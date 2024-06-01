@@ -2,12 +2,39 @@
 
 namespace App\Livewire\Pages;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class LoginPage extends Component
 {
+    public $username;
+    public $password;
+
     public function render()
     {
         return view('livewire.pages.login-page');
+    }
+
+    public function authenticate()
+    {
+
+        $validated = $this->validate([
+            'username' => 'required',
+            'password' => 'required|min:8',
+        ]);
+
+        if (Auth::attempt($validated)) {
+            request()->session()->regenerate();
+
+            if (Auth::user()->role === 'Admin' && Auth::user()->status === 'Active') {
+                return redirect()->route('admin.index');
+            } elseif (Auth::user()->role === 'Cashier' && Auth::user()->status === 'Active') {
+                return redirect()->route('admin.index');
+            }
+
+            $this->addError('submit', 'This account is inactive');
+        }
+
+        $this->addError('submit', 'No matching user with provided username and password');
     }
 }
