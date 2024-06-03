@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,12 +18,13 @@ return new class extends Migration
             $table->string('middlename')->nullable();
             $table->string('lastname');
             $table->string('contact_number')->unique();
-            $table->string('role');
             $table->string('status');
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreignId('user_role_id')->constrained('user_roles');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

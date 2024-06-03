@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,7 +23,7 @@ class User extends Authenticatable
         'middlename',
         'lastname',
         'contact_number',
-        'role',
+        'user_role_id',
         'status',
         'username',
         'password',
@@ -47,5 +49,10 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    public function roleMethod()
+    {
+        return $this->belongsTo(UserRole::class, 'user_role_id');
     }
 }
