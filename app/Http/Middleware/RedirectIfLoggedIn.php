@@ -19,7 +19,7 @@ class RedirectIfLoggedIn
         if (Auth::check()) {
 
             if (Auth::user()->role === 'Admin' && Auth::user()->status === 'Active') {
-                if ($request->path() !== 'admin') {
+                if (!str_starts_with($request->path(), 'admin')) {
                     return redirect('/admin');
                 } else {
                     return $next($request);
