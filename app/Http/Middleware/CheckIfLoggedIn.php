@@ -17,7 +17,7 @@ class CheckIfLoggedIn
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            if (Auth::user()->role === 'Admin' && Auth::user()->status === 'Active') {
+            if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
 
                     return redirect('/admin');
 

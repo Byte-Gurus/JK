@@ -26,7 +26,7 @@ class LoginPage extends Component
         if (Auth::attempt($validated)) {
             request()->session()->regenerate();
 
-            if (Auth::user()->role === 'Admin' && Auth::user()->status === 'Active') {
+            if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
                 return redirect()->route('admin.index');
             } elseif (Auth::user()->role === 'Cashier' && Auth::user()->status === 'Active') {
                 return redirect()->route('admin.index');
