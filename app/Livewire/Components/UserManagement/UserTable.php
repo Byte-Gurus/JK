@@ -5,6 +5,7 @@ namespace App\Livewire\Components\UserManagement;
 
 use App\Models\User;
 use App\Models\UserRole;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class UserTable extends Component
