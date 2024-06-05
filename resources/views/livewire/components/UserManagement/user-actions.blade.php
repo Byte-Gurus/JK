@@ -33,5 +33,5 @@
             </div>
         </div>
     </div>
-    @livewire('components.user-form')
+    @livewire('components.UserManagement.user-form')
 </div>

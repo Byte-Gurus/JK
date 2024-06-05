@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Livewire\Components;
+namespace App\Livewire\Components\UserManagement;
+
 
 use App\Models\User;
 use App\Models\UserRole;
