@@ -83,8 +83,8 @@
 
                     <td class="w-full px-6 py-4 text-nowrap">
                         <!-- Modal toggle -->
-                        <a href="#" type="button" data-modal-target="editUserModal"
-                            data-modal-show="editUserModal"
+                        <a href="#" type="button" data-modal-target="UserModal"
+                            data-modal-show="UserModal"
                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
                     </td>
                 </tr>

@@ -11,8 +11,8 @@ class UserTable extends Component
     public function render()
     {
 
-        $users = User::with('roleMethod')->paginate(10); 
-        return view('livewire.components.user-table', compact('users'));
-        
+        $users = User::with('roleMethod')->paginate(10);
+        return view('livewire.components.UserManagement.user-table', compact('users'));
+
     }
 }
