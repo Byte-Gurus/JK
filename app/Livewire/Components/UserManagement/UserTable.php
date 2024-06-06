@@ -11,13 +11,14 @@ class UserTable extends Component
     use WithPagination;
 
     public $search = '';
+    protected $queryString = ['search'];
 
-    public function updateSearch()
+    public function updatedSearch()
     {
         $this->resetPage();
     }
 
-
+    
     public function render()
     {
 
