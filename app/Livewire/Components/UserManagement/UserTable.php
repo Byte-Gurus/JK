@@ -10,6 +10,7 @@ class UserTable extends Component
 {
     use WithPagination;
 
+    public $perPage = 10;
     public $search = '';
     protected $queryString = ['search'];
 
@@ -22,9 +23,8 @@ class UserTable extends Component
     public function render()
     {
 
-
         return view('livewire.components.UserManagement.user-table', [
-            'users' => User::search($this->search)->paginate(10),
+            'users' => User::search($this->search)->paginate($this->perPage),
         ]);
     }
 }

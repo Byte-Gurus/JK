@@ -50,23 +50,23 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr class="border-b border-[rgb(53,53,53)]">
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->contact_number }}</th>
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->roleMethod->role }}</th>
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->status }}</th>
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->username }}</th>
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    {{ $user->password }}</th>
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    {{ Str::limit($user->password, 10, '...')  }}</th>
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->created_at }}</th>
-                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->updated_at }}</th>
-                                <th class="w-full px-4 py-6 text-nowrap">
+                                <th class="w-full px-4 py-6 text-nowrap text-lg">
                                     <a href="#" type="button" data-modal-target="UserModal"
                                         data-modal-show="UserModal"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
@@ -85,13 +85,12 @@
                 <div class="flex ">
                     <div class="flex items-center mb-3 space-x-4">
                         <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
-                        <select
+                        <select wire:model.live = "perPage" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
-                            <option value="100">100</option>
+                           
                         </select>
                     </div>
                 </div>
