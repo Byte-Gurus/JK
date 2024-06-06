@@ -12,7 +12,7 @@
                      </h3>
                  </div>
                  <button type="button"
-                     class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-red-100 hover:text-gray-900 ms-auto "
+                     class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                      data-modal-hide="UserModal">
                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                          viewBox="0 0 14 14">
@@ -29,7 +29,7 @@
                          {{-- PERSONAL INFORMATION SECTION --}}
                          <div class="border-2 border-[rgb(53,53,53)] rounded-md">
                              <div
-                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] rounded-br-sm rounded-bl-sm">
+                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
                                  <h1 class="font-bold">Personal Information</h1>
                              </div>
                              <div class="p-4">
@@ -99,7 +99,7 @@
                          {{-- LOGIN INFORMATION SECTION --}}
                          <div class="border-2 border-[rgb(53,53,53)] rounded-md">
                              <div
-                                 class="p-2 border-b  bg-[rgb(53,53,53)] text-[rgb(242,242,242)] rounded-br-sm rounded-bl-sm">
+                                 class="p-2 border-b  bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
                                  <h1 class="font-bold">Login Information</h1>
                              </div>
                              <div class="p-4">

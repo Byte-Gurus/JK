@@ -1,5 +1,5 @@
 <div
-    class="relative overflow-x-auto overflow-y-auto shadow-md ml-[242px] mr-[22px] sm:rounded-lg border border-black rounded-md">
+    class="relative overflow-x-auto overflow-y-auto shadow-md ml-[242px] mr-[22px] mb-[22px] sm:rounded-lg border border-black rounded-md">
     <div class="">
         <!-- Start coding here -->
         <div class="relative overflow-hidden bg-white shadow-md sm:rounded-lg">
@@ -31,9 +31,9 @@
                     </div>
                 </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500 ">
-                    <thead class="text-xs text-white uppercase bg-[rgb(53,53,53)]">
+            <div class="overflow-x-auto overflow-y-scroll h-[500px]">
+                <table class="w-full h-10 text-sm text-left text-gray-500">
+                    <thead class="text-xs text-white uppercase pointer-events-none bg-[rgb(53,53,53)]">
                         <tr>
                             <th scope="col" class="px-4 py-3">Name</th>
                             <th scope="col" class="px-4 py-3">Contact No</th>
@@ -49,24 +49,24 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr class="border-b dark:border-gray-700">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                            <tr class="border-b border-[rgb(53,53,53)]">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->contact_number }}</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->roleMethod->role }}</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->status }}</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->username }}</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->password }}</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->created_at }}</th>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">
+                                <th scope="row" class="px-4 py-6 font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->updated_at }}</th>
-                                <th class="w-full px-4 py-3 text-nowrap">
+                                <th class="w-full px-4 py-6 text-nowrap">
                                     <a href="#" type="button" data-modal-target="UserModal"
                                         data-modal-show="UserModal"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
@@ -78,7 +78,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="m-3">
+            <div class="m-3 text-nowrap">
                 {{ $users->links() }}
             </div>
             <div class="px-4 py-2">

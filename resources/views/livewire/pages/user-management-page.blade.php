@@ -1,6 +1,6 @@
 <div>
     @livewire('components.navbar')
-    <div class=" ml-[250px] py-8 mr-8">
+    <div class=" ml-[250px] py-[28px] mr-8">
         <div class="flex flex-col justify-between">
             <div class="flex flex-row items-center justify-between">
                 <div>
