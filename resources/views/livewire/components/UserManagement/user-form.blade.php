@@ -3,11 +3,11 @@
      class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
      <div class="relative w-full max-w-2xl max-h-full">
          <!-- Modal content -->
-         <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+         <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow ">
              <!-- Modal header -->
-             <div class="flex items-center justify-between px-6 py-2 border-b rounded-t dark:border-gray-600">
+             <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
                  <div class="flex justify-center w-full p-2">
-                     <h3 class="text-xl font-black text-gray-900 item dark:text-white">
+                     <h3 class="text-xl font-black text-gray-900 item ">
                          Create User
                      </h3>
                  </div>
@@ -36,7 +36,7 @@
                                  <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
                                      <div class="mb-3">
                                          <label for="firstname"
-                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+                                             class="block mb-2 text-sm font-medium text-gray-900 ">First
                                              Name</label>
                                          <input type="text" id="firstname"
                                              class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
@@ -44,7 +44,7 @@
                                      </div>
                                      <div class="mb-3">
                                          <label for="middlename"
-                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middle
+                                             class="block mb-2 text-sm font-medium text-gray-900 ">Middle
                                              Name <span class="text-red-400 ">*</span></label>
                                          <input type="text" id="middlename"
                                              class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"

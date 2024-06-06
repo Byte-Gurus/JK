@@ -16,6 +16,5 @@
         </div>
         @livewire('components.UserManagement.user-form')
     </div>
-
     @livewire('components.UserManagement.user-table')
 </div>

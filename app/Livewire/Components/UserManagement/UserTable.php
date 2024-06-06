@@ -12,10 +12,15 @@ class UserTable extends Component
 
     public $search = '';
 
-   
+    public function updateSearch()
+    {
+        $this->resetPage();
+    }
+
+
     public function render()
     {
-       
+
 
         return view('livewire.components.UserManagement.user-table', [
             'users' => User::search($this->search)->paginate(10),
