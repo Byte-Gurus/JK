@@ -56,9 +56,9 @@
     <div class="flex items-center">
 
         <div class="flex items-center justify-between">
-            <div class="flex flex-row gap-10">
+            <div class="flex flex-row items-center gap-10">
                 <div x-data="{ openNotifications: false }">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 p-1 transition-all duration-100 ease-in-out hover:bg-slate-200 hover:rounded-full" fill="none" viewBox="0 0 24 24"
                         x-on:click="openNotifications = !openNotifications" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -69,14 +69,12 @@
                         x-transition:leave="transition ease-out duration-300"
                         x-transition:leave-start="transform opacity-100 scale-100"
                         x-transition:leave-end="transform opacity-0 scale-0"
-                        class="absolute z-10 w-screen max-w-md origin-top-right transform right-40">
-                        <div class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
-                        min-h-[50%]">
-                            <div class=" relative grid gap-6 lg:grid-cols-2 sm:gap-8 sm:p-8 bg-[53,53,53]">
+                        class="absolute w-screen max-w-md origin-top-right transform z-100 right-40">
 
+                            <div>
                                 @livewire('components.notifications')
                             </div>
-                        </div>
+
                     </div>
                 </div>
                 <div>

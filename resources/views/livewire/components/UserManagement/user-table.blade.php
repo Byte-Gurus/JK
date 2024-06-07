@@ -25,8 +25,9 @@
                         <select
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                             <option value="">All</option>
-                            <option value="0">User</option>
+                            <option value="0">Cashier</option>
                             <option value="1">Admin</option>
+                            <option value="2">Inventory Staff</option>
                         </select>
                     </div>
                 </div>
@@ -49,9 +50,14 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
+<<<<<<< Updated upstream
                             <tr class="border-b border-[rgb(53,53,53)]">
                                 <th scope="row"
                                     class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+=======
+                            <tr class="border-b border-[rgb(53,53,53)] hover:bg-[#e9e9e9] transition-all duration-100 ease-in-out">
+                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+>>>>>>> Stashed changes
                                     {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
                                 <th scope="row"
                                     class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
@@ -74,9 +80,15 @@
                                 <th scope="row"
                                     class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
                                     {{ $user->updated_at }}</th>
+<<<<<<< Updated upstream
                                 <th class="w-full px-4 py-6 text-nowrap text-lg">
                                     {{-- <a href="#" type="button" data-modal-target="UserModalEdit" 
                                         data-modal-show="UserModalEdit"
+=======
+                                <th class="w-full px-4 py-6 text-lg text-nowrap">
+                                    <a href="#" type="button" data-modal-target="UserModal"
+                                        data-modal-show="UserModal"
+>>>>>>> Stashed changes
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                         user</a> --}}
                                         
