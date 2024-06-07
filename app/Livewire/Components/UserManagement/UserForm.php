@@ -92,9 +92,10 @@ class UserForm extends Component
         $this->middlename =$user_details->middlename;
         $this->lastname =$user_details->lastname;
         $this->contact_number =$user_details->contact_number;
-        $this->role =$user_details->role;
+        $this->role =$user_details->user_role_id;
         $this->status =$user_details->status;
         $this->username =$user_details->username;
+
     }
 
     protected function validateForm()

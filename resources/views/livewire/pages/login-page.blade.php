@@ -1,13 +1,7 @@
-<div class="h-screen w-screen flex flex-col justify-center"
+<div class="flex flex-col justify-center w-screen h-screen"
 style="background-image: linear-gradient(115deg, #008DDA, #F7EEDD)">
 <div
-    class="flex justify-center w-screen align-middle mx-auto rounded-xl
-        vsm:flex-col vsm:w-fit
-        phone:flex-col phone:p-18 phone:w-fit
-        tablet:flex-col tablet-1/2
-        laptop:flex-row
-        shadow-gray-500 shadow-lg
-        overflow-hidden">
+    class="flex justify-center w-screen mx-auto overflow-hidden align-middle shadow-lg rounded-xl vsm:flex-col vsm:w-fit phone:flex-col phone:p-18 phone:w-fit tablet:flex-col tablet-1/2 laptop:flex-row shadow-gray-500">
     <div
         class=" flex flex-col gap-4 items-center justify-center
     vsm:bg-[rgb(190,223,252)] vsm:w-fit  vsm:p-4 vsm:rounded-tl-xl vsm:rounded-tr-xl vsm:rounded-bl-none vsm:rounded-br-none
@@ -33,8 +27,7 @@ style="background-image: linear-gradient(115deg, #008DDA, #F7EEDD)">
             laptop:flex-row laptop:rounded-br-xl laptop:w-[520px] laptop:rounded-tr-xl laptop:rounded-bl-none laptop:p-10">
 
         <form wire:submit.prevent="authenticate"
-            class="flex flex-nowrap text-nowrap justify-center w-full vsm:flex-col phone:flex-col tablet:flex-col
-        laptop:flex-col">
+            class="flex justify-center w-full flex-nowrap text-nowrap vsm:flex-col phone:flex-col tablet:flex-col laptop:flex-col">
             @csrf
             <div class="flex flex-col mb-8">
                 <p
@@ -47,49 +40,37 @@ style="background-image: linear-gradient(115deg, #008DDA, #F7EEDD)">
                 <p class="pointer-events-none">Enter your Account Details!</p>
             </div>
 
-            <div class=" mb-4 flex vsm:flex-col phone:flex-col tablet:flex-col laptop:flex-col">
+            <div class="flex mb-4  vsm:flex-col phone:flex-col tablet:flex-col laptop:flex-col">
                 <label for="username" class=" text-[rgb(53,53,53)]">Username</label>
                 <input type="text" id="username" name="username" value="{{ old('username') }}"
                     class=" w-full px-4 py-2 text-sm rounded-md bg-gray-50 border-2 border-black focus:outline-none focus:border-[rgb(81,114,185)] cursor-pointer"
                     wire:model="username">
                 @error('username')
                     <span
-                        class="text-red-500 mt-2 font-medium
-                vsm:text-sm
-                phone:text-sm
-                tablet:text-sm
-                laptop:text-md">{{ $message }}</span>
+                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                 @enderror
             </div>
 
-            <div class=" mb-12 flex flex-col">
+            <div class="flex flex-col mb-12 ">
                 <label for="password" class="text-[rgb(53,53,53)]">Password</label>
                 <input type="password" id="password" name="password"
                     class="w-full px-4 py-2 text-sm rounded-md bg-gray-50 border-2 border-black focus:outline-none focus:border-[rgb(81,114,185)]cursor-pointer"
                     wire:model="password">
                 @error('password')
                     <span
-                        class="text-red-500 mt-2 font-medium
-                vsm:text-sm
-                phone:text-sm
-                tablet:text-sm
-                laptop:text-md">{{ $message }}</span>
+                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                 @enderror
             </div>
 
             <div class="laptop:text-right">
                 <button type="submit"
-                    class="bg-blue-400 w-full px-8 py-2 rounded-sm text-md font-bold   text-black border-2 border-black hover:bg-blue-500 hover:border-blue-700 shadow-lg hover:text-white shadow-gray-400">
+                    class="w-full px-8 py-2 font-bold text-black bg-blue-400 border-2 border-black rounded-sm shadow-lg text-md hover:bg-blue-500 hover:border-blue-700 hover:text-white shadow-gray-400">
                     Sign In</button>
             </div>
 
             @error('submit')
                 <span
-                    class="text-red-500 mt-4 font-medium text-center
-                vsm:text-sm
-                phone:text-sm
-                tablet:text-sm
-                laptop:text-md">{{ $message }}</span>
+                    class="mt-4 font-medium text-center text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
             @enderror
         </form>
     </div>
