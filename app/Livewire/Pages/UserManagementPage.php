@@ -10,4 +10,9 @@ class UserManagementPage extends Component
     {
         return view('livewire.pages.user-management-page');
     }
+    public function emitEvent()
+    {
+        $this->dispatch('change-method',isCreate: true);
+
+    }
 }

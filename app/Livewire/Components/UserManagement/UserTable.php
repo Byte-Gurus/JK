@@ -4,6 +4,7 @@ namespace App\Livewire\Components\UserManagement;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Livewire;
 use Livewire\WithPagination;
 
 class UserTable extends Component
@@ -12,14 +13,21 @@ class UserTable extends Component
 
     public $perPage = 10;
     public $search = '';
-    protected $queryString = ['search'];
 
+
+
+    public function edit($userId)
+    {
+
+        $this->dispatch('edit-user-from-table',userID: $userId);
+        $this->dispatch('change-method',isCreate: false);
+
+    }
     public function updatedSearch()
     {
         $this->resetPage();
     }
 
-    
     public function render()
     {
 
