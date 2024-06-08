@@ -83,10 +83,10 @@
                                     {{ Str::limit($user->password, 10, '...') }}</th>
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $user->created_at }}</th>
+                                    {{ $user->created_at->format('d-m-y h:i A') }}</th>
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $user->updated_at }}</th>
+                                    {{ $user->updated_at->format('d-m-y h:i A') }}</th>
                                 <th class="w-full px-4 py-6 text-center text-md text-nowrap">
 
                                     <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"
