@@ -1,5 +1,5 @@
 <div x-cloak x-show="showModal" x-data="{ showPassword: @entangle('show_password'), isCreate: @entangle('isCreate') }">
-    <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>
+    <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         {{-- <div id="UserModal" tabindex="-1" aria-hidden="true"
@@ -147,7 +147,7 @@
                                     @enderror
                                 </div>
 
-                                <div x-show="showPassword" x-cloak>
+                                <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
                                     <div class="mb-3">
                                         <label for="password" autocomplete="off"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
