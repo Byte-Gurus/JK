@@ -1,4 +1,4 @@
-{{-- <button wire:click="logout">Logout</button> --}}
+
 
 <div>
     <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"

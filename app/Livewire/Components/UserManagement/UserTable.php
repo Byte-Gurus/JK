@@ -35,16 +35,16 @@ class UserTable extends Component
         $query = User::query();
 
         if ($this->roleFilter != 0) {
-            $query->where('user_role_id', $this->roleFilter); //hanapin ang role id na may same value sa roleFilter
+            $query->where('user_role_id', $this->roleFilter); //?hanapin ang role id na may same value sa roleFilter
         }
         if ($this->statusFilter != 0) {
-            $query->where('status', $this->statusFilter); //hanapin ang status na may same value sa statusFilter
+            $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
         //if ang roleFilter is 0 walang filter ang maapply
 
-        $users = $query->search($this->search)->paginate($this->perPage); //pagination
+        $users = $query->search($this->search)->paginate($this->perPage); //? search the user and paginate it
         $roles = UserRole::all();
 
-        return view('livewire.components.UserManagement.user-table', compact('users', 'roles')); //render the users and roles
+        return view('livewire.components.UserManagement.user-table', compact('users', 'roles')); //*render the users and roles
     }
 }

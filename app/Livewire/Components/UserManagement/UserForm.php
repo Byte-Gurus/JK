@@ -84,7 +84,7 @@ class UserForm extends Component
 
         $user->save();
         $this->resetForm();
-        
+
 
     }
 
@@ -161,6 +161,7 @@ class UserForm extends Component
     }
 
     //listeners
+    
     #[On('edit-user-from-table')]
     public function edit($userID)
     {
