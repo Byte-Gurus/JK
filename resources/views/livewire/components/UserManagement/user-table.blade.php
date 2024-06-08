@@ -49,7 +49,6 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-<<<<<<< Updated upstream
                             <tr class="border-b border-[rgb(53,53,53)]">
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -78,11 +77,6 @@
                                 <th class="w-full px-4 py-6 text-center text-md text-nowrap">
                                     {{-- <a href="#" type="button" data-modal-target="UserModalEdit"
                                         data-modal-show="UserModalEdit"
-=======
-                                <th class="w-full px-4 py-6 text-lg text-nowrap">
-                                    <a href="#" type="button" data-modal-target="UserModal"
-                                        data-modal-show="UserModal"
->>>>>>> Stashed changes
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                         user</a> --}}
 
