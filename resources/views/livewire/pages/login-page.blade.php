@@ -78,8 +78,8 @@ style="background-image: linear-gradient(115deg, #f7f7f7, #ebebeb)">
 </div> --}}
 
 <div class="flex flex-col items-center justify-center w-screen h-screen"
-    style="background-image: linear-gradient(115deg, #f7f7f7, #ebebeb)">
-    <div class="flex flex-row items-center justify-center ">
+    style="background-image: linear-gradient(115deg, #dadada, #1b1b1b)">
+    <div class="flex flex-row items-center justify-center shadow-lg ">
         {{-- LOGO SECTION --}}
         <div
             class=" flex flex-col h-full justify-center items-center bg-[rgb(53,53,53)]
@@ -100,7 +100,7 @@ style="background-image: linear-gradient(115deg, #f7f7f7, #ebebeb)">
         </div>
         {{-- FORM SECTION --}}
         <div
-            class=" bg-white flex transition-all duration-100 ease-in-out border-2 border-[rgb(0,0,0)]
+            class=" bg-white flex transition-all duration-100 ease-in-out border-2 border-[rgb(22,22,22)]
             vsm:flex-col vsm:rounded-bl-xl vsm:rounded-br-xl vsm:rounded-tr-none vsm:rounded-tl-none vsm:p-2
             phone:flex-col phone:rounded-bl-xl phone:rounded-br-xl phone:rounded-tr-none phone:rounded-tl-none phone:p-8
             tablet:flex-row tablet:w-full tablet:rounded-br-xl  tablet:rounded-bl-xl tablet:rounded-tr-none tablet:rounded-tl-none tablet:p-4
