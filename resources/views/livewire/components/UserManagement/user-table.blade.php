@@ -26,7 +26,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                             <option value="0">All</option>
                             @foreach ($roles as $role)
-                            <option value="{{$role->id}}">{{$role->role}}</option>
+                                <option value="{{ $role->id }}">{{ $role->role }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -88,14 +88,11 @@
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->updated_at }}</th>
                                 <th class="w-full px-4 py-6 text-center text-md text-nowrap">
-                                    {{-- <a href="#" type="button" data-modal-target="UserModalEdit"
-                                        data-modal-show="UserModalEdit"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
-                                        user</a> --}}
 
-                                        <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                            Edit
-                                        </button>
+                                    <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        Edit
+                                    </button>
                                 </th>
                             </tr>
                         @endforeach
@@ -105,6 +102,7 @@
             </div>
             <div class="border-t border-black ">
                 <div class="mx-4 my-2 text-nowrap">
+                     {{-- *pagination --}}
                     {{ $users->links() }}
                 </div>
                 <div class="px-4 py-2">

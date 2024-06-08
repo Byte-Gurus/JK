@@ -12,9 +12,9 @@ use function Laravel\Prompts\alert;
 
 class UserForm extends Component
 {
-    public $show_password;
-    public $isCreate;
-    //true for create false for edit
+    public $show_password; //var true for show password false for hindi
+    public $isCreate; //var true for create false for edit
+
     public $user_id;
     public $firstname;
     public $middlename;
@@ -30,10 +30,12 @@ class UserForm extends Component
 
     public function render()
     {
+        // *tignan if yung id na pinasa from table is walang laman, pag may laman means sa edit form punta
         if ($this->user_id == null || $this->user_id == 0) {
 
             return view('livewire.components.UserManagement.user-form');
         } else {
+
             $this->populateForm();
             return view('livewire.components.UserManagement.user-form');
         }
@@ -60,16 +62,15 @@ class UserForm extends Component
         }
 
         $this->resetForm();
-
-
     }
 
     public function update()
     {
         $validated = $this->validateForm();
 
-        $user = User::find($this->user_id);
+        $user = User::find($this->user_id); //? kunin lahat ng data ng may ari ng user_id
 
+        //*pag hindi palitan ang password
         $user->firstname = $validated['firstname'];
         $user->middlename = $validated['middlename'];
         $user->lastname = $validated['lastname'];
@@ -78,17 +79,16 @@ class UserForm extends Component
         $user->status = $validated['status'];
         $user->username = $validated['username'];
 
+        //*pag  palitan ang password
         if ($this->show_password) {
-            $user->password = Hash::make($validated['password']);
+            $user->password = Hash::make($validated['password']);  //* gawing hash ang pass
         }
 
         $user->save();
         $this->resetForm();
-
-
     }
 
-    private function resetForm()
+    private function resetForm() //*tanggalin ang laman ng input
     {
         $this->firstname = "";
         $this->middlename = "";
@@ -99,14 +99,15 @@ class UserForm extends Component
         $this->username = "";
         $this->password = "";
         $this->retype_password = "";
-        $this->user_id = "";
+        $this->user_id = "";  //*tanggalin ang id after mag update para matanggal ang laman ng edit form
+
     }
 
 
-    private function populateForm()
+    private function populateForm() //*lagyan ng laman ang mga input
     {
 
-        $user_details = User::find($this->user_id);
+        $user_details = User::find($this->user_id); //? kunin lahat ng data ng may ari ng user_id
         $this->firstname = $user_details->firstname;
         $this->middlename = $user_details->middlename;
         $this->lastname = $user_details->lastname;
@@ -118,8 +119,7 @@ class UserForm extends Component
 
     protected function validateForm()
     {
-        if ($this->isCreate) {
-            // dd("pangcreate");
+        if ($this->isCreate) {   //*para sa create na validation
             return $this->validate([
                 'firstname' => 'required|string|max:255',
                 'middlename' => 'nullable|string|max:255',
@@ -127,13 +127,14 @@ class UserForm extends Component
                 'contact_number' => 'required|numeric|digits:11',
                 'role' => 'required',
                 'status' => 'required',
+
+                //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
                 'username' => 'required|string|max:255|unique:users,username',
                 'password' => 'required|string|min:8|same:retype_password',
                 'retype_password' => 'required|string|min:8',
             ]);
         } else {
-            if ($this->show_password) {
-                // dd("edit pero may password");
+            if ($this->show_password) { //*para sa edit na may passowrd na validation
                 return $this->validate([
                     'firstname' => 'required|string|max:255',
                     'middlename' => 'nullable|string|max:255',
@@ -141,37 +142,45 @@ class UserForm extends Component
                     'contact_number' => 'required|numeric|digits:11',
                     'role' => 'required',
                     'status' => 'required',
+
+                    //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
                     'username' => 'required|string|max:255|unique:users,username,' . $this->user_id,
                     'password' => 'required|string|min:8|same:retype_password',
                     'retype_password' => 'required|string|min:8',
                 ]);
             } else {
-                // dd("edit pero walang password");
-                return $this->validate([
+
+                return $this->validate([  //*para sa edit na walang passowrd na validation
                     'firstname' => 'required|string|max:255',
                     'middlename' => 'nullable|string|max:255',
                     'lastname' => 'required|string|max:255',
                     'contact_number' => 'required|numeric|digits:11',
                     'role' => 'required',
                     'status' => 'required',
+
+                    //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
                     'username' => 'required|string|max:255|unique:users,username,' . $this->user_id,
                 ]);
             }
         }
     }
 
-    //listeners
-    
-    #[On('edit-user-from-table')]
-    public function edit($userID)
+    //*listeners
+
+    #[On('edit-user-from-table')] //*name ng listener
+    public function edit($userID) //@params parameter galing sa UserTable class
     {
-        $this->user_id = $userID;
+        $this->user_id = $userID; //var assign ang parameter value sa global variable
     }
-    #[On('change-method')]
-    public function changeMethod($isCreate)
+
+
+    #[On('change-method')] //*name ng listener
+    public function changeMethod($isCreate) //@params parameter galing sa UserTable class,  laman false
     {
 
-        $this->isCreate = $isCreate;
+        $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
+
+        //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
         if ($this->isCreate) {
 
             $this->resetForm();

@@ -2,15 +2,15 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        {{-- <div id="UserModal" tabindex="-1" aria-hidden="true"
-    class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"> --}}
+
 
         <div class="relative w-full max-w-2xl max-h-full mx-auto">
             <!-- Modal content -->
             @if (!$this->isCreate)
-                {{-- if form is edit --}}
+                {{-- *if form is edit --}}
                 <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
             @endif
+             {{-- *if form is create --}}
             <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
                 @csrf
 
@@ -19,7 +19,7 @@
                         <h3 class="text-xl font-black text-gray-900 item ">
 
                             @if (!$this->isCreate)
-                                {{-- if form is edit --}}
+                                {{-- *if form is edit --}}
                                 Edit User
                             @else
                                 Create User
@@ -178,7 +178,7 @@
                     </div>
 
                     @if (!$this->isCreate)
-                        {{-- if form is edit --}}
+                        {{-- *if form is edit --}}
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
