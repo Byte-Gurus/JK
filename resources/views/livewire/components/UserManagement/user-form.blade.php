@@ -7,13 +7,24 @@
 
         <div class="relative w-full max-w-2xl max-h-full mx-auto">
             <!-- Modal content -->
+            @if (!$this->isCreate)
+                {{-- if form is edit --}}
+                <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
+            @endif
             <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
                 @csrf
 
                 <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
                     <div class="flex justify-center w-full p-2">
                         <h3 class="text-xl font-black text-gray-900 item ">
-                            Create User
+
+                            @if (!$this->isCreate)
+                                {{-- if form is edit --}}
+                                Edit User
+                            @else
+                                Create User
+                            @endif
+
                         </h3>
                     </div>
                     <button type="button" x-on:click="showModal=false"
@@ -90,8 +101,9 @@
                                     <div class="mb-3">
                                         <label for="role"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
-                                        <select id="user_roles" wire:model="role"
+                                        <select id="user_roles" wire:model="roleFilter"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+
                                             <option selected>Select a role</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Cashier</option>
@@ -165,28 +177,40 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row justify-end gap-2">
-                        <div>
-                            <button type="reset"
-                                class="text-[rgb(53,53,53)] hover:bg-gray-100 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Clear
-                                All</button>
+                    @if (!$this->isCreate)
+                        {{-- if form is edit --}}
+                        <div class="flex flex-row justify-end gap-2">
+
+                            <div>
+                                <input type="submit"
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" />
+                            </div>
                         </div>
-                        <div>
-                            <input type="submit"
-                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" />
-                        </div>
-                    </div>
+                    @else
+                        <div class="flex flex-row justify-end gap-2">
+                            <div>
 
 
-                    @if (session()->has('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+                                <button type="reset"
+                                    class="text-[rgb(53,53,53)] hover:bg-gray-100 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Clear
+                                    All</button>
+                            </div>
+                            <div>
+                                <input type="submit"
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" />
+                            </div>
                         </div>
                     @endif
 
                 </div>
 
             </form>
+
+            @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         </div>
 
     </div>

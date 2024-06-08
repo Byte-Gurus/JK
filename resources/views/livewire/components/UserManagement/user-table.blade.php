@@ -22,11 +22,23 @@
                 <div class="flex space-x-3">
                     <div class="flex items-center space-x-3">
                         <label class="w-40 text-sm font-medium text-gray-900">User Type :</label>
-                        <select
+                        <select wire:model.live="roleFilter"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option value="">All</option>
-                            <option value="0">User</option>
-                            <option value="1">Admin</option>
+                            <option value="0">All</option>
+                            @foreach ($roles as $role)
+                            <option value="{{$role->id}}">{{$role->role}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="flex space-x-3">
+                    <div class="flex items-center space-x-3">
+                        <label class="w-40 text-sm font-medium text-gray-900">Status :</label>
+                        <select wire:model.live="statusFilter"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <option value="0">All</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                 </div>
@@ -93,6 +105,7 @@
             <div class="border-t border-black ">
                 <div class="m-3 text-nowrap">
                     {{ $users->links() }}
+
                 </div>
                 <div class="px-4 py-2">
                     <div class="flex ">
@@ -103,7 +116,6 @@
                                 <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="50">50</option>
-
                             </select>
                         </div>
                     </div>
@@ -111,6 +123,8 @@
             </div>
         </div>
     </div>
+
+
     {{-- modalstart --}}
 
 </div>
