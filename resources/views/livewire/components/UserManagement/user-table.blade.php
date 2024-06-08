@@ -32,9 +32,9 @@
                     </div>
                 </div>
             </div>
-            <div class="overflow-x-auto overflow-y-scroll h-[500px]">
-                <table class="w-full h-10 text-sm text-left text-gray-500">
-                    <thead class="text-xs text-white uppercase pointer-events-none bg-[rgb(53,53,53)]">
+            <div class="overflow-x-auto h-[500px]">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-md text-white uppercase pointer-events-none bg-[rgb(53,53,53)]">
                         <tr>
                             <th scope="col" class="px-4 py-3">Name</th>
                             <th scope="col" class="px-4 py-3">Contact No</th>
@@ -44,54 +44,43 @@
                             <th scope="col" class="px-4 py-3">Passwords</th>
                             <th scope="col" class="px-4 py-3">Created at</th>
                             <th scope="col" class="px-4 py-3">Updated at</th>
-                            <th scope="col" class="px-4 py-3">Actions</th>
+                            <th scope="col" class="w-full px-4 py-3 text-center">Actions</th>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-<<<<<<< Updated upstream
                             <tr class="border-b border-[rgb(53,53,53)]">
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
-=======
-                            <tr class="border-b border-[rgb(53,53,53)] hover:bg-[#e9e9e9] transition-all duration-100 ease-in-out">
-                                <th scope="row" class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
->>>>>>> Stashed changes
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->contact_number }}</th>
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->roleMethod->role }}</th>
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->status }}</th>
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->username }}</th>
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ Str::limit($user->password, 10, '...') }}</th>
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->created_at }}</th>
                                 <th scope="row"
-                                    class="px-4 py-6 text-lg font-medium text-gray-900 whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->updated_at }}</th>
-<<<<<<< Updated upstream
-                                <th class="w-full px-4 py-6 text-nowrap text-lg">
-                                    {{-- <a href="#" type="button" data-modal-target="UserModalEdit" 
+                                <th class="w-full px-4 py-6 text-center text-md text-nowrap">
+                                    {{-- <a href="#" type="button" data-modal-target="UserModalEdit"
                                         data-modal-show="UserModalEdit"
-=======
-                                <th class="w-full px-4 py-6 text-lg text-nowrap">
-                                    <a href="#" type="button" data-modal-target="UserModal"
-                                        data-modal-show="UserModal"
->>>>>>> Stashed changes
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                         user</a> --}}
-                                        
+
                                         <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                             Edit
                                         </button>
@@ -102,25 +91,27 @@
                     </tbody>
                 </table>
             </div>
-            <div class="m-3 text-nowrap">
-                {{ $users->links() }}
-            </div>
-            <div class="px-4 py-2">
-                <div class="flex ">
-                    <div class="flex items-center mb-3 space-x-4">
-                        <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
-                        <select wire:model.live = "perPage"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
+            <div class="border-t border-black ">
+                <div class="m-3 text-nowrap">
+                    {{ $users->links() }}
+                </div>
+                <div class="px-4 py-2">
+                    <div class="flex ">
+                        <div class="flex items-center mb-3 space-x-4">
+                            <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
+                            <select wire:model.live = "perPage"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
 
-                        </select>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {{-- modalstart --}}
-   
+
 </div>

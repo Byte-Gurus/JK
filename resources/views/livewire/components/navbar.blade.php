@@ -1,6 +1,6 @@
 <div x-data="{ openSidebar: true }"
     x-cloak
-    class="flex flex-row items-center justify-between py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
+    class="flex flex-row items-center justify-between py-2 transition-all duration-100 ease-out border-b-2 border-black z-100 px-7 text-nowrap"
     :class="openSidebar && 'ml-[220px]'">
     <div class="flex flex-row items-center">
         <div class="pr-8 cursor-pointer">
