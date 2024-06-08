@@ -16,7 +16,7 @@
                             </button>
                     </div>
                 </div>
-    
+
             </div>
             @livewire('components.UserManagement.user-form')
         </div>

@@ -1,5 +1,5 @@
 <div x-cloak x-show="showModal" x-data="{ showPassword: @entangle('show_password'), isCreate: @entangle('isCreate') }">
-    <div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>
+    <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         {{-- <div id="UserModal" tabindex="-1" aria-hidden="true"
@@ -17,7 +17,7 @@
                         </h3>
                     </div>
                     <button type="button" x-on:click="showModal=false"
-                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
+                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(53,53,53)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
