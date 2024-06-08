@@ -12,11 +12,13 @@ class UserTable extends Component
 {
     use WithPagination;
 
-
+    public $sortBy = 'asc';
+    public $sortColumn = 'id';
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
-    public $roleFilter = '0'; //var filtering value = all
-    public $statusFilter = '0'; //var filtering value = all
+    public $roleFilter = 0; //var filtering value = all
+    public $statusFilter = 0; //var filtering value = all
+
 
     //@params $userId, galing sa pag select ng edit from specific row
     public function edit($userId)
@@ -34,6 +36,10 @@ class UserTable extends Component
         $this->resetPage();
     }
 
+    public function sortByColumn($column){
+        dd($column);
+        // $this->sortColumn = $column;
+    }
     public function render()
     {
 

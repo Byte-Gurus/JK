@@ -47,14 +47,17 @@
                 <table class="w-full h-10 text-sm text-left text-gray-500">
                     <thead class="text-xs text-white uppercase pointer-events-none bg-[rgb(53,53,53)]">
                         <tr>
-                            <th scope="col" class="px-4 py-3">Name</th>
+                            <th wire:click.live='sortByColumn'
+                             scope="col" class="px-4 py-3 cursor-pointer">Name</th>
                             <th scope="col" class="px-4 py-3">Contact No</th>
                             <th scope="col" class="px-4 py-3">Role</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Username</th>
                             <th scope="col" class="px-4 py-3">Passwords</th>
-                            <th scope="col" class="px-4 py-3">Created at</th>
-                            <th scope="col" class="px-4 py-3">Updated at</th>
+                            <th wire:click.live='sortByColumn'
+                             scope="col" class="px-4 py-3 cursor-pointer">Created at</th>
+                            <th wire:click.live='sortByColumn'
+                             scope="col" class="px-4 py-3 cursor-pointer">Updated at</th>
                             <th scope="col" class="w-full px-4 py-3 text-center">Actions</th>
                             </th>
                         </tr>
