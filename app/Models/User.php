@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -29,6 +31,7 @@ class User extends Authenticatable
         'password',
     ];
 
+  
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -63,4 +66,5 @@ class User extends Authenticatable
         ->orWhere('middlename', 'like', "%{$value}%")
         ->orWhere('lastname', 'like', "%{$value}%");
     }
+
 }
