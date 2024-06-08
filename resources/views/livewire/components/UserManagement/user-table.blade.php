@@ -14,8 +14,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-<<<<<<< HEAD
-                        <input type="text" wire:model.live.debounce.300ms = "search" w
+                        <input type="text" wire:model.live.debounce.300ms = "search"
                             class="w-1/3 p-2 pl-10 text-gray-900 border border-gray-300 rounded-lg text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                             placeholder="Search by Name or Username" required="" />
                     </div>
@@ -25,61 +24,22 @@
                         <label class="w-40 text-sm font-medium text-gray-900">User Type :</label>
                         <select wire:model.live="roleFilter"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-
                             <option value="0">All</option>
-
-                            {{-- *ipakita lahat ng user roles sa drop down --}}
                             @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->role }}</option>
+                            <option value="{{$role->id}}">{{$role->role}}</option>
                             @endforeach
-
                         </select>
                     </div>
                 </div>
                 <div class="flex space-x-3">
                     <div class="flex items-center space-x-3">
                         <label class="w-40 text-sm font-medium text-gray-900">Status :</label>
-
                         <select wire:model.live="statusFilter"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                             <option value="0">All</option>
                             <option value="Active">Active</option>
                             <option value="Inactive">Inactive</option>
                         </select>
-
-=======
-                        <input type="text" wire:model.live.debounce.300ms = "search"
-                            class="w-1/3 p-2 pl-10 text-gray-900 border border-[rgb(53,53,53)] rounded-lg text-s bg-[rgb(243,243,243)]"
-                            placeholder="Search by Name or Username" required="" />
-                    </div>
-                </div>
-                <div class="flex flex-row gap-6">
-                    <div>
-                        <div class="flex flex-row items-center gap-2 ">
-                            <label class="w-full font-medium text-gray-900 text-md text-nowrap">User Type :</label>
-                            <select wire:model.live="roleFilter"
-                                class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-xl block w-fit p-2.5 ">
-                                <option value="0">All</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="flex flex-row gap-2">
-                        <div>
-                            <div class="flex flex-row items-center gap-2">
-                                <label class="w-full text-md font-medium text-nowrap text-[rgb(53,53,53)]">Status
-                                    :</label>
-                                <select wire:model.live="statusFilter"
-                                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-xl block w-fit p-2.5 ">s
-                                    <option value="0">All</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                </select>
-                            </div>
-                        </div>
->>>>>>> main
                     </div>
                 </div>
             </div>
@@ -128,16 +88,14 @@
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->updated_at }}</th>
                                 <th class="w-full px-4 py-6 text-center text-md text-nowrap">
+                                    {{-- <a href="#" type="button" data-modal-target="UserModalEdit"
+                                        data-modal-show="UserModalEdit"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
+                                        user</a> --}}
 
-<<<<<<< HEAD
-                                {{-- *tawagin ang edit method sa table-form--}}
-
-=======
->>>>>>> main
-                                    <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                        Edit
-                                    </button>
+                                        <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                            Edit
+                                        </button>
                                 </th>
                             </tr>
                         @endforeach
