@@ -19,45 +19,61 @@
                             placeholder="Search by Name or Username" required="" />
                     </div>
                 </div>
-                <div class="flex space-x-3">
-                    <div class="flex items-center space-x-3">
-                        <label class="w-40 text-sm font-medium text-gray-900">User Type :</label>
-                        <select wire:model.live="roleFilter"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option value="0">All</option>
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->role }}</option>
-                            @endforeach
-                        </select>
+                <div class="flex flex-row items-center justify-center gap-4">
+                    <div class="flex flex-row items-center">
+                        <div class="flex flex-row items-center gap-2">
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">User Type :</label>
+                            <select wire:model.live="roleFilter"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 ">
+                                <option value="0">All</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="flex space-x-3">
-                    <div class="flex items-center space-x-3">
-                        <label class="w-40 text-sm font-medium text-gray-900">Status :</label>
-                        <select wire:model.live="statusFilter"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option value="0">All</option>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
-                        </select>
+                    <div class="flex flex-row items-center">
+                        <div class="flex flex-row items-center gap-2">
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                            <select wire:model.live="statusFilter"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block p-2.5 ">
+                                <option value="0">All</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="overflow-x-auto overflow-y-scroll h-[500px]">
                 <table class="w-full h-10 text-sm text-left text-gray-500">
-                    <thead class="text-xs text-white uppercase pointer-events-none bg-[rgb(53,53,53)]">
+                    <thead class="text-xs text-white uppercase bg-[rgb(53,53,53)]">
                         <tr>
-                            <th wire:click.live='sortByColumn'
-                             scope="col" class="px-4 py-3 cursor-pointer">Name</th>
-                            <th scope="col" class="px-4 py-3">Contact No</th>
+                            <th wire:click='sortByColumn' scope="col"
+                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Name
+                                <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="rotate-90 size-4">
+                                        <path fill-rule="evenodd"
+                                            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                            </th>
+                            <th scope="col" class="px-4 py-3">Contact No span</th>
                             <th scope="col" class="px-4 py-3">Role</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Username</th>
                             <th scope="col" class="px-4 py-3">Passwords</th>
-                            <th wire:click.live='sortByColumn'
-                             scope="col" class="px-4 py-3 cursor-pointer">Created at</th>
-                            <th wire:click.live='sortByColumn'
-                             scope="col" class="px-4 py-3 cursor-pointer">Updated at</th>
+                            <th wire:click='sortByColumn' scope="col"
+                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Created
+                                at <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="rotate-90 size-4">
+                                        <path fill-rule="evenodd"
+                                            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span></th>
+                            <th wire:click.live='sortByColumn' scope="col" class="px-4 py-3 cursor-pointer">Updated
+                                at</th>
                             <th scope="col" class="w-full px-4 py-3 text-center">Actions</th>
                             </th>
                         </tr>
@@ -105,7 +121,7 @@
             </div>
             <div class="border-t border-black ">
                 <div class="mx-4 my-2 text-nowrap">
-                     {{-- *pagination --}}
+                    {{-- *pagination --}}
                     {{ $users->links() }}
                 </div>
                 <div class="px-4 py-2">
