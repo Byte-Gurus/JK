@@ -51,12 +51,14 @@
                         <tr>
                             <th wire:click='sortByColumn' scope="col"
                                 class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Name
-                                <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="rotate-90 size-4">
-                                        <path fill-rule="evenodd"
-                                            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                                            clip-rule="evenodd" />
+                                <span x-data="{ enabled: false }" class="transition-all duration-200 ease-in-out rotate-90"
+                                    :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="size-4">
+                                        <path
+                                            d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
                                     </svg>
+                                </span>
                             </th>
                             <th scope="col" class="px-4 py-3">Contact No span</th>
                             <th scope="col" class="px-4 py-3">Role</th>
@@ -65,11 +67,13 @@
                             <th scope="col" class="px-4 py-3">Passwords</th>
                             <th wire:click='sortByColumn' scope="col"
                                 class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Created
-                                at <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="rotate-90 size-4">
-                                        <path fill-rule="evenodd"
-                                            d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                                            clip-rule="evenodd" />
+                                at <span x-data="{ enabled: false }"
+                                    class="transition-all duration-200 ease-in-out rotate-90"
+                                    :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="size-4">
+                                        <path
+                                            d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
                                     </svg>
                                 </span></th>
                             <th wire:click.live='sortByColumn' scope="col" class="px-4 py-3 cursor-pointer">Updated
