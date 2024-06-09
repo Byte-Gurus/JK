@@ -43,8 +43,8 @@ class UserForm extends Component
     protected $listeners = [
         'edit-user-from-table' => 'edit',  //@params parameter galing sa UserTable class
         'change-method' => 'changeMethod', //@params parameter galing sa UserTable class,  laman false
-        'updateconfirmed',
-        'createconfirmed'
+        'updateConfirmed',
+        'createConfirmed'
     ];
 
     public function create()
@@ -62,7 +62,7 @@ class UserForm extends Component
     }
 
 
-    public function createconfirmed($data)
+    public function createConfirmed($data)
     {
 
         $validated = $data['inputAttributes'];
@@ -113,7 +113,7 @@ class UserForm extends Component
         ]);
     }
 
-    public function updateconfirmed($data)
+    public function updateConfirmed($data)
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable
         $attributes = $data['inputAttributes'];
