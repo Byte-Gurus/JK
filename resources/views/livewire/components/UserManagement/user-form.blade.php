@@ -101,7 +101,7 @@
                                     <div class="mb-3">
                                         <label for="role"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
-                                        <select id="user_roles" wire:model="roleFilter"
+                                        <select id="user_roles" wire:model="role"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
 
                                             <option selected>Select a role</option>
