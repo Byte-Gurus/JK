@@ -182,7 +182,7 @@
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
-                                <input type="submit"
+                                <input type="submit" 
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " />
                             </div>
                         </div>

@@ -8,8 +8,8 @@
     <title>JK STORE</title>
     @vite('resources/css/app.css')
     <script src="https://cdn.tailwindcss.com"></script>
-   
-    
+
+
     @livewireStyles
 
     <style>
@@ -18,8 +18,12 @@
 </head>
 <body>
     {{ $slot }}
-    
+
     @vite('resources/js/app.js')
     @livewireScripts()
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-livewire-alert::scripts />
 </body>
 </html>
