@@ -14,7 +14,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input type="text" wire:model.live.debounce.300ms = "search"
+                        <input type="text" wire:model.live.debounce.100ms = "search"
                             class="w-1/3 p-2 pl-10 text-gray-900 border border-gray-300 rounded-lg text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                             placeholder="Search by Name or Username" required="" />
                     </div>
