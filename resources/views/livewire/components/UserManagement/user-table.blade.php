@@ -80,7 +80,7 @@
                                 </div>
                             </th>
                             <th wire:click="sortByColumn('updated_at')" scope="col"
-                                class=" flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                                class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
                                 <div class="flex flex-row items-center justify-between ">
                                     <p>Updated at at</p>
                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                             </th>
-                            <th scope="col" class="w-full px-4 py-3 text-center text-nowrap">Actions</th>
+                            <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
                             </th>
                         </tr>
                     </thead>
@@ -124,7 +124,7 @@
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->updated_at->format('d-m-y h:i A') }}</th>
-                                <th class="w-full px-4 py-6 text-center text-md text-nowrap">
+                                <th class="px-4 py-6 text-center text-md text-nowrap">
 
                                     <button x-on:click="showModal=true;$wire.edit({{ $user->id }})"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
