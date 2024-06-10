@@ -1,9 +1,10 @@
 <div
-    class="relative overflow-x-auto overflow-y-auto shadow-md ml-[242px] mr-[22px] mb-[22px] sm:rounded-lg border border-black rounded-md">
+    class="relative overflow-x-auto overflow-y-auto shadow-md ml-[242px] mr-[22px] mb-[22px] sm:rounded-lg rounded-md">
     <div class="">
 
-        <div class="relative overflow-hidden bg-white shadow-md sm:rounded-lg">
-            <div class="flex flex-row items-center justify-between p-4  border-b border-[rgb(53,53,53)]">
+        <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+            {{-- FILTERS --}}
+            <div class="flex flex-row items-center justify-between px-2 py-4 ">
                 <div class="flex w-full">
                     <div class="relative w-full">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -15,7 +16,7 @@
                             </svg>
                         </div>
                         <input type="text" wire:model.live.debounce.100ms = "search"
-                            class="w-1/3 p-2 pl-10 text-gray-900 border border-gray-300 rounded-lg text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
+                            class="w-1/3 p-2 pl-10 hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] rounded-lg cursor-pointer text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                             placeholder="Search by Name or Username" required="" />
                     </div>
                 </div>
@@ -24,7 +25,7 @@
                         <div class="flex flex-row items-center gap-2">
                             <label class="text-sm font-medium text-gray-900 text-nowrap">User Type :</label>
                             <select wire:model.live="roleFilter"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 ">
+                                class="bg-gray-50 border hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5 ">
                                 <option value="0">All</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->role }}</option>
@@ -36,7 +37,7 @@
                         <div class="flex flex-row items-center gap-2">
                             <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
                             <select wire:model.live="statusFilter"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block p-2.5 ">
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
                                 <option value="0">All</option>
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option>
@@ -45,38 +46,38 @@
                     </div>
                 </div>
             </div>
+            {{-- TABLE --}}
             <div class="overflow-x-auto overflow-y-scroll h-[500px]">
-                <table class="w-full h-10 text-sm text-left text-gray-500">
-                    <thead class="text-xs text-white uppercase bg-[rgb(53,53,53)]">
-                        <tr>
+                <table class="w-full h-10 text-sm text-left">
+                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)]">
+                        <tr class=" text-nowrap">
                             <th wire:click="sortByColumn('firstname')" scope="col"
-                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Name
-                                <span x-data="{ enabled: false }" class="transition-all duration-200 ease-in-out rotate-90"
-                                    :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="size-4">
-                                        <path
-                                            d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                                class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white"><p>Name</p>
+                                <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
+
                                 </span>
                             </th>
-                            <th scope="col" class="px-4 py-3">Contact No span</th>
+                            <th scope="col" class="px-4 py-3">Contact No</th>
                             <th scope="col" class="px-4 py-3">Role</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Username</th>
                             <th scope="col" class="px-4 py-3">Passwords</th>
                             <th wire:click="sortByColumn('created_at')" scope="col"
-                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Created
-                                at <span x-data="{ enabled: false }"
-                                    class="transition-all duration-200 ease-in-out rotate-90"
-                                    :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="size-4">
-                                        <path
-                                            d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                                class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white"><p>Created_at</p>
+                                <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
-                                </span></th>
-                            <th wire:click.live='sortByColumn' scope="col" class="px-4 py-3 cursor-pointer text-nowrap">Updated
+
+                                </span>
+                            </th>
+                            <th wire:click.live='sortByColumn' scope="col"
+                                class="px-4 py-3 cursor-pointer text-nowrap">Updated
                                 at</th>
                             <th scope="col" class="w-full px-4 py-3 text-center text-nowrap">Actions</th>
                             </th>
@@ -85,7 +86,7 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr
-                                class="border-b border-[rgb(53,53,53)] hover:bg-[rgb(233,233,233)] transition ease-in duration-75">
+                                class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
