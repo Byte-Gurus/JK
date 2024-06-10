@@ -1,14 +1,14 @@
 
 
 <div>
-    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+    <button wire:click="userLogout"
         class="block text-white font-bold rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-800 hover:text-[53,53,53] transition ease-in-out duration-100"
         type="button">
 
         Logout
     </button>
 
-    <div id="popup-modal" tabindex="-1"
+    {{-- <div id="popup-modal" tabindex="-1"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-md max-h-full p-4">
             <div class="relative bg-white rounded-lg shadow ">
@@ -51,5 +51,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
