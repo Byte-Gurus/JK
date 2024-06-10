@@ -139,7 +139,7 @@
                                 <div class="mb-3">
                                     <label for="username"
                                         class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                                    <input type="text" id="username" wire:model="username" autocomplete="off"
+                                    <input type="text" id="username" wire:model="username"
                                         class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                         placeholder="Username" required />
                                     @error('username')
@@ -149,7 +149,7 @@
 
                                 <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
                                     <div class="mb-3">
-                                        <label for="password" autocomplete="off"
+                                        <label for="password"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
                                         <input type="password" wire:model="password" id="password"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
@@ -170,7 +170,7 @@
                                 </div>
                                 @if (!$this->isCreate)
                                     <input type="checkbox" name="showpassword" id="showpassword"
-                                        wire:model.live="show_password" placeholder="">
+                                        wire:model="show_password" placeholder="">
                                     <label for="showpassword">Update Password</label>
                                 @endif
                             </div>

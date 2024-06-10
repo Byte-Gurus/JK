@@ -72,6 +72,7 @@ class UserForm extends Component
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
 
         ]);
+
     }
 
 
@@ -122,11 +123,14 @@ class UserForm extends Component
             $user->password = Hash::make($validated['password']);  //* gawing hash ang pass
         }
 
+        
         $this->confirm('Do you want to update this user??', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $user, //* pass the user to the confirmed method, as a form of array
 
         ]);
+
+
     }
 
     public function updateConfirmed($data)

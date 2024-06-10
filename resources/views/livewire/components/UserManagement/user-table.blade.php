@@ -75,9 +75,20 @@
                                         <path
                                             d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
                                     </svg>
-                                </span></th>
-                            <th wire:click.live='sortByColumn' scope="col" class="px-4 py-3 cursor-pointer text-nowrap">Updated
-                                at</th>
+                                </span>
+                            </th>
+                            <th wire:click="sortByColumn('updated_at')" scope="col"
+                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Updated
+                                at <span x-data="{ enabled: false }"
+                                    class="transition-all duration-200 ease-in-out rotate-90"
+                                    :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="size-4">
+                                        <path
+                                            d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                                    </svg>
+                                </span>
+                            </th>
                             <th scope="col" class="w-full px-4 py-3 text-center text-nowrap">Actions</th>
                             </th>
                         </tr>
