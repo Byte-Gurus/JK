@@ -60,7 +60,6 @@ class UserForm extends Component
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
 
         ]);
-
     }
     public function confirmed()
     {
@@ -73,7 +72,6 @@ class UserForm extends Component
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
 
         ]);
-
     }
 
 
@@ -129,8 +127,6 @@ class UserForm extends Component
             'inputAttributes' =>  $user, //* pass the user to the confirmed method, as a form of array
 
         ]);
-
-
     }
 
     public function updateConfirmed($data)
@@ -145,10 +141,9 @@ class UserForm extends Component
         $user->save(); //* Save the user model to the database
 
         $this->resetForm();
-        $this->alert('success', 'User is updated successfully');
+        $this->alert('success', 'User was updated successfully');
 
         $this->dispatch('refresh-table')->to(UserTable::class);
-
     }
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
