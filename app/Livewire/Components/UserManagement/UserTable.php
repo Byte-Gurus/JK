@@ -12,34 +12,13 @@ class UserTable extends Component
 {
     use WithPagination;
 
-    public $sortBy = 'asc';
+    public $sortDirection = 'asc';
     public $sortColumn = 'id';
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
     public $roleFilter = 0; //var filtering value = all
     public $statusFilter = 0; //var filtering value = all
 
-
-    //@params $userId, galing sa pag select ng edit from specific row
-    public function edit($userId)
-    {
-        //*call the listesner 'edit-user-from-table' galing sa UserForm class
-        //@params userID name ng parameter na ipapasa, $userId parameter value na ipapasa
-        $this->dispatch('edit-user-from-table', userID: $userId);
-
-         //*call the listesner 'change-method' galing sa UserForm class
-         //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create user
-        $this->dispatch('change-method', isCreate: false);
-    }
-    public function updatedSearch()
-    {
-        $this->resetPage();
-    }
-
-    public function sortByColumn($column){
-        dd($column);
-        // $this->sortColumn = $column;
-    }
     public function render()
     {
 
@@ -54,9 +33,51 @@ class UserTable extends Component
 
         //*if ang roleFilter is 0 walang filter ang maapply
 
-        $users = $query->search($this->search)->paginate($this->perPage); //? search the user and paginate it
+        $users = $query->search($this->search) //?search the user
+        ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
+        ->paginate($this->perPage);  //?  and paginate it
+
         $roles = UserRole::all(); //? kunin lahat ng role
 
         return view('livewire.components.UserManagement.user-table', compact('users', 'roles')); //*render the users and roles
+    }
+
+    protected $listeners = [
+        'refresh-table' => 'refreshTable',//*  galing sa UserTable class
+
+    ];
+
+    //@params $userId, galing sa pag select ng edit from specific row
+    public function edit($userId)
+    {
+        //*call the listesner 'edit-user-from-table' galing sa UserForm class
+        //@params userID name ng parameter na ipapasa, $userId parameter value na ipapasa
+        $this->dispatch('edit-user-from-table', userID: $userId)->to(UserForm::class);
+
+         //*call the listesner 'change-method' galing sa UserForm class
+         //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create user
+        $this->dispatch('change-method', isCreate: false)->to(UserForm::class);
+    }
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function sortByColumn($column){ //* sort the column
+
+        //* if ang $column is same sa global variable na sortColumn then if ang sortDirection is desc then it will be asc
+        if($this->sortColumn = $column){
+            $this->sortDirection = $this->sortDirection == 'asc'?'desc':'asc';
+        } else{
+            //* if hindi same ang $column sa global variable na sortColumn, then gawing asc ang column
+            $this->sortDirection = 'asc';
+        }
+
+       $this->sortColumn = $column; //* gawing global variable ang $column
+    }
+
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 }

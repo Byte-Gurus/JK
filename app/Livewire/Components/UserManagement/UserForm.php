@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\UserManagement;
 
+use App\Livewire\Pages\UserManagementPage;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -16,6 +17,7 @@ class UserForm extends Component
     use LivewireAlert;
     public $show_password; //var true for show password false for hindi
     public $isCreate; //var true for create false for edit
+
 
     public $user_id;
     public $firstname;
@@ -41,8 +43,9 @@ class UserForm extends Component
 
     //* assign all the listners in one array
     protected $listeners = [
-        'edit-user-from-table' => 'edit',  //@params parameter galing sa UserTable class
-        'change-method' => 'changeMethod', //@params parameter galing sa UserTable class,  laman false
+        'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
+        //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
+        'change-method' => 'changeMethod',
         'updateConfirmed',
         'createConfirmed'
     ];
@@ -66,7 +69,7 @@ class UserForm extends Component
 
 
         $this->confirm('Do you want to update this user??', [
-            'onConfirmed' => 'createconfirmed', //* call the createconfirmed method
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
 
         ]);
@@ -78,6 +81,7 @@ class UserForm extends Component
     {
 
         $validated = $data['inputAttributes'];
+
 
         if ($this->isCreate) {
             $validated = $this->validateForm();
@@ -120,12 +124,13 @@ class UserForm extends Component
             $user->password = Hash::make($validated['password']);  //* gawing hash ang pass
         }
 
-
         $this->confirm('Do you want to update this user??', [
-            'onConfirmed' => 'updateconfirmed', //* call the confmired method
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $user, //* pass the user to the confirmed method, as a form of array
 
         ]);
+
+
     }
 
     public function updateConfirmed($data)
@@ -141,6 +146,9 @@ class UserForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'User is updated successfully');
+
+        $this->dispatch('refresh-table')->to(UserTable::class);
+
     }
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
@@ -171,8 +179,8 @@ class UserForm extends Component
             'middlename' => 'nullable|string|max:255',
             'lastname' => 'required|string|max:255',
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->user_id)],
-            'role' => 'required',
-            'status' => 'required',
+            'role' => 'required|in:1,2,3',
+            'status' => 'required|in:Active,Inactive',
 
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],

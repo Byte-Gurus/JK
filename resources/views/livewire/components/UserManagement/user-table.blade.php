@@ -14,7 +14,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input type="text" wire:model.live.debounce.300ms = "search"
+                        <input type="text" wire:model.live.debounce.100ms = "search"
                             class="w-1/3 p-2 pl-10 text-gray-900 border border-gray-300 rounded-lg text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                             placeholder="Search by Name or Username" required="" />
                     </div>
@@ -49,8 +49,8 @@
                 <table class="w-full h-10 text-sm text-left text-gray-500">
                     <thead class="text-xs text-white uppercase bg-[rgb(53,53,53)]">
                         <tr>
-                            <th scope="col"
-                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer text-nowrap">Name
+                            <th wire:click="sortByColumn('firstname')" scope="col"
+                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Name
                                 <span x-data="{ enabled: false }" class="transition-all duration-200 ease-in-out rotate-90"
                                     :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -60,13 +60,13 @@
                                     </svg>
                                 </span>
                             </th>
-                            <th scope="col" class="px-4 py-3 text-nowrap">Contact No span</th>
-                            <th scope="col" class="px-4 py-3 text-nowrap">Role</th>
-                            <th scope="col" class="px-4 py-3 text-nowrap">Status</th>
-                            <th scope="col" class="px-4 py-3 text-nowrap">Username</th>
-                            <th scope="col" class="px-4 py-3 text-nowrap">Passwords</th>
-                            <th wire:click='sortByColumn' scope="col"
-                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointe text-nowrap">Created
+                            <th scope="col" class="px-4 py-3">Contact No span</th>
+                            <th scope="col" class="px-4 py-3">Role</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
+                            <th scope="col" class="px-4 py-3">Username</th>
+                            <th scope="col" class="px-4 py-3">Passwords</th>
+                            <th wire:click="sortByColumn('created_at')" scope="col"
+                                class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Created
                                 at <span x-data="{ enabled: false }"
                                     class="transition-all duration-200 ease-in-out rotate-90"
                                     :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
