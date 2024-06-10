@@ -13,7 +13,7 @@ class UserFactory extends Factory
 
     protected static ?string $password;
     /**
-     * 
+     *
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'firstname' => fake()->lastName(),
             'middlename' => fake()->lastName(),
             'lastname' => fake()->lastName(),
-            'contact_number' => fake()->unique()->phoneNumber(),
+            'contact_number' => fake()->unique()->numerify('###########'),
             'status' => fake()->randomElement(['Active', 'Inactive']),
             'user_role_id' => fake()->randomElement([1, 2,3]),
             'username' => fake()->unique()->userName(),

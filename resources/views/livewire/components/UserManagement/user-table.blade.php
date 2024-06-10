@@ -1,5 +1,4 @@
-<div
-    class="relative overflow-x-auto overflow-y-auto shadow-md ml-[242px] mr-[22px] mb-[22px] sm:rounded-lg rounded-md">
+<div class="relative overflow-x-auto overflow-y-auto shadow-md ml-[242px] mr-[22px] mb-[22px] sm:rounded-lg rounded-md">
     <div class="">
 
         <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
@@ -52,7 +51,8 @@
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)]">
                         <tr class=" text-nowrap">
                             <th wire:click="sortByColumn('firstname')" scope="col"
-                                class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white"><p>Name</p>
+                                class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                                <p>Name</p>
                                 <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -67,18 +67,31 @@
                             <th scope="col" class="px-4 py-3">Username</th>
                             <th scope="col" class="px-4 py-3">Passwords</th>
                             <th wire:click="sortByColumn('created_at')" scope="col"
-                                class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white"><p>Created_at</p>
-                                <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>
+                                class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                                <div class="flex flex-row items-center justify-between ">
+                                    <p>Created at</p>
+                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
 
-                                </span>
+                                    </div>
+                                </div>
                             </th>
-                            <th wire:click.live='sortByColumn' scope="col"
-                                class="px-4 py-3 cursor-pointer text-nowrap">Updated
-                                at</th>
+                            <th wire:click="sortByColumn('updated_at')" scope="col"
+                                class=" flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                                <div class="flex flex-row items-center justify-between ">
+                                    <p>Updated at at</p>
+                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
+
+                                    </div>
+                                </div>
+                            </th>
                             <th scope="col" class="w-full px-4 py-3 text-center text-nowrap">Actions</th>
                             </th>
                         </tr>
