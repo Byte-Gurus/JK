@@ -1,4 +1,4 @@
-<div x-cloak x-show="showModal" x-data="{ showPassword: @entangle('show_password'), isCreate: @entangle('isCreate') }">
+<div x-cloak x-show="showModal" x-data="{ showPassword: @entangle('show_password'), isCreate: @entangle('isCreate'), }">
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -54,8 +54,8 @@
                                     <div class="mb-3">
                                         <label for="firstname"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">First
-                                            Name {{ $firstname }}</label>
-                                        <input type="text" id="firstname" wire:model.live="firstname"
+                                            Name</label>
+                                        <input type="text" id="firstname" wire:model="firstname"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="First Name" tabindex="2" required />
                                         @error('firstname')
@@ -104,7 +104,7 @@
                                         <select id="user_roles" wire:model="role"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
 
-                                            <option selected>Select a role</option>
+                                            <option value="" selected>Select a role</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Cashier</option>
                                             <option value="3">Inventory Staff</option>
@@ -118,7 +118,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
                                         <select id="status" wire:model="status"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option selected>Set your status</option>
+                                            <option value="" selected>Set your status</option>
                                             <option value="Active">Active</option>
                                             <option value="Inactive">Inactive</option>
                                         </select>
@@ -182,8 +182,13 @@
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
-                                <input type="submit" 
-                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " />
+                                <button type="submit"
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "> Update
+
+                                    <div wire:loading>
+                                        <svg>...</svg> <!-- SVG loading spinner -->
+                                    </div>
+                                </button>
                             </div>
                         </div>
                     @else
@@ -195,28 +200,15 @@
                                     class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
                                     All</button>
                             </div>
-                            {{-- <div>
-                                <div>
-                                    <input data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                        class="block text-white font-bold rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-800 hover:text-[53,53,53] transition ease-in-out duration-100"
-                                        type="button">
 
-                                    Create
-                                    </input>
-                                </div>
-                                <div id="popup-modal" tabindex="-1"
-                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                    <h1>ADD</h1>
-                                </div>
-                            </div> --}}
-                            <div x-data="{ openConfirmationModal: false }">
-                                <button x-onclick=" openConfirmationModal : !openConfirmationModal"> Create</button>
-                                <div x-show=" openConfirmationModal ">
-                                    <div id="popup-modal" tabindex="-1"
-                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                        <h1>ADD</h1>
+                            <div>
+                                <button type="submit"
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "> Create
+
+                                    <div wire:loading>
+                                        <svg>...</svg> <!-- SVG loading spinner -->
                                     </div>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     @endif
@@ -224,12 +216,6 @@
                 </div>
 
             </form>
-
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
         </div>
 
     </div>

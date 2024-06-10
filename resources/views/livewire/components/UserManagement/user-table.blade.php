@@ -49,7 +49,7 @@
                 <table class="w-full h-10 text-sm text-left text-gray-500">
                     <thead class="text-xs text-white uppercase bg-[rgb(53,53,53)]">
                         <tr>
-                            <th scope="col"
+                            <th wire:click="sortByColumn('firstname')" scope="col"
                                 class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Name
                                 <span x-data="{ enabled: false }" class="transition-all duration-200 ease-in-out rotate-90"
                                     :class="enabled && 'rotate-[270deg]'" x-on:click=" enabled = !enabled "><svg
@@ -65,7 +65,7 @@
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Username</th>
                             <th scope="col" class="px-4 py-3">Passwords</th>
-                            <th wire:click='sortByColumn' scope="col"
+                            <th wire:click="sortByColumn('created_at')" scope="col"
                                 class="flex flex-row items-center gap-2 px-4 py-3 cursor-pointer">Created
                                 at <span x-data="{ enabled: false }"
                                     class="transition-all duration-200 ease-in-out rotate-90"
