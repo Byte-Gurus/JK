@@ -5,9 +5,9 @@ namespace App\Livewire\Components\UserManagement;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Attributes\On;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 
 
@@ -46,8 +46,20 @@ class UserForm extends Component
         'updateConfirmed',
         'createConfirmed'
     ];
-
     public function create()
+    {
+
+        $validated = $this->validateForm();
+
+
+        $this->confirm('Do you want to add this user??', [
+            'onConfirmed' => 'createconfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+
+        ]);
+
+    }
+    public function confirmed()
     {
 
         $validated = $this->validateForm();
@@ -68,6 +80,9 @@ class UserForm extends Component
         $validated = $data['inputAttributes'];
 
         if ($this->isCreate) {
+            $validated = $this->validateForm();
+
+
             $user = User::create([
                 'firstname' => $validated['firstname'],
                 'middlename' => $validated['middlename'],
@@ -79,9 +94,9 @@ class UserForm extends Component
                 'password' => Hash::make($validated['password'])
             ]);
         }
-
+        $this->alert('success', 'Basic Alert');
         $this->resetForm();
-        $this->alert('success', 'User is created successfully');
+        $this->alert('success', 'User was created successfully');
     }
 
 

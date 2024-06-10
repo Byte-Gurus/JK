@@ -182,7 +182,7 @@
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
-                                <input type="submit" 
+                                <input type="submit"
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " />
                             </div>
                         </div>
@@ -195,29 +195,8 @@
                                     class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
                                     All</button>
                             </div>
-                            {{-- <div>
-                                <div>
-                                    <input data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                        class="block text-white font-bold rounded-lg text-sm px-5 py-2.5 text-center bg-red-600 hover:bg-red-800 hover:text-[53,53,53] transition ease-in-out duration-100"
-                                        type="button">
-
-                                    Create
-                                    </input>
-                                </div>
-                                <div id="popup-modal" tabindex="-1"
-                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                    <h1>ADD</h1>
-                                </div>
-                            </div> --}}
-                            <div x-data="{ openConfirmationModal: false }">
-                                <button x-onclick=" openConfirmationModal : !openConfirmationModal"> Create</button>
-                                <div x-show=" openConfirmationModal ">
-                                    <div id="popup-modal" tabindex="-1"
-                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                        <h1>ADD</h1>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="submit"
+                                class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Create</button>
                         </div>
                     @endif
 
@@ -234,3 +213,5 @@
 
     </div>
 </div>
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+<x-livewire-alert::flash />
