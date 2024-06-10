@@ -109,9 +109,17 @@
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->roleMethod->role }}</th>
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $user->status }}</th>
+
+                                    <th scope="row"
+                                    @if ($user->status == 'Active')
+                                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+                                    @elseif ($user->status == 'Inactive')
+                                    class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+                                    @endif
+                                >
+                                    {{ $user->status }}
+                                </th>
+
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->username }}</th>

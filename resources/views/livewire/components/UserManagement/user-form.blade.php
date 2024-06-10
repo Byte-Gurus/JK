@@ -186,7 +186,10 @@
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "> Update
 
                                     <div wire:loading>
-                                        <svg>...</svg> <!-- SVG loading spinner -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z"></path>
+                                        </svg>
                                     </div>
                                 </button>
                             </div>
@@ -206,7 +209,10 @@
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "> Create
 
                                     <div wire:loading>
-                                        <svg>...</svg> <!-- SVG loading spinner -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z"></path>
+                                        </svg>
                                     </div>
                                 </button>
                             </div>
