@@ -12,8 +12,8 @@ class UserTable extends Component
 {
     use WithPagination;
 
-    public $sortDirection = 'asc';
-    public $sortColumn = 'id';
+    public $sortDirection = 'asc';//var default sort direction is ascending
+    public $sortColumn = 'id';//var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
     public $roleFilter = 0; //var filtering value = all

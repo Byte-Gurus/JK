@@ -44,6 +44,7 @@ class UserForm extends Component
 
 
     //* assign all the listners in one array
+    //* for methods
     protected $listeners = [
         'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
         //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
@@ -54,7 +55,7 @@ class UserForm extends Component
 
 
 
-    public function create()
+    public function create() //* create process
     {
 
         $validated = $this->validateForm();
@@ -70,7 +71,7 @@ class UserForm extends Component
 
 
 
-    public function createConfirmed($data)
+    public function createConfirmed($data) //* confirmation process ng create
     {
 
         $validated = $data['inputAttributes'];
@@ -101,14 +102,14 @@ class UserForm extends Component
 
 
 
-    public function refreshTable()
+    public function refreshTable()//* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(UserTable::class);
     }
 
 
 
-    public function closeModal()
+    public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal');
     }
@@ -116,7 +117,7 @@ class UserForm extends Component
 
 
 
-    public function update()
+    public function update()//* update process
     {
         $validated = $this->validateForm();
 
@@ -146,7 +147,7 @@ class UserForm extends Component
 
 
 
-    public function updateConfirmed($data)
+    public function updateConfirmed($data) //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable
         $attributes = $data['inputAttributes'];
