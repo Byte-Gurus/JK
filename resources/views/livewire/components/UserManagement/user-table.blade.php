@@ -17,6 +17,8 @@
                         <input type="text" wire:model.live.debounce.100ms = "search"
                             class="w-1/3 p-2 pl-10 hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] rounded-lg cursor-pointer text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                             placeholder="Search by Name or Username" required="" />
+
+
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center gap-4">
@@ -46,9 +48,9 @@
                 </div>
             </div>
             {{-- TABLE --}}
-            <div class="overflow-x-auto overflow-y-scroll h-[500px]">
+            <div class="overflow-x-auto overflow-y-scroll h-[500px] ">
                 <table class="w-full h-10 text-sm text-left">
-                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)]">
+                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
                         <tr class=" text-nowrap">
                             <th wire:click="sortByColumn('firstname')" scope="col"
                                 class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
@@ -65,7 +67,6 @@
                             <th scope="col" class="px-4 py-3">Role</th>
                             <th scope="col" class="px-4 py-3 text-center">Status</th>
                             <th scope="col" class="px-4 py-3">Username</th>
-                            <th scope="col" class="px-4 py-3">Passwords</th>
                             <th wire:click="sortByColumn('created_at')" scope="col"
                                 class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
                                 <div class="flex flex-row items-center justify-between ">
@@ -110,10 +111,12 @@
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->roleMethod->role }}</th>
 
-                                <th scope="row" class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
-                                    <p @if ($user->status == 'Active') class=" text-green-800 bg-green-100 text-xs text-center font-medium px-2 py-0.5 rounded"
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+                                    <p
+                                        @if ($user->status == 'Active') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
                                         @elseif ($user->status == 'Inactive')
-                                        class=" text-red-800 bg-red-100 text-xs font-medium px-2 py-0.5 rounded " @endif>
+                                        class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
                                         {{ $user->status }}
                                     </p>
                                 </th>
@@ -121,9 +124,6 @@
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->username }}</th>
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ Str::limit($user->password, 10, '...') }}</th>
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $user->created_at->format('d-m-y h:i A') }}</th>
@@ -152,6 +152,7 @@
                                 </th>
                             </tr>
                         @endforeach
+
 
                     </tbody>
                 </table>

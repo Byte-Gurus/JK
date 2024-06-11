@@ -7,11 +7,19 @@ use Livewire\Component;
 
 class UserManagementPage extends Component
 {
- 
 
+    public $showModal = false;
     public function render()
     {
         return view('livewire.pages.user-management-page');
+    }
+
+    protected $listeners = [
+        'close-modal' => 'closeModal'
+        ];
+
+    public function closeModal(){
+        $this->showModal = false;
     }
 
 

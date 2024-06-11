@@ -56,10 +56,11 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">First
                                             Name</label>
                                         <input type="text" id="firstname" wire:model="firstname"
+                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="First Name" tabindex="2" required />
                                         @error('firstname')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -67,10 +68,11 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Middle
                                             Name <span class="text-red-400 ">*</span></label>
                                         <input type="text" id="middlename" wire:model="middlename"
+                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Middle Name" />
                                         @error('middlename')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -79,10 +81,11 @@
                                         <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 ">Last
                                             Name</label>
                                         <input type="text" id="lastname" wire:model="lastname"
+                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Last Name" required />
                                         @error('lastname')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -90,10 +93,11 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Contact
                                             No</label>
                                         <input type="number" id="contactno" wire:model="contact_number"
+                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Contact No" required />
                                         @error('contact_number')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -110,7 +114,7 @@
                                             <option value="3">Inventory Staff</option>
                                         </select>
                                         @error('role')
-                                            <span class="error ">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -123,7 +127,7 @@
                                             <option value="Inactive">Inactive</option>
                                         </select>
                                         @error('status')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -140,10 +144,11 @@
                                     <label for="username"
                                         class="block mb-2 text-sm font-medium text-gray-900">Username</label>
                                     <input type="text" id="username" wire:model="username"
+                                        oninput="removeSpaces(this)"
                                         class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                         placeholder="Username" required />
                                     @error('username')
-                                        <span class="error">{{ $message }}</span>
+                                        <span class="error font-medium text-red-500">{{ $message }}</span>
                                     @enderror
                                 </div>
 
@@ -152,9 +157,10 @@
                                         <label for="password"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
                                         <input type="password" wire:model="password" id="password"
+                                            oninput="removeSpaces(this)" placeholder="Password"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
                                         @error('password')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -162,9 +168,10 @@
                                             class="block mb-2 text-sm font-medium text-gray-900">Re-type
                                             Password</label>
                                         <input type="password" id="retype_password" wire:model="retype_password"
+                                            oninput="removeSpaces(this)" placeholder="Retype Password"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
                                         @error('retype_password')
-                                            <span class="error">{{ $message }}</span>
+                                            <span class="error font-medium text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -183,12 +190,17 @@
 
                             <div>
                                 <button type="submit"
-                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "> Update
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    Update
 
                                     <div wire:loading>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor" d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z"></path>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                            </path>
                                         </svg>
                                     </div>
                                 </button>
@@ -206,12 +218,17 @@
 
                             <div>
                                 <button type="submit"
-                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "> Create
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    Create
 
                                     <div wire:loading>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor" d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z"></path>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                            </path>
                                         </svg>
                                     </div>
                                 </button>
@@ -227,4 +244,9 @@
     </div>
 </div>
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+<script>
+    function removeSpaces(input) {
+        input.value = input.value.replace(/\s+/g, '');
+    }
+</script>
 <x-livewire-alert::flash />
