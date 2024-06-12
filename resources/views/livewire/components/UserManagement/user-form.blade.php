@@ -39,7 +39,7 @@
 
                     {{-- //* close button --}}
                     <button type="button" x-on:click="showModal=false" @if (!$this->isCreate)
-                        wire:click=' resetPasswordInputs() '
+                        wire:click=' resetEditFormWhenClosed() '
                     @endif
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">

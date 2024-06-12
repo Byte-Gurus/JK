@@ -169,8 +169,9 @@ class UserForm extends Component
         $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
     }
 
-    public function resetPasswordInputs() {
-        $this->reset();
+    public function resetEditFormWhenClosed() {
+        $this->resetForm();
+        $this->resetValidation();
     }
 
 
