@@ -19,6 +19,7 @@ class UserTable extends Component
     public $roleFilter = 0; //var filtering value = all
     public $statusFilter = 0; //var filtering value = all
 
+    
     public function render()
     {
 
@@ -42,10 +43,12 @@ class UserTable extends Component
         return view('livewire.components.UserManagement.user-table', compact('users', 'roles')); //*render the users and roles
     }
 
+
     protected $listeners = [
         'refresh-table' => 'refreshTable',//*  galing sa UserTable class
 
     ];
+
 
     //@params $userId, galing sa pag select ng edit from specific row
     public function edit($userId)
@@ -58,10 +61,13 @@ class UserTable extends Component
          //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create user
         $this->dispatch('change-method', isCreate: false)->to(UserForm::class);
     }
+
+
     public function updatedSearch()
     {
         $this->resetPage();
     }
+
 
     public function sortByColumn($column){ //* sort the column
 
@@ -75,6 +81,8 @@ class UserTable extends Component
 
        $this->sortColumn = $column; //* gawing global variable ang $column
     }
+
+
 
     public function refreshTable()
     {

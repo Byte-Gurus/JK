@@ -1,3 +1,5 @@
+
+
 <div class="flex flex-col items-center justify-center w-screen h-screen"
     style="background-image: linear-gradient(115deg, #dadada, #1b1b1b)">
     <div class="flex flex-row items-center justify-center shadow-lg ">
@@ -78,3 +80,4 @@
     </div>
 
 </div>
+

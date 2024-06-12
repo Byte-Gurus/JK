@@ -19,6 +19,7 @@ class UserForm extends Component
     public $isCreate; //var true for create false for edit
 
 
+    //var form inputs
     public $user_id;
     public $firstname;
     public $middlename;
@@ -215,7 +216,6 @@ class UserForm extends Component
 
         return $this->validate($rules);
     }
-
 
 
 
