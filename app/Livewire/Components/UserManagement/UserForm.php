@@ -19,6 +19,7 @@ class UserForm extends Component
     public $isCreate; //var true for create false for edit
 
 
+    //var form inputs
     public $user_id;
     public $firstname;
     public $middlename;
@@ -41,42 +42,37 @@ class UserForm extends Component
         return view('livewire.components.UserManagement.user-form');
     }
 
+
+
     //* assign all the listners in one array
+    //* for methods
     protected $listeners = [
         'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
         //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
         'change-method' => 'changeMethod',
         'updateConfirmed',
-        'createConfirmed'
+        'createConfirmed',
     ];
-    public function create()
+
+
+
+    public function create() //* create process
     {
 
         $validated = $this->validateForm();
 
 
         $this->confirm('Do you want to add this user??', [
-            'onConfirmed' => 'createconfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-
-        ]);
-    }
-    public function confirmed()
-    {
-
-        $validated = $this->validateForm();
-
-
-        $this->confirm('Do you want to update this user??', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
 
         ]);
-
     }
 
 
-    public function createConfirmed($data)
+
+
+    public function createConfirmed($data) //* confirmation process ng create
     {
 
         $validated = $data['inputAttributes'];
@@ -97,13 +93,32 @@ class UserForm extends Component
                 'password' => Hash::make($validated['password'])
             ]);
         }
-        $this->alert('success', 'Basic Alert');
-        $this->resetForm();
+
         $this->alert('success', 'User was created successfully');
+        $this->refreshTable();
+
+        $this->resetForm();
+        $this->closeModal();
     }
 
 
-    public function update()
+
+    public function refreshTable()//* refresh ang table after confirmation
+    {
+        $this->dispatch('refresh-table')->to(UserTable::class);
+    }
+
+
+
+    public function closeModal() //* close ang modal after confirmation
+    {
+        $this->dispatch('close-modal');
+    }
+
+
+
+
+    public function update()//* update process
     {
         $validated = $this->validateForm();
 
@@ -123,17 +138,17 @@ class UserForm extends Component
             $user->password = Hash::make($validated['password']);  //* gawing hash ang pass
         }
 
-        
+
         $this->confirm('Do you want to update this user??', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $user, //* pass the user to the confirmed method, as a form of array
 
         ]);
-
-
     }
 
-    public function updateConfirmed($data)
+
+
+    public function updateConfirmed($data) //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable
         $attributes = $data['inputAttributes'];
@@ -147,12 +162,18 @@ class UserForm extends Component
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');
 
-        $this->dispatch('refresh-table')->to(UserTable::class);
+        $this->refreshTable();
+        $this->closeModal();
     }
+
+
+
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
         $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
     }
+
+
 
 
     private function populateForm() //*lagyan ng laman ang mga input
@@ -170,13 +191,15 @@ class UserForm extends Component
         ]);
     }
 
+
+
     protected function validateForm()
     {
 
         $rules = [
-            'firstname' => 'required|string|max:255',
-            'middlename' => 'nullable|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:Active,Inactive',
@@ -195,10 +218,12 @@ class UserForm extends Component
     }
 
 
+
     public function edit($userID)
     {
         $this->user_id = $userID; //var assign ang parameter value sa global variable
     }
+
 
     public function changeMethod($isCreate)
     {

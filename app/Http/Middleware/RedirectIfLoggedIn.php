@@ -16,32 +16,40 @@ class RedirectIfLoggedIn
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
+        if (!Auth::check()) {
 
-            //* check if may role ka na 1 and active ang status
-            //* check if ang routes mo is nasa admin
-            //* pag hindi ibalik ka sa admin
-            if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
-                if (!str_starts_with($request->path(), 'admin')) {
-                    return redirect('/admin');
-                } else {
-                    return $next($request);
-                }
-
-                //* check if may role ka na 1 and active ang status
-                //* check if ang routes mo is nasa cashier
-                //* pag hindi ibalik ka sa cashier
-            } elseif (Auth::user()->role === 'Cashier' && Auth::user()->status === 'Active') {
-                if ($request->path() !== 'cashier') {
-                    return redirect('/cashier');
-                } else {
-                    return $next($request);
-                }
-            } else {
-                // return redirect('/logout');
-            }
+            return redirect('/');
         }
 
-        return redirect('/');
+
+        //* check if may role ka na 1 and active ang status
+        //* check if ang routes mo is nasa admin
+        //* pag hindi ibalik ka sa admin
+
+        if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
+
+            if (!str_starts_with($request->path(), 'admin')) {
+
+                return redirect('/admin');
+            }
+
+            return $next($request);
+        }
+
+        //* check if may role ka na 1 and active ang status
+        //* check if ang routes mo is nasa cashier
+        //* pag hindi ibalik ka sa cashier
+        
+        if (Auth::user()->role === 'Cashier' && Auth::user()->status === 'Active') {
+
+            if ($request->path() !== 'cashier') {
+
+                return redirect('/cashier');
+            }
+
+            return $next($request);
+        }
+
+        return $next($request);
     }
 }
