@@ -10,6 +10,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
+use function Laravel\Prompts\password;
+
 class UserForm extends Component
 {
     use LivewireAlert;
@@ -158,7 +160,6 @@ class UserForm extends Component
 
         $this->refreshTable();
         $this->closeModal();
-        $this->YesNoButtonClicked();
     }
 
 
@@ -166,6 +167,10 @@ class UserForm extends Component
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
         $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
+    }
+
+    public function resetPasswordInputs() {
+        $this->reset();
     }
 
 
