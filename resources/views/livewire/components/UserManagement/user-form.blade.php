@@ -38,9 +38,7 @@
                     </div>
 
                     {{-- //* close button --}}
-                    <button type="button" x-on:click="showModal=false" @if (!$this->isCreate)
-                        wire:click=' resetEditFormWhenClosed() '
-                    @endif
+                    <button type="button" x-on:click="showModal=false" wire:click=' resetFormWhenClosed() '
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">
 
@@ -292,8 +290,7 @@
                                         <div wire:loading>
 
                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 gap-2 text-white animate-spin"
-                                                viewBox="0 0 24 24">
+                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10"
                                                     stroke="currentColor" stroke-width="4"></circle>
                                                 <path class="opacity-75" fill="currentColor"

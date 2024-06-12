@@ -2,15 +2,13 @@
 
 namespace App\Livewire\Components\UserManagement;
 
-use App\Livewire\Pages\UserManagementPage;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\Attributes\On;
 
-use function Laravel\Prompts\password;
 
 class UserForm extends Component
 {
@@ -33,7 +31,7 @@ class UserForm extends Component
 
     public function render()
     {
-        // *tignan if yung id na pinasa from table is walang laman, pag may laman means mag populate then punta sa edit form punta
+        // *tignan if yung id na pinasa from table is walang laman, pag may laman means mag populate then sa edit form punta
         if ($this->user_id) {
             $this->populateForm();
         }
@@ -169,7 +167,7 @@ class UserForm extends Component
         $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
     }
 
-    public function resetEditFormWhenClosed() {
+    public function resetFormWhenClosed() {
         $this->resetForm();
         $this->resetValidation();
     }
