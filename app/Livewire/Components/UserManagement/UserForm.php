@@ -10,8 +10,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
-
-
 class UserForm extends Component
 {
     use LivewireAlert;
@@ -30,8 +28,6 @@ class UserForm extends Component
     public $username;
     public $password;
     public $retype_password;
-
-
 
     public function render()
     {
@@ -65,7 +61,6 @@ class UserForm extends Component
         $this->confirm('Do you want to add this user??', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-
         ]);
     }
 
@@ -103,7 +98,7 @@ class UserForm extends Component
 
 
 
-    public function refreshTable()//* refresh ang table after confirmation
+    public function refreshTable() //* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(UserTable::class);
     }
@@ -118,7 +113,7 @@ class UserForm extends Component
 
 
 
-    public function update()//* update process
+    public function update() //* update process
     {
         $validated = $this->validateForm();
 
@@ -142,7 +137,6 @@ class UserForm extends Component
         $this->confirm('Do you want to update this user??', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $user, //* pass the user to the confirmed method, as a form of array
-
         ]);
     }
 
@@ -164,6 +158,7 @@ class UserForm extends Component
 
         $this->refreshTable();
         $this->closeModal();
+        $this->YesNoButtonClicked();
     }
 
 
@@ -210,6 +205,7 @@ class UserForm extends Component
 
         //*para sa create na validation or //*para sa edit na may passowrd na validation
         if ($this->isCreate || $this->show_password) {
+
             $rules['password'] = 'required|string|min:8|same:retype_password';
             $rules['retype_password'] = 'required|string|min:8';
         }

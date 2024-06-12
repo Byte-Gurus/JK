@@ -12,10 +12,8 @@
 
             {{-- //* Modal content --}}
             @if (!$this->isCreate)
-
                 {{-- *if form is edit --}}
                 <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
-
             @endif
 
             {{-- *if form is create --}}
@@ -87,7 +85,7 @@
                                             placeholder="First Name" tabindex="2" required />
 
                                         @error('firstname')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -104,7 +102,7 @@
                                             placeholder="Middle Name" />
 
                                         @error('middlename')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -126,7 +124,7 @@
                                             placeholder="Last Name" required />
 
                                         @error('lastname')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -144,7 +142,7 @@
                                             placeholder="Contact No" required />
 
                                         @error('contact_number')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -169,7 +167,7 @@
                                         </select>
 
                                         @error('role')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -188,7 +186,7 @@
                                         </select>
 
                                         @error('status')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -219,12 +217,12 @@
                                         placeholder="Username" required />
 
                                     @error('username')
-                                        <span class="error font-medium text-red-500">{{ $message }}</span>
+                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
 
                                 </div>
 
-                                  {{-- //* script that show password and retype pass if create form--}}
+                                {{-- //* script that show password and retype pass if create form --}}
                                 <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
 
                                     {{-- //* password --}}
@@ -238,7 +236,7 @@
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
                                         @error('password')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -255,7 +253,7 @@
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
                                         @error('retype_password')
-                                            <span class="error font-medium text-red-500">{{ $message }}</span>
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
@@ -277,9 +275,8 @@
 
                     {{-- //* form footer --}}
 
-                     {{-- *if form is edit --}}
+                    {{-- *if form is edit --}}
                     @if (!$this->isCreate)
-
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
@@ -287,19 +284,22 @@
                                 {{-- //* submit button for edit --}}
                                 <button type="submit"
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                    Update
+                                    <div class="flex flex-row items-center ">
+                                        <p>Update</p>
 
-                                    <div wire:loading>
+                                        <div wire:loading>
 
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor"
-                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                            </path>
-                                        </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="w-5 h-5 gap-2 text-white animate-spin"
+                                                viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                    stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                                </path>
+                                            </svg>
 
+                                        </div>
                                     </div>
 
                                 </button>
@@ -307,14 +307,12 @@
                             </div>
 
                         </div>
-
                     @else
-
-                    {{-- *if form is create --}}
+                        {{-- *if form is create --}}
                         <div class="flex flex-row justify-end gap-2">
                             <div>
 
-                                 {{-- //* clear all button for create --}}
+                                {{-- //* clear all button for create --}}
                                 <button type="reset"
                                     class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
                                     All</button>
@@ -322,28 +320,32 @@
 
                             <div>
 
-                                 {{-- //* submit button for create --}}
+                                {{-- //* submit button for create --}}
                                 <button type="submit"
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                    Create
+                                    <div class="flex flex-row items-center gap-2">
+                                        <p>
+                                            Create
+                                        </p>
 
-                                    <div wire:loading>
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor"
-                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                            </path>
-                                        </svg>
+                                        <div wire:loading>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                    stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                                </path>
+                                            </svg>
+                                        </div>
                                     </div>
+
 
                                 </button>
 
                             </div>
 
                         </div>
-
                     @endif
 
                 </div>
