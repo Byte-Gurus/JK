@@ -56,7 +56,7 @@
     <div class="flex items-center">
 
         <div class="flex items-center justify-between">
-            <div class="flex flex-row gap-10">
+            <div class="flex flex-row items-center gap-10">
                 <div x-data="{ openNotifications: false }">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         x-on:click="openNotifications = !openNotifications" stroke="currentColor">

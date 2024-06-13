@@ -69,7 +69,7 @@
         {{-- //* tablea area --}}
         <div class="overflow-x-auto overflow-y-scroll h-[500px] ">
 
-            <table class="w-full h-10 text-sm text-left">
+            <table class="w-full h-10 text-sm text-left scroll">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
@@ -255,9 +255,9 @@
             </div>
 
             {{-- //* per page --}}
-            <div class="flex px-4 py-2 items-center mb-3">
+            <div class="flex items-center px-4 py-2 mb-3">
 
-                <label class="w-15 text-sm font-medium text-gray-900">Per Page</label>
+                <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
                 <select wire:model.live = "perPage"
                     class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
