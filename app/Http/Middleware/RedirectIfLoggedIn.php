@@ -39,8 +39,8 @@ class RedirectIfLoggedIn
         //* check if may role ka na 1 and active ang status
         //* check if ang routes mo is nasa cashier
         //* pag hindi ibalik ka sa cashier
-        
-        if (Auth::user()->role === 'Cashier' && Auth::user()->status === 'Active') {
+
+        if (Auth::user()->user_role_id === '2' && Auth::user()->status === 'Active') {
 
             if ($request->path() !== 'cashier') {
 

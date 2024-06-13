@@ -108,9 +108,11 @@ class UserForm extends Component
     {
         $validated = $this->validateForm();
 
+
         $user = User::find($this->user_id); //? kunin lahat ng data ng may ari ng user_id
 
         //*pag hindi palitan ang password
+        //* ipasa ang laman ng validated inputs sa models
         $user->firstname = $validated['firstname'];
         $user->middlename = $validated['middlename'];
         $user->lastname = $validated['lastname'];
@@ -119,15 +121,17 @@ class UserForm extends Component
         $user->status = $validated['status'];
         $user->username = $validated['username'];
 
-        //*pag  palitan ang password
-        if ($this->show_password) {
-            $user->password = Hash::make($validated['password']);  //* gawing hash ang pass
-        }
+        $attributes = $user->toArray(); //var ilagay sa array ang model before i add ang password sa array kasi hindi ni reretrieve ang hashed password sa toArray() method
 
+        //*pag palitan ang password
+        //* staka palang ilagay ang hashed password kapag may array na
+        if ($this->show_password) {
+            $attributes['password'] = Hash::make($validated['password']);  //var gawing hash ang pass
+        }
 
         $this->confirm('Do you want to update this user??', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $user, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
@@ -135,13 +139,19 @@ class UserForm extends Component
 
     public function updateConfirmed($data) //* confirmation process ng update
     {
-        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable
-        $attributes = $data['inputAttributes'];
 
-        //* hanapin id na attribute sa $attributes array
-        $user = User::find($attributes['id']);
 
-        $user->fill($attributes); //var ipasa ang laman ng $attributes sa $user variable
+        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
+        $updatedAttributes = $data['inputAttributes'];
+
+        //* hanapin id na attribute sa $updatedAttributes array
+        $user = User::find($updatedAttributes['id']);
+
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
+        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $users have same keys with $updatedAttributes array
+        //var ipasa ang laman ng $updatedAttributes sa $user model
+        $user->fill($updatedAttributes);
+
         $user->save(); //* Save the user model to the database
 
         $this->resetForm();
@@ -158,7 +168,9 @@ class UserForm extends Component
         $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
     }
 
-    public function resetFormWhenClosed() {
+    //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation
+    public function resetFormWhenClosed()
+    {
         $this->resetForm();
         $this->resetValidation();
     }
@@ -170,6 +182,9 @@ class UserForm extends Component
     {
 
         $user_details = User::find($this->user_id); //? kunin lahat ng data ng may ari ng user_id
+
+        //* ipasa ang laman ng model sa inputs
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
         $this->fill([
             'firstname' => $user_details->firstname,
             'middlename' => $user_details->middlename,

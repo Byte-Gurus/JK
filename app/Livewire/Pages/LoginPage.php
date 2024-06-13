@@ -28,11 +28,12 @@ class LoginPage extends Component
 
             if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
                 return redirect()->route('admin.index');
-            } elseif (Auth::user()->role === 'Cashier' && Auth::user()->status === 'Active') {
-                return redirect()->route('admin.index');
+            } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status === 'Active') {
+                return redirect()->route('cashier.index');
+            }else{
+                $this->addError('submit', 'This account is inactive');
             }
 
-            $this->addError('submit', 'This account is inactive');
         }
 
         $this->addError('submit', 'No matching user with provided username and password');
