@@ -197,8 +197,7 @@ class UserForm extends Component
     }
 
 
-
-    protected function validateForm()
+tite    protected function validateForm()
     {
 
         $rules = [
