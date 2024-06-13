@@ -18,16 +18,7 @@ class UserForm extends Component
 
 
     //var form inputs
-    public $user_id;
-    public $firstname;
-    public $middlename;
-    public $lastname;
-    public $contact_number;
-    public $role;
-    public $status;
-    public $username;
-    public $password;
-    public $retype_password;
+    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
 
     public function render()
     {
