@@ -92,15 +92,15 @@
                                     {{-- //* contact_no --}}
                                     <div class="mb-3">
 
-                                        <label for="middlename"
+                                        <label for="contactno"
                                             class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span class="text-red-400 ">*</span></label>
 
-                                        <input type="text" id="middlename" wire:model="middlename"
+                                        <input type="text" id="contactno" wire:model="contactno"
                                             oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Middle Name" />
+                                            placeholder="Contact No" />
 
-                                        @error('middlename')
+                                        @error('contact_no')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -113,34 +113,33 @@
                                     {{-- //* lastname --}}
                                     <div class="mb-3">
 
-                                        <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 ">Last
-                                            Name
+                                        <label for="provinceid" class="block mb-2 text-sm font-medium text-gray-900 ">Province ID
                                         </label>
 
-                                        <input type="text" id="lastname" wire:model="lastname"
+                                        <input type="text" id="provinceid" wire:model="provinceid"
                                             oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Last Name" required />
 
-                                        @error('lastname')
+                                        @error('province_id')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
 
-                                    {{-- //* contact numebr --}}
+                                    {{-- //* city --}}
                                     <div class="mb-3">
 
-                                        <label for="contactno"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Contact
+                                        <label for="city"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">City
                                             No</label>
 
-                                        <input type="number" id="contactno" wire:model="contact_number"
+                                        <input type="text" id="city" wire:model="city"
                                             oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Contact No" required />
+                                            placeholder="City" required />
 
-                                        @error('contact_number')
+                                        @error('city')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -151,40 +150,50 @@
                                 {{-- //* third row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                    {{-- //* role --}}
+                                    {{-- //* brgy id --}}
                                     <div class="mb-3">
 
-                                        <label for="role"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
+                                        <label for="brgyid"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Brgy ID</label>
 
-                                        <select id="user_roles" wire:model="role"
+                                            <input type="text" id="brgyid" wire:model="brgyid"
+                                            oninput="removeSpaces(this)"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            placeholder="Brgy ID" required />
+
+                                        {{-- <select id="brgyid" wire:model="brgyid"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select a role</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Cashier</option>
                                             <option value="3">Inventory Staff</option>
-                                        </select>
+                                        </select> --}}
 
-                                        @error('role')
+                                        @error('bgryid')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
 
-                                    {{-- //* status --}}
+                                    {{-- //* street --}}
                                     <div class="mb-3">
 
-                                        <label for="status"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+                                        <label for="stret"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
-                                        <select id="status" wire:model="status"
+                                            <input type="text" id="street" wire:model="street"
+                                            oninput="removeSpaces(this)"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            placeholder="Street" required />
+
+                                        {{-- <select id="street" wire:model="status"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Set your status</option>
                                             <option value="Active">Active</option>
                                             <option value="Inactive">Inactive</option>
-                                        </select>
+                                        </select> --}}
 
-                                        @error('status')
+                                        @error('street')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
