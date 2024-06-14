@@ -1,6 +1,6 @@
 <div>
     @livewire('components.navbar')
-    <div x-data="{showModal:@entangle('showModal')}">
+    <div x-data="{ showModal: @entangle('showModal') }">
         <div class=" ml-[250px] py-[28px] mr-8">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
@@ -9,15 +9,25 @@
                     </div>
                     <div>
 
-                            <button class=" px-4 py-2 text-sm font-bold bg-[rgb(53,53,53)] text-white border rounded-md hover:bg-[rgb(71,71,71)] transition-all duration-100 ease-in-out" x-on:click="showModal=true;$wire.formCreate()">
-                                Add New User
-                            </button>
+                        <button
+                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                            x-on:click="showModal=true;$wire.formCreate()">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Add New User</p>
+                            </div>
+                        </button>
                     </div>
                 </div>
 
             </div>
             @livewire('components.UserManagement.user-form')
         </div>
-            @livewire('components.UserManagement.user-table')
+        @livewire('components.UserManagement.user-table')
     </div>
 </div>
