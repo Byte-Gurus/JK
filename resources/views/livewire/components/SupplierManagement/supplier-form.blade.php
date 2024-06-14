@@ -1,5 +1,5 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showModal" x-data="{ showPassword: @entangle('show_password'), isCreate: @entangle('isCreate'), }">
+<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate'), }">
 
     {{-- //* form background --}}
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
@@ -29,9 +29,9 @@
 
                             @if (!$this->isCreate)
                                 {{-- *if form is edit --}}
-                                Edit User
+                                Edit Supplier
                             @else
-                                Create User
+                                Create Supplier
                             @endif
 
                         </h3>
@@ -221,52 +221,6 @@
                                     @enderror
 
                                 </div>
-
-                                {{-- //* script that show password and retype pass if create form --}}
-                                <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
-
-                                    {{-- //* password --}}
-                                    <div class="mb-3">
-
-                                        <label for="password"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-
-                                        <input type="password" wire:model="password" id="password"
-                                            oninput="removeSpaces(this)" placeholder="Password"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
-
-                                        @error('password')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-
-                                    {{-- //* retype password --}}
-                                    <div class="mb-3">
-
-                                        <label for="retypepassword"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Re-type
-                                            Password</label>
-
-                                        <input type="password" id="retype_password" wire:model="retype_password"
-                                            oninput="removeSpaces(this)" placeholder="Retype Password"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
-
-                                        @error('retype_password')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-
-                                </div>
-
-                                {{-- //* check box for edit --}}
-                                @if (!$this->isCreate)
-                                    <input type="checkbox" name="showpassword" id="showpassword"
-                                        wire:model="show_password" placeholder="">
-
-                                    <label for="showpassword">Update Password</label>
-                                @endif
 
                             </div>
                         </div>

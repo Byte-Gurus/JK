@@ -107,7 +107,7 @@
                         {{-- //* username --}}
                         <th scope="col" class="px-4 py-3">Username</th>
 
-                        {{-- //* created at --}}
+                        {{-- //* created at --}
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 

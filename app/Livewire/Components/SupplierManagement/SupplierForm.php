@@ -10,7 +10,7 @@ class SupplierForm extends Component
     public $isCreate; //var true for create false for edit
 
     //var form inputs
-    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
+    public $supplier_id, $company_name, $contact_no, $province_id, $city, $brgy_id;
 
     public function render()
     {
@@ -28,14 +28,14 @@ class SupplierForm extends Component
     ];
 
 
-    public function edit($userID)
+    public function edit($supplierID)
     {
-        $this->user_id = $userID; //var assign ang parameter value sa global variable
+        $this->supplier_id = $supplier_id; //var assign ang parameter value sa global variable
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
+        $this->reset(['company_name', 'contact_no', 'province_id', 'city', 'brgy_id', 'supplier_id']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation
@@ -43,19 +43,5 @@ class SupplierForm extends Component
     {
         $this->resetForm();
         $this->resetValidation();
-    }
-
-
-    public function changeMethod($isCreate)
-    {
-
-        $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
-
-        //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
-        if ($this->isCreate) {
-
-            $this->resetForm();
-        } else {
-        }
     }
 }
