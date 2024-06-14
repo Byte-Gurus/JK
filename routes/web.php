@@ -15,7 +15,10 @@ Route::get('/logout', Logout::class)->name('logout');
 //homepage
 Route::get('/admin', HomePage::class)->name('admin.index')->middleware('RedirectIfLoggedIn');
 
+//UserManagamenent
 Route::get('/admin/UserManagement', UserManagementPage::class)->name('usermanagement.index')->middleware('RedirectIfLoggedIn');
+
+//SupplierManagement
 Route::get('admin/SupplierManagement', SupplierManagementPage::class)->name('suppliermanagement.index')->middleware('RedirectIfLoggedIn');
 
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
