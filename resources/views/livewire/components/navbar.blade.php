@@ -1,21 +1,24 @@
-<div x-data="{ openSidebar: true }"
+<div x-data="{ openSidebar: @entangle('sidebarOpen') }"
     x-cloak
-    class="flex flex-row items-center justify-between py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
-    :class="openSidebar && 'ml-[220px]'">
+    @if ($this->sidebarOpen)
+        class="z-50 flex flex-row items-center justify-between py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
+    @else
+    class="flex flex-row items-center justify-between ml-[0px] z-50 py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
+    @endif
+    >
     <div class="flex flex-row items-center">
         <div class="pr-8 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-10 h-10" x-on:click="openSidebar = !openSidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-10 h-10" wire:click="toggleSidebar(openSidebar) ">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
-
             <div x-cloak x-show="openSidebar"
-            x-transition:enter="transition ease-in duration-400"
+        x-transition:enter="transition ease-in-out duration-300"
             x-transition:enter-start="opacity-100 scale-100"
             x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-out duration-400"
+            x-transition:leave="transition ease-in-out duration-300"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-100 scale-100"
-            class="absolute top-0 left-[-220px] w-0 max-w-md transition-all ease-in-out duration-400"
+            class="absolute top-0 left-[-220px] w-0 max-w-md z-100 transition-all ease-in-out duration-100 z-50"
             :class="openSidebar && ' left-[0px]'">
                 @livewire('components.sidebar')
             </div>

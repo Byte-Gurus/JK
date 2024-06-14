@@ -1,11 +1,13 @@
-<div>
+<div x-data="{ sidebar: @entangle('sidebarStatus') }" @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
+@else
+    class=" ml-[0px transition-all ease-in-out duration-100]" @endif>
     @livewire('components.navbar')
     <div x-data="{ showModal: @entangle('showModal') }">
-        <div class=" ml-[250px] py-[28px] mr-8">
+        <div class="m-[28px]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
-                        <h1 class="text-[2em] font-bold pointer-events-none">Manage User</h1>
+                        <h1p class="text-[2em] font-bold pointer-events-none">Manage User</h1p>
                     </div>
                     <div>
 
@@ -26,8 +28,12 @@
                 </div>
 
             </div>
-            @livewire('components.UserManagement.user-form')
+            <div>
+                @livewire('components.UserManagement.user-form')
+            </div>
         </div>
-        @livewire('components.UserManagement.user-table')
+        <div class=" m-[20px]">
+            @livewire('components.UserManagement.user-table')
+        </div>
     </div>
 </div>

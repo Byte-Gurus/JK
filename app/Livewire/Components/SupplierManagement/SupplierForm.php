@@ -30,7 +30,7 @@ class SupplierForm extends Component
 
     public function edit($supplierID)
     {
-        $this->supplier_id = $supplier_id; //var assign ang parameter value sa global variable
+        $this->supplier_id = $supplierID; //var assign ang parameter value sa global variable
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
@@ -43,5 +43,25 @@ class SupplierForm extends Component
     {
         $this->resetForm();
         $this->resetValidation();
+    }
+
+    protected function validateForm()
+    {
+
+        $rules = [
+            'company_name' => '',
+            'contact_no' => '',
+            'province_id' => '',
+            'city' => '',
+            'brgy_id' => '',
+            'supplier_id' => '',
+        ];
+
+        return $this->validate($rules);
+    }
+
+    public function changeMethod($isCreate)
+    {
+        $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
     }
 }

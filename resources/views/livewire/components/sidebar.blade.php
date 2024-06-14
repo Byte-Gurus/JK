@@ -1,4 +1,4 @@
-<div x-cloak class="h-screen fixed w-[220px] bg-[#272727] text-center gap-12">
+<div x-cloak class="h-screen fixed w-[220px] bg-[#272727] text-center gap-12 z-50">
     <div class="flex justify-center pt-4 ">
         <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
     </div>

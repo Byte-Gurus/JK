@@ -64,7 +64,7 @@
 
                             <div
                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                <h1 class="font-bold">Personal Information</h1>
+                                <h1 class="font-bold">Supplier Information</h1>
                             </div>
 
                             <div class="p-4">
@@ -72,29 +72,28 @@
                                 {{-- //* first row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                    {{-- //* firstname --}}
+                                    {{-- //* company name --}}
                                     <div class="mb-3">
 
-                                        <label for="firstname"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">First Name
+                                        <label for="companyname"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Company Name
                                         </label>
 
-                                        <input type="text" id="firstname" wire:model="firstname"
+                                        <input type="text" id="companyname" wire:model="companyname"
                                             oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="First Name" tabindex="2" required />
+                                            placeholder="Company Name" tabindex="2" required />
 
-                                        @error('firstname')
+                                        @error('company_name')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
                                     </div>
 
-                                    {{-- //* middlename --}}
+                                    {{-- //* contact_no --}}
                                     <div class="mb-3">
 
                                         <label for="middlename"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Middle
-                                            Name <span class="text-red-400 ">*</span></label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="middlename" wire:model="middlename"
                                             oninput="removeSpaces(this)"
@@ -194,37 +193,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- //* second area, login information --}}
-                        <div class="border-2 border-[rgb(53,53,53)] rounded-md">
-
-                            <div
-                                class="p-2 border-b  bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                <h1 class="font-bold">Login Information</h1>
-                            </div>
-
-                            <div class="p-4">
-
-                                {{-- //* username --}}
-                                <div class="mb-3">
-
-                                    <label for="username"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-
-                                    <input type="text" id="username" wire:model="username"
-                                        oninput="removeSpaces(this)"
-                                        class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                        placeholder="Username" required />
-
-                                    @error('username')
-                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                    @enderror
-
-                                </div>
-
-                            </div>
-                        </div>
-
                     </div>
 
                     {{-- //* form footer --}}

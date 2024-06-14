@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative ml-[242px] mr-[22px] mb-[22px] ">
+<div class="relative">
 
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
@@ -107,7 +107,7 @@
                         {{-- //* username --}}
                         <th scope="col" class="px-4 py-3">Username</th>
 
-                        {{-- //* created at --}
+                        {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -126,7 +126,7 @@
                             </div>
                         </th>
 
-                        {{-- //* updated at --}}
+                         {{-- //* updated at --}}
                         <th wire:click="sortByColumn('updated_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 

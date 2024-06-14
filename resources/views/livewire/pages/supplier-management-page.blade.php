@@ -2,7 +2,7 @@
     @livewire('components.navbar')
     <div x-data="{ showModal: @entangle('showModal') }">
         <div class=" ml-[250px] py-[28px] mr-8">
-            <div class="flex flex-col justify-between">
+        <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
                         <h1 class="text-[2em] font-bold pointer-events-none">Manage Supplier</h1>
