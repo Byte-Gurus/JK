@@ -7,7 +7,6 @@ use Livewire\Component;
 class SupplierForm extends Component
 {
 
-    public $show_password; //var true for show password false for hindi
     public $isCreate; //var true for create false for edit
 
     //var form inputs
@@ -56,9 +55,7 @@ class SupplierForm extends Component
         if ($this->isCreate) {
 
             $this->resetForm();
-            $this->show_password = true;
         } else {
-            $this->show_password = false;
         }
     }
 }
