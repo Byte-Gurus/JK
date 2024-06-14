@@ -116,10 +116,11 @@
                                         <label for="provinceid" class="block mb-2 text-sm font-medium text-gray-900 ">Province ID
                                         </label>
 
-                                        <input type="text" id="provinceid" wire:model="provinceid"
-                                            oninput="removeSpaces(this)"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Last Name" required />
+                                        <select id="provinceid" wire:model="provinceid"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            <option value="" selected>Select a role</option>
+
+                                        </select>
 
                                         @error('province_id')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -134,10 +135,11 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">City
                                             No</label>
 
-                                        <input type="text" id="city" wire:model="city"
-                                            oninput="removeSpaces(this)"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="City" required />
+                                            <select id="city" wire:model="city"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            <option value="" selected>Select a role</option>
+
+                                        </select>
 
                                         @error('city')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -156,18 +158,11 @@
                                         <label for="brgyid"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Brgy ID</label>
 
-                                            <input type="text" id="brgyid" wire:model="brgyid"
-                                            oninput="removeSpaces(this)"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Brgy ID" required />
-
-                                        {{-- <select id="brgyid" wire:model="brgyid"
+                                        <select id="brgyid" wire:model="brgyid"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select a role</option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Cashier</option>
-                                            <option value="3">Inventory Staff</option>
-                                        </select> --}}
+
+                                        </select>
 
                                         @error('bgryid')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
