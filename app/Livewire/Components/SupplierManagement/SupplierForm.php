@@ -50,11 +50,11 @@ class SupplierForm extends Component
 
         $rules = [
             'company_name' => '',
-            'contact_no' => '',
-            'province_id' => '',
-            'city' => '',
-            'brgy_id' => '',
-            'supplier_id' => '',
+            'contact_number' => '',
+            'province' => '',
+            'city/Municipality' => '',
+            'brgy' => '',
+            
         ];
 
         return $this->validate($rules);

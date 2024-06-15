@@ -95,8 +95,7 @@
                                         <label for="contactno"
                                             class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span class="text-red-400 ">*</span></label>
 
-                                        <input type="text" id="contactno" wire:model="contactno"
-                                            oninput="removeSpaces(this)"
+                                        <input type="text" id="contactno" wire:model="contact_number"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Contact No" />
 
@@ -113,12 +112,12 @@
                                     {{-- //* lastname --}}
                                     <div class="mb-3">
 
-                                        <label for="provinceid" class="block mb-2 text-sm font-medium text-gray-900 ">Province ID
+                                        <label for="provinceid" class="block mb-2 text-sm font-medium text-gray-900 ">Province
                                         </label>
 
                                         <select id="provinceid" wire:model="provinceid"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select a role</option>
+                                            <option value="" selected>Select province</option>
 
                                         </select>
 
@@ -132,12 +131,12 @@
                                     <div class="mb-3">
 
                                         <label for="city"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">City
-                                            No</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">City / Municipality
+                                           </label>
 
                                             <select id="city" wire:model="city"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select a role</option>
+                                            <option value="" selected>Select city / municipality</option>
 
                                         </select>
 
@@ -156,7 +155,7 @@
                                     <div class="mb-3">
 
                                         <label for="brgyid"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Brgy ID</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Brgy</label>
 
                                         <select id="brgyid" wire:model="brgyid"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
