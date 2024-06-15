@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Components\SupplierManagement;
 
-use App\Models\Philippine_Region;
+
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
@@ -13,18 +13,23 @@ class SupplierForm extends Component
 {
 
     public $isCreate; //var true for create false for edit
-    public $cities;
-    public $barangays;
+
+    public $selectProvince = null;
+    public $selectCity = null;
+    public $selectBrgy = null;
+
+    public $cities = null;
+    public $barangays = null;
     //var form inputs
-    public $supplier_id, $company_name, $contact_no, $province, $city, $brgy;
+    public $supplier_id, $company_name, $contact_no;
 
     public function render()
     {
-        $provinces = PhilippineProvince::select('province_code', 'province_description')
-            ->orderBy('province_description')
-            ->get();
 
-        return view('livewire.components.SupplierManagement.supplier-form', compact('provinces'));
+
+        return view('livewire.components.SupplierManagement.supplier-form', [
+            'provinces' => PhilippineProvince::orderBy('province_description')->get(),
+        ]);
     }
 
     //* assign all the listners in one array
@@ -37,38 +42,19 @@ class SupplierForm extends Component
         'createConfirmed',
     ];
 
-    public function selectCity()
+    public function updatedSelectProvince($province_code)
     {
-        if ($this->province) {
-            $this->cities = PhilippineCity::where('province_code', $this->province)
-                ->select('city_municipality_code', 'city_municipality_description')
-                ->orderBy('city_municipality_description')
-                ->get();
 
-            return view('livewire.components.SupplierManagement.supplier-form', [$this->cities]);
-        } else {
-            $this->cities = null;
-        }
-
+        $this->cities = PhilippineCity::where('province_code', $province_code)->orderBy('city_municipality_description')->get();
 
     }
 
-    public function selectBarangay()
+    public function updatedSelectCity($city_municipality_code)
     {
 
-            // if ($this->city) {
-            //     $this->barangays = PhilippineBarangay::where('city_municipality_code', $this->city)
-            //         ->select('barangay_code', 'barangay_description')
-            //         ->orderBy('barangay_description')
-            //         ->get();
+        $this->barangays = PhilippineBarangay::where('city_municipality_code', $city_municipality_code)->orderBy('barangay_description')->get();
 
-            //     return view('livewire.components.SupplierManagement.supplier-form', [$this->barangays]);
-            // } else {
-            //     $this->barangays = null; // Reset city dropdown if no province selected
-            // }
     }
-
-
     public function edit($supplierID)
     {
         $this->supplier_id = $supplierID; //var assign ang parameter value sa global variable
@@ -76,7 +62,7 @@ class SupplierForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['company_name', 'contact_no', 'province_id', 'city', 'brgy_id', 'supplier_id']);
+        $this->reset(['company_name', 'contact_no', 'selectProvince', 'selectCity', 'selectBrgy', 'supplier_id']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation

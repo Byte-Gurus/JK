@@ -1,5 +1,5 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate'), cities: @entangle('cities'), barangays: @entangle('barangays') }">
+<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate') }">
 
     {{-- //* form background --}}
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
@@ -113,11 +113,23 @@
                                         {{-- //* province --}}
                                         <div class="mb-3">
 
-                                            <label for="province"
+                                            <label for="selectProvince"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Province
                                             </label>
 
-                                            <select id="province" wire:model="province" wire:change="selectCity()"
+                                            <input type="text" id="selectProvince" wire:model.live="selectProvince"
+                                                placeholder="Select Province" list="provinceList"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            <datalist id="provinceList">
+                                                @foreach ($provinces as $province)
+                                                <option>{{
+                                                    $province->province_description }}</option>
+                                                @endforeach
+                                            </datalist>
+
+
+                                            </input>
+                                            {{-- <select id="selectProvince" wire:model.live="selectProvince"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                                 <option value="" selected>Select province</option>
                                                 @foreach ($provinces as $province)
@@ -125,9 +137,9 @@
                                                     $province->province_description }}</option>
                                                 @endforeach
 
-                                            </select>
+                                            </select> --}}
 
-                                            @error('province_id')
+                                            @error('selectProvince')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
@@ -136,25 +148,25 @@
                                         {{-- //* city --}}
                                         <div class="mb-3">
 
-                                            <label for="city" class="block mb-2 text-sm font-medium text-gray-900 ">City
+                                            <label for="selectCity"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">City
                                                 / Municipality
                                             </label>
 
 
-                                            <select id="city" wire:model="city" wire:change="selectBarangay()"
+                                            <select id="selectCity" wire:model.live="selectCity"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                                 <option value="" selected>Select city / municipality</option>
-                                                @if ($cities)
+                                                @if(!is_null($cities))
                                                 @foreach ($cities as $city)
                                                 <option value="{{ $city->city_municipality_code }}">{{
                                                     $city->city_municipality_description }}</option>
                                                 @endforeach
+
                                                 @endif
-
-
                                             </select>
 
-                                            @error('city')
+                                            @error('selectCity')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
@@ -168,22 +180,21 @@
                                         {{-- //* brgy --}}
                                         <div class="mb-3">
 
-                                            <label for="brgy"
+                                            <label for="selectBrgy"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
-                                            <select id="brgy" wire:model="brgy"
+                                            <select id="selectBrgy" wire:model.live="selectBrgy"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                                 <option value="" selected>Select a role</option>
-                                                @if ($barangays)
+                                                @if(!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
                                                 <option value="{{ $barangay->barangay_code }}">{{
                                                     $barangay->barangay_description }}</option>
                                                 @endforeach
-
                                                 @endif
                                             </select>
 
-                                            @error('bgryid')
+                                            @error('selectBrgy')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
@@ -192,7 +203,7 @@
                                         {{-- //* street --}}
                                         <div class="mb-3">
 
-                                            <label for="stret"
+                                            <label for="street"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
                                             <input type="text" id="street" wire:model="street"

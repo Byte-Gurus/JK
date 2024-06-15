@@ -8,7 +8,7 @@ use Livewire\Component;
 class SupplierManagementPage extends Component
 {
 
-    public $showModal = true;
+    public $showModal = false;
 
 
     public function render()
