@@ -22,6 +22,8 @@ class CreatePhilippineProvincesTable extends Migration
             $table->string('province_code')->index();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+
+            $table->foreign('region_code')->references('region_code')->on('philippine_regions');    
         });
     }
 

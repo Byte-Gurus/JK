@@ -17,11 +17,14 @@ class CreatePhilippineCitiesTable extends Migration
             $table->increments('id');
             $table->string('psgc_code')->index();
             $table->string('city_municipality_description');
-            $table->string('region_description');
+            $table->string('region_code')->index();;
             $table->string('province_code')->index();
             $table->string('city_municipality_code')->index();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+
+            $table->foreign('region_code')->references('region_code')->on('philippine_regions');
+            $table->foreign('province_code')->references('province_code')->on('philippine_provinces');
         });
     }
 
