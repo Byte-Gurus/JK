@@ -19,7 +19,7 @@ class UserTable extends Component
     public $roleFilter = 0; //var filtering value = all
     public $statusFilter = 0; //var filtering value = all
 
-    
+
     public function render()
     {
 
