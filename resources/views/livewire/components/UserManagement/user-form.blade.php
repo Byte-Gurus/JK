@@ -80,7 +80,6 @@
                                         </label>
 
                                         <input type="text" id="firstname" wire:model="firstname"
-                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="First Name" tabindex="2" required />
 
@@ -97,7 +96,6 @@
                                             Name <span class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="middlename" wire:model="middlename"
-                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Middle Name" />
 
@@ -119,7 +117,6 @@
                                         </label>
 
                                         <input type="text" id="lastname" wire:model="lastname"
-                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Last Name" required />
 
@@ -137,7 +134,6 @@
                                             No</label>
 
                                         <input type="number" id="contactno" wire:model="contact_number"
-                                            oninput="removeSpaces(this)"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Contact No" required />
 
@@ -212,7 +208,6 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Username</label>
 
                                     <input type="text" id="username" wire:model="username"
-                                        oninput="removeSpaces(this)"
                                         class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                         placeholder="Username" required />
 
@@ -232,7 +227,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
 
                                         <input type="password" wire:model="password" id="password"
-                                            oninput="removeSpaces(this)" placeholder="Password"
+                                            placeholder="Password"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
                                         @error('password')
@@ -249,7 +244,7 @@
                                             Password</label>
 
                                         <input type="password" id="retype_password" wire:model="retype_password"
-                                            oninput="removeSpaces(this)" placeholder="Retype Password"
+                                            placeholder="Retype Password"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
                                         @error('retype_password')
@@ -356,9 +351,5 @@
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
-<script>
-    function removeSpaces(input) {
-        input.value = input.value.replace(/\s+/g, '');
-    }
-</script>
+
 <x-livewire-alert::flash />

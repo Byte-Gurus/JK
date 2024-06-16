@@ -5,12 +5,13 @@ namespace App\Livewire\Components\UserManagement;
 use App\Models\User;
 use App\Models\UserRole;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
 use Livewire\Livewire;
 use Livewire\WithPagination;
 
 class UserTable extends Component
 {
-    use WithPagination;
+    use WithPagination,  WithoutUrlPagination;
 
     public $sortDirection = 'asc';//var default sort direction is ascending
     public $sortColumn = 'id';//var defualt sort is ID
