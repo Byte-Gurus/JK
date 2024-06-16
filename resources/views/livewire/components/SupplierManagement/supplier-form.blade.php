@@ -194,7 +194,6 @@
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
                                             <input type="text" id="street" wire:model="street"
-                                                oninput="removeSpaces(this)"
                                                 class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                                 placeholder="Street" required />
 
@@ -295,9 +294,5 @@
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
-<script>
-    function removeSpaces(input) {
-        input.value = input.value.replace(/\s+/g, '');
-    }
-</script>
+
 <x-livewire-alert::flash />

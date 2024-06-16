@@ -195,7 +195,13 @@ class UserForm extends Component
 
     protected function validateForm()
     {
-
+        $this->firstname = trim($this->firstname);
+        $this->middlename = trim($this->middlename);
+        $this->lastname = trim($this->lastname);
+        $this->username = trim($this->username);
+        $this->password = trim($this->password);
+        $this->retype_password = trim($this->retype_password);
+        
         $rules = [
             'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',

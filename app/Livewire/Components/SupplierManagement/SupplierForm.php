@@ -114,6 +114,9 @@ class SupplierForm extends Component
 
     protected function validateForm()
     {
+        $this->company_name = trim($this->company_name);
+        $this->street = trim($this->street);
+     
 
         $rules = [
             'company_name' => 'required|string|max:255',
