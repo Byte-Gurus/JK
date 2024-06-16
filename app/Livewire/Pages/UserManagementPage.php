@@ -16,16 +16,15 @@ class UserManagementPage extends Component
         return view('livewire.pages.user-management-page');
     }
 
-
     protected $listeners = [
         'close-modal' => 'closeModal',
         'change-sidebar-status' => 'changeSidebarStatus'
-        ];
+    ];
 
-    public function closeModal(){
+    public function closeModal()
+    {
         $this->showModal = false;
     }
-
 
     public function formCreate()
     {
@@ -34,8 +33,6 @@ class UserManagementPage extends Component
 
     public function changeSidebarStatus($sidebarOpen)
     {
-       $this->sidebarStatus = $sidebarOpen;
+        $this->sidebarStatus = $sidebarOpen;
     }
-
-
 }

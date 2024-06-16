@@ -18,12 +18,11 @@
             x-transition:leave="transition ease-in-out duration-300"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-100 scale-100"
-            class="absolute top-0 left-[-220px] w-0 max-w-md z-100 transition-all ease-in-out duration-100 z-50"
+            class="absolute top-0 left-[-220px] w-0 max-w-md transition-all ease-in-out duration-100 z-20"
             :class="openSidebar && ' left-[0px]'">
                 @livewire('components.sidebar')
             </div>
         </div>
-
         <div class="pr-4">
             <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
         </div>
@@ -42,7 +41,6 @@
                     <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#000000" />
                 </svg>
                 <p class="pointer-events-none ">{{ $date }}</p>
-
             </div>
             <div class="flex flex-row items-center gap-2 font-semibold text-gray-700 pointer-events-none">
                 <svg class="w-6 h-6 pointer-events-none" viewBox="0 0 24 24" fill="none"

@@ -10,6 +10,7 @@ class SupplierManagementPage extends Component
 
     public $showModal = false;
 
+    public $sidebarStatus;
 
     public function render()
     {
@@ -17,16 +18,21 @@ class SupplierManagementPage extends Component
     }
 
     protected $listeners = [
-        'close-modal' => 'closeModal'
+        'close-modal' => 'closeModal',
+        'change-sidebar-status' => 'changeSidebarStatus'
         ];
 
     public function closeModal(){
         $this->showModal = false;
     }
 
-
     public function formCreate()
     {
         $this->dispatch('change-method', isCreate: true)->to(SupplierForm::class);
+    }
+
+    public function changeSidebarStatus($sidebarOpen)
+    {
+       $this->sidebarStatus = $sidebarOpen;
     }
 }

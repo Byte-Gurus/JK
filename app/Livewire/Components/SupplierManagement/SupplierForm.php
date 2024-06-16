@@ -69,13 +69,10 @@ class SupplierForm extends Component
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
-
     public function createConfirmed($data) //* confirmation process ng create
     {
 
         $validated = $data['inputAttributes'];
-
-
 
         $user = Supplier::create([
             'company_name' => $validated['company_name'],

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\UserManagementPage;
 use Carbon\Carbon;
@@ -13,6 +14,7 @@ class Navbar extends Component
     public $date;
 
     public $sidebarOpen = true;
+    public $sidebarStatusOpen = true;
 
     public function render()
     {
@@ -22,7 +24,9 @@ class Navbar extends Component
 
     public function toggleSidebar($sidebarOpen) {
         $this->sidebarOpen = !$this->sidebarOpen;
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(SupplierManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(UserManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(HomePage::class);
     }
 
 
@@ -33,13 +37,4 @@ class Navbar extends Component
         $this->date = $manilaTime->format('F j, Y');
         $this->time = $manilaTime->format('h:i A');
     }
-
-
-    public function formCreate()
-    {
-
-    }
-
-
-
 }

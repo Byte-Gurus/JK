@@ -1,13 +1,16 @@
-<div>
+<div x-data="{ sidebar: @entangle('sidebarStatus') }"
+    @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
+    @else
+        class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
     <div x-data="{ showModal: @entangle('showModal') }">
-        <div class=" ml-[250px] py-[28px] mr-8">
-        <div class="flex flex-col justify-between">
+        <div class=" m-[28px]">
+            <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
                         <h1 class="text-[2em] font-bold pointer-events-none">Manage Supplier</h1>
                     </div>
-                    <div class="flex flex-row gap-2">
+                    <div>
                         <button
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
                             x-on:click="showModal=true;$wire.formCreate()">
@@ -23,10 +26,13 @@
                         </button>
                     </div>
                 </div>
-
             </div>
-            @livewire('components.SupplierManagement.supplier-form')
+            <div>
+                @livewire('components.SupplierManagement.supplier-form')
+            </div>
+            <div class=" my-[28px]">
+                @livewire('components.SupplierManagement.supplier-table')
+            </div>
         </div>
-        @livewire('components.SupplierManagement.supplier-table')
     </div>
 </div>
