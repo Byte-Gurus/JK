@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\UserManagement;
 
 
+use App\Livewire\Pages\UserManagementPage;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -63,22 +64,17 @@ class UserForm extends Component
 
         $validated = $data['inputAttributes'];
 
+        $user = User::create([
+            'firstname' => $validated['firstname'],
+            'middlename' => $validated['middlename'],
+            'lastname' => $validated['lastname'],
+            'contact_number' => $validated['contact_number'],
+            'user_role_id' => $validated['role'],
+            'status' => $validated['status'],
+            'username' => $validated['username'],
+            'password' => Hash::make($validated['password'])
+        ]);
 
-        if ($this->isCreate) {
-            $validated = $this->validateForm();
-
-
-            $user = User::create([
-                'firstname' => $validated['firstname'],
-                'middlename' => $validated['middlename'],
-                'lastname' => $validated['lastname'],
-                'contact_number' => $validated['contact_number'],
-                'user_role_id' => $validated['role'],
-                'status' => $validated['status'],
-                'username' => $validated['username'],
-                'password' => Hash::make($validated['password'])
-            ]);
-        }
 
         $this->alert('success', 'User was created successfully');
         $this->refreshTable();
@@ -98,7 +94,7 @@ class UserForm extends Component
 
     public function closeModal() //* close ang modal after confirmation
     {
-        $this->dispatch('close-modal');
+        $this->dispatch('close-modal')->to(UserManagementPage::class);
     }
 
 

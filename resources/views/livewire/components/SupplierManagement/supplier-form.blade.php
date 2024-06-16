@@ -75,12 +75,11 @@
                                         {{-- //* company name --}}
                                         <div class="mb-3">
 
-                                            <label for="companyname"
+                                            <label for="company_name"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Company Name
                                             </label>
 
-                                            <input type="text" id="companyname" wire:model="companyname"
-                                                oninput="removeSpaces(this)"
+                                            <input type="text" id="company_name" wire:model="company_name"
                                                 class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                                 placeholder="Company Name" tabindex="2" required />
 
@@ -92,15 +91,15 @@
                                         {{-- //* contact_no --}}
                                         <div class="mb-3">
 
-                                            <label for="contactno"
+                                            <label for="contact_number"
                                                 class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span
                                                     class="text-red-400 ">*</span></label>
 
-                                            <input type="text" id="contactno" wire:model="contact_number"
+                                            <input type="text" id="contact_number" wire:model="contact_number" required
                                                 class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                                 placeholder="Contact No" />
 
-                                            @error('contact_no')
+                                            @error('contact_number')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
@@ -117,19 +116,7 @@
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Province
                                             </label>
 
-                                            <input type="text" id="selectProvince" wire:model.live="selectProvince"
-                                                placeholder="Select Province" list="provinceList"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <datalist id="provinceList">
-                                                @foreach ($provinces as $province)
-                                                <option>{{
-                                                    $province->province_description }}</option>
-                                                @endforeach
-                                            </datalist>
-
-
-                                            </input>
-                                            {{-- <select id="selectProvince" wire:model.live="selectProvince"
+                                            <select id="selectProvince" wire:model.live="selectProvince" required
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                                 <option value="" selected>Select province</option>
                                                 @foreach ($provinces as $province)
@@ -137,7 +124,7 @@
                                                     $province->province_description }}</option>
                                                 @endforeach
 
-                                            </select> --}}
+                                            </select>
 
                                             @error('selectProvince')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -154,7 +141,7 @@
                                             </label>
 
 
-                                            <select id="selectCity" wire:model.live="selectCity"
+                                            <select id="selectCity" wire:model.live="selectCity" required
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                                 <option value="" selected>Select city / municipality</option>
                                                 @if(!is_null($cities))
@@ -183,7 +170,7 @@
                                             <label for="selectBrgy"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
-                                            <select id="selectBrgy" wire:model.live="selectBrgy"
+                                            <select id="selectBrgy" wire:model.live="selectBrgy" required
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                                 <option value="" selected>Select a role</option>
                                                 @if(!is_null($barangays))
@@ -241,7 +228,7 @@
                                         <div wire:loading>
 
                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
+                                                class="w-5 h-5 gap-2 text-blue-700 animate-spin" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                                     stroke-width="4"></circle>
                                                 <path class="opacity-75" fill="currentColor"
@@ -279,14 +266,15 @@
                                         </p>
 
                                         <div wire:loading>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
+                                             <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                                     stroke-width="4"></circle>
                                                 <path class="opacity-75" fill="currentColor"
                                                     d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
                                                 </path>
                                             </svg>
+
                                         </div>
                                     </div>
 
