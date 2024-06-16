@@ -17,7 +17,7 @@ class CreatePhilippineCitiesTable extends Migration
             $table->increments('id');
             $table->string('psgc_code')->index();
             $table->string('city_municipality_description');
-            $table->string('region_code')->index();;
+            $table->string('region_code')->index();
             $table->string('province_code')->index();
             $table->string('city_municipality_code')->index();
             $table->timestamp('created_at')->useCurrent();
