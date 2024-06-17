@@ -266,7 +266,7 @@
 
                                         <div wire:loading>
                                              <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
+g                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                                     stroke-width="4"></circle>
                                                 <path class="opacity-75" fill="currentColor"
