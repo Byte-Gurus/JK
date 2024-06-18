@@ -28,6 +28,7 @@ class MigrationOrder extends Command
         //* list all the mirgations in order here
         $migrations = [
             '2024_06_03_052410_user_role_table.php',
+            '2024_06_16_160806_create_statuses_table.php',
             '0001_01_01_000000_create_users_table.php',
             '1995_10_23_100000_create_philippine_regions_table.php',
             '1995_10_23_200000_create_philippine_provinces_table.php',

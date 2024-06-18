@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('middlename')->nullable();
             $table->string('lastname');
             $table->string('contact_number')->unique();
-            $table->string('status');
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreignId('user_role_id')->constrained('user_roles');
+            $table->foreignId('status_id')->constrained('statuses');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

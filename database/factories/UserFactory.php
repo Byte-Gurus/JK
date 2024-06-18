@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'middlename' => fake()->lastName(),
             'lastname' => fake()->lastName(),
             'contact_number' => fake()->unique()->numerify('###########'),
-            'status' => fake()->randomElement(['Active', 'Inactive']),
+            'status_id' => fake()->randomElement([1, 2]),
             'user_role_id' => fake()->randomElement([1, 2,3]),
             'username' => fake()->unique()->userName(),
             'password' => static::$password ??= Hash::make('password'),
