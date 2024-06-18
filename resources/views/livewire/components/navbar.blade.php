@@ -73,7 +73,7 @@
                         class="absolute z-10 w-screen max-w-md origin-top-right transform right-40">
                         <div class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                         min-h-[50%]">
-                            <div class=" relative grid gap-6 lg:grid-cols-2 sm:gap-8 sm:p-8 bg-[53,53,53]">
+                            <div class="  font-black bg-[rgb(255,217,255)] grid gap-6 lg:grid-cols-2 sm:gap-8 sm:p-8">
 
                                 @livewire('components.notifications')
                             </div>
