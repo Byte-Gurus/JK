@@ -28,10 +28,15 @@ class SupplierForm extends Component
     //var form inputs
     public $supplier_id, $company_name, $contact_number, $street;
 
+    public $proxy_supplier_id;
+
     public function render()
     {
         if ($this->supplier_id) {
+
             $this->populateForm();
+            $this->supplier_id = null;
+
         }
 
         return view('livewire.components.SupplierManagement.supplier-form', [
@@ -53,6 +58,7 @@ class SupplierForm extends Component
     {
 
         $this->cities = PhilippineCity::where('province_code', $province_code)->orderBy('city_municipality_description')->get();
+
     }
 
     public function updatedSelectCity($city_municipality_code)
@@ -98,7 +104,7 @@ class SupplierForm extends Component
         $validated = $this->validateForm();
 
 
-        $supplier = Supplier::find($this->supplier_id); //? kunin lahat ng data ng may ari ng user_id
+        $supplier = Supplier::find($this->proxy_supplier_id); //? kunin lahat ng data ng may ari ng user_id
 
         //*pag hindi palitan ang password
         //* ipasa ang laman ng validated inputs sa models
@@ -146,9 +152,6 @@ class SupplierForm extends Component
 
         $supplier_details = Supplier::find($this->supplier_id); //? kunin lahat ng data ng may ari ng user_id
 
-        $this->updatedSelectProvince($supplier_details->province_code);
-        $this->updatedSelectCity($supplier_details->city_municipality_code);
-
 
         //* ipasa ang laman ng model sa inputs
         //* fill() method [key => value] means [paglalagyan => ilalagay]
@@ -161,10 +164,16 @@ class SupplierForm extends Component
             'street' => $supplier_details->street,
 
         ]);
+
+        $this->cities = PhilippineCity::where('province_code', $supplier_details->province_code)->orderBy('city_municipality_description')->get();
+        $this->barangays = PhilippineBarangay::where('city_municipality_code', $supplier_details->city_municipality_code)->orderBy('barangay_description')->get();
+
+
     }
     public function edit($supplierID)
     {
         $this->supplier_id = $supplierID; //var assign ang parameter value sa global variable
+        $this->proxy_supplier_id = $supplierID;
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
@@ -177,6 +186,8 @@ class SupplierForm extends Component
     {
         $this->resetForm();
         $this->resetValidation();
+        $this->cities = null;
+        $this->barangays = null;
     }
     public function refreshTable() //* refresh ang table after confirmation
     {
@@ -185,6 +196,8 @@ class SupplierForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(SupplierManagementPage::class);
+        $this->cities = null;
+        $this->barangays = null;
     }
 
     protected function validateForm()
@@ -195,11 +208,11 @@ class SupplierForm extends Component
 
         $rules = [
             'company_name' => 'required|string|max:255',
-            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('suppliers', 'contact_number')->ignore($this->supplier_id)],
+            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
-            'street' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'street' => 'required|string|max:255',
 
         ];
 
