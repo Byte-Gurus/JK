@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
             'role' => 'Cashier',
         ]);
         DB::table('user_roles')->insert([
-            'role' => 'Inventory Clerk',
+            'role' => 'Inventory Staff',
         ]);
     }
 }
