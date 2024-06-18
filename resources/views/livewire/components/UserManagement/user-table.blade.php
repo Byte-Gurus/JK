@@ -171,7 +171,7 @@
 
                             {{-- //* role --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $user->roleMethod->role }}
+                                {{ $user->roleJoin->role }}
                             </th>
 
                             {{-- //* status --}}
@@ -180,13 +180,13 @@
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($user->status == 'Active') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
+                                    @if ($user->statusJoin->status_type == "Active") class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
 
-                                        @elseif ($user->status == 'Inactive')
+                                        @elseif ($user->statusJoin->status_type == "Inactive")
 
                                         class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
 
-                                    {{ $user->status }}
+                                    {{ $user->statusJoin->status_type }}
                                 </p>
 
                             </th>

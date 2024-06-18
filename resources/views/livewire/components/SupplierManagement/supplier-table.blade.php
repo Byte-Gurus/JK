@@ -20,7 +20,7 @@
                     </svg>
                 </div>
 
-                <input type="text" wire:model.live.debounce.100ms = "search"
+                <input type="text" wire:model.live.debounce.100ms="search"
                     class="w-1/3 p-2 pl-10 hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] rounded-lg cursor-pointer text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Company Name" required="" />
 
@@ -69,7 +69,7 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* company name --}}
-                        <th wire:click="sortByColumn('updated_at')" scope="col"
+                        <th wire:click="sortByColumn('company_name')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
@@ -151,9 +151,75 @@
                 {{-- //* table body --}}
                 <tbody>
 
+                    @foreach ($suppliers as $supplier)
 
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
+                        {{-- //* contact number --}}
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->company_name }}
+                        </th>
 
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->contact_number }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->provinceJoin->province_description }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->cityJoin->city_municipality_description }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->barangayJoin->barangay_description }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->street }}
+                        </th>
+
+                          {{-- //* created at --}}
+                          <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->created_at->format('d-m-y h:i A') }}
+                        </th>
+
+                        {{-- //* updated at --}}
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplier->updated_at->format('d-m-y h:i A') }}
+                        </th>
+
+                        <th class="px-4 py-6 text-center text-md text-nowrap">
+                            <div
+                                class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
+
+                                <button x-on:click="showModal=true;$wire.edit({{ $supplier->id }})">
+
+                                    <div class="flex items-center">
+
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                            </svg>
+                                        </span>
+
+                                        <div>
+                                            <p>Edit</p>
+                                        </div>
+
+                                    </div>
+
+                                </button>
+                            </div>
+
+                        </th>
+                    </tr>
+                    @endforeach
                 </tbody>
 
             </table>
@@ -166,7 +232,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $suppliers->links() }} --}}
+                {{ $suppliers->links() }}
 
             </div>
 
@@ -175,7 +241,7 @@
 
                 <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
-                <select wire:model.live = "perPage"
+                <select wire:model.live="perPage"
                     class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
                     <option value="10">10</option>
                     <option value="20">20</option>

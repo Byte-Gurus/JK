@@ -13,17 +13,17 @@ class PhilippineBarangay extends Model
         'barangay_description'
     ];
 
-    public function city()
+    public function cityJoin()
     {
         return $this->belongsTo(PhilippineCity::class, 'city_municipality_code', 'city_municipality_code');
     }
 
-    public function province()
+    public function provinceJoin()
     {
         return $this->belongsTo(PhilippineProvince::class, 'province_code', 'province_code');
     }
 
-    public function region()
+    public function regionJoin()
     {
         return $this->belongsTo(PhilippineRegion::class, 'region_code', 'region_code');
     }

@@ -13,17 +13,17 @@ class PhilippineProvince extends Model
         'province_description',
     ];
 
-    public function region()
+    public function regionJoin()
     {
         return $this->belongsTo(PhilippineRegion::class, 'region_code', 'region_code');
     }
 
-    public function cities()
+    public function citiesJoin()
     {
         return $this->hasMany(PhilippineCity::class, 'province_code', 'province_code');
     }
 
-    public function barangays()
+    public function barangaysJoin()
     {
         return $this->hasManyThrough(PhilippineBarangay::class, PhilippineCity::class, 'province_code', 'city_municipality_code', 'province_code', 'city_municipality_code');
     }

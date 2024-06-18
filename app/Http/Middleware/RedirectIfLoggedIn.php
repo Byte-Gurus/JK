@@ -26,7 +26,7 @@ class RedirectIfLoggedIn
         //* check if ang routes mo is nasa admin
         //* pag hindi ibalik ka sa admin
 
-        if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
+        if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
 
             if (!str_starts_with($request->path(), 'admin')) {
 
@@ -40,7 +40,7 @@ class RedirectIfLoggedIn
         //* check if ang routes mo is nasa cashier
         //* pag hindi ibalik ka sa cashier
 
-        if (Auth::user()->user_role_id === '2' && Auth::user()->status === 'Active') {
+        if (Auth::user()->user_role_id === '2' && Auth::user()->status_id == 1) {
 
             if ($request->path() !== 'cashier') {
 

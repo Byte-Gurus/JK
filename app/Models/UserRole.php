@@ -14,7 +14,7 @@ class UserRole extends Model
         'role',
     ];
 
-    public function usersMethod()
+    public function usersJoin()
     {
         return $this->hasMany(User::class, 'user_role_id');
     }

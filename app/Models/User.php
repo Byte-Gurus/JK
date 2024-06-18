@@ -27,7 +27,7 @@ class User extends Authenticatable
         'lastname',
         'contact_number',
         'user_role_id',
-        'status',
+        'status_id',
         'username',
         'password',
     ];
@@ -54,12 +54,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-  
 
 
-    public function roleMethod()
+
+    public function roleJoin()
     {
         return $this->belongsTo(UserRole::class, 'user_role_id');
+    }
+    public function statusJoin()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
     }
 
     public function scopeSearch($query, $value)  //* search function

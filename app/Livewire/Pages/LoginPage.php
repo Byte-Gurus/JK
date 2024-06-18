@@ -26,9 +26,9 @@ class LoginPage extends Component
         if (Auth::attempt($validated)) {
             request()->session()->regenerate();
 
-            if (Auth::user()->user_role_id == 1 && Auth::user()->status === 'Active') {
+            if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
                 return redirect()->route('admin.index');
-            } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status === 'Active') {
+            } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
                 return redirect()->route('cashier.index');
             }else{
                 $this->addError('submit', 'This account is inactive');

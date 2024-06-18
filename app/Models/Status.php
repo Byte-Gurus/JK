@@ -12,7 +12,7 @@ class Status extends Model
     protected $fillable = [
         'status_type'
     ];
-    public function usersJoin()
+    public function usersJoinJoin()
     {
         return $this->hasMany(User::class, 'status_id');
     }

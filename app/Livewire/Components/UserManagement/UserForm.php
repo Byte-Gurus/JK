@@ -70,7 +70,7 @@ class UserForm extends Component
             'lastname' => $validated['lastname'],
             'contact_number' => $validated['contact_number'],
             'user_role_id' => $validated['role'],
-            'status' => $validated['status'],
+            'status_id' => $validated['status'],
             'username' => $validated['username'],
             'password' => Hash::make($validated['password'])
         ]);
@@ -114,7 +114,7 @@ class UserForm extends Component
         $user->lastname = $validated['lastname'];
         $user->contact_number = $validated['contact_number'];
         $user->user_role_id = $validated['role'];
-        $user->status = $validated['status'];
+        $user->status_id = $validated['status'];
         $user->username = $validated['username'];
 
         $attributes = $user->toArray(); //var ilagay sa array ang model before i add ang password sa array kasi hindi ni reretrieve ang hashed password sa toArray() method
@@ -187,7 +187,7 @@ class UserForm extends Component
             'lastname' => $user_details->lastname,
             'contact_number' => $user_details->contact_number,
             'role' => $user_details->user_role_id,
-            'status' => $user_details->status,
+            'status' => $user_details->status_id,
             'username' => $user_details->username,
         ]);
     }
@@ -201,14 +201,14 @@ class UserForm extends Component
         $this->username = trim($this->username);
         $this->password = trim($this->password);
         $this->retype_password = trim($this->retype_password);
-        
+
         $rules = [
             'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->user_id)],
             'role' => 'required|in:1,2,3',
-            'status' => 'required|in:Active,Inactive',
+            'status' => 'required|in:1,2',
 
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],

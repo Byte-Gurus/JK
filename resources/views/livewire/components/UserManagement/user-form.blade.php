@@ -177,8 +177,8 @@
                                         <select id="status" wire:model="status"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Set your status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Inactive">Inactive</option>
+                                            <option value="1">Active</option>
+                                            <option value="2">Inactive</option>
                                         </select>
 
                                         @error('status')
