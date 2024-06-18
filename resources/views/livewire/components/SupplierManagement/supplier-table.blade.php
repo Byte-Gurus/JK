@@ -47,7 +47,7 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[500px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[500px] ">
 
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -82,7 +82,7 @@
                         <th scope="col" class="px-4 py-3">Province</th>
 
                         {{-- //* city / municipality --}}
-                        <th scope="col" class="px-4 py-3 text-center">City / Municipality</th>
+                        <th scope="col" class="px-4 py-3">City / Municipality</th>
 
                         {{-- //* barangay --}}
                         <th scope="col" class="px-4 py-3">Barangay</th>
