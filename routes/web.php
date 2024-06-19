@@ -2,6 +2,7 @@
 
 use App\Livewire\Components\Logout;
 use App\Livewire\Pages\CashierPage;
+use App\Livewire\Pages\CustomerCreditMangementPage;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\LoginPage;
 use App\Livewire\Pages\SupplierManagementPage;
@@ -20,5 +21,8 @@ Route::get('/admin/UserManagement', UserManagementPage::class)->name('usermanage
 
 //SupplierManagement
 Route::get('admin/SupplierManagement', SupplierManagementPage::class)->name('suppliermanagement.index')->middleware('RedirectIfLoggedIn');
+
+//CustomerCreditManagement
+Route::get('admin/CustomerCreditManagement', CustomerCreditMangementPage::class)->name('customercreditmanagement.index')->middleware('RedirectIfLoggedIn');
 
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
