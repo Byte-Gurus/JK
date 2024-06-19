@@ -13,6 +13,7 @@ class PhilippineBarangay extends Model
         'barangay_description'
     ];
 
+    //? i join ang barangay sa ibang tables
     public function cityJoin()
     {
         return $this->belongsTo(PhilippineCity::class, 'city_municipality_code', 'city_municipality_code');

@@ -13,6 +13,7 @@ class PhilippineProvince extends Model
         'province_description',
     ];
 
+    //? i join ang province sa ibang tables
     public function regionJoin()
     {
         return $this->belongsTo(PhilippineRegion::class, 'region_code', 'region_code');

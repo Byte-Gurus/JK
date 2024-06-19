@@ -12,6 +12,7 @@ class PhilippineRegion extends Model
         'region_description',
     ];
 
+    //? i join ang region sa ibang tables
     public function provincesJoin()
     {
         return $this->hasMany(PhilippineProvince::class, 'region_code', 'region_code');

@@ -13,10 +13,21 @@ class Supplier extends Model
         'company_name',
         'contact_number',
         'street',
+        'status_id',
         'province_code',
         'city_municipality_code',
         'barangay_code',
     ];
+
+
+    //? i join ang suppler sa ibang tables
+    
+    public function statusJoin()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+
     public function provinceJoin()
     {
         return $this->belongsTo(PhilippineProvince::class, 'province_code', 'province_code');

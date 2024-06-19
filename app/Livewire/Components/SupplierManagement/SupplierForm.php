@@ -19,15 +19,18 @@ class SupplierForm extends Component
 
     public $isCreate; //var true for create false for edit
 
+    //var null muna silang lahat hanggat d narerender
     public $selectProvince = null;
     public $selectCity = null;
     public $selectBrgy = null;
 
     public $cities = null;
     public $barangays = null;
-    //var form inputs
-    public $supplier_id, $company_name, $contact_number, $street;
 
+    //var form inputs
+    public $supplier_id, $company_name, $status, $contact_number, $street;
+
+    //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $proxy_supplier_id;
 
     public function render()
@@ -35,7 +38,7 @@ class SupplierForm extends Component
         if ($this->supplier_id) {
 
             $this->populateForm();
-            $this->supplier_id = null;
+            $this->supplier_id = null;  //var null the supplier id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung supplier id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
 
         }
 
@@ -47,24 +50,29 @@ class SupplierForm extends Component
     //* assign all the listners in one array
     //* for methods
     protected $listeners = [
-        'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
-        //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
+        'edit-supplier-from-table' => 'edit',  //* key:'edit-supplier-from-table' value:'edit'  galing sa SupplierTable class
+        //* key:'change-method' value:'changeMethod' galing sa SupplierTable class,  laman false
         'change-method' => 'changeMethod',
         'updateConfirmed',
         'createConfirmed',
     ];
 
-    public function updatedSelectProvince($province_code)
+    //* update hooks kung saan maguupdate ang selectCity if may napiling item sa selectProvince after ma rerender, hindi mag uupdate if hindi nakapag select sa selectProvince
+    public function updatedSelectProvince($province_code) //@params province code for city query
     {
 
         $this->cities = PhilippineCity::where('province_code', $province_code)->orderBy('city_municipality_description')->get();
+        //? i show sa selection ang mga city based sa province, hindi maglabas ang ibang city if hindi include sa province
 
     }
 
+    //* update hooks kung saan maguupdate ang selectBaranagy if may napiling item sa selectCity after ma rerender, hindi mag uupdate if hindi nakapag select sa selectCity
     public function updatedSelectCity($city_municipality_code)
     {
 
         $this->barangays = PhilippineBarangay::where('city_municipality_code', $city_municipality_code)->orderBy('barangay_description')->get();
+        //? i show sa selection ang mga barangay based sa city, hindi maglabas ang ibang city if hindi included sa city
+
     }
 
     public function create() //* create process
@@ -85,6 +93,7 @@ class SupplierForm extends Component
         $user = Supplier::create([
             'company_name' => $validated['company_name'],
             'contact_number' => $validated['contact_number'],
+            'status_id' => $validated['status'],
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
             'barangay_code' => $validated['selectBrgy'],
@@ -104,18 +113,19 @@ class SupplierForm extends Component
         $validated = $this->validateForm();
 
 
-        $supplier = Supplier::find($this->proxy_supplier_id); //? kunin lahat ng data ng may ari ng user_id
+        $suppliers = Supplier::find($this->proxy_supplier_id); //? kunin lahat ng data ng may ari ng proxy_supplier_id
 
-        //*pag hindi palitan ang password
+
         //* ipasa ang laman ng validated inputs sa models
-        $supplier->company_name = $validated['company_name'];
-        $supplier->contact_number = $validated['contact_number'];
-        $supplier->province_code = $validated['selectProvince'];
-        $supplier->city_municipality_code = $validated['selectCity'];
-        $supplier->barangay_code = $validated['selectBrgy'];
-        $supplier->street = $validated['street'];
+        $suppliers->company_name = $validated['company_name'];
+        $suppliers->contact_number = $validated['contact_number'];
+        $suppliers->status_id = $validated['status'];
+        $suppliers->province_code = $validated['selectProvince'];
+        $suppliers->city_municipality_code = $validated['selectCity'];
+        $suppliers->barangay_code = $validated['selectBrgy'];
+        $suppliers->street = $validated['street'];
 
-        $attributes = $supplier->toArray(); //var ilagay sa array ang model before i add ang password sa array kasi hindi ni reretrieve ang hashed password sa toArray() method
+        $attributes = $suppliers->toArray();
 
 
         $this->confirm('Do you want to update this user??', [
@@ -132,14 +142,14 @@ class SupplierForm extends Component
         $updatedAttributes = $data['inputAttributes'];
 
         //* hanapin id na attribute sa $updatedAttributes array
-        $supplier = Supplier::find($updatedAttributes['id']);
+        $suppliers = Supplier::find($updatedAttributes['id']);
 
         //* fill() method [key => value] means [paglalagyan => ilalagay]
-        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $users have same keys with $updatedAttributes array
+        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
         //var ipasa ang laman ng $updatedAttributes sa $user model
-        $supplier->fill($updatedAttributes);
+        $suppliers->fill($updatedAttributes);
 
-        $supplier->save(); //* Save the user model to the database
+        $suppliers->save(); //* Save the user model to the database
 
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');
@@ -158,6 +168,7 @@ class SupplierForm extends Component
         $this->fill([
             'company_name' => $supplier_details->company_name,
             'contact_number' => $supplier_details->contact_number,
+            'status' => $supplier_details->status_id,
             'selectProvince' => $supplier_details->province_code,
             'selectCity' => $supplier_details->city_municipality_code,
             'selectBrgy' => $supplier_details->barangay_code,
@@ -165,6 +176,9 @@ class SupplierForm extends Component
 
         ]);
 
+        //todo nag ccause to ng bug, ang bug is sa unang render upadte supplier form, hindi makapag select sa City and barangay, but if mag punta sa create supplier then edit then mag render na sya
+        //todo option 1 tanggalin ito para hindi mapopolate ang selectCity and SelectBarangay sa second render ng form
+        //todo option 2 hayaan nalang at mag select nalang si user ng city and brgy ulit everytime mag update kasi idk pano aayusin
         $this->cities = PhilippineCity::where('province_code', $supplier_details->province_code)->orderBy('city_municipality_description')->get();
         $this->barangays = PhilippineBarangay::where('city_municipality_code', $supplier_details->city_municipality_code)->orderBy('barangay_description')->get();
 
@@ -173,12 +187,12 @@ class SupplierForm extends Component
     public function edit($supplierID)
     {
         $this->supplier_id = $supplierID; //var assign ang parameter value sa global variable
-        $this->proxy_supplier_id = $supplierID;
+        $this->proxy_supplier_id = $supplierID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
     }
 
-    private function resetForm() //*tanggalin ang laman ng input pati $user_id value
+    private function resetForm() //*tanggalin ang laman ng input pati $supplier_id value
     {
-        $this->reset(['company_name', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'supplier_id']);
+        $this->reset(['company_name', 'contact_number', 'status','selectProvince', 'selectCity', 'selectBrgy', 'street', 'supplier_id']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation
@@ -208,7 +222,10 @@ class SupplierForm extends Component
 
         $rules = [
             'company_name' => 'required|string|max:255',
+
+            //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
+            'status' => 'required|in:1,2',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',

@@ -145,60 +145,60 @@
                 {{-- //* table body --}}
                 <tbody>
 
-                    @foreach ($customers as $customer)
+                    {{-- @foreach ($customers as $customer) --}}
 
                     <tr
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                         {{-- //* customer name --}}
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->customer_name }}
+                            {{-- {{ $customer->customer_name }} --}}
                         </th>
 
                         {{-- //* contact number --}}
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->contact_number }}
+                            {{-- {{ $customer->contact_number }} --}}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->provinceJoin->province_description }}
+                            {{-- {{ $customer->provinceJoin->province_description }} --}}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->cityJoin->city_municipality_description }}
+                            {{-- {{ $customer->cityJoin->city_municipality_description }} --}}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->barangayJoin->barangay_description }}
+                            {{-- {{ $customer->barangayJoin->barangay_description }} --}}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->street }}
+                            {{-- {{ $customer->street }} --}}
+                        </th>
+
+                        {{-- <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap "> --}}
+                            {{-- {{ $customer->credit }} --}}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->credit }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->credit_limit }}
+                            {{-- {{ $customer->credit_limit }} --}}
                         </th>
 
                           {{-- //* created at --}}
                           <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->created_at->format('d-m-y h:i A') }}
+                            {{-- {{ $customer->created_at->format('d-m-y h:i A') }} --}}
                         </th>
 
                         {{-- //* updated at --}}
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $customer->updated_at->format('d-m-y h:i A') }}
+                        {{-- <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap "> --}}
+                            {{-- {{ $customer->updated_at->format('d-m-y h:i A') }} --}}
                         </th>
 
                         <th class="px-4 py-6 text-center text-md text-nowrap">
                             <div
                                 class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
 
-                                <button x-on:click="showModal=true;$wire.edit({{ $customer->id }})">
+                                {{-- <button x-on:click="showModal=true;$wire.edit({{ $customer->id }})"> --}}
 
                                     <div class="flex items-center">
 
@@ -237,7 +237,7 @@
 
                         </th>
                     </tr>
-                    @endforeach
+                    {{-- @endforeach --}}
                 </tbody>
 
             </table>
@@ -250,7 +250,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{ $customers->links() }}
+                {{-- {{ $customers->links() }} --}}
 
             </div>
 

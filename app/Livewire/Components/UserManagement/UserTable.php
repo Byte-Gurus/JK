@@ -30,7 +30,7 @@ class UserTable extends Component
             $query->where('user_role_id', $this->roleFilter); //?hanapin ang role id na may same value sa roleFilter
         }
         if ($this->statusFilter != 0) {
-            $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
+            $query->where('status_id', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
 
         //*if ang roleFilter is 0 walang filter ang maapply

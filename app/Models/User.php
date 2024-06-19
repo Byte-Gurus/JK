@@ -56,6 +56,7 @@ class User extends Authenticatable
     }
 
 
+    //? i join ang user sa ibang tables
 
     public function roleJoin()
     {
@@ -74,7 +75,4 @@ class User extends Authenticatable
             ->orWhere('middlename', 'like', "%{$value}%")
             ->orWhere('lastname', 'like', "%{$value}%");
     }
-
-
-
 }

@@ -16,10 +16,15 @@ class SupplierTable extends Component
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
+
+    public $statusFilter = 0; //var filtering value = all
     public function render()
     {
         $query = Supplier::query();
 
+        if ($this->statusFilter != 0) {
+            $query->where('status_id', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
+        }
         $suppliers = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);  //?  and paginate it
@@ -36,12 +41,12 @@ class SupplierTable extends Component
     //@params $userId, galing sa pag select ng edit from specific row
     public function edit($supplierId)
     {
-        //*call the listesner 'edit-user-from-table' galing sa UserForm class
-        //@params userID name ng parameter na ipapasa, $userId parameter value na ipapasa
-        $this->dispatch('edit-user-from-table', supplierID: $supplierId)->to(SupplierForm::class);
+        //*call the listesner 'edit-supplier-from-table' galing sa UserForm class
+        //@params supplierID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
+        $this->dispatch('edit-supplier-from-table', supplierID: $supplierId)->to(SupplierForm::class);
 
-        //*call the listesner 'change-method' galing sa UserForm class
-        //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create user
+        //*call the listesner 'change-method' galing sa SupplierForm class
+        //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create supplier
         $this->dispatch('change-method', isCreate: false)->to(SupplierForm::class);
     }
 

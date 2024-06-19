@@ -12,7 +12,12 @@ class Status extends Model
     protected $fillable = [
         'status_type'
     ];
-    public function usersJoinJoin()
+    public function suppliersJoin()
+    {
+        return $this->hasMany(Supplier::class, 'status_id');
+    }
+
+    public function usersJoin()
     {
         return $this->hasMany(User::class, 'status_id');
     }

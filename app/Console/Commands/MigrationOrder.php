@@ -25,7 +25,7 @@ class MigrationOrder extends Command
      */
     public function handle()
     {
-        //* list all the mirgations in order here
+        //* ilagay ang order ng mga migration file sa array
         $migrations = [
             '2024_06_03_052410_user_role_table.php',
             '2024_06_16_160806_create_statuses_table.php',
@@ -38,7 +38,7 @@ class MigrationOrder extends Command
 
         ];
 
-        //* call them in loop, in order here
+        //* call them in loop
         foreach ($migrations as $migration) {
             $basePath = 'database/migrations/';
             $migrationName = trim($migration);

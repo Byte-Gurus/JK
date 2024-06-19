@@ -13,6 +13,7 @@ class PhilippineCity extends Model
         'city_municipality_description'
     ];
 
+    //? i join ang city sa ibang tables
     public function provinceJoin()
     {
         return $this->belongsTo(PhilippineProvince::class, 'province_code', 'province_code');

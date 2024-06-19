@@ -158,10 +158,10 @@
                                         <select id="selectProvince" wire:model.live="selectProvince" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
-                                            @foreach ($provinces as $province)
+                                            {{-- @foreach ($provinces as $province)
                                                 <option value="{{ $province->province_code }}">
                                                     {{ $province->province_description }}</option>
-                                            @endforeach
+                                            @endforeach --}}
 
                                         </select>
 
@@ -183,13 +183,13 @@
                                         <select id="selectCity" wire:model.live="selectCity" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select city / municipality</option>
-                                            @if (!is_null($cities))
+                                            {{-- @if (!is_null($cities))
                                                 @foreach ($cities as $city)
                                                     <option value="{{ $city->city_municipality_code }}">
                                                         {{ $city->city_municipality_description }}</option>
                                                 @endforeach
 
-                                            @endif
+                                            @endif --}}
                                         </select>
 
                                         @error('selectCity')
@@ -212,12 +212,12 @@
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select a role</option>
-                                            @if (!is_null($barangays))
+                                            {{-- @if (!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
                                                     <option value="{{ $barangay->barangay_code }}">
                                                         {{ $barangay->barangay_description }}</option>
                                                 @endforeach
-                                            @endif
+                                            @endif --}}
                                         </select>
 
                                         @error('selectBrgy')

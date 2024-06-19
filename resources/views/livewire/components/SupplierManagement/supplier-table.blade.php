@@ -40,7 +40,19 @@
 
                 <div class="flex flex-row items-center">
 
+                    <div class="flex flex-row items-center gap-2">
 
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+
+                        <select wire:model.live="statusFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            <option value="0">All</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+
+                        </select>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,6 +89,9 @@
 
                         {{-- //* contact number --}}
                         <th scope="col" class="px-4 py-3">Contact No</th>
+
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Status</th>
 
                         {{-- //* province --}}
                         <th scope="col" class="px-4 py-3">Province</th>
@@ -153,6 +168,25 @@
                             {{ $supplier->contact_number }}
                         </th>
 
+                        {{-- //* status --}}
+                        <th scope="row"
+                            class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+
+                            {{-- //* active green, if inactive red --}}
+                            <p @if ($supplier->statusJoin->status_type == "Active") class=" text-black bg-green-400
+                                border
+                                border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
+
+                                @elseif ($supplier->statusJoin->status_type == "Inactive")
+
+                                class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5
+                                rounded " @endif>
+
+                                {{ $supplier->statusJoin->status_type }}
+                            </p>
+
+                        </th>
+
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                             {{ $supplier->provinceJoin->province_description }}
                         </th>
@@ -169,8 +203,8 @@
                             {{ $supplier->street }}
                         </th>
 
-                          {{-- //* created at --}}
-                          <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                        {{-- //* created at --}}
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                             {{ $supplier->created_at->format('d-m-y h:i A') }}
                         </th>
 
@@ -188,9 +222,8 @@
                                     <div class="flex items-center">
 
                                         <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                             </svg>

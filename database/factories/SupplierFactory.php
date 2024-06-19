@@ -25,10 +25,11 @@ class SupplierFactory extends Factory
 
         $barangay = PhilippineBarangay::where('city_municipality_code', $city->city_municipality_code)->inRandomOrder()->first();
 
-        
+
         return [
             'company_name' => fake()->company(),
             'contact_number' => fake()->unique()->numerify('###########'),
+            'status_id' => fake()->randomElement([1, 2]),
             'province_code' => $province->province_code,
             'city_municipality_code' => $city->city_municipality_code,
             'barangay_code' => $barangay->barangay_code,

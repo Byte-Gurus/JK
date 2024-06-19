@@ -205,6 +205,31 @@
 
                                         </div>
 
+
+
+                                    </div>
+
+                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                        {{-- //* status --}}
+                                        <div class="mb-3">
+
+                                            <label for="status"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+
+                                            <select id="status" wire:model="status" required
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                                <option value="" selected>Set your status</option>
+                                                <option value="1">Active</option>
+                                                <option value="2">Inactive</option>
+                                            </select>
+
+                                            @error('status')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -265,8 +290,8 @@
                                         </p>
 
                                         <div wire:loading>
-                                             <svg xmlns="http://www.w3.org/2000/svg"
-g                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
+                                            <svg xmlns="http://www.w3.org/2000/svg" g
+                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
                                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                                     stroke-width="4"></circle>
                                                 <path class="opacity-75" fill="currentColor"
