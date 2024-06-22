@@ -5,7 +5,7 @@
     <nav class="flex flex-col gap-12 text-center ">
         <ul class="flex flex-col w-full gap-2 mt-4">
             <li class="w-full">
-                <a href="{{ route('admin.index') }}" wire:navigate
+                <a href="{{ route('dashboard.index') }}" wire:navigate
                     class="bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">

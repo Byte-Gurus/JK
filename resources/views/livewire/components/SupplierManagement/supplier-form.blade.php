@@ -5,7 +5,7 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
 
     {{-- //* form position --}}
-    <div
+    <dive
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
 
         <div class="relative w-full max-w-2xl max-h-full mx-auto">
