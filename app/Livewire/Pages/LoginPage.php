@@ -24,7 +24,7 @@ class LoginPage extends Component
         ]);
 
         if (Auth::attempt($validated)) {
-            request()->session()->regenerate();
+        
 
             if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
                 return redirect()->route('admin.index');

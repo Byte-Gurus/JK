@@ -67,7 +67,7 @@ class SupplierForm extends Component
     }
 
     //* update hooks kung saan maguupdate ang selectBaranagy if may napiling item sa selectCity after ma rerender, hindi mag uupdate if hindi nakapag select sa selectCity
-    public function updatedSelectCity($city_municipality_code)
+     public function updatedSelectCity($city_municipality_code)
     {
 
         $this->barangays = PhilippineBarangay::where('city_municipality_code', $city_municipality_code)->orderBy('barangay_description')->get();

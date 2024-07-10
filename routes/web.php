@@ -5,6 +5,7 @@ use App\Livewire\Pages\CashierPage;
 use App\Livewire\Pages\CustomerCreditMangementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
+use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\LoginPage;
 use App\Livewire\Pages\OrderAndDeliveryManagementPage;
 use App\Livewire\Pages\SupplierManagementPage;
@@ -34,3 +35,5 @@ Route::get('admin/CustomerCreditManagement', CustomerCreditMangementPage::class)
 Route::get('admin/OrderAndDeliveryManagement', OrderAndDeliveryManagementPage::class)->name('orderanddeliverymanagement.index')->middleware('RedirectIfLoggedIn');
 
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
+
+Route::get('admin/ItemManagementPage', ItemManagementPage::class)->name('itemmanagement.index')->middleware('RedirectIfLoggedIn');
