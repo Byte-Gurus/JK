@@ -50,7 +50,7 @@ class UserForm extends Component
         $validated = $this->validateForm();
 
 
-        $this->confirm('Do you want to add this user??', [
+        $this->confirm('Do you want to add this user?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -125,7 +125,7 @@ class UserForm extends Component
             $attributes['password'] = Hash::make($validated['password']);  //var gawing hash ang pass
         }
 
-        $this->confirm('Do you want to update this user??', [
+        $this->confirm('Do you want to update this user?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);

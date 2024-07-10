@@ -128,7 +128,7 @@ class SupplierForm extends Component
         $attributes = $suppliers->toArray();
 
 
-        $this->confirm('Do you want to update this user??', [
+        $this->confirm('Do you want to update this supplier?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);

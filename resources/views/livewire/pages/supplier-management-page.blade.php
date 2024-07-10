@@ -1,6 +1,6 @@
 
 <div x-data="{ sidebar: @entangle('sidebarStatus') }"
-    @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
+    @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-100"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
@@ -34,6 +34,7 @@
             <div class="my-[28px]">
                 @livewire('components.SupplierManagement.supplier-table')
             </div>
+
         </div>
     </div>
 </div>

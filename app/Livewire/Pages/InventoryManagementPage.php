@@ -2,23 +2,17 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Components\InventoryManagement\InventoryForm;
 use Livewire\Component;
 
-class ItemManagementPage extends Component
+class InventoryManagementPage extends Component
 {
-<<<<<<< HEAD
-=======
-
     public $showModal = false;
     public $sidebarStatus;
-
->>>>>>> zoid
     public function render()
     {
-        return view('livewire.pages.item-management-page');
+        return view('livewire.pages.inventory-management-page');
     }
-<<<<<<< HEAD
-=======
 
     protected $listeners = [
         'close-modal' => 'closeModal',
@@ -32,12 +26,11 @@ class ItemManagementPage extends Component
 
     public function formCreate()
     {
-        $this->dispatch('change-method', isCreate: true)->to(ItemManagementPage::class);
+        $this->dispatch('change-method', isCreate: true)->to(InventoryForm::class);
     }
 
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
     }
->>>>>>> zoid
 }
