@@ -1,5 +1,5 @@
 <div x-data="{ sidebar: @entangle('sidebarStatus') }"
-    @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-100"
+    @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
@@ -8,7 +8,7 @@
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
-                        <h1 class="text-[2em] font-bold pointer-events-none">Manage Supplier</h1>
+                        <h1 class="text-[2em] font-bold pointer-events-none">Manage Item</h1>
                     </div>
                     <div>
                         <button
@@ -21,19 +21,18 @@
                                 </svg>
                             </div>
                             <div>
-                                <p>Add New Supplier</p>
+                                <p>Add New Item</p>
                             </div>
                         </button>
                     </div>
                 </div>
             </div>
             <div>
-                @livewire('components.SupplierManagement.supplier-form')
+                {{-- @livewire('components.ItemManagement.item-form') --}}
             </div>
             <div class="my-[28px]">
-                @livewire('components.SupplierManagement.supplier-table')
+                @livewire('components.ItemManagement.item-table')
             </div>
-
         </div>
     </div>
 </div>
