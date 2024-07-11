@@ -12,11 +12,27 @@ class Item extends Model
     protected $fillable = [
         'barcode',
         'item_name',
-        'description',
+        'item_description',
         'maximum_stock_ratio',
-        'redorder_point',
+        'reorder_point',
         'vat_amount',
         'vat_id',
-        'status'
+        'status_id'
     ];
+
+    public function vatJoin()
+    {
+        return $this->belongsTo(Vat::class, 'vat_id');
+    }
+    public function statusJoin()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+    public function scopeSearch($query, $value)  //* search function
+    {
+        //? queries
+        $query->where('item_name', 'like', "%{$value}%")
+            ->orWhere('item_description', 'like', "%{$value}%");
+
+    }
 }

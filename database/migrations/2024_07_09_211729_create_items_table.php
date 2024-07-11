@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('barcode')->unique();
             $table->string('item_name');
+            $table->string('item_description');
             $table->double('maximum_stock_ratio');
-            $table->double('redorder_point');
-            $table->double('vat_amount');
+            $table->double('reorder_point');
+            $table->double('vat_amount')->nullable();
             $table->timestamps();
 
             $table->foreignId('vat_id')->constrained('vats');

@@ -45,6 +45,23 @@
 
                     </div>
                 </div>
+
+                <div class="flex flex-row items-center">
+
+                    <div class="flex flex-row items-center gap-2">
+
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">VAT type :</label>
+
+                        <select wire:model.live="vatFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            <option value="0">All</option>
+                            <option value="1">Vat</option>
+                            <option value="2">Non vat</option>
+
+                        </select>
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -63,7 +80,7 @@
                         <th scope="col" class="px-4 py-3">Barcode</th>
 
                         {{-- //* item name --}}
-                        <th wire:click="sortByColumn('firstname')" scope="col"
+                        <th wire:click="sortByColumn('item_name')" scope="col"
                             class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
@@ -96,6 +113,43 @@
                         {{-- //* vat amount --}}
                         <th scope="col" class="px-4 py-3">VAT amount (₱)</th>
 
+                        {{-- //* created at --} --}}
+                        <th wire:click="sortByColumn('created_at')" scope="col"
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                            <div class="flex items-center">
+
+                                <p>Created at</p>
+
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </th>
+
+                        {{-- //* updated at --}}
+                        <th wire:click="sortByColumn('updated_at')" scope="col"
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                            <div class="flex items-center">
+
+                                <p>Updated at</p>
+
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </th>
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
                         </th>
@@ -106,7 +160,93 @@
                 {{-- //* table body --}}
                 <tbody>
 
+                    @foreach ($items as $item)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->barcode }}
+                            </th>
+
+                            {{-- //* item name --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->item_name }}
+                            </th>
+
+                            {{-- //* status --}}
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+
+                                {{-- //* active green, if inactive red --}}
+                                <p
+                                    @if ($item->statusJoin->status_type == 'Active') class=" text-black bg-green-400
+                                border
+                                border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
+
+                                @elseif ($item->statusJoin->status_type == 'Inactive')
+
+                                class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5
+                                rounded " @endif>
+
+                                    {{ $item->statusJoin->status_type }}
+                                </p>
+
+                            </th>
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->maximum_stock_ratio }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->reorder_point }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->vatJoin->vat_type }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->vat_amount }}
+                            </th>
+                            {{-- //* created at --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->created_at->format('d-m-y h:i A') }}
+                            </th>
+
+                            {{-- //* updated at --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->updated_at->format('d-m-y h:i A') }}
+                            </th>
+
+                            <th class="px-4 py-6 text-center text-md text-nowrap">
+                                <div
+                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
+
+                                    <button x-on:click="showModal=true;$wire.edit({{ $item->id }})">
+
+                                        <div class="flex items-center">
+
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                </svg>
+                                            </span>
+
+                                            <div>
+                                                <p>Edit</p>
+                                            </div>
+
+                                        </div>
+
+                                    </button>
+                                </div>
+
+                            </th>
+                        </tr>
+                    @endforeach
 
 
                 </tbody>
@@ -121,7 +261,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $items->links() }} --}}
+                {{ $items->links() }}
 
             </div>
 

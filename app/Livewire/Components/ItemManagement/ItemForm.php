@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\ItemManagement;
 
+use App\Livewire\Pages\ItemManagementPage;
 use App\Models\Item;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -11,11 +12,22 @@ class ItemForm extends Component
 {
     use LivewireAlert;
 
-    public $barcode, $item_name, $maximum_stock_ratio = 1.5, $reorder_point, $vat_type, $vat_amount, $status;
+    public $vatType = null;
+
+    public $item_id, $barcode, $item_name, $item_description, $maximum_stock_ratio = 1.5, $reorder_point, $vat_amount, $status;
+    public $vat_amount_enabled = false;
+    public $proxy_item_id;
     public $isCreate; //var true for create false for edit
 
     public function render()
     {
+        if ($this->item_id) {
+
+            $this->populateForm();
+            $this->item_id = null;  //var null the supplier id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung supplier id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
+
+        }
+
         return view('livewire.components.ItemManagement.item-form')->with($this->barcode);
     }
     protected $listeners = [
@@ -26,13 +38,23 @@ class ItemForm extends Component
         'updateConfirmed',
         'createConfirmed',
     ];
+    public function updatedVatType($vat_type) //@params province code for city query
+    {
+        $this->vatType = $vat_type;
 
+        if ($vat_type == 1) {
+            $this->vat_amount_enabled = true;
+        }
+        if ($vat_type == 2) {
+            $this->vat_amount = null;
+        }
+    }
     public function create() //* create process
     {
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this supplier?', [
+        $this->confirm('Do you want to add this item?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -46,9 +68,10 @@ class ItemForm extends Component
         $user = Item::create([
             'barcode' => $validated['barcode'],
             'item_name' => $validated['item_name'],
+            'item_description' => $validated['item_description'],
             'maximum_stock_ratio' => $validated['maximum_stock_ratio'],
             'reorder_point' => $validated['reorder_point'],
-            'vat_type' => $validated['vat_type'],
+            'vat_id' => $validated['vatType'],
             'vat_amount' => $validated['vat_amount'],
             'status_id' => $validated['status'],
         ]);
@@ -58,6 +81,55 @@ class ItemForm extends Component
         $this->refreshTable();
 
         $this->resetForm();
+        $this->closeModal();
+    }
+
+    public function update() //* update process
+    {
+        $validated = $this->validateForm();
+
+
+        $items = Item::find($this->proxy_item_id); //? kunin lahat ng data ng may ari ng proxy_item_id
+
+        //* ipasa ang laman ng validated inputs sa models
+        $items->item_name = $validated['item_name'];
+        $items->item_description = $validated['item_description'];
+        $items->maximum_stock_ratio = $validated['maximum_stock_ratio'];
+        $items->reorder_point = $validated['reorder_point'];
+        $items->vat_id = $validated['vatType'];
+        $items->vat_amount = $validated['vat_amount'];
+        $items->status_id = $validated['status'];
+
+        $attributes = $items->toArray();
+
+
+        $this->confirm('Do you want to update this supplier?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+        ]);
+    }
+
+    public function updateConfirmed($data) //* confirmation process ng update
+    {
+
+
+        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
+        $updatedAttributes = $data['inputAttributes'];
+
+        //* hanapin id na attribute sa $updatedAttributes array
+        $items = Item::find($updatedAttributes['id']);
+
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
+        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
+        //var ipasa ang laman ng $updatedAttributes sa $user model
+        $items->fill($updatedAttributes);
+
+        $items->save(); //* Save the user model to the database
+
+        $this->resetForm();
+        $this->alert('success', 'items was updated successfully');
+
+        $this->refreshTable();
         $this->closeModal();
     }
 
@@ -72,28 +144,64 @@ class ItemForm extends Component
         $this->resetForm();
         $this->resetValidation();
     }
+    public function edit($itemID)
+    {
+        $this->item_id = $itemID; //var assign ang parameter value sa global variable
+        $this->proxy_item_id = $itemID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+    }
 
     private function resetForm() //*tanggalin ang laman ng input pati $supplier_id value
     {
-        $this->reset(['item_name', 'barcode', 'reorder_point', 'vat_type', 'vat_amount', 'status']);
+        $this->reset(['item_id', 'item_name', 'barcode', 'reorder_point', 'vatType', 'vat_amount', 'status']);
+    }
+    public function closeModal() //* close ang modal after confirmation
+    {
+        $this->dispatch('close-modal')->to(ItemManagementPage::class);
     }
     protected function validateForm()
     {
         $this->item_name = trim($this->item_name);
 
         $rules = [
-            'barcode' => 'required', Rule::unique('barcode'),
+            'barcode' => ['required', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)],
             'item_name' => 'required|string|max:255',
+            'item_description' => 'required|string|max:255',
             'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
             'reorder_point' => ['required', 'numeric'],
-            'vat_type' => 'required|in:1,2',
-            'vat_amount' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'vatType' => 'required|in:1,2',
             'status' => 'required|in:1,2',
         ];
 
+        if ($this->vatType == 1) {
+            $rules['vat_amount'] = ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'];
+        }
+
         return $this->validate($rules);
     }
+    private function populateForm() //*lagyan ng laman ang mga input
+    {
 
+        $item_details = Item::find($this->item_id); //? kunin lahat ng data ng may ari ng user_id
+
+
+        //* ipasa ang laman ng model sa inputs
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
+        $this->fill([
+            'barcode' => $item_details->barcode,
+            'item_name' => $item_details->item_name,
+            'item_description' => $item_details->item_description,
+            'maximum_stock_ratio' => $item_details->maximum_stock_ratio,
+            'reorder_point' => $item_details->reorder_point,
+            'vatType' => $item_details->vat_id,
+            'vat_amount' => $item_details->vat_amount,
+            'status' => $item_details->status_id,
+
+        ]);
+    }
+    public function refreshTable() //* refresh ang table after confirmation
+    {
+        $this->dispatch('refresh-table')->to(ItemTable::class);
+    }
     public function changeMethod($isCreate)
     {
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable

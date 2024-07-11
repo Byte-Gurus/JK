@@ -2,12 +2,66 @@
 
 namespace App\Livewire\Components\ItemManagement;
 
+use App\Models\Item;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class ItemTable extends Component
 {
+    use WithPagination,  WithoutUrlPagination;
+    public $sortDirection = 'asc'; //var default sort direction is ascending
+    public $sortColumn = 'id'; //var defualt sort is ID
+    public $perPage = 10; //var for pagination
+    public $search = '';  //var search component
+
+    public $statusFilter = 0; //var filtering value = all
+    public $vatFilter = 0; //var filtering value = all
     public function render()
     {
-        return view('livewire.components.ItemManagement.item-table');
+        $query = Item::query();
+
+        if ($this->statusFilter != 0) {
+            $query->where('status_id', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
+        }
+        if ($this->vatFilter != 0) {
+            $query->where('status_id', $this->vatFilter); //?hanapin ang status na may same value sa statusFilter
+        }
+        $items = $query->search($this->search) //?search the user
+            ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
+            ->paginate($this->perPage);  //?  and paginate it
+        return view('livewire.components.ItemManagement.item-table', compact('items'));
+    }
+
+    protected $listeners = [
+        'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+
+    ];
+    public function edit($itemId)
+    {
+        //*call the listesner 'edit-supplier-from-table' galing sa UserForm class
+        //@params supplierID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
+        $this->dispatch('edit-supplier-from-table', itemID: $itemId)->to(ItemForm::class);
+
+        //*call the listesner 'change-method' galing sa SupplierForm class
+        //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create supplier
+        $this->dispatch('change-method', isCreate: false)->to(ItemForm::class);
+    }
+    public function sortByColumn($column)
+    { //* sort the column
+
+        //* if ang $column is same sa global variable na sortColumn then if ang sortDirection is desc then it will be asc
+        if ($this->sortColumn = $column) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        } else {
+            //* if hindi same ang $column sa global variable na sortColumn, then gawing asc ang column
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortColumn = $column; //* gawing global variable ang $column
+    }
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 }

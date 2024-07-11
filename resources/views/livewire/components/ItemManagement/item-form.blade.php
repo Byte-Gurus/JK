@@ -29,9 +29,9 @@
 
                             @if (!$this->isCreate)
                                 {{-- *if form is edit --}}
-                                Edit User
+                                Edit Item
                             @else
-                                Create User
+                                Create Item
                             @endif
 
                         </h3>
@@ -72,18 +72,18 @@
                                 {{-- //* first row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                    {{-- //* Item Description --}}
+                                    {{-- //* Item name --}}
                                     <div class="mb-3">
 
                                         <label for="item_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Description <span
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Name <span
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="item_name" wire:model="item_name"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Item Name" />
 
-                                        @error('item_description')
+                                        @error('item_name')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -112,18 +112,18 @@
                                 {{-- //* second row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                    {{-- //* Item name --}}
+                                    {{-- //* Item Description --}}
                                     <div class="mb-3">
 
-                                        <label for="item_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Name <span
+                                        <label for="item_description"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Description <span
                                                 class="text-red-400 ">*</span></label>
 
-                                        <input type="text" id="item_name" wire:model="item_name"
+                                        <input type="text" id="item_description" wire:model="item_description"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Item Name" />
+                                            placeholder="Item Description" />
 
-                                        @error('item_name')
+                                        @error('item_description')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -170,10 +170,10 @@
                                     {{-- //* vat type --}}
                                     <div class="mb-3">
 
-                                        <label for="vat_type" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
-                                        <select id="vat_type" wire:model="vat_type"
+                                        <select id="vatType" wire:model.live="vatType"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select vat type</option>
                                             <option value="1">Vat</option>
@@ -201,7 +201,9 @@
 
                                         <input type="text" id="vat_amount" wire:model="vat_amount"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Vat Amount" required />
+                                            placeholder="Vat Amount" required
+                                            @if(!$vat_amount_enabled) disabled @endif
+                                            />
 
                                         @error('vat_amount')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
