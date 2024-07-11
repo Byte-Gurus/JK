@@ -72,23 +72,23 @@
                                 {{-- //* first row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                    {{-- //* Item name --}}
+                                    {{-- //* Item Description --}}
                                     <div class="mb-3">
 
                                         <label for="item_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Name <span
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Description <span
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="item_name" wire:model="item_name"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Item Name" />
 
-                                        @error('item_name')
+                                        @error('item_description')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
-                                    
+
                                     {{-- //* barcode --}}
                                     @if ($barcode)
                                         <div class="mb-3">
@@ -112,6 +112,23 @@
                                 {{-- //* second row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
+                                    {{-- //* Item name --}}
+                                    <div class="mb-3">
+
+                                        <label for="item_name"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Name <span
+                                                class="text-red-400 ">*</span></label>
+
+                                        <input type="text" id="item_name" wire:model="item_name"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            placeholder="Item Name" />
+
+                                        @error('item_name')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
                                     {{-- //* maximum stock ratio --}}
                                     <div class="mb-3">
 
@@ -128,6 +145,11 @@
                                         @enderror
 
                                     </div>
+                                </div>
+
+
+                                {{-- //* third row row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                     {{-- //* reorder point --}}
                                     <div class="mb-3">
@@ -144,11 +166,6 @@
                                         @enderror
 
                                     </div>
-
-                                </div>
-
-                                {{-- //* third row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                     {{-- //* vat type --}}
                                     <div class="mb-3">
@@ -170,6 +187,12 @@
 
                                     </div>
 
+                                </div>
+
+                                {{-- //* third row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+
                                     {{-- //* vat amount --}}
                                     <div class="mb-3">
 
@@ -186,10 +209,6 @@
 
                                     </div>
 
-
-                                </div>
-
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
                                     {{-- //* status --}}
                                     <div class="mb-3">
 
