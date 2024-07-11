@@ -21,14 +21,14 @@
                                 </svg>
                             </div>
                             <div>
-                                <p>Add New Item</p>
+                                <p >Add New Item</p>
                             </div>
                         </button>
                     </div>
                 </div>
             </div>
             <div>
-                {{-- @livewire('components.ItemManagement.item-form') --}}
+                @livewire('components.ItemManagement.item-form')
             </div>
             <div class="my-[28px]">
                 @livewire('components.ItemManagement.item-table')

@@ -42,5 +42,3 @@ Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagem
 Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index')->middleware('RedirectIfLoggedIn');
 
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
-
-Route::get('admin/ItemManagementPage', ItemManagementPage::class)->name('itemmanagement.index')->middleware('RedirectIfLoggedIn');
