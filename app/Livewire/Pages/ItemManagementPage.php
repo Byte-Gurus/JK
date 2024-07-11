@@ -6,19 +6,17 @@ use Livewire\Component;
 
 class ItemManagementPage extends Component
 {
-<<<<<<< HEAD
-=======
+
 
     public $showModal = false;
     public $sidebarStatus;
 
->>>>>>> zoid
+
     public function render()
     {
         return view('livewire.pages.item-management-page');
     }
-<<<<<<< HEAD
-=======
+
 
     protected $listeners = [
         'close-modal' => 'closeModal',
@@ -39,5 +37,5 @@ class ItemManagementPage extends Component
     {
         $this->sidebarStatus = $sidebarOpen;
     }
->>>>>>> zoid
+
 }

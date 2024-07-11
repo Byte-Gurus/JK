@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<div>
-
-    <a>{!! DNS1D::getBarcodeSVG('444564', 'C128') !!}</a>
-    <a>dsdsdsds</a>
-=======
 <div x-data="{ sidebar: @entangle('sidebarStatus') }"
     @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
     @else
@@ -41,5 +35,4 @@
             </div>
         </div>
     </div>
->>>>>>> zoid
 </div>
