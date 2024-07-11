@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('barcode')->unique();
             $table->string('item_name');
-            $table->double('maximum_stock_level');
+            $table->double('maximum_stock_ratio');
             $table->double('redorder_point');
             $table->double('vat_amount');
             $table->timestamps();
 
             $table->foreignId('vat_id')->constrained('vats');
+            $table->foreignId('status_id')->constrained('statuses');
         });
 
     }

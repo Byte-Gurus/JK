@@ -29,23 +29,6 @@
 
 
             <div class="flex flex-row items-center justify-center gap-4">
-
-                {{-- //*category filter --}}
-                <div class="flex flex-row items-center gap-2">
-
-                    <label class="text-sm font-medium text-gray-900 text-nowrap">Category :</label>
-
-                    <select wire:model.live="roleFilter"
-                        class="bg-gray-50 border hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5 ">
-                        <option value="0">All</option>
-                        {{-- @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->category }}</option>
-                        @endforeach --}}
-                    </select>
-
-                </div>
-
-
                 <div class="flex flex-row items-center">
 
                     <div class="flex flex-row items-center gap-2">
@@ -76,6 +59,9 @@
 
                     <tr class=" text-nowrap">
 
+                        {{-- //* barcode --}}
+                        <th scope="col" class="px-4 py-3">Barcode</th>
+
                         {{-- //* item name --}}
                         <th wire:click="sortByColumn('firstname')" scope="col"
                             class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
@@ -95,23 +81,20 @@
 
                         </th>
 
-                        {{-- //* category --}}
-                        <th scope="col" class="px-4 py-3">Category</th>
-
-                        {{-- //* barcode --}}
-                        <th scope="col" class="px-4 py-3">Barcode</th>
-
-                        {{-- //* cost --}}
-                        <th scope="col" class="px-4 py-3">Cost(₱)</th>
-
-                        {{-- //* selling price --}}
-                        <th scope="col" class="px-4 py-3">Selling Price(₱)</th>
-
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
+                        {{-- //* Maximum stock ratio --}}
+                        <th scope="col" class="px-4 py-3">Maximum stock ratio</th>
+
+                        {{-- //* Reorder point --}}
+                        <th scope="col" class="px-4 py-3">Reorder point</th>
+
                         {{-- //* vat type --}}
-                        <th scope="col" class="px-4 py-3">VAT type</th>
+                        <th scope="col" class="px-4 py-3 text-center">VAT type</th>
+
+                        {{-- //* vat amount --}}
+                        <th scope="col" class="px-4 py-3">VAT amount (₱)</th>
 
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
@@ -157,21 +140,6 @@
             </div>
 
 
-        </div>
-
-    </div>
-
-    <div class="flex flex-row items-center justify-end gap-4 pointer-events-none my-[20px]">
-        <div class="flex flex-row items-center">
-            <p class="font-medium">VAT Type:</p>
-        </div>
-        <div class="flex flex-row items-center gap-1">
-            <div class="w-4 h-4 bg-purple-500 rounded-full"></div>
-            <p>Vatable</p>
-        </div>
-        <div class="flex flex-row items-center gap-1">
-            <div class="w-4 h-4 bg-pink-500 rounded-full"></div>
-            <p>Non-Vatable</p>
         </div>
 
     </div>

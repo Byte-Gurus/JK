@@ -13,9 +13,10 @@ class Item extends Model
         'barcode',
         'item_name',
         'description',
-        'maximum_stock_level',
+        'maximum_stock_ratio',
         'redorder_point',
         'vat_amount',
-        'vat_id'
+        'vat_id',
+        'status'
     ];
 }

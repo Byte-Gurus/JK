@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Livewire\Components\ItemManagement\ItemForm;
 use Livewire\Component;
 
 class ItemManagementPage extends Component
@@ -28,14 +29,16 @@ class ItemManagementPage extends Component
         $this->showModal = false;
     }
 
+
+
     public function formCreate()
     {
-        $this->dispatch('change-method', isCreate: true)->to(ItemManagementPage::class);
+        $this->dispatch('change-method', isCreate: true)->to(ItemForm::class);
+        $this->dispatch('generate-barcode', isCreate: true)->to(ItemForm::class);
     }
 
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
     }
-
 }
