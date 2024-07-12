@@ -142,14 +142,14 @@ class SupplierForm extends Component
         $updatedAttributes = $data['inputAttributes'];
 
         //* hanapin id na attribute sa $updatedAttributes array
-        $suppliers = Supplier::find($updatedAttributes['id']);
+        $supplier = Supplier::find($updatedAttributes['id']);
 
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
-        //var ipasa ang laman ng $updatedAttributes sa $user model
-        $suppliers->fill($updatedAttributes);
+        //var ipasa ang laman ng $updatedAttributes sa $item model
+        $supplier->fill($updatedAttributes);
 
-        $suppliers->save(); //* Save the user model to the database
+        $supplier->save(); //* Save the supplier model to the database
 
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');

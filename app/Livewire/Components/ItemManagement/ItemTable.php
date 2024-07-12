@@ -39,12 +39,12 @@ class ItemTable extends Component
     ];
     public function edit($itemId)
     {
-        //*call the listesner 'edit-supplier-from-table' galing sa UserForm class
-        //@params supplierID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
-        $this->dispatch('edit-supplier-from-table', itemID: $itemId)->to(ItemForm::class);
+        //*call the listesner 'edit-item-from-table' galing sa ItemForm class
+        //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
+        $this->dispatch('edit-item-from-table', itemID: $itemId)->to(ItemForm::class);
 
-        //*call the listesner 'change-method' galing sa SupplierForm class
-        //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create supplier
+        //*call the listesner 'change-method' galing sa ItemForm class
+        //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create item
         $this->dispatch('change-method', isCreate: false)->to(ItemForm::class);
     }
     public function sortByColumn($column)
