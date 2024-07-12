@@ -1,4 +1,4 @@
-<div x-data="{ sidebar: @entangle('sidebarStatus') }"
+<div x-data="{ sidebar: @entangle('sidebarStatus'), printBarcode: @entangle('printBarcodeStatus') }"
     @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
@@ -32,6 +32,9 @@
             </div>
             <div class="my-[28px]">
                 @livewire('components.ItemManagement.item-table')
+            </div>
+            <div x-show="printBarcode">
+                @livewire('components.ItemManagement.print-barcode-form')
             </div>
         </div>
     </div>

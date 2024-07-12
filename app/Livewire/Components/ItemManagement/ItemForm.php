@@ -160,6 +160,7 @@ class ItemForm extends Component
     {
         $this->dispatch('close-modal')->to(ItemManagementPage::class);
     }
+    
     protected function validateForm()
     {
         $this->item_name = trim($this->item_name);

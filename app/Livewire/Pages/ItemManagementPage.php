@@ -10,7 +10,10 @@ class ItemManagementPage extends Component
 
 
     public $showModal = false;
+    public $showPrint = false;
     public $sidebarStatus;
+
+    public $printBarcodeStatus;
 
 
     public function render()
@@ -21,7 +24,9 @@ class ItemManagementPage extends Component
 
     protected $listeners = [
         'close-modal' => 'closeModal',
-        'change-sidebar-status' => 'changeSidebarStatus'
+        'close-print' => 'closePrint',
+        'change-sidebar-status' => 'changeSidebarStatus',
+        'print-barcode' => 'changePrintBarcodeStatus'
     ];
 
     public function closeModal()
@@ -29,16 +34,24 @@ class ItemManagementPage extends Component
         $this->showModal = false;
     }
 
-
+    public function closePrint()
+    {
+        $this->showPrint = false;
+    }
 
     public function formCreate()
     {
-        $this->dispatch('change-method', isCreate: true)->to(ItemForm::class);
+        $this->dispatch('change-method',  isCreate: true)->to(ItemForm::class);
         $this->dispatch('generate-barcode', isCreate: true)->to(ItemForm::class);
     }
 
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
+    }
+
+    public function changePrintBarcodeStatus($printBarcodeOpen)
+    {
+        $this->printBarcodeStatus = $printBarcodeOpen;
     }
 }
