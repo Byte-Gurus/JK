@@ -46,7 +46,7 @@
 
                             <div
                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                <h1 class="font-bold">Item Information</h1>
+                                <h1 class="font-bold">Print Information</h1>
                             </div>
 
                             <div class="p-4">
@@ -89,8 +89,9 @@
                                         </div>
                                     @endif
 
-
-
+                                </div>
+                                <div class="mt-4">
+                                    <button class="w-full px-2 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Print</button>
                                 </div>
 
 
