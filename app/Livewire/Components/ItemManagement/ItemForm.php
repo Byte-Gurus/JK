@@ -153,7 +153,8 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id', 'item_name', 'barcode', 'reorder_point', 'vatType', 'vat_amount', 'status']);
+        $this->reset(['item_id','item_description', 'item_name', 'barcode', 'reorder_point', 'vatType', 'vat_amount', 'status']);
+        $this->vat_amount_enabled = false;
     }
     public function closeModal() //* close ang modal after confirmation
     {
