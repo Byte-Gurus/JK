@@ -1,9 +1,9 @@
-<div x-data="{ sidebar: @entangle('sidebarStatus'), printBarcode: @entangle('printBarcodeStatus') }"
+<div x-data="{ sidebar: @entangle('sidebarStatus') }"
     @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
-    <div x-data="{ showModal: @entangle('showModal') }">
+    <div x-data="{ showModal: @entangle('showModal'), showPrintModal: @entangle('showPrintModal') }">
         <div class="m-[28px]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
@@ -33,7 +33,7 @@
             <div class="my-[28px]">
                 @livewire('components.ItemManagement.item-table')
             </div>
-            <div x-show="printBarcode">
+            <div>
                 @livewire('components.ItemManagement.print-barcode-form')
             </div>
         </div>

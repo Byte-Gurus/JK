@@ -7,15 +7,20 @@ use Livewire\Component;
 
 class PrintBarcodeForm extends Component
 {
+    public $barcode;
 
     public function render()
     {
         return view('livewire.components.ItemManagement.print-barcode-form');
     }
 
-    public function closePrint() //* close ang modal after confirmation
+    protected $listeners = [
+        'print-barcode-from-table' => 'printBarcode',
+    ];
+
+    public function printBarcode($barcode)
     {
-        $this->dispatch('close-print')->to(ItemManagementPage::class);
+        
+        $this->barcode = $barcode['Barcode'];
     }
 }
-

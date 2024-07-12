@@ -201,19 +201,23 @@
 
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->maximum_stock_ratio }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->reorder_point }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->vatJoin->vat_type }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->vat_amount }}
                             </th>
                             {{-- //* created at --}}
@@ -228,7 +232,7 @@
 
                             <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
 
-                                <div x-data="{ openActions: false}">
+                                <div x-data="{ openActions: false }">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-6"
                                         x-on:click="openActions = !openActions">
@@ -249,7 +253,7 @@
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 <button
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-red-100"
-                                                    x-on:click="showModal=true;$wire.edit({{ $item->id }}), openActions = !openActions">
+                                                    x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
                                                             stroke="currentColor" class="size-6">
@@ -261,8 +265,7 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
                                                 <button
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-blue-100"
-                                                    x-on:click="openActions = !openActions, $wire.togglePrintBarcode()"
-                                                    >
+                                                    x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions ">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
                                                             stroke="currentColor" class="size-6">

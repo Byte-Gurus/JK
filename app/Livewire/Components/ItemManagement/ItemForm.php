@@ -32,7 +32,7 @@ class ItemForm extends Component
         return view('livewire.components.ItemManagement.item-form')->with($this->barcode);
     }
     protected $listeners = [
-        'edit-item-from-table' => 'edit',  //* key:'edit-item-from-table' value:'edit'  galing sa ItemTable class
+        'edit-item-from-table' => 'edit',  //* key:'edit-item-from-table' method:'edit'  galing sa ItemTable class
         //* key:'change-method' value:'changeMethod' galing sa ItemTable class,  laman false
         'change-method' => 'changeMethod',
         'generate-barcode' => 'generateBarcode',
@@ -160,7 +160,7 @@ class ItemForm extends Component
     {
         $this->dispatch('close-modal')->to(ItemManagementPage::class);
     }
-    
+
     protected function validateForm()
     {
         $this->item_name = trim($this->item_name);

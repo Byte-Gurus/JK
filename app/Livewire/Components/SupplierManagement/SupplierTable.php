@@ -39,7 +39,7 @@ class SupplierTable extends Component
 
 
     //@params $userId, galing sa pag select ng edit from specific row
-    public function edit($supplierId)
+    public function getSupplierID($supplierId)
     {
         //*call the listesner 'edit-supplier-from-table' galing sa UserForm class
         //@params supplierID name ng parameter na ipapasa, $supplierId parameter value na ipapasa

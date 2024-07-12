@@ -52,7 +52,7 @@ class UserTable extends Component
 
 
     //@params $userId, galing sa pag select ng edit from specific row
-    public function edit($userId)
+    public function getUserID($userId)
     {
         //*call the listesner 'edit-user-from-table' galing sa UserForm class
         //@params userID name ng parameter na ipapasa, $userId parameter value na ipapasa

@@ -18,8 +18,6 @@ class ItemTable extends Component
 
     public $statusFilter = 0; //var filtering value = all
     public $vatFilter = 0; //var filtering value = all
-
-    public $printBarcodeOpen = false;
     public function render()
     {
         $query = Item::query();
@@ -41,14 +39,8 @@ class ItemTable extends Component
 
     ];
 
-    public function togglePrintBarcode() {
 
-        $this->printBarcodeOpen = !$this->printBarcodeOpen;
-        $this->dispatch('print-barcode', printBarcodeOpen: $printBarcodeOpen = true )->to(ItemManagementPage::class);
-
-    }
-
-    public function edit($itemId)
+    public function getItemID($itemId)
     {
         //*call the listesner 'edit-item-from-table' galing sa ItemForm class
         //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
@@ -57,6 +49,14 @@ class ItemTable extends Component
         //*call the listesner 'change-method' galing sa ItemForm class\
         //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create item
         $this->dispatch('change-method', isCreate: false)->to(ItemForm::class);
+    }
+
+    public function getBarcode($barcode)
+    {
+        //*call the listesner 'edit-item-from-table' galing sa ItemForm class
+        //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
+        $this->dispatch('print-barcode-from-table', ['Barcode' => $barcode])->to(PrintBarcodeForm::class);
+
     }
     public function sortByColumn($column)
     { //* sort the column

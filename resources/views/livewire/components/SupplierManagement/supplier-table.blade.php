@@ -217,7 +217,7 @@
                             <div
                                 class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
 
-                                <button x-on:click="showModal=true;$wire.edit({{ $supplier->id }})">
+                                <button x-on:click="showModal=true;$wire.getSupplierID({{ $supplier->id }})">
 
                                     <div class="flex items-center">
 

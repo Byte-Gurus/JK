@@ -1,4 +1,4 @@
-<div class="relative" x-cloak>
+<div class="relative" x-cloak x-show="showPrintModal">
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -20,7 +20,7 @@
                     </div>
 
                     {{-- //* close button --}}
-                    <button type="button" x-on:click="closePrint=true"
+                    <button type="button" x-on:click="showPrintModal=false"
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">
 
@@ -52,18 +52,18 @@
                             <div class="p-4">
 
                                 {{-- //* first row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+                                <div class="flex justify-between gap-4">
 
                                     {{-- //* Item name --}}
                                     <div class="mb-3">
 
                                         <label for="item_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Name <span
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">No. of copy<span
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="item_name" wire:model="item_name"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Item Name" />
+                                            placeholder="Quantity" />
 
                                         @error('item_name')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -71,11 +71,11 @@
 
                                     </div>
 
-{{--
+
                                     @if ($barcode)
                                         <div class="mb-3">
 
-                                            <label for="barcode"
+                                            <label for="asas"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Barcode:
                                                 {{ $barcode }}
                                             </label>
@@ -87,7 +87,9 @@
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    @endif --}}
+                                    @endif
+
+
 
                                 </div>
 
