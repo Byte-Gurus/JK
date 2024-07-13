@@ -118,7 +118,6 @@ class UserForm extends Component
         $user->user_role_id = $validated['role'];
         $user->status_id = $validated['status'];
         $user->username = $validated['username'];
-        $user->image_path = $validated['image_path'];
 
 
         $attributes = $user->toArray(); //var ilagay sa array ang model before i add ang password sa array kasi hindi ni reretrieve ang hashed password sa toArray() method
@@ -217,7 +216,7 @@ class UserForm extends Component
 
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+
         ];
 
         //*para sa create na validation or //*para sa edit na may passowrd na validation
