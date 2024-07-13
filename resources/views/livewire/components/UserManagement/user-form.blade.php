@@ -188,166 +188,191 @@
                                     </div>
 
                                 </div>
+
+                                {{-- fourth row --}}
+
+                                <div>
+                                    <label for="profile"
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Profile</label>
+
+                                    <form class="flex flex-col max-w-lg gap-8 mx-auto">
+                                        <div class="flex justify-center w-1/2 text-center border-2 rounded-md border-[rgb(53,53,53)] mb-4">
+                                            {{-- default profile --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-32">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <input
+                                                class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer w-content bg-gray-50 focus:outline-none"
+                                                aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                        </div>
+                                    </form>
+
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        {{-- //* second area, login information --}}
-                        <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                    {{-- //* second area, login information --}}
+                    <div class="border-2 border-[rgb(53,53,53)] rounded-md">
 
-                            <div
-                                class="p-2 border-b  bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                <h1 class="font-bold">Login Information</h1>
+                        <div
+                            class="p-2 border-b  bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
+                            <h1 class="font-bold">Login Information</h1>
+                        </div>
+
+                        <div class="p-4">
+
+                            {{-- //* username --}}
+                            <div class="mb-3">
+
+                                <label for="username"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+
+                                <input type="text" id="username" wire:model="username"
+                                    class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                    placeholder="Username" required />
+
+                                @error('username')
+                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                @enderror
+
                             </div>
 
-                            <div class="p-4">
+                            {{-- //* script that show password and retype pass if create form --}}
+                            <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
 
-                                {{-- //* username --}}
+                                {{-- //* password --}}
                                 <div class="mb-3">
 
-                                    <label for="username"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
 
-                                    <input type="text" id="username" wire:model="username"
-                                        class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                        placeholder="Username" required />
+                                    <input type="password" wire:model="password" id="password"
+                                        placeholder="Password"
+                                        class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
-                                    @error('username')
+                                    @error('password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
 
                                 </div>
 
-                                {{-- //* script that show password and retype pass if create form --}}
-                                <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
+                                {{-- //* retype password --}}
+                                <div class="mb-3">
 
-                                    {{-- //* password --}}
-                                    <div class="mb-3">
+                                    <label for="retypepassword"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Re-type
+                                        Password</label>
 
-                                        <label for="password"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
+                                    <input type="password" id="retype_password" wire:model="retype_password"
+                                        placeholder="Retype Password"
+                                        class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
-                                        <input type="password" wire:model="password" id="password"
-                                            placeholder="Password"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
-
-                                        @error('password')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-
-                                    {{-- //* retype password --}}
-                                    <div class="mb-3">
-
-                                        <label for="retypepassword"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Re-type
-                                            Password</label>
-
-                                        <input type="password" id="retype_password" wire:model="retype_password"
-                                            placeholder="Retype Password"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
-
-                                        @error('retype_password')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
+                                    @error('retype_password')
+                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
 
-                                {{-- //* check box for edit --}}
-                                @if (!$this->isCreate)
-                                    <input type="checkbox" name="showpassword" id="showpassword"
-                                        wire:model="show_password" placeholder="">
-
-                                    <label for="showpassword">Update Password</label>
-                                @endif
-
                             </div>
-                        </div>
 
+                            {{-- //* check box for edit --}}
+                            @if (!$this->isCreate)
+                                <input type="checkbox" name="showpassword" id="showpassword"
+                                    wire:model="show_password" placeholder="">
+
+                                <label for="showpassword">Update Password</label>
+                            @endif
+
+                        </div>
                     </div>
-
-                    {{-- //* form footer --}}
-
-                    {{-- *if form is edit --}}
-                    @if (!$this->isCreate)
-                        <div class="flex flex-row justify-end gap-2">
-
-                            <div>
-
-                                {{-- //* submit button for edit --}}
-                                <button type="submit"
-                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                    <div class="flex flex-row items-center gap-2">
-                                        <p>Update</p>
-
-                                        <div wire:loading>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                    stroke="currentColor" stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor"
-                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                                </path>
-                                            </svg>
-
-                                        </div>
-                                    </div>
-
-                                </button>
-
-                            </div>
-
-                        </div>
-                    @else
-                        {{-- *if form is create --}}
-                        <div class="flex flex-row justify-end gap-2">
-                            <div>
-
-                                {{-- //* clear all button for create --}}
-                                <button type="reset"
-                                    class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
-                                    All</button>
-                            </div>
-
-                            <div>
-
-                                {{-- //* submit button for create --}}
-                                <button type="submit"
-                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                    <div class="flex flex-row items-center gap-2">
-                                        <p>
-                                            Create
-                                        </p>
-
-                                        <div wire:loading>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                    stroke="currentColor" stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor"
-                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                    </div>
-
-
-                                </button>
-
-                            </div>
-
-                        </div>
-                    @endif
 
                 </div>
 
-            </form>
+                {{-- //* form footer --}}
+
+                {{-- *if form is edit --}}
+                @if (!$this->isCreate)
+                    <div class="flex flex-row justify-end gap-2">
+
+                        <div>
+
+                            {{-- //* submit button for edit --}}
+                            <button type="submit"
+                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                <div class="flex flex-row items-center gap-2">
+                                    <p>Update</p>
+
+                                    <div wire:loading>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                            </path>
+                                        </svg>
+
+                                    </div>
+                                </div>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+                @else
+                    {{-- *if form is create --}}
+                    <div class="flex flex-row justify-end gap-2">
+                        <div>
+
+                            {{-- //* clear all button for create --}}
+                            <button type="reset"
+                                class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
+                                All</button>
+                        </div>
+
+                        <div>
+
+                            {{-- //* submit button for create --}}
+                            <button type="submit"
+                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                <div class="flex flex-row items-center gap-2">
+                                    <p>
+                                        Create
+                                    </p>
+
+                                    <div wire:loading>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+
+                            </button>
+
+                        </div>
+
+                    </div>
+                @endif
+
         </div>
 
+        </form>
     </div>
+
+</div>
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
