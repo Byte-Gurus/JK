@@ -20,7 +20,7 @@ class UserForm extends Component
 
 
     //var form inputs
-    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password, $user_image;
+    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password, $photo;
 
 
     public function render()
@@ -255,4 +255,5 @@ class UserForm extends Component
             $this->show_password = false;
         }
     }
+   
 }
