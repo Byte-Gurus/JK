@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('contact_number')->unique();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('image_path');
             $table->rememberToken();
             $table->timestamps();
 
