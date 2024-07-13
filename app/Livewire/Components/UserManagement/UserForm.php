@@ -9,17 +9,18 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 
 class UserForm extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, WithFileUploads;
     public $show_password; //var true for show password false for hindi
     public $isCreate; //var true for create false for edit
 
 
     //var form inputs
-    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
+    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password, $user_image;
 
 
     public function render()
@@ -65,6 +66,8 @@ class UserForm extends Component
 
         $validated = $data['inputAttributes'];
 
+        $validated['user_image'] = $this->user_image->store('userImages', 'public');
+
         $user = User::create([
             'firstname' => $validated['firstname'],
             'middlename' => $validated['middlename'],
@@ -72,6 +75,7 @@ class UserForm extends Component
             'contact_number' => $validated['contact_number'],
             'user_role_id' => $validated['role'],
             'status_id' => $validated['status'],
+            'image' => $validated['user_image'],
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
 
@@ -213,7 +217,7 @@ class UserForm extends Component
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:1,2',
-
+            'user_image' => 'required|image|1024',
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],
 

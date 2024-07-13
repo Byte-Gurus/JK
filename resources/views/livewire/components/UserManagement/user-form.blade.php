@@ -47,8 +47,11 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
+
                         <span class="sr-only">Close modal</span>
+
                     </button>
+
                 </div>
 
 
@@ -181,7 +184,9 @@
                                         @error('status')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
+
                                     </div>
+
                                 </div>
 
                                 {{-- fourth row --}}
@@ -192,20 +197,25 @@
                                     <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                         <div
-                                            class="flex justify-center text-center border-2 rounded-md border-[rgb(53,53,53)]">
+                                            class="rounded-full w-15 h-15 border-spacing-0 border-black border-2">
                                             {{-- default profile --}}
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-32">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" className="size-6">
+                                                <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clipRule="evenodd" />
+                                              </svg>
+
                                         </div>
                                         <div class="flex items-center justify-center">
                                             <input
-                                                class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer w-content bg-gray-50 focus:outline-none"
-                                                aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                                class="block round text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer w-content bg-gray-50 focus:outline-none"
+                                                aria-describedby="user_avatar_help" id="user_image"
+                                                wire:model="user_image" accept="image/png, image.jpeg"
+                                                type="file">
+
+                                            @error('user_image')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -271,8 +281,11 @@
                                     @error('retype_password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
+
                                 </div>
+
                             </div>
+
                             {{-- //* check box for edit --}}
                             @if (!$this->isCreate)
                                 <input type="checkbox" name="showpassword" id="showpassword"
@@ -280,71 +293,91 @@
 
                                 <label for="showpassword">Update Password</label>
                             @endif
+
                         </div>
                     </div>
+
+                    {{-- //* form footer --}}
+
+                    {{-- *if form is edit --}}
+                    @if (!$this->isCreate)
+                        <div class="flex flex-row justify-end gap-2">
+
+                            <div>
+
+                                {{-- //* submit button for edit --}}
+                                <button type="submit"
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    <div class="flex flex-row items-center gap-2">
+                                        <p>Update</p>
+
+                                        <div wire:loading>
+
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                    stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                                </path>
+                                            </svg>
+
+                                        </div>
+                                    </div>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    @else
+                        {{-- *if form is create --}}
+                        <div class="flex flex-row justify-end gap-2">
+                            <div>
+
+                                {{-- //* clear all button for create --}}
+                                <button type="reset"
+                                    class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
+                                    All</button>
+                            </div>
+
+                            <div>
+
+                                {{-- //* submit button for create --}}
+                                <button type="submit"
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    <div class="flex flex-row items-center gap-2">
+                                        <p>
+                                            Create
+                                        </p>
+
+                                        <div wire:loading>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                    stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor"
+                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    @endif
                 </div>
-                {{-- //* form footer --}}
 
-                {{-- *if form is edit --}}
-                @if (!$this->isCreate)
-                    <div class="flex flex-row justify-end m-[28px] gap-2">
-                        <div>
-                            {{-- //* submit button for edit --}}
-                            <button type="submit"
-                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                <div class="flex flex-row items-center gap-2">
-                                    <p>Update</p>
-
-                                    <div wire:loading>
-
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor"
-                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                @else
-                    {{-- *if form is create --}}
-                    <div class="flex flex-row justify-end gap-2">
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <button type="reset"
-                                class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
-                                All</button>
-                        </div>
-                        <div>
-                            {{-- //* submit button for create --}}
-                            <button type="submit"
-                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                <div class="flex flex-row items-center gap-2">
-                                    <p>
-                                        Create
-                                    </p>
-                                    <div wire:loading>
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor"
-                                                d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                @endif
-            </form>
         </div>
+
+        </form>
     </div>
+
+
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
