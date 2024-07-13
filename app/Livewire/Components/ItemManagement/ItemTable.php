@@ -26,7 +26,7 @@ class ItemTable extends Component
             $query->where('status_id', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
         if ($this->vatFilter != 0) {
-            $query->where('status_id', $this->vatFilter); //?hanapin ang status na may same value sa statusFilter
+            $query->where('vat_type', $this->vatFilter); //?hanapin ang status na may same value sa statusFilter
         }
         $items = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
@@ -55,7 +55,7 @@ class ItemTable extends Component
     {
         //*call the listesner 'edit-item-from-table' galing sa ItemForm class
         //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
-        $this->dispatch('print-barcode-from-table', ['Barcode' => $barcode])->to(PrintBarcodeForm::class);
+        $this->dispatch('get-barcode-from-table', ['Barcode' => $barcode])->to(PrintBarcodeForm::class);
 
     }
     public function sortByColumn($column)

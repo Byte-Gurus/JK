@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
 
         Supplier::factory(100)->create();
 
-        $this->call(VatSeeder::class);
+        
     }
 }

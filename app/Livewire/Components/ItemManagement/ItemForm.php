@@ -32,7 +32,7 @@ class ItemForm extends Component
         return view('livewire.components.ItemManagement.item-form')->with($this->barcode);
     }
     protected $listeners = [
-        'edit-item-from-table' => 'edit',  //* key:'edit-item-from-table' method:'edit'  galing sa ItemTable class
+        'edit-item-from-table' => 'edit',  //* key:'edit-item-from-table' function:'edit'  galing sa ItemTable class
         //* key:'change-method' value:'changeMethod' galing sa ItemTable class,  laman false
         'change-method' => 'changeMethod',
         'generate-barcode' => 'generateBarcode',
@@ -43,12 +43,12 @@ class ItemForm extends Component
     {
         $this->vatType = $vat_type;
 
-        if ($vat_type == 1) {
+        if ($vat_type == 'Vat') {
             $this->vat_amount_enabled = true;
-        }
-        if ($vat_type == 2) {   //* remove the value pag non vat
+        }else{
             $this->vat_amount = null;
         }
+
     }
     public function create() //* create process
     {
@@ -72,7 +72,7 @@ class ItemForm extends Component
             'item_description' => $validated['item_description'],
             'maximum_stock_ratio' => $validated['maximum_stock_ratio'],
             'reorder_point' => $validated['reorder_point'],
-            'vat_id' => $validated['vatType'],
+            'vat_type' => $validated['vatType'],
             'vat_amount' => $validated['vat_amount'],
             'status_id' => $validated['status'],
         ]);
@@ -97,7 +97,7 @@ class ItemForm extends Component
         $items->item_description = $validated['item_description'];
         $items->maximum_stock_ratio = $validated['maximum_stock_ratio'];
         $items->reorder_point = $validated['reorder_point'];
-        $items->vat_id = $validated['vatType'];
+        $items->vat_type = $validated['vatType'];
         $items->vat_amount = $validated['vat_amount'];
         $items->status_id = $validated['status'];
 
@@ -172,11 +172,11 @@ class ItemForm extends Component
             'item_description' => 'required|string|max:255',
             'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
             'reorder_point' => ['required', 'numeric'],
-            'vatType' => 'required|in:1,2',
+            'vatType' => 'required|in:Vat,Non Vat',
             'status' => 'required|in:1,2',
         ];
 
-        if ($this->vatType == 1) {
+        if ($this->vatType == 'Vat') {
             $rules['vat_amount'] = ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'];
         }
 

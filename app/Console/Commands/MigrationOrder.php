@@ -35,7 +35,6 @@ class MigrationOrder extends Command
             '1995_10_23_300000_create_philippine_cities_table.php',
             '1995_10_23_400000_create_philippine_barangays_table.php',
             '2024_06_16_014707_create_suppliers_table.php',
-            '2024_07_10_135740_create_vats_table.php',
             '2024_07_09_211729_create_items_table.php'
 
         ];

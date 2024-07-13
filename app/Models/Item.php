@@ -16,14 +16,11 @@ class Item extends Model
         'maximum_stock_ratio',
         'reorder_point',
         'vat_amount',
-        'vat_id',
+        'vat_type',
         'status_id'
     ];
 
-    public function vatJoin()
-    {
-        return $this->belongsTo(Vat::class, 'vat_id');
-    }
+    
     public function statusJoin()
     {
         return $this->belongsTo(Status::class, 'status_id');
