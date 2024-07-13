@@ -233,12 +233,16 @@
                             <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6"
-                                        x-on:click="openActions = !openActions">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-                                    </svg>
+                                    <div
+                                    x-on:click="openActions = !openActions"
+                                    class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
 
                                     <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
                                         x-cloak x-transition:enter-start="transform opacity-100 scale-0"
@@ -252,7 +256,7 @@
                                         min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 <button
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-red-100"
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100"
                                                     x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
@@ -264,7 +268,7 @@
                                                 </button>
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
                                                 <button
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-blue-100"
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100"
                                                     x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions ">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"

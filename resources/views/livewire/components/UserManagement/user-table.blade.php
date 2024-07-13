@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative  m-[28px] bg-black">
+<div class="relative bg-black rounded-lg">
 
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">

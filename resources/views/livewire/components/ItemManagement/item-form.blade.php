@@ -202,8 +202,7 @@
                                         <input type="text" id="vat_amount" wire:model="vat_amount"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Vat Amount" required
-                                            @if(!$vat_amount_enabled) disabled @endif
-                                            />
+                                            @if (!$vat_amount_enabled) disabled @endif />
 
                                         @error('vat_amount')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>

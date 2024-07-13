@@ -47,11 +47,8 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
-
                         <span class="sr-only">Close modal</span>
-
                     </button>
-
                 </div>
 
 
@@ -184,9 +181,7 @@
                                         @error('status')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
-
                                     </div>
-
                                 </div>
 
                                 {{-- fourth row --}}
@@ -211,7 +206,6 @@
                                                 class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer w-content bg-gray-50 focus:outline-none"
                                                 aria-describedby="user_avatar_help" id="user_avatar" type="file">
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -277,11 +271,8 @@
                                     @error('retype_password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
-
                                 </div>
-
                             </div>
-
                             {{-- //* check box for edit --}}
                             @if (!$this->isCreate)
                                 <input type="checkbox" name="showpassword" id="showpassword"
@@ -289,20 +280,15 @@
 
                                 <label for="showpassword">Update Password</label>
                             @endif
-
                         </div>
                     </div>
-
                 </div>
-
                 {{-- //* form footer --}}
 
                 {{-- *if form is edit --}}
                 @if (!$this->isCreate)
-                    <div class="flex flex-row justify-end gap-2">
-
+                    <div class="flex flex-row justify-end m-[28px] gap-2">
                         <div>
-
                             {{-- //* submit button for edit --}}
                             <button type="submit"
                                 class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
@@ -319,28 +305,21 @@
                                                 d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
                                             </path>
                                         </svg>
-
                                     </div>
                                 </div>
-
                             </button>
-
                         </div>
-
                     </div>
                 @else
                     {{-- *if form is create --}}
                     <div class="flex flex-row justify-end gap-2">
                         <div>
-
                             {{-- //* clear all button for create --}}
                             <button type="reset"
                                 class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
                                 All</button>
                         </div>
-
                         <div>
-
                             {{-- //* submit button for create --}}
                             <button type="submit"
                                 class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
@@ -348,7 +327,6 @@
                                     <p>
                                         Create
                                     </p>
-
                                     <div wire:loading>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
@@ -360,21 +338,13 @@
                                         </svg>
                                     </div>
                                 </div>
-
-
                             </button>
-
                         </div>
-
                     </div>
                 @endif
-
+            </form>
         </div>
-
-        </form>
     </div>
-
-
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
