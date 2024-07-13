@@ -374,7 +374,7 @@
         </form>
     </div>
 
-</div>
+
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>

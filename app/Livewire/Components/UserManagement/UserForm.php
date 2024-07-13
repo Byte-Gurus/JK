@@ -20,7 +20,7 @@ class UserForm extends Component
 
     //var form inputs
     public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
-    public $image_path = null;
+
 
     public function render()
     {
@@ -74,7 +74,7 @@ class UserForm extends Component
             'status_id' => $validated['status'],
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
-            'image_path' => $validated['image_path']
+
         ]);
 
 
