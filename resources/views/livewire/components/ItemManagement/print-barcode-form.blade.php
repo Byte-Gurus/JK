@@ -20,7 +20,7 @@
                     </div>
 
                     {{-- //* close button --}}
-                    <button type="button" x-on:click="showPrintModal=false"
+                    <button type="button" x-on:click="showPrintModal=false" wire:click=' resetFormWhenClosed() '
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">
 
@@ -57,15 +57,15 @@
                                     {{-- //* Item name --}}
                                     <div class="mb-3">
 
-                                        <label for="item_name"
+                                        <label for="barcode_quantity"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">No. of copy<span
                                                 class="text-red-400 ">*</span></label>
 
-                                        <input type="text" id="item_name" wire:model="item_name"
+                                        <input type="text" id="barcode_quantity" wire:model="barcode_quantity"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Quantity" />
 
-                                        @error('item_name')
+                                        @error('barcode_quantity')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -91,7 +91,8 @@
 
                                 </div>
                                 <div class="mt-4">
-                                    <button class="w-full px-2 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Print</button>
+                                    <button
+                                        class="w-full px-2 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Print</button>
                                 </div>
 
 

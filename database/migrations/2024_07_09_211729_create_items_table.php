@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('item_description');
             $table->double('maximum_stock_ratio');
             $table->double('reorder_point');
+            $table->string('vat_type');
             $table->double('vat_amount')->nullable();
             $table->timestamps();
 
-            $table->foreignId('vat_id')->constrained('vats');
+
             $table->foreignId('status_id')->constrained('statuses');
         });
 

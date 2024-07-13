@@ -20,6 +20,7 @@ class UserForm extends Component
 
     //var form inputs
     public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
+    public $image_path = null;
 
     public function render()
     {
@@ -72,7 +73,8 @@ class UserForm extends Component
             'user_role_id' => $validated['role'],
             'status_id' => $validated['status'],
             'username' => $validated['username'],
-            'password' => Hash::make($validated['password'])
+            'password' => Hash::make($validated['password']),
+            'image_path' => $validated['image_path']
         ]);
 
 
@@ -116,6 +118,8 @@ class UserForm extends Component
         $user->user_role_id = $validated['role'];
         $user->status_id = $validated['status'];
         $user->username = $validated['username'];
+        $user->image_path = $validated['image_path'];
+
 
         $attributes = $user->toArray(); //var ilagay sa array ang model before i add ang password sa array kasi hindi ni reretrieve ang hashed password sa toArray() method
 
@@ -162,6 +166,7 @@ class UserForm extends Component
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
         $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
+
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation
@@ -212,6 +217,7 @@ class UserForm extends Component
 
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         //*para sa create na validation or //*para sa edit na may passowrd na validation

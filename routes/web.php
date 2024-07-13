@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Components\ItemManagement\BarcodePage;
 use App\Livewire\Components\Logout;
 use App\Livewire\Pages\CashierPage;
 use App\Livewire\Pages\CustomerCreditMangementPage;
@@ -42,3 +43,5 @@ Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagem
 Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index')->middleware('RedirectIfLoggedIn');
 
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
+
+Route::get('/admin/InventoryManagement/BarcodePage', BarcodePage::class)->name('itemmanagement.barcode')->middleware('RedirectIfLoggedIn');
