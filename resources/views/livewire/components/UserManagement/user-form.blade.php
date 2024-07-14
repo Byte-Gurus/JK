@@ -190,35 +190,38 @@
                                 </div>
 
 
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4"
-                                    x-data="{ imagePreview: '', showPreview: false }">
-                                    <div class="mb-3">
-                                        <label for="profile"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Profile</label>
-                                        <input type="file" id="fileInput" class="mb-4"
-                                            x-on:change="showPreview = true; imagePreview = URL.createObjectURL($event.target.files[0])"
-                                            x-ref="fileInput">
-                                    </div>
-                                    <div class="mb-3">
-                                        <div x-show="!showPreview">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="0.8" stroke="currentColor"
-                                                class="p-4 border-2 border-black rounded-full size-36 bg-[rgb(145,145,145)]">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                                                    fill="white" />
-                                            </svg>
+
+                                <div class="mb-3">
+                                    <label for="profile"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Profile</label>
+
+                                    <div class="flex flex-col items-center justify-center gap-8 p-4 "
+                                        x-data="{ imagePreview: '', showPreview: false }">
+                                        <div class="flex items-center justify-center">
+                                            <div x-show="!showPreview" class=" translate-y-[-28] shadow-xl rounded-full">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="0.8" stroke="currentColor"
+                                                    class="border border-black rounded-full size-36">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                                                        fill="white" />
+                                                </svg>
+                                            </div>
+                                            <div x-show="showPreview" class=" translate-y-[-28] shadow-xl rounded-full">
+                                                <img :src="imagePreview" alt="Preview"
+                                                    class="border border-black rounded-full size-36">
+                                            </div>
                                         </div>
-                                        <div x-show="showPreview">
-                                            <img :src="imagePreview" alt="Preview"
-                                                class="p-4 border-2 border-black rounded-full size-36 bg-[rgb(145,145,145)]">
+                                        <div class="flex flex-row flex-wrap items-center justify-center gap-2">
+                                            <input type="file" id="fileInput" class="mb-4 bg-[rgb(236,236,236)] border border-[rgb(53,53,53)]"
+                                                x-on:change="showPreview = true; imagePreview = URL.createObjectURL($event.target.files[0])"
+                                                x-ref="fileInput">
+                                            <button x-show="showPreview"
+                                                @click="showPreview = false; imagePreview = ''; $refs.fileInput.value = ''"
+                                                class="px-4 py-2 mb-4 text-white transition-all duration-100 ease-in-out bg-red-500 hover:bg-red-600 hover:rounded-md">Clear</button>
                                         </div>
-                                        <button x-show="showPreview"
-                                            @click="showPreview = false; imagePreview = ''; $refs.fileInput.value = ''"
-                                            class="bg-red-500 text-white px-4 py-2 rounded-md">Clear</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
