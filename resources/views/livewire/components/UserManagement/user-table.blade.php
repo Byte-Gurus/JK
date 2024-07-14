@@ -75,6 +75,8 @@
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
                     <tr class=" text-nowrap">
+                        {{-- //* user image --}}
+                        <th scope="col" class="px-4 py-3"></th>
 
                         {{-- //* name --}}
                         <th wire:click="sortByColumn('firstname')" scope="col"
@@ -126,7 +128,7 @@
                             </div>
                         </th>
 
-                         {{-- //* updated at --}}
+                        {{-- //* updated at --}}
                         <th wire:click="sortByColumn('updated_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -158,7 +160,19 @@
                     @foreach ($users as $user)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-
+                            <th scope="row"
+                                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                @if ($user->user_image)
+                                    <img class="w-16 h-16 rounded-full" src="{{ $user->user_image }}">
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="0.8"
+                                        stroke="currentColor" class="border border-black rounded-full w-16 h-16">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                                            fill="white" />
+                                    </svg>
+                                @endif
+                            </th>
                             {{-- //* name --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
@@ -180,9 +194,9 @@
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($user->statusJoin->status_type == "Active") class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
+                                    @if ($user->statusJoin->status_type == 'Active') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
 
-                                        @elseif ($user->statusJoin->status_type == "Inactive")
+                                        @elseif ($user->statusJoin->status_type == 'Inactive')
 
                                         class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
 

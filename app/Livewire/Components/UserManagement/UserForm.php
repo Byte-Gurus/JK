@@ -49,13 +49,16 @@ class UserForm extends Component
     public function create() //* create process
     {
 
-        $validated = $this->validateForm();
+        if($this->user_image){
+            dd("sas");
+        }
 
+        // $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
-            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-        ]);
+        // $this->confirm('Do you want to add this user?', [
+        //     'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+        //     'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        // ]);
     }
 
 
@@ -168,8 +171,7 @@ class UserForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
-
+        $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id', 'user_image']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation
@@ -217,7 +219,7 @@ class UserForm extends Component
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:1,2',
-            'user_image' => 'required|image|1024',
+            // 'user_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
             'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],
 
@@ -254,13 +256,5 @@ class UserForm extends Component
         } else {
             $this->show_password = false;
         }
-    }
-    public function updatedPhoto()
-    {
-        $this->validate([
-            'photo' => 'image|max:1024', // 1MB Max
-        ]);
-
-        $this->photo->store('photos');
     }
 }

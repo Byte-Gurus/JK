@@ -12,6 +12,7 @@ use App\Livewire\Pages\LoginPage;
 use App\Livewire\Pages\OrderAndDeliveryManagementPage;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\UserManagementPage;
+use App\Livewire\Test;
 use Illuminate\Support\Facades\Route;
 
 //login
@@ -45,3 +46,5 @@ Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('i
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
 
 Route::get('/admin/InventoryManagement/BarcodePage', BarcodePage::class)->name('itemmanagement.barcode')->middleware('RedirectIfLoggedIn');
+
+Route::get('/test', Test::class);
