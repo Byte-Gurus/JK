@@ -9,18 +9,18 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\WithFileUploads;
+
 
 
 class UserForm extends Component
 {
-    use LivewireAlert, WithFileUploads;
+    use LivewireAlert;
     public $show_password; //var true for show password false for hindi
     public $isCreate; //var true for create false for edit
 
 
     //var form inputs
-    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password, $user_image;
+    public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
 
 
     public function render()
@@ -49,16 +49,14 @@ class UserForm extends Component
     public function create() //* create process
     {
 
-        if($this->user_image){
-            dd("sas");
-        }
 
-        // $validated = $this->validateForm();
 
-        // $this->confirm('Do you want to add this user?', [
-        //     'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-        //     'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-        // ]);
+        $validated = $this->validateForm();
+
+        $this->confirm('Do you want to add this user?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
     }
 
 
@@ -69,7 +67,6 @@ class UserForm extends Component
 
         $validated = $data['inputAttributes'];
 
-        $validated['user_image'] = $this->user_image->store('userImages', 'public');
 
         $user = User::create([
             'firstname' => $validated['firstname'],
@@ -78,7 +75,6 @@ class UserForm extends Component
             'contact_number' => $validated['contact_number'],
             'user_role_id' => $validated['role'],
             'status_id' => $validated['status'],
-            'image' => $validated['user_image'],
             'username' => $validated['username'],
             'password' => Hash::make($validated['password']),
 
@@ -171,7 +167,7 @@ class UserForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id', 'user_image']);
+        $this->reset(['firstname', 'middlename', 'lastname', 'contact_number', 'role', 'status', 'username', 'password', 'retype_password', 'user_id']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation

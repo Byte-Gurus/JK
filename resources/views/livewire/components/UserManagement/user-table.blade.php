@@ -75,8 +75,9 @@
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
                     <tr class=" text-nowrap">
+                        
                         {{-- //* user image --}}
-                        <th scope="col" class="px-4 py-3"></th>
+                        {{-- <th scope="col" class="px-4 py-3"></th> --}}
 
                         {{-- //* name --}}
                         <th wire:click="sortByColumn('firstname')" scope="col"
@@ -160,7 +161,9 @@
                     @foreach ($users as $user)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                            <th scope="row"
+
+                            {{-- user image --}}
+                            {{-- <th scope="row"
                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                 @if ($user->user_image)
                                     <img class="w-16 h-16 rounded-full" src="{{ $user->user_image }}">
@@ -172,7 +175,9 @@
                                             fill="white" />
                                     </svg>
                                 @endif
-                            </th>
+                            </th> --}}
+
+
                             {{-- //* name --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}

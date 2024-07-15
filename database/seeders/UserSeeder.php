@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
             'status_id' => '1',
             'username' => 'Aceboy76',
             'password' => Hash::make('200315feb'),
-            'user_image' => null,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -40,7 +39,6 @@ class UserSeeder extends Seeder
             'status_id' => '1',
             'username' => 'Zoid',
             'password' => Hash::make('iloveaiah'),
-            'user_image' => null,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
          ]);

@@ -45,8 +45,9 @@ class ItemForm extends Component
 
         if ($vat_type == 'Vat') {
             $this->vat_amount_enabled = true;
-        }else{
-            $this->vat_amount = null;
+        }elseif($vat_type == 'Non vat'){
+            $this->vat_amount_enabled = false;
+            $this->vat_amount = 0;
         }
 
     }
@@ -172,13 +173,11 @@ class ItemForm extends Component
             'item_description' => 'required|string|max:255',
             'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
             'reorder_point' => ['required', 'numeric'],
-            'vatType' => 'required|in:Vat,Non Vat',
+            'vat_amount' => ['required', 'numeric'],
+            'vatType' => 'required|in:Vat,Non vat',
             'status' => 'required|in:1,2',
         ];
 
-        if ($this->vatType == 'Vat') {
-            $rules['vat_amount'] = ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'];
-        }
 
         return $this->validate($rules);
     }
@@ -196,7 +195,7 @@ class ItemForm extends Component
             'item_description' => $item_details->item_description,
             'maximum_stock_ratio' => $item_details->maximum_stock_ratio,
             'reorder_point' => $item_details->reorder_point,
-            'vatType' => $item_details->vat_id,
+            'vatType' => $item_details->vat_type,
             'vat_amount' => $item_details->vat_amount,
             'status' => $item_details->status_id,
 

@@ -189,9 +189,8 @@
 
                                 </div>
 
-
-
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4"
+                                {{-- user image --}}
+                                {{-- <div class="grid justify-between grid-flow-col grid-cols-2 gap-4"
                                     x-data="{ imagePreview: '', showPreview: false }">
 
                                     <div class="mb-3">
@@ -223,13 +222,15 @@
                                                 class="mb-4 bg-[rgb(236,236,236)] border border-[rgb(53,53,53)]"
                                                 x-on:change="showPreview = true; imagePreview = URL.createObjectURL($event.target.files[0])"
                                                 x-ref="fileInput">
-                                            {{-- <a x-show="showPreview"
+                                            <a x-show="showPreview"
                                                 @click="showPreview = false; imagePreview = ''; $refs.fileInput.value = ''"
-                                                class="px-4 py-2 mb-4 text-white transition-all duration-100 ease-in-out bg-red-500 hover:bg-red-600 hover:rounded-md">Clear</a> --}}
+                                                class="px-4 py-2 mb-4 text-white transition-all duration-100 ease-in-out bg-red-500 hover:bg-red-600 hover:rounded-md">Clear</a>
                                         </div>
                                     </div>
 
-                                </div>
+                                </div> --}}
+
+
                             </div>
                         </div>
                     </div>

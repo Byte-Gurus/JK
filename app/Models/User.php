@@ -30,7 +30,6 @@ class User extends Authenticatable
         'status_id',
         'username',
         'password',
-        'user_image'
     ];
 
 

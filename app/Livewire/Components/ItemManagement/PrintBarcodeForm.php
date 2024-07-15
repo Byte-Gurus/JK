@@ -36,24 +36,23 @@ class PrintBarcodeForm extends Component
         $validated = $data['inputAttributes'];
 
 
-        $barcode_quantity = $validated['barcode_quantity'];
-
-        $this->passBarcode($this->barcode, $barcode_quantity);
-
+        $this->passBarcode($this->barcode, $validated['barcode_quantity']);
         $this->resetForm();
         $this->closeModal();
 
-        return redirect()->route('itemmanagement.barcode');
+
     }
     public function passBarcode($barcode, $barcode_quantity)
     {
-        
+
         //*call the listesner 'edit-item-from-table' galing sa ItemForm class
         //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
-        $this->dispatch('pass-barcode-from-barcode-form', [
-            'Barcode' => $barcode,
-            'Quantity' => $barcode_quantity
-        ])->to(BarcodePage::class);
+        // $this->dispatch('pass-barcode-from-barcode-form', [
+        //     'barcode' => $barcode,
+        //     'barcode_quantity' => $barcode_quantity
+        // ])->to(BarcodePage::class);
+
+
     }
     protected function validateForm()
     {

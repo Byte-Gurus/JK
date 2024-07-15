@@ -30,7 +30,6 @@ class UserFactory extends Factory
             'user_role_id' => fake()->randomElement([1, 2, 3]),
             'username' => fake()->unique()->userName(),
             'password' => static::$password ??= Hash::make('password'),
-            'user_image' => $this->faker->imageUrl(400, 400, 'people'),
             'remember_token' => Str::random(10),
         ];
     }

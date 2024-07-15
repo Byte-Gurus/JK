@@ -1,12 +1,10 @@
 <div>
-    <form wire:submit.prevent="save" >
 
-        <input type="file" accept="image/png, image/jpg" wire:model="image">
 
-        @error('image')
-            <span class="error">{{ $message }}</span>
-        @enderror
+    <input type="file" accept="image/png, image/jpg" wire:model="image">
 
-        <button type="submit">Save photo</button>
-    </form>
+
+
+    <button wire:click="save">Save photo</button>
+
 </div>
