@@ -41,4 +41,8 @@ class ItemManagementPage extends Component
     {
         $this->sidebarStatus = $sidebarOpen;
     }
+
+    public function changePrintStatus(){
+        $this->isPrint = true;
+    }
 }

@@ -21,6 +21,7 @@ class PrintBarcodeForm extends Component
         'get-barcode-from-table' => 'getBarcode',
         'createConfirmed',
     ];
+
     public function create() //* create process
     {
 
@@ -35,33 +36,17 @@ class PrintBarcodeForm extends Component
     {
 
         $validated = $data['inputAttributes'];
+        $this->print($validated['barcode_quantity'], $this->barcode);
 
-
-        $this->passBarcode($this->barcode, $validated['barcode_quantity']);
         $this->resetForm();
         $this->closeModal();
-
-
-    }
-    public function passBarcode($barcode, $barcode_quantity)
-    {
-
-        //*call the listesner 'edit-item-from-table' galing sa ItemForm class
-        //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
-        // $this->dispatch('pass-barcode-from-barcode-form', [
-        //     'barcode' => $barcode,
-        //     'barcode_quantity' => $barcode_quantity
-        // ])->to(BarcodePage::class);
-
 
     }
     protected function validateForm()
     {
 
         $rules = [
-
             'barcode_quantity' => ['required', 'numeric'],
-
         ];
 
         return $this->validate($rules);
@@ -78,6 +63,15 @@ class PrintBarcodeForm extends Component
     {
         $this->resetForm();
         $this->resetValidation();
+    }
+    public function print($quantity, $barcode)
+    {
+        $this->dispatch('change-print-status')->to(ItemManagementPage::class);
+
+        $this->dispatch('get-print-information', [
+            'barcode' => $barcode,
+            'barcode_quantity' => $quantity,
+        ])->to(PrintBarcode::class);
     }
     public function refreshTable() //* refresh ang table after confirmation
     {

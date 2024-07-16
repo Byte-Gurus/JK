@@ -93,7 +93,7 @@
                     </div>
                     <div class="mt-4">
                         <button
-                            x-on:click="isPrint=true; showPrintModal = false;"
+                           
                             class="w-full px-2 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Print</button>
                     </div>
                     {{-- //* form footer --}}
