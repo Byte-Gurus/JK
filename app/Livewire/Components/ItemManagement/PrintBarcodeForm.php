@@ -12,7 +12,6 @@ class PrintBarcodeForm extends Component
     public $barcode;
     public $barcode_quantity;
 
-    public $displayPrint = true;
     public function render()
     {
         return view('livewire.components.ItemManagement.print-barcode-form');
@@ -86,11 +85,6 @@ class PrintBarcodeForm extends Component
     }
     public function getBarcode($barcode)
     {
-
         $this->barcode = $barcode['Barcode'];
-    }
-
-    public function togglePrint() {
-        $this->displayPrint = !$this->displayPrint;
     }
 }

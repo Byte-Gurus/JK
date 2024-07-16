@@ -3,7 +3,7 @@
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
-    <div x-data="{ showModal: @entangle('showModal'), showPrintModal: @entangle('showPrintModal') }">
+    <div x-data="{ showModal: @entangle('showModal'), showPrintModal: @entangle('showPrintModal'), isPrint: @entangle('isPrint')}">
         <div class="m-[28px]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
@@ -35,6 +35,9 @@
             </div>
             <div>
                 @livewire('components.ItemManagement.print-barcode-form')
+            </div>
+            <div>
+                @livewire('components.ItemManagement.print-barcode')
             </div>
         </div>
     </div>
