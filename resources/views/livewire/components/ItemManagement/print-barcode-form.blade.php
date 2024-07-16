@@ -1,9 +1,8 @@
 <div class="relative" x-cloak x-show="showPrintModal">
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
-    <div
-        class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-
-        <div class="w-1/3 bg-red-200 h-1/3">
+    <div class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        x-data="{ displayPrint: @entangle('displayPrint') }">
+        @if ($this->displayPrint)
             <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
                 @csrf
 
@@ -88,29 +87,25 @@
                                             @enderror
                                         </div>
                                     @endif
-
                                 </div>
-                                <div class="mt-4">
-                                    <button
-                                        class="w-full px-2 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Print</button>
-                                </div>
-
-
                             </div>
                         </div>
-
-
                     </div>
-
+                    <div class="mt-4">
+                        <button wire:click="togglePrint()"
+                            class="w-full px-2 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Print</button>
+                    </div>
                     {{-- //* form footer --}}
-
-
-
                 </div>
-
             </form>
-        </div>
+        @else
+            <div class="w-screen h-screen bg-white">
+
+            </div>
+        @endif
+
     </div>
+
 </div>
 
 {{-- //* form position --}}
