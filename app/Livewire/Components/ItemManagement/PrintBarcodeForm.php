@@ -25,6 +25,7 @@ class PrintBarcodeForm extends Component
     public function create() //* create process
     {
 
+
         $validated = $this->validateForm();
 
         $this->confirm('Do you want to print this barcodes?', [
@@ -36,11 +37,11 @@ class PrintBarcodeForm extends Component
     {
 
         $validated = $data['inputAttributes'];
+                                                   
+        $this->closeModal();
         $this->print($validated['barcode_quantity'], $this->barcode);
 
         $this->resetForm();
-        $this->closeModal();
-
     }
     protected function validateForm()
     {
