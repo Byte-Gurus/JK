@@ -153,21 +153,20 @@ class SupplierForm extends Component
 
         //* hanapin id na attribute sa $updatedAttributes array
         $supplier = Supplier::find($updatedAttributes['id']);
+        $address = Address::find($updatedAttributes['address_id']);
 
-        $address = Address::updateOrCreate(
-            ['id' => $updatedAttributes['address_id']], // Use address_id to find the existing address
-            [
-                'province_code' => $updatedAttributes['province_code'],
-                'city_municipality_code' => $updatedAttributes['city_municipality_code'],
-                'barangay_code' => $updatedAttributes['barangay_code'],
-                'street' => $updatedAttributes['street'],
-            ]
-        );
+        $address->fill([
+            'province_code' => $updatedAttributes['province_code'],
+            'city_municipality_code' => $updatedAttributes['city_municipality_code'],
+            'barangay_code' => $updatedAttributes['barangay_code'],
+            'street' => $updatedAttributes['street'],
+        ]);
+        $address->save();
 
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
         //var ipasa ang laman ng $updatedAttributes sa $item model
-        $supplier->update([
+        $supplier->fill([
             'company_name' => $updatedAttributes['company_name'],
             'contact_number' => $updatedAttributes['contact_number'],
             'status_id' => $updatedAttributes['status_id'],
@@ -175,7 +174,7 @@ class SupplierForm extends Component
         ]);
 
         $this->resetForm();
-        $this->alert('success', 'User was updated successfully');
+        $this->alert('success', 'Supplier was updated successfully');
 
         $this->refreshTable();
         $this->closeModal();
