@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
-
-class TestSecond extends Controller
+class testingPage extends Controller
 {
     use WithFileUploads;
 
@@ -13,7 +12,7 @@ class TestSecond extends Controller
 
     public function index()
     {
-        return view('second-test');
+        return view('test');
     }
 
     public function save(Request $request)

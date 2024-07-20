@@ -37,7 +37,7 @@ class PrintBarcodeForm extends Component
     {
 
         $validated = $data['inputAttributes'];
-                                                   
+
         $this->closeModal();
         $this->print($validated['barcode_quantity'], $this->barcode);
 
@@ -64,7 +64,7 @@ class PrintBarcodeForm extends Component
     {
         $this->resetForm();
         $this->resetValidation();
-    }
+    }               
     public function print($quantity, $barcode)
     {
         $this->dispatch('change-print-status')->to(ItemManagementPage::class);

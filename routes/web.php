@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\Test as ControllersTest;
-use App\Http\Controllers\TestSecond;
-use App\Livewire\Components\ItemManagement\BarcodePage;
+use App\Http\Controllers\testingPage;
 use App\Livewire\Components\Logout;
 use App\Livewire\Pages\CashierPage;
 use App\Livewire\Pages\CustomerCreditMangementPage;
@@ -49,5 +47,5 @@ Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('R
 
 
 
-Route::get('/test', [TestSecond::class, 'index']);
-Route::post('/test/save', [TestSecond::class, 'save'])->name('upload.image');
+Route::get('/test', [testingPage::class, 'save']);
+Route::post('/test/save', [testingPage::class, 'save'])->name('upload.image');

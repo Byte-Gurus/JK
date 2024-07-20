@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use App\Models\PhilippineProvince;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineBarangay;
@@ -19,21 +20,14 @@ class SupplierFactory extends Factory
      */
     public function definition(): array
     {
-        $province = PhilippineProvince::inRandomOrder()->first();
 
-        $city = PhilippineCity::where('province_code', $province->province_code)->inRandomOrder()->first();
-
-        $barangay = PhilippineBarangay::where('city_municipality_code', $city->city_municipality_code)->inRandomOrder()->first();
-
-
+        $address = Address::factory()->create();
         return [
             'company_name' => fake()->company(),
             'contact_number' => fake()->unique()->numerify('###########'),
             'status_id' => fake()->randomElement([1, 2]),
-            'province_code' => $province->province_code,
-            'city_municipality_code' => $city->city_municipality_code,
-            'barangay_code' => $barangay->barangay_code,
-            'street' => fake()->streetName(),
+            'address_id' => $address->id,
+            
         ];
     }
 }

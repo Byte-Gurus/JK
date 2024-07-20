@@ -15,17 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('company_name');
             $table->string('contact_number');
-            $table->string('street');
-            $table->string('province_code');
-            $table->string('city_municipality_code');
-            $table->string('barangay_code');
+            $table->timestamps(); 
 
             $table->foreignId('status_id')->constrained('statuses');
+            $table->foreignId('address_id')->constrained('addresses');
 
-            $table->foreign('province_code')->references('province_code')->on('philippine_provinces');
-            $table->foreign('city_municipality_code')->references('city_municipality_code')->on('philippine_cities');
-            $table->foreign('barangay_code')->references('barangay_code')->on('philippine_barangays');
-            $table->timestamps();
         });
     }
 

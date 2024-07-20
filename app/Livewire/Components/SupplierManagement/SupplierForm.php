@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\SupplierManagement;
 
 use App\Livewire\Pages\SupplierManagementPage;
+use App\Models\Address;
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
@@ -67,7 +68,7 @@ class SupplierForm extends Component
     }
 
     //* update hooks kung saan maguupdate ang selectBaranagy if may napiling item sa selectCity after ma rerender, hindi mag uupdate if hindi nakapag select sa selectCity
-     public function updatedSelectCity($city_municipality_code)
+    public function updatedSelectCity($city_municipality_code)
     {
 
         $this->barangays = PhilippineBarangay::where('city_municipality_code', $city_municipality_code)->orderBy('barangay_description')->get();
@@ -90,15 +91,21 @@ class SupplierForm extends Component
 
         $validated = $data['inputAttributes'];
 
-        $user = Supplier::create([
-            'company_name' => $validated['company_name'],
-            'contact_number' => $validated['contact_number'],
-            'status_id' => $validated['status'],
+        $address = Address::create([
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
             'barangay_code' => $validated['selectBrgy'],
             'street' => $validated['street'],
         ]);
+
+        $supplier = Supplier::create([
+            'company_name' => $validated['company_name'],
+            'contact_number' => $validated['contact_number'],
+            'status_id' => $validated['status'],
+            'address_id' => $address->id
+        ]);
+
+
 
 
         $this->alert('success', 'Supplier was created successfully');
@@ -128,6 +135,9 @@ class SupplierForm extends Component
         $attributes = $suppliers->toArray();
 
 
+
+
+
         $this->confirm('Do you want to update this supplier?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
@@ -144,12 +154,25 @@ class SupplierForm extends Component
         //* hanapin id na attribute sa $updatedAttributes array
         $supplier = Supplier::find($updatedAttributes['id']);
 
+        $address = Address::updateOrCreate(
+            ['id' => $updatedAttributes['address_id']], // Use address_id to find the existing address
+            [
+                'province_code' => $updatedAttributes['province_code'],
+                'city_municipality_code' => $updatedAttributes['city_municipality_code'],
+                'barangay_code' => $updatedAttributes['barangay_code'],
+                'street' => $updatedAttributes['street'],
+            ]
+        );
+
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
         //var ipasa ang laman ng $updatedAttributes sa $item model
-        $supplier->fill($updatedAttributes);
-
-        $supplier->save(); //* Save the supplier model to the database
+        $supplier->update([
+            'company_name' => $updatedAttributes['company_name'],
+            'contact_number' => $updatedAttributes['contact_number'],
+            'status_id' => $updatedAttributes['status_id'],
+            'address_id' => $address->id, // Associate with the updated address
+        ]);
 
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');
@@ -169,20 +192,17 @@ class SupplierForm extends Component
             'company_name' => $supplier_details->company_name,
             'contact_number' => $supplier_details->contact_number,
             'status' => $supplier_details->status_id,
-            'selectProvince' => $supplier_details->province_code,
-            'selectCity' => $supplier_details->city_municipality_code,
-            'selectBrgy' => $supplier_details->barangay_code,
-            'street' => $supplier_details->street,
-
+            'selectProvince' => $supplier_details->addressJoin->province_code,
+            'selectCity' => $supplier_details->addressJoin->city_municipality_code,
+            'selectBrgy' => $supplier_details->addressJoin->barangay_code,
+            'street' => $supplier_details->addressJoin->street,
         ]);
 
         //todo nag ccause to ng bug, ang bug is sa unang render upadte supplier form, hindi makapag select sa City and barangay, but if mag punta sa create supplier then edit then mag render na sya
         //todo option 1 tanggalin ito para hindi mapopolate ang selectCity and SelectBarangay sa second render ng form
         //todo option 2 hayaan nalang at mag select nalang si user ng city and brgy ulit everytime mag update kasi idk pano aayusin
-        $this->cities = PhilippineCity::where('province_code', $supplier_details->province_code)->orderBy('city_municipality_description')->get();
-        $this->barangays = PhilippineBarangay::where('city_municipality_code', $supplier_details->city_municipality_code)->orderBy('barangay_description')->get();
-
-
+        $this->cities = PhilippineCity::where('province_code', $supplier_details->addressJoin->province_code)->orderBy('city_municipality_description')->get();
+        $this->barangays = PhilippineBarangay::where('city_municipality_code', $supplier_details->addressJoin->city_municipality_code)->orderBy('barangay_description')->get();
     }
     public function edit($supplierID)
     {
@@ -192,7 +212,7 @@ class SupplierForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $supplier_id value
     {
-        $this->reset(['company_name', 'contact_number', 'status','selectProvince', 'selectCity', 'selectBrgy', 'street', 'supplier_id']);
+        $this->reset(['company_name', 'contact_number', 'status', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'supplier_id']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation

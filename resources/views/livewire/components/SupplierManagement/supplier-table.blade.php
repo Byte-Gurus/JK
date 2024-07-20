@@ -188,19 +188,19 @@
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->provinceJoin->province_description }}
+                            {{ $supplier->addressJoin->provinceJoin->province_description }}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->cityJoin->city_municipality_description }}
+                            {{ $supplier->addressJoin->cityJoin->city_municipality_description }}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->barangayJoin->barangay_description }}
+                            {{ $supplier->addressJoin->barangayJoin->barangay_description }}
                         </th>
 
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->street }}
+                            {{ $supplier->addressJoin->street }}
                         </th>
 
                         {{-- //* created at --}}
