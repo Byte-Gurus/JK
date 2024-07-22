@@ -93,17 +93,9 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
-                        {{-- //* province --}}
-                        <th scope="col" class="px-4 py-3">Province</th>
+                        {{-- //* Address --}}
+                        <th scope="col" class="px-4 py-3">Address</th>
 
-                        {{-- //* city / municipality --}}
-                        <th scope="col" class="px-4 py-3">City / Municipality</th>
-
-                        {{-- //* barangay --}}
-                        <th scope="col" class="px-4 py-3">Barangay</th>
-
-                        {{-- //* street --}}
-                        <th scope="col" class="px-4 py-3">Street</th>
 
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
@@ -155,91 +147,83 @@
                 <tbody>
 
                     @foreach ($suppliers as $supplier)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                            {{-- //* contact number --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplier->company_name }}
+                            </th>
 
-                        {{-- //* contact number --}}
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->company_name }}
-                        </th>
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplier->contact_number }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->contact_number }}
-                        </th>
+                            {{-- //* status --}}
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
 
-                        {{-- //* status --}}
-                        <th scope="row"
-                            class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
-
-                            {{-- //* active green, if inactive red --}}
-                            <p @if ($supplier->statusJoin->status_type == "Active") class=" text-black bg-green-400
+                                {{-- //* active green, if inactive red --}}
+                                <p
+                                    @if ($supplier->statusJoin->status_type == 'Active') class=" text-black bg-green-400
                                 border
                                 border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
 
-                                @elseif ($supplier->statusJoin->status_type == "Inactive")
+                                @elseif ($supplier->statusJoin->status_type == 'Inactive')
 
                                 class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5
                                 rounded " @endif>
 
-                                {{ $supplier->statusJoin->status_type }}
-                            </p>
+                                    {{ $supplier->statusJoin->status_type }}
+                                </p>
 
-                        </th>
+                            </th>
 
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->addressJoin->provinceJoin->province_description }}
-                        </th>
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap">
+                                {{ $supplier->addressJoin->provinceJoin->province_description }},
+                                {{ $supplier->addressJoin->cityJoin->city_municipality_description }},
+                                {{ $supplier->addressJoin->barangayJoin->barangay_description }},
+                                {{ $supplier->addressJoin->street }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->addressJoin->cityJoin->city_municipality_description }}
-                        </th>
+                            {{-- //* created at --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplier->created_at->format('d-m-y h:i A') }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->addressJoin->barangayJoin->barangay_description }}
-                        </th>
+                            {{-- //* updated at --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplier->updated_at->format('d-m-y h:i A') }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->addressJoin->street }}
-                        </th>
+                            <th class="px-4 py-6 text-center text-md text-nowrap">
+                                <div
+                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
 
-                        {{-- //* created at --}}
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->created_at->format('d-m-y h:i A') }}
-                        </th>
+                                    <button x-on:click="showModal=true;$wire.getSupplierID({{ $supplier->id }})">
 
-                        {{-- //* updated at --}}
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplier->updated_at->format('d-m-y h:i A') }}
-                        </th>
+                                        <div class="flex items-center">
 
-                        <th class="px-4 py-6 text-center text-md text-nowrap">
-                            <div
-                                class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                </svg>
+                                            </span>
 
-                                <button x-on:click="showModal=true;$wire.getSupplierID({{ $supplier->id }})">
+                                            <div>
+                                                <p>Edit</p>
+                                            </div>
 
-                                    <div class="flex items-center">
-
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                            </svg>
-                                        </span>
-
-                                        <div>
-                                            <p>Edit</p>
                                         </div>
 
-                                    </div>
+                                    </button>
+                                </div>
 
-                                </button>
-                            </div>
-
-                        </th>
-                    </tr>
+                            </th>
+                        </tr>
                     @endforeach
                 </tbody>
 

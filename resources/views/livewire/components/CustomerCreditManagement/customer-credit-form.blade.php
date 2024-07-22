@@ -261,22 +261,7 @@
                                         @enderror
                                     </div>
 
-                                    {{-- //* credit limit --}}
-                                    <div class="mb-3">
 
-                                        <label for="creditLimit"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Credit
-                                            Limit(₱)</label>
-
-                                        <input type="number" id="creditlimit" wire:model="credit_limit"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Credit Limit" required />
-
-                                        @error('creditLimit')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
                                 </div>
 
                                 {{-- //* sixth row --}}

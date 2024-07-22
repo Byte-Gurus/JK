@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Models\Vat;
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PhilippineBarangaysTableSeeder::class);
 
         Supplier::factory(100)->create();
+        Customer::factory(100)->create();
 
-        
     }
 }
