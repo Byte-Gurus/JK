@@ -21,7 +21,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p>Add New User</p>
+                                <p>Add New Customer</p>
                             </div>
                         </button>
                         <button

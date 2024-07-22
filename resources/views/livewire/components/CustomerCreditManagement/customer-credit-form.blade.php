@@ -126,18 +126,17 @@
 
                                     </div>
 
-                                    {{-- //* contact numebr --}}
+                                    {{-- //* birth date --}}
                                     <div class="mb-3">
 
-                                        <label for="contactno"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Contact
-                                            No</label>
+                                        <label for="birthdate"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Birth Date</label>
 
-                                        <input type="number" id="contactno" wire:model="contact_number"
+                                        <input type="date" id="birthdate" wire:model="birth_date"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Contact No" required />
+                                            placeholder="Birth Date" required />
 
-                                        @error('contact_number')
+                                        @error('birth_date')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -147,6 +146,22 @@
 
                                 {{-- //* third row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                    {{-- //* contact number --}}
+                                    <div class="mb-3">
+
+                                        <label for="contactno"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Contact No</label>
+
+                                        <input type="date" id="contactno" wire:model="contact_number"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            placeholder="Contact No" required />
+
+                                        @error('contact_number')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
 
                                     {{-- //* province --}}
                                     <div class="mb-3">
@@ -170,6 +185,11 @@
                                         @enderror
 
                                     </div>
+
+                                </div>
+
+                                {{-- //* fourth row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                     {{-- //* city --}}
                                     <div class="mb-3">
@@ -198,11 +218,6 @@
 
                                     </div>
 
-                                </div>
-
-                                {{-- //* fourth row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
                                     {{-- //* brgy --}}
                                     <div class="mb-3">
 
@@ -211,7 +226,7 @@
 
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select a role</option>
+                                            <option value="" selected>Select barangay</option>
                                             {{-- @if (!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
                                                     <option value="{{ $barangay->barangay_code }}">
@@ -226,6 +241,12 @@
 
                                     </div>
 
+
+                                </div>
+                                {{-- //* fifth row --}}
+
+                                <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
+
                                     {{-- //* street --}}
                                     <div class="mb-3">
 
@@ -235,20 +256,10 @@
                                         <input type="text" id="street" wire:model="street"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Street" required />
-
-
-
                                         @error('street')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
-
                                     </div>
-
-                                </div>
-
-                                {{-- //* fifth row --}}
-
-                                <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
 
                                     {{-- //* credit limit --}}
                                     <div class="mb-3">
@@ -266,6 +277,14 @@
                                         @enderror
 
                                     </div>
+                                </div>
+
+                                {{-- //* sixth row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
+                                    <input type="file" wire:model="photo">
+                                    @error('photo')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -334,26 +353,18 @@
                                                         d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
                                                     </path>
                                                 </svg>
-
                                             </div>
                                         </div>
-
-
                                     </button>
-
                                 </div>
-
                             </div>
                         @endif
-
                     </div>
-
+                </div>
             </form>
         </div>
-
     </div>
 </div>
-
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
 
 <x-livewire-alert::flash />

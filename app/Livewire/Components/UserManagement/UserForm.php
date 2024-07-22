@@ -48,9 +48,6 @@ class UserForm extends Component
 
     public function create() //* create process
     {
-
-
-
         $validated = $this->validateForm();
 
         $this->confirm('Do you want to add this user?', [
