@@ -19,15 +19,10 @@
                             clip-rule="evenodd" />
                     </svg>
                 </div>
-
                 <input type="text" wire:model.live.debounce.100ms="search"
                     class="w-1/3 p-2 pl-10 hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] rounded-lg cursor-pointer text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Customer Name" required="" />
-
-
             </div>
-
-
             <div class="flex flex-row items-center justify-center gap-4">
 
                 {{-- //*user type filter --}}
@@ -38,20 +33,10 @@
                     <select wire:model.live="typeFilter"
                         class="bg-gray-50 border hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5 ">
                         <option value="0">All</option>
-
                     </select>
-
-
-                </div>
-
-
-                <div class="flex flex-row items-center">
-
-
                 </div>
             </div>
         </div>
-
 
         {{-- //* tablea area --}}
         <div class="overflow-x-auto overflow-y-scroll scroll h-[500px] ">
@@ -133,12 +118,8 @@
 
                             </div>
                         </th>
-
                         {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
-                        </th>
-
-
+                        <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
                     </tr>
                 </thead>
 
@@ -164,35 +145,23 @@
                                 {{-- {{ $customer->contact_number }} --}}
                             </th>
 
-                            {{-- //* contact number --}}
+                            {{-- //* id picture --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{-- {{ $customer->cityJoin->city_municipality_description }} --}}
                             </th>
 
+                            {{-- //* address --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{-- {{ $customer->barangayJoin->barangay_description }} --}}
                             </th>
-
+                            {{-- //* created at --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{-- {{ $customer->street }} --}}
                             </th>
 
-                            {{-- <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap "> --}}
-                            {{-- {{ $customer->credit }} --}}
-                            </th>
-
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->credit_limit }} --}}
-                            </th>
-
-                            {{-- //* created at --}}
+                            {{-- //* updated at at --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{-- {{ $customer->created_at->format('d-m-y h:i A') }} --}}
-                            </th>
-
-                            {{-- //* updated at --}}
-                            {{-- <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap "> --}}
-                            {{-- {{ $customer->updated_at->format('d-m-y h:i A') }} --}}
                             </th>
 
                             <th class="px-4 py-6 text-center text-md text-nowrap">
@@ -237,50 +206,31 @@
                                             <div>
                                                 <p>Pay</p>
                                             </div>
-
                                     </button>
-
                                 </div>
-
+                            </th>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+        {{-- //* table footer --}}
+        <div class="border-t border-black ">
+            {{-- //*pagination --}}
+            <div class="mx-4 my-2 text-nowrap">
+                {{-- {{ $customers->links() }} --}}
+            </div>
+            {{-- //* per page --}}
+            <div class="flex items-center px-4 py-2 mb-3">
 
-        </th>
-        </tr>
-        @endforeach
-        </tbody>
+                <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
-        </table>
-
+                <select wire:model.live="perPage"
+                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
     </div>
-
-    {{-- //* table footer --}}
-    <div class="border-t border-black ">
-
-        {{-- //*pagination --}}
-        <div class="mx-4 my-2 text-nowrap">
-
-            {{-- {{ $customers->links() }} --}}
-
-        </div>
-
-        {{-- //* per page --}}
-        <div class="flex items-center px-4 py-2 mb-3">
-
-            <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
-
-            <select wire:model.live="perPage"
-                class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-            </select>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-
-</div>
