@@ -1,5 +1,6 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showModal" x-date="{ isCreate: @entangle('isCreate') }">
+
+<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate') }">
 
 
     {{-- //* form background --}}
