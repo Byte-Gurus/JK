@@ -23,6 +23,7 @@ class CustomerCreditForm extends Component
     {
         return view('livewire.components.CustomerCreditManagement.customer-credit-form');
     }
+    
     protected $listeners = [
         'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
         //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
@@ -41,9 +42,9 @@ class CustomerCreditForm extends Component
 
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
-        //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
         if ($this->isCreate) {
-        } else {
+
+            $this->resetForm();
         }
     }
 }

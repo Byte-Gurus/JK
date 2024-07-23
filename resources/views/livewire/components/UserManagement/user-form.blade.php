@@ -319,27 +319,31 @@
                             <div>
 
                                 {{-- //* submit button for edit --}}
-                                <button type="submit"
+                                <button type="submit" wire:loading.remove
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                     <div class="flex flex-row items-center gap-2">
                                         <p>Update</p>
 
-                                        <div wire:loading>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 gap-2 text-white animate-spin" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                    stroke="currentColor" stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor"
-                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                                </path>
-                                            </svg>
-
-                                        </div>
                                     </div>
 
                                 </button>
+                                <div wire:loading>
+                                    <div class="loader loader--style3 flex justify-center items-center "
+                                        title="2">
+                                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+                                            height="40px" viewBox="0 0 50 50"
+                                            style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                            <path fill="#000"
+                                                d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                <animateTransform attributeType="xml" attributeName="transform"
+                                                    type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
+                                                    repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
+                                    </div>
 
+                                </div>
                             </div>
 
                         </div>
@@ -357,28 +361,34 @@
                             <div>
 
                                 {{-- //* submit button for create --}}
-                                <button type="submit"
+                                <button type="submit" wire:loading.remove
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                     <div class="flex flex-row items-center gap-2">
                                         <p>
                                             Create
                                         </p>
 
-                                        <div wire:loading>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 h-5 text-white animate-spin" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                    stroke="currentColor" stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor"
-                                                    d="M12 2a10 10 0 00-4.472 18.965 1 1 0 01.258-1.976 8 8 0 115.429 0 1 1 0 01.258 1.976A10 10 0 0012 2z">
-                                                </path>
-                                            </svg>
-                                        </div>
                                     </div>
-
 
                                 </button>
 
+                                <div wire:loading>
+                                    <div class="loader loader--style3 flex justify-center items-center "
+                                        title="2">
+                                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+                                            height="40px" viewBox="0 0 50 50"
+                                            style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                            <path fill="#000"
+                                                d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                <animateTransform attributeType="xml" attributeName="transform"
+                                                    type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
+                                                    repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
+                                    </div>
+
+                                </div>
                             </div>
 
                         </div>

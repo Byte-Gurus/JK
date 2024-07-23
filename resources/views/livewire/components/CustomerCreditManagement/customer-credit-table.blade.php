@@ -132,36 +132,40 @@
 
                             {{-- //* customer name --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->customer_name }} --}}
+                                {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
                             </th>
 
                             {{-- //* birthdate --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->provinceJoin->province_description }} --}}
+                                {{ $customer->birthdate }}
                             </th>
 
                             {{-- //* contact number --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->contact_number }} --}}
+                                {{ $customer->contact_number }}
                             </th>
 
                             {{-- //* id picture --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->cityJoin->city_municipality_description }} --}}
+                                <img src="{{ $customer->id_picture }}" width="200px" alt="">
                             </th>
 
                             {{-- //* address --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->barangayJoin->barangay_description }} --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap">
+                                {{ $customer->addressJoin->provinceJoin->province_description }},
+                                {{ $customer->addressJoin->cityJoin->city_municipality_description }},
+                                {{ $customer->addressJoin->barangayJoin->barangay_description }},
+                                {{ $customer->addressJoin->street }}
                             </th>
+
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->street }} --}}
+                                {{ $customer->created_at->format('d-m-y h:i A') }}
                             </th>
 
                             {{-- //* updated at at --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $customer->created_at->format('d-m-y h:i A') }} --}}
+                                {{ $customer->updated_at->format('d-m-y h:i A') }}
                             </th>
 
                             <th class="px-4 py-6 text-center text-md text-nowrap">
@@ -188,25 +192,7 @@
 
                                         </div>
                                     </button>
-                                    <button>
 
-                                        <div
-                                            class="flex items-center justify-center px-1 py-1 font-medium text-green-600 rounded-md hover:bg-green-100 ">
-
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-                                                </svg>
-
-                                            </span>
-
-                                            <div>
-                                                <p>Pay</p>
-                                            </div>
-                                    </button>
                                 </div>
                             </th>
                         </tr>

@@ -1,5 +1,3 @@
-
-
 <div class="flex flex-col items-center justify-center w-screen h-screen"
     style="background-image: linear-gradient(115deg, #dadada, #1b1b1b)">
     <div class="flex flex-row items-center justify-center shadow-lg ">
@@ -65,10 +63,29 @@
                     @enderror
                 </div>
 
-                <div class="laptop:text-right">
-                    <button type="submit"
+                <div class="laptop:text-right ">
+                    <button type="submit" wire:loading.remove
                         class="w-full px-8 py-2 font-bold outline-none focus:outline-none text-[rgb(249,249,249)] bg-[rgb(53,53,53)] border-2 border-black rounded-md text-md hover:bg-[rgb(80,80,80)] ">
-                        Sign In</button>
+                        Log In
+
+                    </button>
+
+
+                </div>
+
+                <div wire:loading >
+                    <div class="loader loader--style3 flex justify-center items-center " title="2">
+                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
+                            viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                            <path fill="#000"
+                                d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                <animateTransform attributeType="xml" attributeName="transform" type="rotate"
+                                    from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+                            </path>
+                        </svg>
+                    </div>
+
                 </div>
 
                 @error('submit')
@@ -80,4 +97,3 @@
     </div>
 
 </div>
-
