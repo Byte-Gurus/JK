@@ -15,22 +15,25 @@ class CustomerCreditForm extends Component
     #[Validate('image|max:1024')] // 1MB Max
     public $photo;
 
-    public function save()
-    {
-        $this->photo->store(path: 'photos');
-    }
+
     public function render()
     {
         return view('livewire.components.CustomerCreditManagement.customer-credit-form');
     }
 
     protected $listeners = [
-        'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
-        //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
+        'edit-supplier-from-table' => 'edit',  //* key:'edit-supplier-from-table' value:'edit'  galing sa SupplierTable class
+        //* key:'change-method' value:'changeMethod' galing sa SupplierTable class,  laman false
         'change-method' => 'changeMethod',
         'updateConfirmed',
         'createConfirmed',
     ];
+
+    public function save()
+    {
+        $this->photo->store(path: 'photos');
+    }
+
 
     public function resetFormWhenClosed()
     {
@@ -44,6 +47,11 @@ class CustomerCreditForm extends Component
 
     public function changeMethod($isCreate)
     {
+<<<<<<< HEAD
+=======
+
+        dd($this->photo);
+>>>>>>> f566e9736544656b6dafd993e369480b91c26aa5
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         if ($this->isCreate) {

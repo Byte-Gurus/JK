@@ -29,6 +29,7 @@ class CustomerCreditMangementPage extends Component
 
     public function formCreate()
     {
+       
         $this->dispatch('change-method', isCreate: true)->to(CustomerCreditForm::class);
     }
 
