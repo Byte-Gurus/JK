@@ -10,10 +10,10 @@ class CustomerCreditForm extends Component
 {
 
     use WithFileUploads;
+    public $isCreate; //var true for create false for edit
 
     #[Validate('image|max:1024')] // 1MB Max
     public $photo;
-    public $isCreate; //var true for create false for edit
 
     public function save()
     {
@@ -23,7 +23,7 @@ class CustomerCreditForm extends Component
     {
         return view('livewire.components.CustomerCreditManagement.customer-credit-form');
     }
-    
+
     protected $listeners = [
         'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
         //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
@@ -37,9 +37,13 @@ class CustomerCreditForm extends Component
         $this->resetValidation();
     }
 
+    private function resetForm() //*tanggalin ang laman ng input pati $user_id value
+    {
+        $this->reset([]);
+    }
+
     public function changeMethod($isCreate)
     {
-
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         if ($this->isCreate) {

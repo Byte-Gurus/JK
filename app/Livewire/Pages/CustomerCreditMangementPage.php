@@ -10,6 +10,7 @@ class CustomerCreditMangementPage extends Component
     public $showModal = false;
 
     public $sidebarStatus;
+
     public function render()
     {
         return view('livewire.pages.customer-credit-mangement-page');

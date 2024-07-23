@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Pages\CustomerCreditMangementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\InventoryManagementPage;
@@ -34,6 +35,7 @@ class Navbar extends Component
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(OrderAndDeliveryManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(Dashboard::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(ItemManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(CustomerCreditMangementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(InventoryManagementPage::class);
     }
 

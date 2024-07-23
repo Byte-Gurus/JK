@@ -1,5 +1,6 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate') }">
+<div x-cloak x-show="showModal" x-date="{ isCreate: @entangle('isCreate') }">
+
 
     {{-- //* form background --}}
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
@@ -37,6 +38,8 @@
                         </h3>
                     </div>
 
+
+
                     {{-- //* close button --}}
                     <button type="button" x-on:click="showModal=false" wire:click='resetFormWhenClosed() '
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
@@ -47,6 +50,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
+
 
                         <span class="sr-only">Close modal</span>
 
@@ -293,7 +297,7 @@
                                     </button>
 
                                     <div wire:loading>
-                                        <div class="loader loader--style3 flex justify-center items-center "
+                                        <div class="flex items-center justify-center loader loader--style3 "
                                             title="2">
                                             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -336,7 +340,7 @@
                                         </div>
                                     </button>
                                     <div wire:loading>
-                                        <div class="loader loader--style3 flex justify-center items-center "
+                                        <div class="flex items-center justify-center loader loader--style3 "
                                             title="2">
                                             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
