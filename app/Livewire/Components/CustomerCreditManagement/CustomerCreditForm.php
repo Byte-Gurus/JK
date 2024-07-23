@@ -47,11 +47,7 @@ class CustomerCreditForm extends Component
 
     public function changeMethod($isCreate)
     {
-<<<<<<< HEAD
-=======
 
-        dd($this->photo);
->>>>>>> f566e9736544656b6dafd993e369480b91c26aa5
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         if ($this->isCreate) {
