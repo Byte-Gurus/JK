@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-$DB_URL=parse_url('postgres://um9hh5ac350f:pca473bea94cf7d860302106d1f9994f8975c0ef0c6c6c77ed8ecf9571e2fa9bb@c67okggoj39697.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d4nr2idafg9nb2');
+$DATABASE_URL=parse_url('postgres://um9hh5ac350f:pca473bea94cf7d860302106d1f9994f8975c0ef0c6c6c77ed8ecf9571e2fa9bb@c67okggoj39697.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d4nr2idafg9nb2');
 return [
 
     /*
@@ -81,7 +81,7 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DB_URL'),
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'laravel'),
