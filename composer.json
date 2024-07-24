@@ -11,8 +11,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "milon/barcode": "^11.0",
-        "woenel/prpcmblmts": "^1.0",
-         "ext-pgsql": "*"
+        "woenel/prpcmblmts": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
@@ -68,6 +67,5 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true
-
 
 }
