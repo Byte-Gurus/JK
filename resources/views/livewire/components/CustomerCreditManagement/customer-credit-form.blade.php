@@ -137,7 +137,7 @@
                                         <label for="birthdate"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Birth Date</label>
 
-                                        <input type="date" id="birthdate" wire:model="birth_date"
+                                        <input type="date" id="birthdate" wire:model="birthdate"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Birth Date" required />
 

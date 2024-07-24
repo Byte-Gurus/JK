@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\CustomerCreditManagement;
 
+use App\Livewire\Pages\CustomerCreditMangementPage;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -12,8 +13,13 @@ class CustomerCreditForm extends Component
     use WithFileUploads;
     public $isCreate; //var true for create false for edit
 
-    #[Validate('image|max:1024')] // 1MB Max
-    public $photo;
+    public $selectProvince = null;
+    public $selectCity = null;
+    public $selectBrgy = null;
+    public $cities = null;
+    public $barangays = null;
+
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $photo;
 
 
     public function render()
@@ -29,20 +35,23 @@ class CustomerCreditForm extends Component
         'createConfirmed',
     ];
 
-    public function save()
-    {
-        $this->photo->store(path: 'photos');
-    }
+    // public function save()
+    // {
+    //     $this->photo->store(path: 'photos');
+    // }
 
 
     public function resetFormWhenClosed()
     {
         $this->resetValidation();
+        $this->resetForm();
+        $this->cities = null;
+        $this->barangays = null;
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-
+        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'photo']);
     }
 
     public function changeMethod($isCreate)
@@ -54,5 +63,12 @@ class CustomerCreditForm extends Component
 
             $this->resetForm();
         }
+    }
+
+    public function closeModal() //* close ang modal after confirmation
+    {
+        $this->dispatch('close-modal')->to(CustomerCreditMangementPage::class);
+        $this->cities = null;
+        $this->barangays = null;
     }
 }
