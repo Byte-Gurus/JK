@@ -22,7 +22,7 @@ class UserTable extends Component
     public $statusFilter = 0; //var filtering value = all
 
 
-    // #[On('refresh-table')]
+    #[On('refresh-table')]
     public function render()
     {
 
@@ -87,8 +87,8 @@ class UserTable extends Component
 
 
 
-    public function refreshTable()
-    {
-        $this->resetPage();
-    }
+    // public function refreshTable()
+    // {
+    //     $this->resetPage();
+    // }
 }

@@ -22,12 +22,14 @@ class UserForm extends Component
     //var form inputs
     public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
 
-
+    public $proxy_user_id;  //var proxy id para sa supplier id, same sila ng value ng
     public function render()
     {
-        // *tignan if yung id na pinasa from table is walang laman, pag may laman means mag populate then sa edit form punta
         if ($this->user_id) {
+
             $this->populateForm();
+            $this->user_id = null;  //var null the item id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung item id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
+
         }
         return view('livewire.components.UserManagement.user-form');
     }
@@ -107,7 +109,7 @@ class UserForm extends Component
         $validated = $this->validateForm();
 
 
-        $user = User::find($this->user_id); //? kunin lahat ng data ng may ari ng user_id
+        $user = User::find($this->proxy_user_id); //? kunin lahat ng data ng may ari ng user_id
 
         //*pag hindi palitan ang password
         //* ipasa ang laman ng validated inputs sa models
@@ -209,12 +211,12 @@ class UserForm extends Component
             'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->user_id)],
+            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->proxy_user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:1,2',
             // 'user_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
-            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->user_id)],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->proxy_user_id)],
 
         ];
 
@@ -233,6 +235,7 @@ class UserForm extends Component
     public function edit($userID)
     {
         $this->user_id = $userID; //var assign ang parameter value sa global variable
+        $this->proxy_user_id = $userID;
     }
 
 
