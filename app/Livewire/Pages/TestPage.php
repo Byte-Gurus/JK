@@ -10,7 +10,7 @@ class TestPage extends Component
 {
     use WithFileUploads;
 
-    
+
     public $photo;
 
     public function render()
@@ -22,13 +22,13 @@ class TestPage extends Component
 
     public function save()
     {
-
+        dd($this->photo);
 
         $this->validate([
             'photo' => 'image|mimes:jpg,png', // 1MB Max
         ]);
 
         $this->photo->store('photos');
-        dd($this->photo);
+
     }
 }
