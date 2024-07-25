@@ -1,7 +1,6 @@
 <div>
-    <form wire:submit.prevent="save">
+    <form wire:submit="save">
         @if ($photo)
-            Photo Preview:
             <img src="{{ $photo->temporaryUrl() }}">
         @endif
 
@@ -9,6 +8,6 @@
 
         @error('photo') <span class="error">{{ $message }}</span> @enderror
 
-        <button type="submit">Save Photo</button>
+        <button type="submit">Save photo</button>
     </form>
 </div>

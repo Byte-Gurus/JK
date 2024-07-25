@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Pages;
 
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class TestPage extends Component
 {
     use WithFileUploads;
+    #[Validate('image|max:1024')]
     public $photo;
 
     public function render()
