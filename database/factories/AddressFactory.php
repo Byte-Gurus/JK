@@ -21,9 +21,7 @@ class AddressFactory extends Factory
     public function definition(): array
     {
 
-        $region = PhilippineRegion::inRandomOrder()->first();
-        
-        $province = PhilippineProvince::where('region_code', $region->region_code)->inRandomOrder()->first();
+        $province = PhilippineProvince::inRandomOrder()->first();
 
         $city = PhilippineCity::where('province_code', $province->province_code)->inRandomOrder()->first();
 
