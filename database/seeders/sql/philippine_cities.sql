@@ -1,1647 +1,1649 @@
-INSERT INTO philippine_cities VALUES ('012801000', 'ADAMS', '01', '0128', '012801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012802000', 'BACARRA', '01', '0128', '012802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012803000', 'BADOC', '01', '0128', '012803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012804000', 'BANGUI', '01', '0128', '012804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012805000', 'CITY OF BATAC', '01', '0128', '012805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012806000', 'BURGOS', '01', '0128', '012806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012807000', 'CARASI', '01', '0128', '012807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012808000', 'CURRIMAO', '01', '0128', '012808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012809000', 'DINGRAS', '01', '0128', '012809', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012810000', 'DUMALNEG', '01', '0128', '012810', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012811000', 'BANNA (ESPIRITU)', '01', '0128', '012811', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012812000', 'LAOAG CITY (Capital)', '01', '0128', '012812', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012813000', 'MARCOS', '01', '0128', '012813', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012814000', 'NUEVA ERA', '01', '0128', '012814', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012815000', 'PAGUDPUD', '01', '0128', '012815', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012816000', 'PAOAY', '01', '0128', '012816', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012817000', 'PASUQUIN', '01', '0128', '012817', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012818000', 'PIDDIG', '01', '0128', '012818', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012819000', 'PINILI', '01', '0128', '012819', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012820000', 'SAN NICOLAS', '01', '0128', '012820', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012821000', 'SARRAT', '01', '0128', '012821', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012822000', 'SOLSONA', '01', '0128', '012822', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012823000', 'VINTAR', '01', '0128', '012823', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012901000', 'ALILEM', '01', '0129', '012901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012902000', 'BANAYOYO', '01', '0129', '012902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012903000', 'BANTAY', '01', '0129', '012903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012904000', 'BURGOS', '01', '0129', '012904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012905000', 'CABUGAO', '01', '0129', '012905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012906000', 'CITY OF CANDON', '01', '0129', '012906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012907000', 'CAOAYAN', '01', '0129', '012907', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012908000', 'CERVANTES', '01', '0129', '012908', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012909000', 'GALIMUYOD', '01', '0129', '012909', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012910000', 'GREGORIO DEL PILAR (CONCEPCION)', '01', '0129', '012910', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012911000', 'LIDLIDDA', '01', '0129', '012911', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012912000', 'MAGSINGAL', '01', '0129', '012912', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012913000', 'NAGBUKEL', '01', '0129', '012913', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012914000', 'NARVACAN', '01', '0129', '012914', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012915000', 'QUIRINO (ANGKAKI)', '01', '0129', '012915', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012916000', 'SALCEDO (BAUGEN)', '01', '0129', '012916', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012917000', 'SAN EMILIO', '01', '0129', '012917', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012918000', 'SAN ESTEBAN', '01', '0129', '012918', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012919000', 'SAN ILDEFONSO', '01', '0129', '012919', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012920000', 'SAN JUAN (LAPOG)', '01', '0129', '012920', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012921000', 'SAN VICENTE', '01', '0129', '012921', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012922000', 'SANTA', '01', '0129', '012922', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012923000', 'SANTA CATALINA', '01', '0129', '012923', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012924000', 'SANTA CRUZ', '01', '0129', '012924', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012925000', 'SANTA LUCIA', '01', '0129', '012925', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012926000', 'SANTA MARIA', '01', '0129', '012926', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012927000', 'SANTIAGO', '01', '0129', '012927', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012928000', 'SANTO DOMINGO', '01', '0129', '012928', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012929000', 'SIGAY', '01', '0129', '012929', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012930000', 'SINAIT', '01', '0129', '012930', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012931000', 'SUGPON', '01', '0129', '012931', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012932000', 'SUYO', '01', '0129', '012932', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012933000', 'TAGUDIN', '01', '0129', '012933', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('012934000', 'CITY OF VIGAN (Capital)', '01', '0129', '012934', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013301000', 'AGOO', '01', '0133', '013301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013302000', 'ARINGAY', '01', '0133', '013302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013303000', 'BACNOTAN', '01', '0133', '013303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013304000', 'BAGULIN', '01', '0133', '013304', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013305000', 'BALAOAN', '01', '0133', '013305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013306000', 'BANGAR', '01', '0133', '013306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013307000', 'BAUANG', '01', '0133', '013307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013308000', 'BURGOS', '01', '0133', '013308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013309000', 'CABA', '01', '0133', '013309', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013310000', 'LUNA', '01', '0133', '013310', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013311000', 'NAGUILIAN', '01', '0133', '013311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013312000', 'PUGO', '01', '0133', '013312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013313000', 'ROSARIO', '01', '0133', '013313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013314000', 'CITY OF SAN FERNANDO (Capital)', '01', '0133', '013314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013315000', 'SAN GABRIEL', '01', '0133', '013315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013316000', 'SAN JUAN', '01', '0133', '013316', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013317000', 'SANTO TOMAS', '01', '0133', '013317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013318000', 'SANTOL', '01', '0133', '013318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013319000', 'SUDIPEN', '01', '0133', '013319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('013320000', 'TUBAO', '01', '0133', '013320', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015501000', 'AGNO', '01', '0155', '015501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015502000', 'AGUILAR', '01', '0155', '015502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015503000', 'CITY OF ALAMINOS', '01', '0155', '015503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015504000', 'ALCALA', '01', '0155', '015504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015505000', 'ANDA', '01', '0155', '015505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015506000', 'ASINGAN', '01', '0155', '015506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015507000', 'BALUNGAO', '01', '0155', '015507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015508000', 'BANI', '01', '0155', '015508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015509000', 'BASISTA', '01', '0155', '015509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015510000', 'BAUTISTA', '01', '0155', '015510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015511000', 'BAYAMBANG', '01', '0155', '015511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015512000', 'BINALONAN', '01', '0155', '015512', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015513000', 'BINMALEY', '01', '0155', '015513', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015514000', 'BOLINAO', '01', '0155', '015514', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015515000', 'BUGALLON', '01', '0155', '015515', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015516000', 'BURGOS', '01', '0155', '015516', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015517000', 'CALASIAO', '01', '0155', '015517', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015518000', 'DAGUPAN CITY', '01', '0155', '015518', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015519000', 'DASOL', '01', '0155', '015519', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015520000', 'INFANTA', '01', '0155', '015520', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015521000', 'LABRADOR', '01', '0155', '015521', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015522000', 'LINGAYEN (Capital)', '01', '0155', '015522', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015523000', 'MABINI', '01', '0155', '015523', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015524000', 'MALASIQUI', '01', '0155', '015524', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015525000', 'MANAOAG', '01', '0155', '015525', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015526000', 'MANGALDAN', '01', '0155', '015526', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015527000', 'MANGATAREM', '01', '0155', '015527', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015528000', 'MAPANDAN', '01', '0155', '015528', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015529000', 'NATIVIDAD', '01', '0155', '015529', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015530000', 'POZORRUBIO', '01', '0155', '015530', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015531000', 'ROSALES', '01', '0155', '015531', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015532000', 'SAN CARLOS CITY', '01', '0155', '015532', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015533000', 'SAN FABIAN', '01', '0155', '015533', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015534000', 'SAN JACINTO', '01', '0155', '015534', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015535000', 'SAN MANUEL', '01', '0155', '015535', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015536000', 'SAN NICOLAS', '01', '0155', '015536', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015537000', 'SAN QUINTIN', '01', '0155', '015537', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015538000', 'SANTA BARBARA', '01', '0155', '015538', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015539000', 'SANTA MARIA', '01', '0155', '015539', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015540000', 'SANTO TOMAS', '01', '0155', '015540', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015541000', 'SISON', '01', '0155', '015541', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015542000', 'SUAL', '01', '0155', '015542', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015543000', 'TAYUG', '01', '0155', '015543', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015544000', 'UMINGAN', '01', '0155', '015544', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015545000', 'URBIZTONDO', '01', '0155', '015545', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015546000', 'CITY OF URDANETA', '01', '0155', '015546', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015547000', 'VILLASIS', '01', '0155', '015547', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('015548000', 'LAOAC', '01', '0155', '015548', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('020901000', 'BASCO (Capital)', '02', '0209', '020901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('020902000', 'ITBAYAT', '02', '0209', '020902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('020903000', 'IVANA', '02', '0209', '020903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('020904000', 'MAHATAO', '02', '0209', '020904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('020905000', 'SABTANG', '02', '0209', '020905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('020906000', 'UYUGAN', '02', '0209', '020906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021501000', 'ABULUG', '02', '0215', '021501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021502000', 'ALCALA', '02', '0215', '021502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021503000', 'ALLACAPAN', '02', '0215', '021503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021504000', 'AMULUNG', '02', '0215', '021504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021505000', 'APARRI', '02', '0215', '021505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021506000', 'BAGGAO', '02', '0215', '021506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021507000', 'BALLESTEROS', '02', '0215', '021507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021508000', 'BUGUEY', '02', '0215', '021508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021509000', 'CALAYAN', '02', '0215', '021509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021510000', 'CAMALANIUGAN', '02', '0215', '021510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021511000', 'CLAVERIA', '02', '0215', '021511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021512000', 'ENRILE', '02', '0215', '021512', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021513000', 'GATTARAN', '02', '0215', '021513', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021514000', 'GONZAGA', '02', '0215', '021514', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021515000', 'IGUIG', '02', '0215', '021515', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021516000', 'LAL-LO', '02', '0215', '021516', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021517000', 'LASAM', '02', '0215', '021517', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021518000', 'PAMPLONA', '02', '0215', '021518', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021519000', 'PEÑABLANCA', '02', '0215', '021519', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021520000', 'PIAT', '02', '0215', '021520', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021521000', 'RIZAL', '02', '0215', '021521', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021522000', 'SANCHEZ-MIRA', '02', '0215', '021522', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021523000', 'SANTA ANA', '02', '0215', '021523', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021524000', 'SANTA PRAXEDES', '02', '0215', '021524', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021525000', 'SANTA TERESITA', '02', '0215', '021525', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021526000', 'SANTO NIÑO (FAIRE)', '02', '0215', '021526', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021527000', 'SOLANA', '02', '0215', '021527', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021528000', 'TUAO', '02', '0215', '021528', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('021529000', 'TUGUEGARAO CITY (Capital)', '02', '0215', '021529', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023101000', 'ALICIA', '02', '0231', '023101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023102000', 'ANGADANAN', '02', '0231', '023102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023103000', 'AURORA', '02', '0231', '023103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023104000', 'BENITO SOLIVEN', '02', '0231', '023104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023105000', 'BURGOS', '02', '0231', '023105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023106000', 'CABAGAN', '02', '0231', '023106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023107000', 'CABATUAN', '02', '0231', '023107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023108000', 'CITY OF CAUAYAN', '02', '0231', '023108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023109000', 'CORDON', '02', '0231', '023109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023110000', 'DINAPIGUE', '02', '0231', '023110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023111000', 'DIVILACAN', '02', '0231', '023111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023112000', 'ECHAGUE', '02', '0231', '023112', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023113000', 'GAMU', '02', '0231', '023113', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023114000', 'ILAGAN CITY (Capital)', '02', '0231', '023114', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023115000', 'JONES', '02', '0231', '023115', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023116000', 'LUNA', '02', '0231', '023116', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023117000', 'MACONACON', '02', '0231', '023117', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023118000', 'DELFIN ALBANO (MAGSAYSAY)', '02', '0231', '023118', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023119000', 'MALLIG', '02', '0231', '023119', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023120000', 'NAGUILIAN', '02', '0231', '023120', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023121000', 'PALANAN', '02', '0231', '023121', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023122000', 'QUEZON', '02', '0231', '023122', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023123000', 'QUIRINO', '02', '0231', '023123', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023124000', 'RAMON', '02', '0231', '023124', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023125000', 'REINA MERCEDES', '02', '0231', '023125', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023126000', 'ROXAS', '02', '0231', '023126', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023127000', 'SAN AGUSTIN', '02', '0231', '023127', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023128000', 'SAN GUILLERMO', '02', '0231', '023128', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023129000', 'SAN ISIDRO', '02', '0231', '023129', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023130000', 'SAN MANUEL', '02', '0231', '023130', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023131000', 'SAN MARIANO', '02', '0231', '023131', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023132000', 'SAN MATEO', '02', '0231', '023132', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023133000', 'SAN PABLO', '02', '0231', '023133', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023134000', 'SANTA MARIA', '02', '0231', '023134', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023135000', 'CITY OF SANTIAGO', '02', '0231', '023135', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023136000', 'SANTO TOMAS', '02', '0231', '023136', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('023137000', 'TUMAUINI', '02', '0231', '023137', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025001000', 'AMBAGUIO', '02', '0250', '025001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025002000', 'ARITAO', '02', '0250', '025002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025003000', 'BAGABAG', '02', '0250', '025003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025004000', 'BAMBANG', '02', '0250', '025004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025005000', 'BAYOMBONG (Capital)', '02', '0250', '025005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025006000', 'DIADI', '02', '0250', '025006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025007000', 'DUPAX DEL NORTE', '02', '0250', '025007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025008000', 'DUPAX DEL SUR', '02', '0250', '025008', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025009000', 'KASIBU', '02', '0250', '025009', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025010000', 'KAYAPA', '02', '0250', '025010', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025011000', 'QUEZON', '02', '0250', '025011', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025012000', 'SANTA FE', '02', '0250', '025012', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025013000', 'SOLANO', '02', '0250', '025013', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025014000', 'VILLAVERDE', '02', '0250', '025014', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025015000', 'ALFONSO CASTANEDA', '02', '0250', '025015', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025701000', 'AGLIPAY', '02', '0257', '025701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025702000', 'CABARROGUIS (Capital)', '02', '0257', '025702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025703000', 'DIFFUN', '02', '0257', '025703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025704000', 'MADDELA', '02', '0257', '025704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025705000', 'SAGUDAY', '02', '0257', '025705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('025706000', 'NAGTIPUNAN', '02', '0257', '025706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030801000', 'ABUCAY', '03', '0308', '030801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030802000', 'BAGAC', '03', '0308', '030802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030803000', 'CITY OF BALANGA (Capital)', '03', '0308', '030803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030804000', 'DINALUPIHAN', '03', '0308', '030804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030805000', 'HERMOSA', '03', '0308', '030805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030806000', 'LIMAY', '03', '0308', '030806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030807000', 'MARIVELES', '03', '0308', '030807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030808000', 'MORONG', '03', '0308', '030808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030809000', 'ORANI', '03', '0308', '030809', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030810000', 'ORION', '03', '0308', '030810', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030811000', 'PILAR', '03', '0308', '030811', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('030812000', 'SAMAL', '03', '0308', '030812', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031401000', 'ANGAT', '03', '0314', '031401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031402000', 'BALAGTAS (BIGAA)', '03', '0314', '031402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031403000', 'BALIUAG', '03', '0314', '031403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031404000', 'BOCAUE', '03', '0314', '031404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031405000', 'BULACAN', '03', '0314', '031405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031406000', 'BUSTOS', '03', '0314', '031406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031407000', 'CALUMPIT', '03', '0314', '031407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031408000', 'GUIGUINTO', '03', '0314', '031408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031409000', 'HAGONOY', '03', '0314', '031409', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031410000', 'CITY OF MALOLOS (Capital)', '03', '0314', '031410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031411000', 'MARILAO', '03', '0314', '031411', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031412000', 'CITY OF MEYCAUAYAN', '03', '0314', '031412', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031413000', 'NORZAGARAY', '03', '0314', '031413', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031414000', 'OBANDO', '03', '0314', '031414', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031415000', 'PANDI', '03', '0314', '031415', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031416000', 'PAOMBONG', '03', '0314', '031416', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031417000', 'PLARIDEL', '03', '0314', '031417', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031418000', 'PULILAN', '03', '0314', '031418', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031419000', 'SAN ILDEFONSO', '03', '0314', '031419', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031420000', 'CITY OF SAN JOSE DEL MONTE', '03', '0314', '031420', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031421000', 'SAN MIGUEL', '03', '0314', '031421', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031422000', 'SAN RAFAEL', '03', '0314', '031422', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031423000', 'SANTA MARIA', '03', '0314', '031423', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('031424000', 'DOÑA REMEDIOS TRINIDAD', '03', '0314', '031424', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034901000', 'ALIAGA', '03', '0349', '034901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034902000', 'BONGABON', '03', '0349', '034902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034903000', 'CABANATUAN CITY', '03', '0349', '034903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034904000', 'CABIAO', '03', '0349', '034904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034905000', 'CARRANGLAN', '03', '0349', '034905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034906000', 'CUYAPO', '03', '0349', '034906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034907000', 'GABALDON (BITULOK & SABANI)', '03', '0349', '034907', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034908000', 'CITY OF GAPAN', '03', '0349', '034908', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034909000', 'GENERAL MAMERTO NATIVIDAD', '03', '0349', '034909', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034910000', 'GENERAL TINIO (PAPAYA)', '03', '0349', '034910', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034911000', 'GUIMBA', '03', '0349', '034911', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034912000', 'JAEN', '03', '0349', '034912', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034913000', 'LAUR', '03', '0349', '034913', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034914000', 'LICAB', '03', '0349', '034914', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034915000', 'LLANERA', '03', '0349', '034915', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034916000', 'LUPAO', '03', '0349', '034916', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034917000', 'SCIENCE CITY OF MUÑOZ', '03', '0349', '034917', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034918000', 'NAMPICUAN', '03', '0349', '034918', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034919000', 'PALAYAN CITY (Capital)', '03', '0349', '034919', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034920000', 'PANTABANGAN', '03', '0349', '034920', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034921000', 'PEÑARANDA', '03', '0349', '034921', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034922000', 'QUEZON', '03', '0349', '034922', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034923000', 'RIZAL', '03', '0349', '034923', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034924000', 'SAN ANTONIO', '03', '0349', '034924', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034925000', 'SAN ISIDRO', '03', '0349', '034925', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034926000', 'SAN JOSE CITY', '03', '0349', '034926', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034927000', 'SAN LEONARDO', '03', '0349', '034927', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034928000', 'SANTA ROSA', '03', '0349', '034928', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034929000', 'SANTO DOMINGO', '03', '0349', '034929', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034930000', 'TALAVERA', '03', '0349', '034930', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034931000', 'TALUGTUG', '03', '0349', '034931', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('034932000', 'ZARAGOZA', '03', '0349', '034932', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035401000', 'ANGELES CITY', '03', '0354', '035401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035402000', 'APALIT', '03', '0354', '035402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035403000', 'ARAYAT', '03', '0354', '035403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035404000', 'BACOLOR', '03', '0354', '035404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035405000', 'CANDABA', '03', '0354', '035405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035406000', 'FLORIDABLANCA', '03', '0354', '035406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035407000', 'GUAGUA', '03', '0354', '035407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035408000', 'LUBAO', '03', '0354', '035408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035409000', 'MABALACAT CITY', '03', '0354', '035409', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035410000', 'MACABEBE', '03', '0354', '035410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035411000', 'MAGALANG', '03', '0354', '035411', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035412000', 'MASANTOL', '03', '0354', '035412', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035413000', 'MEXICO', '03', '0354', '035413', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035414000', 'MINALIN', '03', '0354', '035414', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035415000', 'PORAC', '03', '0354', '035415', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035416000', 'CITY OF SAN FERNANDO (Capital)', '03', '0354', '035416', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035417000', 'SAN LUIS', '03', '0354', '035417', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035418000', 'SAN SIMON', '03', '0354', '035418', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035419000', 'SANTA ANA', '03', '0354', '035419', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035420000', 'SANTA RITA', '03', '0354', '035420', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035421000', 'SANTO TOMAS', '03', '0354', '035421', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('035422000', 'SASMUAN (Sexmoan)', '03', '0354', '035422', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036901000', 'ANAO', '03', '0369', '036901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036902000', 'BAMBAN', '03', '0369', '036902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036903000', 'CAMILING', '03', '0369', '036903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036904000', 'CAPAS', '03', '0369', '036904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036905000', 'CONCEPCION', '03', '0369', '036905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036906000', 'GERONA', '03', '0369', '036906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036907000', 'LA PAZ', '03', '0369', '036907', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036908000', 'MAYANTOC', '03', '0369', '036908', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036909000', 'MONCADA', '03', '0369', '036909', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036910000', 'PANIQUI', '03', '0369', '036910', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036911000', 'PURA', '03', '0369', '036911', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036912000', 'RAMOS', '03', '0369', '036912', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036913000', 'SAN CLEMENTE', '03', '0369', '036913', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036914000', 'SAN MANUEL', '03', '0369', '036914', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036915000', 'SANTA IGNACIA', '03', '0369', '036915', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036916000', 'CITY OF TARLAC (Capital)', '03', '0369', '036916', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036917000', 'VICTORIA', '03', '0369', '036917', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('036918000', 'SAN JOSE', '03', '0369', '036918', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037101000', 'BOTOLAN', '03', '0371', '037101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037102000', 'CABANGAN', '03', '0371', '037102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037103000', 'CANDELARIA', '03', '0371', '037103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037104000', 'CASTILLEJOS', '03', '0371', '037104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037105000', 'IBA (Capital)', '03', '0371', '037105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037106000', 'MASINLOC', '03', '0371', '037106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037107000', 'OLONGAPO CITY', '03', '0371', '037107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037108000', 'PALAUIG', '03', '0371', '037108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037109000', 'SAN ANTONIO', '03', '0371', '037109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037110000', 'SAN FELIPE', '03', '0371', '037110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037111000', 'SAN MARCELINO', '03', '0371', '037111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037112000', 'SAN NARCISO', '03', '0371', '037112', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037113000', 'SANTA CRUZ', '03', '0371', '037113', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037114000', 'SUBIC', '03', '0371', '037114', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037701000', 'BALER (Capital)', '03', '0377', '037701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037702000', 'CASIGURAN', '03', '0377', '037702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037703000', 'DILASAG', '03', '0377', '037703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037704000', 'DINALUNGAN', '03', '0377', '037704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037705000', 'DINGALAN', '03', '0377', '037705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037706000', 'DIPACULAO', '03', '0377', '037706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037707000', 'MARIA AURORA', '03', '0377', '037707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('037708000', 'SAN LUIS', '03', '0377', '037708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041001000', 'AGONCILLO', '04', '0410', '041001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041002000', 'ALITAGTAG', '04', '0410', '041002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041003000', 'BALAYAN', '04', '0410', '041003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041004000', 'BALETE', '04', '0410', '041004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041005000', 'BATANGAS CITY (Capital)', '04', '0410', '041005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041006000', 'BAUAN', '04', '0410', '041006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041007000', 'CALACA', '04', '0410', '041007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041008000', 'CALATAGAN', '04', '0410', '041008', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041009000', 'CUENCA', '04', '0410', '041009', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041010000', 'IBAAN', '04', '0410', '041010', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041011000', 'LAUREL', '04', '0410', '041011', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041012000', 'LEMERY', '04', '0410', '041012', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041013000', 'LIAN', '04', '0410', '041013', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041014000', 'LIPA CITY', '04', '0410', '041014', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041015000', 'LOBO', '04', '0410', '041015', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041016000', 'MABINI', '04', '0410', '041016', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041017000', 'MALVAR', '04', '0410', '041017', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041018000', 'MATAASNAKAHOY', '04', '0410', '041018', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041019000', 'NASUGBU', '04', '0410', '041019', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041020000', 'PADRE GARCIA', '04', '0410', '041020', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041021000', 'ROSARIO', '04', '0410', '041021', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041022000', 'SAN JOSE', '04', '0410', '041022', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041023000', 'SAN JUAN', '04', '0410', '041023', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041024000', 'SAN LUIS', '04', '0410', '041024', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041025000', 'SAN NICOLAS', '04', '0410', '041025', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041026000', 'SAN PASCUAL', '04', '0410', '041026', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041027000', 'SANTA TERESITA', '04', '0410', '041027', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041028000', 'SANTO TOMAS', '04', '0410', '041028', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041029000', 'TAAL', '04', '0410', '041029', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041030000', 'TALISAY', '04', '0410', '041030', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041031000', 'CITY OF TANAUAN', '04', '0410', '041031', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041032000', 'TAYSAN', '04', '0410', '041032', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041033000', 'TINGLOY', '04', '0410', '041033', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('041034000', 'TUY', '04', '0410', '041034', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042101000', 'ALFONSO', '04', '0421', '042101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042102000', 'AMADEO', '04', '0421', '042102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042103000', 'BACOOR CITY', '04', '0421', '042103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042104000', 'CARMONA', '04', '0421', '042104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042105000', 'CAVITE CITY', '04', '0421', '042105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042106000', 'CITY OF DASMARIÑAS', '04', '0421', '042106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042107000', 'GENERAL EMILIO AGUINALDO', '04', '0421', '042107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042108000', 'GENERAL TRIAS', '04', '0421', '042108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042109000', 'IMUS CITY', '04', '0421', '042109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042110000', 'INDANG', '04', '0421', '042110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042111000', 'KAWIT', '04', '0421', '042111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042112000', 'MAGALLANES', '04', '0421', '042112', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042113000', 'MARAGONDON', '04', '0421', '042113', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042114000', 'MENDEZ (MENDEZ-NUÑEZ)', '04', '0421', '042114', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042115000', 'NAIC', '04', '0421', '042115', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042116000', 'NOVELETA', '04', '0421', '042116', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042117000', 'ROSARIO', '04', '0421', '042117', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042118000', 'SILANG', '04', '0421', '042118', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042119000', 'TAGAYTAY CITY', '04', '0421', '042119', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042120000', 'TANZA', '04', '0421', '042120', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042121000', 'TERNATE', '04', '0421', '042121', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042122000', 'TRECE MARTIRES CITY (Capital)', '04', '0421', '042122', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('042123000', 'GEN. MARIANO ALVAREZ', '04', '0421', '042123', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043401000', 'ALAMINOS', '04', '0434', '043401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043402000', 'BAY', '04', '0434', '043402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043403000', 'CITY OF BIÑAN', '04', '0434', '043403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043404000', 'CABUYAO CITY', '04', '0434', '043404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043405000', 'CITY OF CALAMBA', '04', '0434', '043405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043406000', 'CALAUAN', '04', '0434', '043406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043407000', 'CAVINTI', '04', '0434', '043407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043408000', 'FAMY', '04', '0434', '043408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043409000', 'KALAYAAN', '04', '0434', '043409', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043410000', 'LILIW', '04', '0434', '043410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043411000', 'LOS BAÑOS', '04', '0434', '043411', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043412000', 'LUISIANA', '04', '0434', '043412', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043413000', 'LUMBAN', '04', '0434', '043413', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043414000', 'MABITAC', '04', '0434', '043414', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043415000', 'MAGDALENA', '04', '0434', '043415', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043416000', 'MAJAYJAY', '04', '0434', '043416', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043417000', 'NAGCARLAN', '04', '0434', '043417', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043418000', 'PAETE', '04', '0434', '043418', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043419000', 'PAGSANJAN', '04', '0434', '043419', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043420000', 'PAKIL', '04', '0434', '043420', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043421000', 'PANGIL', '04', '0434', '043421', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043422000', 'PILA', '04', '0434', '043422', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043423000', 'RIZAL', '04', '0434', '043423', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043424000', 'SAN PABLO CITY', '04', '0434', '043424', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043425000', 'CITY OF SAN PEDRO', '04', '0434', '043425', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043426000', 'SANTA CRUZ (Capital)', '04', '0434', '043426', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043427000', 'SANTA MARIA', '04', '0434', '043427', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043428000', 'CITY OF SANTA ROSA', '04', '0434', '043428', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043429000', 'SINILOAN', '04', '0434', '043429', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('043430000', 'VICTORIA', '04', '0434', '043430', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045601000', 'AGDANGAN', '04', '0456', '045601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045602000', 'ALABAT', '04', '0456', '045602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045603000', 'ATIMONAN', '04', '0456', '045603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045605000', 'BUENAVISTA', '04', '0456', '045605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045606000', 'BURDEOS', '04', '0456', '045606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045607000', 'CALAUAG', '04', '0456', '045607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045608000', 'CANDELARIA', '04', '0456', '045608', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045610000', 'CATANAUAN', '04', '0456', '045610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045615000', 'DOLORES', '04', '0456', '045615', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045616000', 'GENERAL LUNA', '04', '0456', '045616', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045617000', 'GENERAL NAKAR', '04', '0456', '045617', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045618000', 'GUINAYANGAN', '04', '0456', '045618', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045619000', 'GUMACA', '04', '0456', '045619', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045620000', 'INFANTA', '04', '0456', '045620', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045621000', 'JOMALIG', '04', '0456', '045621', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045622000', 'LOPEZ', '04', '0456', '045622', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045623000', 'LUCBAN', '04', '0456', '045623', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045624000', 'LUCENA CITY (Capital)', '04', '0456', '045624', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045625000', 'MACALELON', '04', '0456', '045625', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045627000', 'MAUBAN', '04', '0456', '045627', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045628000', 'MULANAY', '04', '0456', '045628', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045629000', 'PADRE BURGOS', '04', '0456', '045629', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045630000', 'PAGBILAO', '04', '0456', '045630', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045631000', 'PANUKULAN', '04', '0456', '045631', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045632000', 'PATNANUNGAN', '04', '0456', '045632', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045633000', 'PEREZ', '04', '0456', '045633', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045634000', 'PITOGO', '04', '0456', '045634', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045635000', 'PLARIDEL', '04', '0456', '045635', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045636000', 'POLILLO', '04', '0456', '045636', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045637000', 'QUEZON', '04', '0456', '045637', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045638000', 'REAL', '04', '0456', '045638', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045639000', 'SAMPALOC', '04', '0456', '045639', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045640000', 'SAN ANDRES', '04', '0456', '045640', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045641000', 'SAN ANTONIO', '04', '0456', '045641', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045642000', 'SAN FRANCISCO (AURORA)', '04', '0456', '045642', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045644000', 'SAN NARCISO', '04', '0456', '045644', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045645000', 'SARIAYA', '04', '0456', '045645', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045646000', 'TAGKAWAYAN', '04', '0456', '045646', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045647000', 'CITY OF TAYABAS', '04', '0456', '045647', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045648000', 'TIAONG', '04', '0456', '045648', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045649000', 'UNISAN', '04', '0456', '045649', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045801000', 'ANGONO', '04', '0458', '045801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045802000', 'CITY OF ANTIPOLO', '04', '0458', '045802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045803000', 'BARAS', '04', '0458', '045803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045804000', 'BINANGONAN', '04', '0458', '045804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045805000', 'CAINTA', '04', '0458', '045805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045806000', 'CARDONA', '04', '0458', '045806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045807000', 'JALA-JALA', '04', '0458', '045807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045808000', 'RODRIGUEZ (MONTALBAN)', '04', '0458', '045808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045809000', 'MORONG', '04', '0458', '045809', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045810000', 'PILILLA', '04', '0458', '045810', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045811000', 'SAN MATEO', '04', '0458', '045811', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045812000', 'TANAY', '04', '0458', '045812', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045813000', 'TAYTAY', '04', '0458', '045813', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('045814000', 'TERESA', '04', '0458', '045814', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('174001000', 'BOAC (Capital)', '17', '1740', '174001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('174002000', 'BUENAVISTA', '17', '1740', '174002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('174003000', 'GASAN', '17', '1740', '174003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('174004000', 'MOGPOG', '17', '1740', '174004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('174005000', 'SANTA CRUZ', '17', '1740', '174005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('174006000', 'TORRIJOS', '17', '1740', '174006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175101000', 'ABRA DE ILOG', '17', '1751', '175101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175102000', 'CALINTAAN', '17', '1751', '175102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175103000', 'LOOC', '17', '1751', '175103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175104000', 'LUBANG', '17', '1751', '175104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175105000', 'MAGSAYSAY', '17', '1751', '175105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175106000', 'MAMBURAO (Capital)', '17', '1751', '175106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175107000', 'PALUAN', '17', '1751', '175107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175108000', 'RIZAL', '17', '1751', '175108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175109000', 'SABLAYAN', '17', '1751', '175109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175110000', 'SAN JOSE', '17', '1751', '175110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175111000', 'SANTA CRUZ', '17', '1751', '175111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175201000', 'BACO', '17', '1752', '175201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175202000', 'BANSUD', '17', '1752', '175202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175203000', 'BONGABONG', '17', '1752', '175203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175204000', 'BULALACAO (SAN PEDRO)', '17', '1752', '175204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175205000', 'CITY OF CALAPAN (Capital)', '17', '1752', '175205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175206000', 'GLORIA', '17', '1752', '175206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175207000', 'MANSALAY', '17', '1752', '175207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175208000', 'NAUJAN', '17', '1752', '175208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175209000', 'PINAMALAYAN', '17', '1752', '175209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175210000', 'POLA', '17', '1752', '175210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175211000', 'PUERTO GALERA', '17', '1752', '175211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175212000', 'ROXAS', '17', '1752', '175212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175213000', 'SAN TEODORO', '17', '1752', '175213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175214000', 'SOCORRO', '17', '1752', '175214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175215000', 'VICTORIA', '17', '1752', '175215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175301000', 'ABORLAN', '17', '1753', '175301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175302000', 'AGUTAYA', '17', '1753', '175302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175303000', 'ARACELI', '17', '1753', '175303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175304000', 'BALABAC', '17', '1753', '175304', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175305000', 'BATARAZA', '17', '1753', '175305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175306000', 'BROOKE\'S POINT', '17', '1753', '175306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175307000', 'BUSUANGA', '17', '1753', '175307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175308000', 'CAGAYANCILLO', '17', '1753', '175308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175309000', 'CORON', '17', '1753', '175309', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175310000', 'CUYO', '17', '1753', '175310', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175311000', 'DUMARAN', '17', '1753', '175311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175312000', 'EL NIDO (BACUIT)', '17', '1753', '175312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175313000', 'LINAPACAN', '17', '1753', '175313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175314000', 'MAGSAYSAY', '17', '1753', '175314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175315000', 'NARRA', '17', '1753', '175315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175316000', 'PUERTO PRINCESA CITY (Capital)', '17', '1753', '175316', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175317000', 'QUEZON', '17', '1753', '175317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175318000', 'ROXAS', '17', '1753', '175318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175319000', 'SAN VICENTE', '17', '1753', '175319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175320000', 'TAYTAY', '17', '1753', '175320', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175321000', 'KALAYAAN', '17', '1753', '175321', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175322000', 'CULION', '17', '1753', '175322', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175323000', 'RIZAL (MARCOS)', '17', '1753', '175323', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175324000', 'SOFRONIO ESPAÑOLA', '17', '1753', '175324', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175901000', 'ALCANTARA', '17', '1759', '175901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175902000', 'BANTON', '17', '1759', '175902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175903000', 'CAJIDIOCAN', '17', '1759', '175903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175904000', 'CALATRAVA', '17', '1759', '175904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175905000', 'CONCEPCION', '17', '1759', '175905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175906000', 'CORCUERA', '17', '1759', '175906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175907000', 'LOOC', '17', '1759', '175907', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175908000', 'MAGDIWANG', '17', '1759', '175908', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175909000', 'ODIONGAN', '17', '1759', '175909', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175910000', 'ROMBLON (Capital)', '17', '1759', '175910', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175911000', 'SAN AGUSTIN', '17', '1759', '175911', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175912000', 'SAN ANDRES', '17', '1759', '175912', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175913000', 'SAN FERNANDO', '17', '1759', '175913', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175914000', 'SAN JOSE', '17', '1759', '175914', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175915000', 'SANTA FE', '17', '1759', '175915', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175916000', 'FERROL', '17', '1759', '175916', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('175917000', 'SANTA MARIA (IMELDA)', '17', '1759', '175917', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050501000', 'BACACAY', '05', '0505', '050501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050502000', 'CAMALIG', '05', '0505', '050502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050503000', 'DARAGA (LOCSIN)', '05', '0505', '050503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050504000', 'GUINOBATAN', '05', '0505', '050504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050505000', 'JOVELLAR', '05', '0505', '050505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050506000', 'LEGAZPI CITY (Capital)', '05', '0505', '050506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050507000', 'LIBON', '05', '0505', '050507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050508000', 'CITY OF LIGAO', '05', '0505', '050508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050509000', 'MALILIPOT', '05', '0505', '050509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050510000', 'MALINAO', '05', '0505', '050510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050511000', 'MANITO', '05', '0505', '050511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050512000', 'OAS', '05', '0505', '050512', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050513000', 'PIO DURAN', '05', '0505', '050513', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050514000', 'POLANGUI', '05', '0505', '050514', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050515000', 'RAPU-RAPU', '05', '0505', '050515', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050516000', 'SANTO DOMINGO (LIBOG)', '05', '0505', '050516', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050517000', 'CITY OF TABACO', '05', '0505', '050517', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('050518000', 'TIWI', '05', '0505', '050518', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051601000', 'BASUD', '05', '0516', '051601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051602000', 'CAPALONGA', '05', '0516', '051602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051603000', 'DAET (Capital)', '05', '0516', '051603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051604000', 'SAN LORENZO RUIZ (IMELDA)', '05', '0516', '051604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051605000', 'JOSE PANGANIBAN', '05', '0516', '051605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051606000', 'LABO', '05', '0516', '051606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051607000', 'MERCEDES', '05', '0516', '051607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051608000', 'PARACALE', '05', '0516', '051608', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051609000', 'SAN VICENTE', '05', '0516', '051609', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051610000', 'SANTA ELENA', '05', '0516', '051610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051611000', 'TALISAY', '05', '0516', '051611', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051612000', 'VINZONS', '05', '0516', '051612', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051701000', 'BAAO', '05', '0517', '051701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051702000', 'BALATAN', '05', '0517', '051702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051703000', 'BATO', '05', '0517', '051703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051704000', 'BOMBON', '05', '0517', '051704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051705000', 'BUHI', '05', '0517', '051705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051706000', 'BULA', '05', '0517', '051706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051707000', 'CABUSAO', '05', '0517', '051707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051708000', 'CALABANGA', '05', '0517', '051708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051709000', 'CAMALIGAN', '05', '0517', '051709', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051710000', 'CANAMAN', '05', '0517', '051710', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051711000', 'CARAMOAN', '05', '0517', '051711', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051712000', 'DEL GALLEGO', '05', '0517', '051712', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051713000', 'GAINZA', '05', '0517', '051713', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051714000', 'GARCHITORENA', '05', '0517', '051714', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051715000', 'GOA', '05', '0517', '051715', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051716000', 'IRIGA CITY', '05', '0517', '051716', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051717000', 'LAGONOY', '05', '0517', '051717', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051718000', 'LIBMANAN', '05', '0517', '051718', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051719000', 'LUPI', '05', '0517', '051719', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051720000', 'MAGARAO', '05', '0517', '051720', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051721000', 'MILAOR', '05', '0517', '051721', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051722000', 'MINALABAC', '05', '0517', '051722', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051723000', 'NABUA', '05', '0517', '051723', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051724000', 'NAGA CITY', '05', '0517', '051724', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051725000', 'OCAMPO', '05', '0517', '051725', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051726000', 'PAMPLONA', '05', '0517', '051726', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051727000', 'PASACAO', '05', '0517', '051727', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051728000', 'PILI (Capital)', '05', '0517', '051728', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051729000', 'PRESENTACION (PARUBCAN)', '05', '0517', '051729', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051730000', 'RAGAY', '05', '0517', '051730', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051731000', 'SAGÑAY', '05', '0517', '051731', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051732000', 'SAN FERNANDO', '05', '0517', '051732', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051733000', 'SAN JOSE', '05', '0517', '051733', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051734000', 'SIPOCOT', '05', '0517', '051734', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051735000', 'SIRUMA', '05', '0517', '051735', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051736000', 'TIGAON', '05', '0517', '051736', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('051737000', 'TINAMBAC', '05', '0517', '051737', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052001000', 'BAGAMANOC', '05', '0520', '052001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052002000', 'BARAS', '05', '0520', '052002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052003000', 'BATO', '05', '0520', '052003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052004000', 'CARAMORAN', '05', '0520', '052004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052005000', 'GIGMOTO', '05', '0520', '052005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052006000', 'PANDAN', '05', '0520', '052006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052007000', 'PANGANIBAN (PAYO)', '05', '0520', '052007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052008000', 'SAN ANDRES (CALOLBON)', '05', '0520', '052008', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052009000', 'SAN MIGUEL', '05', '0520', '052009', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052010000', 'VIGA', '05', '0520', '052010', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('052011000', 'VIRAC (Capital)', '05', '0520', '052011', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054101000', 'AROROY', '05', '0541', '054101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054102000', 'BALENO', '05', '0541', '054102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054103000', 'BALUD', '05', '0541', '054103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054104000', 'BATUAN', '05', '0541', '054104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054105000', 'CATAINGAN', '05', '0541', '054105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054106000', 'CAWAYAN', '05', '0541', '054106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054107000', 'CLAVERIA', '05', '0541', '054107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054108000', 'DIMASALANG', '05', '0541', '054108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054109000', 'ESPERANZA', '05', '0541', '054109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054110000', 'MANDAON', '05', '0541', '054110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054111000', 'CITY OF MASBATE (Capital)', '05', '0541', '054111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054112000', 'MILAGROS', '05', '0541', '054112', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054113000', 'MOBO', '05', '0541', '054113', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054114000', 'MONREAL', '05', '0541', '054114', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054115000', 'PALANAS', '05', '0541', '054115', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054116000', 'PIO V. CORPUZ (LIMBUHAN)', '05', '0541', '054116', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054117000', 'PLACER', '05', '0541', '054117', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054118000', 'SAN FERNANDO', '05', '0541', '054118', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054119000', 'SAN JACINTO', '05', '0541', '054119', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054120000', 'SAN PASCUAL', '05', '0541', '054120', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('054121000', 'USON', '05', '0541', '054121', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056202000', 'BARCELONA', '05', '0562', '056202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056203000', 'BULAN', '05', '0562', '056203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056204000', 'BULUSAN', '05', '0562', '056204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056205000', 'CASIGURAN', '05', '0562', '056205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056206000', 'CASTILLA', '05', '0562', '056206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056207000', 'DONSOL', '05', '0562', '056207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056208000', 'GUBAT', '05', '0562', '056208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056209000', 'IROSIN', '05', '0562', '056209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056210000', 'JUBAN', '05', '0562', '056210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056211000', 'MAGALLANES', '05', '0562', '056211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056212000', 'MATNOG', '05', '0562', '056212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056213000', 'PILAR', '05', '0562', '056213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056214000', 'PRIETO DIAZ', '05', '0562', '056214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056215000', 'SANTA MAGDALENA', '05', '0562', '056215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('056216000', 'CITY OF SORSOGON (Capital)', '05', '0562', '056216', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060401000', 'ALTAVAS', '06', '0604', '060401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060402000', 'BALETE', '06', '0604', '060402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060403000', 'BANGA', '06', '0604', '060403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060404000', 'BATAN', '06', '0604', '060404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060405000', 'BURUANGA', '06', '0604', '060405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060406000', 'IBAJAY', '06', '0604', '060406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060407000', 'KALIBO (Capital)', '06', '0604', '060407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060408000', 'LEZO', '06', '0604', '060408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060409000', 'LIBACAO', '06', '0604', '060409', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060410000', 'MADALAG', '06', '0604', '060410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060411000', 'MAKATO', '06', '0604', '060411', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060412000', 'MALAY', '06', '0604', '060412', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060413000', 'MALINAO', '06', '0604', '060413', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060414000', 'NABAS', '06', '0604', '060414', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060415000', 'NEW WASHINGTON', '06', '0604', '060415', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060416000', 'NUMANCIA', '06', '0604', '060416', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060417000', 'TANGALAN', '06', '0604', '060417', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060601000', 'ANINI-Y', '06', '0606', '060601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060602000', 'BARBAZA', '06', '0606', '060602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060603000', 'BELISON', '06', '0606', '060603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060604000', 'BUGASONG', '06', '0606', '060604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060605000', 'CALUYA', '06', '0606', '060605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060606000', 'CULASI', '06', '0606', '060606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060607000', 'TOBIAS FORNIER (DAO)', '06', '0606', '060607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060608000', 'HAMTIC', '06', '0606', '060608', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060609000', 'LAUA-AN', '06', '0606', '060609', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060610000', 'LIBERTAD', '06', '0606', '060610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060611000', 'PANDAN', '06', '0606', '060611', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060612000', 'PATNONGON', '06', '0606', '060612', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060613000', 'SAN JOSE (Capital)', '06', '0606', '060613', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060614000', 'SAN REMIGIO', '06', '0606', '060614', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060615000', 'SEBASTE', '06', '0606', '060615', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060616000', 'SIBALOM', '06', '0606', '060616', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060617000', 'TIBIAO', '06', '0606', '060617', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('060618000', 'VALDERRAMA', '06', '0606', '060618', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061901000', 'CUARTERO', '06', '0619', '061901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061902000', 'DAO', '06', '0619', '061902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061903000', 'DUMALAG', '06', '0619', '061903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061904000', 'DUMARAO', '06', '0619', '061904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061905000', 'IVISAN', '06', '0619', '061905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061906000', 'JAMINDAN', '06', '0619', '061906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061907000', 'MA-AYON', '06', '0619', '061907', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061908000', 'MAMBUSAO', '06', '0619', '061908', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061909000', 'PANAY', '06', '0619', '061909', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061910000', 'PANITAN', '06', '0619', '061910', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061911000', 'PILAR', '06', '0619', '061911', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061912000', 'PONTEVEDRA', '06', '0619', '061912', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061913000', 'PRESIDENT ROXAS', '06', '0619', '061913', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061914000', 'ROXAS CITY (Capital)', '06', '0619', '061914', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061915000', 'SAPI-AN', '06', '0619', '061915', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061916000', 'SIGMA', '06', '0619', '061916', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('061917000', 'TAPAZ', '06', '0619', '061917', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063001000', 'AJUY', '06', '0630', '063001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063002000', 'ALIMODIAN', '06', '0630', '063002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063003000', 'ANILAO', '06', '0630', '063003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063004000', 'BADIANGAN', '06', '0630', '063004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063005000', 'BALASAN', '06', '0630', '063005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063006000', 'BANATE', '06', '0630', '063006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063007000', 'BAROTAC NUEVO', '06', '0630', '063007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063008000', 'BAROTAC VIEJO', '06', '0630', '063008', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063009000', 'BATAD', '06', '0630', '063009', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063010000', 'BINGAWAN', '06', '0630', '063010', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063012000', 'CABATUAN', '06', '0630', '063012', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063013000', 'CALINOG', '06', '0630', '063013', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063014000', 'CARLES', '06', '0630', '063014', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063015000', 'CONCEPCION', '06', '0630', '063015', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063016000', 'DINGLE', '06', '0630', '063016', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063017000', 'DUEÑAS', '06', '0630', '063017', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063018000', 'DUMANGAS', '06', '0630', '063018', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063019000', 'ESTANCIA', '06', '0630', '063019', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063020000', 'GUIMBAL', '06', '0630', '063020', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063021000', 'IGBARAS', '06', '0630', '063021', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063022000', 'ILOILO CITY (Capital)', '06', '0630', '063022', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063023000', 'JANIUAY', '06', '0630', '063023', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063025000', 'LAMBUNAO', '06', '0630', '063025', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063026000', 'LEGANES', '06', '0630', '063026', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063027000', 'LEMERY', '06', '0630', '063027', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063028000', 'LEON', '06', '0630', '063028', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063029000', 'MAASIN', '06', '0630', '063029', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063030000', 'MIAGAO', '06', '0630', '063030', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063031000', 'MINA', '06', '0630', '063031', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063032000', 'NEW LUCENA', '06', '0630', '063032', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063034000', 'OTON', '06', '0630', '063034', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063035000', 'CITY OF PASSI', '06', '0630', '063035', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063036000', 'PAVIA', '06', '0630', '063036', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063037000', 'POTOTAN', '06', '0630', '063037', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063038000', 'SAN DIONISIO', '06', '0630', '063038', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063039000', 'SAN ENRIQUE', '06', '0630', '063039', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063040000', 'SAN JOAQUIN', '06', '0630', '063040', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063041000', 'SAN MIGUEL', '06', '0630', '063041', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063042000', 'SAN RAFAEL', '06', '0630', '063042', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063043000', 'SANTA BARBARA', '06', '0630', '063043', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063044000', 'SARA', '06', '0630', '063044', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063045000', 'TIGBAUAN', '06', '0630', '063045', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063046000', 'TUBUNGAN', '06', '0630', '063046', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('063047000', 'ZARRAGA', '06', '0630', '063047', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064501000', 'BACOLOD CITY (Capital)', '06', '0645', '064501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064502000', 'BAGO CITY', '06', '0645', '064502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064503000', 'BINALBAGAN', '06', '0645', '064503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064504000', 'CADIZ CITY', '06', '0645', '064504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064505000', 'CALATRAVA', '06', '0645', '064505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064506000', 'CANDONI', '06', '0645', '064506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064507000', 'CAUAYAN', '06', '0645', '064507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064508000', 'ENRIQUE B. MAGALONA (SARAVIA)', '06', '0645', '064508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064509000', 'CITY OF ESCALANTE', '06', '0645', '064509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064510000', 'CITY OF HIMAMAYLAN', '06', '0645', '064510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064511000', 'HINIGARAN', '06', '0645', '064511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064512000', 'HINOBA-AN (ASIA)', '06', '0645', '064512', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064513000', 'ILOG', '06', '0645', '064513', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064514000', 'ISABELA', '06', '0645', '064514', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064515000', 'CITY OF KABANKALAN', '06', '0645', '064515', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064516000', 'LA CARLOTA CITY', '06', '0645', '064516', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064517000', 'LA CASTELLANA', '06', '0645', '064517', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064518000', 'MANAPLA', '06', '0645', '064518', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064519000', 'MOISES PADILLA (MAGALLON)', '06', '0645', '064519', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064520000', 'MURCIA', '06', '0645', '064520', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064521000', 'PONTEVEDRA', '06', '0645', '064521', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064522000', 'PULUPANDAN', '06', '0645', '064522', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064523000', 'SAGAY CITY', '06', '0645', '064523', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064524000', 'SAN CARLOS CITY', '06', '0645', '064524', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064525000', 'SAN ENRIQUE', '06', '0645', '064525', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064526000', 'SILAY CITY', '06', '0645', '064526', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064527000', 'CITY OF SIPALAY', '06', '0645', '064527', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064528000', 'CITY OF TALISAY', '06', '0645', '064528', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064529000', 'TOBOSO', '06', '0645', '064529', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064530000', 'VALLADOLID', '06', '0645', '064530', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064531000', 'CITY OF VICTORIAS', '06', '0645', '064531', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('064532000', 'SALVADOR BENEDICTO', '06', '0645', '064532', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('067901000', 'BUENAVISTA', '06', '0679', '067901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('067902000', 'JORDAN (Capital)', '06', '0679', '067902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('067903000', 'NUEVA VALENCIA', '06', '0679', '067903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('067904000', 'SAN LORENZO', '06', '0679', '067904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('067905000', 'SIBUNAG', '06', '0679', '067905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071201000', 'ALBURQUERQUE', '07', '0712', '071201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071202000', 'ALICIA', '07', '0712', '071202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071203000', 'ANDA', '07', '0712', '071203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071204000', 'ANTEQUERA', '07', '0712', '071204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071205000', 'BACLAYON', '07', '0712', '071205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071206000', 'BALILIHAN', '07', '0712', '071206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071207000', 'BATUAN', '07', '0712', '071207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071208000', 'BILAR', '07', '0712', '071208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071209000', 'BUENAVISTA', '07', '0712', '071209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071210000', 'CALAPE', '07', '0712', '071210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071211000', 'CANDIJAY', '07', '0712', '071211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071212000', 'CARMEN', '07', '0712', '071212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071213000', 'CATIGBIAN', '07', '0712', '071213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071214000', 'CLARIN', '07', '0712', '071214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071215000', 'CORELLA', '07', '0712', '071215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071216000', 'CORTES', '07', '0712', '071216', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071217000', 'DAGOHOY', '07', '0712', '071217', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071218000', 'DANAO', '07', '0712', '071218', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071219000', 'DAUIS', '07', '0712', '071219', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071220000', 'DIMIAO', '07', '0712', '071220', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071221000', 'DUERO', '07', '0712', '071221', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071222000', 'GARCIA HERNANDEZ', '07', '0712', '071222', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071223000', 'GUINDULMAN', '07', '0712', '071223', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071224000', 'INABANGA', '07', '0712', '071224', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071225000', 'JAGNA', '07', '0712', '071225', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071226000', 'JETAFE', '07', '0712', '071226', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071227000', 'LILA', '07', '0712', '071227', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071228000', 'LOAY', '07', '0712', '071228', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071229000', 'LOBOC', '07', '0712', '071229', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071230000', 'LOON', '07', '0712', '071230', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071231000', 'MABINI', '07', '0712', '071231', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071232000', 'MARIBOJOC', '07', '0712', '071232', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071233000', 'PANGLAO', '07', '0712', '071233', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071234000', 'PILAR', '07', '0712', '071234', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071235000', 'PRES. CARLOS P. GARCIA (PITOGO)', '07', '0712', '071235', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071236000', 'SAGBAYAN (BORJA)', '07', '0712', '071236', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071237000', 'SAN ISIDRO', '07', '0712', '071237', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071238000', 'SAN MIGUEL', '07', '0712', '071238', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071239000', 'SEVILLA', '07', '0712', '071239', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071240000', 'SIERRA BULLONES', '07', '0712', '071240', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071241000', 'SIKATUNA', '07', '0712', '071241', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071242000', 'TAGBILARAN CITY (Capital)', '07', '0712', '071242', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071243000', 'TALIBON', '07', '0712', '071243', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071244000', 'TRINIDAD', '07', '0712', '071244', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071245000', 'TUBIGON', '07', '0712', '071245', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071246000', 'UBAY', '07', '0712', '071246', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071247000', 'VALENCIA', '07', '0712', '071247', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('071248000', 'BIEN UNIDO', '07', '0712', '071248', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072201000', 'ALCANTARA', '07', '0722', '072201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072202000', 'ALCOY', '07', '0722', '072202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072203000', 'ALEGRIA', '07', '0722', '072203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072204000', 'ALOGUINSAN', '07', '0722', '072204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072205000', 'ARGAO', '07', '0722', '072205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072206000', 'ASTURIAS', '07', '0722', '072206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072207000', 'BADIAN', '07', '0722', '072207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072208000', 'BALAMBAN', '07', '0722', '072208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072209000', 'BANTAYAN', '07', '0722', '072209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072210000', 'BARILI', '07', '0722', '072210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072211000', 'CITY OF BOGO', '07', '0722', '072211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072212000', 'BOLJOON', '07', '0722', '072212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072213000', 'BORBON', '07', '0722', '072213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072214000', 'CITY OF CARCAR', '07', '0722', '072214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072215000', 'CARMEN', '07', '0722', '072215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072216000', 'CATMON', '07', '0722', '072216', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072217000', 'CEBU CITY (Capital)', '07', '0722', '072217', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072218000', 'COMPOSTELA', '07', '0722', '072218', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072219000', 'CONSOLACION', '07', '0722', '072219', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072220000', 'CORDOVA', '07', '0722', '072220', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072221000', 'DAANBANTAYAN', '07', '0722', '072221', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072222000', 'DALAGUETE', '07', '0722', '072222', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072223000', 'DANAO CITY', '07', '0722', '072223', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072224000', 'DUMANJUG', '07', '0722', '072224', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072225000', 'GINATILAN', '07', '0722', '072225', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072226000', 'LAPU-LAPU CITY (OPON)', '07', '0722', '072226', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072227000', 'LILOAN', '07', '0722', '072227', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072228000', 'MADRIDEJOS', '07', '0722', '072228', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072229000', 'MALABUYOC', '07', '0722', '072229', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072230000', 'MANDAUE CITY', '07', '0722', '072230', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072231000', 'MEDELLIN', '07', '0722', '072231', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072232000', 'MINGLANILLA', '07', '0722', '072232', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072233000', 'MOALBOAL', '07', '0722', '072233', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072234000', 'CITY OF NAGA', '07', '0722', '072234', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072235000', 'OSLOB', '07', '0722', '072235', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072236000', 'PILAR', '07', '0722', '072236', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072237000', 'PINAMUNGAHAN', '07', '0722', '072237', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072238000', 'PORO', '07', '0722', '072238', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072239000', 'RONDA', '07', '0722', '072239', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072240000', 'SAMBOAN', '07', '0722', '072240', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072241000', 'SAN FERNANDO', '07', '0722', '072241', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072242000', 'SAN FRANCISCO', '07', '0722', '072242', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072243000', 'SAN REMIGIO', '07', '0722', '072243', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072244000', 'SANTA FE', '07', '0722', '072244', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072245000', 'SANTANDER', '07', '0722', '072245', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072246000', 'SIBONGA', '07', '0722', '072246', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072247000', 'SOGOD', '07', '0722', '072247', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072248000', 'TABOGON', '07', '0722', '072248', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072249000', 'TABUELAN', '07', '0722', '072249', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072250000', 'CITY OF TALISAY', '07', '0722', '072250', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072251000', 'TOLEDO CITY', '07', '0722', '072251', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072252000', 'TUBURAN', '07', '0722', '072252', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('072253000', 'TUDELA', '07', '0722', '072253', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074601000', 'AMLAN (AYUQUITAN)', '07', '0746', '074601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074602000', 'AYUNGON', '07', '0746', '074602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074603000', 'BACONG', '07', '0746', '074603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074604000', 'BAIS CITY', '07', '0746', '074604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074605000', 'BASAY', '07', '0746', '074605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074606000', 'CITY OF BAYAWAN (TULONG)', '07', '0746', '074606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074607000', 'BINDOY (PAYABON)', '07', '0746', '074607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074608000', 'CANLAON CITY', '07', '0746', '074608', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074609000', 'DAUIN', '07', '0746', '074609', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074610000', 'DUMAGUETE CITY (Capital)', '07', '0746', '074610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074611000', 'CITY OF GUIHULNGAN', '07', '0746', '074611', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074612000', 'JIMALALUD', '07', '0746', '074612', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074613000', 'LA LIBERTAD', '07', '0746', '074613', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074614000', 'MABINAY', '07', '0746', '074614', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074615000', 'MANJUYOD', '07', '0746', '074615', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074616000', 'PAMPLONA', '07', '0746', '074616', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074617000', 'SAN JOSE', '07', '0746', '074617', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074618000', 'SANTA CATALINA', '07', '0746', '074618', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074619000', 'SIATON', '07', '0746', '074619', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074620000', 'SIBULAN', '07', '0746', '074620', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074621000', 'CITY OF TANJAY', '07', '0746', '074621', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074622000', 'TAYASAN', '07', '0746', '074622', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074623000', 'VALENCIA (LUZURRIAGA)', '07', '0746', '074623', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074624000', 'VALLEHERMOSO', '07', '0746', '074624', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('074625000', 'ZAMBOANGUITA', '07', '0746', '074625', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('076101000', 'ENRIQUE VILLANUEVA', '07', '0761', '076101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('076102000', 'LARENA', '07', '0761', '076102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('076103000', 'LAZI', '07', '0761', '076103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('076104000', 'MARIA', '07', '0761', '076104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('076105000', 'SAN JUAN', '07', '0761', '076105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('076106000', 'SIQUIJOR (Capital)', '07', '0761', '076106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082601000', 'ARTECHE', '08', '0826', '082601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082602000', 'BALANGIGA', '08', '0826', '082602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082603000', 'BALANGKAYAN', '08', '0826', '082603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082604000', 'CITY OF BORONGAN (Capital)', '08', '0826', '082604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082605000', 'CAN-AVID', '08', '0826', '082605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082606000', 'DOLORES', '08', '0826', '082606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082607000', 'GENERAL MACARTHUR', '08', '0826', '082607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082608000', 'GIPORLOS', '08', '0826', '082608', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082609000', 'GUIUAN', '08', '0826', '082609', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082610000', 'HERNANI', '08', '0826', '082610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082611000', 'JIPAPAD', '08', '0826', '082611', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082612000', 'LAWAAN', '08', '0826', '082612', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082613000', 'LLORENTE', '08', '0826', '082613', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082614000', 'MASLOG', '08', '0826', '082614', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082615000', 'MAYDOLONG', '08', '0826', '082615', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082616000', 'MERCEDES', '08', '0826', '082616', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082617000', 'ORAS', '08', '0826', '082617', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082618000', 'QUINAPONDAN', '08', '0826', '082618', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082619000', 'SALCEDO', '08', '0826', '082619', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082620000', 'SAN JULIAN', '08', '0826', '082620', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082621000', 'SAN POLICARPO', '08', '0826', '082621', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082622000', 'SULAT', '08', '0826', '082622', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('082623000', 'TAFT', '08', '0826', '082623', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083701000', 'ABUYOG', '08', '0837', '083701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083702000', 'ALANGALANG', '08', '0837', '083702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083703000', 'ALBUERA', '08', '0837', '083703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083705000', 'BABATNGON', '08', '0837', '083705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083706000', 'BARUGO', '08', '0837', '083706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083707000', 'BATO', '08', '0837', '083707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083708000', 'CITY OF BAYBAY', '08', '0837', '083708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083710000', 'BURAUEN', '08', '0837', '083710', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083713000', 'CALUBIAN', '08', '0837', '083713', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083714000', 'CAPOOCAN', '08', '0837', '083714', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083715000', 'CARIGARA', '08', '0837', '083715', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083717000', 'DAGAMI', '08', '0837', '083717', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083718000', 'DULAG', '08', '0837', '083718', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083719000', 'HILONGOS', '08', '0837', '083719', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083720000', 'HINDANG', '08', '0837', '083720', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083721000', 'INOPACAN', '08', '0837', '083721', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083722000', 'ISABEL', '08', '0837', '083722', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083723000', 'JARO', '08', '0837', '083723', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083724000', 'JAVIER (BUGHO)', '08', '0837', '083724', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083725000', 'JULITA', '08', '0837', '083725', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083726000', 'KANANGA', '08', '0837', '083726', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083728000', 'LA PAZ', '08', '0837', '083728', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083729000', 'LEYTE', '08', '0837', '083729', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083730000', 'MACARTHUR', '08', '0837', '083730', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083731000', 'MAHAPLAG', '08', '0837', '083731', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083733000', 'MATAG-OB', '08', '0837', '083733', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083734000', 'MATALOM', '08', '0837', '083734', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083735000', 'MAYORGA', '08', '0837', '083735', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083736000', 'MERIDA', '08', '0837', '083736', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083738000', 'ORMOC CITY', '08', '0837', '083738', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083739000', 'PALO', '08', '0837', '083739', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083740000', 'PALOMPON', '08', '0837', '083740', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083741000', 'PASTRANA', '08', '0837', '083741', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083742000', 'SAN ISIDRO', '08', '0837', '083742', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083743000', 'SAN MIGUEL', '08', '0837', '083743', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083744000', 'SANTA FE', '08', '0837', '083744', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083745000', 'TABANGO', '08', '0837', '083745', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083746000', 'TABONTABON', '08', '0837', '083746', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083747000', 'TACLOBAN CITY (Capital)', '08', '0837', '083747', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083748000', 'TANAUAN', '08', '0837', '083748', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083749000', 'TOLOSA', '08', '0837', '083749', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083750000', 'TUNGA', '08', '0837', '083750', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('083751000', 'VILLABA', '08', '0837', '083751', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084801000', 'ALLEN', '08', '0848', '084801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084802000', 'BIRI', '08', '0848', '084802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084803000', 'BOBON', '08', '0848', '084803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084804000', 'CAPUL', '08', '0848', '084804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084805000', 'CATARMAN (Capital)', '08', '0848', '084805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084806000', 'CATUBIG', '08', '0848', '084806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084807000', 'GAMAY', '08', '0848', '084807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084808000', 'LAOANG', '08', '0848', '084808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084809000', 'LAPINIG', '08', '0848', '084809', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084810000', 'LAS NAVAS', '08', '0848', '084810', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084811000', 'LAVEZARES', '08', '0848', '084811', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084812000', 'MAPANAS', '08', '0848', '084812', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084813000', 'MONDRAGON', '08', '0848', '084813', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084814000', 'PALAPAG', '08', '0848', '084814', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084815000', 'PAMBUJAN', '08', '0848', '084815', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084816000', 'ROSARIO', '08', '0848', '084816', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084817000', 'SAN ANTONIO', '08', '0848', '084817', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084818000', 'SAN ISIDRO', '08', '0848', '084818', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084819000', 'SAN JOSE', '08', '0848', '084819', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084820000', 'SAN ROQUE', '08', '0848', '084820', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084821000', 'SAN VICENTE', '08', '0848', '084821', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084822000', 'SILVINO LOBOS', '08', '0848', '084822', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084823000', 'VICTORIA', '08', '0848', '084823', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('084824000', 'LOPE DE VEGA', '08', '0848', '084824', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086001000', 'ALMAGRO', '08', '0860', '086001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086002000', 'BASEY', '08', '0860', '086002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086003000', 'CALBAYOG CITY', '08', '0860', '086003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086004000', 'CALBIGA', '08', '0860', '086004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086005000', 'CITY OF CATBALOGAN (Capital)', '08', '0860', '086005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086006000', 'DARAM', '08', '0860', '086006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086007000', 'GANDARA', '08', '0860', '086007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086008000', 'HINABANGAN', '08', '0860', '086008', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086009000', 'JIABONG', '08', '0860', '086009', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086010000', 'MARABUT', '08', '0860', '086010', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086011000', 'MATUGUINAO', '08', '0860', '086011', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086012000', 'MOTIONG', '08', '0860', '086012', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086013000', 'PINABACDAO', '08', '0860', '086013', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086014000', 'SAN JOSE DE BUAN', '08', '0860', '086014', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086015000', 'SAN SEBASTIAN', '08', '0860', '086015', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086016000', 'SANTA MARGARITA', '08', '0860', '086016', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086017000', 'SANTA RITA', '08', '0860', '086017', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086018000', 'SANTO NIÑO', '08', '0860', '086018', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086019000', 'TALALORA', '08', '0860', '086019', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086020000', 'TARANGNAN', '08', '0860', '086020', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086021000', 'VILLAREAL', '08', '0860', '086021', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086022000', 'PARANAS (WRIGHT)', '08', '0860', '086022', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086023000', 'ZUMARRAGA', '08', '0860', '086023', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086024000', 'TAGAPUL-AN', '08', '0860', '086024', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086025000', 'SAN JORGE', '08', '0860', '086025', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086026000', 'PAGSANGHAN', '08', '0860', '086026', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086401000', 'ANAHAWAN', '08', '0864', '086401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086402000', 'BONTOC', '08', '0864', '086402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086403000', 'HINUNANGAN', '08', '0864', '086403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086404000', 'HINUNDAYAN', '08', '0864', '086404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086405000', 'LIBAGON', '08', '0864', '086405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086406000', 'LILOAN', '08', '0864', '086406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086407000', 'CITY OF MAASIN (Capital)', '08', '0864', '086407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086408000', 'MACROHON', '08', '0864', '086408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086409000', 'MALITBOG', '08', '0864', '086409', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086410000', 'PADRE BURGOS', '08', '0864', '086410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086411000', 'PINTUYAN', '08', '0864', '086411', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086412000', 'SAINT BERNARD', '08', '0864', '086412', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086413000', 'SAN FRANCISCO', '08', '0864', '086413', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086414000', 'SAN JUAN (CABALIAN)', '08', '0864', '086414', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086415000', 'SAN RICARDO', '08', '0864', '086415', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086416000', 'SILAGO', '08', '0864', '086416', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086417000', 'SOGOD', '08', '0864', '086417', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086418000', 'TOMAS OPPUS', '08', '0864', '086418', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('086419000', 'LIMASAWA', '08', '0864', '086419', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087801000', 'ALMERIA', '08', '0878', '087801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087802000', 'BILIRAN', '08', '0878', '087802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087803000', 'CABUCGAYAN', '08', '0878', '087803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087804000', 'CAIBIRAN', '08', '0878', '087804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087805000', 'CULABA', '08', '0878', '087805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087806000', 'KAWAYAN', '08', '0878', '087806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087807000', 'MARIPIPI', '08', '0878', '087807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('087808000', 'NAVAL (Capital)', '08', '0878', '087808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097201000', 'DAPITAN CITY', '09', '0972', '097201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097202000', 'DIPOLOG CITY (Capital)', '09', '0972', '097202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097203000', 'KATIPUNAN', '09', '0972', '097203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097204000', 'LA LIBERTAD', '09', '0972', '097204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097205000', 'LABASON', '09', '0972', '097205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097206000', 'LILOY', '09', '0972', '097206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097207000', 'MANUKAN', '09', '0972', '097207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097208000', 'MUTIA', '09', '0972', '097208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097209000', 'PIÑAN (NEW PIÑAN)', '09', '0972', '097209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097210000', 'POLANCO', '09', '0972', '097210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097211000', 'PRES. MANUEL A. ROXAS', '09', '0972', '097211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097212000', 'RIZAL', '09', '0972', '097212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097213000', 'SALUG', '09', '0972', '097213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097214000', 'SERGIO OSMEÑA SR.', '09', '0972', '097214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097215000', 'SIAYAN', '09', '0972', '097215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097216000', 'SIBUCO', '09', '0972', '097216', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097217000', 'SIBUTAD', '09', '0972', '097217', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097218000', 'SINDANGAN', '09', '0972', '097218', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097219000', 'SIOCON', '09', '0972', '097219', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097220000', 'SIRAWAI', '09', '0972', '097220', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097221000', 'TAMPILISAN', '09', '0972', '097221', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097222000', 'JOSE DALMAN (PONOT)', '09', '0972', '097222', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097223000', 'GUTALAC', '09', '0972', '097223', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097224000', 'BALIGUIAN', '09', '0972', '097224', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097225000', 'GODOD', '09', '0972', '097225', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097226000', 'BACUNGAN (Leon T. Postigo)', '09', '0972', '097226', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097227000', 'KALAWIT', '09', '0972', '097227', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097302000', 'AURORA', '09', '0973', '097302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097303000', 'BAYOG', '09', '0973', '097303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097305000', 'DIMATALING', '09', '0973', '097305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097306000', 'DINAS', '09', '0973', '097306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097307000', 'DUMALINAO', '09', '0973', '097307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097308000', 'DUMINGAG', '09', '0973', '097308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097311000', 'KUMALARANG', '09', '0973', '097311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097312000', 'LABANGAN', '09', '0973', '097312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097313000', 'LAPUYAN', '09', '0973', '097313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097315000', 'MAHAYAG', '09', '0973', '097315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097317000', 'MARGOSATUBIG', '09', '0973', '097317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097318000', 'MIDSALIP', '09', '0973', '097318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097319000', 'MOLAVE', '09', '0973', '097319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097322000', 'PAGADIAN CITY (Capital)', '09', '0973', '097322', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097323000', 'RAMON MAGSAYSAY (LIARGO)', '09', '0973', '097323', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097324000', 'SAN MIGUEL', '09', '0973', '097324', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097325000', 'SAN PABLO', '09', '0973', '097325', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097327000', 'TABINA', '09', '0973', '097327', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097328000', 'TAMBULIG', '09', '0973', '097328', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097330000', 'TUKURAN', '09', '0973', '097330', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097332000', 'ZAMBOANGA CITY', '09', '0973', '097332', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097333000', 'LAKEWOOD', '09', '0973', '097333', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097337000', 'JOSEFINA', '09', '0973', '097337', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097338000', 'PITOGO', '09', '0973', '097338', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097340000', 'SOMINOT (DON MARIANO MARCOS)', '09', '0973', '097340', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097341000', 'VINCENZO A. SAGUN', '09', '0973', '097341', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097343000', 'GUIPOS', '09', '0973', '097343', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('097344000', 'TIGBAO', '09', '0973', '097344', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098301000', 'ALICIA', '09', '0983', '098301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098302000', 'BUUG', '09', '0983', '098302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098303000', 'DIPLAHAN', '09', '0983', '098303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098304000', 'IMELDA', '09', '0983', '098304', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098305000', 'IPIL (Capital)', '09', '0983', '098305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098306000', 'KABASALAN', '09', '0983', '098306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098307000', 'MABUHAY', '09', '0983', '098307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098308000', 'MALANGAS', '09', '0983', '098308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098309000', 'NAGA', '09', '0983', '098309', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098310000', 'OLUTANGA', '09', '0983', '098310', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098311000', 'PAYAO', '09', '0983', '098311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098312000', 'ROSELLER LIM', '09', '0983', '098312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098313000', 'SIAY', '09', '0983', '098313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098314000', 'TALUSAN', '09', '0983', '098314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098315000', 'TITAY', '09', '0983', '098315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('098316000', 'TUNGAWAN', '09', '0983', '098316', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('099701000', 'CITY OF ISABELA', '09', '0997', '099701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101301000', 'BAUNGON', '10', '1013', '101301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101302000', 'DAMULOG', '10', '1013', '101302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101303000', 'DANGCAGAN', '10', '1013', '101303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101304000', 'DON CARLOS', '10', '1013', '101304', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101305000', 'IMPASUG-ONG', '10', '1013', '101305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101306000', 'KADINGILAN', '10', '1013', '101306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101307000', 'KALILANGAN', '10', '1013', '101307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101308000', 'KIBAWE', '10', '1013', '101308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101309000', 'KITAOTAO', '10', '1013', '101309', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101310000', 'LANTAPAN', '10', '1013', '101310', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101311000', 'LIBONA', '10', '1013', '101311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101312000', 'CITY OF MALAYBALAY (Capital)', '10', '1013', '101312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101313000', 'MALITBOG', '10', '1013', '101313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101314000', 'MANOLO FORTICH', '10', '1013', '101314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101315000', 'MARAMAG', '10', '1013', '101315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101316000', 'PANGANTUCAN', '10', '1013', '101316', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101317000', 'QUEZON', '10', '1013', '101317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101318000', 'SAN FERNANDO', '10', '1013', '101318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101319000', 'SUMILAO', '10', '1013', '101319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101320000', 'TALAKAG', '10', '1013', '101320', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101321000', 'CITY OF VALENCIA', '10', '1013', '101321', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101322000', 'CABANGLASAN', '10', '1013', '101322', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101801000', 'CATARMAN', '10', '1018', '101801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101802000', 'GUINSILIBAN', '10', '1018', '101802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101803000', 'MAHINOG', '10', '1018', '101803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101804000', 'MAMBAJAO (Capital)', '10', '1018', '101804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('101805000', 'SAGAY', '10', '1018', '101805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103501000', 'BACOLOD', '10', '1035', '103501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103502000', 'BALOI', '10', '1035', '103502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103503000', 'BAROY', '10', '1035', '103503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103504000', 'ILIGAN CITY', '10', '1035', '103504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103505000', 'KAPATAGAN', '10', '1035', '103505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103506000', 'SULTAN NAGA DIMAPORO (KAROMATAN)', '10', '1035', '103506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103507000', 'KAUSWAGAN', '10', '1035', '103507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103508000', 'KOLAMBUGAN', '10', '1035', '103508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103509000', 'LALA', '10', '1035', '103509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103510000', 'LINAMON', '10', '1035', '103510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103511000', 'MAGSAYSAY', '10', '1035', '103511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103512000', 'MAIGO', '10', '1035', '103512', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103513000', 'MATUNGAO', '10', '1035', '103513', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103514000', 'MUNAI', '10', '1035', '103514', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103515000', 'NUNUNGAN', '10', '1035', '103515', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103516000', 'PANTAO RAGAT', '10', '1035', '103516', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103517000', 'POONA PIAGAPO', '10', '1035', '103517', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103518000', 'SALVADOR', '10', '1035', '103518', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103519000', 'SAPAD', '10', '1035', '103519', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103520000', 'TAGOLOAN', '10', '1035', '103520', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103521000', 'TANGCAL', '10', '1035', '103521', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103522000', 'TUBOD (Capital)', '10', '1035', '103522', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('103523000', 'PANTAR', '10', '1035', '103523', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104201000', 'ALORAN', '10', '1042', '104201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104202000', 'BALIANGAO', '10', '1042', '104202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104203000', 'BONIFACIO', '10', '1042', '104203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104204000', 'CALAMBA', '10', '1042', '104204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104205000', 'CLARIN', '10', '1042', '104205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104206000', 'CONCEPCION', '10', '1042', '104206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104207000', 'JIMENEZ', '10', '1042', '104207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104208000', 'LOPEZ JAENA', '10', '1042', '104208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104209000', 'OROQUIETA CITY (Capital)', '10', '1042', '104209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104210000', 'OZAMIS CITY', '10', '1042', '104210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104211000', 'PANAON', '10', '1042', '104211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104212000', 'PLARIDEL', '10', '1042', '104212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104213000', 'SAPANG DALAGA', '10', '1042', '104213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104214000', 'SINACABAN', '10', '1042', '104214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104215000', 'TANGUB CITY', '10', '1042', '104215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104216000', 'TUDELA', '10', '1042', '104216', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104217000', 'DON VICTORIANO CHIONGBIAN  (DON MARIANO MARCOS)', '10', '1042', '104217', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104301000', 'ALUBIJID', '10', '1043', '104301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104302000', 'BALINGASAG', '10', '1043', '104302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104303000', 'BALINGOAN', '10', '1043', '104303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104304000', 'BINUANGAN', '10', '1043', '104304', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104305000', 'CAGAYAN DE ORO CITY (Capital)', '10', '1043', '104305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104306000', 'CLAVERIA', '10', '1043', '104306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104307000', 'CITY OF EL SALVADOR', '10', '1043', '104307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104308000', 'GINGOOG CITY', '10', '1043', '104308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104309000', 'GITAGUM', '10', '1043', '104309', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104310000', 'INITAO', '10', '1043', '104310', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104311000', 'JASAAN', '10', '1043', '104311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104312000', 'KINOGUITAN', '10', '1043', '104312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104313000', 'LAGONGLONG', '10', '1043', '104313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104314000', 'LAGUINDINGAN', '10', '1043', '104314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104315000', 'LIBERTAD', '10', '1043', '104315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104316000', 'LUGAIT', '10', '1043', '104316', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104317000', 'MAGSAYSAY (LINUGOS)', '10', '1043', '104317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104318000', 'MANTICAO', '10', '1043', '104318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104319000', 'MEDINA', '10', '1043', '104319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104320000', 'NAAWAN', '10', '1043', '104320', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104321000', 'OPOL', '10', '1043', '104321', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104322000', 'SALAY', '10', '1043', '104322', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104323000', 'SUGBONGCOGON', '10', '1043', '104323', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104324000', 'TAGOLOAN', '10', '1043', '104324', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104325000', 'TALISAYAN', '10', '1043', '104325', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('104326000', 'VILLANUEVA', '10', '1043', '104326', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112301000', 'ASUNCION (SAUG)', '11', '1123', '112301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112303000', 'CARMEN', '11', '1123', '112303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112305000', 'KAPALONG', '11', '1123', '112305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112314000', 'NEW CORELLA', '11', '1123', '112314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112315000', 'CITY OF PANABO', '11', '1123', '112315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112317000', 'ISLAND GARDEN CITY OF SAMAL', '11', '1123', '112317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112318000', 'SANTO TOMAS', '11', '1123', '112318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112319000', 'CITY OF TAGUM (Capital)', '11', '1123', '112319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112322000', 'TALAINGOD', '11', '1123', '112322', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112323000', 'BRAULIO E. DUJALI', '11', '1123', '112323', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112324000', 'SAN ISIDRO', '11', '1123', '112324', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112401000', 'BANSALAN', '11', '1124', '112401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112402000', 'DAVAO CITY', '11', '1124', '112402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112403000', 'CITY OF DIGOS (Capital)', '11', '1124', '112403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112404000', 'HAGONOY', '11', '1124', '112404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112406000', 'KIBLAWAN', '11', '1124', '112406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112407000', 'MAGSAYSAY', '11', '1124', '112407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112408000', 'MALALAG', '11', '1124', '112408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112410000', 'MATANAO', '11', '1124', '112410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112411000', 'PADADA', '11', '1124', '112411', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112412000', 'SANTA CRUZ', '11', '1124', '112412', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112414000', 'SULOP', '11', '1124', '112414', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112501000', 'BAGANGA', '11', '1125', '112501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112502000', 'BANAYBANAY', '11', '1125', '112502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112503000', 'BOSTON', '11', '1125', '112503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112504000', 'CARAGA', '11', '1125', '112504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112505000', 'CATEEL', '11', '1125', '112505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112506000', 'GOVERNOR GENEROSO', '11', '1125', '112506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112507000', 'LUPON', '11', '1125', '112507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112508000', 'MANAY', '11', '1125', '112508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112509000', 'CITY OF MATI (Capital)', '11', '1125', '112509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112510000', 'SAN ISIDRO', '11', '1125', '112510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('112511000', 'TARRAGONA', '11', '1125', '112511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118201000', 'COMPOSTELA', '11', '1182', '118201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118202000', 'LAAK (SAN VICENTE)', '11', '1182', '118202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118203000', 'MABINI (DOÑA ALICIA)', '11', '1182', '118203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118204000', 'MACO', '11', '1182', '118204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118205000', 'MARAGUSAN (SAN MARIANO)', '11', '1182', '118205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118206000', 'MAWAB', '11', '1182', '118206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118207000', 'MONKAYO', '11', '1182', '118207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118208000', 'MONTEVISTA', '11', '1182', '118208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118209000', 'NABUNTURAN (Capital)', '11', '1182', '118209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118210000', 'NEW BATAAN', '11', '1182', '118210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118211000', 'PANTUKAN', '11', '1182', '118211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118601000', 'DON MARCELINO', '11', '1186', '118601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118602000', 'JOSE ABAD SANTOS (TRINIDAD)', '11', '1186', '118602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118603000', 'MALITA', '11', '1186', '118603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118604000', 'SANTA MARIA', '11', '1186', '118604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('118605000', 'SARANGANI', '11', '1186', '118605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124701000', 'ALAMADA', '12', '1247', '124701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124702000', 'CARMEN', '12', '1247', '124702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124703000', 'KABACAN', '12', '1247', '124703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124704000', 'CITY OF KIDAPAWAN (Capital)', '12', '1247', '124704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124705000', 'LIBUNGAN', '12', '1247', '124705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124706000', 'MAGPET', '12', '1247', '124706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124707000', 'MAKILALA', '12', '1247', '124707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124708000', 'MATALAM', '12', '1247', '124708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124709000', 'MIDSAYAP', '12', '1247', '124709', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124710000', 'M\'LANG', '12', '1247', '124710', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124711000', 'PIGKAWAYAN', '12', '1247', '124711', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124712000', 'PIKIT', '12', '1247', '124712', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124713000', 'PRESIDENT ROXAS', '12', '1247', '124713', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124714000', 'TULUNAN', '12', '1247', '124714', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124715000', 'ANTIPAS', '12', '1247', '124715', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124716000', 'BANISILAN', '12', '1247', '124716', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124717000', 'ALEOSAN', '12', '1247', '124717', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('124718000', 'ARAKAN', '12', '1247', '124718', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126302000', 'BANGA', '12', '1263', '126302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126303000', 'GENERAL SANTOS CITY (DADIANGAS)', '12', '1263', '126303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126306000', 'CITY OF KORONADAL (Capital)', '12', '1263', '126306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126311000', 'NORALA', '12', '1263', '126311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126312000', 'POLOMOLOK', '12', '1263', '126312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126313000', 'SURALLAH', '12', '1263', '126313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126314000', 'TAMPAKAN', '12', '1263', '126314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126315000', 'TANTANGAN', '12', '1263', '126315', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126316000', 'T\'BOLI', '12', '1263', '126316', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126317000', 'TUPI', '12', '1263', '126317', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126318000', 'SANTO NIÑO', '12', '1263', '126318', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126319000', 'LAKE SEBU', '12', '1263', '126319', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126501000', 'BAGUMBAYAN', '12', '1265', '126501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126502000', 'COLUMBIO', '12', '1265', '126502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126503000', 'ESPERANZA', '12', '1265', '126503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126504000', 'ISULAN (Capital)', '12', '1265', '126504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126505000', 'KALAMANSIG', '12', '1265', '126505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126506000', 'LEBAK', '12', '1265', '126506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126507000', 'LUTAYAN', '12', '1265', '126507', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126508000', 'LAMBAYONG (MARIANO MARCOS)', '12', '1265', '126508', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126509000', 'PALIMBANG', '12', '1265', '126509', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126510000', 'PRESIDENT QUIRINO', '12', '1265', '126510', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126511000', 'CITY OF TACURONG', '12', '1265', '126511', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('126512000', 'SEN. NINOY AQUINO', '12', '1265', '126512', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128001000', 'ALABEL (Capital)', '12', '1280', '128001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128002000', 'GLAN', '12', '1280', '128002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128003000', 'KIAMBA', '12', '1280', '128003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128004000', 'MAASIM', '12', '1280', '128004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128005000', 'MAITUM', '12', '1280', '128005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128006000', 'MALAPATAN', '12', '1280', '128006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('128007000', 'MALUNGON', '12', '1280', '128007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('129804000', 'COTABATO CITY', '12', '1298', '129804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133901000', 'TONDO I / II', '13', '1339', '133901', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133902000', 'BINONDO', '13', '1339', '133902', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133903000', 'QUIAPO', '13', '1339', '133903', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133904000', 'SAN NICOLAS', '13', '1339', '133904', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133905000', 'SANTA CRUZ', '13', '1339', '133905', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133906000', 'SAMPALOC', '13', '1339', '133906', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133907000', 'SAN MIGUEL', '13', '1339', '133907', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133908000', 'ERMITA', '13', '1339', '133908', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133909000', 'INTRAMUROS', '13', '1339', '133909', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133910000', 'MALATE', '13', '1339', '133910', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133911000', 'PACO', '13', '1339', '133911', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133912000', 'PANDACAN', '13', '1339', '133912', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133913000', 'PORT AREA', '13', '1339', '133913', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('133914000', 'SANTA ANA', '13', '1339', '133914', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137401000', 'CITY OF MANDALUYONG', '13', '1374', '137401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137402000', 'CITY OF MARIKINA', '13', '1374', '137402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137403000', 'CITY OF PASIG', '13', '1374', '137403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137404000', 'QUEZON CITY', '13', '1374', '137404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137405000', 'CITY OF SAN JUAN', '13', '1374', '137405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137501000', 'CALOOCAN CITY', '13', '1375', '137501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137502000', 'CITY OF MALABON', '13', '1375', '137502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137503000', 'CITY OF NAVOTAS', '13', '1375', '137503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137504000', 'CITY OF VALENZUELA', '13', '1375', '137504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137601000', 'CITY OF LAS PIÑAS', '13', '1376', '137601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137602000', 'CITY OF MAKATI', '13', '1376', '137602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137603000', 'CITY OF MUNTINLUPA', '13', '1376', '137603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137604000', 'CITY OF PARAÑAQUE', '13', '1376', '137604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137605000', 'PASAY CITY', '13', '1376', '137605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137606000', 'PATEROS', '13', '1376', '137606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('137607000', 'TAGUIG CITY', '13', '1376', '137607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140101000', 'BANGUED (Capital)', '14', '1401', '140101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140102000', 'BOLINEY', '14', '1401', '140102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140103000', 'BUCAY', '14', '1401', '140103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140104000', 'BUCLOC', '14', '1401', '140104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140105000', 'DAGUIOMAN', '14', '1401', '140105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140106000', 'DANGLAS', '14', '1401', '140106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140107000', 'DOLORES', '14', '1401', '140107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140108000', 'LA PAZ', '14', '1401', '140108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140109000', 'LACUB', '14', '1401', '140109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140110000', 'LAGANGILANG', '14', '1401', '140110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140111000', 'LAGAYAN', '14', '1401', '140111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140112000', 'LANGIDEN', '14', '1401', '140112', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140113000', 'LICUAN-BAAY (LICUAN)', '14', '1401', '140113', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140114000', 'LUBA', '14', '1401', '140114', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140115000', 'MALIBCONG', '14', '1401', '140115', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140116000', 'MANABO', '14', '1401', '140116', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140117000', 'PEÑARRUBIA', '14', '1401', '140117', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140118000', 'PIDIGAN', '14', '1401', '140118', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140119000', 'PILAR', '14', '1401', '140119', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140120000', 'SALLAPADAN', '14', '1401', '140120', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140121000', 'SAN ISIDRO', '14', '1401', '140121', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140122000', 'SAN JUAN', '14', '1401', '140122', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140123000', 'SAN QUINTIN', '14', '1401', '140123', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140124000', 'TAYUM', '14', '1401', '140124', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140125000', 'TINEG', '14', '1401', '140125', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140126000', 'TUBO', '14', '1401', '140126', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('140127000', 'VILLAVICIOSA', '14', '1401', '140127', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141101000', 'ATOK', '14', '1411', '141101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141102000', 'BAGUIO CITY', '14', '1411', '141102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141103000', 'BAKUN', '14', '1411', '141103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141104000', 'BOKOD', '14', '1411', '141104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141105000', 'BUGUIAS', '14', '1411', '141105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141106000', 'ITOGON', '14', '1411', '141106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141107000', 'KABAYAN', '14', '1411', '141107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141108000', 'KAPANGAN', '14', '1411', '141108', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141109000', 'KIBUNGAN', '14', '1411', '141109', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141110000', 'LA TRINIDAD (Capital)', '14', '1411', '141110', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141111000', 'MANKAYAN', '14', '1411', '141111', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141112000', 'SABLAN', '14', '1411', '141112', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141113000', 'TUBA', '14', '1411', '141113', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('141114000', 'TUBLAY', '14', '1411', '141114', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142701000', 'BANAUE', '14', '1427', '142701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142702000', 'HUNGDUAN', '14', '1427', '142702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142703000', 'KIANGAN', '14', '1427', '142703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142704000', 'LAGAWE (Capital)', '14', '1427', '142704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142705000', 'LAMUT', '14', '1427', '142705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142706000', 'MAYOYAO', '14', '1427', '142706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142707000', 'ALFONSO LISTA (POTIA)', '14', '1427', '142707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142708000', 'AGUINALDO', '14', '1427', '142708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142709000', 'HINGYON', '14', '1427', '142709', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142710000', 'TINOC', '14', '1427', '142710', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('142711000', 'ASIPULO', '14', '1427', '142711', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143201000', 'BALBALAN', '14', '1432', '143201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143206000', 'LUBUAGAN', '14', '1432', '143206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143208000', 'PASIL', '14', '1432', '143208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143209000', 'PINUKPUK', '14', '1432', '143209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143211000', 'RIZAL (LIWAN)', '14', '1432', '143211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143213000', 'CITY OF TABUK (Capital)', '14', '1432', '143213', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143214000', 'TANUDAN', '14', '1432', '143214', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('143215000', 'TINGLAYAN', '14', '1432', '143215', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144401000', 'BARLIG', '14', '1444', '144401', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144402000', 'BAUKO', '14', '1444', '144402', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144403000', 'BESAO', '14', '1444', '144403', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144404000', 'BONTOC (Capital)', '14', '1444', '144404', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144405000', 'NATONIN', '14', '1444', '144405', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144406000', 'PARACELIS', '14', '1444', '144406', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144407000', 'SABANGAN', '14', '1444', '144407', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144408000', 'SADANGA', '14', '1444', '144408', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144409000', 'SAGADA', '14', '1444', '144409', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('144410000', 'TADIAN', '14', '1444', '144410', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148101000', 'CALANASAN (BAYAG)', '14', '1481', '148101', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148102000', 'CONNER', '14', '1481', '148102', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148103000', 'FLORA', '14', '1481', '148103', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148104000', 'KABUGAO (Capital)', '14', '1481', '148104', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148105000', 'LUNA', '14', '1481', '148105', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148106000', 'PUDTOL', '14', '1481', '148106', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('148107000', 'SANTA MARCELA', '14', '1481', '148107', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150702000', 'CITY OF LAMITAN', '15', '1507', '150702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150703000', 'LANTAWAN', '15', '1507', '150703', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150704000', 'MALUSO', '15', '1507', '150704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150705000', 'SUMISIP', '15', '1507', '150705', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150706000', 'TIPO-TIPO', '15', '1507', '150706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150707000', 'TUBURAN', '15', '1507', '150707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150708000', 'AKBAR', '15', '1507', '150708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150709000', 'AL-BARKA', '15', '1507', '150709', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150710000', 'HADJI MOHAMMAD AJUL', '15', '1507', '150710', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150711000', 'UNGKAYA PUKAN', '15', '1507', '150711', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150712000', 'HADJI MUHTAMAD', '15', '1507', '150712', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('150713000', 'TABUAN-LASA', '15', '1507', '150713', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153601000', 'BACOLOD-KALAWI (BACOLOD GRANDE)', '15', '1536', '153601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153602000', 'BALABAGAN', '15', '1536', '153602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153603000', 'BALINDONG (WATU)', '15', '1536', '153603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153604000', 'BAYANG', '15', '1536', '153604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153605000', 'BINIDAYAN', '15', '1536', '153605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153606000', 'BUBONG', '15', '1536', '153606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153607000', 'BUTIG', '15', '1536', '153607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153609000', 'GANASSI', '15', '1536', '153609', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153610000', 'KAPAI', '15', '1536', '153610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153611000', 'LUMBA-BAYABAO (MAGUING)', '15', '1536', '153611', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153612000', 'LUMBATAN', '15', '1536', '153612', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153613000', 'MADALUM', '15', '1536', '153613', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153614000', 'MADAMBA', '15', '1536', '153614', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153615000', 'MALABANG', '15', '1536', '153615', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153616000', 'MARANTAO', '15', '1536', '153616', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153617000', 'MARAWI CITY (Capital)', '15', '1536', '153617', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153618000', 'MASIU', '15', '1536', '153618', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153619000', 'MULONDO', '15', '1536', '153619', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153620000', 'PAGAYAWAN (TATARIKAN)', '15', '1536', '153620', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153621000', 'PIAGAPO', '15', '1536', '153621', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153622000', 'POONA BAYABAO (GATA)', '15', '1536', '153622', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153623000', 'PUALAS', '15', '1536', '153623', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153624000', 'DITSAAN-RAMAIN', '15', '1536', '153624', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153625000', 'SAGUIARAN', '15', '1536', '153625', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153626000', 'TAMPARAN', '15', '1536', '153626', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153627000', 'TARAKA', '15', '1536', '153627', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153628000', 'TUBARAN', '15', '1536', '153628', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153629000', 'TUGAYA', '15', '1536', '153629', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153630000', 'WAO', '15', '1536', '153630', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153631000', 'MAROGONG', '15', '1536', '153631', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153632000', 'CALANOGAS', '15', '1536', '153632', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153633000', 'BUADIPOSO-BUNTONG', '15', '1536', '153633', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153634000', 'MAGUING', '15', '1536', '153634', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153635000', 'PICONG (SULTAN GUMANDER)', '15', '1536', '153635', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153636000', 'LUMBAYANAGUE', '15', '1536', '153636', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153637000', 'BUMBARAN', '15', '1536', '153637', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153638000', 'TAGOLOAN II', '15', '1536', '153638', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153639000', 'KAPATAGAN', '15', '1536', '153639', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153640000', 'SULTAN DUMALONDONG', '15', '1536', '153640', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153641000', 'LUMBACA-UNAYAN', '15', '1536', '153641', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153801000', 'AMPATUAN', '15', '1538', '153801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153802000', 'BULDON', '15', '1538', '153802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153803000', 'BULUAN', '15', '1538', '153803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153805000', 'DATU PAGLAS', '15', '1538', '153805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153806000', 'DATU PIANG', '15', '1538', '153806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153807000', 'DATU ODIN SINSUAT (DINAIG)', '15', '1538', '153807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153808000', 'SHARIFF AGUAK (MAGANOY) (Capital)', '15', '1538', '153808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153809000', 'MATANOG', '15', '1538', '153809', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153810000', 'PAGALUNGAN', '15', '1538', '153810', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153811000', 'PARANG', '15', '1538', '153811', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153812000', 'SULTAN KUDARAT (NULING)', '15', '1538', '153812', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153813000', 'SULTAN SA BARONGIS (LAMBAYONG)', '15', '1538', '153813', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153814000', 'KABUNTALAN (TUMBAO)', '15', '1538', '153814', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153815000', 'UPI', '15', '1538', '153815', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153816000', 'TALAYAN', '15', '1538', '153816', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153817000', 'SOUTH UPI', '15', '1538', '153817', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153818000', 'BARIRA', '15', '1538', '153818', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153819000', 'GEN. S. K. PENDATUN', '15', '1538', '153819', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153820000', 'MAMASAPANO', '15', '1538', '153820', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153821000', 'TALITAY', '15', '1538', '153821', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153822000', 'PAGAGAWAN', '15', '1538', '153822', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153823000', 'PAGLAT', '15', '1538', '153823', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153824000', 'SULTAN MASTURA', '15', '1538', '153824', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153825000', 'GUINDULUNGAN', '15', '1538', '153825', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153826000', 'DATU SAUDI-AMPATUAN', '15', '1538', '153826', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153827000', 'DATU UNSAY', '15', '1538', '153827', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153828000', 'DATU ABDULLAH SANGKI', '15', '1538', '153828', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153829000', 'RAJAH BUAYAN', '15', '1538', '153829', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153830000', 'DATU BLAH T. SINSUAT', '15', '1538', '153830', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153831000', 'DATU ANGGAL MIDTIMBANG', '15', '1538', '153831', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153832000', 'MANGUDADATU', '15', '1538', '153832', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153833000', 'PANDAG', '15', '1538', '153833', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153834000', 'NORTHERN KABUNTALAN', '15', '1538', '153834', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153835000', 'DATU HOFFER AMPATUAN', '15', '1538', '153835', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153836000', 'DATU SALIBO', '15', '1538', '153836', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('153837000', 'SHARIFF SAYDONA MUSTAPHA', '15', '1538', '153837', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156601000', 'INDANAN', '15', '1566', '156601', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156602000', 'JOLO (Capital)', '15', '1566', '156602', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156603000', 'KALINGALAN CALUANG', '15', '1566', '156603', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156604000', 'LUUK', '15', '1566', '156604', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156605000', 'MAIMBUNG', '15', '1566', '156605', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156606000', 'HADJI PANGLIMA TAHIL (MARUNGGAS)', '15', '1566', '156606', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156607000', 'OLD PANAMAO', '15', '1566', '156607', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156608000', 'PANGUTARAN', '15', '1566', '156608', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156609000', 'PARANG', '15', '1566', '156609', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156610000', 'PATA', '15', '1566', '156610', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156611000', 'PATIKUL', '15', '1566', '156611', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156612000', 'SIASI', '15', '1566', '156612', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156613000', 'TALIPAO', '15', '1566', '156613', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156614000', 'TAPUL', '15', '1566', '156614', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156615000', 'TONGKIL', '15', '1566', '156615', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156616000', 'PANGLIMA ESTINO (NEW PANAMAO)', '15', '1566', '156616', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156617000', 'LUGUS', '15', '1566', '156617', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156618000', 'PANDAMI', '15', '1566', '156618', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('156619000', 'OMAR', '15', '1566', '156619', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157001000', 'PANGLIMA SUGALA (BALIMBING)', '15', '1570', '157001', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157002000', 'BONGAO (Capital)', '15', '1570', '157002', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157003000', 'MAPUN (CAGAYAN DE TAWI-TAWI)', '15', '1570', '157003', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157004000', 'SIMUNUL', '15', '1570', '157004', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157005000', 'SITANGKAI', '15', '1570', '157005', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157006000', 'SOUTH UBIAN', '15', '1570', '157006', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157007000', 'TANDUBAS', '15', '1570', '157007', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157008000', 'TURTLE ISLANDS', '15', '1570', '157008', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157009000', 'LANGUYAN', '15', '1570', '157009', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157010000', 'SAPA-SAPA', '15', '1570', '157010', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('157011000', 'SIBUTU', '15', '1570', '157011', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160201000', 'BUENAVISTA', '16', '1602', '160201', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160202000', 'BUTUAN CITY (Capital)', '16', '1602', '160202', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160203000', 'CITY OF CABADBARAN', '16', '1602', '160203', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160204000', 'CARMEN', '16', '1602', '160204', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160205000', 'JABONGA', '16', '1602', '160205', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160206000', 'KITCHARAO', '16', '1602', '160206', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160207000', 'LAS NIEVES', '16', '1602', '160207', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160208000', 'MAGALLANES', '16', '1602', '160208', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160209000', 'NASIPIT', '16', '1602', '160209', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160210000', 'SANTIAGO', '16', '1602', '160210', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160211000', 'TUBAY', '16', '1602', '160211', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160212000', 'REMEDIOS T. ROMUALDEZ', '16', '1602', '160212', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160301000', 'CITY OF BAYUGAN', '16', '1603', '160301', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160302000', 'BUNAWAN', '16', '1603', '160302', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160303000', 'ESPERANZA', '16', '1603', '160303', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160304000', 'LA PAZ', '16', '1603', '160304', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160305000', 'LORETO', '16', '1603', '160305', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160306000', 'PROSPERIDAD (Capital)', '16', '1603', '160306', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160307000', 'ROSARIO', '16', '1603', '160307', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160308000', 'SAN FRANCISCO', '16', '1603', '160308', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160309000', 'SAN LUIS', '16', '1603', '160309', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160310000', 'SANTA JOSEFA', '16', '1603', '160310', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160311000', 'TALACOGON', '16', '1603', '160311', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160312000', 'TRENTO', '16', '1603', '160312', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160313000', 'VERUELA', '16', '1603', '160313', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('160314000', 'SIBAGAT', '16', '1603', '160314', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166701000', 'ALEGRIA', '16', '1667', '166701', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166702000', 'BACUAG', '16', '1667', '166702', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166704000', 'BURGOS', '16', '1667', '166704', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166706000', 'CLAVER', '16', '1667', '166706', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166707000', 'DAPA', '16', '1667', '166707', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166708000', 'DEL CARMEN', '16', '1667', '166708', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166710000', 'GENERAL LUNA', '16', '1667', '166710', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166711000', 'GIGAQUIT', '16', '1667', '166711', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166714000', 'MAINIT', '16', '1667', '166714', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166715000', 'MALIMONO', '16', '1667', '166715', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166716000', 'PILAR', '16', '1667', '166716', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166717000', 'PLACER', '16', '1667', '166717', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166718000', 'SAN BENITO', '16', '1667', '166718', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166719000', 'SAN FRANCISCO (ANAO-AON)', '16', '1667', '166719', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166720000', 'SAN ISIDRO', '16', '1667', '166720', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166721000', 'SANTA MONICA (SAPAO)', '16', '1667', '166721', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166722000', 'SISON', '16', '1667', '166722', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166723000', 'SOCORRO', '16', '1667', '166723', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166724000', 'SURIGAO CITY (Capital)', '16', '1667', '166724', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166725000', 'TAGANA-AN', '16', '1667', '166725', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166727000', 'TUBOD', '16', '1667', '166727', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166801000', 'BAROBO', '16', '1668', '166801', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166802000', 'BAYABAS', '16', '1668', '166802', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166803000', 'CITY OF BISLIG', '16', '1668', '166803', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166804000', 'CAGWAIT', '16', '1668', '166804', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166805000', 'CANTILAN', '16', '1668', '166805', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166806000', 'CARMEN', '16', '1668', '166806', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166807000', 'CARRASCAL', '16', '1668', '166807', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166808000', 'CORTES', '16', '1668', '166808', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166809000', 'HINATUAN', '16', '1668', '166809', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166810000', 'LANUZA', '16', '1668', '166810', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166811000', 'LIANGA', '16', '1668', '166811', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166812000', 'LINGIG', '16', '1668', '166812', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166813000', 'MADRID', '16', '1668', '166813', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166814000', 'MARIHATAG', '16', '1668', '166814', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166815000', 'SAN AGUSTIN', '16', '1668', '166815', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166816000', 'SAN MIGUEL', '16', '1668', '166816', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166817000', 'TAGBINA', '16', '1668', '166817', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166818000', 'TAGO', '16', '1668', '166818', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('166819000', 'CITY OF TANDAG (Capital)', '16', '1668', '166819', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168501000', 'BASILISA (RIZAL)', '16', '1685', '168501', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168502000', 'CAGDIANAO', '16', '1685', '168502', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168503000', 'DINAGAT', '16', '1685', '168503', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168504000', 'LIBJO (ALBOR)', '16', '1685', '168504', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168505000', 'LORETO', '16', '1685', '168505', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168506000', 'SAN JOSE (Capital)', '16', '1685', '168506', NOW(), NOW());
-INSERT INTO philippine_cities VALUES ('168507000', 'TUBAJON', '16', '1685', '168507', NOW(), NOW());
+  INSERT INTO philippine_cities (psgc_code, city_municipality_description, region_code, province_code,city_municipality_code, created_at, updated_at)
+VALUES
+ ('012801000', 'ADAMS', '01', '0128', '012801', NOW(), NOW()),
+ ('012802000', 'BACARRA', '01', '0128', '012802', NOW(), NOW()),
+ ('012803000', 'BADOC', '01', '0128', '012803', NOW(), NOW()),
+ ('012804000', 'BANGUI', '01', '0128', '012804', NOW(), NOW()),
+ ('012805000', 'CITY OF BATAC', '01', '0128', '012805', NOW(), NOW()),
+ ('012806000', 'BURGOS', '01', '0128', '012806', NOW(), NOW()),
+ ('012807000', 'CARASI', '01', '0128', '012807', NOW(), NOW()),
+ ('012808000', 'CURRIMAO', '01', '0128', '012808', NOW(), NOW()),
+ ('012809000', 'DINGRAS', '01', '0128', '012809', NOW(), NOW()),
+ ('012810000', 'DUMALNEG', '01', '0128', '012810', NOW(), NOW()),
+ ('012811000', 'BANNA (ESPIRITU)', '01', '0128', '012811', NOW(), NOW()),
+ ('012812000', 'LAOAG CITY (Capital)', '01', '0128', '012812', NOW(), NOW()),
+ ('012813000', 'MARCOS', '01', '0128', '012813', NOW(), NOW()),
+ ('012814000', 'NUEVA ERA', '01', '0128', '012814', NOW(), NOW()),
+ ('012815000', 'PAGUDPUD', '01', '0128', '012815', NOW(), NOW()),
+ ('012816000', 'PAOAY', '01', '0128', '012816', NOW(), NOW()),
+ ('012817000', 'PASUQUIN', '01', '0128', '012817', NOW(), NOW()),
+ ('012818000', 'PIDDIG', '01', '0128', '012818', NOW(), NOW()),
+ ('012819000', 'PINILI', '01', '0128', '012819', NOW(), NOW()),
+ ('012820000', 'SAN NICOLAS', '01', '0128', '012820', NOW(), NOW()),
+ ('012821000', 'SARRAT', '01', '0128', '012821', NOW(), NOW()),
+ ('012822000', 'SOLSONA', '01', '0128', '012822', NOW(), NOW()),
+ ('012823000', 'VINTAR', '01', '0128', '012823', NOW(), NOW()),
+ ('012901000', 'ALILEM', '01', '0129', '012901', NOW(), NOW()),
+ ('012902000', 'BANAYOYO', '01', '0129', '012902', NOW(), NOW()),
+ ('012903000', 'BANTAY', '01', '0129', '012903', NOW(), NOW()),
+ ('012904000', 'BURGOS', '01', '0129', '012904', NOW(), NOW()),
+ ('012905000', 'CABUGAO', '01', '0129', '012905', NOW(), NOW()),
+ ('012906000', 'CITY OF CANDON', '01', '0129', '012906', NOW(), NOW()),
+ ('012907000', 'CAOAYAN', '01', '0129', '012907', NOW(), NOW()),
+ ('012908000', 'CERVANTES', '01', '0129', '012908', NOW(), NOW()),
+ ('012909000', 'GALIMUYOD', '01', '0129', '012909', NOW(), NOW()),
+ ('012910000', 'GREGORIO DEL PILAR (CONCEPCION)', '01', '0129', '012910', NOW(), NOW()),
+ ('012911000', 'LIDLIDDA', '01', '0129', '012911', NOW(), NOW()),
+ ('012912000', 'MAGSINGAL', '01', '0129', '012912', NOW(), NOW()),
+ ('012913000', 'NAGBUKEL', '01', '0129', '012913', NOW(), NOW()),
+ ('012914000', 'NARVACAN', '01', '0129', '012914', NOW(), NOW()),
+ ('012915000', 'QUIRINO (ANGKAKI)', '01', '0129', '012915', NOW(), NOW()),
+ ('012916000', 'SALCEDO (BAUGEN)', '01', '0129', '012916', NOW(), NOW()),
+ ('012917000', 'SAN EMILIO', '01', '0129', '012917', NOW(), NOW()),
+ ('012918000', 'SAN ESTEBAN', '01', '0129', '012918', NOW(), NOW()),
+ ('012919000', 'SAN ILDEFONSO', '01', '0129', '012919', NOW(), NOW()),
+ ('012920000', 'SAN JUAN (LAPOG)', '01', '0129', '012920', NOW(), NOW()),
+ ('012921000', 'SAN VICENTE', '01', '0129', '012921', NOW(), NOW()),
+ ('012922000', 'SANTA', '01', '0129', '012922', NOW(), NOW()),
+ ('012923000', 'SANTA CATALINA', '01', '0129', '012923', NOW(), NOW()),
+ ('012924000', 'SANTA CRUZ', '01', '0129', '012924', NOW(), NOW()),
+ ('012925000', 'SANTA LUCIA', '01', '0129', '012925', NOW(), NOW()),
+ ('012926000', 'SANTA MARIA', '01', '0129', '012926', NOW(), NOW()),
+ ('012927000', 'SANTIAGO', '01', '0129', '012927', NOW(), NOW()),
+ ('012928000', 'SANTO DOMINGO', '01', '0129', '012928', NOW(), NOW()),
+ ('012929000', 'SIGAY', '01', '0129', '012929', NOW(), NOW()),
+ ('012930000', 'SINAIT', '01', '0129', '012930', NOW(), NOW()),
+ ('012931000', 'SUGPON', '01', '0129', '012931', NOW(), NOW()),
+ ('012932000', 'SUYO', '01', '0129', '012932', NOW(), NOW()),
+ ('012933000', 'TAGUDIN', '01', '0129', '012933', NOW(), NOW()),
+ ('012934000', 'CITY OF VIGAN (Capital)', '01', '0129', '012934', NOW(), NOW()),
+ ('013301000', 'AGOO', '01', '0133', '013301', NOW(), NOW()),
+ ('013302000', 'ARINGAY', '01', '0133', '013302', NOW(), NOW()),
+ ('013303000', 'BACNOTAN', '01', '0133', '013303', NOW(), NOW()),
+ ('013304000', 'BAGULIN', '01', '0133', '013304', NOW(), NOW()),
+ ('013305000', 'BALAOAN', '01', '0133', '013305', NOW(), NOW()),
+ ('013306000', 'BANGAR', '01', '0133', '013306', NOW(), NOW()),
+ ('013307000', 'BAUANG', '01', '0133', '013307', NOW(), NOW()),
+ ('013308000', 'BURGOS', '01', '0133', '013308', NOW(), NOW()),
+ ('013309000', 'CABA', '01', '0133', '013309', NOW(), NOW()),
+ ('013310000', 'LUNA', '01', '0133', '013310', NOW(), NOW()),
+ ('013311000', 'NAGUILIAN', '01', '0133', '013311', NOW(), NOW()),
+ ('013312000', 'PUGO', '01', '0133', '013312', NOW(), NOW()),
+ ('013313000', 'ROSARIO', '01', '0133', '013313', NOW(), NOW()),
+ ('013314000', 'CITY OF SAN FERNANDO (Capital)', '01', '0133', '013314', NOW(), NOW()),
+ ('013315000', 'SAN GABRIEL', '01', '0133', '013315', NOW(), NOW()),
+ ('013316000', 'SAN JUAN', '01', '0133', '013316', NOW(), NOW()),
+ ('013317000', 'SANTO TOMAS', '01', '0133', '013317', NOW(), NOW()),
+ ('013318000', 'SANTOL', '01', '0133', '013318', NOW(), NOW()),
+ ('013319000', 'SUDIPEN', '01', '0133', '013319', NOW(), NOW()),
+ ('013320000', 'TUBAO', '01', '0133', '013320', NOW(), NOW()),
+ ('015501000', 'AGNO', '01', '0155', '015501', NOW(), NOW()),
+ ('015502000', 'AGUILAR', '01', '0155', '015502', NOW(), NOW()),
+ ('015503000', 'CITY OF ALAMINOS', '01', '0155', '015503', NOW(), NOW()),
+ ('015504000', 'ALCALA', '01', '0155', '015504', NOW(), NOW()),
+ ('015505000', 'ANDA', '01', '0155', '015505', NOW(), NOW()),
+ ('015506000', 'ASINGAN', '01', '0155', '015506', NOW(), NOW()),
+ ('015507000', 'BALUNGAO', '01', '0155', '015507', NOW(), NOW()),
+ ('015508000', 'BANI', '01', '0155', '015508', NOW(), NOW()),
+ ('015509000', 'BASISTA', '01', '0155', '015509', NOW(), NOW()),
+ ('015510000', 'BAUTISTA', '01', '0155', '015510', NOW(), NOW()),
+ ('015511000', 'BAYAMBANG', '01', '0155', '015511', NOW(), NOW()),
+ ('015512000', 'BINALONAN', '01', '0155', '015512', NOW(), NOW()),
+ ('015513000', 'BINMALEY', '01', '0155', '015513', NOW(), NOW()),
+ ('015514000', 'BOLINAO', '01', '0155', '015514', NOW(), NOW()),
+ ('015515000', 'BUGALLON', '01', '0155', '015515', NOW(), NOW()),
+ ('015516000', 'BURGOS', '01', '0155', '015516', NOW(), NOW()),
+ ('015517000', 'CALASIAO', '01', '0155', '015517', NOW(), NOW()),
+ ('015518000', 'DAGUPAN CITY', '01', '0155', '015518', NOW(), NOW()),
+ ('015519000', 'DASOL', '01', '0155', '015519', NOW(), NOW()),
+ ('015520000', 'INFANTA', '01', '0155', '015520', NOW(), NOW()),
+ ('015521000', 'LABRADOR', '01', '0155', '015521', NOW(), NOW()),
+ ('015522000', 'LINGAYEN (Capital)', '01', '0155', '015522', NOW(), NOW()),
+ ('015523000', 'MABINI', '01', '0155', '015523', NOW(), NOW()),
+ ('015524000', 'MALASIQUI', '01', '0155', '015524', NOW(), NOW()),
+ ('015525000', 'MANAOAG', '01', '0155', '015525', NOW(), NOW()),
+ ('015526000', 'MANGALDAN', '01', '0155', '015526', NOW(), NOW()),
+ ('015527000', 'MANGATAREM', '01', '0155', '015527', NOW(), NOW()),
+ ('015528000', 'MAPANDAN', '01', '0155', '015528', NOW(), NOW()),
+ ('015529000', 'NATIVIDAD', '01', '0155', '015529', NOW(), NOW()),
+ ('015530000', 'POZORRUBIO', '01', '0155', '015530', NOW(), NOW()),
+ ('015531000', 'ROSALES', '01', '0155', '015531', NOW(), NOW()),
+ ('015532000', 'SAN CARLOS CITY', '01', '0155', '015532', NOW(), NOW()),
+ ('015533000', 'SAN FABIAN', '01', '0155', '015533', NOW(), NOW()),
+ ('015534000', 'SAN JACINTO', '01', '0155', '015534', NOW(), NOW()),
+ ('015535000', 'SAN MANUEL', '01', '0155', '015535', NOW(), NOW()),
+ ('015536000', 'SAN NICOLAS', '01', '0155', '015536', NOW(), NOW()),
+ ('015537000', 'SAN QUINTIN', '01', '0155', '015537', NOW(), NOW()),
+ ('015538000', 'SANTA BARBARA', '01', '0155', '015538', NOW(), NOW()),
+ ('015539000', 'SANTA MARIA', '01', '0155', '015539', NOW(), NOW()),
+ ('015540000', 'SANTO TOMAS', '01', '0155', '015540', NOW(), NOW()),
+ ('015541000', 'SISON', '01', '0155', '015541', NOW(), NOW()),
+ ('015542000', 'SUAL', '01', '0155', '015542', NOW(), NOW()),
+ ('015543000', 'TAYUG', '01', '0155', '015543', NOW(), NOW()),
+ ('015544000', 'UMINGAN', '01', '0155', '015544', NOW(), NOW()),
+ ('015545000', 'URBIZTONDO', '01', '0155', '015545', NOW(), NOW()),
+ ('015546000', 'CITY OF URDANETA', '01', '0155', '015546', NOW(), NOW()),
+ ('015547000', 'VILLASIS', '01', '0155', '015547', NOW(), NOW()),
+ ('015548000', 'LAOAC', '01', '0155', '015548', NOW(), NOW()),
+ ('020901000', 'BASCO (Capital)', '02', '0209', '020901', NOW(), NOW()),
+ ('020902000', 'ITBAYAT', '02', '0209', '020902', NOW(), NOW()),
+ ('020903000', 'IVANA', '02', '0209', '020903', NOW(), NOW()),
+ ('020904000', 'MAHATAO', '02', '0209', '020904', NOW(), NOW()),
+ ('020905000', 'SABTANG', '02', '0209', '020905', NOW(), NOW()),
+ ('020906000', 'UYUGAN', '02', '0209', '020906', NOW(), NOW()),
+ ('021501000', 'ABULUG', '02', '0215', '021501', NOW(), NOW()),
+ ('021502000', 'ALCALA', '02', '0215', '021502', NOW(), NOW()),
+ ('021503000', 'ALLACAPAN', '02', '0215', '021503', NOW(), NOW()),
+ ('021504000', 'AMULUNG', '02', '0215', '021504', NOW(), NOW()),
+ ('021505000', 'APARRI', '02', '0215', '021505', NOW(), NOW()),
+ ('021506000', 'BAGGAO', '02', '0215', '021506', NOW(), NOW()),
+ ('021507000', 'BALLESTEROS', '02', '0215', '021507', NOW(), NOW()),
+ ('021508000', 'BUGUEY', '02', '0215', '021508', NOW(), NOW()),
+ ('021509000', 'CALAYAN', '02', '0215', '021509', NOW(), NOW()),
+ ('021510000', 'CAMALANIUGAN', '02', '0215', '021510', NOW(), NOW()),
+ ('021511000', 'CLAVERIA', '02', '0215', '021511', NOW(), NOW()),
+ ('021512000', 'ENRILE', '02', '0215', '021512', NOW(), NOW()),
+ ('021513000', 'GATTARAN', '02', '0215', '021513', NOW(), NOW()),
+ ('021514000', 'GONZAGA', '02', '0215', '021514', NOW(), NOW()),
+ ('021515000', 'IGUIG', '02', '0215', '021515', NOW(), NOW()),
+ ('021516000', 'LAL-LO', '02', '0215', '021516', NOW(), NOW()),
+ ('021517000', 'LASAM', '02', '0215', '021517', NOW(), NOW()),
+ ('021518000', 'PAMPLONA', '02', '0215', '021518', NOW(), NOW()),
+ ('021519000', 'PEÑABLANCA', '02', '0215', '021519', NOW(), NOW()),
+ ('021520000', 'PIAT', '02', '0215', '021520', NOW(), NOW()),
+ ('021521000', 'RIZAL', '02', '0215', '021521', NOW(), NOW()),
+ ('021522000', 'SANCHEZ-MIRA', '02', '0215', '021522', NOW(), NOW()),
+ ('021523000', 'SANTA ANA', '02', '0215', '021523', NOW(), NOW()),
+ ('021524000', 'SANTA PRAXEDES', '02', '0215', '021524', NOW(), NOW()),
+ ('021525000', 'SANTA TERESITA', '02', '0215', '021525', NOW(), NOW()),
+ ('021526000', 'SANTO NIÑO (FAIRE)', '02', '0215', '021526', NOW(), NOW()),
+ ('021527000', 'SOLANA', '02', '0215', '021527', NOW(), NOW()),
+ ('021528000', 'TUAO', '02', '0215', '021528', NOW(), NOW()),
+ ('021529000', 'TUGUEGARAO CITY (Capital)', '02', '0215', '021529', NOW(), NOW()),
+ ('023101000', 'ALICIA', '02', '0231', '023101', NOW(), NOW()),
+ ('023102000', 'ANGADANAN', '02', '0231', '023102', NOW(), NOW()),
+ ('023103000', 'AURORA', '02', '0231', '023103', NOW(), NOW()),
+ ('023104000', 'BENITO SOLIVEN', '02', '0231', '023104', NOW(), NOW()),
+ ('023105000', 'BURGOS', '02', '0231', '023105', NOW(), NOW()),
+ ('023106000', 'CABAGAN', '02', '0231', '023106', NOW(), NOW()),
+ ('023107000', 'CABATUAN', '02', '0231', '023107', NOW(), NOW()),
+ ('023108000', 'CITY OF CAUAYAN', '02', '0231', '023108', NOW(), NOW()),
+ ('023109000', 'CORDON', '02', '0231', '023109', NOW(), NOW()),
+ ('023110000', 'DINAPIGUE', '02', '0231', '023110', NOW(), NOW()),
+ ('023111000', 'DIVILACAN', '02', '0231', '023111', NOW(), NOW()),
+ ('023112000', 'ECHAGUE', '02', '0231', '023112', NOW(), NOW()),
+ ('023113000', 'GAMU', '02', '0231', '023113', NOW(), NOW()),
+ ('023114000', 'ILAGAN CITY (Capital)', '02', '0231', '023114', NOW(), NOW()),
+ ('023115000', 'JONES', '02', '0231', '023115', NOW(), NOW()),
+ ('023116000', 'LUNA', '02', '0231', '023116', NOW(), NOW()),
+ ('023117000', 'MACONACON', '02', '0231', '023117', NOW(), NOW()),
+ ('023118000', 'DELFIN ALBANO (MAGSAYSAY)', '02', '0231', '023118', NOW(), NOW()),
+ ('023119000', 'MALLIG', '02', '0231', '023119', NOW(), NOW()),
+ ('023120000', 'NAGUILIAN', '02', '0231', '023120', NOW(), NOW()),
+ ('023121000', 'PALANAN', '02', '0231', '023121', NOW(), NOW()),
+ ('023122000', 'QUEZON', '02', '0231', '023122', NOW(), NOW()),
+ ('023123000', 'QUIRINO', '02', '0231', '023123', NOW(), NOW()),
+ ('023124000', 'RAMON', '02', '0231', '023124', NOW(), NOW()),
+ ('023125000', 'REINA MERCEDES', '02', '0231', '023125', NOW(), NOW()),
+ ('023126000', 'ROXAS', '02', '0231', '023126', NOW(), NOW()),
+ ('023127000', 'SAN AGUSTIN', '02', '0231', '023127', NOW(), NOW()),
+ ('023128000', 'SAN GUILLERMO', '02', '0231', '023128', NOW(), NOW()),
+ ('023129000', 'SAN ISIDRO', '02', '0231', '023129', NOW(), NOW()),
+ ('023130000', 'SAN MANUEL', '02', '0231', '023130', NOW(), NOW()),
+ ('023131000', 'SAN MARIANO', '02', '0231', '023131', NOW(), NOW()),
+ ('023132000', 'SAN MATEO', '02', '0231', '023132', NOW(), NOW()),
+ ('023133000', 'SAN PABLO', '02', '0231', '023133', NOW(), NOW()),
+ ('023134000', 'SANTA MARIA', '02', '0231', '023134', NOW(), NOW()),
+ ('023135000', 'CITY OF SANTIAGO', '02', '0231', '023135', NOW(), NOW()),
+ ('023136000', 'SANTO TOMAS', '02', '0231', '023136', NOW(), NOW()),
+ ('023137000', 'TUMAUINI', '02', '0231', '023137', NOW(), NOW()),
+ ('025001000', 'AMBAGUIO', '02', '0250', '025001', NOW(), NOW()),
+ ('025002000', 'ARITAO', '02', '0250', '025002', NOW(), NOW()),
+ ('025003000', 'BAGABAG', '02', '0250', '025003', NOW(), NOW()),
+ ('025004000', 'BAMBANG', '02', '0250', '025004', NOW(), NOW()),
+ ('025005000', 'BAYOMBONG (Capital)', '02', '0250', '025005', NOW(), NOW()),
+ ('025006000', 'DIADI', '02', '0250', '025006', NOW(), NOW()),
+ ('025007000', 'DUPAX DEL NORTE', '02', '0250', '025007', NOW(), NOW()),
+ ('025008000', 'DUPAX DEL SUR', '02', '0250', '025008', NOW(), NOW()),
+ ('025009000', 'KASIBU', '02', '0250', '025009', NOW(), NOW()),
+ ('025010000', 'KAYAPA', '02', '0250', '025010', NOW(), NOW()),
+ ('025011000', 'QUEZON', '02', '0250', '025011', NOW(), NOW()),
+ ('025012000', 'SANTA FE', '02', '0250', '025012', NOW(), NOW()),
+ ('025013000', 'SOLANO', '02', '0250', '025013', NOW(), NOW()),
+ ('025014000', 'VILLAVERDE', '02', '0250', '025014', NOW(), NOW()),
+ ('025015000', 'ALFONSO CASTANEDA', '02', '0250', '025015', NOW(), NOW()),
+ ('025701000', 'AGLIPAY', '02', '0257', '025701', NOW(), NOW()),
+ ('025702000', 'CABARROGUIS (Capital)', '02', '0257', '025702', NOW(), NOW()),
+ ('025703000', 'DIFFUN', '02', '0257', '025703', NOW(), NOW()),
+ ('025704000', 'MADDELA', '02', '0257', '025704', NOW(), NOW()),
+ ('025705000', 'SAGUDAY', '02', '0257', '025705', NOW(), NOW()),
+ ('025706000', 'NAGTIPUNAN', '02', '0257', '025706', NOW(), NOW()),
+ ('030801000', 'ABUCAY', '03', '0308', '030801', NOW(), NOW()),
+ ('030802000', 'BAGAC', '03', '0308', '030802', NOW(), NOW()),
+ ('030803000', 'CITY OF BALANGA (Capital)', '03', '0308', '030803', NOW(), NOW()),
+ ('030804000', 'DINALUPIHAN', '03', '0308', '030804', NOW(), NOW()),
+ ('030805000', 'HERMOSA', '03', '0308', '030805', NOW(), NOW()),
+ ('030806000', 'LIMAY', '03', '0308', '030806', NOW(), NOW()),
+ ('030807000', 'MARIVELES', '03', '0308', '030807', NOW(), NOW()),
+ ('030808000', 'MORONG', '03', '0308', '030808', NOW(), NOW()),
+ ('030809000', 'ORANI', '03', '0308', '030809', NOW(), NOW()),
+ ('030810000', 'ORION', '03', '0308', '030810', NOW(), NOW()),
+ ('030811000', 'PILAR', '03', '0308', '030811', NOW(), NOW()),
+ ('030812000', 'SAMAL', '03', '0308', '030812', NOW(), NOW()),
+ ('031401000', 'ANGAT', '03', '0314', '031401', NOW(), NOW()),
+ ('031402000', 'BALAGTAS (BIGAA)', '03', '0314', '031402', NOW(), NOW()),
+ ('031403000', 'BALIUAG', '03', '0314', '031403', NOW(), NOW()),
+ ('031404000', 'BOCAUE', '03', '0314', '031404', NOW(), NOW()),
+ ('031405000', 'BULACAN', '03', '0314', '031405', NOW(), NOW()),
+ ('031406000', 'BUSTOS', '03', '0314', '031406', NOW(), NOW()),
+ ('031407000', 'CALUMPIT', '03', '0314', '031407', NOW(), NOW()),
+ ('031408000', 'GUIGUINTO', '03', '0314', '031408', NOW(), NOW()),
+ ('031409000', 'HAGONOY', '03', '0314', '031409', NOW(), NOW()),
+ ('031410000', 'CITY OF MALOLOS (Capital)', '03', '0314', '031410', NOW(), NOW()),
+ ('031411000', 'MARILAO', '03', '0314', '031411', NOW(), NOW()),
+ ('031412000', 'CITY OF MEYCAUAYAN', '03', '0314', '031412', NOW(), NOW()),
+ ('031413000', 'NORZAGARAY', '03', '0314', '031413', NOW(), NOW()),
+ ('031414000', 'OBANDO', '03', '0314', '031414', NOW(), NOW()),
+ ('031415000', 'PANDI', '03', '0314', '031415', NOW(), NOW()),
+ ('031416000', 'PAOMBONG', '03', '0314', '031416', NOW(), NOW()),
+ ('031417000', 'PLARIDEL', '03', '0314', '031417', NOW(), NOW()),
+ ('031418000', 'PULILAN', '03', '0314', '031418', NOW(), NOW()),
+ ('031419000', 'SAN ILDEFONSO', '03', '0314', '031419', NOW(), NOW()),
+ ('031420000', 'CITY OF SAN JOSE DEL MONTE', '03', '0314', '031420', NOW(), NOW()),
+ ('031421000', 'SAN MIGUEL', '03', '0314', '031421', NOW(), NOW()),
+ ('031422000', 'SAN RAFAEL', '03', '0314', '031422', NOW(), NOW()),
+ ('031423000', 'SANTA MARIA', '03', '0314', '031423', NOW(), NOW()),
+ ('031424000', 'DOÑA REMEDIOS TRINIDAD', '03', '0314', '031424', NOW(), NOW()),
+ ('034901000', 'ALIAGA', '03', '0349', '034901', NOW(), NOW()),
+ ('034902000', 'BONGABON', '03', '0349', '034902', NOW(), NOW()),
+ ('034903000', 'CABANATUAN CITY', '03', '0349', '034903', NOW(), NOW()),
+ ('034904000', 'CABIAO', '03', '0349', '034904', NOW(), NOW()),
+ ('034905000', 'CARRANGLAN', '03', '0349', '034905', NOW(), NOW()),
+ ('034906000', 'CUYAPO', '03', '0349', '034906', NOW(), NOW()),
+ ('034907000', 'GABALDON (BITULOK & SABANI)', '03', '0349', '034907', NOW(), NOW()),
+ ('034908000', 'CITY OF GAPAN', '03', '0349', '034908', NOW(), NOW()),
+ ('034909000', 'GENERAL MAMERTO NATIVIDAD', '03', '0349', '034909', NOW(), NOW()),
+ ('034910000', 'GENERAL TINIO (PAPAYA)', '03', '0349', '034910', NOW(), NOW()),
+ ('034911000', 'GUIMBA', '03', '0349', '034911', NOW(), NOW()),
+ ('034912000', 'JAEN', '03', '0349', '034912', NOW(), NOW()),
+ ('034913000', 'LAUR', '03', '0349', '034913', NOW(), NOW()),
+ ('034914000', 'LICAB', '03', '0349', '034914', NOW(), NOW()),
+ ('034915000', 'LLANERA', '03', '0349', '034915', NOW(), NOW()),
+ ('034916000', 'LUPAO', '03', '0349', '034916', NOW(), NOW()),
+ ('034917000', 'SCIENCE CITY OF MUÑOZ', '03', '0349', '034917', NOW(), NOW()),
+ ('034918000', 'NAMPICUAN', '03', '0349', '034918', NOW(), NOW()),
+ ('034919000', 'PALAYAN CITY (Capital)', '03', '0349', '034919', NOW(), NOW()),
+ ('034920000', 'PANTABANGAN', '03', '0349', '034920', NOW(), NOW()),
+ ('034921000', 'PEÑARANDA', '03', '0349', '034921', NOW(), NOW()),
+ ('034922000', 'QUEZON', '03', '0349', '034922', NOW(), NOW()),
+ ('034923000', 'RIZAL', '03', '0349', '034923', NOW(), NOW()),
+ ('034924000', 'SAN ANTONIO', '03', '0349', '034924', NOW(), NOW()),
+ ('034925000', 'SAN ISIDRO', '03', '0349', '034925', NOW(), NOW()),
+ ('034926000', 'SAN JOSE CITY', '03', '0349', '034926', NOW(), NOW()),
+ ('034927000', 'SAN LEONARDO', '03', '0349', '034927', NOW(), NOW()),
+ ('034928000', 'SANTA ROSA', '03', '0349', '034928', NOW(), NOW()),
+ ('034929000', 'SANTO DOMINGO', '03', '0349', '034929', NOW(), NOW()),
+ ('034930000', 'TALAVERA', '03', '0349', '034930', NOW(), NOW()),
+ ('034931000', 'TALUGTUG', '03', '0349', '034931', NOW(), NOW()),
+ ('034932000', 'ZARAGOZA', '03', '0349', '034932', NOW(), NOW()),
+ ('035401000', 'ANGELES CITY', '03', '0354', '035401', NOW(), NOW()),
+ ('035402000', 'APALIT', '03', '0354', '035402', NOW(), NOW()),
+ ('035403000', 'ARAYAT', '03', '0354', '035403', NOW(), NOW()),
+ ('035404000', 'BACOLOR', '03', '0354', '035404', NOW(), NOW()),
+ ('035405000', 'CANDABA', '03', '0354', '035405', NOW(), NOW()),
+ ('035406000', 'FLORIDABLANCA', '03', '0354', '035406', NOW(), NOW()),
+ ('035407000', 'GUAGUA', '03', '0354', '035407', NOW(), NOW()),
+ ('035408000', 'LUBAO', '03', '0354', '035408', NOW(), NOW()),
+ ('035409000', 'MABALACAT CITY', '03', '0354', '035409', NOW(), NOW()),
+ ('035410000', 'MACABEBE', '03', '0354', '035410', NOW(), NOW()),
+ ('035411000', 'MAGALANG', '03', '0354', '035411', NOW(), NOW()),
+ ('035412000', 'MASANTOL', '03', '0354', '035412', NOW(), NOW()),
+ ('035413000', 'MEXICO', '03', '0354', '035413', NOW(), NOW()),
+ ('035414000', 'MINALIN', '03', '0354', '035414', NOW(), NOW()),
+ ('035415000', 'PORAC', '03', '0354', '035415', NOW(), NOW()),
+ ('035416000', 'CITY OF SAN FERNANDO (Capital)', '03', '0354', '035416', NOW(), NOW()),
+ ('035417000', 'SAN LUIS', '03', '0354', '035417', NOW(), NOW()),
+ ('035418000', 'SAN SIMON', '03', '0354', '035418', NOW(), NOW()),
+ ('035419000', 'SANTA ANA', '03', '0354', '035419', NOW(), NOW()),
+ ('035420000', 'SANTA RITA', '03', '0354', '035420', NOW(), NOW()),
+ ('035421000', 'SANTO TOMAS', '03', '0354', '035421', NOW(), NOW()),
+ ('035422000', 'SASMUAN (Sexmoan)', '03', '0354', '035422', NOW(), NOW()),
+ ('036901000', 'ANAO', '03', '0369', '036901', NOW(), NOW()),
+ ('036902000', 'BAMBAN', '03', '0369', '036902', NOW(), NOW()),
+ ('036903000', 'CAMILING', '03', '0369', '036903', NOW(), NOW()),
+ ('036904000', 'CAPAS', '03', '0369', '036904', NOW(), NOW()),
+ ('036905000', 'CONCEPCION', '03', '0369', '036905', NOW(), NOW()),
+ ('036906000', 'GERONA', '03', '0369', '036906', NOW(), NOW()),
+ ('036907000', 'LA PAZ', '03', '0369', '036907', NOW(), NOW()),
+ ('036908000', 'MAYANTOC', '03', '0369', '036908', NOW(), NOW()),
+ ('036909000', 'MONCADA', '03', '0369', '036909', NOW(), NOW()),
+ ('036910000', 'PANIQUI', '03', '0369', '036910', NOW(), NOW()),
+ ('036911000', 'PURA', '03', '0369', '036911', NOW(), NOW()),
+ ('036912000', 'RAMOS', '03', '0369', '036912', NOW(), NOW()),
+ ('036913000', 'SAN CLEMENTE', '03', '0369', '036913', NOW(), NOW()),
+ ('036914000', 'SAN MANUEL', '03', '0369', '036914', NOW(), NOW()),
+ ('036915000', 'SANTA IGNACIA', '03', '0369', '036915', NOW(), NOW()),
+ ('036916000', 'CITY OF TARLAC (Capital)', '03', '0369', '036916', NOW(), NOW()),
+ ('036917000', 'VICTORIA', '03', '0369', '036917', NOW(), NOW()),
+ ('036918000', 'SAN JOSE', '03', '0369', '036918', NOW(), NOW()),
+ ('037101000', 'BOTOLAN', '03', '0371', '037101', NOW(), NOW()),
+ ('037102000', 'CABANGAN', '03', '0371', '037102', NOW(), NOW()),
+ ('037103000', 'CANDELARIA', '03', '0371', '037103', NOW(), NOW()),
+ ('037104000', 'CASTILLEJOS', '03', '0371', '037104', NOW(), NOW()),
+ ('037105000', 'IBA (Capital)', '03', '0371', '037105', NOW(), NOW()),
+ ('037106000', 'MASINLOC', '03', '0371', '037106', NOW(), NOW()),
+ ('037107000', 'OLONGAPO CITY', '03', '0371', '037107', NOW(), NOW()),
+ ('037108000', 'PALAUIG', '03', '0371', '037108', NOW(), NOW()),
+ ('037109000', 'SAN ANTONIO', '03', '0371', '037109', NOW(), NOW()),
+ ('037110000', 'SAN FELIPE', '03', '0371', '037110', NOW(), NOW()),
+ ('037111000', 'SAN MARCELINO', '03', '0371', '037111', NOW(), NOW()),
+ ('037112000', 'SAN NARCISO', '03', '0371', '037112', NOW(), NOW()),
+ ('037113000', 'SANTA CRUZ', '03', '0371', '037113', NOW(), NOW()),
+ ('037114000', 'SUBIC', '03', '0371', '037114', NOW(), NOW()),
+ ('037701000', 'BALER (Capital)', '03', '0377', '037701', NOW(), NOW()),
+ ('037702000', 'CASIGURAN', '03', '0377', '037702', NOW(), NOW()),
+ ('037703000', 'DILASAG', '03', '0377', '037703', NOW(), NOW()),
+ ('037704000', 'DINALUNGAN', '03', '0377', '037704', NOW(), NOW()),
+ ('037705000', 'DINGALAN', '03', '0377', '037705', NOW(), NOW()),
+ ('037706000', 'DIPACULAO', '03', '0377', '037706', NOW(), NOW()),
+ ('037707000', 'MARIA AURORA', '03', '0377', '037707', NOW(), NOW()),
+ ('037708000', 'SAN LUIS', '03', '0377', '037708', NOW(), NOW()),
+ ('041001000', 'AGONCILLO', '04', '0410', '041001', NOW(), NOW()),
+ ('041002000', 'ALITAGTAG', '04', '0410', '041002', NOW(), NOW()),
+ ('041003000', 'BALAYAN', '04', '0410', '041003', NOW(), NOW()),
+ ('041004000', 'BALETE', '04', '0410', '041004', NOW(), NOW()),
+ ('041005000', 'BATANGAS CITY (Capital)', '04', '0410', '041005', NOW(), NOW()),
+ ('041006000', 'BAUAN', '04', '0410', '041006', NOW(), NOW()),
+ ('041007000', 'CALACA', '04', '0410', '041007', NOW(), NOW()),
+ ('041008000', 'CALATAGAN', '04', '0410', '041008', NOW(), NOW()),
+ ('041009000', 'CUENCA', '04', '0410', '041009', NOW(), NOW()),
+ ('041010000', 'IBAAN', '04', '0410', '041010', NOW(), NOW()),
+ ('041011000', 'LAUREL', '04', '0410', '041011', NOW(), NOW()),
+ ('041012000', 'LEMERY', '04', '0410', '041012', NOW(), NOW()),
+ ('041013000', 'LIAN', '04', '0410', '041013', NOW(), NOW()),
+ ('041014000', 'LIPA CITY', '04', '0410', '041014', NOW(), NOW()),
+ ('041015000', 'LOBO', '04', '0410', '041015', NOW(), NOW()),
+ ('041016000', 'MABINI', '04', '0410', '041016', NOW(), NOW()),
+ ('041017000', 'MALVAR', '04', '0410', '041017', NOW(), NOW()),
+ ('041018000', 'MATAASNAKAHOY', '04', '0410', '041018', NOW(), NOW()),
+ ('041019000', 'NASUGBU', '04', '0410', '041019', NOW(), NOW()),
+ ('041020000', 'PADRE GARCIA', '04', '0410', '041020', NOW(), NOW()),
+ ('041021000', 'ROSARIO', '04', '0410', '041021', NOW(), NOW()),
+ ('041022000', 'SAN JOSE', '04', '0410', '041022', NOW(), NOW()),
+ ('041023000', 'SAN JUAN', '04', '0410', '041023', NOW(), NOW()),
+ ('041024000', 'SAN LUIS', '04', '0410', '041024', NOW(), NOW()),
+ ('041025000', 'SAN NICOLAS', '04', '0410', '041025', NOW(), NOW()),
+ ('041026000', 'SAN PASCUAL', '04', '0410', '041026', NOW(), NOW()),
+ ('041027000', 'SANTA TERESITA', '04', '0410', '041027', NOW(), NOW()),
+ ('041028000', 'SANTO TOMAS', '04', '0410', '041028', NOW(), NOW()),
+ ('041029000', 'TAAL', '04', '0410', '041029', NOW(), NOW()),
+ ('041030000', 'TALISAY', '04', '0410', '041030', NOW(), NOW()),
+ ('041031000', 'CITY OF TANAUAN', '04', '0410', '041031', NOW(), NOW()),
+ ('041032000', 'TAYSAN', '04', '0410', '041032', NOW(), NOW()),
+ ('041033000', 'TINGLOY', '04', '0410', '041033', NOW(), NOW()),
+ ('041034000', 'TUY', '04', '0410', '041034', NOW(), NOW()),
+ ('042101000', 'ALFONSO', '04', '0421', '042101', NOW(), NOW()),
+ ('042102000', 'AMADEO', '04', '0421', '042102', NOW(), NOW()),
+ ('042103000', 'BACOOR CITY', '04', '0421', '042103', NOW(), NOW()),
+ ('042104000', 'CARMONA', '04', '0421', '042104', NOW(), NOW()),
+ ('042105000', 'CAVITE CITY', '04', '0421', '042105', NOW(), NOW()),
+ ('042106000', 'CITY OF DASMARIÑAS', '04', '0421', '042106', NOW(), NOW()),
+ ('042107000', 'GENERAL EMILIO AGUINALDO', '04', '0421', '042107', NOW(), NOW()),
+ ('042108000', 'GENERAL TRIAS', '04', '0421', '042108', NOW(), NOW()),
+ ('042109000', 'IMUS CITY', '04', '0421', '042109', NOW(), NOW()),
+ ('042110000', 'INDANG', '04', '0421', '042110', NOW(), NOW()),
+ ('042111000', 'KAWIT', '04', '0421', '042111', NOW(), NOW()),
+ ('042112000', 'MAGALLANES', '04', '0421', '042112', NOW(), NOW()),
+ ('042113000', 'MARAGONDON', '04', '0421', '042113', NOW(), NOW()),
+ ('042114000', 'MENDEZ (MENDEZ-NUÑEZ)', '04', '0421', '042114', NOW(), NOW()),
+ ('042115000', 'NAIC', '04', '0421', '042115', NOW(), NOW()),
+ ('042116000', 'NOVELETA', '04', '0421', '042116', NOW(), NOW()),
+ ('042117000', 'ROSARIO', '04', '0421', '042117', NOW(), NOW()),
+ ('042118000', 'SILANG', '04', '0421', '042118', NOW(), NOW()),
+ ('042119000', 'TAGAYTAY CITY', '04', '0421', '042119', NOW(), NOW()),
+ ('042120000', 'TANZA', '04', '0421', '042120', NOW(), NOW()),
+ ('042121000', 'TERNATE', '04', '0421', '042121', NOW(), NOW()),
+ ('042122000', 'TRECE MARTIRES CITY (Capital)', '04', '0421', '042122', NOW(), NOW()),
+ ('042123000', 'GEN. MARIANO ALVAREZ', '04', '0421', '042123', NOW(), NOW()),
+ ('043401000', 'ALAMINOS', '04', '0434', '043401', NOW(), NOW()),
+ ('043402000', 'BAY', '04', '0434', '043402', NOW(), NOW()),
+ ('043403000', 'CITY OF BIÑAN', '04', '0434', '043403', NOW(), NOW()),
+ ('043404000', 'CABUYAO CITY', '04', '0434', '043404', NOW(), NOW()),
+ ('043405000', 'CITY OF CALAMBA', '04', '0434', '043405', NOW(), NOW()),
+ ('043406000', 'CALAUAN', '04', '0434', '043406', NOW(), NOW()),
+ ('043407000', 'CAVINTI', '04', '0434', '043407', NOW(), NOW()),
+ ('043408000', 'FAMY', '04', '0434', '043408', NOW(), NOW()),
+ ('043409000', 'KALAYAAN', '04', '0434', '043409', NOW(), NOW()),
+ ('043410000', 'LILIW', '04', '0434', '043410', NOW(), NOW()),
+ ('043411000', 'LOS BAÑOS', '04', '0434', '043411', NOW(), NOW()),
+ ('043412000', 'LUISIANA', '04', '0434', '043412', NOW(), NOW()),
+ ('043413000', 'LUMBAN', '04', '0434', '043413', NOW(), NOW()),
+ ('043414000', 'MABITAC', '04', '0434', '043414', NOW(), NOW()),
+ ('043415000', 'MAGDALENA', '04', '0434', '043415', NOW(), NOW()),
+ ('043416000', 'MAJAYJAY', '04', '0434', '043416', NOW(), NOW()),
+ ('043417000', 'NAGCARLAN', '04', '0434', '043417', NOW(), NOW()),
+ ('043418000', 'PAETE', '04', '0434', '043418', NOW(), NOW()),
+ ('043419000', 'PAGSANJAN', '04', '0434', '043419', NOW(), NOW()),
+ ('043420000', 'PAKIL', '04', '0434', '043420', NOW(), NOW()),
+ ('043421000', 'PANGIL', '04', '0434', '043421', NOW(), NOW()),
+ ('043422000', 'PILA', '04', '0434', '043422', NOW(), NOW()),
+ ('043423000', 'RIZAL', '04', '0434', '043423', NOW(), NOW()),
+ ('043424000', 'SAN PABLO CITY', '04', '0434', '043424', NOW(), NOW()),
+ ('043425000', 'CITY OF SAN PEDRO', '04', '0434', '043425', NOW(), NOW()),
+ ('043426000', 'SANTA CRUZ (Capital)', '04', '0434', '043426', NOW(), NOW()),
+ ('043427000', 'SANTA MARIA', '04', '0434', '043427', NOW(), NOW()),
+ ('043428000', 'CITY OF SANTA ROSA', '04', '0434', '043428', NOW(), NOW()),
+ ('043429000', 'SINILOAN', '04', '0434', '043429', NOW(), NOW()),
+ ('043430000', 'VICTORIA', '04', '0434', '043430', NOW(), NOW()),
+ ('045601000', 'AGDANGAN', '04', '0456', '045601', NOW(), NOW()),
+ ('045602000', 'ALABAT', '04', '0456', '045602', NOW(), NOW()),
+ ('045603000', 'ATIMONAN', '04', '0456', '045603', NOW(), NOW()),
+ ('045605000', 'BUENAVISTA', '04', '0456', '045605', NOW(), NOW()),
+ ('045606000', 'BURDEOS', '04', '0456', '045606', NOW(), NOW()),
+ ('045607000', 'CALAUAG', '04', '0456', '045607', NOW(), NOW()),
+ ('045608000', 'CANDELARIA', '04', '0456', '045608', NOW(), NOW()),
+ ('045610000', 'CATANAUAN', '04', '0456', '045610', NOW(), NOW()),
+ ('045615000', 'DOLORES', '04', '0456', '045615', NOW(), NOW()),
+ ('045616000', 'GENERAL LUNA', '04', '0456', '045616', NOW(), NOW()),
+ ('045617000', 'GENERAL NAKAR', '04', '0456', '045617', NOW(), NOW()),
+ ('045618000', 'GUINAYANGAN', '04', '0456', '045618', NOW(), NOW()),
+ ('045619000', 'GUMACA', '04', '0456', '045619', NOW(), NOW()),
+ ('045620000', 'INFANTA', '04', '0456', '045620', NOW(), NOW()),
+ ('045621000', 'JOMALIG', '04', '0456', '045621', NOW(), NOW()),
+ ('045622000', 'LOPEZ', '04', '0456', '045622', NOW(), NOW()),
+ ('045623000', 'LUCBAN', '04', '0456', '045623', NOW(), NOW()),
+ ('045624000', 'LUCENA CITY (Capital)', '04', '0456', '045624', NOW(), NOW()),
+ ('045625000', 'MACALELON', '04', '0456', '045625', NOW(), NOW()),
+ ('045627000', 'MAUBAN', '04', '0456', '045627', NOW(), NOW()),
+ ('045628000', 'MULANAY', '04', '0456', '045628', NOW(), NOW()),
+ ('045629000', 'PADRE BURGOS', '04', '0456', '045629', NOW(), NOW()),
+ ('045630000', 'PAGBILAO', '04', '0456', '045630', NOW(), NOW()),
+ ('045631000', 'PANUKULAN', '04', '0456', '045631', NOW(), NOW()),
+ ('045632000', 'PATNANUNGAN', '04', '0456', '045632', NOW(), NOW()),
+ ('045633000', 'PEREZ', '04', '0456', '045633', NOW(), NOW()),
+ ('045634000', 'PITOGO', '04', '0456', '045634', NOW(), NOW()),
+ ('045635000', 'PLARIDEL', '04', '0456', '045635', NOW(), NOW()),
+ ('045636000', 'POLILLO', '04', '0456', '045636', NOW(), NOW()),
+ ('045637000', 'QUEZON', '04', '0456', '045637', NOW(), NOW()),
+ ('045638000', 'REAL', '04', '0456', '045638', NOW(), NOW()),
+ ('045639000', 'SAMPALOC', '04', '0456', '045639', NOW(), NOW()),
+ ('045640000', 'SAN ANDRES', '04', '0456', '045640', NOW(), NOW()),
+ ('045641000', 'SAN ANTONIO', '04', '0456', '045641', NOW(), NOW()),
+ ('045642000', 'SAN FRANCISCO (AURORA)', '04', '0456', '045642', NOW(), NOW()),
+ ('045644000', 'SAN NARCISO', '04', '0456', '045644', NOW(), NOW()),
+ ('045645000', 'SARIAYA', '04', '0456', '045645', NOW(), NOW()),
+ ('045646000', 'TAGKAWAYAN', '04', '0456', '045646', NOW(), NOW()),
+ ('045647000', 'CITY OF TAYABAS', '04', '0456', '045647', NOW(), NOW()),
+ ('045648000', 'TIAONG', '04', '0456', '045648', NOW(), NOW()),
+ ('045649000', 'UNISAN', '04', '0456', '045649', NOW(), NOW()),
+ ('045801000', 'ANGONO', '04', '0458', '045801', NOW(), NOW()),
+ ('045802000', 'CITY OF ANTIPOLO', '04', '0458', '045802', NOW(), NOW()),
+ ('045803000', 'BARAS', '04', '0458', '045803', NOW(), NOW()),
+ ('045804000', 'BINANGONAN', '04', '0458', '045804', NOW(), NOW()),
+ ('045805000', 'CAINTA', '04', '0458', '045805', NOW(), NOW()),
+ ('045806000', 'CARDONA', '04', '0458', '045806', NOW(), NOW()),
+ ('045807000', 'JALA-JALA', '04', '0458', '045807', NOW(), NOW()),
+ ('045808000', 'RODRIGUEZ (MONTALBAN)', '04', '0458', '045808', NOW(), NOW()),
+ ('045809000', 'MORONG', '04', '0458', '045809', NOW(), NOW()),
+ ('045810000', 'PILILLA', '04', '0458', '045810', NOW(), NOW()),
+ ('045811000', 'SAN MATEO', '04', '0458', '045811', NOW(), NOW()),
+ ('045812000', 'TANAY', '04', '0458', '045812', NOW(), NOW()),
+ ('045813000', 'TAYTAY', '04', '0458', '045813', NOW(), NOW()),
+ ('045814000', 'TERESA', '04', '0458', '045814', NOW(), NOW()),
+ ('174001000', 'BOAC (Capital)', '17', '1740', '174001', NOW(), NOW()),
+ ('174002000', 'BUENAVISTA', '17', '1740', '174002', NOW(), NOW()),
+ ('174003000', 'GASAN', '17', '1740', '174003', NOW(), NOW()),
+ ('174004000', 'MOGPOG', '17', '1740', '174004', NOW(), NOW()),
+ ('174005000', 'SANTA CRUZ', '17', '1740', '174005', NOW(), NOW()),
+ ('174006000', 'TORRIJOS', '17', '1740', '174006', NOW(), NOW()),
+ ('175101000', 'ABRA DE ILOG', '17', '1751', '175101', NOW(), NOW()),
+ ('175102000', 'CALINTAAN', '17', '1751', '175102', NOW(), NOW()),
+ ('175103000', 'LOOC', '17', '1751', '175103', NOW(), NOW()),
+ ('175104000', 'LUBANG', '17', '1751', '175104', NOW(), NOW()),
+ ('175105000', 'MAGSAYSAY', '17', '1751', '175105', NOW(), NOW()),
+ ('175106000', 'MAMBURAO (Capital)', '17', '1751', '175106', NOW(), NOW()),
+ ('175107000', 'PALUAN', '17', '1751', '175107', NOW(), NOW()),
+ ('175108000', 'RIZAL', '17', '1751', '175108', NOW(), NOW()),
+ ('175109000', 'SABLAYAN', '17', '1751', '175109', NOW(), NOW()),
+ ('175110000', 'SAN JOSE', '17', '1751', '175110', NOW(), NOW()),
+ ('175111000', 'SANTA CRUZ', '17', '1751', '175111', NOW(), NOW()),
+ ('175201000', 'BACO', '17', '1752', '175201', NOW(), NOW()),
+ ('175202000', 'BANSUD', '17', '1752', '175202', NOW(), NOW()),
+ ('175203000', 'BONGABONG', '17', '1752', '175203', NOW(), NOW()),
+ ('175204000', 'BULALACAO (SAN PEDRO)', '17', '1752', '175204', NOW(), NOW()),
+ ('175205000', 'CITY OF CALAPAN (Capital)', '17', '1752', '175205', NOW(), NOW()),
+ ('175206000', 'GLORIA', '17', '1752', '175206', NOW(), NOW()),
+ ('175207000', 'MANSALAY', '17', '1752', '175207', NOW(), NOW()),
+ ('175208000', 'NAUJAN', '17', '1752', '175208', NOW(), NOW()),
+ ('175209000', 'PINAMALAYAN', '17', '1752', '175209', NOW(), NOW()),
+ ('175210000', 'POLA', '17', '1752', '175210', NOW(), NOW()),
+ ('175211000', 'PUERTO GALERA', '17', '1752', '175211', NOW(), NOW()),
+ ('175212000', 'ROXAS', '17', '1752', '175212', NOW(), NOW()),
+ ('175213000', 'SAN TEODORO', '17', '1752', '175213', NOW(), NOW()),
+ ('175214000', 'SOCORRO', '17', '1752', '175214', NOW(), NOW()),
+ ('175215000', 'VICTORIA', '17', '1752', '175215', NOW(), NOW()),
+ ('175301000', 'ABORLAN', '17', '1753', '175301', NOW(), NOW()),
+ ('175302000', 'AGUTAYA', '17', '1753', '175302', NOW(), NOW()),
+ ('175303000', 'ARACELI', '17', '1753', '175303', NOW(), NOW()),
+ ('175304000', 'BALABAC', '17', '1753', '175304', NOW(), NOW()),
+ ('175305000', 'BATARAZA', '17', '1753', '175305', NOW(), NOW()),
+ ('175306000', 'BROOKES POINT', '17', '1753', '175306', NOW(), NOW()),
+ ('175307000', 'BUSUANGA', '17', '1753', '175307', NOW(), NOW()),
+ ('175308000', 'CAGAYANCILLO', '17', '1753', '175308', NOW(), NOW()),
+ ('175309000', 'CORON', '17', '1753', '175309', NOW(), NOW()),
+ ('175310000', 'CUYO', '17', '1753', '175310', NOW(), NOW()),
+ ('175311000', 'DUMARAN', '17', '1753', '175311', NOW(), NOW()),
+ ('175312000', 'EL NIDO (BACUIT)', '17', '1753', '175312', NOW(), NOW()),
+ ('175313000', 'LINAPACAN', '17', '1753', '175313', NOW(), NOW()),
+ ('175314000', 'MAGSAYSAY', '17', '1753', '175314', NOW(), NOW()),
+ ('175315000', 'NARRA', '17', '1753', '175315', NOW(), NOW()),
+ ('175316000', 'PUERTO PRINCESA CITY (Capital)', '17', '1753', '175316', NOW(), NOW()),
+ ('175317000', 'QUEZON', '17', '1753', '175317', NOW(), NOW()),
+ ('175318000', 'ROXAS', '17', '1753', '175318', NOW(), NOW()),
+ ('175319000', 'SAN VICENTE', '17', '1753', '175319', NOW(), NOW()),
+ ('175320000', 'TAYTAY', '17', '1753', '175320', NOW(), NOW()),
+ ('175321000', 'KALAYAAN', '17', '1753', '175321', NOW(), NOW()),
+ ('175322000', 'CULION', '17', '1753', '175322', NOW(), NOW()),
+ ('175323000', 'RIZAL (MARCOS)', '17', '1753', '175323', NOW(), NOW()),
+ ('175324000', 'SOFRONIO ESPAÑOLA', '17', '1753', '175324', NOW(), NOW()),
+ ('175901000', 'ALCANTARA', '17', '1759', '175901', NOW(), NOW()),
+ ('175902000', 'BANTON', '17', '1759', '175902', NOW(), NOW()),
+ ('175903000', 'CAJIDIOCAN', '17', '1759', '175903', NOW(), NOW()),
+ ('175904000', 'CALATRAVA', '17', '1759', '175904', NOW(), NOW()),
+ ('175905000', 'CONCEPCION', '17', '1759', '175905', NOW(), NOW()),
+ ('175906000', 'CORCUERA', '17', '1759', '175906', NOW(), NOW()),
+ ('175907000', 'LOOC', '17', '1759', '175907', NOW(), NOW()),
+ ('175908000', 'MAGDIWANG', '17', '1759', '175908', NOW(), NOW()),
+ ('175909000', 'ODIONGAN', '17', '1759', '175909', NOW(), NOW()),
+ ('175910000', 'ROMBLON (Capital)', '17', '1759', '175910', NOW(), NOW()),
+ ('175911000', 'SAN AGUSTIN', '17', '1759', '175911', NOW(), NOW()),
+ ('175912000', 'SAN ANDRES', '17', '1759', '175912', NOW(), NOW()),
+ ('175913000', 'SAN FERNANDO', '17', '1759', '175913', NOW(), NOW()),
+ ('175914000', 'SAN JOSE', '17', '1759', '175914', NOW(), NOW()),
+ ('175915000', 'SANTA FE', '17', '1759', '175915', NOW(), NOW()),
+ ('175916000', 'FERROL', '17', '1759', '175916', NOW(), NOW()),
+ ('175917000', 'SANTA MARIA (IMELDA)', '17', '1759', '175917', NOW(), NOW()),
+ ('050501000', 'BACACAY', '05', '0505', '050501', NOW(), NOW()),
+ ('050502000', 'CAMALIG', '05', '0505', '050502', NOW(), NOW()),
+ ('050503000', 'DARAGA (LOCSIN)', '05', '0505', '050503', NOW(), NOW()),
+ ('050504000', 'GUINOBATAN', '05', '0505', '050504', NOW(), NOW()),
+ ('050505000', 'JOVELLAR', '05', '0505', '050505', NOW(), NOW()),
+ ('050506000', 'LEGAZPI CITY (Capital)', '05', '0505', '050506', NOW(), NOW()),
+ ('050507000', 'LIBON', '05', '0505', '050507', NOW(), NOW()),
+ ('050508000', 'CITY OF LIGAO', '05', '0505', '050508', NOW(), NOW()),
+ ('050509000', 'MALILIPOT', '05', '0505', '050509', NOW(), NOW()),
+ ('050510000', 'MALINAO', '05', '0505', '050510', NOW(), NOW()),
+ ('050511000', 'MANITO', '05', '0505', '050511', NOW(), NOW()),
+ ('050512000', 'OAS', '05', '0505', '050512', NOW(), NOW()),
+ ('050513000', 'PIO DURAN', '05', '0505', '050513', NOW(), NOW()),
+ ('050514000', 'POLANGUI', '05', '0505', '050514', NOW(), NOW()),
+ ('050515000', 'RAPU-RAPU', '05', '0505', '050515', NOW(), NOW()),
+ ('050516000', 'SANTO DOMINGO (LIBOG)', '05', '0505', '050516', NOW(), NOW()),
+ ('050517000', 'CITY OF TABACO', '05', '0505', '050517', NOW(), NOW()),
+ ('050518000', 'TIWI', '05', '0505', '050518', NOW(), NOW()),
+ ('051601000', 'BASUD', '05', '0516', '051601', NOW(), NOW()),
+ ('051602000', 'CAPALONGA', '05', '0516', '051602', NOW(), NOW()),
+ ('051603000', 'DAET (Capital)', '05', '0516', '051603', NOW(), NOW()),
+ ('051604000', 'SAN LORENZO RUIZ (IMELDA)', '05', '0516', '051604', NOW(), NOW()),
+ ('051605000', 'JOSE PANGANIBAN', '05', '0516', '051605', NOW(), NOW()),
+ ('051606000', 'LABO', '05', '0516', '051606', NOW(), NOW()),
+ ('051607000', 'MERCEDES', '05', '0516', '051607', NOW(), NOW()),
+ ('051608000', 'PARACALE', '05', '0516', '051608', NOW(), NOW()),
+ ('051609000', 'SAN VICENTE', '05', '0516', '051609', NOW(), NOW()),
+ ('051610000', 'SANTA ELENA', '05', '0516', '051610', NOW(), NOW()),
+ ('051611000', 'TALISAY', '05', '0516', '051611', NOW(), NOW()),
+ ('051612000', 'VINZONS', '05', '0516', '051612', NOW(), NOW()),
+ ('051701000', 'BAAO', '05', '0517', '051701', NOW(), NOW()),
+ ('051702000', 'BALATAN', '05', '0517', '051702', NOW(), NOW()),
+ ('051703000', 'BATO', '05', '0517', '051703', NOW(), NOW()),
+ ('051704000', 'BOMBON', '05', '0517', '051704', NOW(), NOW()),
+ ('051705000', 'BUHI', '05', '0517', '051705', NOW(), NOW()),
+ ('051706000', 'BULA', '05', '0517', '051706', NOW(), NOW()),
+ ('051707000', 'CABUSAO', '05', '0517', '051707', NOW(), NOW()),
+ ('051708000', 'CALABANGA', '05', '0517', '051708', NOW(), NOW()),
+ ('051709000', 'CAMALIGAN', '05', '0517', '051709', NOW(), NOW()),
+ ('051710000', 'CANAMAN', '05', '0517', '051710', NOW(), NOW()),
+ ('051711000', 'CARAMOAN', '05', '0517', '051711', NOW(), NOW()),
+ ('051712000', 'DEL GALLEGO', '05', '0517', '051712', NOW(), NOW()),
+ ('051713000', 'GAINZA', '05', '0517', '051713', NOW(), NOW()),
+ ('051714000', 'GARCHITORENA', '05', '0517', '051714', NOW(), NOW()),
+ ('051715000', 'GOA', '05', '0517', '051715', NOW(), NOW()),
+ ('051716000', 'IRIGA CITY', '05', '0517', '051716', NOW(), NOW()),
+ ('051717000', 'LAGONOY', '05', '0517', '051717', NOW(), NOW()),
+ ('051718000', 'LIBMANAN', '05', '0517', '051718', NOW(), NOW()),
+ ('051719000', 'LUPI', '05', '0517', '051719', NOW(), NOW()),
+ ('051720000', 'MAGARAO', '05', '0517', '051720', NOW(), NOW()),
+ ('051721000', 'MILAOR', '05', '0517', '051721', NOW(), NOW()),
+ ('051722000', 'MINALABAC', '05', '0517', '051722', NOW(), NOW()),
+ ('051723000', 'NABUA', '05', '0517', '051723', NOW(), NOW()),
+ ('051724000', 'NAGA CITY', '05', '0517', '051724', NOW(), NOW()),
+ ('051725000', 'OCAMPO', '05', '0517', '051725', NOW(), NOW()),
+ ('051726000', 'PAMPLONA', '05', '0517', '051726', NOW(), NOW()),
+ ('051727000', 'PASACAO', '05', '0517', '051727', NOW(), NOW()),
+ ('051728000', 'PILI (Capital)', '05', '0517', '051728', NOW(), NOW()),
+ ('051729000', 'PRESENTACION (PARUBCAN)', '05', '0517', '051729', NOW(), NOW()),
+ ('051730000', 'RAGAY', '05', '0517', '051730', NOW(), NOW()),
+ ('051731000', 'SAGÑAY', '05', '0517', '051731', NOW(), NOW()),
+ ('051732000', 'SAN FERNANDO', '05', '0517', '051732', NOW(), NOW()),
+ ('051733000', 'SAN JOSE', '05', '0517', '051733', NOW(), NOW()),
+ ('051734000', 'SIPOCOT', '05', '0517', '051734', NOW(), NOW()),
+ ('051735000', 'SIRUMA', '05', '0517', '051735', NOW(), NOW()),
+ ('051736000', 'TIGAON', '05', '0517', '051736', NOW(), NOW()),
+ ('051737000', 'TINAMBAC', '05', '0517', '051737', NOW(), NOW()),
+ ('052001000', 'BAGAMANOC', '05', '0520', '052001', NOW(), NOW()),
+ ('052002000', 'BARAS', '05', '0520', '052002', NOW(), NOW()),
+ ('052003000', 'BATO', '05', '0520', '052003', NOW(), NOW()),
+ ('052004000', 'CARAMORAN', '05', '0520', '052004', NOW(), NOW()),
+ ('052005000', 'GIGMOTO', '05', '0520', '052005', NOW(), NOW()),
+ ('052006000', 'PANDAN', '05', '0520', '052006', NOW(), NOW()),
+ ('052007000', 'PANGANIBAN (PAYO)', '05', '0520', '052007', NOW(), NOW()),
+ ('052008000', 'SAN ANDRES (CALOLBON)', '05', '0520', '052008', NOW(), NOW()),
+ ('052009000', 'SAN MIGUEL', '05', '0520', '052009', NOW(), NOW()),
+ ('052010000', 'VIGA', '05', '0520', '052010', NOW(), NOW()),
+ ('052011000', 'VIRAC (Capital)', '05', '0520', '052011', NOW(), NOW()),
+ ('054101000', 'AROROY', '05', '0541', '054101', NOW(), NOW()),
+ ('054102000', 'BALENO', '05', '0541', '054102', NOW(), NOW()),
+ ('054103000', 'BALUD', '05', '0541', '054103', NOW(), NOW()),
+ ('054104000', 'BATUAN', '05', '0541', '054104', NOW(), NOW()),
+ ('054105000', 'CATAINGAN', '05', '0541', '054105', NOW(), NOW()),
+ ('054106000', 'CAWAYAN', '05', '0541', '054106', NOW(), NOW()),
+ ('054107000', 'CLAVERIA', '05', '0541', '054107', NOW(), NOW()),
+ ('054108000', 'DIMASALANG', '05', '0541', '054108', NOW(), NOW()),
+ ('054109000', 'ESPERANZA', '05', '0541', '054109', NOW(), NOW()),
+ ('054110000', 'MANDAON', '05', '0541', '054110', NOW(), NOW()),
+ ('054111000', 'CITY OF MASBATE (Capital)', '05', '0541', '054111', NOW(), NOW()),
+ ('054112000', 'MILAGROS', '05', '0541', '054112', NOW(), NOW()),
+ ('054113000', 'MOBO', '05', '0541', '054113', NOW(), NOW()),
+ ('054114000', 'MONREAL', '05', '0541', '054114', NOW(), NOW()),
+ ('054115000', 'PALANAS', '05', '0541', '054115', NOW(), NOW()),
+ ('054116000', 'PIO V. CORPUZ (LIMBUHAN)', '05', '0541', '054116', NOW(), NOW()),
+ ('054117000', 'PLACER', '05', '0541', '054117', NOW(), NOW()),
+ ('054118000', 'SAN FERNANDO', '05', '0541', '054118', NOW(), NOW()),
+ ('054119000', 'SAN JACINTO', '05', '0541', '054119', NOW(), NOW()),
+ ('054120000', 'SAN PASCUAL', '05', '0541', '054120', NOW(), NOW()),
+ ('054121000', 'USON', '05', '0541', '054121', NOW(), NOW()),
+ ('056202000', 'BARCELONA', '05', '0562', '056202', NOW(), NOW()),
+ ('056203000', 'BULAN', '05', '0562', '056203', NOW(), NOW()),
+ ('056204000', 'BULUSAN', '05', '0562', '056204', NOW(), NOW()),
+ ('056205000', 'CASIGURAN', '05', '0562', '056205', NOW(), NOW()),
+ ('056206000', 'CASTILLA', '05', '0562', '056206', NOW(), NOW()),
+ ('056207000', 'DONSOL', '05', '0562', '056207', NOW(), NOW()),
+ ('056208000', 'GUBAT', '05', '0562', '056208', NOW(), NOW()),
+ ('056209000', 'IROSIN', '05', '0562', '056209', NOW(), NOW()),
+ ('056210000', 'JUBAN', '05', '0562', '056210', NOW(), NOW()),
+ ('056211000', 'MAGALLANES', '05', '0562', '056211', NOW(), NOW()),
+ ('056212000', 'MATNOG', '05', '0562', '056212', NOW(), NOW()),
+ ('056213000', 'PILAR', '05', '0562', '056213', NOW(), NOW()),
+ ('056214000', 'PRIETO DIAZ', '05', '0562', '056214', NOW(), NOW()),
+ ('056215000', 'SANTA MAGDALENA', '05', '0562', '056215', NOW(), NOW()),
+ ('056216000', 'CITY OF SORSOGON (Capital)', '05', '0562', '056216', NOW(), NOW()),
+ ('060401000', 'ALTAVAS', '06', '0604', '060401', NOW(), NOW()),
+ ('060402000', 'BALETE', '06', '0604', '060402', NOW(), NOW()),
+ ('060403000', 'BANGA', '06', '0604', '060403', NOW(), NOW()),
+ ('060404000', 'BATAN', '06', '0604', '060404', NOW(), NOW()),
+ ('060405000', 'BURUANGA', '06', '0604', '060405', NOW(), NOW()),
+ ('060406000', 'IBAJAY', '06', '0604', '060406', NOW(), NOW()),
+ ('060407000', 'KALIBO (Capital)', '06', '0604', '060407', NOW(), NOW()),
+ ('060408000', 'LEZO', '06', '0604', '060408', NOW(), NOW()),
+ ('060409000', 'LIBACAO', '06', '0604', '060409', NOW(), NOW()),
+ ('060410000', 'MADALAG', '06', '0604', '060410', NOW(), NOW()),
+ ('060411000', 'MAKATO', '06', '0604', '060411', NOW(), NOW()),
+ ('060412000', 'MALAY', '06', '0604', '060412', NOW(), NOW()),
+ ('060413000', 'MALINAO', '06', '0604', '060413', NOW(), NOW()),
+ ('060414000', 'NABAS', '06', '0604', '060414', NOW(), NOW()),
+ ('060415000', 'NEW WASHINGTON', '06', '0604', '060415', NOW(), NOW()),
+ ('060416000', 'NUMANCIA', '06', '0604', '060416', NOW(), NOW()),
+ ('060417000', 'TANGALAN', '06', '0604', '060417', NOW(), NOW()),
+ ('060601000', 'ANINI-Y', '06', '0606', '060601', NOW(), NOW()),
+ ('060602000', 'BARBAZA', '06', '0606', '060602', NOW(), NOW()),
+ ('060603000', 'BELISON', '06', '0606', '060603', NOW(), NOW()),
+ ('060604000', 'BUGASONG', '06', '0606', '060604', NOW(), NOW()),
+ ('060605000', 'CALUYA', '06', '0606', '060605', NOW(), NOW()),
+ ('060606000', 'CULASI', '06', '0606', '060606', NOW(), NOW()),
+ ('060607000', 'TOBIAS FORNIER (DAO)', '06', '0606', '060607', NOW(), NOW()),
+ ('060608000', 'HAMTIC', '06', '0606', '060608', NOW(), NOW()),
+ ('060609000', 'LAUA-AN', '06', '0606', '060609', NOW(), NOW()),
+ ('060610000', 'LIBERTAD', '06', '0606', '060610', NOW(), NOW()),
+ ('060611000', 'PANDAN', '06', '0606', '060611', NOW(), NOW()),
+ ('060612000', 'PATNONGON', '06', '0606', '060612', NOW(), NOW()),
+ ('060613000', 'SAN JOSE (Capital)', '06', '0606', '060613', NOW(), NOW()),
+ ('060614000', 'SAN REMIGIO', '06', '0606', '060614', NOW(), NOW()),
+ ('060615000', 'SEBASTE', '06', '0606', '060615', NOW(), NOW()),
+ ('060616000', 'SIBALOM', '06', '0606', '060616', NOW(), NOW()),
+ ('060617000', 'TIBIAO', '06', '0606', '060617', NOW(), NOW()),
+ ('060618000', 'VALDERRAMA', '06', '0606', '060618', NOW(), NOW()),
+ ('061901000', 'CUARTERO', '06', '0619', '061901', NOW(), NOW()),
+ ('061902000', 'DAO', '06', '0619', '061902', NOW(), NOW()),
+ ('061903000', 'DUMALAG', '06', '0619', '061903', NOW(), NOW()),
+ ('061904000', 'DUMARAO', '06', '0619', '061904', NOW(), NOW()),
+ ('061905000', 'IVISAN', '06', '0619', '061905', NOW(), NOW()),
+ ('061906000', 'JAMINDAN', '06', '0619', '061906', NOW(), NOW()),
+ ('061907000', 'MA-AYON', '06', '0619', '061907', NOW(), NOW()),
+ ('061908000', 'MAMBUSAO', '06', '0619', '061908', NOW(), NOW()),
+ ('061909000', 'PANAY', '06', '0619', '061909', NOW(), NOW()),
+ ('061910000', 'PANITAN', '06', '0619', '061910', NOW(), NOW()),
+ ('061911000', 'PILAR', '06', '0619', '061911', NOW(), NOW()),
+ ('061912000', 'PONTEVEDRA', '06', '0619', '061912', NOW(), NOW()),
+ ('061913000', 'PRESIDENT ROXAS', '06', '0619', '061913', NOW(), NOW()),
+ ('061914000', 'ROXAS CITY (Capital)', '06', '0619', '061914', NOW(), NOW()),
+ ('061915000', 'SAPI-AN', '06', '0619', '061915', NOW(), NOW()),
+ ('061916000', 'SIGMA', '06', '0619', '061916', NOW(), NOW()),
+ ('061917000', 'TAPAZ', '06', '0619', '061917', NOW(), NOW()),
+ ('063001000', 'AJUY', '06', '0630', '063001', NOW(), NOW()),
+ ('063002000', 'ALIMODIAN', '06', '0630', '063002', NOW(), NOW()),
+ ('063003000', 'ANILAO', '06', '0630', '063003', NOW(), NOW()),
+ ('063004000', 'BADIANGAN', '06', '0630', '063004', NOW(), NOW()),
+ ('063005000', 'BALASAN', '06', '0630', '063005', NOW(), NOW()),
+ ('063006000', 'BANATE', '06', '0630', '063006', NOW(), NOW()),
+ ('063007000', 'BAROTAC NUEVO', '06', '0630', '063007', NOW(), NOW()),
+ ('063008000', 'BAROTAC VIEJO', '06', '0630', '063008', NOW(), NOW()),
+ ('063009000', 'BATAD', '06', '0630', '063009', NOW(), NOW()),
+ ('063010000', 'BINGAWAN', '06', '0630', '063010', NOW(), NOW()),
+ ('063012000', 'CABATUAN', '06', '0630', '063012', NOW(), NOW()),
+ ('063013000', 'CALINOG', '06', '0630', '063013', NOW(), NOW()),
+ ('063014000', 'CARLES', '06', '0630', '063014', NOW(), NOW()),
+ ('063015000', 'CONCEPCION', '06', '0630', '063015', NOW(), NOW()),
+ ('063016000', 'DINGLE', '06', '0630', '063016', NOW(), NOW()),
+ ('063017000', 'DUEÑAS', '06', '0630', '063017', NOW(), NOW()),
+ ('063018000', 'DUMANGAS', '06', '0630', '063018', NOW(), NOW()),
+ ('063019000', 'ESTANCIA', '06', '0630', '063019', NOW(), NOW()),
+ ('063020000', 'GUIMBAL', '06', '0630', '063020', NOW(), NOW()),
+ ('063021000', 'IGBARAS', '06', '0630', '063021', NOW(), NOW()),
+ ('063022000', 'ILOILO CITY (Capital)', '06', '0630', '063022', NOW(), NOW()),
+ ('063023000', 'JANIUAY', '06', '0630', '063023', NOW(), NOW()),
+ ('063025000', 'LAMBUNAO', '06', '0630', '063025', NOW(), NOW()),
+ ('063026000', 'LEGANES', '06', '0630', '063026', NOW(), NOW()),
+ ('063027000', 'LEMERY', '06', '0630', '063027', NOW(), NOW()),
+ ('063028000', 'LEON', '06', '0630', '063028', NOW(), NOW()),
+ ('063029000', 'MAASIN', '06', '0630', '063029', NOW(), NOW()),
+ ('063030000', 'MIAGAO', '06', '0630', '063030', NOW(), NOW()),
+ ('063031000', 'MINA', '06', '0630', '063031', NOW(), NOW()),
+ ('063032000', 'NEW LUCENA', '06', '0630', '063032', NOW(), NOW()),
+ ('063034000', 'OTON', '06', '0630', '063034', NOW(), NOW()),
+ ('063035000', 'CITY OF PASSI', '06', '0630', '063035', NOW(), NOW()),
+ ('063036000', 'PAVIA', '06', '0630', '063036', NOW(), NOW()),
+ ('063037000', 'POTOTAN', '06', '0630', '063037', NOW(), NOW()),
+ ('063038000', 'SAN DIONISIO', '06', '0630', '063038', NOW(), NOW()),
+ ('063039000', 'SAN ENRIQUE', '06', '0630', '063039', NOW(), NOW()),
+ ('063040000', 'SAN JOAQUIN', '06', '0630', '063040', NOW(), NOW()),
+ ('063041000', 'SAN MIGUEL', '06', '0630', '063041', NOW(), NOW()),
+ ('063042000', 'SAN RAFAEL', '06', '0630', '063042', NOW(), NOW()),
+ ('063043000', 'SANTA BARBARA', '06', '0630', '063043', NOW(), NOW()),
+ ('063044000', 'SARA', '06', '0630', '063044', NOW(), NOW()),
+ ('063045000', 'TIGBAUAN', '06', '0630', '063045', NOW(), NOW()),
+ ('063046000', 'TUBUNGAN', '06', '0630', '063046', NOW(), NOW()),
+ ('063047000', 'ZARRAGA', '06', '0630', '063047', NOW(), NOW()),
+ ('064501000', 'BACOLOD CITY (Capital)', '06', '0645', '064501', NOW(), NOW()),
+ ('064502000', 'BAGO CITY', '06', '0645', '064502', NOW(), NOW()),
+ ('064503000', 'BINALBAGAN', '06', '0645', '064503', NOW(), NOW()),
+ ('064504000', 'CADIZ CITY', '06', '0645', '064504', NOW(), NOW()),
+ ('064505000', 'CALATRAVA', '06', '0645', '064505', NOW(), NOW()),
+ ('064506000', 'CANDONI', '06', '0645', '064506', NOW(), NOW()),
+ ('064507000', 'CAUAYAN', '06', '0645', '064507', NOW(), NOW()),
+ ('064508000', 'ENRIQUE B. MAGALONA (SARAVIA)', '06', '0645', '064508', NOW(), NOW()),
+ ('064509000', 'CITY OF ESCALANTE', '06', '0645', '064509', NOW(), NOW()),
+ ('064510000', 'CITY OF HIMAMAYLAN', '06', '0645', '064510', NOW(), NOW()),
+ ('064511000', 'HINIGARAN', '06', '0645', '064511', NOW(), NOW()),
+ ('064512000', 'HINOBA-AN (ASIA)', '06', '0645', '064512', NOW(), NOW()),
+ ('064513000', 'ILOG', '06', '0645', '064513', NOW(), NOW()),
+ ('064514000', 'ISABELA', '06', '0645', '064514', NOW(), NOW()),
+ ('064515000', 'CITY OF KABANKALAN', '06', '0645', '064515', NOW(), NOW()),
+ ('064516000', 'LA CARLOTA CITY', '06', '0645', '064516', NOW(), NOW()),
+ ('064517000', 'LA CASTELLANA', '06', '0645', '064517', NOW(), NOW()),
+ ('064518000', 'MANAPLA', '06', '0645', '064518', NOW(), NOW()),
+ ('064519000', 'MOISES PADILLA (MAGALLON)', '06', '0645', '064519', NOW(), NOW()),
+ ('064520000', 'MURCIA', '06', '0645', '064520', NOW(), NOW()),
+ ('064521000', 'PONTEVEDRA', '06', '0645', '064521', NOW(), NOW()),
+ ('064522000', 'PULUPANDAN', '06', '0645', '064522', NOW(), NOW()),
+ ('064523000', 'SAGAY CITY', '06', '0645', '064523', NOW(), NOW()),
+ ('064524000', 'SAN CARLOS CITY', '06', '0645', '064524', NOW(), NOW()),
+ ('064525000', 'SAN ENRIQUE', '06', '0645', '064525', NOW(), NOW()),
+ ('064526000', 'SILAY CITY', '06', '0645', '064526', NOW(), NOW()),
+ ('064527000', 'CITY OF SIPALAY', '06', '0645', '064527', NOW(), NOW()),
+ ('064528000', 'CITY OF TALISAY', '06', '0645', '064528', NOW(), NOW()),
+ ('064529000', 'TOBOSO', '06', '0645', '064529', NOW(), NOW()),
+ ('064530000', 'VALLADOLID', '06', '0645', '064530', NOW(), NOW()),
+ ('064531000', 'CITY OF VICTORIAS', '06', '0645', '064531', NOW(), NOW()),
+ ('064532000', 'SALVADOR BENEDICTO', '06', '0645', '064532', NOW(), NOW()),
+ ('067901000', 'BUENAVISTA', '06', '0679', '067901', NOW(), NOW()),
+ ('067902000', 'JORDAN (Capital)', '06', '0679', '067902', NOW(), NOW()),
+ ('067903000', 'NUEVA VALENCIA', '06', '0679', '067903', NOW(), NOW()),
+ ('067904000', 'SAN LORENZO', '06', '0679', '067904', NOW(), NOW()),
+ ('067905000', 'SIBUNAG', '06', '0679', '067905', NOW(), NOW()),
+ ('071201000', 'ALBURQUERQUE', '07', '0712', '071201', NOW(), NOW()),
+ ('071202000', 'ALICIA', '07', '0712', '071202', NOW(), NOW()),
+ ('071203000', 'ANDA', '07', '0712', '071203', NOW(), NOW()),
+ ('071204000', 'ANTEQUERA', '07', '0712', '071204', NOW(), NOW()),
+ ('071205000', 'BACLAYON', '07', '0712', '071205', NOW(), NOW()),
+ ('071206000', 'BALILIHAN', '07', '0712', '071206', NOW(), NOW()),
+ ('071207000', 'BATUAN', '07', '0712', '071207', NOW(), NOW()),
+ ('071208000', 'BILAR', '07', '0712', '071208', NOW(), NOW()),
+ ('071209000', 'BUENAVISTA', '07', '0712', '071209', NOW(), NOW()),
+ ('071210000', 'CALAPE', '07', '0712', '071210', NOW(), NOW()),
+ ('071211000', 'CANDIJAY', '07', '0712', '071211', NOW(), NOW()),
+ ('071212000', 'CARMEN', '07', '0712', '071212', NOW(), NOW()),
+ ('071213000', 'CATIGBIAN', '07', '0712', '071213', NOW(), NOW()),
+ ('071214000', 'CLARIN', '07', '0712', '071214', NOW(), NOW()),
+ ('071215000', 'CORELLA', '07', '0712', '071215', NOW(), NOW()),
+ ('071216000', 'CORTES', '07', '0712', '071216', NOW(), NOW()),
+ ('071217000', 'DAGOHOY', '07', '0712', '071217', NOW(), NOW()),
+ ('071218000', 'DANAO', '07', '0712', '071218', NOW(), NOW()),
+ ('071219000', 'DAUIS', '07', '0712', '071219', NOW(), NOW()),
+ ('071220000', 'DIMIAO', '07', '0712', '071220', NOW(), NOW()),
+ ('071221000', 'DUERO', '07', '0712', '071221', NOW(), NOW()),
+ ('071222000', 'GARCIA HERNANDEZ', '07', '0712', '071222', NOW(), NOW()),
+ ('071223000', 'GUINDULMAN', '07', '0712', '071223', NOW(), NOW()),
+ ('071224000', 'INABANGA', '07', '0712', '071224', NOW(), NOW()),
+ ('071225000', 'JAGNA', '07', '0712', '071225', NOW(), NOW()),
+ ('071226000', 'JETAFE', '07', '0712', '071226', NOW(), NOW()),
+ ('071227000', 'LILA', '07', '0712', '071227', NOW(), NOW()),
+ ('071228000', 'LOAY', '07', '0712', '071228', NOW(), NOW()),
+ ('071229000', 'LOBOC', '07', '0712', '071229', NOW(), NOW()),
+ ('071230000', 'LOON', '07', '0712', '071230', NOW(), NOW()),
+ ('071231000', 'MABINI', '07', '0712', '071231', NOW(), NOW()),
+ ('071232000', 'MARIBOJOC', '07', '0712', '071232', NOW(), NOW()),
+ ('071233000', 'PANGLAO', '07', '0712', '071233', NOW(), NOW()),
+ ('071234000', 'PILAR', '07', '0712', '071234', NOW(), NOW()),
+ ('071235000', 'PRES. CARLOS P. GARCIA (PITOGO)', '07', '0712', '071235', NOW(), NOW()),
+ ('071236000', 'SAGBAYAN (BORJA)', '07', '0712', '071236', NOW(), NOW()),
+ ('071237000', 'SAN ISIDRO', '07', '0712', '071237', NOW(), NOW()),
+ ('071238000', 'SAN MIGUEL', '07', '0712', '071238', NOW(), NOW()),
+ ('071239000', 'SEVILLA', '07', '0712', '071239', NOW(), NOW()),
+ ('071240000', 'SIERRA BULLONES', '07', '0712', '071240', NOW(), NOW()),
+ ('071241000', 'SIKATUNA', '07', '0712', '071241', NOW(), NOW()),
+ ('071242000', 'TAGBILARAN CITY (Capital)', '07', '0712', '071242', NOW(), NOW()),
+ ('071243000', 'TALIBON', '07', '0712', '071243', NOW(), NOW()),
+ ('071244000', 'TRINIDAD', '07', '0712', '071244', NOW(), NOW()),
+ ('071245000', 'TUBIGON', '07', '0712', '071245', NOW(), NOW()),
+ ('071246000', 'UBAY', '07', '0712', '071246', NOW(), NOW()),
+ ('071247000', 'VALENCIA', '07', '0712', '071247', NOW(), NOW()),
+ ('071248000', 'BIEN UNIDO', '07', '0712', '071248', NOW(), NOW()),
+ ('072201000', 'ALCANTARA', '07', '0722', '072201', NOW(), NOW()),
+ ('072202000', 'ALCOY', '07', '0722', '072202', NOW(), NOW()),
+ ('072203000', 'ALEGRIA', '07', '0722', '072203', NOW(), NOW()),
+ ('072204000', 'ALOGUINSAN', '07', '0722', '072204', NOW(), NOW()),
+ ('072205000', 'ARGAO', '07', '0722', '072205', NOW(), NOW()),
+ ('072206000', 'ASTURIAS', '07', '0722', '072206', NOW(), NOW()),
+ ('072207000', 'BADIAN', '07', '0722', '072207', NOW(), NOW()),
+ ('072208000', 'BALAMBAN', '07', '0722', '072208', NOW(), NOW()),
+ ('072209000', 'BANTAYAN', '07', '0722', '072209', NOW(), NOW()),
+ ('072210000', 'BARILI', '07', '0722', '072210', NOW(), NOW()),
+ ('072211000', 'CITY OF BOGO', '07', '0722', '072211', NOW(), NOW()),
+ ('072212000', 'BOLJOON', '07', '0722', '072212', NOW(), NOW()),
+ ('072213000', 'BORBON', '07', '0722', '072213', NOW(), NOW()),
+ ('072214000', 'CITY OF CARCAR', '07', '0722', '072214', NOW(), NOW()),
+ ('072215000', 'CARMEN', '07', '0722', '072215', NOW(), NOW()),
+ ('072216000', 'CATMON', '07', '0722', '072216', NOW(), NOW()),
+ ('072217000', 'CEBU CITY (Capital)', '07', '0722', '072217', NOW(), NOW()),
+ ('072218000', 'COMPOSTELA', '07', '0722', '072218', NOW(), NOW()),
+ ('072219000', 'CONSOLACION', '07', '0722', '072219', NOW(), NOW()),
+ ('072220000', 'CORDOVA', '07', '0722', '072220', NOW(), NOW()),
+ ('072221000', 'DAANBANTAYAN', '07', '0722', '072221', NOW(), NOW()),
+ ('072222000', 'DALAGUETE', '07', '0722', '072222', NOW(), NOW()),
+ ('072223000', 'DANAO CITY', '07', '0722', '072223', NOW(), NOW()),
+ ('072224000', 'DUMANJUG', '07', '0722', '072224', NOW(), NOW()),
+ ('072225000', 'GINATILAN', '07', '0722', '072225', NOW(), NOW()),
+ ('072226000', 'LAPU-LAPU CITY (OPON)', '07', '0722', '072226', NOW(), NOW()),
+ ('072227000', 'LILOAN', '07', '0722', '072227', NOW(), NOW()),
+ ('072228000', 'MADRIDEJOS', '07', '0722', '072228', NOW(), NOW()),
+ ('072229000', 'MALABUYOC', '07', '0722', '072229', NOW(), NOW()),
+ ('072230000', 'MANDAUE CITY', '07', '0722', '072230', NOW(), NOW()),
+ ('072231000', 'MEDELLIN', '07', '0722', '072231', NOW(), NOW()),
+ ('072232000', 'MINGLANILLA', '07', '0722', '072232', NOW(), NOW()),
+ ('072233000', 'MOALBOAL', '07', '0722', '072233', NOW(), NOW()),
+ ('072234000', 'CITY OF NAGA', '07', '0722', '072234', NOW(), NOW()),
+ ('072235000', 'OSLOB', '07', '0722', '072235', NOW(), NOW()),
+ ('072236000', 'PILAR', '07', '0722', '072236', NOW(), NOW()),
+ ('072237000', 'PINAMUNGAHAN', '07', '0722', '072237', NOW(), NOW()),
+ ('072238000', 'PORO', '07', '0722', '072238', NOW(), NOW()),
+ ('072239000', 'RONDA', '07', '0722', '072239', NOW(), NOW()),
+ ('072240000', 'SAMBOAN', '07', '0722', '072240', NOW(), NOW()),
+ ('072241000', 'SAN FERNANDO', '07', '0722', '072241', NOW(), NOW()),
+ ('072242000', 'SAN FRANCISCO', '07', '0722', '072242', NOW(), NOW()),
+ ('072243000', 'SAN REMIGIO', '07', '0722', '072243', NOW(), NOW()),
+ ('072244000', 'SANTA FE', '07', '0722', '072244', NOW(), NOW()),
+ ('072245000', 'SANTANDER', '07', '0722', '072245', NOW(), NOW()),
+ ('072246000', 'SIBONGA', '07', '0722', '072246', NOW(), NOW()),
+ ('072247000', 'SOGOD', '07', '0722', '072247', NOW(), NOW()),
+ ('072248000', 'TABOGON', '07', '0722', '072248', NOW(), NOW()),
+ ('072249000', 'TABUELAN', '07', '0722', '072249', NOW(), NOW()),
+ ('072250000', 'CITY OF TALISAY', '07', '0722', '072250', NOW(), NOW()),
+ ('072251000', 'TOLEDO CITY', '07', '0722', '072251', NOW(), NOW()),
+ ('072252000', 'TUBURAN', '07', '0722', '072252', NOW(), NOW()),
+ ('072253000', 'TUDELA', '07', '0722', '072253', NOW(), NOW()),
+ ('074601000', 'AMLAN (AYUQUITAN)', '07', '0746', '074601', NOW(), NOW()),
+ ('074602000', 'AYUNGON', '07', '0746', '074602', NOW(), NOW()),
+ ('074603000', 'BACONG', '07', '0746', '074603', NOW(), NOW()),
+ ('074604000', 'BAIS CITY', '07', '0746', '074604', NOW(), NOW()),
+ ('074605000', 'BASAY', '07', '0746', '074605', NOW(), NOW()),
+ ('074606000', 'CITY OF BAYAWAN (TULONG)', '07', '0746', '074606', NOW(), NOW()),
+ ('074607000', 'BINDOY (PAYABON)', '07', '0746', '074607', NOW(), NOW()),
+ ('074608000', 'CANLAON CITY', '07', '0746', '074608', NOW(), NOW()),
+ ('074609000', 'DAUIN', '07', '0746', '074609', NOW(), NOW()),
+ ('074610000', 'DUMAGUETE CITY (Capital)', '07', '0746', '074610', NOW(), NOW()),
+ ('074611000', 'CITY OF GUIHULNGAN', '07', '0746', '074611', NOW(), NOW()),
+ ('074612000', 'JIMALALUD', '07', '0746', '074612', NOW(), NOW()),
+ ('074613000', 'LA LIBERTAD', '07', '0746', '074613', NOW(), NOW()),
+ ('074614000', 'MABINAY', '07', '0746', '074614', NOW(), NOW()),
+ ('074615000', 'MANJUYOD', '07', '0746', '074615', NOW(), NOW()),
+ ('074616000', 'PAMPLONA', '07', '0746', '074616', NOW(), NOW()),
+ ('074617000', 'SAN JOSE', '07', '0746', '074617', NOW(), NOW()),
+ ('074618000', 'SANTA CATALINA', '07', '0746', '074618', NOW(), NOW()),
+ ('074619000', 'SIATON', '07', '0746', '074619', NOW(), NOW()),
+ ('074620000', 'SIBULAN', '07', '0746', '074620', NOW(), NOW()),
+ ('074621000', 'CITY OF TANJAY', '07', '0746', '074621', NOW(), NOW()),
+ ('074622000', 'TAYASAN', '07', '0746', '074622', NOW(), NOW()),
+ ('074623000', 'VALENCIA (LUZURRIAGA)', '07', '0746', '074623', NOW(), NOW()),
+ ('074624000', 'VALLEHERMOSO', '07', '0746', '074624', NOW(), NOW()),
+ ('074625000', 'ZAMBOANGUITA', '07', '0746', '074625', NOW(), NOW()),
+ ('076101000', 'ENRIQUE VILLANUEVA', '07', '0761', '076101', NOW(), NOW()),
+ ('076102000', 'LARENA', '07', '0761', '076102', NOW(), NOW()),
+ ('076103000', 'LAZI', '07', '0761', '076103', NOW(), NOW()),
+ ('076104000', 'MARIA', '07', '0761', '076104', NOW(), NOW()),
+ ('076105000', 'SAN JUAN', '07', '0761', '076105', NOW(), NOW()),
+ ('076106000', 'SIQUIJOR (Capital)', '07', '0761', '076106', NOW(), NOW()),
+ ('082601000', 'ARTECHE', '08', '0826', '082601', NOW(), NOW()),
+ ('082602000', 'BALANGIGA', '08', '0826', '082602', NOW(), NOW()),
+ ('082603000', 'BALANGKAYAN', '08', '0826', '082603', NOW(), NOW()),
+ ('082604000', 'CITY OF BORONGAN (Capital)', '08', '0826', '082604', NOW(), NOW()),
+ ('082605000', 'CAN-AVID', '08', '0826', '082605', NOW(), NOW()),
+ ('082606000', 'DOLORES', '08', '0826', '082606', NOW(), NOW()),
+ ('082607000', 'GENERAL MACARTHUR', '08', '0826', '082607', NOW(), NOW()),
+ ('082608000', 'GIPORLOS', '08', '0826', '082608', NOW(), NOW()),
+ ('082609000', 'GUIUAN', '08', '0826', '082609', NOW(), NOW()),
+ ('082610000', 'HERNANI', '08', '0826', '082610', NOW(), NOW()),
+ ('082611000', 'JIPAPAD', '08', '0826', '082611', NOW(), NOW()),
+ ('082612000', 'LAWAAN', '08', '0826', '082612', NOW(), NOW()),
+ ('082613000', 'LLORENTE', '08', '0826', '082613', NOW(), NOW()),
+ ('082614000', 'MASLOG', '08', '0826', '082614', NOW(), NOW()),
+ ('082615000', 'MAYDOLONG', '08', '0826', '082615', NOW(), NOW()),
+ ('082616000', 'MERCEDES', '08', '0826', '082616', NOW(), NOW()),
+ ('082617000', 'ORAS', '08', '0826', '082617', NOW(), NOW()),
+ ('082618000', 'QUINAPONDAN', '08', '0826', '082618', NOW(), NOW()),
+ ('082619000', 'SALCEDO', '08', '0826', '082619', NOW(), NOW()),
+ ('082620000', 'SAN JULIAN', '08', '0826', '082620', NOW(), NOW()),
+ ('082621000', 'SAN POLICARPO', '08', '0826', '082621', NOW(), NOW()),
+ ('082622000', 'SULAT', '08', '0826', '082622', NOW(), NOW()),
+ ('082623000', 'TAFT', '08', '0826', '082623', NOW(), NOW()),
+ ('083701000', 'ABUYOG', '08', '0837', '083701', NOW(), NOW()),
+ ('083702000', 'ALANGALANG', '08', '0837', '083702', NOW(), NOW()),
+ ('083703000', 'ALBUERA', '08', '0837', '083703', NOW(), NOW()),
+ ('083705000', 'BABATNGON', '08', '0837', '083705', NOW(), NOW()),
+ ('083706000', 'BARUGO', '08', '0837', '083706', NOW(), NOW()),
+ ('083707000', 'BATO', '08', '0837', '083707', NOW(), NOW()),
+ ('083708000', 'CITY OF BAYBAY', '08', '0837', '083708', NOW(), NOW()),
+ ('083710000', 'BURAUEN', '08', '0837', '083710', NOW(), NOW()),
+ ('083713000', 'CALUBIAN', '08', '0837', '083713', NOW(), NOW()),
+ ('083714000', 'CAPOOCAN', '08', '0837', '083714', NOW(), NOW()),
+ ('083715000', 'CARIGARA', '08', '0837', '083715', NOW(), NOW()),
+ ('083717000', 'DAGAMI', '08', '0837', '083717', NOW(), NOW()),
+ ('083718000', 'DULAG', '08', '0837', '083718', NOW(), NOW()),
+ ('083719000', 'HILONGOS', '08', '0837', '083719', NOW(), NOW()),
+ ('083720000', 'HINDANG', '08', '0837', '083720', NOW(), NOW()),
+ ('083721000', 'INOPACAN', '08', '0837', '083721', NOW(), NOW()),
+ ('083722000', 'ISABEL', '08', '0837', '083722', NOW(), NOW()),
+ ('083723000', 'JARO', '08', '0837', '083723', NOW(), NOW()),
+ ('083724000', 'JAVIER (BUGHO)', '08', '0837', '083724', NOW(), NOW()),
+ ('083725000', 'JULITA', '08', '0837', '083725', NOW(), NOW()),
+ ('083726000', 'KANANGA', '08', '0837', '083726', NOW(), NOW()),
+ ('083728000', 'LA PAZ', '08', '0837', '083728', NOW(), NOW()),
+ ('083729000', 'LEYTE', '08', '0837', '083729', NOW(), NOW()),
+ ('083730000', 'MACARTHUR', '08', '0837', '083730', NOW(), NOW()),
+ ('083731000', 'MAHAPLAG', '08', '0837', '083731', NOW(), NOW()),
+ ('083733000', 'MATAG-OB', '08', '0837', '083733', NOW(), NOW()),
+ ('083734000', 'MATALOM', '08', '0837', '083734', NOW(), NOW()),
+ ('083735000', 'MAYORGA', '08', '0837', '083735', NOW(), NOW()),
+ ('083736000', 'MERIDA', '08', '0837', '083736', NOW(), NOW()),
+ ('083738000', 'ORMOC CITY', '08', '0837', '083738', NOW(), NOW()),
+ ('083739000', 'PALO', '08', '0837', '083739', NOW(), NOW()),
+ ('083740000', 'PALOMPON', '08', '0837', '083740', NOW(), NOW()),
+ ('083741000', 'PASTRANA', '08', '0837', '083741', NOW(), NOW()),
+ ('083742000', 'SAN ISIDRO', '08', '0837', '083742', NOW(), NOW()),
+ ('083743000', 'SAN MIGUEL', '08', '0837', '083743', NOW(), NOW()),
+ ('083744000', 'SANTA FE', '08', '0837', '083744', NOW(), NOW()),
+ ('083745000', 'TABANGO', '08', '0837', '083745', NOW(), NOW()),
+ ('083746000', 'TABONTABON', '08', '0837', '083746', NOW(), NOW()),
+ ('083747000', 'TACLOBAN CITY (Capital)', '08', '0837', '083747', NOW(), NOW()),
+ ('083748000', 'TANAUAN', '08', '0837', '083748', NOW(), NOW()),
+ ('083749000', 'TOLOSA', '08', '0837', '083749', NOW(), NOW()),
+ ('083750000', 'TUNGA', '08', '0837', '083750', NOW(), NOW()),
+ ('083751000', 'VILLABA', '08', '0837', '083751', NOW(), NOW()),
+ ('084801000', 'ALLEN', '08', '0848', '084801', NOW(), NOW()),
+ ('084802000', 'BIRI', '08', '0848', '084802', NOW(), NOW()),
+ ('084803000', 'BOBON', '08', '0848', '084803', NOW(), NOW()),
+ ('084804000', 'CAPUL', '08', '0848', '084804', NOW(), NOW()),
+ ('084805000', 'CATARMAN (Capital)', '08', '0848', '084805', NOW(), NOW()),
+ ('084806000', 'CATUBIG', '08', '0848', '084806', NOW(), NOW()),
+ ('084807000', 'GAMAY', '08', '0848', '084807', NOW(), NOW()),
+ ('084808000', 'LAOANG', '08', '0848', '084808', NOW(), NOW()),
+ ('084809000', 'LAPINIG', '08', '0848', '084809', NOW(), NOW()),
+ ('084810000', 'LAS NAVAS', '08', '0848', '084810', NOW(), NOW()),
+ ('084811000', 'LAVEZARES', '08', '0848', '084811', NOW(), NOW()),
+ ('084812000', 'MAPANAS', '08', '0848', '084812', NOW(), NOW()),
+ ('084813000', 'MONDRAGON', '08', '0848', '084813', NOW(), NOW()),
+ ('084814000', 'PALAPAG', '08', '0848', '084814', NOW(), NOW()),
+ ('084815000', 'PAMBUJAN', '08', '0848', '084815', NOW(), NOW()),
+ ('084816000', 'ROSARIO', '08', '0848', '084816', NOW(), NOW()),
+ ('084817000', 'SAN ANTONIO', '08', '0848', '084817', NOW(), NOW()),
+ ('084818000', 'SAN ISIDRO', '08', '0848', '084818', NOW(), NOW()),
+ ('084819000', 'SAN JOSE', '08', '0848', '084819', NOW(), NOW()),
+ ('084820000', 'SAN ROQUE', '08', '0848', '084820', NOW(), NOW()),
+ ('084821000', 'SAN VICENTE', '08', '0848', '084821', NOW(), NOW()),
+ ('084822000', 'SILVINO LOBOS', '08', '0848', '084822', NOW(), NOW()),
+ ('084823000', 'VICTORIA', '08', '0848', '084823', NOW(), NOW()),
+ ('084824000', 'LOPE DE VEGA', '08', '0848', '084824', NOW(), NOW()),
+ ('086001000', 'ALMAGRO', '08', '0860', '086001', NOW(), NOW()),
+ ('086002000', 'BASEY', '08', '0860', '086002', NOW(), NOW()),
+ ('086003000', 'CALBAYOG CITY', '08', '0860', '086003', NOW(), NOW()),
+ ('086004000', 'CALBIGA', '08', '0860', '086004', NOW(), NOW()),
+ ('086005000', 'CITY OF CATBALOGAN (Capital)', '08', '0860', '086005', NOW(), NOW()),
+ ('086006000', 'DARAM', '08', '0860', '086006', NOW(), NOW()),
+ ('086007000', 'GANDARA', '08', '0860', '086007', NOW(), NOW()),
+ ('086008000', 'HINABANGAN', '08', '0860', '086008', NOW(), NOW()),
+ ('086009000', 'JIABONG', '08', '0860', '086009', NOW(), NOW()),
+ ('086010000', 'MARABUT', '08', '0860', '086010', NOW(), NOW()),
+ ('086011000', 'MATUGUINAO', '08', '0860', '086011', NOW(), NOW()),
+ ('086012000', 'MOTIONG', '08', '0860', '086012', NOW(), NOW()),
+ ('086013000', 'PINABACDAO', '08', '0860', '086013', NOW(), NOW()),
+ ('086014000', 'SAN JOSE DE BUAN', '08', '0860', '086014', NOW(), NOW()),
+ ('086015000', 'SAN SEBASTIAN', '08', '0860', '086015', NOW(), NOW()),
+ ('086016000', 'SANTA MARGARITA', '08', '0860', '086016', NOW(), NOW()),
+ ('086017000', 'SANTA RITA', '08', '0860', '086017', NOW(), NOW()),
+ ('086018000', 'SANTO NIÑO', '08', '0860', '086018', NOW(), NOW()),
+ ('086019000', 'TALALORA', '08', '0860', '086019', NOW(), NOW()),
+ ('086020000', 'TARANGNAN', '08', '0860', '086020', NOW(), NOW()),
+ ('086021000', 'VILLAREAL', '08', '0860', '086021', NOW(), NOW()),
+ ('086022000', 'PARANAS (WRIGHT)', '08', '0860', '086022', NOW(), NOW()),
+ ('086023000', 'ZUMARRAGA', '08', '0860', '086023', NOW(), NOW()),
+ ('086024000', 'TAGAPUL-AN', '08', '0860', '086024', NOW(), NOW()),
+ ('086025000', 'SAN JORGE', '08', '0860', '086025', NOW(), NOW()),
+ ('086026000', 'PAGSANGHAN', '08', '0860', '086026', NOW(), NOW()),
+ ('086401000', 'ANAHAWAN', '08', '0864', '086401', NOW(), NOW()),
+ ('086402000', 'BONTOC', '08', '0864', '086402', NOW(), NOW()),
+ ('086403000', 'HINUNANGAN', '08', '0864', '086403', NOW(), NOW()),
+ ('086404000', 'HINUNDAYAN', '08', '0864', '086404', NOW(), NOW()),
+ ('086405000', 'LIBAGON', '08', '0864', '086405', NOW(), NOW()),
+ ('086406000', 'LILOAN', '08', '0864', '086406', NOW(), NOW()),
+ ('086407000', 'CITY OF MAASIN (Capital)', '08', '0864', '086407', NOW(), NOW()),
+ ('086408000', 'MACROHON', '08', '0864', '086408', NOW(), NOW()),
+ ('086409000', 'MALITBOG', '08', '0864', '086409', NOW(), NOW()),
+ ('086410000', 'PADRE BURGOS', '08', '0864', '086410', NOW(), NOW()),
+ ('086411000', 'PINTUYAN', '08', '0864', '086411', NOW(), NOW()),
+ ('086412000', 'SAINT BERNARD', '08', '0864', '086412', NOW(), NOW()),
+ ('086413000', 'SAN FRANCISCO', '08', '0864', '086413', NOW(), NOW()),
+ ('086414000', 'SAN JUAN (CABALIAN)', '08', '0864', '086414', NOW(), NOW()),
+ ('086415000', 'SAN RICARDO', '08', '0864', '086415', NOW(), NOW()),
+ ('086416000', 'SILAGO', '08', '0864', '086416', NOW(), NOW()),
+ ('086417000', 'SOGOD', '08', '0864', '086417', NOW(), NOW()),
+ ('086418000', 'TOMAS OPPUS', '08', '0864', '086418', NOW(), NOW()),
+ ('086419000', 'LIMASAWA', '08', '0864', '086419', NOW(), NOW()),
+ ('087801000', 'ALMERIA', '08', '0878', '087801', NOW(), NOW()),
+ ('087802000', 'BILIRAN', '08', '0878', '087802', NOW(), NOW()),
+ ('087803000', 'CABUCGAYAN', '08', '0878', '087803', NOW(), NOW()),
+ ('087804000', 'CAIBIRAN', '08', '0878', '087804', NOW(), NOW()),
+ ('087805000', 'CULABA', '08', '0878', '087805', NOW(), NOW()),
+ ('087806000', 'KAWAYAN', '08', '0878', '087806', NOW(), NOW()),
+ ('087807000', 'MARIPIPI', '08', '0878', '087807', NOW(), NOW()),
+ ('087808000', 'NAVAL (Capital)', '08', '0878', '087808', NOW(), NOW()),
+ ('097201000', 'DAPITAN CITY', '09', '0972', '097201', NOW(), NOW()),
+ ('097202000', 'DIPOLOG CITY (Capital)', '09', '0972', '097202', NOW(), NOW()),
+ ('097203000', 'KATIPUNAN', '09', '0972', '097203', NOW(), NOW()),
+ ('097204000', 'LA LIBERTAD', '09', '0972', '097204', NOW(), NOW()),
+ ('097205000', 'LABASON', '09', '0972', '097205', NOW(), NOW()),
+ ('097206000', 'LILOY', '09', '0972', '097206', NOW(), NOW()),
+ ('097207000', 'MANUKAN', '09', '0972', '097207', NOW(), NOW()),
+ ('097208000', 'MUTIA', '09', '0972', '097208', NOW(), NOW()),
+ ('097209000', 'PIÑAN (NEW PIÑAN)', '09', '0972', '097209', NOW(), NOW()),
+ ('097210000', 'POLANCO', '09', '0972', '097210', NOW(), NOW()),
+ ('097211000', 'PRES. MANUEL A. ROXAS', '09', '0972', '097211', NOW(), NOW()),
+ ('097212000', 'RIZAL', '09', '0972', '097212', NOW(), NOW()),
+ ('097213000', 'SALUG', '09', '0972', '097213', NOW(), NOW()),
+ ('097214000', 'SERGIO OSMEÑA SR.', '09', '0972', '097214', NOW(), NOW()),
+ ('097215000', 'SIAYAN', '09', '0972', '097215', NOW(), NOW()),
+ ('097216000', 'SIBUCO', '09', '0972', '097216', NOW(), NOW()),
+ ('097217000', 'SIBUTAD', '09', '0972', '097217', NOW(), NOW()),
+ ('097218000', 'SINDANGAN', '09', '0972', '097218', NOW(), NOW()),
+ ('097219000', 'SIOCON', '09', '0972', '097219', NOW(), NOW()),
+ ('097220000', 'SIRAWAI', '09', '0972', '097220', NOW(), NOW()),
+ ('097221000', 'TAMPILISAN', '09', '0972', '097221', NOW(), NOW()),
+ ('097222000', 'JOSE DALMAN (PONOT)', '09', '0972', '097222', NOW(), NOW()),
+ ('097223000', 'GUTALAC', '09', '0972', '097223', NOW(), NOW()),
+ ('097224000', 'BALIGUIAN', '09', '0972', '097224', NOW(), NOW()),
+ ('097225000', 'GODOD', '09', '0972', '097225', NOW(), NOW()),
+ ('097226000', 'BACUNGAN (Leon T. Postigo)', '09', '0972', '097226', NOW(), NOW()),
+ ('097227000', 'KALAWIT', '09', '0972', '097227', NOW(), NOW()),
+ ('097302000', 'AURORA', '09', '0973', '097302', NOW(), NOW()),
+ ('097303000', 'BAYOG', '09', '0973', '097303', NOW(), NOW()),
+ ('097305000', 'DIMATALING', '09', '0973', '097305', NOW(), NOW()),
+ ('097306000', 'DINAS', '09', '0973', '097306', NOW(), NOW()),
+ ('097307000', 'DUMALINAO', '09', '0973', '097307', NOW(), NOW()),
+ ('097308000', 'DUMINGAG', '09', '0973', '097308', NOW(), NOW()),
+ ('097311000', 'KUMALARANG', '09', '0973', '097311', NOW(), NOW()),
+ ('097312000', 'LABANGAN', '09', '0973', '097312', NOW(), NOW()),
+ ('097313000', 'LAPUYAN', '09', '0973', '097313', NOW(), NOW()),
+ ('097315000', 'MAHAYAG', '09', '0973', '097315', NOW(), NOW()),
+ ('097317000', 'MARGOSATUBIG', '09', '0973', '097317', NOW(), NOW()),
+ ('097318000', 'MIDSALIP', '09', '0973', '097318', NOW(), NOW()),
+ ('097319000', 'MOLAVE', '09', '0973', '097319', NOW(), NOW()),
+ ('097322000', 'PAGADIAN CITY (Capital)', '09', '0973', '097322', NOW(), NOW()),
+ ('097323000', 'RAMON MAGSAYSAY (LIARGO)', '09', '0973', '097323', NOW(), NOW()),
+ ('097324000', 'SAN MIGUEL', '09', '0973', '097324', NOW(), NOW()),
+ ('097325000', 'SAN PABLO', '09', '0973', '097325', NOW(), NOW()),
+ ('097327000', 'TABINA', '09', '0973', '097327', NOW(), NOW()),
+ ('097328000', 'TAMBULIG', '09', '0973', '097328', NOW(), NOW()),
+ ('097330000', 'TUKURAN', '09', '0973', '097330', NOW(), NOW()),
+ ('097332000', 'ZAMBOANGA CITY', '09', '0973', '097332', NOW(), NOW()),
+ ('097333000', 'LAKEWOOD', '09', '0973', '097333', NOW(), NOW()),
+ ('097337000', 'JOSEFINA', '09', '0973', '097337', NOW(), NOW()),
+ ('097338000', 'PITOGO', '09', '0973', '097338', NOW(), NOW()),
+ ('097340000', 'SOMINOT (DON MARIANO MARCOS)', '09', '0973', '097340', NOW(), NOW()),
+ ('097341000', 'VINCENZO A. SAGUN', '09', '0973', '097341', NOW(), NOW()),
+ ('097343000', 'GUIPOS', '09', '0973', '097343', NOW(), NOW()),
+ ('097344000', 'TIGBAO', '09', '0973', '097344', NOW(), NOW()),
+ ('098301000', 'ALICIA', '09', '0983', '098301', NOW(), NOW()),
+ ('098302000', 'BUUG', '09', '0983', '098302', NOW(), NOW()),
+ ('098303000', 'DIPLAHAN', '09', '0983', '098303', NOW(), NOW()),
+ ('098304000', 'IMELDA', '09', '0983', '098304', NOW(), NOW()),
+ ('098305000', 'IPIL (Capital)', '09', '0983', '098305', NOW(), NOW()),
+ ('098306000', 'KABASALAN', '09', '0983', '098306', NOW(), NOW()),
+ ('098307000', 'MABUHAY', '09', '0983', '098307', NOW(), NOW()),
+ ('098308000', 'MALANGAS', '09', '0983', '098308', NOW(), NOW()),
+ ('098309000', 'NAGA', '09', '0983', '098309', NOW(), NOW()),
+ ('098310000', 'OLUTANGA', '09', '0983', '098310', NOW(), NOW()),
+ ('098311000', 'PAYAO', '09', '0983', '098311', NOW(), NOW()),
+ ('098312000', 'ROSELLER LIM', '09', '0983', '098312', NOW(), NOW()),
+ ('098313000', 'SIAY', '09', '0983', '098313', NOW(), NOW()),
+ ('098314000', 'TALUSAN', '09', '0983', '098314', NOW(), NOW()),
+ ('098315000', 'TITAY', '09', '0983', '098315', NOW(), NOW()),
+ ('098316000', 'TUNGAWAN', '09', '0983', '098316', NOW(), NOW()),
+ ('099701000', 'CITY OF ISABELA', '09', '0997', '099701', NOW(), NOW()),
+ ('101301000', 'BAUNGON', '10', '1013', '101301', NOW(), NOW()),
+ ('101302000', 'DAMULOG', '10', '1013', '101302', NOW(), NOW()),
+ ('101303000', 'DANGCAGAN', '10', '1013', '101303', NOW(), NOW()),
+ ('101304000', 'DON CARLOS', '10', '1013', '101304', NOW(), NOW()),
+ ('101305000', 'IMPASUG-ONG', '10', '1013', '101305', NOW(), NOW()),
+ ('101306000', 'KADINGILAN', '10', '1013', '101306', NOW(), NOW()),
+ ('101307000', 'KALILANGAN', '10', '1013', '101307', NOW(), NOW()),
+ ('101308000', 'KIBAWE', '10', '1013', '101308', NOW(), NOW()),
+ ('101309000', 'KITAOTAO', '10', '1013', '101309', NOW(), NOW()),
+ ('101310000', 'LANTAPAN', '10', '1013', '101310', NOW(), NOW()),
+ ('101311000', 'LIBONA', '10', '1013', '101311', NOW(), NOW()),
+ ('101312000', 'CITY OF MALAYBALAY (Capital)', '10', '1013', '101312', NOW(), NOW()),
+ ('101313000', 'MALITBOG', '10', '1013', '101313', NOW(), NOW()),
+ ('101314000', 'MANOLO FORTICH', '10', '1013', '101314', NOW(), NOW()),
+ ('101315000', 'MARAMAG', '10', '1013', '101315', NOW(), NOW()),
+ ('101316000', 'PANGANTUCAN', '10', '1013', '101316', NOW(), NOW()),
+ ('101317000', 'QUEZON', '10', '1013', '101317', NOW(), NOW()),
+ ('101318000', 'SAN FERNANDO', '10', '1013', '101318', NOW(), NOW()),
+ ('101319000', 'SUMILAO', '10', '1013', '101319', NOW(), NOW()),
+ ('101320000', 'TALAKAG', '10', '1013', '101320', NOW(), NOW()),
+ ('101321000', 'CITY OF VALENCIA', '10', '1013', '101321', NOW(), NOW()),
+ ('101322000', 'CABANGLASAN', '10', '1013', '101322', NOW(), NOW()),
+ ('101801000', 'CATARMAN', '10', '1018', '101801', NOW(), NOW()),
+ ('101802000', 'GUINSILIBAN', '10', '1018', '101802', NOW(), NOW()),
+ ('101803000', 'MAHINOG', '10', '1018', '101803', NOW(), NOW()),
+ ('101804000', 'MAMBAJAO (Capital)', '10', '1018', '101804', NOW(), NOW()),
+ ('101805000', 'SAGAY', '10', '1018', '101805', NOW(), NOW()),
+ ('103501000', 'BACOLOD', '10', '1035', '103501', NOW(), NOW()),
+ ('103502000', 'BALOI', '10', '1035', '103502', NOW(), NOW()),
+ ('103503000', 'BAROY', '10', '1035', '103503', NOW(), NOW()),
+ ('103504000', 'ILIGAN CITY', '10', '1035', '103504', NOW(), NOW()),
+ ('103505000', 'KAPATAGAN', '10', '1035', '103505', NOW(), NOW()),
+ ('103506000', 'SULTAN NAGA DIMAPORO (KAROMATAN)', '10', '1035', '103506', NOW(), NOW()),
+ ('103507000', 'KAUSWAGAN', '10', '1035', '103507', NOW(), NOW()),
+ ('103508000', 'KOLAMBUGAN', '10', '1035', '103508', NOW(), NOW()),
+ ('103509000', 'LALA', '10', '1035', '103509', NOW(), NOW()),
+ ('103510000', 'LINAMON', '10', '1035', '103510', NOW(), NOW()),
+ ('103511000', 'MAGSAYSAY', '10', '1035', '103511', NOW(), NOW()),
+ ('103512000', 'MAIGO', '10', '1035', '103512', NOW(), NOW()),
+ ('103513000', 'MATUNGAO', '10', '1035', '103513', NOW(), NOW()),
+ ('103514000', 'MUNAI', '10', '1035', '103514', NOW(), NOW()),
+ ('103515000', 'NUNUNGAN', '10', '1035', '103515', NOW(), NOW()),
+ ('103516000', 'PANTAO RAGAT', '10', '1035', '103516', NOW(), NOW()),
+ ('103517000', 'POONA PIAGAPO', '10', '1035', '103517', NOW(), NOW()),
+ ('103518000', 'SALVADOR', '10', '1035', '103518', NOW(), NOW()),
+ ('103519000', 'SAPAD', '10', '1035', '103519', NOW(), NOW()),
+ ('103520000', 'TAGOLOAN', '10', '1035', '103520', NOW(), NOW()),
+ ('103521000', 'TANGCAL', '10', '1035', '103521', NOW(), NOW()),
+ ('103522000', 'TUBOD (Capital)', '10', '1035', '103522', NOW(), NOW()),
+ ('103523000', 'PANTAR', '10', '1035', '103523', NOW(), NOW()),
+ ('104201000', 'ALORAN', '10', '1042', '104201', NOW(), NOW()),
+ ('104202000', 'BALIANGAO', '10', '1042', '104202', NOW(), NOW()),
+ ('104203000', 'BONIFACIO', '10', '1042', '104203', NOW(), NOW()),
+ ('104204000', 'CALAMBA', '10', '1042', '104204', NOW(), NOW()),
+ ('104205000', 'CLARIN', '10', '1042', '104205', NOW(), NOW()),
+ ('104206000', 'CONCEPCION', '10', '1042', '104206', NOW(), NOW()),
+ ('104207000', 'JIMENEZ', '10', '1042', '104207', NOW(), NOW()),
+ ('104208000', 'LOPEZ JAENA', '10', '1042', '104208', NOW(), NOW()),
+ ('104209000', 'OROQUIETA CITY (Capital)', '10', '1042', '104209', NOW(), NOW()),
+ ('104210000', 'OZAMIS CITY', '10', '1042', '104210', NOW(), NOW()),
+ ('104211000', 'PANAON', '10', '1042', '104211', NOW(), NOW()),
+ ('104212000', 'PLARIDEL', '10', '1042', '104212', NOW(), NOW()),
+ ('104213000', 'SAPANG DALAGA', '10', '1042', '104213', NOW(), NOW()),
+ ('104214000', 'SINACABAN', '10', '1042', '104214', NOW(), NOW()),
+ ('104215000', 'TANGUB CITY', '10', '1042', '104215', NOW(), NOW()),
+ ('104216000', 'TUDELA', '10', '1042', '104216', NOW(), NOW()),
+ ('104217000', 'DON VICTORIANO CHIONGBIAN  (DON MARIANO MARCOS)', '10', '1042', '104217', NOW(), NOW()),
+ ('104301000', 'ALUBIJID', '10', '1043', '104301', NOW(), NOW()),
+ ('104302000', 'BALINGASAG', '10', '1043', '104302', NOW(), NOW()),
+ ('104303000', 'BALINGOAN', '10', '1043', '104303', NOW(), NOW()),
+ ('104304000', 'BINUANGAN', '10', '1043', '104304', NOW(), NOW()),
+ ('104305000', 'CAGAYAN DE ORO CITY (Capital)', '10', '1043', '104305', NOW(), NOW()),
+ ('104306000', 'CLAVERIA', '10', '1043', '104306', NOW(), NOW()),
+ ('104307000', 'CITY OF EL SALVADOR', '10', '1043', '104307', NOW(), NOW()),
+ ('104308000', 'GINGOOG CITY', '10', '1043', '104308', NOW(), NOW()),
+ ('104309000', 'GITAGUM', '10', '1043', '104309', NOW(), NOW()),
+ ('104310000', 'INITAO', '10', '1043', '104310', NOW(), NOW()),
+ ('104311000', 'JASAAN', '10', '1043', '104311', NOW(), NOW()),
+ ('104312000', 'KINOGUITAN', '10', '1043', '104312', NOW(), NOW()),
+ ('104313000', 'LAGONGLONG', '10', '1043', '104313', NOW(), NOW()),
+ ('104314000', 'LAGUINDINGAN', '10', '1043', '104314', NOW(), NOW()),
+ ('104315000', 'LIBERTAD', '10', '1043', '104315', NOW(), NOW()),
+ ('104316000', 'LUGAIT', '10', '1043', '104316', NOW(), NOW()),
+ ('104317000', 'MAGSAYSAY (LINUGOS)', '10', '1043', '104317', NOW(), NOW()),
+ ('104318000', 'MANTICAO', '10', '1043', '104318', NOW(), NOW()),
+ ('104319000', 'MEDINA', '10', '1043', '104319', NOW(), NOW()),
+ ('104320000', 'NAAWAN', '10', '1043', '104320', NOW(), NOW()),
+ ('104321000', 'OPOL', '10', '1043', '104321', NOW(), NOW()),
+ ('104322000', 'SALAY', '10', '1043', '104322', NOW(), NOW()),
+ ('104323000', 'SUGBONGCOGON', '10', '1043', '104323', NOW(), NOW()),
+ ('104324000', 'TAGOLOAN', '10', '1043', '104324', NOW(), NOW()),
+ ('104325000', 'TALISAYAN', '10', '1043', '104325', NOW(), NOW()),
+ ('104326000', 'VILLANUEVA', '10', '1043', '104326', NOW(), NOW()),
+ ('112301000', 'ASUNCION (SAUG)', '11', '1123', '112301', NOW(), NOW()),
+ ('112303000', 'CARMEN', '11', '1123', '112303', NOW(), NOW()),
+ ('112305000', 'KAPALONG', '11', '1123', '112305', NOW(), NOW()),
+ ('112314000', 'NEW CORELLA', '11', '1123', '112314', NOW(), NOW()),
+ ('112315000', 'CITY OF PANABO', '11', '1123', '112315', NOW(), NOW()),
+ ('112317000', 'ISLAND GARDEN CITY OF SAMAL', '11', '1123', '112317', NOW(), NOW()),
+ ('112318000', 'SANTO TOMAS', '11', '1123', '112318', NOW(), NOW()),
+ ('112319000', 'CITY OF TAGUM (Capital)', '11', '1123', '112319', NOW(), NOW()),
+ ('112322000', 'TALAINGOD', '11', '1123', '112322', NOW(), NOW()),
+ ('112323000', 'BRAULIO E. DUJALI', '11', '1123', '112323', NOW(), NOW()),
+ ('112324000', 'SAN ISIDRO', '11', '1123', '112324', NOW(), NOW()),
+ ('112401000', 'BANSALAN', '11', '1124', '112401', NOW(), NOW()),
+ ('112402000', 'DAVAO CITY', '11', '1124', '112402', NOW(), NOW()),
+ ('112403000', 'CITY OF DIGOS (Capital)', '11', '1124', '112403', NOW(), NOW()),
+ ('112404000', 'HAGONOY', '11', '1124', '112404', NOW(), NOW()),
+ ('112406000', 'KIBLAWAN', '11', '1124', '112406', NOW(), NOW()),
+ ('112407000', 'MAGSAYSAY', '11', '1124', '112407', NOW(), NOW()),
+ ('112408000', 'MALALAG', '11', '1124', '112408', NOW(), NOW()),
+ ('112410000', 'MATANAO', '11', '1124', '112410', NOW(), NOW()),
+ ('112411000', 'PADADA', '11', '1124', '112411', NOW(), NOW()),
+ ('112412000', 'SANTA CRUZ', '11', '1124', '112412', NOW(), NOW()),
+ ('112414000', 'SULOP', '11', '1124', '112414', NOW(), NOW()),
+ ('112501000', 'BAGANGA', '11', '1125', '112501', NOW(), NOW()),
+ ('112502000', 'BANAYBANAY', '11', '1125', '112502', NOW(), NOW()),
+ ('112503000', 'BOSTON', '11', '1125', '112503', NOW(), NOW()),
+ ('112504000', 'CARAGA', '11', '1125', '112504', NOW(), NOW()),
+ ('112505000', 'CATEEL', '11', '1125', '112505', NOW(), NOW()),
+ ('112506000', 'GOVERNOR GENEROSO', '11', '1125', '112506', NOW(), NOW()),
+ ('112507000', 'LUPON', '11', '1125', '112507', NOW(), NOW()),
+ ('112508000', 'MANAY', '11', '1125', '112508', NOW(), NOW()),
+ ('112509000', 'CITY OF MATI (Capital)', '11', '1125', '112509', NOW(), NOW()),
+ ('112510000', 'SAN ISIDRO', '11', '1125', '112510', NOW(), NOW()),
+ ('112511000', 'TARRAGONA', '11', '1125', '112511', NOW(), NOW()),
+ ('118201000', 'COMPOSTELA', '11', '1182', '118201', NOW(), NOW()),
+ ('118202000', 'LAAK (SAN VICENTE)', '11', '1182', '118202', NOW(), NOW()),
+ ('118203000', 'MABINI (DOÑA ALICIA)', '11', '1182', '118203', NOW(), NOW()),
+ ('118204000', 'MACO', '11', '1182', '118204', NOW(), NOW()),
+ ('118205000', 'MARAGUSAN (SAN MARIANO)', '11', '1182', '118205', NOW(), NOW()),
+ ('118206000', 'MAWAB', '11', '1182', '118206', NOW(), NOW()),
+ ('118207000', 'MONKAYO', '11', '1182', '118207', NOW(), NOW()),
+ ('118208000', 'MONTEVISTA', '11', '1182', '118208', NOW(), NOW()),
+ ('118209000', 'NABUNTURAN (Capital)', '11', '1182', '118209', NOW(), NOW()),
+ ('118210000', 'NEW BATAAN', '11', '1182', '118210', NOW(), NOW()),
+ ('118211000', 'PANTUKAN', '11', '1182', '118211', NOW(), NOW()),
+ ('118601000', 'DON MARCELINO', '11', '1186', '118601', NOW(), NOW()),
+ ('118602000', 'JOSE ABAD SANTOS (TRINIDAD)', '11', '1186', '118602', NOW(), NOW()),
+ ('118603000', 'MALITA', '11', '1186', '118603', NOW(), NOW()),
+ ('118604000', 'SANTA MARIA', '11', '1186', '118604', NOW(), NOW()),
+ ('118605000', 'SARANGANI', '11', '1186', '118605', NOW(), NOW()),
+ ('124701000', 'ALAMADA', '12', '1247', '124701', NOW(), NOW()),
+ ('124702000', 'CARMEN', '12', '1247', '124702', NOW(), NOW()),
+ ('124703000', 'KABACAN', '12', '1247', '124703', NOW(), NOW()),
+ ('124704000', 'CITY OF KIDAPAWAN (Capital)', '12', '1247', '124704', NOW(), NOW()),
+ ('124705000', 'LIBUNGAN', '12', '1247', '124705', NOW(), NOW()),
+ ('124706000', 'MAGPET', '12', '1247', '124706', NOW(), NOW()),
+ ('124707000', 'MAKILALA', '12', '1247', '124707', NOW(), NOW()),
+ ('124708000', 'MATALAM', '12', '1247', '124708', NOW(), NOW()),
+ ('124709000', 'MIDSAYAP', '12', '1247', '124709', NOW(), NOW()),
+ ('124710000', 'M LANG', '12', '1247', '124710', NOW(), NOW()),
+ ('124711000', 'PIGKAWAYAN', '12', '1247', '124711', NOW(), NOW()),
+ ('124712000', 'PIKIT', '12', '1247', '124712', NOW(), NOW()),
+ ('124713000', 'PRESIDENT ROXAS', '12', '1247', '124713', NOW(), NOW()),
+ ('124714000', 'TULUNAN', '12', '1247', '124714', NOW(), NOW()),
+ ('124715000', 'ANTIPAS', '12', '1247', '124715', NOW(), NOW()),
+ ('124716000', 'BANISILAN', '12', '1247', '124716', NOW(), NOW()),
+ ('124717000', 'ALEOSAN', '12', '1247', '124717', NOW(), NOW()),
+ ('124718000', 'ARAKAN', '12', '1247', '124718', NOW(), NOW()),
+ ('126302000', 'BANGA', '12', '1263', '126302', NOW(), NOW()),
+ ('126303000', 'GENERAL SANTOS CITY (DADIANGAS)', '12', '1263', '126303', NOW(), NOW()),
+ ('126306000', 'CITY OF KORONADAL (Capital)', '12', '1263', '126306', NOW(), NOW()),
+ ('126311000', 'NORALA', '12', '1263', '126311', NOW(), NOW()),
+ ('126312000', 'POLOMOLOK', '12', '1263', '126312', NOW(), NOW()),
+ ('126313000', 'SURALLAH', '12', '1263', '126313', NOW(), NOW()),
+ ('126314000', 'TAMPAKAN', '12', '1263', '126314', NOW(), NOW()),
+ ('126315000', 'TANTANGAN', '12', '1263', '126315', NOW(), NOW()),
+ ('126316000', 'T BOLI', '12', '1263', '126316', NOW(), NOW()),
+ ('126317000', 'TUPI', '12', '1263', '126317', NOW(), NOW()),
+ ('126318000', 'SANTO NIÑO', '12', '1263', '126318', NOW(), NOW()),
+ ('126319000', 'LAKE SEBU', '12', '1263', '126319', NOW(), NOW()),
+ ('126501000', 'BAGUMBAYAN', '12', '1265', '126501', NOW(), NOW()),
+ ('126502000', 'COLUMBIO', '12', '1265', '126502', NOW(), NOW()),
+ ('126503000', 'ESPERANZA', '12', '1265', '126503', NOW(), NOW()),
+ ('126504000', 'ISULAN (Capital)', '12', '1265', '126504', NOW(), NOW()),
+ ('126505000', 'KALAMANSIG', '12', '1265', '126505', NOW(), NOW()),
+ ('126506000', 'LEBAK', '12', '1265', '126506', NOW(), NOW()),
+ ('126507000', 'LUTAYAN', '12', '1265', '126507', NOW(), NOW()),
+ ('126508000', 'LAMBAYONG (MARIANO MARCOS)', '12', '1265', '126508', NOW(), NOW()),
+ ('126509000', 'PALIMBANG', '12', '1265', '126509', NOW(), NOW()),
+ ('126510000', 'PRESIDENT QUIRINO', '12', '1265', '126510', NOW(), NOW()),
+ ('126511000', 'CITY OF TACURONG', '12', '1265', '126511', NOW(), NOW()),
+ ('126512000', 'SEN. NINOY AQUINO', '12', '1265', '126512', NOW(), NOW()),
+ ('128001000', 'ALABEL (Capital)', '12', '1280', '128001', NOW(), NOW()),
+ ('128002000', 'GLAN', '12', '1280', '128002', NOW(), NOW()),
+ ('128003000', 'KIAMBA', '12', '1280', '128003', NOW(), NOW()),
+ ('128004000', 'MAASIM', '12', '1280', '128004', NOW(), NOW()),
+ ('128005000', 'MAITUM', '12', '1280', '128005', NOW(), NOW()),
+ ('128006000', 'MALAPATAN', '12', '1280', '128006', NOW(), NOW()),
+ ('128007000', 'MALUNGON', '12', '1280', '128007', NOW(), NOW()),
+ ('129804000', 'COTABATO CITY', '12', '1298', '129804', NOW(), NOW()),
+ ('133901000', 'TONDO I / II', '13', '1339', '133901', NOW(), NOW()),
+ ('133902000', 'BINONDO', '13', '1339', '133902', NOW(), NOW()),
+ ('133903000', 'QUIAPO', '13', '1339', '133903', NOW(), NOW()),
+ ('133904000', 'SAN NICOLAS', '13', '1339', '133904', NOW(), NOW()),
+ ('133905000', 'SANTA CRUZ', '13', '1339', '133905', NOW(), NOW()),
+ ('133906000', 'SAMPALOC', '13', '1339', '133906', NOW(), NOW()),
+ ('133907000', 'SAN MIGUEL', '13', '1339', '133907', NOW(), NOW()),
+ ('133908000', 'ERMITA', '13', '1339', '133908', NOW(), NOW()),
+ ('133909000', 'INTRAMUROS', '13', '1339', '133909', NOW(), NOW()),
+ ('133910000', 'MALATE', '13', '1339', '133910', NOW(), NOW()),
+ ('133911000', 'PACO', '13', '1339', '133911', NOW(), NOW()),
+ ('133912000', 'PANDACAN', '13', '1339', '133912', NOW(), NOW()),
+ ('133913000', 'PORT AREA', '13', '1339', '133913', NOW(), NOW()),
+ ('133914000', 'SANTA ANA', '13', '1339', '133914', NOW(), NOW()),
+ ('137401000', 'CITY OF MANDALUYONG', '13', '1374', '137401', NOW(), NOW()),
+ ('137402000', 'CITY OF MARIKINA', '13', '1374', '137402', NOW(), NOW()),
+ ('137403000', 'CITY OF PASIG', '13', '1374', '137403', NOW(), NOW()),
+ ('137404000', 'QUEZON CITY', '13', '1374', '137404', NOW(), NOW()),
+ ('137405000', 'CITY OF SAN JUAN', '13', '1374', '137405', NOW(), NOW()),
+ ('137501000', 'CALOOCAN CITY', '13', '1375', '137501', NOW(), NOW()),
+ ('137502000', 'CITY OF MALABON', '13', '1375', '137502', NOW(), NOW()),
+ ('137503000', 'CITY OF NAVOTAS', '13', '1375', '137503', NOW(), NOW()),
+ ('137504000', 'CITY OF VALENZUELA', '13', '1375', '137504', NOW(), NOW()),
+ ('137601000', 'CITY OF LAS PIÑAS', '13', '1376', '137601', NOW(), NOW()),
+ ('137602000', 'CITY OF MAKATI', '13', '1376', '137602', NOW(), NOW()),
+ ('137603000', 'CITY OF MUNTINLUPA', '13', '1376', '137603', NOW(), NOW()),
+ ('137604000', 'CITY OF PARAÑAQUE', '13', '1376', '137604', NOW(), NOW()),
+ ('137605000', 'PASAY CITY', '13', '1376', '137605', NOW(), NOW()),
+ ('137606000', 'PATEROS', '13', '1376', '137606', NOW(), NOW()),
+ ('137607000', 'TAGUIG CITY', '13', '1376', '137607', NOW(), NOW()),
+ ('140101000', 'BANGUED (Capital)', '14', '1401', '140101', NOW(), NOW()),
+ ('140102000', 'BOLINEY', '14', '1401', '140102', NOW(), NOW()),
+ ('140103000', 'BUCAY', '14', '1401', '140103', NOW(), NOW()),
+ ('140104000', 'BUCLOC', '14', '1401', '140104', NOW(), NOW()),
+ ('140105000', 'DAGUIOMAN', '14', '1401', '140105', NOW(), NOW()),
+ ('140106000', 'DANGLAS', '14', '1401', '140106', NOW(), NOW()),
+ ('140107000', 'DOLORES', '14', '1401', '140107', NOW(), NOW()),
+ ('140108000', 'LA PAZ', '14', '1401', '140108', NOW(), NOW()),
+ ('140109000', 'LACUB', '14', '1401', '140109', NOW(), NOW()),
+ ('140110000', 'LAGANGILANG', '14', '1401', '140110', NOW(), NOW()),
+ ('140111000', 'LAGAYAN', '14', '1401', '140111', NOW(), NOW()),
+ ('140112000', 'LANGIDEN', '14', '1401', '140112', NOW(), NOW()),
+ ('140113000', 'LICUAN-BAAY (LICUAN)', '14', '1401', '140113', NOW(), NOW()),
+ ('140114000', 'LUBA', '14', '1401', '140114', NOW(), NOW()),
+ ('140115000', 'MALIBCONG', '14', '1401', '140115', NOW(), NOW()),
+ ('140116000', 'MANABO', '14', '1401', '140116', NOW(), NOW()),
+ ('140117000', 'PEÑARRUBIA', '14', '1401', '140117', NOW(), NOW()),
+ ('140118000', 'PIDIGAN', '14', '1401', '140118', NOW(), NOW()),
+ ('140119000', 'PILAR', '14', '1401', '140119', NOW(), NOW()),
+ ('140120000', 'SALLAPADAN', '14', '1401', '140120', NOW(), NOW()),
+ ('140121000', 'SAN ISIDRO', '14', '1401', '140121', NOW(), NOW()),
+ ('140122000', 'SAN JUAN', '14', '1401', '140122', NOW(), NOW()),
+ ('140123000', 'SAN QUINTIN', '14', '1401', '140123', NOW(), NOW()),
+ ('140124000', 'TAYUM', '14', '1401', '140124', NOW(), NOW()),
+ ('140125000', 'TINEG', '14', '1401', '140125', NOW(), NOW()),
+ ('140126000', 'TUBO', '14', '1401', '140126', NOW(), NOW()),
+ ('140127000', 'VILLAVICIOSA', '14', '1401', '140127', NOW(), NOW()),
+ ('141101000', 'ATOK', '14', '1411', '141101', NOW(), NOW()),
+ ('141102000', 'BAGUIO CITY', '14', '1411', '141102', NOW(), NOW()),
+ ('141103000', 'BAKUN', '14', '1411', '141103', NOW(), NOW()),
+ ('141104000', 'BOKOD', '14', '1411', '141104', NOW(), NOW()),
+ ('141105000', 'BUGUIAS', '14', '1411', '141105', NOW(), NOW()),
+ ('141106000', 'ITOGON', '14', '1411', '141106', NOW(), NOW()),
+ ('141107000', 'KABAYAN', '14', '1411', '141107', NOW(), NOW()),
+ ('141108000', 'KAPANGAN', '14', '1411', '141108', NOW(), NOW()),
+ ('141109000', 'KIBUNGAN', '14', '1411', '141109', NOW(), NOW()),
+ ('141110000', 'LA TRINIDAD (Capital)', '14', '1411', '141110', NOW(), NOW()),
+ ('141111000', 'MANKAYAN', '14', '1411', '141111', NOW(), NOW()),
+ ('141112000', 'SABLAN', '14', '1411', '141112', NOW(), NOW()),
+ ('141113000', 'TUBA', '14', '1411', '141113', NOW(), NOW()),
+ ('141114000', 'TUBLAY', '14', '1411', '141114', NOW(), NOW()),
+ ('142701000', 'BANAUE', '14', '1427', '142701', NOW(), NOW()),
+ ('142702000', 'HUNGDUAN', '14', '1427', '142702', NOW(), NOW()),
+ ('142703000', 'KIANGAN', '14', '1427', '142703', NOW(), NOW()),
+ ('142704000', 'LAGAWE (Capital)', '14', '1427', '142704', NOW(), NOW()),
+ ('142705000', 'LAMUT', '14', '1427', '142705', NOW(), NOW()),
+ ('142706000', 'MAYOYAO', '14', '1427', '142706', NOW(), NOW()),
+ ('142707000', 'ALFONSO LISTA (POTIA)', '14', '1427', '142707', NOW(), NOW()),
+ ('142708000', 'AGUINALDO', '14', '1427', '142708', NOW(), NOW()),
+ ('142709000', 'HINGYON', '14', '1427', '142709', NOW(), NOW()),
+ ('142710000', 'TINOC', '14', '1427', '142710', NOW(), NOW()),
+ ('142711000', 'ASIPULO', '14', '1427', '142711', NOW(), NOW()),
+ ('143201000', 'BALBALAN', '14', '1432', '143201', NOW(), NOW()),
+ ('143206000', 'LUBUAGAN', '14', '1432', '143206', NOW(), NOW()),
+ ('143208000', 'PASIL', '14', '1432', '143208', NOW(), NOW()),
+ ('143209000', 'PINUKPUK', '14', '1432', '143209', NOW(), NOW()),
+ ('143211000', 'RIZAL (LIWAN)', '14', '1432', '143211', NOW(), NOW()),
+ ('143213000', 'CITY OF TABUK (Capital)', '14', '1432', '143213', NOW(), NOW()),
+ ('143214000', 'TANUDAN', '14', '1432', '143214', NOW(), NOW()),
+ ('143215000', 'TINGLAYAN', '14', '1432', '143215', NOW(), NOW()),
+ ('144401000', 'BARLIG', '14', '1444', '144401', NOW(), NOW()),
+ ('144402000', 'BAUKO', '14', '1444', '144402', NOW(), NOW()),
+ ('144403000', 'BESAO', '14', '1444', '144403', NOW(), NOW()),
+ ('144404000', 'BONTOC (Capital)', '14', '1444', '144404', NOW(), NOW()),
+ ('144405000', 'NATONIN', '14', '1444', '144405', NOW(), NOW()),
+ ('144406000', 'PARACELIS', '14', '1444', '144406', NOW(), NOW()),
+ ('144407000', 'SABANGAN', '14', '1444', '144407', NOW(), NOW()),
+ ('144408000', 'SADANGA', '14', '1444', '144408', NOW(), NOW()),
+ ('144409000', 'SAGADA', '14', '1444', '144409', NOW(), NOW()),
+ ('144410000', 'TADIAN', '14', '1444', '144410', NOW(), NOW()),
+ ('148101000', 'CALANASAN (BAYAG)', '14', '1481', '148101', NOW(), NOW()),
+ ('148102000', 'CONNER', '14', '1481', '148102', NOW(), NOW()),
+ ('148103000', 'FLORA', '14', '1481', '148103', NOW(), NOW()),
+ ('148104000', 'KABUGAO (Capital)', '14', '1481', '148104', NOW(), NOW()),
+ ('148105000', 'LUNA', '14', '1481', '148105', NOW(), NOW()),
+ ('148106000', 'PUDTOL', '14', '1481', '148106', NOW(), NOW()),
+ ('148107000', 'SANTA MARCELA', '14', '1481', '148107', NOW(), NOW()),
+ ('150702000', 'CITY OF LAMITAN', '15', '1507', '150702', NOW(), NOW()),
+ ('150703000', 'LANTAWAN', '15', '1507', '150703', NOW(), NOW()),
+ ('150704000', 'MALUSO', '15', '1507', '150704', NOW(), NOW()),
+ ('150705000', 'SUMISIP', '15', '1507', '150705', NOW(), NOW()),
+ ('150706000', 'TIPO-TIPO', '15', '1507', '150706', NOW(), NOW()),
+ ('150707000', 'TUBURAN', '15', '1507', '150707', NOW(), NOW()),
+ ('150708000', 'AKBAR', '15', '1507', '150708', NOW(), NOW()),
+ ('150709000', 'AL-BARKA', '15', '1507', '150709', NOW(), NOW()),
+ ('150710000', 'HADJI MOHAMMAD AJUL', '15', '1507', '150710', NOW(), NOW()),
+ ('150711000', 'UNGKAYA PUKAN', '15', '1507', '150711', NOW(), NOW()),
+ ('150712000', 'HADJI MUHTAMAD', '15', '1507', '150712', NOW(), NOW()),
+ ('150713000', 'TABUAN-LASA', '15', '1507', '150713', NOW(), NOW()),
+ ('153601000', 'BACOLOD-KALAWI (BACOLOD GRANDE)', '15', '1536', '153601', NOW(), NOW()),
+ ('153602000', 'BALABAGAN', '15', '1536', '153602', NOW(), NOW()),
+ ('153603000', 'BALINDONG (WATU)', '15', '1536', '153603', NOW(), NOW()),
+ ('153604000', 'BAYANG', '15', '1536', '153604', NOW(), NOW()),
+ ('153605000', 'BINIDAYAN', '15', '1536', '153605', NOW(), NOW()),
+ ('153606000', 'BUBONG', '15', '1536', '153606', NOW(), NOW()),
+ ('153607000', 'BUTIG', '15', '1536', '153607', NOW(), NOW()),
+ ('153609000', 'GANASSI', '15', '1536', '153609', NOW(), NOW()),
+ ('153610000', 'KAPAI', '15', '1536', '153610', NOW(), NOW()),
+ ('153611000', 'LUMBA-BAYABAO (MAGUING)', '15', '1536', '153611', NOW(), NOW()),
+ ('153612000', 'LUMBATAN', '15', '1536', '153612', NOW(), NOW()),
+ ('153613000', 'MADALUM', '15', '1536', '153613', NOW(), NOW()),
+ ('153614000', 'MADAMBA', '15', '1536', '153614', NOW(), NOW()),
+ ('153615000', 'MALABANG', '15', '1536', '153615', NOW(), NOW()),
+ ('153616000', 'MARANTAO', '15', '1536', '153616', NOW(), NOW()),
+ ('153617000', 'MARAWI CITY (Capital)', '15', '1536', '153617', NOW(), NOW()),
+ ('153618000', 'MASIU', '15', '1536', '153618', NOW(), NOW()),
+ ('153619000', 'MULONDO', '15', '1536', '153619', NOW(), NOW()),
+ ('153620000', 'PAGAYAWAN (TATARIKAN)', '15', '1536', '153620', NOW(), NOW()),
+ ('153621000', 'PIAGAPO', '15', '1536', '153621', NOW(), NOW()),
+ ('153622000', 'POONA BAYABAO (GATA)', '15', '1536', '153622', NOW(), NOW()),
+ ('153623000', 'PUALAS', '15', '1536', '153623', NOW(), NOW()),
+ ('153624000', 'DITSAAN-RAMAIN', '15', '1536', '153624', NOW(), NOW()),
+ ('153625000', 'SAGUIARAN', '15', '1536', '153625', NOW(), NOW()),
+ ('153626000', 'TAMPARAN', '15', '1536', '153626', NOW(), NOW()),
+ ('153627000', 'TARAKA', '15', '1536', '153627', NOW(), NOW()),
+ ('153628000', 'TUBARAN', '15', '1536', '153628', NOW(), NOW()),
+ ('153629000', 'TUGAYA', '15', '1536', '153629', NOW(), NOW()),
+ ('153630000', 'WAO', '15', '1536', '153630', NOW(), NOW()),
+ ('153631000', 'MAROGONG', '15', '1536', '153631', NOW(), NOW()),
+ ('153632000', 'CALANOGAS', '15', '1536', '153632', NOW(), NOW()),
+ ('153633000', 'BUADIPOSO-BUNTONG', '15', '1536', '153633', NOW(), NOW()),
+ ('153634000', 'MAGUING', '15', '1536', '153634', NOW(), NOW()),
+ ('153635000', 'PICONG (SULTAN GUMANDER)', '15', '1536', '153635', NOW(), NOW()),
+ ('153636000', 'LUMBAYANAGUE', '15', '1536', '153636', NOW(), NOW()),
+ ('153637000', 'BUMBARAN', '15', '1536', '153637', NOW(), NOW()),
+ ('153638000', 'TAGOLOAN II', '15', '1536', '153638', NOW(), NOW()),
+ ('153639000', 'KAPATAGAN', '15', '1536', '153639', NOW(), NOW()),
+ ('153640000', 'SULTAN DUMALONDONG', '15', '1536', '153640', NOW(), NOW()),
+ ('153641000', 'LUMBACA-UNAYAN', '15', '1536', '153641', NOW(), NOW()),
+ ('153801000', 'AMPATUAN', '15', '1538', '153801', NOW(), NOW()),
+ ('153802000', 'BULDON', '15', '1538', '153802', NOW(), NOW()),
+ ('153803000', 'BULUAN', '15', '1538', '153803', NOW(), NOW()),
+ ('153805000', 'DATU PAGLAS', '15', '1538', '153805', NOW(), NOW()),
+ ('153806000', 'DATU PIANG', '15', '1538', '153806', NOW(), NOW()),
+ ('153807000', 'DATU ODIN SINSUAT (DINAIG)', '15', '1538', '153807', NOW(), NOW()),
+ ('153808000', 'SHARIFF AGUAK (MAGANOY) (Capital)', '15', '1538', '153808', NOW(), NOW()),
+ ('153809000', 'MATANOG', '15', '1538', '153809', NOW(), NOW()),
+ ('153810000', 'PAGALUNGAN', '15', '1538', '153810', NOW(), NOW()),
+ ('153811000', 'PARANG', '15', '1538', '153811', NOW(), NOW()),
+ ('153812000', 'SULTAN KUDARAT (NULING)', '15', '1538', '153812', NOW(), NOW()),
+ ('153813000', 'SULTAN SA BARONGIS (LAMBAYONG)', '15', '1538', '153813', NOW(), NOW()),
+ ('153814000', 'KABUNTALAN (TUMBAO)', '15', '1538', '153814', NOW(), NOW()),
+ ('153815000', 'UPI', '15', '1538', '153815', NOW(), NOW()),
+ ('153816000', 'TALAYAN', '15', '1538', '153816', NOW(), NOW()),
+ ('153817000', 'SOUTH UPI', '15', '1538', '153817', NOW(), NOW()),
+ ('153818000', 'BARIRA', '15', '1538', '153818', NOW(), NOW()),
+ ('153819000', 'GEN. S. K. PENDATUN', '15', '1538', '153819', NOW(), NOW()),
+ ('153820000', 'MAMASAPANO', '15', '1538', '153820', NOW(), NOW()),
+ ('153821000', 'TALITAY', '15', '1538', '153821', NOW(), NOW()),
+ ('153822000', 'PAGAGAWAN', '15', '1538', '153822', NOW(), NOW()),
+ ('153823000', 'PAGLAT', '15', '1538', '153823', NOW(), NOW()),
+ ('153824000', 'SULTAN MASTURA', '15', '1538', '153824', NOW(), NOW()),
+ ('153825000', 'GUINDULUNGAN', '15', '1538', '153825', NOW(), NOW()),
+ ('153826000', 'DATU SAUDI-AMPATUAN', '15', '1538', '153826', NOW(), NOW()),
+ ('153827000', 'DATU UNSAY', '15', '1538', '153827', NOW(), NOW()),
+ ('153828000', 'DATU ABDULLAH SANGKI', '15', '1538', '153828', NOW(), NOW()),
+ ('153829000', 'RAJAH BUAYAN', '15', '1538', '153829', NOW(), NOW()),
+ ('153830000', 'DATU BLAH T. SINSUAT', '15', '1538', '153830', NOW(), NOW()),
+ ('153831000', 'DATU ANGGAL MIDTIMBANG', '15', '1538', '153831', NOW(), NOW()),
+ ('153832000', 'MANGUDADATU', '15', '1538', '153832', NOW(), NOW()),
+ ('153833000', 'PANDAG', '15', '1538', '153833', NOW(), NOW()),
+ ('153834000', 'NORTHERN KABUNTALAN', '15', '1538', '153834', NOW(), NOW()),
+ ('153835000', 'DATU HOFFER AMPATUAN', '15', '1538', '153835', NOW(), NOW()),
+ ('153836000', 'DATU SALIBO', '15', '1538', '153836', NOW(), NOW()),
+ ('153837000', 'SHARIFF SAYDONA MUSTAPHA', '15', '1538', '153837', NOW(), NOW()),
+ ('156601000', 'INDANAN', '15', '1566', '156601', NOW(), NOW()),
+ ('156602000', 'JOLO (Capital)', '15', '1566', '156602', NOW(), NOW()),
+ ('156603000', 'KALINGALAN CALUANG', '15', '1566', '156603', NOW(), NOW()),
+ ('156604000', 'LUUK', '15', '1566', '156604', NOW(), NOW()),
+ ('156605000', 'MAIMBUNG', '15', '1566', '156605', NOW(), NOW()),
+ ('156606000', 'HADJI PANGLIMA TAHIL (MARUNGGAS)', '15', '1566', '156606', NOW(), NOW()),
+ ('156607000', 'OLD PANAMAO', '15', '1566', '156607', NOW(), NOW()),
+ ('156608000', 'PANGUTARAN', '15', '1566', '156608', NOW(), NOW()),
+ ('156609000', 'PARANG', '15', '1566', '156609', NOW(), NOW()),
+ ('156610000', 'PATA', '15', '1566', '156610', NOW(), NOW()),
+ ('156611000', 'PATIKUL', '15', '1566', '156611', NOW(), NOW()),
+ ('156612000', 'SIASI', '15', '1566', '156612', NOW(), NOW()),
+ ('156613000', 'TALIPAO', '15', '1566', '156613', NOW(), NOW()),
+ ('156614000', 'TAPUL', '15', '1566', '156614', NOW(), NOW()),
+ ('156615000', 'TONGKIL', '15', '1566', '156615', NOW(), NOW()),
+ ('156616000', 'PANGLIMA ESTINO (NEW PANAMAO)', '15', '1566', '156616', NOW(), NOW()),
+ ('156617000', 'LUGUS', '15', '1566', '156617', NOW(), NOW()),
+ ('156618000', 'PANDAMI', '15', '1566', '156618', NOW(), NOW()),
+ ('156619000', 'OMAR', '15', '1566', '156619', NOW(), NOW()),
+ ('157001000', 'PANGLIMA SUGALA (BALIMBING)', '15', '1570', '157001', NOW(), NOW()),
+ ('157002000', 'BONGAO (Capital)', '15', '1570', '157002', NOW(), NOW()),
+ ('157003000', 'MAPUN (CAGAYAN DE TAWI-TAWI)', '15', '1570', '157003', NOW(), NOW()),
+ ('157004000', 'SIMUNUL', '15', '1570', '157004', NOW(), NOW()),
+ ('157005000', 'SITANGKAI', '15', '1570', '157005', NOW(), NOW()),
+ ('157006000', 'SOUTH UBIAN', '15', '1570', '157006', NOW(), NOW()),
+ ('157007000', 'TANDUBAS', '15', '1570', '157007', NOW(), NOW()),
+ ('157008000', 'TURTLE ISLANDS', '15', '1570', '157008', NOW(), NOW()),
+ ('157009000', 'LANGUYAN', '15', '1570', '157009', NOW(), NOW()),
+ ('157010000', 'SAPA-SAPA', '15', '1570', '157010', NOW(), NOW()),
+ ('157011000', 'SIBUTU', '15', '1570', '157011', NOW(), NOW()),
+ ('160201000', 'BUENAVISTA', '16', '1602', '160201', NOW(), NOW()),
+ ('160202000', 'BUTUAN CITY (Capital)', '16', '1602', '160202', NOW(), NOW()),
+ ('160203000', 'CITY OF CABADBARAN', '16', '1602', '160203', NOW(), NOW()),
+ ('160204000', 'CARMEN', '16', '1602', '160204', NOW(), NOW()),
+ ('160205000', 'JABONGA', '16', '1602', '160205', NOW(), NOW()),
+ ('160206000', 'KITCHARAO', '16', '1602', '160206', NOW(), NOW()),
+ ('160207000', 'LAS NIEVES', '16', '1602', '160207', NOW(), NOW()),
+ ('160208000', 'MAGALLANES', '16', '1602', '160208', NOW(), NOW()),
+ ('160209000', 'NASIPIT', '16', '1602', '160209', NOW(), NOW()),
+ ('160210000', 'SANTIAGO', '16', '1602', '160210', NOW(), NOW()),
+ ('160211000', 'TUBAY', '16', '1602', '160211', NOW(), NOW()),
+ ('160212000', 'REMEDIOS T. ROMUALDEZ', '16', '1602', '160212', NOW(), NOW()),
+ ('160301000', 'CITY OF BAYUGAN', '16', '1603', '160301', NOW(), NOW()),
+ ('160302000', 'BUNAWAN', '16', '1603', '160302', NOW(), NOW()),
+ ('160303000', 'ESPERANZA', '16', '1603', '160303', NOW(), NOW()),
+ ('160304000', 'LA PAZ', '16', '1603', '160304', NOW(), NOW()),
+ ('160305000', 'LORETO', '16', '1603', '160305', NOW(), NOW()),
+ ('160306000', 'PROSPERIDAD (Capital)', '16', '1603', '160306', NOW(), NOW()),
+ ('160307000', 'ROSARIO', '16', '1603', '160307', NOW(), NOW()),
+ ('160308000', 'SAN FRANCISCO', '16', '1603', '160308', NOW(), NOW()),
+ ('160309000', 'SAN LUIS', '16', '1603', '160309', NOW(), NOW()),
+ ('160310000', 'SANTA JOSEFA', '16', '1603', '160310', NOW(), NOW()),
+ ('160311000', 'TALACOGON', '16', '1603', '160311', NOW(), NOW()),
+ ('160312000', 'TRENTO', '16', '1603', '160312', NOW(), NOW()),
+ ('160313000', 'VERUELA', '16', '1603', '160313', NOW(), NOW()),
+ ('160314000', 'SIBAGAT', '16', '1603', '160314', NOW(), NOW()),
+ ('166701000', 'ALEGRIA', '16', '1667', '166701', NOW(), NOW()),
+ ('166702000', 'BACUAG', '16', '1667', '166702', NOW(), NOW()),
+ ('166704000', 'BURGOS', '16', '1667', '166704', NOW(), NOW()),
+ ('166706000', 'CLAVER', '16', '1667', '166706', NOW(), NOW()),
+ ('166707000', 'DAPA', '16', '1667', '166707', NOW(), NOW()),
+ ('166708000', 'DEL CARMEN', '16', '1667', '166708', NOW(), NOW()),
+ ('166710000', 'GENERAL LUNA', '16', '1667', '166710', NOW(), NOW()),
+ ('166711000', 'GIGAQUIT', '16', '1667', '166711', NOW(), NOW()),
+ ('166714000', 'MAINIT', '16', '1667', '166714', NOW(), NOW()),
+ ('166715000', 'MALIMONO', '16', '1667', '166715', NOW(), NOW()),
+ ('166716000', 'PILAR', '16', '1667', '166716', NOW(), NOW()),
+ ('166717000', 'PLACER', '16', '1667', '166717', NOW(), NOW()),
+ ('166718000', 'SAN BENITO', '16', '1667', '166718', NOW(), NOW()),
+ ('166719000', 'SAN FRANCISCO (ANAO-AON)', '16', '1667', '166719', NOW(), NOW()),
+ ('166720000', 'SAN ISIDRO', '16', '1667', '166720', NOW(), NOW()),
+ ('166721000', 'SANTA MONICA (SAPAO)', '16', '1667', '166721', NOW(), NOW()),
+ ('166722000', 'SISON', '16', '1667', '166722', NOW(), NOW()),
+ ('166723000', 'SOCORRO', '16', '1667', '166723', NOW(), NOW()),
+ ('166724000', 'SURIGAO CITY (Capital)', '16', '1667', '166724', NOW(), NOW()),
+ ('166725000', 'TAGANA-AN', '16', '1667', '166725', NOW(), NOW()),
+ ('166727000', 'TUBOD', '16', '1667', '166727', NOW(), NOW()),
+ ('166801000', 'BAROBO', '16', '1668', '166801', NOW(), NOW()),
+ ('166802000', 'BAYABAS', '16', '1668', '166802', NOW(), NOW()),
+ ('166803000', 'CITY OF BISLIG', '16', '1668', '166803', NOW(), NOW()),
+ ('166804000', 'CAGWAIT', '16', '1668', '166804', NOW(), NOW()),
+ ('166805000', 'CANTILAN', '16', '1668', '166805', NOW(), NOW()),
+ ('166806000', 'CARMEN', '16', '1668', '166806', NOW(), NOW()),
+ ('166807000', 'CARRASCAL', '16', '1668', '166807', NOW(), NOW()),
+ ('166808000', 'CORTES', '16', '1668', '166808', NOW(), NOW()),
+ ('166809000', 'HINATUAN', '16', '1668', '166809', NOW(), NOW()),
+ ('166810000', 'LANUZA', '16', '1668', '166810', NOW(), NOW()),
+ ('166811000', 'LIANGA', '16', '1668', '166811', NOW(), NOW()),
+ ('166812000', 'LINGIG', '16', '1668', '166812', NOW(), NOW()),
+ ('166813000', 'MADRID', '16', '1668', '166813', NOW(), NOW()),
+ ('166814000', 'MARIHATAG', '16', '1668', '166814', NOW(), NOW()),
+ ('166815000', 'SAN AGUSTIN', '16', '1668', '166815', NOW(), NOW()),
+ ('166816000', 'SAN MIGUEL', '16', '1668', '166816', NOW(), NOW()),
+ ('166817000', 'TAGBINA', '16', '1668', '166817', NOW(), NOW()),
+ ('166818000', 'TAGO', '16', '1668', '166818', NOW(), NOW()),
+ ('166819000', 'CITY OF TANDAG (Capital)', '16', '1668', '166819', NOW(), NOW()),
+ ('168501000', 'BASILISA (RIZAL)', '16', '1685', '168501', NOW(), NOW()),
+ ('168502000', 'CAGDIANAO', '16', '1685', '168502', NOW(), NOW()),
+ ('168503000', 'DINAGAT', '16', '1685', '168503', NOW(), NOW()),
+ ('168504000', 'LIBJO (ALBOR)', '16', '1685', '168504', NOW(), NOW()),
+ ('168505000', 'LORETO', '16', '1685', '168505', NOW(), NOW()),
+ ('168506000', 'SAN JOSE (Capital)', '16', '1685', '168506', NOW(), NOW()),
+ ('168507000', 'TUBAJON', '16', '1685', '168507', NOW(), NOW());
