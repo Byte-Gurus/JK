@@ -21,8 +21,7 @@ class CreatePhilippineBarangaysTable extends Migration
             $table->string('region_code')->index();
             $table->string('province_code')->index();
             $table->string('city_municipality_code')->index();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
 
 
             $table->foreign('region_code')->references('region_code')->on('philippine_regions');

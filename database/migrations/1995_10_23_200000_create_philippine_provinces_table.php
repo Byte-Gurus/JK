@@ -20,8 +20,7 @@ class CreatePhilippineProvincesTable extends Migration
             $table->string('province_description');
             $table->string('region_code');
             $table->string('province_code')->unique();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
 
             $table->foreign('region_code')->references('region_code')->on('philippine_regions');
         });
