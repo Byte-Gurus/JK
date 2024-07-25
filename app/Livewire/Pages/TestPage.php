@@ -19,6 +19,8 @@ class TestPage extends Component
 
     public function save()
     {
+
+        dd($this->photo);
         $this->validate([
             'photo' => 'image|max:1024', // 1MB Max
         ]);
