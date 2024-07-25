@@ -16,10 +16,10 @@ class CreatePhilippineProvincesTable extends Migration
     {
         Schema::create('philippine_provinces', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('psgc_code')->index();
+            $table->string('psgc_code');
             $table->string('province_description');
             $table->string('region_code');
-            $table->string('province_code')->unique();
+            $table->string('province_code');
             $table->timestamps();
 
             $table->foreign('region_code')->references('region_code')->on('philippine_regions');
