@@ -9,7 +9,8 @@ use Livewire\WithFileUploads;
 class TestPage extends Component
 {
     use WithFileUploads;
-    #[Validate('image|max:1024')]
+
+    
     public $photo;
 
     public function render()
@@ -23,7 +24,10 @@ class TestPage extends Component
     {
 
 
-       
+        $this->validate([
+            'photo' => 'image|mimes:jpg,png', // 1MB Max
+        ]);
+
         $this->photo->store('photos');
         dd($this->photo);
     }
