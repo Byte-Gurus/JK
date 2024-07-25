@@ -9,5 +9,6 @@
         @error('photo') <span class="error">{{ $message }}</span> @enderror
 
         <button type="submit">Save photo</button>
+        sss
     </form>
 </div>

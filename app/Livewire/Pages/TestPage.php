@@ -24,7 +24,7 @@ class TestPage extends Component
 
 
         $this->validate([
-            'photo' => 'image|mimes:jpg,png|max:1024', // 1MB Max
+            'photo' => 'image|mimes:jpg,png', // 1MB Max
         ]);
 
         $this->photo->store('photos');
