@@ -4,6 +4,7 @@ namespace App\Livewire\Components\UserManagement;
 
 use App\Models\User;
 use App\Models\UserRole;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\Livewire;
@@ -21,6 +22,7 @@ class UserTable extends Component
     public $statusFilter = 0; //var filtering value = all
 
 
+    #[On('refresh-table')]
     public function render()
     {
 
@@ -85,8 +87,8 @@ class UserTable extends Component
 
 
 
-    public function refreshTable()
-    {
-        $this->resetPage();
-    }
+    // public function refreshTable()
+    // {
+    //     $this->resetPage();
+    // }
 }
