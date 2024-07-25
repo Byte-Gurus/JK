@@ -20,8 +20,8 @@ class CreatePhilippineCitiesTable extends Migration
             $table->string('region_code')->index();
             $table->string('province_code')->index();
             $table->string('city_municipality_code')->index();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
 
             $table->foreign('region_code')->references('region_code')->on('philippine_regions');
             $table->foreign('province_code')->references('province_code')->on('philippine_provinces');

@@ -18,8 +18,8 @@ class CreatePhilippineRegionsTable extends Migration
             $table->string('psgc_code')->index();
             $table->string('region_description');
             $table->string('region_code')->index();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 
