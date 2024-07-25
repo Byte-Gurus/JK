@@ -19,7 +19,7 @@ class CreatePhilippineCitiesTable extends Migration
             $table->string('city_municipality_description');
             $table->string('region_code');
             $table->string('province_code');
-            $table->string('city_municipality_code')->unique();
+            $table->string('city_municipality_code');
             $table->timestamps();
 
             $table->foreign('region_code')->references('region_code')->on('philippine_regions');
