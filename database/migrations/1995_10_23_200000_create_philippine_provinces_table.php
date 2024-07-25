@@ -18,7 +18,7 @@ class CreatePhilippineProvincesTable extends Migration
             $table->increments('id');
             $table->string('psgc_code')->index();
             $table->string('province_description');
-            $table->string('region_code')->index();
+            $table->string('region_code');
             $table->string('province_code')->unique();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
