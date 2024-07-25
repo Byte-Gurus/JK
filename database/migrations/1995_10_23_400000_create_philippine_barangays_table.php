@@ -16,7 +16,7 @@ class CreatePhilippineBarangaysTable extends Migration
     {
         Schema::create('philippine_barangays', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('barangay_code');
+            $table->string('barangay_code')->unique();
             $table->string('barangay_description');
             $table->string('region_code');
             $table->string('province_code');
