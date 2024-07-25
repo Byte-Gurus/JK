@@ -11,6 +11,7 @@ use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\LoginPage;
 use App\Livewire\Pages\OrderAndDeliveryManagementPage;
 use App\Livewire\Pages\SupplierManagementPage;
+use App\Livewire\Pages\TestPage;
 use App\Livewire\Pages\UserManagementPage;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,6 @@ Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('i
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
 
 
-
+Route::get('/test', TestPage::class);
 
 
