@@ -47,5 +47,4 @@ Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('R
 
 
 
-Route::get('/test', [testingPage::class, 'save']);
-Route::post('/test/save', [testingPage::class, 'save'])->name('upload.image');
+
