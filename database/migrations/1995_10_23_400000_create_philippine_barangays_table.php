@@ -18,9 +18,9 @@ class CreatePhilippineBarangaysTable extends Migration
             $table->increments('id');
             $table->string('barangay_code')->index();
             $table->string('barangay_description');
-            $table->string('region_code')->index();
-            $table->string('province_code')->index();
-            $table->string('city_municipality_code')->index();
+            $table->string('region_code')->unique();
+            $table->string('province_code')->unique();
+            $table->string('city_municipality_code')->unique();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
 
