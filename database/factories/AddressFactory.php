@@ -6,6 +6,7 @@ use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
 use App\Models\PhilippineRegion;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,8 +28,8 @@ class AddressFactory extends Factory
 
         $barangay = PhilippineBarangay::where('city_municipality_code', $city->city_municipality_code)->inRandomOrder()->first();
 
-        return [
 
+        return [
             'province_code' => $province->province_code,
             'city_municipality_code' => $city->city_municipality_code,
             'barangay_code' => $barangay->barangay_code,

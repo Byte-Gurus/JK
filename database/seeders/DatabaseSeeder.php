@@ -20,12 +20,13 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(StatusSeeder::class);
         $this->call(UserSeeder::class);
-        // User::factory(100)->create();
+        User::factory(100)->create();
 
-        $this->call(PhilippineRegionsTableSeeder::class);
-        $this->call(PhilippineProvincesTableSeeder::class);
-        $this->call(PhilippineCitiesTableSeeder::class);
-        $this->call(PhilippineBarangaysTableSeeder::class);
+
+        // $this->call(PhilippineRegionsTableSeeder::class);
+        // $this->call(PhilippineProvincesTableSeeder::class);
+        // $this->call(PhilippineCitiesTableSeeder::class);
+        // $this->call(PhilippineBarangaysTableSeeder::class);
 
         // Supplier::factory(100)->create();
         // Customer::factory(100)->create();

@@ -1,26 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreatePhilippineBarangaysTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('philippine_barangays', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('barangay_code')->unique();
             $table->string('barangay_description');
-            $table->string('region_code');
-            $table->string('province_code');
-            $table->string('city_municipality_code');
+            $table->string('region_code')->index();
+            $table->string('province_code')->index();
+            $table->string('city_municipality_code')->index();
             $table->timestamps();
 
 
@@ -28,15 +25,14 @@ class CreatePhilippineBarangaysTable extends Migration
             $table->foreign('province_code')->references('province_code')->on('philippine_provinces');
             $table->foreign('city_municipality_code')->references('city_municipality_code')->on('philippine_cities');
         });
+
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('philippine_barangays');
     }
-}
+};
