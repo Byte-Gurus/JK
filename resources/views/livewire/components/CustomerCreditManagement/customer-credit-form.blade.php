@@ -332,7 +332,7 @@
                                 <div>
 
                                     {{-- //* submit button for create --}}
-                                    <button type="submit" wire:loading.remove
+                                    <button type="submit" wire:loading.remove wire:click="test"
                                         class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                         <div class="flex flex-row items-center gap-2">
                                             <p>
