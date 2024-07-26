@@ -72,6 +72,6 @@ class CustomerCreditForm extends Component
         $this->barangays = null;
     }
     public function test(){
-        dd("sasa");
+        dd($this->photo);
     }
 }
