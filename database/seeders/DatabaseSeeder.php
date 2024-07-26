@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->create();
 
 
-        // $this->call(PhilippineRegionsTableSeeder::class);
-        // $this->call(PhilippineProvincesTableSeeder::class);
-        // $this->call(PhilippineCitiesTableSeeder::class);
-        // $this->call(PhilippineBarangaysTableSeeder::class);
+        $this->call(PhilippineRegionsTableSeeder::class);
+        $this->call(PhilippineProvincesTableSeeder::class);
+        $this->call(PhilippineCitiesTableSeeder::class);
+        $this->call(PhilippineBarangaysTableSeeder::class);
 
-        // Supplier::factory(100)->create();
-        // Customer::factory(100)->create();
+        Supplier::factory(100)->create();
+        Customer::factory(100)->create();
 
     }
 }
