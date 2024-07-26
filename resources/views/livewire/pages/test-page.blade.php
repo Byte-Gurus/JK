@@ -11,6 +11,6 @@
         @enderror
 
         <button type="submit">Save photo</button>
-        sss
+
     </form>
 </div>
