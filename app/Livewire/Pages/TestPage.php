@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages;
 
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 

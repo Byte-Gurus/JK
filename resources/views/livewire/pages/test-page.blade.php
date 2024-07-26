@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit="save" action="" enctype="multipart/form-data">
+    <form wire:submit="save">
         @if ($photo)
             <img src="{{ $photo->temporaryUrl() }}">
         @endif

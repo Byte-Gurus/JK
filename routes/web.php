@@ -46,6 +46,6 @@ Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('i
 Route::get('/cashier', CashierPage::class)->name('cashier.index')->middleware('RedirectIfLoggedIn');
 
 
-Route::get('/test', TestPage::class);
+Route::get('/test', TestPage::class)->name('test');
 
 
