@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://jkstore-a19fed46b3e1.herokuapp.com'),
 
     /*
     |--------------------------------------------------------------------------
