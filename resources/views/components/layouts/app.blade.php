@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ asset('build/assets/app-DJcDnJtG.css') }}">
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
 
     @livewireStyles
