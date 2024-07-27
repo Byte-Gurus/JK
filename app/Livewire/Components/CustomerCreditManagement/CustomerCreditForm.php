@@ -49,7 +49,22 @@ class CustomerCreditForm extends Component
         $this->barangays = null;
     }
 
-    private function resetForm() //*tanggalin ang laman ng input pati $user_id value
+    protected function validateForm()
+    {
+       
+
+        $rules = [
+             //? validation sa barcode paro iignore ang item_id para maupdate ang barcode kahit unique
+
+            'photo' => 'nullable|image|max:20480',
+
+        ];
+
+
+        return $this->validate($rules);
+    }
+
+    public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
         $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'photo']);
     }
@@ -74,4 +89,5 @@ class CustomerCreditForm extends Component
     public function test(){
         dd($this->photo);
     }
+
 }

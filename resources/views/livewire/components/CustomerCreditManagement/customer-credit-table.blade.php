@@ -147,7 +147,7 @@
 
                             {{-- //* id picture --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                <img src="{{ $customer->id_picture }}" width="200px" alt="">
+                               <button class="bg-slate-400"> view image</button>
                             </th>
 
                             {{-- //* address --}}
