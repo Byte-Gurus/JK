@@ -271,12 +271,12 @@
 
                                 {{-- //* sixth row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
-                                    <input type="file" wire:model="photo">
+                                    <input type="file" accept="image/png, image/jpeg" wire:model="photo">
 
                                     @if ($photo)
                                         <img src="{{ $photo->temporaryUrl() }}">
                                     @endif
-                                    
+
                                     @error('photo')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
