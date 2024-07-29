@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative ">
+<div class="relative  " wire:poll.visible="1000ms">
 
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">

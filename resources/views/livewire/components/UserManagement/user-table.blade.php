@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative bg-black rounded-lg">
+<div class="relative bg-black rounded-lg" wire:poll.visible="1000ms">
 
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
@@ -75,7 +75,7 @@
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
                     <tr class=" text-nowrap">
-                        
+
                         {{-- //* user image --}}
                         {{-- <th scope="col" class="px-4 py-3"></th> --}}
 
