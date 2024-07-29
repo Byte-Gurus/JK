@@ -3,7 +3,9 @@
 namespace App\Livewire\Components\CustomerCreditManagement;
 
 use App\Livewire\Pages\CustomerCreditMangementPage;
-use Livewire\Attributes\Validate;
+use App\Models\Address;
+use App\Models\Customer;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -35,10 +37,46 @@ class CustomerCreditForm extends Component
         'createConfirmed',
     ];
 
-    // public function save()
-    // {
-    //     $this->photo->store(path: 'photos');
-    // }
+    public function create() //* create process
+    {
+        $validated = $this->validateForm();
+
+        $this->confirm('Do you want to add this user?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
+    }
+
+    public function createConfirmed($data) //* confirmation process ng create
+    {
+
+        $validated = $data['inputAttributes'];
+
+        $address = Address::create([
+            'province_code' => $validated['selectProvince'],
+            'city_municipality_code' => $validated['selectCity'],
+            'barangay_code' => $validated['selectBrgy'],
+            'street' => $validated['street'],
+        ]);
+
+        $customer = Customer::create([
+            'firstname' => $validated['firstname'],
+            'middlename' => $validated['middlename'],
+            'lastname' => $validated['lastname'],
+            'contact_number' => $validated['contact_number'],
+            'birthdate' => $validated['birthdate'],
+            'address_id' => $address->id
+
+        ]);
+
+
+        $this->alert('success', 'User was created successfully');
+        $this->refreshTable();
+
+        $this->resetForm();
+        $this->closeModal();
+    }
+
 
 
     public function resetFormWhenClosed()
@@ -51,11 +89,21 @@ class CustomerCreditForm extends Component
 
     protected function validateForm()
     {
-       
+
+        $this->firstname = trim($this->firstname);
+        $this->middlename = trim($this->middlename);
+        $this->lastname = trim($this->lastname);
 
         $rules = [
-             //? validation sa barcode paro iignore ang item_id para maupdate ang barcode kahit unique
-
+            'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'birthdate' => 'required|string|max:255',
+            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('customers', 'contact_number')->ignore($this->proxy_customer_id)],
+            'selectProvince' => 'required|exists:philippine_provinces,province_code',
+            'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
+            'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
+            'street' => 'required|string|max:255',
             'photo' => 'nullable|image|max:20480',
 
         ];
