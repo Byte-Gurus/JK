@@ -39,8 +39,6 @@
                         </h3>
                     </div>
 
-
-
                     {{-- //* close button --}}
                     <button type="button" x-on:click="showModal=false" wire:click='resetFormWhenClosed() '
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
@@ -51,7 +49,6 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
-
 
                         <span class="sr-only">Close modal</span>
 
@@ -168,6 +165,30 @@
 
                                     </div>
 
+                                    <div class="mb-3">
+
+                                        <label for="photo"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Profile
+                                        </label>
+
+                                        <input id="photo" type="file" accept="image/png, image/jpeg"
+                                            wire:model="photo"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+
+                                        @if ($photo)
+                                            <img src="{{ $photo->temporaryUrl() }}">
+                                        @endif
+
+                                        @error('photo')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+                                {{-- //* fourth row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
                                     {{-- //* province --}}
                                     <div class="mb-3">
 
@@ -179,9 +200,9 @@
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
                                             {{-- @foreach ($provinces as $province)
-                                                <option value="{{ $province->province_code }}">
-                                                    {{ $province->province_description }}</option>
-                                            @endforeach --}}
+                                               <option value="{{ $province->province_code }}">
+                                                   {{ $province->province_description }}</option>
+                                           @endforeach --}}
 
                                         </select>
 
@@ -190,11 +211,6 @@
                                         @enderror
 
                                     </div>
-
-                                </div>
-
-                                {{-- //* fourth row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                     {{-- //* city --}}
                                     <div class="mb-3">
@@ -223,6 +239,12 @@
 
                                     </div>
 
+                                </div>
+
+                                {{-- //* fifth row --}}
+
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
                                     {{-- //* brgy --}}
                                     <div class="mb-3">
 
@@ -246,12 +268,6 @@
 
                                     </div>
 
-
-                                </div>
-                                {{-- //* fifth row --}}
-
-                                <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
-
                                     {{-- //* street --}}
                                     <div class="mb-3">
 
@@ -271,15 +287,43 @@
 
                                 {{-- //* sixth row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
-                                    <input type="file" accept="image/png, image/jpeg" wire:model="photo">
+                                    {{-- //* customer type --}}
+                                    <div class="mb-3">
 
-                                    @if ($photo)
-                                        <img src="{{ $photo->temporaryUrl() }}">
-                                    @endif
+                                        <label for="selectCustomerType"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
-                                    @error('photo')
-                                        <span class="error">{{ $message }}</span>
-                                    @enderror
+                                        <select id="selectCustomerType" wire:model.live="selectCustomerType" required
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            <option value="" selected>Select Customer Type</option>
+                                            {{-- @if (!is_null($barangays))
+                                                @foreach ($barangays as $barangay)
+                                                    <option value="{{ $barangay->barangay_code }}">
+                                                        {{ $barangay->barangay_description }}</option>
+                                                @endforeach
+                                            @endif --}}
+                                        </select>
+
+                                        @error('selectCustomerType')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                    {{-- //* discount no --}}
+                                    <div class="mb-3">
+
+                                        <label for="customerDiscountNo"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount
+                                            No</label>
+
+                                        <input type="number" id="customerDiscountNo" wire:model="customerDiscountNo"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            placeholder="Discount No" required />
+                                        @error('customerDiscountNo')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
