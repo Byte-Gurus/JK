@@ -155,7 +155,7 @@
                                         <label for="contactno"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Contact No</label>
 
-                                        <input type="date" id="contactno" wire:model="contact_number"
+                                        <input type="number" id="contactno" wire:model="contact_number"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Contact No" required />
 
@@ -167,19 +167,19 @@
 
                                     <div class="mb-3">
 
-                                        <label for="photo"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Profile
+                                        <label for="id_picture"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">ID Picture
                                         </label>
 
-                                        <input id="photo" type="file" accept="image/png, image/jpeg"
-                                            wire:model="photo"
+                                        <input id="id_picture" type="file" accept="image/png, image/jpeg"
+                                            wire:model="id_picture"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
 
-                                        @if ($photo)
-                                            <img src="{{ $photo->temporaryUrl() }}">
+                                        @if ($id_picture)
+                                            <img src="{{ $id_picture->temporaryUrl() }}">
                                         @endif
 
-                                        @error('photo')
+                                        @error('id_picture')
                                             <span class="error">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -199,10 +199,10 @@
                                         <select id="selectProvince" wire:model.live="selectProvince" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
-                                            {{-- @foreach ($provinces as $province)
+                                            @foreach ($provinces as $province)
                                                <option value="{{ $province->province_code }}">
                                                    {{ $province->province_description }}</option>
-                                           @endforeach --}}
+                                           @endforeach
 
                                         </select>
 
@@ -224,13 +224,13 @@
                                         <select id="selectCity" wire:model.live="selectCity" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select city / municipality</option>
-                                            {{-- @if (!is_null($cities))
+                                            @if (!is_null($cities))
                                                 @foreach ($cities as $city)
                                                     <option value="{{ $city->city_municipality_code }}">
                                                         {{ $city->city_municipality_description }}</option>
                                                 @endforeach
 
-                                            @endif --}}
+                                            @endif
                                         </select>
 
                                         @error('selectCity')
@@ -254,12 +254,12 @@
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select barangay</option>
-                                            {{-- @if (!is_null($barangays))
+                                            @if (!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
                                                     <option value="{{ $barangay->barangay_code }}">
                                                         {{ $barangay->barangay_description }}</option>
                                                 @endforeach
-                                            @endif --}}
+                                            @endif
                                         </select>
 
                                         @error('selectBrgy')
@@ -286,16 +286,21 @@
                                 </div>
 
                                 {{-- //* sixth row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-1 gap-4">
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
                                     {{-- //* customer type --}}
                                     <div class="mb-3">
 
-                                        <label for="selectCustomerType"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
+                                        <label for="customer_type"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Typez</label>
 
-                                        <select id="selectCustomerType" wire:model.live="selectCustomerType" required
+                                        <select id="customer_type" wire:model.live="customer_type" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select Customer Type</option>
+                                            <option value="Walk in" selected>Walk In</option>
+                                            <option value="Credit" selected>Credit</option>
+                                            <option value="PWD" selected>PWD</option>
+                                            <option value="Senior Citizen" selected>Senior Citizen</option>
+                                            <option value="Wholesale" selected>Wholesale</option>
                                             {{-- @if (!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
                                                     <option value="{{ $barangay->barangay_code }}">
@@ -304,7 +309,7 @@
                                             @endif --}}
                                         </select>
 
-                                        @error('selectCustomerType')
+                                        @error('customer_type')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
@@ -313,14 +318,14 @@
                                     {{-- //* discount no --}}
                                     <div class="mb-3">
 
-                                        <label for="customerDiscountNo"
+                                        <label for="customer_discount_no"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount
                                             No</label>
 
-                                        <input type="number" id="customerDiscountNo" wire:model="customerDiscountNo"
+                                        <input type="number" id="customer_discount_no" wire:model="customer_discount_no"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Discount No" required />
-                                        @error('customerDiscountNo')
+                                        @error('customer_discount_no')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -381,7 +386,7 @@
                                 <div>
 
                                     {{-- //* submit button for create --}}
-                                    <button type="submit" wire:loading.remove wire:click="test"
+                                    <button type="submit" wire:loading.remove
                                         class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                         <div class="flex flex-row items-center gap-2">
                                             <p>

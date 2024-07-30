@@ -5,14 +5,18 @@ namespace App\Livewire\Components\CustomerCreditManagement;
 use App\Livewire\Pages\CustomerCreditMangementPage;
 use App\Models\Address;
 use App\Models\Customer;
+use App\Models\PhilippineBarangay;
+use App\Models\PhilippineCity;
+use App\Models\PhilippineProvince;
 use Illuminate\Validation\Rule;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CustomerCreditForm extends Component
 {
 
-    use WithFileUploads;
+    use WithFileUploads, LivewireAlert;
     public $isCreate; //var true for create false for edit
 
     public $selectProvince = null;
@@ -21,12 +25,15 @@ class CustomerCreditForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $photo;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customer_type, $customer_discount_no ;
 
+    public $proxy_customer_id, $customer_id;
 
     public function render()
     {
-        return view('livewire.components.CustomerCreditManagement.customer-credit-form');
+        return view('livewire.components.CustomerCreditManagement.customer-credit-form', [
+            'provinces' => PhilippineProvince::orderBy('province_description')->get(),
+        ]);
     }
 
     protected $listeners = [
@@ -36,6 +43,26 @@ class CustomerCreditForm extends Component
         'updateConfirmed',
         'createConfirmed',
     ];
+
+
+    //* update hooks kung saan maguupdate ang selectCity if may napiling item sa selectProvince after ma rerender, hindi mag uupdate if hindi nakapag select sa selectProvince
+    public function updatedSelectProvince($province_code) //@params province code for city query
+    {
+
+        $this->cities = PhilippineCity::where('province_code', $province_code)->orderBy('city_municipality_description')->get();
+        //? i show sa selection ang mga city based sa province, hindi maglabas ang ibang city if hindi include sa province
+
+    }
+
+    //* update hooks kung saan maguupdate ang selectBaranagy if may napiling item sa selectCity after ma rerender, hindi mag uupdate if hindi nakapag select sa selectCity
+    public function updatedSelectCity($city_municipality_code)
+    {
+
+        $this->barangays = PhilippineBarangay::where('city_municipality_code', $city_municipality_code)->orderBy('barangay_description')->get();
+        //? i show sa selection ang mga barangay based sa city, hindi maglabas ang ibang city if hindi included sa city
+
+    }
+
 
     public function create() //* create process
     {
@@ -51,6 +78,7 @@ class CustomerCreditForm extends Component
     {
 
         $validated = $data['inputAttributes'];
+        $validated['id_picture'] = $this->id_picture->store('id_pictures', 'public');
 
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
@@ -65,12 +93,14 @@ class CustomerCreditForm extends Component
             'lastname' => $validated['lastname'],
             'contact_number' => $validated['contact_number'],
             'birthdate' => $validated['birthdate'],
-            'address_id' => $address->id
-
+            'address_id' => $address->id,
+            'customer_type' => $validated['customer_type'],
+            'customer_discount_no' => $validated['customer_discount_no'],
+            'id_picture' => $validated['id_picture'],
         ]);
 
 
-        $this->alert('success', 'User was created successfully');
+        $this->alert('success', 'Customer was created successfully');
         $this->refreshTable();
 
         $this->resetForm();
@@ -104,8 +134,9 @@ class CustomerCreditForm extends Component
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:255',
-            'photo' => 'nullable|image|max:20480',
-
+            'id_picture' => 'nullable|image|max:20480',
+            'customer_type' => 'required|in:Walk in, Credit, PWD, Senior Citizen, Wholesale',
+            'customer_discount_no' => 'required|string|max:255',
         ];
 
 
@@ -114,7 +145,8 @@ class CustomerCreditForm extends Component
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'photo']);
+        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'id_picture','customer_type',
+        'customer_discount_no' ]);
     }
 
     public function changeMethod($isCreate)
@@ -128,14 +160,20 @@ class CustomerCreditForm extends Component
         }
     }
 
+    public function refreshTable() //* refresh ang table after confirmation
+    {
+        $this->dispatch('refresh-table')->to(CustomerCreditTable::class);
+    }
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(CustomerCreditMangementPage::class);
         $this->cities = null;
         $this->barangays = null;
     }
-    public function test(){
-        dd($this->photo);
-    }
 
+    public function edit($customerID)
+    {
+        $this->customer_id = $customerID; //var assign ang parameter value sa global variable
+        $this->proxy_customer_id = $customerID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+    }
 }

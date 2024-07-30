@@ -67,9 +67,9 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[500px] ">
+        <div class="overflow-x-auto overflow-y-scroll h-[500px] ">
 
-            <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
+            <table class="w-full h-10 text-sm text-left">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
@@ -230,6 +230,7 @@
                                 {{ $item->updated_at->format('d-m-y h:i A') }}
                             </th>
 
+                             {{-- //* Action --}}
                             <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
