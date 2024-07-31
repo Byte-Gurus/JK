@@ -44,7 +44,7 @@
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky z-30 top-0   ">
 
                     <tr class=" text-nowrap">
 
@@ -217,15 +217,6 @@
                         </tr>
                     @endforeach
                 </tbody>
-
-                @if ($imageUrl)
-                    <div class="fixed inset-0 flex items-center justify-center ">
-                        <div class="bg-white p-4 rounded-lg shadow-lg">
-                            <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="max-w-full h-auto">
-
-                        </div>
-                    </div>
-                @endif
             </table>
         </div>
         {{-- //* table footer --}}
@@ -248,4 +239,14 @@
             </div>
         </div>
     </div>
+    @if ($imageUrl)
+        <div class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
+            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg shadow-lg ">
+                <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+            </div>
+            <div class="absolute bg-red-200 z-60">
+                <button> Click Me</button>
+            </div>
+        </div>
+    @endif
 </div>

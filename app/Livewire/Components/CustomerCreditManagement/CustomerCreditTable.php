@@ -14,6 +14,8 @@ class CustomerCreditTable extends Component
     public $search = '';  //var search component
     public $imageUrl;
     public $typeFilter = 0; //var filtering value = all
+
+    public $hideImage = 0;
     public function render()
     {
         $query = Customer::query();
@@ -45,9 +47,8 @@ class CustomerCreditTable extends Component
 
     public function showImage($customer_id)
     {
-
         $customer = Customer::find($customer_id);
         $this->imageUrl = $customer->id_picture ? Storage::url($customer->id_picture) : null;
-
     }
+
 }
