@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -25,12 +26,18 @@ class CustomerCreditForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customer_type, $customer_discount_no ;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customer_type, $customer_discount_no, $imageUrl;
 
     public $proxy_customer_id, $customer_id;
 
     public function render()
     {
+        if ($this->customer_id) {
+
+            $this->populateForm();
+            $this->customer_id = null;  //var null the supplier id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung supplier id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
+
+        }
         return view('livewire.components.CustomerCreditManagement.customer-credit-form', [
             'provinces' => PhilippineProvince::orderBy('province_description')->get(),
         ]);
@@ -107,7 +114,111 @@ class CustomerCreditForm extends Component
         $this->closeModal();
     }
 
+    public function update() //* update process
+    {
+        $validated = $this->validateForm();
 
+
+        $customers = Customer::find($this->proxy_customer_id); //? kunin lahat ng data ng may ari ng proxy_supplier_id
+
+
+        //* ipasa ang laman ng validated inputs sa models
+        $customers->firstname = $validated['firstname'];
+        $customers->middlename = $validated['middlename'];
+        $customers->lastname = $validated['lastname'];
+        $customers->birthdate = $validated['birthdate'];
+        $customers->contact_number = $validated['contact_number'];
+        $customers->id_picture = $validated['id_picture'];
+        $customers->customer_type = $validated['customer_type'];
+        $customers->customer_discount_no = $validated['customer_discount_no'];
+        $customers->province_code = $validated['selectProvince'];
+        $customers->city_municipality_code = $validated['selectCity'];
+        $customers->barangay_code = $validated['selectBrgy'];
+        $customers->street = $validated['street'];
+
+        $attributes = $customers->toArray();
+
+
+
+        $this->confirm('Do you want to update this supplier?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+        ]);
+    }
+
+    public function updateConfirmed($data) //* confirmation process ng update
+    {
+
+
+        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
+        $updatedAttributes = $data['inputAttributes'];
+
+        //* hanapin id na attribute sa $updatedAttributes array
+        $customer = Customer::find($updatedAttributes['id']);
+        $address = Address::find($updatedAttributes['address_id']);
+
+        $updatedAttributes['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+
+        $address->fill([
+            'province_code' => $updatedAttributes['province_code'],
+            'city_municipality_code' => $updatedAttributes['city_municipality_code'],
+            'barangay_code' => $updatedAttributes['barangay_code'],
+            'street' => $updatedAttributes['street'],
+        ]);
+        $address->save();
+
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
+        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
+        //var ipasa ang laman ng $updatedAttributes sa $item model
+         $customer ->fill([
+            'firstname' => $updatedAttributes['firstname'],
+            'middlename' => $updatedAttributes['middlename'],
+            'lastname' => $updatedAttributes['lastname'],
+            'contact_number' => $updatedAttributes['contact_number'],
+            'birthdate' => $updatedAttributes['birthdate'],
+            'address_id' => $address->id,
+            'customer_type' => $updatedAttributes['customer_type'],
+            'customer_discount_no' => $updatedAttributes['customer_discount_no'],
+            'id_picture' => $updatedAttributes['id_picture'],
+        ]);
+        $customer->save();
+
+        $this->resetForm();
+        $this->alert('success', 'Supplier was updated successfully');
+
+        $this->refreshTable();
+        $this->closeModal();
+    }
+
+    private function populateForm() //*lagyan ng laman ang mga input
+    {
+
+        $customer_details = Customer::find($this->customer_id); //? kunin lahat ng data ng may ari ng user_id
+
+
+        //* ipasa ang laman ng model sa inputs
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
+        $this->fill([
+            'firstname' => $customer_details->firstname,
+            'middlename' => $customer_details->middlename,
+            'lastname' => $customer_details->lastname,
+            'birthdate' => $customer_details->birthdate,
+            'contact_number' => $customer_details->contact_number,
+            'id_picture' => $customer_details->id_picture,
+            'customer_type' => $customer_details->customer_type,
+            'customer_discount_no' => $customer_details->customer_discount_no,
+            'selectProvince' => $customer_details->addressJoin->province_code,
+            'selectCity' => $customer_details->addressJoin->city_municipality_code,
+            'selectBrgy' => $customer_details->addressJoin->barangay_code,
+            'street' => $customer_details->addressJoin->street,
+        ]);
+
+        //todo nag ccause to ng bug, ang bug is sa unang render upadte supplier form, hindi makapag select sa City and barangay, but if mag punta sa create supplier then edit then mag render na sya
+        //todo option 1 tanggalin ito para hindi mapopolate ang selectCity and SelectBarangay sa second render ng form
+        //todo option 2 hayaan nalang at mag select nalang si user ng city and brgy ulit everytime mag update kasi idk pano aayusin
+        $this->cities = PhilippineCity::where('province_code', $customer_details->addressJoin->province_code)->orderBy('city_municipality_description')->get();
+        $this->barangays = PhilippineBarangay::where('city_municipality_code', $customer_details->addressJoin->city_municipality_code)->orderBy('barangay_description')->get();
+    }
 
     public function resetFormWhenClosed()
     {
@@ -135,7 +246,7 @@ class CustomerCreditForm extends Component
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:255',
             'id_picture' => 'nullable|image|max:20480',
-            'customer_type' => 'required|in:Walk in, Credit, PWD, Senior Citizen, Wholesale',
+            'customer_type' => 'required|in:Walk in,Credit,PWD,Senior Citizen,Wholesale',
             'customer_discount_no' => 'required|string|max:255',
         ];
 
@@ -175,5 +286,10 @@ class CustomerCreditForm extends Component
     {
         $this->customer_id = $customerID; //var assign ang parameter value sa global variable
         $this->proxy_customer_id = $customerID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+
+
+
+        $customer = Customer::find($customerID);
+        $this->imageUrl = $customer->id_picture ? Storage::url($customer->id_picture) : null;
     }
 }

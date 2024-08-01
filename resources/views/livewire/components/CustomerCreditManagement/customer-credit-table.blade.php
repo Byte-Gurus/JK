@@ -78,6 +78,12 @@
                         <th scope="col" class="px-4 py-3">Address</th>
 
 
+                        {{-- //* Customer Type --}}
+                        <th scope="col" class="px-4 py-3">Customer Type</th>
+
+                         {{-- //* Customer discount number --}}
+                         <th scope="col" class="px-4 py-3">Disount Number</th>
+
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
@@ -150,6 +156,16 @@
                                 {{ $customer->addressJoin->street }}
                             </th>
 
+                            {{-- //* customer type --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $customer->customer_type }}
+                            </th>
+
+                             {{-- //* customer discount number --}}
+                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $customer->customer_discount_no }}
+                            </th>
+
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->created_at->format('d-m-y h:i A') }}
@@ -187,7 +203,7 @@
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 <button
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100"
-                                                    x-on:click="showModal=true;$wire.getItemID({{ $customer->id }}), openActions = !openActions">
+                                                    x-on:click="showModal=true;$wire.getCustomerID({{ $customer->id }}), openActions = !openActions">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
                                                             stroke="currentColor" class="size-6">
@@ -223,7 +239,7 @@
         <div class="border-t border-black ">
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
-                {{-- {{ $customers->links() }} --}}
+                {{ $customers->links() }}
             </div>
             {{-- //* per page --}}
             <div class="flex items-center px-4 py-2 mb-3">

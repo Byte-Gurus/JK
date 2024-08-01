@@ -172,6 +172,7 @@ class SupplierForm extends Component
             'status_id' => $updatedAttributes['status_id'],
             'address_id' => $address->id, // Associate with the updated address
         ]);
+        $supplier->save;
 
         $this->resetForm();
         $this->alert('success', 'Supplier was updated successfully');

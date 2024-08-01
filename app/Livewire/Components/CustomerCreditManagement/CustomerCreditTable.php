@@ -5,9 +5,12 @@ namespace App\Livewire\Components\CustomerCreditManagement;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class CustomerCreditTable extends Component
 {
+    use WithPagination,  WithoutUrlPagination;
     public $sortDirection = 'asc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
@@ -29,6 +32,11 @@ class CustomerCreditTable extends Component
 
         return view('livewire.components.CustomerCreditManagement.customer-credit-table', compact('customers'));
     }
+    protected $listeners = [
+        'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+
+    ];
+
     public function sortByColumn($column)
     { //* sort the column
 
@@ -43,7 +51,16 @@ class CustomerCreditTable extends Component
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
 
+    public function getCustomerID($customerId)
+    {
+        //*call the listesner 'edit-supplier-from-table' galing sa UserForm class
+        //@params supplierID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
+        $this->dispatch('edit-supplier-from-table', customerID: $customerId)->to(CustomerCreditForm::class);
 
+        //*call the listesner 'change-method' galing sa SupplierForm class
+        //@params isCerate name ng parameter na ipapasa, false parameter value na ipapasa, false kasi d ka naman mag create supplier
+        $this->dispatch('change-method', isCreate: false)->to(CustomerCreditForm::class);
+    }
 
     public function showImage($customer_id)
     {

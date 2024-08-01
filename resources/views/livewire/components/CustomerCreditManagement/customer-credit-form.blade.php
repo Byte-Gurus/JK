@@ -167,16 +167,19 @@
 
                                     <div class="mb-3">
 
-                                        <label for="id_picture"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">ID Picture
+                                        <label for="id_picture" class="block mb-2 text-sm font-medium text-gray-900 ">ID
+                                            Picture
                                         </label>
 
                                         <input id="id_picture" type="file" accept="image/png, image/jpeg"
                                             wire:model="id_picture"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
 
-                                        @if ($id_picture)
+                                        @if ($id_picture instanceof \Illuminate\Http\UploadedFile)
                                             <img src="{{ $id_picture->temporaryUrl() }}">
+                                        @elseif(is_string($id_picture))
+                                            <img src="{{ $imageUrl }}" alt="Customer ID Picture"
+                                                class="w-1/3 h-1/2">
                                         @endif
 
                                         @error('id_picture')
@@ -200,9 +203,9 @@
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
                                             @foreach ($provinces as $province)
-                                               <option value="{{ $province->province_code }}">
-                                                   {{ $province->province_description }}</option>
-                                           @endforeach
+                                                <option value="{{ $province->province_code }}">
+                                                    {{ $province->province_description }}</option>
+                                            @endforeach
 
                                         </select>
 
@@ -291,22 +294,18 @@
                                     <div class="mb-3">
 
                                         <label for="customer_type"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Typez</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer
+                                            Typez</label>
 
-                                        <select id="customer_type" wire:model.live="customer_type" required
+                                        <select id="customer_type" wire:model="customer_type" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select Customer Type</option>
+                                            <option value=""selected>Select Customer Type</option>
                                             <option value="Walk in" selected>Walk In</option>
                                             <option value="Credit" selected>Credit</option>
                                             <option value="PWD" selected>PWD</option>
                                             <option value="Senior Citizen" selected>Senior Citizen</option>
                                             <option value="Wholesale" selected>Wholesale</option>
-                                            {{-- @if (!is_null($barangays))
-                                                @foreach ($barangays as $barangay)
-                                                    <option value="{{ $barangay->barangay_code }}">
-                                                        {{ $barangay->barangay_description }}</option>
-                                                @endforeach
-                                            @endif --}}
+
                                         </select>
 
                                         @error('customer_type')
@@ -322,7 +321,8 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount
                                             No</label>
 
-                                        <input type="number" id="customer_discount_no" wire:model="customer_discount_no"
+                                        <input type="number" id="customer_discount_no"
+                                            wire:model="customer_discount_no"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Discount No" required />
                                         @error('customer_discount_no')
