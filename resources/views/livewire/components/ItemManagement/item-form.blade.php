@@ -111,11 +111,11 @@
                                         <div class="transition-all duration-100 ease-in-out">
                                             @if ($this->hasBarcode)
                                                 {{-- //* already have barcode --}}
-                                                <input type="text" id="has_barcode"
+                                                <input type="text" id="create_barcode"  wire:model="create_barcode"
                                                     class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                                     placeholder="Barcode" />
 
-                                                @error('has_barcode')
+                                                @error('create_barcode')
                                                     <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             @else
@@ -129,7 +129,7 @@
                                                         </label>
 
                                                         <img id="barcode"
-                                                            wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'C128', 2, 60) !!}</img>
+                                                            wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
 
 
                                                         @error('barcode')

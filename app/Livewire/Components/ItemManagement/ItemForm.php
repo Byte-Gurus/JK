@@ -15,7 +15,7 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $maximum_stock_ratio = 1.5, $reorder_point, $vat_amount, $status; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description, $maximum_stock_ratio = 1.5, $reorder_point, $vat_amount, $status, $create_barcode; //var form inputs
     public $vat_amount_enabled = false; //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -47,11 +47,10 @@ class ItemForm extends Component
 
         if ($vat_type == 'Vat') {
             $this->vat_amount_enabled = true;
-        }elseif($vat_type == 'Non vat'){
+        } elseif ($vat_type == 'Non vat') {
             $this->vat_amount_enabled = false;
             $this->vat_amount = 0;
         }
-
     }
     public function create() //* create process
     {
@@ -69,8 +68,8 @@ class ItemForm extends Component
 
         $validated = $data['inputAttributes'];
 
-        $user = Item::create([
-            'barcode' => $validated['barcode'],
+
+        $item = [
             'item_name' => $validated['item_name'],
             'item_description' => $validated['item_description'],
             'maximum_stock_ratio' => $validated['maximum_stock_ratio'],
@@ -78,8 +77,16 @@ class ItemForm extends Component
             'vat_type' => $validated['vatType'],
             'vat_amount' => $validated['vat_amount'],
             'status_id' => $validated['status'],
-        ]);
+        ];
 
+        // Add barcode based on the condition
+        if ($this->hasBarcode) {
+            $item['barcode'] = $validated['create_barcode'];
+        } else {
+            $item['barcode'] = $validated['barcode'];
+        }
+
+        $item = Item::create($item);
 
         $this->alert('success', 'Item was created successfully');
         $this->refreshTable();
@@ -104,6 +111,12 @@ class ItemForm extends Component
         $items->vat_amount = $validated['vat_amount'];
         $items->status_id = $validated['status'];
 
+        if ($this->hasBarcode) {
+            $items->barcode = $validated['create_barcode'];
+        }else{
+            $items->barcode = $validated['barcode'];
+        }
+
         $attributes = $items->toArray();
 
 
@@ -113,10 +126,7 @@ class ItemForm extends Component
         ]);
     }
 
-    public function changeBarcodeForm()
-    {
-        $this->hasBarcode = !$this->hasBarcode;
-    }
+
 
     public function updateConfirmed($data) //* confirmation process ng update
     {
@@ -141,11 +151,13 @@ class ItemForm extends Component
         $this->refreshTable();
         $this->closeModal();
     }
-
+    public function changeBarcodeForm()
+    {
+        $this->hasBarcode = !$this->hasBarcode;
+    }
     public function generateBarcode()  //* generate a random barcode and contatinate the ITM
     {
-        $numericCode = random_int(10000, 99999);
-        $this->barcode = 'ITM-' . $numericCode;
+        $this->barcode = random_int(100000000000, 999999999999);
     }
 
     public function resetFormWhenClosed()
@@ -161,7 +173,7 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id','item_description', 'item_name', 'barcode', 'reorder_point', 'vatType', 'vat_amount', 'status']);
+        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'reorder_point', 'vatType', 'vat_amount', 'status']);
         $this->vat_amount_enabled = false;
     }
     public function closeModal() //* close ang modal after confirmation
@@ -174,8 +186,6 @@ class ItemForm extends Component
         $this->item_name = trim($this->item_name);
 
         $rules = [
-             //? validation sa barcode paro iignore ang item_id para maupdate ang barcode kahit unique
-            'barcode' => ['required', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)],
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
             'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
@@ -185,6 +195,12 @@ class ItemForm extends Component
             'status' => 'required|in:1,2',
         ];
 
+        if ($this->hasBarcode) {
+            $rules['create_barcode'] = ['required', 'numeric ', 'digits:13', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+        } else {
+            $rules['barcode'] = ['required', 'numeric ', 'digits:13' , Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+        }
+
 
         return $this->validate($rules);
     }
@@ -193,11 +209,13 @@ class ItemForm extends Component
 
         $item_details = Item::find($this->item_id); //? kunin lahat ng data ng may ari ng item_id
 
+        $this->generateBarcode();
 
         //* ipasa ang laman ng model sa inputs
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         $this->fill([
-            'barcode' => $item_details->barcode,
+            'barcode' => $this->barcode,
+            'create_barcode' => $item_details->barcode,
             'item_name' => $item_details->item_name,
             'item_description' => $item_details->item_description,
             'maximum_stock_ratio' => $item_details->maximum_stock_ratio,
