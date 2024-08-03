@@ -20,6 +20,8 @@ class ItemForm extends Component
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
 
+    public $hasBarcode = true;
+
     public function render()
     {
         if ($this->item_id) {
@@ -109,6 +111,11 @@ class ItemForm extends Component
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
+    }
+
+    public function changeBarcodeForm()
+    {
+        $this->hasBarcode = !$this->hasBarcode;
     }
 
     public function updateConfirmed($data) //* confirmation process ng update

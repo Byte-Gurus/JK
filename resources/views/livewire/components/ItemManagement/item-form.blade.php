@@ -1,5 +1,5 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate') }">
+<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate')}">
 
     {{-- //* form background --}}
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
@@ -89,24 +89,58 @@
 
                                     </div>
 
-                                    {{-- //* barcode --}}
-                                    @if ($barcode)
-                                        <div class="mb-3">
-
-                                            <label for="barcode"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Barcode:
-                                                {{ $barcode }}
-                                            </label>
-
-                                            <img id="barcode" wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'C128', 2, 60) !!}</img>
-
-
-                                            @error('barcode')
-                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
+                                    {{-- //* Item Barcode --}}
+                                    <div class="mb-3">
+                                        <div class="flex flex-row justify-between">
+                                            <div>
+                                                <label for="has_barcode"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 ">Barcode <span
+                                                        class="text-red-400 ">*</span></label>
+                                            </div>
+                                            <div>
+                                                <button type="button" wire:click="changeBarcodeForm()"
+                                                    class="px-2 text-sm font-medium bg-[rgb(53,53,53)] text-white rounded-md hover:bg-[rgb(65,65,65)] duration-100 ease-in-out transition-all">
+                                                    @if ($this->hasBarcode)
+                                                        Generate Barcode
+                                                    @else
+                                                        Already Have Barcode
+                                                    @endif
+                                                </button>
+                                            </div>
                                         </div>
-                                    @endif
+                                        <div class="transition-all duration-100 ease-in-out">
+                                            @if ($this->hasBarcode)
+                                                {{-- //* already have barcode --}}
+                                                <input type="text" id="has_barcode"
+                                                    class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                                    placeholder="Barcode" />
 
+                                                @error('has_barcode')
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+                                            @else
+                                                {{-- //* generate barcode --}}
+                                                @if ($barcode)
+                                                    <div class="mb-3">
+
+                                                        <label for="barcode"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 ">Barcode:
+                                                            {{ $barcode }}
+                                                        </label>
+
+                                                        <img id="barcode"
+                                                            wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'C128', 2, 60) !!}</img>
+
+
+                                                        @error('barcode')
+                                                            <span
+                                                                class="font-medium text-red-500 error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
 
                                 {{-- //* second row --}}
@@ -252,7 +286,7 @@
 
                                 </button>
                                 <div wire:loading>
-                                    <div class="loader loader--style3 flex justify-center items-center "
+                                    <div class="flex items-center justify-center loader loader--style3 "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
@@ -296,7 +330,7 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="loader loader--style3 flex justify-center items-center "
+                                    <div class="flex items-center justify-center loader loader--style3 "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
