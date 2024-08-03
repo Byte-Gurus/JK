@@ -79,7 +79,7 @@
                                                 {{ $barcode }}
                                             </label>
 
-                                            <img id="barcode" wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 1, 60) !!}</img>
+                                            <img id="barcode" wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
 
 
                                             @error('barcode')
