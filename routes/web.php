@@ -4,6 +4,7 @@ use App\Http\Controllers\testingPage;
 use App\Livewire\Components\Logout;
 use App\Livewire\Pages\CashierPage;
 use App\Livewire\Pages\CustomerCreditMangementPage;
+use App\Livewire\Pages\CustomerManagementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\InventoryManagementPage;
@@ -39,6 +40,9 @@ Route::get('admin/OrderAndDeliveryManagement', OrderAndDeliveryManagementPage::c
 
 //ItemManagement
 Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagement.index')->middleware('RedirectIfLoggedIn');
+
+//CustomerManagement
+Route::get('admin/CustomerManagement', CustomerManagementPage::class)->name('customermanagement.index')->middleware('RedirectIfLoggedIn');
 
 //InventoryManagement
 Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index')->middleware('RedirectIfLoggedIn');

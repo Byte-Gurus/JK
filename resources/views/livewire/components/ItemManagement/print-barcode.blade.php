@@ -4,8 +4,9 @@
         @if ($barcode)
             @for ($i = 0; $i < $barcode_quantity; $i++)
 
+
                 <div class="p-4 border border-black w-fit">
-                    <img id="barcode" class="w-0 " wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 1.5, 60) !!}</img>
+                    <img id="barcode" class="w-0 " wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 1, 60) !!}</img>
                 </div>
             @endfor
         @endif

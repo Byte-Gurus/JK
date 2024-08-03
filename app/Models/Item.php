@@ -20,7 +20,7 @@ class Item extends Model
         'status_id'
     ];
 
-    
+
     public function statusJoin()
     {
         return $this->belongsTo(Status::class, 'status_id');

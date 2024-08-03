@@ -31,7 +31,7 @@ class ItemForm extends Component
 
         }
 
-        return view('livewire.components.ItemManagement.item-form')->with($this->barcode);
+        return view('livewire.components.ItemManagement.item-form');
     }
     protected $listeners = [
         'edit-item-from-table' => 'edit',  //* key:'edit-item-from-table' function:'edit'  galing sa ItemTable class
@@ -157,7 +157,9 @@ class ItemForm extends Component
     }
     public function generateBarcode()  //* generate a random barcode and contatinate the ITM
     {
+
         $this->barcode = random_int(100000000000, 999999999999);
+
     }
 
     public function resetFormWhenClosed()

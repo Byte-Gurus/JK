@@ -34,7 +34,7 @@ class ItemManagementPage extends Component
     public function formCreate()
     {
         $this->dispatch('change-method',  isCreate: true)->to(ItemForm::class);
-        $this->dispatch('generate-barcode', isCreate: true)->to(ItemForm::class);
+
     }
 
     public function changeSidebarStatus($sidebarOpen)
