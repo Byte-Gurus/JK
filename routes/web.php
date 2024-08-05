@@ -10,7 +10,7 @@ use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\LoginPage;
-use App\Livewire\Pages\OrderAndDeliveryManagementPage;
+use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\TestPage;
 use App\Livewire\Pages\UserManagementPage;
@@ -36,7 +36,7 @@ Route::get('admin/SupplierManagement', SupplierManagementPage::class)->name('sup
 Route::get('admin/CustomerCreditManagement', CustomerCreditMangementPage::class)->name('customercreditmanagement.index')->middleware('RedirectIfLoggedIn');
 
 //OrderAndDeliveryManagement
-Route::get('admin/OrderAndDeliveryManagement', OrderAndDeliveryManagementPage::class)->name('orderanddeliverymanagement.index')->middleware('RedirectIfLoggedIn');
+Route::get('admin/PurchaseAndDeliveryManagement', PurchaseAndDeliveryManagementPage::class)->name('purchaseanddeliverymanagement.index')->middleware('RedirectIfLoggedIn');
 
 //ItemManagement
 Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagement.index')->middleware('RedirectIfLoggedIn');

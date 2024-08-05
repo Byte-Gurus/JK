@@ -17,7 +17,7 @@
     </div>
     <div class=" m-[28px] duration-700 ease-linear transition-all">
         @if ($purchaseOrderOpen)
-            @livewire('pages.order-page')
+            @livewire('pages.purchase-page')
         @else
             @livewire('pages.delivery-page')
         @endif
