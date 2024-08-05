@@ -81,7 +81,11 @@
                 <tbody>
                     @foreach ($rows as $row)
                     <tr>
-                    TITE
+                    <th>t</th>
+                    <th>i</th>
+                    <th>t</th>
+                    <th>w</th>
+                    <th>a</th>
 
                     </tr>
                 @endforeach
