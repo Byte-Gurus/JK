@@ -4,7 +4,7 @@ namespace App\Livewire\Pages;
 
 use Livewire\Component;
 
-class OrderPage extends Component
+class PurchasePage extends Component
 {
     public $showModal = false;
 

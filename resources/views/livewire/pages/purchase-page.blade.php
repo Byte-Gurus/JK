@@ -24,6 +24,6 @@
         {{-- @livewire('components.PurchaseAndDeliveryManagement.purchase-order-form') --}}
     </div>
     <div class="">
-        @livewire('components.OrderAndDeliveryManagement.order.purchase-order-table')
+        @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
     </div>
 </div>

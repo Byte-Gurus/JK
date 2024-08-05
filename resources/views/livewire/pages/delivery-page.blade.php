@@ -10,6 +10,6 @@
         {{-- @livewire('components.PurchaseAndDeliveryManagement.purchase-form') --}}
     </div>
     <div class="">
-        @livewire('components.OrderAndDeliveryManagement.delivery.delivery-table')
+        @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
     </div>
 </div>
