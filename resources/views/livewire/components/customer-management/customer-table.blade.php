@@ -12,15 +12,14 @@
 
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 " fill="currentColor" viewbox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                            clip-rule="evenodd" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24"
+                        strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
                 </div>
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] rounded-lg cursor-pointer text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Customer Name" required="" />
             </div>
             <div class="flex flex-row items-center justify-center gap-4">
@@ -85,8 +84,8 @@
                         {{-- //* Customer Type --}}
                         <th scope="col" class="px-4 py-3">Customer Type</th>
 
-                         {{-- //* Customer discount number --}}
-                         <th scope="col" class="px-4 py-3">Disount Number</th>
+                        {{-- //* Customer discount number --}}
+                        <th scope="col" class="px-4 py-3">Disount Number</th>
 
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
@@ -165,8 +164,8 @@
                                 {{ $customer->customer_type }}
                             </th>
 
-                             {{-- //* customer discount number --}}
-                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{-- //* customer discount number --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->customer_discount_no }}
                             </th>
 
@@ -260,7 +259,8 @@
         </div>
     </div>
     @if ($imageUrl)
-        <div class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
+        <div
+            class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
             <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg shadow-lg ">
                 <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
             </div>

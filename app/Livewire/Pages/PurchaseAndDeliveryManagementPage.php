@@ -4,7 +4,7 @@ namespace App\Livewire\Pages;
 
 use Livewire\Component;
 
-class OrderAndDeliveryManagementPage extends Component
+class PurchaseAndDeliveryManagementPage extends Component
 {
 
     public $sidebarStatus;
@@ -14,7 +14,7 @@ class OrderAndDeliveryManagementPage extends Component
 
     public function render()
     {
-        return view('livewire.pages.order-and-delivery-page');
+        return view('livewire.pages.purchase-and-delivery-page');
     }
 
     protected $listeners = [

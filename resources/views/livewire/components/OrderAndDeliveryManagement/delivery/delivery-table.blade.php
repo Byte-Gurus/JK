@@ -20,7 +20,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] rounded-lg cursor-pointer text-s bg-gray-50 focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Delivery ID" required="" />
 
 
@@ -113,6 +113,9 @@
 
                             </div>
                         </th>
+
+                        {{-- //* restocked --}}
+                        <th scope="col" class="px-4 py-3">Restocked</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3">Status</th>

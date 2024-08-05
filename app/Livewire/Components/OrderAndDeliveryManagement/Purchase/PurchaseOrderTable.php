@@ -8,6 +8,6 @@ class PurchaseOrderTable extends Component
 {
     public function render()
     {
-        return view('livewire.components.OrderAndDeliveryManagement.order.purchase-order-table');
+        return view('livewire.components.OrderAndDeliveryManagement.purchase.purchase-order-table');
     }
 }

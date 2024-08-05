@@ -10,7 +10,7 @@ class OrderPage extends Component
 
     public function render()
     {
-        return view('livewire.pages.order-page');
+        return view('livewire.pages.purchase-page');
     }
 
     protected $listeners = [

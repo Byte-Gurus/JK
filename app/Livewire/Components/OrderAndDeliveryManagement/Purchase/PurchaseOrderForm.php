@@ -8,6 +8,6 @@ class PurchaseOrderForm extends Component
 {
     public function render()
     {
-        return view('livewire.components.OrderAndDeliveryManagement.order.purchase-order-form');
+        return view('livewire.components.OrderAndDeliveryManagement.purchase.purchase-order-form');
     }
 }
