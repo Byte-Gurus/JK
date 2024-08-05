@@ -33,7 +33,7 @@ Route::get('/admin/UserManagement', UserManagementPage::class)->name('usermanage
 Route::get('admin/SupplierManagement', SupplierManagementPage::class)->name('suppliermanagement.index')->middleware('RedirectIfLoggedIn');
 
 //CustomerCreditManagement
-Route::get('admin/CustomerCreditManagement', CustomerCreditMangementPage::class)->name('customercreditmanagement.index')->middleware('RedirectIfLoggedIn');
+/*  */
 
 //OrderAndDeliveryManagement
 Route::get('admin/PurchaseAndDeliveryManagement', PurchaseAndDeliveryManagementPage::class)->name('purchaseanddeliverymanagement.index')->middleware('RedirectIfLoggedIn');
