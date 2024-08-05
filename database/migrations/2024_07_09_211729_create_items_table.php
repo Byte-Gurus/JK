@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('maximum_stock_ratio');
             $table->double('reorder_point');
             $table->string('vat_type');
-            $table->double('vat_amount')->nullable();
+            $table->double('vat_amount');
             $table->timestamps();
 
 

@@ -18,13 +18,13 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'barcode' => $this->faker->unique()->ean13,
+            'barcode' => $this->faker->unique()->numerify('############'),
             'item_name' => $this->faker->word,
             'item_description' => $this->faker->sentence,
             'maximum_stock_ratio' => $this->faker->randomFloat(2, 1, 100),
             'reorder_point' => $this->faker->randomFloat(2, 1, 50),
             'vat_type' => $this->faker->randomElement(['Vat', 'Non vat']),
-            'vat_amount' => $this->faker->optional()->randomFloat(2, 0, 25),
+            'vat_amount' => $this->faker->randomFloat(2, 0, 25),
             'status_id' => $this->faker->numberBetween(1, 2),
         ];
     }
