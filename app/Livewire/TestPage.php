@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\testEvent;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -9,11 +10,14 @@ class TestPage extends Component
 {
     use WithFileUploads;
 
-
+    public $name;
     public $photo;
 
     public function render()
     {
+
+
+        event(new testEvent($this->name));
         return view('livewire.pages.test-page');
     }
 
