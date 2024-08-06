@@ -95,28 +95,28 @@
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Supplier</th>
+                        <th scope="col" class="px-4 py-3 text-left">Supplier</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
                         <th wire:click="sortByColumn('stock_in_date')" scope="col"
-                        class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
-                        <div class="flex items-center">
+                            <div class="flex items-center">
 
-                            <p>Stock-in date</p>
+                                <p>Stock-in date</p>
 
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                </svg>
-                            </span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
 
-                        </div>
-                    </th>
+                            </div>
+                        </th>
 
                         {{-- //* updated at --}}
                         <th wire:click="sortByColumn('expiration_date')" scope="col"
@@ -162,19 +162,23 @@
                                 {{ $inventory->itemJoin->item_name }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->quantity }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->cost }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->mark_up_price }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->selling_price }}
                             </th>
 
@@ -203,12 +207,72 @@
 
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->stock_in_date->format('d-m-y') }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->expiration_date->format('d-m-y') }}
+                            </th>
+
+                            {{-- //* Action --}}
+                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
+
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                                        min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
+                                                {{-- x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions" --}}
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+                                                        </svg></div>
+                                                    <div>Stock Adjust</div>
+                                                </button>
+                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
+                                                {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth={1.5}
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                                        </svg>
+
+
+                                                    </div>
+                                                    <div>Stock Card</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     @endforeach
