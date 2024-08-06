@@ -36,30 +36,16 @@
                         <select wire:model.live="statusFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
                             <option value="0">All</option>
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
+                            <option value="Available">Available</option>
+                            <option value="Not available">Not available</option>
+                            <option value="Expired">Expired</option>
 
                         </select>
 
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center">
 
-                    <div class="flex flex-row items-center gap-2">
-
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">VAT type :</label>
-
-                        <select wire:model.live="vatFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
-                            <option value="0">All</option>
-                            <option value="Vat">Vat</option>
-                            <option value="Non vat">Non vat</option>
-
-                        </select>
-
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -97,25 +83,65 @@
                         </th>
 
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item Cost</th>\
+                        <th scope="col" class="px-4 py-3 text-center">Item Cost</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Mark-up price</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3 text-center">Selling price</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Selling price</th>
 
-                          {{-- //* status --}}
+                        {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3 text-center">Supplier</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Supplier</th>
 
-                          {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Stock-in date</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Status</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3 text-center">Expiration date</th>
+                        <th wire:click="sortByColumn('stock_in_date')" scope="col"
+                        class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                        <div class="flex items-center">
+
+                            <p>Stock-in date</p>
+
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                </svg>
+                            </span>
+
+                        </div>
+                    </th>
+
+                        {{-- //* updated at --}}
+                        <th wire:click="sortByColumn('expiration_date')" scope="col"
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                            <div class="flex items-center">
+
+                                <p>Expiration</p>
+
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </th>
+
+                        </th>
+
+                        {{-- //* action --}}
+                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
+                        </th>
 
 
                     </tr>
@@ -155,6 +181,28 @@
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->supplierJoin->company_name }}
                             </th>
+
+
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+
+                                {{-- //* active green, if inactive red --}}
+                                <p
+                                    @if ($inventory->status == 'Available') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
+
+                                    @elseif ($inventory->status == 'Not available')
+
+                                    class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded "
+
+                                    @elseif ($inventory->status == 'Expired')
+
+                                    class=" text-black bg-orange-400 border border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
+
+                                    {{ $inventory->status }}
+                                </p>
+
+                            </th>
+
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->stock_in_date->format('d-m-y') }}
                             </th>
@@ -177,7 +225,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $items->links() }} --}}
+                {{ $inventories->links() }}
 
             </div>
 

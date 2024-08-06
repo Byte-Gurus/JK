@@ -24,10 +24,7 @@ class InventoryTable extends Component
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
-        if ($this->vatFilter != 0) {
-            $query->where('vat_type', $this->vatFilter); //?hanapin ang status na may same value sa statusFilter
-        }
-        
+
         $inventories = $query->search($this->search) //?search the user
         ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
         ->paginate($this->perPage);
