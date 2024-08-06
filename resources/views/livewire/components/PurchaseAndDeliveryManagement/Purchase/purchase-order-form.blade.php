@@ -9,8 +9,6 @@
                 <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
             </div>
             <div class="flex flex-col gap-2">
-
-
                 <label for="supplier" class="text-[1.8em]">Supplier Name</label>
                 <select id="supplier" wire:model="suppliers"
                     class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
@@ -19,8 +17,6 @@
                             {{ $supplier->company_name }}</option>
                     @endforeach
                 </select>
-
-
             </div>
             <div class="flex flex-row self-center justify-center gap-4">
                 <div>
@@ -80,12 +76,12 @@
                 {{-- //* table body --}}
                 <tbody>
                     @foreach ($rows as $row)
-                    <tr>
-                    <th>t</th>
-                    <th>i</th>
-                    <th>t</th>
-                    <th>w</th>
-                    <th>a</th>
+                        <tr>
+                            <th>t</th>
+                            <th>i</th>
+                            <th>t</th>
+                            <th>w</th>
+                            <th>a</th>
 
                         </tr>
                     @endforeach
