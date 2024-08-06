@@ -90,10 +90,7 @@
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Selling price</th>
-                        {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Selling price</th>
-
-                        {{-- //* status --}}
+                      
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
