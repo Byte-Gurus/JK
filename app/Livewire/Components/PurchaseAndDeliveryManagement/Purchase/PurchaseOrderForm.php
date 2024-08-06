@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
+use App\Models\Inventory;
 use App\Models\Supplier;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -19,6 +20,7 @@ class PurchaseOrderForm extends Component
     {
 
         $suppliers = Supplier::select('id', 'company_name')->get();
+
 
         $this->generatePurchaseNumber();
 

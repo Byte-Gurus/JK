@@ -80,11 +80,11 @@
                 {{-- //* table body --}}
                 <tbody>
                     @foreach ($rows as $row)
-                    <tr>
-                    TITE
+                        <tr>
+                            TITE
 
-                    </tr>
-                @endforeach
+                        </tr>
+                    @endforeach
 
                 </tbody>
 

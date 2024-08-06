@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Customer;
 use App\Models\Inventory;
+use App\Models\Item;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Models\Vat;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
 
         Supplier::factory(100)->create();
         Customer::factory(100)->create();
+        Item::factory(100)->create();
         Inventory::factory(100)->create();
 
     }

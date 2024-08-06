@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'stock_in_date' => 'datetime',
+        'expiration_date' => 'datetime',
+    ];
 
     protected $fillable = [
         'sku_code',
@@ -22,4 +26,25 @@ class Inventory extends Model
         'supplier_id',
 
     ];
+
+    public function itemJoin()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
+    public function supplierJoin()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+
+        return $query->where('sku_code', 'like', "%{$value}%")
+            ->orWhereHas('itemJoin', function ($query) use ($value) {
+                $query->where('item_name', 'like', "%{$value}%");
+            })
+            ->orWhereHas('supplierJoin', function ($query) use ($value) {
+                $query->where('company_name', 'like', "%{$value}%");
+            });
+    }
 }

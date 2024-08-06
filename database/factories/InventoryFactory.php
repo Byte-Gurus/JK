@@ -24,12 +24,11 @@ class InventoryFactory extends Factory
             'mark_up_price' => $this->faker->randomFloat(2, 1, 100),
             'selling_price' => $this->faker->randomFloat(2, 1, 100),
             'quantity' => $this->faker->numberBetween(1, 100),
-            'expiration_date' => $this->faker->date(),
-            'stock_in_date' => $this->faker->date(),
+            'expiration_date' => $this->faker->dateTime(),
+            'stock_in_date' => $this->faker->dateTime(),
             'status' => $this->faker->randomElement(['Expired', 'Available', 'Not available']),
-            'item_id' => Item::factory(),
-            'supplier_id' => Supplier::inRandomOrder()->first()->id,
+            'item_id' => Item::all()->random()->id,
+            'supplier_id' => Supplier::all()->random()->id,
         ];
-
     }
 }

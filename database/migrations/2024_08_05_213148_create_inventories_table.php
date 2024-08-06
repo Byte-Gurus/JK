@@ -18,8 +18,8 @@ return new class extends Migration
             $table->double('mark_up_price');
             $table->double('selling_price');
             $table->integer('quantity');
-            $table->string('expiration_date');
-            $table->string('stock_in_date');
+            $table->datetime('expiration_date');
+            $table->datetime('stock_in_date');
             $table->string('status');
             $table->timestamps();
 
