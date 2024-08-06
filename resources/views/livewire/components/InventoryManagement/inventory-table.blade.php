@@ -81,7 +81,7 @@
                         <th wire:click="sortByColumn('item_name')" scope="col"
                             class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
-                            <div class="flex items-center">
+                            <div class="flex items-center text-left">
                                 <p>Item Name</p>
 
                                 <span>
@@ -97,25 +97,29 @@
                         </th>
 
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item Cost</th>\
+                        <th scope="col" class="px-4 py-3 text-center">Item Cost</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Mark-up price</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3 text-center">Selling price</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Selling price</th>
 
-                          {{-- //* status --}}
+                        {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3 text-center">Supplier</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-left">Supplier</th>
 
-                          {{-- //* status --}}
+                        {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Stock-in date</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3 text-center">Expiration date</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Expiration date</th>
+
+                        {{-- //* action --}}
+                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
+                        </th>
 
 
                     </tr>
@@ -136,31 +140,92 @@
                                 {{ $inventory->itemJoin->item_name }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->quantity }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->cost }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->mark_up_price }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->selling_price }}
                             </th>
 
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->supplierJoin->company_name }}
                             </th>
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->stock_in_date->format('d-m-y') }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->expiration_date->format('d-m-y') }}
+                            </th>
+
+                            {{-- //* Action --}}
+                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
+
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                                        min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg></div>
+                                                    <div>Adjust Stock</div>
+                                                </button>
+                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
+                                                {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions "> --}}
+                                                {{-- x-on:click="showStockAdjustModal=true; $wire.getSKU('{{ $invetory->sku }}'), openActions = !openActions "> --}}
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>Stock Card</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     @endforeach
