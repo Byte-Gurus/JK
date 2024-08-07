@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center w-screen h-screen"
+<div class="flex flex-col items-center justify-center w-screen h-screen font-['Inter']"
     style="background-image: linear-gradient(115deg, #dadada, #1b1b1b)">
     <div class="flex flex-row items-center justify-center shadow-lg ">
         {{-- LOGO SECTION --}}
@@ -73,8 +73,8 @@
 
                 </div>
 
-                <div wire:loading >
-                    <div class="loader loader--style3 flex justify-center items-center " title="2">
+                <div wire:loading>
+                    <div class="flex items-center justify-center loader loader--style3 " title="2">
                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
                             viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">

@@ -1,8 +1,8 @@
-<div x-cloak class="h-screen fixed w-[220px] bg-[#272727] text-center gap-12 z-50">
+<div x-cloak class="h-screen fixed w-[220px] bg-[#272727] text-center gap-12 z-50 font-['Inter']">
     <div class="flex justify-center pt-4 ">
         <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
     </div>
-    <nav class="flex flex-col gap-12 text-center ">
+    <nav class="flex flex-col gap-12 text-center">
         <ul class="flex flex-col w-full gap-2 mt-4">
             <li class="w-full">
                 <a href="{{ route('dashboard.index') }}" wire:navigate

@@ -1,9 +1,9 @@
 <div x-data="{ openSidebar: @entangle('sidebarOpen') }"
     x-cloak
     @if ($this->sidebarOpen)
-        class="z-50 flex flex-row items-center justify-between py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
+        class="z-50 flex flex-row font-['Inter'] items-center justify-between py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
     @else
-    class="flex flex-row items-center justify-between ml-[0px] z-50 py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
+    class="flex flex-row items-center font-['Inter'] justify-between ml-[0px] z-50 py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap"
     @endif
     >
     <div class="flex flex-row items-center">

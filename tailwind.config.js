@@ -9,6 +9,9 @@ module.exports = {
 
   ],
   theme: {
+    fontFamily: {
+        'display': ['Inter','Roboto'],
+    },
     screens: {
       'vsm': '140px',
       'phone': '480px',
