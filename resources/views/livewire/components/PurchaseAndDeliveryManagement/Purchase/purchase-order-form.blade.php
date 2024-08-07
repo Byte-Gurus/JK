@@ -77,10 +77,12 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                <div class="flex justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                        class="w-8 h-8 text-center text-red-300 rounded-full hover:bg-red-500">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                <div class="flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        strokeWidth={1.5} stroke="currentColor"
+                                        class="w-10 h-10 text-center text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
                                 </div>
                             </th>
@@ -88,7 +90,7 @@
                                 class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                 {{ $reorder_list->barcode }}</th> <!-- Use item_id directly -->
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                 {{ $reorder_list->item_name }}</th> <!-- Use item_name directly -->
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -97,8 +99,10 @@
                                 class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $reorder_list->reorder_point }}</th>
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                <input type="number"></th>
+                                class="flex justify-center px-4 py-6 font-medium text-gray-900 text-clip text-md whitespace-nowrap ">
+                                <input type="number"
+                                    class=" bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+                            </th>
                             <!-- Use reorder_point, handle cases where it might not exist -->
                         </tr>
                     @endforeach

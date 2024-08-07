@@ -8,6 +8,8 @@ use Livewire\Component;
 class InventoryManagementPage extends Component
 {
     public $showModal = false;
+
+    public $showStockAdjustModal = false;
     public $sidebarStatus;
     public function render()
     {
