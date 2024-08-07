@@ -47,31 +47,23 @@
 
                     <tr class=" text-nowrap">
 
-                        {{-- //* company name --}}
-                        <th wire:click="sortByColumn('company_name')" scope="col"
-                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
-
-                            <div class="flex items-center">
-
-                                <p>Action</p>
-
-                            </div>
-                        </th>
+                        {{-- //* action --}}
+                        <th scope="col" class="px-4 py-3 text-center">Action</th>
 
                         {{-- //* barcode --}}
-                        <th scope="col" class="px-4 py-3">Barcode</th>
+                        <th scope="col" class="px-4 py-3 text-left">Barcode</th>
 
                         {{-- //* item name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+                        <th scope="col" class="px-4 py-3 text-left">Item Name</th>
 
                         {{-- //* stocks on hand --}}
-                        <th scope="col" class="px-4 py-3">Stocks-On-Hand</th>
+                        <th scope="col" class="px-4 py-3 text-center">Stocks-On-Hand</th>
 
                         {{-- //* item reorder quantity --}}
-                        <th scope="col" class="px-4 py-3">Item Reorder Quantity</th>
+                        <th scope="col" class="px-4 py-3 text-center">Item Reorder Quantity</th>
 
                         {{-- //* purchase quantity --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Purchase Quantity</th>
+                        <th scope="col" class="px-4 py-3 text-center text-nowrap">Purchase Quantity</th>
                         </th>
 
 
@@ -81,14 +73,33 @@
                 {{-- //* table body --}}
                 <tbody>
                     @foreach ($reorder_lists as $reorder_list)
-                        <tr>
-                            <th>Action</th>
-                            <td>{{ $reorder_list->barcode  }}</td> <!-- Use item_id directly -->
-                            <td>{{ $reorder_list->item_name }}</td> <!-- Use item_name directly -->
-                            <td>{{ $reorder_list->total_quantity }}</td> <!-- Total quantity -->
-                            <td>{{ $reorder_list->reorder_point}}</td>
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                <div class="flex justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                        class="w-8 h-8 text-center text-red-300 rounded-full hover:bg-red-500">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                    </svg>
+                                </div>
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $reorder_list->barcode }}</th> <!-- Use item_id directly -->
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $reorder_list->item_name }}</th> <!-- Use item_name directly -->
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $reorder_list->total_quantity }}</th> <!-- Total quantity -->
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $reorder_list->reorder_point }}</th>
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                <input type="number"></th>
                             <!-- Use reorder_point, handle cases where it might not exist -->
-
                         </tr>
                     @endforeach
 
