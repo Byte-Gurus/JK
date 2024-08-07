@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class InventoryManagementPage extends Component
 {
-    public $showModal = false;
+    public $showStockAdjustModal = false;
     public $sidebarStatus;
     public function render()
     {
@@ -21,7 +21,7 @@ class InventoryManagementPage extends Component
 
     public function closeModal()
     {
-        $this->showModal = false;
+        $this->showStockAdjustModal = false;
     }
 
     public function formCreate()
