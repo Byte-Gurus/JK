@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 
+
 use App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase\PurchaseOrderForm;
 use Livewire\Component;
 
@@ -20,6 +21,7 @@ class PurchasePage extends Component
 
     public function formCreate()
     {
+
         $this->dispatch('change-method', isCreate: true)->to(PurchaseOrderForm::class);
     }
 
@@ -36,5 +38,6 @@ class PurchasePage extends Component
     {
         $this->isCreate = false;
     }
+
 
 }
