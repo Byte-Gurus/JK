@@ -4,7 +4,9 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Inventory;
+use App\Models\Item;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -21,10 +23,38 @@ class PurchaseOrderForm extends Component
 
         $suppliers = Supplier::select('id', 'company_name')->get();
 
-
+        $reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
+            ->select(
+                'items.id as item_id',
+                'items.barcode',
+                'items.item_name',
+                'items.item_description',
+                'items.maximum_stock_ratio',
+                'items.reorder_percentage',
+                'items.reorder_point',
+                'items.vat_amount',
+                'items.vat_type',
+                'items.status_id',
+                DB::raw('COALESCE(SUM(inventories.quantity), 0) as total_quantity'),
+                DB::raw('MAX(inventories.status) as inventory_status')
+            )
+            ->groupBy(
+                'items.id',
+                'items.barcode',
+                'items.item_name',
+                'items.item_description',
+                'items.maximum_stock_ratio',
+                'items.reorder_percentage',
+                'items.reorder_point',
+                'items.vat_amount',
+                'items.vat_type',
+                'items.status_id'
+            )
+            ->havingRaw('total_quantity = 0 OR inventory_status = "Available"')
+            ->get();
         $this->generatePurchaseNumber();
 
-        return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', compact('suppliers'));
+        return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', compact('suppliers', 'reorder_lists'));
     }
 
     protected $listeners = [
@@ -62,7 +92,8 @@ class PurchaseOrderForm extends Component
         }
     }
 
-    public function addRows(){
+    public function addRows()
+    {
         $this->rows[] = [];
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('item_name');
             $table->string('item_description');
             $table->double('maximum_stock_ratio');
+            $table->double('reorder_percentage');
             $table->double('reorder_point');
             $table->string('vat_type');
             $table->double('vat_amount');
@@ -25,7 +26,6 @@ return new class extends Migration
 
             $table->foreignId('status_id')->constrained('statuses');
         });
-
     }
 
     /**

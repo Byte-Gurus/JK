@@ -1,5 +1,5 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate')}">
+<div x-cloak x-show="showModal" x-data="{ isCreate: @entangle('isCreate') }">
 
     {{-- //* form background --}}
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
@@ -111,7 +111,7 @@
                                         <div class="transition-all duration-100 ease-in-out">
                                             @if ($this->hasBarcode)
                                                 {{-- //* already have barcode --}}
-                                                <input type="text" id="create_barcode"  wire:model="create_barcode"
+                                                <input type="text" id="create_barcode" wire:model="create_barcode"
                                                     class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                                     placeholder="Barcode" />
 
@@ -128,7 +128,8 @@
                                                             {{ $barcode }}
                                                         </label>
 
-                                            <img id="barcode" wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
+                                                        <img id="barcode"
+                                                            wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
 
 
                                                         @error('barcode')
@@ -184,15 +185,33 @@
                                 {{-- //* third row row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                    {{-- //* reorder point --}}
+
+                                    {{-- //* reorder percentage --}}
                                     <div class="mb-3">
+
+                                        <label for="reorderPercentage"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Reorder
+                                            percentage</label>
+
+                                        <input type="number" id="reorderPercentage" wire:model.live="reorderPercentage"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            placeholder="Reorder Point" required />
+
+                                        @error('reorderPercentage')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                      {{-- //* reorder point --}}
+                                      <div class="mb-3">
 
                                         <label for="reorder_point"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Reorder Point</label>
 
                                         <input type="number" id="reorder_point" wire:model="reorder_point"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Reorder Point" required />
+                                            placeholder="Reorder Point" required disabled />
 
                                         @error('reorder_point')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -200,10 +219,12 @@
 
                                     </div>
 
+
                                     {{-- //* vat type --}}
                                     <div class="mb-3">
 
-                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                        <label for="vatType"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
                                         <select id="vatType" wire:model.live="vatType"

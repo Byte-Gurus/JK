@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ItemManagement;
 
 use App\Livewire\Pages\ItemManagementPage;
+use App\Models\Inventory;
 use App\Models\Item;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -15,7 +16,7 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $maximum_stock_ratio = 1.5, $reorder_point, $vat_amount, $status, $create_barcode; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description, $maximum_stock_ratio = 1.5, $reorder_point, $reorderPercentage, $vat_amount, $status, $create_barcode; //var form inputs
     public $vat_amount_enabled = false; //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -41,6 +42,19 @@ class ItemForm extends Component
         'updateConfirmed',
         'createConfirmed',
     ];
+
+    public function updatedReorderPercentage() {
+        // Fetch the item's quantity from the inventory
+        $inventoryItem = Inventory::where('item_id', $this->proxy_item_id)->first();
+
+        // Check if the inventory item exists and multiply the reorder percentage by the quantity
+        if ($inventoryItem) {
+            $this->reorder_point = $this->reorderPercentage * $inventoryItem->quantity;
+        } else {
+            $this->reorder_point = 0; // Default to 0 if the item is not found
+        }
+    }
+
     public function updatedVatType($vat_type) //@params vat_type for enabling the vat amount
     {
         $this->vatType = $vat_type;
@@ -74,6 +88,7 @@ class ItemForm extends Component
             'item_description' => $validated['item_description'],
             'maximum_stock_ratio' => $validated['maximum_stock_ratio'],
             'reorder_point' => $validated['reorder_point'],
+            'reorder_percentage' => $validated['reorderPercentage'],
             'vat_type' => $validated['vatType'],
             'vat_amount' => $validated['vat_amount'],
             'status_id' => $validated['status'],
@@ -106,6 +121,7 @@ class ItemForm extends Component
         $items->item_name = $validated['item_name'];
         $items->item_description = $validated['item_description'];
         $items->maximum_stock_ratio = $validated['maximum_stock_ratio'];
+        $items->reorder_percentage = $validated['reorderPercentage'];
         $items->reorder_point = $validated['reorder_point'];
         $items->vat_type = $validated['vatType'];
         $items->vat_amount = $validated['vat_amount'];
@@ -175,7 +191,7 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'vatType', 'vat_amount', 'status', ]);
+        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_amount', 'status', ]);
         $this->vat_amount_enabled = false;
         $this->hasBarcode = true;
     }
@@ -192,6 +208,7 @@ class ItemForm extends Component
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
             'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'reorderPercentage' => ['required', 'numeric'],
             'reorder_point' => ['required', 'numeric'],
             'vat_amount' => ['required', 'numeric'],
             'vatType' => 'required|in:Vat,Non vat',
@@ -222,6 +239,7 @@ class ItemForm extends Component
             'item_name' => $item_details->item_name,
             'item_description' => $item_details->item_description,
             'maximum_stock_ratio' => $item_details->maximum_stock_ratio,
+            'reorderPercentage' => $item_details->reorder_percentage,
             'reorder_point' => $item_details->reorder_point,
             'vatType' => $item_details->vat_type,
             'vat_amount' => $item_details->vat_amount,
