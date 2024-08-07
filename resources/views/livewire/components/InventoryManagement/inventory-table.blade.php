@@ -81,9 +81,16 @@
                             </div>
 
                         </th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Quantity</th>
+
+                          {{-- //* status --}}
+                          <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
+
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Item Cost</th>
+
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Mark-up price</th>
@@ -91,8 +98,6 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Selling price</th>
 
-                        {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier</th>
@@ -165,6 +170,12 @@
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->quantity }}
+                            </th>
+
+
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $inventory->itemJoin->reorder_point }}
                             </th>
 
                             <th scope="row"

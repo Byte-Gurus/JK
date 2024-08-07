@@ -14,6 +14,7 @@
                 <label for="supplier" class="text-[1.8em]">Supplier Name</label>
                 <select id="supplier" wire:model="suppliers"
                     class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                    <option value="" selected>Select Supplier</option>
                     @foreach ($suppliers as $supplier)
                         <option value="{{ $supplier->id }}">
                             {{ $supplier->company_name }}</option>
@@ -79,13 +80,14 @@
 
                 {{-- //* table body --}}
                 <tbody>
-                    @foreach ($rows as $row)
-                    <tr>
-                    <th>t</th>
-                    <th>i</th>
-                    <th>t</th>
-                    <th>w</th>
-                    <th>a</th>
+                    @foreach ($reorder_lists as $reorder_list)
+                        <tr>
+                            <th>Action</th>
+                            <td>{{ $reorder_list->barcode  }}</td> <!-- Use item_id directly -->
+                            <td>{{ $reorder_list->item_name }}</td> <!-- Use item_name directly -->
+                            <td>{{ $reorder_list->total_quantity }}</td> <!-- Total quantity -->
+                            <td>{{ $reorder_list->reorder_point}}</td>
+                            <!-- Use reorder_point, handle cases where it might not exist -->
 
                         </tr>
                     @endforeach

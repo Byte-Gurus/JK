@@ -14,6 +14,7 @@ class Item extends Model
         'item_name',
         'item_description',
         'maximum_stock_ratio',
+        'reorder_percentage',
         'reorder_point',
         'vat_amount',
         'vat_type',
@@ -25,6 +26,8 @@ class Item extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
+  
     public function scopeSearch($query, $value)  //* search function
     {
         //? queries
