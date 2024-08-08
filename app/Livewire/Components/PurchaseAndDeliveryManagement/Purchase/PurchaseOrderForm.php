@@ -78,7 +78,6 @@ class PurchaseOrderForm extends Component
 
     public function closeModal() //* close ang modal after confirmation
     {
-        dd('ho');
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
 
@@ -92,7 +91,6 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
-        dd('nanana');
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow

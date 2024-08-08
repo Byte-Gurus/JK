@@ -25,6 +25,12 @@ class PurchasePage extends Component
         $this->isCreate = !$this->isCreate;
     }
 
+    public function formCancel()
+    {
+        $this->dispatch('change-method', isCreate: false)->to(PurchaseOrderForm::class);
+        $this->isCreate = !$this->isCreate;
+    }
+
     protected $listeners = [
         'close-modal' => 'closeModal',
         'change-method' => 'changeMethod',
