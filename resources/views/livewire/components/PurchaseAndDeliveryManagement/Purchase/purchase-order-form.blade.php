@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative" x-data="{ isCreate: @entangle('isCreate') ">
+<div class="relative" x-show="isCreate" x-cloak>
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
 
@@ -9,8 +9,6 @@
                 <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
             </div>
             <div class="flex flex-col gap-2">
-
-
                 <label for="supplier" class="text-[1.8em]">Supplier Name</label>
                 <select id="supplier" wire:model="suppliers"
                     class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
@@ -20,10 +18,13 @@
                             {{ $supplier->company_name }}</option>
                     @endforeach
                 </select>
-
-
             </div>
             <div class="flex flex-row self-center justify-center gap-4">
+                <div>
+                    <button
+                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                        x-on:click="showModal=false;$wire.formCancel()">Cancel</button>
+                </div>
                 <div>
                     <button wire:click="addRows"
                         class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">

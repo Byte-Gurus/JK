@@ -3,7 +3,6 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
-use App\Models\Inventory;
 use App\Models\Item;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +78,7 @@ class PurchaseOrderForm extends Component
 
     public function closeModal() //* close ang modal after confirmation
     {
+        dd('ho');
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
 
@@ -92,8 +92,7 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
-
-        dd("sasa");
+        dd('nanana');
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
@@ -105,8 +104,15 @@ class PurchaseOrderForm extends Component
         }
     }
 
+    public function formCancel()
+    {
+        $this->dispatch('change-method', isCreate: false)->to(PurchasePage::class);
+        $this->isCreate = false;
+    }
+
     public function addRows()
     {
         $this->rows[] = [];
     }
+
 }
