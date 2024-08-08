@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative" x-show="isCreate" x-cloak>
+<div class="relative" x-cloak x-data="{ isCreate: @entangle('isCreate') }">
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
 

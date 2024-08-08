@@ -43,7 +43,8 @@ class ItemForm extends Component
         'createConfirmed',
     ];
 
-    public function updatedReorderPercentage() {
+    public function updatedReorderPercentage()
+    {
         // Fetch the item's quantity from the inventory
         $inventoryItem = Inventory::where('item_id', $this->proxy_item_id)->first();
 
@@ -129,7 +130,7 @@ class ItemForm extends Component
 
         if ($this->hasBarcode) {
             $items->barcode = $validated['create_barcode'];
-        }else{
+        } else {
             $items->barcode = $validated['barcode'];
         }
 
@@ -175,7 +176,6 @@ class ItemForm extends Component
     {
 
         $this->barcode = random_int(100000000000, 999999999999);
-
     }
 
     public function resetFormWhenClosed()
@@ -191,7 +191,7 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_amount', 'status', ]);
+        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_amount', 'status',]);
         $this->vat_amount_enabled = false;
         $this->hasBarcode = true;
     }
@@ -218,7 +218,7 @@ class ItemForm extends Component
         if ($this->hasBarcode) {
             $rules['create_barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         } else {
-            $rules['barcode'] = ['required', 'numeric ', 'digits:12' , Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+            $rules['barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         }
 
 
@@ -257,9 +257,10 @@ class ItemForm extends Component
 
         if ($this->isCreate) {
 
+
             $this->resetForm();
         }
-
+      
         $this->generateBarcode();
     }
 }

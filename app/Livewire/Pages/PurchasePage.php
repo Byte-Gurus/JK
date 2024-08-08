@@ -21,14 +21,16 @@ class PurchasePage extends Component
 
     public function formCreate()
     {
+
+
         $this->dispatch('change-method', isCreate: true)->to(PurchaseOrderForm::class);
-        $this->isCreate = !$this->isCreate;
+        $this->showModal = true;
     }
 
     public function formCancel()
     {
-        $this->dispatch('change-method', isCreate: false)->to(PurchaseOrderForm::class);
-        $this->isCreate = !$this->isCreate;
+        
+        $this->showModal = false;
     }
 
     protected $listeners = [

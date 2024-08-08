@@ -131,7 +131,8 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
-
+      
+        dd($isCreate);
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
@@ -143,11 +144,6 @@ class PurchaseOrderForm extends Component
         }
     }
 
-    public function formCancel()
-    {
-        $this->dispatch('change-method', isCreate: false)->to(PurchasePage::class);
-        $this->isCreate = false;
-    }
 
     public function addRows()
     {
