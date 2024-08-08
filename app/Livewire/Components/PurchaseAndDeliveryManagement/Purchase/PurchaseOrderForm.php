@@ -73,8 +73,13 @@ class PurchaseOrderForm extends Component
     {
         unset($this->reorder_lists[$index]);
         $this->reorder_lists = array_values($this->reorder_lists); // Reindex the array
+       
     }
-
+    public function getRemainingRows()
+    {
+        // This method returns the remaining rows and their values
+        return $this->reorder_lists;
+    }
 
     public function closeModal() //* close ang modal after confirmation
     {
@@ -91,12 +96,13 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
+
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
         if ($this->isCreate) {
 
-
+            $this->generatePurchaseNumber();
             // $this->resetForm();
         } else {
         }
@@ -112,5 +118,4 @@ class PurchaseOrderForm extends Component
     {
         $this->rows[] = [];
     }
-
 }
