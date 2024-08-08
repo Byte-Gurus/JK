@@ -69,19 +69,36 @@
                 {{-- //* table body --}}
                 <tbody>
                     @foreach ($reorder_lists as $index => $reorder_list)
-                        <tr class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75 reorder-list-row">
+                        <tr class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 reorder-list-row"x-data="{ isDisabled: @entangle('isDisabled') }"
+                            :class="{ 'bg-red-200': isDisabled }">
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                <div class="flex justify-center" x-on:click="removeRow({{ $index }})">
+                                @if (!$isDisabled)
+                                    <div class="flex justify-center"
+                                        x-on:click="isDisabled=true;$wire.removeRow({{ $index }})">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        strokeWidth={1.5} stroke="currentColor"
-                                        class="w-10 h-10 text-center text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                    </svg>
-                                    </button>
-                                </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            strokeWidth={1.5} stroke="currentColor"
+                                            class="w-10 h-10 text-center text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
+                                        </button>
+                                    </div>
+                                @else
+                                    <div class="flex justify-center"
+                                        x-on:click="isDisabled=false;$wire.restoreRow({{ $index }})">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            strokeWidth={1.5} stroke="currentColor"
+                                            class="w-10 h-10 text-center text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
+                                        </button>
+                                    </div>
+                                @endif
+
                             </th>
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
@@ -113,17 +130,17 @@
         </div>
 
         {{-- //* table footer --}}
-        {{-- <div class="border-t border-black "> --}}
+        <div class="border-t border-black ">
 
             {{-- //*pagination --}}
-            {{-- <div class="mx-4 my-2 text-nowrap">
+            <div class="mx-4 my-2 text-nowrap">
 
                 {{-- {{ $suppliers->links() }} --}}
 
-            {{-- </div> --}}
+            </div>
 
             {{-- //* per page --}}
-            {{-- <div class="flex items-center px-4 py-2 mb-3">
+            <div class="flex items-center px-4 py-2 mb-3">
 
                 <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
@@ -133,7 +150,7 @@
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
-            </div> --}}
-        {{-- </div> --}}
+            </div>
+        </div>
     </div>
 </div>

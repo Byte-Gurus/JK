@@ -18,6 +18,20 @@ class PurchaseOrderForm extends Component
     public $rows = [];
     public $reorder_lists = [];
     public $purchase_number;
+    public $removed_items = [];
+    public $isDisabled;
+
+    /**
+     * Summary of render
+     * $suppliers gets the supplier id company name
+     * $reorder_lists gets all the attributs in both table( inventory, item) but it ensures that the attributes form item table will return even if they don't have records in the inventory
+     * DB:RAW COALESCE gets the sum of all quantities from inventory table and if no records then it will be 0
+     * DB:RAW MAX sort the inventory status value in order
+     * ->where filter out all the status_id that has value of 2 (Inactive), <> means not equal to
+     * ->groupBy this is need to identify what columns to show especially when theres sum and max (aggregiate functions)
+     * ->havingRaw has a condition and ensure that this columns gets retrieve
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function render()
     {
 
@@ -38,7 +52,7 @@ class PurchaseOrderForm extends Component
                 DB::raw('COALESCE(SUM(inventories.quantity), 0) as total_quantity'),
                 DB::raw('MAX(inventories.status) as inventory_status')
             )
-            ->where('items.status_id', '<>', '2') // Replace 'inactive_status_id' with the actual value representing inactive status
+            ->where('items.status_id', '<>', '2')
             ->groupBy(
                 'items.id',
                 'items.barcode',
@@ -61,19 +75,40 @@ class PurchaseOrderForm extends Component
             'reorder_lists' => $this->reorder_lists,
         ]);
     }
+
+
     protected $listeners = [
-        'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
-        //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
+        'edit-user-from-table' => 'edit',
         'change-method' => 'changeMethod',
         'updateConfirmed',
         'createConfirmed',
     ];
 
+    /**
+     * Summary of removeRow
+     * unset destroy a variable ($index) that  comes from the array of reorder_list
+     * @return void
+     */
     public function removeRow($index)
     {
+
+        $this->removed_items = $this->reorder_lists[$index];
+
+
         unset($this->reorder_lists[$index]);
-        $this->reorder_lists = array_values($this->reorder_lists); // Reindex the array
-       
+        $this->reorder_lists = array_values($this->reorder_lists);
+    }
+
+    public function restoreRow($index)
+    {
+
+        // Check if the row is in removed_items, then restore it
+        if (isset($this->removed_items[$index])) {
+            $this->reorder_lists = $this->removed_items[$index]; // Restore the row
+
+            unset($this->removed_items[$index]); // Remove it from removed_items
+            $this->removed_items = array_values($this->removed_items); // Reindex the removed items array
+        }
     }
     public function getRemainingRows()
     {
