@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("po_number")->unique();
             $table->timestamps();
+
+            $table->foreignId('supplier_id')->constrained('suppliers');
         });
     }
 

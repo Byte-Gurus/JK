@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('purchase_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('inventory_id')->constrained('inventories');
+            $table->foreignId('item_id')->constrained('items');
+            $table->string('po_number')->index();
+            $table->integer('purchase_quantity');
             $table->timestamps();
 
             $table->foreign('po_number')->references('po_number')->on('purchases');
