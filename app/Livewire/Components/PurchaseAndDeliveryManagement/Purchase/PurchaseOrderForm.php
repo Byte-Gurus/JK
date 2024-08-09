@@ -49,7 +49,7 @@ class PurchaseOrderForm extends Component
                 'items.vat_amount',
                 'items.vat_type',
                 'items.status_id',
-                DB::raw('COALESCE(SUM(inventories.quantity), 0) as total_quantity'),
+                DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity'),
                 DB::raw('MAX(inventories.status) as inventory_status')
             )
             ->where('items.status_id', '<>', '2')
@@ -131,7 +131,7 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
-      
+
         dd($isCreate);
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 

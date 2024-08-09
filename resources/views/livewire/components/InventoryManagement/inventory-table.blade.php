@@ -82,10 +82,14 @@
 
                         </th>
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Quantity</th>
+                        <th scope="col" class="px-4 py-3 text-center">Current stock quantity</th>
 
-                          {{-- //* status --}}
-                          <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Purchased stock quantity</th>
+
+
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
 
 
                         {{-- //* status --}}
@@ -169,7 +173,12 @@
 
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->quantity }}
+                                {{ $inventory->current_stock_quantity }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $inventory->purchased_stock_quantity }}
                             </th>
 
 
