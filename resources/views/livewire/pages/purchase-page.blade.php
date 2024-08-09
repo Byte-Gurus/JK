@@ -3,7 +3,7 @@
         <div class="flex flex-row items-center justify-between mb-4">
             <div>
                 <h1 class="text-[2em] font-bold pointer-events-none">
-                    @if ($this->isCreate)
+                    @if ($this->showModal)
                         Create Purchase Order
                     @else
                         Purchase Order
@@ -11,11 +11,7 @@
                 </h1>
             </div>
             <div x-data="{ showModal: @entangle('showModal') }">
-                @if ($this->showModal)
-                    <button
-                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                        x-on:click="showModal=false;$wire.formCancel()">Cancel</button>
-                @else
+                @if (!$this->showModal)
                     <button x-on:click="showModal=true;$wire.formCreate()"
                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                         <div>
@@ -32,15 +28,12 @@
             </div>
         </div>
     </div>
-
-    @if ($this->showModal)
-        <div>
-            @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form')
-        </div>
-    @else
-        <div>
-            @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
-        </div>
+    <div>
+        @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form')
+    </div>
+    @if (!$this->showModal)
+    <div>
+        @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
+    </div>
     @endif
-
 </div>

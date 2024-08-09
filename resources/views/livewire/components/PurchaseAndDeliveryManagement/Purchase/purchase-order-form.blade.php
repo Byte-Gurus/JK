@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative" x-cloak x-data="{ isCreate: @entangle('isCreate') }">
+<div class="relative" x-show="showModal" x-cloak x-data="{ isCreate: @entangle('isCreate'), showModal: @entangle('showModal') }">
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
 
@@ -20,6 +20,11 @@
                 </select>
             </div>
             <div class="flex flex-row self-center justify-center gap-4">
+                <div>
+                    <button
+                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                        x-on:click="showModal=false;$wire.formCancel()">Cancel</button>
+                </div>
                 <div>
                     <button wire:click="addRows"
                         class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
