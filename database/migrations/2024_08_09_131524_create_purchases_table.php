@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('supplier_id')->constrained('suppliers');
-        });
+         });
     }
 
     /**
