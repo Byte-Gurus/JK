@@ -39,41 +39,41 @@ class PurchaseOrderForm extends Component
      */
     public function render()
     {
-
         $suppliers = Supplier::select('id', 'company_name')->get();
 
-        $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
-            ->select(
-                'items.id as item_id',
-                'items.barcode',
-                'items.item_name',
-                'items.item_description',
-                'items.maximum_stock_ratio',
-                'items.reorder_percentage',
-                'items.reorder_point',
-                'items.vat_amount',
-                'items.vat_type',
-                'items.status_id',
-                DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity'),
-                DB::raw('MAX(inventories.status) as inventory_status')
-            )
-            ->where('items.status_id', '<>', '2')
-            ->groupBy(
-                'items.id',
-                'items.barcode',
-                'items.item_name',
-                'items.item_description',
-                'items.maximum_stock_ratio',
-                'items.reorder_percentage',
-                'items.reorder_point',
-                'items.vat_amount',
-                'items.vat_type',
-                'items.status_id'
-            )
-            ->havingRaw('total_quantity = 0 OR inventory_status = "Available"')
-            ->get()
-            ->toArray();
-
+        if (empty($this->reorder_lists)) {
+            $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
+                ->select(
+                    'items.id as item_id',
+                    'items.barcode',
+                    'items.item_name',
+                    'items.item_description',
+                    'items.maximum_stock_ratio',
+                    'items.reorder_percentage',
+                    'items.reorder_point',
+                    'items.vat_amount',
+                    'items.vat_type',
+                    'items.status_id',
+                    DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity'),
+                    DB::raw('MAX(inventories.status) as inventory_status')
+                )
+                ->where('items.status_id', '<>', '2')
+                ->groupBy(
+                    'items.id',
+                    'items.barcode',
+                    'items.item_name',
+                    'items.item_description',
+                    'items.maximum_stock_ratio',
+                    'items.reorder_percentage',
+                    'items.reorder_point',
+                    'items.vat_amount',
+                    'items.vat_type',
+                    'items.status_id'
+                )
+                ->havingRaw('total_quantity = 0 OR inventory_status = "Available"')
+                ->get()
+                ->toArray();
+        }
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
@@ -90,34 +90,31 @@ class PurchaseOrderForm extends Component
         'createConfirmed',
     ];
 
-    /**
-     * Summary of removeRow
-     * unset destroy a variable ($index) that  comes from the array of reorder_list
-     * @return void
-     */
+
     public function removeRow($index)
     {
-        $this->removed_items = $this->reorder_lists[$index];
-
-
+        // Store the removed item
+        $this->removed_items[] = $this->reorder_lists[$index];
         unset($this->reorder_lists[$index]);
-        $this->reorder_lists = array_values($this->reorder_lists);
     }
     public function restoreRow($index)
     {
-
-        // Check if the row is in removed_items, then restore it
+        // Check if the index exists in the removed items array
         if (isset($this->removed_items[$index])) {
-            $this->reorder_lists = $this->removed_items[$index]; // Restore the row
+            // Restore the item to reorder_lists
+            $this->reorder_lists[] = $this->removed_items[$index];
 
-            unset($this->removed_items[$index]); // Remove it from removed_items
-            $this->removed_items = array_values($this->removed_items); // Reindex the removed items array
+            // Remove the item from removed_items
+            unset($this->removed_items[$index]);
+
+            // Reindex the removed_items array
+            $this->removed_items = array_values($this->removed_items);
         }
     }
     public function getRemainingRows()
     {
-        // This method returns the remaining rows and their values
-        return $this->reorder_lists;
+
+        dd($this->reorder_lists);
     }
 
     public function closeModal() //* close ang modal after confirmation
