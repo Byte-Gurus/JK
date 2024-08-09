@@ -22,6 +22,8 @@ class PurchaseOrderForm extends Component
     public $reorder_lists = [];
     public $purchase_number;
     public $removed_items = [];
+
+    public $index;
     public $isDisabled;
 
     /**
@@ -95,14 +97,12 @@ class PurchaseOrderForm extends Component
      */
     public function removeRow($index)
     {
-
         $this->removed_items = $this->reorder_lists[$index];
 
 
         unset($this->reorder_lists[$index]);
         $this->reorder_lists = array_values($this->reorder_lists);
     }
-
     public function restoreRow($index)
     {
 
