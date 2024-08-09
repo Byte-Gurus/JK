@@ -17,7 +17,6 @@ return new class extends Migration
             $table->double('cost');
             $table->double('mark_up_price');
             $table->double('selling_price');
-            $table->integer('purchased_stock_quantity');
             $table->integer('current_stock_quantity');
             $table->datetime('expiration_date');
             $table->datetime('stock_in_date');

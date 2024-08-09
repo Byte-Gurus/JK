@@ -19,7 +19,6 @@ class Inventory extends Model
         'mark_up_price',
         'selling_price',
         'quantity',
-        'purchased_stock_quantity',
         'current_stock_quantity',
         'stock_in_date',
         'status',
