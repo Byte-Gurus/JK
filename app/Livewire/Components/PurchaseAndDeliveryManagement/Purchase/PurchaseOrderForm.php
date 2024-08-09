@@ -15,6 +15,9 @@ class PurchaseOrderForm extends Component
     use LivewireAlert;
 
     public $isCreate;
+
+    public $showModal;
+
     public $rows = [];
     public $reorder_lists = [];
     public $purchase_number;
@@ -80,6 +83,7 @@ class PurchaseOrderForm extends Component
     protected $listeners = [
         'edit-user-from-table' => 'edit',
         'change-method' => 'changeMethod',
+        'display-modal' => 'displayModal',
         'updateConfirmed',
         'createConfirmed',
     ];
@@ -131,8 +135,6 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
-
-        dd($isCreate);
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
@@ -144,6 +146,19 @@ class PurchaseOrderForm extends Component
         }
     }
 
+    public function displayModal($showModal)
+    {
+        $this->showModal = $showModal; //var assign ang parameter value sa global variable
+
+        if ($this->showModal) {
+        } else {
+        }
+    }
+
+    public function formCancel()
+    {
+        $this->dispatch('form-cancel', showModal: false)->to(PurchasePage::class);
+    }
 
     public function addRows()
     {
