@@ -22,7 +22,7 @@ class PurchaseOrderForm extends Component
 
     public $rows = [];
     public $reorder_lists = [];
-    public $po_number, $supplier;
+    public $po_number, $supplier, $purchase_id, $proxy_purchase_id;
     public $purchase_quantities = [];
     public $removed_items = [];
 
@@ -86,7 +86,7 @@ class PurchaseOrderForm extends Component
 
 
     protected $listeners = [
-        'edit-user-from-table' => 'edit',
+        'edit-po-from-table' => 'edit',
         'change-method' => 'changeMethod',
         'display-modal' => 'displayModal',
         'updateConfirmed',
@@ -174,6 +174,21 @@ class PurchaseOrderForm extends Component
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
 
+    public function populateForm()
+    {
+        
+    }
+
+
+
+    public function edit($purchase_Number)
+    {
+
+        $this->purchase_id = $purchase_Number; //var assign ang parameter value sa global variable
+        $this->proxy_purchase_id = $purchase_Number;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+
+        $this->populateForm();
+    }
     public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
     {
 
@@ -191,7 +206,6 @@ class PurchaseOrderForm extends Component
 
             $this->generatePurchaseOrderNumber();
             // $this->resetForm();
-        } else {
         }
     }
 

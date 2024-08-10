@@ -26,8 +26,12 @@ class Item extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+    public function purchasedetailsJoin()
+    {
+        return $this->hasMany(PurchaseDetails::class, 'item_id');
+    }
 
-  
+
     public function scopeSearch($query, $value)  //* search function
     {
         //? queries

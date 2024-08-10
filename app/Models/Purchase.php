@@ -19,6 +19,10 @@ class Purchase extends Model
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
 
+    public function purchaseJoin()
+    {
+        return $this->hasMany(PurchaseDetails::class, 'po_number');
+    }
 
     public function scopeSearch($query, $value)  //* search function
     {
