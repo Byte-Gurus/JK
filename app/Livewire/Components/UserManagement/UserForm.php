@@ -97,8 +97,6 @@ class UserForm extends Component
     }
 
 
-
-
     public function update() //* update process
     {
         $validated = $this->validateForm();
