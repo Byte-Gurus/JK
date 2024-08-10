@@ -23,7 +23,7 @@ class PurchasePage extends Component
     {
         $this->dispatch('change-method', isCreate: true)->to(PurchaseOrderForm::class);
         $this->dispatch('display-modal', showModal: true)->to(PurchaseOrderForm::class);
-        $this->showModal = true;
+       
     }
 
     protected $listeners = [
@@ -37,12 +37,10 @@ class PurchasePage extends Component
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
     }
 
-    public function formCancel($showModal)
+    public function formCancel()
     {
-        $this->showModal = $showModal; //var assign ang parameter value sa global variable
+        $this->dispatch('display-modal', showModal: false)->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
 
-        if ($this->showModal) {
-        } else {
-        }
+
     }
 }

@@ -7,7 +7,7 @@
             <div class="flex flex-row justify-between gap-4 px-8 py-4 text-nowrap">
                 <div>
                     <h1 class="text-[1.8em]">Purchase Order No</h1>
-                    <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
+                    <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="supplier" class="text-[1.8em]">Supplier Name</label>
@@ -21,11 +21,6 @@
                     </select>
                 </div>
                 <div class="flex flex-row items-center justify-center gap-2 flex-nowrap text-nowrap">
-                    <div>
-                        <button
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                            x-on:click="showModal=false;$wire.formCancel()">Cancel</button>
-                    </div>
                     <div>
                         <button wire:click="addRows"
                             class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
@@ -124,17 +119,12 @@
             </div>
 
 
-            {{-- //* table footer --}}
-            <div class="border-t border-black ">
-
-
-            </div>
         </div>
 
 
 
         {{-- Removed Item Section --}}
-        <div class="relative w-1/2 overflow-hidden border border-black shadow-md shadow-lg box bg-gray-50 sm:rounded-lg">
+        <div class="relative w-1/2 overflow-hidden border border-black  shadow-lg box bg-gray-50 sm:rounded-lg">
 
 
             <div class="flex justify-center px-2 py-10">
@@ -197,6 +187,11 @@
                                         class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['item_name'] }}
                                     </th>
+
+                                    <th scope="row"
+                                    class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorder_list['total_quantity'] }}
+                                </th>
                                 </tr>
                             @endforeach
                         @endif

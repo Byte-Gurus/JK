@@ -199,15 +199,8 @@ class PurchaseOrderForm extends Component
     {
         $this->showModal = $showModal; //var assign ang parameter value sa global variable
 
-        if ($this->showModal) {
-        } else {
-        }
     }
 
-    public function formCancel()
-    {
-        $this->dispatch('form-cancel', showModal: false)->to(PurchasePage::class);
-    }
 
     public function addRows()
     {
