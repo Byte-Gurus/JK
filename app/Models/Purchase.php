@@ -11,6 +11,18 @@ class Purchase extends Model
 
     protected $fillable = [
         'po_number',
-        'supplier',
+        'supplier_id',
     ];
+
+    public function supplierJoin()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+
+    public function scopeSearch($query, $value)  //* search function
+    {
+        //? queries
+        $query->where('po_number', 'like', "%{$value}%");
+    }
 }

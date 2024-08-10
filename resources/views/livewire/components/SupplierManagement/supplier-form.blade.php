@@ -143,12 +143,15 @@
 
                                         <select id="selectCity" wire:model.live="selectCity" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select city / municipality</option>
+                                            <option value="" selected>Select a City / Municipality</option>
+
                                             @if (!is_null($cities))
                                                 @foreach ($cities as $city)
-                                                    <option value="{{ $city->city_municipality_code }}">
+                                                    <option value="{{ $city->city_municipality_code }}"
+                                                        {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
                                                         {{ $city->city_municipality_description }}</option>
                                                 @endforeach
+
 
                                             @endif
                                         </select>
@@ -172,10 +175,13 @@
 
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select a role</option>
+
+                                            <option value="" selected>Select a barangay</option>
+
                                             @if (!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
-                                                    <option value="{{ $barangay->barangay_code }}">
+                                                    <option value="{{ $barangay->barangay_code }}"
+                                                        {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
                                                         {{ $barangay->barangay_description }}</option>
                                                 @endforeach
                                             @endif
@@ -244,7 +250,7 @@
                             <div>
 
                                 {{-- //* submit button for edit --}}
-                                <button type="submit"  wire:loading.remove
+                                <button type="submit" wire:loading.remove
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                     <div class="flex flex-row items-center gap-2">
                                         <p>Update</p>
@@ -253,7 +259,7 @@
 
                                 </button>
 
-                                  <div wire:loading>
+                                <div wire:loading>
                                     <div class="loader loader--style3 flex justify-center items-center "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +293,7 @@
                             <div>
 
                                 {{-- //* submit button for create --}}
-                                <button type="submit"  wire:loading.remove
+                                <button type="submit" wire:loading.remove
                                     class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                     <div class="flex flex-row items-center gap-2">
                                         <p>

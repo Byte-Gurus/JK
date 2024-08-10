@@ -10,7 +10,8 @@ class PurchaseDetails extends Model
     use HasFactory;
 
     protected $fillable = [
-        'inventory_id',
+        'item_id',
         'po_number',
+        'purchase_quantity',
     ];
 }

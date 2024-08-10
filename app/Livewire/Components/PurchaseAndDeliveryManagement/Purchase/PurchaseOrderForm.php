@@ -4,6 +4,8 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Item;
+use App\Models\Purchase;
+use App\Models\PurchaseDetails;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -20,7 +22,8 @@ class PurchaseOrderForm extends Component
 
     public $rows = [];
     public $reorder_lists = [];
-    public $purchase_number;
+    public $po_number, $supplier;
+    public $purchase_quantities = [];
     public $removed_items = [];
 
     public $index;
@@ -111,10 +114,59 @@ class PurchaseOrderForm extends Component
             $this->removed_items = array_values($this->removed_items);
         }
     }
-    public function getRemainingRows()
+
+    public function create() //* create process
     {
 
-        dd($this->reorder_lists);
+        $validated = $this->validateForm();
+
+        $this->confirm('Do you want to add this user?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
+    }
+
+    public function createConfirmed($data) //* confirmation process ng create
+    {
+
+        $validated = $data['inputAttributes'];
+
+        $purchase_order = Purchase::create([
+            'po_number' => $this->po_number,
+            'supplier_id' => $this->supplier,
+
+        ]);
+
+
+        foreach ($this->reorder_lists as $index => $reorder_list) {
+            PurchaseDetails::create([
+                'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
+                'po_number' => $this->po_number,
+                'purchase_quantity' => $this->purchase_quantities[$index],
+            ]);
+        }
+
+
+        $this->alert('success', 'Purchase order was created successfully');
+        // $this->refreshTable();
+
+        // $this->resetForm();
+        // $this->closeModal();
+    }
+
+    protected function validateForm()
+    {
+
+        $rules = [
+            'po_number' => 'required|string|max:255',
+        ];
+
+        // Add validation rules for each purchase quantity
+        foreach ($this->reorder_lists as $index => $reorder_list) {
+            $rules["purchase_quantities.$index"] = ['required', 'numeric'];
+        }
+
+        return $this->validate($rules);
     }
 
     public function closeModal() //* close ang modal after confirmation
@@ -122,11 +174,11 @@ class PurchaseOrderForm extends Component
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
 
-    public function generatePurchaseNumber()  //* generate a random barcode and contatinate the ITM
+    public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
     {
 
         $randomNumber = random_int(100000, 999999);
-        $this->purchase_number = 'PO-' . $randomNumber;
+        $this->po_number = 'PO-' . $randomNumber;
     }
 
 
@@ -137,7 +189,7 @@ class PurchaseOrderForm extends Component
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
         if ($this->isCreate) {
 
-            $this->generatePurchaseNumber();
+            $this->generatePurchaseOrderNumber();
             // $this->resetForm();
         } else {
         }

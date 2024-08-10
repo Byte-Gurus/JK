@@ -25,12 +25,6 @@ class ItemForm extends Component
 
     public function render()
     {
-        if ($this->item_id) {
-
-            $this->populateForm();
-            $this->item_id = null;  //var null the item id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung item id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
-
-        }
 
         return view('livewire.components.ItemManagement.item-form');
     }
@@ -187,6 +181,8 @@ class ItemForm extends Component
     {
         $this->item_id = $itemID; //var assign ang parameter value sa global variable
         $this->proxy_item_id = $itemID;  //var proxy_item_id para sa update ng item kasi i null ang item id sa update afetr populating the form
+
+        $this->populateForm();
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
@@ -260,7 +256,7 @@ class ItemForm extends Component
 
             $this->resetForm();
         }
-      
+
         $this->generateBarcode();
     }
 }

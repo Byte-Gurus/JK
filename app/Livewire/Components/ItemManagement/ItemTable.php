@@ -71,6 +71,10 @@ class ItemTable extends Component
 
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
     public function refreshTable()
     {
         $this->resetPage();

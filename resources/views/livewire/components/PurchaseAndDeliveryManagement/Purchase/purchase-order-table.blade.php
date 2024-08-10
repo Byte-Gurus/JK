@@ -41,13 +41,16 @@
 
                     <div class="flex flex-row items-center gap-2">
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
 
-                        <select wire:model.live="statusFilter"
+                        <select wire:model.live="supplierFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
                             <option value="0">All</option>
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
+
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                            @endforeach
+
 
                         </select>
 
@@ -68,7 +71,7 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* company name --}}
-                        <th wire:click="sortByColumn('company_name')" scope="col"
+                        <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
@@ -92,12 +95,6 @@
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-center">Supplier Name</th>
 
-                        {{-- //* item count --}}
-                        <th scope="col" class="px-4 py-3">Item Count</th>
-
-                        {{-- //* total amount --}}
-                        <th scope="col" class="px-4 py-3">Total Amount (₱)</th>
-
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
                         </th>
@@ -108,6 +105,28 @@
 
                 {{-- //* table body --}}
                 <tbody>
+
+                    @foreach ($purchases as $purchase)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchase->created_at }}
+                            </th>
+
+                            {{-- //* item name --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchase->po_number }}
+                            </th>
+
+                            {{-- //* item desc --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchase->supplierJoin->company_name }}
+                            </th>
+
+
+                        </tr>
+                    @endforeach
 
 
                 </tbody>
