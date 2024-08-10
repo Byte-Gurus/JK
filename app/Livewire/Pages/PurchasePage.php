@@ -10,9 +10,10 @@ use Livewire\Component;
 class PurchasePage extends Component
 {
 
-    public $isCreate = false;
+    public $isCreate;
     public $showModal;
 
+    public $showEditModal;
 
     public function render()
     {
@@ -23,18 +24,26 @@ class PurchasePage extends Component
     {
         $this->dispatch('change-method', isCreate: true)->to(PurchaseOrderForm::class);
         $this->dispatch('display-modal', showModal: true)->to(PurchaseOrderForm::class);
-       
+
     }
 
     protected $listeners = [
         'close-modal' => 'closeModal',
         'change-method' => 'changeMethod',
+        'display-edit-modal' => 'displayEditModal',
         'form-cancel' => 'formCancel'
     ];
 
     public function changeMethod($isCreate)
     {
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
+    }
+
+    public function displayEditModal($showEditModal)
+    {
+        $this->showEditModal = $showEditModal;
+
+        $this->dispatch('display-modal', showModal: false)->to(PurchasePage::class); //var assign ang parameter value sa global variable
     }
 
     public function formCancel()

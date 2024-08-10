@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative">
+<div class="relative" x-cloak>
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
 
@@ -90,13 +90,13 @@
                         </th>
 
                         {{-- //* purchase order number --}}
-                        <th scope="col" class="px-4 py-3">Purchase Order No.</th>
+                        <th scope="col" class="px-4 py-3 text-center">Purchase Order No.</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-center">Supplier Name</th>
 
                         {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
+                        <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
                         </th>
 
 
@@ -115,12 +115,12 @@
                             </th>
 
                             {{-- //* item name --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->po_number }}
                             </th>
 
                             {{-- //* item desc --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->supplierJoin->company_name }}
                             </th>
 

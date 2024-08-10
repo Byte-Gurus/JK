@@ -176,7 +176,7 @@ class PurchaseOrderForm extends Component
 
     public function populateForm()
     {
-        
+
     }
 
 
@@ -207,10 +207,13 @@ class PurchaseOrderForm extends Component
             $this->generatePurchaseOrderNumber();
             // $this->resetForm();
         }
+        $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);
+
     }
 
     public function displayModal($showModal)
     {
+
         $this->showModal = $showModal; //var assign ang parameter value sa global variable
 
     }

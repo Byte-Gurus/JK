@@ -147,7 +147,7 @@
                         </th>
 
                         {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
+                        <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
                         </th>
 
                     </tr>
@@ -246,10 +246,8 @@
                                             </div>
 
                                         </div>
-
                                     </button>
                                 </div>
-
                             </th>
                         </tr>
                     @endforeach

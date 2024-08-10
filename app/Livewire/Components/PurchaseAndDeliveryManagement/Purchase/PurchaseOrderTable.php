@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
+use App\Livewire\Pages\PurchasePage;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Livewire\Component;
@@ -50,12 +51,13 @@ class PurchaseOrderTable extends Component
 
     public function getPO($purchase_number)
     {
-
-
         $this->dispatch('edit-po-from-table', purchase_Number: $purchase_number)->to(PurchaseOrderForm::class);
 
         $this->dispatch('change-method', isCreate: false)->to(PurchaseOrderForm::class);
 
         $this->dispatch('display-modal', showModal: true)->to(PurchaseOrderForm::class);
+
+        $this->dispatch('display-edit-modal', showEditModal: true)->to(PurchasePage::class);
+
     }
 }
