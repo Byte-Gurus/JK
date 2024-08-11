@@ -53,7 +53,7 @@ class PurchaseOrderTable extends Component
     {
         $purchase = Purchase::find($purchase_id);
         $purchase_number = $purchase->po_number;
-      
+
         $this->dispatch('edit-po-from-table', purchase_Number: $purchase_number)->to(PurchaseOrderForm::class);
 
         $this->dispatch('change-method', isCreate: false)->to(PurchaseOrderForm::class);
@@ -62,5 +62,10 @@ class PurchaseOrderTable extends Component
 
         $this->dispatch('display-edit-modal', showEditModal: true)->to(PurchasePage::class);
 
+    }
+
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 }

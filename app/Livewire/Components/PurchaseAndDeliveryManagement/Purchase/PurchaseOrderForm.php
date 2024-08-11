@@ -22,12 +22,16 @@ class PurchaseOrderForm extends Component
 
     public $rows = [];
     public $reorder_lists = [];
-    public $po_number, $supplier, $purchase_number, $proxy_purchase_number;
+    public $supplier, $purchase_number, $proxy_purchase_number;
     public $purchase_quantities = [];
     public $removed_items = [];
     public $selectedToRemove = [];
     public $selectedToRestore = [];
     public $isReorderListsCleared = false;
+    public $edit_reorder_lists = [];
+
+    public $filtered_reorder_lists = [];
+
     public $index;
     public $isDisabled;
 
@@ -82,7 +86,9 @@ class PurchaseOrderForm extends Component
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
-            'reorder_lists' => $this->reorder_lists
+            'reorder_lists' => $this->reorder_lists,
+            'edit_reorder_lists' => $this->edit_reorder_lists,
+            'filtered_reorder_lists' => $this->filtered_reorder_lists
         ]);
     }
 
@@ -159,7 +165,7 @@ class PurchaseOrderForm extends Component
         $validated = $data['inputAttributes'];
 
         $purchase_order = Purchase::create([
-            'po_number' => $this->po_number,
+            'po_number' => $this->purchase_number,
             'supplier_id' => $this->supplier,
 
         ]);
@@ -168,16 +174,16 @@ class PurchaseOrderForm extends Component
         foreach ($this->reorder_lists as $index => $reorder_list) {
             PurchaseDetails::create([
                 'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
-                'po_number' => $this->po_number,
+                'po_number' => $this->purchase_number,
                 'purchase_quantity' => $this->purchase_quantities[$index],
             ]);
         }
 
 
         $this->alert('success', 'Purchase order was created successfully');
-        // $this->refreshTable()
-
-        // $this->resetForm();
+        $this->refreshTable();
+        
+        $this->resetForm();
         $this->closeModal();
     }
 
@@ -185,7 +191,7 @@ class PurchaseOrderForm extends Component
     {
 
         $rules = [
-            'po_number' => 'required|string|max:255',
+            'purchase_number' => 'required|string|max:255',
         ];
 
         // Add validation rules for each purchase quantity
@@ -198,9 +204,13 @@ class PurchaseOrderForm extends Component
 
     public function closeModal() //* close ang modal after confirmation
     {
+
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
-
+    private function resetForm() //*tanggalin ang laman ng input pati $item_id value
+    {
+        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier']);
+    }
     public function populateForm()
     {
         // Retrieve purchase details along with item data
@@ -227,7 +237,7 @@ class PurchaseOrderForm extends Component
 
             // If the item was found, add to reorder lists
             if ($item) {
-                $this->reorder_lists[] = [
+                $this->edit_reorder_lists[] = [
                     'item_id' => $item->item_id,
                     'barcode' => $item->barcode,
                     'item_name' => $item->item_name,
@@ -241,9 +251,49 @@ class PurchaseOrderForm extends Component
         }
 
         $this->supplier = $purchase->supplier_id;
-        $this->po_number = $this->purchase_number;
     }
 
+    public function compareAndFilterLists()
+    {
+        $filteredReorderLists = [];
+
+        // Loop through reorder_lists and check if each item exists in edit_reorder_lists
+        foreach ($this->reorder_lists as $reorder_item) {
+            $exists_in_edit = false;
+
+            foreach ($this->edit_reorder_lists as $edit_item) {
+                if ($reorder_item['barcode'] === $edit_item['barcode']) {
+                    $exists_in_edit = true;
+                    break;
+                }
+            }
+
+            // If the item does not exist in edit_reorder_lists, add it to unique_items
+            if (!$exists_in_edit) {
+                $filteredReorderLists[] = $reorder_item;
+            }
+        }
+
+        // Loop through edit_reorder_lists and check if each item exists in reorder_lists
+        foreach ($this->edit_reorder_lists as $edit_item) {
+            $exists_in_reorder = false;
+
+            foreach ($this->reorder_lists as $reorder_item) {
+                if ($edit_item['barcode'] === $reorder_item['barcode']) {
+                    $exists_in_reorder = true;
+                    break;
+                }
+            }
+
+            // If the item does not exist in reorder_lists, add it to unique_items
+            if (!$exists_in_reorder) {
+                $filteredReorderLists[] = $edit_item;
+            }
+        }
+
+        // Now you have the filtered items that were not in edit_reorder_lists
+        $this->filtered_reorder_lists = $filteredReorderLists;
+    }
 
 
 
@@ -254,15 +304,21 @@ class PurchaseOrderForm extends Component
         $this->purchase_number = $purchase_Number; //var assign ang parameter value sa global variable
         $this->proxy_purchase_number = $purchase_Number;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
 
+
         $this->populateForm();
+        $this->compareAndFilterLists();
     }
     public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
     {
 
         $randomNumber = random_int(100000, 999999);
-        $this->po_number = 'PO-' . $randomNumber;
+        $this->purchase_number = 'PO-' . $randomNumber;
     }
 
+    public function refreshTable() //* refresh ang table after confirmation
+    {
+        $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
+    }
 
     public function changeMethod($isCreate)
     {
@@ -271,9 +327,9 @@ class PurchaseOrderForm extends Component
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
         if ($this->isCreate) {
-
+            $this->resetForm();
             $this->generatePurchaseOrderNumber();
-            $this->isReorderListsCleared = false; 
+            $this->isReorderListsCleared = false;
             // $this->resetForm();
         }
         $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);
