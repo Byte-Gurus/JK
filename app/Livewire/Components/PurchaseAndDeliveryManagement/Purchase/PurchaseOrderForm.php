@@ -46,7 +46,7 @@ class PurchaseOrderForm extends Component
     {
         $suppliers = Supplier::select('id', 'company_name')->get();
 
-        if (empty($this->reorder_lists  && !$this->isReorderListsCleared)) {
+        if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
             $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
                 ->select(
                     'items.id as item_id',
@@ -273,6 +273,7 @@ class PurchaseOrderForm extends Component
         if ($this->isCreate) {
 
             $this->generatePurchaseOrderNumber();
+            $this->isReorderListsCleared = false; 
             // $this->resetForm();
         }
         $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);

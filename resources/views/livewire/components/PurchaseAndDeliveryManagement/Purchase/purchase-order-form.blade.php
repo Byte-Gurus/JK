@@ -28,7 +28,7 @@
                                     Remove Row</button>
                             </div>
                             <div>
-                                @if (!empty($selectedToRemove))
+                                @if (!empty($selectedToRemove) || empty($reorder_lists))
                                     <button type="submit" disabled
                                         class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-md ">
                                         Save</button>
