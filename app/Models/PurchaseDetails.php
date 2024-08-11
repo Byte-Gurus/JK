@@ -19,4 +19,9 @@ class PurchaseDetails extends Model
     {
         return $this->belongsTo(Item::class, 'item_id');
     }
+
+    public function purchaseJoin()
+    {
+        return $this->belongsTo(Purchase::class, 'po_number', 'po_number');
+    }
 }

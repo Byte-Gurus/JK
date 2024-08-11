@@ -49,8 +49,11 @@ class PurchaseOrderTable extends Component
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
 
-    public function getPO($purchase_number)
+    public function getPO($purchase_id)
     {
+        $purchase = Purchase::find($purchase_id);
+        $purchase_number = $purchase->po_number;
+      
         $this->dispatch('edit-po-from-table', purchase_Number: $purchase_number)->to(PurchaseOrderForm::class);
 
         $this->dispatch('change-method', isCreate: false)->to(PurchaseOrderForm::class);

@@ -22,11 +22,12 @@ class PurchaseOrderForm extends Component
 
     public $rows = [];
     public $reorder_lists = [];
-    public $po_number, $supplier, $purchase_id, $proxy_purchase_id;
+    public $po_number, $supplier, $purchase_number, $proxy_purchase_number;
     public $purchase_quantities = [];
     public $removed_items = [];
     public $selectedToRemove = [];
     public $selectedToRestore = [];
+    public $isReorderListsCleared = false;
     public $index;
     public $isDisabled;
 
@@ -45,7 +46,7 @@ class PurchaseOrderForm extends Component
     {
         $suppliers = Supplier::select('id', 'company_name')->get();
 
-        if (empty($this->reorder_lists)) {
+        if (empty($this->reorder_lists  && !$this->isReorderListsCleared)) {
             $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
                 ->select(
                     'items.id as item_id',
@@ -118,6 +119,11 @@ class PurchaseOrderForm extends Component
 
         // Reindex the array after removal
         $this->reorder_lists = array_values($this->reorder_lists);
+
+        // Check if all rows are removed
+        if (empty($this->reorder_lists)) {
+            $this->isReorderListsCleared = true; // Set the flag
+        }
 
         $this->selectedToRemove = [];
     }
@@ -195,15 +201,58 @@ class PurchaseOrderForm extends Component
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
 
-    public function populateForm() {}
+    public function populateForm()
+    {
+        // Retrieve purchase details along with item data
+        $purchaseDetails = PurchaseDetails::with('purchaseJoin')
+            ->where('po_number', $this->purchase_number)
+            ->get();
+
+        $purchase = Purchase::where('po_number', $this->purchase_number)->first();
+
+        foreach ($purchaseDetails as $index => $detail) {
+            // Get the item details including total quantity from inventories
+            $item = Item::select('id', 'barcode', 'item_name', 'item_description')
+                ->leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
+                ->select(
+                    'items.id as item_id',
+                    'items.barcode',
+                    'items.item_name',
+                    'items.reorder_point',
+                    DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity')
+                )
+                ->where('items.id', $detail->item_id)
+                ->groupBy('items.id', 'items.barcode', 'items.item_name', 'items.reorder_point')
+                ->first();
+
+            // If the item was found, add to reorder lists
+            if ($item) {
+                $this->reorder_lists[] = [
+                    'item_id' => $item->item_id,
+                    'barcode' => $item->barcode,
+                    'item_name' => $item->item_name,
+                    'total_quantity' => $item->total_quantity, // Use the calculated total_quantity
+                    'reorder_point' => $item->reorder_point, // Adjust this based on your needs
+
+                ];
+
+                $this->purchase_quantities[$index] = $detail->purchase_quantity;
+            }
+        }
+
+        $this->supplier = $purchase->supplier_id;
+        $this->po_number = $this->purchase_number;
+    }
+
 
 
 
     public function edit($purchase_Number)
     {
 
-        $this->purchase_id = $purchase_Number; //var assign ang parameter value sa global variable
-        $this->proxy_purchase_id = $purchase_Number;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+
+        $this->purchase_number = $purchase_Number; //var assign ang parameter value sa global variable
+        $this->proxy_purchase_number = $purchase_Number;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
 
         $this->populateForm();
     }
@@ -217,6 +266,7 @@ class PurchaseOrderForm extends Component
 
     public function changeMethod($isCreate)
     {
+
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow

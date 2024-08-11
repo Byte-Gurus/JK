@@ -76,43 +76,45 @@
                             {{-- //* table body --}}
 
                             <tbody>
-                                @foreach ($reorder_lists as $index => $reorder_list)
-                                    <tr
-                                        class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
-                                        <th scope="row"
-                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            <div class="flex justify-center">
-                                                <input type="checkbox" wire:model.live="selectedToRemove"
-                                                    value="{{ $index }}"
-                                                    class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                            </div>
-                                        </th>
+                                @if ($this->isCreate)
+                                    @foreach ($reorder_lists as $index => $reorder_list)
+                                        <tr
+                                            class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
+                                            <th scope="row"
+                                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                                <div class="flex justify-center">
+                                                    <input type="checkbox" wire:model.live="selectedToRemove"
+                                                        value="{{ $index }}"
+                                                        class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                                </div>
+                                            </th>
 
 
-                                        <th scope="row"
-                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['barcode'] }}
-                                        </th>
-                                        <th scope="row"
-                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['item_name'] }}
-                                        </th>
-                                        <th scope="row"
-                                            class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['total_quantity'] }}
-                                        </th>
-                                        <th scope="row"
-                                            class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['reorder_point'] }}
-                                        </th>
-                                        <th scope="row"
-                                            class="flex justify-center py-4 font-medium text-gray-900 text-clip text-md whitespace-nowrap">
-                                            <input type="number" wire:model="purchase_quantities.{{ $index }}"
-                                                required
-                                                class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
-                                        </th>
-                                    </tr>
-                                @endforeach
+                                            <th scope="row"
+                                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                                {{ $reorder_list['barcode'] }}
+                                            </th>
+                                            <th scope="row"
+                                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                                {{ $reorder_list['item_name'] }}
+                                            </th>
+                                            <th scope="row"
+                                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                                {{ $reorder_list['total_quantity'] }}
+                                            </th>
+                                            <th scope="row"
+                                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                                {{ $reorder_list['reorder_point'] }}
+                                            </th>
+                                            <th scope="row"
+                                                class="flex justify-center py-4 font-medium text-gray-900 text-clip text-md whitespace-nowrap">
+                                                <input type="number"
+                                                    wire:model="purchase_quantities.{{ $index }}" required
+                                                    class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+                                            </th>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -264,8 +266,9 @@
                             </thead>
 
                             {{-- //* table body --}}
-
                             <tbody>
+                            @if (!$this->isCreate)
+
                                 @foreach ($reorder_lists as $index => $reorder_list)
                                     <tr
                                         class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
@@ -300,6 +303,8 @@
                                         </th>
                                     </tr>
                                 @endforeach
+                            @endif
+
                             </tbody>
                         </table>
                     </div>
