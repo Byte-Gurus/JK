@@ -39,6 +39,12 @@ class PurchasePage extends Component
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
     }
 
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->dispatch('display-modal', showModal: false)->to(PurchaseOrderForm::class);
+    }
+
     public function displayEditModal($showEditModal)
     {
         $this->showEditModal = $showEditModal;
@@ -49,7 +55,5 @@ class PurchasePage extends Component
     public function formCancel()
     {
         $this->dispatch('display-modal', showModal: false)->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
-
-
     }
 }

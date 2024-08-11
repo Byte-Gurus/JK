@@ -1,4 +1,4 @@
-<div x-data="{ showModal: @entangle('showModal'), isCreate: @entangle('isCreate'), showEditModal: @entangle('showEditModal') }" x-cloak>
+<div x-data="{ showModal: @entangle('showModal'), isCreate: @entangle('isCreate'), showEditModal: @entangle('showEditModal') }" x-cloak >
     <div class="flex flex-col justify-between">
         <div class="flex flex-row items-center justify-between mb-4">
             <div>
