@@ -23,14 +23,20 @@
                         </div>
                         <div class="flex flex-row items-center justify-center gap-2 flex-nowrap text-nowrap">
                             <div>
-                                <button wire:click="addRows"
+                                <button wire:click="removeRow" type="button"
                                     class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                                    Add Row</button>
+                                    Remove Row</button>
                             </div>
                             <div>
-                                <button type="submit"
-                                    class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                                    Save</button>
+                                @if (!empty($selectedToRemove))
+                                    <button type="submit" disabled
+                                        class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-md ">
+                                        Save</button>
+                                @else
+                                    <button type="submit"
+                                        class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                        Save</button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -47,7 +53,7 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" class="px-4 py-3 text-center ">Action</th>
+                                    <th scope="col" class="px-4 py-3 text-center ">Remove</th>
 
                                     {{-- //* barcode --}}
                                     <th scope="col" class="py-3 text-left">Barcode</th>
@@ -75,19 +81,12 @@
                                         class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
                                         <th scope="row"
                                             class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-
                                             <div class="flex justify-center">
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                    x-on:click="$wire.removeRow({{ $index }})"
-                                                    class="w-10 h-10 text-center text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
-
+                                                <input type="checkbox" wire:model.live="selectedToRemove"
+                                                    value="{{ $index }}"
+                                                    class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                             </div>
-
+                                        </th>
 
 
                                         <th scope="row"
@@ -130,6 +129,11 @@
                         <h1 class="text-[1.8em] text-[rgb(65,47,20)] font-black">Removed Items</h1>
                     </div>
 
+                    <div>
+                        <button wire:click="restoreRow" type="button"
+                            class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                            Restore Row</button>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto overflow-y-scroll h-[620px] scroll ">
@@ -143,7 +147,7 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="px-4 py-3 text-center">Action</th>
+                                <th scope="col" class="px-4 py-3 text-center">Include</th>
 
                                 {{-- //* barcode --}}
                                 <th scope="col" class="py-3 text-left ">Barcode</th>
@@ -167,26 +171,23 @@
                                         <th scope="row"
                                             class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                             <div class="flex justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                    class="w-10 h-10 text-center transition-all duration-100 ease-linear rounded-full text-[rgb(91,72,29)] hover:bg-[rgb(50,40,16)] hover:text-white"
-                                                    x-on:click="$wire.restoreRow({{ $index }})">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
+                                                <input type="checkbox" wire:model="selectedToRestore"
+                                                    value="{{ $index }}"
+                                                    class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                             </div>
-                                        <th scope="row"
-                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['barcode'] }}
                                         </th>
                                         <th scope="row"
                                             class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['item_name'] }}
+                                            {{ $removed_item['barcode'] }}
+                                        </th>
+                                        <th scope="row"
+                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                            {{ $removed_item['item_name'] }}
                                         </th>
 
                                         <th scope="row"
                                             class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorder_list['total_quantity'] }}
+                                            {{ $removed_item['total_quantity'] }}
                                         </th>
                                     </tr>
                                 @endforeach
@@ -241,7 +242,7 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" class="px-4 py-3 text-center">Action</th>
+                                    <th scope="col" class="px-4 py-3 text-center">Remove</th>
 
                                     {{-- //* barcode --}}
                                     <th scope="col" class="px-4 py-3 text-left">Barcode</th>
@@ -269,16 +270,12 @@
                                     <tr
                                         class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
                                         <th scope="row"
-                                            class="px-2 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                             <div class="flex justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                    x-on:click="$wire.removeRow({{ $index }})"
-                                                    class="w-10 h-10 text-center text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
+                                                <input type="checkbox"
+                                                    class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                             </div>
+                                        </th>
                                         <th scope="row"
                                             class="px-2 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                             {{ $reorder_list['barcode'] }}
@@ -332,7 +329,7 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="px-4 py-3 text-center">Action</th>
+                                <th scope="col" class="px-4 py-3 text-center">Include</th>
 
                                 {{-- //* barcode --}}
                                 <th scope="col" class="px-4 py-3 text-left">Barcode</th>
@@ -354,17 +351,12 @@
                                     <tr
                                         class="border-b border-[rgb(53,53,53)] transition ease-in duration-75 index:bg-red-400">
                                         <th scope="row"
-                                            class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            <div class="flex justify-center"
-                                                class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                    class="w-10 h-10 text-center transition-all duration-100 ease-linear rounded-full text-[rgb(91,72,29)] hover:bg-[rgb(50,40,16)] hover:text-white"
-                                                    x-on:click="$wire.restoreRow({{ $index }})">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
+                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                            <div class="flex justify-center">
+                                                <input type="checkbox"
+                                                    class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                             </div>
+                                        </th>
                                         <th scope="row"
                                             class="px-4 py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                             {{ $reorder_list['barcode'] }}

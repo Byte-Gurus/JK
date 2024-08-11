@@ -25,7 +25,8 @@ class PurchaseOrderForm extends Component
     public $po_number, $supplier, $purchase_id, $proxy_purchase_id;
     public $purchase_quantities = [];
     public $removed_items = [];
-
+    public $selectedToRemove = [];
+    public $selectedToRestore = [];
     public $index;
     public $isDisabled;
 
@@ -80,7 +81,7 @@ class PurchaseOrderForm extends Component
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
-            'reorder_lists' => $this->reorder_lists,
+            'reorder_lists' => $this->reorder_lists
         ]);
     }
 
@@ -94,29 +95,49 @@ class PurchaseOrderForm extends Component
     ];
 
 
-    public function removeRow($index)
+    public function removeRow()
     {
-        // Store the removed item
-        $this->removed_items[] = $this->reorder_lists[$index];
-        unset($this->reorder_lists[$index]);
-    }
-    public function restoreRow($index)
-    {
-        // Check if the index exists in the removed items array
-        if (isset($this->removed_items[$index])) {
-            // Restore the item to reorder_lists
-            $this->reorder_lists[] = $this->removed_items[$index];
 
-            // Remove the item from removed_items
-            unset($this->removed_items[$index]);
 
-            // Reindex the removed_items array
-            $this->removed_items = array_values($this->removed_items);
+        foreach ($this->selectedToRemove as $index) {
+
+            // Get the reorder list item details
+            $this->removed_items[] = [
+                'barcode' => $this->reorder_lists[$index]['barcode'],
+                'item_name' => $this->reorder_lists[$index]['item_name'],
+                'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
+                'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
+            ];
         }
+
+
+        // Remove the selected items from reorder_lists
+        foreach ($this->selectedToRemove as $index) {
+            unset($this->reorder_lists[$index]);
+        }
+
+        // Reindex the array after removal
+        $this->reorder_lists = array_values($this->reorder_lists);
+
+        $this->selectedToRemove = [];
+    }
+    public function restoreRow()
+    {
+
+        foreach ($this->selectedToRestore as $index) {
+
+            // Add the item back to reorder_lists
+            $this->reorder_lists[] = $this->removed_items[$index];
+            unset($this->removed_items[$index]);
+        }
+
+        $this->reorder_lists = array_values($this->reorder_lists);
+        $this->selectedToRestore = [];
     }
 
     public function create() //* create process
     {
+
 
         $validated = $this->validateForm();
 
@@ -148,10 +169,10 @@ class PurchaseOrderForm extends Component
 
 
         $this->alert('success', 'Purchase order was created successfully');
-        // $this->refreshTable();
+        // $this->refreshTable()
 
         // $this->resetForm();
-        // $this->closeModal();
+        $this->closeModal();
     }
 
     protected function validateForm()
@@ -174,10 +195,7 @@ class PurchaseOrderForm extends Component
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
 
-    public function populateForm()
-    {
-
-    }
+    public function populateForm() {}
 
 
 
@@ -208,7 +226,6 @@ class PurchaseOrderForm extends Component
             // $this->resetForm();
         }
         $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);
-
     }
 
     public function displayModal($showModal)
@@ -219,8 +236,5 @@ class PurchaseOrderForm extends Component
     }
 
 
-    public function addRows()
-    {
-        $this->rows[] = [];
-    }
+    public function addRows() {}
 }
