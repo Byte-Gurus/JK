@@ -204,11 +204,12 @@ class PurchaseOrderForm extends Component
 
     public function closeModal() //* close ang modal after confirmation
     {
+
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier' , 'removed_items', 'selectedToRemove']);
+        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists']);
     }
     public function populateForm()
     {
@@ -299,7 +300,7 @@ class PurchaseOrderForm extends Component
     public function edit($purchase_Number)
     {
 
-
+        $this->resetForm();
         $this->purchase_number = $purchase_Number; //var assign ang parameter value sa global variable
         $this->proxy_purchase_number = $purchase_Number;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
 

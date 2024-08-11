@@ -51,6 +51,7 @@ class PurchaseOrderTable extends Component
 
     public function getPO($purchase_id)
     {
+        
         $purchase = Purchase::find($purchase_id);
         $purchase_number = $purchase->po_number;
 
