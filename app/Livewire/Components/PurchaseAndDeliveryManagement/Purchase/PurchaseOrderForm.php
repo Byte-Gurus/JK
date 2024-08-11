@@ -208,7 +208,7 @@ class PurchaseOrderForm extends Component
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier']);
+        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier' , 'removed_items', 'selectedToRemove']);
     }
     public function populateForm()
     {
