@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
+use App\Models\Inventory;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
@@ -20,7 +21,7 @@ class PurchaseOrderForm extends Component
 
     public $showModal;
 
-    public $rows = [];
+
     public $reorder_lists = [];
     public $supplier, $purchase_number, $proxy_purchase_number;
     public $purchase_quantities = [];
@@ -50,38 +51,44 @@ class PurchaseOrderForm extends Component
     {
         $suppliers = Supplier::select('id', 'company_name')->get();
 
+
+
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
-            $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
-                ->select(
-                    'items.id as item_id',
-                    'items.barcode',
-                    'items.item_name',
-                    'items.item_description',
-                    'items.maximum_stock_ratio',
-                    'items.reorder_percentage',
-                    'items.reorder_point',
-                    'items.vat_amount',
-                    'items.vat_type',
-                    'items.status_id',
-                    DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity'),
-                    DB::raw('MAX(inventories.status) as inventory_status')
-                )
-                ->where('items.status_id', '<>', '2')
-                ->groupBy(
-                    'items.id',
-                    'items.barcode',
-                    'items.item_name',
-                    'items.item_description',
-                    'items.maximum_stock_ratio',
-                    'items.reorder_percentage',
-                    'items.reorder_point',
-                    'items.vat_amount',
-                    'items.vat_type',
-                    'items.status_id'
-                )
-                ->havingRaw('total_quantity = 0 OR inventory_status = "Available"')
-                ->get()
-                ->toArray();
+            $this->reorder_lists = Inventory::all();
+
+
+
+            //     $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
+            //         ->select(
+            //             'items.id as item_id',
+            //             'items.barcode',
+            //             'items.item_name',
+            //             'items.item_description',
+            //             'items.maximum_stock_ratio',
+            //             'items.reorder_percentage',
+            //             'items.reorder_point',
+            //             'items.vat_amount',
+            //             'items.vat_type',
+            //             'items.status_id',
+            //             DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity'),
+            //             DB::raw('MAX(inventories.status) as inventory_status')
+            //         )
+            //         ->where('items.status_id', '<>', '2')
+            //         ->groupBy(
+            //             'items.id',
+            //             'items.barcode',
+            //             'items.item_name',
+            //             'items.item_description',
+            //             'items.maximum_stock_ratio',
+            //             'items.reorder_percentage',
+            //             'items.reorder_point',
+            //             'items.vat_amount',
+            //             'items.vat_type',
+            //             'items.status_id'
+            //         )
+            //         ->havingRaw('total_quantity = 0 OR inventory_status = "Available"')
+            //         ->get()
+            //         ->toArray();
         }
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
@@ -102,13 +109,11 @@ class PurchaseOrderForm extends Component
     ];
 
 
-    public function removeRow()
-    {
-
-
-        foreach ($this->selectedToRemove as $index) {
-
-            // Get the reorder list item details
+   public function removeRow()
+{
+    // Collect items to remove and move them to the removed_items array
+    foreach ($this->selectedToRemove as $index) {
+        if (isset($this->reorder_lists[$index])) {
             $this->removed_items[] = [
                 'barcode' => $this->reorder_lists[$index]['barcode'],
                 'item_name' => $this->reorder_lists[$index]['item_name'],
@@ -116,27 +121,35 @@ class PurchaseOrderForm extends Component
                 'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
             ];
         }
-
-
-        // Remove the selected items from reorder_lists
-        foreach ($this->selectedToRemove as $index) {
-            unset($this->reorder_lists[$index]);
-        }
-
-        // Reindex the array after removal
-        $this->reorder_lists = array_values($this->reorder_lists);
-
-        // Check if all rows are removed
-        if (empty($this->reorder_lists)) {
-            $this->isReorderListsCleared = true; // Set the flag
-        }
-
-        $this->selectedToRemove = [];
     }
+
+    // Remove the selected items from reorder_lists
+    foreach ($this->selectedToRemove as $index) {
+        unset($this->reorder_lists[$index]);
+    }
+
+    // Reindex the array after removal
+    $this->reorder_lists = array_values($this->reorder_lists);
+
+    // Clear the selected items array
+    $this->selectedToRemove = [];
+
+    // Check if all rows are removed
+    if (empty($this->reorder_lists)) {
+        $this->isReorderListsCleared = true;
+    }
+}
+
 
     public function selectAllToRemove()
     {
-        $this->selectedToRemove = array_keys($this->reorder_lists);
+        $isAllRowsSelected = false;
+
+        if ($isAllRowsSelected) {
+            $this->selectedToRemove = array_keys($this->reorder_lists);
+        }else{
+            $this->selectedToRemove =[];
+        }
     }
 
     public function selectAllToRestore()
@@ -193,6 +206,7 @@ class PurchaseOrderForm extends Component
         $this->alert('success', 'Purchase order was created successfully');
         $this->refreshTable();
 
+        redirect()->route('purchaseanddeliverymanagement.index');
         $this->resetForm();
         $this->closeModal();
     }

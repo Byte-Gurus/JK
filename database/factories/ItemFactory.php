@@ -21,11 +21,11 @@ class ItemFactory extends Factory
 
         $inventory = Inventory::inRandomOrder()->first();
 
-    
+
         $reorderPercentage = $this->faker->randomFloat(2, 1, 50);
 
 
-        $reorderPoint = $inventory ? $reorderPercentage * $inventory->quantity : 0;
+        // $reorderPoint = $inventory ? $reorderPercentage * $inventory->quantity : 0;
 
         return [
             'barcode' => $this->faker->unique()->numerify('############'),
@@ -33,7 +33,7 @@ class ItemFactory extends Factory
             'item_description' => $this->faker->sentence,
             'maximum_stock_ratio' => $this->faker->randomFloat(2, 1, 100),
             'reorder_percentage' => $reorderPercentage,
-            'reorder_point' => $reorderPoint,
+            // 'reorder_point' => $reorderPoint,
             'vat_type' => $this->faker->randomElement(['Vat', 'Non vat']),
             'vat_amount' => $this->faker->randomFloat(2, 0, 25),
             'status_id' => $this->faker->numberBetween(1, 2),
