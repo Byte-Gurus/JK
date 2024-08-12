@@ -58,7 +58,8 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" class="px-4 py-3 text-center ">Remove</th>
+                                    <th scope="col" wire:click="selectAllToRemove" class="px-4 py-3 text-center ">
+                                        Remove</th>
 
                                     {{-- //* barcode --}}
                                     <th scope="col" class="py-3 text-left">Barcode</th>
@@ -160,7 +161,7 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="px-4 py-3 text-center">Include</th>
+                                <th scope="col" wire:click="selectAllToRestore" class="px-4 py-3 text-center">Include</th>
 
                                 {{-- //* barcode --}}
                                 <th scope="col" class="py-3 text-left ">Barcode</th>

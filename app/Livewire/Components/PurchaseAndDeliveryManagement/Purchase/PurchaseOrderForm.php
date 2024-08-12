@@ -133,6 +133,16 @@ class PurchaseOrderForm extends Component
 
         $this->selectedToRemove = [];
     }
+
+    public function selectAllToRemove()
+    {
+        $this->selectedToRemove = array_keys($this->reorder_lists);
+    }
+
+    public function selectAllToRestore()
+    {
+        $this->selectedToRestore = array_keys($this->removed_items);
+    }
     public function restoreRow()
     {
 
