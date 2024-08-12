@@ -52,43 +52,43 @@ class PurchaseOrderForm extends Component
         $suppliers = Supplier::select('id', 'company_name')->get();
 
 
-
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
-            $this->reorder_lists = Inventory::all();
-
-
-
-            //     $this->reorder_lists = Item::leftJoin('inventories', 'items.id', '=', 'inventories.item_id')
-            //         ->select(
-            //             'items.id as item_id',
-            //             'items.barcode',
-            //             'items.item_name',
-            //             'items.item_description',
-            //             'items.maximum_stock_ratio',
-            //             'items.reorder_percentage',
-            //             'items.reorder_point',
-            //             'items.vat_amount',
-            //             'items.vat_type',
-            //             'items.status_id',
-            //             DB::raw('COALESCE(SUM(inventories.current_stock_quantity), 0) as total_quantity'),
-            //             DB::raw('MAX(inventories.status) as inventory_status')
-            //         )
-            //         ->where('items.status_id', '<>', '2')
-            //         ->groupBy(
-            //             'items.id',
-            //             'items.barcode',
-            //             'items.item_name',
-            //             'items.item_description',
-            //             'items.maximum_stock_ratio',
-            //             'items.reorder_percentage',
-            //             'items.reorder_point',
-            //             'items.vat_amount',
-            //             'items.vat_type',
-            //             'items.status_id'
-            //         )
-            //         ->havingRaw('total_quantity = 0 OR inventory_status = "Available"')
-            //         ->get()
-            //         ->toArray();
+            $this->reorder_lists = Item::join('inventories', 'items.id', '=', 'inventories.item_id')
+                ->select(
+                    'items.id as item_id',
+                    'items.barcode',
+                    'items.item_name',
+                    'items.item_description',
+                    'items.maximum_stock_ratio',
+                    'items.reorder_percentage',
+                    'items.reorder_point',
+                    'items.vat_amount',
+                    'items.vat_type',
+                    'items.status_id',
+                    DB::raw('
+                        COALESCE(SUM(inventories.current_stock_quantity), 0) -
+                        COALESCE(SUM(CASE WHEN inventories.status = "Expired" THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
+                    '),
+                    DB::raw('MAX(inventories.status) as inventory_status'),
+                    DB::raw('MAX(inventories.expiration_date) as expiration_date') // Get the latest expiration date
+                )
+                ->where('items.status_id', 1) // Ensure items are active
+                // Ensure inventory status is available
+                ->groupBy(
+                    'items.id',
+                    'items.barcode',
+                    'items.item_name',
+                    'items.item_description',
+                    'items.maximum_stock_ratio',
+                    'items.reorder_percentage',
+                    'items.reorder_point',
+                    'items.vat_amount',
+                    'items.vat_type',
+                    'items.status_id'
+                )
+                ->havingRaw('total_quantity <= items.reorder_point') // Include items below reorder point
+                ->get()
+                ->toArray();
         }
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
@@ -109,36 +109,36 @@ class PurchaseOrderForm extends Component
     ];
 
 
-   public function removeRow()
-{
-    // Collect items to remove and move them to the removed_items array
-    foreach ($this->selectedToRemove as $index) {
-        if (isset($this->reorder_lists[$index])) {
-            $this->removed_items[] = [
-                'barcode' => $this->reorder_lists[$index]['barcode'],
-                'item_name' => $this->reorder_lists[$index]['item_name'],
-                'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
-                'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
-            ];
+    public function removeRow()
+    {
+        // Collect items to remove and move them to the removed_items array
+        foreach ($this->selectedToRemove as $index) {
+            if (isset($this->reorder_lists[$index])) {
+                $this->removed_items[] = [
+                    'barcode' => $this->reorder_lists[$index]['barcode'],
+                    'item_name' => $this->reorder_lists[$index]['item_name'],
+                    'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
+                    'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
+                ];
+            }
+        }
+
+        // Remove the selected items from reorder_lists
+        foreach ($this->selectedToRemove as $index) {
+            unset($this->reorder_lists[$index]);
+        }
+
+        // Reindex the array after removal
+        $this->reorder_lists = array_values($this->reorder_lists);
+
+        // Clear the selected items array
+        $this->selectedToRemove = [];
+
+        // Check if all rows are removed
+        if (empty($this->reorder_lists)) {
+            $this->isReorderListsCleared = true;
         }
     }
-
-    // Remove the selected items from reorder_lists
-    foreach ($this->selectedToRemove as $index) {
-        unset($this->reorder_lists[$index]);
-    }
-
-    // Reindex the array after removal
-    $this->reorder_lists = array_values($this->reorder_lists);
-
-    // Clear the selected items array
-    $this->selectedToRemove = [];
-
-    // Check if all rows are removed
-    if (empty($this->reorder_lists)) {
-        $this->isReorderListsCleared = true;
-    }
-}
 
 
     public function selectAllToRemove()
@@ -147,8 +147,8 @@ class PurchaseOrderForm extends Component
 
         if ($isAllRowsSelected) {
             $this->selectedToRemove = array_keys($this->reorder_lists);
-        }else{
-            $this->selectedToRemove =[];
+        } else {
+            $this->selectedToRemove = [];
         }
     }
 
