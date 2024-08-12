@@ -20,8 +20,8 @@ class PurchaseOrderForm extends Component
     public $isCreate;
 
     public $showModal;
-
-
+    public $selectAllToRestore = false;
+    public $selectAllToRemove = false;
     public $reorder_lists = [];
     public $supplier, $purchase_number, $proxy_purchase_number;
     public $purchase_quantities = [];
@@ -58,32 +58,21 @@ class PurchaseOrderForm extends Component
                     'items.id as item_id',
                     'items.barcode',
                     'items.item_name',
-                    'items.item_description',
-                    'items.maximum_stock_ratio',
-                    'items.reorder_percentage',
                     'items.reorder_point',
-                    'items.vat_amount',
-                    'items.vat_type',
                     'items.status_id',
                     DB::raw('
                         COALESCE(SUM(inventories.current_stock_quantity), 0) -
                         COALESCE(SUM(CASE WHEN inventories.status = "Expired" THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
                     '),
-                    DB::raw('MAX(inventories.status) as inventory_status'),
-                    DB::raw('MAX(inventories.expiration_date) as expiration_date') // Get the latest expiration date
+                    DB::raw('MAX(inventories.status) as inventory_status')
                 )
                 ->where('items.status_id', 1) // Ensure items are active
-                // Ensure inventory status is available
+                // Ensure inventory status is Active
                 ->groupBy(
                     'items.id',
                     'items.barcode',
                     'items.item_name',
-                    'items.item_description',
-                    'items.maximum_stock_ratio',
-                    'items.reorder_percentage',
                     'items.reorder_point',
-                    'items.vat_amount',
-                    'items.vat_type',
                     'items.status_id'
                 )
                 ->havingRaw('total_quantity <= items.reorder_point') // Include items below reorder point
@@ -115,6 +104,7 @@ class PurchaseOrderForm extends Component
         foreach ($this->selectedToRemove as $index) {
             if (isset($this->reorder_lists[$index])) {
                 $this->removed_items[] = [
+                    'item_id' => $this->reorder_lists[$index]['item_id'],
                     'barcode' => $this->reorder_lists[$index]['barcode'],
                     'item_name' => $this->reorder_lists[$index]['item_name'],
                     'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
@@ -131,6 +121,7 @@ class PurchaseOrderForm extends Component
         // Reindex the array after removal
         $this->reorder_lists = array_values($this->reorder_lists);
 
+
         // Clear the selected items array
         $this->selectedToRemove = [];
 
@@ -138,23 +129,29 @@ class PurchaseOrderForm extends Component
         if (empty($this->reorder_lists)) {
             $this->isReorderListsCleared = true;
         }
+        $this->selectAllToRemove = false;
+
+
     }
 
 
-    public function selectAllToRemove()
+    public function removeAll()
     {
-        $isAllRowsSelected = false;
 
-        if ($isAllRowsSelected) {
+        if ($this->selectAllToRemove) {
             $this->selectedToRemove = array_keys($this->reorder_lists);
         } else {
             $this->selectedToRemove = [];
         }
     }
 
-    public function selectAllToRestore()
+    public function restoreAll()
     {
-        $this->selectedToRestore = array_keys($this->removed_items);
+        if ($this->selectAllToRestore) {
+            $this->selectedToRestore = array_keys($this->removed_items);
+        } else {
+            $this->selectedToRestore = [];
+        }
     }
     public function restoreRow()
     {
@@ -167,7 +164,10 @@ class PurchaseOrderForm extends Component
         }
 
         $this->reorder_lists = array_values($this->reorder_lists);
+
+
         $this->selectedToRestore = [];
+        $this->selectAllToRestore = false;
     }
 
     public function create() //* create process

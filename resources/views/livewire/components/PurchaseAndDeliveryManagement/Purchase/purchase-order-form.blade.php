@@ -22,11 +22,7 @@
                             </select>
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
-                            <div>
-                                <button type="button"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                                    Add Row</button>
-                            </div>
+
                             <div>
                                 <button wire:click="removeRow" type="button"
                                     class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
@@ -58,8 +54,14 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" wire:click="selectAllToRemove" class="px-4 py-3 text-center ">
-                                        Remove</th>
+                                    <th scope="col" class="px-4 py-3 text-center ">
+
+                                        <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
+                                            class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                        Remove
+
+
+                                    </th>
 
                                     {{-- //* barcode --}}
                                     <th scope="col" class="py-3 text-left">Barcode</th>
@@ -89,7 +91,7 @@
                                             <th scope="row"
                                                 class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                                 <div class="flex justify-center">
-                                                    <input type="checkbox" wire:model.live="selectedToRemove"
+                                                    <input type="checkbox" wire:model="selectedToRemove"
                                                         value="{{ $index }}"
                                                         class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                                 </div>
@@ -161,7 +163,14 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" wire:click="selectAllToRestore" class="px-4 py-3 text-center">Include</th>
+                                <th scope="col" class="px-4 py-3 text-center ">
+
+                                    <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
+                                        class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                    Remove
+
+
+                                </th>
 
                                 {{-- //* barcode --}}
                                 <th scope="col" class="py-3 text-left ">Barcode</th>
@@ -231,11 +240,7 @@
                             </select>
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
-                            <div>
-                                <button type="button"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                                    Add Row</button>
-                            </div>
+
                             <div>
                                 <button wire:click="removeRow" type="button"
                                     class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
