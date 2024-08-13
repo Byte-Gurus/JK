@@ -61,13 +61,12 @@ class PurchaseOrderForm extends Component
                     'items.reorder_point',
                     'items.status_id',
                     DB::raw('
-                        COALESCE(SUM(inventories.current_stock_quantity), 0) -
-                        COALESCE(SUM(CASE WHEN inventories.status = "Expired" THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
-                    '),
+            COALESCE(SUM(inventories.current_stock_quantity), 0) -
+            COALESCE(SUM(CASE WHEN inventories.status = \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
+        '),
                     DB::raw('MAX(inventories.status) as inventory_status')
                 )
                 ->where('items.status_id', 1) // Ensure items are active
-                // Ensure inventory status is Active
                 ->groupBy(
                     'items.id',
                     'items.barcode',
@@ -359,7 +358,7 @@ class PurchaseOrderForm extends Component
             }
         } else {
             foreach ($this->edit_reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric','min:0'];
+                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:0'];
             }
         }
 
