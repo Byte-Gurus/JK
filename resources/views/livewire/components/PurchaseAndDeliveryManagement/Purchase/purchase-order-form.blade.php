@@ -340,7 +340,7 @@
                                             {{ $edit_reorder_list['reorder_point'] }}
                                         </th>
                                         <th scope="row"
-                                            class="flex justify-center px-2 py-4 font-medium text-center text-gray-900 text-clip text-md whitespace-nowrap">
+                                            class="flex justify-center px-2 py-4 font-medium text-center text-gray-900 flex-colg text-clip text-md whitespace-nowrap">
                                             <input type="number"
                                                 wire:model="purchase_quantities.{{ $index }}" required
                                                 class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
