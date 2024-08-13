@@ -12,13 +12,17 @@
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                            <select id="supplier" wire:model="supplier" required
+                            <select id="supplier" wire:model="select_supplier" required
                                 class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                 <option value="" selected>Select Supplier</option>
                                 @foreach ($suppliers as $supplier)
                                     <option value="{{ $supplier->id }}">
                                         {{ $supplier->company_name }}</option>
                                 @endforeach
+
+                                @error('select_supplier')
+                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                @enderror
                             </select>
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
@@ -119,6 +123,10 @@
                                                 <input type="number"
                                                     wire:model="purchase_quantities.{{ $index }}" required
                                                     class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+
+                                                @error("purchase_quantities.$index")
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
                                             </th>
                                         </tr>
                                     @endforeach
@@ -242,6 +250,10 @@
                                         {{ $supplier->company_name }}</option>
                                 @endforeach
                             </select>
+
+                            @error('select_supplier')
+                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 
@@ -332,7 +344,13 @@
                                             <input type="number"
                                                 wire:model="purchase_quantities.{{ $index }}" required
                                                 class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+
+                                            @error("purchase_quantities.$index")
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
                                         </th>
+
+
                                     </tr>
                                 @endforeach
 

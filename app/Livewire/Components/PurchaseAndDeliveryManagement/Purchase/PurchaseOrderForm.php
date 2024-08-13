@@ -23,7 +23,7 @@ class PurchaseOrderForm extends Component
     public $selectAllToRestore = false;
     public $selectAllToRemove = false;
     public $reorder_lists = [];
-    public $supplier, $purchase_number, $proxy_purchase_number;
+    public $select_supplier, $purchase_number, $proxy_purchase_number;
     public $purchase_quantities = [];
     public $removed_items = [];
     public $selectedToRemove = [];
@@ -142,11 +142,22 @@ class PurchaseOrderForm extends Component
                     ];
                 }
             }
+            foreach ($this->selectedToRemove as $index) {
+                if (isset($this->edit_reorder_lists[$index])) {
+                    $this->removed_items[] = [
+                        'item_id' => $this->edit_reorder_lists[$index]['item_id'],
+                        'barcode' => $this->edit_reorder_lists[$index]['barcode'],
+                        'item_name' => $this->edit_reorder_lists[$index]['item_name'],
+                        'total_quantity' => $this->edit_reorder_lists[$index]['total_quantity'],
+                        'reorder_point' => $this->edit_reorder_lists[$index]['reorder_point'],
+                    ];
+                }
+            }
 
             foreach ($this->selectedToRemove as $index) {
                 unset($this->edit_reorder_lists[$index]);
             }
-            $this->reorder_lists = array_values($this->reorder_lists);
+            $this->edit_reorder_lists = array_values($this->edit_reorder_lists);
 
             $this->selectedToRemove = [];
 
@@ -243,7 +254,7 @@ class PurchaseOrderForm extends Component
 
         $purchase_order = Purchase::create([
             'po_number' => $validated['purchase_number'],
-            'supplier_id' => $validated['supplier'],
+            'supplier_id' => $validated['select_supplier'],
 
         ]);
 
@@ -272,7 +283,7 @@ class PurchaseOrderForm extends Component
 
         $purchase = Purchase::where('po_number', $this->proxy_purchase_number)->first();; //? kunin lahat ng data ng may ari ng proxy_item_id
 
-        $purchase->supplier_id = $validated['supplier'];
+        $purchase->supplier_id = $validated['select_supplier'];
         $purchase->po_number = $validated['purchase_number'];
 
         $attributes = $purchase->toArray();
@@ -293,9 +304,12 @@ class PurchaseOrderForm extends Component
         $purchase = Purchase::where('po_number', $updatedAttributes['po_number'])->first();
 
         // Update the Purchase model with the attributes from the confirmation
+
         $purchase->fill($updatedAttributes);
 
         // Save the updated Purchase model to the database
+
+
         $purchase->save();
 
         // Handle the updating of PurchaseDetails
@@ -316,11 +330,17 @@ class PurchaseOrderForm extends Component
             }
         }
 
+        foreach ($this->removed_items as $removed_item) {
+            PurchaseDetails::where('po_number', $purchase->po_number)
+                ->where('item_id', $removed_item['item_id'])
+                ->delete();
+        }
+
         $this->resetForm();
         $this->alert('success', 'Purchase order was updated successfully');
 
         $this->refreshTable();
-        
+
         $this->closeModal();
     }
 
@@ -328,18 +348,18 @@ class PurchaseOrderForm extends Component
     {
 
         $rules = [
-            'purchase_number' => 'required|string|max:255',
-            'supplier' => 'required|numeric',
+            'purchase_number' => 'required|string|max:255|min:0',
+            'select_supplier' => 'required|numeric',
         ];
 
         if ($this->isCreate) {
             // Add validation rules for each purchase quantity
             foreach ($this->reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric'];
+                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:0'];
             }
         } else {
             foreach ($this->edit_reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric'];
+                $rules["purchase_quantities.$index"] = ['required', 'numeric','min:0'];
             }
         }
 
@@ -354,7 +374,7 @@ class PurchaseOrderForm extends Component
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
+        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
     }
     public function populateForm()
     {
@@ -395,7 +415,7 @@ class PurchaseOrderForm extends Component
             }
         }
 
-        $this->supplier = $purchase->supplier_id;
+        $this->select_supplier = $purchase->supplier_id;
     }
 
     public function compareAndFilterLists()
