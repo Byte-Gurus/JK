@@ -61,9 +61,9 @@ class PurchaseOrderForm extends Component
                     'items.reorder_point',
                     'items.status_id',
                     DB::raw('
-            COALESCE(SUM(inventories.current_stock_quantity), 0) -
-            COALESCE(SUM(CASE WHEN inventories.status = \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
-        '),
+                    COALESCE(SUM(inventories.current_stock_quantity), 0) -
+                    COALESCE(SUM(CASE WHEN inventories.status = \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
+                '),
                     DB::raw('MAX(inventories.status) as inventory_status')
                 )
                 ->where('items.status_id', 1) // Ensure items are active
@@ -74,7 +74,10 @@ class PurchaseOrderForm extends Component
                     'items.reorder_point',
                     'items.status_id'
                 )
-                ->havingRaw('total_quantity <= items.reorder_point') // Include items below reorder point
+                ->havingRaw('
+                COALESCE(SUM(inventories.current_stock_quantity), 0) -
+                COALESCE(SUM(CASE WHEN inventories.status = \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) <= items.reorder_point
+            ') // Include items below reorder point
                 ->get()
                 ->toArray();
         }
