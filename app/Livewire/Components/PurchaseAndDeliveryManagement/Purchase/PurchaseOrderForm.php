@@ -100,75 +100,129 @@ class PurchaseOrderForm extends Component
 
     public function removeRow()
     {
-        // Collect items to remove and move them to the removed_items array
-        foreach ($this->selectedToRemove as $index) {
-            if (isset($this->reorder_lists[$index])) {
-                $this->removed_items[] = [
-                    'item_id' => $this->reorder_lists[$index]['item_id'],
-                    'barcode' => $this->reorder_lists[$index]['barcode'],
-                    'item_name' => $this->reorder_lists[$index]['item_name'],
-                    'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
-                    'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
-                ];
+        if ($this->isCreate) {
+            foreach ($this->selectedToRemove as $index) {
+                if (isset($this->reorder_lists[$index])) {
+                    $this->removed_items[] = [
+                        'item_id' => $this->reorder_lists[$index]['item_id'],
+                        'barcode' => $this->reorder_lists[$index]['barcode'],
+                        'item_name' => $this->reorder_lists[$index]['item_name'],
+                        'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
+                        'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
+                    ];
+                }
             }
+
+            // Remove the selected items from reorder_lists
+            foreach ($this->selectedToRemove as $index) {
+                unset($this->reorder_lists[$index]);
+            }
+
+            // Reindex the array after removal
+            $this->reorder_lists = array_values($this->reorder_lists);
+
+
+            // Clear the selected items array
+            $this->selectedToRemove = [];
+
+            // Check if all rows are removed
+            if (empty($this->reorder_lists)) {
+                $this->isReorderListsCleared = true;
+            }
+            $this->selectAllToRemove = false;
+        } else {
+            foreach ($this->selectedToRemove as $index) {
+                if (isset($this->edit_reorder_lists[$index])) {
+                    $this->filtered_reorder_lists[] = [
+                        'item_id' => $this->edit_reorder_lists[$index]['item_id'],
+                        'barcode' => $this->edit_reorder_lists[$index]['barcode'],
+                        'item_name' => $this->edit_reorder_lists[$index]['item_name'],
+                        'total_quantity' => $this->edit_reorder_lists[$index]['total_quantity'],
+                        'reorder_point' => $this->edit_reorder_lists[$index]['reorder_point'],
+                    ];
+                }
+            }
+
+            foreach ($this->selectedToRemove as $index) {
+                unset($this->edit_reorder_lists[$index]);
+            }
+            $this->reorder_lists = array_values($this->reorder_lists);
+
+            $this->selectedToRemove = [];
+
+            if (empty($this->edit_reorder_lists)) {
+                $this->isReorderListsCleared = true;
+            }
+
+            $this->selectAllToRemove = false;
         }
-
-        // Remove the selected items from reorder_lists
-        foreach ($this->selectedToRemove as $index) {
-            unset($this->reorder_lists[$index]);
-        }
-
-        // Reindex the array after removal
-        $this->reorder_lists = array_values($this->reorder_lists);
-
-
-        // Clear the selected items array
-        $this->selectedToRemove = [];
-
-        // Check if all rows are removed
-        if (empty($this->reorder_lists)) {
-            $this->isReorderListsCleared = true;
-        }
-        $this->selectAllToRemove = false;
-
-
     }
 
+    public function restoreRow()
+    {
+        if ($this->isCreate) {
+            foreach ($this->selectedToRestore as $index) {
 
+                // Add the item back to reorder_lists
+                $this->reorder_lists[] = $this->removed_items[$index];
+                unset($this->removed_items[$index]);
+            }
+
+            $this->reorder_lists = array_values($this->reorder_lists);
+
+
+            $this->selectedToRestore = [];
+            $this->selectAllToRestore = false;
+        } else {
+            foreach ($this->selectedToRestore as $index) {
+
+                // Add the item back to reorder_lists
+                $this->edit_reorder_lists[] = $this->filtered_reorder_lists[$index];
+                unset($this->filtered_reorder_lists[$index]);
+            }
+
+            $this->edit_reorder_lists = array_values($this->edit_reorder_lists);
+
+
+            $this->selectedToRestore = [];
+            $this->selectAllToRestore = false;
+        }
+    }
     public function removeAll()
     {
 
-        if ($this->selectAllToRemove) {
-            $this->selectedToRemove = array_keys($this->reorder_lists);
+        if ($this->isCreate) {
+            if ($this->selectAllToRemove) {
+                $this->selectedToRemove = array_keys($this->reorder_lists);
+            } else {
+                $this->selectedToRemove = [];
+            }
         } else {
-            $this->selectedToRemove = [];
+            if ($this->selectAllToRemove) {
+                $this->selectedToRemove = array_keys($this->edit_reorder_lists);
+            } else {
+                $this->selectedToRemove = [];
+            }
         }
     }
 
     public function restoreAll()
     {
-        if ($this->selectAllToRestore) {
-            $this->selectedToRestore = array_keys($this->removed_items);
+        if ($this->isCreate) {
+            if ($this->selectAllToRestore) {
+                $this->selectedToRestore = array_keys($this->removed_items);
+            } else {
+                $this->selectedToRestore = [];
+            }
         } else {
-            $this->selectedToRestore = [];
+            if ($this->selectAllToRestore) {
+                $this->selectedToRestore = array_keys($this->filtered_reorder_lists);
+            } else {
+                $this->selectedToRestore = [];
+            }
         }
     }
-    public function restoreRow()
-    {
 
-        foreach ($this->selectedToRestore as $index) {
-
-            // Add the item back to reorder_lists
-            $this->reorder_lists[] = $this->removed_items[$index];
-            unset($this->removed_items[$index]);
-        }
-
-        $this->reorder_lists = array_values($this->reorder_lists);
-
-
-        $this->selectedToRestore = [];
-        $this->selectAllToRestore = false;
-    }
 
     public function create() //* create process
     {
@@ -188,8 +242,8 @@ class PurchaseOrderForm extends Component
         $validated = $data['inputAttributes'];
 
         $purchase_order = Purchase::create([
-            'po_number' => $this->purchase_number,
-            'supplier_id' => $this->supplier,
+            'po_number' => $validated['purchase_number'],
+            'supplier_id' => $validated['supplier'],
 
         ]);
 
@@ -197,7 +251,7 @@ class PurchaseOrderForm extends Component
         foreach ($this->reorder_lists as $index => $reorder_list) {
             PurchaseDetails::create([
                 'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
-                'po_number' => $this->purchase_number,
+                'po_number' => $validated['purchase_number'],
                 'purchase_quantity' => $this->purchase_quantities[$index],
             ]);
         }
@@ -211,17 +265,83 @@ class PurchaseOrderForm extends Component
         $this->closeModal();
     }
 
+    public function update() //* update process
+    {
+        $validated = $this->validateForm();
+
+
+        $purchase = Purchase::where('po_number', $this->proxy_purchase_number)->first();; //? kunin lahat ng data ng may ari ng proxy_item_id
+
+        $purchase->supplier_id = $validated['supplier'];
+        $purchase->po_number = $validated['purchase_number'];
+
+        $attributes = $purchase->toArray();
+
+
+        $this->confirm('Do you want to update this supplier?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+        ]);
+    }
+
+    public function updateConfirmed($data) //* confirmation process of update
+    {
+
+        $updatedAttributes = $data['inputAttributes'];
+
+        // Find the Purchase model using the ID
+        $purchase = Purchase::where('po_number', $updatedAttributes['po_number'])->first();
+
+        // Update the Purchase model with the attributes from the confirmation
+        $purchase->fill($updatedAttributes);
+
+        // Save the updated Purchase model to the database
+        $purchase->save();
+
+        // Handle the updating of PurchaseDetails
+        foreach ($this->edit_reorder_lists as $index => $reorder_list) {
+            $purchaseDetail = PurchaseDetails::where('po_number', $purchase->po_number)
+                ->where('item_id', $reorder_list['item_id'])
+                ->first();
+
+            if ($purchaseDetail) {
+                $purchaseDetail->purchase_quantity = $this->purchase_quantities[$index];
+                $purchaseDetail->save();
+            } else {
+                PurchaseDetails::create([
+                    'item_id' => $this->edit_reorder_lists[$index]['item_id'],
+                    'po_number' => $this->proxy_purchase_number,
+                    'purchase_quantity' => $this->purchase_quantities[$index],
+                ]);
+            }
+        }
+
+        $this->resetForm();
+        $this->alert('success', 'Purchase order was updated successfully');
+
+        $this->refreshTable();
+        $this->closeModal();
+    }
+
     protected function validateForm()
     {
 
         $rules = [
             'purchase_number' => 'required|string|max:255',
+            'supplier' => 'required|numeric',
         ];
 
-        // Add validation rules for each purchase quantity
-        foreach ($this->reorder_lists as $index => $reorder_list) {
-            $rules["purchase_quantities.$index"] = ['required', 'numeric'];
+        if ($this->isCreate) {
+            // Add validation rules for each purchase quantity
+            foreach ($this->reorder_lists as $index => $reorder_list) {
+                $rules["purchase_quantities.$index"] = ['required', 'numeric'];
+            }
+        } else {
+            foreach ($this->edit_reorder_lists as $index => $reorder_list) {
+                $rules["purchase_quantities.$index"] = ['required', 'numeric'];
+            }
         }
+
 
         return $this->validate($rules);
     }
@@ -233,7 +353,7 @@ class PurchaseOrderForm extends Component
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists']);
+        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
     }
     public function populateForm()
     {
