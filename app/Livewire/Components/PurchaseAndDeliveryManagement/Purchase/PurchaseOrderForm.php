@@ -320,6 +320,7 @@ class PurchaseOrderForm extends Component
         $this->alert('success', 'Purchase order was updated successfully');
 
         $this->refreshTable();
+        
         $this->closeModal();
     }
 
