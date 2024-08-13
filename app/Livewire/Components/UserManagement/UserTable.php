@@ -22,7 +22,7 @@ class UserTable extends Component
     public $statusFilter = 0; //var filtering value = all
 
 
-    #[On('refresh-table')]
+
     public function render()
     {
 

@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative">
+<div class="relative" x-cloak>
 
     <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
 
@@ -41,13 +41,16 @@
 
                     <div class="flex flex-row items-center gap-2">
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
 
-                        <select wire:model.live="statusFilter"
+                        <select wire:model.live="supplierFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
                             <option value="0">All</option>
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
+
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                            @endforeach
+
 
                         </select>
 
@@ -68,7 +71,7 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* company name --}}
-                        <th wire:click="sortByColumn('company_name')" scope="col"
+                        <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
@@ -87,19 +90,13 @@
                         </th>
 
                         {{-- //* purchase order number --}}
-                        <th scope="col" class="px-4 py-3">Purchase Order No.</th>
+                        <th scope="col" class="px-4 py-3 text-center">Purchase Order No.</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-center">Supplier Name</th>
 
-                        {{-- //* item count --}}
-                        <th scope="col" class="px-4 py-3">Item Count</th>
-
-                        {{-- //* total amount --}}
-                        <th scope="col" class="px-4 py-3">Total Amount (₱)</th>
-
                         {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
+                        <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
                         </th>
 
 
@@ -108,6 +105,55 @@
 
                 {{-- //* table body --}}
                 <tbody>
+
+                    @foreach ($purchases as $purchase)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchase->created_at }}
+                            </th>
+
+                            {{-- //* item name --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchase->po_number }}
+                            </th>
+
+                            {{-- //* item desc --}}
+                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchase->supplierJoin->company_name }}
+                            </th>
+
+
+                            <th class="px-4 py-6 text-center text-md text-nowrap">
+                                <div
+                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
+
+                                    <button x-on:click="showModal=true;$wire.getPO({{ $purchase->id }})">
+
+                                        <div class="flex items-center">
+
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                </svg>
+                                            </span>
+
+                                            <div>
+                                                <p>Edit</p>
+                                            </div>
+
+                                        </div>
+
+                                    </button>
+                                </div>
+
+                            </th>
+                        </tr>
+                    @endforeach
 
 
                 </tbody>

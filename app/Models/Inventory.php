@@ -41,7 +41,8 @@ class Inventory extends Model
 
         return $query->where('sku_code', 'like', "%{$value}%")
             ->orWhereHas('itemJoin', function ($query) use ($value) {
-                $query->where('item_name', 'like', "%{$value}%");
+                $query->where('item_name', 'like', "%{$value}%")
+                    ->orWhere('barcode', 'like', "%{$value}%");
             })
             ->orWhereHas('supplierJoin', function ($query) use ($value) {
                 $query->where('company_name', 'like', "%{$value}%");

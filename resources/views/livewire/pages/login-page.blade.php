@@ -88,6 +88,8 @@
 
                 </div>
 
+                
+
                 @error('submit')
                     <span
                         class="mt-4 font-medium text-center text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>

@@ -10,7 +10,18 @@ class PurchaseDetails extends Model
     use HasFactory;
 
     protected $fillable = [
-        'inventory_id',
+        'item_id',
         'po_number',
+        'purchase_quantity',
     ];
+
+    public function itemsJoin()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
+
+    public function purchaseJoin()
+    {
+        return $this->belongsTo(Purchase::class, 'po_number', 'po_number');
+    }
 }

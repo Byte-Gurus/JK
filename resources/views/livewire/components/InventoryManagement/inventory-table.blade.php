@@ -63,6 +63,9 @@
                         {{-- //* barcode --}}
                         <th scope="col" class="px-4 py-3">SKU Code</th>
 
+                        {{-- //* barcode --}}
+                        <th scope="col" class="px-4 py-3">Barcode</th>
+
                         {{-- //* item name --}}
                         <th wire:click="sortByColumn('item_name')" scope="col"
                             class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
@@ -162,6 +165,10 @@
 
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->sku_code }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $inventory->itemJoin->barcode }}
                             </th>
 
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">

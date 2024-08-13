@@ -25,12 +25,7 @@ class UserForm extends Component
     public $proxy_user_id;  //var proxy id para sa supplier id, same sila ng value ng
     public function render()
     {
-        if ($this->user_id) {
 
-            $this->populateForm();
-            $this->user_id = null;  //var null the item id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung item id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
-
-        }
         return view('livewire.components.UserManagement.user-form');
     }
 
@@ -100,8 +95,6 @@ class UserForm extends Component
     {
         $this->dispatch('close-modal')->to(UserManagementPage::class);
     }
-
-
 
 
     public function update() //* update process
@@ -236,6 +229,8 @@ class UserForm extends Component
     {
         $this->user_id = $userID; //var assign ang parameter value sa global variable
         $this->proxy_user_id = $userID;
+
+        $this->populateForm();
     }
 
 

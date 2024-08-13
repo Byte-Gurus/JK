@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('status');
             $table->timestamps();
 
+            // $table->integer('item_id');
+            // $table->integer('supplier_id');
 
             $table->foreignId('item_id')->constrained('items');
             $table->foreignId('supplier_id')->constrained('suppliers');

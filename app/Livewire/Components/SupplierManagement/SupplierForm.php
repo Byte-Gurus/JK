@@ -36,12 +36,6 @@ class SupplierForm extends Component
 
     public function render()
     {
-        if ($this->supplier_id) {
-
-            $this->populateForm();
-            $this->supplier_id = null;  //var null the supplier id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung supplier id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
-
-        }
 
         return view('livewire.components.SupplierManagement.supplier-form', [
             'provinces' => PhilippineProvince::orderBy('province_description')->get(),
@@ -202,12 +196,15 @@ class SupplierForm extends Component
         //todo option 1 tanggalin ito para hindi mapopolate ang selectCity and SelectBarangay sa second render ng form
         //todo option 2 hayaan nalang at mag select nalang si user ng city and brgy ulit everytime mag update kasi idk pano aayusin
         $this->cities = PhilippineCity::where('province_code', $supplier_details->addressJoin->province_code)->orderBy('city_municipality_description')->get();
+
         $this->barangays = PhilippineBarangay::where('city_municipality_code', $supplier_details->addressJoin->city_municipality_code)->orderBy('barangay_description')->get();
     }
     public function edit($supplierID)
     {
         $this->supplier_id = $supplierID; //var assign ang parameter value sa global variable
         $this->proxy_supplier_id = $supplierID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+
+        $this->populateForm();
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $supplier_id value
@@ -259,7 +256,7 @@ class SupplierForm extends Component
     public function changeMethod($isCreate)
     {
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
-
+        dd($isCreate);
         if ($this->isCreate) {
 
             $this->resetForm();

@@ -226,14 +226,18 @@
 
                                         <select id="selectCity" wire:model.live="selectCity" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select city / municipality</option>
+                                            <option value="" selected>Select a city / municipality</option>
+
                                             @if (!is_null($cities))
                                                 @foreach ($cities as $city)
-                                                    <option value="{{ $city->city_municipality_code }}">
+                                                    <option value="{{ $city->city_municipality_code }}"
+                                                        {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
                                                         {{ $city->city_municipality_description }}</option>
                                                 @endforeach
 
+
                                             @endif
+
                                         </select>
 
                                         @error('selectCity')
@@ -256,10 +260,12 @@
 
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                            <option value="" selected>Select barangay</option>
+                                            <option value="" selected>Select a barangay</option>
+
                                             @if (!is_null($barangays))
                                                 @foreach ($barangays as $barangay)
-                                                    <option value="{{ $barangay->barangay_code }}">
+                                                    <option value="{{ $barangay->barangay_code }}"
+                                                        {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
                                                         {{ $barangay->barangay_description }}</option>
                                                 @endforeach
                                             @endif

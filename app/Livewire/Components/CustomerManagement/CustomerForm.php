@@ -30,12 +30,6 @@ class CustomerForm extends Component
     public $proxy_customer_id, $customer_id;
     public function render()
     {
-        if ($this->customer_id) {
-
-            $this->populateForm();
-            $this->customer_id = null;  //var null the supplier id kasi pag nag render ulit yung selection nirerepopulate nya yung mga fields gamit yung supplier id so i null para d ma repopulate kasi walang id and hindi mapalitan yung current na inpuuted value sa mga fields
-
-        }
         return view('livewire.components.customer-management.customer-form', [
             'provinces' => PhilippineProvince::orderBy('province_description')->get(),
         ]);
@@ -285,7 +279,7 @@ class CustomerForm extends Component
         $this->customer_id = $customerID; //var assign ang parameter value sa global variable
         $this->proxy_customer_id = $customerID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
 
-
+        $this->populateForm();
 
         $customer = Customer::find($customerID);
         $this->imageUrl = $customer->id_picture ? Storage::url($customer->id_picture) : null;

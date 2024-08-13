@@ -26,13 +26,18 @@ class Item extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+    public function purchasedetailsJoin()
+    {
+        return $this->hasMany(PurchaseDetails::class, 'item_id');
+    }
 
-  
+
     public function scopeSearch($query, $value)  //* search function
     {
         //? queries
         $query->where('item_name', 'like', "%{$value}%")
-            ->orWhere('item_description', 'like', "%{$value}%");
+        ->orWhere('barcode', 'like', "%{$value}%");
+;
 
     }
 }
