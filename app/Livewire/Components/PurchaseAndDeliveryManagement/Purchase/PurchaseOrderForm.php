@@ -371,7 +371,6 @@ class PurchaseOrderForm extends Component
 
     public function closeModal() //* close ang modal after confirmation
     {
-
         $this->dispatch('close-modal')->to(PurchasePage::class);
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
