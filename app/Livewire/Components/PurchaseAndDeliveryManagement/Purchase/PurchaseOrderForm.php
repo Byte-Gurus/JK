@@ -104,6 +104,7 @@ class PurchaseOrderForm extends Component
         if ($this->isCreate) {
             foreach ($this->selectedToRemove as $index) {
                 if (isset($this->reorder_lists[$index])) {
+                    $this->purchase_quantities[$index] = null;
                     $this->removed_items[] = [
                         'item_id' => $this->reorder_lists[$index]['item_id'],
                         'barcode' => $this->reorder_lists[$index]['barcode'],
@@ -132,8 +133,10 @@ class PurchaseOrderForm extends Component
             }
             $this->selectAllToRemove = false;
         } else {
+
             foreach ($this->selectedToRemove as $index) {
                 if (isset($this->edit_reorder_lists[$index])) {
+                    $this->purchase_quantities[$index] = null;
                     $this->filtered_reorder_lists[] = [
                         'item_id' => $this->edit_reorder_lists[$index]['item_id'],
                         'barcode' => $this->edit_reorder_lists[$index]['barcode'],
@@ -145,6 +148,8 @@ class PurchaseOrderForm extends Component
             }
             foreach ($this->selectedToRemove as $index) {
                 if (isset($this->edit_reorder_lists[$index])) {
+                    $this->purchase_quantities[$index] = null;
+
                     $this->removed_items[] = [
                         'item_id' => $this->edit_reorder_lists[$index]['item_id'],
                         'barcode' => $this->edit_reorder_lists[$index]['barcode'],
@@ -156,6 +161,7 @@ class PurchaseOrderForm extends Component
             }
 
             foreach ($this->selectedToRemove as $index) {
+
                 unset($this->edit_reorder_lists[$index]);
             }
             $this->edit_reorder_lists = array_values($this->edit_reorder_lists);
@@ -324,7 +330,7 @@ class PurchaseOrderForm extends Component
             } else {
                 PurchaseDetails::create([
                     'item_id' => $this->edit_reorder_lists[$index]['item_id'],
-                    'purchase_id' =>$this->purchase_id,
+                    'purchase_id' => $this->purchase_id,
                     'po_number' => $purchase->po_number,
                     'purchase_quantity' => $this->purchase_quantities[$index],
                 ]);
@@ -343,7 +349,6 @@ class PurchaseOrderForm extends Component
         $this->refreshTable();
 
         $this->closeModal();
-
     }
 
     protected function validateForm()
@@ -510,5 +515,4 @@ class PurchaseOrderForm extends Component
         $this->showModal = $showModal; //var assign ang parameter value sa global variable
 
     }
-
 }
