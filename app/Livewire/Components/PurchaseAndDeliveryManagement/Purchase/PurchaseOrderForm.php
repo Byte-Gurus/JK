@@ -355,18 +355,18 @@ class PurchaseOrderForm extends Component
     {
 
         $rules = [
-            'po_number' => 'required|string|max:255|min:0',
+            'po_number' => 'required|string|max:255|min:1',
             'select_supplier' => 'required|numeric',
         ];
 
         if ($this->isCreate) {
             // Add validation rules for each purchase quantity
             foreach ($this->reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:0'];
+                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
             }
         } else {
             foreach ($this->edit_reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:0'];
+                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
             }
         }
 

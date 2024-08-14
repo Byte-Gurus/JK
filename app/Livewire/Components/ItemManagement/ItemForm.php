@@ -204,7 +204,7 @@ class ItemForm extends Component
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
             'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'reorderPercentage' => ['required', 'numeric','min:0'],
+            'reorderPercentage' => ['required', 'numeric','min:1'],
             'reorder_point' => ['required', 'numeric','min:0'],
             'vat_amount' => ['required', 'numeric','min:0'],
             'vatType' => 'required|in:Vat,Non vat',

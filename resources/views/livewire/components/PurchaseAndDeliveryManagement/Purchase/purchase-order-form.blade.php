@@ -263,9 +263,15 @@
                                     Remove Row</button>
                             </div>
                             <div>
-                                <button type="submit"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                                    Update</button>
+                                @if (!empty($selectedToRemove) || empty($edit_reorder_lists))
+                                    <button type="submit" disabled
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-md ">
+                                        Update</button>
+                                @else
+                                    <button type="submit"
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                        Update</button>
+                                @endif
                             </div>
                         </div>
                     </div>
