@@ -8,17 +8,21 @@
                     <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
                         <div>
                             <h1 class="text-[1.2em]">Purchase Order No</h1>
-                            <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
+                            <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                            <select id="supplier" wire:model="supplier" required
+                            <select id="supplier" wire:model="select_supplier" required
                                 class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                 <option value="" selected>Select Supplier</option>
                                 @foreach ($suppliers as $supplier)
                                     <option value="{{ $supplier->id }}">
                                         {{ $supplier->company_name }}</option>
                                 @endforeach
+
+                                @error('select_supplier')
+                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                @enderror
                             </select>
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
@@ -119,6 +123,10 @@
                                                 <input type="number"
                                                     wire:model="purchase_quantities.{{ $index }}" required
                                                     class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+
+                                                @error("purchase_quantities.$index")
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
                                             </th>
                                         </tr>
                                     @endforeach
@@ -167,7 +175,7 @@
 
                                     <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
                                         class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                    Remove
+                                    Restore
 
 
                                 </th>
@@ -220,17 +228,21 @@
                 </div>
             </div>
         @else
+            {{-- -----------------------------------------EDIT--------------------------------- --}}
+
             <div
                 class="relative w-full overflow-hidden bg-white border border-black rounded-lg shadow-lg sm:rounded-lg">
-                <form wire:submit.prevent="create">
+                <form wire:submit.prevent="update">
                     <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
                         <div>
+
+
                             <h1 class="text-[1.2em]">Purchase Order No</h1>
-                            <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
+                            <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                            <select id="supplier" wire:model="supplier" required
+                            <select id="supplier" wire:model="select_supplier" required
                                 class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                 <option value="" selected>Select Supplier</option>
                                 @foreach ($suppliers as $supplier)
@@ -238,6 +250,10 @@
                                         {{ $supplier->company_name }}</option>
                                 @endforeach
                             </select>
+
+                            @error('select_supplier')
+                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 
@@ -247,9 +263,15 @@
                                     Remove Row</button>
                             </div>
                             <div>
-                                <button type="submit"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                                    Update</button>
+                                @if (!empty($selectedToRemove) || empty($edit_reorder_lists))
+                                    <button type="submit" disabled
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-md ">
+                                        Update</button>
+                                @else
+                                    <button type="submit"
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                        Update</button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -265,8 +287,14 @@
 
                                 <tr class=" text-nowrap">
 
-                                    {{-- //* action --}}
-                                    <th scope="col" class="px-4 py-3 text-center">Remove</th>
+                                    <th scope="col" class="px-4 py-3 text-center ">
+
+                                        <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
+                                            class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                        Remove
+
+
+                                    </th>
 
                                     {{-- //* barcode --}}
                                     <th scope="col" class="px-4 py-3 text-left">Barcode</th>
@@ -289,43 +317,49 @@
 
                             {{-- //* table body --}}
                             <tbody>
-                                @if (!$this->isCreate)
 
-                                    @foreach ($edit_reorder_lists as $index => $edit_reorder_list)
-                                        <tr
-                                            class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
-                                            <th scope="row"
-                                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                                <div class="flex justify-center">
-                                                    <input type="checkbox"
-                                                        class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                                </div>
-                                            </th>
-                                            <th scope="row"
-                                                class="px-2 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                                {{ $edit_reorder_list['barcode'] }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-2 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                                {{ $edit_reorder_list['item_name'] }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                                {{ $edit_reorder_list['total_quantity'] }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                                {{ $edit_reorder_list['reorder_point'] }}
-                                            </th>
-                                            <th scope="row"
-                                                class="flex justify-center px-2 py-4 font-medium text-center text-gray-900 text-clip text-md whitespace-nowrap">
-                                                <input type="number"
-                                                    wire:model="purchase_quantities.{{ $index }}" required
-                                                    class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
-                                            </th>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                                @foreach ($edit_reorder_lists as $index => $edit_reorder_list)
+                                    <tr
+                                        class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
+                                        <th scope="row"
+                                            class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                            <div class="flex justify-center">
+                                                <input type="checkbox" wire:model="selectedToRemove"
+                                                    value="{{ $index }}"
+                                                    class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                            </div>
+                                        </th>
+                                        <th scope="row"
+                                            class="px-2 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                            {{ $edit_reorder_list['barcode'] }}
+                                        </th>
+                                        <th scope="row"
+                                            class="px-2 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                            {{ $edit_reorder_list['item_name'] }}
+                                        </th>
+                                        <th scope="row"
+                                            class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                            {{ $edit_reorder_list['total_quantity'] }}
+                                        </th>
+                                        <th scope="row"
+                                            class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                            {{ $edit_reorder_list['reorder_point'] }}
+                                        </th>
+                                        <th scope="row"
+                                            class="flex justify-center px-2 py-4 font-medium text-center text-gray-900 flex-colg text-clip text-md whitespace-nowrap">
+                                            <input type="number"
+                                                wire:model="purchase_quantities.{{ $index }}" required
+                                                class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+
+                                            @error("purchase_quantities.$index")
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        </th>
+
+
+                                    </tr>
+                                @endforeach
+
 
                             </tbody>
                         </table>
@@ -343,7 +377,7 @@
                         <h1 class="text-[1.8em] text-[rgb(65,47,20)] font-black">Reorder List</h1>
                     </div>
                     <div>
-                        @if (empty($removed_items))
+                        @if (empty($filtered_reorder_lists))
                             <button wire:click="restoreRow" type="button" disabled
                                 class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md">
                                 Restore Row
@@ -367,8 +401,14 @@
 
                             <tr class=" text-nowrap">
 
-                                {{-- //* action --}}
-                                <th scope="col" class="px-4 py-3 text-center">Include</th>
+                                <th scope="col" class="px-4 py-3 text-center ">
+
+                                    <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
+                                        class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                    Restore
+
+
+                                </th>
 
                                 {{-- //* barcode --}}
                                 <th scope="col" class="py-3 text-left">Barcode</th>
@@ -392,7 +432,8 @@
                                     <th scope="row"
                                         class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         <div class="flex justify-center">
-                                            <input type="checkbox"
+                                            <input type="checkbox" wire:model="selectedToRestore"
+                                                value="{{ $index }}"
                                                 class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                         </div>
                                     </th>

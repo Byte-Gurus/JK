@@ -42,13 +42,13 @@ class PurchasePage extends Component
     public function closeModal()
     {
         $this->showModal = false;
+        $this->showEditModal = false;
         $this->dispatch('display-modal', showModal: false)->to(PurchaseOrderForm::class);
     }
 
     public function displayEditModal($showEditModal)
     {
         $this->showEditModal = $showEditModal;
-
         $this->dispatch('display-modal', showModal: false)->to(PurchasePage::class); //var assign ang parameter value sa global variable
     }
 

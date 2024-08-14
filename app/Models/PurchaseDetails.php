@@ -11,6 +11,7 @@ class PurchaseDetails extends Model
 
     protected $fillable = [
         'item_id',
+        'purchase_id',
         'po_number',
         'purchase_quantity',
     ];
@@ -22,6 +23,6 @@ class PurchaseDetails extends Model
 
     public function purchaseJoin()
     {
-        return $this->belongsTo(Purchase::class, 'po_number', 'po_number');
+        return $this->belongsTo(Purchase::class, 'purchase_id');
     }
 }

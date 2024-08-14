@@ -51,11 +51,8 @@ class PurchaseOrderTable extends Component
 
     public function getPO($purchase_id)
     {
-        
-        $purchase = Purchase::find($purchase_id);
-        $purchase_number = $purchase->po_number;
 
-        $this->dispatch('edit-po-from-table', purchase_Number: $purchase_number)->to(PurchaseOrderForm::class);
+        $this->dispatch('edit-po-from-table', purchase_ID: $purchase_id)->to(PurchaseOrderForm::class);
 
         $this->dispatch('change-method', isCreate: false)->to(PurchaseOrderForm::class);
 

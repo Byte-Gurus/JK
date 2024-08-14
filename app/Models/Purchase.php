@@ -21,7 +21,7 @@ class Purchase extends Model
 
     public function purchaseJoin()
     {
-        return $this->hasMany(PurchaseDetails::class, 'po_number');
+        return $this->hasMany(PurchaseDetails::class, 'purchase_id');
     }
 
     public function scopeSearch($query, $value)  //* search function
