@@ -8,7 +8,7 @@
                     <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
                         <div>
                             <h1 class="text-[1.2em]">Purchase Order No</h1>
-                            <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
+                            <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="supplier" class="text-[1.2em]">Supplier Name</label>
@@ -238,11 +238,11 @@
 
 
                             <h1 class="text-[1.2em]">Purchase Order No</h1>
-                            <h2 class="text-[2em] font-black text-center w-full">{{ $purchase_number }}</h2>
+                            <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                            <select id="supplier" wire:model="supplier" required
+                            <select id="supplier" wire:model="select_supplier" required
                                 class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                 <option value="" selected>Select Supplier</option>
                                 @foreach ($suppliers as $supplier)

@@ -23,7 +23,7 @@ class PurchaseOrderForm extends Component
     public $selectAllToRestore = false;
     public $selectAllToRemove = false;
     public $reorder_lists = [];
-    public $select_supplier, $purchase_number, $proxy_purchase_number;
+    public $select_supplier, $purchase_id, $proxy_purchase_id, $po_number;
     public $purchase_quantities = [];
     public $removed_items = [];
     public $selectedToRemove = [];
@@ -62,8 +62,7 @@ class PurchaseOrderForm extends Component
                     'items.status_id',
                     DB::raw('
                         COALESCE(SUM(CASE WHEN inventories.status != \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
-                    '),
-                    DB::raw('MAX(inventories.status) as inventory_status')
+                    ')
                 )
                 ->where('items.status_id', 1) // Ensure items are active
                 ->groupBy(
@@ -255,7 +254,7 @@ class PurchaseOrderForm extends Component
         $validated = $data['inputAttributes'];
 
         $purchase_order = Purchase::create([
-            'po_number' => $validated['purchase_number'],
+            'po_number' => $validated['po_number'],
             'supplier_id' => $validated['select_supplier'],
 
         ]);
@@ -263,8 +262,9 @@ class PurchaseOrderForm extends Component
 
         foreach ($this->reorder_lists as $index => $reorder_list) {
             PurchaseDetails::create([
+                'purchase_id' => $purchase_order->id,
                 'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
-                'po_number' => $validated['purchase_number'],
+                'po_number' => $validated['po_number'],
                 'purchase_quantity' => $this->purchase_quantities[$index],
             ]);
         }
@@ -282,11 +282,12 @@ class PurchaseOrderForm extends Component
     {
         $validated = $this->validateForm();
 
+        $purchase = Purchase::find($this->proxy_purchase_id);
+        //? kunin lahat ng data ng may ari ng proxy_item_id
 
-        $purchase = Purchase::where('po_number', $this->proxy_purchase_number)->first();; //? kunin lahat ng data ng may ari ng proxy_item_id
 
         $purchase->supplier_id = $validated['select_supplier'];
-        $purchase->po_number = $validated['purchase_number'];
+        $purchase->po_number = $validated['po_number'];
 
         $attributes = $purchase->toArray();
 
@@ -303,20 +304,17 @@ class PurchaseOrderForm extends Component
         $updatedAttributes = $data['inputAttributes'];
 
         // Find the Purchase model using the ID
-        $purchase = Purchase::where('po_number', $updatedAttributes['po_number'])->first();
+        $purchase = Purchase::find($updatedAttributes['id']);
 
-        // Update the Purchase model with the attributes from the confirmation
-
+        // Update the Purchase model with the attributes from the confirmatio
         $purchase->fill($updatedAttributes);
 
         // Save the updated Purchase model to the database
-
-
         $purchase->save();
 
         // Handle the updating of PurchaseDetails
         foreach ($this->edit_reorder_lists as $index => $reorder_list) {
-            $purchaseDetail = PurchaseDetails::where('po_number', $purchase->po_number)
+            $purchaseDetail = PurchaseDetails::where('purchase_id', $purchase->id)
                 ->where('item_id', $reorder_list['item_id'])
                 ->first();
 
@@ -326,14 +324,15 @@ class PurchaseOrderForm extends Component
             } else {
                 PurchaseDetails::create([
                     'item_id' => $this->edit_reorder_lists[$index]['item_id'],
-                    'po_number' => $this->proxy_purchase_number,
+                    'purchase_id' =>$this->purchase_id,
+                    'po_number' => $purchase->po_number,
                     'purchase_quantity' => $this->purchase_quantities[$index],
                 ]);
             }
         }
 
         foreach ($this->removed_items as $removed_item) {
-            PurchaseDetails::where('po_number', $purchase->po_number)
+            PurchaseDetails::where('purchase_id', $purchase->id)
                 ->where('item_id', $removed_item['item_id'])
                 ->delete();
         }
@@ -344,13 +343,14 @@ class PurchaseOrderForm extends Component
         $this->refreshTable();
 
         $this->closeModal();
+
     }
 
     protected function validateForm()
     {
 
         $rules = [
-            'purchase_number' => 'required|string|max:255|min:0',
+            'po_number' => 'required|string|max:255|min:0',
             'select_supplier' => 'required|numeric',
         ];
 
@@ -376,16 +376,18 @@ class PurchaseOrderForm extends Component
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['purchase_number', 'proxy_purchase_number', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
+        $this->reset(['purchase_id', 'proxy_purchase_id', 'po_number', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
     }
     public function populateForm()
     {
+
         // Retrieve purchase details along with item data
         $purchaseDetails = PurchaseDetails::with('purchaseJoin')
-            ->where('po_number', $this->purchase_number)
+            ->where('purchase_id', $this->purchase_id)
             ->get();
 
-        $purchase = Purchase::where('po_number', $this->purchase_number)->first();
+        $this->po_number = $purchaseDetails->first()->po_number;
+
 
         foreach ($purchaseDetails as $index => $detail) {
             // Get the item details including total quantity from inventories
@@ -416,6 +418,7 @@ class PurchaseOrderForm extends Component
                 $this->purchase_quantities[$index] = $detail->purchase_quantity;
             }
         }
+        $purchase = Purchase::find($this->purchase_id);
 
         $this->select_supplier = $purchase->supplier_id;
     }
@@ -464,12 +467,12 @@ class PurchaseOrderForm extends Component
 
 
 
-    public function edit($purchase_Number)
+    public function edit($purchase_ID)
     {
 
         $this->resetForm();
-        $this->purchase_number = $purchase_Number; //var assign ang parameter value sa global variable
-        $this->proxy_purchase_number = $purchase_Number;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
+        $this->purchase_id = $purchase_ID; //var assign ang parameter value sa global variable
+        $this->proxy_purchase_id = $purchase_ID;  //var proxy_supplier_id para sa update ng supplier kasi i null ang supplier id sa update afetr populating the form
 
 
         $this->populateForm();
@@ -479,7 +482,7 @@ class PurchaseOrderForm extends Component
     {
 
         $randomNumber = random_int(100000, 999999);
-        $this->purchase_number = 'PO-' . $randomNumber;
+        $this->po_number = 'PO-' . $randomNumber;
     }
 
     public function refreshTable() //* refresh ang table after confirmation
@@ -509,6 +512,4 @@ class PurchaseOrderForm extends Component
 
     }
 
-
-    public function addRows() {}
 }

@@ -22,6 +22,11 @@ class Item extends Model
     ];
 
 
+    public function inventoryJoin()
+    {
+        return $this->hasMany(Inventory::class, 'item_id');
+    }
+
     public function statusJoin()
     {
         return $this->belongsTo(Status::class, 'status_id');

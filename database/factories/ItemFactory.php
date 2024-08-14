@@ -25,7 +25,7 @@ class ItemFactory extends Factory
         $reorderPercentage = $this->faker->randomFloat(2, 1, 50);
 
 
-        // $reorderPoint = $inventory ? $reorderPercentage * $inventory->quantity : 0;
+        // $reorderPoint = $reorderPercentage * $inventory->quantity;
 
         return [
             'barcode' => $this->faker->unique()->numerify('############'),
