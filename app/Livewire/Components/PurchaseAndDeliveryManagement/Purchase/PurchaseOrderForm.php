@@ -61,10 +61,8 @@ class PurchaseOrderForm extends Component
                     'items.reorder_point',
                     'items.status_id',
                     DB::raw('
-            COALESCE(SUM(inventories.current_stock_quantity), 0) -
-            COALESCE(SUM(CASE WHEN inventories.status = \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
-        '),
-                    DB::raw('MAX(inventories.status) as inventory_status')
+                        COALESCE(SUM(CASE WHEN inventories.status != \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
+                    ')
                 )
                 ->where('items.status_id', 1) // Ensure items are active
                 ->groupBy(
@@ -78,6 +76,7 @@ class PurchaseOrderForm extends Component
                 ->get()
                 ->toArray();
         }
+
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
