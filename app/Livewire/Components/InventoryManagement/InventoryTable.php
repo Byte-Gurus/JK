@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\InventoryManagement;
 
 use App\Models\Inventory;
+use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -17,19 +18,27 @@ class InventoryTable extends Component
 
     public $statusFilter = 0; //var filtering value = all
     public $vatFilter = 0; //var filtering value = all
+    public $supplierFilter = 0;
     public function render()
     {
+        $suppliers = Supplier::select('id', 'company_name')->get();
+
         $query = Inventory::query();
 
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
 
+        if ($this->supplierFilter != 0) {
+            // Use whereHas to filter deliveries based on the supplier_id through purchase
+            $query->where('supplier_id', $this->supplierFilter); //
+        }
+
         $inventories = $query->search($this->search) //?search the user
         ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
         ->paginate($this->perPage);
 
-        return view('livewire.components.InventoryManagement.inventory-table', compact('inventories'));
+        return view('livewire.components.InventoryManagement.inventory-table', compact('inventories', 'suppliers'));
     }
 
     public function sortByColumn($column)

@@ -18,18 +18,27 @@ class SupplierTable extends Component
     public $search = '';  //var search component
 
     public $statusFilter = 0; //var filtering value = all
+
+    public $supplierFilter = 0;
     public function render()
     {
+        $supplierLists = Supplier::all();
         $query = Supplier::query();
 
         if ($this->statusFilter != 0) {
             $query->where('status_id', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
+
+        if ($this->supplierFilter != 0) {
+            // Use whereHas to filter deliveries based on the supplier_id through purchase
+            $query->where('id', $this->supplierFilter); //
+        }
+
         $suppliers = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);  //?  and paginate it
 
-        return view('livewire.components.SupplierManagement.supplier-table', compact('suppliers'));
+        return view('livewire.components.SupplierManagement.supplier-table', compact('suppliers', 'supplierLists'));
     }
 
     protected $listeners = [

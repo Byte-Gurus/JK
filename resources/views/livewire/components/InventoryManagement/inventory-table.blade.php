@@ -43,6 +43,23 @@
                         </select>
 
                     </div>
+
+                    <div class="flex flex-row items-center gap-2">
+
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
+
+                        <select wire:model.live="supplierFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            <option value="0">All</option>
+
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                            @endforeach
+
+
+                        </select>
+
+                    </div>
                 </div>
 
 

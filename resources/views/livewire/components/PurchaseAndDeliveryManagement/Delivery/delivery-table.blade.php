@@ -52,6 +52,23 @@
 
                         </select>
 
+                        <div class="flex flex-row items-center gap-2">
+
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
+
+                            <select wire:model.live="supplierFilter"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                                <option value="0">All</option>
+
+                                @foreach ($suppliers as $supplier)
+                                    <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                                @endforeach
+
+
+                            </select>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -144,7 +161,19 @@
 
                         {{-- //* item desc --}}
                         <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $delivery->status }}
+                            <p
+                                    @if ($delivery->status == 'Delivered ') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
+
+                                    @elseif ($delivery->status == 'Cancelled')
+
+                                    class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded "
+
+                                    @elseif ($delivery->status == 'In Progress')
+
+                                    class=" text-black bg-orange-400 border border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
+
+                                    {{ $delivery->status }}
+                                </p>
                         </th>
 
 
