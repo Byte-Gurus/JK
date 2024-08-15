@@ -42,7 +42,6 @@ class Item extends Model
         //? queries
         $query->where('item_name', 'like', "%{$value}%")
         ->orWhere('barcode', 'like', "%{$value}%");
-;
 
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
+use App\Models\Delivery;
 use App\Models\Inventory;
 use App\Models\Item;
 use App\Models\Purchase;
@@ -118,11 +119,12 @@ class PurchaseOrderForm extends Component
             // Remove the selected items from reorder_lists
             foreach ($this->selectedToRemove as $index) {
                 unset($this->reorder_lists[$index]);
+                unset($this->purchase_quantities[$index]);
             }
 
             // Reindex the array after removal
             $this->reorder_lists = array_values($this->reorder_lists);
-
+            $this->purchase_quantities = array_values($this->purchase_quantities);
 
             // Clear the selected items array
             $this->selectedToRemove = [];
@@ -275,6 +277,11 @@ class PurchaseOrderForm extends Component
             ]);
         }
 
+        $delivery = Delivery::create([
+            'status' => "In Progress",
+            'date_delivered' => "N/A",
+            'purchase_id' => $purchase_order->id
+        ]);
 
         $this->alert('success', 'Purchase order was created successfully');
         $this->refreshTable();

@@ -46,8 +46,9 @@
                         <select wire:model.live="statusFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
                             <option value="0">All</option>
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="In progress">In progress</option>
+                            <option value="Cancelled">Cancelled</option>
 
                         </select>
 
@@ -67,8 +68,6 @@
 
                     <tr class=" text-nowrap">
 
-                        {{-- //* delivery id --}}
-                        <th scope="col" class="px-4 py-3">Delivery ID</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3">Supplier Name</th>
@@ -76,7 +75,10 @@
                         {{-- //* purchase order number --}}
                         <th scope="col" class="px-4 py-3 text-center">Purchase Order No.</th>
 
-                        <th wire:click="sortByColumn('company_name')" scope="col"
+                         {{-- //* status --}}
+                         <th scope="col" class="px-4 py-3">Status</th>
+
+                        <th wire:click="sortByColumn('date_created')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
@@ -96,12 +98,12 @@
 
                         {{-- //* date of delivery --}}
 
-                        <th wire:click="sortByColumn('company_name')" scope="col"
+                        <th wire:click="sortByColumn('date_delivered')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
 
-                                <p>Date of Delivery</p>
+                                <p>Date of Delivered</p>
 
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -114,11 +116,7 @@
                             </div>
                         </th>
 
-                        {{-- //* restocked --}}
-                        <th scope="col" class="px-4 py-3">Restocked</th>
 
-                        {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3">Status</th>
 
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
@@ -130,7 +128,41 @@
 
                 {{-- //* table body --}}
                 <tbody>
+                    @foreach ($deliveries as $delivery)
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $delivery->purchaseJoin->supplierJoin->company_name }}
+                        </th>
+
+                        {{-- //* item name --}}
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+
+                            {{ $delivery->purchaseJoin->po_number }}
+                        </th>
+
+                        {{-- //* item desc --}}
+                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $delivery->status }}
+                        </th>
+
+
+                        {{-- //* status --}}
+
+                        <th scope="row"
+                            class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                             {{ $delivery->created_at->format('d-m-y h:i A') }}
+                        </th>
+
+                        <th scope="row"
+                            class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $delivery->date_delivered}}
+                        </th>
+
+
+                    </tr>
+                @endforeach
 
                 </tbody>
 
@@ -144,7 +176,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $suppliers->links() }} --}}
+                {{ $deliveries->links() }}
 
             </div>
 
