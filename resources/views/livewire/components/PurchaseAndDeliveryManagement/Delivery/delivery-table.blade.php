@@ -92,13 +92,13 @@
                         {{-- //* purchase order number --}}
                         <th scope="col" class="px-4 py-3 text-center">Purchase Order No.</th>
 
-                         {{-- //* status --}}
-                         <th scope="col" class="px-4 py-3">Status</th>
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Status</th>
 
                         <th wire:click="sortByColumn('date_created')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
-                            <div class="flex items-center">
+                            <div class="flex items-center justify-center text-center">
 
                                 <p>Date Ordered</p>
 
@@ -118,9 +118,9 @@
                         <th wire:click="sortByColumn('date_delivered')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
-                            <div class="flex items-center">
+                            <div class="flex items-center justify-center">
 
-                                <p>Date of Delivered</p>
+                                <p>Date of Delivery</p>
 
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -136,7 +136,7 @@
 
 
                         {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
+                        <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
                         </th>
 
 
@@ -146,23 +146,26 @@
                 {{-- //* table body --}}
                 <tbody>
                     @foreach ($deliveries as $delivery)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $delivery->purchaseJoin->supplierJoin->company_name }}
-                        </th>
+                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $delivery->purchaseJoin->supplierJoin->company_name }}
+                            </th>
 
-                        {{-- //* item name --}}
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{-- //* purchase number --}}
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            {{ $delivery->purchaseJoin->po_number }}
-                        </th>
+                                {{ $delivery->purchaseJoin->po_number }}
+                            </th>
 
-                        {{-- //* item desc --}}
-                        <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            <p
-                                    @if ($delivery->status == 'Delivered ') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
+                            {{-- //* item status --}}
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                <div class="flex justify-center ">
+                                    <div
+                                        @if ($delivery->status == 'Delivered ') class=" text-black  bg-green-400 border border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
 
                                     @elseif ($delivery->status == 'Cancelled')
 
@@ -170,28 +173,87 @@
 
                                     @elseif ($delivery->status == 'In Progress')
 
-                                    class=" text-black bg-orange-400 border border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
+                                    class=" text-black bg-orange-400 border w-fit self-center border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
 
-                                    {{ $delivery->status }}
-                                </p>
-                        </th>
+                                        {{ $delivery->status }}
+                                    </div>
 
-
-                        {{-- //* status --}}
-
-                        <th scope="row"
-                            class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                             {{ $delivery->created_at->format('d-m-y h:i A') }}
-                        </th>
-
-                        <th scope="row"
-                            class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $delivery->date_delivered}}
-                        </th>
+                                </div>
+                            </th>
 
 
-                    </tr>
-                @endforeach
+                            {{-- //* status --}}
+
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $delivery->created_at->format('d-m-y h:i A') }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{-- {{ $delivery->date_delivered }} --}}
+                                <div>
+                                    <input type="date"
+                                        class="w-full p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500">
+                                </div>
+                            </th>
+
+                            {{-- //* Action --}}
+                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
+
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                                    min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg></div>
+                                                    <div>Edit</div>
+                                                </button>
+                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>View picture</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+
+
+                        </tr>
+                    @endforeach
 
                 </tbody>
 
