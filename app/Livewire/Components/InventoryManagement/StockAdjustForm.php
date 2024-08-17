@@ -78,7 +78,7 @@ class StockAdjustForm extends Component
         ]);
 
         $this->resetForm();
-        $this->alert('success', 'items was updated successfully');
+        $this->alert('success', 'stock adjusted successfully');
 
         $this->refreshTable();
         $this->closeModal();
