@@ -35,11 +35,16 @@ class InventoryTable extends Component
         }
 
         $inventories = $query->search($this->search) //?search the user
-        ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
-        ->paginate($this->perPage);
+            ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
+            ->paginate($this->perPage);
 
         return view('livewire.components.InventoryManagement.inventory-table', compact('inventories', 'suppliers'));
     }
+
+    protected $listeners = [
+        'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+
+    ];
 
     public function sortByColumn($column)
     { //* sort the column
@@ -53,5 +58,20 @@ class InventoryTable extends Component
         }
 
         $this->sortColumn = $column; //* gawing global variable ang $column
+    }
+
+    public function getStockID($stockId)
+    {
+        $this->dispatch('adjust-stock-from-table', stockID: $stockId)->to(StockAdjustForm::class);
+
+    }
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 }

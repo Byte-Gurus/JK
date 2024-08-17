@@ -12,7 +12,7 @@ class Item extends Model
     protected $fillable = [
         'barcode',
         'item_name',
-        'item_description',
+        'description',
         'maximum_stock_ratio',
         'reorder_percentage',
         'reorder_point',

@@ -2,7 +2,7 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
+        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="adjust">
             @csrf
 
             <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
@@ -56,7 +56,7 @@
                                         <p class=" text-[1.2em] text-gray-900">SKU</p>
                                     </div>
                                     <div>
-                                        <p class=" text-[1.2em] font-black text-gray-900">ITM-000000</p>
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $sku_code }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,11 +70,23 @@
                                         <p class=" text-[1.2em] text-gray-900">Item Name</p>
                                     </div>
                                     <div>
-                                        <p class=" text-[1.2em] font-black text-gray-900">N a m e</p>
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $item_name }}</p>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="flex justify-between gap-4">
+
+                                {{-- //* item name --}}
+                                <div class="flex flex-row gap-4 mb-3">
+                                    <div>
+                                        <p class=" text-[1.2em] text-gray-900">Item description</p>
+                                    </div>
+                                    <div>
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $description }}</p>
+                                    </div>
+                                </div>
+                            </div>
                             {{-- //* third row --}}
                             <div class="flex justify-between gap-4">
 
@@ -84,7 +96,7 @@
                                         <p class=" text-[1.2em] text-gray-900">Current Quantity</p>
                                     </div>
                                     <div>
-                                        <p class=" text-[1.2em] font-black text-gray-900"> 123 </p>
+                                        <p class=" text-[1.2em] font-black text-gray-900"> {{ $current_quantity }} </p>
                                     </div>
                                 </div>
                             </div>
@@ -98,13 +110,17 @@
                                         <legend class=" text-[1.2em] text-gray-900">Select Adjustment Operation</legend>
                                         <div class="flex flex-row justify-center gap-2">
                                             <label class="flex gap-2 font-black radio">
-                                                <input type="radio" name="answer" />
+                                                <input type="radio" wire:model="selectOperation" value="add" />
                                                 Add
                                             </label>
                                             <label class="flex gap-2 font-black radio">
-                                                <input type="radio" name="answer" />
+                                                <input type="radio" wire:model="selectOperation" value="deduct" />
                                                 Deduct
                                             </label>
+
+                                            @error('selectOperation')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </fieldset>
                                 </div>
@@ -117,14 +133,18 @@
                                 <div class="flex flex-col gap-1 mb-3">
 
                                     <div>
-                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Adjust Quantity</label>
+                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Adjust
+                                            Quantity</label>
                                     </div>
 
                                     <div>
-                                        <input type="number"
-                                        placeholder="Quantity"
-
+                                        <input type="number" wire:model="quantityToAdjust" placeholder="Quantity"
+                                            required
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+
+                                        @error('quantityToAdjust')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                 </div>
@@ -141,10 +161,13 @@
                                     </div>
 
                                     <div>
-                                        <input type="text"
-                                        placeholder="Reason"
+                                        <input type="text" wire:model="adjustReason" placeholder="Reason" required
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                                     </div>
+
+                                    @error('adjustReason')
+                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
                             </div>
