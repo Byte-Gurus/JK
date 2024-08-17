@@ -58,7 +58,7 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" class="px-4 py-3 text-center ">
+                                    <th scope="col" class="flex items-center gap-2 px-4 py-3 text-center ">
 
                                         <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
                                             class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
@@ -91,7 +91,7 @@
                                 @if ($this->isCreate)
                                     @foreach ($reorder_lists as $index => $reorder_list)
                                         <tr
-                                            class="border-b border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
+                                            class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
                                             <th scope="row"
                                                 class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                                 <div class="flex justify-center">
@@ -141,7 +141,7 @@
             <div
                 class="relative w-1/2 overflow-hidden border border-[rgb(30,24,9)] bg-[rgb(255,249,231)] sm:rounded-lg">
 
-                <div class="flex flex-row items-center gap-2 px-2 py-10 justify-evenly">
+                <div class="flex flex-row items-center gap-2 px-2 py-8 text-nowrap justify-evenly">
                     <div>
                         <h1 class="text-[1.8em] text-[rgb(65,47,20)] font-black">Removed Items</h1>
                     </div>
@@ -171,7 +171,7 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="px-4 py-3 text-center ">
+                                <th scope="col" class="flex items-center gap-2 px-4 py-3 text-center ">
 
                                     <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
                                         class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
@@ -198,7 +198,7 @@
                             @if (!empty($removed_items))
                                 @foreach ($removed_items as $index => $removed_item)
                                     <tr
-                                        class="border-b border-[rgb(53,53,53)] transition ease-in duration-75 index:bg-red-400">
+                                        class="border-b hover:bg-[rgb(255,241,212)] border-[rgb(53,53,53)] transition ease-in duration-75 index:bg-red-400">
                                         <th scope="row"
                                             class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                             <div class="flex justify-center">
