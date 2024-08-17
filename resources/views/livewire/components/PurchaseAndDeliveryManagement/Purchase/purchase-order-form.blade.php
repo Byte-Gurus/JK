@@ -2,28 +2,30 @@
 <div class="relative" x-show="showModal" x-cloak x-data="{ isCreate: @entangle('isCreate'), showModal: @entangle('showModal'), showEditModal: @entangle('showEditModal') }">
     <div class="flex flex-row h-[655px] gap-4 ">
         @if ($this->isCreate)
-            <div class="relative w-full overflow-hidden bg-white border border-black rounded-lg shadow-lg sm:rounded-lg">
+            <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
                 <form wire:submit.prevent="create">
 
                     <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
-                        <div>
-                            <h1 class="text-[1.2em]">Purchase Order No</h1>
-                            <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                            <select id="supplier" wire:model="select_supplier" required
-                                class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
-                                <option value="" selected>Select Supplier</option>
-                                @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}">
-                                        {{ $supplier->company_name }}</option>
-                                @endforeach
+                        <div class="flex flex-row gap-6">
+                            <div>
+                                <h1 class="text-[1.2em]">Purchase Order No</h1>
+                                <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label for="supplier" class="text-[1.2em]">Supplier Name</label>
+                                <select id="supplier" wire:model="select_supplier" required
+                                    class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-md text-gray-900 text-sm block w-full px-4 py-2 appearance-auto ">
+                                    <option value="" selected>Select Supplier</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}">
+                                            {{ $supplier->company_name }}</option>
+                                    @endforeach
 
-                                @error('select_supplier')
-                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                @enderror
-                            </select>
+                                    @error('select_supplier')
+                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                    @enderror
+                                </select>
+                            </div>
                         </div>
                         <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 
@@ -47,7 +49,7 @@
                     </div>
 
                     {{-- //* tablea area --}}
-                    <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll no-scrollbar scroll">
+                    <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                         <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 
@@ -58,11 +60,10 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" class="flex items-center gap-2 px-4 py-3 text-center ">
+                                    <th scope="col" class="flex justify-center gap-2 px-4 py-3 text-center items-cente ">
 
                                         <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
-                                            class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                        Remove
+                                            class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
 
 
                                     </th>
@@ -139,7 +140,7 @@
 
             {{-- Removed Item Section --}}
             <div
-                class="relative w-1/2 overflow-hidden border border-[rgb(30,24,9)] bg-[rgb(255,249,231)] sm:rounded-lg">
+                class="relative w-1/2 overflow-hidden border border-[rgb(143,143,143)] bg-[rgb(255,249,231)] sm:rounded-lg">
 
                 <div class="flex flex-row items-center gap-2 px-2 py-8 text-nowrap justify-evenly">
                     <div>
@@ -148,12 +149,12 @@
                     <div>
                         @if (!empty($selectedToRestore))
                             <button wire:click="restoreRow" type="button"
-                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(199,199,199)] text-[rgb(53,53,53)] border rounded-md">
+                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,215,153)] hover:bg-[rgb(255,201,99)] text-[rgb(53,53,53)] border rounded-md">
                                 Restore Row
                             </button>
                         @else
-                            <button wire:click="restoreRow" type="button"
-                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,215,153)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,201,99)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                            <button wire:click="restoreRow" type="button" disabled
+                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(199,199,199)] text-[rgb(53,53,53)] border rounded-md transition-all duration-100 ease-in-out">
                                 Restore Row
                             </button>
                         @endif
@@ -171,12 +172,10 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="flex items-center gap-2 px-4 py-3 text-center ">
+                                <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center justi ">
 
                                     <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
-                                        class="w-4 h-4 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                    Restore
-
+                                        class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
 
                                 </th>
 

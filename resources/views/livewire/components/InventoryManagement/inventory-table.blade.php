@@ -2,7 +2,7 @@
 <div class="relative" wire:poll.visible="500ms">
 
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4 ">
@@ -27,7 +27,7 @@
 
 
             <div class="flex flex-row items-center justify-center gap-4">
-                <div class="flex flex-row items-center">
+                <div class="flex flex-row items-center gap-4">
 
                     <div class="flex flex-row items-center gap-2">
 
@@ -68,9 +68,9 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll h-[500px] ">
+    <div class="overflow-x-auto overflow-y-scroll h-[480px]">
 
-            <table class="w-full h-10 text-sm text-left">
+            <table class="w-full text-sm text-left">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">

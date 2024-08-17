@@ -2,7 +2,7 @@
 <div class="relative" wire:poll.visible="1000ms">
 
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4 ">
@@ -260,7 +260,7 @@
     @if ($imageUrl)
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
-            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg shadow-lg ">
+            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg ">
                 <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
             </div>
             <div class="absolute bg-red-200 z-60">

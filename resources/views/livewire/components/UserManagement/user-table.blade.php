@@ -2,7 +2,7 @@
 <div class="relative bg-black rounded-lg" wire:poll.visible="1000ms">
 
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4 ">

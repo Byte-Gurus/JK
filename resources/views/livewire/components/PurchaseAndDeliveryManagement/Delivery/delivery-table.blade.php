@@ -193,8 +193,7 @@
                                 class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- {{ $delivery->date_delivered }} --}}
                                 <div>
-                                    <input type="date"
-                                        class="w-full p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500">
+                                    N/A
                                 </div>
                             </th>
 

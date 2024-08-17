@@ -2,7 +2,7 @@
 <div class="relative " wire:poll.visible="1000ms">
 
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4 ">
@@ -30,15 +30,8 @@
 
             <div class="flex flex-row items-center justify-center gap-4">
 
-                {{-- //*user type filter --}}
-                <div class="flex flex-row items-center gap-2">
 
-
-
-                </div>
-
-
-                <div class="flex flex-row items-center">
+                <div class="flex flex-row items-center gap-4">
 
                     <div class="flex flex-row items-center gap-2">
 
