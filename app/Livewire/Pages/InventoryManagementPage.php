@@ -10,6 +10,9 @@ class InventoryManagementPage extends Component
     public $showModal = false;
 
     public $showStockAdjustModal = false;
+
+    public $showInventoryHistory = false;
+
     public $sidebarStatus;
     public function render()
     {
@@ -30,6 +33,11 @@ class InventoryManagementPage extends Component
     public function formCreate()
     {
         $this->dispatch('change-method', isCreate: true)->to(InventoryForm::class);
+    }
+
+    public function showInventory()
+    {
+        $this->showInventoryHistory = !$this->showInventoryHistory;
     }
 
     public function changeSidebarStatus($sidebarOpen)
