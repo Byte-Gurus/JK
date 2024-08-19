@@ -18,4 +18,8 @@
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
         </div>
     @endif
+
+    <div>
+        @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
+    </div>
 </div>

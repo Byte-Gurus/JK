@@ -19,19 +19,17 @@ class RestockForm extends Component
     ];
     private function populateForm() //*lagyan ng laman ang mga input
     {
-
         $delivery_details = Delivery::find($this->delivery_id); //? kunin lahat ng data ng may ari ng item_id
         dd($delivery_details);
 
-        $this->fill([
-            'po_number' => $delivery_details->purchase_id->purchaseJoin->po_number,
+        // $this->fill([
+        //     'po_number' => $delivery_details->purchase_id->purchaseJoin->po_number,
 
-        ]);
+        // ]);
     }
 
     public function restockForm($deliveryID)
     {
-        dd("Sasas");
         $this->delivery_id = $deliveryID;
         $this->populateForm();
     }
