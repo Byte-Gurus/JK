@@ -10,7 +10,7 @@
                 <div class="flex flex-row gap-6">
                     <div>
                         <h1 class="text-[1.2em]">Purchase Order No</h1>
-                        <h2 class="text-[2em] font-black text-center w-full">PO NO.</h2>
+                        <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="supplier" class="text-[1.2em]">Supplier Name</label>

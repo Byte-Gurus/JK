@@ -77,7 +77,7 @@ class StockAdjustForm extends Component
             'inventory_id' => $inventory->id,
             'user_id' => Auth::id(),
         ]);
-        
+
 
         $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
@@ -98,19 +98,19 @@ class StockAdjustForm extends Component
 
         return $this->validate($rules);
     }
-    private function populateForm() //*lagyan ng laman ang mga input
-    {
+        private function populateForm() //*lagyan ng laman ang mga input
+        {
 
-        $stock_details = Inventory::find($this->stock_id); //? kunin lahat ng data ng may ari ng item_id
+            $stock_details = Inventory::find($this->stock_id); //? kunin lahat ng data ng may ari ng item_id
 
 
-        $this->fill([
-            'sku_code' => $stock_details->sku_code,
-            'item_name' => $stock_details->itemJoin->item_name,
-            'current_quantity' => $stock_details->current_stock_quantity,
-            'description' => $stock_details->itemJoin->item_description
-        ]);
-    }
+            $this->fill([
+                'sku_code' => $stock_details->sku_code,
+                'item_name' => $stock_details->itemJoin->item_name,
+                'current_quantity' => $stock_details->current_stock_quantity,
+                'description' => $stock_details->itemJoin->item_description
+            ]);
+        }
 
 
     public function resetFormWhenClosed()

@@ -222,7 +222,8 @@
                                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                                     min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-                                                <button wire:click="showRestockForm()"
+                                                <button
+                                                   x-on:click="$wire.showRestockForm(); $wire.getDeliveryID({{ $delivery->id }})"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
