@@ -14,14 +14,14 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="supplier" class="text-[1.2em]">Supplier Name</label>
+                        <label for="supplier" class="text-[1.2em] ">{{ $supplier }}</label>
 
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 
                     <div>
-                        <button type="button"
-                        wire:click='restockForm()'
+                        <button type="button" wire:click='restockForm()'
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                             Restock</button>
                     </div>
@@ -34,8 +34,7 @@
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 
                     {{-- //* table header --}}
-                    <thead
-                        class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
                         <tr class=" text-nowrap">
 
@@ -47,7 +46,7 @@
                             <th scope="col" class="py-3 text-left">Item Name</th>
 
                             {{-- //* stocks on hand --}}
-                            <th scope="col" class="py-3 text-center ">Purchased Quantity</th>
+                            <th scope="col" class="py-3 texvt-center ">Purchased Quantity</th>
 
                             {{-- //* item reorder quantity --}}
                             <th scope="col" class="py-3 text-center">Remaining Quantity</th>
@@ -85,6 +84,20 @@
                     {{-- //* table body --}}
 
                     <tbody>
+                        @foreach ($purchaseDetails as $purchaseDetail)
+                            <tr
+                                class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->barcode }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>

@@ -13,10 +13,6 @@
         <div class="">
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
         </div>
-    @else
-        <div>
-            @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
-        </div>
     @endif
 
     <div>
