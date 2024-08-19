@@ -66,7 +66,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
-
+    public function inventoryJoin()
+    {
+        return $this->hasMany(UserRole::class, 'user_role_id');
+    }
     public function scopeSearch($query, $value)  //* search function
     {
         //? queries

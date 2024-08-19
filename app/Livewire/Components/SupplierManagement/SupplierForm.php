@@ -256,7 +256,7 @@ class SupplierForm extends Component
     public function changeMethod($isCreate)
     {
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
-        dd($isCreate);
+       
         if ($this->isCreate) {
 
             $this->resetForm();

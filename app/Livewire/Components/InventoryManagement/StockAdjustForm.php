@@ -5,6 +5,7 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryAdjustment;
+use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -74,8 +75,9 @@ class StockAdjustForm extends Component
             'operation' => $updatedAttributes['selectOperation'],
             'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
             'inventory_id' => $inventory->id,
-
+            'user_id' => Auth::id(),
         ]);
+        
 
         $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');

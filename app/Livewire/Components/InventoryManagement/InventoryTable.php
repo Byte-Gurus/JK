@@ -21,7 +21,7 @@ class InventoryTable extends Component
     public $supplierFilter = 0;
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->get();
+        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
         $query = Inventory::query();
 

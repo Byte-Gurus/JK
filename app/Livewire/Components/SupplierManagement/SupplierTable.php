@@ -19,10 +19,10 @@ class SupplierTable extends Component
 
     public $statusFilter = 0; //var filtering value = all
 
-    public $supplierFilter = 0;
+    public $supplierFilter = 0; 
     public function render()
     {
-        $supplierLists = Supplier::all();
+        $supplierLists = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
         $query = Supplier::query();
 
         if ($this->statusFilter != 0) {

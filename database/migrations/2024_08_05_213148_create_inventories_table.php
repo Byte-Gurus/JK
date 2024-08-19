@@ -28,6 +28,7 @@ return new class extends Migration
 
             $table->foreignId('item_id')->constrained('items');
             $table->foreignId('supplier_id')->constrained('suppliers');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

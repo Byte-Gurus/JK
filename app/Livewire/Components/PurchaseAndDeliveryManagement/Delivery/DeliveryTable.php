@@ -23,7 +23,7 @@ class DeliveryTable extends Component
 
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->get();
+        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
         $query = Delivery::query();
 

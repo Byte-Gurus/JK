@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('inventory_id')->constrained('inventories');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
