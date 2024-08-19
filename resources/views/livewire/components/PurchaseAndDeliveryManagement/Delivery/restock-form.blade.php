@@ -96,6 +96,56 @@
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $purchaseDetail->itemsJoin->item_name }}
                                 </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </th>
+
+                                <th scope="row"
+                                    class="flex justify-center px-4 py-6 font-medium text-center text-gray-900 rounded-full text-md whitespace-nowrap ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        strokeWidth={1.5} stroke="currentColor" class="transition-all duration-100 ease-in-out bg-green-100 rounded-full size-8 hover:bg-green-200">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                </th>
                             </tr>
                         @endforeach
 
