@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Livewire\Pages\DeliveryPage;
 use App\Models\Delivery;
 use App\Models\Supplier;
 use Livewire\Component;
@@ -71,5 +72,10 @@ class DeliveryTable extends Component
     public function refreshTable()
     {
         $this->resetPage();
+    }
+
+    public function showRestockForm()
+    {
+        $this->dispatch('display-restock-form', showRestockForm: true)->to(DeliveryPage::class);
     }
 }

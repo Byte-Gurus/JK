@@ -9,7 +9,13 @@
     <div>
         {{-- @livewire('components.PurchaseAndDeliveryManagement.purchase-form') --}}
     </div>
-    <div class="">
-        @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
-    </div>
+    @if (!$showRestockForm)
+        <div class="">
+            @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
+        </div>
+    @else
+        <div>
+            @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
+        </div>
+    @endif
 </div>
