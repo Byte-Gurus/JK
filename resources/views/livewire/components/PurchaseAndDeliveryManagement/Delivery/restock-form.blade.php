@@ -40,19 +40,19 @@
 
 
                             {{-- //* barcode --}}
-                            <th scope="col" class="py-3 text-left">Barcode</th>
+                            <th scope="col" class="px-4 py-3 text-left">Barcode</th>
 
                             {{-- //* item name --}}
                             <th scope="col" class="py-3 text-left">Item Name</th>
 
                             {{-- //* stocks on hand --}}
-                            <th scope="col" class="py-3 texvt-center ">Purchased Quantity</th>
+                            <th scope="col" class="px-4 py-3 text-center ">Purchased Quantity</th>
 
                             {{-- //* item reorder quantity --}}
-                            <th scope="col" class="py-3 text-center">Remaining Quantity</th>
+                            <th scope="col" class="px-4 py-3 text-center">Remaining Quantity</th>
 
                             {{-- //* purchase quantity --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">SKU</th>
+                            <th scope="col" class="px-4 py-3 text-left text-nowrap">SKU</th>
                             </th>
 
                             {{-- //* restock quantity --}}
@@ -76,7 +76,7 @@
                             </th>
 
                             {{-- //* actions --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">Actions</th>
+                            <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
                             </th>
                         </tr>
                     </thead>
@@ -92,24 +92,53 @@
                                     {{ $purchaseDetail['barcode'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                     {{ $purchaseDetail['item_name'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $purchaseDetail['purchase_quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    SKIP
+                                    class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    bini
                                 </th>
+
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $purchaseDetail['sku_code'] }}
                                 </th>
+                                {{-- restock quantity --}}
+                                <th scope="row"
+                                    class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
+                                </th>
 
+                                {{-- cost --}}
+                                <th scope="row"
+                                    class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
+                                </th>
+
+                                {{-- markup --}}
+                                <th scope="row"
+                                    class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
+                                </th>
+
+                                {{-- srp --}}
+                                <th scope="row"
+                                    class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                </th>
+
+                                {{-- exp date --}}
+                                <th scope="row"
+                                    class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    <input type="date" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                </th>
 
                                 <th scope="row"
                                     class="flex justify-center px-4 py-6 font-medium text-center text-gray-900 rounded-full text-md whitespace-nowrap ">
