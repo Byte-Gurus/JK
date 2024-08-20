@@ -4,12 +4,16 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\Delivery;
+use App\Models\Inventory;
 use App\Models\Purchase;
+use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class RestockForm extends Component
 {
+    use LivewireAlert;
     public $delivery_id, $po_number, $supplier, $purchase_id;
     public $purchaseDetails = [];
     public $restock_quantity = [], $cost = [], $markup = [], $srp = [], $expiration_date = [];
@@ -44,15 +48,49 @@ class RestockForm extends Component
 
     public function create()
     {
-        dd($this->purchaseDetails);
+
         $validated = $this->validateForm();
+
+        $this->confirm('Do you want to add this item?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
+    }
+
+    public function createConfirmed($data)
+    {
+        $validated = $data['inputAttributes'];
+        $supplier = Delivery::find($this->delivery_id);
+
+        foreach ($this->purchaseDetails as $index => $detail) {
+            // Create a new inventory record
+            $inventory = Inventory::create([
+                'sku_code' => $detail['sku_code'],
+                'cost' => $this->cost[$index],
+                'mark_up_price' => $this->markup[$index],
+                'selling_price' => $this->srp[$index],
+                'current_stock_quantity' => $this->restock_quantity[$index],
+                'expiration_date' => $this->expiration_date[$index],
+                'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
+                'status' => 'Available',   // Set default status or customize as needed
+                'item_id' => $detail['id'],  // Assuming 'id' here refers to the item_id
+                'supplier_id' => $supplier->purchaseJoin->supplierJoin->id, // Assuming you want to associate with the supplier
+                'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
+            ]);
+        }
+
+        // $this->resetForm();
+        $this->alert('success', 'stock adjusted successfully');
+
+        // $this->refreshTable();
+        // $this->closeModal();
     }
 
     private function populateForm() //*lagyan ng laman ang mga input
     {
 
         $delivery_details = Delivery::find($this->delivery_id); //? kunin lahat ng data ng may ari ng item_id
-        ;
+
 
         $this->fill([
             'po_number' => $delivery_details->purchaseJoin->po_number,
@@ -66,6 +104,7 @@ class RestockForm extends Component
 
 
         $newItem = [
+
             'barcode' => $originalItem->itemsJoin->barcode,
             'item_name' => $originalItem->itemsJoin->item_name,
             'purchase_quantity' => $originalItem->purchase_quantity,
@@ -102,7 +141,7 @@ class RestockForm extends Component
         unset($this->markup[$index]);
         unset($this->srp[$index]);
         unset($this->expiration_date[$index]);
-        
+
 
         $this->purchaseDetails = array_values($this->purchaseDetails);
         $this->restock_quantity = array_values($this->restock_quantity);
@@ -117,6 +156,7 @@ class RestockForm extends Component
         $rules = [];
 
         foreach ($this->purchaseDetails as $index => $purchaseDetail) {
+
             $rules["restock_quantity.$index"] = 'required|numeric|min:1';
             $rules["cost.$index"] = 'required|numeric|min:1';
             $rules["markup.$index"] = 'required|numeric|min:1';

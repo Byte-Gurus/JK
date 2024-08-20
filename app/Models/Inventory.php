@@ -20,6 +20,7 @@ class Inventory extends Model
         'selling_price',
         'current_stock_quantity',
         'stock_in_date',
+        'expiration_date',
         'status',
         'item_id',
         'supplier_id',

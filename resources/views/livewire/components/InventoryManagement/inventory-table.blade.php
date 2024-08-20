@@ -27,6 +27,22 @@
 
 
             <div class="flex flex-row items-center justify-center gap-4">
+
+                <div class="flex flex-row items-center gap-2">
+
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Start Date :</label>
+                    <input type="date" wire:model.live="startDate"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5" />
+
+                </div>
+
+                <div class="flex flex-row items-center gap-2">
+
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">End Date :</label>
+                    <input type="date" wire:model.live="endDate"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5" />
+
+                </div>
                 <div class="flex flex-row items-center gap-4">
 
                     <div class="flex flex-row items-center gap-2">

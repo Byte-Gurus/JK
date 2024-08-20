@@ -19,6 +19,9 @@ class InventoryTable extends Component
     public $statusFilter = 0; //var filtering value = all
     public $vatFilter = 0; //var filtering value = all
     public $supplierFilter = 0;
+
+    public $startDate, $endDate;
+
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -33,6 +36,10 @@ class InventoryTable extends Component
             // Use whereHas to filter deliveries based on the supplier_id through purchase
             $query->where('supplier_id', $this->supplierFilter); //
         }
+        if ($this->startDate && $this->endDate) {
+            $query->whereBetween('stock_in_date', [$this->startDate, $this->endDate]);
+        }
+
 
         $inventories = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
@@ -63,7 +70,6 @@ class InventoryTable extends Component
     public function getStockID($stockId)
     {
         $this->dispatch('adjust-stock-from-table', stockID: $stockId)->to(StockAdjustForm::class);
-
     }
 
     public function updatedSearch()
