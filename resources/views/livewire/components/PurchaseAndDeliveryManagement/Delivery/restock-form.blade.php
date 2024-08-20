@@ -109,10 +109,7 @@
                                     {{ $purchaseDetail['sku_code'] }}
                                 </th>
 
-                                <th scope="row"
-                                class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $purchaseDetail['reorder_point'] }}
-                            </th>
+
 
                                 <th scope="row"
                                     class="flex justify-center px-4 py-6 font-medium text-center text-gray-900 rounded-full text-md whitespace-nowrap ">

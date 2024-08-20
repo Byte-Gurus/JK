@@ -25,7 +25,7 @@ class RestockForm extends Component
                         'item_name' => $details->itemsJoin->item_name,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
-                        'reorder_point' =>  $details->itemsJoin->reorder_point,
+
                     ];
                 })
                 ->toArray();
@@ -60,13 +60,17 @@ class RestockForm extends Component
                 'barcode' => $originalItem->itemsJoin->barcode,
                 'item_name' => $originalItem->itemsJoin->item_name,
                 'purchase_quantity' => $originalItem->purchase_quantity,
-                'sku_code' => $this->generateSKU(),  // Generate a new SKU for the duplicated item
-                'reorder_point' => $originalItem->itemsJoin->reorder_point,
-                'id' => $originalItem->id,
+                'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
+                'id' => $originalItem->id,  // Keep the original ID for tracking purposes
             ];
 
-            $this->purchaseDetails[] = $newItem;
-           
+            // Find the index of the original item in the purchaseDetails array
+            $index = array_search($originalItem->id, array_column($this->purchaseDetails, 'id'));
+
+            // Insert the duplicated item directly after the original item
+            array_splice($this->purchaseDetails, $index + 1, 0, [$newItem]);
+
+            // Reindex the array to ensure consistency
             $this->purchaseDetails = array_values($this->purchaseDetails);
         }
     }
