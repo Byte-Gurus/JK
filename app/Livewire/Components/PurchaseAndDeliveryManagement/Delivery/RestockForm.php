@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class RestockForm extends Component
 {
-    public $delivery_id, $po_number, $supplier;
-    public $purchase_id, $purchaseDetails = [];
+    public $delivery_id, $po_number, $supplier, $purchase_id;
+    public $purchaseDetails = [];
     public $restock_quantity, $cost, $markup, $srp, $expiration_date;
 
     public function render()
@@ -27,7 +27,7 @@ class RestockForm extends Component
                         'item_name' => $details->itemsJoin->item_name,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
-
+                        'isDuplicate' => false,
                     ];
                 })
                 ->toArray();
@@ -57,24 +57,30 @@ class RestockForm extends Component
         // Find the original PurchaseDetails item
         $originalItem = PurchaseDetails::with('itemsJoin')->find($item_id);
 
-        if ($originalItem) {
-            $newItem = [
-                'barcode' => $originalItem->itemsJoin->barcode,
-                'item_name' => $originalItem->itemsJoin->item_name,
-                'purchase_quantity' => $originalItem->purchase_quantity,
-                'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
-                'id' => $originalItem->id,  // Keep the original ID for tracking purposes
-            ];
 
-            // Find the index of the original item in the purchaseDetails array
-            $index = array_search($originalItem->id, array_column($this->purchaseDetails, 'id'));
+        $newItem = [
+            'barcode' => $originalItem->itemsJoin->barcode,
+            'item_name' => $originalItem->itemsJoin->item_name,
+            'purchase_quantity' => $originalItem->purchase_quantity,
+            'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
+            'id' => $originalItem->id,  // Keep the original ID for tracking purposes
+            'isDuplicate' => true,
+        ];
 
-            // Insert the duplicated item directly after the original item
-            array_splice($this->purchaseDetails, $index + 1, 0, [$newItem]);
+        // Find the index of the original item in the purchaseDetails array
+        $index = array_search($originalItem->id, array_column($this->purchaseDetails, 'id'));
 
-            // Reindex the array to ensure consistency
-            $this->purchaseDetails = array_values($this->purchaseDetails);
-        }
+        // Insert the duplicated item directly after the original item
+        array_splice($this->purchaseDetails, $index + 1, 0, [$newItem]);
+
+        // Reindex the array to ensure consistency
+        $this->purchaseDetails = array_values($this->purchaseDetails);
+    }
+
+    public function removeItem($item_id)
+    {
+        unset($this->purchaseDetails[$item_id]);
+        $this->purchaseDetails = array_values($this->purchaseDetails);
     }
     protected function validateForm()
     {
@@ -88,17 +94,6 @@ class RestockForm extends Component
             'srp' => 'required|numeric|min:1',
             'expiration_date' => 'required|date',
         ];
-
-        if ($this->isCreate) {
-            // Add validation rules for each purchase quantity
-            foreach ($this->reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
-            }
-        } else {
-            foreach ($this->edit_reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
-            }
-        }
 
 
         return $this->validate($rules);
