@@ -21,7 +21,7 @@
                 <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 
                     <div>
-                        <button type="button" wire:click='restock()'
+                        <button type="submit"
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                             Restock</button>
                     </div>
@@ -111,14 +111,14 @@
                                 {{-- restock quantity --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model="restock_quantity" required
+                                    <input type="number" wire:model="restock_quantity.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
                                 </th>
 
                                 {{-- cost --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model="cost" required
+                                    <input type="number" wire:model="cost.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
                                 </th>
@@ -126,28 +126,28 @@
                                 {{-- markup --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <input type="number" wire:model="markup"required
+                                    <input type="number" wire:model="markup.{{ $index }}"required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
                                 </th>
 
                                 {{-- srp --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model="srp" required
+                                    <input type="number" wire:model="srp.{{ $index }}" required
                                         class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
                                 </th>
 
                                 {{-- exp date --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="date" wire:model="expiration_date" required
+                                    <input type="date" wire:model="expiration_date.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
                                 </th>
 
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     @if (isset($purchaseDetail['isDuplicate']) && $purchaseDetail['isDuplicate'])
-                                        <button type="button" wire:click="removeItem({{ $purchaseDetail['id'] }})">
+                                        <button type="button" wire:click="removeItem({{ $index }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 strokeWidth={1.5} stroke="currentColor"
                                                 class="transition-all duration-100 ease-in-out bg-red-100 rounded-full size-8 hover:bg-red-200">
@@ -166,6 +166,31 @@
                                         </button>
                                     @endif
                                 </th>
+
+                                @error('restock_quantity.$index ')
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                @error('cost.$index')
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                @error('markup.$index')
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                @error('srp.$index')
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                @error('expiration_date.$index')
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
                             </tr>
                         @endforeach
 

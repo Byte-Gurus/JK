@@ -12,7 +12,7 @@ class RestockForm extends Component
 {
     public $delivery_id, $po_number, $supplier, $purchase_id;
     public $purchaseDetails = [];
-    public $restock_quantity, $cost, $markup, $srp, $expiration_date;
+    public $restock_quantity = [], $cost = [], $markup = [], $srp = [], $expiration_date = [];
 
     public function render()
     {
@@ -38,8 +38,15 @@ class RestockForm extends Component
         ]);
     }
     protected $listeners = [
-        'restock-form' => 'restockForm', //*  galing sa UserTable class
+        'restock-form' => 'restockForm',
+        'createConfirmed', //*  galing sa UserTable class
     ];
+
+    public function create()
+    {
+        dd($this->purchaseDetails);
+        $validated = $this->validateForm();
+    }
 
     private function populateForm() //*lagyan ng laman ang mga input
     {
@@ -72,29 +79,50 @@ class RestockForm extends Component
 
         // Insert the duplicated item directly after the original item
         array_splice($this->purchaseDetails, $index + 1, 0, [$newItem]);
+        array_splice($this->restock_quantity, $index + 1, 0, [$newItem]);
+        array_splice($this->markup, $index + 1, 0, [$newItem]);
+        array_splice($this->cost, $index + 1, 0, [$newItem]);
+        array_splice($this->expiration_date, $index + 1, 0, [$newItem]);
+        array_splice($this->srp, $index + 1, 0, [$newItem]);
 
         // Reindex the array to ensure consistency
         $this->purchaseDetails = array_values($this->purchaseDetails);
+        $this->restock_quantity = array_values($this->restock_quantity);
+        $this->markup = array_values($this->markup);
+        $this->cost = array_values($this->cost);
+        $this->expiration_date = array_values($this->expiration_date);
+        $this->srp = array_values($this->srp);
     }
 
-    public function removeItem($item_id)
+    public function removeItem($index)
     {
-        unset($this->purchaseDetails[$item_id]);
+        unset($this->purchaseDetails[$index]);
+        unset($this->restock_quantity[$index]);
+        unset($this->cost[$index]);
+        unset($this->markup[$index]);
+        unset($this->srp[$index]);
+        unset($this->expiration_date[$index]);
+        
+
         $this->purchaseDetails = array_values($this->purchaseDetails);
+        $this->restock_quantity = array_values($this->restock_quantity);
+        $this->markup = array_values($this->markup);
+        $this->cost = array_values($this->cost);
+        $this->expiration_date = array_values($this->expiration_date);
+        $this->srp = array_values($this->srp);
     }
     protected function validateForm()
     {
 
-        $rules = [
-            'po_number' => 'required|string|max:255|min:1',
-            'select_supplier' => 'required|numeric',
-            'restock_quantity' => 'required|numeric|min:1',
-            'cost' =>  'required|numeric|min:1',
-            'markup' => 'required|numeric|min:1',
-            'srp' => 'required|numeric|min:1',
-            'expiration_date' => 'required|date',
-        ];
+        $rules = [];
 
+        foreach ($this->purchaseDetails as $index => $purchaseDetail) {
+            $rules["restock_quantity.$index"] = 'required|numeric|min:1';
+            $rules["cost.$index"] = 'required|numeric|min:1';
+            $rules["markup.$index"] = 'required|numeric|min:1';
+            $rules["srp.$index"] = 'required|numeric|min:1';
+            $rules["expiration_date.$index"] = 'required|date';
+        }
 
         return $this->validate($rules);
     }
@@ -109,10 +137,7 @@ class RestockForm extends Component
         $this->populateForm();
     }
 
-    public function restock()
-    {
-        dd($this->purchaseDetails);
-    }
+
 
     public function generateSKU()
     {
