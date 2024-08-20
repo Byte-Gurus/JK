@@ -12,6 +12,8 @@ class RestockForm extends Component
 {
     public $delivery_id, $po_number, $supplier;
     public $purchase_id, $purchaseDetails = [];
+    public $restock_quantity, $cost, $markup, $srp, $expiration_date;
+
     public function render()
     {
         if (empty($this->purchaseDetails)) {
@@ -74,6 +76,34 @@ class RestockForm extends Component
             $this->purchaseDetails = array_values($this->purchaseDetails);
         }
     }
+    protected function validateForm()
+    {
+
+        $rules = [
+            'po_number' => 'required|string|max:255|min:1',
+            'select_supplier' => 'required|numeric',
+            'restock_quantity' => 'required|numeric|min:1',
+            'cost' =>  'required|numeric|min:1',
+            'markup' => 'required|numeric|min:1',
+            'srp' => 'required|numeric|min:1',
+            'expiration_date' => 'required|date',
+        ];
+
+        if ($this->isCreate) {
+            // Add validation rules for each purchase quantity
+            foreach ($this->reorder_lists as $index => $reorder_list) {
+                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
+            }
+        } else {
+            foreach ($this->edit_reorder_lists as $index => $reorder_list) {
+                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
+            }
+        }
+
+
+        return $this->validate($rules);
+    }
+
 
     public function restockForm($deliveryID)
     {

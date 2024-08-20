@@ -112,32 +112,32 @@
                                 {{-- restock quantity --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
+                                    <input type="number" wire:model="restock_quantity" required class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
                                 </th>
 
                                 {{-- cost --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                    <input type="number" wire:model="cost" required class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
                                 </th>
 
                                 {{-- markup --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
+                                    <input type="number" wire:model="markup"required class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
                                 </th>
 
                                 {{-- srp --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                    <input type="number"  wire:model="srp" required class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
                                 </th>
 
                                 {{-- exp date --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="date" class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                    <input type="date" wire:model="expiration_date"  required class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
                                 </th>
 
                                 <th scope="row"
