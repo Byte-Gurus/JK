@@ -34,8 +34,7 @@ class PurchaseOrderForm extends Component
 
     public $filtered_reorder_lists = [];
 
-    public $index;
-    public $isDisabled;
+   
 
     /**
      * Summary of render

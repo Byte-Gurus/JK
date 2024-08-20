@@ -21,7 +21,7 @@
                 <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 
                     <div>
-                        <button type="button" wire:click='restockForm()'
+                        <button type="button" wire:click='restock()'
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                             Restock</button>
                     </div>
@@ -84,67 +84,47 @@
                     {{-- //* table body --}}
 
                     <tbody>
-                        @foreach ($purchaseDetails as $purchaseDetail)
+                        @foreach ($purchaseDetails as $index => $purchaseDetail)
                             <tr
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->barcode }}
+                                    {{ $purchaseDetail['barcode'] }}
+                                </th>
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail['item_name'] }}
+                                </th>
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail['purchase_quantity'] }}
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                    SKIP
+                                </th>
+                                <th scope="row"
+                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail['sku_code'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
-
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail->itemsJoin->item_name }}
-                                </th>
+                                class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchaseDetail['reorder_point'] }}
+                            </th>
 
                                 <th scope="row"
                                     class="flex justify-center px-4 py-6 font-medium text-center text-gray-900 rounded-full text-md whitespace-nowrap ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        strokeWidth={1.5} stroke="currentColor" class="transition-all duration-100 ease-in-out bg-green-100 rounded-full size-8 hover:bg-green-200">
-                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                    </svg>
+                                    <Button type="button" wire:click="duplicateItem({{ $purchaseDetail['id'] }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            strokeWidth={1.5} stroke="currentColor"
+                                            class="transition-all duration-100 ease-in-out bg-green-100 rounded-full size-8 hover:bg-green-200">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
+                                    </Button>
+
                                 </th>
                             </tr>
                         @endforeach
