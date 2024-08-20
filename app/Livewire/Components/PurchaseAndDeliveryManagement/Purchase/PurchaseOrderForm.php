@@ -34,7 +34,7 @@ class PurchaseOrderForm extends Component
 
     public $filtered_reorder_lists = [];
 
-   
+
 
     /**
      * Summary of render
@@ -383,6 +383,7 @@ class PurchaseOrderForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(PurchasePage::class);
+        $this->resetValidation();
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {

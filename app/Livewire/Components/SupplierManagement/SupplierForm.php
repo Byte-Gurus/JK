@@ -227,6 +227,7 @@ class SupplierForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(SupplierManagementPage::class);
+        $this->resetValidation();
         $this->cities = null;
         $this->barangays = null;
     }
@@ -256,7 +257,7 @@ class SupplierForm extends Component
     public function changeMethod($isCreate)
     {
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
-       
+
         if ($this->isCreate) {
 
             $this->resetForm();
