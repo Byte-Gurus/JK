@@ -1,4 +1,4 @@
-<div>
+<div x-show="showRestockForms">
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
         <div class="flex items-center justify-center py-2 border border-black">
             <p class="font-black ">Restock Form</p>
@@ -29,7 +29,7 @@
             </div>
 
             {{-- //* tablea area --}}
-            <div class="h-[520px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+            <div class="h-[500px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 
@@ -37,7 +37,6 @@
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
                         <tr class=" text-nowrap">
-
 
                             {{-- //* barcode --}}
                             <th scope="col" class="px-4 py-3 text-left">Barcode</th>
@@ -86,7 +85,7 @@
                     <tbody>
                         @foreach ($purchaseDetails as $index => $purchaseDetail)
                             <tr
-                                class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                                class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition-all ease-in-out duration-1000">
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                     {{ $purchaseDetail['barcode'] }}
@@ -148,9 +147,13 @@
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     @if (isset($purchaseDetail['isDuplicate']) && $purchaseDetail['isDuplicate'])
-
                                         <button type="button" wire:click="removeItem({{ $purchaseDetail['id'] }})">
-                                          dsadsadasd
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                strokeWidth={1.5} stroke="currentColor"
+                                                class="transition-all duration-100 ease-in-out bg-red-100 rounded-full size-8 hover:bg-red-200">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                    d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
                                         </button>
                                     @else
                                         <button type="button" wire:click="duplicateItem({{ $purchaseDetail['id'] }})">

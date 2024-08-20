@@ -1,7 +1,7 @@
 {{-- // --}}
 <div class="relative">
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(53,53,53)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4">
@@ -49,7 +49,6 @@
                             <option value="Delivered">Delivered</option>
                             <option value="In progress">In progress</option>
                             <option value="Cancelled">Cancelled</option>
-
                         </select>
 
                         <div class="flex flex-row items-center gap-2">
@@ -223,7 +222,7 @@
                                     min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 <button
-                                                   x-on:click="$wire.showRestockForm(); $wire.getDeliveryID({{ $delivery->id }})"
+                                                    x-on:click="$wire.showRestockForm(); $wire.getDeliveryID({{ $delivery->id }})"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
@@ -250,8 +249,6 @@
                                     </div>
                                 </div>
                             </th>
-
-
                         </tr>
                     @endforeach
 
@@ -262,7 +259,7 @@
         </div>
 
         {{-- //* table footer --}}
-        <div class="border-t border-black ">
+        <div class="border-t border-[rgb(53,53,53)] ">
 
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">

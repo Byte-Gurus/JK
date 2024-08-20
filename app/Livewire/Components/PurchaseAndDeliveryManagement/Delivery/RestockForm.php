@@ -39,8 +39,8 @@ class RestockForm extends Component
     }
     protected $listeners = [
         'restock-form' => 'restockForm', //*  galing sa UserTable class
-
     ];
+
     private function populateForm() //*lagyan ng laman ang mga input
     {
 
@@ -102,7 +102,6 @@ class RestockForm extends Component
 
     public function restockForm($deliveryID)
     {
-
         $this->delivery_id = $deliveryID;
         $delivery = Delivery::find($this->delivery_id);
         $this->purchase_id = $delivery->purchase_id;
