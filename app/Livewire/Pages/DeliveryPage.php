@@ -27,7 +27,8 @@ class DeliveryPage extends Component
 
     public function cancelRestockForm()
     {
+        $this->dispatch('close-modal')->to(RestockForm::class);
         $this->showRestockForm = false;
-        
+
     }
 }

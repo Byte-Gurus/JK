@@ -43,6 +43,7 @@ class RestockForm extends Component
     }
     protected $listeners = [
         'restock-form' => 'restockForm',
+        'close-modal' => 'closeModal',
         'createConfirmed', //*  galing sa UserTable class
     ];
 
@@ -82,11 +83,11 @@ class RestockForm extends Component
         $delivery = Delivery::find($this->purchase_id);
         $delivery->date_delivered = now();
         $delivery->save();
-        // $this->resetForm();
+        $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
 
-        // $this->refreshTable();
-        // $this->closeModal();
+        $this->refreshTable();
+        $this->closeModal();
     }
 
     private function populateForm() //*lagyan ng laman ang mga input
@@ -180,7 +181,15 @@ class RestockForm extends Component
     {
         $this->reset(['delivery_id', 'po_number', 'supplier', 'purchase_id', 'purchaseDetails', 'restock_quantity', 'cost', 'markup', 'srp', 'expiration_date']);
     }
+    public function refreshTable() {
+        $this->dispatch('refresh-table')->to(DeliveryTable::class);
+    }
 
+    public function closeModal()
+    {
+        $this->resetValidation();
+        $this->resetForm();
+    }
     public function generateSKU()
     {
         $randomNumber = random_int(100000, 999999);
