@@ -47,9 +47,6 @@
                             {{-- //* stocks on hand --}}
                             <th scope="col" class="px-4 py-3 text-center ">Purchased Quantity</th>
 
-                            {{-- //* item reorder quantity --}}
-                            <th scope="col" class="px-4 py-3 text-center">Remaining Quantity</th>
-
                             {{-- //* purchase quantity --}}
                             <th scope="col" class="px-4 py-3 text-left text-nowrap">SKU</th>
                             </th>
@@ -99,10 +96,6 @@
                                     {{ $purchaseDetail['purchase_quantity'] }}
                                 </th>
 
-                                <th scope="row"
-                                    class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    bini
-                                </th>
 
                                 <th scope="row"
                                     class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -119,6 +112,8 @@
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                     @enderror
+
+
                                     {{-- cost --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -149,7 +144,7 @@
                                 {{-- srp --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model="srp.{{ $index }}" required
+                                    <input type="number" wire:model="srp.{{ $index }}" required readonly
                                         class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
 

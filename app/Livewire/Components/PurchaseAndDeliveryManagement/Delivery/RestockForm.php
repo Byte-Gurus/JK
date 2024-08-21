@@ -52,10 +52,33 @@ class RestockForm extends Component
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this item?', [
-            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-        ]);
+        foreach ($this->purchaseDetails as $index => $detail) {
+            $itemId = $detail['item_id']; // Assuming 'id' refers to item_id
+
+            // Sum the restock quantity for the item
+            if (!isset($quantities[$itemId])) {
+                $quantities[$itemId] = 0;
+            }
+            $quantities[$itemId] += $this->restock_quantity[$index];
+
+            // Check if the total restock quantity exceeds the purchased quantity
+            if ($quantities[$itemId] > $detail['purchased_quantity']) {
+                $this->alert('error', "The total restock quantity for {$detail['item_name']} exceeds the purchased quantity of {$detail['purchased_quantity']}.");
+                return; // Stop further processing
+            } elseif (($quantities[$itemId] < $detail['purchased_quantity'])) {
+                $this->confirm("The total restock quantity for some item falls short to the purchased quantit. Do you still want to add this item/s", [
+                    'onConfirmed' => 'updateConfirmed', //* call the confmired method
+                    'inputAttributes' =>  $validated, //* pass the $attributes array to the confirmed method
+                ]);
+            }else{
+                $this->confirm('Do you want to add this item?', [
+                    'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+                    'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+                ]);
+            }
+        }
+
+
     }
 
     public function createConfirmed($data)
@@ -64,6 +87,7 @@ class RestockForm extends Component
         $supplier = Delivery::find($this->delivery_id);
 
         foreach ($this->purchaseDetails as $index => $detail) {
+
             // Create a new inventory record
             $inventory = Inventory::create([
                 'sku_code' => $detail['sku_code'],
@@ -90,6 +114,22 @@ class RestockForm extends Component
         $this->closeModal();
     }
 
+    public function updatedCost($value, $index)
+    {
+        $this->calculateSRP($index);
+    }
+
+    public function updatedMarkup($value, $index)
+    {
+        $this->calculateSRP($index);
+    }
+
+    public function calculateSRP($index)
+    {
+        if (isset($this->cost[$index]) && isset($this->markup[$index])) {
+            $this->srp[$index] = $this->cost[$index] * (1 + $this->markup[$index] / 100);
+        }
+    }
     private function populateForm() //*lagyan ng laman ang mga input
     {
 
@@ -157,6 +197,8 @@ class RestockForm extends Component
     protected function validateForm()
     {
         $rules = [];
+
+
         foreach ($this->purchaseDetails as $index => $purchaseDetail) {
             $rules["restock_quantity.$index"] = ['required', 'numeric', 'min:1'];
             $rules["cost.$index"] = ['required', 'numeric', 'min:1'];
@@ -164,6 +206,8 @@ class RestockForm extends Component
             $rules["srp.$index"] = ['required', 'numeric', 'min:1'];
             $rules["expiration_date.$index"] = ['required', 'date'];
         }
+
+
         return $this->validate($rules);
     }
 
@@ -181,13 +225,15 @@ class RestockForm extends Component
     {
         $this->reset(['delivery_id', 'po_number', 'supplier', 'purchase_id', 'purchaseDetails', 'restock_quantity', 'cost', 'markup', 'srp', 'expiration_date']);
     }
-    public function refreshTable() {
+    public function refreshTable()
+    {
         $this->dispatch('refresh-table')->to(DeliveryTable::class);
     }
 
     public function closeModal()
     {
         $this->resetValidation();
+        $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
         $this->resetForm();
     }
     public function generateSKU()
