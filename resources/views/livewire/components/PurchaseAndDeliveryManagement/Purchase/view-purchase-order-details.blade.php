@@ -1,0 +1,80 @@
+{{-- // --}}
+<div class="relative" x-show="viewPurchaseOrderDetails">
+    <div class="flex flex-row h-[655px] gap-4 ">
+        <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
+
+            <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
+                <div class="flex flex-row gap-6">
+                    <div>
+                        <h1 class="text-[1.2em]">Purchase Order No</h1>
+                        <h2 class="text-[2em] font-black text-center w-full">PO Number</h2>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="supplier" class="text-[1.2em]">Supplier Name</label>
+                        <p>Supplier Name</p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- //* tablea area --}}
+            <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+
+                <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
+
+                    {{-- //* table header --}}
+                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+
+                        <tr class=" text-nowrap">
+
+                            {{-- //* barcode --}}
+                            <th scope="col" class="px-4 py-3 text-left">Barcode</th>
+
+                            {{-- //* item name --}}
+                            <th scope="col" class="py-3 text-left">Item Name</th>
+
+                            {{-- //* stocks on hand --}}
+                            <th scope="col" class="py-3 text-center ">Stocks-On-Hand</th>
+
+                            {{-- //* item reorder quantity --}}
+                            <th scope="col" class="py-3 text-center">Item Reorder Quantity</th>
+
+                            {{-- //* purchase quantity --}}
+                            <th scope="col" class="py-3 text-center text-nowrap">Purchase Quantity</th>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    {{-- //* table body --}}
+
+                    <tbody>
+                        {{-- @foreach ($reorder_lists as $index => $reorder_list) --}}
+                            <tr
+                                class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    <p>1</p>
+                                </th>
+                                <th scope="row"
+                                    class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    <p>2</p>
+                                </th>
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    <p>3</p>
+                                </th>
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    <p>4</p>
+                                </th>
+                                <th scope="row"
+                                    class="flex justify-center py-4 font-medium text-gray-900 text-clip text-md whitespace-nowrap">
+                                    <p>5</p>
+                                </th>
+                            </tr>
+                        {{-- @endforeach --}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
