@@ -7,11 +7,21 @@
                 <div class="flex flex-row gap-6">
                     <div>
                         <h1 class="text-[1.2em]">Purchase Order No</h1>
-                        <h2 class="text-[2em] font-black text-center w-full">PO Number</h2>
+                        <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                        <p>Supplier Name</p>
+                        <p>{{ $supplier }}</p>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="supplier" class="text-[1.2em]">Date Created</label>
+                        <p>{{ $dateCreated }}</p>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="supplier" class="text-[1.2em]"> Created by</label>
+                        <p>{{ $createdBy }}</p>
                     </div>
                 </div>
             </div>
@@ -32,12 +42,6 @@
                             {{-- //* item name --}}
                             <th scope="col" class="py-3 text-left">Item Name</th>
 
-                            {{-- //* stocks on hand --}}
-                            <th scope="col" class="py-3 text-center ">Stocks-On-Hand</th>
-
-                            {{-- //* item reorder quantity --}}
-                            <th scope="col" class="py-3 text-center">Item Reorder Quantity</th>
-
                             {{-- //* purchase quantity --}}
                             <th scope="col" class="py-3 text-center text-nowrap">Purchase Quantity</th>
                             </th>
@@ -47,31 +51,24 @@
                     {{-- //* table body --}}
 
                     <tbody>
-                        {{-- @foreach ($reorder_lists as $index => $reorder_list) --}}
+                        @foreach ($purchaseDetails as $purchaseDetail)
                             <tr
                                 class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                    <p>1</p>
+                                    <p>{{ $purchaseDetail->itemsJoin->barcode }}</p>
                                 </th>
                                 <th scope="row"
                                     class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                    <p>2</p>
+                                    <p>{{ $purchaseDetail->itemsJoin->item_name }}</p>
                                 </th>
                                 <th scope="row"
                                     class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <p>3</p>
+                                    <p>{{ $purchaseDetail->purchase_quantity }}</p>
                                 </th>
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <p>4</p>
-                                </th>
-                                <th scope="row"
-                                    class="flex justify-center py-4 font-medium text-gray-900 text-clip text-md whitespace-nowrap">
-                                    <p>5</p>
-                                </th>
+
                             </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

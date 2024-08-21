@@ -73,4 +73,11 @@ class PurchaseOrderTable extends Component
 
         $this->dispatch('display-purchase-order-details', viewPurchaseOrderDetails: true)->to(PurchasePage::class);
     }
+    public function getPo_ID($po_Id)
+    {
+
+        $this->dispatch('view-po', poID: $po_Id)->to(ViewPurchaseOrderDetails::class);
+
+    }
+
 }

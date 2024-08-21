@@ -12,11 +12,17 @@ class Purchase extends Model
     protected $fillable = [
         'po_number',
         'supplier_id',
+        'user_id',
     ];
 
     public function supplierJoin()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function userJoin()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function purchaseJoin()

@@ -4,11 +4,11 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Delivery;
-use App\Models\Inventory;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -263,7 +263,7 @@ class PurchaseOrderForm extends Component
         $purchase_order = Purchase::create([
             'po_number' => $validated['po_number'],
             'supplier_id' => $validated['select_supplier'],
-
+            'user_id' => Auth::id(),
         ]);
 
 
