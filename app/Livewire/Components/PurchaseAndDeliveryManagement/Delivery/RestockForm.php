@@ -16,7 +16,7 @@ class RestockForm extends Component
     use LivewireAlert;
     public $delivery_id, $po_number, $supplier, $purchase_id;
     public $purchaseDetails = [];
-    public $restock_quantity = [], $cost = [], $markup = [], $srp = [], $expiration_date = [];
+    public $restock_quantity = [null], $cost = [null], $markup = [null], $srp = [null], $expiration_date = [null];
 
     public function render()
     {
@@ -48,38 +48,52 @@ class RestockForm extends Component
     ];
 
     public function create()
-    {
+{
+    $validated = $this->validateForm(); // Validate form data
 
-        $validated = $this->validateForm();
+    // Initialize quantities array
+    $quantities = [];
 
-        foreach ($this->purchaseDetails as $index => $detail) {
-            $itemId = $detail['item_id']; // Assuming 'id' refers to item_id
+    // First pass: Accumulate restock quantities for each item
+    foreach ($this->purchaseDetails as $index => $detail) {
+        $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
-            // Sum the restock quantity for the item
-            if (!isset($quantities[$itemId])) {
-                $quantities[$itemId] = 0;
-            }
-            $quantities[$itemId] += $this->restock_quantity[$index];
-
-            // Check if the total restock quantity exceeds the purchased quantity
-            if ($quantities[$itemId] > $detail['purchased_quantity']) {
-                $this->alert('error', "The total restock quantity for {$detail['item_name']} exceeds the purchased quantity of {$detail['purchased_quantity']}.");
-                return; // Stop further processing
-            } elseif (($quantities[$itemId] < $detail['purchased_quantity'])) {
-                $this->confirm("The total restock quantity for some item falls short to the purchased quantit. Do you still want to add this item/s", [
-                    'onConfirmed' => 'updateConfirmed', //* call the confmired method
-                    'inputAttributes' =>  $validated, //* pass the $attributes array to the confirmed method
-                ]);
-            }else{
-                $this->confirm('Do you want to add this item?', [
-                    'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-                    'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-                ]);
-            }
+        if (!isset($quantities[$details_id])) {
+            $quantities[$details_id] = 0;
         }
-
-
+        $quantities[$details_id] += $this->restock_quantity[$index];
     }
+
+    // Second pass: Check each item's quantity individually
+    foreach ($this->purchaseDetails as $index => $detail) {
+        $details_id = $detail['id']; // Assuming 'id' refers to item_id
+
+        // Check if the accumulated restock quantity exceeds the purchased quantity
+        if ($quantities[$details_id] > $detail['purchase_quantity']) {
+            $this->alert('error', "The total restock quantity for {$detail['item_name']} exceeds the purchased quantity of {$detail['purchase_quantity']}.");
+            return; // Stop further processing
+        }
+    }
+
+    // If any item falls short, prompt for confirmation
+    foreach ($this->purchaseDetails as $index => $detail) {
+        $details_id = $detail['id']; // Assuming 'id' refers to item_id
+
+        if ($quantities[$details_id] < $detail['purchase_quantity']) {
+            $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
+                'onConfirmed' => 'createConfirmed',
+                'inputAttributes' => $validated,
+            ]);
+            return; // Ensure we don’t proceed if confirmation is needed
+        }
+    }
+
+    // If all validations pass, prompt for final confirmation
+    $this->confirm('Do you want to add these items?', [
+        'onConfirmed' => 'createConfirmed',
+        'inputAttributes' => $validated,
+    ]);
+}
 
     public function createConfirmed($data)
     {
@@ -106,7 +120,9 @@ class RestockForm extends Component
 
         $delivery = Delivery::find($this->purchase_id);
         $delivery->date_delivered = now();
+        $delivery->status = "Stocked in";
         $delivery->save();
+
         $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
 
@@ -126,8 +142,14 @@ class RestockForm extends Component
 
     public function calculateSRP($index)
     {
+        // Check if both cost and markup are set and are numeric
         if (isset($this->cost[$index]) && isset($this->markup[$index])) {
-            $this->srp[$index] = $this->cost[$index] * (1 + $this->markup[$index] / 100);
+            if (is_numeric($this->cost[$index]) && is_numeric($this->markup[$index])) {
+                $this->srp[$index] = $this->cost[$index] * (1 + $this->markup[$index] / 100);
+            } else {
+                // Handle the case where cost or markup is not numeric
+                $this->srp[$index] = null; // Or set it to some default value or handle the error accordingly
+            }
         }
     }
     private function populateForm() //*lagyan ng laman ang mga input
