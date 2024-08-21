@@ -113,13 +113,24 @@
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     <input type="number" wire:model="restock_quantity.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
-                                </th>
 
-                                {{-- cost --}}
+
+                                    @error("restock_quantity.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
+                                    {{-- cost --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     <input type="number" wire:model="cost.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+                                    @error("cost.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
+
+
 
                                 </th>
 
@@ -128,6 +139,11 @@
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     <input type="number" wire:model="markup.{{ $index }}"required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
+
+                                    @error("markup.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
                                 </th>
 
                                 {{-- srp --}}
@@ -135,6 +151,13 @@
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     <input type="number" wire:model="srp.{{ $index }}" required
                                         class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+
+                                    @error("srp.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
+
                                 </th>
 
                                 {{-- exp date --}}
@@ -142,6 +165,11 @@
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     <input type="date" wire:model="expiration_date.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+                                    @error("expiration_date.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
                                 </th>
 
                                 <th scope="row"
@@ -167,30 +195,7 @@
                                     @endif
                                 </th>
 
-                                @error('restock_quantity.$index ')
-                                    <span
-                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                @enderror
 
-                                @error('cost.$index')
-                                    <span
-                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                @enderror
-
-                                @error('markup.$index')
-                                    <span
-                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                @enderror
-
-                                @error('srp.$index')
-                                    <span
-                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                @enderror
-
-                                @error('expiration_date.$index')
-                                    <span
-                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                @enderror
                             </tr>
                         @endforeach
 

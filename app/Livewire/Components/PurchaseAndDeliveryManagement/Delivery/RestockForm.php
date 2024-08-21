@@ -152,18 +152,14 @@ class RestockForm extends Component
     }
     protected function validateForm()
     {
-
         $rules = [];
-
         foreach ($this->purchaseDetails as $index => $purchaseDetail) {
-
-            $rules["restock_quantity.$index"] = 'required|numeric|min:1';
-            $rules["cost.$index"] = 'required|numeric|min:1';
-            $rules["markup.$index"] = 'required|numeric|min:1';
-            $rules["srp.$index"] = 'required|numeric|min:1';
-            $rules["expiration_date.$index"] = 'required|date';
+            $rules["restock_quantity.$index"] = ['required', 'numeric', 'min:1'];
+            $rules["cost.$index"] = ['required', 'numeric', 'min:1'];
+            $rules["markup.$index"] = ['required', 'numeric', 'min:1'];
+            $rules["srp.$index"] = ['required', 'numeric', 'min:1'];
+            $rules["expiration_date.$index"] = ['required', 'date'];
         }
-
         return $this->validate($rules);
     }
 
