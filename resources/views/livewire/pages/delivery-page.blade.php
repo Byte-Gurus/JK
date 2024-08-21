@@ -16,6 +16,9 @@
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
         </div>
     @endif
+    <div x-show="showDeliveryDetails" x-data="{ showDeliveryDetails: @entangle('showDeliveryDetails')}">
+        @livewire('components.PurchaseAndDeliveryManagement.Delivery.view-delivery-details')
+    </div>
     <div x-show="showRestockForm" x-data="{ showRestockForm: @entangle('showRestockForm')}">
         @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
     </div>

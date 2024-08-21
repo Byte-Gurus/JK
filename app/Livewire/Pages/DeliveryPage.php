@@ -9,6 +9,8 @@ class DeliveryPage extends Component
 {
 
     public $showRestockForm = false;
+
+    public $showDeliveryDetails = false;
     public function render()
     {
         return view('livewire.pages.delivery-page');
@@ -17,7 +19,7 @@ class DeliveryPage extends Component
     protected $listeners = [
         'close-modal' => 'closeModal',
         'display-restock-form' => 'displayRestockForm',
-        'dsplay-delivery-table' => 'displayDeliveryTable'
+        'display-delivery-details' => 'displayDeliveryDetails',
     ];
 
     public function displayRestockForm($showRestockForm)
@@ -27,8 +29,11 @@ class DeliveryPage extends Component
 
     public function cancelRestockForm()
     {
-        $this->dispatch('close-modal')->to(RestockForm::class);
         $this->showRestockForm = false;
+    }
 
+    public function displayDeliveryDetails($showDeliveryDetails)
+    {
+        $this->showDeliveryDetails = $showDeliveryDetails;
     }
 }
