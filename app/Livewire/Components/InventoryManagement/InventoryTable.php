@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class InventoryTable extends Component
 {
     use WithPagination,  WithoutUrlPagination;
-    public $sortDirection = 'asc'; //var default sort direction is ascending
+    public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component

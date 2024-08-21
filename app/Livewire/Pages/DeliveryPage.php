@@ -28,5 +28,6 @@ class DeliveryPage extends Component
     public function cancelRestockForm()
     {
         $this->showRestockForm = false;
+        
     }
 }

@@ -79,6 +79,9 @@ class RestockForm extends Component
             ]);
         }
 
+        $delivery = Delivery::find($this->purchase_id);
+        $delivery->date_delivered = now();
+        $delivery->save();
         // $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
 
@@ -173,7 +176,10 @@ class RestockForm extends Component
         $this->populateForm();
     }
 
-
+    private function resetForm() //*tanggalin ang laman ng input pati $item_id value
+    {
+        $this->reset(['delivery_id', 'po_number', 'supplier', 'purchase_id', 'purchaseDetails', 'restock_quantity', 'cost', 'markup', 'srp', 'expiration_date']);
+    }
 
     public function generateSKU()
     {
