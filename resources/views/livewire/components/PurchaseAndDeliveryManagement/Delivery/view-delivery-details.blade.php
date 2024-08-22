@@ -14,7 +14,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                        <label for="supplier" class="text-[1.2em] ">Supplier name</label>
+                        <label for="supplier" class="text-[1.2em] ">BINI</label>
 
                     </div>
                 </div>
