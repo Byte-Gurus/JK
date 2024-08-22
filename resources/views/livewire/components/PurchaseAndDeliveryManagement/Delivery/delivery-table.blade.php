@@ -170,6 +170,10 @@
 
                                     class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded "
 
+                                    @elseif ($delivery->status == 'Stocked in')
+
+                                    class=" text-black bg-blue-400 border border-blue-900 text-xs font-medium px-2 py-0.5 rounded "
+
                                     @elseif ($delivery->status == 'In Progress')
 
                                     class=" text-black bg-orange-400 border w-fit self-center border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
@@ -235,7 +239,7 @@
                                                 </button>
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
                                                 <button
-                                                x-on:click="$wire.viewDeliveryDetails(); openActions = !openActions"
+                                                    x-on:click="$wire.viewDeliveryDetails(); openActions = !openActions"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5"
