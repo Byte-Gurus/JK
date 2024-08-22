@@ -164,7 +164,7 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                 <div class="flex justify-center ">
                                     <div
-                                        @if ($delivery->status == 'Delivered ') class=" text-black  bg-green-400 border border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
+                                        @if ($delivery->status == 'Delivered') class=" text-black  bg-green-400 border border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
 
                                     @elseif ($delivery->status == 'Cancelled')
 
@@ -195,10 +195,19 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <div class="flex justify-center ">
-                                    <button
-                                        class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
-                                        {{ $delivery->date_delivered->format('d-m-y')}}
-                                    </button>
+
+                                    @if ($delivery->date_delivered === 'N/A')
+                                        <button type="button" wire:click="changeDate({{ $delivery->id }})"
+                                            class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
+                                            N/A
+                                        </button>
+                                    @else
+                                        <button type="button" wire:click="changeDate({{ $delivery->id }})" disabled
+                                            class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
+                                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('d-m-Y') }}
+                                        </button>
+                                    @endif
+
                                 </div>
                             </th>
 
@@ -227,30 +236,35 @@
                                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                                     min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-                                                <button
-                                                    x-on:click="$wire.showRestockForm(); $wire.getDeliveryID({{ $delivery->id }}); openActions = !openActions"
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
-                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5"
-                                                            stroke="currentColor" class="size-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                        </svg></div>
-                                                    <div>Restock</div>
-                                                </button>
-                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
-                                                <button
-                                                    x-on:click="$wire.viewDeliveryDetails(); openActions = !openActions"
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
-                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5"
-                                                            stroke="currentColor" class="size-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div>View Details</div>
-                                                </button>
+
+                                                @if ($delivery->status === 'Delivered')
+                                                    <button
+                                                        x-on:click="$wire.showRestockForm(); $wire.getDeliveryID({{ $delivery->id }}); openActions = !openActions"
+                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="size-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                            </svg></div>
+                                                        <div>Restock</div>
+                                                    </button>
+                                                @endif
+                                                    <div class="w-full border border-[rgb(205,205,205)]"></div>
+
+
+                                                    <button
+                                                        x-on:click="$wire.viewDeliveryDetails(); openActions = !openActions"
+                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
+                                                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="size-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>View Details</div>
+                                                    </button>
                                             </div>
                                         </div>
                                     </div>

@@ -165,21 +165,7 @@
                                     </div>
 
                                     {{-- //* maximum stock ratio --}}
-                                    <div class="mb-3">
 
-                                        <label for="maximum_stock_ratio"
-                                            class="block mb-2 text-sm font-medium text-gray-900 "> Maximum stock ratio
-                                        </label>
-
-                                        <input type="text" id="maximum_stock_ratio" wire:model="maximum_stock_ratio"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Maximum stock ratio" required />
-
-                                        @error('maximum_stock_ratio')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
                                 </div>
 
 
@@ -254,7 +240,7 @@
                                         <label for="vat_amount"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Vat Amount</label>
 
-                                        <input type="text" id="vat_amount" wire:model="vat_amount"
+                                        <input type="numeric" id="vat_amount" wire:model="vat_amount"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-sm  block w-full p-2.5"
                                             placeholder="Vat Amount" required
                                             @if (!$vat_amount_enabled) disabled @endif />

@@ -49,7 +49,7 @@ class DeliveryTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
-
+        'updateConfirmed'
     ];
 
 
@@ -101,13 +101,20 @@ class DeliveryTable extends Component
 
         return $this->validate($rules);
     }
-    public function handleDateChange($deliveryId, $newDate)
+    public function changeDate($deliveryId)
     {
 
-        $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
-            'onConfirmed' => 'createConfirmed',
-            'inputAttributes' => $validated,
+        $this->confirm("Do you want to update this delivery?", [
+            'onConfirmed' => 'updateConfirmed',
+            'inputAttributes' => $deliveryId,
         ]);
+    }
+
+    public function updateConfirmed($data)
+    {
+
+        $deliveryId = $data['inputAttributes'];
+
         $delivery = Delivery::find($deliveryId);
         $delivery->date_delivered = now();
         $delivery->status = "Delivered";
