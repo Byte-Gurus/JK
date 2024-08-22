@@ -93,22 +93,30 @@ class DeliveryTable extends Component
         $this->dispatch('view-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
     }
 
-    public function changeDate($deliveryId)
+
+    public function changeDate($id, $date)
     {
+        $deliveries = [
+            'date' => $date,
+            'deliveryId' => $id
+        ];
+
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
-            'inputAttributes' => $deliveryId,
+            'inputAttributes' => $deliveries,
         ]);
     }
 
     public function updateConfirmed($data)
     {
 
-        $deliveryId = $data['inputAttributes'];
+        $updatedAttributes = $data['inputAttributes'];
+
+        $deliveryId = $updatedAttributes['deliveryId'];
 
         $delivery = Delivery::find($deliveryId);
-        $delivery->date_delivered = now();
+        $delivery->date_delivered = $updatedAttributes['date'];
         $delivery->status = "Delivered";
         $delivery->save();
 
