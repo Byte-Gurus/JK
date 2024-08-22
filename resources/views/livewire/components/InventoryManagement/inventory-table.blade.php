@@ -2,7 +2,7 @@
 <div class="relative" wire:poll.visible="500ms">
 
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4 ">
@@ -19,7 +19,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms = "search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name or Barcode" required="" />
 
 
@@ -27,7 +27,23 @@
 
 
             <div class="flex flex-row items-center justify-center gap-4">
-                <div class="flex flex-row items-center">
+
+                <div class="flex flex-row items-center gap-2">
+
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Start Date :</label>
+                    <input type="date" wire:model.live="startDate"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5" />
+
+                </div>
+
+                <div class="flex flex-row items-center gap-2">
+
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">End Date :</label>
+                    <input type="date" wire:model.live="endDate"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5" />
+
+                </div>
+                <div class="flex flex-row items-center gap-4">
 
                     <div class="flex flex-row items-center gap-2">
 
@@ -43,6 +59,23 @@
                         </select>
 
                     </div>
+
+                    <div class="flex flex-row items-center gap-2">
+
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
+
+                        <select wire:model.live="supplierFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            <option value="0">All</option>
+
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                            @endforeach
+
+
+                        </select>
+
+                    </div>
                 </div>
 
 
@@ -51,9 +84,9 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll h-[500px] ">
+    <div class="overflow-x-auto overflow-y-scroll h-[480px]">
 
-            <table class="w-full h-10 text-sm text-left">
+            <table class="w-full text-sm text-left">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
@@ -262,6 +295,7 @@
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 {{-- x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions" --}}
                                                 <button
+                                                    x-on:click="showStockAdjustModal=true, openActions = !openActions" wire:click="getStockID({{ $inventory->id}})"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" strokeWidth="1.5"

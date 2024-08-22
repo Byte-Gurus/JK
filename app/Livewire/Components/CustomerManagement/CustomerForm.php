@@ -270,6 +270,7 @@ class CustomerForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(CustomerManagementPage::class);
+        $this->resetValidation();
         $this->cities = null;
         $this->barangays = null;
     }

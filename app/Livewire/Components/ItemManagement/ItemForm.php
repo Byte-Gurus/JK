@@ -194,6 +194,7 @@ class ItemForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(ItemManagementPage::class);
+        $this->resetValidation();
     }
 
     protected function validateForm()

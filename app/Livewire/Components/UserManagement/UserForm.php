@@ -94,6 +94,7 @@ class UserForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(UserManagementPage::class);
+        $this->resetValidation();
     }
 
 

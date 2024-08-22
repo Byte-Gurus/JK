@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Item;
 use App\Models\Supplier;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -44,6 +45,7 @@ class InventoryFactory extends Factory
             'status' => $status,
             'item_id' => $activeItems->isNotEmpty() ? $activeItems->random()->id : null,
             'supplier_id' => Supplier::all()->random()->id,
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

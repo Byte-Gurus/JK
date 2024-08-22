@@ -12,7 +12,7 @@ class Item extends Model
     protected $fillable = [
         'barcode',
         'item_name',
-        'item_description',
+        'description',
         'maximum_stock_ratio',
         'reorder_percentage',
         'reorder_point',
@@ -42,7 +42,6 @@ class Item extends Model
         //? queries
         $query->where('item_name', 'like', "%{$value}%")
         ->orWhere('barcode', 'like', "%{$value}%");
-;
 
     }
 }

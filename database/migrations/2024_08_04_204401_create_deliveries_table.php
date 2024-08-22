@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
+            $table->string("status");
+            $table->string("date_delivered");
             $table->timestamps();
+
+            $table->foreignId('purchase_id')->constrained('purchases');
         });
     }
 

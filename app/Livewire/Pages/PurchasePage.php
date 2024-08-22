@@ -13,7 +13,11 @@ class PurchasePage extends Component
     public $isCreate;
     public $showModal;
 
+    public $hideTable;
+
     public $showEditModal;
+
+    public $viewPurchaseOrderDetails;
 
     public function render()
     {
@@ -24,14 +28,15 @@ class PurchasePage extends Component
     {
         $this->dispatch('change-method', isCreate: true)->to(PurchaseOrderForm::class);
         $this->dispatch('display-modal', showModal: true)->to(PurchaseOrderForm::class);
-
     }
 
     protected $listeners = [
         'close-modal' => 'closeModal',
         'change-method' => 'changeMethod',
         'display-edit-modal' => 'displayEditModal',
-        'form-cancel' => 'formCancel'
+        'display-purchase-order-details' => 'displayPurchaseOrderDetails',
+        'form-cancel' => 'formCancel',
+        'display-table' => 'displayTable'
     ];
 
     public function changeMethod($isCreate)
@@ -49,11 +54,26 @@ class PurchasePage extends Component
     public function displayEditModal($showEditModal)
     {
         $this->showEditModal = $showEditModal;
-        $this->dispatch('display-modal', showModal: false)->to(PurchasePage::class); //var assign ang parameter value sa global variable
     }
 
     public function formCancel()
     {
         $this->dispatch('display-modal', showModal: false)->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
+    }
+
+    public function displayPurchaseOrderDetails($viewPurchaseOrderDetails)
+    {
+        $this->viewPurchaseOrderDetails = $viewPurchaseOrderDetails;
+    }
+
+    public function displayTable()
+    {
+        $this->showModal = true;
+    }
+
+    public function returnToTable()
+    {
+        $this->viewPurchaseOrderDetails = false;
+        $this->showModal = false;
     }
 }

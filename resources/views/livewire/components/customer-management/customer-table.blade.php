@@ -2,7 +2,7 @@
 <div class="relative" wire:poll.visible="1000ms">
 
 
-    <div class="relative overflow-hidden bg-white border border-black shadow-lg sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4 ">
@@ -18,7 +18,7 @@
                     </svg>
                 </div>
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Customer Name" required="" />
             </div>
             <div class="flex flex-row items-center justify-center gap-4">
@@ -260,7 +260,7 @@
     @if ($imageUrl)
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
-            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg shadow-lg ">
+            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg ">
                 <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
             </div>
             <div class="absolute bg-red-200 z-60">

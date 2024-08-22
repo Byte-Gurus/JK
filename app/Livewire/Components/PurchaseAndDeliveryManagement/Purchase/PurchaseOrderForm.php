@@ -3,11 +3,12 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Livewire\Pages\PurchasePage;
-use App\Models\Inventory;
+use App\Models\Delivery;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -33,8 +34,7 @@ class PurchaseOrderForm extends Component
 
     public $filtered_reorder_lists = [];
 
-    public $index;
-    public $isDisabled;
+
 
     /**
      * Summary of render
@@ -49,7 +49,7 @@ class PurchaseOrderForm extends Component
      */
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->get();
+        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
 
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
@@ -118,11 +118,12 @@ class PurchaseOrderForm extends Component
             // Remove the selected items from reorder_lists
             foreach ($this->selectedToRemove as $index) {
                 unset($this->reorder_lists[$index]);
+                unset($this->purchase_quantities[$index]);
             }
 
             // Reindex the array after removal
             $this->reorder_lists = array_values($this->reorder_lists);
-
+            $this->purchase_quantities = array_values($this->purchase_quantities);
 
             // Clear the selected items array
             $this->selectedToRemove = [];
@@ -262,7 +263,7 @@ class PurchaseOrderForm extends Component
         $purchase_order = Purchase::create([
             'po_number' => $validated['po_number'],
             'supplier_id' => $validated['select_supplier'],
-
+            'user_id' => Auth::id(),
         ]);
 
 
@@ -275,6 +276,11 @@ class PurchaseOrderForm extends Component
             ]);
         }
 
+        $delivery = Delivery::create([
+            'status' => "In Progress",
+            'date_delivered' => "N/A",
+            'purchase_id' => $purchase_order->id
+        ]);
 
         $this->alert('success', 'Purchase order was created successfully');
         $this->refreshTable();
@@ -377,6 +383,7 @@ class PurchaseOrderForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(PurchasePage::class);
+        $this->resetValidation();
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {

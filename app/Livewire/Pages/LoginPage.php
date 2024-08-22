@@ -18,22 +18,24 @@ class LoginPage extends Component
     public function authenticate()
     {
 
+
         $validated = $this->validate([
             'username' => 'required',
             'password' => 'required|min:8',
         ]);
 
         if (Auth::attempt($validated)) {
-        
+
 
             if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
+
                 return redirect()->route('admin.index');
             } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
+
                 return redirect()->route('cashier.index');
-            }else{
+            } else {
                 $this->addError('submit', 'This account is inactive');
             }
-
         }
 
         $this->addError('submit', 'No matching user with provided username and password');

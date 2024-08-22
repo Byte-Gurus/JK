@@ -18,13 +18,13 @@ class Inventory extends Model
         'cost',
         'mark_up_price',
         'selling_price',
-        'quantity',
         'current_stock_quantity',
         'stock_in_date',
+        'expiration_date',
         'status',
         'item_id',
         'supplier_id',
-
+        'user_id'
     ];
 
     public function itemJoin()
@@ -35,7 +35,10 @@ class Inventory extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
-
+    public function userJoin()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function scopeSearch($query, $value)
     {
 

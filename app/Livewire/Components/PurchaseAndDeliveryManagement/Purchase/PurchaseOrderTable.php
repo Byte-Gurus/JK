@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class PurchaseOrderTable extends Component
 {
     use WithPagination,  WithoutUrlPagination;
-    public $sortDirection = 'asc'; //var default sort direction is ascending
+    public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
@@ -21,7 +21,7 @@ class PurchaseOrderTable extends Component
 
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->get();
+        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
         $query = Purchase::query();
 
@@ -66,4 +66,18 @@ class PurchaseOrderTable extends Component
     {
         $this->resetPage();
     }
+
+    public function viewPurchaseOrderDetails()
+    {
+        $this->dispatch('display-table')->to(PurchasePage::class);
+
+        $this->dispatch('display-purchase-order-details', viewPurchaseOrderDetails: true)->to(PurchasePage::class);
+    }
+    public function getPo_ID($po_Id)
+    {
+
+        $this->dispatch('view-po', poID: $po_Id)->to(ViewPurchaseOrderDetails::class);
+
+    }
+
 }
