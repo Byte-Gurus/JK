@@ -49,7 +49,7 @@ class DeliveryTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
-        'updateConfirmed'
+        'updateConfirmed',
     ];
 
 
@@ -92,35 +92,29 @@ class DeliveryTable extends Component
         $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
         $this->dispatch('view-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
     }
-    protected function validateForm()
+
+    public function handleDateChange($deliveryId)
     {
 
-        $rules = [
-            'dateDelivered' => '|string|max:255',
-        ];
+        $attributes = $deliveryId;
 
-        return $this->validate($rules);
-    }
-    public function changeDate($deliveryId)
-    {
-
-        $this->confirm("Do you want to update this delivery?", [
-            'onConfirmed' => 'updateConfirmed',
-            'inputAttributes' => $deliveryId,
+        $this->confirm('Do you want to add this item?', [
+            'onConfirmed' => 'updateConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $attributes, //* pass the user to the confirmed method, as a form of array
         ]);
+
     }
 
     public function updateConfirmed($data)
     {
+        $updatedAttributes = $data['inputAttributes'];
 
-        $deliveryId = $data['inputAttributes'];
-
-        $delivery = Delivery::find($deliveryId);
+        $delivery = Delivery::find($updatedAttributes['deliveryId']);
         $delivery->date_delivered = now();
         $delivery->status = "Delivered";
         $delivery->save();
 
-        $this->alert('success', 'Delivery chnaged successfully');
+        $this->alert('success', 'Delivery date changed successfully');
         $this->resetPage();
     }
 }
