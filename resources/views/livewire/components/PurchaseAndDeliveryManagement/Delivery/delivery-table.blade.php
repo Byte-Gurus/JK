@@ -20,7 +20,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/2 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/2 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Delivery ID" required="" />
 
 
@@ -194,11 +194,11 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $delivery->date_delivered }} --}}
                                 <div class="flex justify-center ">
-                                    <input type="date" wire:model.live="dateDelivered.{{ $delivery->id }}"
-                                        wire:change="handleDateChange({{ $delivery->id }}, $event.target.value)"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 p-2.5">
+                                    <button
+                                        class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
+                                        {{ $delivery->date_delivered->format('d-m-y')}}
+                                    </button>
                                 </div>
                             </th>
 

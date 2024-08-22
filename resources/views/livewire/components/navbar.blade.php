@@ -18,7 +18,7 @@
             x-transition:leave="transition ease-in-out duration-300"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-100 scale-100"
-            class="absolute top-0 left-[-220px] w-0 max-w-md transition-all ease-in-out duration-100 z-20"
+            class="absolute bg-blue-100 top-0 left-[-220px] w-0 max-w-md transition-all ease-in-out duration-100 z-20"
             :class="openSidebar && ' left-[0px]'">
                 @livewire('components.sidebar')
             </div>

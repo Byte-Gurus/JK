@@ -14,7 +14,7 @@
                             <div class="flex flex-col gap-2">
                                 <label for="supplier" class="text-[1.2em]">Supplier Name</label>
                                 <select id="supplier" wire:model="select_supplier" required
-                                    class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-md text-gray-900 text-sm block w-full px-4 py-2 appearance-auto ">
+                                    class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-sm text-gray-900 text-sm block w-full px-4 py-2 appearance-auto ">
                                     <option value="" selected>Select Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option value="{{ $supplier->id }}">
@@ -31,17 +31,17 @@
 
                             <div>
                                 <button wire:click="removeRow" type="button"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                                     Remove Row</button>
                             </div>
                             <div>
                                 @if (!empty($selectedToRemove) || empty($reorder_lists))
                                     <button type="submit" disabled
-                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-md ">
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-sm ">
                                         Save</button>
                                 @else
                                     <button type="submit"
-                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                                         Save</button>
                                 @endif
                             </div>
@@ -64,7 +64,6 @@
 
                                         <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
                                             class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
-
 
                                     </th>
 
@@ -123,7 +122,7 @@
                                                 class="flex justify-center py-4 font-medium text-gray-900 text-clip text-md whitespace-nowrap">
                                                 <input type="number"
                                                     wire:model="purchase_quantities.{{ $index }}" required
-                                                    class="bg-[rgb(249,249,249)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg text-center w-1/2 p-2.5">
+                                                    class="bg-[rgb(249,249,249)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
 
                                                 @error("purchase_quantities.$index")
                                                     <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -149,12 +148,12 @@
                     <div>
                         @if (!empty($selectedToRestore))
                             <button wire:click="restoreRow" type="button"
-                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,215,153)] hover:bg-[rgb(255,201,99)] text-[rgb(53,53,53)] border rounded-md">
+                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,215,153)] hover:bg-[rgb(255,201,99)] text-[rgb(53,53,53)] border rounded-sm">
                                 Restore Row
                             </button>
                         @else
                             <button wire:click="restoreRow" type="button" disabled
-                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(199,199,199)] text-[rgb(53,53,53)] border rounded-md transition-all duration-100 ease-in-out">
+                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(199,199,199)] text-[rgb(53,53,53)] border rounded-sm transition-all duration-100 ease-in-out">
                                 Restore Row
                             </button>
                         @endif
@@ -258,17 +257,17 @@
 
                             <div>
                                 <button wire:click="removeRow" type="button"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                                     Remove Row</button>
                             </div>
                             <div>
                                 @if (!empty($selectedToRemove) || empty($edit_reorder_lists))
                                     <button type="submit" disabled
-                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-md ">
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-sm ">
                                         Update</button>
                                 @else
                                     <button type="submit"
-                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                                         Update</button>
                                 @endif
                             </div>
@@ -378,12 +377,12 @@
                     <div>
                         @if (empty($filtered_reorder_lists))
                             <button wire:click="restoreRow" type="button" disabled
-                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md">
+                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-sm">
                                 Restore Row
                             </button>
                         @else
                             <button wire:click="restoreRow" type="button"
-                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,255,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(255,244,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                                 Restore Row
                             </button>
                         @endif

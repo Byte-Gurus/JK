@@ -60,7 +60,7 @@
                     <div class="flex flex-col gap-4">
 
                         {{-- //* first area, personal information --}}
-                        <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                        <div class="border-2 border-[rgb(53,53,53)] rounded-sm">
 
                             <div
                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
@@ -80,7 +80,7 @@
                                         </label>
 
                                         <input type="text" id="firstname" wire:model="firstname"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="First Name" tabindex="2" required />
 
                                         @error('firstname')
@@ -96,7 +96,7 @@
                                             Name <span class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="middlename" wire:model="middlename"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg  block w-full p-2.5"
                                             placeholder="Middle Name" />
 
                                         @error('middlename')
@@ -117,7 +117,7 @@
                                         </label>
 
                                         <input type="text" id="lastname" wire:model="lastname"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg border border-[rgb(143,143,143)]  block w-full p-2.5"
                                             placeholder="Last Name" required />
 
                                         @error('lastname')
@@ -134,7 +134,7 @@
                                             No</label>
 
                                         <input type="number" id="contactno" wire:model="contact_number"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg block w-full p-2.5"
                                             placeholder="Contact No" required />
 
                                         @error('contact_number')
@@ -155,7 +155,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
 
                                         <select id="user_roles" wire:model="role"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Select a role</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Cashier</option>
@@ -175,7 +175,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
                                         <select id="status" wire:model="status"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)]  text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                                             <option value="" selected>Set your status</option>
                                             <option value="1">Active</option>
                                             <option value="2">Inactive</option>
@@ -216,15 +216,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3 flex flex-wrap items-center justify-center">
-                                        <div class="flex flex-col  gap-2">
+                                    <div class="flex flex-wrap items-center justify-center mb-3">
+                                        <div class="flex flex-col gap-2">
                                             <input type="file" id="user_image" wire:model="user_image" required accept="image/jpg, image/png"
                                                 class="mb-4 bg-[rgb(236,236,236)] border border-[rgb(53,53,53)]"
                                                 x-on:change="showPreview = true; imagePreview = URL.createObjectURL($event.target.files[0])"
                                                 x-ref="fileInput">
                                             <a x-show="showPreview"
                                                 @click="showPreview = false; imagePreview = ''; $refs.fileInput.value = ''"
-                                                class="px-4 py-2 mb-4 text-white transition-all duration-100 ease-in-out bg-red-500 hover:bg-red-600 hover:rounded-md">Clear</a>
+                                                class="px-4 py-2 mb-4 text-white transition-all duration-100 ease-in-out bg-red-500 hover:bg-red-600 hover:rounded-sm">Clear</a>
                                         </div>
                                     </div>
 
@@ -236,7 +236,7 @@
                     </div>
 
                     {{-- //* second area, login information --}}
-                    <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                    <div class="border-2 border-[rgb(53,53,53)] rounded-sm">
 
                         <div
                             class="p-2 border-b  bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
@@ -252,7 +252,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900">Username</label>
 
                                 <input type="text" id="username" wire:model="username"
-                                    class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                    class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg  block w-full p-2.5"
                                     placeholder="Username" required />
 
                                 @error('username')
@@ -272,7 +272,7 @@
 
                                     <input type="password" wire:model="password" id="password"
                                         placeholder="Password"
-                                        class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
                                     @error('password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -289,7 +289,7 @@
 
                                     <input type="password" id="retype_password" wire:model="retype_password"
                                         placeholder="Retype Password"
-                                        class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
 
                                     @error('retype_password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -328,7 +328,7 @@
 
                                 </button>
                                 <div wire:loading>
-                                    <div class="loader loader--style3 flex justify-center items-center "
+                                    <div class="flex items-center justify-center loader loader--style3 "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
@@ -373,7 +373,7 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="loader loader--style3 flex justify-center items-center "
+                                    <div class="flex items-center justify-center loader loader--style3 "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
@@ -394,13 +394,9 @@
                         </div>
                     @endif
                 </div>
-
+            </form>
         </div>
-
-        </form>
     </div>
-
-
 </div>
 
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>

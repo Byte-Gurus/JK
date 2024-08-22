@@ -19,7 +19,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms = "search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Name or Username" required="" />
 
 
@@ -226,7 +226,7 @@
                             {{-- //* edit button --}}
                             <th class="px-4 py-6 text-center text-md text-nowrap">
                                 <div
-                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
+                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
 
                                     <button x-on:click="showModal=true;$wire.getUserID({{ $user->id }})">
 
