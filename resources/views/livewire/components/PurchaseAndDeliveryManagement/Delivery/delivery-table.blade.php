@@ -196,7 +196,8 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- {{ $delivery->date_delivered }} --}}
                                 <div class="flex justify-center ">
-                                    <input type="date"
+                                    <input type="date" wire:model.live="dateDelivered.{{ $delivery->id }}"
+                                        wire:change="handleDateChange({{ $delivery->id }}, $event.target.value)"
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 p-2.5">
                                 </div>
                             </th>

@@ -8,10 +8,11 @@ use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DeliveryTable extends Component
 {
-    use WithPagination,  WithoutUrlPagination;
+    use WithPagination,  WithoutUrlPagination, LivewireAlert;
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
@@ -22,6 +23,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
+    public $dateDelivered = [];
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -89,5 +91,29 @@ class DeliveryTable extends Component
     {
         $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
         $this->dispatch('view-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
+    }
+    protected function validateForm()
+    {
+
+        $rules = [
+            'dateDelivered' => '|string|max:255',
+        ];
+
+        return $this->validate($rules);
+    }
+    public function handleDateChange($deliveryId, $newDate)
+    {
+
+        $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
+            'onConfirmed' => 'createConfirmed',
+            'inputAttributes' => $validated,
+        ]);
+        $delivery = Delivery::find($deliveryId);
+        $delivery->date_delivered = now();
+        $delivery->status = "Delivered";
+        $delivery->save();
+
+        $this->alert('success', 'Delivery chnaged successfully');
+        $this->resetPage();
     }
 }

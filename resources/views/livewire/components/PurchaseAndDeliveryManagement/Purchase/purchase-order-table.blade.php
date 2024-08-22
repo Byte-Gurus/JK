@@ -184,7 +184,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $suppliers->links() }} --}}
+                {{ $purchases->links() }}
 
             </div>
 
