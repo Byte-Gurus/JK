@@ -197,7 +197,7 @@
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($user->statusJoin->status_type == 'Active') class=" text-green-900 pointer-events-none  bg-green-100 border border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded-sm"
+                                    @if ($user->statusJoin->status_type == 'Active') class=" text-green-900 pointer-events-none font-bold  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                         @elseif ($user->statusJoin->status_type == 'Inactive')
 

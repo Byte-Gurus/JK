@@ -108,24 +108,24 @@
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->created_at }}
                             </th>
 
                             {{-- //* item name --}}
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->po_number }}
                             </th>
 
                             {{-- //* item desc --}}
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->supplierJoin->company_name }}
                             </th>
 
                             {{-- //* actions --}}
-                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
 
 
                                 <div x-data="{ openActions: false }">

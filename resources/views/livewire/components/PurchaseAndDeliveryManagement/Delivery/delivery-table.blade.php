@@ -148,7 +148,7 @@
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $delivery->purchaseJoin->supplierJoin->company_name }}
                             </th>
 
@@ -164,19 +164,19 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                 <div class="flex justify-center ">
                                     <div
-                                        @if ($delivery->status == 'Delivered') class=" text-black  bg-green-400 border border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
+                                        @if ($delivery->status == 'Delivered') class=" text-green-900 bg-green-100 border pointer-events-none border-green-900 text-xs font-medium px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'Cancelled')
 
-                                    class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded "
+                                    class=" text-red-900 bg-red-100 border pointer-events-none border-red-900 text-xs font-medium px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'Stocked in')
 
-                                    class=" text-black bg-blue-400 border border-blue-900 text-xs font-medium px-2 py-0.5 rounded "
+                                    class=" text-blue-900 bg-blue-100 border pointer-events-none border-blue-900 text-xs font-medium px-2 py-0.5 rounded-sm "
 
                                     @elseif ($delivery->status == 'In Progress')
 
-                                    class=" text-black bg-orange-400 border w-fit self-center border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
+                                    class=" text-orange-900 bg-orange-100 border pointer-events-none border-orange-900 text-xs font-medium px-2 py-0.5 rounded-sm " @endif>
 
                                         {{ $delivery->status }}
                                     </div>
@@ -195,10 +195,26 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <div class="flex justify-center ">
+<<<<<<< Updated upstream
                                     <button
                                         class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-100 transition-all hover:bg-[#535353] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-fit px-4 py-2">
                                         {{ $delivery->date_delivered }}
                                     </button>
+=======
+
+                                    @if ($delivery->date_delivered === 'N/A')
+                                        <button type="button" wire:click="changeDate({{ $delivery->id }})"
+                                            class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
+                                            N/A
+                                        </button>
+                                    @else
+                                        <button type="button" wire:click="changeDate({{ $delivery->id }})" disabled
+                                            class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
+                                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('d-m-Y') }}
+                                        </button>
+                                    @endif
+
+>>>>>>> Stashed changes
                                 </div>
                             </th>
 

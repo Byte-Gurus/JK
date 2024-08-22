@@ -81,7 +81,7 @@
 
 
                         {{-- //* Customer Type --}}
-                        <th scope="col" class="px-4 py-3">Customer Type</th>
+                        <th scope="col" class="px-4 py-3 text-center">Customer Type</th>
 
                         {{-- //* Customer discount number --}}
                         <th scope="col" class="px-4 py-3">Disount Number</th>
@@ -159,7 +159,7 @@
                             </th>
 
                             {{-- //* customer type --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->customer_type }}
                             </th>
 

@@ -188,14 +188,11 @@
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($item->statusJoin->status_type == 'Active') class=" text-black bg-green-400
-                                border
-                                border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
+                                    @if ($item->statusJoin->status_type == 'Active') class=" text-green-900 pointer-events-none font-bold  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                 @elseif ($item->statusJoin->status_type == 'Inactive')
 
-                                class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5
-                                rounded " @endif>
+                                class=" text-red-900 bg-red-100 border pointer-events-none border-red-900 text-xs font-medium px-2 py-0.5 rounded-sm" @endif>
 
                                     {{ $item->statusJoin->status_type }}
                                 </p>
