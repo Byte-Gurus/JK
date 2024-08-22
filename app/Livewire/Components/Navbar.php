@@ -3,11 +3,13 @@
 namespace App\Livewire\Components;
 
 use App\Livewire\Pages\CustomerCreditMangementPage;
+use App\Livewire\Pages\CustomerManagementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\OrderAndDeliveryManagementPage;
+use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\UserManagementPage;
 use Carbon\Carbon;
@@ -32,10 +34,10 @@ class Navbar extends Component
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(SupplierManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(UserManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(HomePage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(OrderAndDeliveryManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(PurchaseAndDeliveryManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(Dashboard::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(ItemManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(CustomerCreditMangementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(CustomerManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(InventoryManagementPage::class);
     }
 
@@ -47,4 +49,6 @@ class Navbar extends Component
         $this->date = $manilaTime->format('F j, Y');
         $this->time = $manilaTime->format('h:i A');
     }
+
+
 }

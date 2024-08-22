@@ -22,7 +22,7 @@
 
                     <div>
                         <button type="submit"
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                             Restock</button>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- wire:model="restock_quantity.{{ $index }}" required --}}
                                 <input type="number"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block mx-auto w-2/3 p-2.5">
 
 
 
@@ -109,7 +109,7 @@
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- wire:model.live="cost.{{ $index }}" required --}}
                                 <input type="number"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-full p-2.5">
 
 
 
@@ -120,7 +120,7 @@
                             class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                             {{-- wire:model.live="markup.{{ $index }}"required --}}
                             <input type="number"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-2/3 mx-auto p-2.5">
 
 
                             </th>
@@ -130,7 +130,7 @@
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <input type="number"
                                 {{--  wire:model.live="srp.{{ $index }}" required readonly --}}
-                                    class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                    class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-full p-2.5">
 
 
 
@@ -141,7 +141,7 @@
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- wire:model="expiration_date.{{ $index }}" required --}}
                                 <input type="date"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-full p-2.5">
                             </th>
                         </tr>
                     </tbody>

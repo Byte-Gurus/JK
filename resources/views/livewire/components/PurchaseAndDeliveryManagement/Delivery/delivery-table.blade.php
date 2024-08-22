@@ -20,7 +20,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/2 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/2 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Delivery ID" required="" />
 
 
@@ -197,7 +197,7 @@
                                 {{-- {{ $delivery->date_delivered }} --}}
                                 <div class="flex justify-center ">
                                     <input type="date"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 p-2.5">
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-2/3 p-2.5">
                                 </div>
                             </th>
 
