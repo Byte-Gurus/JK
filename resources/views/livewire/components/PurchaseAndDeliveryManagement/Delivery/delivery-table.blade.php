@@ -195,6 +195,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <div class="flex justify-center ">
+<<<<<<< Updated upstream
 
                                     @if ($delivery->date_delivered === 'N/A')
                                         <button type="button" wire:click="changeDate({{ $delivery->id }})"
@@ -208,6 +209,12 @@
                                         </button>
                                     @endif
 
+=======
+                                    <button
+                                        class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-100 transition-all hover:bg-[#535353] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-fit px-4 py-2">
+                                        {{ $delivery->date_delivered }}
+                                    </button>
+>>>>>>> Stashed changes
                                 </div>
                             </th>
 
