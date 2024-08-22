@@ -194,10 +194,11 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{-- {{ $delivery->date_delivered }} --}}
                                 <div class="flex justify-center ">
-                                    <input type="date"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-2/3 p-2.5">
+                                    <button
+                                        class=" bg-[rgb(224,224,224)] hover:text-[rgb(255,255,255)] ease-in-out duration-300 transition-all hover:bg-[rgb(0,0,0)] border font-black border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm block w-2/3 px-4 py-2">
+                                        {{ $delivery->date_delivered->format('d-m-y')}}
+                                    </button>
                                 </div>
                             </th>
 

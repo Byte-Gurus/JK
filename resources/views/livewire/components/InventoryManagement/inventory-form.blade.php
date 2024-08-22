@@ -38,7 +38,7 @@
                 <div class="flex flex-col gap-4">
 
                     {{-- //* first area, personal information --}}
-                    <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                    <div class="border-2 border-[rgb(53,53,53)] rounded-sm">
 
                         <div
                             class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
@@ -167,7 +167,7 @@
                     </div>
                     <div>
                         <button
-                            class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Adjust</button>
+                            class=" px-6 py-2 bg-orange-300 rounded-sm text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Adjust</button>
                     </div>
                 </div>
                 {{-- //* form footer --}}
