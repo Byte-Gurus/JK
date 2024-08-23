@@ -125,5 +125,18 @@
         </div>
         <div class="bg-red-100 ">transaction detailsss</div>
     </div>
+    <table>
+        <th>
+            <tr>Expiration Date</tr>
+        </th>
+        <tbody>
+            <th scope="row">
+                <div class="w-1/3 ">
+                    @include('flatpickr::components.style')
+                    <x-flatpickr :min-date="today()" id="laravel-flatpickr" date-format="d/m/Y"/>
+                </div>
+            </th>
+        </tbody>
+    </table>
 </div>
-
+@include('flatpickr::components.script')

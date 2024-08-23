@@ -63,12 +63,12 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[500px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[480px] ">
 
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
                     <tr class=" text-nowrap">
 
@@ -141,10 +141,9 @@
                             </th>
 
                             {{-- //* item status --}}
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-md whitespace-nowrap">
-                                    <p
-                                        @if ($delivery->status == 'Delivered') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-md whitespace-nowrap">
+                                <p
+                                    @if ($delivery->status == 'Delivered') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'Cancelled')
 
@@ -158,8 +157,8 @@
 
                                     class=" text-orange-900 pointer-events-none font-medium  bg-orange-100 border border-orange-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
 
-                                        {{ $delivery->status }}
-                                    </p>
+                                    {{ $delivery->status }}
+                                </p>
                             </th>
 
                             {{-- //* status --}}
@@ -211,9 +210,9 @@
                                         x-transition:leave="transition ease-out duration-100"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0"
-                                        class="absolute right-16 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        class=" absolute right-16 z-1 transform max-w-m origin-top-right w-[170px]">
                                         <div
-                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                                            class=" overflow-y-auto rounded-l-md rounded-br-md rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                                     min-h-[20%]">
                                             <div
                                                 class="flex flex-col font-black border border-[rgb(205,205,205)] bg-[rgb(255,255,255)]">

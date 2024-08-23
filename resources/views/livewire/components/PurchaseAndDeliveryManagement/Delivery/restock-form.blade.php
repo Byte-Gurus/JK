@@ -32,7 +32,6 @@
             <div class="h-[500px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
-
                     {{-- //* table header --}}
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
@@ -156,15 +155,11 @@
                                 </th>
 
                                 {{-- exp date --}}
-                                <th scope="row"
-                                    class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="date" wire:model="expiration_date.{{ $index }}" required
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
-
-                                    @error("expiration_date.$index")
-                                        <span
-                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                    @enderror
+                                <th scope="row">
+                                    <div class="w-1/3 ">
+                                        @include('flatpickr::components.style')
+                                        <x-flatpickr :min-date="today()" id="laravel-flatpickr" date-format="d/m/Y"/>
+                                    </div>
                                 </th>
 
                                 <th scope="row"
@@ -200,3 +195,4 @@
         </form>
     </div>
 </div>
+<x-flatpickr::script />

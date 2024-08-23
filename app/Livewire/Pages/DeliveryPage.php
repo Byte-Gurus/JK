@@ -37,4 +37,10 @@ class DeliveryPage extends Component
         $this->openDeliveryDetails = $openDeliveryDetails;
         $this->showRestockForm = true;
     }
+
+    public function closeDeliveryDetails()
+    {
+        $this->showRestockForm = false;
+        $this->openDeliveryDetails = false;
+    }
 }
