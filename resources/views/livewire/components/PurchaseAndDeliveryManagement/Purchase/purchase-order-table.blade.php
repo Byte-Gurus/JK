@@ -1,7 +1,7 @@
 {{-- // --}}
 <div class="relative" x-cloak>
 
-    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-md">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-2 py-4">
@@ -44,7 +44,7 @@
                         <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
 
                         <select wire:model.live="supplierFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
                             <option value="0">All</option>
 
                             @foreach ($suppliers as $supplier)
@@ -194,7 +194,7 @@
                 <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
                 <select wire:model.live="perPage"
-                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
+                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
