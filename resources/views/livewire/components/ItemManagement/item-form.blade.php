@@ -60,7 +60,7 @@
                     <div class="flex flex-col gap-4">
 
                         {{-- //* first area, personal information --}}
-                        <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                        <div class="border-2 border-[rgb(53,53,53)] rounded-sm">
 
                             <div
                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
@@ -80,7 +80,7 @@
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="item_name" wire:model="item_name"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
                                             placeholder="Item Name" />
 
                                         @error('item_name')
@@ -99,7 +99,7 @@
                                             </div>
                                             <div>
                                                 <button type="button" wire:click="changeBarcodeForm()"
-                                                    class="px-2 text-sm font-medium bg-[rgb(53,53,53)] text-white rounded-md hover:bg-[rgb(65,65,65)] duration-100 ease-in-out transition-all">
+                                                    class="px-2 text-sm font-medium bg-[rgb(53,53,53)] text-white rounded-sm hover:bg-[rgb(65,65,65)] duration-100 ease-in-out transition-all">
                                                     @if ($this->hasBarcode)
                                                         Generate Barcode
                                                     @else
@@ -112,7 +112,7 @@
                                             @if ($this->hasBarcode)
                                                 {{-- //* already have barcode --}}
                                                 <input type="text" id="create_barcode" wire:model="create_barcode"
-                                                    class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                                     placeholder="Barcode" />
 
                                                 @error('create_barcode')
@@ -127,9 +127,10 @@
                                                             class="block mb-2 text-sm font-medium text-gray-900 ">Barcode:
                                                             {{ $barcode }}
                                                         </label>
-
-                                                        <img id="barcode"
-                                                            wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
+                                                        <div class="flex justify-center w-full ">
+                                                            <img id="barcode"
+                                                                wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
+                                                        </div>
 
 
                                                         @error('barcode')
@@ -154,7 +155,7 @@
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="item_description" wire:model="item_description"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Item Description" />
 
                                         @error('item_description')
@@ -164,21 +165,7 @@
                                     </div>
 
                                     {{-- //* maximum stock ratio --}}
-                                    <div class="mb-3">
 
-                                        <label for="maximum_stock_ratio"
-                                            class="block mb-2 text-sm font-medium text-gray-900 "> Maximum stock ratio
-                                        </label>
-
-                                        <input type="text" id="maximum_stock_ratio" wire:model="maximum_stock_ratio"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                                            placeholder="Maximum stock ratio" required />
-
-                                        @error('maximum_stock_ratio')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
                                 </div>
 
 
@@ -194,7 +181,7 @@
                                             percentage</label>
 
                                         <input type="number" id="reorderPercentage" wire:model.live="reorderPercentage"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Reorder Point" required />
 
                                         @error('reorderPercentage')
@@ -210,7 +197,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Reorder Point</label>
 
                                         <input type="number" id="reorder_point" wire:model="reorder_point"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Reorder Point" required disabled />
 
                                         @error('reorder_point')
@@ -228,7 +215,7 @@
                                             Type</label>
 
                                         <select id="vatType" wire:model.live="vatType"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select vat type</option>
                                             <option value="Vat">Vat</option>
                                             <option value="Non vat">Non vat</option>
@@ -253,8 +240,8 @@
                                         <label for="vat_amount"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Vat Amount</label>
 
-                                        <input type="text" id="vat_amount" wire:model="vat_amount"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                        <input type="numeric" id="vat_amount" wire:model="vat_amount"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Vat Amount" required
                                             @if (!$vat_amount_enabled) disabled @endif />
 
@@ -271,7 +258,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
                                         <select id="status" wire:model="status"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Set your status</option>
                                             <option value="1">Active</option>
                                             <option value="2">Inactive</option>

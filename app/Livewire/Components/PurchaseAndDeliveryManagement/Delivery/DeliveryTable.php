@@ -8,10 +8,11 @@ use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DeliveryTable extends Component
 {
-    use WithPagination,  WithoutUrlPagination;
+    use WithPagination,  WithoutUrlPagination, LivewireAlert;
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
@@ -22,6 +23,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
+    public $dateDelivered = [];
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -47,7 +49,8 @@ class DeliveryTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
-
+        'updateConfirmed',
+        'cancelConfirmed',
     ];
 
 
@@ -88,6 +91,58 @@ class DeliveryTable extends Component
     public function viewDeliveryDetails()
     {
         $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
-        $this->dispatch('view-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
+        $this->dispatch('view-delivery-details', openDeliveryDetails: true)->to(DeliveryPage::class);
+    }
+
+
+    public function changeDate($id, $date)
+    {
+        $deliveries = [
+            'date' => $date,
+            'deliveryId' => $id
+        ];
+
+
+        $this->confirm("Do you want to update this delivery?", [
+            'onConfirmed' => 'updateConfirmed',
+            'inputAttributes' => $deliveries,
+        ]);
+    }
+
+    public function updateConfirmed($data)
+    {
+
+        $updatedAttributes = $data['inputAttributes'];
+
+        $deliveryId = $updatedAttributes['deliveryId'];
+
+        $delivery = Delivery::find($deliveryId);
+        $delivery->date_delivered = $updatedAttributes['date'];
+        $delivery->status = "Delivered";
+        $delivery->save();
+
+        $this->alert('success', 'Delivery date changed successfully');
+        $this->resetPage();
+    }
+
+    public function cancelDelivery($deliverId)
+    {
+        $this->confirm("Do you want to cancel this delivery?", [
+            'onConfirmed' => 'cancelConfirmed',
+            'inputAttributes' => $deliverId,
+        ]);
+    }
+
+    public function cancelConfirmed($data)
+    {
+
+        $deliveryId = $data['inputAttributes'];
+
+        $delivery = Delivery::find($deliveryId);
+        $delivery->status = "Cancelled";
+        $delivery->save();
+
+        $this->alert('success', 'Delivery cancelled successfully');
+        $this->resetPage();
     }
 }

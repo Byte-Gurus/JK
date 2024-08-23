@@ -5,7 +5,7 @@
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4 ">
+        <div class="flex flex-row items-center justify-between px-4 py-4 ">
 
             {{-- //* search filter --}}
             <div class="relative w-full">
@@ -21,7 +21,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Company Name" required="" />
 
 
@@ -30,12 +30,9 @@
 
             <div class="flex flex-row items-center justify-center gap-4">
 
+                    <div class="flex flex-col gap-1">
 
-                <div class="flex flex-row items-center gap-4">
-
-                    <div class="flex flex-row items-center gap-2">
-
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status:</label>
 
                         <select wire:model.live="statusFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
@@ -46,9 +43,9 @@
                         </select>
 
                     </div>
-                    <div class="flex flex-row items-center gap-2">
+                    <div class="flex flex-col gap-1">
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
 
                         <select wire:model.live="supplierFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
@@ -61,7 +58,6 @@
 
                         </select>
 
-                    </div>
                 </div>
 
 
@@ -70,7 +66,7 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[500px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[480px] ">
 
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -162,35 +158,32 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                             {{-- //* contact number --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->company_name }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->contact_number }}
                             </th>
 
                             {{-- //* status --}}
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+                                class="px-4 py-4 font-medium text-center pointer-events-none text-md whitespace-nowrap">
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($supplier->statusJoin->status_type == 'Active') class=" text-black bg-green-400
-                                border
-                                border-green-900 text-xs text-center font-medium px-2 py-0.5 rounded"
+                                    @if ($supplier->statusJoin->status_type == 'Active') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                 @elseif ($supplier->statusJoin->status_type == 'Inactive')
 
-                                class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5
-                                rounded " @endif>
+                                class=" text-red-900 font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
 
                                     {{ $supplier->statusJoin->status_type }}
                                 </p>
 
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap">
                                 {{ $supplier->addressJoin->provinceJoin->province_description }},
                                 {{ $supplier->addressJoin->cityJoin->city_municipality_description }},
                                 {{ $supplier->addressJoin->barangayJoin->barangay_description }},
@@ -198,16 +191,16 @@
                             </th>
 
                             {{-- //* created at --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->created_at->format('d-m-y h:i A') }}
                             </th>
 
                             {{-- //* updated at --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->updated_at->format('d-m-y h:i A') }}
                             </th>
 
-                            <th class="px-4 py-6 text-center text-md text-nowrap">
+                            <th class="px-4 py-4 text-center text-md text-nowrap">
                                 <div
                                     class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
 

@@ -16,7 +16,7 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $maximum_stock_ratio = 1.5, $reorder_point, $reorderPercentage, $vat_amount, $status, $create_barcode; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description, $reorder_point, $reorderPercentage, $vat_amount, $status, $create_barcode; //var form inputs
     public $vat_amount_enabled = false; //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -81,7 +81,6 @@ class ItemForm extends Component
         $item = [
             'item_name' => $validated['item_name'],
             'item_description' => $validated['item_description'],
-            'maximum_stock_ratio' => $validated['maximum_stock_ratio'],
             'reorder_point' => $validated['reorder_point'],
             'reorder_percentage' => $validated['reorderPercentage'],
             'vat_type' => $validated['vatType'],
@@ -115,7 +114,6 @@ class ItemForm extends Component
         //* ipasa ang laman ng validated inputs sa models
         $items->item_name = $validated['item_name'];
         $items->item_description = $validated['item_description'];
-        $items->maximum_stock_ratio = $validated['maximum_stock_ratio'];
         $items->reorder_percentage = $validated['reorderPercentage'];
         $items->reorder_point = $validated['reorder_point'];
         $items->vat_type = $validated['vatType'];
@@ -204,7 +202,6 @@ class ItemForm extends Component
         $rules = [
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
-            'maximum_stock_ratio' => ['required', 'numeric', 'regex:/^\d+(\.\d{1,2})?$/'],
             'reorderPercentage' => ['required', 'numeric','min:1'],
             'reorder_point' => ['required', 'numeric','min:0'],
             'vat_amount' => ['required', 'numeric','min:0'],
@@ -235,7 +232,6 @@ class ItemForm extends Component
             'create_barcode' => $item_details->barcode,
             'item_name' => $item_details->item_name,
             'item_description' => $item_details->item_description,
-            'maximum_stock_ratio' => $item_details->maximum_stock_ratio,
             'reorderPercentage' => $item_details->reorder_percentage,
             'reorder_point' => $item_details->reorder_point,
             'vatType' => $item_details->vat_type,

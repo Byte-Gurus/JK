@@ -226,7 +226,7 @@ class RestockForm extends Component
             $rules["cost.$index"] = ['required', 'numeric', 'min:1'];
             $rules["markup.$index"] = ['required', 'numeric', 'min:1'];
             $rules["srp.$index"] = ['required', 'numeric', 'min:1'];
-            $rules["expiration_date.$index"] = ['required', 'date'];
+            $rules["expiration_date.$index"] = ['required', 'date', 'after_or_equal:today'];
         }
 
 

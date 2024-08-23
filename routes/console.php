@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Inventory;
+use Carbon\Carbon;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -47,3 +49,24 @@ Artisan::command('migration-order', function () {
 
     $this->comment('Migration completed!');
 })->purpose('Migrate tables in order to prevent errors from foreign keys');
+
+
+Artisan::command('inventory:check-expiration', function () {
+    $this->comment('Checking for expired inventory items...');
+
+    $today = Carbon::today();
+
+    // Find expired items
+    $expiredItems = Inventory::where('expiration_date', '<=', $today)
+        ->where('status', '!=', 'Expired')
+        ->get();
+
+    // Update status of expired items
+    foreach ($expiredItems as $item) {
+        $item->status = 'Expired';
+        $item->save();
+        $this->info("Updated status for item ID: {$item->id} to 'expired'");
+    }
+
+    $this->comment('Expiration check completed!');
+})->purpose('Check inventory items for expiration and update their status if expired')->daily();

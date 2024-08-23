@@ -1,10 +1,10 @@
 {{-- // --}}
 <div class="relative" x-cloak>
 
-    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-md">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4">
+        <div class="flex flex-row items-center justify-between px-4 py-4">
 
             {{-- //* search filter --}}
             <div class="relative w-full">
@@ -20,7 +20,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Purchase Order No." required="" />
 
 
@@ -30,38 +30,27 @@
             <div class="flex flex-row items-center justify-center gap-4">
 
                 {{-- //*user type filter --}}
-                <div class="flex flex-row items-center gap-2">
 
+                <div class="flex flex-col gap-1">
 
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
 
-                </div>
+                    <select wire:model.live="supplierFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
+                        <option value="0">All</option>
 
+                        @foreach ($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                        @endforeach
 
-                <div class="flex flex-row items-center">
-
-                    <div class="flex flex-row items-center gap-2">
-
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
-
-                        <select wire:model.live="supplierFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
-                            <option value="0">All</option>
-
-                            @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
-                            @endforeach
-
-
-                        </select>
-
-                    </div>
+                    </select>
                 </div>
             </div>
         </div>
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[500px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[480px] ">
 
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -108,24 +97,24 @@
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->created_at }}
                             </th>
 
                             {{-- //* item name --}}
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->po_number }}
                             </th>
 
                             {{-- //* item desc --}}
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->supplierJoin->company_name }}
                             </th>
 
                             {{-- //* actions --}}
-                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
 
 
                                 <div x-data="{ openActions: false }">
@@ -170,12 +159,8 @@
                             </th>
                         </tr>
                     @endforeach
-
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}
@@ -184,7 +169,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $suppliers->links() }} --}}
+                {{ $purchases->links() }}
 
             </div>
 
@@ -194,7 +179,7 @@
                 <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
                 <select wire:model.live="perPage"
-                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
+                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>

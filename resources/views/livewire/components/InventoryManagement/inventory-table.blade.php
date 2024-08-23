@@ -5,10 +5,10 @@
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4 ">
+        <div class="flex flex-row items-center justify-between px-4 py-4 ">
 
             {{-- //* search filter --}}
-            <div class="relative w-full">
+            <div class="relative w-1/2 ">
 
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none" viewBox="0 0 24 24"
@@ -19,38 +19,35 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms = "search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-2/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name or Barcode" required="" />
-
 
             </div>
 
-
-            <div class="flex flex-row items-center justify-center gap-4">
-
-                <div class="flex flex-row items-center gap-2">
-
-                    <label class="text-sm font-medium text-gray-900 text-nowrap">Start Date :</label>
-                    <input type="date" wire:model.live="startDate"
-                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5" />
-
+            <div class="flex flex-row items-center justify-between gap-4">
+                <div class="flex flex-col">
+                    <div class="flex flex-row ">
+                        <div class="flex flex-col gap-1">
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">Start Date:</label>
+                            <input type="date" wire:model.live="startDate"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-l-md block p-2.5" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">End Date:</label>
+                            <input type="date" wire:model.live="endDate"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-r-md block p-2.5" />
+                        </div>
+                    </div>
+                    <p class="text-[12px] font-light text-center text-gray-600 ">Date Range</p>
                 </div>
+                <div class="flex flex-row items-center gap-4 mb-4">
 
-                <div class="flex flex-row items-center gap-2">
+                    <div class="flex flex-col gap-1">
 
-                    <label class="text-sm font-medium text-gray-900 text-nowrap">End Date :</label>
-                    <input type="date" wire:model.live="endDate"
-                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5" />
-
-                </div>
-                <div class="flex flex-row items-center gap-4">
-
-                    <div class="flex flex-row items-center gap-2">
-
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Status:</label>
 
                         <select wire:model.live="statusFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
                             <option value="0">All</option>
                             <option value="Available">Available</option>
                             <option value="Not available">Not available</option>
@@ -60,12 +57,12 @@
 
                     </div>
 
-                    <div class="flex flex-row items-center gap-2">
+                    <div class="flex flex-col gap-1">
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Supplier :</label>
 
                         <select wire:model.live="supplierFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-3 ">
                             <option value="0">All</option>
 
                             @foreach ($suppliers as $supplier)
@@ -84,7 +81,7 @@
 
 
         {{-- //* tablea area --}}
-    <div class="overflow-x-auto overflow-y-scroll h-[480px]">
+        <div class="overflow-x-auto overflow-y-scroll h-[440px]">
 
             <table class="w-full text-sm text-left">
 
@@ -196,62 +193,62 @@
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->sku_code }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->itemJoin->barcode }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->itemJoin->item_name }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->current_stock_quantity }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->itemJoin->reorder_point }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->cost }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->mark_up_price }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->selling_price }}
                             </th>
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->supplierJoin->company_name }}
                             </th>
 
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+                                class="px-4 py-4 font-medium text-center pointer-events-none text-md whitespace-nowrap">
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($inventory->status == 'Available') class=" text-black  bg-green-400 border border-green-900   text-xs text-center font-medium px-2 py-0.5 rounded"
+                                    @if ($inventory->status == 'Available') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($inventory->status == 'Not available')
 
-                                    class=" text-black bg-rose-400 border border-red-900 text-xs font-medium px-2 py-0.5 rounded "
+                                    class=" text-red-900 font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($inventory->status == 'Expired')
 
-                                    class=" text-black bg-orange-400 border border-orange-900 text-xs font-medium px-2 py-0.5 rounded " @endif>
+                                    class=" text-orange-900 font-medium  bg-orange-100 border border-orange-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
 
                                     {{ $inventory->status }}
                                 </p>
@@ -259,17 +256,17 @@
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->stock_in_date->format('d-m-y') }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->expiration_date->format('d-m-y') }}
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
@@ -295,7 +292,8 @@
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 {{-- x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions" --}}
                                                 <button
-                                                    x-on:click="showStockAdjustModal=true, openActions = !openActions" wire:click="getStockID({{ $inventory->id}})"
+                                                    x-on:click="showStockAdjustModal=true, openActions = !openActions"
+                                                    wire:click="getStockID({{ $inventory->id }})"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" strokeWidth="1.5"
