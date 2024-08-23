@@ -196,16 +196,19 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <div class="flex justify-center ">
 
-                                    @if ($delivery->date_delivered === 'N/A')
+                                    @if ($delivery->status === 'Cancelled')
+                                        <p>N/A</p>
+                                    @elseif ($delivery->status === 'In Progress')
                                         <input type="date"
                                             wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
-                                            class="bg-white focus:outline-black shadow-md shadow-[rgb(53,53,53)] drop-shadow-2xl cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
+                                            class="bg-white focus:outline-black shadow-sm shadow-[rgb(53,53,53)] cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-sm block w-fit text-center p-2.5">
                                     @else
                                         <a scope="row"
-                                            class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                                            class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
                                             {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('d-m-Y') }}
                                         </a>
                                     @endif
+
 
                                 </div>
                             </th>
@@ -234,7 +237,8 @@
                                         <div
                                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                                     min-h-[20%]">
-                                            <div class="flex flex-col font-black border border-[rgb(205,205,205)] bg-[rgb(255,255,255)]">
+                                            <div
+                                                class="flex flex-col font-black border border-[rgb(205,205,205)] bg-[rgb(255,255,255)]">
 
                                                 @if ($delivery->status === 'Delivered')
                                                     <button
@@ -269,21 +273,20 @@
 
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
-                                                {{-- x-on:click="$wire.cancelDelivery(); openActions = !openActions" --}}
-                                                <button
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-red-600 justify-left hover:bg-red-100">
-                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" strokeWidth={1.5}
-                                                            stroke="currentColor" class="size-6">
-                                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                                d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-                                                        </svg>
+                                                @if ($delivery->status === 'In Progress')
+                                                    <button wire:click="cancelDelivery({{ $delivery->id }})"
+                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-red-600 justify-left hover:bg-red-100">
+                                                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" strokeWidth={1.5}
+                                                                stroke="currentColor" class="size-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                    d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                                                            </svg>
 
-                                                    </div>
-                                                    <div>Cancel Delivery</div>
-                                                </button>
-
-
+                                                        </div>
+                                                        <div>Cancel Delivery</div>
+                                                    </button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

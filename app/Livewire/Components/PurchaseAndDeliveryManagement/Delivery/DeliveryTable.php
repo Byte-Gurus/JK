@@ -50,6 +50,7 @@ class DeliveryTable extends Component
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
         'updateConfirmed',
+        'cancelConfirmed',
     ];
 
 
@@ -121,6 +122,27 @@ class DeliveryTable extends Component
         $delivery->save();
 
         $this->alert('success', 'Delivery date changed successfully');
+        $this->resetPage();
+    }
+
+    public function cancelDelivery($deliverId)
+    {
+        $this->confirm("Do you want to cancel this delivery?", [
+            'onConfirmed' => 'cancelConfirmed',
+            'inputAttributes' => $deliverId,
+        ]);
+    }
+
+    public function cancelConfirmed($data)
+    {
+
+        $deliveryId = $data['inputAttributes'];
+
+        $delivery = Delivery::find($deliveryId);
+        $delivery->status = "Cancelled";
+        $delivery->save();
+
+        $this->alert('success', 'Delivery cancelled successfully');
         $this->resetPage();
     }
 }
