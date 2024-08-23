@@ -52,5 +52,6 @@
         <div>
             @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
         </div>
+        
     @endif
 </div>

@@ -5,7 +5,7 @@
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4 ">
+        <div class="flex flex-row items-center justify-between px-4 py-4 ">
 
             {{-- //* search filter --}}
             <div class="relative w-full">
@@ -19,7 +19,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms = "search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name or Barcode" required="" />
 
 
@@ -27,38 +27,31 @@
 
 
             <div class="flex flex-row items-center justify-center gap-4">
-                <div class="flex flex-row items-center">
 
-                    <div class="flex flex-row items-center gap-2">
+                <div class="flex flex-col gap-1">
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Status:</label>
 
-                        <select wire:model.live="statusFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
-                            <option value="0">All</option>
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
+                    <select wire:model.live="statusFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
+                        <option value="0">All</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
 
-                        </select>
-
-                    </div>
+                    </select>
                 </div>
 
-                <div class="flex flex-row items-center">
+                <div class="flex flex-col gap-1">
 
-                    <div class="flex flex-row items-center gap-2">
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">VAT type:</label>
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">VAT type :</label>
+                    <select wire:model.live="vatFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
+                        <option value="0">All</option>
+                        <option value="Vat">Vat</option>
+                        <option value="Non vat">Non vat</option>
+                    </select>
 
-                        <select wire:model.live="vatFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
-                            <option value="0">All</option>
-                            <option value="Vat">Vat</option>
-                            <option value="Non vat">Non vat</option>
-
-                        </select>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -104,8 +97,8 @@
                         {{-- //* Maximum stock ratio --}}
                         <th scope="col" class="px-4 py-3">Maximum stock ratio</th>
 
-                         {{-- //* Reorder point --}}
-                         <th scope="col" class="px-4 py-3">Reorder percentage</th>
+                        {{-- //* Reorder point --}}
+                        <th scope="col" class="px-4 py-3">Reorder percentage</th>
 
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Reorder point</th>
@@ -167,32 +160,32 @@
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->barcode }}
                             </th>
 
                             {{-- //* item name --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->item_name }}
                             </th>
 
                             {{-- //* item desc --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->item_description }}
                             </th>
 
 
                             {{-- //* status --}}
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center pointer-events-none text-md whitespace-nowrap">
+                                class="px-4 py-4 font-medium text-center pointer-events-none text-md whitespace-nowrap">
 
                                 {{-- //* active green, if inactive red --}}
                                 <p
-                                    @if ($item->statusJoin->status_type == 'Active') class=" text-green-900 pointer-events-none font-bold  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
+                                    @if ($item->statusJoin->status_type == 'Active') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                 @elseif ($item->statusJoin->status_type == 'Inactive')
 
-                                class=" text-red-900 bg-red-100 border pointer-events-none border-red-900 text-xs font-medium px-2 py-0.5 rounded-sm" @endif>
+                                class=" text-red-900 font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
 
                                     {{ $item->statusJoin->status_type }}
                                 </p>
@@ -200,41 +193,41 @@
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->maximum_stock_ratio }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->reorder_percentage }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->reorder_point }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->vat_type }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->vat_amount }}
                             </th>
                             {{-- //* created at --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->created_at->format('d-m-y h:i A') }}
                             </th>
 
                             {{-- //* updated at --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->updated_at->format('d-m-y h:i A') }}
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"

@@ -1,7 +1,7 @@
-<div x-show="viewDeliveryDetails">
+<div x-show="openDeliveryDetails">
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
         <div class="flex items-center justify-center py-2 border border-black">
-            <p class="font-black ">Restock Form</p>
+            <p class="font-black ">View Delivery Details</p>
         </div>
 
         <form wire:submit.prevent="create">
@@ -71,9 +71,6 @@
                             <th scope="col" class="py-3 text-center text-nowrap">Expiration Date</th>
                             </th>
 
-                            {{-- //* actions --}}
-                            <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
-                            </th>
                         </tr>
                     </thead>
 
@@ -82,67 +79,65 @@
                     <tbody>
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition-all ease-in-out duration-1000">
+
+                            {{-- barcode --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                <p></p>
                             </th>
+
+                            {{-- item name --}}
                             <th scope="row"
                                 class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                <p></p>
                             </th>
+
+                            {{-- purchase quantity --}}
                             <th scope="row"
                                 class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                <p></p>
                             </th>
 
-
+                            {{-- sku --}}
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                <p></p>
                             </th>
+
                             {{-- restock quantity --}}
                             <th scope="row"
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- wire:model="restock_quantity.{{ $index }}" required --}}
-                                <input type="number"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block mx-auto w-2/3 p-2.5">
+                                <p></p>
+                            </th>
 
-
-
-
-                                {{-- cost --}}
+                            {{-- cost --}}
                             <th scope="row"
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- wire:model.live="cost.{{ $index }}" required --}}
-                                <input type="number"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-full p-2.5">
-
-
-
+                                <p></p>
                             </th>
 
                             {{-- markup --}}
                             <th scope="row"
-                            class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                            {{-- wire:model.live="markup.{{ $index }}"required --}}
-                            <input type="number"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-2/3 mx-auto p-2.5">
-
+                                class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                {{-- wire:model.live="markup.{{ $index }}"required --}}
+                                <p></p>
 
                             </th>
 
                             {{-- srp --}}
                             <th scope="row"
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                <input type="number"
-                                {{--  wire:model.live="srp.{{ $index }}" required readonly --}}
-                                    class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-full p-2.5">
-
-
-
+                                <p></p>
                             </th>
 
                             {{-- exp date --}}
                             <th scope="row"
                                 class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{-- wire:model="expiration_date.{{ $index }}" required --}}
-                                <input type="date"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-sm  block w-full p-2.5">
+                                <p></p>
                             </th>
+
+
                         </tr>
                     </tbody>
                 </table>

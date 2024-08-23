@@ -5,7 +5,7 @@
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4 ">
+        <div class="flex flex-row items-center justify-between px-4 py-4 ">
 
             {{-- //* search filter --}}
             <div class="relative w-full">
@@ -18,18 +18,18 @@
                     </svg>
                 </div>
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Customer Name" required="" />
             </div>
             <div class="flex flex-row items-center justify-center gap-4">
 
                 {{-- //*user type filter --}}
-                <div class="flex flex-row items-center gap-2">
+                <div class="flex flex-col gap-1">
 
-                    <label class="text-sm font-medium text-gray-900 text-nowrap">Customer Type :</label>
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Customer Type:</label>
 
                     <select wire:model.live="typeFilter"
-                        class="bg-gray-50 border hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-lg block p-2.5 ">
+                        class="bg-gray-50 border hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
                         <option value="0">All</option>
                         <option value="Walk in">Walk in</option>
                         <option value="Credit">Credit</option>
@@ -136,22 +136,22 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                             {{-- //* customer name --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
                             </th>
 
                             {{-- //* birthdate --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->birthdate }}
                             </th>
 
                             {{-- //* contact number --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->contact_number }}
                             </th>
 
                             {{-- //* address --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap">
                                 {{ $customer->addressJoin->provinceJoin->province_description }},
                                 {{ $customer->addressJoin->cityJoin->city_municipality_description }},
                                 {{ $customer->addressJoin->barangayJoin->barangay_description }},
@@ -159,27 +159,27 @@
                             </th>
 
                             {{-- //* customer type --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->customer_type }}
                             </th>
 
                             {{-- //* customer discount number --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->customer_discount_no }}
                             </th>
 
                             {{-- //* created at --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->created_at->format('d-m-y h:i A') }}
                             </th>
 
                             {{-- //* updated at at --}}
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $customer->updated_at->format('d-m-y h:i A') }}
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="flex justify-center px-4 py-6 text-center text-md text-nowrap">
+                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"

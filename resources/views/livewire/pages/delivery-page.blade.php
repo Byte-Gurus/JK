@@ -2,7 +2,17 @@
     <div class="flex flex-col justify-between">
         <div class="flex flex-row items-center justify-between mb-4">
             <div>
-                <h1 class="text-[2em] font-bold pointer-events-none">Delivery</h1>
+                <h1 class="text-[2em] font-bold pointer-events-none">
+                    @if (!$showRestockForm)
+                        List of Deliveries
+                    @else
+                        @if ($openDeliveryDetails)
+                        Delivery Details
+                        @else
+                        Restock
+                        @endif
+                    @endif
+                </h1>
             </div>
             @if ($showRestockForm)
                 <button
@@ -16,10 +26,10 @@
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
         </div>
     @endif
-    <div x-show="showDeliveryDetails" x-data="{ showDeliveryDetails: @entangle('showDeliveryDetails')}">
+    <div x-show="openDeliveryDetails" x-data="{ openDeliveryDetails: @entangle('openDeliveryDetails') }">
         @livewire('components.PurchaseAndDeliveryManagement.Delivery.view-delivery-details')
     </div>
-    <div x-show="showRestockForm" x-data="{ showRestockForm: @entangle('showRestockForm')}">
+    <div x-show="showRestockForm" x-data="{ showRestockForm: @entangle('showRestockForm') }">
         @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
     </div>
 </div>

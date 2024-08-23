@@ -4,7 +4,7 @@
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-md">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4">
+        <div class="flex flex-row items-center justify-between px-4 py-4">
 
             {{-- //* search filter --}}
             <div class="relative w-full">
@@ -20,7 +20,7 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Purchase Order No." required="" />
 
 
@@ -30,31 +30,20 @@
             <div class="flex flex-row items-center justify-center gap-4">
 
                 {{-- //*user type filter --}}
-                <div class="flex flex-row items-center gap-2">
 
+                <div class="flex flex-col gap-1">
 
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
 
-                </div>
+                    <select wire:model.live="supplierFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
+                        <option value="0">All</option>
 
+                        @foreach ($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                        @endforeach
 
-                <div class="flex flex-row items-center">
-
-                    <div class="flex flex-row items-center gap-2">
-
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
-
-                        <select wire:model.live="supplierFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
-                            <option value="0">All</option>
-
-                            @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
-                            @endforeach
-
-
-                        </select>
-
-                    </div>
+                    </select>
                 </div>
             </div>
         </div>
@@ -170,12 +159,8 @@
                             </th>
                         </tr>
                     @endforeach
-
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}

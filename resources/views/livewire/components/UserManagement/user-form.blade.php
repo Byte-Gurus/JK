@@ -80,7 +80,7 @@
                                         </label>
 
                                         <input type="text" id="firstname" wire:model="firstname"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="First Name" tabindex="2" required />
 
                                         @error('firstname')
@@ -96,7 +96,7 @@
                                             Name <span class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="middlename" wire:model="middlename"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Middle Name" />
 
                                         @error('middlename')
@@ -117,7 +117,7 @@
                                         </label>
 
                                         <input type="text" id="lastname" wire:model="lastname"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg border border-[rgb(143,143,143)]  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-md border border-[rgb(143,143,143)] block w-full p-2.5"
                                             placeholder="Last Name" required />
 
                                         @error('lastname')
@@ -134,7 +134,7 @@
                                             No</label>
 
                                         <input type="number" id="contactno" wire:model="contact_number"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Contact No" required />
 
                                         @error('contact_number')
@@ -155,7 +155,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Role</label>
 
                                         <select id="user_roles" wire:model="role"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select a role</option>
                                             <option value="1">Admin</option>
                                             <option value="2">Cashier</option>
@@ -175,7 +175,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
                                         <select id="status" wire:model="status"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)]  text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Set your status</option>
                                             <option value="1">Active</option>
                                             <option value="2">Inactive</option>
@@ -252,7 +252,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900">Username</label>
 
                                 <input type="text" id="username" wire:model="username"
-                                    class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-lg  block w-full p-2.5"
+                                    class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
                                     placeholder="Username" required />
 
                                 @error('username')
@@ -272,7 +272,7 @@
 
                                     <input type="password" wire:model="password" id="password"
                                         placeholder="Password"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5" />
 
                                     @error('password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -289,7 +289,7 @@
 
                                     <input type="password" id="retype_password" wire:model="retype_password"
                                         placeholder="Retype Password"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5" />
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5" />
 
                                     @error('retype_password')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>

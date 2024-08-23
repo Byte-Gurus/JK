@@ -1,10 +1,10 @@
 {{-- // --}}
 <div class="relative">
 
-    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
+    <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-md">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4">
+        <div class="flex flex-row items-center justify-between px-4 py-4">
 
             {{-- //* search filter --}}
             <div class="relative w-full">
@@ -20,9 +20,8 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/2 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/2 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Delivery ID" required="" />
-
 
             </div>
 
@@ -30,45 +29,34 @@
             <div class="flex flex-row items-center justify-center gap-4">
 
                 {{-- //*user type filter --}}
-                <div class="flex flex-row items-center gap-2">
 
 
+                <div class="flex flex-col gap-1">
 
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Status:</label>
+
+                    <select wire:model.live="statusFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
+                        <option value="0">All</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
                 </div>
 
+                <div class="flex flex-col gap-1">
 
-                <div class="flex flex-row items-center">
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
 
-                    <div class="flex flex-row items-center gap-2">
+                    <select wire:model.live="supplierFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
+                        <option value="0">All</option>
 
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
+                        @foreach ($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                        @endforeach
 
-                        <select wire:model.live="statusFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
-                            <option value="0">All</option>
-                            <option value="Delivered">Delivered</option>
-                            <option value="In progress">In progress</option>
-                            <option value="Cancelled">Cancelled</option>
-                        </select>
-
-                        <div class="flex flex-row items-center gap-2">
-
-                            <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier :</label>
-
-                            <select wire:model.live="supplierFilter"
-                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
-                                <option value="0">All</option>
-
-                                @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
-                                @endforeach
-
-
-                            </select>
-
-                        </div>
-
-                    </div>
+                    </select>
                 </div>
             </div>
         </div>
@@ -94,6 +82,7 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
+                        {{-- date ordered --}}
                         <th wire:click="sortByColumn('date_created')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -108,12 +97,10 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
 
                         {{-- //* date of delivery --}}
-
                         <th wire:click="sortByColumn('date_delivered')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -128,17 +115,11 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
 
-
-
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-center text-nowrap">Actions</th>
-                        </th>
-
-
                     </tr>
                 </thead>
 
@@ -161,29 +142,25 @@
 
                             {{-- //* item status --}}
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <div class="flex justify-center ">
-                                    <div
-                                        @if ($delivery->status == 'Delivered') class=" text-green-900 bg-green-100 border pointer-events-none border-green-900 text-xs font-medium px-2 py-0.5 rounded-sm"
+                                class="px-4 py-4 font-medium text-center text-md whitespace-nowrap">
+                                    <p
+                                        @if ($delivery->status == 'Delivered') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'Cancelled')
 
-                                    class=" text-red-900 bg-red-100 border pointer-events-none border-red-900 text-xs font-medium px-2 py-0.5 rounded-sm"
+                                    class=" text-red-900 pointer-events-none font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'Stocked in')
 
-                                    class=" text-blue-900 bg-blue-100 border pointer-events-none border-blue-900 text-xs font-medium px-2 py-0.5 rounded-sm "
+                                    class=" text-blue-900 pointer-events-none font-medium  bg-blue-100 border border-blue-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'In Progress')
 
-                                    class=" text-orange-900 bg-orange-100 border pointer-events-none border-orange-900 text-xs font-medium px-2 py-0.5 rounded-sm " @endif>
+                                    class=" text-orange-900 pointer-events-none font-medium  bg-orange-100 border border-orange-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
 
                                         {{ $delivery->status }}
-                                    </div>
-
-                                </div>
+                                    </p>
                             </th>
-
 
                             {{-- //* status --}}
 
@@ -201,7 +178,11 @@
                                     @elseif ($delivery->status === 'In Progress')
                                         <input type="date"
                                             wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
+<<<<<<< Updated upstream
                                             class="bg-white focus:outline-black shadow-sm shadow-[rgb(53,53,53)] cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-sm block w-fit text-center p-2.5">
+=======
+                                            class="bg-white focus:outline-black hover:shadow-md hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all hover:drop-shadow-2xl cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
+>>>>>>> Stashed changes
                                     @else
                                         <a scope="row"
                                             class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
@@ -213,8 +194,9 @@
                                 </div>
                             </th>
 
-                            {{-- //* Action --}}
-                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
+                            {{-- //* action --}}
+                            <th
+                                class="flex items-center justify-center h-full px-4 py-4 text-center text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
@@ -240,6 +222,7 @@
                                             <div
                                                 class="flex flex-col font-black border border-[rgb(205,205,205)] bg-[rgb(255,255,255)]">
 
+                                                {{-- restock --}}
                                                 @if ($delivery->status === 'Delivered')
                                                     <button
                                                         x-on:click="$wire.showRestockForm(); $wire.getDeliveryID({{ $delivery->id }}); openActions = !openActions"
@@ -256,8 +239,7 @@
                                                     <div class="w-full border border-[rgb(205,205,205)]"></div>
                                                 @endif
 
-
-
+                                                {{-- view details --}}
                                                 <button
                                                     x-on:click="$wire.viewDeliveryDetails(); openActions = !openActions"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
@@ -273,6 +255,7 @@
 
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
+<<<<<<< Updated upstream
                                                 @if ($delivery->status === 'In Progress')
                                                     <button wire:click="cancelDelivery({{ $delivery->id }})"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-red-600 justify-left hover:bg-red-100">
@@ -287,6 +270,22 @@
                                                         <div>Cancel Delivery</div>
                                                     </button>
                                                 @endif
+=======
+                                                {{-- x-on:click="$wire.cancelDelivery(); openActions = !openActions" --}}
+                                                {{-- cancel delivery --}}
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-red-600 justify-left hover:bg-red-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth={1.5}
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                                                        </svg>
+
+                                                    </div>
+                                                    <div>Cancel Delivery</div>
+                                                </button>
+>>>>>>> Stashed changes
                                             </div>
                                         </div>
                                     </div>
@@ -294,11 +293,8 @@
                             </th>
                         </tr>
                     @endforeach
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}
@@ -317,18 +313,12 @@
                 <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
                 <select wire:model.live="perPage"
-                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
+                    class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
-
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>

@@ -80,7 +80,7 @@
                                         </label>
 
                                         <input type="text" id="company_name" wire:model="company_name"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
                                             placeholder="Company Name" tabindex="2" required />
 
                                         @error('company_name')
@@ -96,7 +96,7 @@
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="contact_number" wire:model="contact_number" required
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Contact No" />
 
                                         @error('contact_number')
@@ -117,7 +117,7 @@
                                         </label>
 
                                         <select id="selectProvince" wire:model.live="selectProvince" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
                                             @foreach ($provinces as $province)
                                                 <option value="{{ $province->province_code }}">
@@ -142,7 +142,7 @@
 
 
                                         <select id="selectCity" wire:model.live="selectCity" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select a City / Municipality</option>
 
                                             @if (!is_null($cities))
@@ -174,7 +174,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
 
                                             <option value="" selected>Select a barangay</option>
 
@@ -200,7 +200,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
                                         <input type="text" id="street" wire:model="street"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Street" required />
 
 
@@ -224,7 +224,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
                                         <select id="status" wire:model="status" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Set your status</option>
                                             <option value="1">Active</option>
                                             <option value="2">Inactive</option>
@@ -251,7 +251,7 @@
 
                                 {{-- //* submit button for edit --}}
                                 <button type="submit" wire:loading.remove
-                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                     <div class="flex flex-row items-center gap-2">
                                         <p>Update</p>
 
@@ -260,7 +260,7 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="loader loader--style3 flex justify-center items-center "
+                                    <div class="flex items-center justify-center loader loader--style3 "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
@@ -305,7 +305,7 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="loader loader--style3 flex justify-center items-center "
+                                    <div class="flex items-center justify-center loader loader--style3 "
                                         title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"

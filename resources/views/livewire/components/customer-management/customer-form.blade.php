@@ -82,7 +82,7 @@
                                         </label>
 
                                         <input type="text" id="firstname" wire:model="firstname"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
                                             placeholder="First Name" tabindex="2" required />
 
                                         @error('firstname')
@@ -98,7 +98,7 @@
                                             Name <span class="text-red-400 ">*</span></label>
 
                                         <input type="text" id="middlename" wire:model="middlename"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
                                             placeholder="Middle Name" />
 
                                         @error('middlename')
@@ -119,7 +119,7 @@
                                         </label>
 
                                         <input type="text" id="lastname" wire:model="lastname"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Last Name" required />
 
                                         @error('lastname')
@@ -135,7 +135,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Birth Date</label>
 
                                         <input type="date" id="birthdate" wire:model="birthdate"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Birth Date" required />
 
                                         @error('birth_date')
@@ -156,7 +156,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Contact No</label>
 
                                         <input type="number" id="contactno" wire:model="contact_number"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
                                             placeholder="Contact No" required />
 
                                         @error('contact_number')
@@ -173,7 +173,7 @@
 
                                         <input id="id_picture" type="file" accept="image/png, image/jpeg"
                                             wire:model="id_picture"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
 
                                         @if ($id_picture instanceof \Illuminate\Http\UploadedFile)
                                             <img src="{{ $id_picture->temporaryUrl() }}">
@@ -200,7 +200,7 @@
                                         </label>
 
                                         <select id="selectProvince" wire:model.live="selectProvince" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
                                             @foreach ($provinces as $province)
                                                 <option value="{{ $province->province_code }}">
@@ -225,7 +225,7 @@
 
 
                                         <select id="selectCity" wire:model.live="selectCity" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select a city / municipality</option>
 
                                             @if (!is_null($cities))
@@ -259,7 +259,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
                                         <select id="selectBrgy" wire:model.live="selectBrgy" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select a barangay</option>
 
                                             @if (!is_null($barangays))
@@ -284,7 +284,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
                                         <input type="text" id="street" wire:model="street"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Street" required />
                                         @error('street')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -301,10 +301,10 @@
 
                                         <label for="customer_type"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
-                                            Typez</label>
+                                            Type</label>
 
                                         <select id="customer_type" wire:model="customer_type" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value=""selected>Select Customer Type</option>
                                             <option value="Walk in" selected>Walk In</option>
                                             <option value="Credit" selected>Credit</option>
@@ -329,7 +329,7 @@
 
                                         <input type="number" id="customer_discount_no"
                                             wire:model="customer_discount_no"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Discount No" required />
                                         @error('customer_discount_no')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -349,7 +349,7 @@
 
                                     {{-- //* submit button for edit --}}
                                     <button type="submit" wire:loading.remove
-                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                         <div class="flex flex-row items-center gap-2">
                                             <p>Update</p>
 
