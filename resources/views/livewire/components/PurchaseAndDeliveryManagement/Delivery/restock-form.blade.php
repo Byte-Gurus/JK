@@ -157,10 +157,8 @@
                                 {{-- exp date --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{-- <input type="date" wire:model="expiration_date.{{ $index }}" required
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5"> --}}
-                                    <x-flatpickr::style />
-                                    <x-flatpickr id="laravel-flatpickr" date-format="d/m/Y" />
+                                    <input type="date" wire:model="expiration_date.{{ $index }}" required
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
                                     @error("expiration_date.$index")
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
@@ -201,4 +199,3 @@
         </form>
     </div>
 </div>
-<x-flatpickr::script />
