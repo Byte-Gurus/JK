@@ -101,6 +101,7 @@ class ItemForm extends Component
 
         Inventory::create([
             'item_id' => $item->id,
+            
         ]);
 
         $this->alert('success', 'Item was created successfully');
