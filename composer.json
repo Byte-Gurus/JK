@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "asdh/laravel-flatpickr": "^2.2",
         "fakerphp/faker": "^1.23",
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.9",
