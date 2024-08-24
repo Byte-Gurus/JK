@@ -68,4 +68,9 @@ class DeliveryPage extends Component
     {
         $this->viewDeliveryTable = $viewDeliveryTable;
     }
+
+    public function displayBackorderPage($showBackorderPage)
+    {
+        $this->showBackorderPage = $showBackorderPage;
+    }
 }
