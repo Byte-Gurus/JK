@@ -285,7 +285,7 @@ class PurchaseOrderForm extends Component
         $this->alert('success', 'Purchase order was created successfully');
         $this->refreshTable();
 
-        redirect()->route('purchaseanddeliverymanagement.index');
+       
         $this->resetForm();
         $this->closeModal();
     }

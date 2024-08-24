@@ -177,7 +177,7 @@
                                     @elseif ($delivery->status === 'In Progress')
                                         <input type="date"
                                             wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
-                                            class="bg-white focus:outline-black hover:shadow-md hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all hover:drop-shadow-2xl cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
+                                            class="bg-white focus:outline-black hover:shadow-sm hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
                                     @else
                                         <a scope="row"
                                             class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
@@ -193,11 +193,13 @@
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
-                                        class="transition-all duration-100 ease-in-out rounded-full hover:shadow-sm hover:shadow-black active:bg-[rgb(129,129,129)] hover:bg-[rgb(200,200,200)]">
+                                        class="transition-all duration-100 ease-in-out rounded-full hover:shadow-sm hover:shadow-black active:bg-[rgb(193,193,193)] hover:bg-[rgb(224,223,223)]">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="size-8">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                          </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            strokeWidth={1.5} stroke="currentColor" class="size-8">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
 
                                     </div>
 
@@ -248,7 +250,8 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
                                                 @if ($delivery->status === 'In Progress')
-                                                    <button x-on:click="$wire.cancelDelivery({{ $delivery->id }}); openActions = !openActions"
+                                                    <button
+                                                        x-on:click="$wire.cancelDelivery({{ $delivery->id }}); openActions = !openActions"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-red-600 justify-left hover:bg-red-100">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth={1.5}
@@ -264,17 +267,21 @@
 
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
-                                                <button x-on:click="$wire.viewBackorder(); openActions = !openActions"
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-purple-600 justify-left hover:bg-purple-100">
-                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" strokeWidth={1.5}
-                                                            stroke="purple" class="size-6">
-                                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div>Backorder</div>
-                                                </button>
+
+                                                @if ($delivery->status === 'Stocked in')
+                                                    <button
+                                                        x-on:click="$wire.viewBackorder(); openActions = !openActions"
+                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-purple-600 justify-left hover:bg-purple-100">
+                                                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="purple"
+                                                                class="size-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>Backorder</div>
+                                                    </button>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
