@@ -82,7 +82,7 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll h-[440px]">
+        <div class="overflow-x-auto overflow-y-scroll h-[480px]">
 
             <table class="w-full text-sm text-left">
 

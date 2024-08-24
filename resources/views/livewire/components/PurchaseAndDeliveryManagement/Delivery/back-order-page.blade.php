@@ -1,3 +1,3 @@
-<div x-show="showBackOrderPage">
+<div x-show="showBackorderPage">
    hi
 </div>

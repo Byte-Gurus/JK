@@ -1,21 +1,14 @@
 <div x-show="showRestockForm">
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
-        <div class="flex items-center justify-center py-2 border border-black">
-            <p class="font-black ">Restock Form</p>
-        </div>
-
         <form wire:submit.prevent="create">
 
-            <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
-                <div class="flex flex-row gap-6">
-                    <div>
-                        <h1 class="text-[1.2em]">Purchase Order No</h1>
-                        <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
+            <div class="flex flex-row items-center justify-between gap-4 py-4 pr-4 my-2 text-nowrap">
+                <div class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
+                    <div class="flex flex-row gap-2">
+                        <h2 class="text-[1.2em] font-black text-center w-full">{{ $po_number }}</h2>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="supplier" class="text-[1.2em]">Supplier Name</label>
+                    <div class="flex flex-row gap-2">
                         <label for="supplier" class="text-[1.2em] ">{{ $supplier }}</label>
-
                     </div>
                 </div>
                 <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">

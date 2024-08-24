@@ -134,15 +134,9 @@ class DeliveryTable extends Component
         $this->resetPage();
     }
 
-    public function viewDeliveryDetails()
-    {
-        $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
-        $this->dispatch('display-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
-    }
-
     public function viewRestockForm()
     {
-        $this->dispatch('display-delivery-details', showDeliveryDetails: false)->to(DeliveryPage::class);
+        $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
         $this->dispatch('display-restock-form', showRestockForm: true)->to(DeliveryPage::class);
     }
 

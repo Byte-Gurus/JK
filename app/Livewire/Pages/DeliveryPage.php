@@ -9,9 +9,7 @@ class DeliveryPage extends Component
 {
 
     public $showDeliveryTable = true;
-    public $viewDeliveryTable = true;
     public $showRestockForm = false;
-    public $showDeliveryDetails = false;
     public $showBackorderPage = false;
 
 
@@ -22,10 +20,8 @@ class DeliveryPage extends Component
 
     protected $listeners = [
         'close-modal' => 'closeModal',
-        'view-delivery-table' => 'viewDeliveryTable',
         'display-restock-form' => 'displayRestockForm',
         'display-delivery-table' => 'displayDeliveryTable',
-        'display-delivery-details' => 'displayDeliveryDetails',
         'display-backorder-page' => 'displayBackorderPage',
     ];
 
@@ -42,35 +38,17 @@ class DeliveryPage extends Component
     public function cancelRestockForm()
     {
         $this->showRestockForm = false;
-    }
-
-    public function displayDeliveryDetails($showDeliveryDetails)
-    {
-        $this->showDeliveryDetails = $showDeliveryDetails;
-    }
-
-    public function closeDeliveryDetails()
-    {
         $this->showDeliveryTable = true;
-        $this->showDeliveryDetails = false;
-    }
-
-    public function viewBackOrderPage()
-    {
-        $this->viewDeliveryTable = false;
-        $this->showDeliveryTable = false;
-        $this->showDeliveryDetails = false;
-        $this->showRestockForm = false;
-        $this->showBackorderPage = true;
-    }
-
-    public function viewDeliveryTable($viewDeliveryTable)
-    {
-        $this->viewDeliveryTable = $viewDeliveryTable;
     }
 
     public function displayBackorderPage($showBackorderPage)
     {
         $this->showBackorderPage = $showBackorderPage;
+    }
+
+    public function closeBackorderPage()
+    {
+        $this->showBackorderPage = false;
+        $this->showDeliveryTable = true;
     }
 }
