@@ -8,13 +8,12 @@ use Livewire\Component;
 class DeliveryPage extends Component
 {
 
-    public $showRestockForm = true;
-
-    public $showDeliveryDetails = false;
-
-    public $showBackOrderPage = false;
-
     public $showDeliveryTable = true;
+    public $viewDeliveryTable = true;
+    public $showRestockForm = false;
+    public $showDeliveryDetails = false;
+    public $showBackorderPage = false;
+
 
     public function render()
     {
@@ -23,9 +22,17 @@ class DeliveryPage extends Component
 
     protected $listeners = [
         'close-modal' => 'closeModal',
+        'view-delivery-table' => 'viewDeliveryTable',
         'display-restock-form' => 'displayRestockForm',
-        'view-delivery-details' => 'viewDeliveryDetails',
+        'display-delivery-table' => 'displayDeliveryTable',
+        'display-delivery-details' => 'displayDeliveryDetails',
+        'display-backorder-page' => 'displayBackorderPage',
     ];
+
+    public function displayDeliveryTable($showDeliveryTable)
+    {
+        $this->showDeliveryTable = $showDeliveryTable;
+    }
 
     public function displayRestockForm($showRestockForm)
     {
@@ -37,23 +44,28 @@ class DeliveryPage extends Component
         $this->showRestockForm = false;
     }
 
-    public function viewDeliveryDetails($showDeliveryDetails)
+    public function displayDeliveryDetails($showDeliveryDetails)
     {
         $this->showDeliveryDetails = $showDeliveryDetails;
-        $this->showRestockForm = true;
     }
 
     public function closeDeliveryDetails()
     {
-        $this->showRestockForm = false;
+        $this->showDeliveryTable = true;
         $this->showDeliveryDetails = false;
     }
 
     public function viewBackOrderPage()
     {
+        $this->viewDeliveryTable = false;
         $this->showDeliveryTable = false;
         $this->showDeliveryDetails = false;
         $this->showRestockForm = false;
-        $this->showBackOrderPage = true;
+        $this->showBackorderPage = true;
+    }
+
+    public function viewDeliveryTable($viewDeliveryTable)
+    {
+        $this->viewDeliveryTable = $viewDeliveryTable;
     }
 }

@@ -1,4 +1,4 @@
-<div x-show="openDeliveryDetails">
+<div>
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
         <form wire:submit.prevent="create">
 

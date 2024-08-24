@@ -77,22 +77,11 @@ class DeliveryTable extends Component
         $this->resetPage();
     }
 
-    public function showRestockForm()
-    {
-        $this->dispatch('display-restock-form', showRestockForm: true)->to(DeliveryPage::class);
-    }
-
     public function getDeliveryID($deliveryId)
     {
 
         $this->dispatch('restock-form', deliveryID: $deliveryId)->to(RestockForm::class);
     }
-
-    public function viewDeliveryDetails()
-    {
-        $this->dispatch('view-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
-    }
-
 
     public function changeDate($id, $date)
     {
@@ -143,5 +132,23 @@ class DeliveryTable extends Component
 
         $this->alert('success', 'Delivery cancelled successfully');
         $this->resetPage();
+    }
+
+    public function viewDeliveryDetails()
+    {
+        $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
+        $this->dispatch('display-delivery-details', showDeliveryDetails: true)->to(DeliveryPage::class);
+    }
+
+    public function viewRestockForm()
+    {
+        $this->dispatch('display-delivery-details', showDeliveryDetails: false)->to(DeliveryPage::class);
+        $this->dispatch('display-restock-form', showRestockForm: true)->to(DeliveryPage::class);
+    }
+
+    public function viewBackorder()
+    {
+        $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
+        $this->dispatch('display-backorder-page', showBackorderPage: true)->to(DeliveryPage::class);
     }
 }

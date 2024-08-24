@@ -184,8 +184,6 @@
                                             {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('d-m-Y') }}
                                         </a>
                                     @endif
-
-
                                 </div>
                             </th>
 
@@ -195,13 +193,12 @@
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
-                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+                                        class="transition-all duration-100 ease-in-out rounded-full hover:shadow-sm hover:shadow-black active:bg-[rgb(129,129,129)] hover:bg-[rgb(200,200,200)]">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="size-8">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                          </svg>
+
                                     </div>
 
                                     <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
@@ -251,7 +248,7 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
                                                 @if ($delivery->status === 'In Progress')
-                                                    <button wire:click="cancelDelivery({{ $delivery->id }})"
+                                                    <button x-on:click="$wire.cancelDelivery({{ $delivery->id }}); openActions = !openActions"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-red-600 justify-left hover:bg-red-100">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth={1.5}
@@ -264,6 +261,20 @@
                                                         <div>Cancel Delivery</div>
                                                     </button>
                                                 @endif
+
+                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
+
+                                                <button x-on:click="$wire.viewBackorder(); openActions = !openActions"
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-purple-600 justify-left hover:bg-purple-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth={1.5}
+                                                            stroke="purple" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>Backorder</div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

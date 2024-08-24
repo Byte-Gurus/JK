@@ -84,8 +84,6 @@
                                     {{-- //* purchase quantity --}}
                                     <th scope="col" class="py-3 text-center text-nowrap">Purchase Quantity</th>
 
-                                    {{-- //* purchase quantity --}}
-                                    <th scope="col" class="py-3 text-center text-nowrap">Expiration Date</th>
                                 </tr>
                             </thead>
 
