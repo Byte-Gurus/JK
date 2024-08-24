@@ -25,6 +25,10 @@ class Purchase extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function backorderJoin()
+    {
+        return $this->hasMany(BackOrder::class, 'purchase_id');
+    }
     public function purchaseJoin()
     {
         return $this->hasMany(PurchaseDetails::class, 'purchase_id');

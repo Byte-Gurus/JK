@@ -34,7 +34,9 @@ class InventoryTable extends Component
 
         if ($this->supplierFilter != 0) {
             // Use whereHas to filter deliveries based on the supplier_id through purchase
-            $query->where('supplier_id', $this->supplierFilter); //
+            $query->whereHas('deliveryJoin.purchaseJoin', function ($query) {
+                $query->where('supplier_id', $this->supplierFilter);
+            });
         }
         if ($this->startDate && $this->endDate) {
             $query->whereBetween('stock_in_date', [$this->startDate, $this->endDate]);
