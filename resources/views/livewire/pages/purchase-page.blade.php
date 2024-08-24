@@ -53,21 +53,4 @@
             @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
         </div>
     @endif
-    <table>
-        <thead>
-            <tr>hi</tr>
-        </thead>
-        <tbody>
-            <tr>
-                <label for="datepicker">Expiration Date</label>
-                <input type="text" id="datepicker" wire:change="hi(picker.toString('YYYY-MM-DD'))">
-            </tr>
-        </tbody>
-    </table>
 </div>
-<script src="pikaday.js"></script>
-<script>
-    var picker = new Pikaday({
-        field: document.getElementById('datepicker')
-    });
-</script>

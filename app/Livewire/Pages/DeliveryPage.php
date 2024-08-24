@@ -8,9 +8,14 @@ use Livewire\Component;
 class DeliveryPage extends Component
 {
 
-    public $showRestockForm = false;
+    public $showRestockForm = true;
 
-    public $openDeliveryDetails = false;
+    public $showDeliveryDetails = false;
+
+    public $showBackOrderPage = false;
+
+    public $showDeliveryTable = true;
+
     public function render()
     {
         return view('livewire.pages.delivery-page');
@@ -32,15 +37,23 @@ class DeliveryPage extends Component
         $this->showRestockForm = false;
     }
 
-    public function viewDeliveryDetails($openDeliveryDetails)
+    public function viewDeliveryDetails($showDeliveryDetails)
     {
-        $this->openDeliveryDetails = $openDeliveryDetails;
+        $this->showDeliveryDetails = $showDeliveryDetails;
         $this->showRestockForm = true;
     }
 
     public function closeDeliveryDetails()
     {
         $this->showRestockForm = false;
-        $this->openDeliveryDetails = false;
+        $this->showDeliveryDetails = false;
+    }
+
+    public function viewBackOrderPage()
+    {
+        $this->showDeliveryTable = false;
+        $this->showDeliveryDetails = false;
+        $this->showRestockForm = false;
+        $this->showBackOrderPage = true;
     }
 }

@@ -1,4 +1,4 @@
-<div x-show="showRestockForms">
+<div x-show="showRestockForm">
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
         <div class="flex items-center justify-center py-2 border border-black">
             <p class="font-black ">Restock Form</p>

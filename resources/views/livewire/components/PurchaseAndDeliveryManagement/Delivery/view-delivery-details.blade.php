@@ -1,35 +1,21 @@
 <div x-show="openDeliveryDetails">
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
-        <div class="flex items-center justify-center py-2 border border-black">
-            <p class="font-black ">View Delivery Details</p>
-        </div>
-
         <form wire:submit.prevent="create">
 
             <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
                 <div class="flex flex-row gap-6">
-                    <div>
-                        <h1 class="text-[1.2em]">Purchase Order No</h1>
-                        <h2 class="text-[2em] font-black text-center w-full"> PO Number</h2>
+                    <div class="flex flex-row gap-2">
+                        <h1 class="text-[1.2em] font-black">P0#</h1>
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="supplier" class="text-[1.2em]">Supplier Name</label>
+                    <div class="flex flex-row gap-2">
                         <label for="supplier" class="text-[1.2em] ">BINI</label>
 
-                    </div>
-                </div>
-                <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
-
-                    <div>
-                        <button type="submit"
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(255,128,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
-                            Restock</button>
                     </div>
                 </div>
             </div>
 
             {{-- //* tablea area --}}
-            <div class="h-[500px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+            <div class="h-[580px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 

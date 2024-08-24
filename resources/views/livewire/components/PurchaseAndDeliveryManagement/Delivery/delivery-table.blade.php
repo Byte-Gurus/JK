@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative">
+<div class="relative" x-show="showDeliveryTable">
 
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-md">
 
