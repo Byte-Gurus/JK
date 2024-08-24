@@ -2,7 +2,8 @@
 <div class="relative" x-show="showModal" x-cloak x-data="{ isCreate: @entangle('isCreate'), showModal: @entangle('showModal'), showEditModal: @entangle('showEditModal') }">
     <div class="flex flex-row h-[655px] gap-4 ">
         @if ($this->isCreate)
-            <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
+            <div
+                class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
                 <form wire:submit.prevent="create">
 
                     <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
@@ -60,7 +61,8 @@
                                 <tr class=" text-nowrap">
 
                                     {{-- //* action --}}
-                                    <th scope="col" class="flex justify-center gap-2 px-4 py-3 text-center items-cente ">
+                                    <th scope="col"
+                                        class="flex justify-center gap-2 px-4 py-3 text-center items-cente ">
 
                                         <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
                                             class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
@@ -81,7 +83,9 @@
 
                                     {{-- //* purchase quantity --}}
                                     <th scope="col" class="py-3 text-center text-nowrap">Purchase Quantity</th>
-                                    </th>
+
+                                    {{-- //* purchase quantity --}}
+                                    <th scope="col" class="py-3 text-center text-nowrap">Expiration Date</th>
                                 </tr>
                             </thead>
 
@@ -171,7 +175,8 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center justi ">
+                                <th scope="col"
+                                    class="flex items-center justify-center gap-2 px-4 py-3 text-center justi ">
 
                                     <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
                                         class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
@@ -458,3 +463,9 @@
         @endif
     </div>
 </div>
+<script src="pikaday.js"></script>
+<script>
+    var picker = new Pikaday({
+        field: document.getElementById('datepicker')
+    });
+</script>

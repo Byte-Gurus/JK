@@ -522,4 +522,9 @@ class PurchaseOrderForm extends Component
         $this->showModal = $showModal; //var assign ang parameter value sa global variable
 
     }
+
+    public function hi($SS)
+    {
+        dd($SS);
+    }
 }
