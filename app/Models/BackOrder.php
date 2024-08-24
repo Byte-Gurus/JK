@@ -12,7 +12,6 @@ class BackOrder extends Model
     protected $fillable = [
         'purchase_id',
         'status',
-
     ];
 
     public function purchaseJoin()

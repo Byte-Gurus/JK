@@ -52,6 +52,7 @@
                             <option value="Available">Available</option>
                             <option value="Not available">Not available</option>
                             <option value="Expired">Expired</option>
+                            <option value="New Item">New Item</option>
 
                         </select>
 
@@ -194,7 +195,7 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->sku_code }}
+                                {{ $inventory->sku_code ?? 'null' }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -231,7 +232,7 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                {{ $inventory->deliveryJoin?->purchaseJoin?->supplierJoin?->company_name ?? 'null' }}
                             </th>
 
 
@@ -245,6 +246,8 @@
                                     @elseif ($inventory->status == 'Not available')
 
                                     class=" text-red-900 font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
+                                    @elseif ($inventory->status == 'New Item')
+                                    class=" text-yellow-900 font-medium  bg-yellow-100 border border-yellow-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($inventory->status == 'Expired')
 
@@ -257,12 +260,13 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->stock_in_date->format('d-m-y') }}
+                                {{ $inventory->stock_in_date ? $inventory->stock_in_date->format('d-m-y') : 'null' }}
+
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->expiration_date->format('d-m-y') }}
+                                {{ $inventory->expiration_date ? $inventory->expiration_date->format('d-m-y') : 'null' }}
                             </th>
 
                             {{-- //* Action --}}

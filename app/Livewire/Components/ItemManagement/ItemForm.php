@@ -88,6 +88,8 @@ class ItemForm extends Component
             'status_id' => $validated['status'],
         ];
 
+
+
         // Add barcode based on the condition
         if ($this->hasBarcode) {
             $item['barcode'] = $validated['create_barcode'];
@@ -96,6 +98,10 @@ class ItemForm extends Component
         }
 
         $item = Item::create($item);
+
+        Inventory::create([
+            'item_id' => $item->id,
+        ]);
 
         $this->alert('success', 'Item was created successfully');
         $this->refreshTable();
