@@ -30,4 +30,8 @@ class TestPage extends Component
         $this->photo->store('photos');
 
     }
+    public function hi($SS)
+    {
+        dd($SS);
+    }
 }

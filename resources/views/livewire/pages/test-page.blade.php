@@ -125,18 +125,13 @@
         </div>
         <div class="bg-red-100 ">transaction detailsss</div>
     </div>
-    <table>
-        <th>
-            <tr>Expiration Date</tr>
-        </th>
-        <tbody>
-            <th scope="row">
-                <div class="w-1/3 ">
-                    @include('flatpickr::components.style')
-                    <x-flatpickr :min-date="today()" id="laravel-flatpickr" date-format="d/m/Y"/>
-                </div>
-            </th>
-        </tbody>
-    </table>
+    <div>
+        <label for="datepicker">Expiration Date</label>
+        <input type="text" id="datepicker"  wire:change="hi(picker.toString('YYYY-MM-DD'))">
+    </div>
 </div>
-@include('flatpickr::components.script')
+<script src="pikaday.js"></script>
+<script>
+    var picker = new Pikaday({ field: document.getElementById('datepicker') });
+
+</script>
