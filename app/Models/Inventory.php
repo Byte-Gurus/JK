@@ -23,7 +23,7 @@ class Inventory extends Model
         'expiration_date',
         'status',
         'item_id',
-        'supplier_id',
+        'delivery_id',
         'user_id'
     ];
 
@@ -31,9 +31,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(Item::class, 'item_id');
     }
-    public function supplierJoin()
+    public function deliveryJoin()
     {
-        return $this->belongsTo(Supplier::class, 'supplier_id');
+        return $this->belongsTo(Delivery::class, 'delivery_id');
     }
     public function userJoin()
     {
@@ -47,7 +47,7 @@ class Inventory extends Model
                 $query->where('item_name', 'like', "%{$value}%")
                     ->orWhere('barcode', 'like', "%{$value}%");
             })
-            ->orWhereHas('supplierJoin', function ($query) use ($value) {
+            ->orWhereHas('deliveryJoin.purchaseJoin.supplierJoin', function ($query) use ($value) {
                 $query->where('company_name', 'like', "%{$value}%");
             });
     }

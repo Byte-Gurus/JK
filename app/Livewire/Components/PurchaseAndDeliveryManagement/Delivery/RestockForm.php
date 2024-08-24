@@ -113,7 +113,7 @@ class RestockForm extends Component
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['id'],  // Assuming 'id' here refers to the item_id
-                'supplier_id' => $supplier->purchaseJoin->supplierJoin->id, // Assuming you want to associate with the supplier
+                'delivery_id' => $this->delivery_id,// Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
             ]);
         }
