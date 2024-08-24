@@ -4,10 +4,10 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use Livewire\Component;
 
-class BackOrderPage extends Component
+class ViewBackorderDetails extends Component
 {
     public function render()
     {
-        return view('livewire.components.PurchaseAndDeliveryManagement.delivery.back-order-page');
+        return view('livewire.components.PurchaseAndDeliveryManagement.delivery.view-backorder-details');
     }
 }

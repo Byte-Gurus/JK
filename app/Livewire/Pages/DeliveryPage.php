@@ -10,7 +10,7 @@ class DeliveryPage extends Component
 
     public $showDeliveryTable = true;
     public $showRestockForm = false;
-    public $showBackorderPage = false;
+    public $showBackorderDetails = false;
 
 
     public function render()
@@ -22,7 +22,7 @@ class DeliveryPage extends Component
         'close-modal' => 'closeModal',
         'display-restock-form' => 'displayRestockForm',
         'display-delivery-table' => 'displayDeliveryTable',
-        'display-backorder-page' => 'displayBackorderPage',
+        'display-backorder-details' => 'displayBackorderDetails',
     ];
 
     public function displayDeliveryTable($showDeliveryTable)
@@ -41,14 +41,14 @@ class DeliveryPage extends Component
         $this->showDeliveryTable = true;
     }
 
-    public function displayBackorderPage($showBackorderPage)
+    public function displayBackorderDetails($showBackorderDetails)
     {
-        $this->showBackorderPage = $showBackorderPage;
+        $this->showBackorderDetails = $showBackorderDetails;
     }
 
-    public function closeBackorderPage()
+    public function closeBackorderDetails()
     {
-        $this->showBackorderPage = false;
+        $this->showBackorderDetails = false;
         $this->showDeliveryTable = true;
     }
 }

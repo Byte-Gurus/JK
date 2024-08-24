@@ -1,4 +1,4 @@
-<div x-show="showBackorderPage">
+<div x-show="showBackorderDetails">
     <div class="flex flex-row h-[655px] gap-4 ">
         <div class="relative w-3/4 overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
             <form wire:submit.prevent="create">

@@ -256,7 +256,7 @@
 
                                                 @if ($delivery->status === 'Stocked in')
                                                     <button
-                                                        x-on:click="$wire.viewBackorder(); openActions = !openActions"
+                                                        x-on:click="$wire.viewBackorderDetails(); openActions = !openActions"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-purple-600 justify-left hover:bg-purple-100">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth={1.5} stroke="purple"
