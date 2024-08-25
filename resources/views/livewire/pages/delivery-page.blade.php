@@ -9,7 +9,7 @@
                         @if ($this->showRestockForm)
                             Restock Form
                         @endif
-                        @if ($this->showBackorderDetails)
+                        @if ($this->showBackorderForm)
                             Back Order Details
                         @endif
                 </h1>
@@ -22,10 +22,10 @@
                             Cancel
                         </button>
                     @endif
-                    @if ($showBackorderDetails)
+                    @if ($showBackorderForm)
                         <button
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out"
-                            x-on:click="$wire.closeBackorderDetails()">
+                            x-on:click="$wire.closeBackorderForm()">
                             Return
                         </button>
                     @endif
@@ -35,11 +35,10 @@
         <div x-show="showDeliveryTable" x-data="{ showDeliveryTable: @entangle('showDeliveryTable') }">
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-table')
         </div>
-
         <div x-show="showRestockForm" x-data="{ showRestockForm: @entangle('showRestockForm') }">
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
         </div>
-        <div x-show="showBackorderDetails" x-data="{ showBackorderDetails: @entangle('showBackorderDetails') }">
-            @livewire('components.PurchaseAndDeliveryManagement.Delivery.view-backorder-details')
+        <div x-show="showBackorderForm" x-data="{ showBackorderForm: @entangle('showBackorderForm') }">
+            @livewire('components.PurchaseAndDeliveryManagement.Delivery.backorder-form')
         </div>
 </div>

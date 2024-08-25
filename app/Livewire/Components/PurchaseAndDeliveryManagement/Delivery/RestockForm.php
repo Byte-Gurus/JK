@@ -38,7 +38,7 @@ class RestockForm extends Component
                 })
                 ->toArray();
         }
-       
+
         return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.restock-form', [
             'purchaseDetails' => $this->purchaseDetails,
         ]);
@@ -299,6 +299,7 @@ class RestockForm extends Component
     {
         $this->resetValidation();
         $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
+        $this->dispatch('display-delivery-table', showDeliveryTable: true)->to(DeliveryPage::class);
         $this->resetForm();
     }
     public function generateSKU()

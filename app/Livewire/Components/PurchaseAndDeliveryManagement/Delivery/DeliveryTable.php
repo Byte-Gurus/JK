@@ -144,13 +144,13 @@ class DeliveryTable extends Component
     public function viewBackorderDetails()
     {
         $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
-        $this->dispatch('display-backorder-details', showBackorderDetails: true)->to(DeliveryPage::class);
+        $this->dispatch('display-backorder-form', showBackorderForm: true)->to(DeliveryPage::class);
     }
 
     public function getPO_ID($deliverId)
     {
 
-        $this->dispatch('backorder-form', deliveryID: $deliverId)->to(ViewBackorderDetails::class);
+        $this->dispatch('backorder-form', deliveryID: $deliverId)->to(BackorderForm::class);
 
     }
 }

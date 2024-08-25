@@ -7,7 +7,7 @@ use App\Models\Purchase;
 use App\Models\Supplier;
 use Livewire\Component;
 
-class ViewBackorderDetails extends Component
+class BackorderForm extends Component
 {
 
     public $backorderList = [];
@@ -37,7 +37,7 @@ class ViewBackorderDetails extends Component
             })->toArray();
         }
 
-        return view('livewire.components.PurchaseAndDeliveryManagement.delivery.view-backorder-details', [
+        return view('livewire.components.PurchaseAndDeliveryManagement.delivery.backorder-form', [
             'backorder_lists' => $this->backorderList,
             'suppliers' => $suppliers,
         ]);
