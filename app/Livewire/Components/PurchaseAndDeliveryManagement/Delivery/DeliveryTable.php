@@ -4,6 +4,7 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\Delivery;
+use App\Models\Purchase;
 use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -144,5 +145,12 @@ class DeliveryTable extends Component
     {
         $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
         $this->dispatch('display-backorder-details', showBackorderDetails: true)->to(DeliveryPage::class);
+    }
+
+    public function getPO_ID($deliverId)
+    {
+
+        $this->dispatch('backorder-form', deliveryID: $deliverId)->to(ViewBackorderDetails::class);
+
     }
 }

@@ -36,6 +36,12 @@ class Item extends Model
         return $this->hasMany(PurchaseDetails::class, 'item_id');
     }
 
+    public function backorderJoin()
+    {
+        return $this->hasMany(BackOrder::class, 'item_id');
+    }
+
+
 
     public function scopeSearch($query, $value)  //* search function
     {

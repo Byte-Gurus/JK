@@ -38,7 +38,7 @@ class RestockForm extends Component
                 })
                 ->toArray();
         }
-
+       
         return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.restock-form', [
             'purchaseDetails' => $this->purchaseDetails,
         ]);
@@ -109,7 +109,7 @@ class RestockForm extends Component
         $backorder_Items = [];
 
         foreach ($this->purchaseDetails as $index => $detail) {
-            $restockDetails = $detail['id'];
+            $restockDetails = $index;
 
             if (!isset($backorder_Items[$restockDetails])) {
                 $backorder_Items[$restockDetails] = [
@@ -118,11 +118,14 @@ class RestockForm extends Component
                 ];
             }
             $backorder_Items[$restockDetails]['total_restock_quantity'] += $this->restock_quantity[$index];
+
         }
 
         foreach ($backorder_Items as $index => $backorder) {
 
             $detail = $backorder['details'];
+
+
             $totalRestockQuantity = $backorder['total_restock_quantity'];
 
             if ($totalRestockQuantity < $detail['purchase_quantity']) {
@@ -134,6 +137,7 @@ class RestockForm extends Component
                     'status' => 'Kulang',
                 ]);
             }
+
 
             // Create a new inventory record
             $inventory = Inventory::create([

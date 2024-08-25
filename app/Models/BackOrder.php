@@ -20,5 +20,9 @@ class BackOrder extends Model
     {
         return $this->belongsTo(Purchase::class, 'purchase_id');
     }
+    public function itemJoin()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
 
 }

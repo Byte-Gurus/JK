@@ -39,7 +39,7 @@
         <div x-show="showRestockForm" x-data="{ showRestockForm: @entangle('showRestockForm') }">
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
         </div>
-        <div x-show"showBackorderDetails" x-data="{ showBackorderDetails: @entangle('showBackorderDetails') }">
+        <div x-show="showBackorderDetails" x-data="{ showBackorderDetails: @entangle('showBackorderDetails') }">
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.view-backorder-details')
         </div>
 </div>
