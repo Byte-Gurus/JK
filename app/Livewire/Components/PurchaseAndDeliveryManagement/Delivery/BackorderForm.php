@@ -2,20 +2,27 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Purchase;
+use App\Models\PurchaseDetails;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BackorderForm extends Component
 {
-
+    use LivewireAlert;
     public $backorderList = [];
-    public $po_number, $purchase_id, $supplier, $delivery_id, $purchase, $select_supplier;
+    public $po_number,  $new_po_number, $purchase_id, $supplier, $delivery_id, $purchase, $select_supplier;
     public $selectedToReorder = [];
     public $selectedToCancel = [];
+    public $new_po_items = [];
     public $selectAllToReorder = false;
     public $selectAllToCancel = false;
+
+    public $isReorderListsCleared = false;
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -24,12 +31,13 @@ class BackorderForm extends Component
             ->find($this->purchase_id);
 
 
-        if ($this->purchase && $this->purchase->backorderJoin->isNotEmpty()) {
+        if ($this->purchase && $this->purchase->backorderJoin->isNotEmpty() && !$this->isReorderListsCleared) {
             $this->backorderList = $this->purchase->backorderJoin->map(function ($backOrder) {
                 return [
                     'backorder_quantity' => $backOrder->backorder_quantity,
                     'status' => $backOrder->status,
                     'barcode' => $backOrder->itemJoin->barcode,
+                    'item_id' => $backOrder->itemJoin->id,
                     'item_name' => $backOrder->itemJoin->item_name,
                     'item_description' => $backOrder->itemJoin->item_description,
                     // Provide an empty array if no item details
@@ -48,8 +56,63 @@ class BackorderForm extends Component
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
         'backorder-form' => 'backorderForm',
         'updateConfirmed',
+        'createConfirmed',
         'cancelConfirmed',
     ];
+
+    public function create() //* create process
+    {
+
+
+        $validated = $this->validateForm();
+
+        $this->confirm('Do you want to add this user?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
+    }
+
+    public function createConfirmed($data) //* confirmation process ng create
+    {
+
+        $validated = $data['inputAttributes'];
+
+        $purchase_order = Purchase::create([
+            'po_number' => $validated['new_po_number'],
+            'supplier_id' => $validated['select_supplier'],
+            'user_id' => Auth::id(),
+        ]);
+
+
+        foreach ($this->new_po_items as $index => $new_po_item) {
+
+            PurchaseDetails::create([
+                'purchase_id' => $purchase_order->id,
+                'item_id' => $new_po_item['item_id'], // Use item_id from reorder_list
+                'po_number' => $validated['new_po_number'],
+                'purchase_quantity' => $new_po_item['backorder_quantity'],
+            ]);
+
+            BackOrder::where('item_id', $new_po_item['item_id'])
+                ->where('purchase_id', $this->purchase_id) // Assuming `purchase_id` is linked with the backorder
+                ->update(['status' => 'Repurchased']);
+        }
+
+        $delivery = Delivery::create([
+            'status' => "In Progress",
+            'date_delivered' => "N/A",
+            'purchase_id' => $purchase_order->id
+        ]);
+
+
+
+        $this->alert('success', 'Purchase order was created successfully');
+        $this->refreshTable();
+
+
+        $this->resetForm();
+        $this->closeModal();
+    }
     private function populateForm() //*lagyan ng laman ang mga input
     {
 
@@ -61,6 +124,40 @@ class BackorderForm extends Component
         ]);
     }
 
+    public function purchaseRow()
+    {
+
+        foreach ($this->selectedToReorder as $index) {
+            if (isset($this->selectedToReorder[$index])) {
+
+                $this->new_po_items[] = [
+                    'item_id' => $this->backorderList[$index]['item_id'],
+                    'barcode' => $this->backorderList[$index]['barcode'],
+                    'item_name' => $this->backorderList[$index]['item_name'],
+                    'backorder_quantity' => $this->backorderList[$index]['backorder_quantity'],
+                    'item_description' => $this->backorderList[$index]['item_description'],
+                    'status' => $this->backorderList[$index]['status'],
+                ];
+            }
+        }
+
+
+        // Remove the selected items from reorder_lists
+        foreach ($this->selectedToReorder as $index) {
+            // dd($this->backorderList[$index], $this->selectedToReorder);
+            unset($this->backorderList[$index]);
+        }
+
+        $this->backorderList = array_values($this->backorderList);
+
+
+        $this->selectedToReorder = [];
+        $this->selectAllToReorder = false;
+
+        if (empty($this->backorderList)) {
+            $this->isReorderListsCleared = true;
+        }
+    }
     public function reorderAll()
     {
 
@@ -69,8 +166,45 @@ class BackorderForm extends Component
         } else {
             $this->selectAllToReorder = [];
         }
+    }
+    public function cancelAll()
+    {
+
+        if ($this->selectAllToCancel) {
+            $this->selectedToCancel = array_keys($this->new_po_items);
+        } else {
+            $this->selectAllToCancel = [];
+        }
+    }
+
+    public function cancelRow()
+    {
+
+        foreach ($this->selectedToCancel as $index) {
+
+            // Add the item back to reorder_lists
+            $this->backorderList[] = $this->new_po_items[$index];
+
+            unset($this->new_po_items[$index]);
+        }
+
+        $this->backorderList = array_values($this->backorderList);
 
 
+        $this->selectedToCancel = [];
+        $this->selectAllToCancel = false;
+    }
+
+    protected function validateForm()
+    {
+
+        $rules = [
+            'new_po_number' => 'required|string|max:255|min:1',
+            'select_supplier' => 'required|numeric',
+        ];
+
+
+        return $this->validate($rules);
     }
 
     public function backorderForm($deliveryID)
@@ -82,6 +216,14 @@ class BackorderForm extends Component
 
 
 
+        $this->generatePurchaseOrderNumber();
         $this->populateForm();
+    }
+
+    public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
+    {
+
+        $randomNumber = random_int(100000, 999999);
+        $this->new_po_number = 'PO-' . $randomNumber;
     }
 }

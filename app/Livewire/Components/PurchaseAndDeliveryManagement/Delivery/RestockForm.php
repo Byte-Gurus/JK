@@ -104,21 +104,24 @@ class RestockForm extends Component
 
 
         $validated = $data['inputAttributes'];
-        $supplier = Delivery::find($this->delivery_id);
+        $hasBackorder = false;
+
 
         $backorder_Items = [];
 
-        foreach ($this->purchaseDetails as $index => $detail) {
-            $restockDetails = $index;
 
-            if (!isset($backorder_Items[$restockDetails])) {
-                $backorder_Items[$restockDetails] = [
+        foreach ($this->purchaseDetails as $index => $detail) {
+            $backorder_index = $index;
+
+            if (!isset($backorder_Items[$backorder_index])) {
+
+                $backorder_Items[$backorder_index] = [
+
                     'details' => $detail,
                     'total_restock_quantity' => 0
                 ];
             }
-            $backorder_Items[$restockDetails]['total_restock_quantity'] += $this->restock_quantity[$index];
-
+            $backorder_Items[$backorder_index]['total_restock_quantity'] += $this->restock_quantity[$index];
         }
 
         foreach ($backorder_Items as $index => $backorder) {
@@ -129,7 +132,8 @@ class RestockForm extends Component
             $totalRestockQuantity = $backorder['total_restock_quantity'];
 
             if ($totalRestockQuantity < $detail['purchase_quantity']) {
-                // Add to BackOrder
+                $hasBackorder = true;
+
                 BackOrder::create([
                     'purchase_id' => $this->purchase_id,
                     'item_id' => $detail['id'],
@@ -143,10 +147,10 @@ class RestockForm extends Component
             $inventory = Inventory::create([
                 'sku_code' => $detail['sku_code'],
                 'cost' => $this->cost[$index],
-                'mark_up_price' => $this->markup[$index],
-                'selling_price' => $this->srp[$index],
-                'current_stock_quantity' => $this->restock_quantity[$index],
-                'expiration_date' => $this->expiration_date[$index],
+                'mark_up_price' => $validated['markup'][$index],
+                'selling_price' => $validated['srp'][$index],
+                'current_stock_quantity' =>  $validated['restock_quantity'][$index],
+                'expiration_date' =>  $validated['expiration_date'][$index],
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['id'],  // Assuming 'id' here refers to the item_id
@@ -156,16 +160,23 @@ class RestockForm extends Component
         }
 
 
-
-        $delivery = Delivery::find($this->purchase_id);
-        $delivery->date_delivered = now();
-        $delivery->status = "Stocked in";
-        $delivery->save();
+        if ($hasBackorder) {
+            $delivery = Delivery::find($this->purchase_id);
+            $delivery->date_delivered = now();
+            $delivery->status = "Stocked in with backorder";
+            $delivery->save();
+        } else {
+            $delivery = Delivery::find($this->purchase_id);
+            $delivery->date_delivered = now();
+            $delivery->status = "Complete Stock in";
+            $delivery->save();
+        }
 
 
 
         $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
+
 
         $this->refreshTable();
         $this->closeModal();
