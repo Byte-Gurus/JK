@@ -4,6 +4,7 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\Delivery;
+use App\Models\Purchase;
 use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -77,23 +78,11 @@ class DeliveryTable extends Component
         $this->resetPage();
     }
 
-    public function showRestockForm()
-    {
-        $this->dispatch('display-restock-form', showRestockForm: true)->to(DeliveryPage::class);
-    }
-
     public function getDeliveryID($deliveryId)
     {
 
         $this->dispatch('restock-form', deliveryID: $deliveryId)->to(RestockForm::class);
     }
-
-    public function viewDeliveryDetails()
-    {
-        $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
-        $this->dispatch('view-delivery-details', openDeliveryDetails: true)->to(DeliveryPage::class);
-    }
-
 
     public function changeDate($id, $date)
     {
@@ -144,5 +133,24 @@ class DeliveryTable extends Component
 
         $this->alert('success', 'Delivery cancelled successfully');
         $this->resetPage();
+    }
+
+    public function viewRestockForm()
+    {
+        $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
+        $this->dispatch('display-restock-form', showRestockForm: true)->to(DeliveryPage::class);
+    }
+
+    public function viewBackorderDetails()
+    {
+        $this->dispatch('display-delivery-table', showDeliveryTable: false)->to(DeliveryPage::class);
+        $this->dispatch('display-backorder-form', showBackorderForm: true)->to(DeliveryPage::class);
+    }
+
+    public function getPO_ID($deliverId)
+    {
+
+        $this->dispatch('backorder-form', deliveryID: $deliverId)->to(BackorderForm::class);
+
     }
 }

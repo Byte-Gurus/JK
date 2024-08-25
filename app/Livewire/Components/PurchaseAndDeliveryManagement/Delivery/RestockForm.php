@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Livewire\Pages\DeliveryPage;
+use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Inventory;
 use App\Models\Purchase;
@@ -29,6 +30,7 @@ class RestockForm extends Component
                     return $details->toArray() + [
                         'barcode' => $details->itemsJoin->barcode,
                         'item_name' => $details->itemsJoin->item_name,
+                        'item_description' => $details->itemsJoin->item_description,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
                         'isDuplicate' => false,
@@ -48,59 +50,94 @@ class RestockForm extends Component
     ];
 
     public function create()
-{
-    $validated = $this->validateForm(); // Validate form data
+    {
+        $validated = $this->validateForm(); // Validate form data
 
-    // Initialize quantities array
-    $quantities = [];
+        // Initialize quantities array
+        $quantities = [];
 
-    // First pass: Accumulate restock quantities for each item
-    foreach ($this->purchaseDetails as $index => $detail) {
-        $details_id = $detail['id']; // Assuming 'id' refers to item_id
+        // First pass: Accumulate restock quantities for each item
+        foreach ($this->purchaseDetails as $index => $detail) {
+            $details_id = $detail['id']; // get all the id of each purchase details
 
-        if (!isset($quantities[$details_id])) {
-            $quantities[$details_id] = 0;
+            if (!isset($quantities[$details_id])) {
+                $quantities[$details_id] = 0;
+            }
+            $quantities[$details_id] += $this->restock_quantity[$index];
         }
-        $quantities[$details_id] += $this->restock_quantity[$index];
-    }
 
-    // Second pass: Check each item's quantity individually
-    foreach ($this->purchaseDetails as $index => $detail) {
-        $details_id = $detail['id']; // Assuming 'id' refers to item_id
+        // Second pass: Check each item's quantity individually
+        foreach ($this->purchaseDetails as $index => $detail) {
+            $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
-        // Check if the accumulated restock quantity exceeds the purchased quantity
-        if ($quantities[$details_id] > $detail['purchase_quantity']) {
-            $this->alert('error', "The total restock quantity for {$detail['item_name']} exceeds the purchased quantity of {$detail['purchase_quantity']}.");
-            return; // Stop further processing
+            // Check if the accumulated restock quantity exceeds the purchased quantity
+            if ($quantities[$details_id] > $detail['purchase_quantity']) {
+                $this->alert('error', "The total restock quantity for {$detail['item_name']} exceeds the purchased quantity of {$detail['purchase_quantity']}.");
+                return; // Stop further processing
+            }
         }
-    }
 
-    // If any item falls short, prompt for confirmation
-    foreach ($this->purchaseDetails as $index => $detail) {
-        $details_id = $detail['id']; // Assuming 'id' refers to item_id
+        // If any item falls short, prompt for confirmation
+        foreach ($this->purchaseDetails as $index => $detail) {
+            $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
-        if ($quantities[$details_id] < $detail['purchase_quantity']) {
-            $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
-                'onConfirmed' => 'createConfirmed',
-                'inputAttributes' => $validated,
-            ]);
-            return; // Ensure we don’t proceed if confirmation is needed
+            if ($quantities[$details_id] < $detail['purchase_quantity']) {
+                $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
+                    'onConfirmed' => 'createConfirmed',
+                    'inputAttributes' => $validated,
+                ]);
+
+
+                return; // Ensure we don’t proceed if confirmation is needed
+            }
         }
-    }
 
-    // If all validations pass, prompt for final confirmation
-    $this->confirm('Do you want to add these items?', [
-        'onConfirmed' => 'createConfirmed',
-        'inputAttributes' => $validated,
-    ]);
-}
+        // If all validations pass, prompt for final confirmation
+        $this->confirm('Do you want to add these items?', [
+            'onConfirmed' => 'createConfirmed',
+            'inputAttributes' => $validated,
+        ]);
+    }
 
     public function createConfirmed($data)
     {
+
+
         $validated = $data['inputAttributes'];
         $supplier = Delivery::find($this->delivery_id);
 
+        $backorder_Items = [];
+
         foreach ($this->purchaseDetails as $index => $detail) {
+            $restockDetails = $index;
+
+            if (!isset($backorder_Items[$restockDetails])) {
+                $backorder_Items[$restockDetails] = [
+                    'details' => $detail,
+                    'total_restock_quantity' => 0
+                ];
+            }
+            $backorder_Items[$restockDetails]['total_restock_quantity'] += $this->restock_quantity[$index];
+
+        }
+
+        foreach ($backorder_Items as $index => $backorder) {
+
+            $detail = $backorder['details'];
+
+
+            $totalRestockQuantity = $backorder['total_restock_quantity'];
+
+            if ($totalRestockQuantity < $detail['purchase_quantity']) {
+                // Add to BackOrder
+                BackOrder::create([
+                    'purchase_id' => $this->purchase_id,
+                    'item_id' => $detail['id'],
+                    'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
+                    'status' => 'Kulang',
+                ]);
+            }
+
 
             // Create a new inventory record
             $inventory = Inventory::create([
@@ -113,15 +150,19 @@ class RestockForm extends Component
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['id'],  // Assuming 'id' here refers to the item_id
-                'supplier_id' => $supplier->purchaseJoin->supplierJoin->id, // Assuming you want to associate with the supplier
+                'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
             ]);
         }
+
+
 
         $delivery = Delivery::find($this->purchase_id);
         $delivery->date_delivered = now();
         $delivery->status = "Stocked in";
         $delivery->save();
+
+
 
         $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
@@ -145,7 +186,8 @@ class RestockForm extends Component
         // Check if both cost and markup are set and are numeric
         if (isset($this->cost[$index]) && isset($this->markup[$index])) {
             if (is_numeric($this->cost[$index]) && is_numeric($this->markup[$index])) {
-                $this->srp[$index] = $this->cost[$index] * (1 + $this->markup[$index] / 100);
+                $srp = $this->cost[$index] * (1 + $this->markup[$index] / 100);
+                $this->srp[$index] = ceil($srp); // Round up to the nearest whole number
             } else {
                 // Handle the case where cost or markup is not numeric
                 $this->srp[$index] = null; // Or set it to some default value or handle the error accordingly
@@ -173,6 +215,7 @@ class RestockForm extends Component
 
             'barcode' => $originalItem->itemsJoin->barcode,
             'item_name' => $originalItem->itemsJoin->item_name,
+            'item_description' => $originalItem->itemsJoin->item_description,
             'purchase_quantity' => $originalItem->purchase_quantity,
             'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
             'id' => $originalItem->id,  // Keep the original ID for tracking purposes
@@ -256,6 +299,7 @@ class RestockForm extends Component
     {
         $this->resetValidation();
         $this->dispatch('display-restock-form', showRestockForm: false)->to(DeliveryPage::class);
+        $this->dispatch('display-delivery-table', showDeliveryTable: true)->to(DeliveryPage::class);
         $this->resetForm();
     }
     public function generateSKU()

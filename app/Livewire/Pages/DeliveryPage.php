@@ -8,9 +8,11 @@ use Livewire\Component;
 class DeliveryPage extends Component
 {
 
+    public $showDeliveryTable = true;
     public $showRestockForm = false;
+    public $showBackorderForm = false;
 
-    public $openDeliveryDetails = false;
+
     public function render()
     {
         return view('livewire.pages.delivery-page');
@@ -19,8 +21,14 @@ class DeliveryPage extends Component
     protected $listeners = [
         'close-modal' => 'closeModal',
         'display-restock-form' => 'displayRestockForm',
-        'view-delivery-details' => 'viewDeliveryDetails',
+        'display-delivery-table' => 'displayDeliveryTable',
+        'display-backorder-form' => 'displayBackorderForm',
     ];
+
+    public function displayDeliveryTable($showDeliveryTable)
+    {
+        $this->showDeliveryTable = $showDeliveryTable;
+    }
 
     public function displayRestockForm($showRestockForm)
     {
@@ -30,17 +38,17 @@ class DeliveryPage extends Component
     public function cancelRestockForm()
     {
         $this->showRestockForm = false;
+        $this->showDeliveryTable = true;
     }
 
-    public function viewDeliveryDetails($openDeliveryDetails)
+    public function displayBackorderForm($showBackorderForm)
     {
-        $this->openDeliveryDetails = $openDeliveryDetails;
-        $this->showRestockForm = true;
+        $this->showBackorderForm = $showBackorderForm;
     }
 
-    public function closeDeliveryDetails()
+    public function closeBackorderForm()
     {
-        $this->showRestockForm = false;
-        $this->openDeliveryDetails = false;
+        $this->showBackorderForm = false;
+        $this->showDeliveryTable = true;
     }
 }

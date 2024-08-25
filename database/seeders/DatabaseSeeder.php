@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
 
         Supplier::factory(100)->create();
         Customer::factory(100)->create();
-        Item::factory(100)->create();
-        Inventory::factory(100)->create();
+        // $this->call(ItemSeeder::class);
+        // Inventory::factory(100)->create();
 
     }
 }

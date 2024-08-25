@@ -24,10 +24,11 @@ Artisan::command('migration-order', function () {
         '2024_07_22_152908_create_customers_table.php',
         '2024_06_16_014707_create_suppliers_table.php',
         '2024_07_09_211729_create_items_table.php',
-        '2024_08_05_213148_create_inventories_table.php',
         '2024_08_09_131524_create_purchases_table.php',
         '2024_08_09_142144_create_purchase_details_table.php',
         '2024_08_04_204401_create_deliveries_table.php',
+        '2024_08_22_213514_create_back_orders_table.php',
+        '2024_08_05_213148_create_inventories_table.php',
         '2024_08_16_234953_create_inventory_adjustments_table.php',
 
         '0001_01_01_000001_create_cache_table.php',
