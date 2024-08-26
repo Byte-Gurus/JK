@@ -26,4 +26,13 @@ class InventoryMovement extends Model
     {
         return $this->belongsTo(InventoryAdjustment::class, 'inventory_adjustment_id');
     }
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->WhereHas('inventoryJoin.itemJoin', function ($query) use ($value) {
+                $query->where('item_name', 'like', "%{$value}%")
+                    ->orWhere('barcode', 'like', "%{$value}%");
+            });
+
+    }
 }

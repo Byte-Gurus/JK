@@ -39,6 +39,7 @@
                             <option value="Available">Available</option>
                             <option value="Not available">Not available</option>
                             <option value="Expired">Expired</option>
+                            <option value="New Item">New Item</option>
 
                         </select>
 
@@ -47,6 +48,45 @@
 
                 </div>
 
+                <div class="flex flex-row items-center gap-4">
+
+                    <div class="flex flex-row items-center gap-2">
+
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Movement :</label>
+
+                        <select wire:model.live="movementFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            <option value="0">All</option>
+                            <option value="Inventory">Inventory</option>
+                            <option value="Adjustment">Adjustment</option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+                <div class="flex flex-row items-center gap-4">
+
+                    <div class="flex flex-row items-center gap-2">
+
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Operation :</label>
+
+                        <select wire:model.live="operationFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            <option value="0">All</option>
+                            <option value="Stock In">Stock In</option>
+                            <option value="Stock Out">Stock Out</option>
+                            <option value="Add">Add</option>
+                            <option value="Deduct">Deduct</option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
 
             </div>
         </div>
@@ -81,6 +121,8 @@
 
                         <th scope="col" class="px-4 py-3">Quantity</th>
 
+                        <th scope="col" class="px-4 py-3">Supplier</th>
+
                     </tr>
                 </thead>
 
@@ -100,26 +142,46 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->status }}
+                                {{ $InventoryHistory->inventoryJoin->status ?? 'N/A' }}
                             </th>
 
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->sku_code  ?? 'N/A'}}
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->sku_code ?? 'N/A' }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->sku_code }}
+                                @endif
+
                             </th>
 
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->barcode }}
+                                @endif
+
                             </th>
 
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->itemJoin->item_name }}
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->itemJoin->item_name }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_name }}
+                                @endif
+
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->itemJoin->item_description }}
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->itemJoin->item_description }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_description }}
+                                @endif
+
                             </th>
 
 
@@ -128,7 +190,21 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->current_stock_quantity }}
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->current_stock_quantity }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->current_stock_quantity }}
+                                @endif
+
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                @endif
+
                             </th>
 
 

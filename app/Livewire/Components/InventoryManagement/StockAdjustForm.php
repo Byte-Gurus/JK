@@ -5,6 +5,7 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryAdjustment;
+use App\Models\InventoryMovement;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -59,9 +60,9 @@ class StockAdjustForm extends Component
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
 
-        if ($this->selectOperation == "add") {
+        if ($this->selectOperation == "Add") {
             $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
-        } elseif ($this->selectOperation == "deduct") {
+        } elseif ($this->selectOperation == "Deduct") {
             $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
         }
 
@@ -86,6 +87,11 @@ class StockAdjustForm extends Component
             'user_id' => Auth::id(),
         ]);
 
+        $inventoryMovement = InventoryMovement::create([
+            'inventory_adjustment_id' => $inventoryAdjust->id,
+            'movement_type' => 'Adjustment',
+            'operation' => $updatedAttributes['selectOperation'],
+        ]);
 
         $this->resetForm();
         $this->alert('success', 'stock adjusted successfully');
