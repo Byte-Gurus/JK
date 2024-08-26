@@ -215,7 +215,7 @@ class BackorderForm extends Component
 
     public function refreshTable() //* refresh ang table after confirmation
     {
-        // $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
+        $this->dispatch('refresh-table')->to(DeliveryTable::class);
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
