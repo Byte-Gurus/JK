@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Purchase;
@@ -111,7 +112,7 @@ class BackorderForm extends Component
 
 
         $this->resetForm();
-        $this->closeModal();
+        $this->closeBackorderForm();
     }
     private function populateForm() //*lagyan ng laman ang mga input
     {
@@ -206,9 +207,9 @@ class BackorderForm extends Component
         return $this->validate($rules);
     }
 
-    public function closeModal() //* close ang modal after confirmation
+    public function closeBackorderForm() //* close ang modal after confirmation
     {
-        // $this->dispatch('close-modal')->to(PurchasePage::class);
+        $this->dispatch('close-backorder-form')->to(DeliveryPage::class);
         $this->resetValidation();
     }
 
