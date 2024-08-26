@@ -11,11 +11,8 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <p class="text-[1.2em] font-black">{{ $po_number }}</p>
-                        <p> GAMBARE GAMBARE </p>
-                        <p> NAH I'D WIN </p>
-                        <p> DOMAIN EXPANSION</p>
-                        <p>MALEVOLENT SHRINE</>
-                        <p>WITH THIS TREASURE I SUMMON</>
+
+
                     </div>
                     <div>
                         |
@@ -85,6 +82,8 @@
                                                     value="{{ $index }}"
                                                     class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                             @endif
+
+
 
                                         </div>
                                     </th>

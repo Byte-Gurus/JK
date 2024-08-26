@@ -19,7 +19,7 @@ class DeliveryPage extends Component
     }
 
     protected $listeners = [
-        'close-modal' => 'closeModal',
+        'close-backorder-form' => 'closeBackorderForm',
         'display-restock-form' => 'displayRestockForm',
         'display-delivery-table' => 'displayDeliveryTable',
         'display-backorder-form' => 'displayBackorderForm',

@@ -1,8 +1,8 @@
 <div>
-    <div class="grid items-center grid-flow-col grid-cols-3 p-[28px]">
+    <div class="grid grid-flow-col grid-cols-3 p-[28px]">
         <div class="flex flex-col col-span-2">
-            <div class="flex flex-row items-center gap-4 p-[28px]">
-                <div>
+            <div class="flex w-full flex-row items-center gap-4 py-[28px]">
+                <div class="w-2/4">
                     <input type="search"
                         class="px-4 py-2 border outline-none rounded-md border-[rgb(143,143,143)] w-full"
                         placeholder="Search by Barcode or Item Name">
@@ -19,7 +19,7 @@
             </div>
             <div class="border border-black ">
                 {{-- //* tablea area --}}
-                <div class="overflow-x-auto overflow-y-scroll scroll h-[500px] ">
+                <div class="overflow-x-auto overflow-y-scroll scroll h-[550px] ">
 
                     <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -65,73 +65,64 @@
 
                 </div>
             </div>
-            <div class=" py-[28px]">
-                <div class="grid grid-flow-col grid-cols-2">
-                    <div class="flex flex-row col-span-1 gap-4">
-                        <div class="flex flex-col col-span-1 gap-2">
-                            <div class="flex flex-row gap-2">
-                                <div class="text-center bg-slate-400 text-nowrap">
-                                    <button class="px-4 py-2 ">
+            <div class=" pt-[28px]">
+                <div class="grid grid-flow-col">
+                    <div class="flex flex-row gap-4">
+                        <div class="flex flex-col gap-2">
+                            <div class="flex flex-row items-center gap-2">
+                                <div class="py-4 text-center bg-slate-400 text-nowrap">
+                                    <button class="px-8 py-2 ">
                                         Quantity
                                     </button>
                                 </div>
-                                <div class="text-center bg-blue-400 text-nowrap">
-                                    <button class="px-4 py-2 ">
+                                <div class="py-4 text-center bg-blue-400 text-nowrap">
+                                    <button class="px-8 py-2 ">
                                         Remove Item
                                     </button>
                                 </div>
                             </div>
-                            <div class="w-full text-center bg-orange-400 text-nowrap">
-                                <button class="px-4 py-2 ">
+                            <div class="w-full py-4 text-center bg-orange-400 text-nowrap">
+                                <button class="px-8 py-2 ">
                                     Cancel Transaction
                                 </button>
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 ">
-                            <div class="text-center bg-indigo-400 text-nowrap">
-                                <button class="px-4 py-2 ">Wholesale</button>
+                            <div class="py-4 text-center bg-indigo-400 text-nowrap">
+                                <button class="px-8 py-2 ">Wholesale</button>
                             </div>
-                            <div class="text-center bg-violet-400 text-nowrap">
-                                <button class="px-4 py-2 ">
+                            <div class="py-4 text-center bg-violet-400 text-nowrap">
+                                <button class="px-8 py-2 ">
                                     Discount
                                 </button>
                             </div>
                         </div>
                         <div class="flex flex-col gap-2 ">
                             <div class="flex flex-row gap-4">
-                                <div class="text-center bg-pink-400 text-nowrap">
-                                    <button class="px-4 py-2 ">Return</button>
+                                <div class="py-4 text-center bg-pink-400 text-nowrap">
+                                    <button class="px-8 py-2 ">Return</button>
                                 </div>
-                                <div class="text-center bg-yellow-400 text-nowrap">
-                                    <button class="px-4 py-2 ">Pay</button>
+                                <div class="py-4 text-center bg-yellow-400 text-nowrap">
+                                    <button class="px-8 py-2 ">Pay</button>
                                 </div>
                             </div>
-                            <div class="text-center bg-sky-400 text-nowrap">
-                                <button class="px-4 py-2 ">
+                            <div class="py-4 text-center bg-sky-400 text-nowrap">
+                                <button class="px-8 py-2 ">
                                     Void Transaction
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-center font-black">
-                        <div class="text-center bg-green-400 text-nowrap">
-                            <button>
-                                Save
-                            </button>
+                        <div class="flex items-center justify-center w-full font-black bg-green-400 p-auto">
+                            <div class="text-center bg-green-400 text-nowrap">
+                                <button>
+                                    Save
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-red-100 ">transaction detailsss</div>
-    </div>
-    <div>
-        <label for="datepicker">Expiration Date</label>
-        <input type="text" id="datepicker"  wire:change="hi(picker.toString('YYYY-MM-DD'))">
+        <div class="bg-red-100 ml-[28px]">transaction detailsss</div>
     </div>
 </div>
-<script src="pikaday.js"></script>
-<script>
-    var picker = new Pikaday({ field: document.getElementById('datepicker') });
-
-</script>

@@ -105,16 +105,16 @@
                     <tr
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        @foreach ($merges as $merge)
+                        {{-- @foreach ($merges as $merge)
                             <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $merge->created_at->format('d-m-y ') }}
                             </th>
 
                             <td class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap">
-                                {{ $merge->item_name  }}
+                                {{ $merge->item_name }}
                             </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
 
             </table>

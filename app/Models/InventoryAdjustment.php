@@ -26,7 +26,7 @@ class InventoryAdjustment extends Model
 
     public function userJoin()
     {
-        return $this->belongsTo(User::class, 'inventory_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeSearch($query, $value)
