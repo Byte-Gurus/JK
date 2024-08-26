@@ -4,6 +4,7 @@ namespace App\Livewire\Components\ItemManagement;
 
 use App\Livewire\Pages\ItemManagementPage;
 use App\Models\Inventory;
+use App\Models\InventoryMovement;
 use App\Models\Item;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -99,9 +100,14 @@ class ItemForm extends Component
 
         $item = Item::create($item);
 
-        Inventory::create([
+        $inventory = Inventory::create([
             'item_id' => $item->id,
-            
+        ]);
+
+        $inventoryMovement = InventoryMovement::create([
+            'inventory_id' => $inventory->id,
+            'movement_type' => 'Inventory',
+            'operation' => 'Stock In',
         ]);
 
         $this->alert('success', 'Item was created successfully');

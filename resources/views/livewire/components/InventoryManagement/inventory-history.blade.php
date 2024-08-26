@@ -66,55 +66,76 @@
                         <th scope="col" class="px-4 py-3">Date</th>
 
                         {{-- //* item name --}}
+                        <th scope="col" class="px-4 py-3">Movement</th>
+
+                        <th scope="col" class="px-4 py-3">Status</th>
+                        <th scope="col" class="px-4 py-3">SKU</th>
+
+                        <th scope="col" class="px-4 py-3">Barcode</th>
+
                         <th scope="col" class="px-4 py-3">Item Name</th>
 
-                        {{-- //* employee name --}}
-                        <th wire:click="sortByColumn('item_name')" scope="col"
-                            class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                        <th scope="col" class="px-4 py-3">Description</th>
 
-                            <div class="flex items-center">
-                                <p>Employee</p>
+                        <th scope="col" class="px-4 py-3">Operation</th>
 
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>
-                                </span>
-
-                            </div>
-
-                        </th>
-                        {{-- //* remark --}}
-                        <th scope="col" class="px-4 py-3 text-center">Remark</th>
-
-
-                        {{-- //* adjustment count --}}
-                        <th scope="col" class="px-4 py-3 text-center">Adjustment Count</th>
-
-
-                        {{-- //* stock after --}}
-                        <th scope="col" class="px-4 py-3 text-center">Stock After</th>
+                        <th scope="col" class="px-4 py-3">Quantity</th>
 
                     </tr>
                 </thead>
 
                 {{-- //* table body --}}
                 <tbody>
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        {{-- @foreach ($merges as $merge)
-                            <th scope="row" class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $merge->created_at->format('d-m-y ') }}
+                    @foreach ($InventoryHistories as $InventoryHistory)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->created_at->format('d-m-y h:i A') }}
                             </th>
 
-                            <td class="px-4 py-6 font-medium text-gray-900 text-md whitespace-nowrap">
-                                {{ $merge->item_name }}
-                            </td>
-                    </tr>
-                    @endforeach --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->movement_type }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->inventoryJoin->status }}
+                            </th>
+
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->inventoryJoin->sku_code  ?? 'N/A'}}
+                            </th>
+
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
+                            </th>
+
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->inventoryJoin->itemJoin->item_name }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->inventoryJoin->itemJoin->item_description }}
+                            </th>
+
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->operation }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->inventoryJoin->current_stock_quantity }}
+                            </th>
+
+
+
+
+                        </tr>
+                    @endforeach
                 </tbody>
 
             </table>

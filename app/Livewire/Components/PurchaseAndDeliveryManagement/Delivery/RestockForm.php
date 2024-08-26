@@ -6,6 +6,7 @@ use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Inventory;
+use App\Models\InventoryMovement;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
@@ -160,13 +161,19 @@ class RestockForm extends Component
         }
         $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
 
-     
+        $inventoryMovement = InventoryMovement::create([
+            'inventory_id' => $inventory->id,
+            'movement_type' => 'Inventory',
+            'operation' => 'Stock In',
+        ]);
+
         if ($hasBackorder) {
             $delivery->status = "Stocked in with backorder";
         } else {
             $delivery->status = "Complete Stock in";
         }
         $delivery->save();
+
 
 
         $this->resetForm();
