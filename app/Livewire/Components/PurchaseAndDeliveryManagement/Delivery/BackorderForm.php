@@ -162,7 +162,9 @@ class BackorderForm extends Component
     {
 
         if ($this->selectAllToReorder) {
-            $this->selectedToReorder = array_keys($this->backorderList);
+            $this->selectedToReorder = array_keys(array_filter($this->backorderList, function ($item) {
+                return $item['status'] !== 'Repurchased';
+            }));
         } else {
             $this->selectAllToReorder = [];
         }
