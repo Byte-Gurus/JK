@@ -294,9 +294,9 @@
                                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                                         min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-                                                {{-- x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions" --}}
 
-                                                @if (!$inventory->stock_in_date === 'null')
+
+                                                @if ($inventory->status !== 'New Item')
                                                     <button
                                                         x-on:click="showStockAdjustModal=true, openActions = !openActions"
                                                         wire:click="getStockID({{ $inventory->id }})"

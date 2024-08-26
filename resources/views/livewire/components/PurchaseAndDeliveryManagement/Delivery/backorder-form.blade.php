@@ -11,11 +11,8 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <p class="text-[1.2em] font-black">{{ $po_number }}</p>
-                        <p> GAMBARE GAMBARE </p>
-                        <p> NAH I'D WIN </p>
-                        <p> DOMAIN EXPANSION</p>
-                        <p>MALEVOLENT SHRINE</>
-                        <p>WITH THIS TREASURE I SUMMON</>
+
+
                     </div>
                     <div>
                         |

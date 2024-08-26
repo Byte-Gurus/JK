@@ -31,7 +31,7 @@ class BackorderForm extends Component
             ->find($this->purchase_id);
 
 
-        if ($this->purchase && $this->purchase->backorderJoin->isNotEmpty() && !$this->isReorderListsCleared) {
+        if ($this->purchase && empty($this->backorderList) && !$this->isReorderListsCleared) {
             $this->backorderList = $this->purchase->backorderJoin->map(function ($backOrder) {
                 return [
                     'backorder_quantity' => $backOrder->backorder_quantity,
@@ -128,8 +128,7 @@ class BackorderForm extends Component
     {
 
         foreach ($this->selectedToReorder as $index) {
-            if (isset($this->selectedToReorder[$index])) {
-
+            if (isset($this->backorderList[$index])) {
                 $this->new_po_items[] = [
                     'item_id' => $this->backorderList[$index]['item_id'],
                     'barcode' => $this->backorderList[$index]['barcode'],
@@ -140,11 +139,11 @@ class BackorderForm extends Component
                 ];
             }
         }
-
+        // dd($this->new_po_items);
 
         // Remove the selected items from reorder_lists
         foreach ($this->selectedToReorder as $index) {
-            // dd($this->backorderList[$index], $this->selectedToReorder);
+
             unset($this->backorderList[$index]);
         }
 
@@ -152,7 +151,7 @@ class BackorderForm extends Component
 
 
         $this->selectedToReorder = [];
-        $this->selectAllToReorder = false;
+
 
         if (empty($this->backorderList)) {
             $this->isReorderListsCleared = true;
@@ -207,6 +206,22 @@ class BackorderForm extends Component
         return $this->validate($rules);
     }
 
+    public function closeModal() //* close ang modal after confirmation
+    {
+        // $this->dispatch('close-modal')->to(PurchasePage::class);
+        $this->resetValidation();
+    }
+
+    public function refreshTable() //* refresh ang table after confirmation
+    {
+        // $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
+    }
+
+    private function resetForm() //*tanggalin ang laman ng input pati $item_id value
+    {
+
+        $this->reset(['backorderList', 'po_number', 'new_po_number', 'purchase_id', 'supplier', 'delivery_id', 'purchase', 'select_supplier', 'selectedToReorder', 'selectedToCancel', 'new_po_items']);
+    }
     public function backorderForm($deliveryID)
     {
 

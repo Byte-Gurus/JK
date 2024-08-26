@@ -52,7 +52,7 @@ class RestockForm extends Component
     public function create()
     {
         $validated = $this->validateForm(); // Validate form data
-
+        // dd($this->purchaseDetails);
         // Initialize quantities array
         $quantities = [];
 
@@ -136,7 +136,7 @@ class RestockForm extends Component
 
                 BackOrder::create([
                     'purchase_id' => $this->purchase_id,
-                    'item_id' => $detail['id'],
+                    'item_id' => $detail['item_id'],
                     'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
                     'status' => 'Kulang',
                 ]);
@@ -153,25 +153,20 @@ class RestockForm extends Component
                 'expiration_date' =>  $validated['expiration_date'][$index],
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
-                'item_id' => $detail['id'],  // Assuming 'id' here refers to the item_id
+                'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
                 'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
             ]);
         }
+        $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
 
-
+     
         if ($hasBackorder) {
-            $delivery = Delivery::find($this->purchase_id);
-            $delivery->date_delivered = now();
             $delivery->status = "Stocked in with backorder";
-            $delivery->save();
         } else {
-            $delivery = Delivery::find($this->purchase_id);
-            $delivery->date_delivered = now();
             $delivery->status = "Complete Stock in";
-            $delivery->save();
         }
-
+        $delivery->save();
 
 
         $this->resetForm();
