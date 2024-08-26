@@ -27,6 +27,23 @@
 
 
             <div class="flex flex-row items-center justify-center gap-4">
+
+                <div class="flex flex-col">
+                    <div class="flex flex-row ">
+                        <div class="flex flex-col gap-1">
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">Start Date:</label>
+                            <input type="date" wire:model.live="startDate"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-l-md block p-2.5" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="text-sm font-medium text-gray-900 text-nowrap">End Date:</label>
+                            <input type="date" wire:model.live="endDate"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-r-md block p-2.5" />
+                        </div>
+                    </div>
+                    <p class="text-[12px] font-light text-center text-gray-600 ">Date Range</p>
+                </div>
+
                 <div class="flex flex-row items-center gap-4">
 
                     <div class="flex flex-row items-center gap-2">
@@ -46,6 +63,21 @@
                     </div>
 
 
+                </div>
+
+                <div class="flex flex-col gap-1">
+
+                    <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
+
+                    <select wire:model.live="supplierFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
+                        <option value="0">All</option>
+
+                        @foreach ($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                        @endforeach
+
+                    </select>
                 </div>
 
                 <div class="flex flex-row items-center gap-4">
@@ -103,7 +135,25 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* date --}}
-                        <th scope="col" class="px-4 py-3">Date</th>
+
+
+                        <th wire:click="sortByColumn('created_at')" scope="col"
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                            <div class="flex items-center">
+
+                                <p>Date</p>
+
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </th>
 
                         {{-- //* item name --}}
                         <th scope="col" class="px-4 py-3">Movement</th>
@@ -142,7 +192,11 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->inventoryJoin->status ?? 'N/A' }}
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->status ?? 'N/A' }}
+                                @else
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->status }}
+                                @endif
                             </th>
 
 
@@ -200,7 +254,7 @@
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
-                                    {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                    {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name ?? 'N/A' }}
                                 @else
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
                                 @endif

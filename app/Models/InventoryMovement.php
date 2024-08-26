@@ -29,10 +29,12 @@ class InventoryMovement extends Model
 
     public function scopeSearch($query, $value)
     {
-        return $query->WhereHas('inventoryJoin.itemJoin', function ($query) use ($value) {
-                $query->where('item_name', 'like', "%{$value}%")
-                    ->orWhere('barcode', 'like', "%{$value}%");
-            });
-
+        return $query->whereHas('inventoryJoin.itemJoin', function ($query) use ($value) {
+            $query->where('item_name', 'like', "%{$value}%")
+                ->orWhere('barcode', 'like', "%{$value}%");
+        })->orWhereHas('adjustmentJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
+            $query->where('item_name', 'like', "%{$value}%")
+                ->orWhere('barcode', 'like', "%{$value}%");
+        });
     }
 }
