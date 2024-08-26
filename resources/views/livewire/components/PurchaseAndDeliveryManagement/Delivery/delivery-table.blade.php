@@ -149,9 +149,13 @@
 
                                     class=" text-red-900 pointer-events-none font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
-                                    @elseif ($delivery->status == 'Stocked in')
+                                    @elseif ($delivery->status == 'Complete Stock in')
 
                                     class=" text-blue-900 pointer-events-none font-medium  bg-blue-100 border border-blue-900 text-xs text-center px-2 py-0.5 rounded-sm"
+
+                                    @elseif ($delivery->status == 'Stocked in with backorder')
+
+                                    class=" text-gray-900 pointer-events-none font-medium  bg-gray-100 border border-gray-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'In Progress')
 
@@ -254,7 +258,7 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
 
-                                                @if ($delivery->status === 'Stocked in' && $delivery->purchaseJoin->backorderJoin->isNotEmpty())
+                                                @if ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty())
                                                     <button
                                                         x-on:click="$wire.viewBackorderDetails(); openActions = !openActions"
                                                         wire:click="getPO_ID({{ $delivery->id }})"

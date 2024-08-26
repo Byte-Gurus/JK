@@ -31,6 +31,9 @@ class DeliveryTable extends Component
 
         $query = Delivery::query();
 
+
+        $query->with(['purchaseJoin.backorderJoin']);
+
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
@@ -147,10 +150,10 @@ class DeliveryTable extends Component
         $this->dispatch('display-backorder-form', showBackorderForm: true)->to(DeliveryPage::class);
     }
 
+  
     public function getPO_ID($deliverId)
     {
 
         $this->dispatch('backorder-form', deliveryID: $deliverId)->to(BackorderForm::class);
-
     }
 }

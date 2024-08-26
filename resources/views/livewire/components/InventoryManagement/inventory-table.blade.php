@@ -295,18 +295,22 @@
                                         min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
                                                 {{-- x-on:click="showModal=true;$wire.getItemID({{ $item->id }}), openActions = !openActions" --}}
-                                                <button
-                                                    x-on:click="showStockAdjustModal=true, openActions = !openActions"
-                                                    wire:click="getStockID({{ $inventory->id }})"
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
-                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" strokeWidth="1.5"
-                                                            stroke="currentColor" class="size-6">
-                                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
-                                                        </svg></div>
-                                                    <div>Stock Adjust</div>
-                                                </button>
+
+                                                @if (!$inventory->stock_in_date === 'null')
+                                                    <button
+                                                        x-on:click="showStockAdjustModal=true, openActions = !openActions"
+                                                        wire:click="getStockID({{ $inventory->id }})"
+                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" strokeWidth="1.5"
+                                                                stroke="currentColor" class="size-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                    d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+                                                            </svg></div>
+                                                        <div>Stock Adjust</div>
+                                                    </button>
+                                                @endif
+
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
                                                 {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
                                                 <button
