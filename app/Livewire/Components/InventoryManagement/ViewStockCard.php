@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ViewStockCard extends Component
 {
-    public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode;
+    public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode, $selling_price;
     public $stock_cards = [];
     public function render()
 
@@ -45,6 +45,7 @@ class ViewStockCard extends Component
             'expiration_date' => $stock_details->expiration_date,
             'barcode' => $stock_details->itemJoin->barcode,
             'supplier' => $stock_details->deliveryJoin->purchaseJoin->supplierJoin->company_name,
+            'selling_price' =>  $stock_details->selling_price,
         ]);
     }
 

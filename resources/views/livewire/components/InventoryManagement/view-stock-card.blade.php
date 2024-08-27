@@ -23,6 +23,11 @@
                 </div>
 
                 <div class="flex flex-col gap-2">
+                    <label for="supplier" class="text-[1.2em]">{{ $selling_price }}</label>
+                    <p></p>
+                </div>
+
+                <div class="flex flex-col gap-2">
                     <label for="supplier" class="text-[1.2em]">Date Range</label>
                     <p></p>
                 </div>
