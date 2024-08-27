@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\InventoryManagement;
 
+use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\Supplier;
 use Livewire\Component;
@@ -81,5 +82,17 @@ class InventoryTable extends Component
     public function refreshTable()
     {
         $this->resetPage();
+    }
+
+    public function displayStockCard()
+    {
+        $this->dispatch('display-inventory-table', showInventoryTable: false)->to(InventoryManagementPage::class);
+        $this->dispatch('display-stock-card', showStockCard: true)->to(InventoryManagementPage::class);
+    }
+
+    public function getStock($stockId)
+    {
+
+        $this->dispatch('stock-card', stockID: $stockId)->to(ViewStockCard::class);
     }
 }

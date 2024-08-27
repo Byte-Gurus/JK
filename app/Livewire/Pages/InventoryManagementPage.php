@@ -13,7 +13,11 @@ class InventoryManagementPage extends Component
 
     public $showInventoryHistory = false;
 
+    public $showInventoryTable = true;
+
     public $sidebarStatus;
+
+    public $showStockCard = false;
     public function render()
     {
         return view('livewire.pages.inventory-management-page');
@@ -21,7 +25,9 @@ class InventoryManagementPage extends Component
 
     protected $listeners = [
         'close-modal' => 'closeModal',
-        'change-sidebar-status' => 'changeSidebarStatus'
+        'change-sidebar-status' => 'changeSidebarStatus',
+        'display-inventoyry-table' => 'displayInventoryTable',
+        'display-stock-card' => 'displayStockCard',
     ];
 
     public function closeModal()
@@ -37,11 +43,18 @@ class InventoryManagementPage extends Component
 
     public function showInventory()
     {
+        $this->showInventoryTable = false;
         $this->showInventoryHistory = !$this->showInventoryHistory;
     }
 
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
+    }
+
+    public function displayStockCard($showStockCard)
+    {
+        $this->showInventoryTable = false;
+        $this->showStockCard = $showStockCard;
     }
 }

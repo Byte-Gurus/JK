@@ -151,6 +151,7 @@ class RestockForm extends Component
                 'mark_up_price' => $validated['markup'][$index],
                 'selling_price' => $validated['srp'][$index],
                 'current_stock_quantity' =>  $validated['restock_quantity'][$index],
+                'stock_in_quantity' =>  $validated['restock_quantity'][$index],
                 'expiration_date' =>  $validated['expiration_date'][$index],
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
