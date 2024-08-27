@@ -314,6 +314,7 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
                                                 {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
                                                 <button
+                                                    x-on:click="$wire.displayStockCard(), openActions = !openActions"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
