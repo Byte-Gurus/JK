@@ -36,9 +36,9 @@
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white">
 
             {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll h-[460px] no-scrollbar scroll">
+            <div class="overflow-x-auto overflow-y-scroll h-[520px] no-scrollbar scroll">
 
-                <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
+                <table class="w-full mb-[56.2px] overflow-auto text-sm text-left scroll no-scrollbar">
 
                     {{-- //* table header --}}
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
@@ -182,7 +182,7 @@
                 </table>
             </div>
         </div>
-        <div class="relative w-full">
+        <div class="absolute bottom-0 w-full ">
             <table class="w-full text-sm text-left">
                 <thead>
                 </thead>
@@ -193,21 +193,20 @@
                         <th scope="row" class=" w-[120.09px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                         </th>
                         <th scope="row"
-                            class=" w-[113.47px] font-black text-[1.2em] py-4 bg-orange-200 text-center text-gray-900 border-black border-l border-r-4 border-b text-md whitespace-nowrap">
-                            Total
+                            class=" w-[113.47px] font-black text-[1.2em] py-4 text-center text-gray-900 border-black border-r-4 text-md whitespace-nowrap">
                         </th>
-                        <th scope="row" class=" w-[123.2px] py-4 font-medium bg-orange-50 text-center border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
+                        <th scope="row" class=" w-[123.13px] py-4 font-medium bg-orange-50 text-center border-t border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
                         <th scope="row"
-                            class="w-[102.83px]  py-4 font-medium text-center bg-orange-50 text-gray-900 border-r-4 border-b border-black text-md whitespace-nowrap">
+                            class="w-[102.83px]  py-4 font-medium text-center bg-orange-50 border-t text-gray-900 border-r-4 border-b border-black text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
-                        <th scope="row" class=" w-[137.63px]  py-4 font-medium bg-orange-50 border-r text-center text-gray-900 border-black border-b text-md whitespace-nowrap">
+                        <th scope="row" class=" w-[137.63px]  py-4 font-medium bg-orange-50 border-r border-t text-center text-gray-900 border-black border-b text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
                         <th scope="row"
-                            class=" w-[102.83px] py-4 font-medium text-center bg-orange-50 text-gray-900 border-r-4 border-black border-b text-md whitespace-nowrap">
+                            class=" w-[102.83px] py-4 font-medium text-center bg-orange-50 border-t text-gray-900 border-r-4 border-black border-b text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
                         <th scope="row" class=" w-[172.17px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
