@@ -1,7 +1,7 @@
 {{-- // --}}
 <div class="relative">
-    <div class="flex flex-col h-[655px] gap-4 ">
-        <div class="flex flex-row items-center border border-[rgb(53,53,53)] justify-between gap-4 p-6 text-nowrap">
+    <div class="flex flex-col h-[655px] ">
+        <div class="flex flex-row items-center border border-[rgb(53,53,53)] justify-between gap-4 p-6 text-nowrap mb-4">
             <div class="flex flex-row gap-6">
                 <div>
                     <h1 class="text-[2em]">{{ $item_name }}</h1>
@@ -33,10 +33,10 @@
                 </div>
             </div>
         </div>
-        <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-b-lg">
+        <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white">
 
             {{-- //* tablea area --}}
-            <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+            <div class="overflow-x-auto overflow-y-scroll h-[460px] no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 
@@ -46,31 +46,35 @@
                         <tr class=" text-nowrap">
 
                             {{-- //* date --}}
-                            <th scope="col" class="px-4 py-3 text-left">Date</th>
+                            <th scope="col" class="px-4 py-3 text-left border-r-2 border-black">Date</th>
 
                             {{-- //* remarks --}}
-                            <th scope="col" class="py-3 text-left">Movements</th>
+                            <th scope="col" class="px-4 py-3 text-left border-r-2 border-black">Movements</th>
 
                             {{-- //* remarks --}}
-                            <th scope="col" class="py-3 text-left">Operation</th>
+                            <th scope="col" class="px-4 py-3 text-left border-r-4 border-black textext-nowrap">
+                                Operation</th>
 
                             {{-- //* in quantity --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">In Quantity</th>
+                            <th scope="col" class="px-4 py-3 text-center border-r-2 border-black text-nowrap">In Quantity</th>
 
                             {{-- //* value --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">Value (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center border-r-4 border-black textext-nowrap">
+                                Value (₱)</th>
 
                             {{-- //* out quantity --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">Out Quantity</th>
+                            <th scope="col" class="px-4 py-3 text-center border-r-2 border-black text-nowrap">Out Quantity</th>
 
                             {{-- //* value --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">Value (₱)</th>
+                            <th scope="col"
+                                class="px-4 py-3 text-center border-r-4 border-black text-nowrap textext-nowrap">Value
+                                (₱)</th>
 
                             {{-- //* quantity balance --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">Quantity Balance</th>
+                            <th scope="col" class="px-4 py-3 text-center border-r-2 border-black text-nowrap">Quantity Balance</th>
 
                             {{-- //* value --}}
-                            <th scope="col" class="py-3 text-center text-nowrap">Value (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center text-nowrap">Value (₱)</th>
                         </tr>
                     </thead>
 
@@ -103,31 +107,28 @@
                                     $value =
                                         $quantity_balance * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
                                 }
-
                             @endphp
 
                             <tr
                                 class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
                                     {{ \Carbon\Carbon::parse($stock_card['created_at'])->format('d-m-y h:i A') }}
                                 </th>
 
                                 <th scope="row"
-                                    class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
                                     {{ $stock_card->movement_type }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-
+                                    class="px-4 py-4 font-medium text-left text-gray-900 border-r-4 border-black textext-nowrap text-md whitespace-nowrap ">
                                     {{ $stock_card->operation }}
-
                                 </th>
 
                                 <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
                                     @if ($stock_card->operation === 'Stock In')
                                         {{ $stock_card->inventoryJoin->stock_in_quantity }}
                                     @elseif ($stock_card->operation === 'Add')
@@ -136,7 +137,7 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    class="py-4 font-medium text-center text-gray-900 border-r-4 border-black textext-nowrap text-md whitespace-nowrap">
                                     @if ($stock_card->operation === 'Stock In')
                                         {{ $stock_card->inventoryJoin->current_stock_quantity * $stock_card->inventoryJoin->selling_price }}
                                     @elseif ($stock_card->operation === 'Add')
@@ -145,7 +146,7 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
                                     @if ($stock_card->operation === 'Stock Out')
                                         {{ $stock_card->inventoryJoin->current_stock_quantity }}
                                     @elseif ($stock_card->operation === 'Deduct')
@@ -155,7 +156,7 @@
 
 
                                 <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    class="py-4 font-medium text-center text-gray-900 border-r-4 border-black textext-nowrap text-md whitespace-nowrap">
                                     @if ($stock_card->operation === 'Stock Out')
                                         <p>SAle</p>
                                     @elseif ($stock_card->operation === 'Deduct')
@@ -164,7 +165,7 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
                                     {{ $quantity_balance }}
 
                                 </th>
@@ -180,6 +181,43 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="relative w-full">
+            <table class="w-full text-sm text-left">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class=" w-[178.06px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                        </th>
+                        <th scope="row" class=" w-[120.09px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                        </th>
+                        <th scope="row"
+                            class=" w-[113.47px] font-black text-[1.2em] py-4 bg-orange-200 text-center text-gray-900 border-black border-l border-r-4 border-b text-md whitespace-nowrap">
+                            Total
+                        </th>
+                        <th scope="row" class=" w-[123.2px] py-4 font-medium bg-orange-50 text-center border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
+                            {{ $value }}
+                        </th>
+                        <th scope="row"
+                            class="w-[102.83px]  py-4 font-medium text-center bg-orange-50 text-gray-900 border-r-4 border-b border-black text-md whitespace-nowrap">
+                            {{ $value }}
+                        </th>
+                        <th scope="row" class=" w-[137.63px]  py-4 font-medium bg-orange-50 border-r text-center text-gray-900 border-black border-b text-md whitespace-nowrap">
+                            {{ $value }}
+                        </th>
+                        <th scope="row"
+                            class=" w-[102.83px] py-4 font-medium text-center bg-orange-50 text-gray-900 border-r-4 border-black border-b text-md whitespace-nowrap">
+                            {{ $value }}
+                        </th>
+                        <th scope="row" class=" w-[172.17px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                        </th>
+                        <th scope="row"
+                            class=" w-[100.72px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
