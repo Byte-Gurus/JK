@@ -20,7 +20,6 @@ class ViewStockCard extends Component
             $this->computeStockCardData();
         }
 
-
         return view('livewire.components.InventoryManagement.view-stock-card', ['stock_cards' => $this->stock_cards]);
     }
 
@@ -84,29 +83,45 @@ class ViewStockCard extends Component
             $out_value = 0;
             $value = 0; // Initialize value for each card
 
-            if ($stock_card->operation === 'Stock In') {
-                $in_quantity = $stock_card->inventoryJoin->stock_in_quantity;
-                $this->quantity_balance += $in_quantity;
-                $in_value = $in_quantity * $stock_card->inventoryJoin->selling_price;
-            } elseif ($stock_card->operation === 'Add') {
-                $in_quantity = $stock_card->adjustmentJoin->adjusted_quantity;
-                $this->quantity_balance += $in_quantity;
-                $in_value = $in_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
-            } elseif ($stock_card->operation === 'Stock Out') {
-                $out_quantity = $stock_card->inventoryJoin->current_stock_quantity;
-                $this->quantity_balance -= $out_quantity;
-                $out_value = $out_quantity * $stock_card->inventoryJoin->selling_price;
-            } elseif ($stock_card->operation === 'Deduct') {
-                $out_quantity = $stock_card->adjustmentJoin->adjusted_quantity;
-                $this->quantity_balance -= $out_quantity;
-                $out_value = $out_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+            switch ($stock_card->operation) {
+                case 'Stock In':
+                    $in_quantity = $stock_card->inventoryJoin->stock_in_quantity;
+                    $this->quantity_balance += $in_quantity;
+                    $in_value = $in_quantity * $stock_card->inventoryJoin->selling_price;
+                    break;
+
+                case 'Add':
+                    $in_quantity = $stock_card->adjustmentJoin->adjusted_quantity;
+                    $this->quantity_balance += $in_quantity;
+                    $in_value = $in_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+                    break;
+
+                case 'Stock Out':
+                    // $out_quantity = $stock_card->inventoryJoin->current_stock_quantity;
+                    // $this->quantity_balance -= $out_quantity;
+                    // $out_value = $out_quantity * $stock_card->inventoryJoin->selling_price;
+                    break;
+
+                case 'Deduct':
+                    $out_quantity = $stock_card->adjustmentJoin->adjusted_quantity;
+                    $this->quantity_balance -= $out_quantity;
+                    $out_value = $out_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+                    break;
             }
 
-            if ($stock_card->operation == 'Add' || $stock_card->operation == 'Deduct') {
-                $value = $this->quantity_balance * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
-            } elseif ($stock_card->operation == 'Stock In' || $stock_card->operation === 'Stock Out') {
-                $value = $this->quantity_balance * $stock_card->inventoryJoin->selling_price;
+            switch ($stock_card->operation) {
+                case 'Add':
+                case 'Deduct':
+                    $selling_price = $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+                    break;
+
+                case 'Stock In':
+                case 'Stock Out':
+                    $selling_price = $stock_card->inventoryJoin->selling_price;
+                    break;
             }
+
+            $value = $this->quantity_balance * $selling_price;
 
             $this->total_in_quantity += $in_quantity;
             $this->total_in_value += $in_value;
