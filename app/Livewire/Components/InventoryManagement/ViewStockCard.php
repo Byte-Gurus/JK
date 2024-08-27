@@ -9,21 +9,17 @@ use Livewire\Component;
 class ViewStockCard extends Component
 {
     public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode, $selling_price;
+
     public $stock_cards = [];
+    public $quantity_balance, $total_in_quantity, $total_in_value, $total_out_quantity, $total_out_value;
+    public $startDate, $endDate;
     public function render()
 
     {
         if ($this->stock_id) {
-
-            $this->stock_cards = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin'])
-                ->whereHas('inventoryJoin', function ($query) {
-                    $query->where('id', $this->stock_id); // Filtering based on stock_id in Inventory
-                })
-                ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
-                    $query->where('id', $this->stock_id); // Filtering based on stock_id in Inventory through InventoryAdjustment
-                })
-                ->get();
+            $this->computeStockCardData();
         }
+
 
         return view('livewire.components.InventoryManagement.view-stock-card', ['stock_cards' => $this->stock_cards]);
     }
@@ -54,4 +50,83 @@ class ViewStockCard extends Component
         $this->stock_id = $stockID;
         $this->populateForm();
     }
+
+    public function computeStockCardData()
+    {
+        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin'])
+            ->where(function ($query) {
+                $query->whereHas('inventoryJoin', function ($query) {
+                    $query->where('id', $this->stock_id);
+                })
+                ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
+                    $query->where('id', $this->stock_id);
+                });
+            });
+
+        // Apply date range filter if both startDate and endDate are provided
+        if ($this->startDate && $this->endDate) {
+            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+        }
+
+        $this->stock_cards = $query->get();
+
+        $processedStockCards = [];
+        $this->quantity_balance = 0;
+        $this->total_in_quantity = 0;
+        $this->total_in_value = 0;
+        $this->total_out_quantity = 0;
+        $this->total_out_value = 0;
+
+        foreach ($this->stock_cards as $stock_card) {
+            $in_quantity = 0;
+            $in_value = 0;
+            $out_quantity = 0;
+            $out_value = 0;
+            $value = 0; // Initialize value for each card
+
+            if ($stock_card->operation === 'Stock In') {
+                $in_quantity = $stock_card->inventoryJoin->stock_in_quantity;
+                $this->quantity_balance += $in_quantity;
+                $in_value = $in_quantity * $stock_card->inventoryJoin->selling_price;
+            } elseif ($stock_card->operation === 'Add') {
+                $in_quantity = $stock_card->adjustmentJoin->adjusted_quantity;
+                $this->quantity_balance += $in_quantity;
+                $in_value = $in_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+            } elseif ($stock_card->operation === 'Stock Out') {
+                $out_quantity = $stock_card->inventoryJoin->current_stock_quantity;
+                $this->quantity_balance -= $out_quantity;
+                $out_value = $out_quantity * $stock_card->inventoryJoin->selling_price;
+            } elseif ($stock_card->operation === 'Deduct') {
+                $out_quantity = $stock_card->adjustmentJoin->adjusted_quantity;
+                $this->quantity_balance -= $out_quantity;
+                $out_value = $out_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+            }
+
+            if ($stock_card->operation == 'Add' || $stock_card->operation == 'Deduct') {
+                $value = $this->quantity_balance * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+            } elseif ($stock_card->operation == 'Stock In' || $stock_card->operation === 'Stock Out') {
+                $value = $this->quantity_balance * $stock_card->inventoryJoin->selling_price;
+            }
+
+            $this->total_in_quantity += $in_quantity;
+            $this->total_in_value += $in_value;
+            $this->total_out_quantity += $out_quantity;
+            $this->total_out_value += $out_value;
+
+            $processedStockCards[] = [
+                'created_at' => $stock_card->created_at->format('d-m-y h:i A'),
+                'movement_type' => $stock_card->movement_type,
+                'operation' => $stock_card->operation,
+                'in_quantity' => $in_quantity,
+                'in_value' => $in_value,
+                'out_quantity' => $out_quantity,
+                'out_value' => $out_value,
+                'quantity_balance' => $this->quantity_balance,
+                'value' => $value,
+            ];
+        }
+
+        $this->stock_cards = $processedStockCards;
+    }
+
 }
