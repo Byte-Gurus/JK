@@ -118,6 +118,8 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Current stock quantity</th>
 
+                        <th scope="col" class="px-4 py-3 text-center">Stock In quantity</th>
+
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
@@ -209,6 +211,12 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->current_stock_quantity }}
+                            </th>
+
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $inventory->stock_in_quantity }}
                             </th>
 
                             <th scope="row"
@@ -315,6 +323,7 @@
                                                 {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
                                                 <button
                                                     x-on:click="$wire.displayStockCard(), openActions = !openActions"
+                                                    wire:click="getStock({{ $inventory->id }})"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"

@@ -64,11 +64,9 @@
                     @livewire('components.InventoryManagement.inventory-table')
                 </div>
             @endif
-            @if ($showStockCard)
                 <div class="my-[28px]" x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                     @livewire('components.InventoryManagement.view-stock-card')
                 </div>
-            @endif
             @if ($showInventoryHistory)
                 <div class="my-[28px]">
                     @livewire('components.InventoryManagement.inventory-history')

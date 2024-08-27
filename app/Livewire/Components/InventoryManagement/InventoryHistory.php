@@ -72,10 +72,11 @@ class InventoryHistory extends Component
             $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
         }
 
-
         $InventoryHistory = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
+
+
 
         return view('livewire.components.InventoryManagement.inventory-history', [
             'InventoryHistories' => $InventoryHistory,

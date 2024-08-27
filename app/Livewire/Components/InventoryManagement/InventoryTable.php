@@ -89,4 +89,10 @@ class InventoryTable extends Component
         $this->dispatch('display-inventory-table', showInventoryTable: false)->to(InventoryManagementPage::class);
         $this->dispatch('display-stock-card', showStockCard: true)->to(InventoryManagementPage::class);
     }
+
+    public function getStock($stockId)
+    {
+
+        $this->dispatch('stock-card', stockID: $stockId)->to(ViewStockCard::class);
+    }
 }

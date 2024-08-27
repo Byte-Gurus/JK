@@ -110,11 +110,11 @@
                                         <legend class=" text-[1.2em] text-gray-900">Select Adjustment Operation</legend>
                                         <div class="flex flex-row justify-center gap-2">
                                             <label class="flex gap-2 font-black radio">
-                                                <input type="radio" wire:model="selectOperation" value="add" />
+                                                <input type="radio" wire:model="selectOperation" value="Add" />
                                                 Add
                                             </label>
                                             <label class="flex gap-2 font-black radio">
-                                                <input type="radio" wire:model="selectOperation" value="deduct" />
+                                                <input type="radio" wire:model="selectOperation" value="Deduct" />
                                                 Deduct
                                             </label>
 

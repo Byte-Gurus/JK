@@ -60,6 +60,7 @@ class StockAdjustForm extends Component
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
 
+    
         if ($this->selectOperation == "Add") {
             $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
         } elseif ($this->selectOperation == "Deduct") {

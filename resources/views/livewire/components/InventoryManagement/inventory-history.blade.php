@@ -207,10 +207,10 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                @if ($InventoryHistory->movement_type === 'Inventory')
-                                    {{ $InventoryHistory->inventoryJoin->current_stock_quantity }}
-                                @else
-                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->current_stock_quantity }}
+                                @if ($InventoryHistory->operation === 'Stock In' || $InventoryHistory->operation === 'Stock Out')
+                                    {{ $InventoryHistory->inventoryJoin->stock_in_quantity }}
+                                @elseif ($InventoryHistory->operation === 'Add' || $InventoryHistory->operation === 'Deduct')
+                                    {{ $InventoryHistory->adjustmentJoin->adjusted_quantity }}
                                 @endif
                             </th>
 

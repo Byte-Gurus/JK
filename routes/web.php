@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\testingPage;
+
 use App\Livewire\Components\Logout;
 use App\Livewire\Pages\CashierPage;
-use App\Livewire\Pages\CustomerCreditMangementPage;
 use App\Livewire\Pages\CustomerManagementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
@@ -50,7 +49,7 @@ Route::group(['middleware' => ['RedirectIfLoggedIn']], function () {
 
     //InventoryManagement
     Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
-    
+
     //CashierHomepage
     Route::get('/cashier', CashierPage::class)->name('cashier.index');
 });

@@ -4,16 +4,21 @@
         <div class="flex flex-row items-center border border-[rgb(53,53,53)] justify-between gap-4 p-6 text-nowrap">
             <div class="flex flex-row gap-6">
                 <div>
-                    <h1 class="text-[1.2em]">Item Name</h1>
-                    <h2 class="text-[2em] font-black text-center w-full"></h2>
+                    <h1 class="text-[2em]">{{ $item_name }}</h1>
+                    <h2 class="text-[1em] font-black text-center w-full">{{ $item_description }}</h2>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <label for="supplier" class="text-[1.2em]">Expiration Date</label>
+                    <label for="supplier"
+                        class="text-[1.2em]">{{ \Carbon\Carbon::parse($expiration_date)->format('d-m-y') }}</label>
                     <p></p>
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label for="supplier" class="text-[1.2em]">Supplier</label>
+                    <label for="supplier" class="text-[1.2em]">{{ $supplier }}</label>
+                    <p></p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="supplier" class="text-[1.2em]">{{ $barcode }}</label>
                     <p></p>
                 </div>
 
@@ -39,7 +44,10 @@
                             <th scope="col" class="px-4 py-3 text-left">Date</th>
 
                             {{-- //* remarks --}}
-                            <th scope="col" class="py-3 text-left">Remarks</th>
+                            <th scope="col" class="py-3 text-left">Movements</th>
+
+                            {{-- //* remarks --}}
+                            <th scope="col" class="py-3 text-left">Operation</th>
 
                             {{-- //* in quantity --}}
                             <th scope="col" class="py-3 text-center text-nowrap">In Quantity</th>
@@ -64,49 +72,106 @@
                     {{-- //* table body --}}
 
                     <tbody>
-                        <tr
-                            class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
 
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                        @php
+                            $quantity_balance = 0;
+                            $value = 0; // Initial balance, or retrieve the initial stock quantity if applicable
+                        @endphp
 
-                            <th scope="row"
-                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                        @foreach ($stock_cards as $index => $stock_card)
+                            @php
+                                if ($stock_card->operation === 'Stock In') {
+                                    // Increase balance for Stock In
+                                    $quantity_balance += $stock_card->inventoryJoin->stock_in_quantity;
+                                    $value = $quantity_balance * $stock_card->inventoryJoin->selling_price;
+                                } elseif ($stock_card->operation === 'Add') {
+                                    // Increase balance for Add
+                                    $quantity_balance += $stock_card->adjustmentJoin->adjusted_quantity;
+                                    $value =
+                                        $quantity_balance * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+                                } elseif ($stock_card->operation === 'Stock Out') {
+                                    // Decrease balance for Stock Out
+                                    $quantity_balance -= null;
+                                } elseif ($stock_card->operation === 'Deduct') {
+                                    // Decrease balance for Deduct
+                                    $quantity_balance -= $stock_card->adjustmentJoin->adjusted_quantity;
+                                    $value =
+                                        $quantity_balance * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
+                                }
 
-                            <th scope="row"
-                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                            @endphp
 
-                            <th scope="row"
-                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                            <tr
+                                class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
 
-                            <th scope="row"
-                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ \Carbon\Carbon::parse($stock_card['created_at'])->format('d-m-y h:i A') }}
+                                </th>
 
-                            <th scope="row"
-                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                                <th scope="row"
+                                    class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $stock_card->movement_type }}
+                                </th>
 
-                            <th scope="row"
-                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
 
-                            <th scope="row"
-                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                <p></p>
-                            </th>
-                        </tr>
+                                    {{ $stock_card->operation }}
+
+                                </th>
+
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    @if ($stock_card->operation === 'Stock In')
+                                        {{ $stock_card->inventoryJoin->stock_in_quantity }}
+                                    @elseif ($stock_card->operation === 'Add')
+                                        {{ $stock_card->adjustmentJoin->adjusted_quantity }}
+                                    @endif
+                                </th>
+
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    @if ($stock_card->operation === 'Stock In')
+                                        {{ $stock_card->inventoryJoin->current_stock_quantity * $stock_card->inventoryJoin->selling_price }}
+                                    @elseif ($stock_card->operation === 'Add')
+                                        {{ $stock_card->adjustmentJoin->inventoryJoin->current_stock_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price }}
+                                    @endif
+                                </th>
+
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    @if ($stock_card->operation === 'Stock Out')
+                                        {{ $stock_card->inventoryJoin->current_stock_quantity }}
+                                    @elseif ($stock_card->operation === 'Deduct')
+                                        {{ $stock_card->adjustmentJoin->adjusted_quantity }}
+                                    @endif
+                                </th>
+
+
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    @if ($stock_card->operation === 'Stock Out')
+                                        <p>SAle</p>
+                                    @elseif ($stock_card->operation === 'Deduct')
+                                        {{ $stock_card->adjustmentJoin->adjusted_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price }}
+                                    @endif
+                                </th>
+
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    {{ $quantity_balance }}
+
+                                </th>
+                                <th scope="row"
+                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    {{ $value }}
+
+                                </th>
+
+
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
