@@ -195,18 +195,18 @@
                         <th scope="row"
                             class=" w-[113.47px] font-black text-[1.2em] py-4 text-center text-gray-900 border-black border-r-4 text-md whitespace-nowrap">
                         </th>
-                        <th scope="row" class=" w-[123.13px] py-4 font-medium bg-orange-50 text-center border-t border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
+                        <th scope="row" class=" w-[123.13px] font-black py-4 bg-orange-50 text-center border-t border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
                         <th scope="row"
-                            class="w-[102.83px]  py-4 font-medium text-center bg-orange-50 border-t text-gray-900 border-r-4 border-b border-black text-md whitespace-nowrap">
+                            class="w-[102.83px]  py-4 font-black text-center bg-orange-50 border-t text-gray-900 border-r-4 border-b border-black text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
-                        <th scope="row" class=" w-[137.63px]  py-4 font-medium bg-orange-50 border-r border-t text-center text-gray-900 border-black border-b text-md whitespace-nowrap">
+                        <th scope="row" class=" w-[137.63px]  py-4 font-black bg-orange-50 border-r border-t text-center text-gray-900 border-black border-b text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
                         <th scope="row"
-                            class=" w-[102.83px] py-4 font-medium text-center bg-orange-50 border-t text-gray-900 border-r-4 border-black border-b text-md whitespace-nowrap">
+                            class=" w-[102.83px] py-4 font-black text-center bg-orange-50 border-t text-gray-900 border-r-4 border-black border-b text-md whitespace-nowrap">
                             {{ $value }}
                         </th>
                         <th scope="row" class=" w-[172.17px] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
