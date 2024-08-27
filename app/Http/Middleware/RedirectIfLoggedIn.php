@@ -30,7 +30,7 @@ class RedirectIfLoggedIn
 
             if (!str_starts_with($request->path(), 'admin')) {
 
-                return redirect('/admin');
+                return redirect('admin');
             }
 
             return $next($request);
@@ -40,11 +40,12 @@ class RedirectIfLoggedIn
         //* check if ang routes mo is nasa cashier
         //* pag hindi ibalik ka sa cashier
 
-        if (Auth::user()->user_role_id === '2' && Auth::user()->status_id == 1) {
+        if (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
 
-            if ($request->path() !== 'cashier') {
 
-                return redirect('/cashier');
+            if (!str_starts_with($request->path(), 'cashier')) {
+
+                return redirect('cashier');
             }
 
             return $next($request);
