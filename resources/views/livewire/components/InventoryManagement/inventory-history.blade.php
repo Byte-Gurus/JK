@@ -5,10 +5,10 @@
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-2 py-4 ">
+        <div class="flex flex-row items-center justify-between px-4 py-4 ">
 
             {{-- //* search filter --}}
-            <div class="relative w-full">
+            <div class="relative w-1/2 mt-1">
 
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none" viewBox="0 0 24 24"
@@ -19,14 +19,14 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms = "search"
-                    class="w-1/3 p-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-lg cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-4/5 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name or Barcode" required="" />
 
 
             </div>
 
 
-            <div class="flex flex-row items-center justify-center gap-4">
+            <div class="flex flex-row items-center justify-center gap-2">
 
                 <div class="flex flex-col">
                     <div class="flex flex-row ">
@@ -44,14 +44,11 @@
                     <p class="text-[12px] font-light text-center text-gray-600 ">Date Range</p>
                 </div>
 
-                <div class="flex flex-row items-center gap-4">
-
-                    <div class="flex flex-row items-center gap-2">
-
-                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status :</label>
-
+                <div class="flex flex-row gap-4 mb-4">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Status:</label>
                         <select wire:model.live="statusFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-3">
                             <option value="0">All</option>
                             <option value="Available">Available</option>
                             <option value="Not available">Not available</option>
@@ -59,54 +56,36 @@
                             <option value="New Item">New Item</option>
 
                         </select>
-
                     </div>
 
+                    <div class="flex flex-col gap-1">
+                        <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
+                        <select wire:model.live="supplierFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-3">
+                            <option value="0">All</option>
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                </div>
-
-                <div class="flex flex-col gap-1">
-
-                    <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
-
-                    <select wire:model.live="supplierFilter"
-                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
-                        <option value="0">All</option>
-
-                        @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
-                        @endforeach
-
-                    </select>
-                </div>
-
-                <div class="flex flex-row items-center gap-4">
-
-                    <div class="flex flex-row items-center gap-2">
-
+                    <div class="flex flex-col gap-1">
                         <label class="text-sm font-medium text-gray-900 text-nowrap">Movement :</label>
 
                         <select wire:model.live="movementFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-3">
                             <option value="0">All</option>
                             <option value="Inventory">Inventory</option>
                             <option value="Adjustment">Adjustment</option>
 
                         </select>
-
                     </div>
 
-
-                </div>
-
-                <div class="flex flex-row items-center gap-4">
-
-                    <div class="flex flex-row items-center gap-2">
-
+                    <div class="flex flex-col gap-1">
                         <label class="text-sm font-medium text-gray-900 text-nowrap">Operation :</label>
 
                         <select wire:model.live="operationFilter"
-                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-3">
                             <option value="0">All</option>
                             <option value="Stock In">Stock In</option>
                             <option value="Stock Out">Stock Out</option>
@@ -114,29 +93,20 @@
                             <option value="Deduct">Deduct</option>
 
                         </select>
-
                     </div>
-
-
                 </div>
-
             </div>
         </div>
 
 
         {{-- //* tablea area --}}
         <div class="overflow-x-auto overflow-y-scroll h-[480px]">
-
             <table class="w-full text-sm text-left">
-
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
-
                     <tr class=" text-nowrap">
 
                         {{-- //* date --}}
-
-
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -151,7 +121,6 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
 
@@ -159,6 +128,7 @@
                         <th scope="col" class="px-4 py-3">Movement</th>
 
                         <th scope="col" class="px-4 py-3">Status</th>
+
                         <th scope="col" class="px-4 py-3">SKU</th>
 
                         <th scope="col" class="px-4 py-3">Barcode</th>
@@ -172,7 +142,6 @@
                         <th scope="col" class="px-4 py-3">Quantity</th>
 
                         <th scope="col" class="px-4 py-3">Supplier</th>
-
                     </tr>
                 </thead>
 
@@ -199,7 +168,6 @@
                                 @endif
                             </th>
 
-
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->sku_code ?? 'N/A' }}
@@ -209,16 +177,13 @@
 
                             </th>
 
-
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
                                 @else
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->barcode }}
                                 @endif
-
                             </th>
-
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
@@ -226,7 +191,6 @@
                                 @else
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_name }}
                                 @endif
-
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -235,7 +199,6 @@
                                 @else
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_description }}
                                 @endif
-
                             </th>
 
 
@@ -249,7 +212,6 @@
                                 @else
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->current_stock_quantity }}
                                 @endif
-
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -258,12 +220,7 @@
                                 @else
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
                                 @endif
-
                             </th>
-
-
-
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -293,13 +250,7 @@
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
-
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>
