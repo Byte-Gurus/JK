@@ -1,20 +1,22 @@
 <div>
     <div class="grid grid-flow-col grid-cols-3 p-[28px]">
         <div class="flex flex-col col-span-2">
-            <div class="flex w-full flex-row items-center gap-4 py-[28px]">
+            <div class="flex flex-row justify-between items-center gap-4 pb-[28px]">
                 <div class="w-2/4">
                     <input type="search"
-                        class="px-4 py-2 border outline-none rounded-md border-[rgb(143,143,143)] w-full"
+                        class="px-4 py-4 border outline-none rounded-md border-[rgb(143,143,143)] w-full"
                         placeholder="Search by Barcode or Item Name">
                 </div>
-                <div>
-                    <button class="px-4 py-2 bg-blue-100">Sales</button>
-                </div>
-                <div>
-                    <button class="px-4 py-2 bg-green-100">New Sales</button>
-                </div>
-                <div>
-                    <button class="px-4 py-2 bg-yellow-100">Transaction History</button>
+                <div class="flex flex-row justify-end gap-4">
+                    <div>
+                        <button class="px-6 py-4 bg-blue-100">Sales</button>
+                    </div>
+                    <div>
+                        <button class="px-6 py-4 bg-green-100">New Sales</button>
+                    </div>
+                    <div>
+                        <button class="px-6 py-4 bg-yellow-100">Transaction History</button>
+                    </div>
                 </div>
             </div>
             <div class="border border-black ">
@@ -123,6 +125,119 @@
                 </div>
             </div>
         </div>
-        <div class="bg-red-100 ml-[28px]">transaction detailsss</div>
+        <div class="bg-[rgba(241,203,162,0.32)] ml-[28px] border-2 border-[rgb(53,53,53)] text-nowrap rounded-md">
+            <div class="flex flex-col ">
+                {{-- date & time section --}}
+                <div class="flex flex-row items-center justify-center gap-8 p-2">
+                    <div>
+                        <p>Date</p>
+                    </div>
+                    <div>
+                        <p>Time</p>
+                    </div>
+                </div>
+                {{-- transaction number section --}}
+                <div class="mb-2">
+                    <div class="border border-black "></div>
+                </div>
+                <div class="flex flex-col mx-6">
+                    <div>
+                        <p class=" font-medium text-[1.6em]">Transaction No.</p>
+                    </div>
+                    <div class="flex justify-center font-black italic text-[2.2em]">
+                        <p>123412321312</p>
+                    </div>
+                </div>
+                {{-- discount section --}}
+                <div class="flex flex-row items-center">
+                    <div class="w-full ">
+                        <div class="border border-black "></div>
+                    </div>
+                    <div class="m-2">
+                        <p class=" font-medium text-[2em]">Discount</p>
+                    </div>
+                    <div class="w-full">
+                        <div class="border border-black "></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 mx-6 mb-2">
+                    <div class="flex flex-row items-center gap-6">
+                        <div class=" font-medium text-[1.6em]">Discount Type</div>
+                        <div>icon</div>
+                    </div>
+                    <div class="flex flex-row items-center gap-6 ">
+                        <div class=" font-medium text-[1.6em]">Customer Name</div>
+                        <div>icon</div>
+                    </div>
+                    <div class="flex flex-row items-center gap-6 ">
+                        <div class=" font-medium text-[1.6em]">ID No.</div>
+                        <div>icon</div>
+                    </div>
+                </div>
+                <div class="my-2">
+                    <div class="border border-black"></div>
+                </div>
+                {{-- ss --}}
+                <div class="flex flex-col gap-2 mx-6">
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.4em]">
+                            <p>Vatable Item Price</p>
+                        </div>
+                        <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.4em]">
+                            <p>Non-Vatable Item Price</p>
+                        </div>
+                        <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    </div>
+                    <div class="w-full my-2">
+                        <div class="border border-black"></div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-[2em]">
+                            <p>Subtotal</p>
+                        </div>
+                        <div class=" font-black text-[2em]">₱ 0.00</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.4em]">
+                            <p>Discount (%)</p>
+                        </div>
+                        <div class=" font-black text-[1.4em]">0</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.4em]">
+                            <p>Discount Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    </div>
+                    <div class="w-full my-2">
+                        <div class="border border-black"></div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-[2em]">
+                            <p>Total</p>
+                        </div>
+                        <div class=" font-black text-[2em]">₱ 0.00</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.4em]">
+                            <p>Tendered Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    </div>
+                    <div class="w-full">
+                        <div class="border border-black"></div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-green-900 text-[2.2em]">
+                            <p>Change</p>
+                        </div>
+                        <div class=" font-black text-[2em]">₱ 0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
