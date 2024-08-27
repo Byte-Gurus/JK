@@ -138,9 +138,9 @@
                                 <th scope="row"
                                     class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     @if ($stock_card->operation === 'Stock In')
-                                        {{ $stock_card->inventoryJoin->current_stock_quantity * $stock_card->inventoryJoin->selling_price }}
+                                        {{ $stock_card->inventoryJoin->stock_in_quantity * $stock_card->inventoryJoin->selling_price }}
                                     @elseif ($stock_card->operation === 'Add')
-                                        {{ $stock_card->adjustmentJoin->inventoryJoin->current_stock_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price }}
+                                        {{ $stock_card->adjustmentJoin->adjusted_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price }}
                                     @endif
                                 </th>
 
