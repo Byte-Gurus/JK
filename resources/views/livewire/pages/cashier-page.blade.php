@@ -1,4 +1,7 @@
 <div>
+    <div>
+        @livewire('components.logout')
+    </div>
     <div class="grid grid-flow-col grid-cols-3 p-[28px]">
         <div class="flex flex-col col-span-2">
             <div class="flex flex-row justify-between items-center gap-4 pb-[28px]">
