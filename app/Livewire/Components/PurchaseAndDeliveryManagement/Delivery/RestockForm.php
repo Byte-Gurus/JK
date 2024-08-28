@@ -73,8 +73,9 @@ class RestockForm extends Component
 
             // Check if the accumulated restock quantity exceeds the purchased quantity
             if ($quantities[$details_id] > $detail['purchase_quantity']) {
-                $this->alert('error', "The total restock quantity for {$detail['item_name']} exceeds the purchased quantity of {$detail['purchase_quantity']}.");
-                return; // Stop further processing
+                // Stop further processing
+                $this->addError('restock_quantity.' . $index, "Restock quantity exceeds the purchased quantity ");
+                return;
             }
         }
 
