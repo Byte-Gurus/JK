@@ -33,22 +33,26 @@ class StockAdjustForm extends Component
     {
         $validated = $this->validateForm();
 
-        $stockAdjust = Inventory::find($this->stock_id);
+        if ($this->selectOperation == "Deduct" && $this->quantityToAdjust > $this->current_quantity) {
+            $this->addError('quantityToAdjust', 'The quantity to adjust cannot be greater than the current quantity.');
+        } else {
+            $stockAdjust = Inventory::find($this->stock_id);
 
 
 
-        $stockAdjust->quantityToAdjust = $validated['quantityToAdjust'];
-        $stockAdjust->adjustReason = $validated['adjustReason'];
-        $stockAdjust->selectOperation = $validated['selectOperation'];
+            $stockAdjust->quantityToAdjust = $validated['quantityToAdjust'];
+            $stockAdjust->adjustReason = $validated['adjustReason'];
+            $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $attributes = $stockAdjust->toArray();
+            $attributes = $stockAdjust->toArray();
 
 
 
-        $this->confirm('Do you want to update this supplier?', [
-            'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
-        ]);
+            $this->confirm('Do you want to update this supplier?', [
+                'onConfirmed' => 'updateConfirmed', //* call the confmired method
+                'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            ]);
+        }
     }
 
 
@@ -70,7 +74,7 @@ class StockAdjustForm extends Component
         $inventory = Inventory::find($updatedAttributes['id']);
         $inventory->current_stock_quantity = $adjustedQuantity;
 
-        if ($adjustedQuantity == 0) {
+        if ($adjustedQuantity <= 0) {
             $inventory->status = "Not available";
         } else {
             $inventory->status = "Available";
@@ -108,9 +112,11 @@ class StockAdjustForm extends Component
             'selectOperation' => 'required',
             'adjustReason' => 'required|string|max:255',
             'quantityToAdjust' => ['required', 'numeric', 'min:1'],
-            
+
 
         ];
+
+
 
         return $this->validate($rules);
     }
