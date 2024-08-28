@@ -140,7 +140,7 @@ class RestockForm extends Component
                     'purchase_id' => $this->purchase_id,
                     'item_id' => $detail['item_id'],
                     'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
-                    'status' => 'Kulang',
+                    'status' => 'Inadequate',
                 ]);
             }
 

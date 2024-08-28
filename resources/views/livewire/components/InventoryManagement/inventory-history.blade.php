@@ -139,6 +139,8 @@
 
                         <th scope="col" class="px-4 py-3">Operation</th>
 
+                        <th scope="col" class="px-4 py-3">Reason</th>
+
                         <th scope="col" class="px-4 py-3">Quantity</th>
 
                         <th scope="col" class="px-4 py-3">Supplier</th>
@@ -204,6 +206,10 @@
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $InventoryHistory->operation }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->adjustmentJoin->reason ?? 'N/A' }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
