@@ -1,33 +1,80 @@
 {{-- // --}}
 <div class="relative">
     <div class="flex flex-col h-[655px] ">
-        <div class="flex flex-row items-center border border-[rgb(53,53,53)] justify-between gap-4 p-6 text-nowrap mb-4">
+        <div
+            class="flex flex-row items-center border leading-none border-[rgb(53,53,53)] justify-between gap-4 p-4 text-nowrap mb-4">
 
-            <div class="flex flex-row items-center gap-6">
-                <div>
-                    <h1 class="text-[2em]">{{ $item_name }}</h1>
-                    <h2 class="text-[1em] font-black text-center w-full">{{ $item_description }}</h2>
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label for="supplier"
-                        class="text-[1.2em]">{{ \Carbon\Carbon::parse($expiration_date)->format('d-m-y') }}</label>
-                    <p></p>
-                </div>
+            <div class="flex flex-col w-full gap-6">
+                <div class="flex flex-row items-center justify-center w-full gap-16">
 
-                <div class="flex flex-col gap-2">
-                    <label for="supplier" class="text-[1.2em]">{{ $supplier }}</label>
-                    <p></p>
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label for="supplier" class="text-[1.2em]">{{ $barcode }}</label>
-                    <p></p>
-                </div>
+                    <div class="flex flex-col gap-1">
+                        <div>
+                            <p>
+                                Item Name</p>
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <h1 class="text-[1.6em] font-black text-center">{{ $item_name }}</h1>
+                            <div class="text-[1em]">-</div>
+                            <h2 class="text-[1.6em] text-center">{{ $item_description }}</h2>
+                        </div>
+                    </div>
 
-                <div class="flex flex-col gap-2">
-                    <label for="supplier" class="text-[1.2em]">{{ $selling_price }}</label>
-                    <p></p>
+                    <div class="flex flex-col gap-1">
+                        <div>
+                            <p>
+                                Selling Price (₱)</p>
+                        </div>
+                        <div class="flex flex-row items-center justify-center gap-2">
+                            <h1 class="text-[1.6em] font-black text-center">{{ $selling_price }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-between mx-8">
+
+                    <div class="flex flex-col gap-1">
+                        <div>
+                            <p>
+                                Expiration Date</p>
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <h1 class="text-[1.2em] font-black text-center">
+                                {{ \Carbon\Carbon::parse($expiration_date)->format('d-m-y') }}</h1>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <div>
+                            <p>
+                                Barcode</p>
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <h1 class="text-[1.2em] font-black text-center">{{ $barcode }}</h1>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                        <div>
+                            <p>
+                                SKU</p>
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <h1 class="text-[1.2em] font-black text-center">{{ $item_name }}</h1>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1 text-left text-wrap">
+                        <div>
+                            <p>
+                                Supplier</p>
+                        </div>
+                        <div class="flex flex-row items-center gap-2">
+                            <h1 class="text-[1.2em] font-black text-left">{{ $supplier }}</h1>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
             <div class="flex flex-col">
                 <div class="flex flex-row ">
                     <div class="flex flex-col gap-1">
@@ -49,7 +96,7 @@
             {{-- //* tablea area --}}
             <div class="overflow-x-auto overflow-y-scroll h-[540px] no-scrollbar scroll">
 
-                <table class="w-full mb-[92px] overflow-auto text-sm text-left scroll no-scrollbar">
+                <table class="w-full mb-[75px] overflow-auto text-sm text-left scroll no-scrollbar">
 
                     {{-- //* table header --}}
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
