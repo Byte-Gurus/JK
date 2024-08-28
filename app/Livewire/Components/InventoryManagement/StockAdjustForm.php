@@ -33,26 +33,22 @@ class StockAdjustForm extends Component
     {
         $validated = $this->validateForm();
 
-        if ($this->selectOperation == "Deduct" && $this->quantityToAdjust > $this->current_quantity) {
-            $this->addError('quantityToAdjust', 'The quantity to adjust cannot be greater than the current quantity.');
-        } else {
-            $stockAdjust = Inventory::find($this->stock_id);
+        $stockAdjust = Inventory::find($this->stock_id);
 
 
 
-            $stockAdjust->quantityToAdjust = $validated['quantityToAdjust'];
-            $stockAdjust->adjustReason = $validated['adjustReason'];
-            $stockAdjust->selectOperation = $validated['selectOperation'];
+        $stockAdjust->quantityToAdjust = $validated['quantityToAdjust'];
+        $stockAdjust->adjustReason = $validated['adjustReason'];
+        $stockAdjust->selectOperation = $validated['selectOperation'];
 
-            $attributes = $stockAdjust->toArray();
+        $attributes = $stockAdjust->toArray();
 
 
 
-            $this->confirm('Do you want to update this supplier?', [
-                'onConfirmed' => 'updateConfirmed', //* call the confmired method
-                'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
-            ]);
-        }
+        $this->confirm('Do you want to update this supplier?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+        ]);
     }
 
 
@@ -115,9 +111,6 @@ class StockAdjustForm extends Component
 
 
         ];
-
-
-
         return $this->validate($rules);
     }
     private function populateForm() //*lagyan ng laman ang mga input

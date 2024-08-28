@@ -119,7 +119,7 @@
                                     {{-- cost --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model.live="cost.{{ $index }}" required
+                                    <input type="number" wire:model.live.debounce.500ms="cost.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
                                     @error("cost.$index")
@@ -134,7 +134,7 @@
                                 {{-- markup --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <input type="number" wire:model.live="markup.{{ $index }}"required
+                                    <input type="number" wire:model.live.debounce.500ms="markup.{{ $index }}"required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
 
                                     @error("markup.$index")
@@ -146,7 +146,7 @@
                                 {{-- srp --}}
                                 <th scope="row"
                                     class="px-2 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model.live="srp.{{ $index }}" required readonly
+                                    <input type="number" wire:model.live.debounce.500ms="srp.{{ $index }}" required readonly
                                         class="  bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
 

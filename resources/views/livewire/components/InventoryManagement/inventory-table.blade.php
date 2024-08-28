@@ -53,11 +53,8 @@
                             <option value="Not available">Not available</option>
                             <option value="Expired">Expired</option>
                             <option value="New Item">New Item</option>
-
                         </select>
-
                     </div>
-
                     <div class="flex flex-col gap-1">
 
                         <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Supplier :</label>
@@ -126,14 +123,14 @@
 
 
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item Cost</th>
+                        <th scope="col" class="px-4 py-3 text-center">Item Cost (₱)</th>
 
 
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Mark-up price</th>
+                        <th scope="col" class="px-4 py-3 text-center">Mark-up price (₱)</th>
 
                         {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Selling price</th>
+                        <th scope="col" class="px-4 py-3 text-center">Selling price (₱)</th>
 
 
                         {{-- //* status --}}
