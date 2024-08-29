@@ -143,6 +143,7 @@ class BackorderForm extends Component
                     'backorder_quantity' => $this->backorderList[$index]['backorder_quantity'],
                     'item_description' => $this->backorderList[$index]['item_description'],
                     'status' => $this->backorderList[$index]['status'],
+                    'new_po_number' => $this->backorderList['new_po_number'] ?? 'N/A'
                 ];
             }
         }

@@ -29,7 +29,7 @@
 
                 <div>
                     <button wire:click="purchaseRow" type="button"
-                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Incldue</button>
+                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Insert</button>
                 </div>
             </div>
 
@@ -112,7 +112,7 @@
                                         class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
                                         @if ($backorder_list['status'] !== 'Repurchased')
-                                            {{ $backorder_list['new_po_number'] }}
+                                            {{ $backorder_list['new_po_number']  }}
                                         @else
                                             {{ $backorder_list['new_po_number'] }}
                                         @endif
@@ -164,8 +164,15 @@
                                 PO</button>
                         </div>
                         <div>
-                            <button type="submit"
-                                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Reorder</button>
+                            @if (empty($new_po_items))
+                                <button type="submit" disabled
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">Reorder
+                                </button>
+                            @else
+                                <button type="submit"
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Reorder
+                                </button>
+                            @endif
                         </div>
                     </div>
 
