@@ -49,7 +49,7 @@ class DeliveryTable extends Component
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);  //?  and paginate it
 
-        return view('livewire.components.PurchaseAndDeliveryManagement.delivery.delivery-table', compact('deliveries', 'suppliers'));
+        return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.delivery-table', compact('deliveries', 'suppliers'));
     }
 
     protected $listeners = [
