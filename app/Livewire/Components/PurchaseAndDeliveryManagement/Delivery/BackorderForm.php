@@ -47,7 +47,7 @@ class BackorderForm extends Component
             })->toArray();
         }
 
-        return view('livewire.components.PurchaseAndDeliveryManagement.delivery.backorder-form', [
+        return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.backorder-form', [
             'backorder_lists' => $this->backorderList,
             'suppliers' => $suppliers,
         ]);
