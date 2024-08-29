@@ -2,6 +2,7 @@
     <div>
         @livewire('components.logout')
     </div>
+<<<<<<< Updated upstream
     <div class="grid grid-flow-col grid-cols-3 p-[28px]">
         <div class="flex flex-col col-span-2">
             <div class="flex flex-row justify-between items-center gap-4 pb-[28px]">
@@ -290,5 +291,12 @@
                 </div>
             </div>
         </div>
+=======
+    <div x-show="showSalesTransaction" x-data="{ showSalesTransaction: @entangle('showSalesTransaction') }">
+        @livewire('components.Sales.sales-transaction')
+    </div>
+    <div x-show="showSalesTransactionHistory" x-data="{ showSalesTransactionHistory: @entangle('showSalesTransactionHistory') }">
+        @livewire('components.Sales.sales-transaction-history')
+>>>>>>> Stashed changes
     </div>
 </div>
