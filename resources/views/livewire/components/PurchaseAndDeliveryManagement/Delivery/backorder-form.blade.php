@@ -108,6 +108,16 @@
                                         {{ $backorder_list['status'] }}
                                     </th>
 
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+                                        @if ($backorder_list['status'] !== 'Repurchased')
+                                            {{ $backorder_list['new_po_number'] }}
+                                        @else
+                                            {{ $backorder_list['new_po_number'] }}
+                                        @endif
+
+                                    </th>
                                     {{-- //* purchase number --}}
                                 </tr>
                             @endforeach
