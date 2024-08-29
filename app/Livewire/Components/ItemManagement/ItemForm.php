@@ -265,6 +265,7 @@ class ItemForm extends Component
 
 
             $this->resetForm();
+            $this->status = 2;
         }
 
         $this->generateBarcode();
