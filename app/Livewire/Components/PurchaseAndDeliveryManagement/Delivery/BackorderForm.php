@@ -37,6 +37,7 @@ class BackorderForm extends Component
                 return [
                     'backorder_quantity' => $backOrder->backorder_quantity,
                     'status' => $backOrder->status,
+                    'new_po_number' => optional($backOrder->deliveryJoin)->purchaseJoin->po_number ?? 'N/A',
                     'barcode' => $backOrder->itemJoin->barcode,
                     'item_id' => $backOrder->itemJoin->id,
                     'item_name' => $backOrder->itemJoin->item_name,
@@ -84,6 +85,12 @@ class BackorderForm extends Component
             'user_id' => Auth::id(),
         ]);
 
+        $delivery = Delivery::create([
+            'status' => "In Progress",
+            'date_delivered' => "N/A",
+            'purchase_id' => $purchase_order->id
+        ]);
+
 
         foreach ($this->new_po_items as $index => $new_po_item) {
 
@@ -95,19 +102,18 @@ class BackorderForm extends Component
             ]);
 
             BackOrder::where('item_id', $new_po_item['item_id'])
-                ->where('purchase_id', $this->purchase_id) // Assuming `purchase_id` is linked with the backorder
-                ->update(['status' => 'Repurchased']);
+                ->where('purchase_id', $this->purchase_id)
+                ->update([
+                    'status' => 'Repurchased',
+                    'delivery_id' => $delivery->id,
+                ]);
         }
 
-        $delivery = Delivery::create([
-            'status' => "In Progress",
-            'date_delivered' => "N/A",
-            'purchase_id' => $purchase_order->id
-        ]);
 
 
 
         $this->alert('success', 'Purchase order was created successfully');
+        $this->render();
         $this->refreshTable();
 
 

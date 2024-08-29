@@ -14,11 +14,16 @@ class BackOrder extends Model
         'item_id',
         'backorder_quantity',
         'status',
+        'delivery_id',
     ];
 
     public function purchaseJoin()
     {
         return $this->belongsTo(Purchase::class, 'purchase_id');
+    }
+    public function deliveryJoin()
+    {
+        return $this->belongsTo(Delivery::class, 'delivery_id');
     }
     public function itemJoin()
     {

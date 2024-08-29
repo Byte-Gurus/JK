@@ -28,6 +28,8 @@ Artisan::command('migration-order', function () {
         '2024_08_09_142144_create_purchase_details_table.php',
         '2024_08_04_204401_create_deliveries_table.php',
         '2024_08_22_213514_create_back_orders_table.php',
+
+
         '2024_08_05_213148_create_inventories_table.php',
         '2024_08_16_234953_create_inventory_adjustments_table.php',
         '2024_08_26_221603_create_inventory_movements_table.php',
@@ -40,7 +42,7 @@ Artisan::command('migration-order', function () {
     foreach ($migrations as $migration) {
         $basePath = 'database/migrations/';
         $migrationName = trim($migration);
-        $path = $basePath.$migrationName;
+        $path = $basePath . $migrationName;
 
         $this->call('migrate', [
             '--path' => $path,

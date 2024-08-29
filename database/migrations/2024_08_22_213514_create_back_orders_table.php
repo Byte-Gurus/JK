@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->foreignId('item_id')->constrained('items');
             $table->foreignId('purchase_id')->constrained('purchases');
+            $table->foreignId('delivery_id')->nullable()->constrained('deliveries');
         });
     }
 

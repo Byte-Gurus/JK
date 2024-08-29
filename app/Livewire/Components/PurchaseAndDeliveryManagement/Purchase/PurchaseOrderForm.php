@@ -64,7 +64,6 @@ class PurchaseOrderForm extends Component
                         COALESCE(SUM(CASE WHEN inventories.status != \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
                     ')
                 )
-                ->where('items.status_id', 1) // Ensure items are active
                 ->groupBy(
                     'items.id',
                     'items.barcode',

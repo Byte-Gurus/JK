@@ -21,6 +21,12 @@ class Delivery extends Model
         return $this->belongsTo(Purchase::class, 'purchase_id');
     }
 
+    public function backorderJoin()
+    {
+        return $this->hasMany(BackOrder::class, 'delivery_id');
+    }
+
+
     public function scopeSearch($query, $value)  //* search function
     {
         //? queries
