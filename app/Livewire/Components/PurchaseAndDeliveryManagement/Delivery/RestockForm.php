@@ -31,6 +31,7 @@ class RestockForm extends Component
                     return $details->toArray() + [
                         'barcode' => $details->itemsJoin->barcode,
                         'item_name' => $details->itemsJoin->item_name,
+                        'item_id' => $details->item_id,
                         'item_description' => $details->itemsJoin->item_description,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
@@ -113,18 +114,18 @@ class RestockForm extends Component
 
 
         foreach ($this->purchaseDetails as $index => $detail) {
-            $backorder_index = $index;
+            $details = $detail['item_id'];
 
-            if (!isset($backorder_Items[$backorder_index])) {
-
-                $backorder_Items[$backorder_index] = [
-
+            if (!isset($backorder_Items[$details])) {
+                $backorder_Items[$details] = [
                     'details' => $detail,
                     'total_restock_quantity' => 0
                 ];
             }
-            $backorder_Items[$backorder_index]['total_restock_quantity'] += $this->restock_quantity[$index];
+            $backorder_Items[$details]['total_restock_quantity'] += $this->restock_quantity[$index];
         }
+
+
 
         foreach ($backorder_Items as $index => $backorder) {
 
@@ -133,7 +134,7 @@ class RestockForm extends Component
 
             $totalRestockQuantity = $backorder['total_restock_quantity'];
 
-            if ($totalRestockQuantity < $detail['purchase_quantity']) {
+            if ($totalRestockQuantity < $detail['purchase_quantity'] && !$detail['isDuplicate']) {
                 $hasBackorder = true;
 
                 BackOrder::create([
@@ -143,9 +144,9 @@ class RestockForm extends Component
                     'status' => 'Inadequate',
                 ]);
             }
+        }
 
-
-            // Create a new inventory record
+        foreach ($this->purchaseDetails as $index => $detail) {
             $inventory = Inventory::create([
                 'sku_code' => $detail['sku_code'],
                 'cost' => $this->cost[$index],
@@ -155,19 +156,24 @@ class RestockForm extends Component
                 'stock_in_quantity' =>  $validated['restock_quantity'][$index],
                 'expiration_date' =>  $validated['expiration_date'][$index],
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
-                'status' => 'Available',   // Set default status or customize as needed
+                'status' => 'TEST',   // Set default status or customize as needed
                 'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
                 'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
             ]);
+
+            $inventoryMovement = InventoryMovement::create([
+                'inventory_id' => $inventory->id,
+                'movement_type' => 'Inventory',
+                'operation' => 'Stock In',
+            ]);
+
+
         }
+
         $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
 
-        $inventoryMovement = InventoryMovement::create([
-            'inventory_id' => $inventory->id,
-            'movement_type' => 'Inventory',
-            'operation' => 'Stock In',
-        ]);
+
 
         if ($hasBackorder) {
             $delivery->status = "Stocked in with backorder";
@@ -229,6 +235,7 @@ class RestockForm extends Component
         $newItem = [
 
             'barcode' => $originalItem->itemsJoin->barcode,
+            'item_id' => $originalItem->item_id,
             'item_name' => $originalItem->itemsJoin->item_name,
             'item_description' => $originalItem->itemsJoin->item_description,
             'purchase_quantity' => $originalItem->purchase_quantity,
@@ -321,5 +328,10 @@ class RestockForm extends Component
     {
         $randomNumber = random_int(100000, 999999);
         return 'SKU-' . $randomNumber;
+    }
+
+    public function test()
+    {
+        dd($this->purchaseDetails);
     }
 }
