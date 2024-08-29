@@ -1,6 +1,6 @@
 <div>
     <div>
-        @livewire('components.logout')
+        @livewire('components.navbar-no-sidebar')
     </div>
     <div x-show="showSalesTransaction" x-data="{ showSalesTransaction: @entangle('showSalesTransaction') }">
         @livewire('components.Sales.sales-transaction')

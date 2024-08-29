@@ -1,24 +1,41 @@
 <div class="grid grid-flow-col grid-cols-3 p-[28px]">
     <div class="flex flex-col col-span-2">
-        <div class="flex flex-row justify-between items-center gap-4 pb-[28px]">
+        <div class="flex flex-row justify-between gap-4 pb-[28px]">
             <div class="w-2/4">
-                <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
-                    class="px-4 py-4 border outline-none rounded-md border-[rgb(143,143,143)] w-full">
+                <div class="relative w-full">
+
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
+                            viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </div>
+
+                    <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
+                        class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Search by Item Name or Barcode" required="">
+                </div>
 
                 @if (!empty($search))
-                    <div>
+                    <div class="absolute w-1/3 overflow-y-scroll bg-[rgb(248,248,248)]">
                         @foreach ($items as $item)
-                            <ul wire:click="selectItem({{ $item->id }})" class="cursor-pointer">
-                                <span>{{ $item->item_name }} ({{ $item->barcode }})</span>
-                                <span>{{ $item->item_description }}</span>
+                            <ul wire:click="selectItem({{ $item->id }})"
+                                class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap ">
+                                <li class="flex flex-row items-center justify-between">
+                                    <div class="flex flex-row items-center gap-2">
+                                        <div class=" text-[1.2em] font-bold">{{ $item->item_name }}</div>
+                                        <div class="font-black text-[1em]">-</div>
+                                        <div>{{ $item->item_description }}</div>
+                                    </div>
+                                    <div class="italic font-black text-[1.2em]">({{ $item->barcode }})</div>
+                                </li>
                             </ul>
                         @endforeach
-
-
                     </div>
                 @endif
             </div>
-            <div class="flex flex-row justify-end gap-4">
+            <div class="flex flex-row items-center gap-4 text-nowrap">
                 <div>
                     <button class="px-6 py-4 bg-blue-100">Sales</button>
                 </div>
@@ -26,20 +43,19 @@
                     <button class="px-6 py-4 bg-green-100">New Sales</button>
                 </div>
                 <div>
-                    <button
-                    x-on:click="$wire.displaySalesTransactionHistory()"
-                    class="px-6 py-4 bg-yellow-100">Transaction History</button>
+                    <button x-on:click="$wire.displaySalesTransactionHistory()"
+                        class="px-6 py-4 bg-yellow-100">Transaction History</button>
                 </div>
             </div>
         </div>
-        <div class="border border-black ">
+        <div class="border border-black">
             {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll scroll h-[550px] ">
+            <div class="overflow-x-auto overflow-y-scroll scroll h-[540px] ">
 
                 <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
                     {{-- //* table header --}}
-                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] top-0">
 
                         <tr class=" text-nowrap">
 
@@ -79,10 +95,9 @@
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $index + 1 }}
                                 </th>
-
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $selectedItem['item_name'] }}

@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative">
+<div class="relative" x-cloak>
     <div class="flex flex-col h-[705px] ">
         <div
             class="flex flex-row items-center border leading-none border-[rgb(53,53,53)] justify-between gap-4 p-4 text-nowrap mb-4">
