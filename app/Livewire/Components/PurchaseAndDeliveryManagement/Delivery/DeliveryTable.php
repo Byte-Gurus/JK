@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Livewire\Pages\DeliveryPage;
+use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Purchase;
 use App\Models\Supplier;
@@ -108,20 +109,31 @@ class DeliveryTable extends Component
         $deliveryId = $updatedAttributes['deliveryId'];
 
         $delivery = Delivery::find($deliveryId);
-        $delivery->date_delivered = $updatedAttributes['date'];
-        $delivery->status = "Delivered";
-        $delivery->save();
 
-        $repurchaseCount = 0;
+        if ($delivery && $delivery->backorderJoin->isNotEmpty()) {
+            // Loop through each backorder associated with the delivery where status is 'Repurchased'
+            foreach ($delivery->backorderJoin as $backorderDetail) {
+                if ($backorderDetail->status === 'Repurchased') {
+                    // Update the status of each backorder to "Delivered"
+                    $backorderDetail->update(['status' => 'Delivered']);
+                }
+            }
 
-        foreach ($delivery->purchaseJoin as $purchaseDetail) {
-            $repurchaseCount += $purchaseDetail->backorderJoin->where('status', 'Repurchased')->count();
+            // Update the delivery details after updating backorders
+            $delivery->date_delivered = $updatedAttributes['date'];
+            $delivery->status = "Delivered";
+            $delivery->save();
+
+            $this->alert('success', 'Delivery date and applicable backorders updated successfully');
+        } else {
+            // If there are no backorders, only update the delivery details
+            $delivery->date_delivered = $updatedAttributes['date'];
+            $delivery->status = "Delivered";
+            $delivery->save();
+
+            $this->alert('success', 'Delivery date changed successfully');
         }
 
-        // dd the count of repurchased items
-        dd($repurchaseCount);
-
-        $this->alert('success', 'Delivery date changed successfully');
         $this->resetPage();
     }
 
