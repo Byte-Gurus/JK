@@ -16,7 +16,7 @@ class ViewPurchaseOrderDetails extends Component
         ->get();
 
 
-        return view('livewire.components.PurchaseAndDeliveryManagement.purchase.view-purchase-order-details', compact('purchaseDetails'));
+        return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.view-purchase-order-details', compact('purchaseDetails'));
     }
 
     protected $listeners = [
