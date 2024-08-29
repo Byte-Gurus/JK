@@ -7,6 +7,7 @@ use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
+use App\Models\Item;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
@@ -156,7 +157,7 @@ class RestockForm extends Component
                 'stock_in_quantity' =>  $validated['restock_quantity'][$index],
                 'expiration_date' =>  $validated['expiration_date'][$index],
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
-                'status' => 'TEST',   // Set default status or customize as needed
+                'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
                 'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
@@ -167,6 +168,9 @@ class RestockForm extends Component
                 'movement_type' => 'Inventory',
                 'operation' => 'Stock In',
             ]);
+
+            $item = Item::find($detail['item_id']);
+            $item->status_id = "1";
 
 
         }
@@ -330,5 +334,5 @@ class RestockForm extends Component
         return 'SKU-' . $randomNumber;
     }
 
-  
+
 }

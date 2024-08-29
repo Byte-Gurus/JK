@@ -36,6 +36,10 @@ class InventoryHistory extends Component
 
         $query = InventoryMovement::query();
 
+        $query->whereHas('inventoryJoin', function ($query) {
+            $query->where('status', '!=', 'new Item');
+        });
+
         if ($this->statusFilter != 0) {
             $query->where(function ($query) {
                 $query->whereHas('inventoryJoin', function ($query) {
