@@ -2,9 +2,21 @@
     <div class="flex flex-col col-span-2">
         <div class="flex flex-row justify-between items-center gap-4 pb-[28px]">
             <div class="w-2/4">
-                <input type="search"
-                    class="px-4 py-4 border outline-none rounded-md border-[rgb(143,143,143)] w-full"
-                    placeholder="Search by Barcode or Item Name">
+                <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
+                    class="px-4 py-4 border outline-none rounded-md border-[rgb(143,143,143)] w-full">
+
+                @if (!empty($search))
+                    <div>
+                        @foreach ($items as $item)
+                            <ul wire:click="selectItem({{ $item->id }})" class="cursor-pointer">
+                                <span>{{ $item->item_name }} ({{ $item->barcode }})</span>
+                                <span>{{ $item->item_description }}</span>
+                            </ul>
+                        @endforeach
+
+
+                    </div>
+                @endif
             </div>
             <div class="flex flex-row justify-end gap-4">
                 <div>
@@ -22,7 +34,7 @@
         </div>
         <div class="border border-black ">
             {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll scroll h-[540px] ">
+            <div class="overflow-x-auto overflow-y-scroll scroll h-[550px] ">
 
                 <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -62,7 +74,41 @@
 
                     {{-- //* table body --}}
                     <tbody>
+                        @foreach ($selectedItems as $index => $selectedItem)
+                            <tr wire:click="getIndex({{ $index }})"
+                                class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $index + 1 }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $selectedItem['item_name'] }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $selectedItem['vat'] }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $selectedItem['quantity'] }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $selectedItem['selling_price'] }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $selectedItem['total_amount'] }}
+                                </th>
+                            </tr>
+                        @endforeach
 
                     </tbody>
 
@@ -76,12 +122,12 @@
                     <div class="flex flex-col gap-2">
                         <div class="flex flex-row items-center gap-2">
                             <div class="py-4 text-center bg-slate-400 text-nowrap">
-                                <button class="px-8 py-2 ">
+                                <button wire:click="setQuantity" class="px-8 py-2 ">
                                     Quantity
                                 </button>
                             </div>
                             <div class="py-4 text-center bg-blue-400 text-nowrap">
-                                <button class="px-8 py-2 ">
+                                <button wire:click="removeItem" class="px-8 py-2 ">
                                     Remove Item
                                 </button>
                             </div>

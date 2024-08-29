@@ -25,9 +25,11 @@ class InventoryTable extends Component
 
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
+        $suppliers = Supplier::select('id', 'company_name')
+        ->where('status_id', '1')->get();
 
-        $query = Inventory::query();
+        $query = Inventory::query()
+        ->where('status', '!=', 'New Item');
 
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter

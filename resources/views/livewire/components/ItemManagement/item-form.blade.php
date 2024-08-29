@@ -276,15 +276,10 @@
                                             <label for="status"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
-                                            <select id="status" wire:model="status" disabled
+                                            <input type="text" id="status" readonly value="Inactive"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            </input>
 
-                                                <option value="2" selected>Inactive</option>
-                                            </select>
-
-                                            @error('status')
-                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
 
                                         </div>
                                     @endif
