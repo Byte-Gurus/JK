@@ -83,7 +83,6 @@ class DeliveryTable extends Component
 
     public function getDeliveryID($deliveryId)
     {
-
         $this->dispatch('restock-form', deliveryID: $deliveryId)->to(RestockForm::class);
     }
 
