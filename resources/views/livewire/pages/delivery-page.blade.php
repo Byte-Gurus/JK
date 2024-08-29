@@ -39,6 +39,6 @@
             @livewire('components.PurchaseAndDeliveryManagement.Delivery.restock-form')
         </div>
         <div x-show="showBackorderForm" x-data="{ showBackorderForm: @entangle('showBackorderForm') }">
-            @livewirKulange('components.PurchaseAndDeliveryManagement.Delivery.backorder-form')
+            @livewire('components.PurchaseAndDeliveryManagement.Delivery.backorder-form')
         </div>
 </div>
