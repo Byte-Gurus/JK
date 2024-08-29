@@ -89,6 +89,7 @@ class BackorderForm extends Component
             'status' => "In Progress",
             'date_delivered' => "N/A",
             'purchase_id' => $purchase_order->id
+            
         ]);
 
 

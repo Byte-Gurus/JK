@@ -125,6 +125,7 @@ class DeliveryTable extends Component
             $delivery->save();
 
             $this->alert('success', 'Delivery date and applicable backorders updated successfully');
+
         } else {
             // If there are no backorders, only update the delivery details
             $delivery->date_delivered = $updatedAttributes['date'];

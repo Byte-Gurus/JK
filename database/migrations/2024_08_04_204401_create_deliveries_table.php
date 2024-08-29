@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("status");
             $table->string("date_delivered");
+            $table->string("old_po_number")->nullable();
             $table->timestamps();
 
             $table->foreignId('purchase_id')->constrained('purchases');
