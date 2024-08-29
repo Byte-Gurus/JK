@@ -8,9 +8,16 @@ use Livewire\Component;
 
 class CashierPage extends Component
 {
+<<<<<<< Updated upstream
     public $search = '';
     public $selectedItems = [];
     public $selectedIndex;
+=======
+    public $showSalesTransaction = true;
+
+    public $showSalesTransactionHistory = false;
+
+>>>>>>> Stashed changes
     public function render()
     {
         $searchTerm = trim($this->search);
@@ -36,6 +43,7 @@ class CashierPage extends Component
         ]);
     }
 
+<<<<<<< Updated upstream
     public function selectItem($item_id)
     {
 
@@ -93,4 +101,24 @@ class CashierPage extends Component
     }
 
 
+=======
+    protected $listeners = [
+        'close-backorder-form' => 'closeBackorderForm',
+        'display-sales-transaction' => 'displaySalesTransaction',
+        'display-sales-transaction-history' => 'displaySalesTransactionHistory',
+        'display-sales-return' => 'displaySalesReturn',
+    ];
+
+    public function displaySalesTransactionHistory($showSalesTransactionHistory)
+    {
+        $this->showSalesTransaction = false;
+        $this->showSalesTransactionHistory = $showSalesTransactionHistory;
+    }
+
+    public function displaySalesTransaction($showSalesTransaction)
+    {
+        $this->showSalesTransaction = $showSalesTransaction;
+        $this->showSalesTransactionHistory = false;
+    }
+>>>>>>> Stashed changes
 }
