@@ -330,8 +330,5 @@ class RestockForm extends Component
         return 'SKU-' . $randomNumber;
     }
 
-    public function test()
-    {
-        dd($this->purchaseDetails);
-    }
+  
 }

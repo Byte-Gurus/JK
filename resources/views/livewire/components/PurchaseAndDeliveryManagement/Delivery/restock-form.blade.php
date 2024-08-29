@@ -20,7 +20,7 @@
                             Restock</button>
                     </div>
 
-                    <button wire:click="test">sasasa</button>
+
                 </div>
             </div>
 
