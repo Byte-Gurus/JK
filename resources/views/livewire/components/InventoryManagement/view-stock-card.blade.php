@@ -1,6 +1,6 @@
 {{-- // --}}
-<div class="relative">
-    <div class="flex flex-col h-[655px] ">
+<div class="relative" x-cloak>
+    <div class="flex flex-col h-[705px] ">
         <div
             class="flex flex-row items-center border leading-none border-[rgb(53,53,53)] justify-between gap-4 p-4 text-nowrap mb-4">
 
@@ -94,9 +94,9 @@
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white">
 
             {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll h-[540px] no-scrollbar scroll">
+            <div class="overflow-x-auto overflow-y-scroll h-[600px] no-scrollbar scroll">
 
-                <table class="w-full mb-[75px] overflow-auto text-sm text-left scroll no-scrollbar">
+                <table class="w-full h-10 mb-[108px] overflow-auto text-sm text-left scroll no-scrollbar">
 
                     {{-- //* table header --}}
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
@@ -197,14 +197,14 @@
                 </table>
             </div>
         </div>
-        <div class="absolute bottom-0 w-full ">
+        <div class="absolute bottom-0 w-full">
             <table class="w-full text-sm text-left">
                 <thead>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row"
-                            class=" w-[180px] bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                            class=" w-[180px] rounded-tl-full bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                         </th>
                         <th scope="row"
                             class=" w-[124px] bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
@@ -214,7 +214,7 @@
                             T o t a l
                         </th>
                         <th scope="row"
-                            class=" w-[123.13px] font-black py-4 bg-orange-50 text-center border-t border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
+                            class=" w-[122px] font-black py-4 bg-orange-50 text-center border-t border-r text-gray-900 border-b border-black text-md whitespace-nowrap">
                             {{ $total_in_quantity }}
                         </th>
                         <th scope="row"
@@ -233,7 +233,7 @@
                             class=" w-[172.17px] bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                         </th>
                         <th scope="row"
-                            class=" w-[100.72px] bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                            class=" w-[100.72px] rounded-tr-full bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                         </th>
                     </tr>
                 </tbody>
