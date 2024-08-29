@@ -113,6 +113,15 @@ class DeliveryTable extends Component
         $delivery->status = "Delivered";
         $delivery->save();
 
+        $repurchaseCount = 0;
+
+        foreach ($delivery->purchaseJoin as $purchaseDetail) {
+            $repurchaseCount += $purchaseDetail->backorderJoin->where('status', 'Repurchased')->count();
+        }
+
+        // dd the count of repurchased items
+        dd($repurchaseCount);
+
         $this->alert('success', 'Delivery date changed successfully');
         $this->resetPage();
     }
@@ -150,7 +159,7 @@ class DeliveryTable extends Component
         $this->dispatch('display-backorder-form', showBackorderForm: true)->to(DeliveryPage::class);
     }
 
-  
+
     public function getPO_ID($deliverId)
     {
 

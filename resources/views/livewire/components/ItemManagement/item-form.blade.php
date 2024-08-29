@@ -190,8 +190,8 @@
 
                                     </div>
 
-                                      {{-- //* reorder point --}}
-                                      <div class="mb-3">
+                                    {{-- //* reorder point --}}
+                                    <div class="mb-3">
 
                                         <label for="reorder_point"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Reorder Point</label>
@@ -210,8 +210,7 @@
                                     {{-- //* vat type --}}
                                     <div class="mb-3">
 
-                                        <label for="vatType"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
                                         <select id="vatType" wire:model.live="vatType"
@@ -252,23 +251,45 @@
                                     </div>
 
                                     {{-- //* status --}}
-                                    <div class="mb-3">
 
-                                        <label for="status"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+                                    @if (!$isCreate)
+                                        <div class="mb-3">
 
-                                        <select id="status" wire:model="status"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Set your status</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Inactive</option>
-                                        </select>
+                                            <label for="status"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
-                                        @error('status')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
+                                            <select id="status" wire:model="status"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value="" selected>Set your status</option>
+                                                <option value="1">Active</option>
+                                                <option value="2">Inactive</option>
+                                            </select>
 
-                                    </div>
+                                            @error('status')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+                                    @else
+                                        <div class="mb-3">
+
+                                            <label for="status"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+
+                                            <select id="status" wire:model="status" disabled
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+
+                                                <option value="2" selected>Inactive</option>
+                                            </select>
+
+                                            @error('status')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+                                    @endif
+
+
                                 </div>
                             </div>
                         </div>
