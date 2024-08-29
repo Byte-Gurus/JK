@@ -253,7 +253,6 @@
                 <select wire:model.live = "perPage"
                     class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
                     <option value="10">10</option>
-                    <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
             </div>
