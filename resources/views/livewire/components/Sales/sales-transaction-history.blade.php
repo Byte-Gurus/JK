@@ -1,4 +1,4 @@
-<div>
+<div x-cloak>
     <div class="flex flex-col m-[28px]">
         <div class="flex flex-row justify-between mb-[28px]">
             <div>
