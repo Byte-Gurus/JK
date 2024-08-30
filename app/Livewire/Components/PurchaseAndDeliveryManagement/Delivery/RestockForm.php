@@ -169,10 +169,10 @@ class RestockForm extends Component
                 'operation' => 'Stock In',
             ]);
 
+
             $item = Item::find($detail['item_id']);
             $item->status_id = "1";
-
-
+            $item->save();
         }
 
         $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
@@ -333,6 +333,4 @@ class RestockForm extends Component
         $randomNumber = random_int(100000, 999999);
         return 'SKU-' . $randomNumber;
     }
-
-
 }

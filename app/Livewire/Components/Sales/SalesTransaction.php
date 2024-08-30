@@ -83,6 +83,7 @@ class SalesTransaction extends Component
     {
         if ($this->selectedIndex !== null) {
             dd($this->selectedIndex);
+            $this->selectedIndex = null;
         }
     }
 
@@ -90,6 +91,7 @@ class SalesTransaction extends Component
     {
         unset($this->selectedItems[$this->selectedIndex]);
         $this->selectedItems = array_values($this->selectedItems);
+        $this->selectedIndex = null;
     }
 
     public function displaySalesTransactionHistory()

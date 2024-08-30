@@ -110,7 +110,7 @@ class DeliveryTable extends Component
 
         $delivery = Delivery::find($deliveryId);
 
-        if ($delivery && $delivery->backorderJoin->isNotEmpty()) {
+        if ($delivery->backorderJoin->isNotEmpty()) {
             // Loop through each backorder associated with the delivery where status is 'Repurchased'
             foreach ($delivery->backorderJoin as $backorderDetail) {
                 if ($backorderDetail->status === 'Repurchased') {
@@ -125,7 +125,6 @@ class DeliveryTable extends Component
             $delivery->save();
 
             $this->alert('success', 'Delivery date and applicable backorders updated successfully');
-
         } else {
             // If there are no backorders, only update the delivery details
             $delivery->date_delivered = $updatedAttributes['date'];
