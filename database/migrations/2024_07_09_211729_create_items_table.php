@@ -20,7 +20,7 @@ return new class extends Migration
             $table->double('reorder_percentage');
             $table->double('reorder_point')->default(50);
             $table->string('vat_type');
-            $table->double('vat_amount');
+            $table->double('vat_amount')->default(0);
             $table->double('vat_percent');
             $table->timestamps();
 
