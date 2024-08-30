@@ -223,17 +223,17 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->cost }}
+                                {{ number_format($inventory->cost, 2) }}
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->mark_up_price }}
+                                {{ number_format($inventory->mark_up_price, 2) }}
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->selling_price }}
+                                {{ number_format($inventory->selling_price, 2) }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">

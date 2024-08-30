@@ -166,7 +166,7 @@
 
                                 <th scope="row"
                                     class="py-4 font-medium text-center text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
-                                    {{ $stock_card['in_value'] }}
+                                    {{ number_format($stock_card['in_value'], 2) }}
                                 </th>
 
                                 <th scope="row"
@@ -176,7 +176,7 @@
 
                                 <th scope="row"
                                     class="py-4 font-medium text-center text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
-                                    {{ $stock_card['out_value'] }}
+                                    {{ number_format($stock_card['out_value'], 2) }}
                                 </th>
 
                                 <th scope="row"
@@ -186,7 +186,7 @@
 
                                 <th scope="row"
                                     class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $stock_card['value'] }}
+                                    {{ number_format($stock_card['value'], 2) }}
                                 </th>
                             </tr>
                         @endforeach
@@ -219,7 +219,7 @@
                         </th>
                         <th scope="row"
                             class="w-[100px]  py-4 font-black text-center bg-orange-50 border-t text-gray-900 border-r-4 border-b border-black text-md whitespace-nowrap">
-                            {{ $total_in_value }}
+                            {{ number_format($total_in_value, 2) }}
                         </th>
                         <th scope="row"
                             class=" w-[137.63px]  py-4 font-black bg-orange-50 border-r border-t text-center text-gray-900 border-black border-b text-md whitespace-nowrap">
@@ -227,7 +227,7 @@
                         </th>
                         <th scope="row"
                             class=" w-[99.5px] py-4 font-black text-center bg-orange-50 border-t text-gray-900 border-r-4 border-black border-b text-md whitespace-nowrap">
-                            {{ $total_out_value }}
+                            {{ number_format($total_out_value, 2) }}
                         </th>
                         <th scope="row"
                             class=" w-[172.17px] bg-[rgb(53,53,53)] py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
