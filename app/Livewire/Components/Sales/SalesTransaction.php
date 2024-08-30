@@ -11,26 +11,12 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class SalesTransaction extends Component
 {
     use LivewireAlert;
-    public $transaction_number;
     public $search = '';
     public $selectedItems = [];
-
     public $selectedIndex, $isSelected, $subtotal, $grandTotal;
-
-
-
-
-    // livewires
     public $showSalesTransactionHistory = false;
-    public $showAdminLoginForm = false;
+    public $transaction_number;
     public $showChangeQuantityForm = false;
-    public $showPaymentForm = false;
-    public $showDiscountForm = false;
-    public $showWholesaleForm = false;
-
-
-
-
 
     public function mount()
     {
@@ -241,20 +227,5 @@ class SalesTransaction extends Component
     public function displaySalesTransactionHistory()
     {
         $this->dispatch('display-sales-transaction-history', showSalesTransactionHistory: true)->to(CashierPage::class);
-    }
-
-    public function displayDiscountForm()
-    {
-        $this->showDiscountForm = true;
-    }
-
-    public function displayWholesaleForm()
-    {
-        $this->showWholesaleForm = true;
-    }
-
-    public function displayPaymentForm()
-    {
-        $this->showPaymentForm = true;
     }
 }
