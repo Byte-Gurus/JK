@@ -107,7 +107,7 @@
                         <th scope="col" class="px-4 py-3 text-center">VAT type</th>
 
                         {{-- //* vat amount --}}
-                        <th scope="col" class="px-4 py-3">VAT amount (₱)</th>
+                        <th scope="col" class="px-4 py-3">VAT percent %</th>
 
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
@@ -214,8 +214,9 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->vat_amount }}
+                                {{ $item->vat_percent }}
                             </th>
+
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->created_at->format('d-m-y h:i A') }}

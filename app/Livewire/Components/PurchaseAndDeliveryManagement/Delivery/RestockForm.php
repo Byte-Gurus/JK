@@ -148,11 +148,18 @@ class RestockForm extends Component
         }
 
         foreach ($this->purchaseDetails as $index => $detail) {
+
+
+            $item = Item::find($detail['item_id']);
+            $item->status_id = "1";
+            $item->save();
+
             $inventory = Inventory::create([
                 'sku_code' => $detail['sku_code'],
                 'cost' => $this->cost[$index],
                 'mark_up_price' => $validated['markup'][$index],
                 'selling_price' => $validated['srp'][$index],
+                'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
                 'current_stock_quantity' =>  $validated['restock_quantity'][$index],
                 'stock_in_quantity' =>  $validated['restock_quantity'][$index],
                 'expiration_date' =>  $validated['expiration_date'][$index],
@@ -170,10 +177,6 @@ class RestockForm extends Component
             ]);
 
 
-            $item = Item::find($detail['item_id']);
-            $item->status_id = "1";
-            $item->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
-            $item->save();
         }
 
         $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();

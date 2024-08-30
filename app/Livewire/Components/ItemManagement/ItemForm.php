@@ -125,6 +125,8 @@ class ItemForm extends Component
 
         $items = Item::find($this->proxy_item_id); //? kunin lahat ng data ng may ari ng proxy_item_id
 
+
+
         //* ipasa ang laman ng validated inputs sa models
         $items->item_name = $validated['item_name'];
         $items->item_description = $validated['item_description'];
@@ -133,6 +135,8 @@ class ItemForm extends Component
         $items->vat_type = $validated['vatType'];
         $items->vat_percent = $validated['vat_percent'];
         $items->status_id = $validated['status'];
+
+
 
         if ($this->hasBarcode) {
             $items->barcode = $validated['create_barcode'];
@@ -158,15 +162,22 @@ class ItemForm extends Component
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
 
+
         //* hanapin id na attribute sa $updatedAttributes array
         $item = Item::find($updatedAttributes['id']);
 
-        //* fill() method [key => value] means [paglalagyan => ilalagay]
-        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $item have same keys with $updatedAttributes array
-        //var ipasa ang laman ng $updatedAttributes sa $item model
         $item->fill($updatedAttributes);
-
         $item->save(); //* Save the item model to the database
+
+        $inventories = Inventory::where('item_id', $item->id)->get();
+
+        // Update vat_amount for each related Inventory record
+        foreach ($inventories as $inventory) {
+
+            // Update the vat_amount in the Inventory model
+            $inventory->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
+            $inventory->save(); // Save each updated inventory record
+        }
 
         $this->resetForm();
         $this->alert('success', 'items was updated successfully');
@@ -216,9 +227,9 @@ class ItemForm extends Component
         $rules = [
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
-            'reorderPercentage' => ['required', 'numeric','min:1'],
-            'reorder_point' => ['required', 'numeric','min:0'],
-            'vat_percent' => ['required', 'numeric','min:0'],
+            'reorderPercentage' => ['required', 'numeric', 'min:1'],
+            'reorder_point' => ['required', 'numeric', 'min:0'],
+            'vat_percent' => ['required', 'numeric', 'min:0'],
             'vatType' => 'required|in:Vat,Non vat',
             'status' => 'required|in:1,2',
         ];

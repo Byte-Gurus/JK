@@ -132,6 +132,9 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Selling price (₱)</th>
 
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Vat amount </th>
+
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier</th>
@@ -234,6 +237,11 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ number_format($inventory->selling_price, 2) }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($inventory->vat_amount, 2) }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
