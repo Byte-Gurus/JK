@@ -6,12 +6,14 @@ use App\Livewire\Pages\CashierPage;
 use App\Models\Inventory;
 use App\Models\Item;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class SalesTransaction extends Component
 {
+    use LivewireAlert;
     public $search = '';
     public $selectedItems = [];
-    public $selectedIndex;
+    public $selectedIndex, $isSelected;
     public $showSalesTransactionHistory = false;
 
     public $showChangeQuantityForm = false;
@@ -38,6 +40,12 @@ class SalesTransaction extends Component
 
         ]);
     }
+
+    protected $listeners = [
+        'removeRowConfirmed',
+        'removeRowCancelled'
+
+    ];
 
     public function selectItem($item_id)
     {
@@ -77,9 +85,11 @@ class SalesTransaction extends Component
         $this->search = '';
     }
 
-    public function getIndex($index)
+    public function getIndex($index, $flag)
     {
+
         $this->selectedIndex = $index;
+        $this->isSelected = $flag;
     }
 
     public function displayChangeQuantityForm()
@@ -97,10 +107,26 @@ class SalesTransaction extends Component
 
     public function removeItem()
     {
+        if ($this->isSelected) {
+            $this->confirm('Do you want to remove this item?', [
+                'onConfirmed' => 'removeRowConfirmed', //* call the confmired method
+                'onDismissed' => 'removeRowCancelled',
+            ]);
+        }
+    }
+
+    public function removeRowConfirmed()
+    {
         unset($this->selectedItems[$this->selectedIndex]);
         $this->selectedItems = array_values($this->selectedItems);
-        $this->selectedIndex = null;
+        $this->reset('selectedIndex', 'isSelected');
     }
+
+    public function removeRowCancelled()
+    {
+        $this->reset('selectedIndex', 'isSelected');
+    }
+
 
     public function displaySalesTransactionHistory()
     {
