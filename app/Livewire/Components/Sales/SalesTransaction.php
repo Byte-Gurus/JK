@@ -13,6 +13,9 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $selectedIndex;
     public $showSalesTransactionHistory = false;
+
+    public $showChangeQuantityForm = false;
+
     public function render()
     {
         $searchTerm = trim($this->search);
@@ -77,6 +80,11 @@ class SalesTransaction extends Component
     public function getIndex($index)
     {
         $this->selectedIndex = $index;
+    }
+
+    public function displayChangeQuantityForm()
+    {
+        $this->showChangeQuantityForm = true;
     }
 
     public function setQuantity()
