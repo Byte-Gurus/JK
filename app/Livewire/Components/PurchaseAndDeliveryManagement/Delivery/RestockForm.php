@@ -291,7 +291,7 @@ class RestockForm extends Component
 
 
         foreach ($this->purchaseDetails as $index => $purchaseDetail) {
-            $rules["restock_quantity.$index"] = ['required', 'numeric', 'min:1'];
+            $rules["restock_quantity.$index"] = ['required', 'numeric', 'min:0'];
             $rules["cost.$index"] = ['required', 'numeric', 'min:1'];
             $rules["markup.$index"] = ['required', 'numeric', 'min:1'];
             $rules["srp.$index"] = ['required', 'numeric', 'min:1'];

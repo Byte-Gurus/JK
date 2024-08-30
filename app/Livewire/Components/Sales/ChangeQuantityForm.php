@@ -8,7 +8,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ChangeQuantityForm extends Component
 {
     use LivewireAlert;
-    public $adjust_quantity;
+    public $adjust_quantity, $current_stock_quantity, $barcode, $item_name, $item_description;
 
     public function render()
     {
@@ -25,7 +25,7 @@ class ChangeQuantityForm extends Component
     public function resetFormWhenClosed()
     {
         $this->resetForm();
-        // $this->resetValidation();
+        $this->resetValidation();
     }
 
     public function adjust()
@@ -54,7 +54,7 @@ class ChangeQuantityForm extends Component
     protected function validateForm()
     {
         $rules = [
-            'adjust_quantity' => ['required', 'numeric', 'min:1'],
+           'adjust_quantity' => ['required', 'numeric', 'min:1', 'lt:current_stock_quantity'],
         ];
 
         return $this->validate($rules);
@@ -67,8 +67,12 @@ class ChangeQuantityForm extends Component
         ]);
     }
 
-    public function getQuantity($itemQuantity)
+    public function getQuantity($data)
     {
-        $this->adjust_quantity = $itemQuantity;
+        $this->adjust_quantity = $data['itemQuantity'];
+        $this->current_stock_quantity = $data['current_stock_quantity'];
+        $this->barcode = $data['barcode'];
+        $this->item_name = $data['item_name'];
+        $this->item_description = $data['item_description'];
     }
 }

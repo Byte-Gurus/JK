@@ -55,17 +55,37 @@
                                 <div class="flex flex-col gap-1 mb-3">
 
                                     <div>
-                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Enter Quantity</label>
+                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Enter
+                                            Quantity</label>
                                     </div>
 
                                     <div>
-                                        <input type="text" wire:model='adjust_quantity' placeholder="Quantity" required
+                                        <input type="text" wire:model='adjust_quantity' placeholder="Quantity"
+                                            required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                                     </div>
 
                                     @error('adjust_quantity')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
+
+
+                                    <div>
+                                        <label for="adjust_quantity"
+                                            class="text-[1.2em] text-gray-900">{{ $item_name }}</label>
+                                    </div>
+                                    <div>
+                                        <label for="adjust_quantity"
+                                            class="text-[1.2em] text-gray-900">{{ $current_stock_quantity }}</label>
+                                    </div>
+                                    <div>
+                                        <label for="adjust_quantity"
+                                            class="text-[1.2em] text-gray-900">{{ $barcode }}</label>
+                                    </div>
+                                    <div>
+                                        <label for="adjust_quantity"
+                                            class="text-[1.2em] text-gray-900">{{ $item_description }}</label>
+                                    </div>
 
                                 </div>
                             </div>
