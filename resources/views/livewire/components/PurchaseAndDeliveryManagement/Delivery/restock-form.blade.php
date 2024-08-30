@@ -5,25 +5,12 @@
             <div class="flex flex-row items-center justify-between gap-4 py-4 pr-4 my-2 text-nowrap">
                 <div
                     class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                    <div>
-                        <p class="text-[1em] font-thin text-center w-full">PO number</p>
+                    <div class="flex flex-row gap-2">
+                        <p class="text-[1.2em] font-black text-center w-full">{{ $po_number }}</p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <p class="text-[1.2em] font-black">{{ $po_number }}</p>
-
-
+                        <p class="text-[1.2em] font-bold">{{ $supplier }}</p>
                     </div>
-                    <div>
-                        |
-                    </div>
-                    <div>
-                        <p class="text-[1em] font-thin text-center w-full">Supplier</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <p class="text-[1.2em] font-black text-wrap">{{ $supplier }}</p>
-                    </div>
-
-
                 </div>
                 <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
 

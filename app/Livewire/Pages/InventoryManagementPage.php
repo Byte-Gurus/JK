@@ -41,7 +41,7 @@ class InventoryManagementPage extends Component
         $this->dispatch('change-method', isCreate: true)->to(InventoryForm::class);
     }
 
-    public function showInventory()
+    public function displayInventoryHistory()
     {
         $this->showInventoryTable = false;
         $this->showInventoryHistory = !$this->showInventoryHistory;
@@ -57,4 +57,12 @@ class InventoryManagementPage extends Component
         $this->showInventoryTable = false;
         $this->showStockCard = $showStockCard;
     }
+
+    public function returnToInventoryTable()
+    {
+        $this->showInventoryTable = true;
+        $this->showInventoryHistory = false;
+    }
+
+
 }

@@ -81,7 +81,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Purchase Order No.</th>
 
                         {{-- //* supplier name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Supplier Name</th>
+                        <th scope="col" class="px-4 py-3 text-left">Supplier Name</th>
 
                         {{-- //* actions --}}
                         <th scope="col" class="px-4 py-3 text-center">Actions</th>
@@ -100,15 +100,15 @@
                                 {{ $purchase->created_at }}
                             </th>
 
-                            {{-- //* item name --}}
+                            {{-- //* purchase order no --}}
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->po_number }}
                             </th>
 
-                            {{-- //* item desc --}}
+                            {{-- //* supplier --}}
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                 {{ $purchase->supplierJoin->company_name }}
                             </th>
 
