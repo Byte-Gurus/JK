@@ -96,36 +96,36 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
-                                    x-on:click=" isSelected = !isSelected " :class="selected && ' bg-gray-200'">
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $index + 1 }}
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
-                                    x-on:click=" isSelected = !isSelected " :class="selected && ' bg-gray-200'">
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_name'] }}
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
-                                    x-on:click=" isSelected = !isSelected " :class="selected && ' bg-gray-200'">
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['vat'] }}
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
-                                    x-on:click=" isSelected = !isSelected " :class="selected && ' bg-gray-200'">
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['quantity'] }}
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
-                                    x-on:click=" isSelected = !isSelected " :class="selected && ' bg-gray-200'">
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['selling_price'] }}
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
-                                    x-on:click=" isSelected = !isSelected " :class="selected && ' bg-gray-200'">
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['total_amount'] }}
                                 </th>
                             </tr>
