@@ -298,13 +298,13 @@
                     <div class=" font-medium text-[1.4em]">
                         <p>Vatable Item Price</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($withVatAmount, 2) }}</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
                         <p>Non-Vatable Item Price</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($nonVatAmount, 2) }}</div>
                 </div>
                 <div class="w-full my-2">
                     <div class="border border-black"></div>

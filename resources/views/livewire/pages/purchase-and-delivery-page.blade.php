@@ -5,11 +5,11 @@
     @livewire('components.navbar')
     <div class=" mx-[28px] mt-4 text-right">
         <button wire:click="togglePurchaseOrder()"
-            @if ($purchaseOrderOpen) class="px-4 py-2 font-bold transition duration-75 ease-in-out bg-orange-200 rounded-md hover:bg-orange-300 text-md"
+            @if ($purchaseOrderOpen) class="px-4 py-2 transition-all duration-100 ease-in-out bg-orange-200 rounded-md hover:rounded-lg hover:bg-orange-300 text-md"
         @else
-        class="px-4 py-2 font-bold transition duration-75 ease-in-out bg-blue-200 rounded-md hover:bg-blue-300 text-md" @endif>
+        class="px-4 py-2 transition-all duration-100 ease-in-out bg-blue-200 rounded-md hover:rounded-lg hover:bg-blue-300 text-md" @endif>
             @if ($purchaseOrderOpen)
-                <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-col items-center justify-center px-1">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="currentColor" class="size-6">
@@ -18,11 +18,11 @@
                         </svg>
                     </div>
                     <div>
-                        <p>Delivery</p>
+                        Delivery
                     </div>
                 </div>
             @else
-                <div>
+                <div class="flex flex-col items-center justify-center">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="currentColor" class="size-6">
@@ -31,7 +31,7 @@
                         </svg>
                     </div>
                     <div>
-                        <p>Delivery</p>
+                        Purchase
                     </div>
                 </div>
             @endif
