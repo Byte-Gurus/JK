@@ -54,7 +54,7 @@ class SalesTransaction extends Component
         'removeRowConfirmed',
         'removeRowCancelled',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
-        'get-quantity' => 'getQuantity'
+        'send-quantity' => 'sendQuantity'
 
     ];
 
@@ -94,6 +94,7 @@ class SalesTransaction extends Component
                 'sku_code' => $item->sku_code,
                 'selling_price' => $item->selling_price,
                 'total_amount' => $item->selling_price * 1,
+                'current_stock_quantity' => $item->current_stock_quantity,
             ];
         }
 
@@ -113,12 +114,14 @@ class SalesTransaction extends Component
         if ($this->isSelected) {
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
-            // Now you can access the attributes of the selected item
-            $quantity = $selectedItem['quantity'];
-
-            // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
-            $this->dispatch('get-quantity', itemQuantity: $quantity)->to(ChangeQuantityForm::class);
+            $this->dispatch('get-quantity', [
+                'itemQuantity' => $selectedItem['quantity'],
+                'current_stock_quantity' => $selectedItem['current_stock_quantity'],
+                'barcode' => $selectedItem['barcode'],
+                'item_name' => $selectedItem['item_name'],
+                'item_description' => $selectedItem['item_description'],
+            ])->to(ChangeQuantityForm::class);
 
             // $this->reset('selectedIndex', 'isSelected');
             // For debugging purposes, you can use dd to see all the attributes
@@ -143,7 +146,7 @@ class SalesTransaction extends Component
             ]);
         }
     }
-    public function getQuantity($newQuantity)
+    public function sendQuantity($newQuantity)
     {
 
         $this->selectedItems[$this->selectedIndex]['quantity'] = $newQuantity;
