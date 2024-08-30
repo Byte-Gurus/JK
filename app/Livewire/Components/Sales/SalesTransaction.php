@@ -84,7 +84,6 @@ class SalesTransaction extends Component
 
     public function getIndex($index, $flag)
     {
-
         $this->selectedIndex = $index;
         $this->isSelected = $flag;
     }
