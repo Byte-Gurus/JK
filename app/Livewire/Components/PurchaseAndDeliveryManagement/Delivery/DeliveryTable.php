@@ -25,7 +25,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
-    public $dateDelivered = [];
+    public $dateDelivered = [], $delivery_date;
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -56,6 +56,7 @@ class DeliveryTable extends Component
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
         'updateConfirmed',
         'cancelConfirmed',
+        'dateCancelled',
     ];
 
 
@@ -97,6 +98,7 @@ class DeliveryTable extends Component
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
+            'onDismissed' => 'dateCancelled',
             'inputAttributes' => $deliveries,
         ]);
     }
@@ -175,5 +177,10 @@ class DeliveryTable extends Component
     {
 
         $this->dispatch('backorder-form', deliveryID: $deliverId)->to(BackorderForm::class);
+    }
+
+    public function dateCancelled()
+    {
+        $this->reset('delivery_date');
     }
 }

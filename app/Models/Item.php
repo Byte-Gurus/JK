@@ -16,7 +16,6 @@ class Item extends Model
         'maximum_stock_ratio',
         'reorder_percentage',
         'reorder_point',
-        'vat_amount',
         'vat_percent',
         'vat_type',
         'status_id'
