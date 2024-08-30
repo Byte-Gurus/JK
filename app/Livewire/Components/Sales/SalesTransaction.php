@@ -115,8 +115,6 @@ class SalesTransaction extends Component
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
             // Now you can access the attributes of the selected item
-
-
             // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
             $this->dispatch('get-quantity', [

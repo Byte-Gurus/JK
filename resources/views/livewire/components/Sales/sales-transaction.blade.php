@@ -114,7 +114,6 @@
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $index + 1 }}
                                 </th>
-<<<<<<< Updated upstream
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
@@ -128,10 +127,6 @@
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
-=======
-
-                                <th scope="row" class="py-4 pl-4 pr-2 font-medium text-left text-gray-900 text-md whitespace-nowrap"
->>>>>>> Stashed changes
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     <div class="flex flex-col ">
                                         <div class="text-xl font-black">{{ $selectedItem['item_name'] }}</div>
