@@ -55,7 +55,7 @@ class ChangeQuantityForm extends Component
     protected function validateForm()
     {
         $rules = [
-            'adjust_quantity' => ['required', 'numeric', 'min:1', 'lt:current_stock_quantity'],
+            'adjust_quantity' => ['required', 'numeric', 'min:1', 'lte:current_stock_quantity'],
         ];
 
         return $this->validate($rules);
