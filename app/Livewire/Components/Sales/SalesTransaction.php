@@ -93,13 +93,13 @@ class SalesTransaction extends Component
 
     public function displayChangeQuantityForm()
     {
-        $this->showChangeQuantityForm = true;
+
     }
 
     public function setQuantity()
     {
-        if ($this->selectedIndex !== null) {
-            dd($this->selectedIndex);
+        if ($this->isSelected) {
+            $this->showChangeQuantityForm = true;
             $this->selectedIndex = null;
         }
     }
