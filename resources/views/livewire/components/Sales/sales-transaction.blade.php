@@ -89,37 +89,43 @@
                     </thead>
 
                     {{-- //* table body --}}
-                    <tbody>
+                    <tbody x-data="{ isSelected: @entangle('isSelected')}">
                         @foreach ($selectedItems as $index => $selectedItem)
-                            <tr wire:click="getIndex({{ $index }})"
+                            <tr wire:click="getIndex({{ $index }}, true )"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $index + 1 }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_name'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['vat'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['selling_price'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['total_amount'] }}
                                 </th>
                             </tr>
@@ -302,5 +308,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div x-show="showChangeQuantityForm" x-data="{ showChangeQuantityForm: @entangle('showChangeQuantityForm') }">
+        @livewire('components.sales.change-quantity-form')
     </div>
 </div>

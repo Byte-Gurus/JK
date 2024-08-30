@@ -6,13 +6,18 @@ use App\Livewire\Pages\CashierPage;
 use App\Models\Inventory;
 use App\Models\Item;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class SalesTransaction extends Component
 {
+    use LivewireAlert;
     public $search = '';
     public $selectedItems = [];
-    public $selectedIndex;
+    public $selectedIndex, $isSelected;
     public $showSalesTransactionHistory = false;
+
+    public $showChangeQuantityForm = false;
+
     public function render()
     {
         $searchTerm = trim($this->search);
@@ -35,6 +40,12 @@ class SalesTransaction extends Component
 
         ]);
     }
+
+    protected $listeners = [
+        'removeRowConfirmed',
+        'removeRowCancelled'
+
+    ];
 
     public function selectItem($item_id)
     {
@@ -74,23 +85,47 @@ class SalesTransaction extends Component
         $this->search = '';
     }
 
-    public function getIndex($index)
+    public function getIndex($index, $flag)
     {
         $this->selectedIndex = $index;
+        $this->isSelected = $flag;
+    }
+
+    public function displayChangeQuantityForm()
+    {
+
     }
 
     public function setQuantity()
     {
-        if ($this->selectedIndex !== null) {
-            dd($this->selectedIndex);
+        if ($this->isSelected) {
+            $this->showChangeQuantityForm = true;
+            $this->selectedIndex = null;
         }
     }
 
     public function removeItem()
     {
+        if ($this->isSelected) {
+            $this->confirm('Do you want to remove this item?', [
+                'onConfirmed' => 'removeRowConfirmed', //* call the confmired method
+                'onDismissed' => 'removeRowCancelled',
+            ]);
+        }
+    }
+
+    public function removeRowConfirmed()
+    {
         unset($this->selectedItems[$this->selectedIndex]);
         $this->selectedItems = array_values($this->selectedItems);
+        $this->reset('selectedIndex', 'isSelected');
     }
+
+    public function removeRowCancelled()
+    {
+        $this->reset('selectedIndex', 'isSelected');
+    }
+
 
     public function displaySalesTransactionHistory()
     {
