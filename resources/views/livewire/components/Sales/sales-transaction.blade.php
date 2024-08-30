@@ -91,7 +91,7 @@
                     {{-- //* table body --}}
                     <tbody>
                         @foreach ($selectedItems as $index => $selectedItem)
-                            <tr wire:click="getIndex({{ $index }})"
+                            <tr wire:click="getIndex({{ $index }}, true )"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                                 <th scope="row"
