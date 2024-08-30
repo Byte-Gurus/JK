@@ -12,7 +12,7 @@
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-gray-900 item ">
 
-                        Payments
+                        Payment
 
                     </h3>
                 </div>
@@ -41,51 +41,70 @@
                     <div class="border-2 border-[rgb(53,53,53)] rounded-md">
 
                         <div
-                            class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                            <h1 class="font-bold">Payment Information</h1>
+                            class="p-2 pr-6 border-b flex flex-row justify-between bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
+                            <div>
+                                <h1 class="font-bold">Payment Information</h1>
+                            </div>
+                            <div class="italic font-thin text-white">
+                                @if ($payWithCash)
+                                Payment Method: <strong>Cash</strong>
+                                @else
+                                Payment Method: <strong>GCash</strong>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="p-4">
 
+                            <div class="flex flex-row items-center gap-2">
+                                {{-- //* first row --}}
+                                <div class="flex justify-between w-full gap-4">
 
-                            {{-- //* first row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* adjust reason --}}
-                                <div class="flex flex-col gap-1 mb-3">
-
-                                    <div>
-                                        <label for="amount" class="text-[1.2em] text-gray-900">Enter
-                                            Amount</label>
-                                    </div>
-
-                                    <div>
-                                        <input type="number" wire:model='amount' placeholder="Amount" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                                    </div>
-
-                                    {{-- @error('item_quantity')
-                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                    @enderror --}}
-                                    @if (!$payWithCash)
-                                        <div class="flex flex-col transition-all duration-100 ease-in-out">
+                                    {{-- //* adjust reason --}}
+                                    <div class="flex flex-col items-center h-full gap-1 mb-3">
+                                        <div class="flex flex-col">
                                             <div>
-                                                <label for="reference_no" class="text-[1.2em] text-gray-900">Reference
-                                                    No.</label>
+                                                <label for="amount" class="text-[1.2em] text-gray-900">Enter
+                                                    Amount</label>
                                             </div>
 
                                             <div>
-                                                <input type="number" wire:model='reference_no'
-                                                    placeholder="Reference No" required
+                                                <input type="number" wire:model='amount' placeholder="Amount" required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                                             </div>
                                         </div>
-                                    @endif
 
-                                    {{-- @error('discount_percentage')
-                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                    @enderror --}}
+                                        {{-- @error('item_quantity')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror --}}
+                                        @if (!$payWithCash)
+                                            <div class="flex flex-col transition-all duration-100 ease-in-out">
+                                                <div>
+                                                    <label for="reference_no" class="text-[1.2em] text-gray-900">Reference
+                                                        No.</label>
+                                                </div>
 
+                                                <div>
+                                                    <input type="number" wire:model='reference_no'
+                                                        placeholder="Reference No" required
+                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        {{-- @error('discount_percentage')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror --}}
+
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-4 w-full shadow-md shadow-[rgb(255,147,147)] items-center justify-center p-4 m-2 leading-none border border-black rounded-lg bg-[rgb(255,255,255)]">
+                                    <div>
+                                        <p class="text-[1.6em] font-thin text-center">To Pay</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[2em] font-black">1000000</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,14 +115,14 @@
                         <div>
                             {{-- //* clear all button for create --}}
                             <div x-on:click="$wire.changePaymentMethod()"
-                                class="text-[rgb(228,228,228)] bg-[rgb(53,53,53)] cursor-pointer hover:bg-[rgb(0,0,0)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                                class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Pay with GCash</div>
                         </div>
                     @else
                         <div>
                             {{-- //* clear all button for create --}}
                             <div x-on:click="$wire.changePaymentMethod()"
-                                class="text-[rgb(228,228,228)] bg-[rgb(53,53,53)] cursor-pointer hover:bg-[rgb(2,2,2)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                                class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Pay with Cash</div>
                         </div>
                     @endif
