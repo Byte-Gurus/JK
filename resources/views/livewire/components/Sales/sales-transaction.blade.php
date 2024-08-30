@@ -106,15 +106,8 @@
                     </thead>
 
                     {{-- //* table body --}}
-<<<<<<< HEAD
+
                     <tbody>
-=======
-<<<<<<< Updated upstream
-                    <tbody x-data="{ isSelected: false }">
-=======
-                    <tbody>
->>>>>>> Stashed changes
->>>>>>> parent of c6bf211 (Revert "z")
                         @foreach ($selectedItems as $index => $selectedItem)
                             <tr wire:click="getIndex({{ $index }}, true )" x-data="{ isSelected: false }"
                                 x-on:click=" isSelected = !isSelected "
@@ -122,15 +115,7 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap"
-<<<<<<< HEAD
                                     :class="isSelected && ' bg-gray-200'">
-=======
-<<<<<<< Updated upstream
-                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
-=======
-                                    :class="isSelected && ' bg-gray-200'">
->>>>>>> Stashed changes
->>>>>>> parent of c6bf211 (Revert "z")
                                     {{ $index + 1 }}
                                 </th>
 
@@ -154,16 +139,6 @@
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_description'] }}
                                 </th>
-<<<<<<< HEAD
-
-
-=======
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
->>>>>>> parent of c6bf211 (Revert "z")
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
@@ -178,32 +153,14 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
-<<<<<<< HEAD
                                     :class="isSelected && ' bg-gray-200'">
-=======
-<<<<<<< Updated upstream
-                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
->>>>>>> parent of c6bf211 (Revert "z")
                                     {{ number_format($selectedItem['selling_price'], 2) }}
-=======
-                                    :class="isSelected && ' bg-gray-200'">
-                                    {{ $selectedItem['selling_price'] }}
->>>>>>> Stashed changes
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
-<<<<<<< HEAD
                                     :class="isSelected && ' bg-gray-200'">
-=======
-<<<<<<< Updated upstream
-                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
->>>>>>> parent of c6bf211 (Revert "z")
                                     {{ number_format($selectedItem['total_amount'], 2) }}
-=======
-                                    :class="isSelected && ' bg-gray-200'">
-                                    {{ $selectedItem['total_amount'] }}
->>>>>>> Stashed changes
                                 </th>
                             </tr>
                         @endforeach
@@ -242,27 +199,12 @@
                     <div class="flex flex-col gap-2 ">
                         <div
                             class="py-4 text-center bg-[rgb(190,143,251)] hover:bg-[rgb(190,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-<<<<<<< HEAD
-                            <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">Wholesale</button>
+                            <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">
+                                Wholesale</button>
                         </div>
                         <div
                             class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
-=======
-<<<<<<< Updated upstream
-                            <button class="px-8 py-2 ">Wholesale</button>
-                        </div>
-                        <div
-                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 ">
-=======
-                            <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">Wholesale</button>
-                        </div>
-                        <div
-                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
->>>>>>> Stashed changes
->>>>>>> parent of c6bf211 (Revert "z")
                                 Discount
                             </button>
                         </div>
@@ -275,19 +217,8 @@
                             </div>
                             <div
                                 class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(255,241,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-<<<<<<< HEAD
-                                <button class="px-8 py-2 "
-                                x-on:click="$wire.displayPaymentForm()"
-                                >Pay</button>
-=======
-<<<<<<< Updated upstream
-                                <button class="px-8 py-2 ">Pay</button>
-=======
-                                <button class="px-8 py-2 "
-                                x-on:click="$wire.displayPaymentForm()"
-                                >Pay</button>
->>>>>>> Stashed changes
->>>>>>> parent of c6bf211 (Revert "z")
+                                <button class="px-8 py-2 " x-on:click="$wire.displayPaymentForm()">
+                                    Pay</button>
                             </div>
                         </div>
                         <div
