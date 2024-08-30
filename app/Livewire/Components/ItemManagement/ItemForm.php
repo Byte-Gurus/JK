@@ -17,8 +17,8 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $reorder_point, $reorderPercentage, $vat_amount, $status, $create_barcode; //var form inputs
-    public $vat_amount_enabled = false; //var diasble and vat amount by default
+    public $item_id, $barcode, $item_name, $item_description, $reorder_point, $reorderPercentage, $vat_percent, $status, $create_barcode; //var form inputs
+    public $isVat = false; //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
 
@@ -56,10 +56,11 @@ class ItemForm extends Component
         $this->vatType = $vat_type;
 
         if ($vat_type == 'Vat') {
-            $this->vat_amount_enabled = true;
+            $this->isVat = true;
+            $this->vat_percent = 12;
         } elseif ($vat_type == 'Non vat') {
-            $this->vat_amount_enabled = false;
-            $this->vat_amount = 0;
+            $this->isVat = false;
+            $this->vat_percent = 0;
         }
     }
     public function create() //* create process
@@ -85,7 +86,7 @@ class ItemForm extends Component
             'reorder_point' => $validated['reorder_point'],
             'reorder_percentage' => $validated['reorderPercentage'],
             'vat_type' => $validated['vatType'],
-            'vat_amount' => $validated['vat_amount'],
+            'vat_percent' => $validated['vat_percent'],
             'status_id' => $validated['status'],
         ];
 
@@ -130,7 +131,7 @@ class ItemForm extends Component
         $items->reorder_percentage = $validated['reorderPercentage'];
         $items->reorder_point = $validated['reorder_point'];
         $items->vat_type = $validated['vatType'];
-        $items->vat_amount = $validated['vat_amount'];
+        $items->vat_percent = $validated['vat_percent'];
         $items->status_id = $validated['status'];
 
         if ($this->hasBarcode) {
@@ -198,8 +199,8 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_amount', 'status',]);
-        $this->vat_amount_enabled = false;
+        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_percent', 'status',]);
+        $this->isVat = false;
         $this->hasBarcode = true;
     }
     public function closeModal() //* close ang modal after confirmation
@@ -217,7 +218,7 @@ class ItemForm extends Component
             'item_description' => 'required|string|max:255',
             'reorderPercentage' => ['required', 'numeric','min:1'],
             'reorder_point' => ['required', 'numeric','min:0'],
-            'vat_amount' => ['required', 'numeric','min:0'],
+            'vat_percent' => ['required', 'numeric','min:0'],
             'vatType' => 'required|in:Vat,Non vat',
             'status' => 'required|in:1,2',
         ];
@@ -248,7 +249,7 @@ class ItemForm extends Component
             'reorderPercentage' => $item_details->reorder_percentage,
             'reorder_point' => $item_details->reorder_point,
             'vatType' => $item_details->vat_type,
-            'vat_amount' => $item_details->vat_amount,
+            'vat_percent' => $item_details->vat_percent,
             'status' => $item_details->status_id,
 
         ]);

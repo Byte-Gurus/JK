@@ -172,6 +172,7 @@ class RestockForm extends Component
 
             $item = Item::find($detail['item_id']);
             $item->status_id = "1";
+            $item->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
             $item->save();
         }
 

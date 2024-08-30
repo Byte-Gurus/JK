@@ -236,15 +236,14 @@
                                     {{-- //* vat amount --}}
                                     <div class="mb-3">
 
-                                        <label for="vat_amount"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat Amount</label>
+                                        <label for="vat_percent"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat Percent</label>
 
-                                        <input type="numeric" id="vat_amount" wire:model="vat_amount"
+                                        <input type="numeric" id="vat_percent" wire:model="vat_percent" readonly
                                             class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Vat Amount" required
-                                            @if (!$vat_amount_enabled) disabled @endif />
+                                            placeholder="Vat Amount" required />
 
-                                        @error('vat_amount')
+                                        @error('vat_percent')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
