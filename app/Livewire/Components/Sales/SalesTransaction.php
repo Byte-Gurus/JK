@@ -43,7 +43,9 @@ class SalesTransaction extends Component
 
     protected $listeners = [
         'removeRowConfirmed',
-        'removeRowCancelled'
+        'removeRowCancelled',
+        'display-change-quantity-form' => 'displayChangeQuantityForm',
+        'get-quantity' => 'getQuantity'
 
     ];
 
@@ -87,22 +89,37 @@ class SalesTransaction extends Component
 
     public function getIndex($index, $flag)
     {
+        $this->reset('selectedIndex', 'isSelected');
         $this->selectedIndex = $index;
         $this->isSelected = $flag;
     }
 
-    public function displayChangeQuantityForm()
-    {
-
-    }
 
     public function setQuantity()
     {
         if ($this->isSelected) {
+            $selectedItem = $this->selectedItems[$this->selectedIndex];
+
+            // Now you can access the attributes of the selected item
+
+            $quantity = $selectedItem['quantity'];
+
+
+            // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
-            $this->selectedIndex = null;
+            $this->dispatch('get-quantity', itemQuantity: $quantity)->to(ChangeQuantityForm::class);
+
+            // $this->reset('selectedIndex', 'isSelected');
+            // For debugging purposes, you can use dd to see all the attributes
         }
     }
+
+    public function displayChangeQuantityForm($showChangeQuantityForm)
+    {
+        $this->showChangeQuantityForm = $showChangeQuantityForm;
+    }
+
+
 
     public function removeItem()
     {
@@ -113,15 +130,28 @@ class SalesTransaction extends Component
             ]);
         }
     }
+    public function getQuantity($newQuantity)
+    {
 
+        $this->selectedItems[$this->selectedIndex]['quantity'] = $newQuantity;
+        $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
+        $this->reset('selectedIndex', 'isSelected');
+    }
     public function removeRowConfirmed()
     {
         unset($this->selectedItems[$this->selectedIndex]);
         $this->selectedItems = array_values($this->selectedItems);
         $this->reset('selectedIndex', 'isSelected');
+
+        $this->alert('success', 'quantity was removed successfully');
     }
 
     public function removeRowCancelled()
+    {
+        $this->reset('selectedIndex', 'isSelected');
+    }
+
+    public function resetFormWhenClosed()
     {
         $this->reset('selectedIndex', 'isSelected');
     }
