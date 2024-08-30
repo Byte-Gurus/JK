@@ -9,7 +9,7 @@
         @else
         class="px-4 py-2 font-bold transition duration-75 ease-in-out bg-blue-200 rounded-md hover:bg-blue-300 text-md" @endif>
             @if ($purchaseOrderOpen)
-                <div class="">
+                <div class="flex flex-col items-center justify-center">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="currentColor" class="size-6">
