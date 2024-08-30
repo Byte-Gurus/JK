@@ -17,6 +17,7 @@ class Item extends Model
         'reorder_percentage',
         'reorder_point',
         'vat_amount',
+        'vat_percent',
         'vat_type',
         'status_id'
     ];
