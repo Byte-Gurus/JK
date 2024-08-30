@@ -15,7 +15,7 @@ class SalesTransaction extends Component
     public $search = '';
     public $selectedItems = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $withVatAmount, $nonVatAmount;
 
 
 
@@ -48,11 +48,6 @@ class SalesTransaction extends Component
                     ->whereNotNull('expiration_date')
                     ->orderBy('expiration_date', 'asc'); // Order by nearest expiration date
             })
-            ->with(['inventoryJoin' => function ($query) {
-                $query->where('status', 'Available')
-                    ->whereNotNull('expiration_date')
-                    ->orderBy('expiration_date', 'asc'); // Order by nearest expiration date
-            }])
             ->when($searchTerm, function ($query, $searchTerm) {
                 $query->where(function ($subQuery) use ($searchTerm) {
                     $subQuery->where('item_name', 'like', "%{$searchTerm}%")
@@ -108,7 +103,8 @@ class SalesTransaction extends Component
             $this->selectedItems[] = [
                 'item_name' => $item->itemJoin->item_name,
                 'item_description' => $item->itemJoin->item_description,
-                'vat' => $item->itemJoin->vat_amount,
+                'vat_type' => $item->itemJoin->vat_type,
+                'vat' => $item->vat_amount,
                 'quantity' => 1,
                 'barcode' => $item->itemJoin->barcode,
                 'sku_code' => $item->sku_code,
@@ -181,11 +177,28 @@ class SalesTransaction extends Component
     {
 
         $this->subtotal = 0;
+        $this->withVatAmount = 0;
+        $this->nonVatAmount = 0;
+
+
+
         foreach ($this->selectedItems as $index) {
+
+
+            if ($index['vat_type'] === 'Vat') {
+                $this->withVatAmount += $index['total_amount'];
+            } else {
+                // If no VAT, sum up the total amount without VAT
+                $this->nonVatAmount += $index['total_amount'];
+            }
+
             $this->subtotal += $index['total_amount'];
+
             $this->grandTotal = $this->subtotal;
         }
     }
+
+
 
 
 
