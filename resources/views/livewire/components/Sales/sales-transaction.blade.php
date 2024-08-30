@@ -89,7 +89,7 @@
                     </thead>
 
                     {{-- //* table body --}}
-                    <tbody x-data="{ isSelected: @entangle('isSelected')}">
+                    <tbody x-data="{ isSelected: @entangle('isSelected') }">
                         @foreach ($selectedItems as $index => $selectedItem)
                             <tr wire:click="getIndex({{ $index }}, true )"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
@@ -215,7 +215,7 @@
                     <p class=" font-medium text-[1.6em]">Transaction No.</p>
                 </div>
                 <div class="flex justify-center font-black italic text-[2.2em]">
-                    <p>123412321312</p>
+                    <p>{{ $transaction_number }}</p>
                 </div>
             </div>
             {{-- discount section --}}
@@ -268,7 +268,7 @@
                     <div class=" font-black text-[2em]">
                         <p>Subtotal</p>
                     </div>
-                    <div class=" font-black text-[2em]">₱ 0.00</div>
+                    <div class=" font-black text-[2em]">₱ {{ $subtotal }}</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
@@ -289,7 +289,7 @@
                     <div class=" font-black text-[2em]">
                         <p>Total</p>
                     </div>
-                    <div class=" font-black text-[2em]">₱ 0.00</div>
+                    <div class=" font-black text-[2em]">₱ {{ $grandTotal }}</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">

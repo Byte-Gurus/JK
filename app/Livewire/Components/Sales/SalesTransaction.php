@@ -13,11 +13,15 @@ class SalesTransaction extends Component
     use LivewireAlert;
     public $search = '';
     public $selectedItems = [];
-    public $selectedIndex, $isSelected;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal;
     public $showSalesTransactionHistory = false;
-
+    public $transaction_number;
     public $showChangeQuantityForm = false;
 
+    public function mount()
+    {
+        $this->generateTransactionNumber();
+    }
     public function render()
     {
         $searchTerm = trim($this->search);
@@ -34,6 +38,11 @@ class SalesTransaction extends Component
                 });
             })
             ->get();
+
+        $this->computeSubTotal();
+
+
+
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
             'selectedItems' => $this->selectedItems,
@@ -63,6 +72,7 @@ class SalesTransaction extends Component
             ->first();
 
         $itemExists = false;
+
         foreach ($this->selectedItems as $index => $selectedItem) {
             if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
                 // Update the quantity if the item already exists
@@ -101,9 +111,7 @@ class SalesTransaction extends Component
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
             // Now you can access the attributes of the selected item
-
             $quantity = $selectedItem['quantity'];
-
 
             // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
@@ -114,9 +122,11 @@ class SalesTransaction extends Component
         }
     }
 
-    public function displayChangeQuantityForm($showChangeQuantityForm)
+    public function generateTransactionNumber()
     {
-        $this->showChangeQuantityForm = $showChangeQuantityForm;
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+        $this->transaction_number = 'TN-' . $formattedNumber . '-' . now()->format('dmY');
     }
 
 
@@ -137,6 +147,29 @@ class SalesTransaction extends Component
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
         $this->reset('selectedIndex', 'isSelected');
     }
+
+
+    public function computeSubTotal()
+    {
+
+        $this->subtotal = 0;
+        foreach ($this->selectedItems as $index) {
+            $this->subtotal += $index['total_amount'];
+            $this->grandTotal = $this->subtotal;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function removeRowConfirmed()
     {
         unset($this->selectedItems[$this->selectedIndex]);
@@ -154,6 +187,26 @@ class SalesTransaction extends Component
     public function resetFormWhenClosed()
     {
         $this->reset('selectedIndex', 'isSelected');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function displayChangeQuantityForm($showChangeQuantityForm)
+    {
+        $this->showChangeQuantityForm = $showChangeQuantityForm;
     }
 
 
