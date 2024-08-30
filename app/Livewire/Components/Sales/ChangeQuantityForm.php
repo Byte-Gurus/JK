@@ -8,7 +8,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ChangeQuantityForm extends Component
 {
     use LivewireAlert;
-
     public $adjust_quantity, $current_stock_quantity, $barcode, $item_name, $item_description;
 
     public function render()
@@ -19,12 +18,14 @@ class ChangeQuantityForm extends Component
     protected $listeners = [
         'get-quantity' => 'getQuantity',
         'adjustConfirmed'
+
     ];
+
 
     public function resetFormWhenClosed()
     {
         $this->resetForm();
-        // $this->resetValidation();
+        $this->resetValidation();
     }
 
     public function adjust()
@@ -32,30 +33,28 @@ class ChangeQuantityForm extends Component
         $validated = $this->validateForm();
 
         $this->confirm('Do you want to add this item?', [
-            'onConfirmed' => 'adjustConfirmed',
-            'inputAttributes' => $validated,
+            'onConfirmed' => 'adjustConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
     public function adjustConfirmed($data)
     {
+
         $validated = $data['inputAttributes'];
 
-        $this->dispatch('send-quantity', ['newQuantity' => $validated['adjust_quantity']])
-            ->to(SalesTransaction::class);
+        $this->dispatch('get-quantity', newQuantity: $validated['adjust_quantity'])->to(SalesTransaction::class);
 
         $this->reset('adjust_quantity');
 
-        $this->dispatch('display-change-quantity-form', ['showChangeQuantityForm' => false])
-            ->to(SalesTransaction::class);
-
-        $this->alert('success', 'Quantity was updated successfully');
+        $this->dispatch('display-change-quantity-form', showChangeQuantityForm: false)->to(SalesTransaction::class);
+        $this->alert('success', 'quantity was updated successfully');
     }
 
     protected function validateForm()
     {
         $rules = [
-            'adjust_quantity' => ['required', 'numeric', 'min:1', 'lte:current_stock_quantity'],
+           'adjust_quantity' => ['required', 'numeric', 'min:1', 'lt:current_stock_quantity'],
         ];
 
         return $this->validate($rules);
@@ -63,7 +62,9 @@ class ChangeQuantityForm extends Component
 
     public function resetForm()
     {
-        $this->reset(['adjust_quantity']);
+        $this->reset([
+            'adjust_quantity'
+        ]);
     }
 
     public function getQuantity($data)

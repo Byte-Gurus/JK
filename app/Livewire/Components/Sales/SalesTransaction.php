@@ -54,7 +54,7 @@ class SalesTransaction extends Component
         'removeRowConfirmed',
         'removeRowCancelled',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
-        'send-quantity' => 'sendQuantity'
+        'get-quantity' => 'getQuantity'
 
     ];
 
@@ -114,6 +114,10 @@ class SalesTransaction extends Component
         if ($this->isSelected) {
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
+            // Now you can access the attributes of the selected item
+
+
+            // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
             $this->dispatch('get-quantity', [
                 'itemQuantity' => $selectedItem['quantity'],
@@ -146,7 +150,7 @@ class SalesTransaction extends Component
             ]);
         }
     }
-    public function sendQuantity($newQuantity)
+    public function getQuantity($newQuantity)
     {
 
         $this->selectedItems[$this->selectedIndex]['quantity'] = $newQuantity;
