@@ -37,14 +37,14 @@
             </div>
             <div class="flex flex-row items-center gap-4 text-nowrap">
                 <div>
-                    <button class="px-6 py-4 bg-blue-100">Sales</button>
+                    <button class="px-6 py-4 bg-[rgb(254,184,134)] border border-black hover:bg-[rgb(255,151,78)] ease-in-out duration-100 transition-all">Sales</button>
                 </div>
                 <div>
-                    <button class="px-6 py-4 bg-green-100">New Sales</button>
+                    <button class="px-6 py-4 bg-[rgb(166,254,134)] border border-black hover:bg-[rgb(152,255,78)] ease-in-out duration-100 transition-all">New Sales</button>
                 </div>
                 <div>
                     <button x-on:click="$wire.displaySalesTransactionHistory()"
-                        class="px-6 py-4 bg-yellow-100">Transaction History</button>
+                        class="px-6 py-4 bg-[rgb(230,254,134)] border border-black hover:bg-[rgb(214,255,49)] ease-in-out duration-100 transition-all">Transaction History</button>
                 </div>
             </div>
         </div>
@@ -71,7 +71,19 @@
                             </th>
 
                             {{-- //* item name --}}
+<<<<<<< Updated upstream
+                            <th scope="col" class="px-4 py-3 text-center">Barcode</th>
+                            {{-- //* item name --}}
+                            <th scope="col" class="px-4 py-3 text-center">SKU</th>
+                            {{-- //* item name --}}
                             <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+                            {{-- //* item name --}}
+=======
+                            <th scope="col" class="py-3 pl-4 pr-2 text-left">Item Name</th>
+
+                            {{-- //* item descrition --}}
+>>>>>>> Stashed changes
+                            <th scope="col" class="px-4 py-3 text-center">Description</th>
 
                             {{-- //* vat --}}
                             <th scope="col" class="px-4 py-3 text-center">VAT(₱)</th>
@@ -89,42 +101,79 @@
                     </thead>
 
                     {{-- //* table body --}}
-                    <tbody x-data="{ isSelected: @entangle('isSelected')}">
+<<<<<<< Updated upstream
+                    <tbody x-data="{ isSelected: @entangle('isSelected') }">
+=======
+                    <tbody x-data="{ isSelected: false   }">
+>>>>>>> Stashed changes
                         @foreach ($selectedItems as $index => $selectedItem)
                             <tr wire:click="getIndex({{ $index }}, true )"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
+                                <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap"
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $index + 1 }}
                                 </th>
+<<<<<<< Updated upstream
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
-                                    {{ $selectedItem['item_name'] }}
+                                    {{ $selectedItem['barcode'] }}
                                 </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                    {{ $selectedItem['sku_code'] }}
+                                </th>
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+=======
+
+                                <th scope="row" class="py-4 pl-4 pr-2 font-medium text-left text-gray-900 text-md whitespace-nowrap"
+>>>>>>> Stashed changes
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                    <div class="flex flex-col ">
+                                        <div class="text-xl font-black">{{ $selectedItem['item_name'] }}</div>
+                                        <div class="flex flex-row gap-2 w-fit">
+                                            <div class="text-sm italic font-medium text-[rgb(122,122,122)]">{{ $selectedItem['barcode'] }}</div>
+                                            <div class="font-black text-[rgb(80,80,80)]">|</div>
+                                            <div class="text-sm italic font-medium text-[rgb(122,122,122)]">{{ $selectedItem['sku_code'] }}</div>
+                                        </div>
+                                    </div>
+
+                                </th>
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                    {{ $selectedItem['item_description'] }}
+                                </th>
+                                <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                {{ $selectedItem['item_description'] }}
+                            </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['vat'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['selling_price'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['total_amount'] }}
                                 </th>
@@ -142,28 +191,28 @@
                 <div class="flex flex-row gap-4">
                     <div class="flex flex-col gap-2">
                         <div class="flex flex-row items-center gap-2">
-                            <div class="py-4 text-center bg-slate-400 text-nowrap">
+                            <div class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(111,253,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button wire:click="setQuantity" class="px-8 py-2 ">
                                     Quantity
                                 </button>
                             </div>
-                            <div class="py-4 text-center bg-blue-400 text-nowrap">
+                            <div class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button wire:click="removeItem" class="px-8 py-2 ">
                                     Remove Item
                                 </button>
                             </div>
                         </div>
-                        <div class="w-full py-4 text-center bg-orange-400 text-nowrap">
+                        <div class="py-4 text-center bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Cancel Transaction
                             </button>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
-                        <div class="py-4 text-center bg-indigo-400 text-nowrap">
+                        <div class="py-4 text-center bg-[rgb(190,143,251)] hover:bg-[rgb(190,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">Wholesale</button>
                         </div>
-                        <div class="py-4 text-center bg-violet-400 text-nowrap">
+                        <div class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Discount
                             </button>
@@ -171,21 +220,21 @@
                     </div>
                     <div class="flex flex-col gap-2 ">
                         <div class="flex flex-row gap-4">
-                            <div class="py-4 text-center bg-pink-400 text-nowrap">
+                            <div class="py-4 text-center bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button class="px-8 py-2 ">Return</button>
                             </div>
-                            <div class="py-4 text-center bg-yellow-400 text-nowrap">
+                            <div class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(255,241,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button class="px-8 py-2 ">Pay</button>
                             </div>
                         </div>
-                        <div class="py-4 text-center bg-sky-400 text-nowrap">
+                        <div class="py-4 text-center bg-[rgb(38,38,38)] text-white hover:bg-[rgb(0,0,0)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Void Transaction
                             </button>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center w-full font-black bg-green-400 p-auto">
-                        <div class="text-center bg-green-400 text-nowrap">
+                    <div class="flex items-center justify-center w-full font-black transition-all duration-100 ease-in-out bg-green-400 border border-black hover:bg-green-500">
+                        <div class="text-center text-nowrap">
                             <button>
                                 Save
                             </button>
@@ -215,7 +264,7 @@
                     <p class=" font-medium text-[1.6em]">Transaction No.</p>
                 </div>
                 <div class="flex justify-center font-black italic text-[2.2em]">
-                    <p>123412321312</p>
+                    <p>{{ $transaction_number }}</p>
                 </div>
             </div>
             {{-- discount section --}}
@@ -268,7 +317,7 @@
                     <div class=" font-black text-[2em]">
                         <p>Subtotal</p>
                     </div>
-                    <div class=" font-black text-[2em]">₱ 0.00</div>
+                    <div class=" font-black text-[2em]">₱ {{ $subtotal }}</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
@@ -289,7 +338,7 @@
                     <div class=" font-black text-[2em]">
                         <p>Total</p>
                     </div>
-                    <div class=" font-black text-[2em]">₱ 0.00</div>
+                    <div class=" font-black text-[2em]">₱ {{ $grandTotal }}</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">

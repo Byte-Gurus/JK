@@ -21,7 +21,7 @@
                         <p class="text-[1em] font-thin text-center w-full">Supplier</p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <p class="text-[1.2em] font-black">{{ $supplier }}</p>
+                        <p class="text-[1.2em] font-black text-wrap">{{ $supplier }}</p>
                     </div>
 
 

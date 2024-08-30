@@ -13,11 +13,15 @@ class SalesTransaction extends Component
     use LivewireAlert;
     public $search = '';
     public $selectedItems = [];
-    public $selectedIndex, $isSelected;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal;
     public $showSalesTransactionHistory = false;
-
+    public $transaction_number;
     public $showChangeQuantityForm = false;
 
+    public function mount()
+    {
+        $this->generateTransactionNumber();
+    }
     public function render()
     {
         $searchTerm = trim($this->search);
@@ -34,6 +38,11 @@ class SalesTransaction extends Component
                 });
             })
             ->get();
+
+        $this->computeSubTotal();
+
+
+
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
             'selectedItems' => $this->selectedItems,
@@ -63,6 +72,7 @@ class SalesTransaction extends Component
             ->first();
 
         $itemExists = false;
+
         foreach ($this->selectedItems as $index => $selectedItem) {
             if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
                 // Update the quantity if the item already exists
@@ -77,10 +87,14 @@ class SalesTransaction extends Component
         if (!$itemExists) {
             $this->selectedItems[] = [
                 'item_name' => $item->itemJoin->item_name,
+                'item_description' => $item->itemJoin->item_description,
                 'vat' => $item->itemJoin->vat_amount,
                 'quantity' => 1,
+                'barcode' => $item->itemJoin->barcode,
+                'sku_code' => $item->sku_code,
                 'selling_price' => $item->selling_price,
                 'total_amount' => $item->selling_price * 1,
+                'current_stock_quantity' => $item->current_stock_quantity,
             ];
         }
 
@@ -102,21 +116,27 @@ class SalesTransaction extends Component
 
             // Now you can access the attributes of the selected item
 
-            $quantity = $selectedItem['quantity'];
-
 
             // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
-            $this->dispatch('get-quantity', itemQuantity: $quantity)->to(ChangeQuantityForm::class);
+            $this->dispatch('get-quantity', [
+                'itemQuantity' => $selectedItem['quantity'],
+                'current_stock_quantity' => $selectedItem['current_stock_quantity'],
+                'barcode' => $selectedItem['barcode'],
+                'item_name' => $selectedItem['item_name'],
+                'item_description' => $selectedItem['item_description'],
+            ])->to(ChangeQuantityForm::class);
 
             // $this->reset('selectedIndex', 'isSelected');
             // For debugging purposes, you can use dd to see all the attributes
         }
     }
 
-    public function displayChangeQuantityForm($showChangeQuantityForm)
+    public function generateTransactionNumber()
     {
-        $this->showChangeQuantityForm = $showChangeQuantityForm;
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+        $this->transaction_number = 'TN-' . $formattedNumber . '-' . now()->format('dmY');
     }
 
 
@@ -137,6 +157,29 @@ class SalesTransaction extends Component
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
         $this->reset('selectedIndex', 'isSelected');
     }
+
+
+    public function computeSubTotal()
+    {
+
+        $this->subtotal = 0;
+        foreach ($this->selectedItems as $index) {
+            $this->subtotal += $index['total_amount'];
+            $this->grandTotal = $this->subtotal;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function removeRowConfirmed()
     {
         unset($this->selectedItems[$this->selectedIndex]);
@@ -154,6 +197,26 @@ class SalesTransaction extends Component
     public function resetFormWhenClosed()
     {
         $this->reset('selectedIndex', 'isSelected');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function displayChangeQuantityForm($showChangeQuantityForm)
+    {
+        $this->showChangeQuantityForm = $showChangeQuantityForm;
     }
 
 
