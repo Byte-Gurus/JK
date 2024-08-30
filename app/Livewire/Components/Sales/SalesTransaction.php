@@ -26,11 +26,19 @@ class SalesTransaction extends Component
     {
         $searchTerm = trim($this->search);
 
-        $items = Item::where('status_id', 1) // Ensure the item itself has status_id 1
+
+
+        $items = Item::where('status_id', 1)
             ->whereHas('inventoryJoin', function ($query) {
-                $query->where('status', 'Available') // Ensure the related inventory status is 'Available'
-                    ->whereNotNull('expiration_date'); // Optionally ensure expiration_date is not null
+                $query->where('status', 'Available')
+                    ->whereNotNull('expiration_date')
+                    ->orderBy('expiration_date', 'asc'); // Order by nearest expiration date
             })
+            ->with(['inventoryJoin' => function ($query) {
+                $query->where('status', 'Available')
+                    ->whereNotNull('expiration_date')
+                    ->orderBy('expiration_date', 'asc'); // Order by nearest expiration date
+            }])
             ->when($searchTerm, function ($query, $searchTerm) {
                 $query->where(function ($subQuery) use ($searchTerm) {
                     $subQuery->where('item_name', 'like', "%{$searchTerm}%")
@@ -41,14 +49,12 @@ class SalesTransaction extends Component
 
         $this->computeSubTotal();
 
-
-
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
             'selectedItems' => $this->selectedItems,
-
         ]);
     }
+
 
     protected $listeners = [
         'removeRowConfirmed',
@@ -115,8 +121,6 @@ class SalesTransaction extends Component
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
             // Now you can access the attributes of the selected item
-
-
             // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
             $this->dispatch('get-quantity', [
