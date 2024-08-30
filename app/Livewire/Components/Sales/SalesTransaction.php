@@ -87,8 +87,11 @@ class SalesTransaction extends Component
         if (!$itemExists) {
             $this->selectedItems[] = [
                 'item_name' => $item->itemJoin->item_name,
+                'item_description' => $item->itemJoin->item_description,
                 'vat' => $item->itemJoin->vat_amount,
                 'quantity' => 1,
+                'barcode' => $item->itemJoin->barcode,
+                'sku_code' => $item->sku_code,
                 'selling_price' => $item->selling_price,
                 'total_amount' => $item->selling_price * 1,
             ];

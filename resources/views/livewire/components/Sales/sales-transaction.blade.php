@@ -71,7 +71,13 @@
                             </th>
 
                             {{-- //* item name --}}
+                            <th scope="col" class="px-4 py-3 text-center">Barcode</th>
+                            {{-- //* item name --}}
+                            <th scope="col" class="px-4 py-3 text-center">SKU</th>
+                            {{-- //* item name --}}
                             <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+                            {{-- //* item name --}}
+                            <th scope="col" class="px-4 py-3 text-center">Description</th>
 
                             {{-- //* vat --}}
                             <th scope="col" class="px-4 py-3 text-center">VAT(₱)</th>
@@ -100,10 +106,26 @@
                                     {{ $index + 1 }}
                                 </th>
                                 <th scope="row"
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                    {{ $selectedItem['barcode'] }}
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                    x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                    {{ $selectedItem['sku_code'] }}
+                                </th>
+                                <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
                                     x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_name'] }}
                                 </th>
+                                <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
+                                x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'">
+                                {{ $selectedItem['item_description'] }}
+                            </th>
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap "
