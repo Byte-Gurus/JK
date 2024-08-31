@@ -96,6 +96,8 @@
 
                         {{-- //* Maximum stock ratio --}}
                         <th scope="col" class="px-4 py-3">Maximum stock ratio</th>
+                        {{-- //* Reorder point --}}
+                        <th scope="col" class="px-4 py-3">Bulk quantity</th>
 
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Reorder percentage</th>
@@ -108,6 +110,9 @@
 
                         {{-- //* vat amount --}}
                         <th scope="col" class="px-4 py-3">VAT percent %</th>
+
+                        {{-- //* vat amount --}}
+                        <th scope="col" class="px-4 py-3">Shelf life type</th>
 
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
@@ -199,6 +204,11 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->bulk_quantity }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->reorder_percentage }}
                             </th>
 
@@ -217,6 +227,10 @@
                                 {{ $item->vat_percent }}
                             </th>
 
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->shelf_life_type }}
+                            </th>
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $item->created_at->format('d-m-y h:i A') }}

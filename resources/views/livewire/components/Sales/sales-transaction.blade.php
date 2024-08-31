@@ -32,11 +32,9 @@
 
                                     <!-- Price on the right side -->
                                     <div class="text-[1.2em] font-bold">
-                                        @if ($item->inventoryJoin->isNotEmpty())
-                                            Php {{ number_format($item->inventoryJoin->first()->selling_price, 2) }}
-                                        @else
-                                            No price available
-                                        @endif
+
+                                        Php {{ number_format($item->inventoryJoin->selling_price, 2) }}
+
                                     </div>
                                 </li>
                             </ul>
@@ -99,6 +97,9 @@
                             {{-- //* price --}}
                             <th scope="col" class="px-4 py-3 text-center">Price(₱)</th>
 
+                            {{-- //* price --}}
+                            <th scope="col" class="px-4 py-3 text-center">Discount(%)</th>
+
                             {{-- //* amount --}}
                             <th scope="col" class="px-4 py-3 text-center">Amount(₱)</th>
 
@@ -155,6 +156,13 @@
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['selling_price'], 2) }}
+                                </th>
+
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    :class="isSelected && ' bg-gray-200'">
+                                    {{ $selectedItem['discount'] }} %
                                 </th>
 
                                 <th scope="row"
@@ -296,16 +304,11 @@
             <div class="flex flex-col gap-2 mx-6">
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
-                        <p>Vatable Item Price</p>
+                        <p>Tax Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ {{ number_format($withVatAmount, 2) }}</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
                 </div>
-                <div class="flex flex-row justify-between">
-                    <div class=" font-medium text-[1.4em]">
-                        <p>Non-Vatable Item Price</p>
-                    </div>
-                    <div class=" font-black text-[1.4em]">₱ {{ number_format($nonVatAmount, 2) }}</div>
-                </div>
+
                 <div class="w-full my-2">
                     <div class="border border-black"></div>
                 </div>

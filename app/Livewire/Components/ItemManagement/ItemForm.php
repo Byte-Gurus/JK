@@ -17,8 +17,8 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $reorder_point, $reorderPercentage, $vat_percent, $status, $create_barcode; //var form inputs
-    public $isVat = false; //var diasble and vat amount by default
+    public $item_id, $barcode, $item_name, $item_description, $reorder_point, $reorderPercentage, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity; //var form inputs
+    //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
 
@@ -55,11 +55,12 @@ class ItemForm extends Component
     {
         $this->vatType = $vat_type;
 
-        if ($vat_type == 'Vat') {
-            $this->isVat = true;
+        if ($vat_type == 'VaTable') {
+
             $this->vat_percent = 12;
-        } elseif ($vat_type == 'Non vat') {
-            $this->isVat = false;
+
+        } elseif ($vat_type == 'Zero Rated' || $vat_type == 'Vat Exempt') {
+
             $this->vat_percent = 0;
         }
     }
@@ -86,8 +87,11 @@ class ItemForm extends Component
             'reorder_point' => $validated['reorder_point'],
             'reorder_percentage' => $validated['reorderPercentage'],
             'vat_type' => $validated['vatType'],
+            'shelf_life_type' => $validated['shelf_life_type'],
+            'bulk_quantity' => $validated['bulk_quantity'],
             'vat_percent' => $validated['vat_percent'],
             'status_id' => $validated['status'],
+
         ];
 
 
@@ -131,7 +135,10 @@ class ItemForm extends Component
         $items->item_name = $validated['item_name'];
         $items->item_description = $validated['item_description'];
         $items->reorder_percentage = $validated['reorderPercentage'];
+        $items->bulk_quantity = $validated['bulk_quantity'];
         $items->reorder_point = $validated['reorder_point'];
+        $items->shelf_life_type = $validated['shelf_life_type'];
+        $items->bulk_quantity = $validated['bulk_quantity'];
         $items->vat_type = $validated['vatType'];
         $items->vat_percent = $validated['vat_percent'];
         $items->status_id = $validated['status'];
@@ -210,8 +217,8 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_percent', 'status',]);
-        $this->isVat = false;
+        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'reorder_point', 'reorderPercentage', 'vatType', 'vat_percent', 'status', 'bulk_quantity', 'shelf_life_type']);
+
         $this->hasBarcode = true;
     }
     public function closeModal() //* close ang modal after confirmation
@@ -229,8 +236,10 @@ class ItemForm extends Component
             'item_description' => 'required|string|max:255',
             'reorderPercentage' => ['required', 'numeric', 'min:1'],
             'reorder_point' => ['required', 'numeric', 'min:0'],
+            'shelf_life_type' =>  'required|in:Perishable,Non Perishable',
             'vat_percent' => ['required', 'numeric', 'min:0'],
-            'vatType' => 'required|in:Vat,Non vat',
+            'bulk_quantity' => ['required', 'numeric', 'min:0'],
+            'vatType' => 'required|in:VaTable,Zero Rated, Vat Exempt',
             'status' => 'required|in:1,2',
         ];
 
@@ -239,6 +248,8 @@ class ItemForm extends Component
         } else {
             $rules['barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         }
+
+
 
 
         return $this->validate($rules);
@@ -258,6 +269,8 @@ class ItemForm extends Component
             'item_name' => $item_details->item_name,
             'item_description' => $item_details->item_description,
             'reorderPercentage' => $item_details->reorder_percentage,
+            'shelf_life_type' => $item_details->shelf_life_type,
+            'bulk_quantity' => $item_details->bulk_quantity,
             'reorder_point' => $item_details->reorder_point,
             'vatType' => $item_details->vat_type,
             'vat_percent' => $item_details->vat_percent,
@@ -278,6 +291,7 @@ class ItemForm extends Component
 
             $this->resetForm();
             $this->status = 2;
+            $this->bulk_quantity = 0;
         }
 
         $this->generateBarcode();

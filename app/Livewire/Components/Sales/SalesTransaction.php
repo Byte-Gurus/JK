@@ -15,7 +15,7 @@ class SalesTransaction extends Component
     public $search = '';
     public $selectedItems = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $withVatAmount, $nonVatAmount;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat;
 
 
 
@@ -40,13 +40,10 @@ class SalesTransaction extends Component
     {
         $searchTerm = trim($this->search);
 
-
-
+        // Fetch items with their inventoryJoin
         $items = Item::where('status_id', 1)
             ->whereHas('inventoryJoin', function ($query) {
-                $query->where('status', 'Available')
-                    ->whereNotNull('expiration_date')
-                    ->orderBy('expiration_date', 'asc'); // Order by nearest expiration date
+                $query->where('status', 'Available');
             })
             ->when($searchTerm, function ($query, $searchTerm) {
                 $query->where(function ($subQuery) use ($searchTerm) {
@@ -54,7 +51,26 @@ class SalesTransaction extends Component
                         ->orWhere('barcode', 'like', "%{$searchTerm}%");
                 });
             })
+            ->with('inventoryJoin') // Ensure inventoryJoin is eager-loaded
             ->get();
+
+        // Process each item
+        $items = $items->map(function ($item) {
+            // Filter and sort inventoryJoin based on shelf_life_type
+            if ($item->shelf_life_type === 'Perishable') {
+                // Sort by expiration_date to find the nearest expiration date
+                $sortedInventory = $item->inventoryJoin->filter(function ($inventory) {
+                    return !is_null($inventory->expiration_date);
+                })->sortBy('expiration_date');
+
+                $item->inventoryJoin = $sortedInventory->first();
+            } else {
+                // For non-perishable items, get the latest inventory entry
+                $sortedInventory = $item->inventoryJoin->sortByDesc('created_at');
+                $item->inventoryJoin = $sortedInventory->first();
+            }
+            return $item;
+        });
 
         $this->computeSubTotal();
 
@@ -63,6 +79,9 @@ class SalesTransaction extends Component
             'selectedItems' => $this->selectedItems,
         ]);
     }
+
+
+
 
 
     protected $listeners = [
@@ -76,27 +95,50 @@ class SalesTransaction extends Component
     public function selectItem($item_id)
     {
 
-        $item = Inventory::with('itemJoin')
+        // Retrieve the item to check its shelf_life_type
+        $itemData = Item::find($item_id);
+
+        // Build the query for inventory
+        $itemQuery = Inventory::with('itemJoin')
             ->where('item_id', $item_id)
             ->where('status', 'Available')
-
             ->whereHas('itemJoin', function ($query) {
                 $query->where('status_id', 1);
-            })
-            ->orderBy('expiration_date', 'asc')
-            ->first();
+            });
+
+        // Apply ordering if the item is perishable
+        if ($itemData && $itemData->shelf_life_type === 'Perishable') {
+            $itemQuery->orderBy('expiration_date', 'asc');
+        }
+
+        // Get the first item from the query
+        $item = $itemQuery->first();
+
 
         $itemExists = false;
 
         foreach ($this->selectedItems as $index => $selectedItem) {
             if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
+
+                $itemExists = true;
                 // Update the quantity if the item already exists
                 $this->selectedItems[$index]['quantity'] += 1;
                 $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
-                $itemExists = true;
+
+
+                if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
+                    $this->selectedItems[$index]['discount'] = 10;
+
+                    $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
+                    $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
+                }
+
+
+
                 break;
             }
         }
+
 
         // If the item does not exist, add it to the array
         if (!$itemExists) {
@@ -111,6 +153,8 @@ class SalesTransaction extends Component
                 'selling_price' => $item->selling_price,
                 'total_amount' => $item->selling_price * 1,
                 'current_stock_quantity' => $item->current_stock_quantity,
+                'bulk_quantity' => $item->itemJoin->bulk_quantity,
+                'discount' => 0,
             ];
         }
 
@@ -169,6 +213,14 @@ class SalesTransaction extends Component
 
         $this->selectedItems[$this->selectedIndex]['quantity'] = $newQuantity;
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
+
+        if ($this->selectedItems[$this->selectedIndex]['quantity'] >= $this->selectedItems[$this->selectedIndex]['bulk_quantity']) {
+            $this->selectedItems[$this->selectedIndex]['discount'] = 10;
+
+            $discounted_amount = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
+            $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $discounted_amount;
+        }
+
         $this->reset('selectedIndex', 'isSelected');
     }
 
@@ -177,22 +229,18 @@ class SalesTransaction extends Component
     {
 
         $this->subtotal = 0;
-        $this->withVatAmount = 0;
-        $this->nonVatAmount = 0;
-
+        $vaTableAmount = 12;
 
 
         foreach ($this->selectedItems as $index) {
 
-
-            if ($index['vat_type'] === 'Vat') {
-                $this->withVatAmount += $index['total_amount'];
-            } else {
-                // If no VAT, sum up the total amount without VAT
-                $this->nonVatAmount += $index['total_amount'];
-            }
-
             $this->subtotal += $index['total_amount'];
+
+            if ($index['vat_type'] === 'VaTable') {
+                $netAmount =   $this->subtotal / (100 + $vaTableAmount) * 100;
+
+                $this->totalVat = $this->subtotal - $netAmount;
+            }
 
             $this->grandTotal = $this->subtotal;
         }

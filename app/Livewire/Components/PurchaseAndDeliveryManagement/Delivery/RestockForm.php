@@ -33,6 +33,7 @@ class RestockForm extends Component
                         'barcode' => $details->itemsJoin->barcode,
                         'item_name' => $details->itemsJoin->item_name,
                         'item_id' => $details->item_id,
+                        'shelf_life_type' => $details->itemsJoin->shelf_life_type,
                         'item_description' => $details->itemsJoin->item_description,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
@@ -162,7 +163,7 @@ class RestockForm extends Component
                 'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
                 'current_stock_quantity' =>  $validated['restock_quantity'][$index],
                 'stock_in_quantity' =>  $validated['restock_quantity'][$index],
-                'expiration_date' =>  $validated['expiration_date'][$index],
+                'expiration_date' =>  $validated['expiration_date'][$index] ?? null,
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
@@ -175,8 +176,6 @@ class RestockForm extends Component
                 'movement_type' => 'Inventory',
                 'operation' => 'Stock In',
             ]);
-
-
         }
 
         $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
@@ -245,6 +244,8 @@ class RestockForm extends Component
             'barcode' => $originalItem->itemsJoin->barcode,
             'item_id' => $originalItem->item_id,
             'item_name' => $originalItem->itemsJoin->item_name,
+            'shelf_life_type' => $originalItem->itemsJoin->shelf_life_type,
+
             'item_description' => $originalItem->itemsJoin->item_description,
             'purchase_quantity' => $originalItem->purchase_quantity,
             'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
@@ -299,8 +300,13 @@ class RestockForm extends Component
             $rules["cost.$index"] = ['required', 'numeric', 'min:1'];
             $rules["markup.$index"] = ['required', 'numeric', 'min:1'];
             $rules["srp.$index"] = ['required', 'numeric', 'min:1'];
-            $rules["expiration_date.$index"] = ['required', 'date', 'after_or_equal:today'];
+
+
+            if ($purchaseDetail['shelf_life_type'] === 'Perishable') {
+                $rules["expiration_date.$index"] = ['required', 'date', 'after_or_equal:today'];
+            }
         }
+
 
 
         return $this->validate($rules);

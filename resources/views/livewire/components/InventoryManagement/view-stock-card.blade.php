@@ -38,7 +38,13 @@
                         </div>
                         <div class="flex flex-row items-center gap-2">
                             <h1 class="text-[1.2em] font-black text-center">
-                                {{ \Carbon\Carbon::parse($expiration_date)->format('d-m-y') }}</h1>
+                                @if ($expiration_date)
+                                    {{ \Carbon\Carbon::parse($expiration_date)->format('d-m-y') }}
+                                @else
+                                    N/A
+                                @endif
+                            </h1>
+
                         </div>
                     </div>
 
