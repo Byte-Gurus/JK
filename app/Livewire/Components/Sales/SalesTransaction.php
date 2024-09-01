@@ -17,11 +17,12 @@ class SalesTransaction extends Component
     public $transaction_number;
     public $search = '';
     public $selectedItems = [];
+    public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change;
 
     public $customerDetails = [];
-
+    public $barcode;
 
     // livewires
     public $showSalesTransactionHistory = false;
@@ -77,6 +78,7 @@ class SalesTransaction extends Component
 
         $this->computeTransaction();
 
+
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
             'selectedItems' => $this->selectedItems,
@@ -92,13 +94,14 @@ class SalesTransaction extends Component
         'removeRowCancelled',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
         'get-quantity' => 'getQuantity',
-        'get-customer-details' => 'getCustomerDetails'
+        'get-customer-details' => 'getCustomerDetails',
+        'get-customer-payments' => 'getCustomerPayments'
 
     ];
 
     public function selectItem($item_id)
     {
-
+        $itemExists = false;
         // Retrieve the item to check its shelf_life_type
         $itemData = Item::find($item_id);
 
@@ -119,7 +122,6 @@ class SalesTransaction extends Component
         $item = $itemQuery->first();
 
 
-        $itemExists = false;
 
         foreach ($this->selectedItems as $index => $selectedItem) {
             if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
@@ -259,6 +261,71 @@ class SalesTransaction extends Component
         }
     }
 
+    public function updatedBarcode()
+    {
+        $itemExists = false;
+
+        $itemData = Item::where('barcode', $this->barcode)->first();
+        if ($itemData) {
+
+            $itemQuery = Inventory::with('itemJoin')
+                ->where('item_id', $itemData->id)
+                ->where('status', 'Available')
+                ->whereHas('itemJoin', function ($query) {
+                    $query->where('status_id', 1);
+                });
+
+            if ($itemData && $itemData->shelf_life_type === 'Perishable') {
+                $itemQuery->orderBy('expiration_date', 'asc');
+            }
+
+            $item = $itemQuery->first();
+
+            foreach ($this->selectedItems as $index => $selectedItem) {
+                if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
+
+                    $itemExists = true;
+                    // Update the quantity if the item already exists
+                    $this->selectedItems[$index]['quantity'] += 1;
+                    $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
+
+
+                    if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
+                        $this->selectedItems[$index]['discount'] = 10;
+
+                        $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
+                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
+                    }
+
+
+
+                    break;
+                }
+            }
+            // If the item does not exist, add it to the array
+            if (!$itemExists) {
+                $this->selectedItems[] = [
+                    'item_name' => $item->itemJoin->item_name,
+                    'item_description' => $item->itemJoin->item_description,
+                    'vat_type' => $item->itemJoin->vat_type,
+                    'vat' => $item->vat_amount,
+                    'quantity' => 1,
+                    'barcode' => $item->itemJoin->barcode,
+                    'sku_code' => $item->sku_code,
+                    'selling_price' => $item->selling_price,
+                    'total_amount' => $item->selling_price * 1,
+                    'current_stock_quantity' => $item->current_stock_quantity,
+                    'bulk_quantity' => $item->itemJoin->bulk_quantity,
+                    'discount' => 0,
+                ];
+            }
+        } else {
+            $this->alert('warning', 'Please Wait');
+        }
+        $this->barcode = '';
+    }
+
+
 
 
 
@@ -308,6 +375,15 @@ class SalesTransaction extends Component
         $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
     }
 
+    public function getCustomerPayments($Payment)
+    {
+        $this->payment = $Payment;
+
+        $this->tendered_amount = $this->payment['amount'];
+        $this->change = $this->tendered_amount - $this->grandTotal;
+    }
+
+
 
 
 
@@ -343,5 +419,6 @@ class SalesTransaction extends Component
     public function displayPaymentForm()
     {
         $this->showPaymentForm = true;
+        $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
     }
 }
