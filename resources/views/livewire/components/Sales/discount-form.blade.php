@@ -378,7 +378,7 @@
                                         <label for="customer_name"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Name</label>
 
-                                        <select id="customer_name" wire:model="customer_name"
+                                        <select id="customer_id" wire:model="customer_id"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select customer</option>
                                             @foreach ($customers as $customer)

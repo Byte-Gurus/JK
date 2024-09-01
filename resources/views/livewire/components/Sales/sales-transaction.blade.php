@@ -285,16 +285,15 @@
             </div>
             <div class="flex flex-col gap-2 mx-6 mb-2">
                 <div class="flex flex-row items-center gap-6">
-                    <div class=" font-medium text-[1.6em]">Discount Type</div>
-                    <div>icon</div>
+                    <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
                 </div>
                 <div class="flex flex-row items-center gap-6 ">
-                    <div class=" font-medium text-[1.6em]">Customer Name</div>
-                    <div>icon</div>
+                    <div class=" font-medium text-[1.6em]">Customer Name: {{ $customer_name }}</div>
+
                 </div>
                 <div class="flex flex-row items-center gap-6 ">
-                    <div class=" font-medium text-[1.6em]">ID No.</div>
-                    <div>icon</div>
+                    <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
+
                 </div>
             </div>
             <div class="my-2">

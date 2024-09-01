@@ -21,7 +21,7 @@ class DiscountForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $customer_name, $customer_type, $customer_discount_no, $discount_percentage = 5;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $customer_id, $customer_type, $customer_discount_no, $discount_percentage = 5;
     public $customerDetails = [];
 
     public function render()
@@ -95,7 +95,7 @@ class DiscountForm extends Component
             $this->customerDetails = [
                 'customer_type' => $validated['customer_type'],
                 'customer_discount_no' => $validated['customer_discount_no'],
-                'customer_name' =>  $validated['customer_name'],
+                'customer_id' =>  $validated['customer_id'],
                 'discount_percentage' =>  $validated['discount_percentage'],
             ];
         }
@@ -146,7 +146,7 @@ class DiscountForm extends Component
             $rules = [
                 'customer_type' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
-                'customer_name' => 'required|numeric',
+                'customer_id' => 'required|numeric',
                 'discount_percentage' => 'required|numeric|min:0',
             ];
         }

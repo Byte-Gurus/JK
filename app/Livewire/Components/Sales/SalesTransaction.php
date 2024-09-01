@@ -3,10 +3,13 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Livewire\Pages\CashierPage;
+use App\Models\Customer;
 use App\Models\Inventory;
 use App\Models\Item;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+
+use function PHPUnit\Framework\isNull;
 
 class SalesTransaction extends Component
 {
@@ -15,7 +18,7 @@ class SalesTransaction extends Component
     public $search = '';
     public $selectedItems = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no;
 
     public $customerDetails = [];
 
@@ -252,7 +255,7 @@ class SalesTransaction extends Component
                 $this->discount_amount = $this->subtotal - $discount;
             }
 
-            $this->grandTotal = $this->subtotal - $this->discount_amount ;
+            $this->grandTotal = $this->subtotal - $this->discount_amount;
         }
     }
 
@@ -291,6 +294,18 @@ class SalesTransaction extends Component
     public function getCustomerDetails($customerDetails)
     {
         $this->customerDetails = $customerDetails;
+
+        $this->discount_type =   $this->customerDetails['customer_type'];
+
+        if (isset($this->customerDetails['firstname'])) {
+            $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+        } else {
+            $customer = Customer::find($this->customerDetails['customer_id']);
+            $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+        }
+
+
+        $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
     }
 
 
