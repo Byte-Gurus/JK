@@ -136,37 +136,37 @@
 
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_description'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
-                                    {{ $selectedItem['vat'] }}
+                                    {{ number_format($selectedItem['vat'], 2)  }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['selling_price'], 2) }}
                                 </th>
 
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['discount'] }} %
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 font-black text-center text-gray-900 text-xl whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['total_amount'], 2) }}
                                 </th>
