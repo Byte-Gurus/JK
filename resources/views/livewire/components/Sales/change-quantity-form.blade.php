@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div>
-                                        <input type="text" wire:model='adjust_quantity' placeholder="Quantity"
+                                        <input autofocus type="text" wire:model='adjust_quantity' placeholder="Quantity"
                                             required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                                     </div>

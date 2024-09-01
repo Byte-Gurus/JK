@@ -32,11 +32,9 @@
 
                                     <!-- Price on the right side -->
                                     <div class="text-[1.2em] font-bold">
-                                        @if ($item->inventoryJoin->isNotEmpty())
-                                            Php {{ number_format($item->inventoryJoin->first()->selling_price, 2) }}
-                                        @else
-                                            No price available
-                                        @endif
+
+                                        Php {{ number_format($item->inventoryJoin->selling_price, 2) }}
+
                                     </div>
                                 </li>
                             </ul>
@@ -99,6 +97,9 @@
                             {{-- //* price --}}
                             <th scope="col" class="px-4 py-3 text-center">Price(₱)</th>
 
+                            {{-- //* discount --}}
+                            <th scope="col" class="px-4 py-3 text-center">Discount(%)</th>
+
                             {{-- //* amount --}}
                             <th scope="col" class="px-4 py-3 text-center">Amount(₱)</th>
 
@@ -135,33 +136,45 @@
 
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_description'] }}
                                 </th>
+
+                                {{-- vat amount --}}
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
-                                    {{ $selectedItem['vat'] }}
+                                    {{ number_format($selectedItem['vat'] ?? 0, 2) }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['selling_price'], 2) }}
                                 </th>
 
+
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
+                                    :class="isSelected && ' bg-gray-200'">
+                                    {{ $selectedItem['discount'] }} %
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 text-xl font-black text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['total_amount'], 2) }}
+
                                 </th>
+
+
                             </tr>
                         @endforeach
 
@@ -177,64 +190,91 @@
                     <div class="flex flex-col gap-2">
                         <div class="flex flex-row items-center gap-2">
                             <div
-                                class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(111,253,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                <button wire:click="setQuantity" class="px-8 py-2 ">
-                                    Quantity
-                                </button>
+                                class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                @if (!empty($selectedItems))
+                                    <button wire:click="setQuantity" class="px-8 py-2 ">
+                                        Quantity
+                                    </button>
+                                @else
+                                    <button wire:click="setQuantity" disabled class="px-8 py-2 ">
+                                        Quantity
+                                    </button>
+                                @endif
+
                             </div>
                             <div
-                                class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button wire:click="removeItem" class="px-8 py-2 ">
                                     Remove Item
                                 </button>
                             </div>
                         </div>
                         <div
-                            class="py-4 text-center bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Cancel Transaction
                             </button>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
-                        <div
-                            class="py-4 text-center bg-[rgb(190,143,251)] hover:bg-[rgb(190,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">
-                                Wholesale</button>
-                        </div>
-                        <div
-                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
-                                Discount
-                            </button>
+
+                        <div x-on:click="$wire.displayDiscountForm()"
+                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+
+                            @if (!empty($selectedItems))
+                                <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
+                                    Discount
+                                </button>
+                            @else
+                                <button class="px-8 py-2 " disabled x-on:click="$wire.displayDiscountForm()">
+                                    Discount
+                                </button>
+                            @endif
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
                         <div class="flex flex-row gap-4">
                             <div
-                                class="py-4 text-center bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                class="py-4 text-center bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button class="px-8 py-2 ">Return</button>
                             </div>
                             <div
-                                class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(255,241,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                <button class="px-8 py-2 " x-on:click="$wire.displayPaymentForm()">
-                                    Pay</button>
+                                class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                @if (!empty($selectedItems))
+                                    <button class="px-8 py-2" x-on:click="$wire.displayPaymentForm()">
+                                        Pay
+                                    </button>
+                                @else
+                                    <button class="px-8 py-2" disabled x-on:click="$wire.displayPaymentForm()">
+                                        Pay
+                                    </button>
+                                @endif
+
                             </div>
                         </div>
                         <div
-                            class="py-4 text-center bg-[rgb(38,38,38)] text-white hover:bg-[rgb(0,0,0)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center bg-[rgb(38,38,38)] text-white hover:bg-[rgb(0,0,0)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Void Transaction
                             </button>
                         </div>
                     </div>
                     <div
-                        class="flex items-center justify-center w-full font-black transition-all duration-100 ease-in-out bg-green-400 border border-black hover:bg-green-500">
-                        <div class="text-center text-nowrap">
-                            <button>
-                                Save
-                            </button>
-                        </div>
+                        class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
+                        @if (!empty($payment))
+                            <div class="text-center text-nowrap">
+                                <button type="button" class="px-8 py-2 " wire:click="save">
+                                    Save
+                                </button>
+                            </div>
+                        @else
+                            <div class="text-center text-nowrap">
+                                <button disabled class="px-8 py-2" >
+                                    Save
+                                </button>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -245,7 +285,7 @@
             {{-- date & time section --}}
             <div class="flex flex-row items-center justify-center gap-8 p-2">
                 <div>
-                    <p>Date</p>
+                    <input type="text" wire:model.live="barcode" autofocus>
                 </div>
                 <div>
                     <p>Time</p>
@@ -277,16 +317,15 @@
             </div>
             <div class="flex flex-col gap-2 mx-6 mb-2">
                 <div class="flex flex-row items-center gap-6">
-                    <div class=" font-medium text-[1.6em]">Discount Type</div>
-                    <div>icon</div>
+                    <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
                 </div>
                 <div class="flex flex-row items-center gap-6 ">
-                    <div class=" font-medium text-[1.6em]">Customer Name</div>
-                    <div>icon</div>
+                    <div class=" font-medium text-[1.6em]">Customer Name: {{ $customer_name }}</div>
+
                 </div>
                 <div class="flex flex-row items-center gap-6 ">
-                    <div class=" font-medium text-[1.6em]">ID No.</div>
-                    <div>icon</div>
+                    <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
+
                 </div>
             </div>
             <div class="my-2">
@@ -296,16 +335,11 @@
             <div class="flex flex-col gap-2 mx-6">
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
-                        <p>Vatable Item Price</p>
+                        <p>Tax Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ {{ number_format($withVatAmount, 2) }}</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
                 </div>
-                <div class="flex flex-row justify-between">
-                    <div class=" font-medium text-[1.4em]">
-                        <p>Non-Vatable Item Price</p>
-                    </div>
-                    <div class=" font-black text-[1.4em]">₱ {{ number_format($nonVatAmount, 2) }}</div>
-                </div>
+
                 <div class="w-full my-2">
                     <div class="border border-black"></div>
                 </div>
@@ -319,13 +353,13 @@
                     <div class=" font-medium text-[1.4em]">
                         <p>Discount (%)</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">0</div>
+                    <div class=" font-black text-[1.4em]">{{ $discount_percent }} %</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
                         <p>Discount Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($discount_amount, 2) }}</div>
                 </div>
                 <div class="w-full my-2">
                     <div class="border border-black"></div>
@@ -340,7 +374,7 @@
                     <div class=" font-medium text-[1.4em]">
                         <p>Tendered Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($tendered_amount, 2) }}</div>
                 </div>
                 <div class="w-full">
                     <div class="border border-black"></div>
@@ -349,7 +383,7 @@
                     <div class=" font-black text-green-900 text-[2.2em]">
                         <p>Change</p>
                     </div>
-                    <div class=" font-black text-[2em]">₱ 0.00</div>
+                    <div class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</div>
                 </div>
             </div>
         </div>
@@ -368,5 +402,8 @@
     </div>
     <div x-show="showWholesaleForm" x-data="{ showWholesaleForm: @entangle('showWholesaleForm') }">
         @livewire('components.sales.wholesale-form')
+    </div>
+    <div x-show="showVoidTransactionPage" x-data="{ showVoidTransactionPage: @entangle('showVoidTransactionPage') }">
+        @livewire('components.sales.void-transaction-page')
     </div>
 </div>

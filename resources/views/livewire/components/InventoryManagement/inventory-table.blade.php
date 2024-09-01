@@ -279,7 +279,12 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->expiration_date ? $inventory->expiration_date->format('d-m-y') : 'null' }}
+                                @if ($inventory->itemJoin->shelf_life_type === 'Perishable')
+                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format('d-m-y') : 'null' }}
+                                @elseif($inventory->itemJoin->shelf_life_type === 'Non Perishable')
+                                    N/A
+                                @endif
+
                             </th>
 
                             {{-- //* Action --}}

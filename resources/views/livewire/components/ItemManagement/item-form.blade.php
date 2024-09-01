@@ -172,7 +172,6 @@
                                 {{-- //* third row row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-
                                     {{-- //* reorder percentage --}}
                                     <div class="mb-3">
 
@@ -206,18 +205,37 @@
 
                                     </div>
 
+                                    {{-- //* reorder point --}}
+                                    <div class="mb-3">
+
+                                        <label for="bulk_quantity"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Bulk Quantity</label>
+
+                                        <input type="number" id="bulk_quantity" wire:model="bulk_quantity"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
+                                            placeholder="Bulk Quantity" required />
+
+                                        @error('bulk_quantity')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
 
                                     {{-- //* vat type --}}
                                     <div class="mb-3">
 
-                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                        <label for="vatType"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
-                                        <select id="vatType" wire:model.live="vatType"
+                                        <select id="vatType" wire:model.live="vatType" readonly
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select vat type</option>
-                                            <option value="Vat">Vat</option>
-                                            <option value="Non vat">Non vat</option>
+                                            <option value="VaTable">VaTable</option>
+                                            <option value="Zero Rated">Zero Rated</option>
+                                            <option value="Vat Exempt">Vat Exempt</option>
+
 
                                         </select>
 
@@ -231,6 +249,25 @@
 
                                 {{-- //* third row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                    <div class="mb-3">
+
+                                        <label for="shelf_life_type"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Shelf life
+                                            type</label>
+
+                                        <select id="shelf_life_type" wire:model="shelf_life_type"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <option value="" selected>Set item shelf life</option>
+                                            <option value="Perishable">Perishable</option>
+                                            <option value="Non Perishable">Non Perishable</option>
+                                        </select>
+
+                                        @error('shelf_life_type')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
 
 
                                     {{-- //* vat amount --}}
