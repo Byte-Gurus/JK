@@ -72,7 +72,7 @@ class SalesTransaction extends Component
             return $item;
         });
 
-        $this->computeSubTotal();
+        $this->computeTransaction();
 
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
@@ -226,7 +226,7 @@ class SalesTransaction extends Component
     }
 
 
-    public function computeSubTotal()
+    public function computeTransaction()
     {
 
         $this->subtotal = 0;
