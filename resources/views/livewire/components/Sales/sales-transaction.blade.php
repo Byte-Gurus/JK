@@ -217,13 +217,9 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
+
                         <div
-                            class="py-4 text-center bg-[rgb(190,143,251)] hover:bg-[rgb(190,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">
-                                Wholesale</button>
-                        </div>
-                        <div
-                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             @if (!empty($selectedItems))
                                 <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
                                     Discount
