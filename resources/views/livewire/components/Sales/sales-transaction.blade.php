@@ -97,7 +97,7 @@
                             {{-- //* price --}}
                             <th scope="col" class="px-4 py-3 text-center">Price(₱)</th>
 
-                            {{-- //* price --}}
+                            {{-- //* discount --}}
                             <th scope="col" class="px-4 py-3 text-center">Discount(%)</th>
 
                             {{-- //* amount --}}
@@ -140,10 +140,16 @@
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_description'] }}
                                 </th>
+
+                                {{-- vat amount --}}
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
+<<<<<<< Updated upstream
                                     {{ number_format($selectedItem['vat'], 2) }}
+=======
+                                    {{ number_format($selectedItem['vat'] ?? 0, 2) }}
+>>>>>>> Stashed changes
                                 </th>
 
                                 <th scope="row"
@@ -167,6 +173,13 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-black text-center text-gray-900 text-xl whitespace-nowrap"
+                                    :class="isSelected && ' bg-gray-200'">
+                                    {{-- {{ number_format($selectedItem['selling_price'], 2) }} --}}
+                                    bini
+                                </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['total_amount'], 2) }}
                                 </th>
@@ -370,5 +383,8 @@
     </div>
     <div x-show="showWholesaleForm" x-data="{ showWholesaleForm: @entangle('showWholesaleForm') }">
         @livewire('components.sales.wholesale-form')
+    </div>
+    <div x-show="showVoidTransactionPage" x-data="{ showVoidTransactionPage: @entangle('showVoidTransactionPage') }">
+        @livewire('components.sales.void-transaction-page')
     </div>
 </div>

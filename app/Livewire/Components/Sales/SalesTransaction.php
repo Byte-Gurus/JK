@@ -324,7 +324,6 @@ class SalesTransaction extends Component
         $this->showChangeQuantityForm = $showChangeQuantityForm;
     }
 
-
     public function displaySalesTransactionHistory()
     {
         $this->dispatch('display-sales-transaction-history', showSalesTransactionHistory: true)->to(CashierPage::class);

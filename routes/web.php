@@ -3,6 +3,7 @@
 
 use App\Livewire\Components\Logout;
 use App\Livewire\Pages\CashierPage;
+use App\Livewire\Pages\CreditManagementPage;
 use App\Livewire\Pages\CustomerManagementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
@@ -10,6 +11,7 @@ use App\Livewire\Pages\InventoryManagementPage;
 use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\LoginPage;
 use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
+use App\Livewire\Pages\ReportManagement;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\TestPage;
 use App\Livewire\Pages\UserManagementPage;
@@ -49,6 +51,12 @@ Route::group(['middleware' => ['RedirectIfLoggedIn']], function () {
 
     //InventoryManagement
     Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
+
+    //CreditManagement
+    Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');
+
+    //ReportManagement
+    Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');
 
     //CashierHomepage
     Route::get('/cashier', CashierPage::class)->name('cashier.index');
