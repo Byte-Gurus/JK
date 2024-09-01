@@ -334,7 +334,9 @@ class SalesTransaction extends Component
     }
 
 
-
+    public function save() {
+        dd($this->selectedItems, $this->payment, $this->customerDetails ?? null);
+    }
 
 
 
