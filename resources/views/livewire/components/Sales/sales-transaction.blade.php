@@ -230,7 +230,7 @@
                         </div>
                         <div x-on:click="$wire.displayDiscountForm()"
                             class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-<<<<<<< Updated upstream
+
                             @if (!empty($selectedItems))
                                 <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
                                     Discount
@@ -240,12 +240,6 @@
                                     Discount
                                 </button>
                             @endif
-
-=======
-                            <button class="px-8 py-2 ">
-                                Discount
-                            </button>
->>>>>>> Stashed changes
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
@@ -284,7 +278,7 @@
                                 </button>
                             </div>
                         @else
-                            <div class="text-center text-nowrap" >
+                            <div class="text-center text-nowrap">
                                 <button>
                                     Save
                                 </button>
