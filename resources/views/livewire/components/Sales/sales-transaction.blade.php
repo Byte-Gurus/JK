@@ -145,9 +145,7 @@
                                 <th scope="row"
                                     class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
-                                    <<<<<<< Updated upstream
-                                        {{ number_format($selectedItem['vat'], 2) }}======={{ number_format($selectedItem['vat'] ?? 0, 2) }}>
-                                        >>>>>> Stashed changes
+                                    {{ number_format($selectedItem['vat'] ?? 0, 2) }}
                                 </th>
 
                                 <th scope="row"
@@ -172,15 +170,11 @@
                                 <th scope="row"
                                     class="px-4 py-4 text-xl font-black text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
-                                    {{-- {{ number_format($selectedItem['selling_price'], 2) }} --}}
-                                    bini
+                                    {{ number_format($selectedItem['total_amount'], 2) }}
+
                                 </th>
 
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap"
-                                    :class="isSelected && ' bg-gray-200'">
-                                    {{ number_format($selectedItem['total_amount'], 2) }}
-                                </th>
+
                             </tr>
                         @endforeach
 
@@ -196,7 +190,7 @@
                     <div class="flex flex-col gap-2">
                         <div class="flex flex-row items-center gap-2">
                             <div
-                                class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(111,253,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 @if (!empty($selectedItems))
                                     <button wire:click="setQuantity" class="px-8 py-2 ">
                                         Quantity
@@ -209,27 +203,23 @@
 
                             </div>
                             <div
-                                class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button wire:click="removeItem" class="px-8 py-2 ">
                                     Remove Item
                                 </button>
                             </div>
                         </div>
                         <div
-                            class="py-4 text-center bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Cancel Transaction
                             </button>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
-                        <div
-                            class="py-4 text-center bg-[rgb(190,143,251)] hover:bg-[rgb(190,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">
-                                Wholesale</button>
-                        </div>
+
                         <div x-on:click="$wire.displayDiscountForm()"
-                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
 
                             @if (!empty($selectedItems))
                                 <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
@@ -245,11 +235,11 @@
                     <div class="flex flex-col gap-2 ">
                         <div class="flex flex-row gap-4">
                             <div
-                                class="py-4 text-center bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                class="py-4 text-center bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 <button class="px-8 py-2 ">Return</button>
                             </div>
                             <div
-                                class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(255,241,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                                 @if (!empty($selectedItems))
                                     <button class="px-8 py-2" x-on:click="$wire.displayPaymentForm()">
                                         Pay
@@ -263,23 +253,23 @@
                             </div>
                         </div>
                         <div
-                            class="py-4 text-center bg-[rgb(38,38,38)] text-white hover:bg-[rgb(0,0,0)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center bg-[rgb(38,38,38)] text-white hover:bg-[rgb(0,0,0)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">
                                 Void Transaction
                             </button>
                         </div>
                     </div>
                     <div
-                        class="flex items-center justify-center w-full font-black transition-all duration-100 ease-in-out bg-green-400 border border-black hover:bg-green-500">
+                        class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                         @if (!empty($payment))
                             <div class="text-center text-nowrap">
-                                <button disabled type="button" wire:click="save">
+                                <button type="button" class="px-8 py-2 " wire:click="save">
                                     Save
                                 </button>
                             </div>
                         @else
                             <div class="text-center text-nowrap">
-                                <button>
+                                <button disabled class="px-8 py-2" >
                                     Save
                                 </button>
                             </div>
