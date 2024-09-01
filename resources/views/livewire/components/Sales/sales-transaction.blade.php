@@ -143,7 +143,7 @@
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
-                                    {{ number_format($selectedItem['vat'], 2)  }}
+                                    {{ number_format($selectedItem['vat'], 2) }}
                                 </th>
 
                                 <th scope="row"
@@ -322,13 +322,13 @@
                     <div class=" font-medium text-[1.4em]">
                         <p>Discount (%)</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">0</div>
+                    <div class=" font-black text-[1.4em]">{{ $discount_percent }} %</div>
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
                         <p>Discount Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($discount_amount, 2) }}</div>
                 </div>
                 <div class="w-full my-2">
                     <div class="border border-black"></div>

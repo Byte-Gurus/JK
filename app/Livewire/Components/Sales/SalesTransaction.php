@@ -15,9 +15,9 @@ class SalesTransaction extends Component
     public $search = '';
     public $selectedItems = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount;
 
-
+    public $customerDetails = [];
 
 
     // livewires
@@ -88,7 +88,8 @@ class SalesTransaction extends Component
         'removeRowConfirmed',
         'removeRowCancelled',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
-        'get-quantity' => 'getQuantity'
+        'get-quantity' => 'getQuantity',
+        'get-customer-details' => 'getCustomerDetails'
 
     ];
 
@@ -230,7 +231,8 @@ class SalesTransaction extends Component
 
         $this->subtotal = 0;
         $vaTableAmount = 12;
-
+        $this->discount_percent =  0;
+        $this->discount_amount = 0;
 
         foreach ($this->selectedItems as $index) {
 
@@ -242,7 +244,15 @@ class SalesTransaction extends Component
                 $this->totalVat = $this->subtotal - $netAmount;
             }
 
-            $this->grandTotal = $this->subtotal;
+            if ($this->customerDetails) {
+
+                $this->discount_percent = $this->customerDetails['discount_percentage'];
+
+                $discount = $this->subtotal / (100 + $this->customerDetails['discount_percentage']) * 100;
+                $this->discount_amount = $this->subtotal - $discount;
+            }
+
+            $this->grandTotal = $this->subtotal - $this->discount_amount ;
         }
     }
 
@@ -278,9 +288,10 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
     }
 
-
-
-
+    public function getCustomerDetails($customerDetails)
+    {
+        $this->customerDetails = $customerDetails;
+    }
 
 
 

@@ -100,12 +100,12 @@ class DiscountForm extends Component
             ];
         }
 
-        dd($this->customerDetails);
-
 
         $this->alert('success', 'Customer was saved successfully');
 
-        $this->closeModal();
+        $this->dispatch('get-customer-details', customerDetails: $this->customerDetails)->to(SalesTransaction::class);
+
+            //   $this->closeModal();
     }
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
