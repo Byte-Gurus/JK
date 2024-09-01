@@ -20,7 +20,11 @@
                         {{-- //* form title --}}
                         <h3 class="text-xl font-black text-gray-900 item ">
 
-                            Discount Form
+                            @if ($isCreate)
+                                Create Customer
+                            @else
+                                Discount Form
+                            @endif
 
                         </h3>
                     </div>
@@ -52,53 +56,17 @@
 
                             <div
                                 class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                <h1 class="font-bold">Discount Information</h1>
+                                <h1 class="font-bold">
+                                    @if ($isCreate)
+                                        Customer Information
+                                    @else
+                                        Discount Information
+                                    @endif
+                                </h1>
                             </div>
 
                             <div class="p-4">
 
-                                {{-- //* first row --}}
-                                @if (!$isCreate)
-                                    `
-                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
-                                        {{-- //* discount type --}}
-
-                                        <div class="mb-3">
-
-                                            <label for="customer_type"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Customer
-                                                Type</label>
-
-                                            <select id="customer_type" wire:model="customer_type" required
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value=""selected>Select Customer Type</option>
-                                                <option value="PWD">PWD</option>
-                                                <option value="Senior Citizen">Senior Citizen</option>
-
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    {{-- //* middlename --}}
-                                    <div class="mb-3">
-
-                                        <label for="discount_percentage"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Discount
-                                            Percentage
-                                            (%)<span class="text-red-400 ">*</span></label>
-
-                                        <input type="number" id="discount_percentage" required
-                                            wire:model="discount_percentage"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Discount Percentage" />
-
-                                        @error('discount_percentage')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                @endif
                                 @if ($isCreate)
                                     <div class="p-4">
 
@@ -199,12 +167,6 @@
 
                                             </div>
 
-
-                                        </div>
-
-                                        {{-- //* fourth row --}}
-                                        <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
                                             {{-- //* province --}}
                                             <div class="mb-3">
 
@@ -227,6 +189,12 @@
                                                 @enderror
 
                                             </div>
+                                        </div>
+
+                                        {{-- //* fourth row --}}
+                                        <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+
 
                                             {{-- //* city --}}
                                             <div class="mb-3">
@@ -255,32 +223,10 @@
                                                 </select>
 
                                                 @error('selectCity')
-                                                    <span
-                                                        class="font-medium text-red-500 error">{{ $message }}</span>
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
 
                                             </div>
-
-                                        </div>
-
-                                        {{-- //* fifth row --}}
-                                        <div class="mb-3">
-
-                                            <label for="discount_percentage"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Discount
-                                                Percentage
-                                                (%)<span class="text-red-400 ">*</span></label>
-
-                                            <input type="number" id="discount_percentage" required
-                                                wire:model="discount_percentage"
-                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                                placeholder="Discount Percentage" />
-
-                                            @error('discount_percentage')
-                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                             {{-- //* brgy --}}
                                             <div class="mb-3">
@@ -308,6 +254,10 @@
 
                                             </div>
 
+                                        </div>
+
+                                        <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
                                             {{-- //* street --}}
                                             <div class="mb-3">
 
@@ -322,8 +272,6 @@
                                                         class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             </div>
-
-
                                         </div>
 
                                         {{-- //* sixth row --}}
@@ -341,7 +289,6 @@
                                                     <option value=""selected>Select Customer Type</option>
                                                     <option value="PWD">PWD</option>
                                                     <option value="Senior Citizen">Senior Citizen</option>
-
 
                                                 </select>
 
@@ -368,25 +315,98 @@
                                                         class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                        </div>
+                                        {{-- //* fifth row --}}
+                                        <div class="mb-3">
+                                            <label for="discount_percentage"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Discount
+                                                Percentage
+                                                (%)<span class="text-red-400 ">*</span></label>
 
+                                            <input type="number" id="discount_percentage" required
+                                                wire:model="discount_percentage"
+                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Discount Percentage" />
 
+                                            @error('discount_percentage')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 @else
-                                    <div class="mb-3">
+                                    <div class="flex flex-row items-center justify-between gap-2 mb-3">
 
-                                        <label for="customer_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Name</label>
+                                        <div class="flex flex-col ">
+                                            <label for="customer_name"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Customer
+                                                Name</label>
 
-                                        <select id="customer_id" wire:model="customer_id"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Select customer</option>
-                                            @foreach ($customers as $customer)
-                                                <option value="{{ $customer->id }}">
-                                                    {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                            <div class="flex flex-row w-full gap-2">
+                                                <div>
+                                                    <select id="customer_id" wire:model="customer_id"
+                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                        <option value="" selected>Select customer</option>
+                                                        @foreach ($customers as $customer)
+                                                            <option value="{{ $customer->id }}">
+                                                                {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mt-6.5">
+                                                    <button type="button" wire:loading.remove
+                                                        wire:click="createCustomer"
+                                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                                        <div class="flex flex-row items-center gap-2">
+                                                            <p>
+                                                                +
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                        {{-- //* discount type --}}
+
+                                        <div class="mb-3">
+
+                                            <label for="customer_type"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Customer
+                                                Type</label>
+
+                                            <select id="customer_type" wire:model="customer_type" required
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value=""selected>Select Customer Type</option>
+                                                <option value="PWD">PWD</option>
+                                                <option value="Senior Citizen">Senior Citizen</option>
+
+
+                                            </select>
+                                        </div>
+
+
+                                        {{-- //* middlename --}}
+                                        <div class="mb-3">
+
+                                            <label for="discount_percentage"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Discount
+                                                Percentage
+                                                (%)<span class="text-red-400 ">*</span></label>
+
+                                            <input type="number" id="discount_percentage" required
+                                                wire:model="discount_percentage"
+                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Discount Percentage" />
+
+                                            @error('discount_percentage')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -409,16 +429,39 @@
                                 {{-- //* lastname --}}
 
 
-                                <div class="flex flex-row justify-end gap-2">
-                                    <div>
-
-                                        {{-- //* clear all button for create --}}
-                                        <button type="reset"
-                                            class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
-                                            All</button>
+                                @if ($isCreate)
+                                    <div class="flex flex-row justify-between mx-4">
+                                        <div>
+                                            <button wire:click='returnToDiscountForm()'
+                                                class="text-[rgb(0,0,0)] bg-[rgb(218,218,218)] hover:bg-[rgb(165,165,165)] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Return</button>
+                                        </div>
+                                        <div class="flex flex-row gap-2 ">
+                                            <div>
+                                                <button type="reset"
+                                                    class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
+                                                    All</button>
+                                            </div>
+                                            <div>
+                                                <button type="button" wire:loading.remove wire:click="create"
+                                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                                    <div class="flex flex-row items-center gap-2">
+                                                        <p>
+                                                            Create
+                                                        </p>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
+                                @else
+                                    <div class="flex justify-end w-full">
+                                        <div>
 
-                                    <div>
+                                            {{-- //* clear all button for create --}}
+                                            <button type="reset"
+                                                class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
+                                                All</button>
+                                        </div>
 
                                         {{-- //* submit button for create --}}
                                         <button type="submit" wire:loading.remove
@@ -426,25 +469,6 @@
                                             <div class="flex flex-row items-center gap-2">
                                                 <p>
                                                     Apply
-                                                </p>
-                                            </div>
-                                        </button>
-
-                                        @if ($isCreate)
-                                            <button type="button" wire:loading.remove wire:click="create"
-                                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                                <div class="flex flex-row items-center gap-2">
-                                                    <p>
-                                                        Create
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        @endif
-                                        <button type="button" wire:loading.remove wire:click="createCustomer"
-                                            class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                            <div class="flex flex-row items-center gap-2">
-                                                <p>
-                                                    New Customer
                                                 </p>
                                             </div>
                                         </button>
@@ -467,8 +491,7 @@
 
                                         </div>
                                     </div>
-
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -136,43 +136,41 @@
 
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_description'] }}
                                 </th>
 
                                 {{-- vat amount --}}
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
-<<<<<<< Updated upstream
-                                    {{ number_format($selectedItem['vat'], 2) }}
-=======
-                                    {{ number_format($selectedItem['vat'] ?? 0, 2) }}
->>>>>>> Stashed changes
+                                    <<<<<<< Updated upstream
+                                        {{ number_format($selectedItem['vat'], 2) }}======={{ number_format($selectedItem['vat'] ?? 0, 2) }}>
+                                        >>>>>> Stashed changes
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['selling_price'], 2) }}
                                 </th>
 
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-lg whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['discount'] }} %
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-black text-center text-gray-900 text-xl whitespace-nowrap"
+                                    class="px-4 py-4 text-xl font-black text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{-- {{ number_format($selectedItem['selling_price'], 2) }} --}}
                                     bini
@@ -230,8 +228,9 @@
                             <button class="px-8 py-2 " x-on:click="$wire.displayWholesaleForm()">
                                 Wholesale</button>
                         </div>
-                        <div
+                        <div x-on:click="$wire.displayDiscountForm()"
                             class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+<<<<<<< Updated upstream
                             @if (!empty($selectedItems))
                                 <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
                                     Discount
@@ -242,6 +241,11 @@
                                 </button>
                             @endif
 
+=======
+                            <button class="px-8 py-2 ">
+                                Discount
+                            </button>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">

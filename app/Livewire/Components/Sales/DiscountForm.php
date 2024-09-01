@@ -157,6 +157,11 @@ class DiscountForm extends Component
     public function createCustomer()
     {
         $this->resetForm();
-        $this->isCreate = true;
+        $this->isCreate = !$this->isCreate;
+    }
+
+    public function returnToDiscountForm()
+    {
+        $this->isCreate = !$this->isCreate;
     }
 }
