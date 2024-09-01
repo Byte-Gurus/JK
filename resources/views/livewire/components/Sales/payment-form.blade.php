@@ -2,7 +2,7 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="adjust">
+        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="pay">
             @csrf
 
             <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
@@ -47,9 +47,9 @@
                             </div>
                             <div class="italic font-thin text-white">
                                 @if ($payWithCash)
-                                Payment Method: <strong>Cash</strong>
+                                    Payment Method: <strong>Cash</strong>
                                 @else
-                                Payment Method: <strong>GCash</strong>
+                                    Payment Method: <strong>GCash</strong>
                                 @endif
                             </div>
                         </div>
@@ -70,17 +70,19 @@
 
                                             <div>
                                                 <input type="number" wire:model='amount' placeholder="Amount" required
-                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
+
+                                                @error('amount')
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
 
-                                        {{-- @error('item_quantity')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror --}}
                                         @if (!$payWithCash)
                                             <div class="flex flex-col transition-all duration-100 ease-in-out">
                                                 <div>
-                                                    <label for="reference_no" class="text-[1.2em] text-gray-900">Reference
+                                                    <label for="reference_no"
+                                                        class="text-[1.2em] text-gray-900">Reference
                                                         No.</label>
                                                 </div>
 
@@ -88,22 +90,25 @@
                                                     <input type="number" wire:model='reference_no'
                                                         placeholder="Reference No" required
                                                         class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+
+                                                    @error('reference_no')
+                                                        <span
+                                                            class="font-medium text-red-500 error">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         @endif
 
-                                        {{-- @error('discount_percentage')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror --}}
 
                                     </div>
                                 </div>
-                                <div class="flex flex-col gap-4 w-full shadow-md shadow-[rgb(255,147,147)] items-center justify-center p-4 m-2 leading-none border border-black rounded-lg bg-[rgb(255,255,255)]">
+                                <div
+                                    class="flex flex-col gap-4 w-full shadow-md shadow-[rgb(255,147,147)] items-center justify-center p-4 m-2 leading-none border border-black rounded-lg bg-[rgb(255,255,255)]">
                                     <div>
                                         <p class="text-[1.6em] font-thin text-center">To Pay</p>
                                     </div>
                                     <div>
-                                        <p class="text-[2em] font-black">1000000</p>
+                                        <p class="text-[2em] font-black">{{ number_format($grand_total, 2) }}</p>
                                     </div>
                                 </div>
                             </div>

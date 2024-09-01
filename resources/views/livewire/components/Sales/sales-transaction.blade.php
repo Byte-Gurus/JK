@@ -199,9 +199,16 @@
                         <div class="flex flex-row items-center gap-2">
                             <div
                                 class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(111,253,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                <button wire:click="setQuantity" class="px-8 py-2 ">
-                                    Quantity
-                                </button>
+                                @if (!empty($selectedItems))
+                                    <button wire:click="setQuantity" class="px-8 py-2 ">
+                                        Quantity
+                                    </button>
+                                @else
+                                    <button wire:click="setQuantity" disabled class="px-8 py-2 ">
+                                        Quantity
+                                    </button>
+                                @endif
+
                             </div>
                             <div
                                 class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -225,9 +232,16 @@
                         </div>
                         <div
                             class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
-                                Discount
-                            </button>
+                            @if (!empty($selectedItems))
+                                <button class="px-8 py-2 " x-on:click="$wire.displayDiscountForm()">
+                                    Discount
+                                </button>
+                            @else
+                                <button class="px-8 py-2 " disabled x-on:click="$wire.displayDiscountForm()">
+                                    Discount
+                                </button>
+                            @endif
+
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
@@ -238,8 +252,16 @@
                             </div>
                             <div
                                 class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(255,241,111)] border border-black hover:shadow-2xl hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                <button class="px-8 py-2 " x-on:click="$wire.displayPaymentForm()">
-                                    Pay</button>
+                                @if (!empty($selectedItems))
+                                    <button class="px-8 py-2" x-on:click="$wire.displayPaymentForm()">
+                                        Pay
+                                    </button>
+                                @else
+                                    <button class="px-8 py-2" disabled x-on:click="$wire.displayPaymentForm()">
+                                        Pay
+                                    </button>
+                                @endif
+
                             </div>
                         </div>
                         <div
@@ -251,11 +273,20 @@
                     </div>
                     <div
                         class="flex items-center justify-center w-full font-black transition-all duration-100 ease-in-out bg-green-400 border border-black hover:bg-green-500">
-                        <div class="text-center text-nowrap">
-                            <button>
-                                Save
-                            </button>
-                        </div>
+                        @if (!empty($payment))
+                            <div class="text-center text-nowrap">
+                                <button disabled type="button" wire:click="save">
+                                    Save
+                                </button>
+                            </div>
+                        @else
+                            <div class="text-center text-nowrap" >
+                                <button>
+                                    Save
+                                </button>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -266,7 +297,7 @@
             {{-- date & time section --}}
             <div class="flex flex-row items-center justify-center gap-8 p-2">
                 <div>
-                    <p>Date</p>
+                    <input type="text" wire:model.live="barcode" autofocus>
                 </div>
                 <div>
                     <p>Time</p>
@@ -355,7 +386,7 @@
                     <div class=" font-medium text-[1.4em]">
                         <p>Tendered Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ 0.00</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($tendered_amount, 2) }}</div>
                 </div>
                 <div class="w-full">
                     <div class="border border-black"></div>
@@ -364,7 +395,7 @@
                     <div class=" font-black text-green-900 text-[2.2em]">
                         <p>Change</p>
                     </div>
-                    <div class=" font-black text-[2em]">₱ 0.00</div>
+                    <div class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</div>
                 </div>
             </div>
         </div>
