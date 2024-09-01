@@ -99,71 +99,80 @@ class SalesTransaction extends Component
 
     ];
 
-    public function selectItem($item_id)
+    public function selectItem($item_id = null)
     {
         $itemExists = false;
         // Retrieve the item to check its shelf_life_type
-        $itemData = Item::find($item_id);
-
-        // Build the query for inventory
-        $itemQuery = Inventory::with('itemJoin')
-            ->where('item_id', $item_id)
-            ->where('status', 'Available')
-            ->whereHas('itemJoin', function ($query) {
-                $query->where('status_id', 1);
-            });
-
-        // Apply ordering if the item is perishable
-        if ($itemData && $itemData->shelf_life_type === 'Perishable') {
-            $itemQuery->orderBy('expiration_date', 'asc');
+        if ($item_id) {
+            $itemData = Item::find($item_id);
+        } else {
+            $itemData = Item::where('barcode', $this->barcode)->first();
         }
 
-        // Get the first item from the query
-        $item = $itemQuery->first();
+        if ($itemData) {
 
+            // Build the query for inventory
+            $itemQuery = Inventory::with('itemJoin')
+                ->where('item_id', $item_id ?? $itemData->id)
+                ->where('status', 'Available')
+                ->whereHas('itemJoin', function ($query) {
+                    $query->where('status_id', 1);
+                });
 
-
-        foreach ($this->selectedItems as $index => $selectedItem) {
-            if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
-
-                $itemExists = true;
-                // Update the quantity if the item already exists
-                $this->selectedItems[$index]['quantity'] += 1;
-                $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
-
-
-                if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
-                    $this->selectedItems[$index]['discount'] = 10;
-
-                    $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
-                    $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
-                }
-
-
-
-                break;
+            // Apply ordering if the item is perishable
+            if ($itemData && $itemData->shelf_life_type === 'Perishable') {
+                $itemQuery->orderBy('expiration_date', 'asc');
             }
+
+            // Get the first item from the query
+            $item = $itemQuery->first();
+
+
+
+            foreach ($this->selectedItems as $index => $selectedItem) {
+                if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
+
+                    $itemExists = true;
+                    // Update the quantity if the item already exists
+                    $this->selectedItems[$index]['quantity'] += 1;
+                    $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
+
+
+                    if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
+                        $this->selectedItems[$index]['discount'] = 10;
+
+                        $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
+                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
+                    }
+
+
+
+                    break;
+                }
+            }
+
+
+            // If the item does not exist, add it to the array
+            if (!$itemExists) {
+                $this->selectedItems[] = [
+                    'item_name' => $item->itemJoin->item_name,
+                    'item_description' => $item->itemJoin->item_description,
+                    'vat_type' => $item->itemJoin->vat_type,
+                    'vat' => $item->vat_amount,
+                    'quantity' => 1,
+                    'barcode' => $item->itemJoin->barcode,
+                    'sku_code' => $item->sku_code,
+                    'selling_price' => $item->selling_price,
+                    'total_amount' => $item->selling_price * 1,
+                    'current_stock_quantity' => $item->current_stock_quantity,
+                    'bulk_quantity' => $item->itemJoin->bulk_quantity,
+                    'discount' => 0,
+                ];
+            }
+        } else {
+            $this->alert('warning', 'Please Wait');
         }
-
-
-        // If the item does not exist, add it to the array
-        if (!$itemExists) {
-            $this->selectedItems[] = [
-                'item_name' => $item->itemJoin->item_name,
-                'item_description' => $item->itemJoin->item_description,
-                'vat_type' => $item->itemJoin->vat_type,
-                'vat' => $item->vat_amount,
-                'quantity' => 1,
-                'barcode' => $item->itemJoin->barcode,
-                'sku_code' => $item->sku_code,
-                'selling_price' => $item->selling_price,
-                'total_amount' => $item->selling_price * 1,
-                'current_stock_quantity' => $item->current_stock_quantity,
-                'bulk_quantity' => $item->itemJoin->bulk_quantity,
-                'discount' => 0,
-            ];
-        }
-
+        $this->barcode = '';
         $this->search = '';
     }
 
@@ -263,66 +272,7 @@ class SalesTransaction extends Component
 
     public function updatedBarcode()
     {
-        $itemExists = false;
-
-        $itemData = Item::where('barcode', $this->barcode)->first();
-        if ($itemData) {
-
-            $itemQuery = Inventory::with('itemJoin')
-                ->where('item_id', $itemData->id)
-                ->where('status', 'Available')
-                ->whereHas('itemJoin', function ($query) {
-                    $query->where('status_id', 1);
-                });
-
-            if ($itemData && $itemData->shelf_life_type === 'Perishable') {
-                $itemQuery->orderBy('expiration_date', 'asc');
-            }
-
-            $item = $itemQuery->first();
-
-            foreach ($this->selectedItems as $index => $selectedItem) {
-                if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
-
-                    $itemExists = true;
-                    // Update the quantity if the item already exists
-                    $this->selectedItems[$index]['quantity'] += 1;
-                    $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
-
-
-                    if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
-                        $this->selectedItems[$index]['discount'] = 10;
-
-                        $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
-                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
-                    }
-
-
-
-                    break;
-                }
-            }
-            // If the item does not exist, add it to the array
-            if (!$itemExists) {
-                $this->selectedItems[] = [
-                    'item_name' => $item->itemJoin->item_name,
-                    'item_description' => $item->itemJoin->item_description,
-                    'vat_type' => $item->itemJoin->vat_type,
-                    'vat' => $item->vat_amount,
-                    'quantity' => 1,
-                    'barcode' => $item->itemJoin->barcode,
-                    'sku_code' => $item->sku_code,
-                    'selling_price' => $item->selling_price,
-                    'total_amount' => $item->selling_price * 1,
-                    'current_stock_quantity' => $item->current_stock_quantity,
-                    'bulk_quantity' => $item->itemJoin->bulk_quantity,
-                    'discount' => 0,
-                ];
-            }
-        } else {
-            $this->alert('warning', 'Please Wait');
-        }
-        $this->barcode = '';
+        $this->selectItem();
     }
 
 
