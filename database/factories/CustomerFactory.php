@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Type\Integer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Customer>
@@ -27,7 +28,7 @@ class CustomerFactory extends Factory
             'birthdate' => $this->faker->dateTimeBetween('-60 years', '-18 years')->format('d-m-Y'),
             'contact_number' => fake()->unique()->numerify('###########'),
             'customer_type' => fake()->randomElement(['Walk in', 'PWD', 'Senior Citizen', 'Credit']),
-            'customer_discount_no' => Str::random(10),
+            'customer_discount_no' => rand(1000000000, 9999999999),
             'id_picture' => $this->faker->imageUrl(),
             'address_id' => $address->id,
         ];

@@ -105,15 +105,25 @@ class DeliveryTable extends Component
 
     public function updateConfirmed($data)
     {
-
         $updatedAttributes = $data['inputAttributes'];
-
         $deliveryId = $updatedAttributes['deliveryId'];
 
+        // Find the current delivery record
         $delivery = Delivery::find($deliveryId);
 
+
+
+        // Check if the current delivery has associated backorders
         if ($delivery->backorderJoin->isNotEmpty()) {
-            // Loop through each backorder associated with the delivery where status is 'Repurchased'
+
+            // Decode the old purchase order data from the delivery record
+            $oldPoData = json_decode($delivery->old_po_id, true);
+            $old_purchase = Purchase::find($oldPoData['id']);
+
+
+            // dd($old_purchase->backorderJoin);
+
+            // Loop through each backorder associated with the current delivery
             foreach ($delivery->backorderJoin as $backorderDetail) {
                 if ($backorderDetail->status === 'Repurchased') {
                     // Update the status of each backorder to "Delivered"
@@ -121,19 +131,31 @@ class DeliveryTable extends Component
                 }
             }
 
-            // Update the delivery details after updating backorders
+
+            $repurchasedCount = $old_purchase->backorderJoin->where('status', 'Repurchased')->count();
+
+            // If all backorders are delivered, update the old delivery status to "Complete Backorder"
+            if ($repurchasedCount == 0) {
+                // Get the old delivery record associated with the old purchase order
+                $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
+                $old_delivery->update(['status' => 'Backorder complete']);
+            }
+
+            // Update the current delivery details
             $delivery->date_delivered = $updatedAttributes['date'];
             $delivery->status = "Delivered";
             $delivery->save();
 
             $this->alert('success', 'Delivery date and applicable backorders updated successfully');
+            $this->resetPage();
         } else {
-            // If there are no backorders, only update the delivery details
+            // If there are no backorders, only update the current delivery details
             $delivery->date_delivered = $updatedAttributes['date'];
             $delivery->status = "Delivered";
             $delivery->save();
 
             $this->alert('success', 'Delivery date changed successfully');
+            $this->resetPage();
         }
 
         $this->resetPage();

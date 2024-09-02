@@ -8,15 +8,10 @@ use Livewire\Component;
 class InventoryManagementPage extends Component
 {
     public $showModal = false;
-
-    public $showStockAdjustModal = false;
-
-    public $showInventoryHistory = false;
-
     public $showInventoryTable = true;
-
+    public $showStockAdjustModal = false;
+    public $showInventoryHistory = false;
     public $sidebarStatus;
-
     public $showStockCard = false;
     public function render()
     {
@@ -41,6 +36,14 @@ class InventoryManagementPage extends Component
         $this->dispatch('change-method', isCreate: true)->to(InventoryForm::class);
     }
 
+    public function returnToInventoryTable()
+    {
+        $this->showInventoryTable = true;
+        $this->showInventoryHistory = false;
+        $this->showStockCard = false;
+        $this->showStockAdjustModal = false;
+    }
+
     public function displayInventoryHistory()
     {
         $this->showInventoryTable = false;
@@ -57,12 +60,4 @@ class InventoryManagementPage extends Component
         $this->showInventoryTable = false;
         $this->showStockCard = $showStockCard;
     }
-
-    public function returnToInventoryTable()
-    {
-        $this->showInventoryTable = true;
-        $this->showInventoryHistory = false;
-    }
-
-
 }
