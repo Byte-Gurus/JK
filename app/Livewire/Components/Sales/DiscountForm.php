@@ -21,7 +21,7 @@ class DiscountForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $customer_id, $customer_type, $customer_discount_no, $discount_percentage = 5;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $selectCustomer, $customer_type, $customer_discount_no, $customer_id, $discount_percentage = 5;
     public $customerDetails = [];
 
     public function render()
@@ -39,6 +39,7 @@ class DiscountForm extends Component
     protected $listeners = [
 
         'createConfirmed',
+        'removeDiscountConfirmed',
     ];
 
     public function updatedSelectProvince($province_code) //@params province code for city query
@@ -58,12 +59,18 @@ class DiscountForm extends Component
 
     }
 
+    public function updatedSelectCustomer($customer_id)
+    {
+        $this->customer_id = $customer_id;
+        $this->populateForm();
+    }
+
     public function create() //* create process
     {
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to apply the discount?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -105,17 +112,42 @@ class DiscountForm extends Component
 
         $this->dispatch('get-customer-details', customerDetails: $this->customerDetails)->to(SalesTransaction::class);
 
-            //   $this->closeModal();
+        //   $this->closeModal();
+    }
+    public function removeDiscount()
+    {
+
+        $this->confirm('Do you want to remove this discount?', [
+            'onConfirmed' => 'removeDiscountConfirmed', //* call the createconfirmed method
+        ]);
     }
 
+    public function removeDiscountConfirmed()
+    {
+        $this->dispatch('get-customer-details', customerDetails: null)->to(SalesTransaction::class);
+    }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
         $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customer_type', 'customer_discount_no', 'discount_percentage']);
     }
     public function resetFormWhenClosed()
     {
-        $this->resetForm();
+        // $this->resetForm();
         $this->resetValidation();
+    }
+
+    private function populateForm() //*lagyan ng laman ang mga input
+    {
+
+        $customer_details = Customer::find($this->customer_id); //? kunin lahat ng data ng may ari ng item_id
+
+        //* ipasa ang laman ng model sa inputs
+        //* fill() method [key => value] means [paglalagyan => ilalagay]
+        $this->fill([
+            'customer_type' => $customer_details->customer_type,
+            'customer_discount_no' => $customer_details->customer_discount_no,
+
+        ]);
     }
 
     protected function validateForm()

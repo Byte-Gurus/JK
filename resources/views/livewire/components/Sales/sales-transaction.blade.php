@@ -13,33 +13,33 @@
                     </div>
 
                     <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
-                        class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                        class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                         placeholder="Search by Item Name or Barcode" required="">
                 </div>
 
                 @if (!empty($search))
-                    <div class="absolute w-1/3 overflow-y-scroll bg-[rgb(248,248,248)]">
+                    <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
                         @foreach ($items as $item)
                             <ul wire:click="selectItem({{ $item->id }})"
                                 class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
                                 <li class="flex items-start justify-between">
                                     <!-- Item details on the left side -->
-                                    <div class="flex flex-col items-start">
+                                    <div class="flex flex-col items-start leading-1">
                                         <div class="text-[1.2em] font-bold">{{ $item->item_name }}</div>
                                         <div class="text-[0.8em]">{{ $item->item_description }}</div>
                                         <div class="text-[1em]">{{ $item->barcode }}</div>
                                     </div>
 
                                     <!-- Price on the right side -->
-                                    <div class="text-[1.2em] font-bold">
+                                    <div class="flex flex-row items-center self-center justify-between gap-2 ">
 
-                                        Php {{ number_format($item->inventoryJoin->selling_price, 2) }}
-
+                                        <p class="text-[1em] font-medium italic">PHP</p>
+                                        <p class="text-[1.5em] font-bold ">
+                                            {{ number_format($item->inventoryJoin->selling_price, 2) }}</p>
                                     </div>
                                 </li>
                             </ul>
                         @endforeach
-
                     </div>
                 @endif
             </div>
@@ -88,9 +88,6 @@
                             {{-- //* item descrition --}}
                             <th scope="col" class="px-4 py-3 text-center">Description</th>
 
-                            {{-- //* vat --}}
-                            <th scope="col" class="px-4 py-3 text-center">VAT(₱)</th>
-
                             {{-- //* quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
@@ -98,10 +95,10 @@
                             <th scope="col" class="px-4 py-3 text-center">Price(₱)</th>
 
                             {{-- //* discount --}}
-                            <th scope="col" class="px-4 py-3 text-center">Discount(%)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Wholesale(%)</th>
 
                             {{-- //* amount --}}
-                            <th scope="col" class="px-4 py-3 text-center">Amount(₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Subtotal(₱)</th>
 
                         </tr>
                     </thead>
@@ -155,7 +152,7 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-black text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ number_format($selectedItem['selling_price'], 2) }}
                                 </th>
@@ -168,10 +165,16 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 text-xl font-black text-center text-gray-900 whitespace-nowrap"
+                                    class="flex flex-col px-4 py-4 text-xl font-black text-center text-gray-900"
                                     :class="isSelected && ' bg-gray-200'">
-                                    {{ number_format($selectedItem['total_amount'], 2) }}
-
+                                    <div class="flex flex-col items-center justify-center">
+                                        <div class="text-xl font-black">
+                                            {{ number_format($selectedItem['total_amount'], 2) }}</div>
+                                        <div>
+                                            <div class="text-sm text-left italic font-medium text-[rgb(122,122,122)]">
+                                                {{ $selectedItem['barcode'] }}</div>
+                                        </div>
+                                    </div>
                                 </th>
                             </tr>
                         @endforeach
@@ -216,7 +219,6 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
-
                         <div
                             class="py-4  px-8 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             @if (!empty($selectedItems))
@@ -233,24 +235,33 @@
                         </div>
                         <div
                             class="py-4 px-8 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button wire:click="removeItem" class="px-8 py-2 ">
-                                Remove Item
-                            </button>
+                            @if (!empty($selectedItems))
+                                <button wire:click="removeItem"
+                                    x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')" class="px-8 py-2 ">
+                                    Remove Item
+                                </button>
+                            @else
+                                <button disabled wire:click="removeItem"
+                                    x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')" class="px-8 py-2 ">
+                                    Remove Item
+                                </button>
+                            @endif
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
                         <div
                             class="py-4 px-8 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+
                             @if (!empty($selectedItems))
-                                <button wire:click="setQuantity" class="px-8 py-2 ">
+                                <button wire:click="setQuantity" id="setQuantity"
+                                    x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')" class="px-8 py-2 ">
                                     Quantity
                                 </button>
                             @else
-                                <button wire:click="setQuantity" disabled class="px-8 py-2 ">
+                                <button disabled class="px-8 py-2 ">
                                     Quantity
                                 </button>
                             @endif
-
                         </div>
                         <div
                             class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -294,7 +305,7 @@
             {{-- date & time section --}}
             <div class="flex flex-row items-center justify-center gap-8 p-2">
                 <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
-                    <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;"
+                    <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
                         x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
                 </div>
                 <div>

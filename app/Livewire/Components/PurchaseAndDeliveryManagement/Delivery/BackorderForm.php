@@ -85,11 +85,14 @@ class BackorderForm extends Component
             'user_id' => Auth::id(),
         ]);
 
+        $old_po_id = Purchase::where('po_number', $this->po_number)->first();
+
         $delivery = Delivery::create([
             'status' => "In Progress",
             'date_delivered' => "N/A",
-            'purchase_id' => $purchase_order->id
-            
+            'purchase_id' => $purchase_order->id,
+            'old_po_id' => $old_po_id,
+
         ]);
 
 

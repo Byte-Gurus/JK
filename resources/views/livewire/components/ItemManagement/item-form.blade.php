@@ -198,9 +198,8 @@
                                         <select id="vatType" wire:model.live="vatType" readonly
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select vat type</option>
-                                            <option value="VaTable">VaTable</option>
-                                            <option value="Zero Rated">Zero Rated</option>
-                                            <option value="Vat Exempt">Vat Exempt</option>
+                                            <option value="Vat">Vat</option>
+                                            <option value="Non Vatable">Non Vatable</option>
 
 
                                         </select>

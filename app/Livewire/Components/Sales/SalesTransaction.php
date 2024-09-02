@@ -94,6 +94,7 @@ class SalesTransaction extends Component
         'removeRowCancelled',
         'cancelConfirmed',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
+        'display-discount-form' => 'displayDiscountForm',
         'get-quantity' => 'getQuantity',
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments'
@@ -247,7 +248,7 @@ class SalesTransaction extends Component
 
     public function computeTransaction()
     {
-
+        $netAmount = 0;
         $this->subtotal = 0;
         $vaTableAmount = 12;
 
@@ -325,19 +326,25 @@ class SalesTransaction extends Component
 
     public function getCustomerDetails($customerDetails)
     {
-        $this->customerDetails = $customerDetails;
+        if (!is_null($customerDetails)) {
+            $this->customerDetails = $customerDetails;
 
-        $this->discount_type =   $this->customerDetails['customer_type'];
+            $this->discount_type =   $this->customerDetails['customer_type'];
 
-        if (isset($this->customerDetails['firstname'])) {
-            $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+            if (isset($this->customerDetails['firstname'])) {
+                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+            } else {
+                $customer = Customer::find($this->customerDetails['customer_id']);
+                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+            }
+
+
+            $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
         } else {
-            $customer = Customer::find($this->customerDetails['customer_id']);
-            $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+            $this->customerDetails = null;
+
+            $this->reset('customer_name', 'customer_discount_no', 'discount_type');
         }
-
-
-        $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
     }
 
     public function getCustomerPayments($Payment)
@@ -375,7 +382,7 @@ class SalesTransaction extends Component
 
     public function displayDiscountForm()
     {
-        $this->showDiscountForm = true;
+        $this->showDiscountForm = !$this->showDiscountForm;
     }
 
     public function displayWholesaleForm()
