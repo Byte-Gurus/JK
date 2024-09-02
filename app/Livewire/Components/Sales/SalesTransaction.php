@@ -19,7 +19,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount = 0;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount = 0, $original_total;
 
     public $customerDetails = [];
     public $barcode;
@@ -145,6 +145,8 @@ class SalesTransaction extends Component
 
                         $this->wholesale_discount = 10;
 
+                        $this->selectedItems[$index]['original_total'] = $this->selectedItems[$index]['total_amount'];
+
                         $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
                         $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
                     }
@@ -171,6 +173,7 @@ class SalesTransaction extends Component
                     'current_stock_quantity' => $item->current_stock_quantity,
                     'bulk_quantity' => $item->itemJoin->bulk_quantity,
                     'discount' => 0,
+                    'original_total' => 0,
                 ];
             }
         } else {
@@ -238,6 +241,8 @@ class SalesTransaction extends Component
 
             $this->wholesale_discount = 10;
 
+            $this->selectedItems[$this->selectedIndex]['original_total'] = $this->selectedItems[$this->selectedIndex]['total_amount'];
+
             $discounted_amount = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
             $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $discounted_amount;
         }
@@ -273,6 +278,30 @@ class SalesTransaction extends Component
 
             $this->grandTotal = $this->subtotal - $this->discount_amount;
             $this->totalVat = $this->grandTotal - $netAmount;
+        }
+    }
+
+    public function getCustomerDetails($customerDetails)
+    {
+        if (!is_null($customerDetails)) {
+            $this->customerDetails = $customerDetails;
+
+            $this->discount_type =   $this->customerDetails['customer_type'];
+
+            if (isset($this->customerDetails['firstname'])) {
+                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+            } else {
+                $customer = Customer::find($this->customerDetails['customer_id']);
+                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+            }
+
+            $this->alert('success', 'Discount was applied successfully');
+            $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
+        } else {
+            $this->customerDetails = null;
+
+            $this->reset('customer_name', 'customer_discount_no', 'discount_type');
+            $this->alert('success', 'Discount was removed successfully');
         }
     }
 
@@ -324,28 +353,6 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
     }
 
-    public function getCustomerDetails($customerDetails)
-    {
-        if (!is_null($customerDetails)) {
-            $this->customerDetails = $customerDetails;
-
-            $this->discount_type =   $this->customerDetails['customer_type'];
-
-            if (isset($this->customerDetails['firstname'])) {
-                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
-            } else {
-                $customer = Customer::find($this->customerDetails['customer_id']);
-                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
-            }
-
-
-            $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
-        } else {
-            $this->customerDetails = null;
-
-            $this->reset('customer_name', 'customer_discount_no', 'discount_type');
-        }
-    }
 
     public function getCustomerPayments($Payment)
     {
