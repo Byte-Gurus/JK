@@ -19,7 +19,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount = 0;
 
     public $customerDetails = [];
     public $barcode;
@@ -92,6 +92,7 @@ class SalesTransaction extends Component
     protected $listeners = [
         'removeRowConfirmed',
         'removeRowCancelled',
+        'cancelConfirmed',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
         'get-quantity' => 'getQuantity',
         'get-customer-details' => 'getCustomerDetails',
@@ -140,6 +141,8 @@ class SalesTransaction extends Component
 
                     if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
                         $this->selectedItems[$index]['discount'] = 10;
+
+                        $this->wholesale_discount = 10;
 
                         $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
                         $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
@@ -232,6 +235,8 @@ class SalesTransaction extends Component
         if ($this->selectedItems[$this->selectedIndex]['quantity'] >= $this->selectedItems[$this->selectedIndex]['bulk_quantity']) {
             $this->selectedItems[$this->selectedIndex]['discount'] = 10;
 
+            $this->wholesale_discount = 10;
+
             $discounted_amount = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
             $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $discounted_amount;
         }
@@ -245,6 +250,7 @@ class SalesTransaction extends Component
 
         $this->subtotal = 0;
         $vaTableAmount = 12;
+
         $this->discount_percent =  0;
         $this->discount_amount = 0;
 
@@ -253,20 +259,19 @@ class SalesTransaction extends Component
             $this->subtotal += $index['total_amount'];
 
             if ($index['vat_type'] === 'VaTable') {
-                $netAmount =   $this->subtotal / (100 + $vaTableAmount) * 100;
-
-                $this->totalVat = $this->subtotal - $netAmount;
+                $netAmount =   $this->grandTotal / (100 + $vaTableAmount) * 100;
             }
 
             if ($this->customerDetails) {
 
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
-                $discount = $this->subtotal / (100 + $this->customerDetails['discount_percentage']) * 100;
-                $this->discount_amount = $this->subtotal - $discount;
+                $discount = $this->subtotal * ($this->customerDetails['discount_percentage'] / 100);
+                $this->discount_amount =  $discount;
             }
 
             $this->grandTotal = $this->subtotal - $this->discount_amount;
+            $this->totalVat = $this->grandTotal - $netAmount;
         }
     }
 
@@ -275,8 +280,18 @@ class SalesTransaction extends Component
         $this->selectItem();
     }
 
+    public function cancel()
+    {
+        $this->confirm('Do you want to cancel this transaction?', [
+            'onConfirmed' => 'cancelConfirmed', //* call the confmired method
 
+        ]);
+    }
 
+    public function cancelConfirmed()
+    {
+        return redirect(request()->header('Referer'));
+    }
 
 
 
@@ -334,7 +349,8 @@ class SalesTransaction extends Component
     }
 
 
-    public function save() {
+    public function save()
+    {
         dd($this->selectedItems, $this->payment, $this->customerDetails ?? null);
     }
 
