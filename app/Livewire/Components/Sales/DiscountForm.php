@@ -112,10 +112,6 @@ class DiscountForm extends Component
 
         $this->dispatch('get-customer-details', customerDetails: $this->customerDetails)->to(SalesTransaction::class);
 
-<<<<<<< HEAD
-        $this->dispatch('display-discount-form')->to(SalesTransaction::class);
-
-=======
         //   $this->closeModal();
     }
     public function removeDiscount()
@@ -124,7 +120,6 @@ class DiscountForm extends Component
         $this->confirm('Do you want to remove this discount?', [
             'onConfirmed' => 'removeDiscountConfirmed', //* call the createconfirmed method
         ]);
->>>>>>> main
     }
 
     public function removeDiscountConfirmed()
