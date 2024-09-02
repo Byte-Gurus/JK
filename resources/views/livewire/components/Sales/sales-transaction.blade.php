@@ -138,13 +138,6 @@
                                     {{ $selectedItem['item_description'] }}
                                 </th>
 
-                                {{-- vat amount --}}
-                                <th scope="row"
-                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
-                                    :class="isSelected && ' bg-gray-200'">
-                                    {{ number_format($selectedItem['vat'] ?? 0, 2) }}
-                                </th>
-
                                 <th scope="row"
                                     class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
                                     :class="isSelected && ' bg-gray-200'">
@@ -186,29 +179,9 @@
             <div class="grid grid-flow-col">
                 <div class="flex flex-row gap-4">
                     <div class="flex flex-col gap-2">
-                        <div class="flex flex-row items-center gap-2">
-                            <div
-                                class="py-4 text-center bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                @if (!empty($selectedItems))
-                                    <button wire:click="setQuantity" id="setQuantity"
-                                        x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')"
-                                        class="px-8 py-2 ">
-                                        Quantity
-                                    </button>
-                                @else
-                                    <button disabled class="px-8 py-2 ">
-                                        Quantity
-                                    </button>
-                                @endif
-
-                            </div>
-                            <div
-                                class="py-4 text-center bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                <button wire:click="removeItem"
-                                    x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')" class="px-8 py-2 ">
-                                    Remove Item
-                                </button>
-                            </div>
+                        <div
+                            class="py-4 text-center font-bold bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            <button class="px-8 py-2 ">Return</button>
                         </div>
                         <div
                             class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
