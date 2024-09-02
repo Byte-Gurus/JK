@@ -69,10 +69,10 @@
                                             </div>
 
                                             <div>
-                                                <input type="number" wire:model='amount' placeholder="Amount" required 
+                                                <input type="number" wire:model='tendered_amount' placeholder="Amount" required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
-                                                @error('amount')
+                                                @error('tendered_amount')
                                                     <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             </div>

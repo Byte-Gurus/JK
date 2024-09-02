@@ -441,7 +441,7 @@
                                 @if ($isCreate)
                                     <div class="flex flex-row justify-between mx-4">
                                         <div>
-                                            <button wire:click='returnToDiscountForm()'
+                                            <button type="button" wire:click='returnToDiscountForm()'
                                                 class="text-[rgb(0,0,0)] bg-[rgb(218,218,218)] hover:bg-[rgb(165,165,165)] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Return</button>
                                         </div>
                                         <div class="flex flex-row gap-2 ">

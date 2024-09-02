@@ -19,7 +19,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount = 0, $original_total;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount, $original_total, $netAmount, $tax_details = [];
 
     public $customerDetails = [];
     public $barcode;
@@ -103,6 +103,13 @@ class SalesTransaction extends Component
 
     public function selectItem($item_id = null)
     {
+
+        if ($this->payment) {
+            $this->alert('error', 'transaction is paid');
+            return;
+        }
+
+
         $itemExists = false;
         // Retrieve the item to check its shelf_life_type
         if ($item_id) {
@@ -253,10 +260,16 @@ class SalesTransaction extends Component
 
     public function computeTransaction()
     {
-        $netAmount = 0;
-        $this->subtotal = 0;
-        $vaTableAmount = 12;
 
+        $this->subtotal = 0;
+
+        $vatable_amount = 0;
+        $non_vatable_amount = 0;
+
+        $vatable_subtotal = 0;
+        $non_vatable_subtotal = 0;
+
+        $this->netAmount = 0;
         $this->discount_percent =  0;
         $this->discount_amount = 0;
 
@@ -264,21 +277,32 @@ class SalesTransaction extends Component
 
             $this->subtotal += $index['total_amount'];
 
-            if ($index['vat_type'] === 'VaTable') {
-                $netAmount =   $this->grandTotal / (100 + $vaTableAmount) * 100;
+            if ($index['vat_type'] === 'Vat') {
+                $vatable_subtotal += $index['total_amount'];
+                $vatable_amount  = $vatable_subtotal - ($index['total_amount'] / (100 + 12) * 100);
+            } elseif ($index['vat_type'] === 'Non Vatable') {
+                $non_vatable_subtotal += $index['total_amount'];
+                $non_vatable_amount  =  $non_vatable_subtotal - ($index['total_amount'] / (100 + 3) * 100);
             }
+
+            $this->totalVat = $vatable_amount + $non_vatable_amount;
 
             if ($this->customerDetails) {
 
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
-                $discount = $this->subtotal * ($this->customerDetails['discount_percentage'] / 100);
-                $this->discount_amount =  $discount;
+                $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
+                $this->discount_amount =  $this->netAmount;
             }
 
             $this->grandTotal = $this->subtotal - $this->discount_amount;
-            $this->totalVat = $this->grandTotal - $netAmount;
         }
+
+        $this->tax_details = [
+            'non_vatable_amount' => $non_vatable_amount,
+            'vatable_amount' => $vatable_amount,
+            'discount_amount' =>  $this->discount_amount,
+        ];
     }
 
     public function getCustomerDetails($customerDetails)
@@ -358,14 +382,18 @@ class SalesTransaction extends Component
     {
         $this->payment = $Payment;
 
-        $this->tendered_amount = $this->payment['amount'];
+        $this->tendered_amount = $this->payment['tendered_amount'];
         $this->change = $this->tendered_amount - $this->grandTotal;
+
+        $this->payment['change'] = $this->change;
     }
+
+
 
 
     public function save()
     {
-        dd($this->selectedItems, $this->payment, $this->customerDetails ?? null);
+        dd($this->selectedItems, $this->payment, $this->customerDetails ?? null,  $this->tax_details);
     }
 
 

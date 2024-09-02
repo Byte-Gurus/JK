@@ -9,7 +9,7 @@ class PaymentForm extends Component
 {
     use LivewireAlert;
     public $payWithCash = true;
-    public $amount, $reference_no, $grand_total, $payment = [];
+    public $tendered_amount, $reference_no, $grand_total, $payment = [];
 
     public function render()
     {
@@ -39,12 +39,12 @@ class PaymentForm extends Component
 
         if ($this->payWithCash) {
             $this->payment = [
-                'amount' => $validated['amount'],
+                'tendered_amount' => $validated['tendered_amount'],
             ];
         } else {
 
             $this->payment = [
-                'amount' => $validated['amount'],
+                'tendered_amount' => $validated['tendered_amount'],
                 'reference_no' => $validated['reference_no']
             ];
         }
@@ -60,12 +60,12 @@ class PaymentForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['amount', 'reference_no']);
+        $this->reset(['tendered_amount', 'reference_no']);
     }
 
     public function resetFormWhenClosed()
     {
-        $this->resetForm();
+        // $this->resetForm();
         $this->resetValidation();
     }
     public function getGrandTotal($GrandTotal)
@@ -81,12 +81,12 @@ class PaymentForm extends Component
 
 
             $rules = [
-                'amount' => 'required|numeric|min:1|gte:grand_total',
+                'tendered_amount' => 'required|numeric|min:1|gte:grand_total',
 
             ];
         } else {
             $rules = [
-                'amount' => 'required|numeric|min:1|gte:grand_total',
+                'tendered_amount' => 'required|numeric|min:1|gte:grand_total',
                 'reference_no' => 'required|numeric|min:0',
             ];
         }

@@ -21,7 +21,7 @@ class DiscountForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $selectCustomer, $customer_type, $customer_discount_no, $customer_id, $discount_percentage = 5;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $selectCustomer, $customer_type, $customer_discount_no, $customer_id, $discount_percentage = 20;
     public $customerDetails = [];
 
     public function render()
@@ -108,7 +108,7 @@ class DiscountForm extends Component
         }
 
 
-        
+
 
         $this->dispatch('get-customer-details', customerDetails: $this->customerDetails)->to(SalesTransaction::class);
 
