@@ -19,8 +19,8 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount, $original_total, $netAmount, $tax_details = [];
-
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount, $original_total, $netAmount;
+    public  $tax_details = [];
     public $customerDetails = [];
     public $barcode;
 
@@ -395,14 +395,39 @@ class SalesTransaction extends Component
 
     public function save()
     {
-        dd($this->selectedItems, $this->payment, $this->customerDetails ?? null,  $this->tax_details);
-    }
+        // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->customerDetails ?? null);
 
+        $receiptData = [];
+        $transactionDetails = [
+            'subtotal' => $this->subtotal,
+            'grandTotal' => $this->grandTotal,
+            'transaction_no' => $this->transaction_number,
+            'transaction_time' => now()->format('H:i:s'),
+            'transaction_date' => now()->format('d-m-Y'),
+        ];
 
-    public function displayReceipt()
-    {
+        if(isset($this->customerDetails['customer_id'])){
+            $customer = Customer::find($this->customerDetails['customer_id']);
+
+            $this->customerDetails['customer'] = $customer;
+        }
+
+        $this->dispatch('print-sales-receipt', array_merge(
+            $receiptData,
+            [
+                'payment' => $this->payment,
+                'selectedItems' => $this->selectedItems,
+                'customerDetails' => $this->customerDetails ?? null,
+                'tax_details' => $this->tax_details,
+                'transactionDetails' => $transactionDetails
+            ]
+        ))->to(SalesReceipt::class);
+
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
+
+
+    
 
 
 
