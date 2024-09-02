@@ -14,6 +14,7 @@ class Delivery extends Model
         'status',
         'date_delivered',
         'purchase_id',
+        'old_po_id'
     ];
 
     public function purchaseJoin()

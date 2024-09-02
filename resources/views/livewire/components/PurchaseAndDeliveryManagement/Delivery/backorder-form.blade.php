@@ -77,7 +77,7 @@
                                     <th scope="row"
                                         class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         <div class="flex justify-center">
-                                            @if ($backorder_list['status'] !== 'Repurchased' || $backorder_list['status'] !== 'Delivered')
+                                            @if ($backorder_list['status'] === 'Missing')
                                                 <input type="checkbox" wire:model="selectedToReorder"
                                                     value="{{ $index }}"
                                                     class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
