@@ -3,7 +3,7 @@
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
-    <div x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal'), showInventoryHistory: @entangle('showInventoryHistory') }">
+    <div x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal'), showInventoryHistory: @entangle('showInventoryHistory'), showInventoryTable: @entangle('showInventoryTable') }">
         <div class="m-[28px]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
@@ -13,7 +13,7 @@
                     <div class="flex flex-row items-center gap-4">
                         @if ($showInventoryTable)
                             <div>
-                                <button x-on :click="$wire.displayInventoryHistory()">
+                                <button x-on:click="$wire.displayInventoryHistory()">
                                     <div
                                         class="flex flex-col items-center justify-center px-4 py-2 transition-all duration-75 ease-in-out bg-blue-100 rounded-md hover:bg-blue-200">
                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -42,8 +42,7 @@
                             </div>
                         @else
                             <div>
-                                <button
-                                x-on:click="$wire.returnToInventoryTable()">
+                                <button x-on:click="$wire.returnToInventoryTable()">
                                     <div
                                         class="flex flex-col items-center justify-center px-4 py-2 transition-all duration-75 ease-in-out bg-red-100 rounded-md hover:bg-red-200">
                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -60,20 +59,16 @@
                     </div>
                 </div>
             </div>
-            @if ($showInventoryTable)
-                <div class="my-[28px]">
-                    @livewire('components.InventoryManagement.inventory-table')
-                </div>
-            @endif
-            <div class="my-[28px]" x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
+            <div x-cloak class="my-[28px]" x-show="showInventoryTable" x-data="{ showInventoryTable: @entangle('showInventoryTable') }">
+                @livewire('components.InventoryManagement.inventory-table')
+            </div>
+            <div x-cloak class="my-[28px]" x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                 @livewire('components.InventoryManagement.view-stock-card')
             </div>
-            @if ($showInventoryHistory)
-                <div class="my-[28px]">
-                    @livewire('components.InventoryManagement.inventory-history')
-                </div>
-            @endif
-            <div class="my-[28px]">
+            <div x-cloak class="my-[28px]" x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
+                @livewire('components.InventoryManagement.inventory-history')
+            </div>
+            <div x-cloak class="my-[28px]" x-show="showStockAdjustModal" x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal') }">
                 @livewire('components.InventoryManagement.stock-adjust-form')
             </div>
         </div>
