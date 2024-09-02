@@ -441,10 +441,20 @@
                                 @if ($isCreate)
                                     <div class="flex flex-row justify-between mx-4">
                                         <div>
-                                            <button wire:click='returnToDiscountForm()'
+                                            <button type="button" wire:click='returnToDiscountForm()'
                                                 class="text-[rgb(0,0,0)] bg-[rgb(218,218,218)] hover:bg-[rgb(165,165,165)] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Return</button>
                                         </div>
                                         <div class="flex flex-row gap-2 ">
+                                            <div>
+                                                <button type="button" wire:loading.remove wire:click="removeDiscount"
+                                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                                    <div class="flex flex-row items-center gap-2">
+                                                        <p>
+                                                            Remove Discount
+                                                        </p>
+                                                    </div>
+                                                </button>
+                                            </div>
                                             <div>
                                                 <button type="reset"
                                                     class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear

@@ -69,10 +69,10 @@
                                             </div>
 
                                             <div>
-                                                <input type="number" wire:model='amount' placeholder="Amount" required
+                                                <input type="number" wire:model='tendered_amount' placeholder="Amount" required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
-                                                @error('amount')
+                                                @error('tendered_amount')
                                                     <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -139,7 +139,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            <button type="submit"
+                            <button type="submit" x-on:keydown.window.prevent.ctrl.enter="$wire.call('pay')"
                                 class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Pay</button>
                         </div>
                     </div>

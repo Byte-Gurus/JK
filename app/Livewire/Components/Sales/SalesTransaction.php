@@ -19,7 +19,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount = 0;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount, $original_total, $netAmount, $tax_details = [];
 
     public $customerDetails = [];
     public $barcode;
@@ -31,6 +31,7 @@ class SalesTransaction extends Component
     public $showPaymentForm = false;
     public $showDiscountForm = false;
     public $showWholesaleForm = false;
+    public $showSalesReceipt = false;
 
 
 
@@ -97,12 +98,20 @@ class SalesTransaction extends Component
         'display-discount-form' => 'displayDiscountForm',
         'get-quantity' => 'getQuantity',
         'get-customer-details' => 'getCustomerDetails',
-        'get-customer-payments' => 'getCustomerPayments'
-
+        'get-customer-payments' => 'getCustomerPayments',
+        'unselect-item' => 'unselectItem',
+        'display-sales-receipt' => 'displaySalesReceipt'
     ];
 
     public function selectItem($item_id = null)
     {
+
+        if ($this->payment) {
+            $this->alert('error', 'transaction is paid');
+            return;
+        }
+
+
         $itemExists = false;
         // Retrieve the item to check its shelf_life_type
         if ($item_id) {
@@ -145,6 +154,8 @@ class SalesTransaction extends Component
 
                         $this->wholesale_discount = 10;
 
+                        $this->selectedItems[$index]['original_total'] = $this->selectedItems[$index]['total_amount'];
+
                         $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
                         $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
                     }
@@ -171,6 +182,7 @@ class SalesTransaction extends Component
                     'current_stock_quantity' => $item->current_stock_quantity,
                     'bulk_quantity' => $item->itemJoin->bulk_quantity,
                     'discount' => 0,
+                    'original_total' => 0,
                 ];
             }
         } else {
@@ -238,6 +250,8 @@ class SalesTransaction extends Component
 
             $this->wholesale_discount = 10;
 
+            $this->selectedItems[$this->selectedIndex]['original_total'] = $this->selectedItems[$this->selectedIndex]['total_amount'];
+
             $discounted_amount = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
             $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $discounted_amount;
         }
@@ -248,10 +262,16 @@ class SalesTransaction extends Component
 
     public function computeTransaction()
     {
-        $netAmount = 0;
-        $this->subtotal = 0;
-        $vaTableAmount = 12;
 
+        $this->subtotal = 0;
+
+        $vatable_amount = 0;
+        $non_vatable_amount = 0;
+
+        $vatable_subtotal = 0;
+        $non_vatable_subtotal = 0;
+
+        $this->netAmount = 0;
         $this->discount_percent =  0;
         $this->discount_amount = 0;
 
@@ -259,20 +279,55 @@ class SalesTransaction extends Component
 
             $this->subtotal += $index['total_amount'];
 
-            if ($index['vat_type'] === 'VaTable') {
-                $netAmount =   $this->grandTotal / (100 + $vaTableAmount) * 100;
+            if ($index['vat_type'] === 'Vat') {
+                $vatable_subtotal += $index['total_amount'];
+                $vatable_amount  = $vatable_subtotal - ($index['total_amount'] / (100 + 12) * 100);
+            } elseif ($index['vat_type'] === 'Non Vatable') {
+                $non_vatable_subtotal += $index['total_amount'];
+                $non_vatable_amount  =  $non_vatable_subtotal - ($index['total_amount'] / (100 + 3) * 100);
             }
+
+            $this->totalVat = $vatable_amount + $non_vatable_amount;
 
             if ($this->customerDetails) {
 
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
-                $discount = $this->subtotal * ($this->customerDetails['discount_percentage'] / 100);
-                $this->discount_amount =  $discount;
+                $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
+                $this->discount_amount =  $this->netAmount;
             }
 
             $this->grandTotal = $this->subtotal - $this->discount_amount;
-            $this->totalVat = $this->grandTotal - $netAmount;
+        }
+
+        $this->tax_details = [
+            'non_vatable_amount' => $non_vatable_amount,
+            'vatable_amount' => $vatable_amount,
+            'discount_amount' =>  $this->discount_amount,
+        ];
+    }
+
+    public function getCustomerDetails($customerDetails)
+    {
+        if (!is_null($customerDetails)) {
+            $this->customerDetails = $customerDetails;
+
+            $this->discount_type =   $this->customerDetails['customer_type'];
+
+            if (isset($this->customerDetails['firstname'])) {
+                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+            } else {
+                $customer = Customer::find($this->customerDetails['customer_id']);
+                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+            }
+
+            $this->alert('success', 'Discount was applied successfully');
+            $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
+        } else {
+            $this->customerDetails = null;
+
+            $this->reset('customer_name', 'customer_discount_no', 'discount_type');
+            $this->alert('success', 'Discount was removed successfully');
         }
     }
 
@@ -324,44 +379,30 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
     }
 
-    public function getCustomerDetails($customerDetails)
-    {
-        if (!is_null($customerDetails)) {
-            $this->customerDetails = $customerDetails;
-
-            $this->discount_type =   $this->customerDetails['customer_type'];
-
-            if (isset($this->customerDetails['firstname'])) {
-                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
-            } else {
-                $customer = Customer::find($this->customerDetails['customer_id']);
-                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
-            }
-
-
-            $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
-        } else {
-            $this->customerDetails = null;
-
-            $this->reset('customer_name', 'customer_discount_no', 'discount_type');
-        }
-    }
 
     public function getCustomerPayments($Payment)
     {
         $this->payment = $Payment;
 
-        $this->tendered_amount = $this->payment['amount'];
+        $this->tendered_amount = $this->payment['tendered_amount'];
         $this->change = $this->tendered_amount - $this->grandTotal;
+
+        $this->payment['change'] = $this->change;
     }
+
+
 
 
     public function save()
     {
-        dd($this->selectedItems, $this->payment, $this->customerDetails ?? null);
+        dd($this->selectedItems, $this->payment, $this->customerDetails ?? null,  $this->tax_details);
     }
 
 
+    public function displayReceipt()
+    {
+        $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
+    }
 
 
 
@@ -394,5 +435,10 @@ class SalesTransaction extends Component
     {
         $this->showPaymentForm = true;
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
+    }
+
+    public function displaySalesReceipt()
+    {
+        $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
 }
