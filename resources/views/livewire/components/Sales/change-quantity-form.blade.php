@@ -49,52 +49,51 @@
 
 
                             {{-- //* first row --}}
-                            <div class="flex justify-between gap-4">
+                            <div class="flex flex-row items-center justify-between">
 
                                 {{-- //* adjust reason --}}
-                                <div class="flex flex-col gap-1 mb-3">
+                                <div class="flex flex-col items-center justify-center w-full gap-1 mb-3">
 
                                     <div>
-                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Enter
-                                            Quantity</label>
+                                        <p class="text-[1.6em] font-bold text-gray-900">Enter
+                                            Quantity</p>
                                     </div>
 
-                                    <div>
-                                        <input autofocus type="text" wire:model='adjust_quantity' placeholder="Quantity"
-                                            required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                                    <div class="flex justify-center">
+                                        <input autofocus type="text" wire:model='adjust_quantity' required
+                                            class=" bg-[rgb(245,245,245)] text-center w-1/2 h-1/2 text-2xl border border-[rgb(143,143,143)] text-gray-900 rounded-md block p-4">
                                     </div>
 
                                     @error('adjust_quantity')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
 
-
-                                    <div>
-                                        <label for="adjust_quantity"
-                                            class="text-[1.2em] text-gray-900">{{ $item_name }}</label>
+                                </div>
+                                <div class="flex flex-col w-full gap-2 p-4 m-2 border border-black rounded-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
+                                    <div class="flex flex-col gap-1 leading-none">
+                                        <p class="text-[1em] font-thin text-gray-900">Item Barcode</p>
+                                        <p class="text-[1.2em] font-bold text-gray-900">{{ $barcode }}
+                                        </p>
                                     </div>
-                                    <div>
-                                        <label for="adjust_quantity"
-                                            class="text-[1.2em] text-gray-900">{{ $current_stock_quantity }}</label>
+                                    <div class="flex flex-row justify-between w-full ">
+                                        <div class="flex flex-col gap-1 leading-none">
+                                            <p class="text-[1em] font-thin text-gray-900">Item Name</p>
+                                            <p class="text-[1.2em] font-bold text-gray-900">{{ $item_name }}</p>
+                                        </div>
+                                        <div class="flex flex-col gap-1 leading-none">
+                                            <p class="text-[1em] font-thin text-gray-900">Item Description</p>
+                                            <p class="text-[1.2em] font-bold text-gray-900">{{ $item_description }}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label for="adjust_quantity"
-                                            class="text-[1.2em] text-gray-900">{{ $barcode }}</label>
+                                    <div class="flex flex-col gap-1 leading-none">
+                                        <p class="text-[1em] font-thin text-gray-900">Current Stock</p>
+                                        <p class="text-[1.6em] font-black text-gray-900">{{ $current_stock_quantity }}
+                                        </p>
                                     </div>
-                                    <div>
-                                        <label for="adjust_quantity"
-                                            class="text-[1.2em] text-gray-900">{{ $item_description }}</label>
-                                    </div>
-
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
-
                 </div>
                 <div class="flex flex-row justify-end gap-2 mt-4">
                     <div>
@@ -111,7 +110,6 @@
                             class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Apply</button>
                     </div>
                 </div>
-                {{-- //* form footer --}}
             </div>
         </form>
     </div>

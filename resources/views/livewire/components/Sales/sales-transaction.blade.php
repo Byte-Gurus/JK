@@ -173,15 +173,10 @@
                                     {{ number_format($selectedItem['total_amount'], 2) }}
 
                                 </th>
-
-
                             </tr>
                         @endforeach
-
                     </tbody>
-
                 </table>
-
             </div>
         </div>
         <div class=" pt-[28px]">
@@ -213,7 +208,7 @@
                             </div>
                         </div>
                         <div
-                            class="py-4 text-center bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button wire:click="cancel" x-on:keydown.window.prevent.ctrl.1="$wire.call('cancel')"
                                 class="px-8 py-2 ">
                                 Cancel Transaction
@@ -223,7 +218,7 @@
                     <div class="flex flex-col gap-2 ">
 
                         <div
-                            class="py-4 text-center bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class="py-4  px-8 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             @if (!empty($selectedItems))
                                 <button class="px-8 py-2 "
                                     x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
@@ -236,34 +231,40 @@
                                 </button>
                             @endif
                         </div>
+                        <div
+                            class="py-4 px-8 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            <button wire:click="removeItem" class="px-8 py-2 ">
+                                Remove Item
+                            </button>
+                        </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
-                        <div class="flex flex-row gap-4">
-                            <div
-                                class="py-4 text-center bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                <button class="px-8 py-2 ">Return</button>
-                            </div>
-                            <div
-                                class="py-4 text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                                @if (!empty($selectedItems))
-                                    <button class="px-8 py-2"
-                                        x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
-                                        x-on:click="$wire.displayPaymentForm()">
-                                        Pay
-                                    </button>
-                                @else
-                                    <button class="px-8 py-2" disabled>
-                                        Pay
-                                    </button>
-                                @endif
+                        <div
+                            class="py-4 px-8 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            @if (!empty($selectedItems))
+                                <button wire:click="setQuantity" class="px-8 py-2 ">
+                                    Quantity
+                                </button>
+                            @else
+                                <button wire:click="setQuantity" disabled class="px-8 py-2 ">
+                                    Quantity
+                                </button>
+                            @endif
 
-                            </div>
                         </div>
                         <div
-                            class="py-4 text-center bg-[rgb(38,38,38)] text-white hover:bg-[rgb(0,0,0)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="px-8 py-2 ">
-                                Void Transaction
-                            </button>
+                            class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            @if (!empty($selectedItems))
+                                <button class="px-8 py-2"
+                                        x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
+                                        x-on:click="$wire.displayPaymentForm()">
+                                    Pay
+                                </button>
+                            @else
+                                <button class="px-8 py-2" disabled>
+                                    Pay
+                                </button>
+                            @endif
                         </div>
                     </div>
                     <div
@@ -365,7 +366,7 @@
 
                     <div class=" font-black text-[1.4em]">%</div>
                 </div>
-            
+
                 <div class="flex flex-row justify-between">
                     <div class=" font-medium text-[1.4em]">
                         <p>Senior & PWD </p>
@@ -420,8 +421,5 @@
     </div>
     <div x-show="showWholesaleForm" x-data="{ showWholesaleForm: @entangle('showWholesaleForm') }">
         @livewire('components.sales.wholesale-form')
-    </div>
-    <div x-show="showVoidTransactionPage" x-data="{ showVoidTransactionPage: @entangle('showVoidTransactionPage') }">
-        @livewire('components.sales.void-transaction-page')
     </div>
 </div>

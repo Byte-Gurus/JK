@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="flex flex-col gap-4 w-full shadow-md shadow-[rgb(255,147,147)] items-center justify-center p-4 m-2 leading-none border border-black rounded-lg bg-[rgb(255,255,255)]">
+                                    class="flex flex-col gap-4 w-full shadow-md shadow-[rgb(244,255,147)] items-center justify-center p-4 m-2 leading-none border border-black rounded-lg bg-[rgb(255,255,255)]">
                                     <div>
                                         <p class="text-[1.6em] font-thin text-center">To Pay</p>
                                     </div>
