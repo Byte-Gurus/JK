@@ -32,16 +32,7 @@ class ChangeQuantityForm extends Component
     {
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this item?', [
-            'onConfirmed' => 'adjustConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-        ]);
-    }
-
-    public function adjustConfirmed($data)
-    {
-
-        $validated = $data['inputAttributes'];
+        // $validated = $data['inputAttributes'];
 
         $this->dispatch('get-quantity', newQuantity: $validated['adjust_quantity'])->to(SalesTransaction::class);
 
@@ -49,12 +40,23 @@ class ChangeQuantityForm extends Component
 
         $this->dispatch('display-change-quantity-form', showChangeQuantityForm: false)->to(SalesTransaction::class);
         $this->alert('success', 'quantity was updated successfully');
+
+        // $this->confirm('Do you want to add this item?', [
+        //     'onConfirmed' => 'adjustConfirmed', //* call the createconfirmed method
+        //     'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        // ]);
     }
+
+    // public function adjustConfirmed($data)
+    // {
+
+
+    // }
 
     protected function validateForm()
     {
         $rules = [
-           'adjust_quantity' => ['required', 'numeric', 'min:1', 'lt:current_stock_quantity'],
+           'adjust_quantity' => ['required', 'numeric', 'min:1', 'lte:current_stock_quantity'],
         ];
 
         return $this->validate($rules);

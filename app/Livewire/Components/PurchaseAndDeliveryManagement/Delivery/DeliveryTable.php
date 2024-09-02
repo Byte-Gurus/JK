@@ -115,14 +115,13 @@ class DeliveryTable extends Component
 
         // Check if the current delivery has associated backorders
         if ($delivery->backorderJoin->isNotEmpty()) {
+
             // Decode the old purchase order data from the delivery record
             $oldPoData = json_decode($delivery->old_po_id, true);
+            $old_purchase = Purchase::find($oldPoData['id']);
 
-            // Get the old delivery record associated with the old purchase order
-            $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
 
-          
-            $allDelivered = true;
+            // dd($old_purchase->backorderJoin);
 
             // Loop through each backorder associated with the current delivery
             foreach ($delivery->backorderJoin as $backorderDetail) {
@@ -130,15 +129,15 @@ class DeliveryTable extends Component
                     // Update the status of each backorder to "Delivered"
                     $backorderDetail->update(['status' => 'Delivered']);
                 }
-
-                // Check if any backorder is not yet delivered
-                if ($backorderDetail->status !== 'Delivered') {
-                    $allDelivered = false;
-                }
             }
 
+
+            $repurchasedCount = $old_purchase->backorderJoin->where('status', 'Repurchased')->count();
+
             // If all backorders are delivered, update the old delivery status to "Complete Backorder"
-            if ($allDelivered && $old_delivery) {
+            if ($repurchasedCount == 0) {
+                // Get the old delivery record associated with the old purchase order
+                $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
                 $old_delivery->update(['status' => 'Backorder complete']);
             }
 
@@ -148,6 +147,7 @@ class DeliveryTable extends Component
             $delivery->save();
 
             $this->alert('success', 'Delivery date and applicable backorders updated successfully');
+            $this->resetPage();
         } else {
             // If there are no backorders, only update the current delivery details
             $delivery->date_delivered = $updatedAttributes['date'];
@@ -155,6 +155,7 @@ class DeliveryTable extends Component
             $delivery->save();
 
             $this->alert('success', 'Delivery date changed successfully');
+            $this->resetPage();
         }
 
         $this->resetPage();
