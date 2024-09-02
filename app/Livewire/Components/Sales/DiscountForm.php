@@ -63,7 +63,7 @@ class DiscountForm extends Component
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to apply the discount?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -105,7 +105,8 @@ class DiscountForm extends Component
 
         $this->dispatch('get-customer-details', customerDetails: $this->customerDetails)->to(SalesTransaction::class);
 
-            //   $this->closeModal();
+        $this->dispatch('display-discount-form')->to(SalesTransaction::class);
+
     }
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value

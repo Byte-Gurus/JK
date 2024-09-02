@@ -18,7 +18,6 @@ class ChangeQuantityForm extends Component
     protected $listeners = [
         'get-quantity' => 'getQuantity',
         'adjustConfirmed'
-
     ];
 
 

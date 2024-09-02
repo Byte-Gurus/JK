@@ -93,6 +93,7 @@ class SalesTransaction extends Component
         'removeRowConfirmed',
         'removeRowCancelled',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
+        'display-discount-form' => 'displayDiscountForm',
         'get-quantity' => 'getQuantity',
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments'
@@ -359,7 +360,7 @@ class SalesTransaction extends Component
 
     public function displayDiscountForm()
     {
-        $this->showDiscountForm = true;
+        $this->showDiscountForm = !$this->showDiscountForm;
     }
 
     public function displayWholesaleForm()
