@@ -67,13 +67,9 @@
                                 <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                             @endforeach
 
-
                         </select>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
 

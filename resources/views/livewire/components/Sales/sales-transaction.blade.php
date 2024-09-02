@@ -193,10 +193,10 @@
                                         Quantity
                                     </button>
                                 @else
-                                    <button " disabled class="px-8 py-2 ">
+                                    <button disabled class="px-8 py-2 ">
                                         Quantity
                                     </button>
- @endif
+                                @endif
 
                             </div>
                             <div
@@ -256,8 +256,8 @@
                             class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             @if (!empty($selectedItems))
                                 <button class="px-8 py-2"
-                                        x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
-                                        x-on:click="$wire.displayPaymentForm()">
+                                    x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
+                                    x-on:click="$wire.displayPaymentForm()">
                                     Pay
                                 </button>
                             @else
