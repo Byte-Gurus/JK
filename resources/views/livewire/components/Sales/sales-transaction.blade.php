@@ -392,6 +392,9 @@
                     </div>
                     <div class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</div>
                 </div>
+                <div wire:click='displaySalesReceipt()'>
+                    DISPLAY RECEIPT
+                </div>
             </div>
         </div>
     </div>

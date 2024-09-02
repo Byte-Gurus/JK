@@ -13,6 +13,8 @@ class CashierPage extends Component
 
     public $showSalesTransactionHistory = false;
 
+    public $showSalesReceipt = false;
+
     public function render()
     {
         return view('livewire.pages.cashier-page');
@@ -23,6 +25,7 @@ class CashierPage extends Component
         'display-sales-transaction' => 'displaySalesTransaction',
         'display-sales-transaction-history' => 'displaySalesTransactionHistory',
         'display-sales-return' => 'displaySalesReturn',
+        'display-sales-receipt' => 'displaySalesReceipt',
     ];
 
     public function displaySalesTransactionHistory($showSalesTransactionHistory)
@@ -35,5 +38,11 @@ class CashierPage extends Component
     {
         $this->showSalesTransaction = $showSalesTransaction;
         $this->showSalesTransactionHistory = false;
+    }
+
+    public function displaySalesReceipt($showSalesReceipt)
+    {
+        $this->showSalesTransaction = false;
+        $this->showSalesReceipt = $showSalesReceipt;
     }
 }

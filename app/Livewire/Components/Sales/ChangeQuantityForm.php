@@ -44,6 +44,9 @@ class ChangeQuantityForm extends Component
         //     'onConfirmed' => 'adjustConfirmed', //* call the createconfirmed method
         //     'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         // ]);
+
+        $this->dispatch('isSelected')->to(SalesTransaction::class);
+
     }
 
     // public function adjustConfirmed($data)

@@ -31,6 +31,7 @@ class SalesTransaction extends Component
     public $showPaymentForm = false;
     public $showDiscountForm = false;
     public $showWholesaleForm = false;
+    public $showSalesReceipt = false;
 
 
 
@@ -97,8 +98,9 @@ class SalesTransaction extends Component
         'display-discount-form' => 'displayDiscountForm',
         'get-quantity' => 'getQuantity',
         'get-customer-details' => 'getCustomerDetails',
-        'get-customer-payments' => 'getCustomerPayments'
-
+        'get-customer-payments' => 'getCustomerPayments',
+        'unselect-item' => 'unselectItem',
+        'display-sales-receipt' => 'displaySalesReceipt'
     ];
 
     public function selectItem($item_id = null)
@@ -369,6 +371,10 @@ class SalesTransaction extends Component
     }
 
 
+    public function displayReceipt()
+    {
+        $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
+    }
 
 
 
@@ -401,5 +407,10 @@ class SalesTransaction extends Component
     {
         $this->showPaymentForm = true;
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
+    }
+
+    public function displaySalesReceipt()
+    {
+        $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
 }
