@@ -11,19 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaction_details', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('item_quantity');
-            $table->string('vat_type');
-            $table->double('item_subtotal');
-            $table->double('item_discount_amount');
-            $table->double('discount');
-            $table->double('item_quantity');
+            $table->double('amount');
+            $table->string('reference_number');
+            $table->string('payment_type');
             $table->timestamps();
 
-
             $table->foreignId('transaction_id')->constrained('transactions');
-            $table->foreignId('item_id')->constrained('items');
         });
     }
 
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaction_details');
+        Schema::dropIfExists('payments');
     }
 };

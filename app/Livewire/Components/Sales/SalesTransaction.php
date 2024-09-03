@@ -6,6 +6,9 @@ use App\Livewire\Pages\CashierPage;
 use App\Models\Customer;
 use App\Models\Inventory;
 use App\Models\Item;
+use App\Models\Transaction;
+use App\Models\TransactionDetails;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -170,6 +173,7 @@ class SalesTransaction extends Component
             // If the item does not exist, add it to the array
             if (!$itemExists) {
                 $this->selectedItems[] = [
+                    'item_id' => $item->itemJoin->id,
                     'item_name' => $item->itemJoin->item_name,
                     'item_description' => $item->itemJoin->item_description,
                     'vat_type' => $item->itemJoin->vat_type,
@@ -303,6 +307,7 @@ class SalesTransaction extends Component
         $this->tax_details = [
             'non_vatable_amount' => $non_vatable_amount,
             'vatable_amount' => $vatable_amount,
+            'total_vat' =>  $this->totalVat,
             'discount_amount' =>  $this->discount_amount,
         ];
     }
@@ -398,7 +403,7 @@ class SalesTransaction extends Component
         // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->customerDetails ?? null);
 
         $receiptData = [];
-        $transactionDetails = [
+        $transaction_info = [
             'subtotal' => $this->subtotal,
             'grandTotal' => $this->grandTotal,
             'transaction_no' => $this->transaction_number,
@@ -419,15 +424,38 @@ class SalesTransaction extends Component
                 'selectedItems' => $this->selectedItems,
                 'customerDetails' => $this->customerDetails ?? null,
                 'tax_details' => $this->tax_details,
-                'transactionDetails' => $transactionDetails
+                'transaction_info' => $transaction_info
             ]
         ))->to(SalesReceipt::class);
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
+
+
+        // $transaction = Transaction::create([
+        //     'transaction_number' => $transaction_info['transaction_number'],
+        //     'transaction_type' => 'Sales',
+        //     'subtotal' => $transaction_info['subtotal'],
+        //     'total_amount' => $transaction_info['granTotal'],
+        //     'total_vat_amount' => $this->tax_details['total_vat'],
+        //     'total_discount_amount' => $this->tax_details['disount_amount'],
+        //     'customer_id' => null,
+        //     'user_id' => Auth::id(),
+        // ]);
+
+//         $transactionDetails = TransactionDetails::create([
+//             'item_quantity' => $this->selectedItems['quantity'],
+// 'vat_type' => $this->selectedItems['vat_type'],
+// 'item_subtotal' => $this->selectedItems['total_amount'],
+// 'item_discount_amount' =>
+// 'discount' =>
+// 'item_quantity' =>
+// 'transactions_id' =>
+// 'item_id' =>
+//         ])
     }
 
 
-    
+
 
 
 

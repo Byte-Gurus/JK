@@ -20,6 +20,6 @@ class SalesReceipt extends Component
     {
         $this->receiptDetails = $receiptData;
 
-        // dd($this->receiptDetails);
+        dd($this->receiptDetails);
     }
 }

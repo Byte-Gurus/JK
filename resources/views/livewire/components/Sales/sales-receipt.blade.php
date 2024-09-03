@@ -16,15 +16,15 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row gap-1 ">
                         <p>Date:</p>
-                        <p>{{ $receiptDetails['transactionDetails']['transaction_date'] ?? null }}</p>
+                        <p>{{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Time:</p>
-                        <p>{{ $receiptDetails['transactionDetails']['transaction_time'] ?? null }}</p>
+                        <p>{{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Transaction No.</p>
-                        <p>{{ $receiptDetails['transactionDetails']['transaction_no'] ?? null }}</p>
+                        <p>{{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Payment Method:</p>
@@ -112,7 +112,7 @@
 
                     <p class=" text-[1.4em] font-bold">Subtotal</p>
                     <p class=" text-[1.4em] font-bold">
-                        {{ number_format($receiptDetails['transactionDetails']['subtotal'] ?? null, 2) }}</p>
+                        {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Discount - Senior Citizen / PWD (20%)</p>
@@ -127,7 +127,7 @@
 
                     <p class=" text-[1.4em] font-bold">Total Amount</p>
                     <p class=" text-[1.4em] font-bold">
-                        {{ number_format($receiptDetails['transactionDetails']['grandTotal'] ?? null, 2) }}</p>
+                        {{ number_format($receiptDetails['transaction_info']['grandTotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Tendered Amount</p>
