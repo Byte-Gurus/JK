@@ -16,19 +16,23 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row gap-1 ">
                         <p>Date:</p>
-                        <p>12/12/2024</p>
+                        <p>{{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Time:</p>
-                        <p>12:12:12</p>
+                        <p>{{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Transaction No.</p>
-                        <p>1239039012</p>
+                        <p>{{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Payment Method:</p>
-                        <p>Cash</p>
+                        <p>{{ $receiptDetails['payment']['payment_method'] ?? null }}</p>
+                    </div>
+                    <div class="flex flex-row gap-1 ">
+                        <p>Reference No.</p>
+                        <p>3213213213</p>
                     </div>
                 </div>
                 <div class="flex flex-row ">
@@ -68,18 +72,20 @@
                         </tr>
                     </thead>
 
-                    {{-- //* table body --}}
+
                     <tbody class="border-b border-black">
-
-                        <tr class="">
-
-                            <th class="px-2">asdjsajkdhkajsdhka</th>
-                            {{-- //* name --}}
-                            {{-- <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname }}
-                            </th> --}}
-
-                        </tr>
+                        @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
+                            @foreach ($receiptDetails['selectedItems'] as $item)
+                                <tr>
+                                    <th>{{ $item['item_name'] }}</th>
+                                    <th>{{ $item['item_description'] }}</th>
+                                    <th>{{ $item['quantity'] }}</th>
+                                    <th>{{ number_format($item['selling_price'], 2) }}</th>
+                                    <th>{{ $item['discount'] }}</th>
+                                    <th>{{ number_format($item['total_amount'], 2) }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
 
                     </tbody>
                 </table>
@@ -87,11 +93,11 @@
             <div class="flex flex-col gap-2 p-2 mx-2">
                 <div class="flex flex-row justify-between">
                     <p>VATable</p>
-                    <p>0.00</p>
+                    <p>{{ number_format($receiptDetails['tax_details']['vatable_amount'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Non-Vatable Sale</p>
-                    <p>0.00</p>
+                    <p>{{ number_format($receiptDetails['tax_details']['non_vatable_amount'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>VAT-Exempt Sale</p>
@@ -109,11 +115,12 @@
                 <div class="flex flex-row justify-between">
 
                     <p class=" text-[1.4em] font-bold">Subtotal</p>
-                    <p class=" text-[1.4em] font-bold">0.00</p>
+                    <p class=" text-[1.4em] font-bold">
+                        {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Discount - Senior Citizen / PWD (20%)</p>
-                    <p>0.00</p>
+                    <p>{{ number_format($receiptDetails['tax_details']['discount_amount'] ?? null, 2) }}</p>
                 </div>
             </div>
             <div class="m-2 ">
@@ -123,11 +130,12 @@
                 <div class="flex flex-row justify-between">
 
                     <p class=" text-[1.4em] font-bold">Total Amount</p>
-                    <p class=" text-[1.4em] font-bold">0.00</p>
+                    <p class=" text-[1.4em] font-bold">
+                        {{ number_format($receiptDetails['transaction_info']['grandTotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Tendered Amount</p>
-                    <p>0.00</p>
+                    <p>{{ number_format($receiptDetails['payment']['tendered_amount'] ?? null, 2) }}</p>
                 </div>
             </div>
             <div class="m-2 ">
@@ -136,7 +144,8 @@
             <div class="flex flex-col gap-2 p-2 mx-2">
                 <div class="flex flex-row justify-between">
                     <p class=" text-[1.4em] font-bold">Change</p>
-                    <p class=" text-[1.4em] font-bold">0.00</p>
+                    <p class=" text-[1.4em] font-bold">
+                        {{ number_format($receiptDetails['payment']['change'] ?? null, 2) }}</p>
                 </div>
             </div>
             <div class="m-2 ">
@@ -145,7 +154,21 @@
             <div class="flex flex-col gap-2 p-2 mx-2">
                 <div class="flex flex-row justify-between">
                     <p>Customer Name</p>
-                    <p>aiah</p>
+
+                    @if (isset($receiptDetails['customerDetails']['customer']))
+                        <p>
+                            {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
+                            {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
+                            {{ $receiptDetails['customerDetails']['customer']['lastname'] ?? null }}
+                        </p>
+                    @else
+                        <p>
+                            {{ $receiptDetails['customerDetails']['firstname'] ?? null }}
+                            {{ $receiptDetails['customerDetails']['middlename'] ?? null }}
+                            {{ $receiptDetails['customerDetails']['lastname'] ?? null }}
+                        </p>
+                    @endif
+
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Customer Signature</p>

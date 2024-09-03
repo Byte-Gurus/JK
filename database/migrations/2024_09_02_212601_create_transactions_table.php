@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_code')->unique();
+            $table->string('transaction_number')->unique();
             $table->string('transaction_type');
             $table->double('subtotal');
             $table->double('total_amount');
-            $table->double('vat_amount');
+            $table->double('total_vat_amount');
+            $table->double('total_discount_amount');
             $table->timestamps();
 
 
