@@ -30,6 +30,10 @@
                         <p>Payment Method:</p>
                         <p>{{ $receiptDetails['payment']['payment_method'] ?? null }}</p>
                     </div>
+                    <div class="flex flex-row gap-1 ">
+                        <p>Reference No.</p>
+                        <p>3213213213</p>
+                    </div>
                 </div>
                 <div class="flex flex-row ">
                     <p>Sales Invoice No.</p>
