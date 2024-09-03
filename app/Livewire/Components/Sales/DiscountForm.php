@@ -111,6 +111,7 @@ class DiscountForm extends Component
 
 
         $this->dispatch('get-customer-details', customerDetails: $this->customerDetails)->to(SalesTransaction::class);
+        $this->dispatch('display-discount-form')->to(SalesTransaction::class);
 
         //   $this->closeModal();
     }

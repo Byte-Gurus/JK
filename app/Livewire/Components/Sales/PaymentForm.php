@@ -54,6 +54,8 @@ class PaymentForm extends Component
         $this->alert('success', 'Customer was saved successfully');
 
         $this->dispatch('get-customer-payments', Payment: $this->payment)->to(SalesTransaction::class);
+
+        $this->dispatch('display-payment-form')->to(SalesTransaction::class);
     }
     public function changePaymentMethod()
     {

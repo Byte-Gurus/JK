@@ -99,6 +99,7 @@ class SalesTransaction extends Component
         'cancelConfirmed',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
         'display-discount-form' => 'displayDiscountForm',
+        'display-payment-form' => 'displayPaymentForm',
         'get-quantity' => 'getQuantity',
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments',
@@ -486,7 +487,7 @@ class SalesTransaction extends Component
 
     public function displayPaymentForm()
     {
-        $this->showPaymentForm = true;
+        $this->showPaymentForm = !$this->showPaymentForm;
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
     }
 
