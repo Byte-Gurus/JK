@@ -28,10 +28,15 @@ Artisan::command('migration-order', function () {
         '2024_08_09_142144_create_purchase_details_table.php',
         '2024_08_04_204401_create_deliveries_table.php',
         '2024_08_22_213514_create_back_orders_table.php',
-
+        '2024_09_02_212601_create_transactions_table.php',
 
         '2024_08_05_213148_create_inventories_table.php',
         '2024_08_16_234953_create_inventory_adjustments_table.php',
+
+        '2024_09_03_174035_create_discounts_table.php',
+        '2024_09_03_101448_create_payments_table.php',
+        '2024_09_02_213236_create_transaction_details_table.php',
+
         '2024_08_26_221603_create_inventory_movements_table.php',
 
         '0001_01_01_000001_create_cache_table.php',

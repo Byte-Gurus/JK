@@ -17,13 +17,14 @@ return new class extends Migration
             $table->string('vat_type');
             $table->double('item_subtotal');
             $table->double('item_discount_amount');
-            $table->double('discount');
-            $table->double('item_quantity');
             $table->timestamps();
 
 
+            $table->foreignId('discount_id')->nullable()->constrained('discounts');
             $table->foreignId('transaction_id')->constrained('transactions');
             $table->foreignId('item_id')->constrained('items');
+            $table->foreignId('inventory_id')->constrained('inventories');
+
         });
     }
 

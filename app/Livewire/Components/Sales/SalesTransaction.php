@@ -3,9 +3,13 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Livewire\Pages\CashierPage;
+use App\Models\Address;
 use App\Models\Customer;
+use App\Models\Discount;
 use App\Models\Inventory;
+use App\Models\InventoryMovement;
 use App\Models\Item;
+use App\Models\Payment;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +26,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $wholesale_discount, $original_total, $netAmount;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount;
     public  $tax_details = [];
     public $customerDetails = [];
     public $barcode;
@@ -46,6 +50,9 @@ class SalesTransaction extends Component
     }
     public function render()
     {
+
+        $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
+
         $searchTerm = trim($this->search);
 
         // Fetch items with their inventoryJoin
@@ -154,14 +161,16 @@ class SalesTransaction extends Component
 
 
                     if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
-                        $this->selectedItems[$index]['discount'] = 10;
+                        $this->selectedItems[$index]['discount'] =    $this->discounts[3]->percentage;
+                        $this->selectedItems[$index]['discount_id'] =  $this->discounts[3]->id;
 
-                        $this->wholesale_discount = 10;
 
                         $this->selectedItems[$index]['original_total'] = $this->selectedItems[$index]['total_amount'];
 
-                        $discounted_amount = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
-                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -  $discounted_amount;
+
+                        $this->selectedItems[$index]['wholesale_discount_amount'] = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
+
+                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -   $this->selectedItems[$index]['wholesale_discount_amount'];
                     }
 
 
@@ -186,7 +195,9 @@ class SalesTransaction extends Component
                     'total_amount' => $item->selling_price * 1,
                     'current_stock_quantity' => $item->current_stock_quantity,
                     'bulk_quantity' => $item->itemJoin->bulk_quantity,
-                    'discount' => 0,
+                    'wholesale_discount_amount' => 0,
+                    'discount' =>  0,
+                    'discount_id' =>  null,
                     'original_total' => 0,
                 ];
             }
@@ -251,14 +262,18 @@ class SalesTransaction extends Component
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
 
         if ($this->selectedItems[$this->selectedIndex]['quantity'] >= $this->selectedItems[$this->selectedIndex]['bulk_quantity']) {
-            $this->selectedItems[$this->selectedIndex]['discount'] = 10;
+            $this->selectedItems[$this->selectedIndex]['discount'] =    $this->discounts[3]->percentage;
+            $this->selectedItems[$this->selectedIndex]['discount_id'] =  $this->discounts[3]->id;
 
-            $this->wholesale_discount = 10;
+
+
 
             $this->selectedItems[$this->selectedIndex]['original_total'] = $this->selectedItems[$this->selectedIndex]['total_amount'];
 
-            $discounted_amount = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
-            $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $discounted_amount;
+            $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
+
+
+            $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'];
         }
 
         $this->reset('selectedIndex', 'isSelected');
@@ -278,7 +293,7 @@ class SalesTransaction extends Component
 
         $this->netAmount = 0;
         $this->discount_percent =  0;
-        $this->discount_amount = 0;
+        $this->PWD_Senior_discount_amount = 0;
 
         foreach ($this->selectedItems as $index) {
 
@@ -299,17 +314,17 @@ class SalesTransaction extends Component
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
                 $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
-                $this->discount_amount =  $this->netAmount;
+                $this->PWD_Senior_discount_amount =  $this->netAmount;
             }
 
-            $this->grandTotal = $this->subtotal - $this->discount_amount;
+            $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
         }
 
         $this->tax_details = [
             'non_vatable_amount' => $non_vatable_amount,
             'vatable_amount' => $vatable_amount,
             'total_vat' =>  $this->totalVat,
-            'discount_amount' =>  $this->discount_amount,
+            'PWD_Senior_discount_amount' =>  $this->PWD_Senior_discount_amount,
         ];
     }
 
@@ -407,16 +422,95 @@ class SalesTransaction extends Component
         $transaction_info = [
             'subtotal' => $this->subtotal,
             'grandTotal' => $this->grandTotal,
-            'transaction_no' => $this->transaction_number,
+            'transaction_number' => $this->transaction_number,
             'transaction_time' => now()->format('H:i:s'),
             'transaction_date' => now()->format('d-m-Y'),
         ];
 
-        if(isset($this->customerDetails['customer_id'])){
+        if (isset($this->customerDetails['customer_id'])) {
             $customer = Customer::find($this->customerDetails['customer_id']);
 
             $this->customerDetails['customer'] = $customer;
         }
+
+
+
+        if (!isset($this->customerDetails['customer_id']) && !empty($this->customerDetails['customer_id'])) {
+
+            $address = Address::create([
+                'province_code' => $this->customerDetails['province_code'],
+                'city_municipality_code' => $this->customerDetails['city_municipality_code'],
+                'barangay_code' => $this->customerDetails['barangay_code'],
+                'street' => $this->customerDetails['street'],
+
+            ]);
+            $customer = Customer::create([
+                'firstname' => $this->customerDetails['firstname'],
+                'middlename' => $this->customerDetails['middlename'],
+                'lastname' => $this->customerDetails['lastname'],
+                'contact_number' => $this->customerDetails['contact_number'],
+                'birthdate' => $this->customerDetails['birthdate'],
+                'address_id' => $address->id,
+                'customer_type' => $this->customerDetails['customer_type'],
+                'customer_discount_no' => $this->customerDetails['customer_discount_no'],
+                'id_picture' => 'N/A',
+
+            ]);
+        }
+
+        $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
+
+        $transaction = Transaction::create([
+            'transaction_number' => $transaction_info['transaction_number'],
+            'transaction_type' => 'Sales',
+            'subtotal' => $transaction_info['subtotal'],
+            'total_amount' => $transaction_info['grandTotal'],
+            'total_vat_amount' => $this->tax_details['total_vat'],
+            'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
+            'customer_id' => $customer_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        foreach ($this->selectedItems as $index => $selectedItem) {
+
+
+            $inventory = Inventory::where('sku_code', $selectedItem['sku_code'])->first();
+
+            $transactionDetails = TransactionDetails::create([
+                'item_quantity' => $selectedItem['quantity'],
+                'vat_type' => $selectedItem['vat_type'],
+                'item_subtotal' => $selectedItem['total_amount'],
+                'item_discount_amount' => $selectedItem['wholesale_discount_amount'],
+                'discount' => $selectedItem['discount'],
+                'discount_id' => $selectedItem['discount_id'],
+                'transaction_id' => $transaction->id,
+                'item_id' => $selectedItem['item_id'],
+                'inventory_id' => $inventory->id
+            ]);
+
+
+            $inventory->current_stock_quantity -= $selectedItem['quantity'];
+            $inventory->save();
+
+            $inventory_movements = InventoryMovement::create([
+                'transaction_detail_id' => $transactionDetails->id,
+                'movement_type' => 'Sales',
+                'operation' => 'Stock out',
+            ]);
+        }
+
+
+
+        $payment = Payment::create([
+            'transaction_id' => $transaction->id,
+            'amount' => $this->payment['tendered_amount'],
+            'reference_number' => $this->payment['reference_no'] ?? 'N/A',
+            'payment_type' => $this->payment['payment_type'],
+        ]);
+
+
+
+
 
         $this->dispatch('print-sales-receipt', array_merge(
             $receiptData,
@@ -430,31 +524,7 @@ class SalesTransaction extends Component
         ))->to(SalesReceipt::class);
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
-
-
-        // $transaction = Transaction::create([
-        //     'transaction_number' => $transaction_info['transaction_number'],
-        //     'transaction_type' => 'Sales',
-        //     'subtotal' => $transaction_info['subtotal'],
-        //     'total_amount' => $transaction_info['granTotal'],
-        //     'total_vat_amount' => $this->tax_details['total_vat'],
-        //     'total_discount_amount' => $this->tax_details['disount_amount'],
-        //     'customer_id' => null,
-        //     'user_id' => Auth::id(),
-        // ]);
-
-//         $transactionDetails = TransactionDetails::create([
-//             'item_quantity' => $this->selectedItems['quantity'],
-// 'vat_type' => $this->selectedItems['vat_type'],
-// 'item_subtotal' => $this->selectedItems['total_amount'],
-// 'item_discount_amount' =>
-// 'discount' =>
-// 'item_quantity' =>
-// 'transactions_id' =>
-// 'item_id' =>
-//         ])
     }
-
 
 
 

@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(StatusSeeder::class);
         $this->call(UserSeeder::class);
-        
+        $this->call(DiscountSeeder::class);
+
 
 
         $this->call(PhilippineRegionsTableSeeder::class);

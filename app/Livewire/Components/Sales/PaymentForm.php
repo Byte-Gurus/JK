@@ -40,14 +40,14 @@ class PaymentForm extends Component
         if ($this->payWithCash) {
             $this->payment = [
                 'tendered_amount' => $validated['tendered_amount'],
-                'payment_method' => 'Cash',
+                'payment_type' => 'Cash',
             ];
         } else {
 
             $this->payment = [
                 'tendered_amount' => $validated['tendered_amount'],
                 'reference_no' => $validated['reference_no'],
-                'payment_method' => 'GCash',
+                'payment_type' => 'GCash',
             ];
         }
 

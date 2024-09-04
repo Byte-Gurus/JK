@@ -259,7 +259,7 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
 
-                                                @if ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty())
+                                                @if ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty() || $delivery->status === 'Backorder complete')
                                                     <button
                                                         x-on:click="$wire.viewBackorderDetails(); openActions = !openActions"
                                                         wire:click="getPO_ID({{ $delivery->id }})"

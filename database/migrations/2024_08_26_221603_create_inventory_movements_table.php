@@ -1,4 +1,4 @@
-<?php
+t<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->foreignId('inventory_id')->nullable()->constrained('inventories');
             $table->foreignId('inventory_adjustment_id')->nullable()->constrained('inventory_adjustments');
+            $table->foreignId('transaction_detail_id')->nullable()->constrained('transaction_details');
         });
     }
 

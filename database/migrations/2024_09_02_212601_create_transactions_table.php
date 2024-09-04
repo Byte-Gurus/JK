@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreignId('customer_id')->nullable()->constrained('items');
+            $table->foreignId('customer_id')->nullable()->constrained('customers');
             $table->foreignId('user_id')->nullable()->constrained('users');
 
         });

@@ -4,6 +4,7 @@ namespace App\Livewire\Components\Sales;
 
 use App\Models\Address;
 use App\Models\Customer;
+use App\Models\Discount;
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
@@ -21,11 +22,12 @@ class DiscountForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $selectCustomer, $customer_type, $customer_discount_no, $customer_id, $discount_percentage = 20;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $selectCustomer, $customerType, $customer_discount_no, $customer_id, $discount_percentage, $discounts, $discount_id;
     public $customerDetails = [];
 
     public function render()
     {
+        $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
 
         $customers = Customer::where('customer_type', 'PWD')
             ->orWhere('customer_type', 'Senior CItizen')->get();
@@ -42,6 +44,18 @@ class DiscountForm extends Component
         'removeDiscountConfirmed',
     ];
 
+    public function updatedCustomerType($customer_type) //@params province code for city query
+    {
+
+
+        if ($this->customerType == 'PWD') {
+            $this->discount_percentage = $this->discounts[1]->percentage;
+            $this->discount_id = $this->discounts[1]->id;
+        } elseif ($this->customerType == 'Senior Citizen') {
+            $this->discount_percentage = $this->discounts[2]->percentage;
+            $this->discount_id = $this->discounts[2]->id;
+        }
+    }
     public function updatedSelectProvince($province_code) //@params province code for city query
     {
 
@@ -61,8 +75,17 @@ class DiscountForm extends Component
 
     public function updatedSelectCustomer($customer_id)
     {
+        $customer = Customer::find($customer_id);
         $this->customer_id = $customer_id;
         $this->populateForm();
+
+        if ($customer->customer_type == 'PWD') {
+            $this->discount_percentage = $this->discounts[1]->percentage;
+            $this->discount_id = $this->discounts[1]->id;
+        } elseif ($customer->customer_type == 'Senior Citizen') {
+            $this->discount_percentage = $this->discounts[2]->percentage;
+            $this->discount_id = $this->discounts[2]->id;
+        }
     }
 
     public function create() //* create process
@@ -89,9 +112,10 @@ class DiscountForm extends Component
                 'lastname' => $validated['lastname'],
                 'contact_number' => $validated['contact_number'],
                 'birthdate' => $validated['birthdate'],
-                'customer_type' => $validated['customer_type'],
+                'customer_type' => $validated['customerType'],
                 'customer_discount_no' => $validated['customer_discount_no'],
                 'discount_percentage' =>  $validated['discount_percentage'],
+                'discount_id' => $this->discount_id,
 
                 'province_code' => $validated['selectProvince'],
                 'city_municipality_code' => $validated['selectCity'],
@@ -100,10 +124,11 @@ class DiscountForm extends Component
             ];
         } else {
             $this->customerDetails = [
-                'customer_type' => $validated['customer_type'],
+                'customer_type' => $validated['customerType'],
                 'customer_discount_no' => $validated['customer_discount_no'],
                 'customer_id' =>  $validated['customer_id'],
                 'discount_percentage' =>  $validated['discount_percentage'],
+                'discount_id' => $this->discount_id,
             ];
         }
 
@@ -131,7 +156,7 @@ class DiscountForm extends Component
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customer_type', 'customer_discount_no', 'discount_percentage']);
+        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'customer_discount_no', 'discount_percentage']);
     }
     public function resetFormWhenClosed()
     {
@@ -147,7 +172,7 @@ class DiscountForm extends Component
         //* ipasa ang laman ng model sa inputs
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         $this->fill([
-            'customer_type' => $customer_details->customer_type,
+            'customerType' => $customer_details->customer_type,
             'customer_discount_no' => $customer_details->customer_discount_no,
 
         ]);
@@ -173,13 +198,13 @@ class DiscountForm extends Component
                 'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
                 'street' => 'required|string|max:255',
-                'customer_type' => 'required|in:PWD,Senior Citizen',
+                'customerType' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
                 'discount_percentage' => 'required|numeric|min:0',
             ];
         } else {
             $rules = [
-                'customer_type' => 'required|in:PWD,Senior Citizen',
+                'customerType' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
                 'customer_id' => 'required|numeric',
                 'discount_percentage' => 'required|numeric|min:0',

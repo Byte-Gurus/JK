@@ -132,10 +132,13 @@ class DeliveryTable extends Component
             }
 
 
-            $repurchasedCount = $old_purchase->backorderJoin->where('status', 'Repurchased')->count();
+            $missingOrRepurchasedCount = $old_purchase->backorderJoin
+                ->whereIn('status', ['Missing', 'Repurchased'])
+                ->count();
+
 
             // If all backorders are delivered, update the old delivery status to "Complete Backorder"
-            if ($repurchasedCount == 0) {
+            if ($missingOrRepurchasedCount == 0) {
                 // Get the old delivery record associated with the old purchase order
                 $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
                 $old_delivery->update(['status' => 'Backorder complete']);

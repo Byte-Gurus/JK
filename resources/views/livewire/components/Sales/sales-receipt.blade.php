@@ -28,11 +28,11 @@
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Payment Method:</p>
-                        <p>{{ $receiptDetails['payment']['payment_method'] ?? null }}</p>
+                        <p>{{ $receiptDetails['payment']['payment_type'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row gap-1 ">
                         <p>Reference No.</p>
-                        <p>3213213213</p>
+                        <p>{{ $receiptDetails['payment']['reference_no'] ?? null }}</p>
                     </div>
                 </div>
                 <div class="flex flex-row ">
@@ -120,7 +120,7 @@
                 </div>
                 <div class="flex flex-row justify-between">
                     <p>Discount - Senior Citizen / PWD (20%)</p>
-                    <p>{{ number_format($receiptDetails['tax_details']['discount_amount'] ?? null, 2) }}</p>
+                    <p>{{ number_format($receiptDetails['tax_details']['PWD_Senior_discount_amount'] ?? null, 2) }}</p>
                 </div>
             </div>
             <div class="m-2 ">

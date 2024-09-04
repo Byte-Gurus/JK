@@ -165,16 +165,20 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->status ?? 'N/A' }}
-                                @else
-                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->status }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->status ?? 'N/A' }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->status }}
                                 @endif
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->sku_code ?? 'N/A' }}
-                                @else
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->sku_code }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->sku_code }}
                                 @endif
 
                             </th>
@@ -182,24 +186,30 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
-                                @else
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->barcode }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->barcode }}
                                 @endif
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->itemJoin->item_name }}
-                                @else
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_name }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_name }}
                                 @endif
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->itemJoin->item_description }}
-                                @else
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_description }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_description }}
                                 @endif
                             </th>
 
@@ -213,8 +223,8 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                @if ($InventoryHistory->operation === 'Stock In' || $InventoryHistory->operation === 'Stock Out')
-                                    {{ $InventoryHistory->inventoryJoin->stock_in_quantity }}
+                                @if ($InventoryHistory->operation === 'Stock In' || $InventoryHistory->operation === 'Stock out')
+                                    {{ $InventoryHistory->inventoryJoin->stock_in_quantity ?? $InventoryHistory->transactionDetailsJoin->item_quantity }}
                                 @elseif ($InventoryHistory->operation === 'Add' || $InventoryHistory->operation === 'Deduct')
                                     {{ $InventoryHistory->adjustmentJoin->adjusted_quantity }}
                                 @endif
@@ -223,8 +233,10 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name ?? 'N/A' }}
-                                @else
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
                                     {{ $InventoryHistory->adjustmentJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
                                 @endif
                             </th>
                         </tr>

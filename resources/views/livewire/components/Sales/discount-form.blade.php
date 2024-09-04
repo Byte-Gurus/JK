@@ -280,11 +280,11 @@
 
                                             <div class="mb-3">
 
-                                                <label for="customer_type"
+                                                <label for="customerType"
                                                     class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                                     Type</label>
 
-                                                <select id="customer_type" wire:model="customer_type" required
+                                                <select id="customerType" wire:model.live="customerType" required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                     <option value=""selected>Select Customer Type</option>
                                                     <option value="PWD">PWD</option>
@@ -292,7 +292,7 @@
 
                                                 </select>
 
-                                                @error('customer_type')
+                                                @error('customerType')
                                                     <span
                                                         class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
@@ -380,11 +380,11 @@
 
                                         <div class="mb-3">
 
-                                            <label for="customer_type"
+                                            <label for="customerType"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                                 Type</label>
 
-                                            <select id="customer_type" wire:model="customer_type" required
+                                            <select id="customerType" wire:model.live="customerType" required
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value=""selected>Select Customer Type</option>
                                                 <option value="PWD">PWD</option>
@@ -393,7 +393,7 @@
 
                                             </select>
 
-                                            @error('customer_type')
+                                            @error('customerType')
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
                                         </div>
