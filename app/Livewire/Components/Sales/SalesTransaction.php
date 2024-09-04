@@ -467,6 +467,7 @@ class SalesTransaction extends Component
             'total_amount' => $transaction_info['grandTotal'],
             'total_vat_amount' => $this->tax_details['total_vat'],
             'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
+            'discount_id' => $this->customerDetails['discount_id'] ?? null,
             'customer_id' => $customer_id,
             'user_id' => Auth::id(),
         ]);
@@ -504,6 +505,7 @@ class SalesTransaction extends Component
         $payment = Payment::create([
             'transaction_id' => $transaction->id,
             'amount' => $this->payment['tendered_amount'],
+            'tendered_amount' => $this->payment['tendered_amount'],
             'reference_number' => $this->payment['reference_no'] ?? 'N/A',
             'payment_type' => $this->payment['payment_type'],
         ]);

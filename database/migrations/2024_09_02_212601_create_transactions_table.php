@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->foreignId('customer_id')->nullable()->constrained('customers');
             $table->foreignId('user_id')->nullable()->constrained('users');
-
+            $table->foreignId('discount_id')->nullable()->constrained('discounts');
         });
     }
 

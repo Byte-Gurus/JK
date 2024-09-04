@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->double('amount');
+            $table->double('tendered_amount');
             $table->string('reference_number');
             $table->string('payment_type');
             $table->timestamps();
