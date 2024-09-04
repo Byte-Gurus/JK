@@ -93,7 +93,7 @@ class DiscountForm extends Component
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to apply the discount?', [
+        $this->confirm('Do you want to create and apply the discount?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);

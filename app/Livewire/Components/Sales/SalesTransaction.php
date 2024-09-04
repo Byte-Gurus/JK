@@ -435,7 +435,7 @@ class SalesTransaction extends Component
 
 
 
-        if (!isset($this->customerDetails['customer_id']) && !empty($this->customerDetails['customer_id'])) {
+        if (!isset($this->customerDetails['customer_id'])) {
 
             $address = Address::create([
                 'province_code' => $this->customerDetails['province_code'],
@@ -497,6 +497,8 @@ class SalesTransaction extends Component
                 'movement_type' => 'Sales',
                 'operation' => 'Stock out',
             ]);
+
+            $this->alert('success', 'New Transaction Saved Successfully');
         }
 
 

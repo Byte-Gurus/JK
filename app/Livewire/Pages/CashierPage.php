@@ -9,6 +9,8 @@ use Livewire\Component;
 class CashierPage extends Component
 {
 
+    public $showNavbarNoSidebar = true;
+
     public $showSalesTransaction = true;
 
     public $showSalesTransactionHistory = false;
@@ -36,12 +38,14 @@ class CashierPage extends Component
 
     public function displaySalesTransaction($showSalesTransaction)
     {
+        $this->showNavbarNoSidebar = true;
         $this->showSalesTransaction = $showSalesTransaction;
         $this->showSalesTransactionHistory = false;
     }
 
     public function displaySalesReceipt($showSalesReceipt)
     {
+        $this->showNavbarNoSidebar = false;
         $this->showSalesTransaction = false;
         $this->showSalesReceipt = $showSalesReceipt;
     }
