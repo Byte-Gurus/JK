@@ -156,6 +156,7 @@ class StockAdjustForm extends Component
     public function refreshTable() //* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(InventoryTable::class);
+        $this->dispatch('refresh-table')->to(InventoryHistory::class);
     }
     public function adjustStock($stockID)
     {

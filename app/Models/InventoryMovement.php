@@ -14,6 +14,7 @@ class InventoryMovement extends Model
         'inventory_id',
         'operation',
         'inventory_adjustment_id',
+        'transaction_detail_id',
 
     ];
 
@@ -27,12 +28,21 @@ class InventoryMovement extends Model
         return $this->belongsTo(InventoryAdjustment::class, 'inventory_adjustment_id');
     }
 
+    public function transactionDetailsJoin()
+    {
+        return $this->belongsTo(TransactionDetails::class, 'transaction_detail_id');
+    }
+
+
     public function scopeSearch($query, $value)
     {
         return $query->whereHas('inventoryJoin.itemJoin', function ($query) use ($value) {
             $query->where('item_name', 'like', "%{$value}%")
                 ->orWhere('barcode', 'like', "%{$value}%");
         })->orWhereHas('adjustmentJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
+            $query->where('item_name', 'like', "%{$value}%")
+                ->orWhere('barcode', 'like', "%{$value}%");
+        })->orWhereHas('transactionDetailsJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
             $query->where('item_name', 'like', "%{$value}%")
                 ->orWhere('barcode', 'like', "%{$value}%");
         });

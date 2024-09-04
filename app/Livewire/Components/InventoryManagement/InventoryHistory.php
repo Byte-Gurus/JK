@@ -38,7 +38,13 @@ class InventoryHistory extends Component
 
         $query->whereHas('inventoryJoin', function ($query) {
             $query->where('status', '!=', 'new Item');
-        });
+        })
+            ->orWhereHas('adjustmentJoin')
+            ->orWhereHas('transactionDetailsJoin');
+
+
+
+
 
         if ($this->statusFilter != 0) {
             $query->where(function ($query) {
@@ -82,11 +88,16 @@ class InventoryHistory extends Component
 
 
 
+
         return view('livewire.components.InventoryManagement.inventory-history', [
             'InventoryHistories' => $InventoryHistory,
             'suppliers' => $suppliers,
         ]);
     }
+
+    protected $listeners = [
+        'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+    ];
 
     public function sortByColumn($column)
     { //* sort the column
@@ -101,6 +112,8 @@ class InventoryHistory extends Component
 
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
+
+
     public function updatedSearch()
     {
         $this->resetPage();

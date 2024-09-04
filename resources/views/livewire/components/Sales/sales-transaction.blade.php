@@ -366,7 +366,7 @@
                     <div class=" font-medium text-[1.4em]">
                         <p>Discount Amount</p>
                     </div>
-                    <div class=" font-black text-[1.4em]">₱ {{ number_format($discount_amount, 2) }}</div>
+                    <div class=" font-black text-[1.4em]">₱ {{ number_format($PWD_Senior_discount_amount, 2) }}</div>
                 </div>
                 <div class="w-full my-2">
                     <div class="border border-black"></div>

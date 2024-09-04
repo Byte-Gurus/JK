@@ -181,7 +181,7 @@
                                     @elseif ($delivery->status === 'In Progress')
                                         <input type="date"
                                             wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
-                                            wire:model="delivery_date.{{ $delivery->id }}"
+                                            wire:model="delivery_date{{ $delivery->id }}"
                                             class="bg-white focus:outline-black hover:shadow-sm hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
                                     @else
                                         <a scope="row"
@@ -259,7 +259,7 @@
                                                 <div class="w-full border border-[rgb(205,205,205)]"></div>
 
 
-                                                @if ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty())
+                                                @if ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty() || $delivery->status === 'Backorder complete')
                                                     <button
                                                         x-on:click="$wire.viewBackorderDetails(); openActions = !openActions"
                                                         wire:click="getPO_ID({{ $delivery->id }})"

@@ -40,20 +40,22 @@ class PaymentForm extends Component
         if ($this->payWithCash) {
             $this->payment = [
                 'tendered_amount' => $validated['tendered_amount'],
-                'payment_method' => 'Cash',
+                'payment_type' => 'Cash',
             ];
         } else {
 
             $this->payment = [
                 'tendered_amount' => $validated['tendered_amount'],
                 'reference_no' => $validated['reference_no'],
-                'payment_method' => 'GCash',
+                'payment_type' => 'GCash',
             ];
         }
 
         $this->alert('success', 'Customer was saved successfully');
 
         $this->dispatch('get-customer-payments', Payment: $this->payment)->to(SalesTransaction::class);
+
+        $this->dispatch('display-payment-form')->to(SalesTransaction::class);
     }
     public function changePaymentMethod()
     {

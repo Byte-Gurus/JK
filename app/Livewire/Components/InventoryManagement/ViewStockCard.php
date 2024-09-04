@@ -52,12 +52,15 @@ class ViewStockCard extends Component
 
     public function computeStockCardData()
     {
-        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin'])
+        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin', 'transactionDetailsJoin.inventoryJoin'])
             ->where(function ($query) {
                 $query->whereHas('inventoryJoin', function ($query) {
                     $query->where('id', $this->stock_id);
                 })
                 ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
+                    $query->where('id', $this->stock_id);
+                })
+                ->orWhereHas('transactionDetailsJoin.inventoryJoin', function ($query) {
                     $query->where('id', $this->stock_id);
                 });
             });
@@ -96,10 +99,10 @@ class ViewStockCard extends Component
                     $in_value = $in_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
                     break;
 
-                case 'Stock Out':
-                    // $out_quantity = $stock_card->inventoryJoin->current_stock_quantity;
-                    // $this->quantity_balance -= $out_quantity;
-                    // $out_value = $out_quantity * $stock_card->inventoryJoin->selling_price;
+                case 'Stock out':
+                    $out_quantity = $stock_card->transactionDetailsJoin->item_quantity;
+                    $this->quantity_balance -= $out_quantity;
+                    $out_value = $out_quantity * $stock_card->transactionDetailsJoin->inventoryJoin->selling_price;
                     break;
 
                 case 'Deduct':

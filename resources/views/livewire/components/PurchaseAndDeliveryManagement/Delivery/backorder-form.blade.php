@@ -63,6 +63,9 @@
                             {{-- //* purchase quantity --}}
                             <th scope="col" class="py-3 text-center text-nowrap">Status</th>
 
+                            {{-- //* purchase quantity --}}
+                            <th scope="col" class="py-3 text-center text-nowrap">New PO</th>
+
                         </tr>
                     </thead>
 

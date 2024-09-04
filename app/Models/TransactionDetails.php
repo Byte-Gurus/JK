@@ -14,15 +14,21 @@ class TransactionDetails extends Model
         'vat_type',
         'item_subtotal',
         'item_discount_amount',
-        'discount',
+        'discount_id',
         'item_quantity',
-        'transactions_id',
+        'transaction_id',
         'item_id',
+        'inventory_id',
     ];
 
     public function transactionJoin()
     {
         return $this->belongsTo(TransactionDetails::class, 'transaction_id');
+    }
+
+    public function inventoryJoin()
+    {
+        return $this->belongsTo(Inventory::class, 'inventory_id');
     }
 
     public function itemJoin()
