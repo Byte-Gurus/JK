@@ -75,8 +75,8 @@ class CreditForm extends Component
 
     public function resetFormWhenClosed()
     {
-        $this->resetForm();
-        $this->resetValidation();
+        // $this->resetForm();
+        // $this->resetValidation();
     }
 
     public function changeMethod($isCreate)
