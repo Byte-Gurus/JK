@@ -1,7 +1,7 @@
 <div>
-    <div>
+<di x-show="showNavbarNoSidebar" x-data="{ showNavbarNoSidebar: @entangle('showNavbarNoSidebar') }">
         @livewire('components.navbar-no-sidebar')
-    </div>
+    </di>
     <div x-show="showSalesTransaction" x-data="{ showSalesTransaction: @entangle('showSalesTransaction') }">
         @livewire('components.Sales.sales-transaction')
     </div>
