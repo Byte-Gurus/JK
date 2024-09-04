@@ -78,31 +78,29 @@
                                             class="block mb-2 font-medium text-gray-900 text-md ">Credit ID
                                         </label>
 
-                                        <p class=" text-[2em] font-black">192038</p>
+                                        <p class=" text-[2em] font-black">{{ $credit_number }}</p>
 
                                     </div>
 
                                     {{-- //* province --}}
-                                    <div class="mb-3">
-
+                                    <div>
                                         <label for="selectCustomer"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Name
                                         </label>
 
-                                        <select id="selectCustomer" wire:model.live="selectCustomer" required
+                                        <select id="selectCustomer" wire:model.live="selectCustomer"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            {{-- <option value="" selected>Select Customer</option>
-                                            @foreach ($provinces as $province)
-                                                <option value="{{ $province->province_code }}">
-                                                    {{ $province->province_description }}</option>
-                                            @endforeach --}}
-
+                                            <option value="" selected>Select customer</option>
+                                            @foreach ($customers as $customer)
+                                                <option value="{{ $customer->id }}">
+                                                    {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
+                                                </option>
+                                            @endforeach
                                         </select>
 
-                                        {{-- @error('selectProvince')
+                                        @error('selectCustomer')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror --}}
-
+                                        @enderror
                                     </div>
 
                                     {{-- //* credit limit --}}
@@ -116,9 +114,45 @@
                                             class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
                                             placeholder="Enter Credit Limit" tabindex="2" required />
 
-                                        {{-- @error('credit_limit')
+                                        @error('credit_limit')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror --}}
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="due_date"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Due Date
+                                        </label>
+
+                                        <input type="date" id="due_date" wire:model="due_date"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
+                                            tabindex="2" required />
+
+                                        @error('due_date')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+
+                                        <select id="status" wire:model="status" readonly
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <option value="" selected>Select status</option>
+                                            <option value="Paid">Paid</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Overdue">Overdue</option>
+
+
+                                        </select>
+
+                                        @error('status')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
 
                                     </div>
                                 </div>
@@ -192,8 +226,8 @@
                                     <div class="flex items-center justify-center loader loader--style3 " title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
-                                            height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
-                                            xml:space="preserve">
+                                            height="40px" viewBox="0 0 50 50"
+                                            style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                             <path fill="#000"
                                                 d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
                                                 <animateTransform attributeType="xml" attributeName="transform"

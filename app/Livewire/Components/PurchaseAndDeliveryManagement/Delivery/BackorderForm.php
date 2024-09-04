@@ -252,7 +252,8 @@ class BackorderForm extends Component
     public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
     {
 
-        $randomNumber = random_int(100000, 999999);
-        $this->new_po_number = 'PO-' . $randomNumber;
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+        $this->new_po_number = 'PO-' . $formattedNumber . '-' . now()->format('dmY');
     }
 }

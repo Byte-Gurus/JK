@@ -33,8 +33,9 @@
                 <select wire:model.live="statusFilter"
                     class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
                     <option value="0">All</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Overdue">Overdue</option>
 
                 </select>
 
@@ -55,16 +56,16 @@
 
 
                         {{-- //* credit id --}}
-                        <th scope="col" class="px-4 py-3 text-center">Credit ID</th>
+                        <th scope="col" class="px-4 py-3 text-center">Credit No</th>
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Customer Name</th>
 
                         {{-- //* credit balance --}}
-                        <th scope="col" class="px-4 py-3 text-center">Credit Balance</th>
+                        <th scope="col" class="px-4 py-3 text-center">Credit Amount</th>
 
                         {{-- //* credit payment amount --}}
-                        <th wire:click="sortByColumn('created_at')" scope="col"
+                        {{-- <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center">
@@ -80,7 +81,7 @@
                                 </span>
 
                             </div>
-                        </th>
+                        </th> --}}
 
                         {{-- //* credit limit --}}
                         <th scope="col" class="px-4 py-3 text-center">Credit Limit</th>
@@ -96,86 +97,96 @@
 
                 {{-- //* table body --}}
                 <tbody>
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        {{-- credit id --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                        </th>
+                    @foreach ($credits as $credit)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        {{-- customer name --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                        </th>
+                            {{-- credit id --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->credit_number }}
+                            </th>
 
-                        {{-- credit balance --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                        </th>
+                            {{-- customer name --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname }}
+                            </th>
 
-                        {{-- credit payment amount --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                        </th>
+                            {{-- credit balance --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->credit_amount ?? 'N/A' }}
+                            </th>
 
-                        {{-- credit limit --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                        </th>
+                            {{-- credit payment amount --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->credit_limit }}
+                            </th>
 
-                        {{-- status --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                        </th>
+                            {{-- credit limit --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->status }}
+                            </th>
 
-                        {{-- //* actions --}}
-                        <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
+                            {{-- status --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->transactionJoin->transaction_number ?? 'N/A' }}
+                            </th>
+
+                            {{-- //* actions --}}
+                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
 
 
-                            <div x-data="{ openActions: false }">
-                                <div x-on:click="openActions = !openActions"
-                                    class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
-                                    </svg>
-                                </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
 
-                                <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
-                                    x-cloak x-transition:enter-start="transform opacity-100 scale-0"
-                                    x-transition:enter-end="transform opacity-100 scale-100"
-                                    x-transition:leave="transition ease-out duration-100"
-                                    x-transition:leave-start="transform opacity-100 scale-100"
-                                    x-transition:leave-end="transform opacity-0 scale-0"
-                                    class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
-                                    <div
-                                        class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
-                                min-h-[20%]">
-                                        <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-                                            <button
-                                                class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
-                                                <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="size-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                    </svg></div>
-                                                <div>Edit</div>
-                                            </button>
-                                            <button
-                                                class="flex flex-row items-center gap-2 px-2 py-2 text-[rgb(255,131,49)] justify-left hover:bg-[rgb(255,215,188)]">
-                                                <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                        class="size-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                            d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-                                                    </svg>
-                                                </div>
-                                                <div>Credit Payment</div>
-                                            </button>
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                            min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg></div>
+                                                    <div>Edit</div>
+                                                </button>
+                                                <button
+                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-[rgb(255,131,49)] justify-left hover:bg-[rgb(255,215,188)]">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                                            class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>Credit Payment</div>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </th>
-                    </tr>
+                            </th>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>

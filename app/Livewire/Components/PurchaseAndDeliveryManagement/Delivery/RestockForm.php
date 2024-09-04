@@ -340,7 +340,12 @@ class RestockForm extends Component
     }
     public function generateSKU()
     {
-        $randomNumber = random_int(100000, 999999);
-        return 'SKU-' . $randomNumber;
+
+
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+        $SKU = 'SKU-' . $formattedNumber . '-' . now()->format('dmY');
+
+        return $SKU;
     }
 }
