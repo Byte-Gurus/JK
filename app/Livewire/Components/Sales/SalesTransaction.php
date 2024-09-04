@@ -417,6 +417,10 @@ class SalesTransaction extends Component
     public function save()
     {
         // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->customerDetails ?? null);
+        if(empty($this->payment)){
+            $this->alert('warning', 'No payment yest');
+            return;
+        }
 
         $receiptData = [];
         $transaction_info = [
