@@ -31,11 +31,9 @@ class SalesTransactionHistory extends Component
 
         if ($this->transactionTypeFilter != 0) {
             $query->where('transaction_type', $this->transactionTypeFilter);
-            $this->resetForm();
         }
         if ($this->startDate && $this->endDate) {
             $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
-            $this->resetForm();
         }
 
 

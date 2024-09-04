@@ -434,7 +434,7 @@ class SalesTransaction extends Component
         }
 
 
-        
+
 
         if (!isset($this->customerDetails['customer_id']) && isset($this->customerDetails['firstname'])) {
 
@@ -492,6 +492,9 @@ class SalesTransaction extends Component
 
 
             $inventory->current_stock_quantity -= $selectedItem['quantity'];
+            if ($inventory->current_stock_quantity == 0) {
+                $inventory->status -= 'Not available';
+            }
             $inventory->save();
 
             $inventory_movements = InventoryMovement::create([
