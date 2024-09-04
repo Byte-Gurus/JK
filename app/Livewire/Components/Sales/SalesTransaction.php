@@ -493,9 +493,12 @@ class SalesTransaction extends Component
 
             $inventory->current_stock_quantity -= $selectedItem['quantity'];
             if ($inventory->current_stock_quantity == 0) {
-                $inventory->status -= 'Not available';
+                $inventory->status = 'Not available';
+
             }
             $inventory->save();
+
+
 
             $inventory_movements = InventoryMovement::create([
                 'transaction_detail_id' => $transactionDetails->id,
