@@ -95,6 +95,10 @@ class InventoryHistory extends Component
         ]);
     }
 
+    protected $listeners = [
+        'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+    ];
+
     public function sortByColumn($column)
     { //* sort the column
 

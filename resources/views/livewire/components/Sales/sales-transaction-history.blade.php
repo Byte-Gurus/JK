@@ -126,7 +126,7 @@
                                 </th>
                                 <th
                                     scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['paymentJoin']['payment_type'] }}
+                                    {{ $sale['paymentJoin']['payment_type'] ?? 'N/A'}}
                                 </th>
                                 <th
                                     scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -233,7 +233,7 @@
                             {{-- //* quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Quantity</th>
                             {{-- //* amount --}}
-                            <th scope="col" class="px-4 py-3 text-center">Wholesale discount amount (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Wholesale (₱)</th>
                             {{-- //* amount --}}
                             <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
 
