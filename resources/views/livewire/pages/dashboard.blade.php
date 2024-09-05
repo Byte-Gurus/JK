@@ -6,6 +6,9 @@
     <div class=" m-[28px] w-content">
         @livewire('charts.user-chart')
     </div>
+    <div class=" m-[28px] w-content">
+        @livewire('charts.sale-chart')
+    </div>
 </div>
 
 {{-- <div>
