@@ -181,6 +181,7 @@
                 <div class="flex flex-row gap-4">
                     <div class="flex flex-col gap-2">
                         <div
+                        wire:click="displaySalesReturn()"
                             class="py-4 text-center font-bold bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">Return</button>
                         </div>

@@ -56,7 +56,7 @@
 
 
                         {{-- //* credit id --}}
-                        <th scope="col" class="px-4 py-3 text-center">Credit No</th>
+                        <th scope="col" class="px-4 py-3 text-left">Credit No</th>
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Customer Name</th>
@@ -113,24 +113,24 @@
                             </th>
 
                             {{-- credit balance --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->credit_amount ?? 'N/A' }}
                             </th>
 
                             {{-- credit payment amount --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->credit_limit }}
                             </th>
 
                             {{-- credit limit --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->status }}
                             </th>
 
-                            {{-- status --}}
+                            {{-- status
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->transactionJoin->transaction_number ?? 'N/A' }}
-                            </th>
+                            </th> --}}
 
                             {{-- //* actions --}}
                             <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
@@ -169,6 +169,7 @@
                                                     <div>Edit</div>
                                                 </button>
                                                 <button
+                                                x-on:click="$wire.displayCreditPaymentForm()"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-[rgb(255,131,49)] justify-left hover:bg-[rgb(255,215,188)]">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"

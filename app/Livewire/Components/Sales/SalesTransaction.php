@@ -657,8 +657,14 @@ class SalesTransaction extends Component
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
     }
 
+    public function displaySalesReturn()
+    {
+        $this->dispatch('display-sales-return', showSalesReturn: true)->to(CashierPage::class);
+    }
+
     public function displaySalesReceipt()
     {
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
+
 }

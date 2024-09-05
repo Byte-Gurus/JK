@@ -16,6 +16,7 @@ class CashierPage extends Component
     public $showSalesTransactionHistory = false;
 
     public $showSalesReceipt = false;
+    public $showSalesReturn = false;
 
     public function render()
     {
@@ -48,5 +49,11 @@ class CashierPage extends Component
         $this->showNavbarNoSidebar = false;
         $this->showSalesTransaction = false;
         $this->showSalesReceipt = $showSalesReceipt;
+    }
+
+    public function displaySalesReturn($showSalesReturn)
+    {
+        $this->showSalesTransaction = false;
+        $this->showSalesReturn = $showSalesReturn;
     }
 }
