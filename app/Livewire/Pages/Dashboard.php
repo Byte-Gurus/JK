@@ -27,4 +27,9 @@ class Dashboard extends Component
     {
         dd('hi');
     }
+
+    public function dailyS()
+    {
+        dd('hi');
+    }
 }
