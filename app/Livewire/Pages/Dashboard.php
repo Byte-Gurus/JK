@@ -22,4 +22,9 @@ class Dashboard extends Component
     {
         $this->sidebarStatus = $sidebarOpen;
     }
+
+    public function hi()
+    {
+        dd('hi');
+    }
 }
