@@ -390,7 +390,7 @@
             </div>
         </div>
     @else
-    {{-- credit details --}}
+        {{-- credit details --}}
         <div class="bg-[rgba(241,203,162,0.32)] ml-[28px] border-2 border-[rgb(53,53,53)] text-nowrap rounded-md">
             <div class="flex flex-col ">
                 {{-- date & time section --}}
@@ -429,16 +429,28 @@
                 </div>
                 <div class="flex flex-row items-center justify-between px-6">
                     <div class=" font-medium text-[1.6em]">Customer Name:</div>
-                    <div class=" font-medium text-[1.6em] w-1/2">
+                    <div class="font-medium text-[1.6em] w-1/2">
                         <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
-                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                            <option value="" selected>Select customer</option>
-                            {{-- @foreach ($customers as $customer)
-                                <option value="{{ $customer->id }}">
-                                    {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
+                            class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                            <option value=""  selected>Select customer</option>
+                            @foreach ($credit_customers as $credit_customer)
+                                <option value="{{ $credit_customer->id }} ">
+                                    {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
+                                    {{ $credit_customer->creditJoin->credit_number }}
                                 </option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
+                    </div>
+
+                </div>
+
+
+                <div class="flex flex-row items-center justify-between px-6">
+                    <div class="m-2">
+                        <p class=" font-medium text-[2em]">{{ $credit_no }}</p>
+                    </div>
+                    <div class="m-2">
+                        <p class=" font-medium text-[2em]">{{ $creditor_name }}</p>
                     </div>
                 </div>
                 {{-- discount section --}}
