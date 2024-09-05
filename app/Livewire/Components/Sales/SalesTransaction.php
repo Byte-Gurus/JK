@@ -4,6 +4,7 @@ namespace App\Livewire\Components\Sales;
 
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
+use App\Models\Credit;
 use App\Models\Customer;
 use App\Models\Discount;
 use App\Models\Inventory;
@@ -28,7 +29,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $selectCustomer, $creditor_name;
     public  $tax_details = [];
     public $customerDetails = [];
     public $barcode;
@@ -52,8 +53,11 @@ class SalesTransaction extends Component
     }
     public function render()
     {
-
         $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
+
+        $credit_customers = Customer::whereHas('creditJoin', function ($query) {
+            $query->where('status', '!=', 'Paid');
+        })->get();
 
         $searchTerm = trim($this->search);
 
@@ -91,18 +95,27 @@ class SalesTransaction extends Component
 
         $this->computeTransaction();
 
-
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
             'selectedItems' => $this->selectedItems,
+            'credit_customers' => $credit_customers
         ]);
     }
+
 
     public function changeTransactionType()
     {
         $this->isSales = !$this->isSales;
     }
 
+    public function updatedSelectCustomer($creditor_id)
+    {
+
+        $credit = Credit::where('customer_id', $creditor_id)->first();
+
+        $this->creditor_name =  $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname;
+        $this->credit_no = $credit->credit_number;
+    }
 
 
 
@@ -424,7 +437,7 @@ class SalesTransaction extends Component
     public function save()
     {
         // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->customerDetails ?? null);
-        if(empty($this->payment)){
+        if (empty($this->payment)) {
             $this->alert('warning', 'No payment yest');
             return;
         }
@@ -505,7 +518,6 @@ class SalesTransaction extends Component
             $inventory->current_stock_quantity -= $selectedItem['quantity'];
             if ($inventory->current_stock_quantity == 0) {
                 $inventory->status = 'Not available';
-
             }
             $inventory->save();
 
