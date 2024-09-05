@@ -1,4 +1,4 @@
-<div>
+<div class="flex w-full justify-center">
     <div class=" w-full max-w-[216px]">
         <div class="w-full border-2 h-fit">
             <div class="flex flex-col justify-center mb-6 text-center">

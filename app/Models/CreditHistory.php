@@ -4,21 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
-class Payment extends Model
+
+class CreditHistory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'amount',
-        'tendered_amount',
-        'reference_number',
-        'payment_type',
-        'transaction_id',
+        'description',
+        'credit_id',
     ];
 
     public function transactionJoin()
     {
-        return $this->belongsTo(Transaction::class, 'transaction_id');
+        return $this->belongsTo(Credit::class, 'credit_id');
     }
 }

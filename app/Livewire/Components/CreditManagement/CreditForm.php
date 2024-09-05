@@ -12,12 +12,19 @@ class CreditForm extends Component
     use LivewireAlert;
 
     public $isCreate;
-    public $credit_number, $selectCustomer, $credit_limit, $status, $due_date;
+    public $credit_number, $selectCustomer, $credit_limit = 5000, $status = 'Pending', $due_date;
     public function render()
     {
 
         $this->generateCreditNumber();
-        $customers = Customer::where('customer_type', 'Credit')->get();
+        $customers = Customer::where('customer_type', 'Credit')
+            ->where(function ($query) {
+                $query->whereHas('creditJoin', function ($subQuery) {
+                    $subQuery->where('status', 'Paid');
+                })
+                    ->orWhereDoesntHave('creditJoin');
+            })
+            ->get();
 
         return view('livewire.components.CreditManagement.credit-form', [
             'customers' => $customers

@@ -16,8 +16,7 @@
                         class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                         placeholder="Search by Item Name or Barcode" required="">
                 </div>
-                {{-- <img id="dimg_DGjVZrqyIPnd2roPzvzYmQc_249"
-                    src="data:image/jpeg;base64,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" --}}
+
                 @if (!empty($search))
                     <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
                         @foreach ($items as $item)
@@ -48,7 +47,7 @@
                 <div>
                     <select id="transaction_type" wire:change='changeTransactionType()'
                         class=" bg-[rgb(255,206,121)] px-4 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
-                        <option value="1">Sales</option>
+                        <option selected value="1">Sales</option>
                         <option value="2">Credit</option>
                     </select>
                 </div>
@@ -255,7 +254,7 @@
                     </div>
                     <div
                         class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
-                        @if (!empty($payment))
+                        @if (!empty($payment) && $isSales)
                             <div class="text-center text-nowrap">
                                 <button type="button" class="px-8 py-2 "
                                     x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
@@ -263,11 +262,12 @@
                                 </button>
                             </div>
                         @else
-                            <div class="text-center text-nowrap">
-                                <button disabled class="px-8 py-2">
-                                    Save
-                                </button>
-                            </div>
+                        <div class="text-center text-nowrap">
+                            <button type="button" class="px-8 py-2 "
+                                x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
+                                Save
+                            </button>
+                        </div>
                         @endif
 
                     </div>
@@ -432,7 +432,7 @@
                     <div class="font-medium text-[1.6em] w-1/2">
                         <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
                             class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
-                            <option value=""  selected>Select customer</option>
+                            <option value="" selected>Select customer</option>
                             @foreach ($credit_customers as $credit_customer)
                                 <option value="{{ $credit_customer->id }} ">
                                     {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
@@ -451,7 +451,9 @@
                     </div>
                     <div class="m-2">
                         <p class=" font-medium text-[2em]">{{ $creditor_name }}</p>
+                        <p>{{ $credit_limit }}</p>
                     </div>
+
                 </div>
                 {{-- discount section --}}
                 <div class="flex flex-row items-center">
