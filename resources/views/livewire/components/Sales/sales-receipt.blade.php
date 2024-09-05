@@ -1,4 +1,4 @@
-<div x-cloak class="flex items-center justify-center h-fit ">
+<div x-cloak class=" items-center justify-center h-[100px] w-[216px] ">
     <div class="flex items-center justify-center border border-black">
         <div class="flex flex-col p-4 bg-white ">
             <div class="flex flex-col mb-6 text-center">
