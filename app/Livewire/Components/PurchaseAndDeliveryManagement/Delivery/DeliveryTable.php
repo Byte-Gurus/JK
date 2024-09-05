@@ -162,6 +162,8 @@ class DeliveryTable extends Component
         }
 
         $this->resetPage();
+
+        return back();
     }
 
     public function cancelDelivery($deliverId)

@@ -22,6 +22,8 @@ class SalesTransaction extends Component
 {
     use LivewireAlert;
     public $transaction_number;
+
+    public $isSales = true;
     public $search = '';
     public $selectedItems = [];
     public $payment = [];
@@ -94,6 +96,11 @@ class SalesTransaction extends Component
             'items' => $items,
             'selectedItems' => $this->selectedItems,
         ]);
+    }
+
+    public function changeTransactionType()
+    {
+        $this->isSales = !$this->isSales;
     }
 
 
