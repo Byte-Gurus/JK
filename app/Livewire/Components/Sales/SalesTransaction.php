@@ -111,6 +111,9 @@ class SalesTransaction extends Component
     public function updatedSelectCustomer($creditor_id)
     {
 
+        if (!$creditor_id) {
+            return;
+        }
         $credit = Credit::where('customer_id', $creditor_id)->first();
 
         $this->creditor_name =  $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname;
