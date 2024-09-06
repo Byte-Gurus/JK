@@ -111,7 +111,7 @@ class DeliveryTable extends Component
         // Find the current delivery record
         $delivery = Delivery::find($deliveryId);
 
-
+        //bawal backward delivery 
 
         // Check if the current delivery has associated backorders
         if ($delivery->backorderJoin->isNotEmpty()) {

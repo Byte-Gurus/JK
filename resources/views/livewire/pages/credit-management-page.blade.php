@@ -60,7 +60,7 @@
                 @livewire('components.CreditManagement.credit-table')
             </div>
             <div class="my-[28px]" x-show="showCreditHistory" x-data="{ showCreditHistory: @entangle('showCreditHistory') }">
-                @livewire('components.CreditManagement.credit-history')
+                @livewire('components.CreditManagement.credit-history-table')
             </div>
             <div class="my-[28px]" x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
                 @livewire('components.CreditManagement.credit-payment-form')

@@ -62,7 +62,8 @@ class SalesTransaction extends Component
         $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
 
         $credit_customers = Customer::whereHas('creditJoin', function ($query) {
-            $query->where('status', '!=', 'Paid');
+            $query->where('status', '!=', 'Paid')
+                ->doesntHave('transactionJoin');
         })->get();
 
         $searchTerm = trim($this->search);
@@ -686,5 +687,4 @@ class SalesTransaction extends Component
     {
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
-
 }

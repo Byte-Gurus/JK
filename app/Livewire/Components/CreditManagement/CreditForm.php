@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\CreditManagement;
 
 use App\Models\Credit;
+use App\Models\CreditHistory;
 use App\Models\Customer;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -62,6 +63,11 @@ class CreditForm extends Component
             'credit_limit' => $validated['credit_limit'],
             'transaction_id' => null,
             'customer_id' => $validated['selectCustomer'],
+        ]);
+
+        $creditHistory = CreditHistory::create([
+            'description' => 'Credit Approved',
+            'credit_id' => $credit->id
         ]);
     }
 

@@ -14,8 +14,21 @@ class CreditHistory extends Model
         'credit_id',
     ];
 
-    public function transactionJoin()
+    public function creditJoin()
     {
         return $this->belongsTo(Credit::class, 'credit_id');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+
+        return $query->where(function ($query) use ($value) {
+            $query->whereHas('creditJoin', function ($query) use ($value) {
+                $query->where('credit_number', 'like', "%{$value}%");
+            })
+                ->orWhereHas('creditJoin.transactionJoin.customerJoin', function ($query) use ($value) {
+                    $query->where('firstname', 'like', "%{$value}%");
+                });
+        });
     }
 }

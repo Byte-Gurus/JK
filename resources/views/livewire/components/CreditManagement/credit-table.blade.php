@@ -89,6 +89,12 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Issued Date</th>
+
+                        {{-- //* status --}}
+                        <th scope="col" class="px-4 py-3 text-center">Due Date</th>
+
                         {{-- //* actions --}}
                         <th scope="col" class="px-4 py-3 text-center">Actions</th>
 
@@ -109,24 +115,40 @@
 
                             {{-- customer name --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname }}
+                                {{ $credit->customerJoin->firstname . ' ' . $credit->customerJoin->middlename . ' ' . $credit->customerJoin->lastname }}
                             </th>
 
                             {{-- credit balance --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->credit_amount ?? 'N/A' }}
                             </th>
 
                             {{-- credit payment amount --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->credit_limit }}
                             </th>
 
                             {{-- credit limit --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->status }}
                             </th>
 
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                @if ($credit->credit_amount)
+                                    {{ $credit->created_at->format('d-m-y') }}
+                                @else
+                                    'N/A'
+                                @endif
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ \Carbon\Carbon::parse($credit->due_date)->format('d m y') }}
+                            </th>
                             {{-- status
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $credit->transactionJoin->transaction_number ?? 'N/A' }}
@@ -168,8 +190,8 @@
                                                         </svg></div>
                                                     <div>Edit</div>
                                                 </button>
-                                                <button
-                                                x-on:click="$wire.displayCreditPaymentForm()"
+                                                <button wire:click="getCredit({{ $credit->id }})"
+                                                    x-on:click="$wire.displayCreditPaymentForm()"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-[rgb(255,131,49)] justify-left hover:bg-[rgb(255,215,188)]">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"

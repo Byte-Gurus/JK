@@ -15,7 +15,6 @@ class TransactionDetails extends Model
         'item_subtotal',
         'item_discount_amount',
         'discount_id',
-        'item_quantity',
         'transaction_id',
         'item_id',
         'inventory_id',
@@ -23,7 +22,7 @@ class TransactionDetails extends Model
 
     public function transactionJoin()
     {
-        return $this->belongsTo(TransactionDetails::class, 'transaction_id');
+        return $this->belongsTo(Transaction::class, 'transaction_id');
     }
 
     public function inventoryJoin()

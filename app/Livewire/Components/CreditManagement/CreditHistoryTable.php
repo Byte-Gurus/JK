@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Components\CreditManagement;
 
-use App\Livewire\Pages\CreditManagementPage;
-use App\Models\Credit;
+use App\Models\CreditHistory;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
-class CreditTable extends Component
+class CreditHistoryTable extends Component
 {
+    use WithPagination,  WithoutUrlPagination;
+
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
@@ -20,20 +23,22 @@ class CreditTable extends Component
     public $startDate, $endDate;
     public function render()
     {
-        $query = Credit::query()
-            ->whereHas('transactionJoin')
-            ->orWhereDoesntHave('transactionJoin');
+
+        $query = CreditHistory::query();
+
 
         if ($this->statusFilter != 0) {
-            $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
+            $query->whereHas('creditJoin', function ($query) {
+                $query->where('status', $this->statusFilter);
+            });
         }
 
-        $credits = $query->search($this->search) //?search the user
+        $creditHistories = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
 
-        return view('livewire.components.CreditManagement.credit-table', [
-            'credits' => $credits
+        return view('livewire.components.credit-management.credit-history-table', [
+            'creditHistories' => $creditHistories
         ]);
     }
 
@@ -50,14 +55,12 @@ class CreditTable extends Component
 
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
-
-    public function getCredit($credit_id)
+    public function updatedSearch()
     {
-        $this->dispatch('credit-payment', credit_ID: $credit_id)->to(CreditPaymentForm::class);
+        $this->resetPage();
     }
-
-    public function displayCreditPaymentForm()
+    public function refreshTable()
     {
-        $this->dispatch('display-credit-payment-form', showCreditPaymentForm: true)->to(CreditManagementPage::class);
+        $this->resetPage();
     }
 }

@@ -55,14 +55,22 @@
 
 
 
+                        <th scope="col" class="px-4 py-3 text-left">Date</th>
+
                         {{-- //* credit id --}}
-                        <th scope="col" class="px-4 py-3 text-left">Credit ID</th>
+                        <th scope="col" class="px-4 py-3 text-left">Credit Number</th>
+                        {{-- //* credit id --}}
+                        <th scope="col" class="px-4 py-3 text-left">Transaction Number</th>
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Customer Name</th>
 
                         {{-- //* credit balance --}}
+                        <th scope="col" class="px-4 py-3 text-center">Status</th>
+                        {{-- //* credit balance --}}
                         <th scope="col" class="px-4 py-3 text-center">Payment Method</th>
+
+
 
                         {{-- //* credit payment amount --}}
                         {{-- <th wire:click="sortByColumn('created_at')" scope="col"
@@ -102,6 +110,43 @@
                 <tbody>
 
 
+                    @foreach ($creditHistories as $creditHistory)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->creditJoin->created_at->format('d m y') }}
+                            </th>
+                            {{-- credit id --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->creditJoin->credit_number }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->creditJoin->transactionJoin->transaction_number ?? 'N/A' }}
+                            </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->creditJoin->customerJoin->firstname . ' ' . $creditHistory->creditJoin->customerJoin->middlename . ' ' . $creditHistory->creditJoin->customerJoin->lastname }}
+                            </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->creditJoin->status }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->transactionJoin->paymentJoin->payment_type ?? 'NA' }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->transactionJoin->paymentJoin->reference_no ?? 'NA' }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->transactionJoin->paymentJoin->amount ?? 'NA' }}
+                            </th>
+                            {{-- //* actions --}}
+
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>
@@ -113,7 +158,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $purchases->links() }} --}}
+                {{ $creditHistories->links() }}
 
             </div>
 

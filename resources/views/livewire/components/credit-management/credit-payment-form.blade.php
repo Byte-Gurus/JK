@@ -69,7 +69,8 @@
                                             </div>
 
                                             <div>
-                                                <input type="number" wire:model='tendered_amount' placeholder="Amount" required
+                                                <input type="number" wire:model='tendered_amount' placeholder="Amount"
+                                                    required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                 @error('tendered_amount')
@@ -106,6 +107,9 @@
                                     class="flex flex-col gap-4 w-full shadow-md shadow-[rgb(244,255,147)] items-center justify-center p-4 m-2 leading-none border border-black rounded-lg bg-[rgb(255,255,255)]">
                                     <div>
                                         <p class="text-[1.6em] font-thin text-center">To Pay</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[1.6em] font-thin text-center">{{ $credit_amount }}</p>
                                     </div>
                                     <div>
                                         {{-- <p class="text-[2em] font-black">{{ number_format($grand_total, 2) }}</p> --}}
