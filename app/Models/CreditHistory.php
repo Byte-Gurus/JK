@@ -13,9 +13,14 @@ class CreditHistory extends Model
         'description',
         'credit_id',
         'credit_amount',
-        'remaining_balance'
+        'remaining_balance',
+        'payment_id'
     ];
 
+    public function paymentJoin()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
+    }
     public function creditJoin()
     {
         return $this->belongsTo(Credit::class, 'credit_id');

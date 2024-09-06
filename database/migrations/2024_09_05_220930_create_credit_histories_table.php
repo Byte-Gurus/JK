@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('credit_id')->constrained('credits');
+            $table->foreignId('payment_id')->nullable()->constrained('payments');
         });
     }
 

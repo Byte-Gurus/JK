@@ -76,9 +76,7 @@ class CreditPaymentForm extends Component
             'credit_id' => $credit->id,
             'credit_amount' => $credit->credit_amount,
             'remaining_balance' => $credit->remaining_balance,
-            'payment_amount' => $this->credit_amount,
-            'payment_type' => $this->payWithCash ? 'Cash' : 'GCash',
-            'reference_no' => $this->payWithCash ? null : $validated['reference_no'],
+            'payment_id' => $payment->id
         ]);
 
         $this->alert('success', 'Creditor was paid successfully');
