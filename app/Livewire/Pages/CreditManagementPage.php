@@ -8,6 +8,8 @@ use Livewire\Component;
 class CreditManagementPage extends Component
 {
 
+    public $showModal = false;
+
     public $showCreditTable = true;
     public $showCreditHistory = false;
 
@@ -31,6 +33,11 @@ class CreditManagementPage extends Component
         'display-credit-payment-form' => 'displayCreditPaymentForm',
         'display-stock-card' => 'displayStockCard',
     ];
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
 
     public function changeSidebarStatus($sidebarOpen)
     {

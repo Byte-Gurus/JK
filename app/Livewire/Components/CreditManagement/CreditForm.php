@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\CreditManagement;
 
+use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Customer;
@@ -40,6 +41,12 @@ class CreditForm extends Component
         'createConfirmed',
     ];
 
+    public function closeModal() //* close ang modal after confirmation
+    {
+        $this->dispatch('close-modal')->to(CreditManagementPage::class);
+        // $this->resetValidation();
+    }
+
     public function create()
     {
 
@@ -50,6 +57,7 @@ class CreditForm extends Component
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
+
 
     public function createConfirmed($data)
     {
@@ -72,6 +80,24 @@ class CreditForm extends Component
             'credit_amount' => null,
             'remaining_balance' => null,
         ]);
+
+        $this->alert('success', 'Customer Credit was created successfully');
+        $this->resetForm();
+
+        $this->refreshTable();
+
+        $this->closeModal();
+
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['credit_number', 'selectCustomer', 'due_date' ]);
+    }
+
+    public function refreshTable() //* refresh ang table after confirmation
+    {
+        $this->dispatch('refresh-table')->to(CreditTable::class);
     }
 
     protected function validateForm()
@@ -85,13 +111,15 @@ class CreditForm extends Component
         ];
 
         return $this->validate($rules);
+
+
     }
 
 
 
     public function resetFormWhenClosed()
     {
-        // $this->resetForm();
+        $this->resetForm();
         // $this->resetValidation();
     }
 
