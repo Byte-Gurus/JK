@@ -7,6 +7,7 @@ use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -95,6 +96,17 @@ class DeliveryTable extends Component
             'deliveryId' => $id
         ];
 
+        $delivery = Delivery::find($deliveries['deliveryId']);
+
+
+        $inputDate = Carbon::parse($deliveries['date']);
+        $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at);
+
+
+        if ($inputDate < $purchaseOrderDate) {
+            $this->alert('error', 'Delivery date must be after the creation of the purchase order.');
+            return;
+        }
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
@@ -105,13 +117,14 @@ class DeliveryTable extends Component
 
     public function updateConfirmed($data)
     {
+
+
         $updatedAttributes = $data['inputAttributes'];
         $deliveryId = $updatedAttributes['deliveryId'];
 
         // Find the current delivery record
         $delivery = Delivery::find($deliveryId);
 
-        //bawal backward delivery 
 
         // Check if the current delivery has associated backorders
         if ($delivery->backorderJoin->isNotEmpty()) {
