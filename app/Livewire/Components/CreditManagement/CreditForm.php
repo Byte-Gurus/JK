@@ -21,7 +21,7 @@ class CreditForm extends Component
         $customers = Customer::where('customer_type', 'Credit')
             ->where(function ($query) {
                 $query->whereHas('creditJoin', function ($subQuery) {
-                    $subQuery->where('status', 'Paid');
+                    $subQuery->where('status', 'Fully paid');
                 })
                     ->orWhereDoesntHave('creditJoin');
             })
