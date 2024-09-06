@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\CreditManagement;
 
 use App\Models\Credit;
+use App\Models\CreditHistory;
 use App\Models\Customer;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -12,12 +13,19 @@ class CreditForm extends Component
     use LivewireAlert;
 
     public $isCreate;
-    public $credit_number, $selectCustomer, $credit_limit, $status, $due_date;
+    public $credit_number, $selectCustomer, $credit_limit = 5000, $status = 'Pending', $due_date;
     public function render()
     {
 
         $this->generateCreditNumber();
-        $customers = Customer::where('customer_type', 'Credit')->get();
+        $customers = Customer::where('customer_type', 'Credit')
+            ->where(function ($query) {
+                $query->whereHas('creditJoin', function ($subQuery) {
+                    $subQuery->where('status', 'Paid');
+                })
+                    ->orWhereDoesntHave('creditJoin');
+            })
+            ->get();
 
         return view('livewire.components.CreditManagement.credit-form', [
             'customers' => $customers
@@ -51,10 +59,18 @@ class CreditForm extends Component
             'status' => $validated['status'],
             'due_date' => $validated['due_date'],
             'credit_amount' => null,
+            'remaining_balance' => null,
             'credit_number' => $this->credit_number,
             'credit_limit' => $validated['credit_limit'],
             'transaction_id' => null,
             'customer_id' => $validated['selectCustomer'],
+        ]);
+
+        $creditHistory = CreditHistory::create([
+            'description' => 'Credit Approved',
+            'credit_id' => $credit->id,
+            'credit_amount' => null,
+            'remaining_balance' => null,
         ]);
     }
 

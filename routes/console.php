@@ -38,6 +38,8 @@ Artisan::command('migration-order', function () {
         '2024_09_03_101448_create_payments_table.php',
         '2024_09_02_213236_create_transaction_details_table.php',
         '2024_09_04_210427_create_credits_table.php',
+        '2024_09_05_220930_create_credit_histories_table.php',
+
         '2024_08_26_221603_create_inventory_movements_table.php',
 
         '0001_01_01_000001_create_cache_table.php',

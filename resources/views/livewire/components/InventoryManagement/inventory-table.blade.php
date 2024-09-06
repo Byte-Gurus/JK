@@ -108,32 +108,33 @@
                             </div>
 
                         </th>
-                        {{-- //* status --}}
+
+                        {{-- //* supplier name --}}
+                        <th scope="col" class="px-4 py-3 text-left">Supplier</th>
+
+                        {{-- //* current stock quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Current stock quantity</th>
 
+                        {{-- stock in quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Stock In quantity</th>
 
 
-                        {{-- //* status --}}
+                        {{-- //* reorder point --}}
                         <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
 
 
-                        {{-- //* status --}}
+                        {{-- //* item cost --}}
                         <th scope="col" class="px-4 py-3 text-center">Item Cost (₱)</th>
 
 
-                        {{-- //* status --}}
+                        {{-- //* mark-up price --}}
                         <th scope="col" class="px-4 py-3 text-center">Mark-up price (₱)</th>
 
-                        {{-- //* status --}}
+                        {{-- //* sellign price --}}
                         <th scope="col" class="px-4 py-3 text-center">Selling price (₱)</th>
 
-                        {{-- //* status --}}
+                        {{-- //* vat amount --}}
                         <th scope="col" class="px-4 py-3 text-center">Vat amount </th>
-
-
-                        {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-left">Supplier</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
@@ -200,8 +201,12 @@
                                 {{ $inventory->itemJoin->barcode }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $inventory->itemJoin->item_name }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $inventory->deliveryJoin?->purchaseJoin?->supplierJoin?->company_name ?? 'null' }}
                             </th>
 
                             <th scope="row"
@@ -239,11 +244,6 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ number_format($inventory->vat_amount, 2) }}
                             </th>
-
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->deliveryJoin?->purchaseJoin?->supplierJoin?->company_name ?? 'null' }}
-                            </th>
-
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center pointer-events-none text-md whitespace-nowrap">
@@ -351,11 +351,8 @@
                             </th>
                         </tr>
                     @endforeach
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}
@@ -381,11 +378,6 @@
                 </select>
 
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>

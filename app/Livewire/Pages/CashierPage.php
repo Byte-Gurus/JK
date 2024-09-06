@@ -17,6 +17,8 @@ class CashierPage extends Component
 
     public $showSalesReceipt = false;
 
+    public $showSalesReturn = false;
+
     public function render()
     {
         return view('livewire.pages.cashier-page');
@@ -48,5 +50,11 @@ class CashierPage extends Component
         $this->showNavbarNoSidebar = false;
         $this->showSalesTransaction = false;
         $this->showSalesReceipt = $showSalesReceipt;
+    }
+
+    public function displaySalesReturn($showSalesReturn)
+    {
+        $this->showSalesTransaction = false;
+        $this->showSalesReturn = $showSalesReturn;
     }
 }

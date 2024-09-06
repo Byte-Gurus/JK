@@ -14,6 +14,7 @@ class Credit extends Model
         'credit_number',
         'due_date',
         'credit_amount',
+        'remaining_balance',
         'credit_limit',
         'transaction_id',
         'customer_id',
@@ -23,6 +24,7 @@ class Credit extends Model
     {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
+
     public function transactionJoin()
     {
         return $this->belongsTo(Transaction::class, 'transaction_id');
@@ -31,9 +33,7 @@ class Credit extends Model
     public function scopeSearch($query, $value)
     {
 
-        return $query->whereHas('transactionJoin', function ($query) use ($value) {
-            $query->where('transaction_number', 'like', "%{$value}%");
-        })
+        return $query->where('credit_number', 'like', "%{$value}%")
             ->orWhereHas('customerJoin', function ($query) use ($value) {
                 $query->where('firstname', 'like', "%{$value}%");
             });

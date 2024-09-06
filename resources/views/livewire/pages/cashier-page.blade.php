@@ -8,7 +8,10 @@
     <div x-show="showSalesTransactionHistory" x-data="{ showSalesTransactionHistory: @entangle('showSalesTransactionHistory') }">
         @livewire('components.Sales.sales-transaction-history')
     </div>
-    <div class="h-[100px]" x-show="showSalesReceipt" x-data="{ showSalesReceipt: @entangle('showSalesReceipt') }">
+    {{-- <div x-show="showSalesReturn" x-data="{ showSalesReturn: @entangle('showSalesReturn') }">
+        @livewire('components.Sales.sales-return')
+    </div> --}}
+    <div x-show="showSalesReceipt" x-data="{ showSalesReceipt: @entangle('showSalesReceipt') }">
         @livewire('components.Sales.sales-receipt')
     </div>
 </div>

@@ -48,6 +48,7 @@ class DiscountForm extends Component
     {
 
 
+
         if ($this->customerType == 'PWD') {
             $this->discount_percentage = $this->discounts[1]->percentage;
             $this->discount_id = $this->discounts[1]->id;
@@ -75,6 +76,11 @@ class DiscountForm extends Component
 
     public function updatedSelectCustomer($customer_id)
     {
+        if (!$customer_id) {
+
+            $this->reset();
+            return;
+        }
         $customer = Customer::find($customer_id);
         $this->customer_id = $customer_id;
         $this->populateForm();
@@ -171,11 +177,14 @@ class DiscountForm extends Component
 
         //* ipasa ang laman ng model sa inputs
         //* fill() method [key => value] means [paglalagyan => ilalagay]
-        $this->fill([
-            'customerType' => $customer_details->customer_type,
-            'customer_discount_no' => $customer_details->customer_discount_no,
+        if ($this->customer_id) {
 
-        ]);
+            $this->fill([
+                'customerType' => $customer_details->customer_type,
+                'customer_discount_no' => $customer_details->customer_discount_no,
+
+            ]);
+        }
     }
 
     protected function validateForm()

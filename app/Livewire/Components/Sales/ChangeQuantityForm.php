@@ -8,7 +8,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ChangeQuantityForm extends Component
 {
     use LivewireAlert;
-    public $adjust_quantity, $current_stock_quantity, $barcode, $item_name, $item_description;
+    public $adjust_quantity, $current_stock_quantity, $barcode, $item_name, $item_description, $credit_limit,
+        $selling_price, $grandTotal, $original_quantity;
 
     public function render()
     {
@@ -31,7 +32,13 @@ class ChangeQuantityForm extends Component
     {
         $validated = $this->validateForm();
 
-        // $validated = $data['inputAttributes'];
+
+        if ($this->original_quantity < $validated['adjust_quantity']) {
+            if ($validated['adjust_quantity'] * $this->selling_price + $this->grandTotal > $this->credit_limit && $this->credit_limit) {
+                $this->alert('error', 'Credit limit is reached');
+                return;
+            }
+        }
 
         $this->dispatch('get-quantity', newQuantity: $validated['adjust_quantity'])->to(SalesTransaction::class);
 
@@ -46,7 +53,6 @@ class ChangeQuantityForm extends Component
         // ]);
 
         $this->dispatch('isSelected')->to(SalesTransaction::class);
-
     }
 
     // public function adjustConfirmed($data)
@@ -58,7 +64,7 @@ class ChangeQuantityForm extends Component
     protected function validateForm()
     {
         $rules = [
-           'adjust_quantity' => ['required', 'numeric', 'min:1', 'lte:current_stock_quantity'],
+            'adjust_quantity' => ['required', 'numeric', 'min:1', 'lte:current_stock_quantity'],
         ];
 
         return $this->validate($rules);
@@ -74,9 +80,13 @@ class ChangeQuantityForm extends Component
     public function getQuantity($data)
     {
         $this->adjust_quantity = $data['itemQuantity'];
+        $this->original_quantity = $data['itemQuantity'];
         $this->current_stock_quantity = $data['current_stock_quantity'];
         $this->barcode = $data['barcode'];
         $this->item_name = $data['item_name'];
         $this->item_description = $data['item_description'];
+        $this->credit_limit = $data['credit_limit'];
+        $this->selling_price = $data['selling_price'];
+        $this->grandTotal = $data['grandTotal'];
     }
 }

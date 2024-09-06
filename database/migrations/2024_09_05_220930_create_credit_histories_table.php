@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('credits', function (Blueprint $table) {
+        Schema::create('credit_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
-            $table->string('credit_number');
-            $table->dateTime('due_date');
+            $table->string('description');
             $table->double('remaining_balance')->nullable();
             $table->double('credit_amount')->nullable();
-            $table->double('credit_limit');
             $table->timestamps();
 
-            $table->foreignId('transaction_id')->nullable()->constrained('transactions');
-            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('credit_id')->constrained('credits');
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('credits');
+        Schema::dropIfExists('credit_histories');
     }
 };

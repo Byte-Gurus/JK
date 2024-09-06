@@ -93,7 +93,7 @@
                             <th scope="col" class="px-4 py-3 text-center">Payment method</th>
 
                             {{-- //* gcash reference no. --}}
-                            <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
+                            <th scope="col" class="px-4 py-3 text-left">GCash Reference No.</th>
 
                             {{-- //* date --}}
                             <th scope="col" class="px-4 py-3 text-center">Date</th>
@@ -113,33 +113,33 @@
                                 x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                                 <th
-                                    scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $sale['transaction_number'] }}
                                 </th>
                                 <th
-                                    scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ number_format($sale->total_amount, 2) }}
                                 </th>
                                 <th
-                                    scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $sale['transaction_type'] }}
                                 </th>
                                 <th
-                                    scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $sale['paymentJoin']['payment_type'] ?? 'N/A'}}
                                 </th>
                                 <th
-                                    scope="row"class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                     {{ $sale['paymentJoin->reference_number'] ?? 'N/A' }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $sale['created_at']->format('d-m-y') }}
                                 </th>
 
                                 {{-- //* updated at --}}
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $sale['created_at']->format('h:i A') }}
                                 </th>
                             </tr>

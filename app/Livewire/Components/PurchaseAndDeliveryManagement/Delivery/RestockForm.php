@@ -11,18 +11,23 @@ use App\Models\Item;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
+use App\Models\Transaction;
+use App\Models\TransactionDetails;
+use Carbon\Carbon;
+use DateTime;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class RestockForm extends Component
 {
     use LivewireAlert;
-    public $delivery_id, $po_number, $supplier, $purchase_id;
+    public $delivery_id, $po_number, $supplier, $purchase_id,  $delivery_date, $po_date;
     public $purchaseDetails = [];
     public $restock_quantity = [null], $cost = [null], $markup = [null], $srp = [null], $expiration_date = [null];
 
     public function render()
     {
+
         if (empty($this->purchaseDetails)) {
             // Fetch purchase details with related itemsJoin data
             $this->purchaseDetails = PurchaseDetails::with('itemsJoin')
@@ -56,12 +61,15 @@ class RestockForm extends Component
     public function create()
     {
         $validated = $this->validateForm(); // Validate form data
-        // dd($this->purchaseDetails);
-        // Initialize quantities array
+
         $quantities = [];
+
 
         // First pass: Accumulate restock quantities for each item
         foreach ($this->purchaseDetails as $index => $detail) {
+
+            $this->getReorderPoint($detail['item_id']);
+
             $details_id = $detail['id']; // get all the id of each purchase details
 
             if (!isset($quantities[$details_id])) {
@@ -72,6 +80,7 @@ class RestockForm extends Component
 
         // Second pass: Check each item's quantity individually
         foreach ($this->purchaseDetails as $index => $detail) {
+
             $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
             // Check if the accumulated restock quantity exceeds the purchased quantity
@@ -170,6 +179,8 @@ class RestockForm extends Component
                 'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
             ]);
+
+
 
             $inventoryMovement = InventoryMovement::create([
                 'inventory_id' => $inventory->id,
@@ -319,6 +330,11 @@ class RestockForm extends Component
         $delivery = Delivery::find($this->delivery_id);
         $this->purchase_id = $delivery->purchase_id;
 
+        $this->delivery_date = $delivery->date_delivered;
+        $this->po_date = $delivery->purchaseJoin->created_at;
+
+
+
         $this->populateForm();
     }
 
@@ -347,5 +363,31 @@ class RestockForm extends Component
         $SKU = 'SKU-' . $formattedNumber . '-' . now()->format('dmY');
 
         return $SKU;
+    }
+
+    public function getReorderPoint($item_id)
+    {
+        $deliveryDate = Carbon::parse($this->delivery_date);
+        $poDate = Carbon::parse($this->po_date);
+
+        // Define the start and end dates
+        $startDate = $poDate->startOfDay();
+        $endDate = $deliveryDate->endOfDay();
+
+
+        $totalSellingPrice = TransactionDetails::where('item_id', $item_id)
+            ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            })
+            ->sum('item_subtotal');
+
+
+
+        // Calculate the number of days in the date range
+        $days = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate)) + 1;
+
+        // Calculate the demand rate
+        $demandRate = $days > 0 ? $totalSellingPrice / $days : 0;
+
     }
 }

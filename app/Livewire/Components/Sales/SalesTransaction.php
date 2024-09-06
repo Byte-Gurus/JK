@@ -5,6 +5,8 @@ namespace App\Livewire\Components\Sales;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
 use App\Models\Credit;
+
+use App\Models\CreditHistory;
 use App\Models\Customer;
 use App\Models\Discount;
 use App\Models\Inventory;
@@ -29,8 +31,9 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $selectCustomer, $creditor_name;
-    public  $tax_details = [];
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $selectCustomer, $creditor_name, $transaction_info, $credit_limit;
+    public $tax_details = [];
+    public $credit_details = [];
     public $customerDetails = [];
     public $barcode;
 
@@ -53,10 +56,14 @@ class SalesTransaction extends Component
     }
     public function render()
     {
+
+
+
         $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
 
         $credit_customers = Customer::whereHas('creditJoin', function ($query) {
-            $query->where('status', '!=', 'Paid');
+            $query->where('status', '!=', 'Paid')
+                ->doesntHave('transactionJoin');
         })->get();
 
         $searchTerm = trim($this->search);
@@ -112,12 +119,33 @@ class SalesTransaction extends Component
     {
 
         if (!$creditor_id) {
+
+            return redirect(request()->header('Referer'));
+        }
+        if (isset($this->credit_details['credit_id'])) {
+
+            $this->alert('error', 'Reset the transaction');
             return;
         }
+
         $credit = Credit::where('customer_id', $creditor_id)->first();
+
+        if ($credit->credit_limit <= $this->grandTotal) {
+
+            $this->alert('error', 'Creditor reached the credit limit');
+            return;
+        }
 
         $this->creditor_name =  $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname;
         $this->credit_no = $credit->credit_number;
+        $this->credit_limit =  $credit->credit_limit;
+
+        $this->credit_details = [
+            'customer_id' => $creditor_id,
+            'credit_no' =>  $this->credit_no,
+            'credit_id' => $credit->id,
+            'credit_limit' => $this->credit_limit
+        ];
     }
 
 
@@ -140,10 +168,17 @@ class SalesTransaction extends Component
     public function selectItem($item_id = null)
     {
 
+
         if ($this->payment) {
             $this->alert('error', 'transaction is paid');
             return;
         }
+
+        if (!$this->isSales && !$this->selectCustomer) {
+            $this->alert('error', 'Please select creditor');
+            return;
+        }
+
 
 
         $itemExists = false;
@@ -176,6 +211,12 @@ class SalesTransaction extends Component
 
             foreach ($this->selectedItems as $index => $selectedItem) {
                 if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
+
+
+                    if ($selectedItem['selling_price'] + $this->grandTotal > $this->credit_limit && $this->credit_details) {
+                        $this->alert('error', 'Credit limit reached');
+                        return;
+                    }
 
                     $itemExists = true;
                     // Update the quantity if the item already exists
@@ -241,19 +282,30 @@ class SalesTransaction extends Component
 
     public function setQuantity()
     {
+
         if ($this->isSelected) {
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
             // Now you can access the attributes of the selected item
             // Example: you can pass the quantity to the ChangeQuantityForm component
             $this->showChangeQuantityForm = true;
-            $this->dispatch('get-quantity', [
+            $data = [
                 'itemQuantity' => $selectedItem['quantity'],
                 'current_stock_quantity' => $selectedItem['current_stock_quantity'],
                 'barcode' => $selectedItem['barcode'],
                 'item_name' => $selectedItem['item_name'],
                 'item_description' => $selectedItem['item_description'],
-            ])->to(ChangeQuantityForm::class);
+                'selling_price' => $selectedItem['selling_price'],
+                'grandTotal' => $this->grandTotal,
+            ];
+
+            if (!$this->isSales) {
+                $data['credit_limit'] = $this->credit_limit;
+            } else {
+                $data['credit_limit'] = null;
+            }
+
+            $this->dispatch('get-quantity', $data)->to(ChangeQuantityForm::class);
 
             // $this->reset('selectedIndex', 'isSelected');
             // For debugging purposes, you can use dd to see all the attributes
@@ -306,6 +358,7 @@ class SalesTransaction extends Component
     public function computeTransaction()
     {
 
+
         $this->subtotal = 0;
 
         $vatable_amount = 0;
@@ -317,6 +370,8 @@ class SalesTransaction extends Component
         $this->netAmount = 0;
         $this->discount_percent =  0;
         $this->PWD_Senior_discount_amount = 0;
+
+
 
         foreach ($this->selectedItems as $index) {
 
@@ -343,12 +398,17 @@ class SalesTransaction extends Component
             $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
         }
 
+
         $this->tax_details = [
             'non_vatable_amount' => $non_vatable_amount,
             'vatable_amount' => $vatable_amount,
             'total_vat' =>  $this->totalVat,
             'PWD_Senior_discount_amount' =>  $this->PWD_Senior_discount_amount,
         ];
+
+        if (isset($this->credit_details['credit_no'])) {
+            $this->credit_details['credit_amount'] =  $this->grandTotal;
+        }
     }
 
     public function getCustomerDetails($customerDetails)
@@ -406,7 +466,9 @@ class SalesTransaction extends Component
 
     public function removeRowConfirmed()
     {
+        $this->totalVat -=  $this->tax_details['vatable_amount'];
         unset($this->selectedItems[$this->selectedIndex]);
+
         $this->selectedItems = array_values($this->selectedItems);
         $this->reset('selectedIndex', 'isSelected');
 
@@ -439,20 +501,22 @@ class SalesTransaction extends Component
 
     public function save()
     {
-        // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->customerDetails ?? null);
-        if (empty($this->payment)) {
+
+        if (empty($this->payment) && $this->isSales) {
             $this->alert('warning', 'No payment yest');
             return;
         }
 
         $receiptData = [];
-        $transaction_info = [
+        $this->transaction_info = [
             'subtotal' => $this->subtotal,
             'grandTotal' => $this->grandTotal,
             'transaction_number' => $this->transaction_number,
             'transaction_time' => now()->format('H:i:s'),
             'transaction_date' => now()->format('d-m-Y'),
         ];
+
+        // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->tax_details ?? null, $this->credit_details ?? null, $this->transaction_info ?? null);
 
         if (isset($this->customerDetails['customer_id'])) {
             $customer = Customer::find($this->customerDetails['customer_id']);
@@ -486,19 +550,23 @@ class SalesTransaction extends Component
             ]);
         }
 
+
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
 
+        $transactionType = $this->isSales ? 'Sales' : 'Credit';
+
         $transaction = Transaction::create([
-            'transaction_number' => $transaction_info['transaction_number'],
-            'transaction_type' => 'Sales',
-            'subtotal' => $transaction_info['subtotal'],
-            'total_amount' => $transaction_info['grandTotal'],
+            'transaction_number' => $this->transaction_info['transaction_number'],
+            'transaction_type' => $transactionType,
+            'subtotal' => $this->transaction_info['subtotal'],
+            'total_amount' => $this->transaction_info['grandTotal'],
             'total_vat_amount' => $this->tax_details['total_vat'],
             'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
             'discount_id' => $this->customerDetails['discount_id'] ?? null,
             'customer_id' => $customer_id,
             'user_id' => Auth::id(),
         ]);
+
 
         foreach ($this->selectedItems as $index => $selectedItem) {
 
@@ -531,23 +599,37 @@ class SalesTransaction extends Component
                 'movement_type' => 'Sales',
                 'operation' => 'Stock out',
             ]);
+        }
 
-            $this->alert('success', 'New Transaction Saved Successfully');
+
+        if ($this->isSales) {
+            $payment = Payment::create([
+                'transaction_id' => $transaction->id,
+                'amount' => $this->payment['tendered_amount'],
+                'tendered_amount' => $this->payment['tendered_amount'],
+                'reference_number' => $this->payment['reference_no'] ?? 'N/A',
+                'payment_type' => $this->payment['payment_type'],
+            ]);
+        } else {
+            $credit = Credit::where('credit_number', $this->credit_no)->first();
+            $credit->credit_amount = $this->grandTotal;
+            $credit->remaining_balance = $this->grandTotal;
+            $credit->transaction_id = $transaction->id;
+            $credit->save();
+
+            $creditHistory = CreditHistory::create([
+                'description' => 'Issuance of credit',
+                'credit_id' => $credit->id,
+                'credit_amount' => $this->grandTotal,
+                'remaining_balance'=> $this->grandTotal,
+            ]);
         }
 
 
 
-        $payment = Payment::create([
-            'transaction_id' => $transaction->id,
-            'amount' => $this->payment['tendered_amount'],
-            'tendered_amount' => $this->payment['tendered_amount'],
-            'reference_number' => $this->payment['reference_no'] ?? 'N/A',
-            'payment_type' => $this->payment['payment_type'],
-        ]);
 
 
-
-
+        $this->alert('success', 'New Transaction Saved Successfully');
 
         $this->dispatch('print-sales-receipt', array_merge(
             $receiptData,
@@ -556,7 +638,8 @@ class SalesTransaction extends Component
                 'selectedItems' => $this->selectedItems,
                 'customerDetails' => $this->customerDetails ?? null,
                 'tax_details' => $this->tax_details,
-                'transaction_info' => $transaction_info
+                'transaction_info' => $this->transaction_info,
+                'credit_details' => $this->credit_details ?? null,
             ]
         ))->to(SalesReceipt::class);
 
@@ -596,6 +679,11 @@ class SalesTransaction extends Component
     {
         $this->showPaymentForm = !$this->showPaymentForm;
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
+    }
+
+    public function displaySalesReturn()
+    {
+        $this->dispatch('display-sales-return', showSalesReturn: true)->to(CashierPage::class);
     }
 
     public function displaySalesReceipt()
