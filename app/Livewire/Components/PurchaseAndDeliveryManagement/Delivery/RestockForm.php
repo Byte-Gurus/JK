@@ -388,6 +388,5 @@ class RestockForm extends Component
 
         // Calculate the demand rate
         $demandRate = $days > 0 ? $totalSellingPrice / $days : 0;
-
     }
 }

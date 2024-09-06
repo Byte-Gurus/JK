@@ -384,7 +384,7 @@
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                                 Type</label>
 
-                                            <select id="customerType" wire:model.live="customerType" required
+                                            <select id="customerType" wire:model.live="customerType" required disabled
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value=""selected>Select Customer Type</option>
                                                 <option value="PWD">PWD</option>
@@ -407,7 +407,7 @@
                                                 Percentage
                                                 (%)<span class="text-red-400 ">*</span></label>
 
-                                            <input type="number" id="discount_percentage" required
+                                            <input type="number" id="discount_percentage" required disabled
                                                 wire:model="discount_percentage"
                                                 class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                                 placeholder="Discount Percentage" />
@@ -425,7 +425,7 @@
                                             Discount
                                             No</label>
 
-                                        <input type="number" id="customer_discount_no"
+                                        <input type="number" id="customer_discount_no" disabled
                                             wire:model="customer_discount_no"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Discount No" required />
@@ -445,16 +445,7 @@
                                                 class="text-[rgb(0,0,0)] bg-[rgb(218,218,218)] hover:bg-[rgb(165,165,165)] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Return</button>
                                         </div>
                                         <div class="flex flex-row gap-2 ">
-                                            <div>
-                                                <button type="button" wire:loading.remove wire:click="removeDiscount"
-                                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                                    <div class="flex flex-row items-center gap-2">
-                                                        <p>
-                                                            Remove Discount
-                                                        </p>
-                                                    </div>
-                                                </button>
-                                            </div>
+
                                             <div>
                                                 <button type="reset"
                                                     class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
@@ -474,23 +465,18 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="flex justify-end w-full">
+                                    <div class="flex items-center justify-between w-full">
                                         <div>
-
-                                            {{-- //* clear all button for create --}}
-                                            <button type="reset"
-                                                class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
-                                                All</button>
-                                        </div>
-                                        <div>
-                                            <button type="button" wire:loading.remove wire:click="removeDiscount"
-                                                class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                                <div class="flex flex-row items-center gap-2">
-                                                    <p>
-                                                        Remove Discount
-                                                    </p>
-                                                </div>
-                                            </button>
+                                            <div>
+                                                <button type="button" wire:loading.remove wire:click="removeDiscount"
+                                                    class="text-[rgb(53,53,53)] bg-[rgb(238,238,238)] underline focus:ring-4  focus:outline-none  font-medium rounded-lg text-sm w-full ease-in-out duration-100 transition-all sm:w-auto text-center ">
+                                                    <div class="flex flex-row items-center gap-2">
+                                                        <p>
+                                                            Remove Discount
+                                                        </p>
+                                                    </div>
+                                                </button>
+                                            </div>
                                         </div>
                                         {{-- //* submit button for create --}}
                                         <button type="submit" wire:loading.remove

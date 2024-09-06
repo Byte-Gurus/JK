@@ -162,11 +162,11 @@ class DiscountForm extends Component
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'customer_discount_no', 'discount_percentage']);
+        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'customer_discount_no', 'discount_percentage', 'selectCustomer']);
     }
     public function resetFormWhenClosed()
     {
-        // $this->resetForm();
+        $this->resetForm();
         $this->resetValidation();
     }
 
