@@ -183,7 +183,7 @@
 
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $supplier->addressJoin->provinceJoin->province_description }},
                                 {{ $supplier->addressJoin->cityJoin->city_municipality_description }},
                                 {{ $supplier->addressJoin->barangayJoin->barangay_description }},

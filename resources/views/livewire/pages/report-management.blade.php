@@ -12,7 +12,8 @@
                     </div>
                 </div>
                 <div>
-                    <div class="p-2 my-4 text-center font-black italic border-2 border-[rgb(20,20,20)] bg-[rgb(53,53,53)] text-white">
+                    <div
+                        class="p-2 my-4 text-center font-black italic border-2 border-[rgb(20,20,20)] bg-[rgb(53,53,53)] text-white">
                         <p>Select a Report To View or Print</p>
                     </div>
                 </div>
@@ -109,7 +110,7 @@
                         </div>
                         <div class="flex flex-col">
                             <div
-                                class="px-4 py-2 transition-all font-bold hover:text-[1.2em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md w-2/3 text-nowrap">
+                                class="px-4 py-2 transition-all font-bold hover:text-[1.6em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md w-3/4 text-nowrap">
 
                                 <button>Stock-on-hand</button>
                             </div>

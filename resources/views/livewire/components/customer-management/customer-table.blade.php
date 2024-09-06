@@ -151,7 +151,7 @@
                             </th>
 
                             {{-- //* address --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $customer->addressJoin->provinceJoin->province_description }},
                                 {{ $customer->addressJoin->cityJoin->city_municipality_description }},
                                 {{ $customer->addressJoin->barangayJoin->barangay_description }},

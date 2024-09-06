@@ -16,6 +16,7 @@ class CashierPage extends Component
     public $showSalesTransactionHistory = false;
 
     public $showSalesReceipt = false;
+
     public $showSalesReturn = false;
 
     public function render()

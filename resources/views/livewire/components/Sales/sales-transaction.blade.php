@@ -24,8 +24,8 @@
                                 class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
                                 <li class="flex items-start justify-between">
                                     <!-- Item details on the left side -->
-                                    <div class="flex flex-col items-start leading-1">
-                                        <div class="text-[1.2em] font-bold">{{ $item->item_name }}</div>
+                                    <div class="flex flex-col w-[200px] items-start leading-1">
+                                        <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
                                         <div class="text-[0.8em]">{{ $item->item_description }}</div>
                                         <div class="text-[1em]">{{ $item->barcode }}</div>
                                     </div>
@@ -46,14 +46,14 @@
             <div class="flex flex-row items-center gap-4 text-nowrap">
                 <div>
                     <select id="transaction_type" wire:change='changeTransactionType()'
-                        class=" bg-[rgb(255,206,121)] px-4 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
+                        class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
                         <option selected value="1">Sales</option>
                         <option value="2">Credit</option>
                     </select>
                 </div>
                 <div>
                     <button x-on:click="$wire.displaySalesTransactionHistory()"
-                        class="px-6 py-4 bg-[rgb(230,254,134)] border border-black hover:bg-[rgb(214,255,49)] ease-in-out duration-100 transition-all">Transaction
+                        class="px-6 py-4 bg-[rgb(230,254,134)] border border-black hover:bg-[rgb(214,255,49)] font-bold ease-in-out duration-100 transition-all">Transaction
                         History</button>
                 </div>
             </div>
@@ -81,10 +81,10 @@
                             </th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="py-3 pl-4 pr-2 text-left">Item Name</th>
+                            <th scope="col" class="py-3 pl-4 pr-2 text-left ">Item Name</th>
 
                             {{-- //* item descrition --}}
-                            <th scope="col" class="px-4 py-3 text-center">Description</th>
+                            <th scope="col" class="px-4 py-3 text-left">Description</th>
 
                             {{-- //* quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Quantity</th>
@@ -116,10 +116,10 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap "
+                                    class="px-4 py-4 text-left text-gray-900 text-md whitespace-nowrap text-wrap"
                                     :class="isSelected && ' bg-gray-200'">
-                                    <div class="flex flex-col ">
-                                        <div class="text-xl font-black">{{ $selectedItem['item_name'] }}</div>
+                                    <div class="flex flex-col break-all">
+                                        <div class="text-xl font-bold">{{ $selectedItem['item_name'] }}</div>
                                         <div class="flex flex-row gap-2 w-fit">
                                             <div class="text-sm italic font-medium text-[rgb(122,122,122)]">
                                                 {{ $selectedItem['barcode'] }}</div>
@@ -131,7 +131,7 @@
 
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
+                                    class="px-4 py-4 text-lg font-medium text-left text-gray-900 break-all whitespace-nowrap text-wrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     {{ $selectedItem['item_description'] }}
                                 </th>
@@ -156,17 +156,15 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="flex flex-col px-4 py-4 text-xl font-black text-center text-gray-900"
+                                    class="px-4 py-4 text-lg font-medium text-left text-gray-900 whitespace-nowrap text-wrap"
                                     :class="isSelected && ' bg-gray-200'">
                                     <div class="flex flex-col items-center justify-center">
                                         <div class="text-xl font-black">
                                             {{ number_format($selectedItem['total_amount'], 2) }}
                                         </div>
-                                        <div>
-                                            <div class="text-sm text-left italic font-medium text-[rgb(122,122,122)]">
+                                        <div class="text-sm text-left italic font-medium text-[rgb(122,122,122)]">
 
-                                                {{ number_format($selectedItem['original_total'], 2) }}
-                                            </div>
+                                            {{ number_format($selectedItem['original_total'], 2) }}
                                         </div>
                                     </div>
                                 </th>
@@ -180,8 +178,7 @@
             <div class="grid grid-flow-col">
                 <div class="flex flex-row gap-4">
                     <div class="flex flex-col gap-2">
-                        <div
-                        wire:click="displaySalesReturn()"
+                        <div wire:click="displaySalesReturn()"
                             class="py-4 text-center font-bold bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="px-8 py-2 ">Return</button>
                         </div>
@@ -263,12 +260,12 @@
                                 </button>
                             </div>
                         @else
-                        <div class="text-center text-nowrap">
-                            <button type="button" class="px-8 py-2 "
-                                x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
-                                Save
-                            </button>
-                        </div>
+                            <div class="text-center text-nowrap">
+                                <button type="button" class="px-8 py-2 "
+                                    x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
+                                    Save
+                                </button>
+                            </div>
                         @endif
 
                     </div>
