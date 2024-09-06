@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('credit_histories', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->double('remaining_balance')->nullable();
+            $table->double('credit_amount')->nullable();
             $table->timestamps();
 
             $table->foreignId('credit_id')->constrained('credits');

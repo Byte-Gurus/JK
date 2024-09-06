@@ -613,12 +613,15 @@ class SalesTransaction extends Component
         } else {
             $credit = Credit::where('credit_number', $this->credit_no)->first();
             $credit->credit_amount = $this->grandTotal;
+            $credit->remaining_balance = $this->grandTotal;
             $credit->transaction_id = $transaction->id;
             $credit->save();
 
             $creditHistory = CreditHistory::create([
                 'description' => 'Issuance of credit',
-                'credit_id' => $credit->id
+                'credit_id' => $credit->id,
+                'credit_amount' => $this->grandTotal,
+                'remaining_balance'=> $this->grandTotal,
             ]);
         }
 

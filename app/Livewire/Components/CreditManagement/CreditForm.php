@@ -59,6 +59,7 @@ class CreditForm extends Component
             'status' => $validated['status'],
             'due_date' => $validated['due_date'],
             'credit_amount' => null,
+            'remaining_balance' => null,
             'credit_number' => $this->credit_number,
             'credit_limit' => $validated['credit_limit'],
             'transaction_id' => null,
@@ -67,7 +68,9 @@ class CreditForm extends Component
 
         $creditHistory = CreditHistory::create([
             'description' => 'Credit Approved',
-            'credit_id' => $credit->id
+            'credit_id' => $credit->id,
+            'credit_amount' => null,
+            'remaining_balance' => null,
         ]);
     }
 

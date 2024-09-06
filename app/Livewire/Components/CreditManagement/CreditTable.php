@@ -20,9 +20,8 @@ class CreditTable extends Component
     public $startDate, $endDate;
     public function render()
     {
-        $query = Credit::query()
-            ->whereHas('transactionJoin')
-            ->orWhereDoesntHave('transactionJoin');
+        $query = Credit::query();
+
 
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter

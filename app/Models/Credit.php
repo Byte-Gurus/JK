@@ -14,6 +14,7 @@ class Credit extends Model
         'credit_number',
         'due_date',
         'credit_amount',
+        'remaining_balance',
         'credit_limit',
         'transaction_id',
         'customer_id',

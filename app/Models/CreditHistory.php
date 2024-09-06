@@ -12,6 +12,8 @@ class CreditHistory extends Model
     protected $fillable = [
         'description',
         'credit_id',
+        'credit_amount',
+        'remaining_balance'
     ];
 
     public function creditJoin()

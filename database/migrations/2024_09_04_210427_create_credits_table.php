@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('credit_number');
             $table->dateTime('due_date');
+            $table->double('remaining_balance')->nullable();
             $table->double('credit_amount')->nullable();
             $table->double('credit_limit');
             $table->timestamps();
