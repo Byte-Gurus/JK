@@ -16,7 +16,7 @@ class CreditTable extends Component
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
 
-    public $statusFilter = 0; //var filtering value = all
+    public $statusFilter = 'Pending'; //var filtering value = all
     public $vatFilter = 0; //var filtering value = all
     public $supplierFilter = 0;
 
@@ -28,6 +28,8 @@ class CreditTable extends Component
 
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
+        }else{
+
         }
 
         $credits = $query->search($this->search) //?search the user
