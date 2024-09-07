@@ -72,7 +72,7 @@
 
                             {{-- //* username --}}
                             <th scope="col" class="text-[0.6em] font-bold text-center">
-                                <p>Wholesale(%)</p>
+                                <p>WS(%)</p>
                             </th>
 
                             {{-- //* username --}}
