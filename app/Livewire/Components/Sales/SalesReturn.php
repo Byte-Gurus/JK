@@ -16,9 +16,19 @@ class SalesReturn extends Component
         return view('livewire.components.sales.sales-return');
     }
 
+    protected $listeners = [
+        'display-sales-return-details' => 'displaySalesReturnDetails'
+    ];
+
     public function displaySalesReturnModal()
     {
         $this->showSalesReturnModal = true;
+    }
+
+    public function displaySalesReturnDetails()
+    {
+        $this->showSalesReturnModal = false;
+        $this->showSalesReturnDetails = true;
     }
 
 }

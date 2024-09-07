@@ -22,7 +22,9 @@ class SalesReturnModal extends Component
             $this->addError('transaction_number', 'The transaction number does not exist.');
             return;
         }
-        
+
+        $this->dispatch('display-sales-return-details')->to(SalesReturn::class);
+
     }
 
     protected function validateForm()
