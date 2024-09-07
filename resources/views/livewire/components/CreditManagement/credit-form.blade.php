@@ -27,12 +27,8 @@
                         {{-- //* form title --}}
                         <h3 class="text-xl font-black text-gray-900 item ">
 
-                            @if (!$this->isCreate)
-                                {{-- *if form is edit --}}
-                                Edit Credit
-                            @else
-                                Create Credit
-                            @endif
+                            Create Credit
+
 
                         </h3>
                     </div>
