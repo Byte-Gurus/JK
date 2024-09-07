@@ -218,6 +218,11 @@ class SalesTransaction extends Component
                         return;
                     }
 
+                    if ($selectedItem['quantity'] >= $selectedItem['current_stock_quantity']) {
+                        $this->alert('error', 'current stock is depleted');
+                        return;
+                    }
+
                     $itemExists = true;
                     // Update the quantity if the item already exists
                     $this->selectedItems[$index]['quantity'] += 1;
@@ -621,7 +626,7 @@ class SalesTransaction extends Component
                 'description' => 'Issuance of credit',
                 'credit_id' => $credit->id,
                 'credit_amount' => $this->grandTotal,
-                'remaining_balance'=> $this->grandTotal,
+                'remaining_balance' => $this->grandTotal,
             ]);
         }
 
