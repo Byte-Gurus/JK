@@ -15,6 +15,7 @@ class CreditForm extends Component
 
     public $isCreate;
     public $credit_number, $selectCustomer, $credit_limit = 5000, $status = 'Pending', $due_date;
+
     public function render()
     {
 

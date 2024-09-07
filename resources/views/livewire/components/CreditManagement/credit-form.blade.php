@@ -88,7 +88,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Name
                                         </label>
 
-                                        <select id="selectCustomer" wire:model.live="selectCustomer"
+                                        <select id="selectCustomer" wire:model="selectCustomer"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select customer</option>
                                             @foreach ($customers as $customer)
@@ -122,8 +122,8 @@
 
                                     <div class="mb-3">
 
-                                        <label for="due_date"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Due Date
+                                        <label for="due_date" class="block mb-2 text-sm font-medium text-gray-900 ">Due
+                                            Date
                                         </label>
 
                                         <input type="date" id="due_date" wire:model="due_date"
@@ -138,17 +138,13 @@
 
                                     <div class="mb-3">
 
-                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+                                        <label for="vatType"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
-                                        <select id="status" wire:model="status" readonly
+                                        <input type="text" wire:model="status" readonly
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Select status</option>
-                                            <option value="Paid">Paid</option>
-                                            <option value="Pending">Pending</option>
-                                            <option value="Overdue">Overdue</option>
 
-
-                                        </select>
+                                        </input>
 
                                         @error('status')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -223,7 +219,8 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                    <div class="flex items-center justify-center loader loader--style3 "
+                                        title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
                                             height="40px" viewBox="0 0 50 50"
