@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class SalesReturnDetails extends Component
 {
+    public $showSalesReturnForm = false;
+
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $return_quantity;
 
     public function render()
@@ -47,5 +49,10 @@ class SalesReturnDetails extends Component
     {
         $this->transaction_id = $Transaction['id'];
         $this->populateForm();
+    }
+
+    public function displaySalesReturnForm()
+    {
+        $this->showSalesReturnForm = true;
     }
 }

@@ -39,6 +39,7 @@ class SalesTransaction extends Component
     public $barcode;
 
     // livewires
+    public $showSalesTransaction = true;
     public $showSalesTransactionHistory = false;
     public $showAdminLoginForm = false;
     public $showChangeQuantityForm = false;
@@ -162,6 +163,7 @@ class SalesTransaction extends Component
         'removeRowCancelled',
         'cancelConfirmed',
         'display-change-quantity-form' => 'displayChangeQuantityForm',
+        'display-sales-transaction' => 'displaySalesTransaction',
         'display-discount-form' => 'displayDiscountForm',
         'display-payment-form' => 'displayPaymentForm',
         'get-quantity' => 'getQuantity',
@@ -315,7 +317,6 @@ class SalesTransaction extends Component
             dd($this->si);
         }
     }
-
 
     public function setQuantity()
     {
@@ -713,15 +714,13 @@ class SalesTransaction extends Component
 
         // Calculate the demand rate
         $demandRate =  $todayTotalItemQuantity / $daysWithSales;
-       
+
         $reorder_point = ($days * $demandRate);
 
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
     }
-
-
 
 
 
