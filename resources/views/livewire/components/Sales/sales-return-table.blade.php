@@ -1,4 +1,4 @@
-<div x-show="showSalesReturnTable">
+<div>
     <div class="relative overflow-hidden bg-white h-[620px] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
 
         {{-- //* filters --}}
@@ -88,3 +88,4 @@
             </table>
         </div>
     </div>
+</div>

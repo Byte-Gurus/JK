@@ -49,18 +49,18 @@
 
 
                             {{-- //* first row --}}
-                            <div class="flex flex-row items-center justify-between">
+                            <div class="flex flex-row items-center justify-between w-full">
 
                                 {{-- //* adjust reason --}}
                                 <div class="flex flex-col items-center justify-center w-full gap-1 mb-3">
 
                                     <div>
-                                        <p class="text-[1.6em] font-bold text-gray-900">Search</p>
+                                        <p class="text-[1.6em] font-bold text-gray-900">Search Transaction No.</p>
                                     </div>
 
                                     <div class="flex justify-center">
                                         <input autofocus type="text" wire:model='adjust_quantity' required
-                                            class=" bg-[rgb(245,245,245)] text-center w-1/2 h-1/2 text-2xl border border-[rgb(143,143,143)] text-gray-900 rounded-md block p-4">
+                                            class=" bg-[rgb(245,245,245)] text-center text-2xl border border-[rgb(143,143,143)] text-gray-900 rounded-md block p-4">
                                     </div>
 
                                     {{-- @error('adjust_quantity')
@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <button type="submit"
-                            class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Apply</button>
+                            class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Enter</button>
                     </div>
                 </div>
             </div>
