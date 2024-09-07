@@ -99,8 +99,7 @@
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Bulk quantity</th>
 
-                        {{-- //* Reorder point --}}
-                        <th scope="col" class="px-4 py-3">Reorder percentage</th>
+                      
 
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Reorder point</th>
@@ -207,10 +206,6 @@
                                 {{ $item->bulk_quantity }}
                             </th>
 
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->reorder_percentage }}
-                            </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">

@@ -15,6 +15,7 @@ use App\Models\Item;
 use App\Models\Payment;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -278,6 +279,8 @@ class SalesTransaction extends Component
                     'discount' =>  0,
                     'discount_id' =>  null,
                     'original_total' => 0,
+                    'delivery_date' => $item->deliveryJoin->date_delivered,
+                    'po_date' => $item->deliveryJoin->purchaseJoin->created_at,
                 ];
             }
         } else {
@@ -308,8 +311,7 @@ class SalesTransaction extends Component
     {
         array_push($this->si, $index);
 
-        if (count($this->si) == 2)
-        {
+        if (count($this->si) == 2) {
             dd($this->si);
         }
     }
@@ -634,6 +636,8 @@ class SalesTransaction extends Component
                 'movement_type' => 'Sales',
                 'operation' => 'Stock out',
             ]);
+
+            $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
         }
 
 
@@ -681,7 +685,41 @@ class SalesTransaction extends Component
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
 
+    public function getReorderPoint($item_id, $delivery_date, $po_date)
+    {
+        $deliveryDate = Carbon::parse($delivery_date);
+        $poDate = Carbon::parse($po_date);
 
+        // Define the start and end dates
+        $startDate = $poDate->startOfDay();
+        $endDate = $deliveryDate->endOfDay();
+
+        $startOfDay = Carbon::today()->startOfDay();
+        $endOfDay = Carbon::today()->endOfDay();
+
+        $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
+            ->distinct()
+            ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
+            ->count();
+
+        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        })->sum('item_quantity');
+
+
+        // Calculate the number of days in the date range
+        $days = floor($startDate->diffInDays($endDate));
+        // dd($totalQuantity);
+
+        // Calculate the demand rate
+        $demandRate =  $todayTotalItemQuantity / $daysWithSales;
+       
+        $reorder_point = ($days * $demandRate);
+
+        $item = Item::find($item_id);
+        $item->reorder_point = $reorder_point;
+        $item->save();
+    }
 
 
 

@@ -375,18 +375,23 @@ class RestockForm extends Component
         $endDate = $deliveryDate->endOfDay();
 
 
-        $totalSellingPrice = TransactionDetails::where('item_id', $item_id)
+        $totalQuantity = TransactionDetails::where('item_id', $item_id)
             ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('created_at', [$startDate, $endDate]);
             })
-            ->sum('item_subtotal');
-
+            ->sum('item_quantity');
 
 
         // Calculate the number of days in the date range
-        $days = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate)) + 1;
+        $days = floor($startDate->diffInDays($endDate));
+        // dd($totalQuantity);
 
         // Calculate the demand rate
-        $demandRate = $days > 0 ? $totalSellingPrice / $days : 0;
+        $demandRate =  $totalQuantity / $days;
+        $reorder_point = ($days * $demandRate) ;
+
+        $item = Item::find($item_id);
+        $item->reorder_point = $reorder_point;
+        $item->save();
     }
 }
