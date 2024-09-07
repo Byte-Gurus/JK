@@ -55,7 +55,7 @@ class CreditForm extends Component
 
 
         $customer = Customer::find($customer_id);
-        $this->customer_name =  $customer->firstname . '' . $customer->middlename . '' . $customer->lastname;
+        $this->customer_name =  $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
 
         $this->generateCreditNumber();
         $this->searchCustomer = '';
@@ -123,6 +123,7 @@ class CreditForm extends Component
     {
 
         $rules = [
+            'customer_name' => 'required',
             'credit_limit' => ['required', 'numeric', 'min:1'],
             'status' => 'required|in:Paid,Pending,Overdue',
             'due_date' => 'required|date|after_or_equal:today'

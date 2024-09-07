@@ -127,17 +127,13 @@ class SalesTransaction extends Component
 
 
 
-        if (isset($this->credit_details['credit_id'])) {
-
-            $this->alert('error', 'Reset the transaction');
-            return;
-        }
 
         $credit = Credit::where('customer_id', $creditor_id)->first();
 
         if ($credit->credit_limit <= $this->grandTotal) {
 
             $this->alert('error', 'Creditor reached the credit limit');
+            $this->searchCustomer = '';
             return;
         }
 
@@ -181,10 +177,10 @@ class SalesTransaction extends Component
             return;
         }
 
-        if (!$this->isSales && !$this->credit_no) {
-            $this->alert('error', 'Please select creditor');
-            return;
-        }
+        // if (!$this->isSales && !$this->credit_no) {
+        //     $this->alert('error', 'Please select creditor');
+        //     return;
+        // }
 
 
 
@@ -515,7 +511,7 @@ class SalesTransaction extends Component
     {
 
         if (empty($this->payment) && $this->isSales) {
-            $this->alert('warning', 'No payment yest');
+            $this->alert('warning', 'No payment yet');
             return;
         }
 
