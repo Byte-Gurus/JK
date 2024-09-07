@@ -9,13 +9,13 @@ use Livewire\Component;
 class CashierPage extends Component
 {
 
-    public $showNavbarNoSidebar = true;
+    public $showNavbarNoSidebar = false;
 
-    public $showSalesTransaction = true;
+    public $showSalesTransaction = false;
 
     public $showSalesTransactionHistory = false;
 
-    public $showSalesReceipt = false;
+    public $showSalesReceipt = true;
 
     public $showSalesReturn = false;
 
