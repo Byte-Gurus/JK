@@ -46,6 +46,8 @@ class SalesTransaction extends Component
     public $showWholesaleForm = false;
     public $showSalesReceipt = false;
 
+    public $si = [];
+
 
 
 
@@ -172,6 +174,11 @@ class SalesTransaction extends Component
         'display-sales-receipt' => 'displaySalesReceipt'
     ];
 
+    public function unselectItem()
+    {
+        $this->isSelected = false;
+    }
+
     public function selectItem($item_id = null)
     {
 
@@ -284,11 +291,22 @@ class SalesTransaction extends Component
         $this->search = '';
     }
 
-    public function getIndex($index, $flag)
+    public function getIndex($index)
     {
-        $this->reset('selectedIndex', 'isSelected');
+
+
+        $this->reset('selectedIndex');
         $this->selectedIndex = $index;
-        $this->isSelected = $flag;
+    }
+
+    public function ss($index)
+    {
+        array_push($this->si, $index);
+
+        if (count($this->si) == 2)
+        {
+            dd($this->si);
+        }
     }
 
 
