@@ -25,6 +25,10 @@
 
             </div>
 
+            
+
+
+
 
             <div class="flex flex-row items-center justify-center gap-4">
 
@@ -44,6 +48,10 @@
 
                     </select>
                 </div>
+
+
+
+
             </div>
         </div>
 
@@ -54,7 +62,7 @@
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] top-0   ">
 
                     <tr class=" text-nowrap">
 

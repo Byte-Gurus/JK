@@ -5,9 +5,12 @@ namespace App\Livewire\Components\CreditManagement;
 use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CreditTable extends Component
 {
+
+    use WithPagination;
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
@@ -34,6 +37,15 @@ class CreditTable extends Component
         return view('livewire.components.CreditManagement.credit-table', [
             'credits' => $credits
         ]);
+    }
+
+    protected $listeners = [
+        'refresh-table' => 'refreshTable',//*  galing sa UserTable class
+    ];
+
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 
     public function sortByColumn($column)

@@ -67,6 +67,8 @@
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Description</th>
+                        {{-- //* customer name --}}
+                        <th scope="col" class="px-4 py-3 text-left">Status</th>
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Credit Amount</th>
@@ -140,6 +142,9 @@
                                 {{ $creditHistory->description }}
                             </th>
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $creditHistory->creditJoin->status }}
+                            </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->credit_amount ?? 'N/A' }}
                             </th>
 
@@ -149,15 +154,15 @@
 
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $creditHistory->creditJoin->transactionJoin->paymentJoin->payment_type ?? 'NA' }}
+                                {{ $creditHistory->paymentJoin->payment_type ?? 'NA' }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $creditHistory->transactionJoin->paymentJoin->reference_no ?? 'NA' }}
+                                {{ $creditHistory->paymentJoin->reference_no ?? 'NA' }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $creditHistory->transactionJoin->paymentJoin->amount ?? 'NA' }}
+                                {{ $creditHistory->paymentJoin->amount ?? 'NA' }}
                             </th>
                             {{-- //* actions --}}
 

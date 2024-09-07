@@ -22,15 +22,25 @@ class DiscountForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $selectCustomer, $customerType, $customer_discount_no, $customer_id, $discount_percentage, $discounts, $discount_id;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $customer_discount_no, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
     public $customerDetails = [];
 
     public function render()
     {
         $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
 
-        $customers = Customer::where('customer_type', 'PWD')
-            ->orWhere('customer_type', 'Senior CItizen')->get();
+        $searchCustomerTerm = trim($this->searchCustomer);
+
+        $customers = Customer::where(function ($query) {
+            $query->where('customer_type', 'PWD')
+                ->orWhere('customer_type', 'Senior Citizen');
+        })
+            ->where(function ($query) use ($searchCustomerTerm) {
+                $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
+                    ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
+                    ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
+            })
+            ->get();
 
         return view('livewire.components.sales.discount-form', [
             'provinces' => PhilippineProvince::orderBy('province_description')->get(),
@@ -74,14 +84,11 @@ class DiscountForm extends Component
 
     }
 
-    public function updatedSelectCustomer($customer_id)
+    public function getCustomer($customer_id)
     {
-        if (!$customer_id) {
 
-            $this->reset();
-            return;
-        }
         $customer = Customer::find($customer_id);
+        $this->customer_name =  $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
         $this->customer_id = $customer_id;
         $this->populateForm();
 
@@ -92,6 +99,7 @@ class DiscountForm extends Component
             $this->discount_percentage = $this->discounts[2]->percentage;
             $this->discount_id = $this->discounts[2]->id;
         }
+        $this->searchCustomer = '';
     }
 
     public function create() //* create process
@@ -162,11 +170,11 @@ class DiscountForm extends Component
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'customer_discount_no', 'discount_percentage']);
+        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'customer_discount_no', 'discount_percentage', 'searchCustomer']);
     }
     public function resetFormWhenClosed()
     {
-        // $this->resetForm();
+        $this->resetForm();
         $this->resetValidation();
     }
 

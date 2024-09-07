@@ -27,12 +27,8 @@
                         {{-- //* form title --}}
                         <h3 class="text-xl font-black text-gray-900 item ">
 
-                            @if (!$this->isCreate)
-                                {{-- *if form is edit --}}
-                                Edit Credit
-                            @else
-                                Create Credit
-                            @endif
+                            Create Credit
+
 
                         </h3>
                     </div>
@@ -83,12 +79,12 @@
                                     </div>
 
                                     {{-- //* province --}}
-                                    <div>
+                                    {{-- <div>
                                         <label for="selectCustomer"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Name
                                         </label>
 
-                                        <select id="selectCustomer" wire:model.live="selectCustomer"
+                                        <select id="selectCustomer" wire:model="selectCustomer"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select customer</option>
                                             @foreach ($customers as $customer)
@@ -101,7 +97,56 @@
                                         @error('selectCustomer')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
+                                    </div> --}}
+                                    <div class="flex flex-row items-center justify-between px-6">
+                                        <div class="relative w-full">
+
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
+                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                                </svg>
+                                            </div>
+
+                                            <input wire:model.live.debounce.300ms='searchCustomer' type="text" list="itemList"
+                                                class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                                                placeholder="Search Customer">
+                                        </div>
+                                        @if (!empty($searchCustomer))
+                                            <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
+                                                @foreach ($customers as $customer)
+                                                    <ul wire:click="getCustomer({{ $customer->id }})"
+                                                        class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
+                                                        <li class="flex items-start justify-between">
+                                                            <!-- Item details on the left side -->
+                                                            <div class="flex flex-col w-[200px] items-start leading-1">
+                                                                <div class="text-[1.2em] font-bold text-wrap">
+                                                                    {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
+
+                                                            </div>
+
+                                                        </li>
+                                                    </ul>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                        {{-- <div class="font-medium text-[1.6em] w-1/2">
+                                            <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
+                                                class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                                                <option value="" selected>Select customer</option>
+                                                @foreach ($credit_customers as $credit_customer)
+                                                    <option value="{{ $credit_customer->id }} ">
+                                                        {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
+                                                        {{ $credit_customer->creditJoin->credit_number }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div> --}}
+
                                     </div>
+
+                                    <p>{{ $customer_name}}</p>
 
                                     {{-- //* credit limit --}}
                                     <div class="mb-3">
@@ -122,8 +167,8 @@
 
                                     <div class="mb-3">
 
-                                        <label for="due_date"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Due Date
+                                        <label for="due_date" class="block mb-2 text-sm font-medium text-gray-900 ">Due
+                                            Date
                                         </label>
 
                                         <input type="date" id="due_date" wire:model="due_date"
@@ -138,17 +183,13 @@
 
                                     <div class="mb-3">
 
-                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+                                        <label for="vatType"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
-                                        <select id="status" wire:model="status" readonly
+                                        <input type="text" wire:model="status" readonly
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Select status</option>
-                                            <option value="Paid">Paid</option>
-                                            <option value="Pending">Pending</option>
-                                            <option value="Overdue">Overdue</option>
 
-
-                                        </select>
+                                        </input>
 
                                         @error('status')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -223,7 +264,8 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                    <div class="flex items-center justify-center loader loader--style3 "
+                                        title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
                                             height="40px" viewBox="0 0 50 50"

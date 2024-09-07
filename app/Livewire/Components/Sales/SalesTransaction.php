@@ -31,7 +31,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $selectCustomer, $creditor_name, $transaction_info, $credit_limit;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -61,12 +61,19 @@ class SalesTransaction extends Component
 
         $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
 
-        $credit_customers = Customer::whereHas('creditJoin', function ($query) {
+
+
+        $searchTerm = trim($this->search);
+        $searchCustomerTerm = trim($this->searchCustomer);
+
+        $credit_customers = Customer::where(function ($query) use ($searchCustomerTerm) {
+            $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
+                ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
+                ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
+        })->whereHas('creditJoin', function ($query) {
             $query->where('status', '!=', 'Paid')
                 ->doesntHave('transactionJoin');
         })->get();
-
-        $searchTerm = trim($this->search);
 
         // Fetch items with their inventoryJoin
         $items = Item::where('status_id', 1)
@@ -115,13 +122,11 @@ class SalesTransaction extends Component
         $this->isSales = !$this->isSales;
     }
 
-    public function updatedSelectCustomer($creditor_id)
+    public function selectCustomer($creditor_id)
     {
 
-        if (!$creditor_id) {
 
-            return redirect(request()->header('Referer'));
-        }
+
         if (isset($this->credit_details['credit_id'])) {
 
             $this->alert('error', 'Reset the transaction');
@@ -146,6 +151,8 @@ class SalesTransaction extends Component
             'credit_id' => $credit->id,
             'credit_limit' => $this->credit_limit
         ];
+
+        $this->searchCustomer = '';
     }
 
 
@@ -174,7 +181,7 @@ class SalesTransaction extends Component
             return;
         }
 
-        if (!$this->isSales && !$this->selectCustomer) {
+        if (!$this->isSales && !$this->credit_no) {
             $this->alert('error', 'Please select creditor');
             return;
         }
@@ -215,6 +222,11 @@ class SalesTransaction extends Component
 
                     if ($selectedItem['selling_price'] + $this->grandTotal > $this->credit_limit && $this->credit_details) {
                         $this->alert('error', 'Credit limit reached');
+                        return;
+                    }
+
+                    if ($selectedItem['quantity'] >= $selectedItem['current_stock_quantity']) {
+                        $this->alert('error', 'current stock is depleted');
                         return;
                     }
 
@@ -621,7 +633,7 @@ class SalesTransaction extends Component
                 'description' => 'Issuance of credit',
                 'credit_id' => $credit->id,
                 'credit_amount' => $this->grandTotal,
-                'remaining_balance'=> $this->grandTotal,
+                'remaining_balance' => $this->grandTotal,
             ]);
         }
 

@@ -18,6 +18,8 @@ class UserForm extends Component
     public $show_password; //var true for show password false for hindi
     public $isCreate; //var true for create false for edit
 
+    public $showModal = false;
+
 
     //var form inputs
     public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
@@ -82,6 +84,10 @@ class UserForm extends Component
         $this->closeModal();
     }
 
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
 
 
     public function refreshTable() //* refresh ang table after confirmation
@@ -89,13 +95,6 @@ class UserForm extends Component
         $this->dispatch('refresh-table')->to(UserTable::class);
     }
 
-
-
-    public function closeModal() //* close ang modal after confirmation
-    {
-        $this->dispatch('close-modal')->to(UserManagementPage::class);
-        $this->resetValidation();
-    }
 
 
     public function update() //* update process

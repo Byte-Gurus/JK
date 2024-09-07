@@ -171,7 +171,7 @@
                                 <th scope="col"
                                     class="flex items-center justify-center gap-2 px-4 py-3 text-center justi ">
 
-                                  
+
                                     <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
                                         class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
 
