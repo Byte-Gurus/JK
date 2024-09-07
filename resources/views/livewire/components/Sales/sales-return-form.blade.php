@@ -157,4 +157,9 @@
             </div>
         </form>
     </div>
+    <div>
+        <div class="m-[28px]" x-show="showAdminLoginForm" x-data="{ showAdminLoginForm: @entangle('showAdminLoginForm') }">
+            @livewire('components.sales.admin-login-form')
+        </div>
+    </div>
 </div>
