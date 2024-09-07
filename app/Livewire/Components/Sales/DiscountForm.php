@@ -88,7 +88,7 @@ class DiscountForm extends Component
     {
 
         $customer = Customer::find($customer_id);
-        $this->customer_name =  $customer->firstname . '' . $customer->middlename . '' . $customer->lastname;
+        $this->customer_name =  $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
         $this->customer_id = $customer_id;
         $this->populateForm();
 
