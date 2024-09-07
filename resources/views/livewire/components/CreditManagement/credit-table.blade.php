@@ -34,7 +34,8 @@
                     class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
                     <option value="0">All</option>
                     <option value="Pending">Pending</option>
-                    <option value="Paid">Paid</option>
+                    <option value="With remaining balance"> With remaining balance</option>
+                    <option value="Fully paid">Fully paid</option>
                     <option value="Overdue">Overdue</option>
 
                 </select>

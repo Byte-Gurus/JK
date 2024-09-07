@@ -26,20 +26,7 @@
             </div>
 
 
-            <div class="flex flex-col gap-1">
-
-                <label class="text-sm font-medium text-gray-900 text-nowrap">Status:</label>
-
-                <select wire:model.live="statusFilter"
-                    class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
-                    <option value="0">All</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Paid">Paid</option>
-                    <option value="Overdue">Overdue</option>
-
-                </select>
-
-            </div>
+         
         </div>
 
 
@@ -67,8 +54,7 @@
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Description</th>
-                        {{-- //* customer name --}}
-                        <th scope="col" class="px-4 py-3 text-left">Status</th>
+
 
                         {{-- //* customer name --}}
                         <th scope="col" class="px-4 py-3 text-left">Credit Amount</th>
@@ -141,9 +127,7 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->description }}
                             </th>
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $creditHistory->creditJoin->status }}
-                            </th>
+
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->credit_amount ?? 'N/A' }}
                             </th>

@@ -3,139 +3,143 @@
         <div class="w-full border-2 h-fit">
             <div class="flex flex-col justify-center mx-3 mb-6 text-center">
                 <div class="font-black ">
-                    <p class="text-[0.6em]">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>
+                    <p class="text-[0.6em] uppercase">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>
                 </div>
                 <div>
-                    <p class="text-[0.6em]">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
+                    <p class="text-[0.6em] uppercase">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
                 </div>
                 <div>
-                    <p class="text-[0.6em]">Non-VAT Reg TIN 936-196-461-0000</p>
+                    <p class="text-[0.6em] uppercase">Non-VAT Reg TIN 936-196-461-0000</p>
                 </div>
             </div>
             <div class="flex flex-col justify-between px-4 mb-2">
                 <div class="flex flex-col ">
                     <div class="flex flex-row self-end mb-4 mr-2 text-nowrap">
-                        <p class="text-[0.6em] font-black">Sales Invoice No.</p>
-                        <p class="text-[0.6em] font-black">1234</p>
+                        <p class="text-[0.6em] font-black uppercase">Sales Invoice No.</p>
+                        <p class="text-[0.6em] font-black uppercase">1234</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold">Date:</p>
-                        <p class="text-[0.6em] font-bold">
+                        <p class="text-[0.6em] font-bold uppercase">Date:</p>
+                        <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold">Time:</p>
-                        <p class="text-[0.6em] font-bold">
+                        <p class="text-[0.6em] font-bold uppercase">Time:</p>
+                        <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold">Transaction No.</p>
-                        <p class="text-[0.6em] font-bold">
+                        <p class="text-[0.6em] font-bold uppercase">Transaction No.</p>
+                        <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold">Payment Method:</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['payment']['payment_type'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>
+                        <p class="text-[0.6em] font-bold uppercase">
+                            {{ $receiptDetails['payment']['payment_type'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold">Reference No.</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['payment']['reference_no'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">Reference No.</p>
+                        <p class="text-[0.6em] font-bold uppercase">
+                            {{ $receiptDetails['payment']['reference_no'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold">
+                        <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
+                        <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
                     </div>
                 </div>
             </div>
-            <div class="mx-4 ">
-                <span class="">------------------------</span>
-            </div>
+
             <div class="mx-4">
-                <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
+                <span class="">------------------------</span>
 
-                    {{-- //* table header --}}
-                    <thead class="sticky top-0 w-full text-black uppercase border-b-2 border-black cursor-default ">
+                {{-- //* table header --}}
+                <ul class="grid justify-between grid-flow-col grid-cols-4">
+                    <li class="col-span-1 ">
+                        <div>
+                            <p class="text-[0.6em]  font-bold">Qty</p>
+                        </div>
+                    </li>
+                    <li class="col-span-4 ">
+                        <div>
+                            <p class="text-[0.6em] font-bold">Description(s)</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 ">
+                        <div>
+                            <p class="text-[0.6em] font-bold">Price</p>
+                        </div>
+                    </li>
+                </ul>
 
-                        <tr>
+                <span class="">------------------------</span>
 
-                            <th scope="col" class="px-[4px] font-bold text-center">
-                                <p class="text-[0.6em]">Qty</p>
-                            </th>
 
-                            <th scope="col" class="text-left px-[4px]">
-                                <p class="text-[0.6em]">Description(s)</p>
-                            </th>
-
-                            {{-- //* status --}}
-                            <th scope="col" class="text-[0.6em] px-[4px] font-bold text-right">
-                                <p class="text-[0.6em]">Price</p>
-                            </th>
-
-                        </tr>
-                    </thead>
-
-                    <tbody class="capitalize border-black w-fit">
-                        @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
-                            @foreach ($receiptDetails['selectedItems'] as $item)
-                                <tr class="mt-1 ">
-                                    <th scope="row">
-                                        <div>
-                                            <p class="text-[0.6em] italic text-right font-medium">
-                                                {{ $item['quantity'] }}</p>
-                                        </div>
-                                    </th>
-
-                                    <th scope="row">
-                                        <div class="flex flex-col">
-                                            <div class="flex flex-row items-center text-wrap">
-                                                <p class="text-[0.6em] font-bold break-all leading-none">
-                                                    {{ $item['item_name'] }}
-                                                </p>
-                                                <p
-                                                    class="text-[0.6em] text-wrap  break-all font-medium leading-none mb-1">
-                                                    {{ $item['item_description'] }}</p>
-                                            </div>
-                                            <p class="text-[0.6em] text-center font-bold">
-                                                RP{{ number_format($item['selling_price'], 2) }}</p>
-                                            <p class="text-[0.6em] text-center font-bold">WS{{ $item['discount'] }}</p>
-
-                                        </div>
-                                    </th>
-
-                                    <th scope="row">
-                                        <p class="text-[0.6em] text-right font-bold">
-                                            {{ number_format($item['total_amount'], 2) }}
+                @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
+                    @foreach ($receiptDetails['selectedItems'] as $item)
+                        <ul class="grid justify-between grid-flow-col grid-cols-4">
+                            <li class="col-span-1 py-[3px]">
+                                <div>
+                                    <p class="text-[0.6em] uppercase text-center font-medium">
+                                        {{ $item['quantity'] }}</p>
+                                </div>
+                            </li>
+                            <li class="col-span-4 py-[3px]">
+                                <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
+                                    <div class=" text-wrap">
+                                        <p class="text-[0.6em] flex uppercase text-justify font-bold">
+                                            {{ $item['item_name'] }} {{ $item['item_description'] }}
                                         </p>
-                                    </th>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                                    </div>
+                                    <div class="flex flex-col w-full justify-center gap-[3px]">
+                                        <div class="flex flex-row justify-end gap-[5px]">
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">RP</p>
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">
+                                                {{ number_format($item['selling_price'], 2) }}</p>
+                                        </div>
+                                        <div class="flex flex-row justify-end gap-[3px]">
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">WS</p>
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">
+                                                {{ $item['discount'] }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-span-1 py-[3px]">
+                                <div>
+                                    <p class="text-[0.6em] text-right uppercase font-bold">
+                                        {{ number_format($item['total_amount'], 2) }}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    @endforeach
+                @endif
+
                 <span class="">------------------------</span>
             </div>
 
             <div class="flex flex-col px-2 mx-2">
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">VATable</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">VATable</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['tax_details']['vatable_amount'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">Non-Vatable Sale</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">Non-Vatable Sale</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['tax_details']['non_vatable_amount'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">VAT-Exempt Sale</p>
-                    <p class="text-[0.6em] font-bold">0.00</p>
+                    <p class="text-[0.6em] font-bold uppercase">VAT-Exempt Sale</p>
+                    <p class="text-[0.6em] font-bold uppercase">0.00</p>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">VAT Zero-Rated Sale</p>
-                    <p class="text-[0.6em] font-bold">0.00</p>
+                    <p class="text-[0.6em] font-bold uppercase">VAT Zero-Rated Sale</p>
+                    <p class="text-[0.6em] font-bold uppercase">0.00</p>
                 </div>
             </div>
             <div class="mx-4 ">
@@ -144,13 +148,13 @@
             <div class="flex flex-col gap-1 px-2 mx-2">
                 <div class="flex flex-row justify-between">
 
-                    <p class="text-[0.6em] font-bold">Subtotal</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">Subtotal</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">Discount - SC/PWD (20%)</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">Discount - SC/PWD (20%)</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['tax_details']['PWD_Senior_discount_amount'] ?? null, 2) }}
                     </p>
                 </div>
@@ -161,13 +165,13 @@
             <div class="flex flex-col gap-1 px-3 m-1">
                 <div class="flex flex-row justify-between">
 
-                    <p class="text-[0.6em] font-bold">Total Amount</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">Total Amount</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['transaction_info']['grandTotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">Tendered Amount</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">Tendered Amount</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['payment']['tendered_amount'] ?? null, 2) }}</p>
                 </div>
             </div>
@@ -176,8 +180,8 @@
             </div>
             <div class="flex flex-col gap-2 px-3 mx-1">
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold">Change</p>
-                    <p class="text-[0.6em] font-bold">
+                    <p class="text-[0.6em] font-bold uppercase">Change</p>
+                    <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['payment']['change'] ?? null, 2) }}</p>
                 </div>
             </div>
@@ -186,16 +190,16 @@
             </div>
             <div class="flex flex-col gap-2 px-2 mx-2 mb-[34px] mt-2p">
                 <div class="flex flex-col justify-between">
-                    <p class="text-[0.6em] font-bold">Customer Name</p>
+                    <p class="text-[0.6em] font-bold uppercase">Customer Name</p>
 
                     @if (isset($receiptDetails['customerDetails']['customer']))
-                        <p class="text-[0.6em] font-bold">
+                        <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
                             {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
                             {{ $receiptDetails['customerDetails']['customer']['lastname'] ?? null }}
                         </p>
                     @else
-                        <p class="text-[0.6em] font-bold">
+                        <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['customerDetails']['firstname'] ?? null }}
                             {{ $receiptDetails['customerDetails']['middlename'] ?? null }}
                             {{ $receiptDetails['customerDetails']['lastname'] ?? null }}
@@ -204,7 +208,7 @@
 
                 </div>
                 <div class="flex flex-col justify-between font-bold">
-                    <p class="text-[0.6em] font-bold">Customer Signature</p>
+                    <p class="text-[0.6em] font-bold uppercase">Customer Signature</p>
                     <p class="text-[0.6em] font-bold">_______________________</p>
                 </div>
             </div>

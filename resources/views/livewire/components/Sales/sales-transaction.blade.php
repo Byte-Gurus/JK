@@ -475,7 +475,7 @@
                             @endforeach
                         </select>
                     </div> --}}
-                    <<<<<<< Updated upstream=======<div>
+                    <div>
                         <div class="relative w-full">
                             >>>>>>> Stashed changes
 
