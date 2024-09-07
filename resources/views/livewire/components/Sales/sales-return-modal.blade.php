@@ -2,7 +2,7 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="adjust">
+        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="enterTransaction">
             @csrf
 
             <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
@@ -59,13 +59,13 @@
                                     </div>
 
                                     <div class="flex justify-center">
-                                        <input autofocus type="text" wire:model='adjust_quantity' required
+                                        <input autofocus type="text" wire:model='transaction_number' required
                                             class=" bg-[rgb(245,245,245)] text-center text-2xl border border-[rgb(143,143,143)] text-gray-900 rounded-md block p-4">
                                     </div>
 
-                                    {{-- @error('adjust_quantity')
+                                    @error('transaction_number')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                    @enderror --}}
+                                    @enderror
 
                                 </div>
                             </div>

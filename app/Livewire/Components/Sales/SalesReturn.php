@@ -7,9 +7,9 @@ use Livewire\Component;
 class SalesReturn extends Component
 {
 
-    public $showSalesReturnTable = false;
+    public $showSalesReturnTable = true;
     public $showSalesReturnModal = false;
-    public $showSalesReturnDetails = true;
+    public $showSalesReturnDetails = false;
 
     public function render()
     {
