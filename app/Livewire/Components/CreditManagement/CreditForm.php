@@ -14,20 +14,28 @@ class CreditForm extends Component
     use LivewireAlert;
 
     public $isCreate;
-    public $credit_number, $selectCustomer, $credit_limit = 5000, $status = 'Pending', $due_date;
+    public $credit_number, $searchCustomer, $credit_limit = 5000, $status = 'Pending', $due_date, $customer_id, $customer_name;
 
     public function render()
     {
 
-        $this->generateCreditNumber();
+
+        $searchCustomerTerm = trim($this->searchCustomer);
+
         $customers = Customer::where('customer_type', 'Credit')
             ->where(function ($query) {
                 $query->whereHas('creditJoin', function ($subQuery) {
                     $subQuery->where('status', 'Fully paid');
                 })
-                    ->orWhereDoesntHave('creditJoin');
+                    ->orDoesntHave('creditJoin');
+            })
+            ->where(function ($query) use ($searchCustomerTerm) {
+                $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
+                    ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
+                    ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
             })
             ->get();
+
 
         return view('livewire.components.CreditManagement.credit-form', [
             'customers' => $customers
@@ -41,6 +49,17 @@ class CreditForm extends Component
         'updateConfirmed',
         'createConfirmed',
     ];
+
+    public function getCustomer($customer_id){
+        $this->customer_id = $customer_id;
+
+
+        $customer = Customer::find($customer_id);
+        $this->customer_name =  $customer->firstname . '' . $customer->middlename . '' . $customer->lastname;
+
+        $this->generateCreditNumber();
+        $this->searchCustomer = '';
+    }
 
     public function closeModal() //* close ang modal after confirmation
     {
@@ -72,7 +91,7 @@ class CreditForm extends Component
             'credit_number' => $this->credit_number,
             'credit_limit' => $validated['credit_limit'],
             'transaction_id' => null,
-            'customer_id' => $validated['selectCustomer'],
+            'customer_id' => $this->customer_id
         ]);
 
         $creditHistory = CreditHistory::create([
@@ -88,12 +107,11 @@ class CreditForm extends Component
         $this->refreshTable();
 
         $this->closeModal();
-
     }
 
     public function resetForm()
     {
-        $this->reset(['credit_number', 'selectCustomer', 'due_date' ]);
+        $this->reset(['credit_number', 'searchCustomer', 'due_date']);
     }
 
     public function refreshTable() //* refresh ang table after confirmation
@@ -105,15 +123,12 @@ class CreditForm extends Component
     {
 
         $rules = [
-            'selectCustomer' => 'required|numeric',
             'credit_limit' => ['required', 'numeric', 'min:1'],
             'status' => 'required|in:Paid,Pending,Overdue',
             'due_date' => 'required|date|after_or_equal:today'
         ];
 
         return $this->validate($rules);
-
-
     }
 
 
