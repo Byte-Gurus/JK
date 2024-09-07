@@ -105,7 +105,7 @@
 
                     <tbody>
                         @foreach ($selectedItems as $index => $selectedItem)
-                            <tr wire:click="getIndex({{ $index }})" x-data="{ isSelected: false }"
+                            <tr wire:click="getIndex({{ $index }}, true)" x-data="{ isSelected: false }"
                                 x-on:click=" isSelected = !isSelected; $wire.ss({{ $index }}) "
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75 cursor-pointer">
 
@@ -475,97 +475,96 @@
                             @endforeach
                         </select>
                     </div> --}}
-<<<<<<< Updated upstream
-=======
-                    <div>
+                    <<<<<<< Updated upstream=======<div>
                         <div class="relative w-full">
->>>>>>> Stashed changes
+                            >>>>>>> Stashed changes
 
-                </div>
-
-
-                <div class="flex flex-row items-center justify-between px-6">
-                    <div class="m-2">
-                        <p class=" font-medium text-[2em]">{{ $credit_no }}</p>
-                    </div>
-                    <div class="m-2">
-                        <p class=" font-medium text-[2em]">{{ $creditor_name }}</p>
-                        <p>{{ $credit_limit }}</p>
-                    </div>
-
-                </div>
-                {{-- discount section --}}
-                <div class="flex flex-row items-center">
-                    <div class="w-full ">
-                        <div class="border border-black "></div>
-                    </div>
-                    <div class="m-2">
-                        <p class=" font-medium text-[2em]">Discount</p>
-                    </div>
-                    <div class="w-full">
-                        <div class="border border-black "></div>
-                    </div>
-                </div>
-                <div class="flex flex-col gap-2 mx-6 mb-2">
-                    <div class="flex flex-row items-center gap-6">
-                        <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
-                    </div>
-                    <div class="flex flex-row items-center gap-6 ">
-                        <div class=" font-medium text-[1.6em]">Customer Name: {{ $customer_name }}</div>
-
-                    </div>
-                    <div class="flex flex-row items-center gap-6 ">
-                        <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
-
-                    </div>
-                </div>
-                <div class="my-2">
-                    <div class="border border-black"></div>
-                </div>
-                {{-- ss --}}
-                <div class="flex flex-col gap-2 mx-6">
-                    <div class="flex flex-row justify-between">
-                        <div class=" font-medium text-[1.4em]">
-                            <p>Tax Amount</p>
-                        </div>
-                        <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
-                    </div>
-
-                    <div class="w-full my-2">
-                        <div class="border border-black"></div>
-                    </div>
-                    <div class="flex flex-row justify-between">
-                        <div class=" font-black text-[2em]">
-                            <p>Subtotal</p>
-                        </div>
-                        <div class=" font-black text-[2em]">₱ {{ number_format($subtotal, 2) }}</div>
-                    </div>
-                    <div class="flex flex-row justify-between">
-                        <div class=" font-medium text-[1.4em]">
-                            <p>Senior & PWD </p>
                         </div>
 
-                        <div class=" font-black text-[1.4em]">{{ $discount_percent }} %</div>
-                    </div>
-                    <div class="flex flex-row justify-between">
-                        <div class=" font-medium text-[1.4em]">
-                            <p>Discount Amount</p>
+
+                        <div class="flex flex-row items-center justify-between px-6">
+                            <div class="m-2">
+                                <p class=" font-medium text-[2em]">{{ $credit_no }}</p>
+                            </div>
+                            <div class="m-2">
+                                <p class=" font-medium text-[2em]">{{ $creditor_name }}</p>
+                                <p>{{ $credit_limit }}</p>
+                            </div>
+
                         </div>
-                        <div class=" font-black text-[1.4em]">₱ {{ number_format($PWD_Senior_discount_amount, 2) }}
+                        {{-- discount section --}}
+                        <div class="flex flex-row items-center">
+                            <div class="w-full ">
+                                <div class="border border-black "></div>
+                            </div>
+                            <div class="m-2">
+                                <p class=" font-medium text-[2em]">Discount</p>
+                            </div>
+                            <div class="w-full">
+                                <div class="border border-black "></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-full my-2">
-                        <div class="border border-black"></div>
-                    </div>
-                    <div class="flex flex-row justify-between">
-                        <div class=" font-black text-[2em]">
-                            <p>Total</p>
+                        <div class="flex flex-col gap-2 mx-6 mb-2">
+                            <div class="flex flex-row items-center gap-6">
+                                <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
+                            </div>
+                            <div class="flex flex-row items-center gap-6 ">
+                                <div class=" font-medium text-[1.6em]">Customer Name: {{ $customer_name }}</div>
+
+                            </div>
+                            <div class="flex flex-row items-center gap-6 ">
+                                <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
+
+                            </div>
                         </div>
-                        <div class=" font-black text-[2em]">₱ {{ number_format($grandTotal, 2) }}</div>
-                    </div>
+                        <div class="my-2">
+                            <div class="border border-black"></div>
+                        </div>
+                        {{-- ss --}}
+                        <div class="flex flex-col gap-2 mx-6">
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-medium text-[1.4em]">
+                                    <p>Tax Amount</p>
+                                </div>
+                                <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
+                            </div>
+
+                            <div class="w-full my-2">
+                                <div class="border border-black"></div>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-black text-[2em]">
+                                    <p>Subtotal</p>
+                                </div>
+                                <div class=" font-black text-[2em]">₱ {{ number_format($subtotal, 2) }}</div>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-medium text-[1.4em]">
+                                    <p>Senior & PWD </p>
+                                </div>
+
+                                <div class=" font-black text-[1.4em]">{{ $discount_percent }} %</div>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-medium text-[1.4em]">
+                                    <p>Discount Amount</p>
+                                </div>
+                                <div class=" font-black text-[1.4em]">₱
+                                    {{ number_format($PWD_Senior_discount_amount, 2) }}
+                                </div>
+                            </div>
+                            <div class="w-full my-2">
+                                <div class="border border-black"></div>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-black text-[2em]">
+                                    <p>Total</p>
+                                </div>
+                                <div class=" font-black text-[2em]">₱ {{ number_format($grandTotal, 2) }}</div>
+                            </div>
+                        </div>
                 </div>
             </div>
-        </div>
     @endif
     <div x-show="showChangeQuantityForm" x-data="{ showChangeQuantityForm: @entangle('showChangeQuantityForm') }">
         @livewire('components.sales.change-quantity-form')

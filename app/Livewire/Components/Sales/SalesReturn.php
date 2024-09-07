@@ -28,6 +28,7 @@ class SalesReturn extends Component
     public function displaySalesReturnDetails()
     {
         $this->showSalesReturnModal = false;
+        $this->showSalesReturnTable = false;
         $this->showSalesReturnDetails = true;
     }
 

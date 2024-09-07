@@ -287,12 +287,21 @@ class SalesTransaction extends Component
         $this->search = '';
     }
 
-    public function getIndex($index)
+    // public function getIndex($index)
+    // {
+
+
+    //     $this->reset('selectedIndex');
+    //     $this->selectedIndex = $index;
+    // }
+
+
+    public function getIndex($index, $flag)
     {
+        $this->reset('selectedIndex', 'isSelected');
 
-
-        $this->reset('selectedIndex');
         $this->selectedIndex = $index;
+        $this->isSelected = $flag;
     }
 
     public function ss($index)
