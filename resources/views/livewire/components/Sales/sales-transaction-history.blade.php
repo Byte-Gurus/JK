@@ -62,12 +62,6 @@
 
                             </select>
                         </div>
-                        <div class="flex flex-col items-center gap-1 mt-5">
-
-                            <button class="px-6 py-4 bg-yellow-100 focus:ring-2 focus:ring-offset-2">Apply</button>
-
-                            </select>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -93,7 +87,7 @@
                             <th scope="col" class="px-4 py-3 text-center">Payment method</th>
 
                             {{-- //* gcash reference no. --}}
-                            <th scope="col" class="px-4 py-3 text-left">GCash Reference No.</th>
+                            <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
                             {{-- //* date --}}
                             <th scope="col" class="px-4 py-3 text-center">Date</th>
@@ -126,7 +120,7 @@
                                 </th>
                                 <th
                                     scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['paymentJoin']['payment_type'] ?? 'N/A'}}
+                                    {{ $sale['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 </th>
                                 <th
                                     scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
@@ -217,23 +211,26 @@
                             <th scope="col" class="px-4 py-3">#</th>
 
                             {{-- //* sku --}}
-                            <th scope="col" class="px-4 py-3 text-center">SKU</th>
+                            <th scope="col" class="px-4 py-3 text-left">SKU</th>
 
                             {{-- //* barcode --}}
-                            <th scope="col" class="px-4 py-3 text-center">Barcode</th>
+                            <th scope="col" class="px-4 py-3 text-left">Barcode</th>
 
                             {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+                            <th scope="col" class="px-4 py-3 text-left">Item Name</th>
+
                             {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Item Description</th>
+                            <th scope="col" class="px-4 py-3 text-left">Item Description</th>
 
                             {{-- //* unit price --}}
                             <th scope="col" class="px-4 py-3 text-center">Unit Price (₱)</th>
 
                             {{-- //* quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Quantity</th>
+
                             {{-- //* amount --}}
                             <th scope="col" class="px-4 py-3 text-center">Wholesale (₱)</th>
+
                             {{-- //* amount --}}
                             <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
 
@@ -247,40 +244,40 @@
                             <tr
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $index + 1 }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['inventoryJoin']['sku_code'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['barcode'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['item_name'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['item_description'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['inventoryJoin']['selling_price'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['item_quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['item_discount_amount'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['item_subtotal'] }}
                                 </th>
                             </tr>

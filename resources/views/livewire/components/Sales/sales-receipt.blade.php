@@ -20,17 +20,20 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Date:</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}
+                        <p class="text-[0.6em] font-bold">
+                            {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Time:</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}
+                        <p class="text-[0.6em] font-bold">
+                            {{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Transaction No.</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold">
+                            {{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Payment Method:</p>
@@ -42,7 +45,8 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold">
+                            {{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
                     </div>
                 </div>
             </div>
@@ -57,59 +61,50 @@
 
                         <tr>
 
-                            <th scope="col" class="text-left">
-                                <p class="text-[0.6em]">Item</p>
+                            <th scope="col" class="px-[4px] font-bold text-center">
+                                <p class="text-[0.6em]">Qty</p>
                             </th>
 
-                            <th scope="col" class="px-[4px] font-bold text-center">
-                                <p></p>
+                            <th scope="col" class="text-left px-[4px]">
+                                <p class="text-[0.6em]">Description(s)</p>
                             </th>
 
                             {{-- //* status --}}
-                            <th scope="col" class="text-[0.6em] font-bold text-center">
-                                <p>Price</p>
-                            </th>
-
-                            {{-- //* username --}}
-                            <th scope="col" class="text-[0.6em] font-bold text-center">
-                                <p>WS(%)</p>
-                            </th>
-
-                            {{-- //* username --}}
-                            <th scope="col" class="text-[0.6em] font-bold text-center">
-                                <p>Subtotal</p>
+                            <th scope="col" class="text-[0.6em] px-[4px] font-bold text-right">
+                                <p class="text-[0.6em]">Price</p>
                             </th>
 
                         </tr>
                     </thead>
 
-                    <tbody class="border-black w-fit">
+                    <tbody class="capitalize border-black w-fit">
                         @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
                             @foreach ($receiptDetails['selectedItems'] as $item)
-                                <tr>
-                                    <th scope="row">
-                                        <div class="flex flex-col max-w-[68px]">
-                                            <p class="text-[0.6em] font-bold break-all leading-none mt-1">
-                                                {{ $item['item_name'] }}
-                                            </p>
-                                            <p
-                                                class="text-[0.6em] text-wrap  break-all font-medium leading-none mt-[2px] mb-1">
-                                                {{ $item['item_description'] }}</p>
-                                        </div>
-                                    </th>
+                                <tr class="mt-1 ">
                                     <th scope="row">
                                         <div>
-                                            <p class="text-[0.6em] italic text-center font-medium">
-                                                x{{ $item['quantity'] }}</p>
+                                            <p class="text-[0.6em] italic text-right font-medium">
+                                                {{ $item['quantity'] }}</p>
                                         </div>
                                     </th>
+
                                     <th scope="row">
-                                        <p class="text-[0.6em] text-center font-bold">
-                                            {{ number_format($item['selling_price'], 2) }}</p>
+                                        <div class="flex flex-col">
+                                            <div class="flex flex-row items-center text-wrap">
+                                                <p class="text-[0.6em] font-bold break-all leading-none">
+                                                    {{ $item['item_name'] }}
+                                                </p>
+                                                <p
+                                                    class="text-[0.6em] text-wrap  break-all font-medium leading-none mb-1">
+                                                    {{ $item['item_description'] }}</p>
+                                            </div>
+                                            <p class="text-[0.6em] text-center font-bold">
+                                                RP{{ number_format($item['selling_price'], 2) }}</p>
+                                            <p class="text-[0.6em] text-center font-bold">WS{{ $item['discount'] }}</p>
+
+                                        </div>
                                     </th>
-                                    <th scope="row">
-                                        <p class="text-[0.6em] text-center font-bold">{{ $item['discount'] }}</p>
-                                    </th>
+
                                     <th scope="row">
                                         <p class="text-[0.6em] text-right font-bold">
                                             {{ number_format($item['total_amount'], 2) }}

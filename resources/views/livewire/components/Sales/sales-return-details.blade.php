@@ -48,6 +48,9 @@
 
                     {{-- //* table body --}}
                     <tbody>
+                        <th>
+                            hi
+                        </th>
 
                         {{-- @foreach ($sales as $index => $sale)
                             <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
@@ -100,7 +103,7 @@
                     </div>
                 </div>
                 <div class="border border-black"></div>
-                <div class="flex flex-col gap-2 px-6 py-2 overflow-hidden">
+                <div class="flex flex-col h-full gap-2 px-6 py-2 text-wrap justify-evenly">
                     <div class="flex flex-row justify-between">
                         <div>
                             <p class=" text-[1.2em] font-medium">Subtotal</p>
