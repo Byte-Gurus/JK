@@ -9,6 +9,7 @@ use Livewire\Component;
 class SalesReturnDetails extends Component
 {
     public $showSalesReturnForm = false;
+    public $showAdminLoginForm = false;
 
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $return_quantity;
 
@@ -54,5 +55,10 @@ class SalesReturnDetails extends Component
     public function displaySalesReturnForm()
     {
         $this->showSalesReturnForm = true;
+    }
+
+    public function displayAdminLoginForm()
+    {
+        $this->showAdminLoginForm = true;
     }
 }

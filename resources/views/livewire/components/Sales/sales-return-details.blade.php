@@ -165,40 +165,40 @@
                             <tr
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $index + 1 }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['inventoryJoin']['sku_code'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['barcode'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['item_name'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['item_description'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
                                     {{ $transactionDetail['inventoryJoin']['selling_price'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['item_quantity'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['item_discount_amount'] }}
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['item_subtotal'] }}
                                 </th>
 
@@ -221,7 +221,7 @@
                                                 </span>
 
                                                 <div>
-                                                    <p>Edit</p>
+                                                    <p>Return</p>
                                                 </div>
                                             </div>
                                         </button>

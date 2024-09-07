@@ -8,6 +8,7 @@ class SalesReturnForm extends Component
 {
 
     public $showSalesReturnForm = false;
+    public $showAdminLoginForm = false;
 
     public function render()
     {
