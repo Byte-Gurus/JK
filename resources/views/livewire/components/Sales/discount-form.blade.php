@@ -342,21 +342,30 @@
                                                 Name</label>
 
                                             <div class="flex flex-row w-full gap-2">
-                                                <div>
-                                                    <select id="selectCustomer" wire:model.live="selectCustomer"
-                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                        <option value="" selected>Select customer</option>
-                                                        @foreach ($customers as $customer)
-                                                            <option value="{{ $customer->id }}">
-                                                                {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                <div class="w-full">
+                                                    <div class="relative w-full">
 
-                                                    @error('selectCustomer')
-                                                        <span
-                                                            class="font-medium text-red-500 error">{{ $message }}</span>
-                                                    @enderror
+                                                        <input wire:model.live.debounce.300ms='search' type="text" list="customerList"
+                                                            class="w-full p-2 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                                                            placeholder="Select a Customer" required="">
+                                                    </div>
+
+                                                    @if (!empty($search))
+                                                        <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
+                                                            @foreach ($customers as $customer)
+                                                                <ul wire:click="selectCustomer({{ $customer->id }})"
+                                                                    class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
+                                                                    <li class="flex items-start justify-between">
+                                                                        <!-- Item details on the left side -->
+                                                                        <div class="flex flex-col w-[200px] items-start leading-1">
+                                                                            <div class="text-[1.2em] font-bold text-wrap">
+                                                                                {{ $supplier->customer_name }}</div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="mt-6.5">
                                                     <button type="button" wire:loading.remove

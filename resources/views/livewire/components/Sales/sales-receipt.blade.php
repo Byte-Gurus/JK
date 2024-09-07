@@ -72,7 +72,7 @@
 
                             {{-- //* username --}}
                             <th scope="col" class="text-[0.6em] font-bold text-center">
-                                <p>Wholesale(%)</p>
+                                <p>WS(%)</p>
                             </th>
 
                             {{-- //* username --}}
@@ -83,12 +83,12 @@
                         </tr>
                     </thead>
 
-                    <tbody class="border-b border-black w-fit">
+                    <tbody class="border-black w-fit">
                         @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
                             @foreach ($receiptDetails['selectedItems'] as $item)
                                 <tr>
                                     <th scope="row">
-                                        <div class="flex flex-col max-w-[48px]">
+                                        <div class="flex flex-col max-w-[68px]">
                                             <p class="text-[0.6em] font-bold break-all leading-none mt-1">
                                                 {{ $item['item_name'] }}
                                             </p>
@@ -120,7 +120,9 @@
                         @endif
                     </tbody>
                 </table>
+                <span class="">------------------------</span>
             </div>
+
             <div class="flex flex-col px-2 mx-2">
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold">VATable</p>
@@ -189,7 +191,7 @@
             </div>
             <div class="flex flex-col gap-2 px-2 mx-2 mb-[34px] mt-2p">
                 <div class="flex flex-col justify-between">
-                    <p class="text-[0.6em]">Customer Name</p>
+                    <p class="text-[0.6em] font-bold">Customer Name</p>
 
                     @if (isset($receiptDetails['customerDetails']['customer']))
                         <p class="text-[0.6em] font-bold">
