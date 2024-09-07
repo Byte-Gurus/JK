@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Inventory;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -41,7 +42,8 @@ Artisan::command('migration-order', function () {
         '2024_09_05_220930_create_credit_histories_table.php',
 
         '2024_08_26_221603_create_inventory_movements_table.php',
-
+        '2024_09_07_233147_create_notifications_table.php',
+        
         '0001_01_01_000001_create_cache_table.php',
         '0001_01_01_000002_create_jobs_table.php',
 
@@ -70,14 +72,21 @@ Artisan::command('inventory:check-expiration', function () {
 
     // Find expired items
     $expiredItems = Inventory::where('expiration_date', '<=', $today)
-        ->where('status', '!=', 'Expired')
+        ->where('status', 'Available')
         ->get();
 
     // Update status of expired items
     foreach ($expiredItems as $item) {
         $item->status = 'Expired';
         $item->save();
-        $this->info("Updated status for item ID: {$item->id} to 'expired'");
+        $this->info("Updated status for item SKU: {$item->sku_code} to 'expired'");
+
+        Notification::create([
+            'description' => "Item with SKU {$item->sku_code} has expired.",
+            'inventory_id' => $item->id,
+        ]);
+
+        $this->info("Updated status for item SKU: {$item->sku_code} to 'Expired' and added notification");
     }
 
     $this->comment('Expiration check completed!');
