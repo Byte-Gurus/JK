@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <div class="border border-[rgb(143,143,143)] "></div>
+                <span class="">------------------------</span>
             </div>
             <div class="mx-4">
                 <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
@@ -111,7 +111,8 @@
                                         <p class="text-[0.8em] text-center font-bold">{{ $item['discount'] }}</p>
                                     </th>
                                     <th scope="row">
-                                        <p class="text-[0.8em] text-right font-bold">{{ number_format($item['total_amount'], 2) }}
+                                        <p class="text-[0.8em] text-right font-bold">
+                                            {{ number_format($item['total_amount'], 2) }}
                                         </p>
                                     </th>
                                 </tr>
@@ -141,7 +142,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <div class="border border-black "></div>
+                <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-2 m-2">
                 <div class="flex flex-row justify-between">
@@ -158,7 +159,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <div class="border border-black "></div>
+                <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-3 m-1">
                 <div class="flex flex-row justify-between">
@@ -174,7 +175,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <div class="border border-black "></div>
+                <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-2 px-3 m-1">
                 <div class="flex flex-row justify-between">
@@ -184,7 +185,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <div class="border border-black "></div>
+                <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-2 px-2 mx-2 mb-[24px] mt-2p">
                 <div class="flex flex-col justify-between">
