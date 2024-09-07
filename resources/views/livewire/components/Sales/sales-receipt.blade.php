@@ -30,7 +30,7 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Transaction No.</p>
-                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold">{{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold">Payment Method:</p>
