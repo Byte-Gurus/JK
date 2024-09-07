@@ -192,6 +192,10 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $transactionDetail['item_subtotal'] }}
                             </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                               <input wire:model="return_quantity">
+                            </th>
                         </tr>
                         @endforeach
 
