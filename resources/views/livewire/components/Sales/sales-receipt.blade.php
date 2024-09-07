@@ -1,4 +1,4 @@
-<div class="flex justify-center w-full">
+<div x-cloak class="flex justify-center w-full">
     <div class=" w-full max-w-[216px]">
         <div class="w-full border-2 h-fit">
             <div class="flex flex-col justify-center mx-3 mb-6 text-center">

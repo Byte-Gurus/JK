@@ -18,7 +18,7 @@
                 </div>
 
                 {{-- //* close button --}}
-                <button type="button" x-on:click="showChangeQuantityForm=false" wire:click='resetFormWhenClosed'
+                <button type="button" x-on:click="showSalesReturnModal=false" wire:click='resetFormWhenClosed'
                     class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                     data-modal-hide="UserModal">
 
@@ -78,6 +78,7 @@
 
                             {{-- //* clear all button for create --}}
                             <button type="button" wire:click='resetFormWhenClosed'
+                                x-on:click="showSalesReturnModal=false"
                                 class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>

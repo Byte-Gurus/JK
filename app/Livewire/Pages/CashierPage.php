@@ -42,6 +42,7 @@ class CashierPage extends Component
     {
         $this->showNavbarNoSidebar = true;
         $this->showSalesTransaction = $showSalesTransaction;
+        $this->showSalesReturn = false;
         $this->showSalesTransactionHistory = false;
     }
 

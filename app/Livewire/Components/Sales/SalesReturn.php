@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Livewire\Pages\CashierPage;
 use Livewire\Component;
 
 class SalesReturn extends Component
@@ -19,6 +20,11 @@ class SalesReturn extends Component
     protected $listeners = [
         'display-sales-return-details' => 'displaySalesReturnDetails'
     ];
+
+    public function returnToSalesTransaction()
+    {
+        $this->dispatch('display-sales-transaction', showSalesTransaction: true)->to(CashierPage::class);
+    }
 
     public function displaySalesReturnModal()
     {
