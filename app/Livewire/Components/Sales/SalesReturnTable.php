@@ -10,4 +10,9 @@ class SalesReturnTable extends Component
     {
         return view('livewire.components.sales.sales-return-table');
     }
+
+    public function dDisplaySalesReturnDetails()
+    {
+        $this->dispatch('d-display-sales-return-details', sShowSalesReturnDetails: true)->to(SalesReturn::class);
+    }
 }

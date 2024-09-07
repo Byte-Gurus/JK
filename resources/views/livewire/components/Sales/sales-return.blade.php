@@ -1,13 +1,19 @@
 <div x-cloak>
     <div class="flex flex-col m-[28px]">
         <div class="flex flex-row justify-between mb-[28px]">
-            @if ($showSalesReturnTable && $showSalesReturnModal)
+            @if ($showSalesReturnTable)
                 <div>
                     <p class="text-[2em] font-black ">Sales Return</p>
                 </div>
-            @else
+            @endif
+            @if ($showSalesReturnDetails)
                 <div>
                     <p class="text-[2em] font-black ">Sales Return Details</p>
+                </div>
+            @endif
+            @if ($sShowSalesReturnDetails)
+                <div>
+                    <p class="text-[2em] font-black ">View Sales Return Details</p>
                 </div>
             @endif
             <div>
@@ -42,5 +48,7 @@
     <div class="m-[28px]" x-show="showSalesReturnModal" x-data="{ showSalesReturnModal: @entangle('showSalesReturnModal') }">
         @livewire('components.sales.sales-return-modal')
     </div>
-
+    <div class="m-[28px]" x-show="sShowSalesReturnDetails" x-data="{ sShowSalesReturnDetails: @entangle('sShowSalesReturnDetails') }">
+        @livewire('components.sales.view-sales-return-details')
+    </div>
 </div>

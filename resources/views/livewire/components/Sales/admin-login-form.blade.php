@@ -1,4 +1,4 @@
-<div>
+<div x-cloak>
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 justify-center w-full h-full max-h-full p-4 overflow-x-hidden overflow-y-auto">

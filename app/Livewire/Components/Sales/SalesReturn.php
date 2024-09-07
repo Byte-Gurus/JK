@@ -11,6 +11,7 @@ class SalesReturn extends Component
     public $showSalesReturnTable = true;
     public $showSalesReturnModal = false;
     public $showSalesReturnDetails = false;
+    public $sShowSalesReturnDetails = false;
 
     public function render()
     {
@@ -18,7 +19,8 @@ class SalesReturn extends Component
     }
 
     protected $listeners = [
-        'display-sales-return-details' => 'displaySalesReturnDetails'
+        'display-sales-return-details' => 'displaySalesReturnDetails',
+        'd-display-sales-return-details' => 'dDisplaySalesReturnDetails'
     ];
 
     public function returnToSalesTransaction()
@@ -36,6 +38,13 @@ class SalesReturn extends Component
         $this->showSalesReturnModal = false;
         $this->showSalesReturnTable = false;
         $this->showSalesReturnDetails = true;
+    }
+
+    public function dDisplaySalesReturnDetails($sShowSalesReturnDetails)
+    {
+        $this->showSalesReturnTable = false;
+        $this->showSalesReturnDetails = false;
+        $this->sShowSalesReturnDetails = $sShowSalesReturnDetails;
     }
 
 }
