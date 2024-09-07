@@ -12,6 +12,7 @@ use App\Models\Discount;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
 use App\Models\Item;
+use App\Models\Notification;
 use App\Models\Payment;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
@@ -269,6 +270,7 @@ class SalesTransaction extends Component
                     'item_name' => $item->itemJoin->item_name,
                     'item_description' => $item->itemJoin->item_description,
                     'vat_type' => $item->itemJoin->vat_type,
+                    'reorder_point' => $item->itemJoin->reorder_point,
                     'vat' => $item->vat_amount,
                     'quantity' => 1,
                     'barcode' => $item->itemJoin->barcode,
@@ -625,11 +627,19 @@ class SalesTransaction extends Component
 
 
             $inventory->current_stock_quantity -= $selectedItem['quantity'];
+
             if ($inventory->current_stock_quantity == 0) {
                 $inventory->status = 'Not available';
             }
             $inventory->save();
 
+
+            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
+                Notification::create([
+                    'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                    'inventory_id' => $inventory->id,
+                ]);
+            }
 
 
             $inventory_movements = InventoryMovement::create([
@@ -637,6 +647,8 @@ class SalesTransaction extends Component
                 'movement_type' => 'Sales',
                 'operation' => 'Stock out',
             ]);
+
+
 
             $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
         }
