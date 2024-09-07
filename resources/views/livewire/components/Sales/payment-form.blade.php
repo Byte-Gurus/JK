@@ -89,7 +89,7 @@
                                                 <div>
                                                     <input type="number" wire:model='reference_no'
                                                         placeholder="Reference No" required
-                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                     @error('reference_no')
                                                         <span

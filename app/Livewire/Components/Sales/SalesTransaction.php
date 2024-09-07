@@ -46,6 +46,8 @@ class SalesTransaction extends Component
     public $showWholesaleForm = false;
     public $showSalesReceipt = false;
 
+    public $si = [];
+
 
 
 
@@ -127,17 +129,13 @@ class SalesTransaction extends Component
 
 
 
-        if (isset($this->credit_details['credit_id'])) {
-
-            $this->alert('error', 'Reset the transaction');
-            return;
-        }
 
         $credit = Credit::where('customer_id', $creditor_id)->first();
 
         if ($credit->credit_limit <= $this->grandTotal) {
 
             $this->alert('error', 'Creditor reached the credit limit');
+            $this->searchCustomer = '';
             return;
         }
 
@@ -172,6 +170,11 @@ class SalesTransaction extends Component
         'display-sales-receipt' => 'displaySalesReceipt'
     ];
 
+    public function unselectItem()
+    {
+        $this->isSelected = false;
+    }
+
     public function selectItem($item_id = null)
     {
 
@@ -181,10 +184,10 @@ class SalesTransaction extends Component
             return;
         }
 
-        if (!$this->isSales && !$this->credit_no) {
-            $this->alert('error', 'Please select creditor');
-            return;
-        }
+        // if (!$this->isSales && !$this->credit_no) {
+        //     $this->alert('error', 'Please select creditor');
+        //     return;
+        // }
 
 
 
@@ -284,11 +287,22 @@ class SalesTransaction extends Component
         $this->search = '';
     }
 
-    public function getIndex($index, $flag)
+    public function getIndex($index)
     {
-        $this->reset('selectedIndex', 'isSelected');
+
+
+        $this->reset('selectedIndex');
         $this->selectedIndex = $index;
-        $this->isSelected = $flag;
+    }
+
+    public function ss($index)
+    {
+        array_push($this->si, $index);
+
+        if (count($this->si) == 2)
+        {
+            dd($this->si);
+        }
     }
 
 
@@ -515,7 +529,7 @@ class SalesTransaction extends Component
     {
 
         if (empty($this->payment) && $this->isSales) {
-            $this->alert('warning', 'No payment yest');
+            $this->alert('warning', 'No payment yet');
             return;
         }
 

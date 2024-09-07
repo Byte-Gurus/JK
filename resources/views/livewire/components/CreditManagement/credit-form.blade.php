@@ -101,20 +101,24 @@
                                     <div class="flex flex-row items-center justify-between px-6">
                                         <div class="relative w-full">
 
-                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
-                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                            <div
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black "
+                                                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                                    stroke="currentColor" className="size-6">
                                                     <path strokeLinecap="round" strokeLinejoin="round"
                                                         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                                 </svg>
                                             </div>
 
-                                            <input wire:model.live.debounce.300ms='searchCustomer' type="text" list="itemList"
+                                            <input wire:model.live.debounce.300ms='searchCustomer' type="text"
+                                                list="itemList"
                                                 class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                                                 placeholder="Search Customer">
                                         </div>
                                         @if (!empty($searchCustomer))
-                                            <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
+                                            <div
+                                                class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
                                                 @foreach ($customers as $customer)
                                                     <ul wire:click="getCustomer({{ $customer->id }})"
                                                         class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
@@ -124,7 +128,7 @@
                                                                 <div class="text-[1.2em] font-bold text-wrap">
                                                                     {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
 
-                                                            </div>
+                                                                </div>
 
                                                         </li>
                                                     </ul>
@@ -146,7 +150,11 @@
 
                                     </div>
 
-                                    <p>{{ $customer_name}}</p>
+                                    <p>{{ $customer_name }}</p>
+
+                                    @error('customer_name')
+                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                    @enderror
 
                                     {{-- //* credit limit --}}
                                     <div class="mb-3">

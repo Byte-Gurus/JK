@@ -105,8 +105,8 @@
 
                     <tbody>
                         @foreach ($selectedItems as $index => $selectedItem)
-                            <tr wire:click="getIndex({{ $index }}, true )" x-data="{ isSelected: false }"
-                                x-on:click=" isSelected = !isSelected "
+                            <tr wire:click="getIndex({{ $index }})" x-data="{ isSelected: false }"
+                                x-on:click=" isSelected = !isSelected; $wire.ss({{ $index }}) "
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75 cursor-pointer">
 
                                 <th scope="row"
@@ -191,84 +191,89 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 ">
-                        <div
-                            class="py-4  px-8 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            @if (!empty($selectedItems))
-                                <button class="px-8 py-2 "
-                                    x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
-                                    x-on:click="$wire.displayDiscountForm()">
+                        @if (!empty($selectedItems))
+                            <div x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
+                                x-on:click="$wire.displayDiscountForm()"
+                                class="py-4  px-8 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                <button class="px-8 py-2 ">
                                     Discount
-                                </button>
-                            @else
-                                <button class="px-8 py-2 " disabled>
-                                    Discount
-                                </button>
-                            @endif
-                        </div>
-                        <div
-                            class="py-4 px-8 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            @if (!empty($selectedItems))
-                                <button wire:click="removeItem"
-                                    x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')" class="px-8 py-2 ">
-                                    Remove Item
-                                </button>
-                            @else
-                                <button disabled wire:click="removeItem"
-                                    x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')" class="px-8 py-2 ">
-                                    Remove Item
-                                </button>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 ">
-                        <div
-                            class="py-4 px-8 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-
-                            @if (!empty($selectedItems))
-                                <button wire:click="setQuantity" id="setQuantity"
-                                    x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')" class="px-8 py-2 ">
-                                    Quantity
-                                </button>
-                            @else
-                                <button disabled class="px-8 py-2 ">
-                                    Quantity
-                                </button>
-                            @endif
-                        </div>
-                        <div
-                            class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            @if (!empty($selectedItems))
-                                <button class="px-8 py-2"
-                                    x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
-                                    x-on:click="$wire.displayPaymentForm()">
-                                    Pay
-                                </button>
-                            @else
-                                <button class="px-8 py-2" disabled>
-                                    Pay
-                                </button>
-                            @endif
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
-                        @if (!empty($payment) && $isSales)
-                            <div class="text-center text-nowrap">
-                                <button type="button" class="px-8 py-2 "
-                                    x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
-                                    Save
                                 </button>
                             </div>
                         @else
-                            <div class="text-center text-nowrap">
-                                <button type="button" class="px-8 py-2 "
-                                    x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
-                                    Save
+                            <div
+                                class="py-4 px-8 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                                <button class="px-8 py-2 " disabled>
+                                    Discount
                                 </button>
                             </div>
                         @endif
-
+                        @if (!empty($selectedItems))
+                            <div wire:click="removeItem" x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')"
+                                class="py-4 px-8 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                <button class="px-8 py-2 ">
+                                    Remove Item
+                                </button>
+                            </div>
+                        @else
+                            <div
+                                class="py-4 px-8 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                                <button disabled class="px-8 py-2 ">
+                                    Remove Item
+                                </button>
+                            </div>
+                        @endif
                     </div>
+                    <div class="flex flex-col gap-2 ">
+
+                        @if (!empty($selectedItems))
+                            <div wire:click="setQuantity" id="setQuantity"
+                                x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')"
+                                class="py-4 px-8 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                <button class="px-8 py-2 ">
+                                    Quantity
+                                </button>
+                            </div>
+                        @else
+                            <div
+                                class="py-4 px-8 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                                <button disabled class="px-8 py-2 ">
+                                    Quantity
+                                </button>
+                            </div>
+                        @endif
+                        @if (!empty($selectedItems))
+                            <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
+                                x-on:click="$wire.displayPaymentForm()"
+                                class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                                <button class="px-8 py-2">
+                                    Pay
+                                </button>
+                            </div>
+                        @else
+                            <div
+                                class="py-4 px-8 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                                <button class="px-8 py-2" disabled>
+                                    Pay
+                                </button>
+                            </div>
+                        @endif
+                    </div>
+                    @if (!empty($payment) && $isSales)
+                        <div
+                            class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
+                            <button type="button" class="px-8 py-2 "
+                                x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
+                                Save
+                            </button>
+                        </div>
+                    @else
+                        <div
+                            class="py-4 px-8 font-bold w-full items-center flex justify-center text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                            <button type="button" class="px-8 py-2 ">
+                                Save
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -470,6 +475,11 @@
                             @endforeach
                         </select>
                     </div> --}}
+<<<<<<< Updated upstream
+=======
+                    <div>
+                        <div class="relative w-full">
+>>>>>>> Stashed changes
 
                 </div>
 

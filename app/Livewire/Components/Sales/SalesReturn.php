@@ -8,7 +8,8 @@ class SalesReturn extends Component
 {
 
     public $showSalesReturnTable = false;
-    public $showSalesReturnModal = true;
+    public $showSalesReturnModal = false;
+    public $showSalesReturnDetails = true;
 
     public function render()
     {
@@ -17,7 +18,7 @@ class SalesReturn extends Component
 
     public function displaySalesReturnModal()
     {
-        dd('g');
+        $this->showSalesReturnModal = true;
     }
 
 }
