@@ -373,18 +373,7 @@
                                                     @endforeach
                                                 </div>
                                             @endif
-                                            {{-- <div class="font-medium text-[1.6em] w-1/2">
-                                    <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
-                                        class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
-                                        <option value="" selected>Select customer</option>
-                                        @foreach ($credit_customers as $credit_customer)
-                                            <option value="{{ $credit_customer->id }} ">
-                                                {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
-                                                {{ $credit_customer->creditJoin->credit_number }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div> --}}
+                                          
 
                                         </div>
                                     @else

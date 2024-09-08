@@ -33,7 +33,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -122,10 +122,6 @@ class SalesTransaction extends Component
     }
 
 
-    public function changeTransactionType()
-    {
-        $this->isSales = !$this->isSales;
-    }
 
     public function selectCustomer($creditor_id)
     {
@@ -142,7 +138,7 @@ class SalesTransaction extends Component
             return;
         }
 
-        $this->creditor_name =  $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname;
+        $this->creditor_name =  $credit->customerJoin->firstname . ' ' . $credit->customerJoin->middlename . ' ' . $credit->customerJoin->lastname;
         $this->credit_no = $credit->credit_number;
         $this->credit_limit =  $credit->credit_limit;
 
@@ -153,6 +149,7 @@ class SalesTransaction extends Component
             'credit_limit' => $this->credit_limit
         ];
 
+        $this->dispatch('get-credit-detail', creditDetail: $this->credit_details)->to(DiscountForm::class);
         $this->searchCustomer = '';
     }
 
@@ -501,6 +498,13 @@ class SalesTransaction extends Component
 
 
 
+
+    public function updatedChangeTransactionType()
+    {
+        $this->isSales = !$this->isSales;
+        $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
+
+    }
 
 
 

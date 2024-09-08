@@ -45,7 +45,7 @@
             </div>
             <div class="flex flex-row items-center gap-4 text-nowrap">
                 <div>
-                    <select id="transaction_type" wire:change='changeTransactionType()'
+                    <select id="transaction_type" wire:model.live='changeTransactionType'
                         class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
                         <option selected value="1">Sales</option>
                         <option value="2">Credit</option>
