@@ -224,7 +224,7 @@ class SalesTransaction extends Component
 
 
             foreach ($this->selectedItems as $index => $selectedItem) {
-                if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
+                if ($selectedItem['sku_code'] === $item->sku_code) {
 
 
                     if ($selectedItem['selling_price'] + $this->grandTotal > $this->credit_limit && $this->credit_details) {
