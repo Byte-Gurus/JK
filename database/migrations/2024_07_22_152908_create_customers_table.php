@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("middlename");
             $table->string("lastname");
             $table->string("birthdate");
-            $table->string('contact_number')->unique();
+            $table->string('contact_number');
             $table->string("customer_type");
             $table->string("customer_discount_no");
             $table->string("id_picture");

@@ -229,21 +229,21 @@ class DiscountForm extends Component
                 'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
                 'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
                 'birthdate' => 'required|string|max:255',
-                'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('customers', 'contact_number')],
+                'contact_number' => 'required', 'numeric', 'digits:11',
                 'selectProvince' => 'required|exists:philippine_provinces,province_code',
                 'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
                 'street' => 'required|string|max:255',
                 'customerType' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
-                'discount_percentage' => 'required|numeric|min:0',
+                'discount_percentage' => 'required|numeric|min:1',
             ];
         } else {
             $rules = [
                 'customerType' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
                 'customer_id' => 'required|numeric',
-                'discount_percentage' => 'required|numeric|min:0',
+                'discount_percentage' => 'required|numeric|min:1',
             ];
         }
 

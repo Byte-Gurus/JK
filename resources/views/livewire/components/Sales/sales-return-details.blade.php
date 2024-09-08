@@ -55,7 +55,7 @@
                             </th>
                             <th
                                 scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $total_amount }}
+                                {{ number_format($total_amount, 2) }}
                             </th>
                             <th
                                 scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -71,7 +71,7 @@
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transaction_date }}
+                                {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
                             </th>
 
 
@@ -92,7 +92,7 @@
                             <p class=" text-[1.2em] font-medium">Current Total Amount</p>
                         </div>
                         <div>
-                            {{ $total_amount }}
+                            {{number_format( $total_amount, 2) }}
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
                             <p class=" text-[1.2em] font-medium">Refund Amount</p>
                         </div>
                         <div>
-                            {{-- <p class=" text-[1.2em] font-black">{{ $tendered_amount }}</p> --}}
+                            <p class=" text-[1.2em] font-black">{{ number_format($return_total_amount, 2) }}</p>
                         </div>
                     </div>
                     <div class="border border-black "></div>
@@ -111,7 +111,7 @@
                             <p class=" text-[1.6em] font-medium">New Total Amount</p>
                         </div>
                         <div>
-                            <p class=" text-[1.6em] font-black">{{ $new_total }}</p>
+                            <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
-                                    {{ $transactionDetail['inventoryJoin']['selling_price'] }}
+                                    {{ number_format($transactionDetail['inventoryJoin']['selling_price'], 2) }}
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -198,11 +198,11 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $transactionDetail['item_discount_amount'] }}
+                                    {{ number_format($transactionDetail['item_discount_amount'], 2) }}
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $transactionDetail['item_subtotal'] }}
+                                    {{ number_format($transactionDetail['item_subtotal'], 2) }}
                                 </th>
 
                                 <th scope="row"

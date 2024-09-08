@@ -64,7 +64,7 @@ class CreditForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(CreditManagementPage::class);
-        // $this->resetValidation();
+        $this->resetValidation();
     }
 
     public function create()
@@ -101,7 +101,7 @@ class CreditForm extends Component
             'remaining_balance' => null,
         ]);
 
-        $this->alert('success', 'Customer Credit was created successfully');
+        $this->alert('success', 'Creditor was created successfully');
         $this->resetForm();
 
         $this->refreshTable();
@@ -116,7 +116,7 @@ class CreditForm extends Component
 
     public function resetForm()
     {
-        $this->reset(['credit_number', 'searchCustomer', 'due_date']);
+        $this->reset(['credit_number', 'searchCustomer', 'due_date', 'customer_name']);
     }
 
     public function refreshTable() //* refresh ang table after confirmation
@@ -142,7 +142,7 @@ class CreditForm extends Component
     public function resetFormWhenClosed()
     {
         $this->resetForm();
-        // $this->resetValidation();
+        $this->resetValidation();
     }
 
     public function changeMethod($isCreate)

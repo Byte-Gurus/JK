@@ -99,7 +99,7 @@
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Bulk quantity</th>
 
-                      
+
 
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Reorder point</th>
@@ -228,12 +228,12 @@
                             </th>
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->created_at->format('d-m-y h:i A') }}
+                                {{ $item->created_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->updated_at->format('d-m-y h:i A') }}
+                                {{ $item->updated_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* Action --}}

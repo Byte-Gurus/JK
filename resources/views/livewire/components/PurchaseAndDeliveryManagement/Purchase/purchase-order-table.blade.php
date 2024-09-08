@@ -25,7 +25,7 @@
 
             </div>
 
-            
+
 
 
 
@@ -105,7 +105,7 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $purchase->created_at }}
+                                {{ $purchase->created_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* purchase order no --}}

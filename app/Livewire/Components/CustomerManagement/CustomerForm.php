@@ -67,7 +67,7 @@ class CustomerForm extends Component
     {
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to add this customer?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -132,7 +132,7 @@ class CustomerForm extends Component
 
 
 
-        $this->confirm('Do you want to update this supplier?', [
+        $this->confirm('Do you want to update this customer?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
@@ -176,7 +176,7 @@ class CustomerForm extends Component
         $customer->save();
 
         $this->resetForm();
-        $this->alert('success', 'Supplier was updated successfully');
+        $this->alert('success', 'Customer was updated successfully');
 
         $this->refreshTable();
         $this->closeModal();
@@ -232,7 +232,7 @@ class CustomerForm extends Component
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'birthdate' => 'required|string|max:255',
-            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('customers', 'contact_number')->ignore($this->proxy_customer_id)],
+            'contact_number' => 'required', 'numeric', 'digits:11',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',

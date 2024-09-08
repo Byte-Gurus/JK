@@ -170,12 +170,12 @@
 
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->created_at->format('d-m-y h:i A') }}
+                                {{ $customer->created_at->format(' M d Y ') }}
                             </th>
 
                             {{-- //* updated at at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->updated_at->format('d-m-y h:i A') }}
+                                {{ $customer->updated_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* Action --}}

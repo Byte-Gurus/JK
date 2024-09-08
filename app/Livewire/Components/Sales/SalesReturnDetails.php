@@ -52,6 +52,9 @@ class SalesReturnDetails extends Component
 
     public function returnConfirmed()
     {
+        $transaction = Transaction::find($this->transaction_id);
+        $transaction->total_amount = $this->new_total;
+        $transaction->transaction_type = 'Return';
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
@@ -66,15 +69,15 @@ class SalesReturnDetails extends Component
 
                 // Create return details record
                 ReturnDetails::create([
-                    'return_quantity' => $info['return_quantity'] ?? 0,
-                    'item_return_amount' => $info['item_return_amount'] ?? 0,
-                    'description' => $info['description'] ?? '',
+                    'return_quantity' => $info['return_quantity'],
+                    'item_return_amount' => $info['item_return_amount'],
+                    'description' => $info['description'],
                     'return_id' => $returns->id,
-                    'transaction_details_id' => $info['transaction_details_id'] ?? null,
+                    'transaction_details_id' => $info['transaction_details_id'] ,
                 ]);
             }
         }
-        $this->alert('success', 'items was returned successfully');
+        $this->alert('success', 'Item/s was returned successfully');
     }
 
     public function updatedReturnQuantity()

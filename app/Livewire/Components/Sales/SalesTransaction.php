@@ -181,7 +181,7 @@ class SalesTransaction extends Component
 
 
         if ($this->payment) {
-            $this->alert('error', 'transaction is paid');
+            $this->alert('error', 'Transaction is paid');
             return;
         }
 
@@ -230,7 +230,7 @@ class SalesTransaction extends Component
                     }
 
                     if ($selectedItem['quantity'] >= $selectedItem['current_stock_quantity']) {
-                        $this->alert('error', 'current stock is depleted');
+                        $this->alert('error', 'Current stock is depleted');
                         return;
                     }
 
@@ -516,7 +516,7 @@ class SalesTransaction extends Component
         $this->selectedItems = array_values($this->selectedItems);
         $this->reset('selectedIndex', 'isSelected');
 
-        $this->alert('success', 'quantity was removed successfully');
+        $this->alert('success', 'Item was removed successfully');
     }
 
     public function removeRowCancelled()
@@ -685,7 +685,7 @@ class SalesTransaction extends Component
 
 
 
-        $this->alert('success', 'New Transaction Saved Successfully');
+        $this->alert('success', 'New Transaction saved successfully');
 
         $this->dispatch('print-sales-receipt', array_merge(
             $receiptData,

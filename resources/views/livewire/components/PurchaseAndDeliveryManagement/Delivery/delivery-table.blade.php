@@ -169,7 +169,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $delivery->created_at->format('d-m-y h:i A') }}
+                                {{ $delivery->created_at->format(' M d Y ')  }}
                             </th>
 
                             <th scope="row"
@@ -186,7 +186,7 @@
                                     @else
                                         <a scope="row"
                                             class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
-                                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('d-m-Y') }}
+                                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ')  }}
                                         </a>
                                     @endif
                                 </div>

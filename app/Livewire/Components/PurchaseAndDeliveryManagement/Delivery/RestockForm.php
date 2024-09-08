@@ -96,7 +96,7 @@ class RestockForm extends Component
             $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
             if ($quantities[$details_id] < $detail['purchase_quantity']) {
-                $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
+                $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to restock these items?", [
                     'onConfirmed' => 'createConfirmed',
                     'inputAttributes' => $validated,
                 ]);
@@ -107,7 +107,7 @@ class RestockForm extends Component
         }
 
         // If all validations pass, prompt for final confirmation
-        $this->confirm('Do you want to add these items?', [
+        $this->confirm('Do you want to restock these items?', [
             'onConfirmed' => 'createConfirmed',
             'inputAttributes' => $validated,
         ]);
@@ -203,7 +203,7 @@ class RestockForm extends Component
 
 
         $this->resetForm();
-        $this->alert('success', 'stock adjusted successfully');
+        $this->alert('success', 'Restocked successfully');
 
 
         $this->refreshTable();

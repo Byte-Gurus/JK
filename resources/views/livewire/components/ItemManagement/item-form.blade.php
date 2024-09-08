@@ -232,25 +232,7 @@
                                 </div>
 
                                 {{-- //* third row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
-                                    {{-- //* reorder percentage --}}
-                                 
-                                    {{-- //* reorder point --}}
-                                    <div class="mb-3">
-
-                                        <label for="reorder_point"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Reorder Point</label>
-
-                                        <input type="number" id="reorder_point" wire:model="reorder_point"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Reorder Point" required disabled />
-
-                                        @error('reorder_point')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
+                            
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                     {{-- //* reorder point --}}

@@ -269,14 +269,14 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->stock_in_date ? $inventory->stock_in_date->format('d-m-y') : 'null' }}
+                                {{ $inventory->stock_in_date ? $inventory->stock_in_date->format(' M d Y h:i A') : 'null' }}
 
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($inventory->itemJoin->shelf_life_type === 'Perishable')
-                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format('d-m-y') : 'null' }}
+                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format(' M d Y ')  : 'null' }}
                                 @elseif($inventory->itemJoin->shelf_life_type === 'Non Perishable')
                                     N/A
                                 @endif

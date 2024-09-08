@@ -147,7 +147,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($credit->credit_amount)
-                                    {{ $credit->created_at->format('d-m-y') }}
+                                    {{ $credit->created_at->format(' M d Y ')  }}
                                 @else
                                     'N/A'
                                 @endif
@@ -155,12 +155,9 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ \Carbon\Carbon::parse($credit->due_date)->format('d m y') }}
+                                {{ \Carbon\Carbon::parse($credit->due_date)->format(' M d Y ')  }}
                             </th>
-                            {{-- status
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $credit->transactionJoin->transaction_number ?? 'N/A' }}
-                            </th> --}}
+
 
                             {{-- //* actions --}}
                             <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
@@ -223,7 +220,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{-- {{ $purchases->links() }} --}}
+                {{ $credits->links() }}
 
             </div>
 

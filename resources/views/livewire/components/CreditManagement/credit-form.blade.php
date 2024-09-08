@@ -259,7 +259,7 @@
                             <div>
 
                                 {{-- //* clear all button for create --}}
-                                <button type="reset"
+                                <button type="button" wire:click="resetForm"
                                     class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
                                     All</button>
                             </div>
