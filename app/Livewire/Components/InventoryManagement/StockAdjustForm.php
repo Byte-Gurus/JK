@@ -107,10 +107,14 @@ class StockAdjustForm extends Component
         $rules = [
             'selectOperation' => 'required',
             'adjustReason' => 'required|string|max:255',
-            'quantityToAdjust' => ['required', 'numeric', 'min:1'],
-
-
+            'quantityToAdjust' => ['required', 'numeric', 'min:1']
         ];
+
+        // Conditionally add rules for 'quantityToAdjust' if 'selectOperation' is 'Deduct'
+        if ($this->selectOperation === 'Deduct') {
+            $rules['quantityToAdjust'] = ['required', 'numeric', 'min:1', 'lte:current_quantity'];
+        }
+
         return $this->validate($rules);
     }
     private function populateForm() //*lagyan ng laman ang mga input

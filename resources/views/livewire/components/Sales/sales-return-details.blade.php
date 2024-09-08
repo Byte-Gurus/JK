@@ -111,7 +111,7 @@
                             <p class=" text-[1.6em] font-medium">New Total Amount</p>
                         </div>
                         <div>
-                            {{-- <p class=" text-[1.6em] font-black">{{ $change }}</p> --}}
+                            <p class=" text-[1.6em] font-black">{{ $new_total }}</p>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,10 @@
                             <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
 
                             {{-- //* actionn --}}
-                            <th scope="col" class="px-4 py-3 text-center">Action</th>
+                            <th scope="col" class="px-4 py-3 text-center">Return quantity</th>
+
+                            {{-- //* actionn --}}
+                            <th scope="col" class="px-4 py-3 text-center">Description</th>
 
                         </tr>
                     </thead>
@@ -203,33 +206,41 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    <div
-                                        class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
-
-                                        <button x-on:click="$wire.displaySalesReturnForm()">
-
-                                            <div class="flex items-center">
-
-                                                <span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="size-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                    </svg>
-                                                </span>
-
-                                                <div>
-                                                    <p>Return</p>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </div>
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    <input type="number" wire:model.live="returnQuantity.{{ $index }}">
+                                    @error("returnQuantity.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
                                 </th>
+
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    @if (isset($returnQuantity[$index]) && !is_null($returnQuantity[$index]) && $returnQuantity[$index] > 0)
+                                        <select id="status" wire:model.live="description.{{ $index }}"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <option value="" selected>Set your status</option>
+                                            <option value="Damaged">Damaged</option>
+                                            <option value="Expired">Expired</option>
+                                        </select>
+
+                                        @error("description.$index")
+                                            <span
+                                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                        @enderror
+                                    @else
+                                        <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
+                                    @endif
+
+                                </th>
+
+
                             </tr>
                         @endforeach
                     </tbody>
+                    <button type="button" wire:click="return">
+                        Confirm
+                    </button>
                 </table>
             </div>
         </div>
