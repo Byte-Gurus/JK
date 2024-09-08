@@ -76,8 +76,15 @@ class CustomerForm extends Component
     public function createConfirmed($data) //* confirmation process ng create
     {
 
+
+
         $validated = $data['inputAttributes'];
-        $validated['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        if ($this->id_picture) {
+            $validated['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        } else {
+            $validated['id_picture'] = null; // or provide a default value if necessary
+        }
+
 
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
@@ -149,7 +156,11 @@ class CustomerForm extends Component
         $customer = Customer::find($updatedAttributes['id']);
         $address = Address::find($updatedAttributes['address_id']);
 
-        $updatedAttributes['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        if ($this->id_picture) {
+            $updatedAttributes['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        } else {
+            $updatedAttributes['id_picture'] =  'null'; // Keep existing value or set to null
+        }
 
         $address->fill([
             'province_code' => $updatedAttributes['province_code'],
@@ -162,7 +173,7 @@ class CustomerForm extends Component
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
         //var ipasa ang laman ng $updatedAttributes sa $item model
-         $customer ->fill([
+        $customer->fill([
             'firstname' => $updatedAttributes['firstname'],
             'middlename' => $updatedAttributes['middlename'],
             'lastname' => $updatedAttributes['lastname'],
@@ -192,7 +203,7 @@ class CustomerForm extends Component
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         $this->fill([
             'firstname' => $customer_details->firstname,
-            'middlename' => $customer_details->middlename,
+            'middlename' => $customer_details->middlename ?? null,
             'lastname' => $customer_details->lastname,
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
@@ -224,7 +235,8 @@ class CustomerForm extends Component
     {
 
         $this->firstname = trim($this->firstname);
-        $this->middlename = trim($this->middlename);
+        $this->middlename = $this->middlename ? trim($this->middlename) : null;
+
         $this->lastname = trim($this->lastname);
 
         $rules = [
@@ -232,13 +244,13 @@ class CustomerForm extends Component
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'birthdate' => 'required|string|max:255',
-            'contact_number' => 'required', 'numeric', 'digits:11',
+            'contact_number' => 'required|numeric|digits:11',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:255',
             'id_picture' => 'nullable|image|max:20480',
-            'customer_type' => 'required|in:Walk in,Credit,PWD,Senior Citizen,Wholesale',
+            'customer_type' => 'required|in:Credit,PWD,Senior Citizen,Wholesale',
             'customer_discount_no' => 'required|string|max:255',
         ];
 
@@ -248,8 +260,20 @@ class CustomerForm extends Component
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'id_picture','customer_type',
-        'customer_discount_no' ]);
+        $this->reset([
+            'firstname',
+            'middlename',
+            'lastname',
+            'birthdate',
+            'contact_number',
+            'selectProvince',
+            'selectCity',
+            'selectBrgy',
+            'street',
+            'id_picture',
+            'customer_type',
+            'customer_discount_no'
+        ]);
     }
 
     public function changeMethod($isCreate)

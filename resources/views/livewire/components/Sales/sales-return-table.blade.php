@@ -81,14 +81,14 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{  number_format($return->original_amount, 2) }}
+                                {{ number_format($return->original_amount, 2) }}
 
                             </th>
 
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{  number_format($return->return_total_amount, 2) }}
+                                {{ number_format($return->return_total_amount, 2) }}
 
                             </th>
 
@@ -101,7 +101,8 @@
                                 <div
                                     class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
 
-                                    <button x-on:click="$wire.dDisplaySalesReturnDetails();">
+                                    <button x-on:click="$wire.dDisplaySalesReturnDetails();"
+                                        wire:click="getReturn({{ $return->id }})">
 
                                         <div class="flex items-center">
 

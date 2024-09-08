@@ -64,4 +64,9 @@ class SalesReturnTable extends Component
     {
         $this->resetPage();
     }
+
+    public function getReturn($return_id)
+    {
+        $this->dispatch('get-return', return_ID: $return_id)->to(ViewSalesReturnDetails::class);
+    }
 }

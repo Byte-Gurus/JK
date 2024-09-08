@@ -120,7 +120,7 @@ class DiscountForm extends Component
             if ($customer_name != $creditor_name) {
                 $this->alert('error', 'Name doesnt match with the credit');
                 return;
-            }else{
+            } else {
                 $this->populateForm();
             }
         }
@@ -141,7 +141,7 @@ class DiscountForm extends Component
         if ($this->isCreate) {
             $this->customerDetails = [
                 'firstname' => $validated['firstname'],
-                'middlename' => $validated['middlename'],
+                'middlename' => $validated['middlename'] ?? null,
                 'lastname' => $validated['lastname'],
                 'contact_number' => $validated['contact_number'],
                 'birthdate' => $validated['birthdate'],
@@ -221,7 +221,7 @@ class DiscountForm extends Component
         if ($this->isCreate) {
 
             $this->firstname = trim($this->firstname);
-            $this->middlename = trim($this->middlename);
+            $this->middlename = $this->middlename ? trim($this->middlename) : null;
             $this->lastname = trim($this->lastname);
 
             $rules = [
@@ -229,7 +229,7 @@ class DiscountForm extends Component
                 'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
                 'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
                 'birthdate' => 'required|string|max:255',
-                'contact_number' => 'required', 'numeric', 'digits:11',
+                'contact_number' => 'required|numeric|digits:11',
                 'selectProvince' => 'required|exists:philippine_provinces,province_code',
                 'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',

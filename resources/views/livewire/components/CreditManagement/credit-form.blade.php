@@ -119,8 +119,9 @@
                                                             <li class="flex items-start justify-between">
                                                                 <!-- Item details on the left side -->
                                                                 <div class="text-[0.8em] font-medium text-wrap">
-                                                                    {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
+                                                                    {{ $customer->firstname . ' ' . ($customer->middlename ? $customer->middlename . ' ' : '') . $customer->lastname }}
                                                                 </div>
+
                                                             </li>
                                                         </ul>
                                                     @endforeach

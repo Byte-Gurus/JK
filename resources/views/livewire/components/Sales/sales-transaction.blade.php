@@ -44,6 +44,7 @@
                 @endif
             </div>
             <div class="flex flex-row items-center gap-4 text-nowrap">
+                @if (empty($payment) && empty($credit_details) )
                 <div>
                     <select id="transaction_type" wire:model.live='changeTransactionType'
                         class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
@@ -51,6 +52,7 @@
                         <option value="2">Credit</option>
                     </select>
                 </div>
+                @endif
                 <div>
                     <button x-on:click="$wire.displaySalesTransactionHistory()"
                         class="px-6 py-4 bg-[rgb(230,254,134)] border border-black hover:bg-[rgb(214,255,49)] font-bold ease-in-out duration-100 transition-all">Transaction
@@ -241,7 +243,7 @@
                                 </button>
                             </div>
                         @endif
-                        @if (!empty($selectedItems))
+                        @if (!empty($selectedItems)  && $isSales)
                             <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
                                 x-on:click="$wire.displayPaymentForm()"
                                 class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -259,6 +261,14 @@
                         @endif
                     </div>
                     @if (!empty($payment) && $isSales)
+                        <div
+                            class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
+                            <button type="button" class="px-8 py-2 "
+                                x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
+                                Save
+                            </button>
+                        </div>
+                    @elseif (!$isSales && $credit_details && $selectedItems)
                         <div
                             class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                             <button type="button" class="px-8 py-2 "

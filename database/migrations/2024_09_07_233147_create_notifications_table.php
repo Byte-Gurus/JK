@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('description');
             $table->timestamps();
 
-            $table->foreignId('inventory_id')->constrained('inventories');
+            $table->foreignId('inventory_id')->nullable()->constrained('inventories');
+            $table->foreignId('credit_id')->nullable()->constrained('credits');
         });
     }
 

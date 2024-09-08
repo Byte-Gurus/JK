@@ -189,12 +189,14 @@
                     </div>
                     <div class="border border-black "></div>
                     <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.6em] font-medium">Change</p>
-                        </div>
-                        <div>
-                            <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
-                        </div>
+                        @if ($transaction_type != 'Credit')
+                            <div>
+                                <p class=" text-[1.6em] font-medium">Change</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

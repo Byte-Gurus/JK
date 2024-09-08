@@ -138,7 +138,8 @@ class SalesTransaction extends Component
             return;
         }
 
-        $this->creditor_name =  $credit->customerJoin->firstname . ' ' . $credit->customerJoin->middlename . ' ' . $credit->customerJoin->lastname;
+        $this->creditor_name = $credit->customerJoin->firstname . ' ' . ($credit->customerJoin->middlename ? $credit->customerJoin->middlename . ' ' : '') . $credit->customerJoin->lastname;
+
         $this->credit_no = $credit->credit_number;
         $this->credit_limit =  $credit->credit_limit;
 
@@ -456,10 +457,10 @@ class SalesTransaction extends Component
             $this->discount_type =   $this->customerDetails['customer_type'];
 
             if (isset($this->customerDetails['firstname'])) {
-                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+                $this->customer_name = $this->customerDetails['firstname'] . ' ' . (isset($this->customerDetails['middlename']) && $this->customerDetails['middlename'] ? $this->customerDetails['middlename'] . ' ' : '') . $this->customerDetails['lastname'];
             } else {
                 $customer = Customer::find($this->customerDetails['customer_id']);
-                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+                $this->customer_name = $customer->firstname . ' ' . ($customer->middlename ? $customer->middlename . ' ' : '') . $customer->lastname;
             }
 
             $this->alert('success', 'Discount was applied successfully');
@@ -503,7 +504,6 @@ class SalesTransaction extends Component
     {
         $this->isSales = !$this->isSales;
         $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
-
     }
 
 
@@ -558,6 +558,9 @@ class SalesTransaction extends Component
             'transaction_number' => $this->transaction_number,
             'transaction_time' => now()->format('H:i:s'),
             'transaction_date' => now()->format('d-m-Y'),
+            'user' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
+
+
         ];
 
         // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->tax_details ?? null, $this->credit_details ?? null, $this->transaction_info ?? null);
@@ -582,7 +585,7 @@ class SalesTransaction extends Component
             ]);
             $customer = Customer::create([
                 'firstname' => $this->customerDetails['firstname'],
-                'middlename' => $this->customerDetails['middlename'],
+                'middlename' => $this->customerDetails['middlename'] ?? null,
                 'lastname' => $this->customerDetails['lastname'],
                 'contact_number' => $this->customerDetails['contact_number'],
                 'birthdate' => $this->customerDetails['birthdate'],
@@ -740,7 +743,7 @@ class SalesTransaction extends Component
 
     public function clearSelectedCustomerName()
     {
-        $this->reset('creditor_name', 'credit_no', 'credit_limit');
+        $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details');
     }
 
 

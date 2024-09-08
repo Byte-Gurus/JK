@@ -110,10 +110,10 @@ Artisan::command('credit:check-overdue', function () {
         $creditor->save();
         $this->info("Updated status for creditor: {$creditor->credit_number} to 'Overdue'");
 
-        // Notification::create([
-        //     'description' => "Item with SKU {$item->sku_code} has expired.",
-        //     'inventory_id' => $item->id,
-        // ]);
+        Notification::create([
+            'description' => "Item with SKU {$creditor->sku_code} has expired.",
+            'credit_id' => $creditor->id,
+        ]);
 
         $this->info("Updated status for creditor: {$creditor->credit_number} to 'Overdue' and added notification'");
     }
