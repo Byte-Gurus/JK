@@ -109,6 +109,11 @@ class CreditForm extends Component
         $this->closeModal();
     }
 
+    public function clearSelectedCustomerName()
+    {
+        $this->reset(['customer_name']);
+    }
+
     public function resetForm()
     {
         $this->reset(['credit_number', 'searchCustomer', 'due_date']);

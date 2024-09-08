@@ -2,7 +2,7 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="adjust">
+        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="return">
             @csrf
 
             <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
@@ -56,7 +56,7 @@
                                         <p class=" text-[1.2em] text-gray-900">Selected Item</p>
                                     </div>
                                     <div>
-                                        {{-- <p class=" text-[1.2em] font-black text-gray-900">{{ $sku_code }}</p> --}}
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $item_name }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         <p class=" text-[1.2em] text-gray-900">SKU</p>
                                     </div>
                                     <div>
-                                        {{-- <p class=" text-[1.2em] font-black text-gray-900">{{ $item_name }}</p> --}}
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $sku_code }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -83,28 +83,38 @@
                                         <p class=" text-[1.2em] text-gray-900">Current Quantity</p>
                                     </div>
                                     <div>
-                                        {{-- <p class=" text-[1.2em] font-black text-gray-900">{{ $description }}</p> --}}
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $item_quantity }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-row gap-4 mb-3">
+                                    <div>
+                                        <p class=" text-[1.2em] text-gray-900">Item Price</p>
+                                    </div>
+                                    <div>
+                                        <p class=" text-[1.2em] font-black text-gray-900">{{ $selling_price }}</p>
                                     </div>
                                 </div>
                             </div>
                             {{-- //* third row --}}
                             <div class="flex justify-between gap-4">
 
-                                 {{-- //* adjust quantity --}}
-                                 <div class="flex flex-col gap-1 mb-3">
+                                {{-- //* adjust quantity --}}
+                                <div class="flex flex-col gap-1 mb-3">
 
                                     <div>
-                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Enter Return Quantity</label>
+                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Enter Return
+                                            Quantity</label>
                                     </div>
 
                                     <div>
-                                        <input type="number" wire:model="quantityToAdjust" placeholder="Quantity"
+                                        <input type="number" wire:model="return_quantity" placeholder="Quantity"
                                             required
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
 
-                                        {{-- @error('quantityToAdjust')
+                                        @error('return_quantity')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
 
                                 </div>
@@ -121,13 +131,13 @@
                                     </div>
 
                                     <div>
-                                        <input type="text" wire:model="returnReason" placeholder="Reason" required
+                                        <input type="text" wire:model="return_reason" placeholder="Reason" required
                                             class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                                     </div>
 
-                                    {{-- @error('returnReason')
+                                    @error('return_reason')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                    @enderror --}}
+                                    @enderror
 
                                 </div>
                             </div>
@@ -149,7 +159,7 @@
                         </div>
                     </div>
                     <div>
-                        <button
+                        <button type="submit"
                             class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Return</button>
                     </div>
                 </div>
