@@ -734,7 +734,10 @@ class SalesTransaction extends Component
         $item->save();
     }
 
-
+    public function clearSelectedCustomerName()
+    {
+        $this->reset('creditor_name', 'credit_no', 'credit_limit');
+    }
 
 
 

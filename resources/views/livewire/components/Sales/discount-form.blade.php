@@ -334,62 +334,83 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="flex flex-row items-center justify-between gap-2 mb-3">
+                                    @if (empty($customer_name))
+                                        <div class="flex flex-col">
+                                            <label for="credit_id"
+                                                class="block mb-1 text-sm font-medium text-gray-900 ">Customer Name
+                                            </label>
+                                            <div class="flex flex-row w-1/2 gap-2">
 
-                                        <div class="flex flex-col ">
-                                            <label for="customer_name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Customer
-                                                Name</label>
+                                                <input wire:model.live.debounce.300ms='searchCustomer' type="search"
+                                                    value="{{ $customer_name }}" list="itemList"
+                                                    class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
+                                                    placeholder="Search Customer">
 
-                                            <div class="flex flex-row w-full gap-2">
-                                                <div class="w-full">
-                                                    <div class="relative w-full">
-
-                                                        <input wire:model.live.debounce.300ms='searchCustomer'
-                                                            type="text" list="customerList"
-                                                            class="w-full p-2 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                                                            placeholder="Select a Customer"="">
+                                                    <div class="mt-6.5">
+                                                        <button type="button" wire:loading.remove wire:click="createCustomer"
+                                                            class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                                            <div class="flex flex-row items-center gap-2">
+                                                                <p>
+                                                                    +
+                                                                </p>
+                                                            </div>
+                                                        </button>
                                                     </div>
-
-                                                    @if (!empty($searchCustomer))
-                                                        <div
-                                                            class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
-                                                            @foreach ($customers as $customer)
-                                                                <ul wire:click="getCustomer({{ $customer->id }})"
-                                                                    class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
-                                                                    <li class="flex items-start justify-between">
-                                                                        <!-- Item details on the left side -->
-                                                                        <div
-                                                                            class="flex flex-col w-[200px] items-start leading-1">
-                                                                            <div
-                                                                                class="text-[1.2em] font-bold text-wrap">
-                                                                                {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                                <p>
-                                                    {{ $customer_name }}
-                                                </p>
-                                                <div class="mt-6.5">
-                                                    <button type="button" wire:loading.remove
-                                                        wire:click="createCustomer"
-                                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                                        <div class="flex flex-row items-center gap-2">
-                                                            <p>
-                                                                +
-                                                            </p>
-                                                        </div>
-                                                    </button>
-                                                </div>
                                             </div>
+                                            @if (!empty($searchCustomer))
+                                                <div
+                                                    class="fixed max-h-1/2 z-99 h-[200px] mt-16 rounded-b-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                                    @foreach ($customers as $customer)
+                                                        <ul wire:click="getCustomer({{ $customer->id }})"
+                                                            class="w-full px-4 py-2 transition-all duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
+                                                            <li class="flex items-start justify-between">
+                                                                <!-- Item details on the left side -->
+                                                                <div class="text-[0.8em] font-medium text-wrap">
+                                                                    {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                            {{-- <div class="font-medium text-[1.6em] w-1/2">
+                                    <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
+                                        class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                                        <option value="" selected>Select customer</option>
+                                        @foreach ($credit_customers as $credit_customer)
+                                            <option value="{{ $credit_customer->id }} ">
+                                                {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
+                                                {{ $credit_customer->creditJoin->credit_number }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div> --}}
 
                                         </div>
-                                    </div>
+                                    @else
+                                        <div class="mb-3">
+                                            <label for="credit_id"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Customer Name
+                                            </label>
+                                            <div class="flex flex-row items-center justify-between">
+                                                <p class="text-2xl font-bold ">{{ $customer_name }}</p>
+
+                                                {{-- clear customer name --}}
+                                                <div wire:click='clearSelectedCustomerName()'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                                        class="size-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @error('customer_name')
+                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                    @enderror
 
                                     <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
@@ -401,14 +422,8 @@
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                                 Type</label>
 
-                                            <select id="customerType" wire:model.live="customerType" required disabled
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value=""selected>Select Customer Type</option>
-                                                <option value="PWD">PWD</option>
-                                                <option value="Senior Citizen">Senior Citizen</option>
-
-
-                                            </select>
+                                            <input id="customerType" wire:model.live="customerType" required disabled
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5" placeholder="Select Customer Type"/>
 
                                             @error('customerType')
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>
