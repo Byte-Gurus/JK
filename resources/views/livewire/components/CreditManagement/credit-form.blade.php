@@ -71,7 +71,7 @@
                                     <div class="mb-3">
 
                                         <label for="credit_id"
-                                            class="block mb-2 font-medium text-gray-900 text-md ">Credit ID
+                                            class="block mb-1 font-medium text-gray-900 text-md ">Credit ID
                                         </label>
 
                                         <p class=" text-[2em] font-black">{{ $credit_number }}</p>
@@ -98,44 +98,35 @@
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
                                     </div> --}}
-                                    <div class="flex flex-row items-center justify-between px-6">
-                                        <div class="relative w-full">
+                                    @if (empty($customer_name))
+                                        <div class="flex flex-col">
+                                            <label for="credit_id"
+                                                class="block mb-1 font-medium text-gray-900 text-md ">Customer Name
+                                            </label>
+                                            <div class="w-1/2 ">
 
-                                            <div
-                                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black "
-                                                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                                    stroke="currentColor" className="size-6">
-                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                                                </svg>
+                                                <input wire:model.live.debounce.300ms='searchCustomer' type="search"
+                                                    value="{{ $customer_name }}" list="itemList"
+                                                    class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
+                                                    placeholder="Search Customer">
                                             </div>
-
-                                            <input wire:model.live.debounce.300ms='searchCustomer' type="text"
-                                                list="itemList"
-                                                class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                                                placeholder="Search Customer">
-                                        </div>
-                                        @if (!empty($searchCustomer))
-                                            <div
-                                                class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
-                                                @foreach ($customers as $customer)
-                                                    <ul wire:click="getCustomer({{ $customer->id }})"
-                                                        class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
-                                                        <li class="flex items-start justify-between">
-                                                            <!-- Item details on the left side -->
-                                                            <div class="flex flex-col w-[200px] items-start leading-1">
-                                                                <div class="text-[1.2em] font-bold text-wrap">
+                                            @if (!empty($searchCustomer))
+                                                <div
+                                                    class="fixed max-h-1/2 h-[200px] mt-16 rounded-b-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                                    @foreach ($customers as $customer)
+                                                        <ul wire:click="getCustomer({{ $customer->id }})"
+                                                            class="w-full px-4 py-2 transition-all duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
+                                                            <li class="flex items-start justify-between">
+                                                                <!-- Item details on the left side -->
+                                                                <div class="text-[0.8em] font-medium text-wrap">
                                                                     {{ $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname }}
-
                                                                 </div>
-
-                                                        </li>
-                                                    </ul>
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                        {{-- <div class="font-medium text-[1.6em] w-1/2">
+                                                            </li>
+                                                        </ul>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                            {{-- <div class="font-medium text-[1.6em] w-1/2">
                                             <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
                                                 class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
                                                 <option value="" selected>Select customer</option>
@@ -148,9 +139,25 @@
                                             </select>
                                         </div> --}}
 
-                                    </div>
-
-                                    <p>{{ $customer_name }}</p>
+                                        </div>
+                                    @else
+                                        <div class="mb-3">
+                                            <label for="credit_id"
+                                                class="block font-medium text-gray-900 text-md ">Customer Name
+                                            </label>
+                                            <div class="flex flex-row items-center justify-between">
+                                                <p class=" text-[2em] font-black">{{ $customer_name }}</p>
+                                                <div wire:click='clearSelectedCustomerName()'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                                        class="size-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     @error('customer_name')
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
@@ -160,7 +167,7 @@
                                     <div class="mb-3">
 
                                         <label for="credit_limit"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Credit Limit
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Credit Limit (₱)
                                         </label>
 
                                         <input type="number" id="credit_limit" wire:model="credit_limit"
@@ -231,8 +238,8 @@
                                     <div class="flex items-center justify-center loader loader--style3 " title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
-                                            height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
-                                            xml:space="preserve">
+                                            height="40px" viewBox="0 0 50 50"
+                                            style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                             <path fill="#000"
                                                 d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
                                                 <animateTransform attributeType="xml" attributeName="transform"

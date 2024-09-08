@@ -241,4 +241,9 @@ class DiscountForm extends Component
     {
         $this->isCreate = !$this->isCreate;
     }
+
+    public function clearSelectedCustomerName()
+    {
+        $this->reset(['customer_name', 'customerType', 'discount_percentage', 'customer_discount_no']);
+    }
 }

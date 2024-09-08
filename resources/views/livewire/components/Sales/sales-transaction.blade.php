@@ -293,7 +293,7 @@
                     </div>
                 </div>
                 {{-- transaction number section --}}
-                <div class="mb-2">
+                <div class="mb-1">
                     <div class="border border-black "></div>
                 </div>
                 <div class="flex flex-col mx-6">
@@ -309,8 +309,8 @@
                     <div class="w-full ">
                         <div class="border border-black "></div>
                     </div>
-                    <div class="m-2">
-                        <p class=" font-medium text-[2em]">Discount</p>
+                    <div class="m-1">
+                        <p class=" font-medium text-[1em]">Discount</p>
                     </div>
                     <div class="w-full">
                         <div class="border border-black "></div>
@@ -329,7 +329,7 @@
 
                     </div>
                 </div>
-                <div class="my-2">
+                <div class="my-1">
                     <div class="border border-black"></div>
                 </div>
                 {{-- ss --}}
@@ -341,7 +341,7 @@
                         <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
                     </div>
 
-                    <div class="w-full my-2">
+                    <div class="w-full my-1">
                         <div class="border border-black"></div>
                     </div>
                     <div class="flex flex-row justify-between">
@@ -407,7 +407,7 @@
                     </div>
                 </div>
                 {{-- transaction number section --}}
-                <div class="mb-2">
+                <div class="mb-1">
                     <div class="border border-black "></div>
                 </div>
                 <div class="flex flex-col mx-6">
@@ -423,46 +423,73 @@
                     <div class="w-full ">
                         <div class="border border-black "></div>
                     </div>
-                    <div class="m-2">
-                        <p class=" font-medium text-[2em]">Credit</p>
+                    <div class="m-1">
+                        <p class=" font-medium text-[1em]">Credit</p>
                     </div>
                     <div class="w-full">
                         <div class="border border-black "></div>
                     </div>
                 </div>
-                <div class="flex flex-row items-center justify-between px-6">
-                    <div class="relative w-full">
+                <div class="flex flex-col">
+                    <div class="px-6">
 
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
-                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </div>
+                        <label for="credit_id" class="block mb-1 font-medium text-[1.6em] text-gray-900 ">Customer
+                            Name
+                        </label>
 
-                        <input wire:model.live.debounce.300ms='searchCustomer' type="text" list="itemList"
-                            class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                            placeholder="Search Customer" required="">
-                    </div>
-                    @if (!empty($searchCustomer))
-                        <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
-                            @foreach ($credit_customers as $credit_customer)
-                                <ul wire:click="selectCustomer({{ $credit_customer->id }})"
-                                    class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
-                                    <li class="flex items-start justify-between">
-                                        <!-- Item details on the left side -->
-                                        <div class="flex flex-col w-[200px] items-start leading-1">
-                                            <div class="text-[1.2em] font-bold text-wrap">
-                                                {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
-                                                {{ $credit_customer->creditJoin->credit_number }}</div>
+                        @if (empty($credit_no))
+                            <div class="relative w-1/2">
+
+                                <input wire:model.live.debounce.300ms='searchCustomer' type="search" list="itemList"
+                                    class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
+                                    placeholder="Search Customer" required="">
+
+                            </div>
+                            @if (!empty($searchCustomer))
+                                <div
+                                    class="fixed max-h-1/2 z-99 h-[200px] rounded-b-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                    @foreach ($credit_customers as $credit_customer)
+                                        <ul wire:click="selectCustomer({{ $credit_customer->id }})"
+                                            class="w-full px-4 py-2 transition-all duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
+
+                                            <li class="flex items-start justify-between">
+                                                <!-- Item details on the left side -->
+                                                <div
+                                                    class="text-[0.8em] gap-4 justify-between flex flex-row font-medium text-wrap">
+                                                    <p>{{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
+                                                    </p>
+                                                    <p class="italic">
+                                                        {{ $credit_customer->creditJoin->credit_number }}</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    @endforeach
+                                </div>
+                            @endif
+                        @else
+                            <div class="flex flex-col">
+                                <div class="flex flex-row items-center justify-between">
+                                    <div class="flex flex-col items-start">
+                                        <p class=" font-black text-[1.6em]">{{ $creditor_name }}</p>
+                                        <p class=" font-medium text-[1em] italic">{{ $credit_no }}</p>
+                                        <div>
+                                            <p>{{ $credit_limit }}</p>
                                         </div>
-
-                                    </li>
-                                </ul>
-                            @endforeach
-                        </div>
-                    @endif
+                                    </div>
+                                    <div>
+                                        <div wire:click='clearSelectedCustomerName()'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                                class="size-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                     {{-- <div class="font-medium text-[1.6em] w-1/2">
                         <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
                             class="bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
@@ -476,29 +503,14 @@
                         </select>
                     </div> --}}
                     <div>
-                        <div class="relative w-full">
-                            >>>>>>> Stashed changes
 
-                        </div>
-
-
-                        <div class="flex flex-row items-center justify-between px-6">
-                            <div class="m-2">
-                                <p class=" font-medium text-[2em]">{{ $credit_no }}</p>
-                            </div>
-                            <div class="m-2">
-                                <p class=" font-medium text-[2em]">{{ $creditor_name }}</p>
-                                <p>{{ $credit_limit }}</p>
-                            </div>
-
-                        </div>
                         {{-- discount section --}}
                         <div class="flex flex-row items-center">
                             <div class="w-full ">
                                 <div class="border border-black "></div>
                             </div>
-                            <div class="m-2">
-                                <p class=" font-medium text-[2em]">Discount</p>
+                            <div class="m-1">
+                                <p class=" font-medium text-[1em]">Discount</p>
                             </div>
                             <div class="w-full">
                                 <div class="border border-black "></div>
@@ -563,8 +575,10 @@
                                 <div class=" font-black text-[2em]">₱ {{ number_format($grandTotal, 2) }}</div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
+        </div>
     @endif
     <div x-show="showChangeQuantityForm" x-data="{ showChangeQuantityForm: @entangle('showChangeQuantityForm') }">
         @livewire('components.sales.change-quantity-form')
