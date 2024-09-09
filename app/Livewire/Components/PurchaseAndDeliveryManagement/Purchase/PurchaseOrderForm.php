@@ -378,6 +378,8 @@ class PurchaseOrderForm extends Component
                 if ($maxStockLevel > 0) {
                     $rules["purchase_quantities.$index"] = ['required','numeric','min:1','lte:' . $maxStockLevel
                     ];
+                }else{
+                    $rules["purchase_quantities.$index"] = ['required','numeric','min:1'];
                 }
             }
         }
