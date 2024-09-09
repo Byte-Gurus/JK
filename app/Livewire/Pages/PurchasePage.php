@@ -6,10 +6,11 @@ namespace App\Livewire\Pages;
 
 use App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase\PurchaseOrderForm;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PurchasePage extends Component
 {
-
+    use WithPagination;
     public $isCreate;
     public $showModal;
 
@@ -73,6 +74,7 @@ class PurchasePage extends Component
 
     public function returnToTable()
     {
+        $this->dispatch('refresh-purchase-order-form')->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
         $this->viewPurchaseOrderDetails = false;
         $this->showModal = false;
     }
