@@ -99,7 +99,6 @@ class PurchaseOrderForm extends Component
         'createConfirmed',
     ];
 
-
     public function removeRow()
     {
         if ($this->isCreate) {
@@ -530,7 +529,8 @@ class PurchaseOrderForm extends Component
 
     public function displayModal($showModal)
     {
-
+        $this->resetValidation();
+        $this->resetForm();
         $this->showModal = $showModal; //var assign ang parameter value sa global variable
 
     }

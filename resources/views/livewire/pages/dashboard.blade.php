@@ -13,7 +13,7 @@
                     Date
                 </div>
                 <div class="rounded-md">
-                    <x-flatpickr id="laravel-flatpickr" class="rounded-sm " onChange="dailyS" date-format="m/Y" />
+                    <x-flatpickr id="laravel-flatpickr" class="rounded-sm " date-format="m/Y" />
                 </div>
             </div>
             <div>
