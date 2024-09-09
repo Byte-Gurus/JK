@@ -24,13 +24,28 @@
                 <div class="flex flex-col">
                     <div class="flex flex-col gap-1">
 
-                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Status:</label>
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Description:</label>
 
                         <select wire:model.live="statusFilter"
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
                             <option value="0">All</option>
                             <option value="Expired">Expired</option>
                             <option value="Damaged">Damaged</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row items-center justify-between gap-4">
+                <div class="flex flex-col">
+                    <div class="flex flex-col gap-1">
+
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Operation:</label>
+
+                        <select wire:model.live="operationFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                            <option value="0">All</option>
+                            <option value="Refund">Refund</option>
+                            <option value="Exchange">Exchange</option>
                         </select>
                     </div>
                 </div>
@@ -57,6 +72,9 @@
 
                         {{-- //* employee name --}}
                         <th scope="col" class="px-4 py-3 text-center">Item description</th>
+
+                        {{-- //* employee name --}}
+                        <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
                         <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
@@ -95,6 +113,9 @@
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return_detail->transactionDetailsJoin->itemJoin->item_description }}
+                            </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $return_detail->operation }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">

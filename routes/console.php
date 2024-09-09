@@ -85,10 +85,17 @@ Artisan::command('inventory:check-expiration', function () {
         $item->save();
         $this->info("Updated status for item SKU: {$item->sku_code} to 'expired'");
 
-        Notification::create([
-            'description' => "Item with SKU {$item->sku_code} has expired.",
-            'inventory_id' => $item->id,
-        ]);
+        $notificationExists = Notification::where('inventory_id', $item->id)
+            ->where('description', "Item with SKU {$item->sku_code} has expired.")
+            ->exists();
+
+        if (!$notificationExists) {
+            Notification::create([
+                'description' => "Item with SKU {$item->sku_code} has expired.",
+                'inventory_id' => $item->id,
+            ]);
+            $this->info("Added notification for item SKU: {$item->sku_code}");
+        }
 
         $this->info("Updated status for item SKU: {$item->sku_code} to 'Expired' and added notification");
     }
@@ -102,20 +109,25 @@ Artisan::command('credit:check-overdue', function () {
     $today = Carbon::today();
 
     $overdueCreditor = Credit::where('due_date', '<=', $today)
-    ->where('status', 'Pending')
-    ->get();
+        ->where('status', 'Pending')
+        ->get();
 
-    foreach ($overdueCreditor as $creditor) {
-        $creditor->status = 'Overdue';
-        $creditor->save();
-        $this->info("Updated status for creditor: {$creditor->credit_number} to 'Overdue'");
+    foreach ($overdueCreditor as $credit) {
+        $credit->status = 'Overdue';
+        $credit->save();
+        $this->info("Updated status for credit number: {$credit->credit_number} to 'Overdue'");
 
-        Notification::create([
-            'description' => "Item with SKU {$creditor->sku_code} has expired.",
-            'credit_id' => $creditor->id,
-        ]);
+        // Check if notification already exists
+        $notificationExists = Notification::where('credit_id', $credit->id)
+            ->where('description', "Credit with number {$credit->credit_number} is overdue.")
+            ->exists();
 
-        $this->info("Updated status for creditor: {$creditor->credit_number} to 'Overdue' and added notification'");
+        if (!$notificationExists) {
+            Notification::create([
+                'description' => "Credit with number {$credit->credit_number} is overdue.",
+                'credit_id' => $credit->id,
+            ]);
+            $this->info("Added notification for credit number: {$credit->credit_number}");
+        }
     }
-
 })->purpose('Check credit creditor and update status if overdue')->daily();

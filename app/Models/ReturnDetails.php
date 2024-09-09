@@ -12,6 +12,7 @@ class ReturnDetails extends Model
     protected $fillable = [
         'return_quantity',
         'item_return_amount',
+        'operation',
         'description',
         'return_id',
         'transaction_details_id'

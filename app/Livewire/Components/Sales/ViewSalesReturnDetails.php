@@ -9,6 +9,7 @@ use Livewire\Component;
 class ViewSalesReturnDetails extends Component
 {
     public $statusFilter = 0;
+    public $operationFilter = 0;
 
     public $return_id, $transaction_number, $transaction_date, $return_date, $orignal_amount, $return_total_amount, $current_amount;
     public function render()
@@ -17,6 +18,9 @@ class ViewSalesReturnDetails extends Component
 
         if ($this->statusFilter != 0) {
             $query->where('description', $this->statusFilter);
+        }
+        if ($this->operationFilter != 0) {
+            $query->where('operation', $this->operationFilter);
         }
 
         // Execute the query and get the results

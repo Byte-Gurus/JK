@@ -12,6 +12,7 @@ class TransactionDetails extends Model
     protected $fillable = [
         'item_quantity',
         'vat_type',
+        'status',
         'item_subtotal',
         'item_discount_amount',
         'discount_id',

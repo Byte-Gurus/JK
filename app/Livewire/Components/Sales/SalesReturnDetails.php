@@ -16,8 +16,9 @@ class SalesReturnDetails extends Component
     public $showAdminLoginForm = false;
 
     public $returnQuantity = [];
+    public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
 
     public $return_info = [];
 
@@ -37,12 +38,14 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
+
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
-                $rules["description.$index"] = ['required', 'in:Damaged,Expired'];
+                $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
+                $this->rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
             }
         }
-        $this->validate($rules);
+        $this->validate($this->rules);
 
         $this->confirm('Do you want to return this items?', [
             'onConfirmed' => 'returnConfirmed', //* call the createconfirmed method
@@ -52,6 +55,7 @@ class SalesReturnDetails extends Component
 
     public function returnConfirmed()
     {
+
         $transaction = Transaction::find($this->transaction_id);
         $transaction->total_amount = $this->new_total;
         $transaction->transaction_type = 'Return';
@@ -73,13 +77,44 @@ class SalesReturnDetails extends Component
                     'item_return_amount' => $info['item_return_amount'],
                     'description' => $info['description'],
                     'return_id' => $returns->id,
-                    'transaction_details_id' => $info['transaction_details_id'] ,
+                    'transaction_details_id' => $info['transaction_details_id'],
+                    'operation' => $info['operation'],
                 ]);
+
+                $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
+                $transactionDetails->status = $info['operation'];
+                $transactionDetails->save();
+
             }
         }
+
+
         $this->alert('success', 'Item/s was returned successfully');
     }
+    public function updatedOperation($value, $ind)
+    {
+        foreach ($this->transactionDetails as $index => $transactionDetail) {
 
+            if (isset($this->operation[$index])) {
+                $this->return_info[$index]['operation'] = $this->operation[$index];
+            }
+        }
+
+        if (isset($this->returnQuantity[$ind])) {
+            $this->returnQuantity[$ind] = 0;
+            $this->calculateTotalRefundAmount();
+        }
+
+        if ($this->operation[$ind] === '') {
+            unset($this->returnQuantity[$ind]);
+            unset($this->description[$ind]);
+            unset($this->return_info[$ind]);
+            unset($this->operation[$ind]);
+
+
+            $this->calculateTotalRefundAmount();
+        }
+    }
     public function updatedReturnQuantity()
     {
         $validated = $this->validateForm();
@@ -92,17 +127,21 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && is_numeric($this->returnQuantity[$index])) {
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index])) {
 
-                $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
+                if ($this->operation[$index] != 'Exchange') {
+                    $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
 
-                $this->return_total_amount += $this->item_return_amount;
+                    $this->return_total_amount += $this->item_return_amount;
+                }
+
 
                 $this->return_info[$index] = [
                     'item_return_amount' => $this->item_return_amount,
                     'return_quantity' => $this->returnQuantity[$index],
                     'description' => $this->description[$index] ?? '',
-                    'transaction_details_id' => $transactionDetail->id
+                    'transaction_details_id' => $transactionDetail->id,
+                    'operation' => $this->operation[$index]
 
                 ];
             }
@@ -113,7 +152,7 @@ class SalesReturnDetails extends Component
     {
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             // Check if returnQuantity at $index is set and greater than 0
-            if (isset($this->returnQuantity[$index]) && is_numeric($this->returnQuantity[$index]) && $this->returnQuantity[$index] > 0) {
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
                 // Check if description at $index exists
                 if (isset($this->description[$index])) {
                     $this->return_info[$index]['description'] = $this->description[$index];
@@ -143,18 +182,18 @@ class SalesReturnDetails extends Component
     }
     protected function validateForm()
     {
-        $rules = [];
+
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index])) {
                 $availableQty = $transactionDetail['item_quantity']; // Replace with the actual field for quantity
-                $rules["returnQuantity.$index"] = ['numeric', 'min:0', "lte:$availableQty"];
+                $this->rules["returnQuantity.$index"] = ['numeric', 'min:1', "lte:$availableQty"];
             }
         }
 
 
 
-        return $this->validate($rules);
+        return $this->validate($this->rules);
     }
 
     public function getTransaction($Transaction)

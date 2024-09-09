@@ -1,3 +1,5 @@
 <div class="text-center">
-    STAN BINI 🌸
+    @foreach ($notifications as $notification)
+        <p>{{ $notification->description }}</p>
+    @endforeach
 </div>

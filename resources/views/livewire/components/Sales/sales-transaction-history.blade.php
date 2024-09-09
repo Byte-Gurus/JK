@@ -224,6 +224,9 @@
                             {{-- item name --}}
                             <th scope="col" class="px-4 py-3 text-left">Item Description</th>
 
+                            {{-- item name --}}
+                            <th scope="col" class="px-4 py-3 text-left">Status</th>
+
                             {{-- //* unit price --}}
                             <th scope="col" class="px-4 py-3 text-center">Unit Price (₱)</th>
 
@@ -264,6 +267,10 @@
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                     {{ $transactionDetail['itemJoin']['item_description'] }}
+                                </th>
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $transactionDetail['status'] }}
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
