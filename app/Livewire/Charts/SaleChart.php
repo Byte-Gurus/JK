@@ -17,14 +17,11 @@ class SaleChart extends Component
 
     public function render()
     {
-
-
         if ($this->selectPicker == 1 && $this->day) {
             $this->dailyTotal = Transaction::whereDate('created_at', $this->day)
                 ->sum('total_amount');
         }
 
-        // Weekly total
         if ($this->selectPicker == 2 && $this->week) {
             $weekStart = Carbon::parse($this->week)->startOfWeek()->toDateString();
             $weekEnd = Carbon::parse($this->week)->endOfWeek()->toDateString();
@@ -32,25 +29,19 @@ class SaleChart extends Component
                 ->sum('total_amount');
         }
 
-        // Monthly total
         if ($this->selectPicker == 3 && $this->month) {
             $this->monthlyTotal = Transaction::whereMonth('created_at', Carbon::parse($this->month)->month)
                 ->whereYear('created_at', Carbon::parse($this->month)->year)
                 ->sum('total_amount');
         }
 
-        // Yearly total
         if ($this->selectPicker == 4 && $this->year) {
             $this->yearlyTotal = Transaction::whereYear('created_at', $this->year)
                 ->sum('total_amount');
         }
 
-        return view(
-            'livewire.charts.sale-chart',
-
-        );
+        return view('livewire.charts.sale-chart');
     }
-
 
     public function updatedSelectPicker($picker)
     {
