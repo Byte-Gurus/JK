@@ -270,6 +270,7 @@ class SalesTransaction extends Component
                     'vat_type' => $item->itemJoin->vat_type,
                     'reorder_point' => $item->itemJoin->reorder_point,
                     'vat' => $item->vat_amount,
+                    'vat_percent' => $item->itemJoin->vat_percent,
                     'quantity' => 1,
                     'barcode' => $item->itemJoin->barcode,
                     'sku_code' => $item->sku_code,
@@ -278,6 +279,7 @@ class SalesTransaction extends Component
                     'current_stock_quantity' => $item->current_stock_quantity,
                     'bulk_quantity' => $item->itemJoin->bulk_quantity,
                     'wholesale_discount_amount' => 0,
+                    'status' => 'Sales',
                     'discount' =>  0,
                     'discount_id' =>  null,
                     'original_total' => 0,
@@ -314,7 +316,7 @@ class SalesTransaction extends Component
         array_push($this->si, $index);
 
         if (count($this->si) == 2) {
-            dd($this->si);
+            // dd($this->si);
         }
     }
 
@@ -417,10 +419,10 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount  = $vatable_subtotal - ($index['total_amount'] / (100 + 12) * 100);
+                $vatable_amount  = $vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
             } elseif ($index['vat_type'] === 'Non Vatable') {
                 $non_vatable_subtotal += $index['total_amount'];
-                $non_vatable_amount  =  $non_vatable_subtotal - ($index['total_amount'] / (100 + 3) * 100);
+                $non_vatable_amount  =  $non_vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
             }
 
             $this->totalVat = $vatable_amount + $non_vatable_amount;
@@ -625,6 +627,7 @@ class SalesTransaction extends Component
                 'vat_type' => $selectedItem['vat_type'],
                 'item_subtotal' => $selectedItem['total_amount'],
                 'item_discount_amount' => $selectedItem['wholesale_discount_amount'],
+                'status' => $selectedItem['status'],
                 'discount' => $selectedItem['discount'],
                 'discount_id' => $selectedItem['discount_id'],
                 'transaction_id' => $transaction->id,

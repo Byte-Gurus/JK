@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('return_quantity');
             $table->double('item_return_amount');
+            $table->string('operation');
             $table->string('description');
             $table->timestamps();
 

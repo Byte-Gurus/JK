@@ -92,7 +92,7 @@
                             <p class=" text-[1.2em] font-medium">Current Total Amount</p>
                         </div>
                         <div>
-                            {{number_format( $total_amount, 2) }}
+                            {{ number_format($total_amount, 2) }}
                         </div>
                     </div>
 
@@ -207,19 +207,37 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model.live="returnQuantity.{{ $index }}">
-                                    @error("returnQuantity.$index")
+
+                                    <select id="status" wire:model.live="operation.{{ $index }}"
+                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                        <option value="" selected>Set your operation</option>
+                                        <option value="Refund">Refund</option>
+                                        <option value="Exchange">Exchange</option>
+                                    </select>
+
+                                    @error("description.$index")
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                     @enderror
-                                </th>
 
+
+                                </th>
+                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        <input type="number" wire:model.live="returnQuantity.{{ $index }}">
+                                        @error("returnQuantity.$index")
+                                            <span
+                                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                        @enderror
+                                    </th>
+                                @endif
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    @if (isset($returnQuantity[$index]) && !is_null($returnQuantity[$index]) && $returnQuantity[$index] > 0)
+                                    @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
                                         <select id="status" wire:model.live="description.{{ $index }}"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Set your status</option>
+                                            <option value="" selected>Set your description</option>
                                             <option value="Damaged">Damaged</option>
                                             <option value="Expired">Expired</option>
                                         </select>
@@ -228,7 +246,7 @@
                                             <span
                                                 class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                         @enderror
-                                    @else
+
                                         <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
                                     @endif
 
