@@ -45,7 +45,7 @@ class ChangeQuantityForm extends Component
         $this->reset('adjust_quantity');
 
         $this->dispatch('display-change-quantity-form', showChangeQuantityForm: false)->to(SalesTransaction::class);
-        $this->alert('success', 'quantity was updated successfully');
+        $this->alert('success', 'Quantity was updated successfully');
 
         // $this->confirm('Do you want to add this item?', [
         //     'onConfirmed' => 'adjustConfirmed', //* call the createconfirmed method

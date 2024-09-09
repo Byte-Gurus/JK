@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Credit;
 use App\Models\Inventory;
 use App\Models\Notification;
 use Carbon\Carbon;
@@ -94,3 +95,27 @@ Artisan::command('inventory:check-expiration', function () {
 
     $this->comment('Expiration check completed!');
 })->purpose('Check inventory items for expiration and update their status if expired')->daily();
+
+Artisan::command('credit:check-overdue', function () {
+    $this->comment('Checking for overdue creditor...');
+
+    $today = Carbon::today();
+
+    $overdueCreditor = Credit::where('due_date', '<=', $today)
+    ->where('status', 'Pending')
+    ->get();
+
+    foreach ($overdueCreditor as $creditor) {
+        $creditor->status = 'Overdue';
+        $creditor->save();
+        $this->info("Updated status for creditor: {$creditor->credit_number} to 'Overdue'");
+
+        Notification::create([
+            'description' => "Item with SKU {$creditor->sku_code} has expired.",
+            'credit_id' => $creditor->id,
+        ]);
+
+        $this->info("Updated status for creditor: {$creditor->credit_number} to 'Overdue' and added notification'");
+    }
+
+})->purpose('Check credit creditor and update status if overdue')->daily();

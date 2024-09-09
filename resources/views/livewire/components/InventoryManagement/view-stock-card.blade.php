@@ -39,7 +39,7 @@
                         <div class="flex flex-row items-center gap-2">
                             <h1 class="text-[1.2em] font-black text-center">
                                 @if ($expiration_date)
-                                    {{ \Carbon\Carbon::parse($expiration_date)->format('d-m-y') }}
+                                    {{ \Carbon\Carbon::parse($expiration_date)->format(' M d Y ') }}
                                 @else
                                     N/A
                                 @endif
@@ -110,7 +110,7 @@
                         <tr class=" text-nowrap">
 
                             {{-- //* date --}}
-                            <th scope="col" class="px-4 py-3 text-left ">Date</th>
+                            <th scope="col" class="px-4 py-3 text-left ">Date & Time</th>
 
                             {{-- //* remarks --}}
                             <th scope="col" class="px-4 py-3 text-left ">Movements</th>
@@ -152,7 +152,7 @@
                             <tr class="transition duration-75 ease-in border-b hover:bg-gray-100 index:bg-red-400">
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
-                                    {{ $stock_card['created_at'] }}
+                                    {{ \Carbon\Carbon::parse($stock_card['created_at'])->format(' M d Y h:i A') }}
                                 </th>
 
                                 <th scope="row"

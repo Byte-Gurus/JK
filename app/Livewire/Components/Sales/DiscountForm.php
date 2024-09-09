@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Models\Address;
+use App\Models\Credit;
 use App\Models\Customer;
 use App\Models\Discount;
 use App\Models\PhilippineBarangay;
@@ -23,7 +24,9 @@ class DiscountForm extends Component
     public $barangays = null;
 
     public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $customer_discount_no, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
+    public $isSales;
     public $customerDetails = [];
+    public $credit_details = [];
 
     public function render()
     {
@@ -52,6 +55,8 @@ class DiscountForm extends Component
 
         'createConfirmed',
         'removeDiscountConfirmed',
+        'change-credit-discount' => 'changeCreditDiscount',
+        'get-credit-detail' => 'getCreditDetail'
     ];
 
     public function updatedCustomerType($customer_type) //@params province code for city query
@@ -105,6 +110,20 @@ class DiscountForm extends Component
     public function create() //* create process
     {
 
+        if (!$this->isSales) {
+            $customer = Customer::find($this->customer_id);
+            $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+
+            $creditor =  Customer::find($this->credit_details['customer_id']);
+            $creditor_name = $creditor->firstname . ' ' . $creditor->middlename  . ' ' . $creditor->lastname;
+
+            if ($customer_name != $creditor_name) {
+                $this->alert('error', 'Name doesnt match with the credit');
+                return;
+            } else {
+                $this->populateForm();
+            }
+        }
         $validated = $this->validateForm();
 
         $this->confirm('Do you want to create and apply the discount?', [
@@ -122,7 +141,7 @@ class DiscountForm extends Component
         if ($this->isCreate) {
             $this->customerDetails = [
                 'firstname' => $validated['firstname'],
-                'middlename' => $validated['middlename'],
+                'middlename' => $validated['middlename'] ?? null,
                 'lastname' => $validated['lastname'],
                 'contact_number' => $validated['contact_number'],
                 'birthdate' => $validated['birthdate'],
@@ -202,7 +221,7 @@ class DiscountForm extends Component
         if ($this->isCreate) {
 
             $this->firstname = trim($this->firstname);
-            $this->middlename = trim($this->middlename);
+            $this->middlename = $this->middlename ? trim($this->middlename) : null;
             $this->lastname = trim($this->lastname);
 
             $rules = [
@@ -210,27 +229,30 @@ class DiscountForm extends Component
                 'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
                 'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
                 'birthdate' => 'required|string|max:255',
-                'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('customers', 'contact_number')],
+                'contact_number' => 'required|numeric|digits:11',
                 'selectProvince' => 'required|exists:philippine_provinces,province_code',
                 'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
                 'street' => 'required|string|max:255',
                 'customerType' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
-                'discount_percentage' => 'required|numeric|min:0',
+                'discount_percentage' => 'required|numeric|min:1',
             ];
         } else {
             $rules = [
                 'customerType' => 'required|in:PWD,Senior Citizen',
                 'customer_discount_no' => 'required|string|max:255',
                 'customer_id' => 'required|numeric',
-                'discount_percentage' => 'required|numeric|min:0',
+                'discount_percentage' => 'required|numeric|min:1',
             ];
         }
 
         return $this->validate($rules);
     }
-
+    public function changeCreditDiscount($isSales)
+    {
+        $this->isSales = $isSales;
+    }
     public function createCustomer()
     {
         $this->resetForm();
@@ -245,5 +267,9 @@ class DiscountForm extends Component
     public function clearSelectedCustomerName()
     {
         $this->reset(['customer_name', 'customerType', 'discount_percentage', 'customer_discount_no']);
+    }
+    public function getCreditDetail($creditDetail)
+    {
+        $this->credit_details = $creditDetail;
     }
 }

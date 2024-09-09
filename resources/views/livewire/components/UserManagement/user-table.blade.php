@@ -211,12 +211,12 @@
 
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $user->created_at->format('d-m-y h:i A') }}
+                                {{ $user->created_at->format(' M d Y ') }}
                             </th>
 
                             {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $user->updated_at->format('d-m-y h:i A') }}
+                                {{ $user->updated_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* edit button --}}

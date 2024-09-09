@@ -17,7 +17,7 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $reorder_point = 0, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description,  $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity; //var form inputs
     //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -73,7 +73,6 @@ class ItemForm extends Component
         $item = [
             'item_name' => $validated['item_name'],
             'item_description' => $validated['item_description'],
-            'reorder_point' => $validated['reorder_point'],
             'vat_type' => $validated['vatType'],
             'shelf_life_type' => $validated['shelf_life_type'],
             'bulk_quantity' => $validated['bulk_quantity'],
@@ -123,7 +122,6 @@ class ItemForm extends Component
         $items->item_name = $validated['item_name'];
         $items->item_description = $validated['item_description'];
         $items->bulk_quantity = $validated['bulk_quantity'];
-        $items->reorder_point = $validated['reorder_point'];
         $items->shelf_life_type = $validated['shelf_life_type'];
         $items->bulk_quantity = $validated['bulk_quantity'];
         $items->vat_type = $validated['vatType'];
@@ -141,7 +139,7 @@ class ItemForm extends Component
         $attributes = $items->toArray();
 
 
-        $this->confirm('Do you want to update this supplier?', [
+        $this->confirm('Do you want to update this item?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
@@ -221,7 +219,7 @@ class ItemForm extends Component
         $rules = [
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
-            'reorder_point' => ['required', 'numeric', 'min:0'],
+
             'shelf_life_type' =>  'required|in:Perishable,Non Perishable',
             'vat_percent' => ['required', 'numeric', 'min:0'],
             'bulk_quantity' => ['required', 'numeric', 'min:0'],
@@ -256,7 +254,6 @@ class ItemForm extends Component
             'item_description' => $item_details->item_description,
             'shelf_life_type' => $item_details->shelf_life_type,
             'bulk_quantity' => $item_details->bulk_quantity,
-            'reorder_point' => $item_details->reorder_point,
             'vatType' => $item_details->vat_type,
             'vat_percent' => $item_details->vat_percent,
             'status' => $item_details->status_id,

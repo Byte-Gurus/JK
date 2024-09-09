@@ -48,32 +48,16 @@
 
                     <tr class=" text-nowrap">
 
-                        {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Employee</th>
+
 
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3">Transaction No.</th>
 
-                        {{-- //* sku --}}
-                        <th scope="col" class="px-4 py-3 text-center">SKU</th>
-
-                        {{-- item name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item Name</th>
-
                         {{-- original quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Original Quantity</th>
 
-                        {{-- //* return quantity --}}
-                        <th scope="col" class="px-4 py-3 text-center">Return Quantity</th>
-
-                        {{-- //* unit price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
-
                         {{-- //* total return amount --}}
                         <th scope="col" class="px-4 py-3 text-center">Total Return Amount</th>
-
-                        {{-- //* reason --}}
-                        <th scope="col" class="px-4 py-3 text-center">Reason</th>
 
                         {{-- //* date --}}
                         <th scope="col" class="px-4 py-3 text-center">Date</th>
@@ -86,34 +70,62 @@
 
                 {{-- //* table body --}}
                 <tbody>
+                    @foreach ($returns as $return)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $return->transactionJoin->transaction_number }}
 
-                    {{-- //* edit button --}}
-                    <th class="px-4 py-4 text-center text-md text-nowrap">
-                        <div
-                            class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
+                            </th>
 
-                            <button x-on:click="$wire.dDisplaySalesReturnDetails();">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($return->original_amount, 2) }}
 
-                                <div class="flex items-center">
+                            </th>
 
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                            class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                        </svg>
-                                    </span>
 
-                                    <div>
-                                        <p>Edit</p>
-                                    </div>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($return->return_total_amount, 2) }}
 
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $return->created_at->format(' M d Y h:i A') }}
+
+                            </th>
+                            <th class="px-4 py-4 text-center text-md text-nowrap">
+                                <div
+                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
+
+                                    <button x-on:click="$wire.dDisplaySalesReturnDetails();"
+                                        wire:click="getReturn({{ $return->id }})">
+
+                                        <div class="flex items-center">
+
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                </svg>
+                                            </span>
+
+                                            <div>
+                                                <p>Edit</p>
+                                            </div>
+
+                                        </div>
+                                    </button>
                                 </div>
-                            </button>
-                        </div>
-                    </th>
+                            </th>
 
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -12,6 +12,7 @@ class Notification extends Model
     protected $fillable = [
         'description',
         'inventory_id',
+        'credit_id',
     ];
 
     public function inventory()

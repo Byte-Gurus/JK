@@ -26,7 +26,7 @@ class PaymentForm extends Component
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to confirm the payment?', [
             'onConfirmed' => 'paymentConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -51,7 +51,7 @@ class PaymentForm extends Component
             ];
         }
 
-        $this->alert('success', 'Customer was saved successfully');
+        $this->alert('success', 'Payment was successful');
 
         $this->dispatch('get-customer-payments', Payment: $this->payment)->to(SalesTransaction::class);
 
@@ -91,7 +91,7 @@ class PaymentForm extends Component
         } else {
             $rules = [
                 'tendered_amount' => 'required|numeric|min:1|gte:grand_total',
-                'reference_no' => 'required|numeric|min:0',
+                'reference_no' => 'required|numeric',
             ];
         }
 

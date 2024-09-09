@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('item_description');
             $table->double('maximum_stock_ratio')->default(0);
             $table->double('bulk_quantity')->default(0);
-            $table->double('reorder_point')->default(50);
+            $table->double('reorder_point')->default(0);
             $table->string('shelf_life_type');
             $table->string('vat_type');
             $table->double('vat_percent');

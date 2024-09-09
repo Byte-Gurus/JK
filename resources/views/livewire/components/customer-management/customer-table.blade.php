@@ -31,7 +31,6 @@
                     <select wire:model.live="typeFilter"
                         class="bg-gray-50 border hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out border-[rgb(53,53,53)] text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
                         <option value="0">All</option>
-                        <option value="Walk in">Walk in</option>
                         <option value="Credit">Credit</option>
                         <option value="PWD">PWD</option>
                         <option value="Senior Citizen">Senior Citizen</option>
@@ -170,12 +169,12 @@
 
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->created_at->format('d-m-y h:i A') }}
+                                {{ $customer->created_at->format(' M d Y ') }}
                             </th>
 
                             {{-- //* updated at at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->updated_at->format('d-m-y h:i A') }}
+                                {{ $customer->updated_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* Action --}}

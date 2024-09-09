@@ -11,7 +11,8 @@ class Returns extends Model
 
     protected $fillable = [
         'transaction_id',
-        'return_total_amount'
+        'return_total_amount',
+        'original_amount'
     ];
 
     public function transactionJoin()
@@ -22,6 +23,14 @@ class Returns extends Model
     public function returnDetailsJoin()
     {
         return $this->hasMany(ReturnDetails::class, 'returns_id');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+
+        return $query->whereHas('transactionJoin', function ($query) use ($value) {
+                $query->where('transaction_number', 'like', "%{$value}%");
+        });
     }
 
 }

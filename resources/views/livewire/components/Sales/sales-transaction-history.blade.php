@@ -128,7 +128,7 @@
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['created_at']->format('d-m-y') }}
+                                    {{ $sale['created_at']->format(' M d Y ') }}
                                 </th>
 
                                 {{-- //* updated at --}}
@@ -160,7 +160,7 @@
                             <p class=" text-[1.2em] font-medium">Subtotal</p>
                         </div>
                         <div>
-                            <p class=" text-[1.2em] font-black">{{ $subtotal }}</p>
+                            <p class=" text-[1.2em] font-black">{{ number_format($subtotal, 2) }}</p>
                         </div>
                     </div>
                     <div class="flex flex-row justify-between">
@@ -176,7 +176,7 @@
                             <p class=" text-[1.2em] font-medium">Total</p>
                         </div>
                         <div>
-                            <p class=" text-[1.2em] font-black">{{ $grandTotal }}</p>
+                            <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
                         </div>
                     </div>
                     <div class="flex flex-row justify-between">
@@ -184,17 +184,19 @@
                             <p class=" text-[1.2em] font-medium">Tendered Amount</p>
                         </div>
                         <div>
-                            <p class=" text-[1.2em] font-black">{{ $tendered_amount }}</p>
+                            <p class=" text-[1.2em] font-black">{{ number_format($tendered_amount, 2) }}</p>
                         </div>
                     </div>
                     <div class="border border-black "></div>
                     <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.6em] font-medium">Change</p>
-                        </div>
-                        <div>
-                            <p class=" text-[1.6em] font-black">{{ $change }}</p>
-                        </div>
+                        @if ($transaction_type != 'Credit')
+                            <div>
+                                <p class=" text-[1.6em] font-medium">Change</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -265,7 +267,7 @@
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $transactionDetail['inventoryJoin']['selling_price'] }}
+                                    {{ number_format($transactionDetail['inventoryJoin']['selling_price'], 2) }}
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -274,11 +276,11 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $transactionDetail['item_discount_amount'] }}
+                                    {{ number_format($transactionDetail['item_discount_amount'], 2) }}
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $transactionDetail['item_subtotal'] }}
+                                    {{ number_format($transactionDetail['item_subtotal'], 2) }}
                                 </th>
                             </tr>
                         @endforeach

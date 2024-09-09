@@ -23,4 +23,9 @@ class ReturnDetails extends Model
         return $this->belongsTo(Returns::class, 'return_id');
     }
 
+    public function transactionDetailsJoin()
+    {
+        return $this->belongsTo(TransactionDetails::class, 'transaction_details_id');
+    }
+
 }

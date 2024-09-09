@@ -191,12 +191,12 @@
 
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplier->created_at->format('d-m-y h:i A') }}
+                                {{ $supplier->created_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplier->updated_at->format('d-m-y h:i A') }}
+                                {{ $supplier->updated_at->format(' M d Y ')  }}
                             </th>
 
                             <th class="px-4 py-4 text-center text-md text-nowrap">

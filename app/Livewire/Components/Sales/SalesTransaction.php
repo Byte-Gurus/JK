@@ -33,7 +33,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -122,10 +122,6 @@ class SalesTransaction extends Component
     }
 
 
-    public function changeTransactionType()
-    {
-        $this->isSales = !$this->isSales;
-    }
 
     public function selectCustomer($creditor_id)
     {
@@ -142,7 +138,8 @@ class SalesTransaction extends Component
             return;
         }
 
-        $this->creditor_name =  $credit->customerJoin->firstname . '' . $credit->customerJoin->middlename . '' . $credit->customerJoin->lastname;
+        $this->creditor_name = $credit->customerJoin->firstname . ' ' . ($credit->customerJoin->middlename ? $credit->customerJoin->middlename . ' ' : '') . $credit->customerJoin->lastname;
+
         $this->credit_no = $credit->credit_number;
         $this->credit_limit =  $credit->credit_limit;
 
@@ -153,6 +150,7 @@ class SalesTransaction extends Component
             'credit_limit' => $this->credit_limit
         ];
 
+        $this->dispatch('get-credit-detail', creditDetail: $this->credit_details)->to(DiscountForm::class);
         $this->searchCustomer = '';
     }
 
@@ -184,7 +182,7 @@ class SalesTransaction extends Component
 
 
         if ($this->payment) {
-            $this->alert('error', 'transaction is paid');
+            $this->alert('error', 'Transaction is paid');
             return;
         }
 
@@ -224,7 +222,7 @@ class SalesTransaction extends Component
 
 
             foreach ($this->selectedItems as $index => $selectedItem) {
-                if ($selectedItem['item_name'] === $item->itemJoin->item_name) {
+                if ($selectedItem['sku_code'] === $item->sku_code) {
 
 
                     if ($selectedItem['selling_price'] + $this->grandTotal > $this->credit_limit && $this->credit_details) {
@@ -233,7 +231,7 @@ class SalesTransaction extends Component
                     }
 
                     if ($selectedItem['quantity'] >= $selectedItem['current_stock_quantity']) {
-                        $this->alert('error', 'current stock is depleted');
+                        $this->alert('error', 'Current stock is depleted');
                         return;
                     }
 
@@ -459,10 +457,10 @@ class SalesTransaction extends Component
             $this->discount_type =   $this->customerDetails['customer_type'];
 
             if (isset($this->customerDetails['firstname'])) {
-                $this->customer_name = $this->customerDetails['firstname'] . ' ' . $this->customerDetails['middlename'] . ' ' . $this->customerDetails['lastname'];
+                $this->customer_name = $this->customerDetails['firstname'] . ' ' . (isset($this->customerDetails['middlename']) && $this->customerDetails['middlename'] ? $this->customerDetails['middlename'] . ' ' : '') . $this->customerDetails['lastname'];
             } else {
                 $customer = Customer::find($this->customerDetails['customer_id']);
-                $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+                $this->customer_name = $customer->firstname . ' ' . ($customer->middlename ? $customer->middlename . ' ' : '') . $customer->lastname;
             }
 
             $this->alert('success', 'Discount was applied successfully');
@@ -502,6 +500,12 @@ class SalesTransaction extends Component
 
 
 
+    public function updatedChangeTransactionType()
+    {
+        $this->isSales = !$this->isSales;
+        $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
+    }
+
 
 
     public function removeRowConfirmed()
@@ -512,7 +516,7 @@ class SalesTransaction extends Component
         $this->selectedItems = array_values($this->selectedItems);
         $this->reset('selectedIndex', 'isSelected');
 
-        $this->alert('success', 'quantity was removed successfully');
+        $this->alert('success', 'Item was removed successfully');
     }
 
     public function removeRowCancelled()
@@ -554,6 +558,9 @@ class SalesTransaction extends Component
             'transaction_number' => $this->transaction_number,
             'transaction_time' => now()->format('H:i:s'),
             'transaction_date' => now()->format('d-m-Y'),
+            'user' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
+
+
         ];
 
         // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->tax_details ?? null, $this->credit_details ?? null, $this->transaction_info ?? null);
@@ -578,7 +585,7 @@ class SalesTransaction extends Component
             ]);
             $customer = Customer::create([
                 'firstname' => $this->customerDetails['firstname'],
-                'middlename' => $this->customerDetails['middlename'],
+                'middlename' => $this->customerDetails['middlename'] ?? null,
                 'lastname' => $this->customerDetails['lastname'],
                 'contact_number' => $this->customerDetails['contact_number'],
                 'birthdate' => $this->customerDetails['birthdate'],
@@ -681,7 +688,7 @@ class SalesTransaction extends Component
 
 
 
-        $this->alert('success', 'New Transaction Saved Successfully');
+        $this->alert('success', 'New Transaction saved successfully');
 
         $this->dispatch('print-sales-receipt', array_merge(
             $receiptData,
@@ -736,7 +743,7 @@ class SalesTransaction extends Component
 
     public function clearSelectedCustomerName()
     {
-        $this->reset('creditor_name', 'credit_no', 'credit_limit');
+        $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details');
     }
 
 

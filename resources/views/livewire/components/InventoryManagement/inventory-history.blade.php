@@ -112,7 +112,7 @@
 
                             <div class="flex items-center">
 
-                                <p>Date</p>
+                                <p>Date & Time</p>
 
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -155,7 +155,7 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $InventoryHistory->created_at->format('d-m-y h:i A') }}
+                                {{ $InventoryHistory->created_at->format(' M d Y h:i A') }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">

@@ -45,7 +45,7 @@ class StockAdjustForm extends Component
 
 
 
-        $this->confirm('Do you want to update this supplier?', [
+        $this->confirm('Do you want to update this stock?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
@@ -95,7 +95,7 @@ class StockAdjustForm extends Component
         ]);
 
         $this->resetForm();
-        $this->alert('success', 'stock adjusted successfully');
+        $this->alert('success', 'Stock was adjusted successfully');
 
         $this->refreshTable();
         $this->closeModal();
