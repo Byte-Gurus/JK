@@ -95,7 +95,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
                         {{-- //* Maximum stock ratio --}}
-                        <th scope="col" class="px-4 py-3">Maximum stock ratio</th>
+                        <th scope="col" class="px-4 py-3">Maximum stock level</th>
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Bulk quantity</th>
 
@@ -198,7 +198,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->maximum_stock_ratio }}
+                                {{ $item->maximum_stock_level }}
                             </th>
 
                             <th scope="row"

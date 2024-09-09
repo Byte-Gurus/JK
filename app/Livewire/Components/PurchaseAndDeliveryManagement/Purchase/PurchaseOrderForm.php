@@ -59,6 +59,7 @@ class PurchaseOrderForm extends Component
                     'items.barcode',
                     'items.item_name',
                     'items.reorder_point',
+                    'items.maximum_stock_level',
                     'items.status_id',
                     DB::raw('
                         COALESCE(SUM(CASE WHEN inventories.status != \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) as total_quantity
@@ -69,6 +70,7 @@ class PurchaseOrderForm extends Component
                     'items.barcode',
                     'items.item_name',
                     'items.reorder_point',
+                    'items.maximum_stock_level',
                     'items.status_id'
                 )
                 ->havingRaw('
@@ -371,7 +373,12 @@ class PurchaseOrderForm extends Component
         if ($this->isCreate) {
             // Add validation rules for each purchase quantity
             foreach ($this->reorder_lists as $index => $reorder_list) {
-                $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
+                $maxStockLevel = $reorder_list['maximum_stock_level'];
+
+                if ($maxStockLevel > 0) {
+                    $rules["purchase_quantities.$index"] = ['required','numeric','min:1','lte:' . $maxStockLevel
+                    ];
+                }
             }
         }
         // else {
@@ -527,6 +534,4 @@ class PurchaseOrderForm extends Component
         $this->showModal = $showModal; //var assign ang parameter value sa global variable
 
     }
-
-
 }
