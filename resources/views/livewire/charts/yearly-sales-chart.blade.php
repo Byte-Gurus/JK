@@ -6,7 +6,8 @@
             <option value="{{ $year }}">{{ $year }}</option>
         @endfor
     </select>
-
+    <p class="text-6xl font-extrabold">{{ $totalAmount }}</p>
+    <p class="text-6xl font-extrabold">{{ $transactionCount }}</p>
     <div wire:ignore>
         <canvas width="400" height="100" id="yearChart"></canvas>
     </div>

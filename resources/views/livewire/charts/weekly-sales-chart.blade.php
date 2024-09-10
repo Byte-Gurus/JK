@@ -1,6 +1,8 @@
 <div>
 
     <input type="week" wire:model.live="week" />
+    <p class="text-6xl font-extrabold">{{ $totalAmount }}</p>
+    <p class="text-6xl font-extrabold">{{ $transactionCount }}</p>
     <div wire:ignore>
         <canvas width="400" height="100" id="weekChart"></canvas>
     </div>

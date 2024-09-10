@@ -9,7 +9,7 @@ use Livewire\Component;
 class YearlySalesChart extends Component
 {
 
-    public $year;
+    public $year, $totalAmount, $transactionCount;
     public $yearlyTotal = [];
     public function render()
     {
@@ -23,7 +23,8 @@ class YearlySalesChart extends Component
     public function updatedYear($currentYear)
     {
 
-
+        $this->totalAmount = 0;
+        $this->transactionCount = 0;
         $this->yearlyTotal = [];
 
         // Parse the current year
@@ -39,11 +40,14 @@ class YearlySalesChart extends Component
             $endOfMonth = Carbon::createFromDate($year, $month, 1)->endOfMonth();
 
             $totalAmount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_amount');
+            $dailyTransactionCount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
             $formattedMonth = $startOfMonth->format('M Y');
             $this->yearlyTotal[] = [
                 'date' => $formattedMonth,
                 'totalAmount' => $totalAmount
             ];
+            $this->totalAmount += $totalAmount;
+            $this->transactionCount += $dailyTransactionCount;
         }
 
         $this->dispatch('yearlyTotalUpdated', $this->yearlyTotal);

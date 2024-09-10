@@ -12,8 +12,7 @@
 
                 <div>
                     <select id="selectPicker" wire:model.live="selectPicker"
-                        class="bg-[rgb(255,206,121)] p-3 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full">
-                        <option value="0">Overall Sales</option>
+                        class="bg-[rgb(255,206,121)] p-3 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full">k
                         <option value="1">Daily Sales</option>
                         <option value="2">Weekly Sales</option>
                         <option value="3">Monthly Sales</option>
@@ -28,9 +27,10 @@
             @elseif ($selectPicker == 3)
                 @livewire('charts.monthly-sales-chart')
             @elseif ($selectPicker == 4)
-            @livewire('charts.yearly-sales-chart')
+                @livewire('charts.yearly-sales-chart')
             @endif
         </div>
+        @livewire('charts.inventory-movement-chart')
 
     </div>
 </div>

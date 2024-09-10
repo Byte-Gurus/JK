@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class WeeklySalesChart extends Component
 {
-    public $week;
+    public $week, $totalAmount, $transactionCount;
     public $weeklyTotal = [];
     public function render()
     {
@@ -25,6 +25,8 @@ class WeeklySalesChart extends Component
     public function updatedWeek($currentWeek)
     {
 
+        $this->totalAmount = 0;
+        $this->transactionCount = 0;
         $this->weeklyTotal = [];
         $year = substr($currentWeek, 0, 4);
         $weekNumber = substr($currentWeek, -2);
@@ -39,11 +41,15 @@ class WeeklySalesChart extends Component
         for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
             $totalAmount = Transaction::whereDate('created_at', $date->toDateString())
                 ->sum('total_amount');
+            $dailyTransactionCount = Transaction::whereDate('created_at', $date->toDateString())
+                ->count();
             $formattedDate = $date->format('M d Y');
             $this->weeklyTotal[] = [
                 'date' => $formattedDate,
                 'totalAmount' => $totalAmount
             ];
+            $this->totalAmount += $totalAmount;
+            $this->transactionCount += $dailyTransactionCount;
         }
 
 

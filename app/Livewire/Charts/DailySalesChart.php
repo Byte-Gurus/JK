@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class DailySalesChart extends Component
 {
-    public $day;
+    public $day, $totalAmount, $transactionCount;
     public $dailyTotal = [];
     public $currentDate;
     public function render()
@@ -33,12 +33,12 @@ class DailySalesChart extends Component
         $this->currentDate = $currentDate->toDateString(); // Get today's date in 'YYYY-MM-DD' format
         $formattedDate = $currentDate->format('M d Y');
 
-        $totalAmount = Transaction::whereDate('created_at', $this->currentDate)->sum('total_amount');
-
-
+        $this->totalAmount = Transaction::whereDate('created_at', $this->currentDate)->sum('total_amount');
+        $this->transactionCount = Transaction::whereDate('created_at', $this->currentDate)->count();
+        
         $this->dailyTotal[] = [
             'date' => $formattedDate,
-            'totalAmount' => $totalAmount
+            'totalAmount' => $this->totalAmount
         ];
 
         $this->dispatch('DailyTotalUpdated', $this->dailyTotal);
