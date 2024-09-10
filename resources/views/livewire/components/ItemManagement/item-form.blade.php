@@ -195,20 +195,22 @@
                                         <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
-                                        <select id="vatType" wire:model.live="vatType" readonly
-                                       
-
-                                        @error('vat_type')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
+                                        <select id="vatType" wire:model.live="vatType" 
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <option value="" selected>Set vat</option>
+                                            <option value="Vat">Vat</option>
+                                            <option value="Non Vatable">Non Vatable</option>
+                                            @error('vat_type')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
                                     </div>
 
                                     {{-- //* vat amount --}}
                                     <div class="mb-3">
 
                                         <label for="vat_percent"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat Percent</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                            Percent</label>
 
                                         <input type="numeric" id="vat_percent" wire:model="vat_percent" readonly
                                             class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"

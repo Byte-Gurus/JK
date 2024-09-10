@@ -51,7 +51,8 @@ class PurchaseOrderForm extends Component
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
-
+        $this->generatePurchaseOrderNumber();
+        
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
             $this->reorder_lists = Item::join('inventories', 'items.id', '=', 'inventories.item_id')
                 ->select(
@@ -375,10 +376,14 @@ class PurchaseOrderForm extends Component
                 $maxStockLevel = $reorder_list['maximum_stock_level'];
 
                 if ($maxStockLevel > 0) {
-                    $rules["purchase_quantities.$index"] = ['required','numeric','min:1','lte:' . $maxStockLevel
+                    $rules["purchase_quantities.$index"] = [
+                        'required',
+                        'numeric',
+                        'min:1',
+                        'lte:' . $maxStockLevel
                     ];
-                }else{
-                    $rules["purchase_quantities.$index"] = ['required','numeric','min:1'];
+                } else {
+                    $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
                 }
             }
         }

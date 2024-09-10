@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Livewire\Charts;
+
+use App\Models\Transaction;
+use Carbon\Carbon;
+use Livewire\Component;
+
+class YearlySalesChart extends Component
+{
+
+    public $year;
+    public $yearlyTotal = [];
+    public function render()
+    {
+        return view('livewire.charts.yearly-sales-chart');
+    }
+
+    public function updatedYear($currentYear)
+    {
+        if (!$currentYear) {
+            return;
+        }
+
+        $this->yearlyTotal = [];
+
+        // Parse the current year
+        $year = (int) $currentYear;
+
+        // Get the start and end dates of the year
+        $startDate = Carbon::createFromDate($year, 1, 1)->startOfYear();
+        $endDate = Carbon::createFromDate($year, 12, 31)->endOfYear();
+
+        // Loop through each month of the year
+        for ($month = 1; $month <= 12; $month++) {
+            $startOfMonth = Carbon::createFromDate($year, $month, 1)->startOfMonth();
+            $endOfMonth = Carbon::createFromDate($year, $month, 1)->endOfMonth();
+
+            $totalAmount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_amount');
+            $formattedMonth = $startOfMonth->format('M Y');
+            $this->yearlyTotal[] = [
+                'date' => $formattedMonth,
+                'totalAmount' => $totalAmount
+            ];
+        }
+
+        $this->dispatch('yearlyTotalUpdated', $this->yearlyTotal);
+        // Uncomment the line below to debug the yearly total
+        // dd($this->yearlyTotal);
+    }
+}
