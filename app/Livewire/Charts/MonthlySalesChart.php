@@ -12,14 +12,17 @@ class MonthlySalesChart extends Component
     public $monthlyTotal = [];
     public function render()
     {
+
+        if (!$this->month) {
+            $currentMonth = Carbon::now()->format('Y-m');
+            $this->updatedMonth($currentMonth);
+        }
         return view('livewire.charts.monthly-sales-chart');
     }
 
     public function updatedMonth($currentMonth)
     {
-        if (!$currentMonth) {
-            return;
-        }
+
 
         $this->monthlyTotal = [];
 

@@ -13,14 +13,16 @@ class YearlySalesChart extends Component
     public $yearlyTotal = [];
     public function render()
     {
+        if (!$this->year) {
+            $currentYear = Carbon::now()->format('Y');
+            $this->updatedYear($currentYear);
+        }
         return view('livewire.charts.yearly-sales-chart');
     }
 
     public function updatedYear($currentYear)
     {
-        if (!$currentYear) {
-            return;
-        }
+
 
         $this->yearlyTotal = [];
 
