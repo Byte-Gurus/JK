@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('barcode')->unique();
             $table->string('item_name');
             $table->string('item_description');
-            $table->double('maximum_stock_ratio')->default(0);
+            $table->double('maximum_stock_level')->default(0);
             $table->double('bulk_quantity')->default(0);
             $table->double('reorder_point')->default(0);
             $table->string('shelf_life_type');

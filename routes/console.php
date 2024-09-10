@@ -103,6 +103,7 @@ Artisan::command('inventory:check-expiration', function () {
     $this->comment('Expiration check completed!');
 })->purpose('Check inventory items for expiration and update their status if expired')->daily();
 
+
 Artisan::command('credit:check-overdue', function () {
     $this->comment('Checking for overdue creditor...');
 
@@ -131,3 +132,4 @@ Artisan::command('credit:check-overdue', function () {
         }
     }
 })->purpose('Check credit creditor and update status if overdue')->daily();
+

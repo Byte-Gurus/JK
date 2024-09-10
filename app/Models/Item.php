@@ -13,7 +13,7 @@ class Item extends Model
         'barcode',
         'item_name',
         'item_description',
-        'maximum_stock_ratio',
+        'maximum_stock_level',
         'bulk_quantity',
         'shelf_life_type',
         'reorder_point',

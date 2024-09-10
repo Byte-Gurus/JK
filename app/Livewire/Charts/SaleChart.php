@@ -8,32 +8,43 @@ use Livewire\Component;
 
 class SaleChart extends Component
 {
-    public $dailyTotal;
-    public $weeklyTotal;
-    public $monthlyTotal;
-    public $yearlyTotal;
+    public $day, $week, $month, $year;
+    public $selectPicker;
+    public $dailyTotal = 0;
+    public $weeklyTotal = 0;
+    public $monthlyTotal = 0;
+    public $yearlyTotal = 0;
 
     public function render()
     {
-        $this->dailyTotal = Transaction::whereDate('created_at', Carbon::today())->sum('total_amount');
+        if ($this->selectPicker == 1 && $this->day) {
+            $this->dailyTotal = Transaction::whereDate('created_at', $this->day)
+                ->sum('total_amount');
+        }
 
-        // Sum of this week's transactions
-        $this->weeklyTotal = Transaction::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-            ->sum('total_amount');
+        if ($this->selectPicker == 2 && $this->week) {
+            $weekStart = Carbon::parse($this->week)->startOfWeek()->toDateString();
+            $weekEnd = Carbon::parse($this->week)->endOfWeek()->toDateString();
+            $this->weeklyTotal = Transaction::whereBetween('created_at', [$weekStart, $weekEnd])
+                ->sum('total_amount');
+        }
 
-        // Sum of this month's transactions
-        $this->monthlyTotal = Transaction::whereMonth('created_at', Carbon::now()->month)
-            ->whereYear('created_at', Carbon::now()->year)
-            ->sum('total_amount');
+        if ($this->selectPicker == 3 && $this->month) {
+            $this->monthlyTotal = Transaction::whereMonth('created_at', Carbon::parse($this->month)->month)
+                ->whereYear('created_at', Carbon::parse($this->month)->year)
+                ->sum('total_amount');
+        }
 
-        // Sum of this year's transactions
-        $this->yearlyTotal = Transaction::whereYear('created_at', Carbon::now()->year)
-            ->sum('total_amount');
+        if ($this->selectPicker == 4 && $this->year) {
+            $this->yearlyTotal = Transaction::whereYear('created_at', $this->year)
+                ->sum('total_amount');
+        }
 
-            
-        return view(
-            'livewire.charts.sale-chart',
+        return view('livewire.charts.sale-chart');
+    }
 
-        );
+    public function updatedSelectPicker($picker)
+    {
+        $this->selectPicker = $picker;
     }
 }

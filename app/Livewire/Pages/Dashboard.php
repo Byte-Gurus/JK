@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -23,13 +24,6 @@ class Dashboard extends Component
         $this->sidebarStatus = $sidebarOpen;
     }
 
-    public function hi()
-    {
-        dd('hi');
-    }
 
-    public function dailyS()
-    {
-        dd('hi');
-    }
+
 }
