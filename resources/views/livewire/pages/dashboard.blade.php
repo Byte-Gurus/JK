@@ -31,6 +31,6 @@
             @endif
         </div>
         @livewire('charts.inventory-movement-chart')
-
+        @livewire('charts.fast-slow-moving-chart')
     </div>
 </div>

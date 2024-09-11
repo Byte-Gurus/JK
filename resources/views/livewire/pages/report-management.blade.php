@@ -118,7 +118,7 @@
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.6em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md w-3/4 text-nowrap">
                                 <button>Slow-moving Items</button>
                             </div>
-                            <div
+                            <div wire:click="calculateFastMoving"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.6em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md w-3/4 text-nowrap">
                                 <button>Fast-moving Items</button>
                             </div>
