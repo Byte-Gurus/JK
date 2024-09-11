@@ -97,6 +97,9 @@ class InventoryHistory extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+        "echo:refresh-adjustment,AdjustmentEvent" => 'refreshFromPusher',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
+        "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
     ];
 
     public function sortByColumn($column)
@@ -119,6 +122,10 @@ class InventoryHistory extends Component
         $this->resetPage();
     }
     public function refreshTable()
+    {
+        $this->resetPage();
+    }
+    public function refreshFromPusher()
     {
         $this->resetPage();
     }

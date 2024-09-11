@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
+use App\Events\PurchaseOrderEvent;
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Delivery;
 use App\Models\Item;
@@ -52,7 +53,7 @@ class PurchaseOrderForm extends Component
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
         $this->generatePurchaseOrderNumber();
-        
+
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
             $this->reorder_lists = Item::join('inventories', 'items.id', '=', 'inventories.item_id')
                 ->select(
@@ -289,7 +290,7 @@ class PurchaseOrderForm extends Component
 
         $this->alert('success', 'Purchase order was created successfully');
         $this->refreshTable();
-
+        PurchaseOrderEvent::dispatch('refresh-purchase-order');
 
         $this->resetForm();
         $this->closeModal();

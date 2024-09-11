@@ -43,6 +43,9 @@ class CreditTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable',//*  galing sa UserTable class
+        "echo:refresh-credit,CreditEvent" => 'refreshFromPusher',
+
+
     ];
 
     public function refreshTable()
@@ -72,5 +75,10 @@ class CreditTable extends Component
     public function displayCreditPaymentForm()
     {
         $this->dispatch('display-credit-payment-form', showCreditPaymentForm: true)->to(CreditManagementPage::class);
+    }
+
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

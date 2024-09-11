@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Events\ReturnEvent;
 use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
@@ -84,10 +85,10 @@ class SalesReturnDetails extends Component
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
                 $transactionDetails->status = $info['operation'];
                 $transactionDetails->save();
-
             }
         }
 
+        ReturnEvent::dispatch('refresh-return');
 
         $this->alert('success', 'Item/s was returned successfully');
     }

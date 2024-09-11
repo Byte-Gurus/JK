@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\CustomerManagement;
 
+use App\Events\CustomerEvent;
 use App\Livewire\Pages\CustomerManagementPage;
 use App\Models\Address;
 use App\Models\Customer;
@@ -108,7 +109,7 @@ class CustomerForm extends Component
 
         $this->alert('success', 'Customer was created successfully');
         $this->refreshTable();
-
+        CustomerEvent::dispatch('refresh-customer');
         $this->resetForm();
         $this->closeModal();
     }
@@ -127,7 +128,7 @@ class CustomerForm extends Component
         $customers->lastname = $validated['lastname'];
         $customers->birthdate = $validated['birthdate'];
         $customers->contact_number = $validated['contact_number'];
-        $customers->id_picture = $validated['id_picture'];
+        $customers->id_picture = $validated['id_picture'] ?? null;
         $customers->customer_type = $validated['customer_type'];
         $customers->customer_discount_no = $validated['customer_discount_no'];
         $customers->province_code = $validated['selectProvince'];
@@ -179,7 +180,7 @@ class CustomerForm extends Component
             'lastname' => $updatedAttributes['lastname'],
             'contact_number' => $updatedAttributes['contact_number'],
             'birthdate' => $updatedAttributes['birthdate'],
-            'address_id' => $address->id,
+            'address_id' => $address->id ?? null,
             'customer_type' => $updatedAttributes['customer_type'],
             'customer_discount_no' => $updatedAttributes['customer_discount_no'],
             'id_picture' => $updatedAttributes['id_picture'],
@@ -188,7 +189,7 @@ class CustomerForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'Customer was updated successfully');
-
+        CustomerEvent::dispatch('refresh-customer');
         $this->refreshTable();
         $this->closeModal();
     }
@@ -207,7 +208,7 @@ class CustomerForm extends Component
             'lastname' => $customer_details->lastname,
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
-            'id_picture' => $customer_details->id_picture,
+            'id_picture' => $customer_details->id_picture ?? null,
             'customer_type' => $customer_details->customer_type,
             'customer_discount_no' => $customer_details->customer_discount_no,
             'selectProvince' => $customer_details->addressJoin->province_code,

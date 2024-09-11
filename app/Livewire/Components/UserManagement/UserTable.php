@@ -49,7 +49,9 @@ class UserTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable',//*  galing sa UserTable class
-        "echo:new-user,NewUserCreatedEvent" => 'updatedSearch',
+        // "echo:new-user,NewUserCreatedEvent" => 'updatedSearch',
+        "echo:refresh-customer,UserEvent" => 'refreshFromPusher',
+
     ];
 
 
@@ -86,7 +88,10 @@ class UserTable extends Component
 
        $this->sortColumn = $column; //* gawing global variable ang $column
     }
-
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
+    }
 
 
     // public function refreshTable()

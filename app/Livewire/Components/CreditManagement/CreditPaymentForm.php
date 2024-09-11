@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\CreditManagement;
 
+use App\Events\CreditEvent;
 use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Payment;
@@ -80,6 +81,7 @@ class CreditPaymentForm extends Component
         ]);
 
         $this->alert('success', 'Creditor was paid successfully');
+        CreditEvent::dispatch('refresh-credit');
     }
 
     public function creditPayment($credit_ID)

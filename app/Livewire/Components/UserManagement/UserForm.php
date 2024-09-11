@@ -4,6 +4,7 @@ namespace App\Livewire\Components\UserManagement;
 
 
 use App\Events\NewUserCreatedEvent;
+use App\Events\UserEvent;
 use App\Livewire\Pages\UserManagementPage;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -80,7 +81,8 @@ class UserForm extends Component
 
 
         $this->alert('success', 'User was created successfully');
-        NewUserCreatedEvent::dispatch('new-user');
+        // NewUserCreatedEvent::dispatch('new-user');
+        UserEvent::dispatch('refresh-user');
         $this->refreshTable();
 
         $this->resetForm();
@@ -153,7 +155,7 @@ class UserForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');
-
+        UserEvent::dispatch('refresh-user');
         $this->refreshTable();
         $this->closeModal();
     }

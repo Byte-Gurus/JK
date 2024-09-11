@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\DeliveryEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
@@ -55,6 +56,10 @@ class DeliveryTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+        "echo:refresh-delivery,DeliveryEvent" => 'refreshFromPusher',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
+        "echo:refresh-backorder,BackorderEvent" => 'refreshFromPusher',
+
         'updateConfirmed',
         'cancelConfirmed',
         'dateCancelled',
@@ -175,6 +180,7 @@ class DeliveryTable extends Component
         }
 
         $this->resetPage();
+        DeliveryEvent::dispatch('refresh-delivery');
 
         return back();
     }
@@ -198,6 +204,8 @@ class DeliveryTable extends Component
 
         $this->alert('success', 'Delivery cancelled successfully');
         $this->resetPage();
+
+        DeliveryEvent::dispatch('refresh-delivery');
     }
 
     public function viewRestockForm()
@@ -222,5 +230,10 @@ class DeliveryTable extends Component
     public function dateCancelled()
     {
         $this->reset('delivery_date');
+    }
+
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

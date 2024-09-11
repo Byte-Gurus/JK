@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\RestockEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
@@ -125,7 +126,7 @@ class RestockForm extends Component
 
 
         $backorder_Items = [];
-        
+
         $this->getMaximumLevel();
 
         foreach ($this->purchaseDetails as $index => $detail) {
@@ -209,7 +210,7 @@ class RestockForm extends Component
         $this->resetForm();
         $this->alert('success', 'Restocked successfully');
 
-
+        RestockEvent::dispatch('refresh-stock');
         $this->refreshTable();
         $this->closeModal();
     }

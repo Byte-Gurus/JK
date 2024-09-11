@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
 use App\Models\Credit;
@@ -704,6 +705,8 @@ class SalesTransaction extends Component
                 'credit_details' => $this->credit_details ?? null,
             ]
         ))->to(SalesReceipt::class);
+
+        TransactionEvent::dispatch('refresh-transaction');
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\BackorderEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
@@ -57,6 +58,7 @@ class BackorderForm extends Component
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
         'backorder-form' => 'backorderForm',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
         'updateConfirmed',
         'createConfirmed',
         'cancelConfirmed',
@@ -119,7 +121,7 @@ class BackorderForm extends Component
         $this->alert('success', 'Purchase order was created successfully');
         $this->render();
         $this->refreshTable();
-
+        BackorderEvent::dispatch('refresh-backorder');
 
         $this->resetForm();
         $this->closeBackorderForm();
@@ -255,5 +257,10 @@ class BackorderForm extends Component
         $randomNumber = random_int(0, 9999);
         $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
         $this->new_po_number = 'PO-' . $formattedNumber . '-' . now()->format('dmY');
+    }
+
+     public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

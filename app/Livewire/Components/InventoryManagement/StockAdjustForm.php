@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\InventoryManagement;
 
+use App\Events\AdjustmentEvent;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryAdjustment;
@@ -96,7 +97,7 @@ class StockAdjustForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'Stock was adjusted successfully');
-
+        AdjustmentEvent::dispatch('refresh-adjustment');
         $this->refreshTable();
         $this->closeModal();
     }
