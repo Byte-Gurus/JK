@@ -1,40 +1,48 @@
 <div>
     <input type="month" wire:model.live="month" />
+
+    <div wire:ignore>
+        <canvas width="400" height="100" id="fastslowChart"></canvas>
+    </div>
 </div>
+
 @assets
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 @endassets
 @script
     <script>
-        const perMonth = document.getElementById('monthChart');
+        const perMonth = document.getElementById('fastslowChart');
 
-        Livewire.on('monthlyTotalUpdated', (monthlyTotal) => {
 
-            dates = [];
+        Livewire.on('fastSlowUpdated', (fastmoving_info) => {
+
+            items = [];
             datas = [];
-            if (Chart.getChart("monthChart")) {
-                Chart.getChart("monthChart")?.destroy();
+            tsi = [];
+            if (Chart.getChart("fastslowChart")) {
+                Chart.getChart("fastslowChart")?.destroy();
             }
 
-            monthly = $wire.monthlyTotal;
-            console.log('Weekly Total:', monthly);
+            fastSlow = $wire.fastmoving_info;
+            console.log('item movement:', fastSlow);
 
 
-            for (let index = 0; index < monthly.length; index++) {
+            for (let index = 0; index < fastSlow.length; index++) {
 
-                dates[index] = monthly[index].date;
-                datas[index] = monthly[index].totalAmount;
-
+                items[index] = fastSlow[index].item_name;
+                datas[index] = fastSlow[index].fast_slow;
+                tsi[index] = fastSlow[index].tsi;
             }
-
+            console.log('item movement:', items);
 
             // console.log(dates, datas);
             new Chart(perMonth, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: dates,
+                    labels: items,
                     datasets: [{
-                        label: '# of Sales',
+                        label: 'Item',
                         data: datas,
                         borderWidth: 1
                     }]
@@ -45,11 +53,10 @@
                         y: {
                             beginAtZero: true
                         }
-                    }
+                    },
+
                 }
             });
-
-
         });
     </script>
 @endscript

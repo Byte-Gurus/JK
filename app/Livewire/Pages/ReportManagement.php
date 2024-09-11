@@ -93,15 +93,16 @@ class ReportManagement extends Component
                 $weekCount++;
                 $currentDate = $endOfWeek->addDay();
             }
-            $averageStockInPerWeek =  $totalStockInQuantity / $weeksWithStockIn;
+            $averageStockInPerWeek = $weeksWithStockIn > 0 ? $totalStockInQuantity / $weeksWithStockIn : 0;
 
+            $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;
             $fastmoving_info[] = [
-                'item name' => $item->itemJoin->item_name,
+                'item_name' => $item->itemJoin->item_name,
                 'tsi' => $totalQuantity,
                 'totalStockInQuantity' => $totalStockInQuantity,
                 'weeksWithStockIn' => $weeksWithStockIn,
                 'aii' => $averageStockInPerWeek,
-                'fast_slow' => $totalQuantity /  $averageStockInPerWeek
+                'fast_slow' => $fastSlowValue
             ];
         }
 

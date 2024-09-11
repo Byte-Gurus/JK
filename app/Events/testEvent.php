@@ -23,6 +23,7 @@ class testEvent implements ShouldBroadcast
     {
         $this->name = $name;
     }
+    
 
     /**
      * Get the channels the event should broadcast on.

@@ -49,7 +49,7 @@ class UserTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable',//*  galing sa UserTable class
-
+        "echo:new-user,NewUserCreatedEvent" => 'updatedSearch',
     ];
 
 
@@ -68,6 +68,8 @@ class UserTable extends Component
 
     public function updatedSearch()
     {
+
+
         $this->resetPage();
     }
 
