@@ -9,9 +9,15 @@ use Livewire\Component;
 class CashierPage extends Component
 {
 
+    public $showNavbarNoSidebar = true;
+
     public $showSalesTransaction = true;
 
     public $showSalesTransactionHistory = false;
+
+    public $showSalesReceipt = false;
+
+    public $showSalesReturn = false;
 
     public function render()
     {
@@ -23,6 +29,7 @@ class CashierPage extends Component
         'display-sales-transaction' => 'displaySalesTransaction',
         'display-sales-transaction-history' => 'displaySalesTransactionHistory',
         'display-sales-return' => 'displaySalesReturn',
+        'display-sales-receipt' => 'displaySalesReceipt',
     ];
 
     public function displaySalesTransactionHistory($showSalesTransactionHistory)
@@ -33,7 +40,22 @@ class CashierPage extends Component
 
     public function displaySalesTransaction($showSalesTransaction)
     {
+        $this->showNavbarNoSidebar = true;
         $this->showSalesTransaction = $showSalesTransaction;
+        $this->showSalesReturn = false;
         $this->showSalesTransactionHistory = false;
+    }
+
+    public function displaySalesReceipt($showSalesReceipt)
+    {
+        $this->showNavbarNoSidebar = false;
+        $this->showSalesTransaction = false;
+        $this->showSalesReceipt = $showSalesReceipt;
+    }
+
+    public function displaySalesReturn($showSalesReturn)
+    {
+        $this->showSalesTransaction = false;
+        $this->showSalesReturn = $showSalesReturn;
     }
 }

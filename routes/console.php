@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Credit;
 use App\Models\Inventory;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -28,11 +30,23 @@ Artisan::command('migration-order', function () {
         '2024_08_09_142144_create_purchase_details_table.php',
         '2024_08_04_204401_create_deliveries_table.php',
         '2024_08_22_213514_create_back_orders_table.php',
-
+        '2024_09_03_174035_create_discounts_table.php',
+        '2024_09_02_212601_create_transactions_table.php',
 
         '2024_08_05_213148_create_inventories_table.php',
         '2024_08_16_234953_create_inventory_adjustments_table.php',
+
+
+        '2024_09_03_101448_create_payments_table.php',
+        '2024_09_02_213236_create_transaction_details_table.php',
+        '2024_09_04_210427_create_credits_table.php',
+        '2024_09_05_220930_create_credit_histories_table.php',
+
         '2024_08_26_221603_create_inventory_movements_table.php',
+        '2024_09_07_233147_create_notifications_table.php',
+
+        '2024_09_08_090928_create_returns_table.php',
+        '2024_09_08_090030_create_return_details_table.php',
 
         '0001_01_01_000001_create_cache_table.php',
         '0001_01_01_000002_create_jobs_table.php',
@@ -62,15 +76,60 @@ Artisan::command('inventory:check-expiration', function () {
 
     // Find expired items
     $expiredItems = Inventory::where('expiration_date', '<=', $today)
-        ->where('status', '!=', 'Expired')
+        ->where('status', 'Available')
         ->get();
 
     // Update status of expired items
     foreach ($expiredItems as $item) {
         $item->status = 'Expired';
         $item->save();
-        $this->info("Updated status for item ID: {$item->id} to 'expired'");
+        $this->info("Updated status for item SKU: {$item->sku_code} to 'expired'");
+
+        $notificationExists = Notification::where('inventory_id', $item->id)
+            ->where('description', "Item with SKU {$item->sku_code} has expired.")
+            ->exists();
+
+        if (!$notificationExists) {
+            Notification::create([
+                'description' => "Item with SKU {$item->sku_code} has expired.",
+                'inventory_id' => $item->id,
+            ]);
+            $this->info("Added notification for item SKU: {$item->sku_code}");
+        }
+
+        $this->info("Updated status for item SKU: {$item->sku_code} to 'Expired' and added notification");
     }
 
     $this->comment('Expiration check completed!');
 })->purpose('Check inventory items for expiration and update their status if expired')->daily();
+
+
+Artisan::command('credit:check-overdue', function () {
+    $this->comment('Checking for overdue creditor...');
+
+    $today = Carbon::today();
+
+    $overdueCreditor = Credit::where('due_date', '<=', $today)
+        ->where('status', 'Pending')
+        ->get();
+
+    foreach ($overdueCreditor as $credit) {
+        $credit->status = 'Overdue';
+        $credit->save();
+        $this->info("Updated status for credit number: {$credit->credit_number} to 'Overdue'");
+
+        // Check if notification already exists
+        $notificationExists = Notification::where('credit_id', $credit->id)
+            ->where('description', "Credit with number {$credit->credit_number} is overdue.")
+            ->exists();
+
+        if (!$notificationExists) {
+            Notification::create([
+                'description' => "Credit with number {$credit->credit_number} is overdue.",
+                'credit_id' => $credit->id,
+            ]);
+            $this->info("Added notification for credit number: {$credit->credit_number}");
+        }
+    }
+})->purpose('Check credit creditor and update status if overdue')->daily();
+

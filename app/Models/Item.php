@@ -13,10 +13,11 @@ class Item extends Model
         'barcode',
         'item_name',
         'item_description',
-        'maximum_stock_ratio',
-        'reorder_percentage',
+        'maximum_stock_level',
+        'bulk_quantity',
+        'shelf_life_type',
         'reorder_point',
-        'vat_amount',
+        'vat_percent',
         'vat_type',
         'status_id'
     ];

@@ -67,13 +67,9 @@
                                 <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                             @endforeach
 
-
                         </select>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -112,29 +108,33 @@
                             </div>
 
                         </th>
-                        {{-- //* status --}}
+
+                        {{-- //* supplier name --}}
+                        <th scope="col" class="px-4 py-3 text-left">Supplier</th>
+
+                        {{-- //* current stock quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Current stock quantity</th>
 
+                        {{-- stock in quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Stock In quantity</th>
 
 
-                        {{-- //* status --}}
+                        {{-- //* reorder point --}}
                         <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
 
 
-                        {{-- //* status --}}
+                        {{-- //* item cost --}}
                         <th scope="col" class="px-4 py-3 text-center">Item Cost (₱)</th>
 
 
-                        {{-- //* status --}}
+                        {{-- //* mark-up price --}}
                         <th scope="col" class="px-4 py-3 text-center">Mark-up price (₱)</th>
 
-                        {{-- //* status --}}
+                        {{-- //* sellign price --}}
                         <th scope="col" class="px-4 py-3 text-center">Selling price (₱)</th>
 
-
-                        {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-left">Supplier</th>
+                        {{-- //* vat amount --}}
+                        <th scope="col" class="px-4 py-3 text-center">Vat amount </th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
@@ -201,8 +201,12 @@
                                 {{ $inventory->itemJoin->barcode }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $inventory->itemJoin->item_name }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $inventory->deliveryJoin?->purchaseJoin?->supplierJoin?->company_name ?? 'null' }}
                             </th>
 
                             <th scope="row"
@@ -223,23 +227,23 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->cost }}
+                                {{ number_format($inventory->cost, 2) }}
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->mark_up_price }}
+                                {{ number_format($inventory->mark_up_price, 2) }}
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->selling_price }}
+                                {{ number_format($inventory->selling_price, 2) }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->deliveryJoin?->purchaseJoin?->supplierJoin?->company_name ?? 'null' }}
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($inventory->vat_amount, 2) }}
                             </th>
-
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center pointer-events-none text-md whitespace-nowrap">
@@ -265,13 +269,18 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->stock_in_date ? $inventory->stock_in_date->format('d-m-y') : 'null' }}
+                                {{ $inventory->stock_in_date ? $inventory->stock_in_date->format(' M d Y h:i A') : 'null' }}
 
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->expiration_date ? $inventory->expiration_date->format('d-m-y') : 'null' }}
+                                @if ($inventory->itemJoin->shelf_life_type === 'Perishable')
+                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format(' M d Y ')  : 'null' }}
+                                @elseif($inventory->itemJoin->shelf_life_type === 'Non Perishable')
+                                    N/A
+                                @endif
+
                             </th>
 
                             {{-- //* Action --}}
@@ -342,11 +351,8 @@
                             </th>
                         </tr>
                     @endforeach
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}
@@ -372,11 +378,6 @@
                 </select>
 
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>

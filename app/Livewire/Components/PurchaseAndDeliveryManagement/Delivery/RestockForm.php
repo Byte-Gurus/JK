@@ -2,26 +2,34 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\RestockEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
+use App\Models\Item;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
+use App\Models\Transaction;
+use App\Models\TransactionDetails;
+use Carbon\Carbon;
+use DateTime;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class RestockForm extends Component
 {
     use LivewireAlert;
-    public $delivery_id, $po_number, $supplier, $purchase_id;
+    public $delivery_id, $po_number, $supplier, $purchase_id,  $delivery_date, $po_date;
     public $purchaseDetails = [];
     public $restock_quantity = [null], $cost = [null], $markup = [null], $srp = [null], $expiration_date = [null];
 
     public function render()
     {
+
         if (empty($this->purchaseDetails)) {
             // Fetch purchase details with related itemsJoin data
             $this->purchaseDetails = PurchaseDetails::with('itemsJoin')
@@ -31,7 +39,9 @@ class RestockForm extends Component
                     return $details->toArray() + [
                         'barcode' => $details->itemsJoin->barcode,
                         'item_name' => $details->itemsJoin->item_name,
+                        'reorder_point' => $details->itemsJoin->reorder_point,
                         'item_id' => $details->item_id,
+                        'shelf_life_type' => $details->itemsJoin->shelf_life_type,
                         'item_description' => $details->itemsJoin->item_description,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
@@ -53,13 +63,17 @@ class RestockForm extends Component
 
     public function create()
     {
+
         $validated = $this->validateForm(); // Validate form data
-        // dd($this->purchaseDetails);
-        // Initialize quantities array
+
         $quantities = [];
+
 
         // First pass: Accumulate restock quantities for each item
         foreach ($this->purchaseDetails as $index => $detail) {
+
+            $this->getReorderPoint($detail['item_id']);
+
             $details_id = $detail['id']; // get all the id of each purchase details
 
             if (!isset($quantities[$details_id])) {
@@ -70,6 +84,7 @@ class RestockForm extends Component
 
         // Second pass: Check each item's quantity individually
         foreach ($this->purchaseDetails as $index => $detail) {
+
             $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
             // Check if the accumulated restock quantity exceeds the purchased quantity
@@ -85,7 +100,7 @@ class RestockForm extends Component
             $details_id = $detail['id']; // Assuming 'id' refers to item_id
 
             if ($quantities[$details_id] < $detail['purchase_quantity']) {
-                $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to add these items?", [
+                $this->confirm("The total restock quantity for some items falls short of the purchased quantity. Do you still want to restock these items?", [
                     'onConfirmed' => 'createConfirmed',
                     'inputAttributes' => $validated,
                 ]);
@@ -96,7 +111,7 @@ class RestockForm extends Component
         }
 
         // If all validations pass, prompt for final confirmation
-        $this->confirm('Do you want to add these items?', [
+        $this->confirm('Do you want to restock these items?', [
             'onConfirmed' => 'createConfirmed',
             'inputAttributes' => $validated,
         ]);
@@ -112,6 +127,7 @@ class RestockForm extends Component
 
         $backorder_Items = [];
 
+        $this->getMaximumLevel();
 
         foreach ($this->purchaseDetails as $index => $detail) {
             $details = $detail['item_id'];
@@ -141,34 +157,41 @@ class RestockForm extends Component
                     'purchase_id' => $this->purchase_id,
                     'item_id' => $detail['item_id'],
                     'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
-                    'status' => 'Inadequate',
+                    'status' => 'Missing',
                 ]);
             }
         }
 
         foreach ($this->purchaseDetails as $index => $detail) {
+
+
+            $item = Item::find($detail['item_id']);
+            $item->status_id = "1";
+            $item->save();
+
             $inventory = Inventory::create([
                 'sku_code' => $detail['sku_code'],
                 'cost' => $this->cost[$index],
                 'mark_up_price' => $validated['markup'][$index],
                 'selling_price' => $validated['srp'][$index],
+                'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
                 'current_stock_quantity' =>  $validated['restock_quantity'][$index],
                 'stock_in_quantity' =>  $validated['restock_quantity'][$index],
-                'expiration_date' =>  $validated['expiration_date'][$index],
+                'expiration_date' =>  $validated['expiration_date'][$index] ?? null,
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
-                'status' => 'TEST',   // Set default status or customize as needed
+                'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
                 'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                 'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
             ]);
+
+
 
             $inventoryMovement = InventoryMovement::create([
                 'inventory_id' => $inventory->id,
                 'movement_type' => 'Inventory',
                 'operation' => 'Stock In',
             ]);
-
-
         }
 
         $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
@@ -185,9 +208,9 @@ class RestockForm extends Component
 
 
         $this->resetForm();
-        $this->alert('success', 'stock adjusted successfully');
+        $this->alert('success', 'Restocked successfully');
 
-
+        RestockEvent::dispatch('refresh-stock');
         $this->refreshTable();
         $this->closeModal();
     }
@@ -237,6 +260,8 @@ class RestockForm extends Component
             'barcode' => $originalItem->itemsJoin->barcode,
             'item_id' => $originalItem->item_id,
             'item_name' => $originalItem->itemsJoin->item_name,
+            'shelf_life_type' => $originalItem->itemsJoin->shelf_life_type,
+
             'item_description' => $originalItem->itemsJoin->item_description,
             'purchase_quantity' => $originalItem->purchase_quantity,
             'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
@@ -287,12 +312,17 @@ class RestockForm extends Component
 
 
         foreach ($this->purchaseDetails as $index => $purchaseDetail) {
-            $rules["restock_quantity.$index"] = ['required', 'numeric', 'min:1'];
+            $rules["restock_quantity.$index"] = ['required', 'numeric', 'min:0'];
             $rules["cost.$index"] = ['required', 'numeric', 'min:1'];
             $rules["markup.$index"] = ['required', 'numeric', 'min:1'];
             $rules["srp.$index"] = ['required', 'numeric', 'min:1'];
-            $rules["expiration_date.$index"] = ['required', 'date', 'after_or_equal:today'];
+
+
+            if ($purchaseDetail['shelf_life_type'] === 'Perishable') {
+                $rules["expiration_date.$index"] = ['required', 'date', 'after_or_equal:today'];
+            }
         }
+
 
 
         return $this->validate($rules);
@@ -304,6 +334,11 @@ class RestockForm extends Component
         $this->delivery_id = $deliveryID;
         $delivery = Delivery::find($this->delivery_id);
         $this->purchase_id = $delivery->purchase_id;
+
+        $this->delivery_date = $delivery->date_delivered;
+        $this->po_date = $delivery->purchaseJoin->created_at;
+
+
 
         $this->populateForm();
     }
@@ -326,9 +361,91 @@ class RestockForm extends Component
     }
     public function generateSKU()
     {
-        $randomNumber = random_int(100000, 999999);
-        return 'SKU-' . $randomNumber;
+
+
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+        $SKU = 'SKU-' . $formattedNumber . '-' . now()->format('dmY');
+
+        return $SKU;
     }
 
-  
+    public function getReorderPoint($item_id)
+    {
+        $deliveryDate = Carbon::parse($this->delivery_date);
+        $poDate = Carbon::parse($this->po_date);
+
+        // Define the start and end dates
+        $startDate = $poDate->startOfDay();
+        $endDate = $deliveryDate->endOfDay();
+
+
+        $totalQuantity = TransactionDetails::where('item_id', $item_id)
+            ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            })
+            ->sum('item_quantity');
+
+
+        // Calculate the number of days in the date range
+        $days = floor($startDate->diffInDays($endDate));
+        // dd($totalQuantity);
+
+        // Calculate the demand rate
+        $demandRate =  $totalQuantity / $days;
+        $reorder_point = ($days * $demandRate);
+
+        $item = Item::find($item_id);
+        $item->reorder_point = $reorder_point;
+        $item->save();
+    }
+
+    public function getMaximumLevel()
+    {
+        $maximum_level_req = [];
+
+        foreach ($this->purchaseDetails as $detail) {
+            $itemId = $detail['item_id'];
+
+            // Calculate the date range from the same day last week to today
+            $startDate = Carbon::now()->subWeek()->startOfDay()->toDateTimeString();
+            $endDate = Carbon::now()->endOfDay()->toDateTimeString();
+
+            // Calculate minimum consumption within the period
+            $minQuantity = TransactionDetails::where('item_id', $itemId)
+                ->whereBetween('created_at', [$startDate, $endDate])
+                ->min('item_quantity');
+
+            // Find the minimum reorder period for the item
+            $minReorderPeriod = PurchaseDetails::where('item_id', $itemId)
+                ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+                ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
+                ->select(DB::raw('DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period'))
+                ->orderBy('reorder_period', 'asc')
+                ->value('reorder_period');
+
+            // Calculate maximum level using the formula
+            $reorderPoint = $detail['reorder_point'];
+            $reorderQuantity = $detail['purchase_quantity'];
+            $minConsumption = $minQuantity ?? 0;
+            $minReorderPeriod = $minReorderPeriod ?? 0;
+
+            $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
+
+            Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
+
+            $maximum_level_req[] = [
+                'item_id' => $itemId,
+                'min_quantity' => $minConsumption,
+                'purchase_quantity' => $reorderQuantity,
+                'reorder_point' => $reorderPoint,
+                'min_reorder_period' => $minReorderPeriod,
+                'maximum_level' => $maximumLevel
+            ];
+
+
+        }
+
+
+    }
 }

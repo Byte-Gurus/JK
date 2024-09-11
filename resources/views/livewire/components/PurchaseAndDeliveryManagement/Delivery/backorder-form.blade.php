@@ -21,7 +21,7 @@
                         <p class="text-[1em] font-thin text-center w-full">Supplier</p>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <p class="text-[1.2em] font-black">{{ $supplier }}</p>
+                        <p class="text-[1.2em] font-black text-wrap">{{ $supplier }}</p>
                     </div>
 
 
@@ -29,7 +29,7 @@
 
                 <div>
                     <button wire:click="purchaseRow" type="button"
-                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Incldue</button>
+                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Insert</button>
                 </div>
             </div>
 
@@ -63,6 +63,9 @@
                             {{-- //* purchase quantity --}}
                             <th scope="col" class="py-3 text-center text-nowrap">Status</th>
 
+                            {{-- //* purchase quantity --}}
+                            <th scope="col" class="py-3 text-center text-nowrap">New PO</th>
+
                         </tr>
                     </thead>
 
@@ -77,7 +80,7 @@
                                     <th scope="row"
                                         class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         <div class="flex justify-center">
-                                            @if ($backorder_list['status'] !== 'Repurchased')
+                                            @if ($backorder_list['status'] === 'Missing')
                                                 <input type="checkbox" wire:model="selectedToReorder"
                                                     value="{{ $index }}"
                                                     class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
@@ -164,8 +167,15 @@
                                 PO</button>
                         </div>
                         <div>
-                            <button type="submit"
-                                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Reorder</button>
+                            @if (empty($new_po_items))
+                                <button type="submit" disabled
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">Reorder
+                                </button>
+                            @else
+                                <button type="submit"
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Reorder
+                                </button>
+                            @endif
                         </div>
                     </div>
 

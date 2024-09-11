@@ -95,10 +95,11 @@
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
                         {{-- //* Maximum stock ratio --}}
-                        <th scope="col" class="px-4 py-3">Maximum stock ratio</th>
-
+                        <th scope="col" class="px-4 py-3">Maximum stock level</th>
                         {{-- //* Reorder point --}}
-                        <th scope="col" class="px-4 py-3">Reorder percentage</th>
+                        <th scope="col" class="px-4 py-3">Bulk quantity</th>
+
+
 
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Reorder point</th>
@@ -107,7 +108,10 @@
                         <th scope="col" class="px-4 py-3 text-center">VAT type</th>
 
                         {{-- //* vat amount --}}
-                        <th scope="col" class="px-4 py-3">VAT amount (₱)</th>
+                        <th scope="col" class="px-4 py-3">VAT percent %</th>
+
+                        {{-- //* vat amount --}}
+                        <th scope="col" class="px-4 py-3">Shelf life type</th>
 
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
@@ -165,12 +169,12 @@
                             </th>
 
                             {{-- //* item name --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $item->item_name }}
                             </th>
 
                             {{-- //* item desc --}}
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $item->item_description }}
                             </th>
 
@@ -194,13 +198,14 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->maximum_stock_ratio }}
+                                {{ $item->maximum_stock_level }}
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->reorder_percentage }}
+                                {{ $item->bulk_quantity }}
                             </th>
+
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -214,16 +219,21 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->vat_amount }}
+                                {{ $item->vat_percent }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $item->shelf_life_type }}
                             </th>
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->created_at->format('d-m-y h:i A') }}
+                                {{ $item->created_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $item->updated_at->format('d-m-y h:i A') }}
+                                {{ $item->updated_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* Action --}}

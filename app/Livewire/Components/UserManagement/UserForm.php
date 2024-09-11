@@ -3,6 +3,8 @@
 namespace App\Livewire\Components\UserManagement;
 
 
+use App\Events\NewUserCreatedEvent;
+use App\Events\UserEvent;
 use App\Livewire\Pages\UserManagementPage;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +19,8 @@ class UserForm extends Component
     use LivewireAlert;
     public $show_password; //var true for show password false for hindi
     public $isCreate; //var true for create false for edit
+
+    public $showModal = false;
 
 
     //var form inputs
@@ -34,6 +38,7 @@ class UserForm extends Component
     //* assign all the listners in one array
     //* for methods
     protected $listeners = [
+
         'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
         //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
         'change-method' => 'changeMethod',
@@ -76,12 +81,18 @@ class UserForm extends Component
 
 
         $this->alert('success', 'User was created successfully');
+        // NewUserCreatedEvent::dispatch('new-user');
+        UserEvent::dispatch('refresh-user');
         $this->refreshTable();
 
         $this->resetForm();
         $this->closeModal();
     }
 
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
 
 
     public function refreshTable() //* refresh ang table after confirmation
@@ -89,13 +100,6 @@ class UserForm extends Component
         $this->dispatch('refresh-table')->to(UserTable::class);
     }
 
-
-
-    public function closeModal() //* close ang modal after confirmation
-    {
-        $this->dispatch('close-modal')->to(UserManagementPage::class);
-        $this->resetValidation();
-    }
 
 
     public function update() //* update process
@@ -151,7 +155,7 @@ class UserForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');
-
+        UserEvent::dispatch('refresh-user');
         $this->refreshTable();
         $this->closeModal();
     }

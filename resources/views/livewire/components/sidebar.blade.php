@@ -27,17 +27,6 @@
                 </a>
             </li>
             <li>
-                <a href=" {{ route('itemmanagement.index') }} " wire:navigate
-                    class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                    </svg>
-                    <p>Item Management</p>
-                </a>
-            </li>
-            <li>
                 <a href=" {{ route('customermanagement.index') }} " wire:navigate
                     class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -49,36 +38,14 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('inventorymanagement.index') }}" wire:navigate
+                <a href=" {{ route('itemmanagement.index') }} " wire:navigate
                     class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                            d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                     </svg>
-                    <p>Inventory</p>
-                </a>
-            </li>
-            <li>
-                <a href=""
-                    class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                    </svg>
-                    <p>Returns</p>
-                </a>
-            </li>
-            <li>
-                <a href=" " wire:navigate
-                    class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-                    </svg>
-                    <p>Credit</p>
+                    <p>Item Management</p>
                 </a>
             </li>
             <li>
@@ -104,7 +71,40 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('creditmanagement.index') }}" wire:navigate
+                    class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                    </svg>
+                    <p>Credit</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('inventorymanagement.index') }}" wire:navigate
+                    class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                    </svg>
+                    <p>Inventory</p>
+                </a>
+            </li>
+            <li>
                 <a href=""
+                    class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+                    <p>Sales</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('reportmanagement.index') }}" wire:navigate
                     class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">

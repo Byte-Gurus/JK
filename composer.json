@@ -6,13 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "asantibanez/livewire-charts": "^4.1",
+        "asdh/laravel-flatpickr": "^2.2",
         "fakerphp/faker": "^1.23",
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.9",
-        "laravel/reverb": "^1.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "milon/barcode": "^11.0",
+        "pusher/pusher-php-server": "^7.2",
         "woenel/prpcmblmts": "^1.0"
     },
     "require-dev": {

@@ -21,9 +21,8 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Company Name" required="" />
-
 
             </div>
 
@@ -183,7 +182,7 @@
 
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $supplier->addressJoin->provinceJoin->province_description }},
                                 {{ $supplier->addressJoin->cityJoin->city_municipality_description }},
                                 {{ $supplier->addressJoin->barangayJoin->barangay_description }},
@@ -192,12 +191,12 @@
 
                             {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplier->created_at->format('d-m-y h:i A') }}
+                                {{ $supplier->created_at->format(' M d Y ')  }}
                             </th>
 
                             {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplier->updated_at->format('d-m-y h:i A') }}
+                                {{ $supplier->updated_at->format(' M d Y ')  }}
                             </th>
 
                             <th class="px-4 py-4 text-center text-md text-nowrap">

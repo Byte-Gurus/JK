@@ -20,7 +20,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    
+
 
     @livewireStyles
 
@@ -30,29 +30,17 @@
         }
     </style>
 
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
 
-        var pusher = new Pusher('fa7d24aad8f58de38dcc', {
-            cluster: 'ap1'
-        });
 
-        var channel = pusher.subscribe('JK-Store');
-        channel.bind('Testing', function(data) {
-            alert(JSON.stringify(data));
-        });
-    </script>
 </head>
 
-<body class="font-['Inter', 'Roboto']">
+<body class="font-['Inter', 'Roboto'] h-fit">
     {{ $slot }}
 
 
     @vite('resources/js/app.js')
     @livewireScripts()
-
+    @livewireChartsScripts
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

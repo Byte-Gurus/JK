@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('cost')->default(0);
             $table->double('mark_up_price')->default(0);
             $table->double('selling_price')->default(0);
+            $table->double('vat_amount')->default(0);
             $table->integer('current_stock_quantity')->default(0);
             $table->integer('stock_in_quantity')->default(0);
             $table->datetime('expiration_date')->nullable();

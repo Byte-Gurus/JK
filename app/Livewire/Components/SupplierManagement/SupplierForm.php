@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\SupplierManagement;
 
+use App\Events\SupplierEvent;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Models\Address;
 use App\Models\PhilippineBarangay;
@@ -104,7 +105,7 @@ class SupplierForm extends Component
 
         $this->alert('success', 'Supplier was created successfully');
         $this->refreshTable();
-
+        SupplierEvent::dispatch('refresh-supplier');
         $this->resetForm();
         $this->closeModal();
     }
@@ -170,7 +171,7 @@ class SupplierForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'Supplier was updated successfully');
-
+        SupplierEvent::dispatch('refresh-supplier');
         $this->refreshTable();
         $this->closeModal();
     }

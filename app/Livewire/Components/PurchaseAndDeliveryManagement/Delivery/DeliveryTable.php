@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\DeliveryEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -25,7 +27,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
-    public $dateDelivered = [];
+    public $dateDelivered = [], $delivery_date;
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -54,8 +56,13 @@ class DeliveryTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+        "echo:refresh-delivery,DeliveryEvent" => 'refreshFromPusher',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
+        "echo:refresh-backorder,BackorderEvent" => 'refreshFromPusher',
+
         'updateConfirmed',
         'cancelConfirmed',
+        'dateCancelled',
     ];
 
 
@@ -94,9 +101,21 @@ class DeliveryTable extends Component
             'deliveryId' => $id
         ];
 
+        $delivery = Delivery::find($deliveries['deliveryId']);
+
+
+        $inputDate = Carbon::parse($deliveries['date']);
+        $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at);
+
+
+        if ($inputDate < $purchaseOrderDate) {
+            $this->alert('error', 'Delivery date must be after the creation of the purchase order.');
+            return;
+        }
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
+            'onDismissed' => 'dateCancelled',
             'inputAttributes' => $deliveries,
         ]);
     }
@@ -104,14 +123,25 @@ class DeliveryTable extends Component
     public function updateConfirmed($data)
     {
 
-        $updatedAttributes = $data['inputAttributes'];
 
+        $updatedAttributes = $data['inputAttributes'];
         $deliveryId = $updatedAttributes['deliveryId'];
 
+        // Find the current delivery record
         $delivery = Delivery::find($deliveryId);
 
-        if ($delivery && $delivery->backorderJoin->isNotEmpty()) {
-            // Loop through each backorder associated with the delivery where status is 'Repurchased'
+
+        // Check if the current delivery has associated backorders
+        if ($delivery->backorderJoin->isNotEmpty()) {
+
+            // Decode the old purchase order data from the delivery record
+            $oldPoData = json_decode($delivery->old_po_id, true);
+            $old_purchase = Purchase::find($oldPoData['id']);
+
+
+            // dd($old_purchase->backorderJoin);
+
+            // Loop through each backorder associated with the current delivery
             foreach ($delivery->backorderJoin as $backorderDetail) {
                 if ($backorderDetail->status === 'Repurchased') {
                     // Update the status of each backorder to "Delivered"
@@ -119,22 +149,40 @@ class DeliveryTable extends Component
                 }
             }
 
-            // Update the delivery details after updating backorders
+
+            $missingOrRepurchasedCount = $old_purchase->backorderJoin
+                ->whereIn('status', ['Missing', 'Repurchased'])
+                ->count();
+
+
+            // If all backorders are delivered, update the old delivery status to "Complete Backorder"
+            if ($missingOrRepurchasedCount == 0) {
+                // Get the old delivery record associated with the old purchase order
+                $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
+                $old_delivery->update(['status' => 'Backorder complete']);
+            }
+
+            // Update the current delivery details
             $delivery->date_delivered = $updatedAttributes['date'];
             $delivery->status = "Delivered";
             $delivery->save();
 
             $this->alert('success', 'Delivery date and applicable backorders updated successfully');
+            $this->resetPage();
         } else {
-            // If there are no backorders, only update the delivery details
+            // If there are no backorders, only update the current delivery details
             $delivery->date_delivered = $updatedAttributes['date'];
             $delivery->status = "Delivered";
             $delivery->save();
 
             $this->alert('success', 'Delivery date changed successfully');
+            $this->resetPage();
         }
 
         $this->resetPage();
+        DeliveryEvent::dispatch('refresh-delivery');
+
+        return back();
     }
 
     public function cancelDelivery($deliverId)
@@ -156,6 +204,8 @@ class DeliveryTable extends Component
 
         $this->alert('success', 'Delivery cancelled successfully');
         $this->resetPage();
+
+        DeliveryEvent::dispatch('refresh-delivery');
     }
 
     public function viewRestockForm()
@@ -175,5 +225,15 @@ class DeliveryTable extends Component
     {
 
         $this->dispatch('backorder-form', deliveryID: $deliverId)->to(BackorderForm::class);
+    }
+
+    public function dateCancelled()
+    {
+        $this->reset('delivery_date');
+    }
+
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

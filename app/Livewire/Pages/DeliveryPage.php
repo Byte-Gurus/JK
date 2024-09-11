@@ -3,11 +3,12 @@
 namespace App\Livewire\Pages;
 
 use App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery\RestockForm;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class DeliveryPage extends Component
 {
-
+    use LivewireAlert;
     public $showDeliveryTable = true;
     public $showRestockForm = false;
     public $showBackorderForm = false;
@@ -35,8 +36,16 @@ class DeliveryPage extends Component
         $this->showRestockForm = $showRestockForm;
     }
 
-    public function cancelRestockForm()
+    public function closeRestockForm()
     {
+        $this->confirm("Do you want to close the restock form?", [
+            'onConfirmed' => 'closeRestockFormConfirmed',
+        ]);
+    }
+
+    public function closeRestockFormConfirmed()
+    {
+        $this->dispatch('close-modal')->to(RestockForm::class);
         $this->showRestockForm = false;
         $this->showDeliveryTable = true;
     }

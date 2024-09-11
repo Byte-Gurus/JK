@@ -1,5 +1,5 @@
 <div>
-    <div>
+    <div x-show="showNavbarNoSidebar" x-data="{ showNavbarNoSidebar: @entangle('showNavbarNoSidebar') }">
         @livewire('components.navbar-no-sidebar')
     </div>
     <div x-show="showSalesTransaction" x-data="{ showSalesTransaction: @entangle('showSalesTransaction') }">
@@ -8,5 +8,10 @@
     <div x-show="showSalesTransactionHistory" x-data="{ showSalesTransactionHistory: @entangle('showSalesTransactionHistory') }">
         @livewire('components.Sales.sales-transaction-history')
     </div>
+    <div x-show="showSalesReturn" x-data="{ showSalesReturn: @entangle('showSalesReturn') }">
+        @livewire('components.Sales.sales-return')
+    </div>
+    <div x-show="showSalesReceipt" x-data="{ showSalesReceipt: @entangle('showSalesReceipt') }">
+        @livewire('components.Sales.sales-receipt')
+    </div>
 </div>
-

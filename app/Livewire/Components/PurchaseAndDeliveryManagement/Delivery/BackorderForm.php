@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\BackorderEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
@@ -57,6 +58,7 @@ class BackorderForm extends Component
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
         'backorder-form' => 'backorderForm',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
         'updateConfirmed',
         'createConfirmed',
         'cancelConfirmed',
@@ -68,7 +70,7 @@ class BackorderForm extends Component
 
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to create this purchase order?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -85,10 +87,14 @@ class BackorderForm extends Component
             'user_id' => Auth::id(),
         ]);
 
+        $old_po_id = Purchase::where('po_number', $this->po_number)->first();
+
         $delivery = Delivery::create([
             'status' => "In Progress",
             'date_delivered' => "N/A",
-            'purchase_id' => $purchase_order->id
+            'purchase_id' => $purchase_order->id,
+            'old_po_id' => $old_po_id,
+
         ]);
 
 
@@ -115,7 +121,7 @@ class BackorderForm extends Component
         $this->alert('success', 'Purchase order was created successfully');
         $this->render();
         $this->refreshTable();
-
+        BackorderEvent::dispatch('refresh-backorder');
 
         $this->resetForm();
         $this->closeBackorderForm();
@@ -143,6 +149,7 @@ class BackorderForm extends Component
                     'backorder_quantity' => $this->backorderList[$index]['backorder_quantity'],
                     'item_description' => $this->backorderList[$index]['item_description'],
                     'status' => $this->backorderList[$index]['status'],
+                    'new_po_number' => $this->backorderList['new_po_number'] ?? 'N/A'
                 ];
             }
         }
@@ -247,7 +254,13 @@ class BackorderForm extends Component
     public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
     {
 
-        $randomNumber = random_int(100000, 999999);
-        $this->new_po_number = 'PO-' . $randomNumber;
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+        $this->new_po_number = 'PO-' . $formattedNumber . '-' . now()->format('dmY');
+    }
+
+     public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

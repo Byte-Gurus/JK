@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\InventoryManagement;
 
+use App\Events\AdjustmentEvent;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryAdjustment;
@@ -45,7 +46,7 @@ class StockAdjustForm extends Component
 
 
 
-        $this->confirm('Do you want to update this supplier?', [
+        $this->confirm('Do you want to update this stock?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
@@ -95,8 +96,8 @@ class StockAdjustForm extends Component
         ]);
 
         $this->resetForm();
-        $this->alert('success', 'stock adjusted successfully');
-
+        $this->alert('success', 'Stock was adjusted successfully');
+        AdjustmentEvent::dispatch('refresh-adjustment');
         $this->refreshTable();
         $this->closeModal();
     }
@@ -107,10 +108,14 @@ class StockAdjustForm extends Component
         $rules = [
             'selectOperation' => 'required',
             'adjustReason' => 'required|string|max:255',
-            'quantityToAdjust' => ['required', 'numeric', 'min:1'],
-
-
+            'quantityToAdjust' => ['required', 'numeric', 'min:1']
         ];
+
+        // Conditionally add rules for 'quantityToAdjust' if 'selectOperation' is 'Deduct'
+        if ($this->selectOperation === 'Deduct') {
+            $rules['quantityToAdjust'] = ['required', 'numeric', 'min:1', 'lte:current_quantity'];
+        }
+
         return $this->validate($rules);
     }
     private function populateForm() //*lagyan ng laman ang mga input
@@ -156,6 +161,7 @@ class StockAdjustForm extends Component
     public function refreshTable() //* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(InventoryTable::class);
+        $this->dispatch('refresh-table')->to(InventoryHistory::class);
     }
     public function adjustStock($stockID)
     {

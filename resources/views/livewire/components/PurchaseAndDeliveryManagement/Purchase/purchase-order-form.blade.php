@@ -78,6 +78,9 @@
                                     {{-- //* stocks on hand --}}
                                     <th scope="col" class="py-3 text-center ">Stocks-On-Hand</th>
 
+                                    {{-- {-- //* stocks on hand --}}
+                                    <th scope="col" class="py-3 text-center ">Maximum stock level</th>
+
                                     {{-- //* item reorder quantity --}}
                                     <th scope="col" class="py-3 text-center">Item Reorder Quantity</th>
 
@@ -115,6 +118,10 @@
                                             <th scope="row"
                                                 class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                                 {{ $reorder_list['total_quantity'] }}
+                                            </th>
+                                            <th scope="row"
+                                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                                {{ $reorder_list['maximum_stock_level'] }}
                                             </th>
                                             <th scope="row"
                                                 class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
@@ -171,7 +178,7 @@
                                 <th scope="col"
                                     class="flex items-center justify-center gap-2 px-4 py-3 text-center justi ">
 
-                                  
+
                                     <input type="checkbox" wire:model="selectAllToRestore" wire:click="restoreAll"
                                         class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
 

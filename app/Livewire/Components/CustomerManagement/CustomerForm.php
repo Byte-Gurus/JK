@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\CustomerManagement;
 
+use App\Events\CustomerEvent;
 use App\Livewire\Pages\CustomerManagementPage;
 use App\Models\Address;
 use App\Models\Customer;
@@ -67,7 +68,7 @@ class CustomerForm extends Component
     {
         $validated = $this->validateForm();
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to add this customer?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
@@ -76,8 +77,15 @@ class CustomerForm extends Component
     public function createConfirmed($data) //* confirmation process ng create
     {
 
+
+
         $validated = $data['inputAttributes'];
-        $validated['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        if ($this->id_picture) {
+            $validated['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        } else {
+            $validated['id_picture'] = null; // or provide a default value if necessary
+        }
+
 
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
@@ -101,7 +109,7 @@ class CustomerForm extends Component
 
         $this->alert('success', 'Customer was created successfully');
         $this->refreshTable();
-
+        CustomerEvent::dispatch('refresh-customer');
         $this->resetForm();
         $this->closeModal();
     }
@@ -120,7 +128,7 @@ class CustomerForm extends Component
         $customers->lastname = $validated['lastname'];
         $customers->birthdate = $validated['birthdate'];
         $customers->contact_number = $validated['contact_number'];
-        $customers->id_picture = $validated['id_picture'];
+        $customers->id_picture = $validated['id_picture'] ?? null;
         $customers->customer_type = $validated['customer_type'];
         $customers->customer_discount_no = $validated['customer_discount_no'];
         $customers->province_code = $validated['selectProvince'];
@@ -132,7 +140,7 @@ class CustomerForm extends Component
 
 
 
-        $this->confirm('Do you want to update this supplier?', [
+        $this->confirm('Do you want to update this customer?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
@@ -149,7 +157,11 @@ class CustomerForm extends Component
         $customer = Customer::find($updatedAttributes['id']);
         $address = Address::find($updatedAttributes['address_id']);
 
-        $updatedAttributes['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        if ($this->id_picture) {
+            $updatedAttributes['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+        } else {
+            $updatedAttributes['id_picture'] =  'null'; // Keep existing value or set to null
+        }
 
         $address->fill([
             'province_code' => $updatedAttributes['province_code'],
@@ -162,13 +174,13 @@ class CustomerForm extends Component
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
         //var ipasa ang laman ng $updatedAttributes sa $item model
-         $customer ->fill([
+        $customer->fill([
             'firstname' => $updatedAttributes['firstname'],
             'middlename' => $updatedAttributes['middlename'],
             'lastname' => $updatedAttributes['lastname'],
             'contact_number' => $updatedAttributes['contact_number'],
             'birthdate' => $updatedAttributes['birthdate'],
-            'address_id' => $address->id,
+            'address_id' => $address->id ?? null,
             'customer_type' => $updatedAttributes['customer_type'],
             'customer_discount_no' => $updatedAttributes['customer_discount_no'],
             'id_picture' => $updatedAttributes['id_picture'],
@@ -176,8 +188,8 @@ class CustomerForm extends Component
         $customer->save();
 
         $this->resetForm();
-        $this->alert('success', 'Supplier was updated successfully');
-
+        $this->alert('success', 'Customer was updated successfully');
+        CustomerEvent::dispatch('refresh-customer');
         $this->refreshTable();
         $this->closeModal();
     }
@@ -192,11 +204,11 @@ class CustomerForm extends Component
         //* fill() method [key => value] means [paglalagyan => ilalagay]
         $this->fill([
             'firstname' => $customer_details->firstname,
-            'middlename' => $customer_details->middlename,
+            'middlename' => $customer_details->middlename ?? null,
             'lastname' => $customer_details->lastname,
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
-            'id_picture' => $customer_details->id_picture,
+            'id_picture' => $customer_details->id_picture ?? null,
             'customer_type' => $customer_details->customer_type,
             'customer_discount_no' => $customer_details->customer_discount_no,
             'selectProvince' => $customer_details->addressJoin->province_code,
@@ -224,7 +236,8 @@ class CustomerForm extends Component
     {
 
         $this->firstname = trim($this->firstname);
-        $this->middlename = trim($this->middlename);
+        $this->middlename = $this->middlename ? trim($this->middlename) : null;
+
         $this->lastname = trim($this->lastname);
 
         $rules = [
@@ -232,13 +245,13 @@ class CustomerForm extends Component
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'birthdate' => 'required|string|max:255',
-            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('customers', 'contact_number')->ignore($this->proxy_customer_id)],
+            'contact_number' => 'required|numeric|digits:11',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:255',
             'id_picture' => 'nullable|image|max:20480',
-            'customer_type' => 'required|in:Walk in,Credit,PWD,Senior Citizen,Wholesale',
+            'customer_type' => 'required|in:Credit,PWD,Senior Citizen,Wholesale',
             'customer_discount_no' => 'required|string|max:255',
         ];
 
@@ -248,8 +261,20 @@ class CustomerForm extends Component
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'id_picture','customer_type',
-        'customer_discount_no' ]);
+        $this->reset([
+            'firstname',
+            'middlename',
+            'lastname',
+            'birthdate',
+            'contact_number',
+            'selectProvince',
+            'selectCity',
+            'selectBrgy',
+            'street',
+            'id_picture',
+            'customer_type',
+            'customer_discount_no'
+        ]);
     }
 
     public function changeMethod($isCreate)

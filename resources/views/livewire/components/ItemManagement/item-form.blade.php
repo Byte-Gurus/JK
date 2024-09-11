@@ -164,7 +164,24 @@
 
                                     </div>
 
-                                    {{-- //* maximum stock ratio --}}
+                                    <div class="mb-3">
+
+                                        <label for="shelf_life_type"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Shelf life
+                                            type</label>
+
+                                        <select id="shelf_life_type" wire:model="shelf_life_type"
+                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <option value="" selected>Set item shelf life</option>
+                                            <option value="Perishable">Perishable</option>
+                                            <option value="Non Perishable">Non Perishable</option>
+                                        </select>
+
+                                        @error('shelf_life_type')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
 
                                 </div>
 
@@ -172,82 +189,62 @@
                                 {{-- //* third row row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-
-                                    {{-- //* reorder percentage --}}
-                                    <div class="mb-3">
-
-                                        <label for="reorderPercentage"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Reorder
-                                            percentage</label>
-
-                                        <input type="number" id="reorderPercentage" wire:model.live="reorderPercentage"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Reorder Point" required />
-
-                                        @error('reorderPercentage')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-
-                                    {{-- //* reorder point --}}
-                                    <div class="mb-3">
-
-                                        <label for="reorder_point"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Reorder Point</label>
-
-                                        <input type="number" id="reorder_point" wire:model="reorder_point"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Reorder Point" required disabled />
-
-                                        @error('reorder_point')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-
-
                                     {{-- //* vat type --}}
                                     <div class="mb-3">
 
                                         <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
-                                        <select id="vatType" wire:model.live="vatType"
+                                        <select id="vatType" wire:model.live="vatType" 
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Select vat type</option>
+                                            <option value="" selected>Set vat</option>
                                             <option value="Vat">Vat</option>
-                                            <option value="Non vat">Non vat</option>
+                                            <option value="Non Vatable">Non Vatable</option>
+                                            @error('vat_type')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                    </div>
 
-                                        </select>
+                                    {{-- //* vat amount --}}
+                                    <div class="mb-3">
 
-                                        @error('vat_type')
+                                        <label for="vat_percent"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                            Percent</label>
+
+                                        <input type="numeric" id="vat_percent" wire:model="vat_percent" readonly
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
+                                            placeholder="Vat Amount" required />
+
+                                        @error('vat_percent')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
 
+
+
+
                                 </div>
 
                                 {{-- //* third row --}}
+
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-
-                                    {{-- //* vat amount --}}
+                                    {{-- //* reorder point --}}
                                     <div class="mb-3">
 
-                                        <label for="vat_amount"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat Amount</label>
+                                        <label for="bulk_quantity"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Bulk
+                                            Quantity</label>
 
-                                        <input type="numeric" id="vat_amount" wire:model="vat_amount"
+                                        <input type="number" id="bulk_quantity" wire:model="bulk_quantity"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Vat Amount" required
-                                            @if (!$vat_amount_enabled) disabled @endif />
+                                            placeholder="Bulk Quantity" required />
 
-                                        @error('vat_amount')
+                                        @error('bulk_quantity')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
-
                                     </div>
 
                                     {{-- //* status --}}
@@ -279,21 +276,14 @@
                                             <input type="text" id="status" readonly value="Inactive"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             </input>
-
-
                                         </div>
                                     @endif
-
-
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     {{-- //* form footer --}}
-
                     {{-- *if form is edit --}}
                     @if (!$this->isCreate)
                         <div class="flex flex-row justify-end gap-2">
@@ -367,10 +357,8 @@
                                             </path>
                                         </svg>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     @endif
 

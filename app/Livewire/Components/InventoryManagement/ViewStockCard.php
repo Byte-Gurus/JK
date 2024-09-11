@@ -25,7 +25,9 @@ class ViewStockCard extends Component
 
     protected $listeners = [
         'stock-card' => 'stockCard', //*  galing sa UserTable class
-
+        "echo:refresh-adjustment,AdjustmentEvent" => 'refreshFromPusher',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
+        "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
     ];
 
     private function populateForm() //*lagyan ng laman ang mga input
@@ -52,14 +54,17 @@ class ViewStockCard extends Component
 
     public function computeStockCardData()
     {
-        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin'])
+        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin', 'transactionDetailsJoin.inventoryJoin'])
             ->where(function ($query) {
                 $query->whereHas('inventoryJoin', function ($query) {
                     $query->where('id', $this->stock_id);
                 })
-                ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
-                    $query->where('id', $this->stock_id);
-                });
+                    ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
+                        $query->where('id', $this->stock_id);
+                    })
+                    ->orWhereHas('transactionDetailsJoin.inventoryJoin', function ($query) {
+                        $query->where('id', $this->stock_id);
+                    });
             });
 
         // Apply date range filter if both startDate and endDate are provided
@@ -96,10 +101,10 @@ class ViewStockCard extends Component
                     $in_value = $in_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
                     break;
 
-                case 'Stock Out':
-                    // $out_quantity = $stock_card->inventoryJoin->current_stock_quantity;
-                    // $this->quantity_balance -= $out_quantity;
-                    // $out_value = $out_quantity * $stock_card->inventoryJoin->selling_price;
+                case 'Stock out':
+                    $out_quantity = $stock_card->transactionDetailsJoin->item_quantity;
+                    $this->quantity_balance -= $out_quantity;
+                    $out_value = $out_quantity * $stock_card->transactionDetailsJoin->inventoryJoin->selling_price;
                     break;
 
                 case 'Deduct':
@@ -143,5 +148,8 @@ class ViewStockCard extends Component
 
         $this->stock_cards = $processedStockCards;
     }
-
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
+    }
 }
