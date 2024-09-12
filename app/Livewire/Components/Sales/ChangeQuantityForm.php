@@ -13,7 +13,7 @@ class ChangeQuantityForm extends Component
 
     public function render()
     {
-        return view('livewire.components.sales.change-quantity-form');
+        return view('livewire.components.Sales.change-quantity-form');
     }
 
     protected $listeners = [
