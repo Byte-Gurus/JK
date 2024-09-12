@@ -13,6 +13,7 @@ class ChangeQuantityForm extends Component
 
     public function render()
     {
+
         return view('livewire.components.Sales.change-quantity-form');
     }
 
@@ -66,6 +67,7 @@ class ChangeQuantityForm extends Component
         $rules = [
             'adjust_quantity' => ['required', 'numeric', 'min:1', 'lte:current_stock_quantity'],
         ];
+        $this->focusInput();
 
         return $this->validate($rules);
     }
@@ -79,6 +81,7 @@ class ChangeQuantityForm extends Component
 
     public function getQuantity($data)
     {
+
         $this->adjust_quantity = $data['itemQuantity'];
         $this->original_quantity = $data['itemQuantity'];
         $this->current_stock_quantity = $data['current_stock_quantity'];
@@ -88,5 +91,12 @@ class ChangeQuantityForm extends Component
         $this->credit_limit = $data['credit_limit'];
         $this->selling_price = $data['selling_price'];
         $this->grandTotal = $data['grandTotal'];
+
+        $this->focusInput();
+    }
+
+    public function focusInput()
+    {
+        $this->dispatch('adjust_quantity_focus');
     }
 }

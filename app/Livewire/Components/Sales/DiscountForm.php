@@ -13,6 +13,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
+use function Laravel\Prompts\alert;
+
 class DiscountForm extends Component
 {
     use LivewireAlert;
@@ -24,7 +26,7 @@ class DiscountForm extends Component
     public $barangays = null;
 
     public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $customer_discount_no, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
-    public $isSales;
+    public $isSales = true;
     public $customerDetails = [];
     public $credit_details = [];
 
@@ -45,7 +47,7 @@ class DiscountForm extends Component
             })
             ->get();
 
-        return view('livewire.components.Sales.discount-form', [
+        return view('livewire.components.sales.discount-form', [
             'provinces' => PhilippineProvince::orderBy('province_description')->get(),
             'customers' => $customers,
         ]);
@@ -109,8 +111,8 @@ class DiscountForm extends Component
 
     public function create() //* create process
     {
-
-        if (!$this->isSales) {
+        $isSales = $this->isSales;
+        if (!$isSales && isset($this->credit_details['customer_id'])) {
             $customer = Customer::find($this->customer_id);
             $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
 
@@ -123,13 +125,18 @@ class DiscountForm extends Component
             } else {
                 $this->populateForm();
             }
-        }
-        $validated = $this->validateForm();
+        } elseif ($isSales) {
+            $validated = $this->validateForm();
 
-        $this->confirm('Do you want to create and apply the discount?', [
-            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-        ]);
+            $this->confirm('Do you want to create and apply the discount?', [
+                'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+                'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            ]);
+        } else {
+            $this->alert('warning', 'Select creditor');
+            $this->clearSelectedCustomerName();
+            return;
+        }
     }
 
     public function createConfirmed($data) //* confirmation process ng create
@@ -164,7 +171,6 @@ class DiscountForm extends Component
                 'discount_id' => $this->discount_id,
             ];
         }
-
 
 
 
@@ -251,6 +257,7 @@ class DiscountForm extends Component
     }
     public function changeCreditDiscount($isSales)
     {
+        $this->clearSelectedCustomerName();
         $this->isSales = $isSales;
     }
     public function createCustomer()
@@ -266,10 +273,12 @@ class DiscountForm extends Component
 
     public function clearSelectedCustomerName()
     {
-        $this->reset(['customer_name', 'customerType', 'discount_percentage', 'customer_discount_no']);
+        $this->reset(['customer_name', 'customerType', 'discount_percentage', 'customer_discount_no', 'customerDetails', 'credit_details']);
     }
     public function getCreditDetail($creditDetail)
     {
         $this->credit_details = $creditDetail;
+        $this->resetForm();
+        $this->removeDiscountConfirmed();
     }
 }
