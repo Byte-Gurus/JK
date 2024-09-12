@@ -175,7 +175,7 @@ class SalesReturnDetails extends Component
             'payment_method' => $transaction->paymentJoin->payment_type ?? 'N/A',
             'reference_number' => $transaction->paymentJoin->reference_number ?? 'N/A',
             'discount_amount' => $transaction->total_discount_amount,
-            'change' => $transaction->paymentJoin->tendered_amount ?? 0 - $transaction->paymentJoin->amount,
+            'change' => $transaction->paymentJoin->tendered_amount ?? 0 - $transaction->paymentJoin->amount ?? 0,
             'tendered_amount' => $transaction->paymentJoin->tendered_amountm,
             'subtotal' => $transaction->subtotal,
 
