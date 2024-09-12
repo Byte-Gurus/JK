@@ -112,7 +112,7 @@ class SalesReturnDetails extends Component
             unset($this->return_info[$ind]);
             unset($this->operation[$ind]);
 
-
+            $this->resetValidation();
             $this->calculateTotalRefundAmount();
         }
     }
