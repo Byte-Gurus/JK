@@ -32,7 +32,7 @@ class SalesReturnTable extends Component
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
 
-        return view('livewire.components.sales.sales-return-table', [
+        return view('livewire.components.Sales.sales-return-table', [
             'returns' => $returns
         ]);
     }
