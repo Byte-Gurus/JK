@@ -417,10 +417,10 @@ class RestockForm extends Component
                 ->min('item_quantity');
 
             // Find the minimum reorder period for the item
-            $minReorderPeriod = PurchaseDetails::where('item_id', $itemId)
+            $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
                 ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->select(DB::raw('DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period'))
+                ->select(DB::raw("EXTRACT(DAY FROM AGE(deliveries.date_delivered, purchases.created_at)) AS reorder_period"))
                 ->orderBy('reorder_period', 'asc')
                 ->value('reorder_period');
 
@@ -442,10 +442,6 @@ class RestockForm extends Component
                 'min_reorder_period' => $minReorderPeriod,
                 'maximum_level' => $maximumLevel
             ];
-
-
         }
-
-
     }
 }
