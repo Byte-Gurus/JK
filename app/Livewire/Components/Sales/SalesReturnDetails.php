@@ -19,7 +19,7 @@ class SalesReturnDetails extends Component
     public $returnQuantity = [];
     public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount = 0, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
 
     public $return_info = [];
 
@@ -175,7 +175,7 @@ class SalesReturnDetails extends Component
             'payment_method' => $transaction->paymentJoin->payment_type ?? 'N/A',
             'reference_number' => $transaction->paymentJoin->reference_number ?? 'N/A',
             'discount_amount' => $transaction->total_discount_amount,
-            'change' => $transaction->paymentJoin->tendered_amount - $transaction->paymentJoin->amount ?? 0,
+            'change' => $transaction->paymentJoin->tendered_amount - $transaction->paymentJoin->amount ,
             'tendered_amount' => $transaction->paymentJoin->tendered_amountm,
             'subtotal' => $transaction->subtotal,
 
