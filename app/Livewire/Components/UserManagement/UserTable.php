@@ -50,7 +50,7 @@ class UserTable extends Component
     protected $listeners = [
         'refresh-table' => 'refreshTable',//*  galing sa UserTable class
         // "echo:new-user,NewUserCreatedEvent" => 'updatedSearch',
-        "echo:refresh-customer,UserEvent" => 'refreshFromPusher',
+        "echo:refresh-user,UserEvent" => 'refreshFromPusher',
 
     ];
 
