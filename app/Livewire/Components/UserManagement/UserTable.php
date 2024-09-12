@@ -91,7 +91,7 @@ class UserTable extends Component
     }
     public function refreshFromPusher()
     {
-        dd("sasa");
+
         $this->resetPage();
     }
 
