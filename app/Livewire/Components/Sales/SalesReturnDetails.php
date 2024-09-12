@@ -101,7 +101,7 @@ class SalesReturnDetails extends Component
             }
         }
 
-        if (isset($this->returnQuantity[$ind])) {
+        if (isset($this->returnQuantity[$ind]) && is_numeric($this->returnQuantity[$ind])) {
             $this->returnQuantity[$ind] = 0;
             $this->calculateTotalRefundAmount();
         }
@@ -128,7 +128,7 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index])) {
+            if (isset($this->returnQuantity[$index])  && is_numeric($this->returnQuantity[$index])  && isset($this->operation[$index])) {
 
                 if ($this->operation[$index] != 'Exchange') {
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
@@ -153,7 +153,7 @@ class SalesReturnDetails extends Component
     {
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             // Check if returnQuantity at $index is set and greater than 0
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
+            if (isset($this->returnQuantity[$index]) && is_numeric($this->returnQuantity[$index])  && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
                 // Check if description at $index exists
                 if (isset($this->description[$index])) {
                     $this->return_info[$index]['description'] = $this->description[$index];
