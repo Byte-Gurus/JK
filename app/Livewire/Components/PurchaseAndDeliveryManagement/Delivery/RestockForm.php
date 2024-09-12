@@ -416,11 +416,11 @@ class RestockForm extends Component
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->min('item_quantity');
 
-            // Find the minimum reorder period for the item
+            // Find the minimum reorder period for the item using PostgreSQL-compatible query
             $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
                 ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->select(DB::raw("EXTRACT(DAY FROM AGE(deliveries.date_delivered, purchases.created_at)) AS reorder_period"))
+                ->select(DB::raw("EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
                 ->orderBy('reorder_period', 'asc')
                 ->value('reorder_period');
 
