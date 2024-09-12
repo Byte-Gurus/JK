@@ -19,7 +19,7 @@ class SalesReturnDetails extends Component
     public $returnQuantity = [];
     public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount = 0, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
 
     public $return_info = [];
 
@@ -28,7 +28,7 @@ class SalesReturnDetails extends Component
 
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
-        return view('livewire.components.Sales.sales-return-details', [
+        return view('livewire.components.sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
         ]);
     }
@@ -101,7 +101,7 @@ class SalesReturnDetails extends Component
             }
         }
 
-        if (isset($this->returnQuantity[$ind]) && is_numeric($this->returnQuantity[$ind])) {
+        if (isset($this->returnQuantity[$ind])) {
             $this->returnQuantity[$ind] = 0;
             $this->calculateTotalRefundAmount();
         }
@@ -128,7 +128,7 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index])  && is_numeric($this->returnQuantity[$index])  && isset($this->operation[$index])) {
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index])) {
 
                 if ($this->operation[$index] != 'Exchange') {
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
@@ -153,7 +153,7 @@ class SalesReturnDetails extends Component
     {
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             // Check if returnQuantity at $index is set and greater than 0
-            if (isset($this->returnQuantity[$index]) && is_numeric($this->returnQuantity[$index])  && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
                 // Check if description at $index exists
                 if (isset($this->description[$index])) {
                     $this->return_info[$index]['description'] = $this->description[$index];
@@ -175,7 +175,7 @@ class SalesReturnDetails extends Component
             'payment_method' => $transaction->paymentJoin->payment_type ?? 'N/A',
             'reference_number' => $transaction->paymentJoin->reference_number ?? 'N/A',
             'discount_amount' => $transaction->total_discount_amount,
-            'change' => $transaction->paymentJoin->tendered_amount - $transaction->paymentJoin->amount ,
+            'change' => $transaction->paymentJoin->tendered_amount ?? 0 - $transaction->paymentJoin->amount,
             'tendered_amount' => $transaction->paymentJoin->tendered_amountm,
             'subtotal' => $transaction->subtotal,
 
