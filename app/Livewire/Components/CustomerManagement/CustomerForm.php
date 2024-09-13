@@ -94,7 +94,7 @@ class CustomerForm extends Component
             'street' => $validated['street'],
         ]);
 
-        $customer = Customer::create([
+        $customer = Customer::create([  
             'firstname' => $validated['firstname'],
             'middlename' => $validated['middlename'],
             'lastname' => $validated['lastname'],
