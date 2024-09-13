@@ -15,7 +15,7 @@ class SalesReturn extends Component
 
     public function render()
     {
-        return view('livewire.components.sales.sales-return');
+        return view('livewire.components.Sales.sales-return');
     }
 
     protected $listeners = [

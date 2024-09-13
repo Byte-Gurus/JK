@@ -12,6 +12,6 @@ class AdminLoginForm extends Component
 
     public function render()
     {
-        return view('livewire.components.sales.admin-login-form');
+        return view('livewire.components.Sales.admin-login-form');
     }
 }

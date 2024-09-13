@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\ItemManagement;
 
+use App\Events\ItemEvent;
 use App\Livewire\Pages\ItemManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
@@ -104,7 +105,7 @@ class ItemForm extends Component
 
         $this->alert('success', 'Item was created successfully');
         $this->refreshTable();
-
+        ItemEvent::dispatch('refresh-item');
         $this->resetForm();
         $this->closeModal();
     }
@@ -173,7 +174,7 @@ class ItemForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'items was updated successfully');
-
+        ItemEvent::dispatch('refresh-item');
         $this->refreshTable();
         $this->closeModal();
     }

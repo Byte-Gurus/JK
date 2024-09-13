@@ -3,6 +3,8 @@
 namespace App\Livewire\Components\UserManagement;
 
 
+use App\Events\NewUserCreatedEvent;
+use App\Events\UserEvent;
 use App\Livewire\Pages\UserManagementPage;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +38,7 @@ class UserForm extends Component
     //* assign all the listners in one array
     //* for methods
     protected $listeners = [
+
         'edit-user-from-table' => 'edit',  //* key:'edit-user-from-table' value:'edit'  galing sa UserTable class
         //* key:'change-method' value:'changeMethod' galing sa UserTable class,  laman false
         'change-method' => 'changeMethod',
@@ -78,6 +81,8 @@ class UserForm extends Component
 
 
         $this->alert('success', 'User was created successfully');
+        // NewUserCreatedEvent::dispatch('new-user');
+        UserEvent::dispatch('refresh-user');
         $this->refreshTable();
 
         $this->resetForm();
@@ -150,7 +155,7 @@ class UserForm extends Component
 
         $this->resetForm();
         $this->alert('success', 'User was updated successfully');
-
+        UserEvent::dispatch('refresh-user');
         $this->refreshTable();
         $this->closeModal();
     }

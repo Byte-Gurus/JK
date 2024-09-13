@@ -8,7 +8,7 @@ class WholesaleForm extends Component
 {
     public function render()
     {
-        return view('livewire.components.sales.wholesale-form');
+        return view('livewire.components.Sales.wholesale-form');
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value

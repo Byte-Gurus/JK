@@ -34,6 +34,10 @@ class PurchaseOrderTable extends Component
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table', compact('purchases', 'suppliers'));
     }
+    protected $listeners = [
+        "echo:refresh-purchase-order,PurchaseOrderEvent" => 'refreshFromPusher',
+        "echo:refresh-backorder,BackorderEvent" => 'refreshFromPusher',
+    ];
 
     public function sortByColumn($column)
     { //* sort the column
@@ -78,6 +82,10 @@ class PurchaseOrderTable extends Component
 
         $this->dispatch('view-po', poID: $po_Id)->to(ViewPurchaseOrderDetails::class);
 
+    }
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 
 }

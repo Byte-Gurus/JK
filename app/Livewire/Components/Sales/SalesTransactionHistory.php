@@ -46,6 +46,12 @@ class SalesTransactionHistory extends Component
             ['sales' => $sales,]
         );
     }
+
+    protected $listeners = [
+        "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
+        "echo:refresh-return,ReturnEvent" => 'refreshFromPusher',
+
+    ];
     public function getTransactionID($transaction_id)
     {
 
@@ -110,5 +116,9 @@ class SalesTransactionHistory extends Component
             'tendered_amount',
             'change'
         );
+    }
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

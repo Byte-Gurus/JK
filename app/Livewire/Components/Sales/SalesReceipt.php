@@ -9,7 +9,7 @@ class SalesReceipt extends Component
     public $receiptDetails = [];
     public function render()
     {
-        return view('livewire.components.sales.sales-receipt');
+        return view('livewire.components.Sales.sales-receipt');
     }
 
     protected $listeners = [

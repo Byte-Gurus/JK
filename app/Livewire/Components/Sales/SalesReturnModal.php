@@ -12,7 +12,7 @@ class SalesReturnModal extends Component
     public function render()
     {
 
-        return view('livewire.components.sales.sales-return-modal');
+        return view('livewire.components.Sales.sales-return-modal');
     }
 
     public function enterTransaction()

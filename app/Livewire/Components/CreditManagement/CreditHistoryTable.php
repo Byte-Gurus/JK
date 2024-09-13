@@ -41,6 +41,10 @@ class CreditHistoryTable extends Component
             'creditHistories' => $creditHistories
         ]);
     }
+    protected $listeners = [
+        "echo:refresh-credit,CreditEvent" => 'refreshFromPusher',
+    ];
+
 
     public function sortByColumn($column)
     { //* sort the column
@@ -60,6 +64,10 @@ class CreditHistoryTable extends Component
         $this->resetPage();
     }
     public function refreshTable()
+    {
+        $this->resetPage();
+    }
+    public function refreshFromPusher()
     {
         $this->resetPage();
     }

@@ -26,7 +26,7 @@ class ViewSalesReturnDetails extends Component
         // Execute the query and get the results
         $return_details = $query->get();
 
-        return view('livewire.components.sales.view-sales-return-details', [
+        return view('livewire.components.Sales.view-sales-return-details', [
             'return_details' => $return_details
         ]);
     }

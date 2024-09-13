@@ -43,7 +43,7 @@ class SupplierTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
-
+        "echo:refresh-supplier,SupplierEvent" => 'refreshFromPusher',
     ];
 
 
@@ -83,6 +83,10 @@ class SupplierTable extends Component
 
 
     public function refreshTable()
+    {
+        $this->resetPage();
+    }
+    public function refreshFromPusher()
     {
         $this->resetPage();
     }

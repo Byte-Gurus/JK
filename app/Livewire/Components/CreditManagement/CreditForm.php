@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\CreditManagement;
 
+use App\Events\CreditEvent;
 use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
@@ -106,6 +107,7 @@ class CreditForm extends Component
         $this->resetForm();
 
         $this->refreshTable();
+        CreditEvent::dispatch('refresh-credit');
 
         $this->closeModal();
     }

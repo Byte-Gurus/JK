@@ -35,6 +35,7 @@ class CustomerTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
+        "echo:refresh-customer,CustomerEvent" => 'refreshFromPusher',
 
     ];
 
@@ -68,5 +69,8 @@ class CustomerTable extends Component
         $customer = Customer::find($customer_id);
         $this->imageUrl = $customer->id_picture ? Storage::url($customer->id_picture) : null;
     }
-
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
+    }
 }

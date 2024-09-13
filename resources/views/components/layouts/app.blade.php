@@ -30,20 +30,8 @@
         }
     </style>
 
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
 
-        var pusher = new Pusher('fa7d24aad8f58de38dcc', {
-            cluster: 'ap1'
-        });
 
-        var channel = pusher.subscribe('JK-Store');
-        channel.bind('Testing', function(data) {
-            alert(JSON.stringify(data));
-        });
-    </script>
 </head>
 
 <body class="font-['Inter', 'Roboto'] h-fit">

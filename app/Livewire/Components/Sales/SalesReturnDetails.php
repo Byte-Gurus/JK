@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Events\ReturnEvent;
 use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
@@ -27,7 +28,7 @@ class SalesReturnDetails extends Component
 
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
-        return view('livewire.components.sales.sales-return-details', [
+        return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
         ]);
     }
@@ -84,10 +85,10 @@ class SalesReturnDetails extends Component
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
                 $transactionDetails->status = $info['operation'];
                 $transactionDetails->save();
-
             }
         }
 
+        ReturnEvent::dispatch('refresh-return');
 
         $this->alert('success', 'Item/s was returned successfully');
     }
@@ -114,6 +115,8 @@ class SalesReturnDetails extends Component
 
             $this->calculateTotalRefundAmount();
         }
+
+        $this->resetValidation();
     }
     public function updatedReturnQuantity()
     {
@@ -174,8 +177,8 @@ class SalesReturnDetails extends Component
             'payment_method' => $transaction->paymentJoin->payment_type ?? 'N/A',
             'reference_number' => $transaction->paymentJoin->reference_number ?? 'N/A',
             'discount_amount' => $transaction->total_discount_amount,
-            'change' => $transaction->paymentJoin->tendered_amount - $transaction->paymentJoin->amount,
-            'tendered_amount' => $transaction->paymentJoin->tendered_amountm,
+            'change' => ($transaction->paymentJoin->tendered_amount ?? 0) - ($transaction->paymentJoin->amount ?? 0),
+            'tendered_amount' => $transaction->paymentJoin->tendered_amount ?? 0,
             'subtotal' => $transaction->subtotal,
 
         ]);

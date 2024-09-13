@@ -19,7 +19,7 @@ class SalesReturnForm extends Component
 
     public function render()
     {
-        return view('livewire.components.sales.sales-return-form');
+        return view('livewire.components.Sales.sales-return-form');
     }
 
     protected $listeners = [

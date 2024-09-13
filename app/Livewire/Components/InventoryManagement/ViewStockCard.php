@@ -25,7 +25,9 @@ class ViewStockCard extends Component
 
     protected $listeners = [
         'stock-card' => 'stockCard', //*  galing sa UserTable class
-
+        "echo:refresh-adjustment,AdjustmentEvent" => 'refreshFromPusher',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
+        "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
     ];
 
     private function populateForm() //*lagyan ng laman ang mga input
@@ -57,12 +59,12 @@ class ViewStockCard extends Component
                 $query->whereHas('inventoryJoin', function ($query) {
                     $query->where('id', $this->stock_id);
                 })
-                ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
-                    $query->where('id', $this->stock_id);
-                })
-                ->orWhereHas('transactionDetailsJoin.inventoryJoin', function ($query) {
-                    $query->where('id', $this->stock_id);
-                });
+                    ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
+                        $query->where('id', $this->stock_id);
+                    })
+                    ->orWhereHas('transactionDetailsJoin.inventoryJoin', function ($query) {
+                        $query->where('id', $this->stock_id);
+                    });
             });
 
         // Apply date range filter if both startDate and endDate are provided
@@ -146,5 +148,8 @@ class ViewStockCard extends Component
 
         $this->stock_cards = $processedStockCards;
     }
-
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
+    }
 }

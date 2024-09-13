@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
+use App\Events\RestockEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
@@ -125,7 +126,7 @@ class RestockForm extends Component
 
 
         $backorder_Items = [];
-        
+
         $this->getMaximumLevel();
 
         foreach ($this->purchaseDetails as $index => $detail) {
@@ -209,7 +210,7 @@ class RestockForm extends Component
         $this->resetForm();
         $this->alert('success', 'Restocked successfully');
 
-
+        RestockEvent::dispatch('refresh-stock');
         $this->refreshTable();
         $this->closeModal();
     }
@@ -415,11 +416,11 @@ class RestockForm extends Component
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->min('item_quantity');
 
-            // Find the minimum reorder period for the item
-            $minReorderPeriod = PurchaseDetails::where('item_id', $itemId)
+            // Find the minimum reorder period for the item using PostgreSQL-compatible query
+            $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
                 ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->select(DB::raw('DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period'))
+                ->select(DB::raw("EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
                 ->orderBy('reorder_period', 'asc')
                 ->value('reorder_period');
 
@@ -441,10 +442,6 @@ class RestockForm extends Component
                 'min_reorder_period' => $minReorderPeriod,
                 'maximum_level' => $maximumLevel
             ];
-
-
         }
-
-
     }
 }

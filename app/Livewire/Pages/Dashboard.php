@@ -19,7 +19,10 @@ class Dashboard extends Component
 
     protected $listeners = [
         'close-modal' => 'closeModal',
-        'change-sidebar-status' => 'changeSidebarStatus'
+        'change-sidebar-status' => 'changeSidebarStatus',
+        "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
+        "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
+        "echo:refresh-adjustment,AdjustmentEvent" => 'refreshFromPusher',
     ];
 
     public function changeSidebarStatus($sidebarOpen)
@@ -30,6 +33,9 @@ class Dashboard extends Component
     public function updatedSelectPicker($picker)
     {
         $this->selectPicker = $picker;
-       
+    }
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
     }
 }

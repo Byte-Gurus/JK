@@ -44,14 +44,14 @@
                 @endif
             </div>
             <div class="flex flex-row items-center gap-4 text-nowrap">
-                @if (empty($payment) && empty($credit_details) )
-                <div>
-                    <select id="transaction_type" wire:model.live='changeTransactionType'
-                        class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
-                        <option selected value="1">Sales</option>
-                        <option value="2">Credit</option>
-                    </select>
-                </div>
+                @if (empty($payment) && empty($credit_details))
+                    <div>
+                        <select id="transaction_type" wire:model.live='changeTransactionType'
+                            class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
+                            <option selected value="1">Sales</option>
+                            <option value="2">Credit</option>
+                        </select>
+                    </div>
                 @endif
                 <div>
                     <button x-on:click="$wire.displaySalesTransactionHistory()"
@@ -243,7 +243,7 @@
                                 </button>
                             </div>
                         @endif
-                        @if (!empty($selectedItems)  && $isSales)
+                        @if (!empty($selectedItems) && $isSales)
                             <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
                                 x-on:click="$wire.displayPaymentForm()"
                                 class="py-4 px-8 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">

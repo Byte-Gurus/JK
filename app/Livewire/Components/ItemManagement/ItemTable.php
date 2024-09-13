@@ -36,7 +36,7 @@ class ItemTable extends Component
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
-
+        "echo:refresh-item,ItemEvent" => 'refreshFromPusher',
     ];
 
 
@@ -56,7 +56,6 @@ class ItemTable extends Component
         //*call the listesner 'edit-item-from-table' galing sa ItemForm class
         //@params itemID name ng parameter na ipapasa, $supplierId parameter value na ipapasa
         $this->dispatch('get-barcode-from-table', ['Barcode' => $barcode])->to(PrintBarcodeForm::class);
-
     }
     public function sortByColumn($column)
     { //* sort the column
@@ -76,6 +75,10 @@ class ItemTable extends Component
         $this->resetPage();
     }
     public function refreshTable()
+    {
+        $this->resetPage();
+    }
+    public function refreshFromPusher()
     {
         $this->resetPage();
     }
