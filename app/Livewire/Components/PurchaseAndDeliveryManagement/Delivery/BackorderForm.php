@@ -11,11 +11,13 @@ use App\Models\PurchaseDetails;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BackorderForm extends Component
 {
-    use LivewireAlert;
+    use LivewireAlert, WithPagination,  WithoutUrlPagination;
     public $backorderList = [];
     public $po_number,  $new_po_number, $purchase_id, $supplier, $delivery_id, $purchase, $select_supplier;
     public $selectedToReorder = [];
