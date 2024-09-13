@@ -16,6 +16,7 @@
         "milon/barcode": "^11.0",
         "pusher/pusher-php-server": "^7.2",
         "woenel/prpcmblmts": "^1.0"
+
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
@@ -53,6 +54,7 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ]
+
     },
     "extra": {
         "laravel": {
