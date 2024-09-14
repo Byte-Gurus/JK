@@ -199,14 +199,22 @@
                         @endif
                     </div>
                     @if ($transaction_type == 'Return')
-                    <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.2em] font-medium">Original Amount</p>
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Original Amount</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class=" text-[1.2em] font-black">{{ number_format($tendered_amount, 2) }}</p>
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Return Amount</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) }}</p>
+                            </div>
                         </div>
-                    </div>
                     @endif
                 </div>
             </div>
