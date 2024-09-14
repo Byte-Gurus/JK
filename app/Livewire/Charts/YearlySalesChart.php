@@ -24,7 +24,7 @@ class YearlySalesChart extends Component
     {
 
 
-        if (!$currentYear) {
+        if (!$this->Year) {
             $currentYear = Carbon::now()->format('Y');
         }
 

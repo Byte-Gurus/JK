@@ -27,7 +27,7 @@ class DailySalesChart extends Component
     {
 
 
-        if (!$currentDate) {
+        if (!$this->day) {
             $currentDate = Carbon::now();
         }
 
@@ -48,6 +48,5 @@ class DailySalesChart extends Component
         ];
 
         $this->dispatch('DailyTotalUpdated', $this->dailyTotal);
-        dd($this->totalAmount, $this->transactionCount);
     }
 }
