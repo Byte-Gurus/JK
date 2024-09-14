@@ -16,7 +16,7 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Purchase Order No.</p>
-                        <p class="text-[1em] font-bold uppercase"></p>
+                        <p class="text-[1em] font-bold uppercase">{{$purchase->po_number ?? null}}</p>
                         {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
                         </p>
                     </div>
