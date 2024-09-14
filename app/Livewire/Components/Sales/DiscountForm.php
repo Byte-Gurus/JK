@@ -190,7 +190,7 @@ class DiscountForm extends Component
     public function removeDiscountConfirmed()
     {
         $this->resetForm();
-
+        $this->clearSelectedCustomerName(); 
         $this->dispatch('get-customer-details', customerDetails: null)->to(SalesTransaction::class);
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
