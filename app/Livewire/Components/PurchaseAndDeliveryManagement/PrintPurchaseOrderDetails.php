@@ -10,4 +10,13 @@ class PrintPurchaseOrderDetails extends Component
     {
         return view('livewire.components.PurchaseAndDeliveryManagement.print-purchase-order-details');
     }
+
+    protected $listeners = [
+        'print-po-from-table' => 'printPO'
+    ];
+
+    public function printPO($purchase_ID)
+    {
+        dd($purchase_ID);
+    }
 }

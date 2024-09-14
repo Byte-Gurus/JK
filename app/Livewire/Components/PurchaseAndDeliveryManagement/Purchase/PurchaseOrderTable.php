@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
+use App\Livewire\Components\PurchaseAndDeliveryManagement\PrintPurchaseOrderDetails;
 use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Purchase;
@@ -64,7 +65,10 @@ class PurchaseOrderTable extends Component
         $this->dispatch('display-modal', showModal: true)->to(PurchaseOrderForm::class);
 
         $this->dispatch('display-edit-modal', showEditModal: true)->to(PurchasePage::class);
-
+    }
+    public function printPO($purchase_id)
+    {
+        $this->dispatch('print-po-from-table', purchase_ID: $purchase_id)->to(PrintPurchaseOrderDetails::class);
     }
 
     public function displayPrintPurchaseOrderDetails()
@@ -87,11 +91,9 @@ class PurchaseOrderTable extends Component
     {
 
         $this->dispatch('view-po', poID: $po_Id)->to(ViewPurchaseOrderDetails::class);
-
     }
     public function refreshFromPusher()
     {
         $this->resetPage();
     }
-
 }
