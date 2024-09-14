@@ -87,14 +87,15 @@ class SalesTransaction extends Component
                 $query->where('status', 'Available');
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where(function ($subQuery) use ($searchTerm) {
-                    $subQuery->where('item_name', 'like', "%{$searchTerm}%")
-                        ->orWhere('barcode', 'like', "%{$searchTerm}%");
+                $searchTermLower = strtolower($searchTerm); // Convert search term to lowercase
+
+                $query->where(function ($subQuery) use ($searchTermLower) {
+                    $subQuery->whereRaw('LOWER(item_name) LIKE ?', ['%' . $searchTermLower . '%'])
+                        ->orWhereRaw('LOWER(barcode) LIKE ?', ['%' . $searchTermLower . '%']);
                 });
             })
             ->with('inventoryJoin') // Ensure inventoryJoin is eager-loaded
             ->get();
-
         // Process each item
         $items = $items->map(function ($item) {
             // Filter and sort inventoryJoin based on shelf_life_type
