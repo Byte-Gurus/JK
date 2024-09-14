@@ -435,6 +435,7 @@ class SalesTransaction extends Component
             }
 
             $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+            dump($this->grandTotal );
         }
 
 
@@ -519,7 +520,6 @@ class SalesTransaction extends Component
 
         $this->alert('success', 'Item was removed successfully');
         $this->computeTransaction();
-        dd($this->grandTotal);
     }
 
     public function removeRowCancelled()
