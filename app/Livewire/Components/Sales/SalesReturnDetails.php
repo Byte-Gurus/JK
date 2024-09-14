@@ -121,10 +121,8 @@ class SalesReturnDetails extends Component
     }
     public function updatedReturnQuantity()
     {
-        if (!$this->returnQuantity) {
-            $validated = $this->validateForm();
-            $this->calculateTotalRefundAmount();
-        }
+        $validated = $this->validateForm();
+        $this->calculateTotalRefundAmount();
     }
 
     public function calculateTotalRefundAmount()
@@ -133,6 +131,10 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
+            if (!$this->returnQuantity[$index]) {
+                return;
+            }
+
             if (isset($this->returnQuantity[$index]) && isset($this->operation[$index])) {
 
                 if ($this->operation[$index] != 'Exchange') {
