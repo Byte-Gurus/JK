@@ -96,7 +96,7 @@ class PurchaseOrderForm extends Component
     protected $listeners = [
         'edit-po-from-table' => 'edit',
         'change-method' => 'changeMethod',
-        'display-modal' => 'displayModal',
+        'reset-modal' => 'resetModal',
         'updateConfirmed',
         'createConfirmed',
     ];
@@ -535,11 +535,9 @@ class PurchaseOrderForm extends Component
         $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);
     }
 
-    public function displayModal($showModal)
+    public function resetModal()
     {
         $this->resetValidation();
         $this->resetForm();
-        $this->showModal = $showModal; //var assign ang parameter value sa global variable
-
     }
 }

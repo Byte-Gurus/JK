@@ -82,7 +82,7 @@ class PurchaseOrderTable extends Component
         $this->resetPage();
     }
 
-    public function viewPurchaseOrderDetails()
+    public function displayPurchaseOrderDetails()
     {
         $this->dispatch('display-table')->to(PurchasePage::class);
 

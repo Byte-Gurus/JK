@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative" x-show="showModal" x-cloak x-data="{ isCreate: @entangle('isCreate'), showModal: @entangle('showModal'), showEditModal: @entangle('showEditModal') }">
+<div class="relative">
     <div class="flex flex-row h-[655px] gap-4 ">
         @if ($this->isCreate)
             <div
@@ -271,11 +271,11 @@
                                 @if (!empty($selectedToRemove) || empty($edit_reorder_lists))
                                     <button type="submit" disabled
                                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-sm ">
-                                        Update</button>
+                                        Create</button>
                                 @else
                                     <button type="submit"
                                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-sm hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out">
-                                        Update</button>
+                                        Create</button>
                                 @endif
                             </div>
                         </div>
@@ -360,12 +360,8 @@
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
                                         </th>
-
-
                                     </tr>
                                 @endforeach
-
-
                             </tbody>
                         </table>
                     </div>

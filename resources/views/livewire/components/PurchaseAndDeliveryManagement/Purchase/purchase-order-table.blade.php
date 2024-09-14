@@ -148,7 +148,7 @@
 
 
                                                 <button
-                                                    x-on:click=" $wire.viewPurchaseOrderDetails(); openActions = !openActions"
+                                                    x-on:click=" $wire.displayPurchaseOrderDetails(); openActions = !openActions"
                                                     wire:click="getPo_ID({{ $purchase->id }})"
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 transition-all duration-100 ease-in-out justify-left hover:bg-blue-100">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
