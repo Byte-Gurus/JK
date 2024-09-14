@@ -11,7 +11,7 @@ class StockAdjustPage extends Component
     public $showInventoryAdminLoginForm = false;
     public function render()
     {
-        return view('livewire.components.inventorymanagement.stock-adjust-page');
+        return view('livewire.components.InventoryManagement.stock-adjust-page');
     }
 
 }
