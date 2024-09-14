@@ -128,8 +128,6 @@ class SalesTransaction extends Component
     {
 
 
-
-
         $credit = Credit::where('customer_id', $creditor_id)->first();
 
         if ($credit->credit_limit <= $this->grandTotal) {
@@ -472,7 +470,7 @@ class SalesTransaction extends Component
             $this->customerDetails = null;
 
             $this->reset('customer_name', 'customer_discount_no', 'discount_type');
-            $this->alert('success', 'Discount was removed successfully');
+           
         }
     }
 
