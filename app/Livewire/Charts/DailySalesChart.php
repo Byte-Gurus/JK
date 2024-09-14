@@ -48,5 +48,6 @@ class DailySalesChart extends Component
         ];
 
         $this->dispatch('DailyTotalUpdated', $this->dailyTotal);
+        dd($this->totalAmount, $this->transactionCount);
     }
 }
