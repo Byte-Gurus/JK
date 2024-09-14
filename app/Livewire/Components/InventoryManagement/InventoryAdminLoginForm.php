@@ -10,7 +10,7 @@ class InventoryAdminLoginForm extends Component
     public $showStockAdjustModal = false;
     public function render()
     {
-        return view('livewire.components.inventorymanagement.inventory-admin-login-form');
+        return view('livewire.components.InventoryManagement.inventory-admin-login-form');
     }
 
     public function closeInventoryAdminLoginForm()
