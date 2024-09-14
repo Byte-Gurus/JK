@@ -51,19 +51,20 @@ class Transaction extends Model
 
     public function scopeSearch($query, $value)
     {
+        $value = strtolower($value);
 
-        return $query->where('transaction_number', 'like', "%{$value}%")
+        return $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"])
             ->orWhereHas('customerJoin', function ($query) use ($value) {
-                $query->where('firstname', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('userJoin', function ($query) use ($value) {
-                $query->where('firstname', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('discountJoin', function ($query) use ($value) {
-                $query->where('percentage', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(percentage) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('paymentJoin', function ($query) use ($value) {
-                $query->where('payment_type', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(payment_type) like ?', ["%{$value}%"]);
             });
     }
 }

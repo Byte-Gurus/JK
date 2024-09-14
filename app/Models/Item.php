@@ -44,11 +44,11 @@ class Item extends Model
 
 
 
-    public function scopeSearch($query, $value)  //* search function
+    public function scopeSearch($query, $value)
     {
-        //? queries
-        $query->where('item_name', 'like', "%{$value}%")
-        ->orWhere('barcode', 'like', "%{$value}%");
+        $value = strtolower($value);
 
+        return $query->whereRaw('LOWER(item_name) like ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
     }
 }

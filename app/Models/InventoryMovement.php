@@ -36,15 +36,17 @@ class InventoryMovement extends Model
 
     public function scopeSearch($query, $value)
     {
+        $value = strtolower($value);
+
         return $query->whereHas('inventoryJoin.itemJoin', function ($query) use ($value) {
-            $query->where('item_name', 'like', "%{$value}%")
-                ->orWhere('barcode', 'like', "%{$value}%");
+            $query->whereRaw('LOWER(item_name) like ?', ["%{$value}%"])
+                ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
         })->orWhereHas('adjustmentJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
-            $query->where('item_name', 'like', "%{$value}%")
-                ->orWhere('barcode', 'like', "%{$value}%");
+            $query->whereRaw('LOWER(item_name) like ?', ["%{$value}%"])
+                ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
         })->orWhereHas('transactionDetailsJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
-            $query->where('item_name', 'like', "%{$value}%")
-                ->orWhere('barcode', 'like', "%{$value}%");
+            $query->whereRaw('LOWER(item_name) like ?', ["%{$value}%"])
+                ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
         });
     }
 }

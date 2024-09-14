@@ -70,12 +70,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserRole::class, 'user_role_id');
     }
-    public function scopeSearch($query, $value)  //* search function
+    public function scopeSearch($query, $value)
     {
-        //? queries
-        $query->where('username', 'like', "%{$value}%")
-            ->orWhere('firstname', 'like', "%{$value}%")
-            ->orWhere('middlename', 'like', "%{$value}%")
-            ->orWhere('lastname', 'like', "%{$value}%");
+        $value = strtolower($value);
+        $query->whereRaw('LOWER(username) like ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(firstname) like ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(middlename) like ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(lastname) like ?', ["%{$value}%"]);
     }
 }
