@@ -518,7 +518,7 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
 
         $this->alert('success', 'Item was removed successfully');
-        $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+        $this->computeTransaction();
         dd($this->grandTotal);
     }
 
