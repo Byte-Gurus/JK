@@ -359,10 +359,19 @@ class SalesTransaction extends Component
 
     public function generateTransactionNumber()
     {
-        $randomNumber = random_int(0, 9999);
-        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-        $this->transaction_number = 'TN-' . $formattedNumber . '-' . now()->format('dmY');
+        do {
+            $randomNumber = random_int(0, 9999);
+            $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+            $transactionNumber = 'TN-' . $formattedNumber . '-' . now()->format('mdY');
+
+            // Check if the transaction number already exists
+            $exists = Transaction::where('transaction_number', $transactionNumber)->exists();
+        } while ($exists);
+
+        // Assign the unique transaction number
+        $this->transaction_number = $transactionNumber;
     }
+
 
 
 

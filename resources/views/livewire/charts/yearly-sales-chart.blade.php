@@ -33,7 +33,7 @@
                     @endfor
                 </select>
             </div>
-            <canvas width="300" height="100" id="yearChart"></canvas>
+            <canvas wire:ignore  width="300" height="100" id="yearChart"></canvas>
         </div>
     </div>
 </div>

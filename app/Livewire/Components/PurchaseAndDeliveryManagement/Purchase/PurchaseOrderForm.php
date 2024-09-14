@@ -511,12 +511,19 @@ class PurchaseOrderForm extends Component
     //     $this->populateForm();
     //     $this->compareAndFilterLists();
     // }
-    public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
+    public function generatePurchaseOrderNumber()
     {
+        do {
+            $randomNumber = random_int(0, 9999);
+            $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+            $purchaseOrderNumber = 'PO-' . $formattedNumber . '-' . now()->format('mdY');
 
-        $randomNumber = random_int(0, 9999);
-        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-        $this->po_number = 'PO-' . $formattedNumber . '-' . now()->format('dmY');
+            // Check if the purchase order number already exists
+            $exists = Purchase::where('po_number', $purchaseOrderNumber)->exists();
+        } while ($exists);
+
+        // Assign the unique purchase order number
+        $this->po_number = $purchaseOrderNumber;
     }
 
     public function refreshTable() //* refresh ang table after confirmation

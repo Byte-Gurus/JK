@@ -1,5 +1,5 @@
 <div x-cloak>
-    <div wire:ignore>
+    <div >
         <div class="grid grid-flow-col grid-cols-2 gap-4">
             <div class="col-span-2">
                 <div class="grid grid-flow-col grid-cols-2 gap-4 mb-4">
@@ -28,7 +28,7 @@
                     <input type="date" wire:model.live="day" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
                 </div>
             </div>
-            <canvas width="300" height="100" id="dailyChart"></canvas>
+            <canvas wire:ignore width="300" height="100" id="dailyChart"></canvas>
         </div>
     </div>
 </div>

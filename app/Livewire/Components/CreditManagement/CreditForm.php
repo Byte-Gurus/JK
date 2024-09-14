@@ -51,7 +51,8 @@ class CreditForm extends Component
         'createConfirmed',
     ];
 
-    public function getCustomer($customer_id){
+    public function getCustomer($customer_id)
+    {
         $this->customer_id = $customer_id;
 
 
@@ -158,11 +159,18 @@ class CreditForm extends Component
         }
     }
 
-    public function generateCreditNumber()  //* generate a random barcode and contatinate the ITM
+    public function generateCreditNumber()
     {
+        do {
+            $randomNumber = random_int(0, 9999);
+            $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+            $creditNumber = 'CR-' . $formattedNumber . '-' . now()->format('mdY');
 
-        $randomNumber = random_int(0, 9999);
-        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-        $this->credit_number = 'CR-' . $formattedNumber . '-' . now()->format('dmY');
+            // Check if the credit number already exists
+            $exists = Credit::where('credit_number', $creditNumber)->exists();
+        } while ($exists);
+
+        // Assign the unique credit number
+        $this->credit_number = $creditNumber;
     }
 }

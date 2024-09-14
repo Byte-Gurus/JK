@@ -30,7 +30,7 @@
                         class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
                 </div>
             </div>
-            <canvas width="300" height="100" id="monthChart"></canvas>
+            <canvas wire:ignore  width="300" height="100" id="monthChart"></canvas>
         </div>
     </div>
 </div>
