@@ -35,6 +35,11 @@ class CreditPaymentForm extends Component
 
         $validated = $this->validateForm();
 
+        if (!$this->payWithCash && $this->tendered_amount != $this->credit_amount) {
+            $this->addError('tendered_amount', 'The tendered amount must be equal to the grand total.');
+            return;
+        }
+
         $this->confirm('Do you want to add this user?', [
             'onConfirmed' => 'paymentConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array

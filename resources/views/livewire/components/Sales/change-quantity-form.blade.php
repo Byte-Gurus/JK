@@ -24,7 +24,8 @@
                     </p>
                 </div>
             </div>
-            <div class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
+            <div
+                class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
 
                 <div class="flex flex-row items-center justify-between">
 
@@ -57,7 +58,7 @@
                     @csrf
 
                     <div class="flex flex-col items-center justify-center mt-4 w-fit">
-                        <input autofocus type="text" wire:model='adjust_quantity' required
+                        <input type="text" wire:model='adjust_quantity' required
                             class=" bg-[#ffffff3d] w-1/2  text-center font-black text-2xl border border-[rgb(143,143,143)] text-white rounded-md block p-4">
 
                         @error('adjust_quantity')
