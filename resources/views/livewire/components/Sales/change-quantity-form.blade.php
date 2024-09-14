@@ -2,9 +2,9 @@
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
-        <div class="grid items-center justify-center grid-flow-col bg-transparent max-h-[400px] w-fit">
+        <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[400px]">
             <div
-                class="flex flex-col h-full w-fit justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
+                class="flex flex-col h-full w-full justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
                 <div class="flex flex-col gap-1 leading-none">
                     <p class="text-[1em] font-thin text-white">Item Barcode</p>
                     <p class="text-[1.2em] font-bold text-white">{{ $barcode }}
@@ -24,19 +24,16 @@
                     </p>
                 </div>
             </div>
-            <div
-                class="h-full w-fit gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
+            <div class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
 
                 <div class="flex flex-row items-center justify-between">
-                    <div class="w-full ">
 
-                        {{-- //* form title --}}
-                        <h3 class="text-xl font-black text-[rgb(255,255,255)] item ">
+                    {{-- //* form title --}}
+                    <h3 class="text-xl font-black text-[rgb(255,255,255)] item ">
 
-                            Change Quantity
+                        Change Quantity
 
-                        </h3>
-                    </div>
+                    </h3>
 
                     {{-- //* close button --}}
                     <button type="button" x-on:click="showChangeQuantityForm=false" wire:click='resetFormWhenClosed'
@@ -54,21 +51,14 @@
                     </button>
                 </div>
 
-                        <div class="p-4">
+                {{-- //* first row --}}
+                {{-- //* adjust reason --}}
+                <form wire:submit.prevent="adjust" class="flex flex-col items-center w-full h-full justify-evenly">
+                    @csrf
 
-                            {{-- //* first row --}}
-                            <div class="flex flex-row items-center justify-between">
-                                {{-- //* adjust reason --}}
-                                <div class="flex flex-col items-center justify-center w-full gap-1 mb-3">
-                                    <div>
-                                        <p class="text-[1.6em] font-bold text-gray-900">Enter
-                                            Quantity</p>
-                                    </div>
-
-                                    <div class="flex justify-center">
-                                        <input autofocus type="text" wire:model='adjust_quantity' required
-                                            class=" bg-[rgb(245,245,245)] text-center w-1/2 h-1/2 text-2xl border border-[rgb(143,143,143)] text-gray-900 rounded-md block p-4">
-                                    </div>
+                    <div class="flex flex-col items-center justify-center mt-4 w-fit">
+                        <input autofocus type="text" wire:model='adjust_quantity' required
+                            class=" bg-[#ffffff3d] w-1/2  text-center font-black text-2xl border border-[rgb(143,143,143)] text-white rounded-md block p-4">
 
                         @error('adjust_quantity')
                             <span
@@ -76,9 +66,7 @@
                         @enderror
                     </div>
 
-
-
-                    <div class="flex flex-row justify-end w-full gap-2 mt-4">
+                    <div class="flex flex-row justify-end gap-2 my-4">
                         <div>
                             <div>
                                 <button wire:click='resetFormWhenClosed'
