@@ -45,13 +45,13 @@ class Inventory extends Model
     {
         $value = strtolower($value);
 
-        return $query->whereRaw('LOWER(sku_code) like ?', ["%{$value}%"])
+        return $query->whereRaw('LOWER(sku_code) LIKE ?', ["%{$value}%"])
             ->orWhereHas('itemJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(item_name) like ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
+                $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
             })
             ->orWhereHas('deliveryJoin.purchaseJoin.supplierJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(company_name) like ?', ["%{$value}%"]);
+                $query->whereRaw('LOWER(company_name) LIKE ?', ["%{$value}%"]);
             });
     }
 }

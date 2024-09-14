@@ -30,7 +30,8 @@ class Returns extends Model
         $value = strtolower($value);
 
         return $query->whereHas('transactionJoin', function ($query) use ($value) {
-            $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
+            $query->whereRaw('LOWER(transaction_number) LIKE ?', ["%{$value}%"]);
         });
     }
+
 }

@@ -36,18 +36,18 @@ class Supplier extends Model
     {
         $value = strtolower($value);
 
-        return $query->whereRaw('LOWER(company_name) like ?', ["%{$value}%"])
-            ->orWhereRaw('LOWER(contact_number) like ?', ["%{$value}%"])
+        return $query->whereRaw('LOWER(company_name) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(contact_number) LIKE ?', ["%{$value}%"])
             ->orWhereHas('addressJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(street) like ?', ["%{$value}%"])
+                $query->whereRaw('LOWER(street) LIKE ?', ["%{$value}%"])
                     ->orWhereHas('provinceJoin', function ($query) use ($value) {
-                        $query->whereRaw('LOWER(province_description) like ?', ["%{$value}%"]);
+                        $query->whereRaw('LOWER(province_description) LIKE ?', ["%{$value}%"]);
                     })
                     ->orWhereHas('cityJoin', function ($query) use ($value) {
-                        $query->whereRaw('LOWER(city_municipality_description) like ?', ["%{$value}%"]);
+                        $query->whereRaw('LOWER(city_municipality_description) LIKE ?', ["%{$value}%"]);
                     })
                     ->orWhereHas('barangayJoin', function ($query) use ($value) {
-                        $query->whereRaw('LOWER(barangay_description) like ?', ["%{$value}%"]);
+                        $query->whereRaw('LOWER(barangay_description) LIKE ?', ["%{$value}%"]);
                     });
             });
     }

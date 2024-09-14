@@ -31,9 +31,10 @@ class Delivery extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
-
+    
         return $query->whereHas('purchaseJoin', function ($query) use ($value) {
-            $query->whereRaw('LOWER(po_number) like ?', ["%{$value}%"]);
+            $query->whereRaw('LOWER(po_number) LIKE ?', ["%{$value}%"]);
         });
     }
+    
 }
