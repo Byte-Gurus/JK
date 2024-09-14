@@ -121,8 +121,10 @@ class SalesReturnDetails extends Component
     }
     public function updatedReturnQuantity()
     {
-        $validated = $this->validateForm();
-        $this->calculateTotalRefundAmount();
+        if (!$this->returnQuantity) {
+            $validated = $this->validateForm();
+            $this->calculateTotalRefundAmount();
+        }
     }
 
     public function calculateTotalRefundAmount()
