@@ -1,5 +1,5 @@
 <div x-cloak>
-    <div wire:ignore>
+    <div >
         <div class="grid grid-flow-col grid-cols-2 gap-4">
             <div class="col-span-2">
                 <div class="grid grid-flow-col grid-cols-2 gap-4 mb-4">
@@ -7,7 +7,7 @@
                         class="col-span-1 px-8 py-5 border border-red-900 rounded-md shadow-md shadow-red-900 "
                         style="background-image: linear-gradient(115deg, #ffcccc, #feaeae)">
                         <p class="pb-3 text-lg font-extrabold text-red-800">Total Amount (₱)</p>
-                        <p class="text-3xl font-black text-red-900">{{ $totalAmount }}</p>
+                        <p class="text-3xl font-black text-red-900">{{ number_format($totalAmount, 2)  }}</p>
                     </div>
                     <div
                         class="col-span-1 px-8 py-5 border border-purple-900 rounded-md shadow-md shadow-purple-900 "
@@ -29,7 +29,7 @@
                     <input type="week" wire:model.live="week" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
                 </div>
             </div>
-            <canvas wire:ignore  width="300" height="100" id="weekChart"></canvas>
+            <canvas wire:ignore width="300" height="100" id="weekChart"></canvas>
         </div>
     </div>
 </div>
