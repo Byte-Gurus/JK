@@ -42,15 +42,16 @@
             </div>
         </div>
     </div>
-    <div>
+    <div x-data="{ showPurchaseOrderForm: @entangle('showPurchaseOrderForm') }" x-show="showPurchaseOrderForm">
         @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form')
     </div>
-    <div x-show="viewPurchaseOrderDetails">
+    <div x-data="{ showPurchaseOrderDetails: @entangle('showPurchaseOrderDetails') }" x-show="showPurchaseOrderDetails">
         @livewire('components.PurchaseAndDeliveryManagement.Purchase.view-purchase-order-details')
     </div>
-    @if (!$this->showModal)
-        <div>
-            @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
-        </div>
-    @endif
+    <div x-data="{ showPurchaseOrderTable: @entangle('showPurchaseOrderTable') }" x-show="showPurchaseOrderTable">
+        @livewire('components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table')
+    </div>
+    <div x-data="{ showPrintPurchaseOrderDetails: @entangle('showPrintPurchaseOrderDetails') }" x-show="showPrintPurchaseOrderDetails">
+        @livewire('components.PurchaseAndDeliveryManagement.print-purchase-order-details')
+    </div>
 </div>
