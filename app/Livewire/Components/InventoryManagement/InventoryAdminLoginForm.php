@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class InventoryAdminLoginForm extends Component
 {
+    public $showStockAdjustModal = false;
     public function render()
     {
         return view('livewire.components.inventory-management.inventory-admin-login-form');
@@ -16,4 +17,6 @@ class InventoryAdminLoginForm extends Component
     {
         $this->dispatch('close-inventory-admin-login-form')->to(InventoryManagementPage::class);
     }
+
+    
 }

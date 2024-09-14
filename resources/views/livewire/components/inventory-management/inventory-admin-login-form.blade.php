@@ -73,4 +73,7 @@
             </div>
         </div>
     </div>
+    <div x-cloak class="my-[28px]" x-show="showStockAdjustModal" x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal') }">
+        @livewire('components.InventoryManagement.stock-adjust-form')
+    </div>
 </div>{{-- //* form position --}}

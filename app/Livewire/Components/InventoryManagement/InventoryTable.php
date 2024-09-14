@@ -89,6 +89,11 @@ class InventoryTable extends Component
         $this->resetPage();
     }
 
+    public function displayInventoryAdminLoginForm()
+    {
+        $this->dispatch('display-inventory-admin-login-form')->to(InventoryManagementPage::class);
+    }
+
     public function displayStockCard()
     {
         $this->dispatch('display-inventory-table', showInventoryTable: false)->to(InventoryManagementPage::class);

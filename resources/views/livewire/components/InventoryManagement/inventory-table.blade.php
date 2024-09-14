@@ -312,7 +312,7 @@
 
                                                 @if ($inventory->status !== 'New Item')
                                                     <button
-                                                        x-on:click="showStockAdjustModal=true, openActions = !openActions"
+                                                        x-on:click="$wire.displayInventoryAdminLoginForm(), openActions = !openActions"
                                                         wire:click="getStockID({{ $inventory->id }})"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"

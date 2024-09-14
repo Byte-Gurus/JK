@@ -62,16 +62,16 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Barcode</th>
+                        <th scope="col" class="px-4 py-3 text-left">Barcode</th>
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">SKU</th>
+                        <th scope="col" class="px-4 py-3 text-left">SKU</th>
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item name</th>
+                        <th scope="col" class="px-4 py-3 text-left">Item name</th>
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item description</th>
+                        <th scope="col" class="px-4 py-3 text-left">Item description</th>
 
                         {{-- //* employee name --}}
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
@@ -83,7 +83,7 @@
                         <th scope="col" class="px-4 py-3 text-center">return_quantity</th>
 
                         {{-- //* transaction no --}}
-                        <th scope="col" class="px-4 py-3">item_return_amount</th>
+                        <th scope="col" class="px-4 py-3 text-center">item_return_amount</th>
 
                         {{-- //* sku --}}
                         <th scope="col" class="px-4 py-3 text-center">description</th>
@@ -114,7 +114,7 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return_detail->transactionDetailsJoin->itemJoin->item_description }}
                             </th>
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return_detail->operation }}
                             </th>
 

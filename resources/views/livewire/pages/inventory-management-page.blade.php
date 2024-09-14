@@ -54,9 +54,7 @@
             <div x-cloak class="my-[28px]" x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
                 @livewire('components.InventoryManagement.inventory-history')
             </div>
-            <div x-cloak class="my-[28px]" x-show="showStockAdjustModal" x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal') }">
-                @livewire('components.InventoryManagement.stock-adjust-form')
-            </div>
+    
             <div x-cloak class="my-[28px]" x-show="showInventoryAdminLoginForm" x-data="{ showInventoryAdminLoginForm: @entangle('showInventoryAdminLoginForm') }">
                 @livewire('components.InventoryManagement.inventory-admin-login-form')
             </div>
