@@ -16,25 +16,25 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Purchase Order No.</p>
-                        <p class="text-[1em] font-bold uppercase">{{$purchase->po_number ?? null}}</p>
+                        <p class="text-[1em] font-bold uppercase">{{ $po_number }}</p>
                         {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        <p class="text-[1em] font-bold uppercase"></p>
+                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
                         </p>
                     </div>
 
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Supplier Name:</p>
-                        <p class="text-[1em] font-bold uppercase"></p>
+                        <p class="text-[1em] font-bold uppercase">{{ $supplier }}</p>
                         {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[1em] font-bold uppercase"></p>
+                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
                         {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
                     </div>
                 </div>
@@ -68,26 +68,29 @@
                 {{-- @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
                     @foreach ($receiptDetails['selectedItems'] as $item) --}}
                 <ul class="flex flex-row justify-between mx-8">
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-medium">
-                                barcode</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-bold">
-                                item name
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-center fot-bold">
-                                purchase quantity
-                            </p>
-                        </div>
-                    </li>
+                    @foreach ($purchaseDetails as $purchaseDetail)
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ $purchaseDetail->itemsJoin->barcode }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-bold">
+                                    {{ $purchaseDetail->itemsJoin->item_name }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-center fot-bold">
+                                    {{ $purchaseDetail->purchase_quantity }}
+                                </p>
+                            </div>
+                        </li>
+                    @endforeach
+
                 </ul>
                 {{-- @endforeach
                 @endif --}}
