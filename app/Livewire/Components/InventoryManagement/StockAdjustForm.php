@@ -26,11 +26,17 @@ class StockAdjustForm extends Component
 
     protected $listeners = [
         'adjust-stock-from-table' => 'adjustStock', //*  galing sa UserTable class
+        'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
         'updateConfirmed',
         'createConfirmed',
     ];
 
     public function adjust()
+    {
+        $this->dispatch('display-inventory-admin-login-form')->to(InventoryManagementPage::class);
+    }
+
+    public function displayStockAdjustConfirmation()
     {
         $validated = $this->validateForm();
 
@@ -52,55 +58,50 @@ class StockAdjustForm extends Component
         ]);
     }
 
-
-
     public function updateConfirmed($data) //* confirmation process ng update
     {
-
-        $this->dispatch('display-inventory-admin-login-form')->to(InventoryManagementPage::class);
-
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
-        // $updatedAttributes = $data['inputAttributes'];
+        $updatedAttributes = $data['inputAttributes'];
 
 
-        // if ($this->selectOperation == "Add") {
-        //     $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
-        // } elseif ($this->selectOperation == "Deduct") {
-        //     $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
-        // }
+        if ($this->selectOperation == "Add") {
+            $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
+        } elseif ($this->selectOperation == "Deduct") {
+            $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
+        }
 
-        // $inventory = Inventory::find($updatedAttributes['id']);
-        // $inventory->current_stock_quantity = $adjustedQuantity;
+        $inventory = Inventory::find($updatedAttributes['id']);
+        $inventory->current_stock_quantity = $adjustedQuantity;
 
-        // if ($adjustedQuantity <= 0) {
-        //     $inventory->status = "Not available";
-        // } else {
-        //     $inventory->status = "Available";
-        // }
+        if ($adjustedQuantity <= 0) {
+            $inventory->status = "Not available";
+        } else {
+            $inventory->status = "Available";
+        }
 
-        // $inventory->save();
+        $inventory->save();
 
 
 
-        // $inventoryAdjust = InventoryAdjustment::create([
-        //     'reason' => $updatedAttributes['adjustReason'],
-        //     'operation' => $updatedAttributes['selectOperation'],
-        //     'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
-        //     'inventory_id' => $inventory->id,
-        //     'user_id' => Auth::id(),
-        // ]);
+        $inventoryAdjust = InventoryAdjustment::create([
+            'reason' => $updatedAttributes['adjustReason'],
+            'operation' => $updatedAttributes['selectOperation'],
+            'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
+            'inventory_id' => $inventory->id,
+            'user_id' => Auth::id(),
+        ]);
 
-        // $inventoryMovement = InventoryMovement::create([
-        //     'inventory_adjustment_id' => $inventoryAdjust->id,
-        //     'movement_type' => 'Adjustment',
-        //     'operation' => $updatedAttributes['selectOperation'],
-        // ]);
+        $inventoryMovement = InventoryMovement::create([
+            'inventory_adjustment_id' => $inventoryAdjust->id,
+            'movement_type' => 'Adjustment',
+            'operation' => $updatedAttributes['selectOperation'],
+        ]);
 
-        // $this->resetForm();
-        // $this->alert('success', 'Stock was adjusted successfully');
-        // AdjustmentEvent::dispatch('refresh-adjustment');
-        // $this->refreshTable();
-        // $this->closeModal();
+        $this->resetForm();
+        $this->alert('success', 'Stock was adjusted successfully');
+        AdjustmentEvent::dispatch('refresh-adjustment');
+        $this->refreshTable();
+        $this->closeModal();
     }
     protected function validateForm()
     {
