@@ -518,7 +518,8 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
 
         $this->alert('success', 'Item was removed successfully');
-        $this->computeTransaction();
+        $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+        dd($this->grandTotal);
     }
 
     public function removeRowCancelled()
