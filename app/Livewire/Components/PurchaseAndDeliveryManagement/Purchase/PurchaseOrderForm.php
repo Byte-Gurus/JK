@@ -46,13 +46,16 @@ class PurchaseOrderForm extends Component
      * ->where filter out all the status_id that has value of 2 (Inactive), <> means not equal to
      * ->groupBy this is need to identify what columns to show especially when theres sum and max (aggregiate functions)
      * ->havingRaw has a condition and ensure that this columns gets retrieve
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+    public function mount()
+    {
+        $this->generatePurchaseOrderNumber();
+    }
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
-        $this->generatePurchaseOrderNumber();
+
 
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
             $this->reorder_lists = Item::join('inventories', 'items.id', '=', 'inventories.item_id')
