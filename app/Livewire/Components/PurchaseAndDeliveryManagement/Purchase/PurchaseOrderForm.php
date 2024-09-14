@@ -116,6 +116,7 @@ class PurchaseOrderForm extends Component
                         'item_name' => $this->reorder_lists[$index]['item_name'],
                         'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
                         'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
+                        'maximum_stock_level' => $this->reorder_lists[$index]['maximum_stock_level'],
                     ];
                 }
             }
