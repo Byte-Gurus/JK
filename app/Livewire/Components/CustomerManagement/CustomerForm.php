@@ -309,6 +309,6 @@ class CustomerForm extends Component
 
         $customer = Customer::find($customerID);
         $this->imageUrl =  Storage::url($customer->id_picture);
-        dd($this->imageUrl);
+    
     }
 }
