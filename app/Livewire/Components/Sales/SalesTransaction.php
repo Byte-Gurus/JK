@@ -73,13 +73,18 @@ class SalesTransaction extends Component
         $searchCustomerTerm = trim($this->searchCustomer);
 
         $credit_customers = Customer::where(function ($query) use ($searchCustomerTerm) {
-            $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
-                ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
-                ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
-        })->whereHas('creditJoin', function ($query) {
-            $query->where('status', '!=', 'Paid')
-                ->doesntHave('transactionJoin');
-        })->get();
+            $searchCustomerTermLower = strtolower($searchCustomerTerm); // Convert search term to lowercase
+
+            $query->whereRaw('LOWER(firstname) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
+                ->orWhereRaw('LOWER(middlename) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
+                ->orWhereRaw('LOWER(lastname) LIKE ?', ['%' . $searchCustomerTermLower . '%']);
+        })
+            ->whereHas('creditJoin', function ($query) {
+                $query->where('status', '!=', 'Paid')
+                    ->doesntHave('transactionJoin');
+            })
+            ->get();
+
 
         // Fetch items with their inventoryJoin
         $items = Item::where('status_id', 1)
