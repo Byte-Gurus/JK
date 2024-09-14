@@ -61,7 +61,8 @@ class Transaction extends Model
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('discountJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(percentage) like ?', ["%{$value}%"]);
+                // Cast percentage to text if it's a numeric field
+                $query->whereRaw('LOWER(CAST(percentage AS TEXT)) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('paymentJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(payment_type) like ?', ["%{$value}%"]);
