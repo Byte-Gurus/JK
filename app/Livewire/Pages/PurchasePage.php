@@ -20,6 +20,12 @@ class PurchasePage extends Component
 
     public $viewPurchaseOrderDetails;
 
+    public $showPurchaseOrderTable = true;
+
+    public $showPurchaseOrderForm = false;
+
+    public $showPurchaseOrderDetails = false;
+
     public $showPrintPurchaseOrderDetails = false;
 
     public function render()
@@ -62,6 +68,7 @@ class PurchasePage extends Component
 
     public function displayPrintPurchaseOrderDetails()
     {
+        $this->showPurchaseOrderTable = false;
         $this->showPrintPurchaseOrderDetails = true;
     }
 

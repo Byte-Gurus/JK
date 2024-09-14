@@ -168,8 +168,8 @@
         </form>
     </div>
     <div>
-        <div class="m-[28px]" x-show="showAdminLoginForm" x-data="{ showAdminLoginForm: @entangle('showAdminLoginForm') }">
-            @livewire('components.sales.admin-login-form')
+        <div class="m-[28px]" x-show="showSalesAdminLoginForm" x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
+            @livewire('components.sales.sales-admin-login-form')
         </div>
     </div>
 </div>

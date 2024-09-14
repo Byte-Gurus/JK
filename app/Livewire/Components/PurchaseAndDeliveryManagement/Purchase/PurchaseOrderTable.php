@@ -66,14 +66,10 @@ class PurchaseOrderTable extends Component
 
         $this->dispatch('display-edit-modal', showEditModal: true)->to(PurchasePage::class);
     }
-    public function printPO($purchase_id)
+    public function displayPrintPurchaseOrderDetails($purchase_id)
     {
         $this->dispatch('print-po-from-table', purchase_ID: $purchase_id)->to(PrintPurchaseOrderDetails::class);
-    }
-
-    public function displayPrintPurchaseOrderDetails()
-    {
-        $this->dispatch('display-print-purchase-order-details')->to(PurchaseAndDeliveryManagementPage::class);
+        $this->dispatch('display-print-purchase-order-details')->to(PurchasePage::class);
     }
 
     public function refreshTable()

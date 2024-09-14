@@ -593,9 +593,6 @@
     <div x-show="showChangeQuantityForm" x-data="{ showChangeQuantityForm: @entangle('showChangeQuantityForm') }">
         @livewire('components.sales.change-quantity-form')
     </div>
-    <div x-show="showAdminLoginForm" x-data="{ showAdminLoginForm: @entangle('showAdminLoginForm') }">
-        @livewire('components.sales.admin-login-form')
-    </div>
     <div x-show="showPaymentForm" x-data="{ showPaymentForm: @entangle('showPaymentForm') }">
         @livewire('components.sales.payment-form')
     </div>
