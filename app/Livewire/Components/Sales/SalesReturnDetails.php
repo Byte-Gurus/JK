@@ -191,11 +191,10 @@ class SalesReturnDetails extends Component
     protected function validateForm()
     {
 
-
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index])) {
                 $availableQty = $transactionDetail['item_quantity']; // Replace with the actual field for quantity
-                $this->rules["returnQuantity.$index"] = ['numeric', 'min:1', "lte:$availableQty"];
+                $this->rules["returnQuantity.$index"] = ['reqired','numeric', 'min:1', "lte:$availableQty"];
             }
         }
 
