@@ -512,14 +512,13 @@ class SalesTransaction extends Component
     {
 
         $this->totalVat -=  $this->tax_details['vatable_amount'];
-        $this->grandTotal -= $this->selectedItems['total_amount'];
+        $this->grandTotal  -=  $this->selectedItems[$this->selectedIndex]['total_amount'];
         unset($this->selectedItems[$this->selectedIndex]);
 
         $this->selectedItems = array_values($this->selectedItems);
         $this->reset('selectedIndex', 'isSelected');
 
         $this->alert('success', 'Item was removed successfully');
-        $this->grandTotal  -=  $this->selectedItems[$this->selectedIndex]['total_amount'];
     }
 
     public function removeRowCancelled()

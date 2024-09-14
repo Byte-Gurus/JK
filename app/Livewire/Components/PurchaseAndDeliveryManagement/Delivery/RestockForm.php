@@ -17,6 +17,7 @@ use App\Models\TransactionDetails;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -416,14 +417,16 @@ class RestockForm extends Component
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->min('item_quantity');
 
-            // Find the minimum reorder period for the item using PostgreSQL-compatible query
+            $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
+
             $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
                 ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->select(DB::raw("EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
+                ->select(DB::raw($isMySQL
+                    ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
+                    : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
                 ->orderBy('reorder_period', 'asc')
                 ->value('reorder_period');
-
             // Calculate maximum level using the formula
             $reorderPoint = $detail['reorder_point'];
             $reorderQuantity = $detail['purchase_quantity'];
