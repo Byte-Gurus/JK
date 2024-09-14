@@ -101,6 +101,7 @@ class SalesTransaction extends Component
             })
             ->with('inventoryJoin') // Ensure inventoryJoin is eager-loaded
             ->get();
+
         // Process each item
         $items = $items->map(function ($item) {
             // Filter and sort inventoryJoin based on shelf_life_type
@@ -113,7 +114,7 @@ class SalesTransaction extends Component
                 $item->inventoryJoin = $sortedInventory->first();
             } else {
                 // For non-perishable items, get the latest inventory entry
-                $sortedInventory = $item->inventoryJoin->sortByDesc('created_at');
+                $sortedInventory = $item->inventoryJoin->sortBy('created_at');
                 $item->inventoryJoin = $sortedInventory->first();
             }
             return $item;
@@ -246,7 +247,9 @@ class SalesTransaction extends Component
                     $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
 
 
-                    if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
+                    if (
+                        $this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity'] && $this->selectedItems[$index]['bulk_quantity'] >= 2
+                    ) {
                         $this->selectedItems[$index]['discount'] =    $this->discounts[3]->percentage;
                         $this->selectedItems[$index]['discount_id'] =  $this->discounts[3]->id;
 

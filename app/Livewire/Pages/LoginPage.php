@@ -18,7 +18,6 @@ class LoginPage extends Component
     public function authenticate()
     {
 
-
         $validated = $this->validate([
             'username' => 'required',
             'password' => 'required|min:8',
@@ -28,10 +27,10 @@ class LoginPage extends Component
 
 
             if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
-
+                Auth::logoutOtherDevices($this->password);
                 return redirect()->route('admin.index');
             } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
-
+                Auth::logoutOtherDevices($this->password);
                 return redirect()->route('cashier.index');
             } else {
                 $this->addError('submit', 'This account is inactive');

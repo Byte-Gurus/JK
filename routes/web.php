@@ -18,50 +18,54 @@ use App\Livewire\Pages\UserManagementPage;
 use Illuminate\Support\Facades\Route;
 
 //login
-Route::get('/', LoginPage::class)->name('login')->middleware('CheckIfLoggedIn');
 Route::get('/logout', Logout::class)->name('logout');
-
-//test
-Route::get('/test', TestPage::class)->name('test');
+Route::get('/', LoginPage::class)->name('login')->middleware('CheckIfLoggedIn');
 
 
-//redirect to page of the designated role
-Route::group(['middleware' => ['RedirectIfLoggedIn']], function () {
+Route::middleware(['auth', 'auth.session'])->group(function () {
 
-    //AdminHomePage
-    Route::get('/admin', HomePage::class)->name('admin.index');
 
-    //Dashboard
-    Route::get('/admin/Dashboard', Dashboard::class)->name('dashboard.index');
+    //test
+    Route::get('/test', TestPage::class)->name('test');
 
-    //UserManagamenent
-    Route::get('/admin/UserManagement', UserManagementPage::class)->name('usermanagement.index');
 
-    //SupplierManagement
-    Route::get('admin/SupplierManagement', SupplierManagementPage::class)->name('suppliermanagement.index');
+    //redirect to page of the designated role
+    Route::group(['middleware' => ['RedirectIfLoggedIn']], function () {
 
-    //PurchaseAndDeliveryManagement
-    Route::get('admin/PurchaseAndDeliveryManagement', PurchaseAndDeliveryManagementPage::class)->name('purchaseanddeliverymanagement.index');
+        //AdminHomePage
+        Route::get('/admin', HomePage::class)->name('admin.index');
 
-    //ItemManagement
-    Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagement.index');
+        //Dashboard
+        Route::get('/admin/Dashboard', Dashboard::class)->name('dashboard.index');
 
-    //CustomerManagement
-    Route::get('admin/CustomerManagement', CustomerManagementPage::class)->name('customermanagement.index');
+        //UserManagamenent
+        Route::get('/admin/UserManagement', UserManagementPage::class)->name('usermanagement.index');
 
-    //InventoryManagement
-    Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
+        //SupplierManagement
+        Route::get('admin/SupplierManagement', SupplierManagementPage::class)->name('suppliermanagement.index');
 
-    //CreditManagement
-    Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');
+        //PurchaseAndDeliveryManagement
+        Route::get('admin/PurchaseAndDeliveryManagement', PurchaseAndDeliveryManagementPage::class)->name('purchaseanddeliverymanagement.index');
 
-    //ReportManagement
-    Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');
+        //ItemManagement
+        Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagement.index');
 
-    //CashierHomepage
-    Route::get('/cashier', CashierPage::class)->name('cashier.index');
+        //CustomerManagement
+        Route::get('admin/CustomerManagement', CustomerManagementPage::class)->name('customermanagement.index');
+
+        //InventoryManagement
+        Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
+
+        //CreditManagement
+        Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');
+
+        //ReportManagement
+        Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');
+
+        //CashierHomepage
+        Route::get('/cashier', CashierPage::class)->name('cashier.index');
+    });
 });
-
 
 
 //homepage
