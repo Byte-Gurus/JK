@@ -81,7 +81,7 @@ class CustomerForm extends Component
 
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
-            $validated['id_picture'] = $this->id_picture->store('id_pictures', 'public');
+            $validated['id_picture'] = $this->id_picture->store('id_pictures', 'z');
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
@@ -308,6 +308,7 @@ class CustomerForm extends Component
         $this->populateForm();
 
         $customer = Customer::find($customerID);
-        $this->imageUrl = $customer->id_picture ? Storage::url($customer->id_picture) : null;
+        $this->imageUrl =  Storage::url($customer->id_picture);
+        dd($this->imageUrl);
     }
 }
