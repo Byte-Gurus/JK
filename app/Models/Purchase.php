@@ -29,7 +29,7 @@ class Purchase extends Model
     {
         return $this->hasMany(BackOrder::class, 'purchase_id');
     }
-    public function purchaseJoin()
+    public function purchaseDetailsJoin()
     {
         return $this->hasMany(PurchaseDetails::class, 'purchase_id');
     }
