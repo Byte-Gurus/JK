@@ -16,7 +16,7 @@ class Transaction extends Model
         'total_amount',
         'total_vat_amount',
         'total_discount_amount',
-        'customer_id',  
+        'customer_id',
         'user_id'
     ];
 
@@ -43,6 +43,10 @@ class Transaction extends Model
     public function transactionDetailsJoin()
     {
         return $this->hasMany(TransactionDetails::class, 'transaction_id');
+    }
+    public function returnJoin()
+    {
+        return $this->hasOne(Returns::class, 'transaction_id');
     }
 
     public function scopeSearch($query, $value)

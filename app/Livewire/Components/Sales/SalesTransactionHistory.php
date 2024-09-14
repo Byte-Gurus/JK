@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class SalesTransactionHistory extends Component
 {
     use WithPagination,  WithoutUrlPagination;
-    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type;
+    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount;
     public $transactionDetails = [];
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
@@ -71,6 +71,7 @@ class SalesTransactionHistory extends Component
 
         $this->discount_percent = $transaction->discountJoin->percentage ?? 0;
         $this->tendered_amount = $transaction->paymentJoin->tendered_amount ?? 0;
+        $this->original_amount = $transaction->returnJoin->original_amount ?? 0;
 
         $this->change =  $this->tendered_amount - $this->grandTotal;
     }

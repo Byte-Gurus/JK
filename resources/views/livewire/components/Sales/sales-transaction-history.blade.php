@@ -198,6 +198,16 @@
                             </div>
                         @endif
                     </div>
+                    @if ($transaction_type == 'Return')
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Original Amount</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($tendered_amount, 2) }}</p>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
             <div class="w-full h-[260px] overflow-x-auto overflow-y-scroll scroll ">

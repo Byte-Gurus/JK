@@ -60,6 +60,7 @@ class SalesReturnDetails extends Component
         $transaction = Transaction::find($this->transaction_id);
         $transaction->total_amount = $this->new_total;
         $transaction->transaction_type = 'Return';
+        $transaction->save();
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
