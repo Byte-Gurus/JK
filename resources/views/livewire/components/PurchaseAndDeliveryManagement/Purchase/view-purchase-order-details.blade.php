@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative" x-show="viewPurchaseOrderDetails">
+<div class="relative">
     <div class="flex flex-row h-[655px] gap-4 ">
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
 

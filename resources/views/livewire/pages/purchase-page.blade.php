@@ -3,20 +3,22 @@
         <div class="flex flex-row items-center justify-between mb-4">
             <div>
                 <h1 class="text-[2em] font-bold pointer-events-none">
-                    @if ($this->showModal)
-                        @if ($viewPurchaseOrderDetails)
-                            View Purchase Order Details
-                        @else
-                            Create Purchase Order
-                        @endif
-                    @else
+                    @if ($showPurchaseOrderDetails)
+                        View Purchase Order Details
+                    @endif
+
+                    @if ($showPurchaseOrderForm)
+                        Create Purchase Order
+                    @endif
+
+                    @if ($showPurchaseOrderTable)
                         Purchase Order
                     @endif
                 </h1>
             </div>
             <div>
-                @if (!$showModal)
-                    <button x-on:click="showModal=true;$wire.formCreate()"
+                @if ($showPurchaseOrderTable)
+                    <button x-on:click="$wire.formCreate()"
                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -28,16 +30,18 @@
                             <p>Add New Purchase Order</p>
                         </div>
                     </button>
-                @else
-                    @if ($viewPurchaseOrderDetails)
-                        <button
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out"
-                            x-on:click="showModal=false;$wire.returnToTable()">Return</button>
-                    @else
-                        <button
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out"
-                            x-on:click="showModal=false;$wire.formCancel()">Cancel</button>
-                    @endif
+                @endif
+
+                @if ($showPurchaseOrderForm)
+                    <button
+                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out"
+                        x-on:click="$wire.formCancel()">Cancel</button>
+                @endif
+
+                @if ($showPurchaseOrderDetails)
+                    <button
+                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out"
+                        x-on:click="$wire.returnToPurchaseOrderTable()">Return</button>
                 @endif
             </div>
         </div>
