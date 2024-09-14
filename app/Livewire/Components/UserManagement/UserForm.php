@@ -91,7 +91,7 @@ class UserForm extends Component
 
     public function closeModal()
     {
-        $this->showModal = false;
+        $this->dispatch('close-modal')->to(UserManagementPage::class);
     }
 
 

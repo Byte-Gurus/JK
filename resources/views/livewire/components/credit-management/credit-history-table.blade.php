@@ -93,7 +93,7 @@
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Payment Amount</th>
 
-                      
+
 
                     </tr>
                 </thead>
@@ -124,24 +124,24 @@
                                 {{ $creditHistory->description }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->credit_amount ?? 'N/A' }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->remaining_balance ?? 'N/A' }}
                             </th>
 
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->paymentJoin->payment_type ?? 'NA' }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->paymentJoin->reference_no ?? 'NA' }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->paymentJoin->amount ?? 'NA' }}
                             </th>
                             {{-- //* actions --}}

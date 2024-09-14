@@ -11,8 +11,12 @@
                 <div class="flex flex-row items-center justify-between">
                     <div>
                         <h1 class="text-[2em] font-bold pointer-events-none">
-                            @if (!$showPaymentReceipt)
+                            @if ($showCreditTable)
                                 Manage Credit
+                            @endif
+
+                            @if ($showCreditHistory)
+                                Credit History
                             @endif
                         </h1>
                     </div>
