@@ -131,7 +131,7 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (!$this->returnQuantity[$index]) {
+            if (!$this->returnQuantity[$index] && isset($this->operation[$index])) {
                 return;
             }
 
@@ -194,7 +194,7 @@ class SalesReturnDetails extends Component
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index])) {
                 $availableQty = $transactionDetail['item_quantity']; // Replace with the actual field for quantity
-                $this->rules["returnQuantity.$index"] = ['reqired','numeric', 'min:1', "lte:$availableQty"];
+                $this->rules["returnQuantity.$index"] = ['reqired', 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
 
