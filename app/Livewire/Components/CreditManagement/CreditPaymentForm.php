@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\CreditManagement;
 
 use App\Events\CreditEvent;
+use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Payment;
@@ -13,13 +14,18 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class CreditPaymentForm extends Component
 {
     use LivewireAlert;
+
+    public $showCreditPaymentForm = false;
+
     public $credit_amount, $tendered_amount, $reference_no, $credit_id;
     public $payWithCash = true;
+
     public function render()
     {
         return view('livewire.components.credit-management.credit-payment-form');
     }
     protected $listeners = [
+        'display-credit-payment-form' => 'displayCreditPaymentForm',
         'credit-payment' => 'creditPayment', //*  galing sa UserTable class
         'paymentConfirmed'
     ];
@@ -81,6 +87,8 @@ class CreditPaymentForm extends Component
         ]);
 
         $this->alert('success', 'Creditor was paid successfully');
+
+        $this->dispatch('display-payment-receipt')->to(CreditManagementPage::class);
         CreditEvent::dispatch('refresh-credit');
     }
 
@@ -125,5 +133,10 @@ class CreditPaymentForm extends Component
     {
         // $this->resetForm();
         // $this->resetValidation();
+    }
+
+    public function displayCreditPaymentForm()
+    {
+        $this->showCreditPaymentForm = true;
     }
 }

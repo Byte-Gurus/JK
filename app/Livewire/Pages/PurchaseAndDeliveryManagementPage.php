@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Pages;
 
-use App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase\PurchaseOrderForm;
 use Livewire\Component;
 
 class PurchaseAndDeliveryManagementPage extends Component
 {
+
+    public $showPrintPurchaseOrderDetails = false;
 
     public $sidebarStatus;
 
@@ -20,7 +21,8 @@ class PurchaseAndDeliveryManagementPage extends Component
 
     protected $listeners = [
         'change-sidebar-status' => 'changeSidebarStatus',
-        ];
+        'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
+    ];
 
     public function togglePurchaseOrder()
     {
@@ -29,7 +31,12 @@ class PurchaseAndDeliveryManagementPage extends Component
 
     public function changeSidebarStatus($sidebarOpen)
     {
-       $this->sidebarStatus = $sidebarOpen;
+        $this->sidebarStatus = $sidebarOpen;
     }
 
+    public function displayPrintPurchaseOrderDetails()
+    {
+        $this->sidebarStatus = true;
+        $this->showPrintPurchaseOrderDetails = true;
+    }
 }

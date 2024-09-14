@@ -1,6 +1,9 @@
-<div>
-    <div wire:ignore>
-        <canvas width="400" height="100" id="operationChart"></canvas>
+<div class="p-4 bg-white border border-black rounded-lg">
+    <div class="text-left">
+        <p class=" font-black text-[rgb(53,53,53)] text-[2em]">Inventory Movement</p>
+    </div>
+    <div wire:ignore class="flex justify-center ">
+        <canvas width="300" height="100" id="operationChart"></canvas>
     </div>
 </div>
 

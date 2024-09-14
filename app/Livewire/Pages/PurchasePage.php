@@ -20,6 +20,8 @@ class PurchasePage extends Component
 
     public $viewPurchaseOrderDetails;
 
+    public $showPrintPurchaseOrderDetails = false;
+
     public function render()
     {
         return view('livewire.pages.purchase-page');
@@ -36,6 +38,7 @@ class PurchasePage extends Component
         'change-method' => 'changeMethod',
         'display-edit-modal' => 'displayEditModal',
         'display-purchase-order-details' => 'displayPurchaseOrderDetails',
+        'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
         'form-cancel' => 'formCancel',
         'display-table' => 'displayTable'
     ];
@@ -55,6 +58,11 @@ class PurchasePage extends Component
     public function displayEditModal($showEditModal)
     {
         $this->showEditModal = $showEditModal;
+    }
+
+    public function displayPrintPurchaseOrderDetails()
+    {
+        $this->showPrintPurchaseOrderDetails = true;
     }
 
     public function formCancel()

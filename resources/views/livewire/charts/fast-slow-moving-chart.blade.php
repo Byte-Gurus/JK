@@ -1,8 +1,10 @@
-<div>
-    <input type="month" wire:model.live="month" />
+<div class="p-4 border border-[rgb(143,143,143)] bg-white rounded-lg ">
+    <div class="flex justify-end ">
+        <input type="month" wire:model.live="month" class="p-2 border border-[rgb(143,143,143)] rounded-lg "/>
+    </div>
 
     <div wire:ignore>
-        <canvas width="400" height="100" id="fastslowChart"></canvas>
+        <canvas width="400" height="218" id="fastslowChart"></canvas>
     </div>
 </div>
 
@@ -31,7 +33,7 @@
             for (let index = 0; index < fastSlow.length; index++) {
 
                 items[index] = fastSlow[index].item_name;
-                datas[index] = fastSlow[index].fast_slow;
+                datas[index] = fastSlow[index].totalStockInQuantity;
                 tsi[index] = fastSlow[index].tsi;
             }
             console.log('item movement:', items);

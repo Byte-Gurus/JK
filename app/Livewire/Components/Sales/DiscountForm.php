@@ -47,7 +47,7 @@ class DiscountForm extends Component
             })
             ->get();
 
-        return view('livewire.components.sales.discount-form', [
+        return view('livewire.components.Sales.discount-form', [
             'provinces' => PhilippineProvince::orderBy('province_description')->get(),
             'customers' => $customers,
         ]);

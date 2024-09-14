@@ -2,13 +2,19 @@
     @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
-    @livewire('components.navbar')
+    <div x-show="showNavbar" x-data="{ showNavbar: @entangle('showNavbar') }">
+        @livewire('components.navbar')
+    </div>
     <div x-data="{ showModal: @entangle('showModal') }">
         <div class="m-[28px]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
-                        <h1 class="text-[2em] font-bold pointer-events-none">Manage Credit</h1>
+                        <h1 class="text-[2em] font-bold pointer-events-none">
+                            @if (!$showPaymentReceipt)
+                                Manage Credit
+                            @endif
+                        </h1>
                     </div>
                     @if ($showCreditTable)
                         <div class="flex flex-row gap-4">
@@ -64,6 +70,9 @@
             </div>
             <div class="my-[28px]" x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
                 @livewire('components.CreditManagement.credit-payment-form')
+            </div>
+            <div class="my-[28px]" x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
+                @livewire('components.CreditManagement.payment-receipt')
             </div>
         </div>
     </div>

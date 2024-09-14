@@ -1,4 +1,4 @@
-<div class="relative" x-cloak x-show="showCreditPaymentForm" x-data="{ payWithCash: @entangle('payWithCash') }">
+<div class="relative" x-cloak x-show="showCreditPaymentForm" x-data="{ payWithCash: @entangle('payWithCash'); showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">

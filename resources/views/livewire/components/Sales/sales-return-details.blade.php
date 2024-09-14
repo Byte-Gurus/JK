@@ -82,6 +82,13 @@
                 </table>
             </div>
         </div>
+        <div class="flex justify-end w-full my-[28px]">
+            <button type="button"
+                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                wire:click="return">
+                Confirm
+            </button>
+        </div>
         <div class="flex flex-row w-full border border-black rounded-md">
             <div class="w-1/3 border-r border-black ">
 
@@ -116,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full h-[500px] overflow-x-auto overflow-y-scroll scroll ">
+            <div class="w-full overflow-x-auto overflow-y-scroll h-fit scroll ">
 
                 <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -146,17 +153,20 @@
                             {{-- //* quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
-                            {{-- //* amount --}}
+                            {{-- //* wholesale --}}
                             <th scope="col" class="px-4 py-3 text-center">Wholesale (₱)</th>
 
-                            {{-- //* amount --}}
+                            {{-- //* subtotal --}}
                             <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
 
-                            {{-- //* actionn --}}
+                            {{-- //* return quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Return quantity</th>
 
-                            {{-- //* actionn --}}
+                            {{-- //* description --}}
                             <th scope="col" class="px-4 py-3 text-center">Description</th>
+
+                            {{-- //* operation --}}
+                            <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         </tr>
                     </thead>
@@ -205,6 +215,18 @@
                                     {{ number_format($transactionDetail['item_subtotal'], 2) }}
                                 </th>
 
+
+                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        <input type="number" wire:model.live="returnQuantity.{{ $index }}">
+                                        @error("returnQuantity.$index")
+                                            <span
+                                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                        @enderror
+                                    </th>
+                                @endif
+
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
@@ -222,16 +244,7 @@
 
 
                                 </th>
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
-                                    <th scope="row"
-                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                        <input type="number" wire:model.live="returnQuantity.{{ $index }}">
-                                        @error("returnQuantity.$index")
-                                            <span
-                                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                        @enderror
-                                    </th>
-                                @endif
+
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
@@ -256,9 +269,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <button type="button" wire:click="return">
-                        Confirm
-                    </button>
                 </table>
             </div>
         </div>

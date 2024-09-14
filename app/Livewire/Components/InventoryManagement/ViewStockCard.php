@@ -5,9 +5,12 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class ViewStockCard extends Component
 {
+    use WithPagination,  WithoutUrlPagination;
     public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode, $selling_price;
 
     public $stock_cards = [];
