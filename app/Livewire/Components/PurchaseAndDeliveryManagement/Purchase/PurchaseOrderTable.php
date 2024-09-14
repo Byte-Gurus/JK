@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
+use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Purchase;
 use App\Models\Supplier;
@@ -64,6 +65,11 @@ class PurchaseOrderTable extends Component
 
         $this->dispatch('display-edit-modal', showEditModal: true)->to(PurchasePage::class);
 
+    }
+
+    public function displayPrintPurchaseOrderDetails()
+    {
+        $this->dispatch('display-print-purchase-order-details')->to(PurchaseAndDeliveryManagementPage::class);
     }
 
     public function refreshTable()

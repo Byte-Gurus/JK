@@ -1,9 +1,32 @@
 <div>
 
-    <input type="week" wire:model.live="week" />
-    <p class="text-6xl font-extrabold">{{ $totalAmount }}</p>
-    <p class="text-6xl font-extrabold">{{ $transactionCount }}</p>
-    <div wire:ignore>
+    <div class="flex flex-row items-center justify-between gap-4">
+        <div class="flex flex-row gap-2 my-2">
+            <div class="p-2 bg-red-100 border border-black">
+                <div>
+                    <p class="font-thin">Total Amount</p>
+                </div>
+                <div class="">
+                    <p class="text-4xl font-extrabold text-center">{{ $totalAmount }}</p>
+                </div>
+            </div>
+            <div class="p-2 bg-purple-100 border border-black ">
+                <div>
+                    <p class="font-thin">Transaction Count</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-extrabold text-center">{{ $transactionCount }}</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="week" wire:model.live="week" class="border border-black " />
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore class="border border-black">
         <canvas width="400" height="100" id="weekChart"></canvas>
     </div>
 </div>

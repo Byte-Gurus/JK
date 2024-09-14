@@ -189,7 +189,7 @@
 
                                                 @if ($credit->transaction_id && $credit->status != 'Fully paid')
                                                     <button wire:click="getCredit({{ $credit->id }})"
-                                                        x-on:click="$wire.displayCreditPaymentForm()"
+                                                        x-on:click="$wire.displayCreditPaymentForm(); openActions = !openActions"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-[rgb(255,131,49)] justify-left hover:bg-[rgb(255,215,188)]">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth={1.5}

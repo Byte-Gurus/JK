@@ -40,7 +40,7 @@
 
     @vite('resources/js/app.js')
     @livewireScripts()
-    @livewireChartsScripts
+    {{-- @livewireChartsScripts --}}
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
