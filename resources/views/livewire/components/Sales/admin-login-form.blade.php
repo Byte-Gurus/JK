@@ -38,7 +38,7 @@
 
                     <div class="flex flex-row justify-between">
                         <div class="text-right">
-                            <button type="button" wire:click='closeInventoryAdminLoginForm()' wire:loading.remove
+                            <button type="submit" wire:loading.remove
                                 class="w-full px-8 py-2 font-bold outline-none focus:outline-none text-[rgb(55,55,55)] rounded-md text-md hover:bg-[rgb(221,221,221)]">
                                 Cancel
                             </button>
@@ -72,8 +72,5 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div x-cloak class="my-[28px]" x-show="showStockAdjustModal" x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal') }">
-        @livewire('components.InventoryManagement.stock-adjust-form')
     </div>
 </div>{{-- //* form position --}}

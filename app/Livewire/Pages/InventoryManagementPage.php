@@ -10,7 +10,7 @@ class InventoryManagementPage extends Component
     public $showModal = false;
     public $showInventoryTable = true;
     public $showInventoryHistory = false;
-    public $showInventoryAdminLoginForm = false;
+    public $showStockAdjustPage = false;
     public $sidebarStatus;
     public $showStockCard = false;
     public function render()
@@ -22,8 +22,7 @@ class InventoryManagementPage extends Component
         'close-modal' => 'closeModal',
         'change-sidebar-status' => 'changeSidebarStatus',
         'display-inventoyry-table' => 'displayInventoryTable',
-        'display-inventory-admin-login-form' => 'displayInventoryAdminLoginForm',
-        'close-inventory-admin-login-form' => 'closeAdminLoginForm',
+        'display-stock-adjust-page' => 'displayStockAdjustPage',
         'display-stock-card' => 'displayStockCard',
     ];
 
@@ -61,13 +60,8 @@ class InventoryManagementPage extends Component
         $this->showStockCard = $showStockCard;
     }
 
-    public function displayInventoryAdminLoginForm()
+    public function displayStockAdjustPage()
     {
-        $this->showInventoryAdminLoginForm = true;
-    }
-
-    public function closeAdminLoginForm()
-    {
-        $this->showInventoryAdminLoginForm = false;
+        $this->showStockAdjustPage = true;
     }
 }

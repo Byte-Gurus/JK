@@ -201,7 +201,8 @@
                                 {{ $inventory->itemJoin->barcode }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $inventory->itemJoin->item_name }}
                             </th>
 
@@ -276,7 +277,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($inventory->itemJoin->shelf_life_type === 'Perishable')
-                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format(' M d Y ')  : 'null' }}
+                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format(' M d Y ') : 'null' }}
                                 @elseif($inventory->itemJoin->shelf_life_type === 'Non Perishable')
                                     N/A
                                 @endif
@@ -312,7 +313,7 @@
 
                                                 @if ($inventory->status !== 'New Item')
                                                     <button
-                                                        x-on:click="$wire.displayInventoryAdminLoginForm(), openActions = !openActions"
+                                                        x-on:click="$wire.displayStockAdjustPage(), openActions = !openActions"
                                                         wire:click="getStockID({{ $inventory->id }})"
                                                         class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"

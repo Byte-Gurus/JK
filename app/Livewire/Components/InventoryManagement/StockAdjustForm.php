@@ -19,9 +19,14 @@ class StockAdjustForm extends Component
     public $stock_id;
     public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason;
 
+    public $showStockAdjustForm = true;
+
+    public $showInventoryAdminLoginForm = false;
+
+
     public function render()
     {
-        return view('livewire.components.InventoryManagement.stock-adjust-form');
+        return view('livewire.components.inventorymanagement.stock-adjust-form');
     }
 
     protected $listeners = [
