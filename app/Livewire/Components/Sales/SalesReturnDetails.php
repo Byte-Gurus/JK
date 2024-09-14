@@ -131,11 +131,9 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (!$this->returnQuantity[$index] && isset($this->operation[$index])) {
-                return;
-            }
 
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index])) {
+
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
 
                 if ($this->operation[$index] != 'Exchange') {
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
@@ -152,6 +150,8 @@ class SalesReturnDetails extends Component
                     'operation' => $this->operation[$index]
 
                 ];
+            }
+            if (!$this->returnQuantity[$index] && isset($this->returnQuantity[$index])) {
             }
         }
         $this->new_total = $this->total_amount - $this->return_total_amount;
