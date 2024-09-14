@@ -26,7 +26,7 @@ class StockAdjustForm extends Component
 
     public function render()
     {
-        return view('livewire.components.inventorymanagement.stock-adjust-form');
+        return view('livewire.components.InventoryManagement.stock-adjust-form');
     }
 
     protected $listeners = [
