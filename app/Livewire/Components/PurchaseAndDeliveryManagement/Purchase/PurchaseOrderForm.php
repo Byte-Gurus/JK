@@ -19,7 +19,7 @@ class PurchaseOrderForm extends Component
 
     use LivewireAlert;
 
-    public $isCreate;
+    public $isCreate = true;
 
     public $showModal;
     public $selectAllToRestore = false;
