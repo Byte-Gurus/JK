@@ -470,7 +470,6 @@ class SalesTransaction extends Component
             $this->customerDetails = null;
 
             $this->reset('customer_name', 'customer_discount_no', 'discount_type');
-           
         }
     }
 
@@ -511,6 +510,7 @@ class SalesTransaction extends Component
 
     public function removeRowConfirmed()
     {
+
         $this->totalVat -=  $this->tax_details['vatable_amount'];
         unset($this->selectedItems[$this->selectedIndex]);
 
@@ -518,6 +518,7 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
 
         $this->alert('success', 'Item was removed successfully');
+        $this->computeTransaction();
     }
 
     public function removeRowCancelled()
