@@ -151,8 +151,7 @@ class SalesReturnDetails extends Component
 
                 ];
             }
-            if (!$this->returnQuantity[$index] && isset($this->returnQuantity[$index])) {
-            }
+            
         }
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
