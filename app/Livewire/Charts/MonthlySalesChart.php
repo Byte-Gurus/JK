@@ -23,6 +23,10 @@ class MonthlySalesChart extends Component
     public function updatedMonth($currentMonth)
     {
 
+        if (!$currentMonth) {
+            $currentMonth = Carbon::now()->format('Y-m');
+
+        }
         $this->totalAmount = 0;
         $this->transactionCount = 0;
         $this->monthlyTotal = [];
