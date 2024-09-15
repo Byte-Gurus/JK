@@ -17,8 +17,9 @@ class StockAdjustForm extends Component
 
 
     public $stock_id;
-    public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin, $attributes;
+    public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin;
 
+    public $adjustInfo = [];
     public $showStockAdjustForm = true;
 
     public $showInventoryAdminLoginForm = false;
@@ -33,6 +34,7 @@ class StockAdjustForm extends Component
         'adjust-stock-from-table' => 'adjustStock', //*  galing sa UserTable class
         'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
         'admin-confirmed' => 'adminConfirmed',
+        'updateConfirmed',
         'createConfirmed',
     ];
 
@@ -46,19 +48,22 @@ class StockAdjustForm extends Component
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $this->attributes = $stockAdjust->toArray();
-
+        $this->adjustInfo  = $stockAdjust;
 
         $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
 
+
     }
 
+    // public function displayStockAdjustConfirmation()
+    // {
 
+    // }
 
     public function updateConfirmed() //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
-        $updatedAttributes =  $this->attributes;
+        $updatedAttributes = $this->adjustInfo;
 
 
         if ($this->selectOperation == "Add") {
