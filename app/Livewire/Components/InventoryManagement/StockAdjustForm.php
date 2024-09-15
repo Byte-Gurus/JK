@@ -53,17 +53,16 @@ class StockAdjustForm extends Component
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
-
-
     }
 
-  
+    public function displayStockAdjustConfirmation() {}
 
     public function updateConfirmed($data) //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
 
-        if(!$this->isAdmin){
+        if (!$this->isAdmin) {
+            $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
         }
 
         $updatedAttributes = $data['inputAttributes'];
