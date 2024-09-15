@@ -405,6 +405,7 @@ class PurchaseOrderForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(PurchasePage::class);
+        $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
         $this->resetValidation();
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
@@ -529,21 +530,6 @@ class PurchaseOrderForm extends Component
     public function refreshTable() //* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
-    }
-
-    public function changeMethod($isCreate)
-    {
-
-        $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
-
-        //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
-        if ($this->isCreate) {
-            $this->resetForm();
-            $this->generatePurchaseOrderNumber();
-            $this->isReorderListsCleared = false;
-            // $this->resetForm();
-        }
-        $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);
     }
 
     public function resetModal()

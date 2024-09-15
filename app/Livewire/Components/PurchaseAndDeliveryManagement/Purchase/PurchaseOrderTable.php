@@ -37,6 +37,7 @@ class PurchaseOrderTable extends Component
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-table', compact('purchases', 'suppliers'));
     }
     protected $listeners = [
+        'refresh-table' => 'refreshTable',
         "echo:refresh-purchase-order,PurchaseOrderEvent" => 'refreshFromPusher',
         "echo:refresh-backorder,BackorderEvent" => 'refreshFromPusher',
     ];
@@ -73,7 +74,7 @@ class PurchaseOrderTable extends Component
     }
     public function displayPrintPurchaseOrderDetails()
     {
-
+        $this->dispatch('hide-navbar')->to(PurchaseAndDeliveryManagementPage::class);
         $this->dispatch('display-print-purchase-order-details')->to(PurchasePage::class);
     }
 

@@ -11,6 +11,10 @@ class PurchaseAndDeliveryManagementPage extends Component
 
     public $sidebarStatus;
 
+    public $showNavbar = true;
+
+    public $showDeliveryButton = true;
+
     public $purchaseOrderOpen = true;
 
 
@@ -21,6 +25,7 @@ class PurchaseAndDeliveryManagementPage extends Component
 
     protected $listeners = [
         'change-sidebar-status' => 'changeSidebarStatus',
+        'hide-navbar' => 'hideNavbar',
         'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
     ];
 
@@ -29,10 +34,18 @@ class PurchaseAndDeliveryManagementPage extends Component
         $this->purchaseOrderOpen = !$this->purchaseOrderOpen;
     }
 
+    public function hideNavbar()
+    {
+        $this->sidebarStatus = true;
+        $this->showDeliveryButton = false;
+        $this->showNavbar = false;
+    }
+
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
     }
+
 
     public function displayPrintPurchaseOrderDetails()
     {

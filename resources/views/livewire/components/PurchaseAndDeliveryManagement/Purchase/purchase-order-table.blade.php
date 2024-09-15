@@ -164,7 +164,7 @@
                                                 {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
 
                                                 <button wire:click="printPO({{ $purchase->id }})"
-                                                    x-on:click="$wire.displayPrintPurchaseOrderDetails, openActions = !openActions"
+                                                    x-on:click="$wire.displayPrintPurchaseOrderDetails(), openActions = !openActions"
                                                     {{-- wire:click="getStock({{ $inventory->id }})" --}}
                                                     class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
                                                     <div>

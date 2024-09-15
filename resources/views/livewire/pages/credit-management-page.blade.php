@@ -54,12 +54,14 @@
                             </div>
                         </div>
                     @else
-                        <div class="flex flex-row gap-4">
-                            <div>
-                                <button x-on:click="$wire.returnToCreditTable()"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Return</button>
+                        @if (!$showPaymentReceipt)
+                            <div class="flex flex-row gap-4">
+                                <div>
+                                    <button x-on:click="$wire.returnToCreditTable()"
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Return</button>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
                 </div>
             </div>
@@ -75,7 +77,7 @@
             <div class="my-[28px]" x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
                 @livewire('components.CreditManagement.credit-payment-form')
             </div>
-            <div class="my-[28px]" x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
+            <div x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
                 @livewire('components.CreditManagement.payment-receipt')
             </div>
         </div>
