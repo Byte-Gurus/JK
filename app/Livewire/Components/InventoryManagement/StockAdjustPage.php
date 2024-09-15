@@ -25,13 +25,11 @@ class StockAdjustPage extends Component
 
     public function displayAdminLoginForm()
     {
-        $this->showStockAdjustForm = false;
         $this->adminLoginForm = true;
     }
 
-    public function returnStockAdjustForm()
+    public function closeLoginForm()
     {
-        $this->showStockAdjustForm = true;
         $this->adminLoginForm = false;
     }
 }

@@ -38,14 +38,14 @@
 
                     <div class="flex flex-row justify-between">
                         <div class="text-right">
-                            <button type="submit" wire:loading.remove
+                            <button type="submit" wire:click="closeLoginForm" wire:loading.remove
                                 class="w-full px-8 py-2 font-bold outline-none focus:outline-none text-[rgb(55,55,55)] rounded-md text-md hover:bg-[rgb(221,221,221)]">
                                 Cancel
                             </button>
                         </div>
 
                         <div class="text-right">
-                            <button type="submit" wire:loading.remove
+                            <button type="submit"  wire:loading.remove
                                 class="w-full px-8 py-2 font-bold outline-none focus:outline-none text-[rgb(249,249,249)] bg-[rgb(53,53,53)] border-2 border-black rounded-md text-md hover:bg-[rgb(80,80,80)]">
                                 Confirm
                             </button>
