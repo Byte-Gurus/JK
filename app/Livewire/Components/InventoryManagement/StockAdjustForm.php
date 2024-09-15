@@ -17,7 +17,7 @@ class StockAdjustForm extends Component
 
 
     public $stock_id;
-    public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason;
+    public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin;
 
     public $showStockAdjustForm = true;
 
@@ -174,5 +174,13 @@ class StockAdjustForm extends Component
         $this->stock_id = $stockID;
 
         $this->populateForm();
+    }
+
+    public function adminConfirmed($isAdmin){
+        $this->isAdmin = $isAdmin;
+
+        if($this->isAdmin){
+            $this->displayStockAdjustConfirmation();
+        }
     }
 }
