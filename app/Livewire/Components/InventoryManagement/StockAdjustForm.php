@@ -39,7 +39,11 @@ class StockAdjustForm extends Component
 
     public function adjust()
     {
+        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
+    }
 
+    public function displayStockAdjustConfirmation()
+    {
         $validated = $this->validateForm();
 
         $stockAdjust = Inventory::find($this->stock_id);
@@ -47,12 +51,6 @@ class StockAdjustForm extends Component
         $stockAdjust->quantityToAdjust = $validated['quantityToAdjust'];
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
-
-        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
-    }
-
-    public function displayStockAdjustConfirmation()
-    {
 
         $attributes = $this->stockAdjust->toArray();
 
@@ -177,11 +175,12 @@ class StockAdjustForm extends Component
         $this->populateForm();
     }
 
-    public function adminConfirmed($isAdmin){
+    public function adminConfirmed($isAdmin)
+    {
         $this->isAdmin = $isAdmin;
 
 
-        if($this->isAdmin){
+        if ($this->isAdmin) {
             $this->displayStockAdjustConfirmation();
         }
     }
