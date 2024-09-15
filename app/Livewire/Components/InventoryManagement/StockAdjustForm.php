@@ -17,7 +17,7 @@ class StockAdjustForm extends Component
 
 
     public $stock_id;
-    public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin, $attributes;
+    public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin;
 
     public $showStockAdjustForm = true;
 
@@ -47,22 +47,25 @@ class StockAdjustForm extends Component
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $this->attributes = $stockAdjust->toArray();
+        $attributes = $stockAdjust->toArray();
+
+        $this->confirm('Do you want to update this stock?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+        ]);
 
 
-
-        // $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
     }
 
-    // public function displayStockAdjustConfirmation()
-    // {
-    //     $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
-    // }
+    public function displayStockAdjustConfirmation()
+    {
+        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
+    }
 
-    public function updateConfirmed() //* confirmation process ng update
+    public function updateConfirmed($data) //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
-        $updatedAttributes =  $this->attributes;
+        $updatedAttributes = $data['inputAttributes'];
 
 
         if ($this->selectOperation == "Add") {
