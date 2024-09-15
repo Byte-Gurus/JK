@@ -51,7 +51,7 @@ class StockAdjustForm extends Component
 
 
 
-        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
+        // $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
     }
 
     // public function displayStockAdjustConfirmation()
