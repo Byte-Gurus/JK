@@ -27,7 +27,7 @@ class CreditHistoryTable extends Component
         $query = CreditHistory::query();
 
 
-        if ($this->statusFilter != 0) {
+        if ($this->descriptionFilter != 0) {
             $query->whereHas('creditJoin', function ($query) {
                 $query->where('description', $this->descriptionFilter);
             });
