@@ -33,7 +33,6 @@ class StockAdjustForm extends Component
         'adjust-stock-from-table' => 'adjustStock', //*  galing sa UserTable class
         'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
         'admin-confirmed' => 'adminConfirmed',
-        'updateConfirmed',
         'createConfirmed',
     ];
 
@@ -54,7 +53,7 @@ class StockAdjustForm extends Component
 
     }
 
-  
+
 
     public function updateConfirmed() //* confirmation process ng update
     {
