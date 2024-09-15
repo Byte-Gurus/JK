@@ -39,11 +39,6 @@ class StockAdjustForm extends Component
 
     public function adjust()
     {
-        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
-    }
-
-    public function displayStockAdjustConfirmation()
-    {
         $validated = $this->validateForm();
 
         $stockAdjust = Inventory::find($this->stock_id);
@@ -58,11 +53,19 @@ class StockAdjustForm extends Component
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
             'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
         ]);
+
+
     }
+
+  
 
     public function updateConfirmed($data) //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
+
+        if(!$this->isAdmin){
+        }
+
         $updatedAttributes = $data['inputAttributes'];
 
 
