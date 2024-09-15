@@ -45,12 +45,9 @@ class InventoryTable extends Component
             $query->whereBetween('stock_in_date', [$this->startDate, $this->endDate]);
         }
 
-        $query->leftJoin('items', 'inventories.item_id', '=', 'items.id');
 
-        // Use scopeSearch for search functionality
-        $inventories = $query->search($this->search)
-            ->orderBy('items.' . $this->sortColumn, $this->sortDirection) // sort by column in items table
-            ->select('inventories.*', 'items.item_name') // make sure to select required columns
+        $inventories = $query->search($this->search) //?search the user
+            ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
 
         return view('livewire.components.InventoryManagement.inventory-table', compact('inventories', 'suppliers'));
