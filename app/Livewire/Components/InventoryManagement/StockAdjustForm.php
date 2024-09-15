@@ -32,6 +32,7 @@ class StockAdjustForm extends Component
     protected $listeners = [
         'adjust-stock-from-table' => 'adjustStock', //*  galing sa UserTable class
         'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
+        'admin-confirmed' => 'adminConfirmed',
         'updateConfirmed',
         'createConfirmed',
     ];
@@ -179,7 +180,7 @@ class StockAdjustForm extends Component
     public function adminConfirmed($isAdmin){
         $this->isAdmin = $isAdmin;
 
-        dd($this->isAdmin);
+
         if($this->isAdmin){
             $this->displayStockAdjustConfirmation();
         }
