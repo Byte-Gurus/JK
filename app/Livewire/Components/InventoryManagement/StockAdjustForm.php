@@ -47,7 +47,7 @@ class StockAdjustForm extends Component
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
+        $this->dispatch('display-admin-login-form')->to(StockAdjustPage::class);
     }
 
     public function displayStockAdjustConfirmation()

@@ -17,7 +17,7 @@ class StockAdjustPage extends Component
     protected $listeners = [
         'adjust-stock-from-table' => 'adjustStock', //*  galing sa UserTable class
         'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
-        'display-inventory-admin-login-form' => 'displayInventoryAdminLoginForm',
+        'display-admin-login-form' => 'displayAdminLoginForm',
         'return-stock-adjust-form' => 'returnStockAdjustForm',
         'updateConfirmed',
         'createConfirmed',
