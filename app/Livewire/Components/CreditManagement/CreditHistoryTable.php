@@ -16,7 +16,7 @@ class CreditHistoryTable extends Component
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
 
-    public $statusFilter = 0; //var filtering value = all
+    public $descriptionFilter = 0; //var filtering value = all
     public $vatFilter = 0; //var filtering value = all
     public $supplierFilter = 0;
 
@@ -29,7 +29,7 @@ class CreditHistoryTable extends Component
 
         if ($this->statusFilter != 0) {
             $query->whereHas('creditJoin', function ($query) {
-                $query->where('status', $this->statusFilter);
+                $query->where('description', $this->descriptionFilter);
             });
         }
 

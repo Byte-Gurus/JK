@@ -25,7 +25,19 @@
 
             </div>
 
+            <div class="flex flex-col gap-1">
 
+                <label class="text-sm font-medium text-gray-900 text-nowrap">Description:</label>
+
+                <select wire:model.live="descriptionFilter"
+                    class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-2.5 ">
+                    <option value="0">All</option>
+                    <option value="Payment made">Payment made</option>
+                    <option value="Issuance of credit">Issuance of credit</option>
+                    <option value="Credit Approved">Credit Approved</option>
+                </select>
+
+            </div>
 
         </div>
 
@@ -40,9 +52,25 @@
 
                     <tr class=" text-nowrap">
 
+                        <th wire:click="sortByColumn('created_at')" scope="col"
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                            <div class="flex items-center">
+
+                                <p>Date</p>
+
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
+
+                            </div>
+                        </th>
 
 
-                        <th scope="col" class="px-4 py-3 text-left">Date</th>
 
                         {{-- //* credit id --}}
                         <th scope="col" class="px-4 py-3 text-left">Credit Number</th>
@@ -107,7 +135,7 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $creditHistory->creditJoin->created_at->format(' M d Y ')  }}
+                                {{ $creditHistory->creditJoin->created_at->format(' M d Y ') }}
                             </th>
                             {{-- credit id --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -124,24 +152,29 @@
                                 {{ $creditHistory->description }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->credit_amount ?? 'N/A' }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->remaining_balance ?? 'N/A' }}
                             </th>
 
 
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->paymentJoin->payment_type ?? 'NA' }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->paymentJoin->reference_no ?? 'NA' }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $creditHistory->paymentJoin->amount ?? 'NA' }}
                             </th>
                             {{-- //* actions --}}

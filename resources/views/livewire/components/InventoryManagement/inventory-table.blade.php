@@ -52,7 +52,6 @@
                             <option value="Available">Available</option>
                             <option value="Not available">Not available</option>
                             <option value="Expired">Expired</option>
-                            <option value="New Item">New Item</option>
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
