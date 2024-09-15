@@ -47,14 +47,10 @@ class InventoryHistory extends Component
 
 
         if ($this->statusFilter != 0) {
-            $query->where(function ($query) {
-                $query->whereHas('inventoryJoin', function ($query) {
-                    $query->where('status', $this->statusFilter);
-                })
-                    ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
-                        $query->where('status', $this->statusFilter);
-                    });
-            });
+            $query->whereHas('inventoryJoin', function ($query) {
+                $query->where('status', $this->statusFilter);
+            })
+                ->orWhereHas('adjustmentJoin.inventoryJoin')->where('status', $this->statusFilter);
         }
 
         if ($this->supplierFilter != 0) {
@@ -85,6 +81,7 @@ class InventoryHistory extends Component
         $InventoryHistory = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
+
 
 
 
