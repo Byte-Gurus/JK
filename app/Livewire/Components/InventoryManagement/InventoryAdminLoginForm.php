@@ -15,7 +15,7 @@ class InventoryAdminLoginForm extends Component
 
     public function closeInventoryAdminLoginForm()
     {
-        $this->dispatch('close-inventory-admin-login-form')->to(InventoryManagementPage::class);
+        $this->dispatch('return-stock-adjust-form')->to(StockAdjustPage::class);
     }
 
 

@@ -38,24 +38,22 @@ class StockAdjustForm extends Component
 
     public function adjust()
     {
-        $this->dispatch('display-inventory-admin-login-form')->to(InventoryManagementPage::class);
-    }
 
-    public function displayStockAdjustConfirmation()
-    {
         $validated = $this->validateForm();
 
         $stockAdjust = Inventory::find($this->stock_id);
-
-
 
         $stockAdjust->quantityToAdjust = $validated['quantityToAdjust'];
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $attributes = $stockAdjust->toArray();
+        $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
+    }
 
+    public function displayStockAdjustConfirmation()
+    {
 
+        $attributes = $this->stockAdjust->toArray();
 
         $this->confirm('Do you want to update this stock?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
