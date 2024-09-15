@@ -83,7 +83,7 @@ class CreditPaymentForm extends Component
         }
         $credit->save();
 
-        CreditHistory::create([
+        $creditHistory = CreditHistory::create([
             'description' => 'Payment made',
             'credit_id' => $credit->id,
             'credit_amount' => $credit->credit_amount,
@@ -94,6 +94,12 @@ class CreditPaymentForm extends Component
         $this->alert('success', 'Creditor was paid successfully');
 
         $this->dispatch('display-payment-receipt')->to(CreditManagementPage::class);
+
+        $this->dispatch('get-payment-info', [
+            'CreditHistory' => $creditHistory,
+            'payment' => $payment
+        ])->to(PaymentReceipt::class);
+
         CreditEvent::dispatch('refresh-credit');
     }
 

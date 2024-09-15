@@ -22,7 +22,6 @@ class CreditForm extends Component
 
 
         $searchCustomerTerm = trim($this->searchCustomer);
-
         $customers = Customer::where('customer_type', 'Credit')
             ->where(function ($query) {
                 $query->whereHas('creditJoin', function ($subQuery) {
@@ -31,9 +30,10 @@ class CreditForm extends Component
                     ->orDoesntHave('creditJoin');
             })
             ->where(function ($query) use ($searchCustomerTerm) {
-                $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
+                $searchCustomerTerm = strtolower($searchCustomerTerm); // Convert to lowercase for case-insensitive search
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(lastname) like ?', ["%{$searchCustomerTerm}%"]);
             })
             ->get();
 

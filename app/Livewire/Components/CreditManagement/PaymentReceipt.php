@@ -15,10 +15,16 @@ class PaymentReceipt extends Component
 
     protected $listeners = [
         'display-payment-receipt' => 'displayPaymentReceipt', //*  galing sa UserTable class
+        'get-payment-info' => 'getPaymentInfo'
     ];
 
     public function displayPaymentReceipt($showPaymentReceipt)
     {
         $this->showPaymentReceipt = $showPaymentReceipt;
+    }
+
+    public function getPaymentInfo($data)
+    {
+        dd($data);
     }
 }
