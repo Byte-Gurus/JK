@@ -47,21 +47,23 @@ class InventoryHistory extends Component
 
 
         if ($this->statusFilter != 0) {
+
             $query->whereHas('inventoryJoin', function ($query) {
                 $query->where('status', $this->statusFilter);
             })
-                ->orWhereHas('adjustmentJoin.inventoryJoin')->where('status', $this->statusFilter);
+                ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
+                    $query->where('status', $this->statusFilter);
+                });
         }
 
         if ($this->supplierFilter != 0) {
-            $query->where(function ($query) {
-                $query->whereHas('inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
+
+            $query->whereHas('inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
+                $query->where('supplier_id', $this->supplierFilter);
+            })
+                ->orWhereHas('adjustmentJoin.inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
                     $query->where('supplier_id', $this->supplierFilter);
-                })
-                    ->orWhereHas('adjustmentJoin.inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
-                        $query->where('supplier_id', $this->supplierFilter);
-                    });
-            });
+                });
         }
 
 

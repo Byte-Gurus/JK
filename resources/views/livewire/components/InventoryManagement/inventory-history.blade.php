@@ -77,6 +77,7 @@
                             <option value="0">All</option>
                             <option value="Inventory">Inventory</option>
                             <option value="Adjustment">Adjustment</option>
+                            <option value="Transaction">Transaction</option>
 
                         </select>
                     </div>
