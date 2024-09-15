@@ -32,6 +32,9 @@ class LoginPage extends Component
             } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
                 Auth::logoutOtherDevices($this->password);
                 return redirect()->route('cashier.index');
+            } elseif (Auth::user()->user_role_id == '3' && Auth::user()->status_id == 1) {
+                Auth::logoutOtherDevices($this->password);
+                return redirect()->route('inventoryclerk.index');
             } else {
                 $this->addError('submit', 'This account is inactive');
             }

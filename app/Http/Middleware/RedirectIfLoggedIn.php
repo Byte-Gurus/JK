@@ -51,6 +51,17 @@ class RedirectIfLoggedIn
             return $next($request);
         }
 
+        if (Auth::user()->user_role_id == '3' && Auth::user()->status_id == 1) {
+
+
+            if (!str_starts_with($request->path(), 'inventoryClerk')) {
+
+                return redirect('inventoryClerk');
+            }
+
+            return $next($request);
+        }
+
         return $next($request);
     }
 }

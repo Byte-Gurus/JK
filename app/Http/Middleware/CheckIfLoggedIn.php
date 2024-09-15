@@ -26,8 +26,11 @@ class CheckIfLoggedIn
             } elseif (Auth::user()->user_role_id == 2 && Auth::user()->status_id == 1) {
 
                 return redirect('/cashier');
-            } else {
+                //* check if may role ka na 2 and active ang status mo para makalogin ka sa cashier
+            } elseif (Auth::user()->user_role_id == 3 && Auth::user()->status_id == 1) {
 
+                return redirect('/inventoryClerk');
+            } else {
             }
         }
         return $next($request);

@@ -7,6 +7,7 @@ use App\Livewire\Pages\CreditManagementPage;
 use App\Livewire\Pages\CustomerManagementPage;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\HomePage;
+use App\Livewire\Pages\InventoryClerkPage;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\LoginPage;
@@ -64,6 +65,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         //CashierHomepage
         Route::get('/cashier', CashierPage::class)->name('cashier.index');
+
+        //InventoryClerk Homepage
+        Route::get('/inventoryClerk', InventoryClerkPage::class)->name('inventoryclerk.index');
     });
 });
 

@@ -151,7 +151,7 @@ class SalesReturnDetails extends Component
 
                 ];
             }
-            
+
         }
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
@@ -194,7 +194,7 @@ class SalesReturnDetails extends Component
             if (isset($this->returnQuantity[$index])) {
                 $availableQty = $transactionDetail['item_quantity']; // Replace with the actual field for quantity
                 $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
-            }
+k            }
         }
 
 
