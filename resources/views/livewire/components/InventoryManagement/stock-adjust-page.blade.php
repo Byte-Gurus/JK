@@ -3,7 +3,7 @@
     <div x-cloak class="my-[28px]" x-show="showStockAdjustForm" x-data="{ showStockAdjustForm: @entangle('showStockAdjustForm') }">
         @livewire('components.InventoryManagement.stock-adjust-form')
     </div>
-    <div x-cloak class="my-[28px]" x-show="adminLoginForm" x-data="{ adminLoginForm: @entangle('adminLoginForm') }">
-        @livewire('components.admin-login-form')
+    <div x-cloak class="my-[28px]" x-show="showInventoryAdminLoginForm" x-data="{ showInventoryAdminLoginForm: @entangle('showInventoryAdminLoginForm') }">
+        @livewire('components.InventoryManagement.inventory-admin-login-form')
     </div>
 </div>

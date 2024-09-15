@@ -8,7 +8,7 @@ class StockAdjustPage extends Component
 {
 
     public $showStockAdjustForm = true;
-    public $adminLoginForm = false;
+    public $showInventoryAdminLoginForm = false;
     public function render()
     {
         return view('livewire.components.InventoryManagement.stock-adjust-page');
@@ -17,19 +17,21 @@ class StockAdjustPage extends Component
     protected $listeners = [
         'adjust-stock-from-table' => 'adjustStock', //*  galing sa UserTable class
         'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
-        'display-admin-login-form' => 'displayAdminLoginForm',
+        'display-inventory-admin-login-form' => 'displayInventoryAdminLoginForm',
         'return-stock-adjust-form' => 'returnStockAdjustForm',
         'updateConfirmed',
         'createConfirmed',
     ];
 
-    public function displayAdminLoginForm()
+    public function displayInventoryAdminLoginForm()
     {
-        $this->adminLoginForm = true;
+        $this->showStockAdjustForm = false;
+        $this->showInventoryAdminLoginForm = true;
     }
 
-    public function closeLoginForm()
+    public function returnStockAdjustForm()
     {
-        $this->adminLoginForm = false;
+        $this->showStockAdjustForm = true;
+        $this->showInventoryAdminLoginForm = false;
     }
 }
