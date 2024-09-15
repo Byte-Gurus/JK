@@ -63,7 +63,7 @@ class StockAdjustForm extends Component
     public function updateConfirmed() //* confirmation process ng update
     {
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
-        $updatedAttributes = $this->adjustInfo;
+        $updatedAttributes = $this->adjustInfo['stockAdjust'];
 
 
         if ($this->selectOperation == "Add") {
