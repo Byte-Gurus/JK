@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\InventoryManagement;
 
 use App\Livewire\Pages\InventoryManagementPage;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -30,17 +31,20 @@ class InventoryAdminLoginForm extends Component
             'password' => 'required|min:8',
         ]);
 
-        if (Auth::attempt($validated)) {
+        if (Auth::validate(['username' => $validated['username'], 'password' => $validated['password']])) {
+            // Fetch the user with the given username
+            $user = User::where('username', $validated['username'])->first();
 
-
-            if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
+            // Check if the user is an admin and active
+            if ($user && $user->user_role_id == 1 && $user->status_id == 1) {
                 $this->isAdmin = true;
                 $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustForm::class);
             } else {
-                $this->addError('submit', 'This account is inactive');
+                $this->addError('submit', 'This account is inactive or not an admin.');
             }
+        } else {
+            $this->addError('submit', 'No matching user with provided username and password.');
         }
 
-        $this->addError('submit', 'No matching user with provided username and password');
     }
 }
