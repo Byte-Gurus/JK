@@ -55,7 +55,6 @@ class InventoryHistory extends Component
                         $query->where('status', $this->statusFilter);
                     });
             });
-            dd("sasas");
         }
 
         if ($this->supplierFilter != 0) {
