@@ -4,7 +4,6 @@ namespace App\Livewire\Components\InventoryManagement;
 
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
-use App\Models\InventoryMovement;
 use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -26,62 +25,33 @@ class InventoryTable extends Component
 
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
+        $suppliers = Supplier::select('id', 'company_name')
+            ->where('status_id', '1')->get();
 
-        $query = InventoryMovement::query();
-
-        $query->where(function ($query) {
-            $query->whereHas('inventoryJoin', function ($query) {
-                $query->where('status', '!=', 'new Item');
-            })
-                ->orWhereHas('adjustmentJoin')
-                ->orWhereHas('transactionDetailsJoin');
-        });
+        $query = Inventory::query()
+            ->where('status', '!=', 'New Item');
 
         if ($this->statusFilter != 0) {
-            $query->where(function ($query) {
-                $query->whereHas('inventoryJoin', function ($query) {
-                    $query->where('status', $this->statusFilter);
-                })
-                    ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
-                        $query->where('status', $this->statusFilter);
-                    });
-            });
+            $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
         }
 
         if ($this->supplierFilter != 0) {
-            $query->where(function ($query) {
-                $query->whereHas('inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
-                    $query->where('supplier_id', $this->supplierFilter);
-                })
-                    ->orWhereHas('adjustmentJoin.inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
-                        $query->where('supplier_id', $this->supplierFilter);
-                    });
+            // Use whereHas to filter deliveries based on the supplier_id through purchase
+            $query->whereHas('deliveryJoin.purchaseJoin', function ($query) {
+                $query->where('supplier_id', $this->supplierFilter);
             });
         }
-
-        if ($this->movementFilter != 0) {
-            $query->where('movement_type', $this->movementFilter);
-        }
-
-        if ($this->operationFilter != 0) {
-            $query->where('operation', $this->operationFilter);
-        }
-
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+            $query->whereBetween('stock_in_date', [$this->startDate, $this->endDate]);
         }
 
-        $InventoryHistory = $query->search($this->search)
-            ->orderBy($this->sortColumn, $this->sortDirection)
+
+        $inventories = $query->search($this->search) //?search the user
+            ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
 
-        return view('livewire.components.InventoryManagement.inventory-history', [
-            'InventoryHistories' => $InventoryHistory,
-            'suppliers' => $suppliers,
-        ]);
+        return view('livewire.components.InventoryManagement.inventory-table', compact('inventories', 'suppliers'));
     }
-
 
     protected $listeners = [
         'refresh-table' => 'refreshTable', //*  galing sa UserTable class
