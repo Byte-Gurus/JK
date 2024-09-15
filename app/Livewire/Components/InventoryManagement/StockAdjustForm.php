@@ -52,7 +52,7 @@ class StockAdjustForm extends Component
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $attributes = $this->stockAdjust->toArray();
+        $attributes = $stockAdjust->toArray();
 
         $this->confirm('Do you want to update this stock?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
