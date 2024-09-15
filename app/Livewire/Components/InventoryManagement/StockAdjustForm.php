@@ -181,7 +181,7 @@ class StockAdjustForm extends Component
 
 
         if ($this->isAdmin) {
-            $this->displayStockAdjustConfirmation();
+            $this->updateConfirmed();
         }
     }
 }
