@@ -39,6 +39,8 @@ class InventoryAdminLoginForm extends Component
             if ($user && $user->user_role_id == 1 && $user->status_id == 1) {
                 $this->isAdmin = true;
                 $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustForm::class);
+
+                $this->dispatch('admin-confirmed')->to(StockAdjustPage::class);
             } else {
                 $this->addError('submit', 'This account is inactive or not an admin.');
             }
