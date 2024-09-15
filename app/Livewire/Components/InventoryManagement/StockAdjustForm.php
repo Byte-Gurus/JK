@@ -63,49 +63,50 @@ class StockAdjustForm extends Component
 
         if (!$this->isAdmin) {
             $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
-        }
-
-        $updatedAttributes = $data['inputAttributes'];
-
-
-        if ($this->selectOperation == "Add") {
-            $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
-        } elseif ($this->selectOperation == "Deduct") {
-            $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
-        }
-
-        $inventory = Inventory::find($updatedAttributes['id']);
-        $inventory->current_stock_quantity = $adjustedQuantity;
-
-        if ($adjustedQuantity <= 0) {
-            $inventory->status = "Not available";
+            return;
         } else {
-            $inventory->status = "Available";
+            $updatedAttributes = $data['inputAttributes'];
+
+
+            if ($this->selectOperation == "Add") {
+                $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
+            } elseif ($this->selectOperation == "Deduct") {
+                $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
+            }
+
+            $inventory = Inventory::find($updatedAttributes['id']);
+            $inventory->current_stock_quantity = $adjustedQuantity;
+
+            if ($adjustedQuantity <= 0) {
+                $inventory->status = "Not available";
+            } else {
+                $inventory->status = "Available";
+            }
+
+            $inventory->save();
+
+
+
+            $inventoryAdjust = InventoryAdjustment::create([
+                'reason' => $updatedAttributes['adjustReason'],
+                'operation' => $updatedAttributes['selectOperation'],
+                'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
+                'inventory_id' => $inventory->id,
+                'user_id' => Auth::id(),
+            ]);
+
+            $inventoryMovement = InventoryMovement::create([
+                'inventory_adjustment_id' => $inventoryAdjust->id,
+                'movement_type' => 'Adjustment',
+                'operation' => $updatedAttributes['selectOperation'],
+            ]);
+
+            $this->resetForm();
+            $this->alert('success', 'Stock was adjusted successfully');
+            AdjustmentEvent::dispatch('refresh-adjustment');
+            $this->refreshTable();
+            $this->closeModal();
         }
-
-        $inventory->save();
-
-
-
-        $inventoryAdjust = InventoryAdjustment::create([
-            'reason' => $updatedAttributes['adjustReason'],
-            'operation' => $updatedAttributes['selectOperation'],
-            'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
-            'inventory_id' => $inventory->id,
-            'user_id' => Auth::id(),
-        ]);
-
-        $inventoryMovement = InventoryMovement::create([
-            'inventory_adjustment_id' => $inventoryAdjust->id,
-            'movement_type' => 'Adjustment',
-            'operation' => $updatedAttributes['selectOperation'],
-        ]);
-
-        $this->resetForm();
-        $this->alert('success', 'Stock was adjusted successfully');
-        AdjustmentEvent::dispatch('refresh-adjustment');
-        $this->refreshTable();
-        $this->closeModal();
     }
     protected function validateForm()
     {
