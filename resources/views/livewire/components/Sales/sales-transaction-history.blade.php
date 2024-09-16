@@ -231,7 +231,7 @@
                     </div>
                     <div class="border border-black "></div>
                     <div class="flex flex-row justify-between">
-                        @if ($payment_type != 'GCash')
+                        @if ($payment_type != 'GCash' && !is_null($payment_type))
                             <div>
                                 <p class=" text-[1.6em] font-medium">Change</p>
                             </div>
