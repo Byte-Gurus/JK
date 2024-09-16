@@ -50,7 +50,7 @@ class CreditPaymentForm extends Component
     {
 
         $validated = $data['inputAttributes'];
-     
+
         $credit = Credit::find($this->credit_id);
 
         if ($this->payWithCash) {
@@ -61,7 +61,7 @@ class CreditPaymentForm extends Component
                 'reference_number' => 'N/A',
                 'transaction_id' => $credit->transaction_id
             ]);
-        } else {
+        } elseif (!$this->payWithCash) {
 
 
             $payment = Payment::create([
