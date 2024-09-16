@@ -27,7 +27,7 @@ class Customer extends Model
     }
     public function creditJoin()
     {
-        return $this->hasOne(Credit::class, 'customer_id');
+        return $this->hasMany(Credit::class, 'customer_id');
     }
     public function scopeSearch($query, $value)
     {
