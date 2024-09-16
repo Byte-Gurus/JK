@@ -69,7 +69,7 @@ class SalesTransactionHistory extends Component
             ->find($transaction_id);
 
         $this->transaction_type = $transaction->transaction_type;
-        $this->payment_type = $transaction->paymentJoin->payment_type;
+        $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
         $this->transaction_number = $transaction->transaction_number;
         $this->subtotal = $transaction->subtotal;
         $this->grandTotal = $transaction->total_amount;
