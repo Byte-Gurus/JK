@@ -61,13 +61,13 @@ class CreditPaymentForm extends Component
                 'reference_number' => 'N/A',
                 'transaction_id' => $credit->transaction_id
             ]);
-        } elseif (!$this->payWithCash) {
+        } else {
 
 
             $payment = Payment::create([
                 'tendered_amount' => $validated['tendered_amount'],
                 'amount' => $this->credit_amount,
-                'reference_no' => $validated['reference_no'],
+                'reference_number' => $validated['reference_no'],
                 'payment_type' => 'GCash',
                 'transaction_id' => $credit->transaction_id
             ]);
