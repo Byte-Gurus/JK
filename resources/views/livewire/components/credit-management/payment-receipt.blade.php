@@ -27,13 +27,13 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>
-                        <p class="text-[0.6em] font-bold uppercase"></p>
+                        <p class="text-[0.6em] font-bold uppercase"> {{ $credit_payment_info['payment']['payment_type'] ?? null }}</p>
                             {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
                     </div>
                     {{-- @if ($payWithCash) --}}
                     <div>
                         <p class="text-[0.6em] font-bold uppercase">Reference no.</p>
-                        <p class="text-[0.6em] font-bold uppercase"></p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $credit_payment_info['payment']['reference_number'] ?? null }}</p>
                     </div>
                     {{-- @endif --}}
                 </div>
@@ -51,7 +51,7 @@
                     </li>
                     <li class="col-span-2 ">
                         <div>
-                            <p class="text-[0.2em] font-bold">198</p>
+                            <p class="text-[0.2em] font-bold">{{ $credit_payment_info['payment']['amount'] ?? null }}</p>
                         </div>
                     </li>
 
@@ -64,7 +64,7 @@
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[0.6em] font-bold uppercase">Prepared by:</p>
                     <p class="text-[0.6em] font-bold uppercase">
-                        {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
+                        {{ $credit_payment_info['user'] ?? null }}</p>
                 </div>
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[0.6em] font-bold uppercase">Signiture:</p>

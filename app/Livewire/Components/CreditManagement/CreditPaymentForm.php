@@ -8,6 +8,7 @@ use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Payment;
 use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -99,7 +100,8 @@ class CreditPaymentForm extends Component
             'CreditHistory' => $creditHistory,
             'credit' => $credit,
             'payment' => $payment,
-            'name' => $credit->customerjoin->firstname, $credit->customerjoin->middlename, $credit->customerjoin->lastname
+            'name' => $credit->customerjoin->firstname . ' ' . ($credit->customerjoin->middlename ?? '') . ' ' . $credit->customerjoin->lastname,
+            'user' =>  Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ])->to(PaymentReceipt::class);
 
         CreditEvent::dispatch('refresh-credit');

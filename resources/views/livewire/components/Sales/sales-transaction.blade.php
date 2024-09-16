@@ -466,8 +466,8 @@
                                                 <!-- Item details on the left side -->
                                                 <div
                                                     class="text-[0.8em] w-full gap-4 justify-between flex flex-row text-wrap">
-                                                    <p class="font-medium ">
-                                                        {{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
+                                                    <p class="font-medium">
+                                                        {{ $credit_customer->firstname . ' ' . ($credit_customer->middlename ?? '') . ' ' . $credit_customer->lastname }}
                                                     </p>
                                                     @foreach ($credit_customer->creditJoin as $credit)
                                                         @if ($credit->status != 'Fully paid' && !$credit->transactionJoin)
