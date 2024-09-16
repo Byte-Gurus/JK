@@ -99,7 +99,7 @@ class CreditPaymentForm extends Component
             'CreditHistory' => $creditHistory,
             'credit' => $credit,
             'payment' => $payment,
-            'name' => $credit->customerjoin->firstname,
+            'name' => $credit->customerjoin->firstname, $credit->customerjoin->middlename, $credit->customerjoin->lastname
         ])->to(PaymentReceipt::class);
 
         CreditEvent::dispatch('refresh-credit');
