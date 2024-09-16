@@ -17,6 +17,7 @@ class StockAdjustForm extends Component
 
 
     public $stock_id;
+
     public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin;
 
     public $showStockAdjustForm = true;

@@ -147,7 +147,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($credit->credit_amount)
-                                    {{ $credit->created_at->format(' M d Y ')  }}
+                                    {{ $credit->created_at->format(' M d Y ') }}
                                 @else
                                     'N/A'
                                 @endif
@@ -155,17 +155,15 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ \Carbon\Carbon::parse($credit->due_date)->format(' M d Y ')  }}
+                                {{ \Carbon\Carbon::parse($credit->due_date)->format(' M d Y ') }}
                             </th>
 
 
                             {{-- //* actions --}}
-                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
-
-
+                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
-                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+                                        class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -180,17 +178,17 @@
                                         x-transition:leave="transition ease-out duration-100"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0"
-                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        x-on:click.away="openActions = false"
+                                        class="absolute right-14 z-10 transform max-w-m origin-top-right w-[170px]">
                                         <div
-                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
-                            min-h-[20%]">
-                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
+                                        min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
 
                                                 @if ($credit->transaction_id && $credit->status != 'Fully paid')
                                                     <button wire:click="getCredit({{ $credit->id }})"
                                                         x-on:click="$wire.displayCreditPaymentForm(); openActions = !openActions"
-                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-[rgb(255,131,49)] justify-left hover:bg-[rgb(255,215,188)]">
+                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth={1.5}
                                                                 stroke="currentColor" class="size-6">
@@ -201,7 +199,6 @@
                                                         <div>Credit Payment</div>
                                                     </button>
                                                 @endif
-
                                             </div>
                                         </div>
                                     </div>

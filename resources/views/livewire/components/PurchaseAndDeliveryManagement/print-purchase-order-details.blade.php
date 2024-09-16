@@ -43,7 +43,8 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="flex flex-row justify-between mx-8 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
@@ -67,7 +68,8 @@
             {{-- @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
                     @foreach ($receiptDetails['selectedItems'] as $item) --}}
             @foreach ($purchaseDetails as $purchaseDetail)
-                <ul class="flex flex-row justify-between mx-8 my-2">
+            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[1em] text-left font-medium">
