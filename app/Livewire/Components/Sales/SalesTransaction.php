@@ -569,7 +569,6 @@ class SalesTransaction extends Component
 
     public function save()
     {
-        dd($this->isSales);
 
         if (empty($this->payment) && $this->isSales) {
             $this->alert('warning', 'No payment yet');
@@ -707,6 +706,8 @@ class SalesTransaction extends Component
                 'credit_amount' => $this->grandTotal,
                 'remaining_balance' => $this->grandTotal,
             ]);
+
+            CreditEvent::dispatch('refresh-credit');
         }
 
 
@@ -728,7 +729,7 @@ class SalesTransaction extends Component
         ))->to(SalesReceipt::class);
 
         TransactionEvent::dispatch('refresh-transaction');
-        CreditEvent::dispatch('refresh-credit');
+
 
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
