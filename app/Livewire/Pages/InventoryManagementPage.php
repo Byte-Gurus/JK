@@ -28,7 +28,7 @@ class InventoryManagementPage extends Component
 
     public function closeModal()
     {
-        $this->showModal = false;
+        $this->showStockAdjustPage = false;
     }
 
     public function formCreate()

@@ -107,8 +107,9 @@
 
                     <tbody>
                         @foreach ($selectedItems as $index => $selectedItem)
-                            <tr wire:click="getIndex({{ $index }}, true)" x-data="{ isSelected: false }"
-                                x-on:click=" isSelected = !isSelected; $wire.ss({{ $index }}) "
+                            <tr wire:click="getIndex({{ $index }}, true )" x-data="{ isSelected: false }"
+                                x-on:click=" isSelected = true;"
+                                x-on:click.away="isSelected = false;"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75 cursor-pointer">
 
                                 <th scope="row"
@@ -457,7 +458,7 @@
                             </div>
                             @if (!empty($searchCustomer))
                                 <div
-                                    class="fixed max-h-[400px] z-99 h-fit rounded-b-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                    class="fixed max-h-[400px] z-99 h-fit rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
                                     @foreach ($credit_customers as $credit_customer)
                                         <ul wire:click="selectCustomer({{ $credit_customer->id }})"
                                             class="w-full px-4 py-2 transition-all  justify-between duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">

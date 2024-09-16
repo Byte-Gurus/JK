@@ -319,13 +319,10 @@ class SalesTransaction extends Component
         $this->isSelected = $flag;
     }
 
-    public function ss($index)
+    public function hi()
     {
-        array_push($this->si, $index);
-
-        if (count($this->si) == 2) {
-            // dd($this->si);
-        }
+        dd('hi');
+        // $this->reset('selectedIndex', 'isSelected');
     }
 
     public function setQuantity()

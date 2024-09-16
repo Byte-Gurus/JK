@@ -11,10 +11,6 @@
                 <p class="text-[1em] uppercase">Non-VAT Reg TIN 936-196-461-0000</p>
             </div>
         </div>
-        <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">DAILY SALES REPORT</p>
-
-        </div>
         <div class="grid grid-flow-col grid-cols-2 ">
             <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
                 <div class="flex flex-col ">
@@ -30,29 +26,9 @@
                         {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
                     </div>
                 </div>
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                    {{-- <p class="text-[1em] font-black uppercase">{{ $createdBy }}</p> --}}
-                </div>
             </div>
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row border border-black text-nowrap">
-                        <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p> --}}
-                        {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
-                        </p>
-                    </div>
-                    <div class="flex flex-row border border-black text-nowrap ">
-                        <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p> --}}
-                        {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
-                    </div>
-                </div>
-                <div class="flex flex-row border border-black text-nowrap">
-                    <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
-                    {{-- <p class="text-[1em] font-black uppercase">{{ $createdBy }}</p> --}}
-                </div>
+            <div>
+                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">EXPIRED ITEMS LIST REPORT</p>
             </div>
         </div>
 
@@ -60,45 +36,34 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
 
-                <li class="col-span-2 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Transaction No</p>
-                    </div>
-                </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Time</p>
-                    </div>
-                </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Gross Sales</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD(20%)</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">SKU</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">WS Discount</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Item Description</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Quantity</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
-                    </div>
-                </li>
-
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Net Sales</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Date</p>
                     </div>
                 </li>
 
@@ -107,9 +72,9 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- @foreach ($purchaseDetails as $purchaseDetail) --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
 
-                <li class="col-span-2 py-[3px]">
+                <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-left font-medium">
                             hiii</p>
@@ -143,21 +108,6 @@
                         </p>
                     </div>
                 </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-
             </ul>
             {{-- @endforeach --}}
         </div>

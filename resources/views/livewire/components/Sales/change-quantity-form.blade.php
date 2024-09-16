@@ -58,13 +58,8 @@
                     @csrf
 
                     <div class="flex flex-col items-center justify-center mt-4 w-fit">
-<<<<<<< Updated upstream
-                        <input type="text" wire:model='adjust_quantity' required
-                            class=" bg-[#ffffff3d] w-1/2  text-center font-black text-2xl border border-[rgb(143,143,143)] text-white rounded-md block p-4">
-=======
                         <input autofocus type="text" wire:model='adjust_quantity' required
                             class=" bg-[#ffffff3d] w-2/4 text-center font-black text-2xl border border-[rgb(143,143,143)] text-white rounded-md block p-4">
->>>>>>> Stashed changes
 
                         @error('adjust_quantity')
                             <span

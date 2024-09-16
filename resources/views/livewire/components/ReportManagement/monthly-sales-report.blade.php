@@ -12,7 +12,7 @@
             </div>
         </div>
         <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">DAILY SALES REPORT</p>
+            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">MONTHLY SALES REPORT</p>
 
         </div>
         <div class="grid grid-flow-col grid-cols-2 ">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-black uppercase">Selected Date:</p>
+                    <p class="text-[1em] font-black uppercase">Selected Month:</p>
                     {{-- <p class="text-[1em] font-black uppercase">{{ $createdBy }}</p> --}}
                 </div>
             </div>
@@ -60,45 +60,27 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
-
-                <li class="col-span-2 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Transaction No</p>
-                    </div>
-                </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Time</p>
-                    </div>
-                </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Gross Sales</p>
-                    </div>
-                </li>
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD(20%)</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Date</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-center font-bold">Gross Sales</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-center font-bold">VAT Amount</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">WS Discount</p>
-                    </div>
-                </li>
-
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
-                    </div>
-                </li>
-
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Net Sales</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Net Sales</p>
                     </div>
                 </li>
 
@@ -107,57 +89,35 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- @foreach ($purchaseDetails as $purchaseDetail) --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
-                <li class="col-span-2 py-[3px]">
+                <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[0.8em] text-left font-medium">
+                        <p class="text-[1em] text-left font-medium">
                             hiii</p>
                     </div>
                 </li>
-                <li class="col-span-1 py-[3px]">
+                <li class="col-span-1 text-center py-[3px]">
                     <div>
-                        <p class="text-[0.8em] text-left font-bold">
+                        <p class="text-[1em] text-center font-bold">
                             hello
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[0.8em] text-center fot-bold">
+                        <p class="text-[1em] text-center fot-bold">
                             aiah
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[0.8em] text-center fot-bold">
+                        <p class="text-[1em] text-center fot-bold">
                             aiah
                         </p>
                     </div>
                 </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-
             </ul>
             {{-- @endforeach --}}
         </div>

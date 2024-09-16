@@ -121,11 +121,11 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
+                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
 
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
-                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+                                        class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -140,17 +140,16 @@
                                         x-transition:leave="transition ease-out duration-100"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0"
-                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        x-on:click.away="openActions = false"
+                                        class="absolute overflow-hidden  right-24 z-10 transform max-w-m origin-top-right w-[170px]">
                                         <div
-                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
                                         min-h-[20%]">
-                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-
-
+                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
                                                 <button
                                                     x-on:click=" $wire.displayPurchaseOrderDetails(); openActions = !openActions"
                                                     wire:click="getPo_ID({{ $purchase->id }})"
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 transition-all duration-100 ease-in-out justify-left hover:bg-blue-100">
+                                                    class="flex transition-all duration-100 ease-in-out hover:text-green-300 hover:pl-3 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                     <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="size-6">
@@ -160,13 +159,13 @@
                                                     <div>View PO</div>
                                                 </button>
 
-                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
+                                                <div class="w-full border border-[rgb(39,39,39)]"></div>
                                                 {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
 
                                                 <button wire:click="printPO({{ $purchase->id }})"
                                                     x-on:click="$wire.displayPrintPurchaseOrderDetails(), openActions = !openActions"
                                                     {{-- wire:click="getStock({{ $inventory->id }})" --}}
-                                                    class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
+                                                    class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"

@@ -10,7 +10,12 @@ use Livewire\Component;
 
 class ReportManagement extends Component
 {
+    public $showNavbar = true;
     public $sidebarStatus;
+
+    public $reportSelected = false;
+
+    public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport = false;
 
     public function render()
     {
@@ -114,5 +119,115 @@ class ReportManagement extends Component
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function displayDailySalesReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showDailySalesReport = true;
+    }
+
+    public function displayWeeklySalesReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showWeeklySalesReport = true;
+    }
+
+    public function displayMonthlySalesReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showMonthlySalesReport = true;
+    }
+
+    public function displayYearlySalesReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showYearlySalesReport = true;
+    }
+
+    public function displaySalesReturnReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showSalesReturnReport = true;
+    }
+
+    public function displayCustomerCreditListReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showCustomerCreditListReport = true;
+    }
+
+    public function displayStockonhandReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showStockonhandReport = true;
+    }
+
+    public function displaySlowMovingItemsReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showSlowMovingItemsReport = true;
+    }
+
+    public function displayFastMovingItemsReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showFastMovingItemsReport = true;
+    }
+
+    public function displayReorderListReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showReorderListReport = true;
+    }
+
+    public function displayBackorderedItemsReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showBackorderedItemsReport = true;
+    }
+
+    public function displayExpiredItemsReport()
+    {
+        $this->reportSelected = true;
+        $this->showNavbar = false;
+        $this->sidebarStatus = true;
+        $this->showExpiredItemsReport = true;
     }
 }
