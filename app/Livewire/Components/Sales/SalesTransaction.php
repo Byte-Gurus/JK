@@ -81,7 +81,7 @@ class SalesTransaction extends Component
                 ->orWhereRaw('LOWER(lastname) LIKE ?', ['%' . $searchCustomerTermLower . '%']);
         })
             ->whereHas('creditJoin', function ($query) {
-                $query->where('status', '!=', 'Paid')
+                $query->where('status', '!=', 'Fully paid')
                     ->doesntHave('transactionJoin');
             })
             ->get();
