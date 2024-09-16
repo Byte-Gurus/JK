@@ -100,22 +100,28 @@ class SalesTransaction extends Component
                         ->orWhereRaw('LOWER(barcode) LIKE ?', ['%' . $searchTermLower . '%']);
                 });
             })
-            ->with('inventoryJoin') // Ensure inventoryJoin is eager-loaded
+            ->with(['inventoryJoin' => function ($query) {
+                $query->where('status', 'Available'); // Ensure only 'Available' inventory is eager-loaded
+            }])
             ->get();
 
         // Process each item
         $items = $items->map(function ($item) {
             // Filter and sort inventoryJoin based on shelf_life_type
+            $availableInventory = $item->inventoryJoin->filter(function ($inventory) {
+                return $inventory->status === 'Available'; // Ensure only available items are considered
+            });
+
             if ($item->shelf_life_type === 'Perishable') {
                 // Sort by expiration_date to find the nearest expiration date
-                $sortedInventory = $item->inventoryJoin->filter(function ($inventory) {
+                $sortedInventory = $availableInventory->filter(function ($inventory) {
                     return !is_null($inventory->expiration_date);
                 })->sortBy('expiration_date');
 
                 $item->inventoryJoin = $sortedInventory->first();
             } else {
                 // For non-perishable items, get the latest inventory entry
-                $sortedInventory = $item->inventoryJoin->sortBy('created_at');
+                $sortedInventory = $availableInventory->sortBy('created_at');
                 $item->inventoryJoin = $sortedInventory->first();
             }
             return $item;
