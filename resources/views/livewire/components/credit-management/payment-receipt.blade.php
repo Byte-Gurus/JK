@@ -17,7 +17,7 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
+                            {{ $credit_payment_info['payment']['created_at'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">

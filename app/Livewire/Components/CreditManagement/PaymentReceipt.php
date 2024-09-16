@@ -8,9 +8,12 @@ class PaymentReceipt extends Component
 {
 
     public $showPaymentReceipt = false;
+    public $credit_payment_info = [];
     public function render()
     {
-        return view('livewire.components.credit-management.payment-receipt');
+        return view('livewire.components.credit-management.payment-receipt',[
+            'credit_payment_info' => $this->credit_payment_info
+        ]);
     }
 
     protected $listeners = [
@@ -25,6 +28,6 @@ class PaymentReceipt extends Component
 
     public function getPaymentInfo($data)
     {
-        dd($data);
+        $this->credit_payment_info = $data;
     }
 }
