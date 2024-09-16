@@ -706,12 +706,10 @@ class SalesTransaction extends Component
                 'credit_amount' => $this->grandTotal,
                 'remaining_balance' => $this->grandTotal,
             ]);
-
-            CreditEvent::dispatch('refresh-credit');
         }
 
 
-
+        CreditEvent::dispatch('refresh-credit');
 
 
         $this->alert('success', 'New Transaction saved successfully');
