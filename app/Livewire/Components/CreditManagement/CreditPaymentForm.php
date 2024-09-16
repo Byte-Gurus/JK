@@ -50,7 +50,7 @@ class CreditPaymentForm extends Component
     {
 
         $validated = $data['inputAttributes'];
-        dd($validated, $this->payWithCash);
+     
         $credit = Credit::find($this->credit_id);
 
         if ($this->payWithCash) {
