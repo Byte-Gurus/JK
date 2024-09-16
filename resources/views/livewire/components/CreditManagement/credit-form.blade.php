@@ -146,9 +146,7 @@
                                     </div>
                                 @else
                                     <div class="mb-3">
-                                        <label for="credit_id" class="block font-medium text-gray-900 text-md ">Customer
-                                            Name
-                                        </label>
+                                       
                                         <div class="flex flex-row items-center justify-between">
                                             <p class=" text-[2em] font-black">{{ $customer_name }}</p>
                                             <div wire:click='clearSelectedCustomerName()'>
