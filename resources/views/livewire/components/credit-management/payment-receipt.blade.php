@@ -15,21 +15,15 @@
             <div class="flex flex-col justify-between px-4 mb-2">
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Date:</p>
+                        <p class="text-[0.6em] font-bold uppercase">Date $& Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $credit_payment_info['payment']['created_at'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Time:</p>
-                        <p class="text-[0.6em] font-bold uppercase">
-                            {{-- {{ $receiptDetails['transaction_info']['transaction_time'] ?? null }} --}}
-                        </p>
-                    </div>
-                    <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Creditor Name:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{-- {{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p> --}}
+                            {{ $credit_payment_info['credit']['customerjoin']['firstaname'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>

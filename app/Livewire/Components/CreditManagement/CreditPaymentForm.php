@@ -97,6 +97,7 @@ class CreditPaymentForm extends Component
 
         $this->dispatch('get-payment-info', [
             'CreditHistory' => $creditHistory,
+            'credit' => $credit,
             'payment' => $payment
         ])->to(PaymentReceipt::class);
 
