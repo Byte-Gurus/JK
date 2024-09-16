@@ -20,29 +20,29 @@ class CreditForm extends Component
 
     public function render()
     {
-
-
         $searchCustomerTerm = trim($this->searchCustomer);
+        $searchCustomerTerm = strtolower($searchCustomerTerm); // Convert to lowercase for case-insensitive search
+
+        // Get customers who have credits that are not fully paid
+        $customersWithUnpaidCredits = Customer::whereHas('creditJoin', function ($query) {
+            $query->where('status', '!=', 'Fully paid');
+        })->pluck('id');
+
+        // Get customers who are of type 'Credit' and either have fully paid credits or no credits at all
         $customers = Customer::where('customer_type', 'Credit')
-            ->where(function ($query) {
-                $query->whereHas('creditJoin', function ($subQuery) {
-                    $subQuery->where('status', 'Fully paid');
-                })
-                    ->orDoesntHave('creditJoin');
-            })
+            ->whereNotIn('id', $customersWithUnpaidCredits)
             ->where(function ($query) use ($searchCustomerTerm) {
-                $searchCustomerTerm = strtolower($searchCustomerTerm); // Convert to lowercase for case-insensitive search
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
                     ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])
                     ->orWhereRaw('LOWER(lastname) like ?', ["%{$searchCustomerTerm}%"]);
             })
             ->get();
 
-
         return view('livewire.components.CreditManagement.credit-form', [
             'customers' => $customers
         ]);
     }
+
 
     protected $listeners = [
         'edit-supplier-from-table' => 'edit',  //* key:'edit-supplier-from-table' value:'edit'  galing sa SupplierTable class
@@ -110,7 +110,7 @@ class CreditForm extends Component
 
         $this->refreshTable();
         CreditEvent::dispatch('refresh-credit');
-        
+
 
         $this->closeModal();
     }
