@@ -23,7 +23,7 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Creditor Name:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $credit_payment_info['credit']['customerjoin']['firstname'] ?? null }}</p>
+                            {{ $credit_payment_info['name'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>

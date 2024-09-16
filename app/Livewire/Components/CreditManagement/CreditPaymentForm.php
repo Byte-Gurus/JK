@@ -98,7 +98,8 @@ class CreditPaymentForm extends Component
         $this->dispatch('get-payment-info', [
             'CreditHistory' => $creditHistory,
             'credit' => $credit,
-            'payment' => $payment
+            'payment' => $payment,
+            'name' => $credit->customerjoin->firstname,
         ])->to(PaymentReceipt::class);
 
         CreditEvent::dispatch('refresh-credit');
