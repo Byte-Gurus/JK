@@ -26,7 +26,7 @@ class CreditForm extends Component
         $customers = Customer::where('customer_type', 'Credit')
             ->where(function ($query) {
                 $query->whereHas('creditJoin', function ($subQuery) {
-                    $subQuery->where('status', 'Fully paid');
+                    $subQuery->where('status', '!=' ,'Pending');
                 })
                     ->orDoesntHave('creditJoin');
             })
@@ -110,7 +110,7 @@ class CreditForm extends Component
 
         $this->refreshTable();
         CreditEvent::dispatch('refresh-credit');
-        
+
 
         $this->closeModal();
     }
