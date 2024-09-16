@@ -53,12 +53,30 @@
                             <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Transaction
                                 Type:</label>
 
-                            <select wire:model.live="transactionTypeFilter"
+                            <select wire:model.live="transactionFilter"
                                 class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
                                 <option value="0">All</option>
                                 <option value="Sales">Sales</option>
                                 <option value="Credit">Credit</option>
                                 <option value="Return">Return</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row items-center gap-4 mb-4">
+
+                        <div class="flex flex-col gap-1">
+
+                            <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Payment
+                                Type:</label>
+
+                            <select wire:model.live="paymentFilter"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                                <option value="0">All</option>
+                                <option value="Cash">Cash</option>
+                                <option value="GCash">GCash</option>
+
 
                             </select>
                         </div>

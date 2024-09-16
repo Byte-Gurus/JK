@@ -20,7 +20,8 @@ class SalesTransactionHistory extends Component
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
 
-    public $transactionTypeFilter = 0; //var filtering value = all
+    public $transactionFilter = 0; //var filtering value = all
+    public $paymentFilter = 0;
     public $vatFilter = 0; //var filtering value = all
     public $supplierFilter = 0;
 
@@ -29,13 +30,17 @@ class SalesTransactionHistory extends Component
     {
         $query = Transaction::query();
 
-        if ($this->transactionTypeFilter != 0) {
-            $query->where('transaction_type', $this->transactionTypeFilter);
+        if ($this->transactionFilter != 0) {
+            $query->where('transaction_type', $this->transactionFilter);
+        }
+        if ($this->paymentFilter != 0) {
+            $query->whereHas('paymentJoin', function ($query) {
+                $query->where('payment_type', $this->paymentFilter);
+            });
         }
         if ($this->startDate && $this->endDate) {
             $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
         }
-
 
         $sales = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
