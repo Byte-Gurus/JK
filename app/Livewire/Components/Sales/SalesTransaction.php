@@ -569,6 +569,7 @@ class SalesTransaction extends Component
 
     public function save()
     {
+        dd($this->isSales);
 
         if (empty($this->payment) && $this->isSales) {
             $this->alert('warning', 'No payment yet');
@@ -684,7 +685,6 @@ class SalesTransaction extends Component
 
             $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
         }
-
 
         if ($this->isSales) {
             $payment = Payment::create([
