@@ -805,13 +805,16 @@ class SalesTransaction extends Component
 
             $minReorderPeriod = $purchaseDetails->flatMap(function ($purchaseDetail) {
                 // Ensure delivery is a single instance or null
-                $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
+                $delivery = $purchaseDetail->purchaseJoin->delivery;
                 if ($delivery) {
-                    return [$delivery->date_delivered->diffInDays($purchaseDetail->purchaseJoin->created_at)];
+                    // Convert strings to Carbon instances
+                    $deliveryDate = Carbon::parse($delivery->date_delivered);
+                    $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+
+                    return [$deliveryDate->diffInDays($purchaseDate)];
                 }
                 return [];
             })->min();
-
 
 
             dd($minReorderPeriod);
