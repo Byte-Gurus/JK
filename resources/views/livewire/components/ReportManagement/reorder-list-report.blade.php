@@ -91,11 +91,15 @@
                                 {{ $reorder_list['total_quantity'] }}</p>
                             </p>
                         </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
                                 {{ $reorder_list['maximum_stock_level'] }}</p>
                             </p>
                         </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
                                 {{ $reorder_list['reorder_point'] }}</p>
