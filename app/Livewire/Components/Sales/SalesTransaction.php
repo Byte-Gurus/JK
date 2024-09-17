@@ -733,7 +733,7 @@ class SalesTransaction extends Component
 
         TransactionEvent::dispatch('refresh-transaction');
 
-
+        $this->getMaximumLevel();
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
@@ -773,7 +773,7 @@ class SalesTransaction extends Component
         $item->reorder_point = $reorder_point;
         $item->save();
 
-        $this->getMaximumLevel();
+
     }
 
     public function getMaximumLevel()
@@ -786,8 +786,6 @@ class SalesTransaction extends Component
             $restockDate = Inventory::where('item_id', $itemId)
                 ->orderBy('stock_in_date', 'desc')
                 ->value('stock_in_date');
-
-
             // Calculate the date range from the same day last week to today
             $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
             $endDate = Carbon::now()->endOfDay()->toDateTimeString();
@@ -797,21 +795,16 @@ class SalesTransaction extends Component
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->min('item_quantity');
 
-
-
             $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
             $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
                 ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->whereNotNull('deliveries.date_delivered') // Ensure valid delivery date
-                ->whereNotNull('purchases.created_at') // Ensure valid purchase date
                 ->select(DB::raw($isMySQL
                     ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
                     : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
                 ->orderBy('reorder_period', 'asc')
                 ->value('reorder_period');
-
             // Calculate maximum level using the formula
             $reorderPoint = $item['reorder_point'];
             $reorderQuantity = $item['purchase_quantity'];
@@ -832,7 +825,6 @@ class SalesTransaction extends Component
             ];
         }
     }
-
 
     public function clearSelectedCustomerName()
     {
