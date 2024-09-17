@@ -824,7 +824,7 @@ class SalesTransaction extends Component
 
                 return $reorderPeriods;
             })->min();
-
+            dd($minReorderPeriod);
             // dd($minReorderPeriod);
 
             if (!$item) {
