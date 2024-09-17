@@ -299,7 +299,7 @@
                                     {{-- //* customer type --}}
                                     <div class="mb-3">
 
-                                        <label for="customer_type"
+                                        <label for="customerType"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                             Type</label>
 
@@ -313,7 +313,7 @@
 
                                         </select>
 
-                                        @error('customer_type')
+                                        @error('customerType')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 

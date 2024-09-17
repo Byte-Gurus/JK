@@ -63,7 +63,7 @@ class CustomerForm extends Component
 
     }
 
-    public function updateCustomerType()
+    public function updatedCustomerType()
     {
         $this->customer_discount_no = '';
     }
