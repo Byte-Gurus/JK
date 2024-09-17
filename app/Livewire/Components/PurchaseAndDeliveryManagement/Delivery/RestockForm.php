@@ -401,50 +401,53 @@ class RestockForm extends Component
         $item->save();
     }
 
-    public function getMaximumLevel()
-    {
-        $maximum_level_req = [];
+    // public function getMaximumLevel()
+    // {
+    //     $maximum_level_req = [];
 
-        foreach ($this->purchaseDetails as $detail) {
-            $itemId = $detail['item_id'];
+    //     foreach ($this->purchaseDetails as $detail) {
+    //         $itemId = $detail['item_id'];
 
-            // Calculate the date range from the same day last week to today
-            $startDate = Carbon::now()->subWeek()->startOfDay()->toDateTimeString();
-            $endDate = Carbon::now()->endOfDay()->toDateTimeString();
+    //         $restockDate = Inventory::where('item_id', $itemId)
+    //             ->orderBy('stock_in_date', 'desc')
+    //             ->value('stock_in_date');
+    //         // Calculate the date range from the same day last week to today
+    //         $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
+    //         $endDate = Carbon::now()->endOfDay()->toDateTimeString();
 
-            // Calculate minimum consumption within the period
-            $minQuantity = TransactionDetails::where('item_id', $itemId)
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->min('item_quantity');
+    //         // Calculate minimum consumption within the period
+    //         $minQuantity = TransactionDetails::where('item_id', $itemId)
+    //             ->whereBetween('created_at', [$startDate, $endDate])
+    //             ->min('item_quantity');
 
-            $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
+    //         $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
-            $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
-                ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
-                ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->select(DB::raw($isMySQL
-                    ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
-                    : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
-                ->orderBy('reorder_period', 'asc')
-                ->value('reorder_period');
-            // Calculate maximum level using the formula
-            $reorderPoint = $detail['reorder_point'];
-            $reorderQuantity = $detail['purchase_quantity'];
-            $minConsumption = $minQuantity ?? 0;
-            $minReorderPeriod = $minReorderPeriod ?? 0;
+    //         $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
+    //             ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+    //             ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
+    //             ->select(DB::raw($isMySQL
+    //                 ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
+    //                 : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
+    //             ->orderBy('reorder_period', 'asc')
+    //             ->value('reorder_period');
+    //         // Calculate maximum level using the formula
+    //         $reorderPoint = $detail['reorder_point'];
+    //         $reorderQuantity = $detail['purchase_quantity'];
+    //         $minConsumption = $minQuantity ?? 0;
+    //         $minReorderPeriod = $minReorderPeriod ?? 0;
 
-            $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
+    //         $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
 
-            Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
+    //         Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
 
-            $maximum_level_req[] = [
-                'item_id' => $itemId,
-                'min_quantity' => $minConsumption,
-                'purchase_quantity' => $reorderQuantity,
-                'reorder_point' => $reorderPoint,
-                'min_reorder_period' => $minReorderPeriod,
-                'maximum_level' => $maximumLevel
-            ];
-        }
-    }
+    //         $maximum_level_req[] = [
+    //             'item_id' => $itemId,
+    //             'min_quantity' => $minConsumption,
+    //             'purchase_quantity' => $reorderQuantity,
+    //             'reorder_point' => $reorderPoint,
+    //             'min_reorder_period' => $minReorderPeriod,
+    //             'maximum_level' => $maximumLevel
+    //         ];
+    //     }
+    // }
 }
