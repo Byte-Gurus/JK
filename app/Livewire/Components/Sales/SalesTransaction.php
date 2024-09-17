@@ -805,8 +805,8 @@ class SalesTransaction extends Component
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
                 ->whereNotNull('deliveries.date_delivered') // Ensure valid delivery date
                 ->whereNotNull('purchases.created_at') // Ensure valid purchase date
-                ->where('deliveries.date_delivered', '!=', 'N/A') // Exclude invalid dates
-                ->where('purchases.created_at', '!=', 'N/A') // Exclude invalid dates
+                ->whereRaw("deliveries.date_delivered::timestamp != 'N/A'::timestamp") // Exclude invalid dates
+                ->whereRaw("purchases.created_at::timestamp != 'N/A'::timestamp") // Exclude invalid dates
                 ->select(DB::raw($isMySQL
                     ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
                     : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
