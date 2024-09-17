@@ -185,6 +185,7 @@ class PurchaseOrderForm extends Component
 
         //     $this->selectAllToRemove = false;
         // }
+        $this->resetValidation();
     }
 
     public function restoreRow()

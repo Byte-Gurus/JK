@@ -1,7 +1,8 @@
 {{-- // --}}
 <div class="relative">
-    <div class="flex flex-row h-[655px] gap-4 ">
-        <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
+    <div class="grid grid-flow-col grid-cols-9 h-[655px] gap-4 ">
+        <div
+            class="relative w-full col-span-6 overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
             <form wire:submit.prevent="create">
 
                 <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
@@ -46,6 +47,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="px-2 pt-1 bg-[rgb(29,29,29)] text-white border border-black rounded-tr-lg w-fit">
+                    <p class="font-bold ">Item Information</p>
+                </div>
 
                 {{-- //* tablea area --}}
                 <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
@@ -69,7 +73,10 @@
                                 <th scope="col" class="py-3 text-left">Barcode</th>
 
                                 {{-- //* item name --}}
-                                <th scope="col" class="py-3 text-left">Item Name</th>
+                                <th scope="col" class="py-3 text-left">Name</th>
+
+                                {{-- //* item name --}}
+                                <th scope="col" class="py-3 text-left">Description</th>
 
                                 {{-- //* stocks on hand --}}
                                 <th scope="col" class="py-3 text-center ">Stocks-On-Hand</th>
@@ -78,10 +85,10 @@
                                 <th scope="col" class="py-3 text-center ">Maximum stock level</th>
 
                                 {{-- //* item reorder quantity --}}
-                                <th scope="col" class="py-3 text-center">Item Reorder Quantity</th>
+                                <th scope="col" class="py-3 text-center">Item Reorder Qty</th>
 
                                 {{-- //* purchase quantity --}}
-                                <th scope="col" class="py-3 text-center text-nowrap">Purchase Quantity</th>
+                                <th scope="col" class="py-3 text-center text-nowrap">Purchase Qty</th>
 
                             </tr>
                         </thead>
@@ -128,7 +135,7 @@
                                         class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
                                         <input type="number" wire:model="purchase_quantities.{{ $index }}"
                                             required
-                                            class="bg-[rgb(249,249,249)] self-center border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
+                                            class="bg-[rgb(249,249,249)] self-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
                                         @error("purchase_quantities.$index")
                                             <div
                                                 class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/3">
@@ -147,7 +154,7 @@
 
         {{-- Removed Item Section --}}
         <div
-            class="relative w-1/2 overflow-hidden border border-[rgb(143,143,143)] bg-[rgb(255,249,231)] sm:rounded-lg">
+            class="relative col-span-3 overflow-hidden border border-[rgb(143,143,143)] bg-[rgb(255,249,231)] sm:rounded-lg">
 
             <div class="flex flex-row items-center gap-2 px-2 py-8 text-nowrap justify-evenly">
                 <div>
@@ -162,8 +169,11 @@
 
                 </div>
             </div>
+            <div class="px-4 pt-1 bg-[rgb(255,221,146)] text-[rgb(90,74,26)] border border-[rgb(143,143,143)] rounded-tr-lg w-fit">
+                <p class="font-bold ">Item Information</p>
+            </div>
 
-            <div class="h-[680px] pb-[150px] overflow-x-auto overflow-y-scroll no-scrollbar scroll">
+            <div class="pb-[150px] overflow-x-auto overflow-y-scroll no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 
@@ -184,10 +194,10 @@
                             </th>
 
                             {{-- //* barcode --}}
-                            <th scope="col" class="py-3 text-left ">Barcode</th>
+                            <th scope="col" class="py-3 text-left ">Name</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="py-3 text-left ">Item Name</th>
+                            <th scope="col" class="py-3 text-left ">Description</th>
 
                             {{-- //* stocks on hand --}}
                             <th scope="col" class="py-3 text-center ">Stocks-On-Hand</th>
@@ -213,11 +223,11 @@
                                     </th>
                                     <th scope="row"
                                         class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                        {{ $removed_item['barcode'] }}
+                                        {{ $removed_item['item_name'] }}
                                     </th>
                                     <th scope="row"
                                         class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                        {{ $removed_item['item_name'] }}
+                                        {{ $removed_item['item_description'] }}
                                     </th>
 
                                     <th scope="row"

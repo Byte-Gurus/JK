@@ -26,24 +26,24 @@
                         @enderror
                     </div>
 
-                    <div class="flex flex-col mb-12" x-data="{ show: @entangle('showPassword') }">
+                    <div class="flex flex-col mb-12" x-data="{ showPassword: @entangle('showPassword') }">
                         <label for="password" class="text-[rgb(53,53,53)]">Password</label>
-                        <input :type="show ? 'password' : 'test'" id="password" name="password" required
-                            class="w-full px-4 py-2 text-sm border-2 border-black rounded-md outline-none cursor-pointer bg-gray-50 text-none focus:outline-none"
+                        <input :type="showPassword ? 'password' : 'text'" id="password" name="password" required
+                            class="w-full py-2 pl-4 pr-12 text-sm border-2 border-black rounded-md outline-none bg-gray-50 text-none focus:outline-none"
                             wire:model="password">
+
                         @if ($this->showPassword)
-                            <div class="absolute self-end mt-8 mr-4" x-on:click=" show = !show ">
+                            <p x-cloak class="fixed self-end mt-8 mr-4 cursor-pointer "
+                                x-on:click=" $wire.showPasswordStatus()">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
                                 </svg>
-                            </div>
-                            @error('password')
-                                <span class="mt-2 font-medium text-red-500 text-md">{{ $message }}</span>
-                            @enderror
+                            </p>
                         @else
-                            <div class="absolute self-end mt-8 mr-4 bg-red-400" x-on:click=" show = !show ">
+                            <p class="fixed self-end mt-8 mr-4 cursor-pointer "
+                                x-on:click=" $wire.showPasswordStatus()">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -51,11 +51,12 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                 </svg>
-                            </div>
-                            @error('password')
-                                <span class="mt-2 font-medium text-red-500 text-md">{{ $message }}</span>
-                            @enderror
+                            </p>
                         @endif
+
+                        @error('password')
+                            <span class="mt-2 font-medium text-red-500 text-md">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="flex flex-row justify-between">

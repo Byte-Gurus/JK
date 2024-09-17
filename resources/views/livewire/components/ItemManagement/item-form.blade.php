@@ -190,12 +190,12 @@
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
                                     {{-- //* vat type --}}
-                                    <div class="mb-3">
+                                    <div class="col-span-1 mb-3">
 
                                         <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
-                                        <select id="vatType" wire:model.live="vatType" 
+                                        <select id="vatType" wire:model.live="vatType"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Set vat</option>
                                             <option value="Vat">Vat</option>
@@ -203,10 +203,11 @@
                                             @error('vat_type')
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
+                                        </select>
                                     </div>
 
                                     {{-- //* vat amount --}}
-                                    <div class="mb-3">
+                                    <div class="col-span-1 mb-3 pointer-events-none">
 
                                         <label for="vat_percent"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Vat
@@ -268,7 +269,7 @@
 
                                         </div>
                                     @else
-                                        <div class="mb-3">
+                                        <div class="mb-3 pointer-events-none">
 
                                             <label for="status"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>

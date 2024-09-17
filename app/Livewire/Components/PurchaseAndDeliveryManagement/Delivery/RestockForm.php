@@ -58,8 +58,10 @@ class RestockForm extends Component
     }
     protected $listeners = [
         'restock-form' => 'restockForm',
+        // 'display-close-restock-form-confirmation' => 'DisplayCloseRestockFormConfirmation',
         'close-modal' => 'closeModal',
         'createConfirmed', //*  galing sa UserTable class
+        // 'closeRestockFormConfirmed',
     ];
 
     public function create()

@@ -13,7 +13,7 @@ class InventoryAdminLoginForm extends Component
     public $username;
     public $password;
 
-    public $showPassword = false;
+    public $showPassword = true;
     public $showStockAdjustModal = false;
     public function render()
     {
@@ -50,5 +50,10 @@ class InventoryAdminLoginForm extends Component
             $this->addError('submit', 'No matching user with provided username and password.');
         }
 
+    }
+
+    public function showPasswordStatus()
+    {
+     $this->showPassword = !$this->showPassword;
     }
 }

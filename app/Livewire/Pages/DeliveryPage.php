@@ -24,6 +24,7 @@ class DeliveryPage extends Component
         'display-restock-form' => 'displayRestockForm',
         'display-delivery-table' => 'displayDeliveryTable',
         'display-backorder-form' => 'displayBackorderForm',
+        'closeRestockFormConfirmed'
     ];
 
     public function displayDeliveryTable($showDeliveryTable)
@@ -42,13 +43,14 @@ class DeliveryPage extends Component
             'onConfirmed' => 'closeRestockFormConfirmed',
         ]);
     }
-
     public function closeRestockFormConfirmed()
     {
         $this->dispatch('close-modal')->to(RestockForm::class);
-        $this->showRestockForm = false;
         $this->showDeliveryTable = true;
+        $this->showRestockForm = false;
     }
+
+
 
     public function displayBackorderForm($showBackorderForm)
     {

@@ -92,6 +92,8 @@
                         {{-- //* item name --}}
                         <th scope="col" class="px-4 py-3">Item name</th>
 
+                        {{-- //* item name --}}
+                        <th scope="col" class="px-4 py-3">Item Description</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier</th>
@@ -188,6 +190,11 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $inventory->itemJoin->item_name }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                {{ $inventory->itemJoin->item_description }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
