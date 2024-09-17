@@ -33,7 +33,10 @@ class Purchase extends Model
     {
         return $this->hasMany(PurchaseDetails::class, 'purchase_id');
     }
-
+    public function deliveryJoin()
+    {
+        return $this->hasOne(Delivery::class, 'purchase_id');
+    }
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
