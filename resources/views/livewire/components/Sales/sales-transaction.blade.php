@@ -72,15 +72,7 @@
                         <tr class=" text-nowrap">
 
                             {{-- //* # count --}}
-                            <th wire:click="sortByColumn('created_at')" scope="col"
-                                class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
-
-                                <div class="flex items-center">
-
-                                    <p>#</p>
-
-                                </div>
-                            </th>
+                            <th scope="col" class="py-3 pl-4 pr-2 text-left ">#</th>
 
                             {{-- //* item name --}}
                             <th scope="col" class="py-3 pl-4 pr-2 text-left ">Item Name</th>

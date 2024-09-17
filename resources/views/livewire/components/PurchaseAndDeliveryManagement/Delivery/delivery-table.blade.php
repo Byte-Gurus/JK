@@ -83,7 +83,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
                         {{-- date ordered --}}
-                        <th wire:click="sortByColumn('date_created')" scope="col"
+                        <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
                             <div class="flex items-center justify-center text-center">
