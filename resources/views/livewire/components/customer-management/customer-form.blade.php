@@ -327,7 +327,7 @@
                                             No</label>
 
                                         <input type="number" id="customer_discount_no"
-                                            wire:model="customer_discount_no"
+                                            wire:model.live="customer_discount_no"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Discount No" required />
                                         @error('customer_discount_no')
