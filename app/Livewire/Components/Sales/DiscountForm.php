@@ -125,18 +125,19 @@ class DiscountForm extends Component
             } else {
                 $this->populateForm();
             }
-        } elseif ($isSales) {
-            $validated = $this->validateForm();
-
-            $this->confirm('Do you want to create and apply the discount?', [
-                'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-                'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-            ]);
         } else {
             $this->alert('warning', 'Select creditor');
             $this->clearSelectedCustomerName();
             return;
         }
+
+
+        $validated = $this->validateForm();
+
+        $this->confirm('Do you want to create and apply the discount?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
     }
 
     public function createConfirmed($data) //* confirmation process ng create
@@ -190,7 +191,7 @@ class DiscountForm extends Component
     public function removeDiscountConfirmed()
     {
         $this->resetForm();
-        $this->clearSelectedCustomerName(); 
+        $this->clearSelectedCustomerName();
         $this->dispatch('get-customer-details', customerDetails: null)->to(SalesTransaction::class);
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
