@@ -816,7 +816,7 @@ class SalesTransaction extends Component
                         $deliveryDate = Carbon::parse($delivery->date_delivered);
                         $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
                         // Calculate the difference in days if both dates are valid
-                        $reorderPeriods[] = $deliveryDate->diffInDays($purchaseDate);
+                        $reorderPeriods[] = $purchaseDate->diffInDays($deliveryDate);
                     } catch (\Exception $e) {
                         // Ignore invalid date parsing
                     }
