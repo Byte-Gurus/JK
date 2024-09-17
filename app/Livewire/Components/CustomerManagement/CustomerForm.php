@@ -26,7 +26,7 @@ class CustomerForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customer_type, $customer_discount_no, $imageUrl;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customertype, $customer_discount_no, $imageUrl;
 
     public $proxy_customer_id, $customer_id;
     public function render()
@@ -61,6 +61,11 @@ class CustomerForm extends Component
         $this->barangays = PhilippineBarangay::where('city_municipality_code', $city_municipality_code)->orderBy('barangay_description')->get();
         //? i show sa selection ang mga barangay based sa city, hindi maglabas ang ibang city if hindi included sa city
 
+    }
+
+    public function updateCustomerType()
+    {
+        $this->customer_discount_no = '';
     }
 
 
@@ -101,7 +106,7 @@ class CustomerForm extends Component
             'contact_number' => $validated['contact_number'],
             'birthdate' => $validated['birthdate'],
             'address_id' => $address->id,
-            'customer_type' => $validated['customer_type'],
+            'customer_type' => $validated['customertype'],
             'customer_discount_no' => $validated['customer_discount_no'],
             'id_picture' => $validated['id_picture'],
         ]);
@@ -129,8 +134,8 @@ class CustomerForm extends Component
         $customers->birthdate = $validated['birthdate'];
         $customers->contact_number = $validated['contact_number'];
         $customers->id_picture = $validated['id_picture'] ?? null;
-        $customers->customer_type = $validated['customer_type'];
-        $customers->customer_discount_no = $validated['customer_discount_no'];
+        $customers->customer_type = $validated['customertype'];
+        $customers->customer_discount_no = $validated['customer_discount_no'] ?? null;
         $customers->province_code = $validated['selectProvince'];
         $customers->city_municipality_code = $validated['selectCity'];
         $customers->barangay_code = $validated['selectBrgy'];
@@ -181,8 +186,8 @@ class CustomerForm extends Component
             'contact_number' => $updatedAttributes['contact_number'],
             'birthdate' => $updatedAttributes['birthdate'],
             'address_id' => $address->id ?? null,
-            'customer_type' => $updatedAttributes['customer_type'],
-            'customer_discount_no' => $updatedAttributes['customer_discount_no'],
+            'customer_type' => $updatedAttributes['customertype'],
+            'customer_discount_no' => $updatedAttributes['customer_discount_no'] ?? null,
             'id_picture' => $updatedAttributes['id_picture'],
         ]);
         $customer->save();
@@ -209,8 +214,8 @@ class CustomerForm extends Component
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
             'id_picture' => $customer_details->id_picture ?? null,
-            'customer_type' => $customer_details->customer_type,
-            'customer_discount_no' => $customer_details->customer_discount_no,
+            'customertype' => $customer_details->customer_type,
+            'customer_discount_no' => $customer_details->customer_discount_no ?? null,
             'selectProvince' => $customer_details->addressJoin->province_code,
             'selectCity' => $customer_details->addressJoin->city_municipality_code,
             'selectBrgy' => $customer_details->addressJoin->barangay_code,
@@ -251,9 +256,15 @@ class CustomerForm extends Component
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:255',
             'id_picture' => 'nullable|image|max:20480',
-            'customer_type' => 'required|in:Credit,PWD,Senior Citizen,Wholesale',
-            'customer_discount_no' => 'required|string|max:255',
+            'customertype' => 'required|in:Credit,PWD,Senior Citizen,Wholesale',
+
         ];
+
+        if ($this->customertype != 'Credit') {
+            $rules['customer_discount_no'] =  'required|string|max:255';
+        } else {
+            $rules['customer_discount_no'] =  'nullable|string|max:255';
+        }
 
 
         return $this->validate($rules);
@@ -272,7 +283,7 @@ class CustomerForm extends Component
             'selectBrgy',
             'street',
             'id_picture',
-            'customer_type',
+            'customertype',
             'customer_discount_no'
         ]);
     }
@@ -309,6 +320,5 @@ class CustomerForm extends Component
 
         $customer = Customer::find($customerID);
         $this->imageUrl =  Storage::url($customer->id_picture);
-    
     }
 }

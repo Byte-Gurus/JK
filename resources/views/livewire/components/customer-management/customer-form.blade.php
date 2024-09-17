@@ -303,7 +303,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                             Type</label>
 
-                                        <select id="customer_type" wire:model="customer_type" required
+                                        <select id="customer_type" wire:model.live="customerType" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value=""selected>Select Customer Type</option>
                                             <option value="Credit">Credit</option>
