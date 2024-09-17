@@ -828,14 +828,13 @@ class SalesTransaction extends Component
             })->min();
             $minReorderPeriod = $minReorderPeriod !== null ? (int) $minReorderPeriod : 0;
 
-            // dd($minReorderPeriod);
+            $latestPurchaseDetail = $purchaseDetails->sortByDesc(function ($purchaseDetail) {
+                return $purchaseDetail->purchase_quantity;
+            })->first();
 
-            if (!$item) {
-                continue; // Skip if item not found
-            }
             // Calculate maximum level using the formula
             $reorderPoint = $selectedItem['reorder_point'];
-            $reorderQuantity = $purchaseDetails->purchase_quantity;
+            $reorderQuantity = $latestPurchaseDetail;
             $minConsumption = $minQuantity ?? 0;
             $minReorderPeriod = $minReorderPeriod ?? 0;
 
