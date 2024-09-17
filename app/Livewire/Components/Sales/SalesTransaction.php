@@ -772,8 +772,6 @@ class SalesTransaction extends Component
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
-
-
     }
 
     public function getMaximumLevel()
@@ -787,7 +785,7 @@ class SalesTransaction extends Component
                 ->orderBy('stock_in_date', 'desc')
                 ->value('stock_in_date');
 
-            if ($restockDate) {
+            if ($restockDate && $restockDate !== 'N/A') {
                 // Calculate the date range from the same day last week to today
                 $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
                 $endDate = Carbon::now()->endOfDay()->toDateTimeString();
@@ -807,6 +805,8 @@ class SalesTransaction extends Component
                 ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
                 ->whereNotNull('deliveries.date_delivered') // Ensure valid delivery date
                 ->whereNotNull('purchases.created_at') // Ensure valid purchase date
+                ->where('deliveries.date_delivered', '!=', 'N/A') // Exclude invalid dates
+                ->where('purchases.created_at', '!=', 'N/A') // Exclude invalid dates
                 ->select(DB::raw($isMySQL
                     ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
                     : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
@@ -833,6 +833,7 @@ class SalesTransaction extends Component
             ];
         }
     }
+
 
 
     public function clearSelectedCustomerName()
