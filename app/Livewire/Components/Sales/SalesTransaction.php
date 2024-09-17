@@ -807,14 +807,23 @@ class SalesTransaction extends Component
                 // Ensure delivery is a single instance or null
                 $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
 
-                // Convert strings to Carbon instances
-                $deliveryDate = Carbon::parse($delivery->date_delivered);
-                $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
-                dd($deliveryDate, $purchaseDate);
+                // Initialize minReorderPeriod as null
+                $reorderPeriods = [];
 
-                return [$deliveryDate->diffInDays($purchaseDate)];
+                // Check if delivery and purchase dates are valid
+                if ($delivery && $delivery->date_delivered && $purchaseDetail->purchaseJoin->created_at) {
+                    try {
+                        $deliveryDate = Carbon::parse($delivery->date_delivered);
+                        $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+                        // Calculate the difference in days if both dates are valid
+                        $reorderPeriods[] = $deliveryDate->diffInDays($purchaseDate);
+                    } catch (\Exception $e) {
+                        // Ignore invalid date parsing
+                    }
+                }
+
+                return $reorderPeriods;
             })->min();
-
 
             // dd($minReorderPeriod);
 
