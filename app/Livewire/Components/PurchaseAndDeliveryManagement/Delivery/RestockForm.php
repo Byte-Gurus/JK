@@ -73,7 +73,7 @@ class RestockForm extends Component
         // First pass: Accumulate restock quantities for each item
         foreach ($this->purchaseDetails as $index => $detail) {
 
-            $this->getReorderPoint($detail['item_id']);
+            // $this->getReorderPoint($detail['item_id']);
 
             $details_id = $detail['id']; // get all the id of each purchase details
 
@@ -371,35 +371,35 @@ class RestockForm extends Component
         return $SKU;
     }
 
-    public function getReorderPoint($item_id)
-    {
-        $deliveryDate = Carbon::parse($this->delivery_date);
-        $poDate = Carbon::parse($this->po_date);
+    // public function getReorderPoint($item_id)
+    // {
+    //     $deliveryDate = Carbon::parse($this->delivery_date);
+    //     $poDate = Carbon::parse($this->po_date);
 
-        // Define the start and end dates
-        $startDate = $poDate->startOfDay();
-        $endDate = $deliveryDate->endOfDay();
-
-
-        $totalQuantity = TransactionDetails::where('item_id', $item_id)
-            ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
-                $query->whereBetween('created_at', [$startDate, $endDate]);
-            })
-            ->sum('item_quantity');
+    //     // Define the start and end dates
+    //     $startDate = $poDate->startOfDay();
+    //     $endDate = $deliveryDate->endOfDay();
 
 
-        // Calculate the number of days in the date range
-        $days = floor($startDate->diffInDays($endDate));
-        // dd($totalQuantity);
+    //     $totalQuantity = TransactionDetails::where('item_id', $item_id)
+    //         ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
+    //             $query->whereBetween('created_at', [$startDate, $endDate]);
+    //         })
+    //         ->sum('item_quantity');
 
-        // Calculate the demand rate
-        $demandRate =  $totalQuantity / $days;
-        $reorder_point = ($days * $demandRate);
 
-        $item = Item::find($item_id);
-        $item->reorder_point = $reorder_point;
-        $item->save();
-    }
+    //     // Calculate the number of days in the date range
+    //     $days = floor($startDate->diffInDays($endDate));
+    //     // dd($totalQuantity);
+
+    //     // Calculate the demand rate
+    //     $demandRate =  $totalQuantity / $days;
+    //     $reorder_point = ($days * $demandRate);
+
+    //     $item = Item::find($item_id);
+    //     $item->reorder_point = $reorder_point;
+    //     $item->save();
+    // }
 
     // public function getMaximumLevel()
     // {
