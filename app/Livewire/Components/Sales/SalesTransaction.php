@@ -797,7 +797,7 @@ class SalesTransaction extends Component
 
             // $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
-            $item = Item::with(['purchaseDetails.purchase.deliveries'])
+            $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveriesJoin'])
                 ->find($itemId);
 
             $minReorderPeriod  = $item->purchaseDetails->flatMap(function ($purchaseDetail) {
