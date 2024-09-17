@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="grid grid-flow-col grid-cols-4 gap-4 ">
+        <div class="w-full">
             <div class="col-span-3">
                 @if ($selectPicker == 1)
                     @livewire('charts.daily-sales-chart')
@@ -34,12 +34,6 @@
                 @elseif ($selectPicker == 4)
                     @livewire('charts.yearly-sales-chart')
                 @endif
-            </div>
-            <div
-                class="w-full h-full col-span-1 p-4 bg-[rgb(53,53,53)] border shadow-md shadow-[rgb(0,0,0)] border-[rgb(0,0,0)] rounded-lg">
-                <div class="text-center ">
-                    <p class="text-lg text-[rgb(255,255,255)] italic font-black">Transaction History</p>
-                </div>
             </div>
         </div>
         <div class="grid w-full grid-flow-col grid-cols-3 gap-4 my-4">

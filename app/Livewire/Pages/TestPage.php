@@ -9,6 +9,8 @@ class TestPage extends Component
 {
     use WithFileUploads;
 
+    public $show = false;
+
 
     public $photo;
 

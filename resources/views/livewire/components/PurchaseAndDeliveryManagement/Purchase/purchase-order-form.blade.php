@@ -93,43 +93,43 @@
                                 <tr
                                     class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
                                     <th scope="row"
-                                        class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         <div class="flex justify-center">
                                             <input type="checkbox" wire:model="selectedToRemove"
                                                 value="{{ $index }}"
                                                 class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                         </div>
                                     </th>
-
-
                                     <th scope="row"
-                                        class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['barcode'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['item_name'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['total_quantity'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['maximum_stock_level'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['reorder_point'] }}
                                     </th>
                                     <th scope="row"
-                                        class="flex justify-center py-4 font-medium text-gray-900 text-clip text-md whitespace-nowrap">
+                                        class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
                                         <input type="number" wire:model="purchase_quantities.{{ $index }}"
                                             required
-                                            class="bg-[rgb(249,249,249)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
-
+                                            class="bg-[rgb(249,249,249)] self-center border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
                                         @error("purchase_quantities.$index")
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            <div class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/3">
+                                                <span
+                                                class="relative font-medium text-center text-red-500 error text-nowrap">{{ $message }}</span>
+                                            </div>
                                         @enderror
                                     </th>
                                 </tr>
@@ -198,7 +198,7 @@
                                 <tr
                                     class="border-b hover:bg-[rgb(255,241,212)] border-[rgb(53,53,53)] transition ease-in duration-75 index:bg-red-400">
                                     <th scope="row"
-                                        class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
 
                                         <div class="flex justify-center">
                                             <input type="checkbox" wire:model="selectedToRestore"
@@ -207,16 +207,16 @@
                                         </div>
                                     </th>
                                     <th scope="row"
-                                        class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         {{ $removed_item['barcode'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         {{ $removed_item['item_name'] }}
                                     </th>
 
                                     <th scope="row"
-                                        class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                         {{ $removed_item['total_quantity'] }}
                                     </th>
                                 </tr>

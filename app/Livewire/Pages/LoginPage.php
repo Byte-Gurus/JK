@@ -10,6 +10,8 @@ class LoginPage extends Component
     public $username;
     public $password;
 
+    public $showPassword = false;
+
     public function render()
     {
         return view('livewire.pages.login-page');
@@ -41,5 +43,10 @@ class LoginPage extends Component
         }
 
         $this->addError('submit', 'No matching user with provided username and password');
+    }
+
+    public function showPasswordStatus()
+    {
+     $this->showPassword = !$this->showPassword;
     }
 }

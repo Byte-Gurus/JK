@@ -234,8 +234,6 @@
                                                         {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
                                                         {{ $city->city_municipality_description }}</option>
                                                 @endforeach
-
-
                                             @endif
 
                                         </select>
@@ -245,7 +243,6 @@
                                         @enderror
 
                                     </div>
-
                                 </div>
 
                                 {{-- //* fifth row --}}
@@ -319,12 +316,12 @@
 
                                     </div>
 
+                                    {{-- @if () --}}
                                     {{-- //* discount no --}}
                                     <div class="mb-3">
 
                                         <label for="customer_discount_no"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount
-                                            No</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount</label>
 
                                         @if ($customertype != 'Credit')
                                             <input type="number" id="customer_discount_no"
@@ -345,6 +342,8 @@
                                         @endif
 
                                     </div>
+                                    {{-- @endif --}}
+
                                 </div>
                             </div>
                         </div>
@@ -382,11 +381,8 @@
                                                 </path>
                                             </svg>
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
                         @else
                             {{-- *if form is create --}}
@@ -400,7 +396,6 @@
                                 </div>
 
                                 <div>
-
                                     {{-- //* submit button for create --}}
                                     <button type="submit" wire:loading.remove
                                         class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">

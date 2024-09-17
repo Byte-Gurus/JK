@@ -12,6 +12,8 @@ class InventoryAdminLoginForm extends Component
     public $isAdmin;
     public $username;
     public $password;
+
+    public $showPassword = false;
     public $showStockAdjustModal = false;
     public function render()
     {
