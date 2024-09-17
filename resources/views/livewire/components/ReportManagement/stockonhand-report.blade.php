@@ -45,6 +45,11 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[1em] uppercase text-center font-bold">Item Name</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[1em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
