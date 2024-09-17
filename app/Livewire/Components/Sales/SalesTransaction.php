@@ -806,7 +806,9 @@ class SalesTransaction extends Component
                 });
             });
 
-
+            if (!$item) {
+                continue; // Skip if item not found
+            }
             // Calculate maximum level using the formula
             $reorderPoint = $item['reorder_point'];
             $reorderQuantity = $item['purchase_quantity'];
