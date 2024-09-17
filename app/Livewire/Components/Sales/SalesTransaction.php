@@ -772,6 +772,8 @@ class SalesTransaction extends Component
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
+
+        $this->getMaximumLevel();
     }
 
     public function getMaximumLevel()

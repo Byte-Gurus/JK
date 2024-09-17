@@ -128,7 +128,7 @@ class RestockForm extends Component
 
         $backorder_Items = [];
 
-        $this->getMaximumLevel();
+        // $this->getMaximumLevel();
 
         foreach ($this->purchaseDetails as $index => $detail) {
             $details = $detail['item_id'];
