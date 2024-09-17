@@ -808,7 +808,9 @@ class SalesTransaction extends Component
                 return $deliveries->map(function ($delivery) use ($purchaseDetail) {
                     return $delivery->date_delivered->diffInDays($purchaseDetail->purchase->created_at);
                 });
-            })->min()
+            })->min();
+
+            dd($minReorderPeriod);
 
             if (!$item) {
                 continue; // Skip if item not found
