@@ -792,31 +792,6 @@ class SalesTransaction extends Component
         $startOfDay = Carbon::today()->startOfDay();
         $endOfDay = Carbon::today()->endOfDay();
 
-        $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
-            ->distinct()
-            ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
-            ->count();
-
-        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
-            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
-        })->sum('item_quantity');
-
-
-        // Calculate the number of days in the date range
-        $days = floor($startDate->diffInDays($endDate));
-        // dd($totalQuantity);
-
-        // Calculate the demand rate
-        $demandRate =  $todayTotalItemQuantity / $$deliveryDate = Carbon::parse($delivery_date);
-        $poDate = Carbon::parse($po_date);
-
-        // Define the start and end dates
-        $startDate = $poDate->startOfDay();
-        $endDate = $deliveryDate->endOfDay();
-
-        $startOfDay = Carbon::today()->startOfDay();
-        $endOfDay = Carbon::today()->endOfDay();
-
         // $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
         //     ->distinct()
         //     ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
@@ -831,21 +806,17 @@ class SalesTransaction extends Component
         $days = floor($startDate->diffInDays($endDate));
         // dd($totalQuantity);
 
-        // Calculate the demand rate
-
-
-
         $restockDate = Inventory::where('item_id', $item_id)
             ->orderBy('stock_in_date', 'desc')
             ->value('stock_in_date');
 
         // Calculate the date range from the same day last week to today
-        $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
-        $endDate = Carbon::now()->endOfDay()->toDateTimeString();
+        $startRestockDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
+        $endCurrentDate = Carbon::now()->endOfDay()->toDateTimeString();
 
         // Calculate minimum consumption within the period
         $minQuantity = TransactionDetails::where('item_id', $item_id)
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereBetween('created_at', [$startRestockDate, $endCurrentDate])
             ->min('item_quantity');
 
 
@@ -899,7 +870,7 @@ class SalesTransaction extends Component
         );
         $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
 
-        Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
+        Item::where('id', $item_id)->update(['maximum_stock_level' => $maximumLevel]);
 
         $maximum_level_req[] = [
             'item_id' => $item_id,
