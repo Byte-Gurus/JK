@@ -36,7 +36,7 @@
                         class="w-full py-2 pl-4 pr-12 text-sm border-2 border-black rounded-md outline-none bg-gray-50 text-none focus:outline-none"
                         wire:model="password">
 
-                    @if ($this->showPassword)
+                    @if (!$this->showPassword)
                         <p x-cloak class="fixed self-end mt-8 mr-4 cursor-pointer "
                             x-on:click=" $wire.showPasswordStatus()">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
