@@ -109,6 +109,10 @@
                                         {{ $reorder_list['item_name'] }}
                                     </th>
                                     <th scope="row"
+                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        {{ $reorder_list['item_description'] }}
+                                    </th>
+                                    <th scope="row"
                                         class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                         {{ $reorder_list['total_quantity'] }}
                                     </th>
@@ -126,9 +130,10 @@
                                             required
                                             class="bg-[rgb(249,249,249)] self-center border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
                                         @error("purchase_quantities.$index")
-                                            <div class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/3">
+                                            <div
+                                                class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/3">
                                                 <span
-                                                class="relative font-medium text-center text-red-500 error text-nowrap">{{ $message }}</span>
+                                                    class="relative font-medium text-center text-red-500 error text-nowrap">{{ $message }}</span>
                                             </div>
                                         @enderror
                                     </th>

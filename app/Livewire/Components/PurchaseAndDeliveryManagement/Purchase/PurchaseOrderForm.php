@@ -63,6 +63,7 @@ class PurchaseOrderForm extends Component
                     'items.id as item_id',
                     'items.barcode',
                     'items.item_name',
+                    'items.item_description',
                     'items.reorder_point',
                     'items.maximum_stock_level',
                     'items.status_id',
@@ -74,6 +75,7 @@ class PurchaseOrderForm extends Component
                     'items.id',
                     'items.barcode',
                     'items.item_name',
+                    'items.item_description',
                     'items.reorder_point',
                     'items.maximum_stock_level',
                     'items.status_id'
@@ -114,6 +116,7 @@ class PurchaseOrderForm extends Component
                         'item_id' => $this->reorder_lists[$index]['item_id'],
                         'barcode' => $this->reorder_lists[$index]['barcode'],
                         'item_name' => $this->reorder_lists[$index]['item_name'],
+                        'item_description'  => $this->reorder_lists[$index]['item_description'],
                         'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
                         'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
                         'maximum_stock_level' => $this->reorder_lists[$index]['maximum_stock_level'],

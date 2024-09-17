@@ -19,6 +19,7 @@ class ReorderListReport extends Component
                 'items.id as item_id',
                 'items.barcode',
                 'items.item_name',
+                'items.item_description',
                 'items.reorder_point',
                 'items.maximum_stock_level',
                 'items.status_id',
@@ -30,6 +31,7 @@ class ReorderListReport extends Component
                 'items.id',
                 'items.barcode',
                 'items.item_name',
+                'items.item_description',
                 'items.reorder_point',
                 'items.maximum_stock_level',
                 'items.status_id'
