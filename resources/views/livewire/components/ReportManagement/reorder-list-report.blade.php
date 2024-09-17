@@ -43,6 +43,11 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Item Name</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Item Description</p>
                     </div>
                 </li>
@@ -51,10 +56,15 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">Stock-on-hand</p>
                     </div>
                 </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Maximum stock level</p>
+                    </div>
+                </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Reorder Quantity</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Reorder point</p>
                     </div>
                 </li>
 
