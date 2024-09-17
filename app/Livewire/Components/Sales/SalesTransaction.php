@@ -858,7 +858,7 @@ class SalesTransaction extends Component
 
         // Calculate maximum level using the formula
         $reorderPoint = $item['reorder_point'];
-        $reorderQuantity =  $todayTotalItemQuantity / $days;
+        $reorderQuantity = round($todayTotalItemQuantity / $days);
         $minConsumption = $minQuantity ?? 0;
         $minReorderPeriod = $minReorderPeriod = $minReorderPeriod !== null ? (int) $minReorderPeriod : 0;
 
