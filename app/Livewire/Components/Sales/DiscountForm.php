@@ -279,9 +279,10 @@ class DiscountForm extends Component
     }
     public function getCreditDetail($creditDetail)
     {
-        dd( $this->credit_details);
+
         $this->credit_details = $creditDetail;
-        // $this->resetForm();
+        dd( $this->credit_details);
+        $this->resetForm();
         $this->removeDiscountConfirmed();
 
     }
