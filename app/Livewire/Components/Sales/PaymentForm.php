@@ -83,6 +83,7 @@ class PaymentForm extends Component
     {
         $this->grand_total = $GrandTotal;
         $this->focusInput();
+        $this->resetValidation();
     }
 
     protected function validateForm()
