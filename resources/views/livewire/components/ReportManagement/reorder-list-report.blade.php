@@ -64,38 +64,38 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            {{-- @foreach ($purchaseDetails as $purchaseDetail) --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
+            @foreach ($reorder_lists as $reorder_list)
+                <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-medium">
-                            hiii</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-bold">
-                            hello
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            {{-- @endforeach --}}
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-left font-medium">
+                                {{ $reorder_list->barcode }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-left font-bold">
+                                hello
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                aiah
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                aiah
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            @endforeach
         </div>
     </div>
 </div>
