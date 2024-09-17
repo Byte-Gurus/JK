@@ -782,6 +782,58 @@ class SalesTransaction extends Component
     {
         $maximum_level_req = [];
 
+        $deliveryDate = Carbon::parse($delivery_date);
+        $poDate = Carbon::parse($po_date);
+
+        // Define the start and end dates
+        $startDate = $poDate->startOfDay();
+        $endDate = $deliveryDate->endOfDay();
+
+        $startOfDay = Carbon::today()->startOfDay();
+        $endOfDay = Carbon::today()->endOfDay();
+
+        $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
+            ->distinct()
+            ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
+            ->count();
+
+        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        })->sum('item_quantity');
+
+
+        // Calculate the number of days in the date range
+        $days = floor($startDate->diffInDays($endDate));
+        // dd($totalQuantity);
+
+        // Calculate the demand rate
+        $demandRate =  $todayTotalItemQuantity / $$deliveryDate = Carbon::parse($delivery_date);
+        $poDate = Carbon::parse($po_date);
+
+        // Define the start and end dates
+        $startDate = $poDate->startOfDay();
+        $endDate = $deliveryDate->endOfDay();
+
+        $startOfDay = Carbon::today()->startOfDay();
+        $endOfDay = Carbon::today()->endOfDay();
+
+        // $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
+        //     ->distinct()
+        //     ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
+        //     ->count();
+
+        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        })->sum('item_quantity');
+
+
+        // Calculate the number of days in the date range
+        $days = floor($startDate->diffInDays($endDate));
+        // dd($totalQuantity);
+
+        // Calculate the demand rate
+
+
 
         $restockDate = Inventory::where('item_id', $item_id)
             ->orderBy('stock_in_date', 'desc')
@@ -799,18 +851,44 @@ class SalesTransaction extends Component
 
         // $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
+        $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])
+            ->find($item_id);
 
 
-        $minReorderPeriod = $po_date->diffInDays($delivery_date)->min();
-        dd($minReorderPeriod);
+        $purchaseDetails = $item->purchaseDetailsJoin;
+
+        $minReorderPeriod = $purchaseDetails->flatMap(function ($purchaseDetail) {
+            // Ensure delivery is a single instance or null
+            $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
+
+            // Initialize minReorderPeriod as null
+            $reorderPeriods = [];
+
+            // Check if delivery and purchase dates are valid
+            if ($delivery && $delivery->date_delivered && $purchaseDetail->purchaseJoin->created_at) {
+                try {
+                    $deliveryDate = Carbon::parse($delivery->date_delivered);
+                    $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+                    // Calculate the difference in days if both dates are valid
+                    $reorderPeriods[] = $purchaseDate->diffInDays($deliveryDate);
+                } catch (\Exception $e) {
+                    // Ignore invalid date parsing
+                }
+            }
+
+            return $reorderPeriods;
+        })->min();
 
 
-        $item = Item::find($item_id);
-        
+        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        })->sum('item_quantity');
+
+
         // Calculate maximum level using the formula
         $reorderPoint = $item['reorder_point'];
-        $reorderQuantity =
-            $minConsumption = $minQuantity ?? 0;
+        $reorderQuantity =  $todayTotalItemQuantity / $days;
+        $minConsumption = $minQuantity ?? 0;
         $minReorderPeriod = $minReorderPeriod = $minReorderPeriod !== null ? (int) $minReorderPeriod : 0;
 
         dump(
@@ -824,7 +902,7 @@ class SalesTransaction extends Component
         Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
 
         $maximum_level_req[] = [
-            'item_id' => $itemId,
+            'item_id' => $item_id,
             'min_quantity' => $minConsumption,
             'purchase_quantity' => $reorderQuantity,
             'reorder_point' => $reorderPoint,
