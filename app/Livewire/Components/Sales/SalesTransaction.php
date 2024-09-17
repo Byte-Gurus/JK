@@ -163,6 +163,7 @@ class SalesTransaction extends Component
             'credit_limit' => $this->credit_limit
         ];
 
+        dd( $this->credit_details);
         $this->dispatch('get-credit-detail', creditDetail: $this->credit_details)->to(DiscountForm::class);
         $this->searchCustomer = '';
     }
