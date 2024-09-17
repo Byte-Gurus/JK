@@ -81,9 +81,9 @@ class PaymentForm extends Component
     }
     public function getGrandTotal($GrandTotal)
     {
+        $this->resetValidation();
         $this->grand_total = $GrandTotal;
         $this->focusInput();
-        $this->resetValidation();
     }
 
     protected function validateForm()
