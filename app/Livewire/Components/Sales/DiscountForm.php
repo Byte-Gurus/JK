@@ -112,7 +112,7 @@ class DiscountForm extends Component
     public function create() //* create process
     {
         $isSales = $this->isSales;
-        dd($isSales);
+        // dd($isSales);
         if (!$isSales && isset($this->credit_details['customer_id'])) {
             $customer = Customer::find($this->customer_id);
             $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
@@ -282,5 +282,6 @@ class DiscountForm extends Component
         $this->credit_details = $creditDetail;
         $this->resetForm();
         $this->removeDiscountConfirmed();
+        dd($this->credit_details );
     }
 }
