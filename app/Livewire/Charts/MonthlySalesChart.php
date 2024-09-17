@@ -23,7 +23,7 @@ class MonthlySalesChart extends Component
     public function updatedMonth($currentMonth)
     {
 
-        if (!$this->Month) {
+        if (!$this->month) {
             $currentMonth = Carbon::now()->format('Y-m');
 
         }
