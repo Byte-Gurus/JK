@@ -281,9 +281,9 @@ class DiscountForm extends Component
     {
 
         $this->credit_details = $creditDetail;
-        dd( $this->credit_details);
+
         $this->resetForm();
         $this->removeDiscountConfirmed();
-
+        dd($this->credit_details);
     }
 }
