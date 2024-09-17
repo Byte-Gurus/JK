@@ -112,6 +112,7 @@ class DiscountForm extends Component
     public function create() //* create process
     {
         $isSales = $this->isSales;
+        dd($this->credit_details['customer_id']);
         if (!$isSales && isset($this->credit_details['customer_id'])) {
             $customer = Customer::find($this->customer_id);
             $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
