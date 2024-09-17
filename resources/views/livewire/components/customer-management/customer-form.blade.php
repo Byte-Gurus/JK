@@ -299,11 +299,11 @@
                                     {{-- //* customer type --}}
                                     <div class="mb-3">
 
-                                        <label for="customerType"
+                                        <label for="customertype"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                             Type</label>
 
-                                        <select id="customer_type" wire:model.live="customerType" required
+                                        <select id="customertype" wire:model.live="customertype" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value=""selected>Select Customer Type</option>
                                             <option value="Credit">Credit</option>
@@ -326,13 +326,24 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount
                                             No</label>
 
-                                        <input type="number" id="customer_discount_no"
-                                            wire:model.live="customer_discount_no"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Discount No" required />
-                                        @error('customer_discount_no')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
+                                        @if ($customertype != 'Credit')
+                                            <input type="number" id="customer_discount_no"
+                                                wire:model="customer_discount_no"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Discount No" required />
+                                            @error('customer_discount_no')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        @else
+                                            <input type="number" id="customer_discount_no" disabled
+                                                wire:model="customer_discount_no"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Discount No" required />
+                                            @error('customer_discount_no')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
