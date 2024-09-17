@@ -34,7 +34,8 @@ class ReorderListReport extends Component
             ->havingRaw('
                     COALESCE(SUM(CASE WHEN inventories.status != \'Expired\' THEN inventories.current_stock_quantity ELSE 0 END), 0) <= items.reorder_point
                 ') // Use the same expression as in the SELECT clause
-            ->get();
+            ->get()
+            ->toArray();
 
 
         return view('livewire.components.ReportManagement.reorder-list-report', [

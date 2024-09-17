@@ -64,13 +64,13 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            @foreach ($reorder_lists as $reorder_list)
+            @foreach ($reorder_lists as $index => $reorder_list)
                 <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-left font-medium">
-                                {{ $reorder_list->barcode }}</p>
+                                {{ $reorder_list['barcode'] }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
