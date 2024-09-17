@@ -3,11 +3,14 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Models\Item;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ReorderListReport extends Component
 {
+    public $createdBy, $dateCreated;
     public function render()
     {
 
@@ -41,5 +44,12 @@ class ReorderListReport extends Component
         return view('livewire.components.ReportManagement.reorder-list-report', [
             'reorder_lists' => $reorder_lists
         ]);
+    }
+
+    public function reportInfo()
+    {
+        $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+        $this->dateCreated = Carbon::now()->format('m d Y h:i:s a');
     }
 }

@@ -16,14 +16,12 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p> --}}
-                        {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
+                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p> --}}
-                        {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
+                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
                     </div>
                 </div>
             </div>
@@ -76,21 +74,31 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-left font-bold">
-                                hello
+                                {{ $reorder_list['item_name'] }}</p>
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
-                                aiah
+                                {{ $reorder_list['item_description'] }}</p>
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
-                                aiah
+                                {{ $reorder_list['total_quantity'] }}</p>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $reorder_list['maximum_stock_level'] }}</p>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $reorder_list['reorder_point'] }}</p>
                             </p>
                         </div>
                     </li>
