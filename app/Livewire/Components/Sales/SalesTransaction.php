@@ -810,6 +810,7 @@ class SalesTransaction extends Component
                     // Convert strings to Carbon instances
                     $deliveryDate = Carbon::parse($delivery->date_delivered);
                     $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+                    dd($deliveryDate, $purchaseDate);
 
                     return [$deliveryDate->diffInDays($purchaseDate)];
                 }
