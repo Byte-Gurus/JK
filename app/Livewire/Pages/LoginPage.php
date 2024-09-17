@@ -10,7 +10,7 @@ class LoginPage extends Component
     public $username;
     public $password;
 
-    public $showPassword = false;
+    public $showPassword = true;
 
     public function render()
     {
