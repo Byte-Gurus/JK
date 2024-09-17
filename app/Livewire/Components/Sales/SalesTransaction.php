@@ -800,16 +800,19 @@ class SalesTransaction extends Component
             $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])
                 ->find($itemId);
 
-          
+
             $purchaseDetails = $item->purchaseDetailsJoin;
 
             $minReorderPeriod = $purchaseDetails->flatMap(function ($purchaseDetail) {
-                // Ensure deliveries is a collection
-                $deliveries = $purchaseDetail->purchaseJoin->deliveryJoin ;
-                return $deliveries->map(function ($delivery) use ($purchaseDetail) {
-                    return $delivery->date_delivered->diffInDays($purchaseDetail->purchase->created_at);
-                });
+                // Ensure delivery is a single instance or null
+                $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
+                if ($delivery) {
+                    return [$delivery->date_delivered->diffInDays($purchaseDetail->purchaseJoin->created_at)];
+                }
+                return [];
             })->min();
+
+
 
             dd($minReorderPeriod);
 
