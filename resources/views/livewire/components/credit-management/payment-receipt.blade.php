@@ -28,14 +28,11 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>
                         <p class="text-[0.6em] font-bold uppercase"> {{ $credit_payment_info['payment']['payment_type'] ?? null }}</p>
-                            {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
                     </div>
-                    {{-- @if ($payWithCash) --}}
                     <div>
                         <p class="text-[0.6em] font-bold uppercase">Reference no.</p>
                         <p class="text-[0.6em] font-bold uppercase">{{ $credit_payment_info['payment']['reference_number'] ?? null }}</p>
                     </div>
-                    {{-- @endif --}}
                 </div>
             </div>
 

@@ -76,11 +76,13 @@ class PaymentForm extends Component
     public function resetFormWhenClosed()
     {
         // $this->resetForm();
+        $this->focusInput();
         $this->resetValidation();
     }
     public function getGrandTotal($GrandTotal)
     {
         $this->grand_total = $GrandTotal;
+        $this->focusInput();
     }
 
     protected function validateForm()
@@ -101,5 +103,10 @@ class PaymentForm extends Component
         }
 
         return $this->validate($rules);
+    }
+
+    public function focusInput()
+    {
+        $this->dispatch('tendered_amount_focus');
     }
 }
