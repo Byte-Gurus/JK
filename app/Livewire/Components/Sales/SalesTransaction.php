@@ -778,40 +778,34 @@ class SalesTransaction extends Component
     {
         $maximum_level_req = [];
 
-        foreach ($this->selectedItems as $item) {
-            $itemId = $item['item_id'];
+        foreach ($this->selectedItems as $selectedItem) {
+            $itemId = $selectedItem['item_id'];
 
             $restockDate = Inventory::where('item_id', $itemId)
                 ->orderBy('stock_in_date', 'desc')
                 ->value('stock_in_date');
 
-            if ($restockDate && $restockDate !== 'N/A') {
-                // Calculate the date range from the same day last week to today
-                $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
-                $endDate = Carbon::now()->endOfDay()->toDateTimeString();
+            // Calculate the date range from the same day last week to today
+            $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
+            $endDate = Carbon::now()->endOfDay()->toDateTimeString();
 
-                // Calculate minimum consumption within the period
-                $minQuantity = TransactionDetails::where('item_id', $itemId)
-                    ->whereBetween('created_at', [$startDate, $endDate])
-                    ->min('item_quantity');
-            } else {
-                $minQuantity = 0;
-            }
+            // Calculate minimum consumption within the period
+            $minQuantity = TransactionDetails::where('item_id', $itemId)
+                ->whereBetween('created_at', [$startDate, $endDate])
+                ->min('item_quantity');
 
-            $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
-            $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
-                ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
-                ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->whereNotNull('deliveries.date_delivered') // Ensure valid delivery date
-                ->whereNotNull('purchases.created_at') // Ensure valid purchase date
-                ->whereRaw("deliveries.date_delivered::timestamp != 'N/A'::timestamp") // Exclude invalid dates
-                ->whereRaw("purchases.created_at::timestamp != 'N/A'::timestamp") // Exclude invalid dates
-                ->select(DB::raw($isMySQL
-                    ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
-                    : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
-                ->orderBy('reorder_period', 'asc')
-                ->value('reorder_period');
+            // $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
+
+            $item = Item::with(['purchaseDetails.purchase.deliveries'])
+                ->find($itemId);
+
+            $minReorderPeriod  = $item->purchaseDetails->flatMap(function ($purchaseDetail) {
+                return $purchaseDetail->purchase->deliveries->map(function ($delivery) use ($purchaseDetail) {
+                    return $delivery->date_delivered->diffInDays($purchaseDetail->purchase->created_at);
+                });
+            });
+
 
             // Calculate maximum level using the formula
             $reorderPoint = $item['reorder_point'];
@@ -833,7 +827,6 @@ class SalesTransaction extends Component
             ];
         }
     }
-
 
 
     public function clearSelectedCustomerName()
