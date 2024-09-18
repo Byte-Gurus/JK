@@ -41,9 +41,9 @@ class DiscountForm extends Component
                 ->orWhere('customer_type', 'Senior Citizen');
         })
             ->where(function ($query) use ($searchCustomerTerm) {
-                $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(lastname) like ?', ["%{$searchCustomerTerm}%"]);
             })
             ->get();
 
