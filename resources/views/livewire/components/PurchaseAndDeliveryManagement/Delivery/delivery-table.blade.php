@@ -155,7 +155,7 @@
 
                                     @elseif ($delivery->status == 'Stocked in with backorder')
 
-                                    class=" text-gray-900 pointer-events-none font-medium  bg-gray-100 border border-gray-900 text-xs text-center px-2 py-0.5 rounded-sm"
+                                    class=" text-purple-900 pointer-events-none font-medium  bg-purple-100 border border-purple-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
                                     @elseif ($delivery->status == 'In Progress')
 
