@@ -55,7 +55,12 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Quantity</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Purchase Number</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-center font-bold">Supplier</p>
                     </div>
                 </li>
             </ul>
@@ -68,7 +73,31 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[1em] text-left font-medium">
-                                {{ $backorderList->item_id }}</p>
+                                {{ $backorderList->itemJoin->barcode }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-left font-medium">
+                                {{ $backorderList->itemJoin->item_name }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-left font-medium">
+                                {{ $backorderList->itemJoin->item_description }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-left font-medium">
+                                {{ $backorderList->purchaseJoin->purchase_number }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-left font-medium">
+                                {{ $backorderList->deliveryJoin->supplierJoin->company_name }}</p>
                         </div>
                     </li>
 
