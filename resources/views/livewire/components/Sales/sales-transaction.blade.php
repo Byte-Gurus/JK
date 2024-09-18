@@ -219,7 +219,7 @@
                     </div>
                     <div class="flex flex-col gap-2 ">
 
-                        @if (!empty($selectedItems))
+                        @if (!empty($selectedItems) || empty($payment))
                             <div wire:click="setQuantity" id="setQuantity"
                                 x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')"
                                 class="py-4 px-8 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
