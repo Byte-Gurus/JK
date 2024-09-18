@@ -101,10 +101,31 @@
                             </p>
                         </div>
                     </li>
+                    <li class="col-span-1 text-center py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-center font-bold">
+                                {{ $returnItem->operation }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 text-center py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-center font-bold">
+                                {{ $returnItem->description}}
+                            </p>
+                        </div>
+                    </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[1em] text-center fot-bold">
                                 {{ $returnItem->return_quantity }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-center fot-bold">
+                                {{ $returnItem->item_return_amount }}
                             </p>
                         </div>
                     </li>
