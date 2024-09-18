@@ -165,6 +165,7 @@ class SalesTransaction extends Component
             'customer_id' => $creditor_id,
             'credit_no' =>  $this->credit_no,
             'credit_id' => $credit->id,
+            'creditor_name' => $this->creditor_name,
             'credit_limit' => $this->credit_limit
         ];
 
