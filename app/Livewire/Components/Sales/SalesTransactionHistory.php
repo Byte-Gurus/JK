@@ -80,7 +80,12 @@ class SalesTransactionHistory extends Component
         $this->original_amount = $transaction->returnJoin->original_amount ?? 0;
         $this->return_amount = $transaction->returnJoin->return_total_amount ?? 0;
 
-        $this->change =  $this->tendered_amount - $this->grandTotal;
+        if ($this->transaction_type == 'Return') {
+            $this->change =  $this->tendered_amount - $this->original_amount;
+
+        } else {
+            $this->change =  $this->tendered_amount - $this->grandTotal;
+        }
     }
 
     public function sortByColumn($column)
