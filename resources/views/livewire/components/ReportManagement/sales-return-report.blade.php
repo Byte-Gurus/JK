@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div>
-                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">STOCK-ON-HAND REPORT</p>
+                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">SALES RETURN REPORT</p>
             </div>
         </div>
 
@@ -36,36 +36,36 @@
 
 
 
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Transaction Number</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Transaction No.</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Name</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Description</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Return Quantity</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Return Qty</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Return Amount</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Return Amount</p>
                     </div>
                 </li>
             </ul>
@@ -73,38 +73,45 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             @foreach ($returnItems as $returnItem)
-                <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+                <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
 
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-left font-medium">
+                            <p class="text-[0.8em] text-left font-medium">
                                 {{ $returnItem->returnJoin->transactionJoin->transaction_number }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-left font-medium">
+                            <p class="text-[0.8em] text-left font-medium">
                                 {{ $returnItem->transactionDetailsJoin->itemJoin->barcode }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 text-center py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center font-bold">
+                            <p class="text-[0.8em] text-center font-bold">
                                 {{ $returnItem->transactionDetailsJoin->itemJoin->item_name }}
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 text-center py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center font-bold">
+                            <p class="text-[0.8em] text-center font-bold">
                                 {{ $returnItem->transactionDetailsJoin->itemJoin->item_description }}
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center fot-bold">
+                            <p class="text-[0.8em] text-center fot-bold">
                                 {{ $returnItem->return_quantity }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $returnItem->return_amount }}
                             </p>
                         </div>
                     </li>
