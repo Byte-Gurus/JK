@@ -36,19 +36,19 @@
                             </div>
                         </div>
                         <div class="flex flex-col ">
-                            <div x-on:click="$wire.displayDailySalesReport()"
+                            <div x-on:click="$wire.displayDailySalesReportDatePickerModal()"
                                 class="px-4 py-2 font-bold hover:text-[1.4em] transition-all duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md  text-nowrap">
                                 <button>Daily Sales</button>
                             </div>
-                            <div x-on:click="$wire.displayWeeklySalesReport()"
+                            <div x-on:click="$wire.displayWeeklySalesReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md  text-nowrap">
                                 <button>Weekly Sales</button>
                             </div>
-                            <div x-on:click="$wire.displayMonthlySalesReport()"
+                            <div x-on:click="$wire.displayMonthlySalesReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Monthly Sales</button>
                             </div>
-                            <div x-on:click="$wire.displayYearlySalesReport()"
+                            <div x-on:click="$wire.displayYearlySalesReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Yearly Sales</button>
                             </div>
@@ -160,19 +160,34 @@
                 </div>
             </div>
         </div>
-    @else
-        {{-- Sales --}}
+    @endif
+        {{-- Daily Sales --}}
         <div x-show="showDailySalesReport" x-data="{ showDailySalesReport: @entangle('showDailySalesReport') }">
             @livewire('components.ReportManagement.daily-sales-report')
         </div>
+        <div x-show="showDailySalesReportDatePickerModal" x-data="{ showDailySalesReportDatePickerModal: @entangle('showDailySalesReportDatePickerModal') }">
+            @livewire('components.ReportManagement.daily-sales-report-date-picker-modal')
+        </div>
+        {{-- Weekly Sales --}}
         <div x-show="showWeeklySalesReport" x-data="{ showWeeklySalesReport: @entangle('showWeeklySalesReport') }">
             @livewire('components.ReportManagement.weekly-sales-report')
         </div>
+        <div x-show="showWeeklySalesReportDatePickerModal" x-data="{ showWeeklySalesReportDatePickerModal: @entangle('showWeeklySalesReportDatePickerModal') }">
+            @livewire('components.ReportManagement.weekly-sales-report-date-picker-modal')
+        </div>
+        {{-- Monthly Sales --}}
         <div x-show="showMonthlySalesReport" x-data="{ showMonthlySalesReport: @entangle('showMonthlySalesReport') }">
             @livewire('components.ReportManagement.monthly-sales-report')
         </div>
+        <div x-show="showMonthlySalesReportDatePickerModal" x-data="{ showMonthlySalesReportDatePickerModal: @entangle('showMonthlySalesReportDatePickerModal') }">
+            @livewire('components.ReportManagement.monthly-sales-report-date-picker-modal')
+        </div>
+        {{-- Yearly Sales --}}
         <div x-show="showYearlySalesReport" x-data="{ showYearlySalesReport: @entangle('showYearlySalesReport') }">
             @livewire('components.ReportManagement.yearly-sales-report')
+        </div>
+        <div x-show="showYearlySalesReportDatePickerModal" x-data="{ showYearlySalesReportDatePickerModal: @entangle('showYearlySalesReportDatePickerModal') }">
+            @livewire('components.ReportManagement.yearly-sales-report-date-picker-modal')
         </div>
 
         {{-- Return --}}
@@ -204,5 +219,4 @@
         <div x-show="showExpiredItemsReport" x-data="{ showExpiredItemsReport: @entangle('showExpiredItemsReport') }">
             @livewire('components.ReportManagement.expired-items-report')
         </div>
-    @endif
 </div>

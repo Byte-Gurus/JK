@@ -75,9 +75,10 @@ class PaymentForm extends Component
 
     public function resetFormWhenClosed()
     {
-        // $this->resetForm();
+        $this->resetForm();
         $this->focusInput();
         $this->resetValidation();
+        $this->dispatch('display-payment-form')->to(SalesTransaction::class);
     }
     public function getGrandTotal($GrandTotal)
     {

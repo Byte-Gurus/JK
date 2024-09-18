@@ -1,5 +1,6 @@
-<div x-cloak class="flex justify-center ">
-    <div class="w-[816px] max-h-[1056px] h-full border border-black">
+<div class="flex justify-center">
+
+    <div class="  w-[816px] max-h-[1056px] h-full border border-black">
         <div class="flex flex-row justify-around my-8">
             <div>
                 <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
@@ -168,3 +169,4 @@
         </div>
     </div>
 </div>
+

@@ -15,7 +15,10 @@ class ReportManagement extends Component
 
     public $reportSelected = false;
 
+    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal = false;
+
     public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport = false;
+
 
     public function render()
     {
@@ -27,6 +30,10 @@ class ReportManagement extends Component
         'change-sidebar-status' => 'changeSidebarStatus',
         'display-inventoyry-table' => 'displayInventoryTable',
         'display-stock-card' => 'displayStockCard',
+        'display-daily-sales-report' => 'displayDailySalesReport',
+        'display-weekly-sales-report' => 'displayWeeklySalesReport',
+        'display-monthly-sales-report' => 'displayMonthlySalesReport',
+        'display-yearly-sales-report' => 'displayYearlySalesReport',
     ];
 
 
@@ -125,47 +132,70 @@ class ReportManagement extends Component
 
 
 
-
-
-
-
-
-
-
-
-
-
-    public function displayDailySalesReport()
+    public function hideExtras()
     {
         $this->reportSelected = true;
         $this->showNavbar = false;
         $this->sidebarStatus = true;
-        $this->showDailySalesReport = true;
+        $this->showDailySalesReportDatePickerModal = false;
+        $this->showWeeklySalesReportDatePickerModal = false;
+        $this->showMonthlySalesReportDatePickerModal = false;
+        $this->showYearlySalesReportDatePickerModal = false;
+    }
+
+    // Daily Sales Report
+
+    public function displayDailySalesReportDatePickerModal()
+    {
+        $this->showDailySalesReportDatePickerModal = true;
+    }
+
+    public function displayDailySalesReport()
+    {
+        $this->showDailySalesReport = !$this->showDailySalesReport;
+        $this->hideExtras();
+    }
+
+    // Weekly Sales Report
+
+    public function displayWeeklySalesReportDatePickerModal()
+    {
+        $this->showWeeklySalesReportDatePickerModal = true;
     }
 
     public function displayWeeklySalesReport()
     {
-        $this->reportSelected = true;
-        $this->showNavbar = false;
-        $this->sidebarStatus = true;
-        $this->showWeeklySalesReport = true;
+        $this->showWeeklySalesReport = !$this->showWeeklySalesReport;
+        $this->hideExtras();
+    }
+
+    // Monthly Sales Report
+
+    public function displayMonthlySalesReportDatePickerModal()
+    {
+        $this->showMonthlySalesReportDatePickerModal = true;
     }
 
     public function displayMonthlySalesReport()
     {
-        $this->reportSelected = true;
-        $this->showNavbar = false;
-        $this->sidebarStatus = true;
-        $this->showMonthlySalesReport = true;
+        $this->showMonthlySalesReport = !$this->showMonthlySalesReport;
+        $this->hideExtras();
+    }
+
+    // Yearly Sales Report
+
+    public function displayYearlySalesReportDatePickerModal()
+    {
+        $this->showYearlySalesReportDatePickerModal = true;
     }
 
     public function displayYearlySalesReport()
     {
-        $this->reportSelected = true;
-        $this->showNavbar = false;
-        $this->sidebarStatus = true;
-        $this->showYearlySalesReport = true;
+        $this->showYearlySalesReport = !$this->showYearlySalesReport;
+        $this->hideExtras();
     }
+
+    // Sales Return Report
 
     public function displaySalesReturnReport()
     {
