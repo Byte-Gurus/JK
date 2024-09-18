@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("birthdate");
             $table->string('contact_number');
             $table->string("customer_type");
-            $table->string("customer_discount_no");
+            $table->string("customer_discount_no")->nullable();
             $table->string("id_picture")->nullable();
 
             $table->foreignId('address_id')->constrained('addresses');

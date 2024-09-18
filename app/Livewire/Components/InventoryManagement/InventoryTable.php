@@ -89,6 +89,11 @@ class InventoryTable extends Component
         $this->resetPage();
     }
 
+    public function displayStockAdjustPage()
+    {
+        $this->dispatch('display-stock-adjust-page')->to(InventoryManagementPage::class);
+    }
+
     public function displayStockCard()
     {
         $this->dispatch('display-inventory-table', showInventoryTable: false)->to(InventoryManagementPage::class);

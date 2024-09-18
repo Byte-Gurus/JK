@@ -23,6 +23,11 @@ class YearlySalesChart extends Component
     public function updatedYear($currentYear)
     {
 
+
+        if (!$this->year) {
+            $currentYear = Carbon::now()->format('Y');
+        }
+
         $this->totalAmount = 0;
         $this->transactionCount = 0;
         $this->yearlyTotal = [];

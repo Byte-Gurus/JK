@@ -22,6 +22,10 @@ class FastSlowMovingChart extends Component
 
     public function updatedMonth($currentMonth)
     {
+
+        if (!$currentMonth) {
+            $currentMonth = Carbon::now()->format('Y-m');
+        }
         $date = Carbon::createFromFormat('Y-m', $currentMonth);
         // Calculate the start and end date of the month
         $startOfMonth = $date->copy()->startOfMonth();
@@ -88,7 +92,7 @@ class FastSlowMovingChart extends Component
                 $weekCount++;
                 $currentDate = $endOfWeek->addDay();
             }
-            
+
             $averageStockInPerWeek = $weeksWithStockIn > 0 ? $totalStockInQuantity / $weeksWithStockIn : 0;
 
             $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;

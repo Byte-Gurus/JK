@@ -132,4 +132,3 @@ Artisan::command('credit:check-overdue', function () {
         }
     }
 })->purpose('Check credit creditor and update status if overdue')->daily();
-

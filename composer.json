@@ -55,7 +55,8 @@
             "@php artisan migrate --graceful --ansi"
         ],
         "post-install-cmd": [
-            "@php artisan storage:link"
+            "@php artisan storage:link",
+            "ln -sr storage/app/public public/storage"
         ]
 
     },

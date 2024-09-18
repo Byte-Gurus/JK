@@ -1,9 +1,9 @@
-<div class="p-4 bg-white border border-black rounded-lg">
-    <div class="text-left">
-        <p class=" font-black text-[rgb(53,53,53)] text-[2em]">Inventory Movement</p>
+<div class="p-4 bg-white border h-full border-[rgb(143,143,143)] shadow-2xl rounded-lg">
+    <div class="mb-4 text-left ">
+        <p class=" text-2xl text-[rgb(72,72,72)] italic font-black">Inventory Movement</p>
     </div>
     <div wire:ignore class="flex justify-center ">
-        <canvas width="300" height="100" id="operationChart"></canvas>
+        <canvas class="w-full h-full"" id="operationChart"></canvas>
     </div>
 </div>
 

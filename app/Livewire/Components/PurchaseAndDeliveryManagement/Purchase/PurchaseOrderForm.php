@@ -19,7 +19,7 @@ class PurchaseOrderForm extends Component
 
     use LivewireAlert;
 
-    public $isCreate;
+    public $isCreate = true;
 
     public $showModal;
     public $selectAllToRestore = false;
@@ -46,13 +46,16 @@ class PurchaseOrderForm extends Component
      * ->where filter out all the status_id that has value of 2 (Inactive), <> means not equal to
      * ->groupBy this is need to identify what columns to show especially when theres sum and max (aggregiate functions)
      * ->havingRaw has a condition and ensure that this columns gets retrieve
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+    public function mount()
+    {
+        $this->generatePurchaseOrderNumber();
+    }
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
-        $this->generatePurchaseOrderNumber();
+
 
         if (empty($this->reorder_lists) && !$this->isReorderListsCleared) {
             $this->reorder_lists = Item::join('inventories', 'items.id', '=', 'inventories.item_id')
@@ -60,6 +63,7 @@ class PurchaseOrderForm extends Component
                     'items.id as item_id',
                     'items.barcode',
                     'items.item_name',
+                    'items.item_description',
                     'items.reorder_point',
                     'items.maximum_stock_level',
                     'items.status_id',
@@ -71,6 +75,7 @@ class PurchaseOrderForm extends Component
                     'items.id',
                     'items.barcode',
                     'items.item_name',
+                    'items.item_description',
                     'items.reorder_point',
                     'items.maximum_stock_level',
                     'items.status_id'
@@ -111,8 +116,10 @@ class PurchaseOrderForm extends Component
                         'item_id' => $this->reorder_lists[$index]['item_id'],
                         'barcode' => $this->reorder_lists[$index]['barcode'],
                         'item_name' => $this->reorder_lists[$index]['item_name'],
+                        'item_description'  => $this->reorder_lists[$index]['item_description'],
                         'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
                         'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
+                        'maximum_stock_level' => $this->reorder_lists[$index]['maximum_stock_level'],
                     ];
                 }
             }
@@ -178,6 +185,7 @@ class PurchaseOrderForm extends Component
 
         //     $this->selectAllToRemove = false;
         // }
+        $this->resetValidation();
     }
 
     public function restoreRow()
@@ -401,6 +409,7 @@ class PurchaseOrderForm extends Component
     public function closeModal() //* close ang modal after confirmation
     {
         $this->dispatch('close-modal')->to(PurchasePage::class);
+        $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
         $this->resetValidation();
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
@@ -507,32 +516,24 @@ class PurchaseOrderForm extends Component
     //     $this->populateForm();
     //     $this->compareAndFilterLists();
     // }
-    public function generatePurchaseOrderNumber()  //* generate a random barcode and contatinate the ITM
+    public function generatePurchaseOrderNumber()
     {
+        do {
+            $randomNumber = random_int(0, 9999);
+            $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+            $purchaseOrderNumber = 'PO-' . $formattedNumber . '-' . now()->format('mdY');
 
-        $randomNumber = random_int(0, 9999);
-        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-        $this->po_number = 'PO-' . $formattedNumber . '-' . now()->format('dmY');
+            // Check if the purchase order number already exists
+            $exists = Purchase::where('po_number', $purchaseOrderNumber)->exists();
+        } while ($exists);
+
+        // Assign the unique purchase order number
+        $this->po_number = $purchaseOrderNumber;
     }
 
     public function refreshTable() //* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
-    }
-
-    public function changeMethod($isCreate)
-    {
-
-        $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
-
-        //* kapag true ang laman ng $isCreate mag reset ang form then  go to create form and ishow ang password else hindi ishow
-        if ($this->isCreate) {
-            $this->resetForm();
-            $this->generatePurchaseOrderNumber();
-            $this->isReorderListsCleared = false;
-            // $this->resetForm();
-        }
-        $this->dispatch('display-modal', isCreate: false)->to(PurchasePage::class);
     }
 
     public function resetModal()

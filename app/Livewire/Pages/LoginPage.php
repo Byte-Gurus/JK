@@ -10,6 +10,8 @@ class LoginPage extends Component
     public $username;
     public $password;
 
+    public $showPassword = true;
+
     public function render()
     {
         return view('livewire.pages.login-page');
@@ -17,7 +19,6 @@ class LoginPage extends Component
 
     public function authenticate()
     {
-
 
         $validated = $this->validate([
             'username' => 'required',
@@ -28,16 +29,24 @@ class LoginPage extends Component
 
 
             if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
-
+                Auth::logoutOtherDevices($this->password);
                 return redirect()->route('admin.index');
             } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
-
+                Auth::logoutOtherDevices($this->password);
                 return redirect()->route('cashier.index');
+            } elseif (Auth::user()->user_role_id == '3' && Auth::user()->status_id == 1) {
+                Auth::logoutOtherDevices($this->password);
+                return redirect()->route('inventoryclerk.index');
             } else {
                 $this->addError('submit', 'This account is inactive');
             }
         }
 
         $this->addError('submit', 'No matching user with provided username and password');
+    }
+
+    public function showPasswordStatus()
+    {
+     $this->showPassword = !$this->showPassword;
     }
 }

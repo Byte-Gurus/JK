@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\CreditManagement;
 
 use App\Events\CreditEvent;
+use App\Events\TransactionEvent;
 use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
@@ -19,29 +20,29 @@ class CreditForm extends Component
 
     public function render()
     {
-
-
         $searchCustomerTerm = trim($this->searchCustomer);
+        $searchCustomerTerm = strtolower($searchCustomerTerm); // Convert to lowercase for case-insensitive search
 
+        // Get customers who have credits that are not fully paid
+        $customersWithUnpaidCredits = Customer::whereHas('creditJoin', function ($query) {
+            $query->where('status', '!=', 'Fully paid');
+        })->pluck('id');
+
+        // Get customers who are of type 'Credit' and either have fully paid credits or no credits at all
         $customers = Customer::where('customer_type', 'Credit')
-            ->where(function ($query) {
-                $query->whereHas('creditJoin', function ($subQuery) {
-                    $subQuery->where('status', 'Fully paid');
-                })
-                    ->orDoesntHave('creditJoin');
-            })
+            ->whereNotIn('id', $customersWithUnpaidCredits)
             ->where(function ($query) use ($searchCustomerTerm) {
-                $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(lastname) like ?', ["%{$searchCustomerTerm}%"]);
             })
             ->get();
-
 
         return view('livewire.components.CreditManagement.credit-form', [
             'customers' => $customers
         ]);
     }
+
 
     protected $listeners = [
         'edit-supplier-from-table' => 'edit',  //* key:'edit-supplier-from-table' value:'edit'  galing sa SupplierTable class
@@ -51,7 +52,8 @@ class CreditForm extends Component
         'createConfirmed',
     ];
 
-    public function getCustomer($customer_id){
+    public function getCustomer($customer_id)
+    {
         $this->customer_id = $customer_id;
 
 
@@ -109,6 +111,7 @@ class CreditForm extends Component
         $this->refreshTable();
         CreditEvent::dispatch('refresh-credit');
 
+
         $this->closeModal();
     }
 
@@ -158,11 +161,18 @@ class CreditForm extends Component
         }
     }
 
-    public function generateCreditNumber()  //* generate a random barcode and contatinate the ITM
+    public function generateCreditNumber()
     {
+        do {
+            $randomNumber = random_int(0, 9999);
+            $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+            $creditNumber = 'CR-' . $formattedNumber . '-' . now()->format('mdY');
 
-        $randomNumber = random_int(0, 9999);
-        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-        $this->credit_number = 'CR-' . $formattedNumber . '-' . now()->format('dmY');
+            // Check if the credit number already exists
+            $exists = Credit::where('credit_number', $creditNumber)->exists();
+        } while ($exists);
+
+        // Assign the unique credit number
+        $this->credit_number = $creditNumber;
     }
 }

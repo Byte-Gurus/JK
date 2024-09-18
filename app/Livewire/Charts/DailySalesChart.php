@@ -25,17 +25,23 @@ class DailySalesChart extends Component
 
     public function updatedDay($currentDate)
     {
-        $this->dailyTotal = [];
 
+
+        if (!$this->day) {
+            $currentDate = Carbon::now();
+        }
+
+
+        $this->dailyTotal = [];
 
         $currentDate = Carbon::parse($currentDate);
 
         $this->currentDate = $currentDate->toDateString(); // Get today's date in 'YYYY-MM-DD' format
         $formattedDate = $currentDate->format('M d Y');
 
-        $this->totalAmount = Transaction::whereDate('created_at', $this->currentDate)->sum('total_amount');
-        $this->transactionCount = Transaction::whereDate('created_at', $this->currentDate)->count();
-        
+        $this->totalAmount = Transaction::whereDate('created_at', $currentDate)->sum('total_amount');
+        $this->transactionCount = Transaction::whereDate('created_at', $currentDate)->count();
+
         $this->dailyTotal[] = [
             'date' => $formattedDate,
             'totalAmount' => $this->totalAmount

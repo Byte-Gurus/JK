@@ -61,7 +61,7 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[480px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[550px] ">
 
             <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
 
@@ -222,7 +222,7 @@
                             {{-- //* edit button --}}
                             <th class="px-4 py-4 text-center text-md text-nowrap">
                                 <div
-                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
+                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 transition-all duration-100 ease-in-out rounded-lg hover:bg-blue-100 ">
 
                                     <button x-on:click="showModal=true;$wire.getUserID({{ $user->id }})">
 

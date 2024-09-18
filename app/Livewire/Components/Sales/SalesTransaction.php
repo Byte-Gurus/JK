@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Events\CreditEvent;
+use App\Events\ItemEvent;
 use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
@@ -15,10 +17,13 @@ use App\Models\InventoryMovement;
 use App\Models\Item;
 use App\Models\Notification;
 use App\Models\Payment;
+use App\Models\PurchaseDetails;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -73,13 +78,18 @@ class SalesTransaction extends Component
         $searchCustomerTerm = trim($this->searchCustomer);
 
         $credit_customers = Customer::where(function ($query) use ($searchCustomerTerm) {
-            $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
-                ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
-                ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
-        })->whereHas('creditJoin', function ($query) {
-            $query->where('status', '!=', 'Paid')
-                ->doesntHave('transactionJoin');
-        })->get();
+            $searchCustomerTermLower = strtolower($searchCustomerTerm); // Convert search term to lowercase
+
+            $query->whereRaw('LOWER(firstname) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
+                ->orWhereRaw('LOWER(middlename) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
+                ->orWhereRaw('LOWER(lastname) LIKE ?', ['%' . $searchCustomerTermLower . '%']);
+        })
+            ->whereHas('creditJoin', function ($query) {
+                $query->where('status', '!=', 'Fully paid')
+                    ->doesntHave('transactionJoin');
+            })
+            ->get();
+
 
         // Fetch items with their inventoryJoin
         $items = Item::where('status_id', 1)
@@ -87,27 +97,35 @@ class SalesTransaction extends Component
                 $query->where('status', 'Available');
             })
             ->when($searchTerm, function ($query, $searchTerm) {
-                $query->where(function ($subQuery) use ($searchTerm) {
-                    $subQuery->where('item_name', 'like', "%{$searchTerm}%")
-                        ->orWhere('barcode', 'like', "%{$searchTerm}%");
+                $searchTermLower = strtolower($searchTerm); // Convert search term to lowercase
+
+                $query->where(function ($subQuery) use ($searchTermLower) {
+                    $subQuery->whereRaw('LOWER(item_name) LIKE ?', ['%' . $searchTermLower . '%'])
+                        ->orWhereRaw('LOWER(barcode) LIKE ?', ['%' . $searchTermLower . '%']);
                 });
             })
-            ->with('inventoryJoin') // Ensure inventoryJoin is eager-loaded
+            ->with(['inventoryJoin' => function ($query) {
+                $query->where('status', 'Available'); // Ensure only 'Available' inventory is eager-loaded
+            }])
             ->get();
 
         // Process each item
         $items = $items->map(function ($item) {
             // Filter and sort inventoryJoin based on shelf_life_type
+            $availableInventory = $item->inventoryJoin->filter(function ($inventory) {
+                return $inventory->status === 'Available'; // Ensure only available items are considered
+            });
+
             if ($item->shelf_life_type === 'Perishable') {
                 // Sort by expiration_date to find the nearest expiration date
-                $sortedInventory = $item->inventoryJoin->filter(function ($inventory) {
+                $sortedInventory = $availableInventory->filter(function ($inventory) {
                     return !is_null($inventory->expiration_date);
                 })->sortBy('expiration_date');
 
                 $item->inventoryJoin = $sortedInventory->first();
             } else {
                 // For non-perishable items, get the latest inventory entry
-                $sortedInventory = $item->inventoryJoin->sortByDesc('created_at');
+                $sortedInventory = $availableInventory->sortBy('created_at');
                 $item->inventoryJoin = $sortedInventory->first();
             }
             return $item;
@@ -126,8 +144,6 @@ class SalesTransaction extends Component
 
     public function selectCustomer($creditor_id)
     {
-
-
 
 
         $credit = Credit::where('customer_id', $creditor_id)->first();
@@ -150,6 +166,7 @@ class SalesTransaction extends Component
             'credit_id' => $credit->id,
             'credit_limit' => $this->credit_limit
         ];
+
 
         $this->dispatch('get-credit-detail', creditDetail: $this->credit_details)->to(DiscountForm::class);
         $this->searchCustomer = '';
@@ -242,7 +259,9 @@ class SalesTransaction extends Component
                     $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
 
 
-                    if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity']) {
+                    if (
+                        $this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity'] && $this->selectedItems[$index]['bulk_quantity'] >= 2
+                    ) {
                         $this->selectedItems[$index]['discount'] =    $this->discounts[3]->percentage;
                         $this->selectedItems[$index]['discount_id'] =  $this->discounts[3]->id;
 
@@ -312,13 +331,10 @@ class SalesTransaction extends Component
         $this->isSelected = $flag;
     }
 
-    public function ss($index)
+    public function hi()
     {
-        array_push($this->si, $index);
-
-        if (count($this->si) == 2) {
-            // dd($this->si);
-        }
+        dd('hi');
+        // $this->reset('selectedIndex', 'isSelected');
     }
 
     public function setQuantity()
@@ -355,10 +371,19 @@ class SalesTransaction extends Component
 
     public function generateTransactionNumber()
     {
-        $randomNumber = random_int(0, 9999);
-        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-        $this->transaction_number = 'TN-' . $formattedNumber . '-' . now()->format('dmY');
+        do {
+            $randomNumber = random_int(0, 9999);
+            $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+            $transactionNumber = 'TN-' . $formattedNumber . '-' . now()->format('mdY');
+
+            // Check if the transaction number already exists
+            $exists = Transaction::where('transaction_number', $transactionNumber)->exists();
+        } while ($exists);
+
+        // Assign the unique transaction number
+        $this->transaction_number = $transactionNumber;
     }
+
 
 
 
@@ -472,7 +497,6 @@ class SalesTransaction extends Component
             $this->customerDetails = null;
 
             $this->reset('customer_name', 'customer_discount_no', 'discount_type');
-            $this->alert('success', 'Discount was removed successfully');
         }
     }
 
@@ -513,7 +537,9 @@ class SalesTransaction extends Component
 
     public function removeRowConfirmed()
     {
+
         $this->totalVat -=  $this->tax_details['vatable_amount'];
+        $this->grandTotal  -=  $this->selectedItems[$this->selectedIndex]['total_amount'];
         unset($this->selectedItems[$this->selectedIndex]);
 
         $this->selectedItems = array_values($this->selectedItems);
@@ -662,8 +688,9 @@ class SalesTransaction extends Component
 
 
             $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
-        }
 
+            $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
+        }
 
         if ($this->isSales) {
             $payment = Payment::create([
@@ -689,6 +716,7 @@ class SalesTransaction extends Component
         }
 
 
+        CreditEvent::dispatch('refresh-credit');
 
 
 
@@ -707,6 +735,9 @@ class SalesTransaction extends Component
         ))->to(SalesReceipt::class);
 
         TransactionEvent::dispatch('refresh-transaction');
+
+        ItemEvent::dispatch('refresh-item');
+
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
     }
@@ -746,6 +777,106 @@ class SalesTransaction extends Component
         $item->reorder_point = $reorder_point;
         $item->save();
     }
+
+    public function getMaximumLevel($delivery_date, $po_date, $item_id,)
+    {
+        $maximum_level_req = [];
+
+        $deliveryDate = Carbon::parse($delivery_date);
+        $poDate = Carbon::parse($po_date);
+
+        // Define the start and end dates
+        $startDate = $poDate->startOfDay();
+        $endDate = $deliveryDate->endOfDay();
+
+        $startOfDay = Carbon::today()->startOfDay();
+        $endOfDay = Carbon::today()->endOfDay();
+
+        // $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
+        //     ->distinct()
+        //     ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
+        //     ->count();
+
+        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        })->sum('item_quantity');
+
+
+        // Calculate the number of days in the date range
+        $days = floor($startDate->diffInDays($endDate));
+        // dd($totalQuantity);
+
+        $restockDate = Inventory::where('item_id', $item_id)
+            ->orderBy('stock_in_date', 'desc')
+            ->value('stock_in_date');
+
+        // Calculate the date range from the same day last week to today
+        $startRestockDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
+        $endCurrentDate = Carbon::now()->endOfDay()->toDateTimeString();
+
+        // Calculate minimum consumption within the period
+        $minQuantity = TransactionDetails::where('item_id', $item_id)
+            ->whereBetween('created_at', [$startRestockDate, $endCurrentDate])
+            ->min('item_quantity');
+
+
+        // $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
+
+        $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])
+            ->find($item_id);
+
+
+        $purchaseDetails = $item->purchaseDetailsJoin;
+
+        $minReorderPeriod = $purchaseDetails->flatMap(function ($purchaseDetail) {
+            // Ensure delivery is a single instance or null
+            $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
+
+            // Initialize minReorderPeriod as null
+            $reorderPeriods = [];
+
+            // Check if delivery and purchase dates are valid
+            if ($delivery && $delivery->date_delivered && $purchaseDetail->purchaseJoin->created_at) {
+                try {
+                    $deliveryDate = Carbon::parse($delivery->date_delivered);
+                    $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+                    // Calculate the difference in days if both dates are valid
+                    $reorderPeriods[] = $purchaseDate->diffInDays($deliveryDate);
+                } catch (\Exception $e) {
+                    // Ignore invalid date parsing
+                }
+            }
+
+            return $reorderPeriods;
+        })->min();
+
+
+        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        })->sum('item_quantity');
+
+
+        // Calculate maximum level using the formula
+        $reorderPoint = $item['reorder_point'];
+        $reorderQuantity = round($todayTotalItemQuantity / $days);
+        $minConsumption = $minQuantity ?? 0;
+        $minReorderPeriod = $minReorderPeriod = $minReorderPeriod !== null ? (int) $minReorderPeriod : 0;
+
+
+        $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
+
+        Item::where('id', $item_id)->update(['maximum_stock_level' => $maximumLevel]);
+
+        // $maximum_level_req[] = [
+        //     'item_id' => $item_id,
+        //     'min_quantity' => $minConsumption,
+        //     'purchase_quantity' => $reorderQuantity,
+        //     'reorder_point' => $reorderPoint,
+        //     'min_reorder_period' => $minReorderPeriod,
+        //     'maximum_level' => $maximumLevel
+        // ];
+    }
+
 
     public function clearSelectedCustomerName()
     {

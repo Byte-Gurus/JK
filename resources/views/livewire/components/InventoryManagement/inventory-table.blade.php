@@ -52,7 +52,6 @@
                             <option value="Available">Available</option>
                             <option value="Not available">Not available</option>
                             <option value="Expired">Expired</option>
-                            <option value="New Item">New Item</option>
                         </select>
                     </div>
                     <div class="flex flex-col gap-1">
@@ -91,23 +90,10 @@
                         <th scope="col" class="px-4 py-3">Barcode</th>
 
                         {{-- //* item name --}}
-                        <th wire:click="sortByColumn('item_name')" scope="col"
-                            class="flex flex-row items-center justify-between gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                        <th scope="col" class="px-4 py-3">Item name</th>
 
-                            <div class="flex items-center">
-                                <p>Item Name</p>
-
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>
-                                </span>
-
-                            </div>
-
-                        </th>
+                        {{-- //* item name --}}
+                        <th scope="col" class="px-4 py-3">Item Description</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier</th>
@@ -201,8 +187,14 @@
                                 {{ $inventory->itemJoin->barcode }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $inventory->itemJoin->item_name }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                {{ $inventory->itemJoin->item_description }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -276,7 +268,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($inventory->itemJoin->shelf_life_type === 'Perishable')
-                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format(' M d Y ')  : 'null' }}
+                                    {{ $inventory->expiration_date ? $inventory->expiration_date->format(' M d Y ') : 'null' }}
                                 @elseif($inventory->itemJoin->shelf_life_type === 'Non Perishable')
                                     N/A
                                 @endif
@@ -284,11 +276,10 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="flex justify-center px-4 py-4 text-center text-md text-nowrap">
-
+                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
-                                        class="p-1 transition-all duration-100 ease-in-out rounded-full hover:bg-[rgb(237,237,237)]">
+                                        class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -303,18 +294,18 @@
                                         x-transition:leave="transition ease-out duration-100"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0"
-                                        class="absolute right-8 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        x-on:click.away="openActions = false"
+                                        class="absolute overflow-hidden  right-11 z-10 transform max-w-m origin-top-right w-[170px]">
+
                                         <div
-                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
                                         min-h-[20%]">
-                                            <div class="flex flex-col font-black bg-[rgb(255,255,255)]">
-
-
+                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
                                                 @if ($inventory->status !== 'New Item')
                                                     <button
-                                                        x-on:click="showStockAdjustModal=true, openActions = !openActions"
+                                                        x-on:click="$wire.displayStockAdjustPage(), openActions = !openActions"
                                                         wire:click="getStockID({{ $inventory->id }})"
-                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-blue-600 justify-left hover:bg-blue-100">
+                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth="1.5"
                                                                 stroke="currentColor" class="size-6">
@@ -325,14 +316,15 @@
                                                     </button>
                                                 @endif
 
-                                                <div class="w-full border border-[rgb(205,205,205)]"></div>
+                                                <div class="w-full border border-[rgb(39,39,39)]"></div>
+
                                                 {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
 
                                                 @if ($inventory->status !== 'New Item')
                                                     <button
                                                         x-on:click="$wire.displayStockCard(), openActions = !openActions"
                                                         wire:click="getStock({{ $inventory->id }})"
-                                                        class="flex flex-row items-center gap-2 px-2 py-2 text-yellow-600 justify-left hover:bg-yellow-100">
+                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-yellow-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth={1.5}

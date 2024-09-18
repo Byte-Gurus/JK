@@ -345,9 +345,10 @@
                                                     value="{{ $customer_name }}" list="itemList"
                                                     class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                                                     placeholder="Search Customer">
-
+                                                @if ($isSales)
                                                     <div class="mt-6.5">
-                                                        <button type="button" wire:loading.remove wire:click="createCustomer"
+                                                        <button type="button" wire:loading.remove
+                                                            wire:click="createCustomer"
                                                             class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                                                             <div class="flex flex-row items-center gap-2">
                                                                 <p>
@@ -356,10 +357,12 @@
                                                             </div>
                                                         </button>
                                                     </div>
+                                                @endif
+
                                             </div>
                                             @if (!empty($searchCustomer))
                                                 <div
-                                                    class="fixed max-h-1/2 z-99 h-[200px] mt-16 rounded-b-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                                    class="fixed max-h-1/2 z-99 h-[200px] mt-16 rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
                                                     @foreach ($customers as $customer)
                                                         <ul wire:click="getCustomer({{ $customer->id }})"
                                                             class="w-full px-4 py-2 transition-all duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
@@ -412,7 +415,8 @@
                                                 Type</label>
 
                                             <input id="customerType" wire:model.live="customerType" required disabled
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5" placeholder="Select Customer Type"/>
+                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Select Customer Type" />
 
                                             @error('customerType')
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>

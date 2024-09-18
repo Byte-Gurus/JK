@@ -1,10 +1,17 @@
-<div class="p-4 border border-[rgb(143,143,143)] bg-white rounded-lg ">
-    <div class="flex justify-end ">
-        <input type="month" wire:model.live="month" class="p-2 border border-[rgb(143,143,143)] rounded-lg "/>
+<div class="p-4 border border-[rgb(143,143,143)] shadow-2xl bg-white rounded-lg ">
+    <div class="flex flex-row items-center justify-between ">
+        <div>
+            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Fast & Slow Moving Items</p>
+        </div>
+        <div>
+            <input type="month" wire:model.live="month" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
+        </div>
     </div>
 
-    <div wire:ignore>
-        <canvas width="400" height="218" id="fastslowChart"></canvas>
+    <div wire:ignore class="">
+        <div>
+            <canvas class="w-full h-full" id="fastslowChart"></canvas>
+        </div>
     </div>
 </div>
 

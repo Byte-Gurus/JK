@@ -26,6 +26,11 @@ class PaymentForm extends Component
 
         $validated = $this->validateForm();
 
+        if (!$this->payWithCash && $this->tendered_amount != $this->grand_total) {
+            $this->addError('tendered_amount', 'The tendered amount must be equal to the grand total.');
+            return;
+        }
+
         $this->confirm('Do you want to confirm the payment?', [
             'onConfirmed' => 'paymentConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
@@ -60,6 +65,7 @@ class PaymentForm extends Component
     public function changePaymentMethod()
     {
         $this->payWithCash = !$this->payWithCash;
+        $this->resetValidation();
     }
 
     private function resetForm() //*tanggalin ang laman ng input pati $user_id value
@@ -70,11 +76,14 @@ class PaymentForm extends Component
     public function resetFormWhenClosed()
     {
         // $this->resetForm();
+        $this->focusInput();
         $this->resetValidation();
     }
     public function getGrandTotal($GrandTotal)
     {
+        $this->resetValidation();
         $this->grand_total = $GrandTotal;
+        $this->focusInput();
     }
 
     protected function validateForm()
@@ -83,18 +92,22 @@ class PaymentForm extends Component
 
         if ($this->payWithCash) {
 
-
             $rules = [
                 'tendered_amount' => 'required|numeric|min:1|gte:grand_total',
 
             ];
         } else {
             $rules = [
-                'tendered_amount' => 'required|numeric|min:1|gte:grand_total',
+                'tendered_amount' => 'required|numeric|min:1',
                 'reference_no' => 'required|numeric',
             ];
         }
 
         return $this->validate($rules);
+    }
+
+    public function focusInput()
+    {
+        $this->dispatch('tendered_amount_focus');
     }
 }

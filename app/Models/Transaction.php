@@ -16,7 +16,7 @@ class Transaction extends Model
         'total_amount',
         'total_vat_amount',
         'total_discount_amount',
-        'customer_id',  
+        'customer_id',
         'user_id'
     ];
 
@@ -44,22 +44,28 @@ class Transaction extends Model
     {
         return $this->hasMany(TransactionDetails::class, 'transaction_id');
     }
+    public function returnJoin()
+    {
+        return $this->hasOne(Returns::class, 'transaction_id');
+    }
 
     public function scopeSearch($query, $value)
     {
+        $value = strtolower($value);
 
-        return $query->where('transaction_number', 'like', "%{$value}%")
+        return $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"])
             ->orWhereHas('customerJoin', function ($query) use ($value) {
-                $query->where('firstname', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('userJoin', function ($query) use ($value) {
-                $query->where('firstname', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('discountJoin', function ($query) use ($value) {
-                $query->where('percentage', 'like', "%{$value}%");
+                // Cast percentage to text if it's a numeric field
+                $query->whereRaw('LOWER(CAST(percentage AS TEXT)) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('paymentJoin', function ($query) use ($value) {
-                $query->where('payment_type', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(payment_type) like ?', ["%{$value}%"]);
             });
     }
 }

@@ -56,9 +56,8 @@ class PurchasePage extends Component
 
     public function closeModal()
     {
-        $this->showModal = false;
-        $this->showEditModal = false;
-        $this->dispatch('display-modal', showModal: false)->to(PurchaseOrderForm::class);
+        $this->showPurchaseOrderForm = false;
+        $this->showPurchaseOrderTable = true;
     }
 
     public function displayEditModal($showEditModal)

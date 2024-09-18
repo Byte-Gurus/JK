@@ -28,11 +28,13 @@ class Delivery extends Model
     }
 
 
-    public function scopeSearch($query, $value)  //* search function
+    public function scopeSearch($query, $value)
     {
-        //? queries
-        $query->whereHas('purchaseJoin', function ($query) use ($value) {
-            $query->where('po_number', 'like', "%{$value}%");
+        $value = strtolower($value);
+    
+        return $query->whereHas('purchaseJoin', function ($query) use ($value) {
+            $query->whereRaw('LOWER(po_number) LIKE ?', ["%{$value}%"]);
         });
     }
+    
 }

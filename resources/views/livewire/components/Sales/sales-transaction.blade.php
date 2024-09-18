@@ -72,15 +72,7 @@
                         <tr class=" text-nowrap">
 
                             {{-- //* # count --}}
-                            <th wire:click="sortByColumn('created_at')" scope="col"
-                                class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
-
-                                <div class="flex items-center">
-
-                                    <p>#</p>
-
-                                </div>
-                            </th>
+                            <th scope="col" class="py-3 pl-4 pr-2 text-left ">#</th>
 
                             {{-- //* item name --}}
                             <th scope="col" class="py-3 pl-4 pr-2 text-left ">Item Name</th>
@@ -107,8 +99,8 @@
 
                     <tbody>
                         @foreach ($selectedItems as $index => $selectedItem)
-                            <tr wire:click="getIndex({{ $index }}, true)" x-data="{ isSelected: false }"
-                                x-on:click=" isSelected = !isSelected; $wire.ss({{ $index }}) "
+                            <tr wire:click="getIndex({{ $index }}, true )" x-data="{ isSelected: false }"
+                                x-on:click=" isSelected = true;" x-on:click.away="isSelected = false;"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75 cursor-pointer">
 
                                 <th scope="row"
@@ -227,7 +219,7 @@
                     </div>
                     <div class="flex flex-col gap-2 ">
 
-                        @if (!empty($selectedItems))
+                        @if (!empty($selectedItems) || empty($payment))
                             <div wire:click="setQuantity" id="setQuantity"
                                 x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')"
                                 class="py-4 px-8 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -457,7 +449,7 @@
                             </div>
                             @if (!empty($searchCustomer))
                                 <div
-                                    class="fixed max-h-[400px] z-99 h-fit rounded-b-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                    class="fixed max-h-[400px] z-99 h-fit rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
                                     @foreach ($credit_customers as $credit_customer)
                                         <ul wire:click="selectCustomer({{ $credit_customer->id }})"
                                             class="w-full px-4 py-2 transition-all  justify-between duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
@@ -466,10 +458,16 @@
                                                 <!-- Item details on the left side -->
                                                 <div
                                                     class="text-[0.8em] w-full gap-4 justify-between flex flex-row text-wrap">
-                                                    <p class="font-medium ">{{ $credit_customer->firstname . ' ' . $credit_customer->middlename . ' ' . $credit_customer->lastname }}
+                                                    <p class="font-medium">
+                                                        {{ $credit_customer->firstname . ' ' . ($credit_customer->middlename ?? '') . ' ' . $credit_customer->lastname }}
                                                     </p>
-                                                    <p class="italic font-thin">
-                                                        {{ $credit_customer->creditJoin->credit_number }}</p>
+                                                    @foreach ($credit_customer->creditJoin as $credit)
+                                                        @if ($credit->status != 'Fully paid' && !$credit->transactionJoin)
+                                                            <p class="italic font-thin">
+                                                                {{ $credit->credit_number }}
+                                                            </p>
+                                                        @endif
+                                                    @endforeach
                                                 </div>
                                             </li>
                                         </ul>

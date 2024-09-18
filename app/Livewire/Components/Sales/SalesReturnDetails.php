@@ -60,6 +60,7 @@ class SalesReturnDetails extends Component
         $transaction = Transaction::find($this->transaction_id);
         $transaction->total_amount = $this->new_total;
         $transaction->transaction_type = 'Return';
+        $transaction->save();
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
@@ -130,7 +131,9 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index])) {
+
+
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
 
                 if ($this->operation[$index] != 'Exchange') {
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
@@ -186,11 +189,10 @@ class SalesReturnDetails extends Component
     protected function validateForm()
     {
 
-
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index])) {
                 $availableQty = $transactionDetail['item_quantity']; // Replace with the actual field for quantity
-                $this->rules["returnQuantity.$index"] = ['numeric', 'min:1', "lte:$availableQty"];
+                $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
 

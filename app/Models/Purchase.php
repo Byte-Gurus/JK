@@ -33,10 +33,14 @@ class Purchase extends Model
     {
         return $this->hasMany(PurchaseDetails::class, 'purchase_id');
     }
-
-    public function scopeSearch($query, $value)  //* search function
+    public function deliveryJoin()
     {
-        //? queries
-        $query->where('po_number', 'like', "%{$value}%");
+        return $this->hasOne(Delivery::class, 'purchase_id');
+    }
+    public function scopeSearch($query, $value)
+    {
+        $value = strtolower($value);
+
+        return $query->whereRaw('LOWER(po_number) like ?', ["%{$value}%"]);
     }
 }

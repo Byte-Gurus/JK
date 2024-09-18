@@ -112,6 +112,7 @@ class DiscountForm extends Component
     public function create() //* create process
     {
         $isSales = $this->isSales;
+        // dd($isSales);
         if (!$isSales && isset($this->credit_details['customer_id'])) {
             $customer = Customer::find($this->customer_id);
             $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
@@ -125,18 +126,19 @@ class DiscountForm extends Component
             } else {
                 $this->populateForm();
             }
-        } elseif ($isSales) {
-            $validated = $this->validateForm();
-
-            $this->confirm('Do you want to create and apply the discount?', [
-                'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-                'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
-            ]);
         } else {
             $this->alert('warning', 'Select creditor');
             $this->clearSelectedCustomerName();
             return;
         }
+
+
+        $validated = $this->validateForm();
+
+        $this->confirm('Do you want to create and apply the discount?', [
+            'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
+            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+        ]);
     }
 
     public function createConfirmed($data) //* confirmation process ng create
@@ -190,7 +192,7 @@ class DiscountForm extends Component
     public function removeDiscountConfirmed()
     {
         $this->resetForm();
-
+        $this->clearSelectedCustomerName();
         $this->dispatch('get-customer-details', customerDetails: null)->to(SalesTransaction::class);
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
@@ -277,8 +279,12 @@ class DiscountForm extends Component
     }
     public function getCreditDetail($creditDetail)
     {
-        $this->credit_details = $creditDetail;
+
+
         $this->resetForm();
         $this->removeDiscountConfirmed();
+        $this->credit_details = $creditDetail;
+
+        // dd($this->credit_details);
     }
 }

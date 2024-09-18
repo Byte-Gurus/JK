@@ -32,10 +32,12 @@ class Credit extends Model
 
     public function scopeSearch($query, $value)
     {
+        $value = strtolower($value);
 
-        return $query->where('credit_number', 'like', "%{$value}%")
+        return $query->whereRaw('LOWER(credit_number) LIKE ?', ["%{$value}%"])
             ->orWhereHas('customerJoin', function ($query) use ($value) {
-                $query->where('firstname', 'like', "%{$value}%");
+                $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"]);
             });
     }
+
 }

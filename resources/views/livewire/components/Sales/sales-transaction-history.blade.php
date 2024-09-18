@@ -53,12 +53,30 @@
                             <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Transaction
                                 Type:</label>
 
-                            <select wire:model.live="transactionTypeFilter"
+                            <select wire:model.live="transactionFilter"
                                 class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
                                 <option value="0">All</option>
                                 <option value="Sales">Sales</option>
                                 <option value="Credit">Credit</option>
                                 <option value="Return">Return</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row items-center gap-4 mb-4">
+
+                        <div class="flex flex-col gap-1">
+
+                            <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Payment
+                                Type:</label>
+
+                            <select wire:model.live="paymentFilter"
+                                class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                                <option value="0">All</option>
+                                <option value="Cash">Cash</option>
+                                <option value="GCash">GCash</option>
+
 
                             </select>
                         </div>
@@ -78,8 +96,23 @@
                             {{-- //* transaction no --}}
                             <th scope="col" class="px-4 py-3">Transaction No.</th>
 
-                            {{-- //* total --}}
-                            <th scope="col" class="px-4 py-3 text-center">Total (₱)</th>
+                            <th wire:click="sortByColumn('total_amount')" scope="col"
+                                class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+
+                                <div class="flex items-center">
+
+                                    <p>Total (₱)</p>
+
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
+                                    </span>
+
+                                </div>
+                            </th>
 
                             {{-- payment --}}
                             <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
@@ -89,17 +122,34 @@
                             {{-- //* gcash reference no. --}}
                             <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
-                            {{-- //* date --}}
-                            <th scope="col" class="px-4 py-3 text-center">Date</th>
+                            <th wire:click="sortByColumn('created_at')" scope="col"
+                                class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
-                            {{-- //* time --}}
-                            <th scope="col" class="px-4 py-3 text-center">Time</th>
+                                <div class="flex items-center">
+
+                                    <p>Date & Time</p>
+
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
+                                    </span>
+
+                                </div>
+                            </th>
+
 
 
                         </tr>
                     </thead>
 
                     {{-- //* table body --}}
+                    {{-- <tr x-data="{ isSelected: false }" :class="isSelected ? 'bg-gray-200' : ''"
+                    class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75"
+                    @click="isSelected = true; $dispatch('row-selected', {{ $sale->id }})"
+                    @row-selected.window="isSelected = ($event.detail === {{ $sale->id }})"> --}}
                     <tbody>
 
                         @foreach ($sales as $index => $sale)
@@ -128,14 +178,10 @@
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['created_at']->format(' M d Y ') }}
+                                    {{ $sale['created_at']->format(' M d Y h:i A ') }}
                                 </th>
 
-                                {{-- //* updated at --}}
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['created_at']->format('h:i A') }}
-                                </th>
+
                             </tr>
                         @endforeach
 
@@ -189,7 +235,7 @@
                     </div>
                     <div class="border border-black "></div>
                     <div class="flex flex-row justify-between">
-                        @if ($transaction_type != 'Credit')
+                        @if ($payment_type != 'GCash' && !is_null($payment_type))
                             <div>
                                 <p class=" text-[1.6em] font-medium">Change</p>
                             </div>
@@ -198,6 +244,24 @@
                             </div>
                         @endif
                     </div>
+                    @if ($transaction_type == 'Return')
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Original Amount</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Return Amount</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) }}</p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="w-full h-[260px] overflow-x-auto overflow-y-scroll scroll ">

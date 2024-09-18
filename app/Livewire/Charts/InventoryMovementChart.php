@@ -24,7 +24,7 @@ class InventoryMovementChart extends Component
 
 
         $this->Stock_In = InventoryMovement::where('operation', 'Stock In')->count();
-        $this->Stock_Out = InventoryMovement::where('operation', 'Stock Out')->count();
+        $this->Stock_Out = InventoryMovement::where('operation', 'Stock out')->count();
         $this->Add = InventoryMovement::where('operation', 'Add')->count();
         $this->Deduct = InventoryMovement::where('operation', 'Deduct')->count();
     }

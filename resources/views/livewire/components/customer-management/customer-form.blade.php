@@ -234,8 +234,6 @@
                                                         {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
                                                         {{ $city->city_municipality_description }}</option>
                                                 @endforeach
-
-
                                             @endif
 
                                         </select>
@@ -245,7 +243,6 @@
                                         @enderror
 
                                     </div>
-
                                 </div>
 
                                 {{-- //* fifth row --}}
@@ -299,11 +296,11 @@
                                     {{-- //* customer type --}}
                                     <div class="mb-3">
 
-                                        <label for="customer_type"
+                                        <label for="customertype"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                             Type</label>
 
-                                        <select id="customer_type" wire:model="customer_type" required
+                                        <select id="customertype" wire:model.live="customertype" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value=""selected>Select Customer Type</option>
                                             <option value="Credit">Credit</option>
@@ -313,27 +310,40 @@
 
                                         </select>
 
-                                        @error('customer_type')
+                                        @error('customerType')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
                                     </div>
 
+                                    {{-- @if () --}}
                                     {{-- //* discount no --}}
                                     <div class="mb-3">
 
                                         <label for="customer_discount_no"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount
-                                            No</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount</label>
 
-                                        <input type="number" id="customer_discount_no"
-                                            wire:model="customer_discount_no"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Discount No" required />
-                                        @error('customer_discount_no')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
+                                        @if ($customertype != 'Credit')
+                                            <input type="number" id="customer_discount_no"
+                                                wire:model="customer_discount_no"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Discount No" required />
+                                            @error('customer_discount_no')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        @else
+                                            <input type="number" id="customer_discount_no" disabled
+                                                wire:model="customer_discount_no"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Discount No" required />
+                                            @error('customer_discount_no')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        @endif
+
                                     </div>
+                                    {{-- @endif --}}
+
                                 </div>
                             </div>
                         </div>
@@ -371,11 +381,8 @@
                                                 </path>
                                             </svg>
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
                         @else
                             {{-- *if form is create --}}
@@ -389,7 +396,6 @@
                                 </div>
 
                                 <div>
-
                                     {{-- //* submit button for create --}}
                                     <button type="submit" wire:loading.remove
                                         class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">

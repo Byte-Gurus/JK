@@ -95,7 +95,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span
                                                 class="text-red-400 ">*</span></label>
 
-                                        <input type="text" id="contact_number" wire:model="contact_number" required
+                                        <input type="number" id="contact_number" wire:model="contact_number" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Contact No" />
 

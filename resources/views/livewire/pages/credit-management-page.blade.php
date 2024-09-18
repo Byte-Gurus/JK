@@ -11,8 +11,12 @@
                 <div class="flex flex-row items-center justify-between">
                     <div>
                         <h1 class="text-[2em] font-bold pointer-events-none">
-                            @if (!$showPaymentReceipt)
+                            @if ($showCreditTable)
                                 Manage Credit
+                            @endif
+
+                            @if ($showCreditHistory)
+                                Credit History
                             @endif
                         </h1>
                     </div>
@@ -21,7 +25,7 @@
                             <div>
                                 <div class="flex flex-row gap-4 ">
                                     <button x-on:click="$wire.displayCreditHistory()"
-                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(180,255,248)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(128,255,247)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(180,255,248)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(128,255,247)] transition-all duration-100 ease-in-out">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 strokeWidth={1.5} stroke="currentColor" class="size-5">
@@ -36,7 +40,7 @@
                             </div>
                             <div class="flex flex-row gap-4 ">
                                 <button
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out"
                                     x-on:click="showModal=true;$wire.formCreate()">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -50,12 +54,14 @@
                             </div>
                         </div>
                     @else
-                        <div class="flex flex-row gap-4">
-                            <div>
-                                <button x-on:click="$wire.returnToCreditTable()"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Return</button>
+                        @if (!$showPaymentReceipt)
+                            <div class="flex flex-row gap-4">
+                                <div>
+                                    <button x-on:click="$wire.returnToCreditTable()"
+                                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Return</button>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
                 </div>
             </div>
@@ -71,7 +77,7 @@
             <div class="my-[28px]" x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
                 @livewire('components.CreditManagement.credit-payment-form')
             </div>
-            <div class="my-[28px]" x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
+            <div x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
                 @livewire('components.CreditManagement.payment-receipt')
             </div>
         </div>

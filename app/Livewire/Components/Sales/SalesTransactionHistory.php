@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class SalesTransactionHistory extends Component
 {
     use WithPagination,  WithoutUrlPagination;
-    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type;
+    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type;
     public $transactionDetails = [];
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
@@ -20,7 +20,8 @@ class SalesTransactionHistory extends Component
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
 
-    public $transactionTypeFilter = 0; //var filtering value = all
+    public $transactionFilter = 0; //var filtering value = all
+    public $paymentFilter = 0;
     public $vatFilter = 0; //var filtering value = all
     public $supplierFilter = 0;
 
@@ -29,13 +30,17 @@ class SalesTransactionHistory extends Component
     {
         $query = Transaction::query();
 
-        if ($this->transactionTypeFilter != 0) {
-            $query->where('transaction_type', $this->transactionTypeFilter);
+        if ($this->transactionFilter != 0) {
+            $query->where('transaction_type', $this->transactionFilter);
+        }
+        if ($this->paymentFilter != 0) {
+            $query->whereHas('paymentJoin', function ($query) {
+                $query->where('payment_type', $this->paymentFilter);
+            });
         }
         if ($this->startDate && $this->endDate) {
             $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
         }
-
 
         $sales = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
@@ -64,6 +69,7 @@ class SalesTransactionHistory extends Component
             ->find($transaction_id);
 
         $this->transaction_type = $transaction->transaction_type;
+        $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
         $this->transaction_number = $transaction->transaction_number;
         $this->subtotal = $transaction->subtotal;
         $this->grandTotal = $transaction->total_amount;
@@ -71,6 +77,8 @@ class SalesTransactionHistory extends Component
 
         $this->discount_percent = $transaction->discountJoin->percentage ?? 0;
         $this->tendered_amount = $transaction->paymentJoin->tendered_amount ?? 0;
+        $this->original_amount = $transaction->returnJoin->original_amount ?? 0;
+        $this->return_amount = $transaction->returnJoin->return_total_amount ?? 0;
 
         $this->change =  $this->tendered_amount - $this->grandTotal;
     }

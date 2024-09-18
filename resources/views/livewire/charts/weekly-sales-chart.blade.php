@@ -1,33 +1,36 @@
-<div>
+<div x-cloak>
+    <div >
+        <div class="grid grid-flow-col grid-cols-2 gap-4">
+            <div class="col-span-2">
+                <div class="grid grid-flow-col grid-cols-2 gap-4 mb-4">
+                    <div
+                        class="col-span-1 px-8 py-5 border border-red-900 rounded-md shadow-md shadow-red-900 "
+                        style="background-image: linear-gradient(115deg, #ffcccc, #feaeae)">
+                        <p class="pb-3 text-lg font-extrabold text-red-800">Total Amount (₱)</p>
+                        <p class="text-3xl font-black text-red-900">{{ number_format($totalAmount, 2)  }}</p>
+                    </div>
+                    <div
+                        class="col-span-1 px-8 py-5 border border-purple-900 rounded-md shadow-md shadow-purple-900 "
+                        style="background-image: linear-gradient(115deg, #ecc7fd, #c08df9)">
+                        <p class="pb-3 text-lg font-extrabold text-purple-800">Transaction Count</p>
+                        <p class="text-3xl font-black text-purple-900">{{ $transactionCount }}</p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="flex flex-row items-center justify-between gap-4">
-        <div class="flex flex-row gap-2 my-2">
-            <div class="p-2 bg-red-100 border border-black">
-                <div>
-                    <p class="font-thin">Total Amount</p>
-                </div>
-                <div class="">
-                    <p class="text-4xl font-extrabold text-center">{{ $totalAmount }}</p>
-                </div>
-            </div>
-            <div class="p-2 bg-purple-100 border border-black ">
-                <div>
-                    <p class="font-thin">Transaction Count</p>
-                </div>
-                <div>
-                    <p class="text-4xl font-extrabold text-center">{{ $transactionCount }}</p>
-                </div>
-            </div>
         </div>
-        <div>
-            <div>
-                <input type="week" wire:model.live="week" class="border border-black " />
-            </div>
-        </div>
-    </div>
+        <div class="p-4 bg-white border border-[rgb(143,143,143)] shadow-2xl rounded-lg">
+            <div class="flex flex-row justify-between ">
+                <div>
+                    <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Sales Performance - Weekly</p>
+                </div>
 
-    <div wire:ignore class="border border-black">
-        <canvas width="400" height="100" id="weekChart"></canvas>
+                <div class="col-span-1 ">
+                    <input type="week" wire:model.live="week" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
+                </div>
+            </div>
+            <canvas wire:ignore width="300" height="100" id="weekChart"></canvas>
+        </div>
     </div>
 </div>
 @assets

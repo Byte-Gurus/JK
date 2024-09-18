@@ -25,6 +25,9 @@ class WeeklySalesChart extends Component
     public function updatedWeek($currentWeek)
     {
 
+        if (!$this->week) {
+            $currentWeek = Carbon::now()->format('o-\WW');
+        }
         $this->totalAmount = 0;
         $this->transactionCount = 0;
         $this->weeklyTotal = [];

@@ -8,6 +8,7 @@ use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Payment;
 use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -34,6 +35,11 @@ class CreditPaymentForm extends Component
     {
 
         $validated = $this->validateForm();
+
+        if (!$this->payWithCash && $this->tendered_amount != $this->credit_amount) {
+            $this->addError('tendered_amount', 'The tendered amount must be equal to the grand total.');
+            return;
+        }
 
         $this->confirm('Do you want to add this user?', [
             'onConfirmed' => 'paymentConfirmed', //* call the createconfirmed method
@@ -62,7 +68,7 @@ class CreditPaymentForm extends Component
             $payment = Payment::create([
                 'tendered_amount' => $validated['tendered_amount'],
                 'amount' => $this->credit_amount,
-                'reference_no' => $validated['reference_no'],
+                'reference_number' => $validated['reference_no'],
                 'payment_type' => 'GCash',
                 'transaction_id' => $credit->transaction_id
             ]);
@@ -78,7 +84,7 @@ class CreditPaymentForm extends Component
         }
         $credit->save();
 
-        CreditHistory::create([
+        $creditHistory = CreditHistory::create([
             'description' => 'Payment made',
             'credit_id' => $credit->id,
             'credit_amount' => $credit->credit_amount,
@@ -89,6 +95,15 @@ class CreditPaymentForm extends Component
         $this->alert('success', 'Creditor was paid successfully');
 
         $this->dispatch('display-payment-receipt')->to(CreditManagementPage::class);
+
+        $this->dispatch('get-payment-info', [
+            'CreditHistory' => $creditHistory,
+            'credit' => $credit,
+            'payment' => $payment,
+            'name' => $credit->customerjoin->firstname . ' ' . ($credit->customerjoin->middlename ?? '') . ' ' . $credit->customerjoin->lastname,
+            'user' =>  Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
+        ])->to(PaymentReceipt::class);
+
         CreditEvent::dispatch('refresh-credit');
     }
 

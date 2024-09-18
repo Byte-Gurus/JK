@@ -17,6 +17,7 @@ use App\Models\TransactionDetails;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -57,8 +58,10 @@ class RestockForm extends Component
     }
     protected $listeners = [
         'restock-form' => 'restockForm',
+        // 'display-close-restock-form-confirmation' => 'DisplayCloseRestockFormConfirmation',
         'close-modal' => 'closeModal',
         'createConfirmed', //*  galing sa UserTable class
+        // 'closeRestockFormConfirmed',
     ];
 
     public function create()
@@ -72,7 +75,7 @@ class RestockForm extends Component
         // First pass: Accumulate restock quantities for each item
         foreach ($this->purchaseDetails as $index => $detail) {
 
-            $this->getReorderPoint($detail['item_id']);
+            // $this->getReorderPoint($detail['item_id']);
 
             $details_id = $detail['id']; // get all the id of each purchase details
 
@@ -127,7 +130,7 @@ class RestockForm extends Component
 
         $backorder_Items = [];
 
-        $this->getMaximumLevel();
+        // $this->getMaximumLevel();
 
         foreach ($this->purchaseDetails as $index => $detail) {
             $details = $detail['item_id'];
@@ -370,78 +373,83 @@ class RestockForm extends Component
         return $SKU;
     }
 
-    public function getReorderPoint($item_id)
-    {
-        $deliveryDate = Carbon::parse($this->delivery_date);
-        $poDate = Carbon::parse($this->po_date);
+    // public function getReorderPoint($item_id)
+    // {
+    //     $deliveryDate = Carbon::parse($this->delivery_date);
+    //     $poDate = Carbon::parse($this->po_date);
 
-        // Define the start and end dates
-        $startDate = $poDate->startOfDay();
-        $endDate = $deliveryDate->endOfDay();
-
-
-        $totalQuantity = TransactionDetails::where('item_id', $item_id)
-            ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
-                $query->whereBetween('created_at', [$startDate, $endDate]);
-            })
-            ->sum('item_quantity');
+    //     // Define the start and end dates
+    //     $startDate = $poDate->startOfDay();
+    //     $endDate = $deliveryDate->endOfDay();
 
 
-        // Calculate the number of days in the date range
-        $days = floor($startDate->diffInDays($endDate));
-        // dd($totalQuantity);
+    //     $totalQuantity = TransactionDetails::where('item_id', $item_id)
+    //         ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
+    //             $query->whereBetween('created_at', [$startDate, $endDate]);
+    //         })
+    //         ->sum('item_quantity');
 
-        // Calculate the demand rate
-        $demandRate =  $totalQuantity / $days;
-        $reorder_point = ($days * $demandRate);
 
-        $item = Item::find($item_id);
-        $item->reorder_point = $reorder_point;
-        $item->save();
-    }
+    //     // Calculate the number of days in the date range
+    //     $days = floor($startDate->diffInDays($endDate));
+    //     // dd($totalQuantity);
 
-    public function getMaximumLevel()
-    {
-        $maximum_level_req = [];
+    //     // Calculate the demand rate
+    //     $demandRate =  $totalQuantity / $days;
+    //     $reorder_point = ($days * $demandRate);
 
-        foreach ($this->purchaseDetails as $detail) {
-            $itemId = $detail['item_id'];
+    //     $item = Item::find($item_id);
+    //     $item->reorder_point = $reorder_point;
+    //     $item->save();
+    // }
 
-            // Calculate the date range from the same day last week to today
-            $startDate = Carbon::now()->subWeek()->startOfDay()->toDateTimeString();
-            $endDate = Carbon::now()->endOfDay()->toDateTimeString();
+    // public function getMaximumLevel()
+    // {
+    //     $maximum_level_req = [];
 
-            // Calculate minimum consumption within the period
-            $minQuantity = TransactionDetails::where('item_id', $itemId)
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->min('item_quantity');
+    //     foreach ($this->purchaseDetails as $detail) {
+    //         $itemId = $detail['item_id'];
 
-            // Find the minimum reorder period for the item using PostgreSQL-compatible query
-            $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
-                ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
-                ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-                ->select(DB::raw("EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
-                ->orderBy('reorder_period', 'asc')
-                ->value('reorder_period');
+    //         $restockDate = Inventory::where('item_id', $itemId)
+    //             ->orderBy('stock_in_date', 'desc')
+    //             ->value('stock_in_date');
+    //         // Calculate the date range from the same day last week to today
+    //         $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
+    //         $endDate = Carbon::now()->endOfDay()->toDateTimeString();
 
-            // Calculate maximum level using the formula
-            $reorderPoint = $detail['reorder_point'];
-            $reorderQuantity = $detail['purchase_quantity'];
-            $minConsumption = $minQuantity ?? 0;
-            $minReorderPeriod = $minReorderPeriod ?? 0;
+    //         // Calculate minimum consumption within the period
+    //         $minQuantity = TransactionDetails::where('item_id', $itemId)
+    //             ->whereBetween('created_at', [$startDate, $endDate])
+    //             ->min('item_quantity');
 
-            $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
+    //         $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
-            Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
+    //         $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
+    //             ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+    //             ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
+    //             ->select(DB::raw($isMySQL
+    //                 ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
+    //                 : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
+    //             ->orderBy('reorder_period', 'asc')
+    //             ->value('reorder_period');
+    //         // Calculate maximum level using the formula
+    //         $reorderPoint = $detail['reorder_point'];
+    //         $reorderQuantity = $detail['purchase_quantity'];
+    //         $minConsumption = $minQuantity ?? 0;
+    //         $minReorderPeriod = $minReorderPeriod ?? 0;
 
-            $maximum_level_req[] = [
-                'item_id' => $itemId,
-                'min_quantity' => $minConsumption,
-                'purchase_quantity' => $reorderQuantity,
-                'reorder_point' => $reorderPoint,
-                'min_reorder_period' => $minReorderPeriod,
-                'maximum_level' => $maximumLevel
-            ];
-        }
-    }
+    //         $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
+
+    //         Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
+
+    //         $maximum_level_req[] = [
+    //             'item_id' => $itemId,
+    //             'min_quantity' => $minConsumption,
+    //             'purchase_quantity' => $reorderQuantity,
+    //             'reorder_point' => $reorderPoint,
+    //             'min_reorder_period' => $minReorderPeriod,
+    //             'maximum_level' => $maximumLevel
+    //         ];
+    //     }
+    // }
 }
