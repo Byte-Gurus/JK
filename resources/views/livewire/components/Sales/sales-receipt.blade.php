@@ -48,7 +48,7 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
+                            {{ $receiptDetails['transaction_info']['user'] ?? null }}</p>
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@
                 <div class="flex flex-col justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Customer Name</p>
 
-                    @if (isset($receiptDetails['customerDetails']['customer']))
+                    @if (isset($receiptDetails['customerDetails']['customer'] ||isset($receiptDetails['credit_details']['customer'] ))
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
                             {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
