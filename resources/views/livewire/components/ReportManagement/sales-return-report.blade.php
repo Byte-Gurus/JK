@@ -124,7 +124,7 @@
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center fot-bold">
+                            <p class="text-[1em] text-center font-bold">
                                 {{ $returnItem->item_return_amount }}
                             </p>
                         </div>
