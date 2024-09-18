@@ -37,8 +37,7 @@ class DiscountForm extends Component
         $searchCustomerTerm = trim($this->searchCustomer);
 
         $customers = Customer::where(function ($query) {
-            $query->where('customer_type', 'PWD')
-                ->orWhere('customer_type', 'Senior Citizen');
+            $query->where('customer_type', !=, 'Credit');
         })
             ->where(function ($query) use ($searchCustomerTerm) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
@@ -284,7 +283,6 @@ class DiscountForm extends Component
         $this->resetForm();
         $this->removeDiscountConfirmed();
         $this->credit_details = $creditDetail;
-        dd($this->credit_details);
 
         // dd($this->credit_details);
     }
