@@ -192,7 +192,7 @@
                 <div class="flex flex-col justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Customer Name</p>
 
-                    @if (isset($receiptDetails['customerDetails']['customer'] ||isset($receiptDetails['credit_details']['customer'] ))
+                    @if (isset($receiptDetails['customerDetails']['customer']) || isset($receiptDetails['customerDetails']['customer']))
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
                             {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
