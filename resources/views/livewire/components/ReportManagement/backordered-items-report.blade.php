@@ -91,7 +91,7 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[1em] text-left font-medium">
-                                {{ $backorderList->purchaseJoin->purchase_number }}</p>
+                                {{ $backorderList->purchaseJoin->po_number }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
