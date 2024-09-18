@@ -208,7 +208,7 @@
 
                     @if (isset($receiptDetails['credit_details']['creditor_name']))
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['credit_details']['credit_details'] ?? null }}
+                            {{ $receiptDetails['credit_details']['creditor_name'] ?? null }}
                         </p>
                     @endif
 
