@@ -9,7 +9,8 @@ class CustomerCreditListReport extends Component
 {
     public function render()
     {
-        credit_limit
+        $credits = Credit::whereHas('transactionJoin')->get();
+        
         return view('livewire.components.ReportManagement.customer-credit-list-report',[
             'credits' => $credits
         ]);
