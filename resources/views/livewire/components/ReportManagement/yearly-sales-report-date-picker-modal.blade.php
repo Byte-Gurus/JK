@@ -32,7 +32,7 @@
 
                     <div class="flex justify-center w-full my-4 ">
                         <select name="year" class="w-full p-4 rounded-md hover:bg-gray-300" id="year"
-                            wire:model.live="year">
+                            wire:model="date">
                             <option value="">Select a year</option>
                             @for ($year = 2000; $year <= 2050; $year++)
                                 <option value="{{ $year }}">{{ $year }}</option>
@@ -47,7 +47,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            <button type="button" x-on:click='$wire.displayYearlySalesReport()'
+                            <button type="button" wire:click="getDate" x-on:click='$wire.displayYearlySalesReport()'
                                 class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
                         </div>
                     </div>
