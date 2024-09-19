@@ -25,6 +25,6 @@ class DailySalesReport extends Component
     {
 
 
-        $$this->Transactions = Transaction::whereDate('created_at', $date)->get();
+        $this->Transactions = Transaction::whereDate('created_at', $date)->get();
     }
 }
