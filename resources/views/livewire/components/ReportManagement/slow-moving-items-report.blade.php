@@ -112,7 +112,7 @@
                             <div>
                                 <p class="text-[0.8em] text-center fot-bold">
 
-                                    {{ $slowmoving_info['totalStockInQuantity'] }}
+                                    {{ $slowmoving_info['aii'] }}
                                 </p>
                             </div>
                         </li>
