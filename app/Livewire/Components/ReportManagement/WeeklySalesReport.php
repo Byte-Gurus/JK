@@ -39,17 +39,17 @@ class WeeklySalesReport extends Component
 
     // Iterate through transactions to group and sum by day
     foreach ($transactions as $transaction) {
-        $dateKey = $transaction->created_at->format('Y-m-d');
+        $date = $transaction->created_at->format('Y-m-d');
 
-        if (!isset($dailySummaries[$dateKey])) {
-            $dailySummaries[$dateKey] = [
+        if (!isset($dailySummaries[$date])) {
+            $dailySummaries[$date] = [
                 'totalGross' => 0,
                 'totalTax' => 0,
             ];
         }
 
-        $dailySummaries[$dateKey]['totalGross'] += $transaction->total_amount;
-        $dailySummaries[$dateKey]['totalTax'] += $transaction->total_vat_amount;
+        $dailySummaries[$date]['totalGross'] += $transaction->total_amount;
+        $dailySummaries[$date]['totalTax'] += $transaction->total_vat_amount;
 
         // Accumulate weekly totals
         $totalGross += $transaction->total_amount;
@@ -66,7 +66,7 @@ class WeeklySalesReport extends Component
         'dailySummaries' => $dailySummaries
     ];
 
-    
+
 }
 
 
