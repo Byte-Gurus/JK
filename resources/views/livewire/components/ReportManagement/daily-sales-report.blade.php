@@ -45,13 +45,14 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row border border-black text-nowrap">
                         <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
-                        {{ $transaction_info['totalGross'] ?? ' '}}
+                        {{ $transaction_info['totalGross'] ?? ' ' }}
                         </p>
                     </div>
                     <div class="flex flex-row border border-black text-nowrap ">
                         <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p> --}}
-                        {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
+
+                        {{ $transaction_info['totalTax'] ?? ' ' }}
+
                     </div>
                 </div>
                 <div class="flex flex-row border border-black text-nowrap">

@@ -27,13 +27,16 @@ class DailySalesReport extends Component
         $this->transactions = Transaction::whereDate('created_at', $date)->get();
 
         $totalGross = 0;
+        $totalTax = 0;
         foreach($this->transactions as $transaction){
             $totalGross += $transaction['total_amount'];
+            $totalTax += $transaction['total_vat_amount'];
         }
 
         $this->transaction_info = [
 
             'totalGross' => $totalGross,
+            'totalTax' => $totalTax
         ];
 
     }
