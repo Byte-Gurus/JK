@@ -15,6 +15,8 @@ class SalesReturnReport extends Component
     public function render()
     {
         $returnItems = ReturnDetails::all();
+
+        $this->reportInfo();
         return view('livewire.components.ReportManagement.sales-return-report', [
             'returnItems' => $returnItems
         ]);

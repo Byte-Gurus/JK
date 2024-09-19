@@ -59,7 +59,7 @@
                     </div>
                     <div class="flex flex-row border border-black text-nowrap">
                         <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
-                        {{-- <p class="text-[1em] font-black uppercase">{{ $createdBy }}</p> --}}
+                        {{ number_format($transaction_info['totalGross'], 2) ?? ' ' -  number_format($transaction_info['totalGross'], 2) ?? ' ' }}
                     </div>
                 </div>
             </div>

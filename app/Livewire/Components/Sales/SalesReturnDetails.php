@@ -141,6 +141,10 @@ class SalesReturnDetails extends Component
                     $this->return_total_amount += $this->item_return_amount;
                 }
 
+                if($this->returnQuantity[$index] >=  $transactionDetail->itemJoin->bulk_quantity){
+                    $this->return_total_amount = $this->return_total_amount - $transactionDetail->item_discount_amount;
+                }
+
 
                 $this->return_info[$index] = [
                     'item_return_amount' => $this->item_return_amount,
