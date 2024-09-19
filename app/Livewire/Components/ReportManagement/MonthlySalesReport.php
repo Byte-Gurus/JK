@@ -16,6 +16,9 @@ class MonthlySalesReport extends Component
             'transactions' => $this->transactions
         ]);
     }
+    protected $listeners = [
+        'generate-report' => 'generateReport'
+    ];
 
     public function generateReport($month)
     {
