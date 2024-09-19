@@ -9,7 +9,7 @@ class WeeklySalesReportDatePickerModal extends Component
 {
 
     public $showWeeklySalesReportDatePicker = true;
-   wire:click="getDate" public $date;
+    public $date;
 
 
     public function render()
@@ -21,5 +21,7 @@ class WeeklySalesReportDatePickerModal extends Component
     {
         $this->dispatch(event: 'display-weekly-sales-report')->to(ReportManagement::class);
     }
-   wire:click="getDate"
+    public function getDate(){
+        $this->dispatch('generate-report', $this->date)->to(WeeklySalesReport::class);
+     }
 }
