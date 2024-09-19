@@ -11,6 +11,7 @@ use Livewire\Component;
 class FastMovingItemsReport extends Component
 {
     public $fastmoving_info = [];
+    public $date, $dateCreated, $createdBy;
     public function render()
     {
         return view('livewire.components.ReportManagement.fast-moving-items-report');
@@ -104,9 +105,7 @@ class FastMovingItemsReport extends Component
                 'weeksWithStockIn' => $weeksWithStockIn,
                 'aii' => $averageStockInPerWeek,
                 'fast_slow' => $fastSlowValue,
-                'date' => $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y'),
-                'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
-                'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+
 
             ];
         }
@@ -114,8 +113,8 @@ class FastMovingItemsReport extends Component
             return $b['fast_slow'] <=> $a['fast_slow'];
         });
 
-        // $this->fastmoving_info = array_slice($this->fastmoving_info, 0, 10);
-        // $this->dispatch('fastSlowUpdated', $this->fastmoving_info);
-        // dd($this->fastmoving_info);
+        $this->date = $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y');
+        $this->dateCreated = Carbon::now()->format('M d Y H:i:s A');
+        $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
     }
 }
