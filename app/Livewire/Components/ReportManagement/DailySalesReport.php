@@ -39,8 +39,8 @@ class DailySalesReport extends Component
 
             'totalGross' => $totalGross,
             'totalTax' => $totalTax,
-            'date' => $date,
-            'dateCreated' => Carbon::today(),
+            'date' => $date->format('m d Y H:i:s') ,
+            'dateCreated' => Carbon::today()->format('m d Y ') ,
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
 
