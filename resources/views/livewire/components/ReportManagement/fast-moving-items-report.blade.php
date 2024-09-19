@@ -75,7 +75,7 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            @if (fastmoving_info)
+            @if ($fastmoving_info)
                 {{-- @foreach ($purchaseDetails as $purchaseDetail) --}}
                 <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
 
