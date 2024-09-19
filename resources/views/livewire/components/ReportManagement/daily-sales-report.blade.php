@@ -112,61 +112,61 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            {{-- @foreach ($purchaseDetails as $purchaseDetail) --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
+            @foreach ($Transactions as $Transaction)
+                <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
 
-                <li class="col-span-2 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-medium">
-                            hiii</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-bold">
-                            hello
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            aiah
-                        </p>
-                    </div>
-                </li>
+                    <li class="col-span-2 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-left font-medium">
+                                {{ $transaction->transaction_no }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-left font-bold">
+                                {{ $transaction->created_at->format('H:i:s') }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $transaction->total_amount }}</p>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $transaction->total_discount_amount}}
 
-            </ul>
-            {{-- @endforeach --}}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                aiah
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $transaction->total_vat_amount}}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                aiah
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            @endforeach
         </div>
     </div>
 </div>
-
