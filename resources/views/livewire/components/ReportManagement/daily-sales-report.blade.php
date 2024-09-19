@@ -26,7 +26,8 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        {{ $transaction_info['date']->format('m d Y H:i:s') ?? ' ' }}
+                        {{ $transaction_info['date'] ? $transaction_info['date']->format('m d Y H:i:s') : ' ' }}
+
 
                         </p>
                     </div>
@@ -38,7 +39,7 @@
                 </div>
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                    {{ $transaction_info['dateCreated']->format('m d Y ') ?? ' ' }}
+                    {{ $transaction_info['dateCreated'] ? $transaction_info['dateCreated']->format('m d Y ') : ' ' }}
                 </div>
             </div>
             <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
