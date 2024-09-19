@@ -19,7 +19,7 @@ class SalesReturnDetails extends Component
     public $returnQuantity = [];
     public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount;
 
     public $return_info = [];
 
@@ -139,10 +139,16 @@ class SalesReturnDetails extends Component
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
 
                     $this->return_total_amount += $this->item_return_amount;
-                    if($transactionDetail->vat_type = 'vat'){
-                        // $this->item_vat_amount =
-                    }
+
+
                 }
+                if($transactionDetail->vat_type == "Vat"){
+                    $this->return_vat_amount = $transactionDetail->itemJoin->vat_percent;
+                }else{
+                    $this->return_vat_amount = $transactionDetail->itemJoin->vat_percent;
+                }
+
+                dd($this->return_vat_amount);
 
                 if($this->returnQuantity[$index] >=  $transactionDetail->itemJoin->bulk_quantity){
                     $this->return_total_amount = $this->return_total_amount - $transactionDetail->item_discount_amount;
