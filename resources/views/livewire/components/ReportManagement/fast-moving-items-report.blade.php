@@ -16,26 +16,26 @@
                 </div>
             </div>
         </div>
-        @if ($transaction_info)
+        @if ($fastmoving_info)
             <div class="grid grid-flow-col grid-cols-2 ">
                 <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
                     <div class="flex flex-col ">
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                            {{ $transaction_info['dateCreated'] ?? ' ' }}
+                            {{ $fastmoving_info['dateCreated'] ?? ' ' }}
 
 
                             </p>
                         </div>
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                            {{ $transaction_info['createdBy'] ?? ' ' }}
+                            {{ $fastmoving_info['createdBy'] ?? ' ' }}
 
                         </div>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                        {{ $transaction_info['date'] ?? ' ' }}
+                        {{ $fastmoving_info['date'] ?? ' ' }}
                     </div>
                 </div>
 
