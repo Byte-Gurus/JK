@@ -9,11 +9,11 @@ use Livewire\Component;
 class DailySalesReport extends Component
 {
     public $showDailySalesReport = false;
-    public $Transactions = [];
+    public $transactions = [];
     public function render()
     {
         return view('livewire.components.ReportManagement.daily-sales-report', [
-            'Transactions' => $this->Transactions
+            'transactions' => $this->transactions
         ]);
     }
 
@@ -25,6 +25,6 @@ class DailySalesReport extends Component
     {
 
 
-        $this->Transactions = Transaction::whereDate('created_at', $date)->get();
+        $this->transactions = Transaction::whereDate('created_at', $date)->get();
     }
 }

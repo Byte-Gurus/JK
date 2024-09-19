@@ -112,7 +112,7 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            @foreach ($Transactions as $Transaction)
+            @foreach ($transactions as $transaction)
                 <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
 
                     <li class="col-span-2 py-[3px]">
