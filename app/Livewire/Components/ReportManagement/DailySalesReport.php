@@ -21,7 +21,8 @@ class DailySalesReport extends Component
 
     public function generateReport($date){
 
-        $Transactions = Transaction::where('created_at', $date)->get();
+
+        $Transactions = Transaction::whereDate('created_at', $date)->get();
         dd($Transactions);
     }
 
