@@ -9,7 +9,7 @@ use Livewire\Component;
 class DailySalesReport extends Component
 {
     public $showDailySalesReport = false;
-    public $Transactions;
+    public $Transactions = [];
     public function render()
     {
         return view('livewire.components.ReportManagement.daily-sales-report', [
