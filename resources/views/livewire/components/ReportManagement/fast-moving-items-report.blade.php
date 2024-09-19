@@ -16,26 +16,31 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-flow-col grid-cols-2 ">
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p> --}}
-                        {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
-                        </p>
+        @if ($transaction_info)
+            <div class="grid grid-flow-col grid-cols-2 ">
+                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                    <div class="flex flex-col ">
+                        <div class="flex flex-row text-nowrap">
+                            <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                            {{ $transaction_info['dateCreated'] ?? ' ' }}
+
+
+                            </p>
+                        </div>
+                        <div class="flex flex-row text-nowrap">
+                            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                            {{ $transaction_info['createdBy'] ?? ' ' }}
+
+                        </div>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p> --}}
-                        {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
+                        <p class="text-[1em] font-black uppercase">Selected Date:</p>
+                        {{ $transaction_info['date'] ?? ' ' }}
                     </div>
                 </div>
+
             </div>
-            <div>
-                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">FAST MOVING ITEMS REPORT</p>
-            </div>
-        </div>
+        @endif
 
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
@@ -46,6 +51,11 @@
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -102,6 +112,15 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center fot-bold">
+
+                                    {{ $fastmoving_info['totalStockInQuantity'] }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+
                                     {{ $fastmoving_info['tsi'] }}
                                 </p>
                             </div>
@@ -109,7 +128,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center fot-bold">
-                                    aiah
+                                    {{ $fastmoving_info['fast_slow'] }}
                                 </p>
                             </div>
                         </li>

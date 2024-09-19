@@ -5,6 +5,7 @@ namespace App\Livewire\Components\ReportManagement;
 use App\Models\Inventory;
 use App\Models\TransactionDetails;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class FastMovingItemsReport extends Component
@@ -102,7 +103,11 @@ class FastMovingItemsReport extends Component
                 'totalStockInQuantity' => $totalStockInQuantity,
                 'weeksWithStockIn' => $weeksWithStockIn,
                 'aii' => $averageStockInPerWeek,
-                'fast_slow' => $fastSlowValue
+                'fast_slow' => $fastSlowValue,
+                'date' => $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y'),
+                'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
+                'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+
             ];
         }
         usort($this->fastmoving_info, function ($a, $b) {
