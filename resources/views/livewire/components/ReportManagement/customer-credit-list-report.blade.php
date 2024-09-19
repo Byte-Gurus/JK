@@ -80,6 +80,11 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Remaining Balance</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Status</p>
                     </div>
                 </li>
@@ -134,6 +139,13 @@
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
                                 {{ $credit->credit_amount }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $credit->remaining_balance }}
                             </p>
                         </div>
                     </li>
