@@ -45,7 +45,7 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row border border-black text-nowrap">
                         <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
-                        {{ $transaction_info['totalGross'] }}
+                        {{ $transaction_info['totalGross'] ?? ' '}}
                         </p>
                     </div>
                     <div class="flex flex-row border border-black text-nowrap ">
