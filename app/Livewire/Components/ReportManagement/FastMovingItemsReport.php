@@ -96,7 +96,7 @@ class FastMovingItemsReport extends Component
             $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;
 
             $this->fastmoving_info[] = [
-                'barcodee' =>  $item->itemJoin->barcode,
+                'barcode' =>  $item->itemJoin->barcode,
                 'item_description' =>  $item->itemJoin->item_description,
                 'item_name' => $item->itemJoin->item_name,
                 'tsi' => $totalQuantity,

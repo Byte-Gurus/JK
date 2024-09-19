@@ -22,19 +22,19 @@
             <div class="flex flex-col ">
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                    {{ $fastmoving_info['dateCreated'] }}
+                    {{ $fastmoving_info['dateCreated'] ?? ' ' }}
 
 
                     </p>
                 </div>
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                    {{ $fastmoving_info['createdBy'] }}
+                    {{ $fastmoving_info['createdBy'] ?? ' ' }}
 
                 </div>
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                    {{ $fastmoving_info['date'] }}
+                    {{ $fastmoving_info['date'] ?? ' ' }}
                 </div>
             </div>
 
@@ -91,7 +91,7 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-left font-medium">
-                                {{ $fastmoving_info['barcodee'] }}</p>
+                                {{ $fastmoving_info['barcode'] }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
