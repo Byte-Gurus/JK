@@ -14,4 +14,12 @@ class DailySalesReport extends Component
         return view('livewire.components.ReportManagement.daily-sales-report');
     }
 
+    protected $listeners = [
+        'generate-report' => 'generateReport'
+    ];
+
+    public function generateReport($date){
+        dd($date);
+    }
+
 }

@@ -21,6 +21,6 @@ class DailySalesReportDatePickerModal extends Component
     }
 
     public function getDate(){
-        dd($this->date);
+       $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
     }
 }
