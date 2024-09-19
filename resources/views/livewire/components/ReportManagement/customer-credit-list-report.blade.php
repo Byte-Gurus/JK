@@ -23,17 +23,17 @@
         </div>
         {{-- @if ($transaction_info) --}}
         <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-            <div class="flex flex-col ">
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                    {{-- {{ $transaction_info['dateCreated'] ?? ' ' }} --}}
-
-                    </p>
-                </div>
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                    {{-- {{ $transaction_info['createdBy'] ?? ' ' }} --}}
-
+            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                <div class="flex flex-col ">
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
+                        </p>
+                    </div>
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,10 +66,21 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">Date of Credit</p>
                     </div>
                 </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Due date</p>
+                    </div>
+                </li>
+
 
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Credit Amount</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Status</p>
                     </div>
                 </li>
 
@@ -108,7 +119,14 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
-                                {{ $credit->transactionJoin->created_at }}
+                                {{ \Carbon\Carbon::parse($credit->transactionJoin->created_at)->format('M d Y h:i:s a') }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ \Carbon\Carbon::parse($credit->due_date)->format('M d Y h:i:s a') }}
                             </p>
                         </div>
                     </li>
@@ -116,6 +134,13 @@
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
                                 {{ $credit->credit_amount }}
+                            </p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-center fot-bold">
+                                {{ $credit->status }}
                             </p>
                         </div>
                     </li>
