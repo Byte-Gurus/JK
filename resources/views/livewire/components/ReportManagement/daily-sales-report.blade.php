@@ -21,47 +21,48 @@
             <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">DAILY SALES REPORT</p>
 
         </div>
-        <div class="grid grid-flow-col grid-cols-2 ">
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        {{  isset($transaction_info['date']) ? $transaction_info['date']->format('m d Y H:i:s') : ' ' }}
+        @if ($transaction_info)
+            <div class="grid grid-flow-col grid-cols-2 ">
+                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                    <div class="flex flex-col ">
+                        <div class="flex flex-row text-nowrap">
+                            <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                            {{ $transaction_info['date']->format('m d Y H:i:s') ?? ' ' }}
 
+                            </p>
+                        </div>
+                        <div class="flex flex-row text-nowrap">
+                            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                            {{ $transaction_info['createdBy'] ?? ' ' }}
 
-                        </p>
+                        </div>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        {{ $transaction_info['createdBy'] ?? ' ' }}
-
+                        <p class="text-[1em] font-black uppercase">Selected Date:</p>
+                        {{ $transaction_info['dateCreated']->format('m d Y ') ?? ' ' }}
                     </div>
                 </div>
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                    {{ isset($transaction_info['dateCreated']) ? $transaction_info['dateCreated']->format('m d Y ') : ' ' }}
-                </div>
-            </div>
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
+                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                    <div class="flex flex-col ">
+                        <div class="flex flex-row border border-black text-nowrap">
+                            <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
+                            {{ number_format($transaction_info['totalGross'], 2) ?? ' ' }}
+                            </p>
+                        </div>
+                        <div class="flex flex-row border border-black text-nowrap ">
+                            <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
+
+                            {{ number_format($transaction_info['totalTax'], 2) ?? ' ' }}
+
+                        </div>
+                    </div>
                     <div class="flex flex-row border border-black text-nowrap">
-                        <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
-                        {{ number_format($transaction_info['totalGross'], 2) ?? ' ' }}
-                        </p>
+                        <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
+                        {{-- <p class="text-[1em] font-black uppercase">{{ $createdBy }}</p> --}}
                     </div>
-                    <div class="flex flex-row border border-black text-nowrap ">
-                        <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
-
-                        {{ number_format($transaction_info['totalTax'], 2) ?? ' ' }}
-
-                    </div>
-                </div>
-                <div class="flex flex-row border border-black text-nowrap">
-                    <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
-                    {{-- <p class="text-[1em] font-black uppercase">{{ $createdBy }}</p> --}}
                 </div>
             </div>
-        </div>
+        @endif
 
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
