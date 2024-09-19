@@ -13,7 +13,10 @@ class ExpiredItemsReport extends Component
 
     public function render()
     {
+       
         $expiredItems = Inventory::where('status', 'Expired')->get();
+
+        $this->reportInfo();
         return view('livewire.components.ReportManagement.expired-items-report',[
             'expiredItems' => $expiredItems
         ]);

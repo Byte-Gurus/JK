@@ -13,7 +13,8 @@ class BackorderedItemsReport extends Component
     public function render()
     {
         $backorderLists = BackOrder::where('status', 'Missing')->get();
-        
+        $this->reportInfo();
+
         return view('livewire.components.ReportManagement.backordered-items-report', [
             'backorderLists' => $backorderLists
         ]);

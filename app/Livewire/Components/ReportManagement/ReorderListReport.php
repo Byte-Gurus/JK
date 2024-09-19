@@ -42,6 +42,7 @@ class ReorderListReport extends Component
             ->get()
             ->toArray();
 
+        $this->reportInfo();
 
         return view('livewire.components.ReportManagement.reorder-list-report', [
             'reorder_lists' => $reorder_lists
