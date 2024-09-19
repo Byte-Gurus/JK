@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class FastMovingItemsReportDatePickerModal extends Component
 {
+    public $date;
     public function render()
     {
         return view('livewire.components.ReportManagement.fast-moving-items-report-date-picker-modal');
@@ -16,4 +17,7 @@ class FastMovingItemsReportDatePickerModal extends Component
     {
         $this->dispatch(event: 'display-fast-moving-items-report')->to(ReportManagement::class);
     }
+    public function getDate(){
+        $this->dispatch('generate-report', $this->date)->to(FastMovingItemsReport::class);
+     }
 }

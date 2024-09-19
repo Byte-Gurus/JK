@@ -99,6 +99,7 @@ class FastSlowMovingChart extends Component
 
             $this->fastmoving_info[] = [
                 'item_name' => $item->itemJoin->item_name,
+                'item_description' =>  $item->itemJoin->item_description,
                 'tsi' => $totalQuantity,
                 'totalStockInQuantity' => $totalStockInQuantity,
                 'weeksWithStockIn' => $weeksWithStockIn,

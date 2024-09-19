@@ -4,7 +4,8 @@
             <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Fast & Slow Moving Items</p>
         </div>
         <div>
-            <input type="month" wire:model.live="month" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
+            <input type="month" wire:model.live="month"
+                class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
         </div>
     </div>
 
@@ -26,46 +27,65 @@
 
         Livewire.on('fastSlowUpdated', (fastmoving_info) => {
 
-            items = [];
-            datas = [];
-            tsi = [];
-            if (Chart.getChart("fastslowChart")) {
-                Chart.getChart("fastslowChart")?.destroy();
-            }
+                    items = [];
+                    datas = [];
+                    tsi = [];
+                    descriptions = [];
 
-            fastSlow = $wire.fastmoving_info;
-            console.log('item movement:', fastSlow);
+                    if (Chart.getChart("fastslowChart")) {
+                        Chart.getChart("fastslowChart")?.destroy();
+                    }
+
+                    fastSlow = $wire.fastmoving_info;
+                    console.log('item movement:', fastSlow);
 
 
-            for (let index = 0; index < fastSlow.length; index++) {
+                    for (let index = 0; index < fastSlow.length; index++) {
 
-                items[index] = fastSlow[index].item_name;
-                datas[index] = fastSlow[index].totalStockInQuantity;
-                tsi[index] = fastSlow[index].tsi;
-            }
-            console.log('item movement:', items);
+                        items[index] = fastSlow[index].item_name;
+                        datas[index] = fastSlow[index].totalStockInQuantity;
+                        tsi[index] = fastSlow[index].tsi;
+                        descriptions[index] = fastSlow[index].item_description;
+                    }
+                    console.log('item movement:', items);
 
-            // console.log(dates, datas);
-            new Chart(perMonth, {
-                type: 'bar',
-                data: {
-                    labels: items,
-                    datasets: [{
-                        label: 'Item',
-                        data: datas,
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
+                    // console.log(dates, datas);
+                    new Chart(perMonth, {
+                            type: 'bar',
+                            data: {
+                                labels: items,
+                                datasets: [{
+                                    label: 'Item',
+                                    data: datas,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                let label = context.label || '';
+                                                let description = descriptions[context.dataIndex] || '';
+                                                if (label) {
+                                                    label += ': ';
+                                                }
+                                                if (description) {
+                                                    label += description;
+                                                }
+                                                return label;
+                                            }
+                                        }
+                                    }
 
-                }
-            });
-        });
+                                }
+                            });
+                    });
     </script>
 @endscript

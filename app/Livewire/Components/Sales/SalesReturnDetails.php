@@ -140,7 +140,7 @@ class SalesReturnDetails extends Component
 
                     $this->return_total_amount += $this->item_return_amount;
                     if($transactionDetail->vat_type = 'vat'){
-                        $this->item_vat_amount =
+                        // $this->item_vat_amount =
                     }
                 }
 
