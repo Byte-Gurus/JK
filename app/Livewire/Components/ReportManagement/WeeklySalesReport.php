@@ -24,29 +24,50 @@ class WeeklySalesReport extends Component
     ];
 
     public function generateReport($week)
-    {
-        // Parse the week into start and end dates
-        $startOfWeek = Carbon::parse($week)->startOfWeek();
-        $endOfWeek = Carbon::parse($week)->endOfWeek();
+{
+    // Parse the week into start and end dates
+    $startOfWeek = Carbon::parse($week)->startOfWeek();
+    $endOfWeek = Carbon::parse($week)->endOfWeek();
 
-        // Fetch transactions within the week range
-        $this->transactions = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
+    // Fetch transactions within the week range
+    $transactions = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
-        $totalGross = 0;
-        $totalTax = 0;
-        foreach($this->transactions as $transaction){
-            $totalGross += $transaction->total_amount;
-            $totalTax += $transaction->total_vat_amount;
+    // Initialize totals and daily summaries
+    $totalGross = 0;
+    $totalTax = 0;
+    $dailySummaries = [];
+
+    // Iterate through transactions to group and sum by day
+    foreach ($transactions as $transaction) {
+        $dateKey = $transaction->created_at->format('Y-m-d');
+
+        if (!isset($dailySummaries[$dateKey])) {
+            $dailySummaries[$dateKey] = [
+                'totalGross' => 0,
+                'totalTax' => 0,
+            ];
         }
 
-        // Prepare report information
-        $this->transaction_info = [
-            'totalGross' => $totalGross,
-            'totalTax' => $totalTax,
-            'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
-            'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
-            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
-        ];
+        $dailySummaries[$dateKey]['totalGross'] += $transaction->total_amount;
+        $dailySummaries[$dateKey]['totalTax'] += $transaction->total_vat_amount;
+
+        // Accumulate weekly totals
+        $totalGross += $transaction->total_amount;
+        $totalTax += $transaction->total_vat_amount;
     }
+
+    // Prepare report information
+    $this->transaction_info = [
+        'totalGross' => $totalGross,
+        'totalTax' => $totalTax,
+        'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
+        'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
+        'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+        'dailySummaries' => $dailySummaries
+    ];
+
+    
+}
+
 
 }

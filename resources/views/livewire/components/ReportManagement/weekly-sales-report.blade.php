@@ -95,61 +95,32 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            @foreach ($transactions as $transaction)
-                <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
-
-                    <li class="col-span-2 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                {{ $transaction->transaction_number }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-2 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                {{ $transaction->transaction_type }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-bold">
-                                {{ $transaction->created_at->format('H:i:s') }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                {{ number_format($transaction->total_amount, 2) }}
-
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                {{ number_format($transaction->total_discount_amount, 2) }}
-                            </p>
-                        </div>
-                    </li>
-
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                {{ number_format($transaction->total_vat_amount, 2) }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                aiah
-                            </p>
-                        </div>
-                    </li>
-
-                </ul>
-            @endforeach
+            @foreach ($transaction_info['dailySummaries'] as $date => $summary)
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">{{ \Carbon\Carbon::parse($date)->format('M d, Y') }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">{{ number_format($summary['totalGross'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">{{ number_format($summary['totalTax'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
+                            {{ number_format($summary['totalGross'] - $summary['totalTax'], 2) }}
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        @endforeach
         </div>
     </div>
 </div>
