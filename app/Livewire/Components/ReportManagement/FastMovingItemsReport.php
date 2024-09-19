@@ -109,8 +109,8 @@ class FastMovingItemsReport extends Component
             return $b['fast_slow'] <=> $a['fast_slow'];
         });
 
-        $this->fastmoving_info = array_slice($this->fastmoving_info, 0, 10);
         $this->dispatch('fastSlowUpdated', $this->fastmoving_info);
         // dd($this->fastmoving_info);
     }
+
 }
