@@ -27,65 +27,47 @@
 
         Livewire.on('fastSlowUpdated', (fastmoving_info) => {
 
-                    items = [];
-                    datas = [];
-                    tsi = [];
-                    descriptions = [];
+            items = [];
+            datas = [];
+            tsi = [];
+            if (Chart.getChart("fastslowChart")) {
+                Chart.getChart("fastslowChart")?.destroy();
+            }
 
-                    if (Chart.getChart("fastslowChart")) {
-                        Chart.getChart("fastslowChart")?.destroy();
-                    }
-
-                    fastSlow = $wire.fastmoving_info;
-                    console.log('item movement:', fastSlow);
+            fastSlow = $wire.fastmoving_info;
+            console.log('item movement:', fastSlow);
 
 
-                    for (let index = 0; index < fastSlow.length; index++) {
+            for (let index = 0; index < fastSlow.length; index++) {
 
-                        items[index] = fastSlow[index].item_name;
-                        datas[index] = fastSlow[index].totalStockInQuantity;
-                        tsi[index] = fastSlow[index].tsi;
-                        descriptions[index] = fastSlow[index].item_description;
-                    }
-                    console.log('item movement:', items);
+                items[index] = fastSlow[index].item_name;
+                datas[index] = fastSlow[index].totalStockInQuantity;
+                tsi[index] = fastSlow[index].tsi;
+            }
+            console.log('item movement:', items);
 
-                    // console.log(dates, datas);
-                    new Chart(perMonth, {
-                            type: 'bar',
-                            data: {
-                                labels: items,
-                                datasets: [{
-                                    label: 'Item',
-                                    data: datas,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                indexAxis: 'y',
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                },
-                                plugins: {
-                                    tooltip: {
-                                        callbacks: {
-                                            label: function(context) {
-                                                let label = context.label || '';
-                                                let description = descriptions[context.dataIndex] || '';
-                                                if (label) {
-                                                    label += ': ';
-                                                }
-                                                if (description) {
-                                                    label += description;
-                                                }
-                                                return label;
-                                            }
-                                        }
-                                    }
+            // console.log(dates, datas);
+            new Chart(perMonth, {
+                type: 'bar',
+                data: {
+                    labels: items,
+                    datasets: [{
+                        label: 'Item',
+                        data: datas,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
 
-                                }
-                            });
-                    });
+
+                }
+            });
+        });
     </script>
 @endscript

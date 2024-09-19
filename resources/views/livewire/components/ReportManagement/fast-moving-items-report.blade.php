@@ -76,45 +76,45 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             @if ($fastmoving_info)
-                {{-- @foreach ($purchaseDetails as $purchaseDetail) --}}
-                <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+                @foreach ($fastmoving_info as $index => $fastmoving_info)
+                    <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
 
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                hiii</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-bold">
-                                hello
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                aiah
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                aiah
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                aiah
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-                {{-- @endforeach --}}
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-left font-medium">
+                                    {{ $fastmoving_info['barcodee'] }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-left font-bold">
+                                    {{ $fastmoving_info['item_name'] }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+                                    {{ $fastmoving_info['item_description'] }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+                                    {{ $fastmoving_info['tsi'] }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+                                    aiah
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                @endforeach
             @endif
 
         </div>
