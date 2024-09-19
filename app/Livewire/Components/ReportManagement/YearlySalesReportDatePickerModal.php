@@ -9,6 +9,7 @@ class YearlySalesReportDatePickerModal extends Component
 {
     public $showYearlySalesReportDatePircker = false;
 
+    public $date;
     public function render()
     {
         return view('livewire.components.ReportManagement.yearly-sales-report-date-picker-modal');
@@ -18,4 +19,7 @@ class YearlySalesReportDatePickerModal extends Component
     {
         $this->dispatch(event: 'display-yearly-sales-report')->to(ReportManagement::class);
     }
+     public function getDate(){
+        $this->dispatch('generate-report', $this->date)->to(YearlySalesReport::class);
+     }
 }
