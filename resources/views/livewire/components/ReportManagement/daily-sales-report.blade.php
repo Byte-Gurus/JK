@@ -95,11 +95,7 @@
                     </div>
                 </li>
 
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">WS Discount</p>
-                    </div>
-                </li>
+
 
                 <li class="col-span-1 ">
                     <div>
@@ -107,11 +103,11 @@
                     </div>
                 </li>
 
-                <li class="col-span-1 ">
+                {{-- <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Net Sales</p>
                     </div>
-                </li>
+                </li> --}}
 
             </ul>
 
@@ -154,13 +150,7 @@
                             </p>
                         </div>
                     </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center fot-bold">
-                                aiah
-                            </p>
-                        </div>
-                    </li>
+
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
@@ -168,13 +158,13 @@
                             </p>
                         </div>
                     </li>
-                    <li class="col-span-1 py-[3px]">
+                    {{-- <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
                                 aiah
                             </p>
                         </div>
-                    </li>
+                    </li> --}}
 
                 </ul>
             @endforeach
