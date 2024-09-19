@@ -114,7 +114,7 @@
                         </div>
                     </li>
                 </ul>
-                @endforeach
+                {{-- @endforeach --}}
             @endif
 
         </div>
