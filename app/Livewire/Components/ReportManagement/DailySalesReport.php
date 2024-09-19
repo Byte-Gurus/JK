@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
+use App\Models\Transaction;
 use Livewire\Component;
 
 class DailySalesReport extends Component
@@ -19,7 +20,9 @@ class DailySalesReport extends Component
     ];
 
     public function generateReport($date){
-        dd($date);
+
+        $Transactions = Transaction::where('created_at', $date)->get();
+        dd($Transactions);
     }
 
 }
