@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">WEEKLY SALES REPORT</p>
+            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">MONTHLY SALES REPORT</p>
 
         </div>
         @if ($transaction_info)

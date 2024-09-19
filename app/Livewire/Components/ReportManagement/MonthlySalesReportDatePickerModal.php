@@ -21,6 +21,6 @@ class MonthlySalesReportDatePickerModal extends Component
     }
     public function getDate()
     {
-        $this->dispatch('generate-report', $this->date)->to(WeeklySalesReport::class);
+        $this->dispatch('generate-report', $this->date)->to(MonthlySalesReport::class);
     }
 }
