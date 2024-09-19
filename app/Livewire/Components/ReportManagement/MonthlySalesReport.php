@@ -12,8 +12,11 @@ class MonthlySalesReport extends Component
     public $transactions = [], $transaction_info = [];
     public function render()
     {
-        return view('livewire.components.ReportManagement.monthly-sales-report');
+        return view('livewire.components.ReportManagement.monthly-sales-report', [
+            'transactions' => $this->transactions
+        ]);
     }
+
     public function generateReport($month)
     {
         // Parse the month into start and end dates
