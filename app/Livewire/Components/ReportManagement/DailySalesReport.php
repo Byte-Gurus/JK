@@ -26,6 +26,7 @@ class DailySalesReport extends Component
     public function generateReport($date)
     {
 
+        $date = Carbon::parse($date);
         $this->transactions = Transaction::whereDate('created_at', $date)->get();
 
         $totalGross = 0;
