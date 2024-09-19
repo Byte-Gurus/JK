@@ -91,7 +91,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-                                    {{ $fastmoving_info['barcodee'] }}</p>
+                                    {{ $fastmoving_info['barcode'] }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
