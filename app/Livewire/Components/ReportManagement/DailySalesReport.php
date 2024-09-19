@@ -4,6 +4,8 @@ namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
 use App\Models\Transaction;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class DailySalesReport extends Component
@@ -36,7 +38,10 @@ class DailySalesReport extends Component
         $this->transaction_info = [
 
             'totalGross' => $totalGross,
-            'totalTax' => $totalTax
+            'totalTax' => $totalTax,
+            'date' => $date,
+            'dateCreated' => Carbon::today(),
+            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
 
     }
