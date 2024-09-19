@@ -73,6 +73,11 @@
                         <p class="text-[0.8em] uppercase text-left font-bold">Transaction No</p>
                     </div>
                 </li>
+                <li class="col-span-2 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Transaction type</p>
+                    </div>
+                </li>
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Time</p>
@@ -118,7 +123,13 @@
                     <li class="col-span-2 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-left font-medium">
-                                {{ $transaction->transaction_no }}</p>
+                                {{ $transaction->transaction_number }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-2 py-[3px]">
+                        <div>
+                            <p class="text-[0.8em] text-left font-medium">
+                                {{ $transaction->transaction_type }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
@@ -131,15 +142,15 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
-                                {{ $transaction->total_amount }}</p>
+                                {{ number_format($transaction->total_amount, 2) }}
+
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
-                                {{ $transaction->total_discount_amount}}
-
+                                {{ number_format($transaction->total_discount_amount, 2) }}
                             </p>
                         </div>
                     </li>
@@ -153,7 +164,7 @@
                     <li class="col-span-1 py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center fot-bold">
-                                {{ $transaction->total_vat_amount}}
+                                {{ number_format($transaction->total_vat_amount, 2) }}
                             </p>
                         </div>
                     </li>
