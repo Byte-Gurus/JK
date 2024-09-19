@@ -9,7 +9,7 @@ use Livewire\Component;
 class DailySalesReport extends Component
 {
     public $showDailySalesReport = false;
-    public $transactions = [];
+    public $transactions = [], $transaction_info = [];
     public function render()
     {
         return view('livewire.components.ReportManagement.daily-sales-report', [
@@ -24,7 +24,17 @@ class DailySalesReport extends Component
     public function generateReport($date)
     {
 
-
         $this->transactions = Transaction::whereDate('created_at', $date)->get();
+
+        $totalGross = 0;
+        foreach($this->transactions as $transaction){
+            $totalGross += $transaction['total_amount'];
+        }
+
+        $this->transaction_info = [
+
+            'totalGross' => $totalGross,
+        ];
+
     }
 }
