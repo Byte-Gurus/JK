@@ -32,7 +32,7 @@
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="date" wire:model="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <input type="month" wire:model="date" class="w-full p-4 rounded-md hover:bg-gray-300">
                     </div>
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
