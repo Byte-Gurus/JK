@@ -35,6 +35,7 @@ class WeeklySalesReport extends Component
         // Initialize totals and daily summaries
         $totalGross = 0;
         $totalTax = 0;
+        $totalNet = 0;
         $dailySummaries = [];
 
         // Iterate through transactions to group and sum by day
@@ -54,12 +55,14 @@ class WeeklySalesReport extends Component
             // Accumulate weekly totals
             $totalGross += $transaction->total_amount;
             $totalTax += $transaction->total_vat_amount;
+            $totalNet = $totalGross - $totalTax;
         }
 
         // Prepare report information
         $this->transaction_info = [
             'totalGross' => $totalGross,
             'totalTax' => $totalTax,
+            'totalNet' => $totalNet,
             'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
             'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,

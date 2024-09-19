@@ -29,6 +29,7 @@ class MonthlySalesReport extends Component
 
         $totalGross = 0;
         $totalTax = 0;
+
         $dailySummaries = [];
 
         foreach ($this->transactions as $transaction) {
@@ -45,11 +46,13 @@ class MonthlySalesReport extends Component
 
             $dailySummaries[$date]['totalGross'] += $transaction->total_amount;
             $dailySummaries[$date]['totalTax'] += $transaction->total_vat_amount;
+
         }
 
         $this->transaction_info = [
             'totalGross' => $totalGross,
             'totalTax' => $totalTax,
+
             'date' => $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y'),
             'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,

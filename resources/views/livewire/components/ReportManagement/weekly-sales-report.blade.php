@@ -52,13 +52,13 @@
                         <div class="flex flex-row border border-black text-nowrap ">
                             <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
 
-                            {{ number_format($transaction_info['totalTax'], 2) ?? ' ' }}
+                            {{ number_format($transaction_info['totalTax'], 2) }}
 
                         </div>
                     </div>
                     <div class="flex flex-row border border-black text-nowrap">
                         <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
-                        {{ number_format($transaction_info['totalGross'] - $transaction_info['totalGross'], 2) ?? ' ' }}
+                        {{ number_format($transaction_info['totalNet'], 2) ?? ' ' }}
 
                     </div>
                 </div>
