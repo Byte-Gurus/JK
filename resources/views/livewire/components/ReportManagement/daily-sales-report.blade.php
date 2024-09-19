@@ -39,7 +39,7 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                        {{ $transaction_info['date']?? ' ' }}
+                        {{ $transaction_info['date'] ?? ' ' }}
 
                     </div>
                 </div>
@@ -59,7 +59,8 @@
                     </div>
                     <div class="flex flex-row border border-black text-nowrap">
                         <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
-                        {{ number_format($transaction_info['totalGross'], 2) ?? ' ' -  number_format($transaction_info['totalGross'], 2) ?? ' ' }}
+                        {{ number_format($transaction_info['totalGross'] - $transaction_info['totalGross'], 2) ?? ' ' }}
+
                     </div>
                 </div>
             </div>

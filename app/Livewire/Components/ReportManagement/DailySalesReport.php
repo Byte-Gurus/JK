@@ -31,6 +31,7 @@ class DailySalesReport extends Component
 
         $totalGross = 0;
         $totalTax = 0;
+        
         foreach($this->transactions as $transaction){
             $totalGross += $transaction['total_amount'];
             $totalTax += $transaction['total_vat_amount'];
