@@ -112,7 +112,7 @@ class FastMovingItemsReport extends Component
         usort($this->fastmoving_info, function ($a, $b) {
             return $b['fast_slow'] <=> $a['fast_slow'];
         });
-
+        // $a['fast_slow'] <=> $b['fast_slow']
         $this->date = $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y');
         $this->dateCreated = Carbon::now()->format('M d Y H:i:s A');
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
