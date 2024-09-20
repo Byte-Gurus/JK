@@ -131,13 +131,8 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-<<<<<<< Updated upstream
-                                <p class="text-[0.8em] text-left font-bold">
-                                    {{ $transaction->created_at->format('h:i A') }}
-=======
                                 <p class="text-[0.8em] text-center font-bold">
                                     {{ $transaction->created_at->format('H:i:s') }}
->>>>>>> Stashed changes
                                 </p>
                             </div>
                         </li>
