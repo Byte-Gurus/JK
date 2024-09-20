@@ -144,7 +144,7 @@ class SalesReturnDetails extends Component
                     $this->return_total_amount += $this->item_return_amount;
 
 
-                    $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
+                    $transactionDetail->item_subtotal += ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
 
                     $this->return_vat_amount  = $transactionDetail->item_subtotal;
 
