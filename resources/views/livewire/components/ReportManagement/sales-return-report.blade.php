@@ -16,22 +16,26 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-flow-col grid-cols-2 ">
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.8em] font-bold uppercase">Date & Time Created:</p>
-                        <p class="text-[0.8em] font-bold uppercase">{{ $dateCreated }}</p>
-                        </p>
-                    </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.8em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[0.8em] font-bold uppercase">{{ $createdBy }}</p>
-                    </div>
+        <div>
+            <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">SALES RETURN REPORT</p>
+        </div>
+        <div class="flex flex-row justify-between px-4 mb-2">
+            <div class="flex flex-col ">
+                <div class="flex flex-row text-nowrap">
+                    <p class="text-[0.8em] font-bold uppercase">Date & Time Created:</p>
+                    <p class="text-[0.8em] font-bold uppercase">{{ $dateCreated }}</p>
+                    </p>
+                </div>
+                <div class="flex flex-row text-nowrap">
+                    <p class="text-[0.8em] font-bold uppercase">Prepared By:</p>
+                    <p class="text-[0.8em] font-bold uppercase">{{ $createdBy }}</p>
                 </div>
             </div>
-            <div>
-                <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">SALES RETURN REPORT</p>
+            <div class="flex flex-col self-start justify-between px-4 mb-2">
+                <div class="flex flex-row border border-black text-nowrap">
+                    <p class="text-[1em] font-black border-r border-black uppercase">Total Sales Return </p>
+                    {{-- {{ number_format($transaction_info['totalNet'], 2) }} --}}
+                </div>
             </div>
         </div>
 
@@ -84,7 +88,7 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Return Amount</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Return Amount(₱)</p>
                     </div>
                 </li>
             </ul>
@@ -130,7 +134,7 @@
                     <li class="col-span-1 text-center py-[3px]">
                         <div>
                             <p class="text-[0.8em] text-center font-bold">
-                                {{ $returnItem->description}}
+                                {{ $returnItem->description }}
                             </p>
                         </div>
                     </li>

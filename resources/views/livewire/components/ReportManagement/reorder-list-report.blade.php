@@ -39,7 +39,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
@@ -78,7 +78,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             @foreach ($reorder_lists as $index => $reorder_list)
-                <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
+                <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
 
                     <li class="col-span-1 py-[3px]">
                         <div>

@@ -106,7 +106,7 @@
 
                 <li class="col-span-2">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Net Sales</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Net Sales(₱)</p>
                     </div>
                 </li>
 
