@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class DailySalesReportDatePickerModal extends Component
@@ -33,7 +34,12 @@ class DailySalesReportDatePickerModal extends Component
         $this->dispatch(event: 'display-daily-sales-report')->to(ReportManagement::class);
     }
 
-    public function getDate(){
-       $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
+    public function getDate()
+    {
+
+        $rules = ['date' => 'required'];
+        $this->validate($rules);
+
+        $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
     }
 }
