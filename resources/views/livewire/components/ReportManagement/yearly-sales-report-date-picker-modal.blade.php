@@ -4,8 +4,7 @@
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
         <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
 
-            <div
-                class=" w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
+            <div class=" w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
                 <div class="flex flex-row items-center justify-between">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
@@ -32,7 +31,7 @@
 
                     <div class="flex justify-center w-full my-4 ">
                         <select name="year" class="w-full p-4 rounded-md hover:bg-gray-300" id="year"
-                            wire:model="date">
+                            wire:model.live="date">
                             <option value="">Select a year</option>
                             @for ($year = 2000; $year <= 2050; $year++)
                                 <option value="{{ $year }}">{{ $year }}</option>
@@ -47,8 +46,16 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            <button type="button" wire:click="getDate" x-on:click='$wire.displayYearlySalesReport()'
-                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            @if ($date)
+                                <button type="button" wire:click="getDate"
+                                    x-on:click='$wire.displayYearlySalesReport()'
+                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            @else
+                                <button type="button" wire:click="getDate" disabled
+                                    x-on:click='$wire.displayYearlySalesReport()'
+                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
+                            @endif
+
                         </div>
                     </div>
                 </form>

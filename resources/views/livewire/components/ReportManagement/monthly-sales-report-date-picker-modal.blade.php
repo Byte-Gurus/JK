@@ -31,7 +31,7 @@
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="month" wire:model="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <input type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
                     </div>
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
@@ -41,8 +41,16 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            <button type="button" wire:click="getDate" x-on:click='$wire.displayMonthlySalesReport()'
-                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            @if ($date)
+                                <button type="button" wire:click="getDate"
+                                    x-on:click='$wire.displayMonthlySalesReport()'
+                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            @else
+                                <button type="button" wire:click="getDate" disabled
+                                    x-on:click='$wire.displayMonthlySalesReport()'
+                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
+                            @endif
+
                         </div>
                     </div>
                 </form>

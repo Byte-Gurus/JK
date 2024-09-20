@@ -1,4 +1,4 @@
-<div x-cloak >
+<div x-cloak>
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
@@ -27,24 +27,29 @@
                 </div>
 
                 {{-- //* first row --}} {{-- //* adjust reason --}}
-                <form
-                    class="flex flex-col items-center w-full h-full mt-2 justify-evenly">
+                <form class="flex flex-col items-center w-full h-full mt-2 justify-evenly">
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="week" wire:model="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <input type="week" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
                     </div>
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
                             {{-- //* clear all button for create --}}
-                            <button
-                            type="button" wire:click="resetFormWhenClosed"
+                            <button type="button" wire:click="resetFormWhenClosed"
                                 class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>
                         <div>
-                            <button type="button"  wire:click="getDate" x-on:click='$wire.displayWeeklySalesReport()'
-                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            @if ($date)
+                                <button type="button" wire:click="getDate" x-on:click='$wire.displayWeeklySalesReport()'
+                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            @else
+                                <button type="button" wire:click="getDate" disabled
+                                    x-on:click='$wire.displayWeeklySalesReport()'
+                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
+                            @endif
+
                         </div>
                     </div>
                 </form>
