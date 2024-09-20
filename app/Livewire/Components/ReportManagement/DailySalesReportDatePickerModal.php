@@ -39,9 +39,9 @@ class DailySalesReportDatePickerModal extends Component
 
         $rules = ['date' => 'required'];
 
-        $validatedDate = $this->validate($rules);
-        if ($validatedDate) {
-            $this->dispatch('generate-report', $validatedDate)->to(DailySalesReport::class);
+       $this->validate($rules);
+        if ($this->date) {
+            $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
         }
     }
 }
