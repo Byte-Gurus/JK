@@ -77,18 +77,18 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Gross Sales</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Gross Sales(₱)</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">VAT Amount</p>
+                        <p class="text-[1em] uppercase text-center font-bold">VAT Amount(₱)</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Net Sales</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Net Sales(₱)</p>
                     </div>
                 </li>
 

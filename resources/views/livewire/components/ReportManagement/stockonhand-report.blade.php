@@ -26,7 +26,7 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[1em] font-medium uppercase">{{ $createdBy }}</p>
+                        <p class="text-[1em] font-medium     uppercase">{{ $createdBy }}</p>
                     </div>
                 </div>
             </div>
