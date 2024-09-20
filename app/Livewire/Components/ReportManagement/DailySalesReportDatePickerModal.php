@@ -3,7 +3,6 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
-use Illuminate\Support\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -14,7 +13,6 @@ class DailySalesReportDatePickerModal extends Component
 
     public function render()
     {
-        $this->date =  Carbon::today()->format('m d Y');
         return view('livewire.components.ReportManagement.daily-sales-report-date-picker-modal');
     }
 
