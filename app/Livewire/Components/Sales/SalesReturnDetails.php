@@ -19,7 +19,7 @@ class SalesReturnDetails extends Component
     public $returnQuantity = [];
     public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount;
 
     public $return_info = [];
 
@@ -60,6 +60,7 @@ class SalesReturnDetails extends Component
         $transaction = Transaction::find($this->transaction_id);
         $transaction->total_amount = $this->new_total;
         $transaction->transaction_type = 'Return';
+        $transaction->total_vat_amount = $this->new_vat_amount;
         $transaction->save();
 
         $returns = Returns::create([
@@ -145,7 +146,6 @@ class SalesReturnDetails extends Component
                         $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
 
                         $this->return_vat_amount  = $transactionDetail->item_subtotal;
-
                     } else {
                         $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
 
@@ -171,8 +171,9 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
-        $new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
-        dd($total_vat_amount, $this->return_vat_amount, $new_vat_amount);
+
+        $this->new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
+
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()
