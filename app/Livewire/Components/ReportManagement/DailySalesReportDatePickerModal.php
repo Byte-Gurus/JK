@@ -9,7 +9,7 @@ use Livewire\Component;
 class DailySalesReportDatePickerModal extends Component
 {
     public $showDailySalesReportDatePickerModal = false;
-    public $date;
+    public $date = null;
 
     public function render()
     {
