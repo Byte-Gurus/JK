@@ -135,7 +135,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-bold">
-                                    {{ $transaction->created_at->format('h:i:s A') }}
+                                    {{ $transaction->created_at->format('h:i A') }}
                                 </p>
                             </div>
                         </li>

@@ -114,7 +114,7 @@ class FastMovingItemsReport extends Component
         });
         // $a['fast_slow'] <=> $b['fast_slow']
         $this->date = $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y');
-        $this->dateCreated = Carbon::now()->format('M d Y H:i:s A');
+        $this->dateCreated = Carbon::now()->format('M d Y h:i A');
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
     }
 }

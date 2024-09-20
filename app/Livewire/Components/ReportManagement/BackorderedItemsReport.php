@@ -23,6 +23,6 @@ class BackorderedItemsReport extends Component
     {
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
 
-        $this->dateCreated = Carbon::now()->format('m d Y h:i:s a');
+        $this->dateCreated = Carbon::now()->format('M d Y h:i A');
     }
 }

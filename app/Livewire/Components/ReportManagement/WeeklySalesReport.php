@@ -64,7 +64,7 @@ class WeeklySalesReport extends Component
             'totalTax' => $totalTax,
             'totalNet' => $totalNet,
             'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
-            'dateCreated' => Carbon::now()->format('M d Y h:i:s A'),
+            'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
             'dailySummaries' => $dailySummaries
         ];
