@@ -174,7 +174,7 @@ class SalesReturnDetails extends Component
         }
 
         $this->new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
-        dd( $this->new_vat_amount);
+        dump( $this->new_vat_amount);
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()
