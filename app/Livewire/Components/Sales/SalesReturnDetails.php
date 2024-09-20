@@ -171,8 +171,8 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
-        $total_vat_amount -= $this->return_vat_amount;
-        dd($total_vat_amount);
+        // $total_vat_amount -= $this->return_vat_amount;
+        dd($this->return_vat_amount);
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()
