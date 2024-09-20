@@ -131,7 +131,7 @@ class SalesReturnDetails extends Component
     {
         $this->return_total_amount = 0;
         $this->item_return_amount = 0;
-        $this->return_vat_amount = 0;
+       
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
 
