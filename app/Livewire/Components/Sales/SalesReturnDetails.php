@@ -151,7 +151,7 @@ class SalesReturnDetails extends Component
 
 
 
-                    dump($this->return_vat_amount);
+                    // dump($this->return_vat_amount);
                     $total_vat_amount = $transactionDetail->transactionJoin->total_vat_amount;
 
                     $this->new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
