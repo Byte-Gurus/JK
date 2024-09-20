@@ -149,9 +149,9 @@ class SalesReturnDetails extends Component
 
                     $this->return_vat_amount  = $transactionDetail->item_subtotal;
                 }
-                dd($transactionDetail->transactionJoin->total_vat_amount);
-                $transactionDetail->transactionJoin->total_vat_amount -= $this->return_vat_amount;
-                dd($transactionDetail->total_vat_amount);
+                $total_vat_amount = $transactionDetail->transactionJoin->total_vat_amount;
+                $total_vat_amount -= $this->return_vat_amount;
+                dd($total_vat_amount);
 
                 if ($this->returnQuantity[$index] >=  $transactionDetail->itemJoin->bulk_quantity) {
                     $this->return_total_amount = $this->return_total_amount - $transactionDetail->item_discount_amount;
