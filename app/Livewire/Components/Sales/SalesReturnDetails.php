@@ -141,12 +141,16 @@ class SalesReturnDetails extends Component
                     $this->return_total_amount += $this->item_return_amount;
                 }
                 if ($transactionDetail->vat_type == "Vat") {
-                    $this->return_vat_amount -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
+                    $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
+
+                    $this->return_vat_amount  = $transactionDetail->item_subtotal;
                 } else {
-                    $this->return_vat_amount -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
+                    $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
+
+                    $this->return_vat_amount  = $transactionDetail->item_subtotal;
                 }
 
-                dd($this->return_vat_amount);
+                dd(vars: $this->return_vat_amount);
 
                 if ($this->returnQuantity[$index] >=  $transactionDetail->itemJoin->bulk_quantity) {
                     $this->return_total_amount = $this->return_total_amount - $transactionDetail->item_discount_amount;
