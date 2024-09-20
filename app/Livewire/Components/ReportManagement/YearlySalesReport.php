@@ -64,7 +64,7 @@ class YearlySalesReport extends Component
             'totalTax' => $totalTax,
             'totalNet' => $totalNet,
             'date' => $startOfYear->format('Y'),
-            'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
+            'dateCreated' => Carbon::now()->format('M d Y h:i:s A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
             'monthlySummaries' => $monthlySummaries
         ];

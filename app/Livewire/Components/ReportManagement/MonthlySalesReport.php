@@ -54,7 +54,7 @@ class MonthlySalesReport extends Component
             'totalTax' => $totalTax,
 
             'date' => $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y'),
-            'dateCreated' => Carbon::now()->format('M d Y H:i:s A'),
+            'dateCreated' => Carbon::now()->format('M d Y h:i:s A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
             'dailySummaries' => $dailySummaries,
         ];
