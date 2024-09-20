@@ -60,6 +60,7 @@ class SalesReturnDetails extends Component
         $transaction = Transaction::find($this->transaction_id);
         $transaction->total_amount = $this->new_total;
         $transaction->transaction_type = 'Return';
+
         $transaction->total_vat_amount = $this->new_vat_amount;
         $transaction->save();
 
@@ -173,7 +174,7 @@ class SalesReturnDetails extends Component
         }
 
         $this->new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
-
+        dd( $this->new_vat_amount);
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()
