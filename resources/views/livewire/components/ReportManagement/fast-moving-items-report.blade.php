@@ -22,22 +22,22 @@
                     <div class="flex flex-col ">
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                            {{ $dateCreated ?? ' ' }}
-
+                            <p class="text-[1em] font-medium uppercase">{{ $dateCreated }}</p>
                             </p>
                         </div>
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                            {{ $createdBy ?? ' ' }}
-
+                            <p class="text-[1em] font-medium uppercase">{{ $createdBy }}</p>
+                        </div>
+                        <div class="flex flex-row text-nowrap">
+                            <p class="text-[1em] font-black uppercase">Selected Date:</p>
+                            <p class="text-[1em] font-medium uppercase">{{ $date ?? ' ' }}</p>
                         </div>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                        {{ $date ?? ' ' }}
-                    </div>
                 </div>
-
+                <div>
+                    <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">STOCK-ON-HAND REPORT</p>
+                </div>
             </div>
         @endif
 
@@ -45,7 +45,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
@@ -86,7 +86,7 @@
 
             @if ($fastmoving_info)
                 @foreach ($fastmoving_info as $index => $fastmoving_info)
-                    <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+                    <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
 
                         <li class="col-span-1 py-[3px]">
                             <div>
@@ -103,14 +103,14 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-left font-bold">
                                     {{ $fastmoving_info['item_description'] }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
 
                                     {{ $fastmoving_info['aii'] }}
                                 </p>
@@ -118,7 +118,7 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
 
                                     {{ $fastmoving_info['tsi'] }}
                                 </p>
@@ -126,7 +126,7 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
                                     {{ $fastmoving_info['fast_slow'] }}
                                 </p>
                             </div>

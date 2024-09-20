@@ -21,12 +21,12 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
+                        <p class="text-[1em] font-medium uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
+                        <p class="text-[1em] font-medium uppercase">{{ $createdBy }}</p>
                     </div>
                 </div>
             </div>
@@ -38,10 +38,7 @@
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
 
-
-
-
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
@@ -50,12 +47,12 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Name</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Description</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Item Description</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -68,7 +65,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             @foreach ($inventories as $inventory)
-                <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+                <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
                     <li class="col-span-1 py-[3px]">
                         <div>
@@ -76,23 +73,23 @@
                                 {{ $inventory->itemJoin->barcode }}</p>
                         </div>
                     </li>
-                    <li class="col-span-1 text-center py-[3px]">
+                    <li class="col-span-1 text-left py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center font-bold">
+                            <p class="text-[1em] text-left font-bold">
                                 {{ $inventory->itemJoin->item_name }}
                             </p>
                         </div>
                     </li>
-                    <li class="col-span-1 text-center py-[3px]">
+                    <li class="col-span-1 text-left py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center font-bold">
+                            <p class="text-[1em] text-left font-bold">
                                 {{ $inventory->itemJoin->item_description }}
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center fot-bold">
+                            <p class="text-[1em] text-center font-bold">
                                 {{ $inventory->current_stock_quantity }}
                             </p>
                         </div>

@@ -1,6 +1,6 @@
-<div class="flex justify-center">
+<div class="flex justify-center h-fit">
 
-    <div class="  w-[816px] max-h-[1056px] h-full border border-black">
+    <div class="  w-[816px] border border-black">
         <div class="flex flex-row justify-around my-8">
             <div>
                 <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
@@ -70,44 +70,41 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
+            <ul class="grid items-center justify-between grid-flow-col grid-cols-12 mx-4 ">
 
-                <li class="col-span-2 ">
+                <li class="col-span-3 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Transaction No</p>
                     </div>
                 </li>
                 <li class="col-span-2 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Transaction type</p>
+                        <p class="text-[0.8em] text-center uppercase font-bold">Transaction type</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
+                <li class="col-span-1">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Time</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Time</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
+                <li class="col-span-2">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Gross Sales</p>
                     </div>
                 </li>
 
-                <li class="col-span-1 ">
+                <li class="col-span-2 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD(20%)</p>
                     </div>
                 </li>
-
-
-
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
                     </div>
                 </li>
 
-                <li class="col-span-1 ">
+                <li class="col-span-2">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Net Sales</p>
                     </div>
@@ -118,9 +115,9 @@
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($transaction_info)
                 @foreach ($transactions as $transaction)
-                    <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
+                    <ul class="grid justify-between grid-flow-col grid-cols-12 mx-4 ">
 
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-3 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
                                     {{ $transaction->transaction_number }}</p>
@@ -128,28 +125,33 @@
                         </li>
                         <li class="col-span-2 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-left font-medium">
+                                <p class="text-[0.8em] text-center font-medium">
                                     {{ $transaction->transaction_type }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
+<<<<<<< Updated upstream
                                 <p class="text-[0.8em] text-left font-bold">
                                     {{ $transaction->created_at->format('h:i A') }}
+=======
+                                <p class="text-[0.8em] text-center font-bold">
+                                    {{ $transaction->created_at->format('H:i:s') }}
+>>>>>>> Stashed changes
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-1 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->total_amount, 2) }}
 
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-1 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->total_discount_amount, 2) }}
                                 </p>
                             </div>
@@ -157,14 +159,14 @@
 
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->total_vat_amount, 2) }}
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-1 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->total_amount - $transaction->total_vat_amount , 2) }}
                                 </p>
                             </div>

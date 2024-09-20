@@ -13,6 +13,19 @@ class SlowMovingItemsReportDatePickerModal extends Component
         return view('livewire.components.ReportManagement.slow-moving-items-report-date-picker-modal');
     }
 
+    public function resetFormWhenClosed()
+    {
+        $this->resetForm();
+        $this->dispatch(event: 'close-slow-moving-items-report-date-picker-modal')->to(ReportManagement::class);
+    }
+
+    public function resetForm()
+    {
+        $this->reset([
+            'date'
+        ]);
+    }
+
     public function displaySlowMovingItemsReport()
     {
         $this->dispatch(event: 'display-slow-moving-items-report')->to(ReportManagement::class);

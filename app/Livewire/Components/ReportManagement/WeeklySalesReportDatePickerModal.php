@@ -17,6 +17,19 @@ class WeeklySalesReportDatePickerModal extends Component
         return view('livewire.components.ReportManagement.weekly-sales-report-date-picker-modal');
     }
 
+    public function resetFormWhenClosed()
+    {
+        $this->resetForm();
+        $this->dispatch(event: 'close-weekly-sales-report-date-picker-modal')->to(ReportManagement::class);
+    }
+
+    public function resetForm()
+    {
+        $this->reset([
+            'date'
+        ]);
+    }
+
     public function displayWeeklySalesReport()
     {
         $this->dispatch(event: 'display-weekly-sales-report')->to(ReportManagement::class);

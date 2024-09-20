@@ -31,11 +31,17 @@ class ReportManagement extends Component
         'display-inventoyry-table' => 'displayInventoryTable',
         'display-stock-card' => 'displayStockCard',
         'display-daily-sales-report' => 'displayDailySalesReport',
+        'close-daily-sales-report-date-picker-modal' => 'closeDailySalesReportDatePickerModal',
+        'close-weekly-sales-report-date-picker-modal' => 'closeWeeklySalesReportDatePickerModal',
+        'close-yearly-sales-report-date-picker-modal' => 'closeYearlySalesReportDatePickerModal',
+        'close-monthly-sales-report-date-picker-modal' => 'closeMonthlySalesReportDatePickerModal',
         'display-weekly-sales-report' => 'displayWeeklySalesReport',
         'display-monthly-sales-report' => 'displayMonthlySalesReport',
         'display-yearly-sales-report' => 'displayYearlySalesReport',
         'display-customer-credit-list-report' => 'displayYearlySalesReport',
         'display-slow-moving-items-report' => 'displaySlowMovingItemsReport',
+        'close-slow-moving-items-report-date-picker-modal' => 'closeSlowMovingItemsReportDatePickerModal',
+        'close-fast-moving-items-report-date-picker-modal' => 'closeFastMovingItemsReportDatePickerModal',
         'display-fast-moving-items-report' => 'displayFastMovingItemsReport',
     ];
 
@@ -161,6 +167,11 @@ class ReportManagement extends Component
         $this->hideExtras();
     }
 
+    public function closeDailySalesReportDatePickerModal()
+    {
+        $this->showDailySalesReportDatePickerModal = false;
+    }
+
     // Weekly Sales Report
 
     public function displayWeeklySalesReportDatePickerModal()
@@ -172,6 +183,11 @@ class ReportManagement extends Component
     {
         $this->showWeeklySalesReport = !$this->showWeeklySalesReport;
         $this->hideExtras();
+    }
+
+    public function closeWeeklySalesReportDatePickerModal()
+    {
+        $this->showWeeklySalesReportDatePickerModal = false;
     }
 
     // Monthly Sales Report
@@ -187,6 +203,11 @@ class ReportManagement extends Component
         $this->hideExtras();
     }
 
+    public function closeMonthlySalesReportDatePickerModal()
+    {
+        $this->showMonthlySalesReportDatePickerModal = false;
+    }
+
     // Yearly Sales Report
 
     public function displayYearlySalesReportDatePickerModal()
@@ -198,6 +219,11 @@ class ReportManagement extends Component
     {
         $this->showYearlySalesReport = !$this->showYearlySalesReport;
         $this->hideExtras();
+    }
+
+    public function closeYearlySalesReportDatePickerModal()
+    {
+        $this->showYearlySalesReportDatePickerModal = false;
     }
 
     // Sales Return Report
@@ -241,6 +267,11 @@ class ReportManagement extends Component
         $this->hideExtras();
     }
 
+    public function closeSlowMovingItemsReportDatePickerModal()
+    {
+        $this->showSlowMovingItemsReportDatePickerModal = false;
+    }
+
     // Fast moving Items Report
 
     public function displayFastMovingItemsReportDatePickerModal()
@@ -252,6 +283,11 @@ class ReportManagement extends Component
     {
         $this->showFastMovingItemsReport = !$this->showFastMovingItemsReport;
         $this->hideExtras();
+    }
+
+    public function closeFastMovingItemsReportDatePickerModal()
+    {
+        $this->showFastMovingItemsReportDatePickerModal = false;
     }
 
     // Reorder list Report

@@ -1,4 +1,4 @@
-<div x-cloak >
+<div x-cloak>
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
@@ -27,8 +27,7 @@
                 </div>
 
                 {{-- //* first row --}} {{-- //* adjust reason --}}
-                <form
-                    class="flex flex-col items-center w-full h-full mt-2 justify-evenly">
+                <form class="flex flex-col items-center w-full h-full mt-2 justify-evenly">
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
@@ -37,7 +36,7 @@
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
                             {{-- //* clear all button for create --}}
-                            <button
+                            <button wire:click="resetFormWhenClosed" type="button"
                                 class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>

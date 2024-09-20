@@ -5,11 +5,11 @@
         <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
 
             <div
-                class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
+                class=" w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
                 <div class="flex flex-row items-center justify-between">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
-                        Set Date
+                        Set Year
                     </h3>
 
                     {{-- //* close button --}}
@@ -42,7 +42,7 @@
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
                             {{-- //* clear all button for create --}}
-                            <button
+                            <button wire:click="resetFormWhenClosed" type="button"
                                 class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>

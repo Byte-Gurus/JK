@@ -13,6 +13,19 @@ class FastMovingItemsReportDatePickerModal extends Component
         return view('livewire.components.ReportManagement.fast-moving-items-report-date-picker-modal');
     }
 
+    public function resetFormWhenClosed()
+    {
+        $this->resetForm();
+        $this->dispatch(event: 'close-fast-moving-items-report-date-picker-modal')->to(ReportManagement::class);
+    }
+
+    public function resetForm()
+    {
+        $this->reset([
+            'date'
+        ]);
+    }
+
     public function displayFastMovingItemsReport()
     {
         $this->dispatch(event: 'display-fast-moving-items-report')->to(ReportManagement::class);

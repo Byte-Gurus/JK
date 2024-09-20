@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div>
-                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">STOCK-ON-HAND REPORT</p>
+                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">BACKORDERED ITEMS REPORT</p>
             </div>
         </div>
 

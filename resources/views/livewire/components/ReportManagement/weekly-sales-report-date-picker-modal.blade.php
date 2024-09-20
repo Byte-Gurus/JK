@@ -9,7 +9,7 @@
                 <div class="flex flex-row items-center justify-between">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
-                        Set Date
+                        Set Week
                     </h3>
 
                     {{-- //* close button --}}
@@ -38,6 +38,7 @@
                         <div>
                             {{-- //* clear all button for create --}}
                             <button
+                            type="button" wire:click="resetFormWhenClosed"
                                 class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>

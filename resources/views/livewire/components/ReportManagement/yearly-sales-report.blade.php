@@ -1,5 +1,5 @@
-<div x-cloak class="flex justify-center ">
-    <div class="w-[816px] max-h-[1056px] h-full border border-black">
+<div x-cloak class="flex justify-center h-screen ">
+    <div class="w-[816px] border border-black">
         <div class="flex flex-row justify-around my-8">
             <div>
                 <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
@@ -27,8 +27,6 @@
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
                             {{ $transaction_info['dateCreated'] ?? ' ' }}
-
-
                             </p>
                         </div>
                         <div class="flex flex-row text-nowrap">
