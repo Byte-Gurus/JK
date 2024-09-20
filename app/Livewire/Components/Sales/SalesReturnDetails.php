@@ -131,7 +131,7 @@ class SalesReturnDetails extends Component
     {
         $this->return_total_amount = 0;
         $this->item_return_amount = 0;
-       
+        $this->return_vat_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
 
@@ -145,7 +145,7 @@ class SalesReturnDetails extends Component
 
                     $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
 
-                    $this->return_vat_amount  = $transactionDetail->item_subtotal;
+                    $this->return_vat_amount  += $transactionDetail->item_subtotal;
 
                     dump($this->return_vat_amount);
                     $total_vat_amount = $transactionDetail->transactionJoin->total_vat_amount;
