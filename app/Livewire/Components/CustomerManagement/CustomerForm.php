@@ -87,12 +87,11 @@ class CustomerForm extends Component
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
             $validated['id_picture'] = $this->id_picture->store('id_pictures', 'r2');
-            dd($validated['id_picture']);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
 
-
+        dd($validated['id_picture']);
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
