@@ -95,3 +95,10 @@ Broadcast::channel(
         return 'Return refreshed';
     }
 );
+
+Broadcast::channel(
+    'refresh-inventory',
+    function () {
+        return 'Inventory refreshed';
+    }
+);

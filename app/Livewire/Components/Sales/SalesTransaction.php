@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Events\CreditEvent;
+use App\Events\InventoryEvent;
 use App\Events\ItemEvent;
 use App\Events\PurchaseOrderEvent;
 use App\Events\TransactionEvent;
@@ -739,6 +740,7 @@ class SalesTransaction extends Component
         TransactionEvent::dispatch('refresh-transaction');
 
         ItemEvent::dispatch('refresh-item');
+        InventoryEvent::dispatch('refresh-inventory');
         PurchaseOrderEvent::dispatch('refresh-purchase-order');
 
 

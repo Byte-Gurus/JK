@@ -58,6 +58,7 @@ class InventoryTable extends Component
         "echo:refresh-adjustment,AdjustmentEvent" => 'refreshFromPusher',
         "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
+        "echo:refresh-inventory,InventoryEvent" => 'refreshFromPusher',
 
     ];
 
