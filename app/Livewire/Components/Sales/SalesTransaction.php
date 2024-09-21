@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Events\CreditEvent;
+
 use App\Events\InventoryEvent;
 use App\Events\ItemEvent;
 use App\Events\PurchaseOrderEvent;
@@ -187,6 +188,7 @@ class SalesTransaction extends Component
         'display-discount-form' => 'displayDiscountForm',
         'display-payment-form' => 'displayPaymentForm',
         'get-quantity' => 'getQuantity',
+        'focus-input' => 'focusInput',
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments',
         'unselect-item' => 'unselectItem',
@@ -925,5 +927,10 @@ class SalesTransaction extends Component
     public function displaySalesReceipt()
     {
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
+    }
+
+    public function focusInput()
+    {
+        $this->dispatch('barcode_focus');
     }
 }
