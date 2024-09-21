@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('contact_number');
             $table->string("customer_type");
             $table->string("customer_discount_no")->nullable();
-            $table->binary("id_picture")->nullable();
+            $table->bytea("id_picture")->nullable();
 
             $table->foreignId('address_id')->constrained('addresses');
             $table->timestamps();

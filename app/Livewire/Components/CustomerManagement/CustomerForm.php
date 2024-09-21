@@ -87,7 +87,7 @@ class CustomerForm extends Component
 
         if ($this->id_picture) {
 
-            $validated['id_picture'] =   file_get_contents($this->id_picture->getRealPath());
+            $validated['id_picture'] =   file_get_contents($this->id_picture);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
