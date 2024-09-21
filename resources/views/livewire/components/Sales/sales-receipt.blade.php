@@ -188,7 +188,7 @@
             <div class="mx-4 ">
                 <span class="">------------------------</span>
             </div>
-            <div class="flex flex-col gap-2 px-2 mx-2 mb-[34px] mt-2p">
+            <div class="flex flex-col gap-2 px-2 mx-2 pb-[34px] mt-2p">
                 <div class="flex flex-col justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Customer Name</p>
 

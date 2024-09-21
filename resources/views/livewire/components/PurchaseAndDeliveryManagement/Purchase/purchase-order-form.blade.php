@@ -62,7 +62,7 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="flex justify-center gap-2 px-4 py-3 text-center items-cente ">
+                                <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center ">
 
                                     <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
                                         class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
@@ -79,13 +79,13 @@
                                 <th scope="col" class="py-3 text-left">Description</th>
 
                                 {{-- //* stocks on hand --}}
-                                <th scope="col" class="py-3 text-center ">Stocks-On-Hand</th>
+                                <th scope="col" class="py-3 text-center">Stocks-On-Hand</th>
 
                                 {{-- {-- //* stocks on hand --}}
-                                <th scope="col" class="py-3 text-center ">Maximum stock level</th>
+                                <th scope="col" class="py-3 text-center text-wrap">Maximum stock level</th>
 
                                 {{-- //* item reorder quantity --}}
-                                <th scope="col" class="py-3 text-center">Item Reorder Qty</th>
+                                <th scope="col" class="py-3 text-center text-wrap">Item Reorder Qty</th>
 
                                 {{-- //* purchase quantity --}}
                                 <th scope="col" class="py-3 text-center text-nowrap">Purchase Qty</th>
@@ -112,11 +112,11 @@
                                         {{ $reorder_list['barcode'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
                                         {{ $reorder_list['item_name'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 break-all text-wrap text-md whitespace-nowrap">
                                         {{ $reorder_list['item_description'] }}
                                     </th>
                                     <th scope="row"
@@ -138,7 +138,7 @@
                                             class="bg-[rgb(249,249,249)] self-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
                                         @error("purchase_quantities.$index")
                                             <div
-                                                class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/3">
+                                                class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/4">
                                                 <span
                                                     class="relative font-medium text-center text-red-500 error text-nowrap">{{ $message }}</span>
                                             </div>
@@ -160,6 +160,7 @@
                 <div>
                     <h1 class="text-[1.8em] text-[rgb(65,47,20)] font-black">Removed Items</h1>
                 </div>
+                @if (!empty($removed_items))
                 <div>
 
                     <button wire:click="restoreRow" type="button"
@@ -168,6 +169,12 @@
                     </button>
 
                 </div>
+                @else
+                    <button wire:click="restoreRow" type="button" disabled
+                        class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(130,130,130)]  text-[rgb(53,53,53)] border rounded-sm">
+                        Restore Row
+                    </button>
+                @endif
             </div>
             <div class="px-4 pt-1 bg-[rgb(255,221,146)] text-[rgb(90,74,26)] border border-[rgb(143,143,143)] rounded-tr-lg w-fit">
                 <p class="font-bold ">Item Information</p>
@@ -222,11 +229,11 @@
                                         </div>
                                     </th>
                                     <th scope="row"
-                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 break-all text-wrap text-md whitespace-nowrap">
                                         {{ $removed_item['item_name'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                        class="py-6 font-medium text-left text-gray-900 break-all text-wrap text-md whitespace-nowrap">
                                         {{ $removed_item['item_description'] }}
                                     </th>
 

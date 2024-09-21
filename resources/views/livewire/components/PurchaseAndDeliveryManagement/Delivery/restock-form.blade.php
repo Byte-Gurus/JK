@@ -46,7 +46,7 @@
                             <th scope="col" class="px-4 py-3 text-left">Barcode</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="py-3 text-left">Item Name</th>
+                            <th scope="col" class="px-4 py-3 text-left">Item Name</th>
 
                             {{-- //* item name --}}
                             <th scope="col" class="py-3 text-left">Item Description</th>
@@ -96,12 +96,12 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-10 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                    class="px-4 py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap ">
                                     {{ $purchaseDetail['item_name'] }}
                                 </th>
 
                                 <th scope="row"
-                                    class="py-10 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    class="py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
                                     {{ $purchaseDetail['item_description'] }}
                                 </th>
                                 <th scope="row"
@@ -119,9 +119,6 @@
                                     class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     <input type="number" wire:model="restock_quantity.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
-
-
-
                                 </th>
 
                                 {{-- cost --}}
@@ -130,11 +127,6 @@
                                     <input type="number" wire:model.live.debounce.500ms="cost.{{ $index }}"
                                         required
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
-
-
-
-
-
                                 </th>
 
                                 {{-- markup --}}
@@ -143,8 +135,6 @@
                                     <input type="number"
                                         wire:model.live.debounce.500ms="markup.{{ $index }}"required
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
-
-
                                 </th>
 
                                 {{-- srp --}}
@@ -153,10 +143,6 @@
                                     <input type="number" wire:model.live.debounce.500ms="srp.{{ $index }}"
                                         required readonly
                                         class="  bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
-
-
-
-
                                 </th>
 
                                 {{-- exp date --}}
@@ -195,9 +181,9 @@
                                     @endif
                                 </th>
 
-                                {{-- errors --}}
                                 <div class="absolute bottom-[58%] mx-4">
-                                    <div class="grid grid-flow-col grid-cols-5 gap-4 leading-none text-justify justify-evenly">
+                                    <div
+                                        class="grid grid-flow-col grid-cols-5 gap-4 leading-none text-justify justify-evenly">
                                         @error("restock_quantity.$index")
                                             <span
                                                 class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
@@ -226,14 +212,9 @@
                                 </div>
                             </tr>
                         @endforeach
-
                     </tbody>
-
                 </table>
-
-
             </div>
-
         </form>
     </div>
 </div>
