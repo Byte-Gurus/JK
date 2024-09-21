@@ -188,7 +188,6 @@ class SalesTransaction extends Component
         'display-discount-form' => 'displayDiscountForm',
         'display-payment-form' => 'displayPaymentForm',
         'get-quantity' => 'getQuantity',
-        'focus-input' => 'focusInput',
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments',
         'unselect-item' => 'unselectItem',
@@ -917,6 +916,10 @@ class SalesTransaction extends Component
     {
         $this->showPaymentForm = !$this->showPaymentForm;
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
+
+        if(!$this->showPaymentForm){
+            $this->focusInput();
+        }
     }
 
     public function displaySalesReturn()

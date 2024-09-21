@@ -79,7 +79,6 @@ class PaymentForm extends Component
         $this->resetForm();
 
         $this->resetValidation();
-        $this->dispatch('focus-input')->to(SalesTransaction::class);
         $this->dispatch('display-payment-form')->to(SalesTransaction::class);
 
     }
