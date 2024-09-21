@@ -83,11 +83,10 @@ class CustomerForm extends Component
     {
 
 
+
         $validated = $data['inputAttributes'];
-
         if ($this->id_picture) {
-
-            $validated['id_picture'] =   file_get_contents($this->id_picture);
+            $validated['id_picture'] = $this->id_picture->store('public');
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
