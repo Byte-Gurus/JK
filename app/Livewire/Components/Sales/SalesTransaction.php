@@ -918,7 +918,6 @@ class SalesTransaction extends Component
         $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
 
         if(!$this->showPaymentForm){
-            dd("yummers");
             $this->focusInput();
         }
     }
