@@ -67,8 +67,8 @@ class CustomerTable extends Component
     public function showImage($customer_id)
     {
         $customer = Customer::find($customer_id);
-        
-        if ($customer && $customer->image) { // Assuming 'image' is the column name for binary data
+
+        if ($customer && $customer->id_picture) { // Assuming 'image' is the column name for binary data
             $this->imageUrl = 'data:image/jpeg;base64,' . base64_encode($customer->image);
         } else {
             $this->imageUrl = null; // Handle case when no image is found
