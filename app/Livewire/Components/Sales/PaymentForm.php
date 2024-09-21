@@ -61,7 +61,7 @@ class PaymentForm extends Component
         $this->dispatch('get-customer-payments', Payment: $this->payment)->to(SalesTransaction::class);
 
         $this->dispatch('display-payment-form')->to(SalesTransaction::class);
-        $this->dispatch('focus-input')->to(SalesTransaction::class);
+
     }
     public function changePaymentMethod()
     {
@@ -79,6 +79,7 @@ class PaymentForm extends Component
         $this->resetForm();
 
         $this->resetValidation();
+        $this->dispatch('focus-input')->to(SalesTransaction::class);
         $this->dispatch('display-payment-form')->to(SalesTransaction::class);
 
     }
