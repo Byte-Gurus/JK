@@ -19,7 +19,7 @@ class SalesReturnDetails extends Component
     public $returnQuantity = [];
     public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [];
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount;
 
     public $return_info = [];
 
@@ -60,6 +60,8 @@ class SalesReturnDetails extends Component
         $transaction = Transaction::find($this->transaction_id);
         $transaction->total_amount = $this->new_total;
         $transaction->transaction_type = 'Return';
+
+        $transaction->total_vat_amount = $this->new_vat_amount;
         $transaction->save();
 
         $returns = Returns::create([
@@ -129,6 +131,7 @@ class SalesReturnDetails extends Component
     {
         $this->return_total_amount = 0;
         $this->item_return_amount = 0;
+        $this->return_vat_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
 
@@ -139,6 +142,22 @@ class SalesReturnDetails extends Component
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
 
                     $this->return_total_amount += $this->item_return_amount;
+
+                    $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
+
+                    $this->return_vat_amount  += $transactionDetail->item_subtotal;
+
+
+                    $total_vat_amount = $transactionDetail->transactionJoin->total_vat_amount;
+
+                    $this->new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
+
+                }
+
+
+
+                if ($this->returnQuantity[$index] >=  $transactionDetail->itemJoin->bulk_quantity) {
+                    $this->return_total_amount = $this->return_total_amount - $transactionDetail->item_discount_amount;
                 }
 
 
@@ -152,6 +171,8 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
+
+
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()

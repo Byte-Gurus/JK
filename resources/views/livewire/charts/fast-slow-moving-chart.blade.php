@@ -4,7 +4,8 @@
             <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Fast & Slow Moving Items</p>
         </div>
         <div>
-            <input type="month" wire:model.live="month" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
+            <input type="month" wire:model.live="month"
+                class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
         </div>
     </div>
 
@@ -63,6 +64,7 @@
                             beginAtZero: true
                         }
                     },
+
 
                 }
             });

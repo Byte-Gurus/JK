@@ -217,14 +217,25 @@
                             <p class=" text-[1.2em] font-black">{{ $discount_percent }}</p>
                         </div>
                     </div>
-                    <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.2em] font-medium">Total</p>
+                    @if ($transaction_type == 'Return')
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Total</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
+                    @else
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Total</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="flex flex-row justify-between">
                         <div>
                             <p class=" text-[1.2em] font-medium">Tendered Amount</p>

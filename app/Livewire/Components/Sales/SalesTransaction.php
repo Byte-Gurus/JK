@@ -3,7 +3,9 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Events\CreditEvent;
+use App\Events\InventoryEvent;
 use App\Events\ItemEvent;
+use App\Events\PurchaseOrderEvent;
 use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
@@ -164,6 +166,7 @@ class SalesTransaction extends Component
             'customer_id' => $creditor_id,
             'credit_no' =>  $this->credit_no,
             'credit_id' => $credit->id,
+            'creditor_name' => $this->creditor_name,
             'credit_limit' => $this->credit_limit
         ];
 
@@ -737,6 +740,8 @@ class SalesTransaction extends Component
         TransactionEvent::dispatch('refresh-transaction');
 
         ItemEvent::dispatch('refresh-item');
+        InventoryEvent::dispatch('refresh-inventory');
+        PurchaseOrderEvent::dispatch('refresh-purchase-order');
 
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
@@ -771,7 +776,7 @@ class SalesTransaction extends Component
         // Calculate the demand rate
         $demandRate =  $todayTotalItemQuantity / $daysWithSales;
 
-        $reorder_point = ($days * $demandRate);
+        $reorder_point = round($days * $demandRate);
 
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;

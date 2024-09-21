@@ -37,13 +37,12 @@ class DiscountForm extends Component
         $searchCustomerTerm = trim($this->searchCustomer);
 
         $customers = Customer::where(function ($query) {
-            $query->where('customer_type', 'PWD')
-                ->orWhere('customer_type', 'Senior Citizen');
+            $query->where('customer_type', '!=' , 'Credit');
         })
             ->where(function ($query) use ($searchCustomerTerm) {
-                $query->where('firstname', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('middlename', 'like', "%{$searchCustomerTerm}%")
-                    ->orWhere('lastname', 'like', "%{$searchCustomerTerm}%");
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])
+                    ->orWhereRaw('LOWER(lastname) like ?', ["%{$searchCustomerTerm}%"]);
             })
             ->get();
 

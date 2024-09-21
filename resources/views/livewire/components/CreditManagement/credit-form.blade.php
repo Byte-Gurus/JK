@@ -146,7 +146,7 @@
                                     </div>
                                 @else
                                     <div class="mb-3">
-                                       
+
                                         <div class="flex flex-row items-center justify-between">
                                             <p class=" text-[2em] font-black">{{ $customer_name }}</p>
                                             <div wire:click='clearSelectedCustomerName()'>
@@ -257,7 +257,7 @@
                         </div>
                     @else
                         {{-- *if form is create --}}
-                        <div class="flex flex-row justify-end gap-2">
+                        <div class="flex flex-row justify-end gap-2 m-2">
                             <div>
 
                                 {{-- //* clear all button for create --}}
@@ -275,8 +275,6 @@
                                         <p>
                                             Create
                                         </p>
-
-
                                     </div>
                                 </button>
 
@@ -295,18 +293,13 @@
                                             </path>
                                         </svg>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     @endif
-
                 </div>
-
             </form>
         </div>
-
     </div>
 </div>
 

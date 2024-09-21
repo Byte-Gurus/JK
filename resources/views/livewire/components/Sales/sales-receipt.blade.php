@@ -48,7 +48,7 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_no'] ?? null }}</p>
+                            {{ $receiptDetails['transaction_info']['user'] ?? null }}</p>
                     </div>
                 </div>
             </div>
@@ -205,6 +205,13 @@
                             {{ $receiptDetails['customerDetails']['lastname'] ?? null }}
                         </p>
                     @endif
+
+                    @if (isset($receiptDetails['credit_details']['creditor_name']))
+                        <p class="text-[0.6em] font-bold uppercase">
+                            {{ $receiptDetails['credit_details']['creditor_name'] ?? null }}
+                        </p>
+                    @endif
+
 
                 </div>
                 <div class="flex flex-col justify-between font-bold">

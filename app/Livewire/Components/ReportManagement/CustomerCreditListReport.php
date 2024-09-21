@@ -2,23 +2,22 @@
 
 namespace App\Livewire\Components\ReportManagement;
 
-use App\Models\Inventory;
-use Carbon\Carbon;
+use App\Models\Credit;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class StockonhandReport extends Component
+class CustomerCreditListReport extends Component
 {
-    public $createdBy, $dateCreated;
+    public $dateCreated, $createdBy;
     public function render()
     {
-        $inventories = Inventory::query()
-            ->where('status', 'Available')
-            ->get();
+        $credits = Credit::whereHas('transactionJoin')->get();
 
-            $this->reportInfo();
-        return view('livewire.components.ReportManagement.stockonhand-report', [
-            'inventories' => $inventories
+        $this->reportInfo();
+
+        return view('livewire.components.ReportManagement.customer-credit-list-report',[
+            'credits' => $credits
         ]);
     }
 
@@ -27,6 +26,5 @@ class StockonhandReport extends Component
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
 
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');
-
     }
 }
