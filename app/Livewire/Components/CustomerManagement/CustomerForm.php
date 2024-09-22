@@ -87,19 +87,26 @@ class CustomerForm extends Component
 
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
+            // Validate and store the uploaded file temporarily
+            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
-            $filename = Str::random(40) . '.' . pathinfo($this->id_picture, PATHINFO_EXTENSION);
+            // Generate a new filename
+            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
 
             // Get the contents of the file
-            $fileContents = file_get_contents($this->id_picture);
+            $fileContents = Storage::disk('local')->get($path);
 
             // Store the file on S3
             $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+            // Optionally delete the temporary file
+            Storage::disk('local')->delete($path);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
 
         dd($isStored);
+
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
