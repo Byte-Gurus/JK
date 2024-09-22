@@ -87,12 +87,18 @@ class CustomerForm extends Component
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
 
-            $validated['id_picture'] = Storage::disk('s3')->put($this->id_picture, file_get_contents($this->id_picture));
+            $filename = str()::random(40) . '.' . pathinfo($this->id_picture, PATHINFO_EXTENSION);
+
+            // Get the contents of the file
+            $fileContents = file_get_contents($this->id_picture);
+
+            // Store the file on S3
+            $isStored = Storage::disk('s3')->put($filename, $fileContents);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
 
-        dd(Storage::disk('s3')->put($this->id_picture, file_get_contents($this->id_picture)));
+        dd($isStored);
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
