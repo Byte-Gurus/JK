@@ -19,7 +19,7 @@
             @endif
 
             {{-- *if form is create --}}
-            <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
+            <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create" >
                 @csrf
 
                 <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
@@ -177,7 +177,7 @@
 
                                         @if ($id_picture instanceof \Illuminate\Http\UploadedFile)
                                             <img src="{{ $id_picture->temporaryUrl() }}">
-                                        @elseif(is_string($id_picture))
+                                        @elseif($id_picture)
                                             <img src="{{ $imageUrl }}" alt="Customer ID Picture"
                                                 class="w-1/3 h-1/2">
                                         @endif

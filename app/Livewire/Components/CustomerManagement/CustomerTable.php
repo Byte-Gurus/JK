@@ -67,7 +67,7 @@ class CustomerTable extends Component
     public function showImage($customer_id)
     {
         $customer = Customer::find($customer_id);
-        $this->imageUrl = $customer->id_picture ? Storage::url($customer->id_picture) : null;
+        $this->imageUrl = Storage::disk('r2')->get($customer->id_pictures) ?? null;
     }
     public function refreshFromPusher()
     {

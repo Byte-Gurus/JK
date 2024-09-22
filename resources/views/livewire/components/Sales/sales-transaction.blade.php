@@ -401,7 +401,7 @@
                 {{-- date & time section --}}
                 <div class="flex flex-row items-center justify-center gap-8 p-2">
                     <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
-                        <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
+                        <input type="text" x-ref="barcodeInput" wire.live="barcode" id="barcode" style="opacity: 0;" autofocus
                             x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
                     </div>
                     <div>
@@ -601,3 +601,10 @@
         @livewire('components.sales.wholesale-form')
     </div>
 </div>
+@script
+    <script>
+        Livewire.on('barcode_focus', () => {
+            document.getElementById('barcode').focus();
+        });
+    </script>
+@endscript

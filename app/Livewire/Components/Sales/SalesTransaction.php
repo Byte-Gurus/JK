@@ -188,7 +188,7 @@ class SalesTransaction extends Component
         'display-discount-form' => 'displayDiscountForm',
         'display-payment-form' => 'displayPaymentForm',
         'get-quantity' => 'getQuantity',
-        'focus-input' => 'focusInput',
+        
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments',
         'unselect-item' => 'unselectItem',
