@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PhilippineCitiesTableSeeder::class);
         $this->call(PhilippineBarangaysTableSeeder::class);
 
-        Supplier::factory(100)->create();
-        Customer::factory(100)->create();
+        // Supplier::factory(100)->create();
+        // Customer::factory(100)->create();
         // $this->call(ItemSeeder::class);
         // Inventory::factory(100)->create();
 
