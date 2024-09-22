@@ -214,7 +214,7 @@
                                                     <div>Edit</div>
                                                 </button>
                                                 <div class="w-full border border-[rgb(39,39,39)]"></div>
-                                                @if ($customer->picture_id)
+                                                @if (!$customer->picture_id)
                                                     <button
                                                         class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]"
                                                         x-on:click="showPrintModal=true; $wire.showImage('{{ $customer->id }}'), openActions = !openActions">
