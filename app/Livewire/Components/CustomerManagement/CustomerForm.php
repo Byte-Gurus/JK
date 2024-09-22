@@ -106,7 +106,7 @@ class CustomerForm extends Component
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
 
-        dd($validated['id_picture']);
+
 
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
@@ -335,6 +335,6 @@ class CustomerForm extends Component
         $this->populateForm();
 
         $customer = Customer::find($customerID);
-        $this->imageUrl =  Storage::url($customer->id_picture);
+        
     }
 }
