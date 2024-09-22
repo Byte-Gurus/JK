@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Support\Str;
 
 class CustomerForm extends Component
 {
@@ -87,7 +88,7 @@ class CustomerForm extends Component
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
 
-            $filename = str()::random(40) . '.' . pathinfo($this->id_picture, PATHINFO_EXTENSION);
+            $filename = Str::random(40) . '.' . pathinfo($this->id_picture, PATHINFO_EXTENSION);
 
             // Get the contents of the file
             $fileContents = file_get_contents($this->id_picture);
