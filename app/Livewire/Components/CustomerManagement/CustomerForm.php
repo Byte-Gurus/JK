@@ -101,7 +101,7 @@ class CustomerForm extends Component
             // Optionally delete the temporary file
             Storage::disk('local')->delete($path);
 
-            $validated['id_picture'] = Storage::url($filename);
+            $validated['id_picture'] = Storage::disk('s3')->url($filename);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
@@ -335,6 +335,6 @@ class CustomerForm extends Component
         $this->populateForm();
 
         $customer = Customer::find($customerID);
-        
+
     }
 }
