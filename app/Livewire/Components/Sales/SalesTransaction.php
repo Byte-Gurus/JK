@@ -472,7 +472,7 @@ class SalesTransaction extends Component
                 $this->PWD_Senior_discount_amount = $this->netAmount;
             }
             if ($this->credit_details) {
-                $this->discount_percent = $this->discounts[1];
+                $this->discount_percent = $this->discounts[1]->percentage;
 
                 $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
                 $this->PWD_Senior_discount_amount = $this->netAmount;
