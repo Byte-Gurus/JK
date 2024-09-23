@@ -401,8 +401,9 @@
                 {{-- date & time section --}}
                 <div class="flex flex-row items-center justify-center gap-8 p-2">
                     <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
-                        <input type="text" x-ref="barcodeInput" wire.live="barcode" id="barcode" style="opacity: 0;" autofocus
-                            x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
+                        <input type="text" x-ref="barcodeInput" wire.live="barcode" id="barcode"
+                            style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
+                            wire:model.live="barcode">
                     </div>
                     <div>
                         <p>Time</p>
@@ -524,82 +525,87 @@
                                 <div class="border border-black "></div>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-2 mx-6 mb-2">
-                            <div class="flex flex-row items-center gap-6">
-                                <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
-                            </div>
-                            <div class="flex flex-row items-center gap-6 ">
-                                <div class=" font-medium text-[1.6em]">Customer Name: {{ $customer_name }}</div>
+                        @if (!isSales)
+                        ASasasasas
+                        @else
+                            <div class="flex flex-col gap-2 mx-6 mb-2">
+                                <div class="flex flex-row items-center gap-6">
+                                    <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
+                                </div>
+                                <div class="flex flex-row items-center gap-6 ">
+                                    <div class=" font-medium text-[1.6em]">Customer Name: {{ $customer_name }}</div>
 
-                            </div>
-                            <div class="flex flex-row items-center gap-6 ">
-                                <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
+                                </div>
+                                <div class="flex flex-row items-center gap-6 ">
+                                    <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
 
+                                </div>
+                        @endif
+
+                    </div>
+                    <div class="my-2">
+                        <div class="border border-black"></div>
+                    </div>
+                    {{-- ss --}}
+                    <div class="flex flex-col gap-2 mx-6">
+                        <div class="flex flex-row justify-between">
+                            <div class=" font-medium text-[1.4em]">
+                                <p>Tax Amount</p>
                             </div>
+                            <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
                         </div>
-                        <div class="my-2">
+
+                        <div class="w-full my-2">
                             <div class="border border-black"></div>
                         </div>
-                        {{-- ss --}}
-                        <div class="flex flex-col gap-2 mx-6">
-                            <div class="flex flex-row justify-between">
-                                <div class=" font-medium text-[1.4em]">
-                                    <p>Tax Amount</p>
-                                </div>
-                                <div class=" font-black text-[1.4em]">₱ {{ number_format($totalVat, 2) }}</div>
+                        <div class="flex flex-row justify-between">
+                            <div class=" font-black text-[2em]">
+                                <p>Subtotal</p>
+                            </div>
+                            <div class=" font-black text-[2em]">₱ {{ number_format($subtotal, 2) }}</div>
+                        </div>
+                        <div class="flex flex-row justify-between">
+                            <div class=" font-medium text-[1.4em]">
+                                <p>Senior & PWD </p>
                             </div>
 
-                            <div class="w-full my-2">
-                                <div class="border border-black"></div>
+                            <div class=" font-black text-[1.4em]">{{ $discount_percent }} %</div>
+                        </div>
+                        <div class="flex flex-row justify-between">
+                            <div class=" font-medium text-[1.4em]">
+                                <p>Discount Amount</p>
                             </div>
-                            <div class="flex flex-row justify-between">
-                                <div class=" font-black text-[2em]">
-                                    <p>Subtotal</p>
-                                </div>
-                                <div class=" font-black text-[2em]">₱ {{ number_format($subtotal, 2) }}</div>
+                            <div class=" font-black text-[1.4em]">₱
+                                {{ number_format($PWD_Senior_discount_amount, 2) }}
                             </div>
-                            <div class="flex flex-row justify-between">
-                                <div class=" font-medium text-[1.4em]">
-                                    <p>Senior & PWD </p>
-                                </div>
-
-                                <div class=" font-black text-[1.4em]">{{ $discount_percent }} %</div>
+                        </div>
+                        <div class="w-full my-2">
+                            <div class="border border-black"></div>
+                        </div>
+                        <div class="flex flex-row justify-between">
+                            <div class=" font-black text-[2em]">
+                                <p>Total</p>
                             </div>
-                            <div class="flex flex-row justify-between">
-                                <div class=" font-medium text-[1.4em]">
-                                    <p>Discount Amount</p>
-                                </div>
-                                <div class=" font-black text-[1.4em]">₱
-                                    {{ number_format($PWD_Senior_discount_amount, 2) }}
-                                </div>
-                            </div>
-                            <div class="w-full my-2">
-                                <div class="border border-black"></div>
-                            </div>
-                            <div class="flex flex-row justify-between">
-                                <div class=" font-black text-[2em]">
-                                    <p>Total</p>
-                                </div>
-                                <div class=" font-black text-[2em]">₱ {{ number_format($grandTotal, 2) }}</div>
-                            </div>
+                            <div class=" font-black text-[2em]">₱ {{ number_format($grandTotal, 2) }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    @endif
-    <div x-show="showChangeQuantityForm" x-data="{ showChangeQuantityForm: @entangle('showChangeQuantityForm') }">
-        @livewire('components.sales.change-quantity-form')
-    </div>
-    <div x-show="showPaymentForm" x-data="{ showPaymentForm: @entangle('showPaymentForm') }">
-        @livewire('components.sales.payment-form')
-    </div>
-    <div x-show="showDiscountForm" x-data="{ showDiscountForm: @entangle('showDiscountForm') }">
-        @livewire('components.sales.discount-form')
-    </div>
-    <div x-show="showWholesaleForm" x-data="{ showWholesaleForm: @entangle('showWholesaleForm') }">
-        @livewire('components.sales.wholesale-form')
-    </div>
+</div>
+@endif
+<div x-show="showChangeQuantityForm" x-data="{ showChangeQuantityForm: @entangle('showChangeQuantityForm') }">
+    @livewire('components.sales.change-quantity-form')
+</div>
+<div x-show="showPaymentForm" x-data="{ showPaymentForm: @entangle('showPaymentForm') }">
+    @livewire('components.sales.payment-form')
+</div>
+<div x-show="showDiscountForm" x-data="{ showDiscountForm: @entangle('showDiscountForm') }">
+    @livewire('components.sales.discount-form')
+</div>
+<div x-show="showWholesaleForm" x-data="{ showWholesaleForm: @entangle('showWholesaleForm') }">
+    @livewire('components.sales.wholesale-form')
+</div>
 </div>
 @script
     <script>
