@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Support\Str;
 
 class CustomerForm extends Component
 {
@@ -83,15 +84,30 @@ class CustomerForm extends Component
     {
 
 
-
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
-            $validated['id_picture'] = $this->id_picture->store('public');
+            // Validate and store the uploaded file temporarily
+            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
+
+            // Generate a new filename
+            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
+
+            // Get the contents of the file
+            $fileContents = Storage::disk('local')->get($path);
+
+            // Store the file on S3
+            $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+            // Optionally delete the temporary file
+            Storage::disk('local')->delete($path);
+
+            $validated['id_picture'] = Storage::disk('s3')->url($filename);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
 
-        dd($validated['id_picture']);
+
+
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
@@ -319,6 +335,6 @@ class CustomerForm extends Component
         $this->populateForm();
 
         $customer = Customer::find($customerID);
-        $this->imageUrl =  Storage::url($customer->id_picture);
+
     }
 }
