@@ -23,6 +23,7 @@ use App\Models\Payment;
 use App\Models\PurchaseDetails;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use App\Models\TransactionMovement;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -733,6 +734,15 @@ class SalesTransaction extends Component
             ]);
         }
 
+        if ($transaction) {
+            $transaction_movements = TransactionMovement::create([
+                'movement_type' => 'Sales',
+                'transaction_id' => $transaction->id,
+                'credit_id' => null,
+                'returns_id' => null
+            ]);
+        }
+      
 
         CreditEvent::dispatch('refresh-credit');
 
