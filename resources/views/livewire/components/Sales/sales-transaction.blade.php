@@ -525,7 +525,7 @@
                                 <div class="border border-black "></div>
                             </div>
                         </div>
-                        @if (!isSales)
+                        @if (!$isSales)
                         ASasasasas
                         @else
                             <div class="flex flex-col gap-2 mx-6 mb-2">
