@@ -107,9 +107,11 @@ class SalesTransaction extends Component
                         ->orWhereRaw('LOWER(barcode) LIKE ?', ['%' . $searchTermLower . '%']);
                 });
             })
-            ->with(['inventoryJoin' => function ($query) {
-                $query->where('status', 'Available'); // Ensure only 'Available' inventory is eager-loaded
-            }])
+            ->with([
+                'inventoryJoin' => function ($query) {
+                    $query->where('status', 'Available'); // Ensure only 'Available' inventory is eager-loaded
+                }
+            ])
             ->get();
 
         // Process each item
@@ -161,16 +163,18 @@ class SalesTransaction extends Component
         $this->creditor_name = $credit->customerJoin->firstname . ' ' . ($credit->customerJoin->middlename ? $credit->customerJoin->middlename . ' ' : '') . $credit->customerJoin->lastname;
 
         $this->credit_no = $credit->credit_number;
-        $this->credit_limit =  $credit->credit_limit;
+        $this->credit_limit = $credit->credit_limit;
         $this->discount_type = $credit->customerJoin->customer_type;
-        $this->senior_pwd_id = $credit->customerJoin->senior_pwd_id;
+        $this->senior_pwd_id = $credit->customerJoin->senior_pwd_id ?? 'N/A';
 
         $this->credit_details = [
             'customer_id' => $creditor_id,
-            'credit_no' =>  $this->credit_no,
+            'credit_no' => $this->credit_no,
             'credit_id' => $credit->id,
             'creditor_name' => $this->creditor_name,
-            'credit_limit' => $this->credit_limit
+            'credit_limit' => $this->credit_limit,
+            'senior_pwd_id' => $credit->customerJoin->senior_pwd_id ?? 'N/A',
+            'discount_type' => $credit->customerJoin->customer_type
         ];
 
 
@@ -269,8 +273,8 @@ class SalesTransaction extends Component
                     if (
                         $this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity'] && $this->selectedItems[$index]['bulk_quantity'] >= 2
                     ) {
-                        $this->selectedItems[$index]['discount'] =    $this->discounts[3]->percentage;
-                        $this->selectedItems[$index]['discount_id'] =  $this->discounts[3]->id;
+                        $this->selectedItems[$index]['discount'] = $this->discounts[3]->percentage;
+                        $this->selectedItems[$index]['discount_id'] = $this->discounts[3]->id;
 
 
                         $this->selectedItems[$index]['original_total'] = $this->selectedItems[$index]['total_amount'];
@@ -278,7 +282,7 @@ class SalesTransaction extends Component
 
                         $this->selectedItems[$index]['wholesale_discount_amount'] = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
 
-                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] -   $this->selectedItems[$index]['wholesale_discount_amount'];
+                        $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] - $this->selectedItems[$index]['wholesale_discount_amount'];
                     }
 
 
@@ -307,8 +311,8 @@ class SalesTransaction extends Component
                     'bulk_quantity' => $item->itemJoin->bulk_quantity,
                     'wholesale_discount_amount' => 0,
                     'status' => 'Sales',
-                    'discount' =>  0,
-                    'discount_id' =>  null,
+                    'discount' => 0,
+                    'discount_id' => null,
                     'original_total' => 0,
                     'delivery_date' => $item->deliveryJoin->date_delivered,
                     'po_date' => $item->deliveryJoin->purchaseJoin->created_at,
@@ -410,8 +414,8 @@ class SalesTransaction extends Component
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
 
         if ($this->selectedItems[$this->selectedIndex]['quantity'] >= $this->selectedItems[$this->selectedIndex]['bulk_quantity']) {
-            $this->selectedItems[$this->selectedIndex]['discount'] =    $this->discounts[3]->percentage;
-            $this->selectedItems[$this->selectedIndex]['discount_id'] =  $this->discounts[3]->id;
+            $this->selectedItems[$this->selectedIndex]['discount'] = $this->discounts[3]->percentage;
+            $this->selectedItems[$this->selectedIndex]['discount_id'] = $this->discounts[3]->id;
 
 
 
@@ -421,7 +425,7 @@ class SalesTransaction extends Component
             $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
 
 
-            $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] -  $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'];
+            $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] - $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'];
         }
 
         $this->reset('selectedIndex', 'isSelected');
@@ -441,7 +445,7 @@ class SalesTransaction extends Component
         $non_vatable_subtotal = 0;
 
         $this->netAmount = 0;
-        $this->discount_percent =  0;
+        $this->discount_percent = 0;
         $this->PWD_Senior_discount_amount = 0;
 
 
@@ -452,10 +456,10 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount  = $vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
+                $vatable_amount = $vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
             } elseif ($index['vat_type'] === 'Non Vatable') {
                 $non_vatable_subtotal += $index['total_amount'];
-                $non_vatable_amount  =  $non_vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
+                $non_vatable_amount = $non_vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
             }
 
             $this->totalVat = $vatable_amount + $non_vatable_amount;
@@ -465,7 +469,13 @@ class SalesTransaction extends Component
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
                 $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
-                $this->PWD_Senior_discount_amount =  $this->netAmount;
+                $this->PWD_Senior_discount_amount = $this->netAmount;
+            }
+            if ($this->credit_details) {
+                $this->discount_percent = $this->discounts[1];
+
+                $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
+                $this->PWD_Senior_discount_amount = $this->netAmount;
             }
 
             $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
@@ -475,12 +485,12 @@ class SalesTransaction extends Component
         $this->tax_details = [
             'non_vatable_amount' => $non_vatable_amount,
             'vatable_amount' => $vatable_amount,
-            'total_vat' =>  $this->totalVat,
-            'PWD_Senior_discount_amount' =>  $this->PWD_Senior_discount_amount,
+            'total_vat' => $this->totalVat,
+            'PWD_Senior_discount_amount' => $this->PWD_Senior_discount_amount,
         ];
 
         if (isset($this->credit_details['credit_no'])) {
-            $this->credit_details['credit_amount'] =  $this->grandTotal;
+            $this->credit_details['credit_amount'] = $this->grandTotal;
         }
     }
 
@@ -489,7 +499,7 @@ class SalesTransaction extends Component
         if (!is_null($customerDetails)) {
             $this->customerDetails = $customerDetails;
 
-            $this->discount_type =   $this->customerDetails['customer_type'];
+            $this->discount_type = $this->customerDetails['customer_type'];
 
             if (isset($this->customerDetails['firstname'])) {
                 $this->customer_name = $this->customerDetails['firstname'] . ' ' . (isset($this->customerDetails['middlename']) && $this->customerDetails['middlename'] ? $this->customerDetails['middlename'] . ' ' : '') . $this->customerDetails['lastname'];
@@ -546,8 +556,8 @@ class SalesTransaction extends Component
     public function removeRowConfirmed()
     {
 
-        $this->totalVat -=  $this->tax_details['vatable_amount'];
-        $this->grandTotal  -=  $this->selectedItems[$this->selectedIndex]['total_amount'];
+        $this->totalVat -= $this->tax_details['vatable_amount'];
+        $this->grandTotal -= $this->selectedItems[$this->selectedIndex]['total_amount'];
         unset($this->selectedItems[$this->selectedIndex]);
 
         $this->selectedItems = array_values($this->selectedItems);
@@ -779,7 +789,7 @@ class SalesTransaction extends Component
         // dd($totalQuantity);
 
         // Calculate the demand rate
-        $demandRate =  $todayTotalItemQuantity / $daysWithSales;
+        $demandRate = $todayTotalItemQuantity / $daysWithSales;
 
         $reorder_point = round($days * $demandRate);
 
@@ -788,7 +798,7 @@ class SalesTransaction extends Component
         $item->save();
     }
 
-    public function getMaximumLevel($delivery_date, $po_date, $item_id,)
+    public function getMaximumLevel($delivery_date, $po_date, $item_id, )
     {
         $maximum_level_req = [];
 
