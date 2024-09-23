@@ -327,7 +327,7 @@
 
                     </div>
                     <div class="flex flex-row items-center gap-6 ">
-                        <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
+                        <div class=" font-medium text-[1.6em]">ID No.: {{ $senior_pwd_id }}</div>
 
                     </div>
                 </div>
@@ -531,8 +531,8 @@
                                 <div class=" font-medium text-[1.6em]">Discount Type: {{ $discount_type }}</div>
                             </div>
                             <div class="flex flex-row items-center gap-6 ">
-                                <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
-
+                                <div class=" font-medium text-[1.6em]">ID No.: {{ $senior_pwd_id }}</div>
+                                
                             </div>
                         @else
                             <div class="flex flex-col gap-2 mx-6 mb-2">
@@ -544,7 +544,7 @@
 
                                 </div>
                                 <div class="flex flex-row items-center gap-6 ">
-                                    <div class=" font-medium text-[1.6em]">ID No.: {{ $customer_discount_no }}</div>
+                                    <div class=" font-medium text-[1.6em]">ID No.: {{ $senior_pwd_id }}</div>
 
                                 </div>
                         @endif
