@@ -166,6 +166,8 @@ class SalesReturnDetails extends Component
                     'return_quantity' => $this->returnQuantity[$index],
                     'description' => $this->description[$index] ?? '',
                     'transaction_details_id' => $transactionDetail->id,
+                    'item_id' => $transactionDetail->item_id,
+                    'inventory_id' => $transactionDetail->inventory_id,
                     'operation' => $this->operation[$index]
 
                 ];

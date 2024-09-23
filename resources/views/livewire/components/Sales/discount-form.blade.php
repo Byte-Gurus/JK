@@ -301,16 +301,16 @@
 
                                             <div class="mb-3">
 
-                                                <label for="customer_discount_no"
+                                                <label for="senior_pwd_id"
                                                     class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                                     Discount
                                                     No</label>
 
-                                                <input type="number" id="customer_discount_no"
-                                                    wire:model="customer_discount_no"
+                                                <input type="number" id="senior_pwd_id"
+                                                    wire:model="senior_pwd_id"
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                    placeholder="Discount No" required />
-                                                @error('customer_discount_no')
+                                                    placeholder="PWD/Senior Citizen ID" required />
+                                                @error('senior_pwd_id')
                                                     <span
                                                         class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
@@ -445,16 +445,16 @@
 
                                     <div class="mb-3">
 
-                                        <label for="customer_discount_no"
+                                        <label for="senior_pwd_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
                                             Discount
                                             No</label>
 
-                                        <input type="number" id="customer_discount_no" disabled
-                                            wire:model="customer_discount_no"
+                                        <input type="number" id="senior_pwd_id" disabled
+                                            wire:model="senior_pwd_id"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Discount No" required />
-                                        @error('customer_discount_no')
+                                            placeholder="PWD/Senior Citizen ID" required />
+                                        @error('senior_pwd_id')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 

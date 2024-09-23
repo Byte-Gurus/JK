@@ -276,7 +276,7 @@ class CustomerForm extends Component
 
         ];
 
-        if ($this->customertype != 'Credit') {
+        if ($this->customertype != 'Normal') {
             $rules['senior_pwd_id'] =  'required|string|max:255';
         } else {
             $rules['senior_pwd_id'] =  'nullable|string|max:255';
