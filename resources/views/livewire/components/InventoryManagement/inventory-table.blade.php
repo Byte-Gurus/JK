@@ -108,7 +108,6 @@
                         {{-- //* reorder point --}}
                         <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
 
-
                         {{-- //* item cost --}}
                         <th scope="col" class="px-4 py-3 text-center">Item Cost (₱)</th>
 
@@ -276,7 +275,7 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
+                            <th class="relative flex items-center justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
                                         class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">

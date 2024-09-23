@@ -8,6 +8,7 @@ use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Customer;
+use App\Models\TransactionMovement;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -29,8 +30,7 @@ class CreditForm extends Component
         })->pluck('id');
 
         // Get customers who are of type 'Credit' and either have fully paid credits or no credits at all
-        $customers = Customer::where('customer_type', 'Credit')
-            ->whereNotIn('id', $customersWithUnpaidCredits)
+        $customers = Customer::whereNotIn('id', $customersWithUnpaidCredits)
             ->where(function ($query) use ($searchCustomerTerm) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
                     ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])
@@ -78,7 +78,7 @@ class CreditForm extends Component
 
         $this->confirm('Do you want to add this credit?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -104,6 +104,15 @@ class CreditForm extends Component
             'credit_amount' => null,
             'remaining_balance' => null,
         ]);
+
+
+        $transaction_movements = TransactionMovement::create([
+            'movement_type' => 'Credit',
+            'transaction_id' => null,
+            'credit_id' => $credit->id,
+            'returns_id' => null
+        ]);
+
 
         $this->alert('success', 'Creditor was created successfully');
         $this->resetForm();

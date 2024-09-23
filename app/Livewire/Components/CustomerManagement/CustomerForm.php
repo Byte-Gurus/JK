@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Support\Str;
 
 class CustomerForm extends Component
 {
@@ -26,7 +27,7 @@ class CustomerForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customertype, $customer_discount_no, $imageUrl;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $id_picture, $customertype, $senior_pwd_id, $imageUrl;
 
     public $proxy_customer_id, $customer_id;
     public function render()
@@ -65,7 +66,7 @@ class CustomerForm extends Component
 
     public function updatedCustomertype()
     {
-        $this->customer_discount_no = null;
+        $this->senior_pwd_id = null;
     }
 
 
@@ -83,22 +84,30 @@ class CustomerForm extends Component
     {
 
 
-
         $validated = $data['inputAttributes'];
         if ($this->id_picture) {
+            // Validate and store the uploaded file temporarily
+            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
-            $filename = str()::random(40) . '.' . pathinfo($this->id_picture, PATHINFO_EXTENSION);
+            // Generate a new filename
+            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
 
             // Get the contents of the file
-            $fileContents = file_get_contents($this->id_picture);
+            $fileContents = Storage::disk('local')->get($path);
 
             // Store the file on S3
             $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+            // Optionally delete the temporary file
+            Storage::disk('local')->delete($path);
+
+            $validated['id_picture'] = Storage::disk('s3')->url($filename);
         } else {
             $validated['id_picture'] = null; // or provide a default value if necessary
         }
 
-        dd($isStored);
+
+
         $address = Address::create([
             'province_code' => $validated['selectProvince'],
             'city_municipality_code' => $validated['selectCity'],
@@ -114,7 +123,7 @@ class CustomerForm extends Component
             'birthdate' => $validated['birthdate'],
             'address_id' => $address->id,
             'customer_type' => $validated['customertype'],
-            'customer_discount_no' => $validated['customer_discount_no'],
+            'senior_pwd_id' => $validated['senior_pwd_id'],
             'id_picture' => $validated['id_picture'],
         ]);
 
@@ -142,7 +151,7 @@ class CustomerForm extends Component
         $customers->contact_number = $validated['contact_number'];
         $customers->id_picture = $validated['id_picture'] ?? null;
         $customers->customer_type = $validated['customertype'];
-        $customers->customer_discount_no = $validated['customer_discount_no'] ?? null;
+        $customers->senior_pwd_id = $validated['senior_pwd_id'] ?? null;
         $customers->province_code = $validated['selectProvince'];
         $customers->city_municipality_code = $validated['selectCity'];
         $customers->barangay_code = $validated['selectBrgy'];
@@ -194,7 +203,7 @@ class CustomerForm extends Component
             'birthdate' => $updatedAttributes['birthdate'],
             'address_id' => $address->id ?? null,
             'customer_type' => $updatedAttributes['customertype'],
-            'customer_discount_no' => $updatedAttributes['customer_discount_no'] ?? null,
+            'senior_pwd_id' => $updatedAttributes['senior_pwd_id'] ?? null,
             'id_picture' => $updatedAttributes['id_picture'],
         ]);
         $customer->save();
@@ -222,7 +231,7 @@ class CustomerForm extends Component
             'contact_number' => $customer_details->contact_number,
             'id_picture' => $customer_details->id_picture ?? null,
             'customertype' => $customer_details->customer_type,
-            'customer_discount_no' => $customer_details->customer_discount_no ?? null,
+            'senior_pwd_id' => $customer_details->senior_pwd_id ?? null,
             'selectProvince' => $customer_details->addressJoin->province_code,
             'selectCity' => $customer_details->addressJoin->city_municipality_code,
             'selectBrgy' => $customer_details->addressJoin->barangay_code,
@@ -267,10 +276,10 @@ class CustomerForm extends Component
 
         ];
 
-        if ($this->customertype != 'Credit') {
-            $rules['customer_discount_no'] =  'required|string|max:255';
+        if ($this->customertype != 'Normal') {
+            $rules['senior_pwd_id'] =  'required|string|max:255';
         } else {
-            $rules['customer_discount_no'] =  'nullable|string|max:255';
+            $rules['senior_pwd_id'] =  'nullable|string|max:255';
         }
 
 
@@ -291,7 +300,7 @@ class CustomerForm extends Component
             'street',
             'id_picture',
             'customertype',
-            'customer_discount_no'
+            'senior_pwd_id'
         ]);
     }
 
@@ -326,6 +335,6 @@ class CustomerForm extends Component
         $this->populateForm();
 
         $customer = Customer::find($customerID);
-        $this->imageUrl =  Storage::url($customer->id_picture);
+
     }
 }

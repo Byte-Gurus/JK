@@ -16,7 +16,7 @@ class Customer extends Model
         'birthdate',
         'contact_number',
         'customer_type',
-        'customer_discount_no',
+        'senior_pwd_id',
         'id_picture',
         'address_id',
     ];
@@ -36,7 +36,7 @@ class Customer extends Model
         return $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
-            ->orWhereRaw('LOWER(customer_discount_no) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(senior_pwd_id) LIKE ?', ["%{$value}%"])
             ->orWhereHas('addressJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(street) LIKE ?', ["%{$value}%"])
                     ->orWhereHas('provinceJoin', function ($query) use ($value) {

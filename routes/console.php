@@ -48,6 +48,8 @@ Artisan::command('migration-order', function () {
         '2024_09_08_090928_create_returns_table.php',
         '2024_09_08_090030_create_return_details_table.php',
 
+        '2024_09_23_231210_create_transaction_movements_table.php',
+
         '0001_01_01_000001_create_cache_table.php',
         '0001_01_01_000002_create_jobs_table.php',
 

@@ -25,7 +25,7 @@ class DiscountForm extends Component
     public $cities = null;
     public $barangays = null;
 
-    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $customer_discount_no, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
+    public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $senior_pwd_id, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
     public $isSales = true;
     public $customerDetails = [];
     public $credit_details = [];
@@ -37,7 +37,7 @@ class DiscountForm extends Component
         $searchCustomerTerm = trim($this->searchCustomer);
 
         $customers = Customer::where(function ($query) {
-            $query->where('customer_type', '!=' , 'Credit');
+            $query->where('customer_type', '!=', 'Credit');
         })
             ->where(function ($query) use ($searchCustomerTerm) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
@@ -94,7 +94,7 @@ class DiscountForm extends Component
     {
 
         $customer = Customer::find($customer_id);
-        $this->customer_name =  $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+        $this->customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
         $this->customer_id = $customer_id;
         $this->populateForm();
 
@@ -116,8 +116,8 @@ class DiscountForm extends Component
             $customer = Customer::find($this->customer_id);
             $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
 
-            $creditor =  Customer::find($this->credit_details['customer_id']);
-            $creditor_name = $creditor->firstname . ' ' . $creditor->middlename  . ' ' . $creditor->lastname;
+            $creditor = Customer::find($this->credit_details['customer_id']);
+            $creditor_name = $creditor->firstname . ' ' . $creditor->middlename . ' ' . $creditor->lastname;
 
             if ($customer_name != $creditor_name) {
                 $this->alert('error', 'Name doesnt match with the credit');
@@ -136,7 +136,7 @@ class DiscountForm extends Component
 
         $this->confirm('Do you want to create and apply the discount?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -154,8 +154,8 @@ class DiscountForm extends Component
                 'contact_number' => $validated['contact_number'],
                 'birthdate' => $validated['birthdate'],
                 'customer_type' => $validated['customerType'],
-                'customer_discount_no' => $validated['customer_discount_no'],
-                'discount_percentage' =>  $validated['discount_percentage'],
+                'senior_pwd_id' => $validated['senior_pwd_id'],
+                'discount_percentage' => $validated['discount_percentage'],
                 'discount_id' => $this->discount_id,
 
                 'province_code' => $validated['selectProvince'],
@@ -166,9 +166,9 @@ class DiscountForm extends Component
         } else {
             $this->customerDetails = [
                 'customer_type' => $validated['customerType'],
-                'customer_discount_no' => $validated['customer_discount_no'],
-                'customer_id' =>  $validated['customer_id'],
-                'discount_percentage' =>  $validated['discount_percentage'],
+                'senior_pwd_id' => $validated['senior_pwd_id'],
+                'customer_id' => $validated['customer_id'],
+                'discount_percentage' => $validated['discount_percentage'],
                 'discount_id' => $this->discount_id,
             ];
         }
@@ -196,7 +196,7 @@ class DiscountForm extends Component
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'customer_discount_no', 'discount_percentage', 'searchCustomer']);
+        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'senior_pwd_id', 'discount_percentage', 'searchCustomer']);
     }
     public function resetFormWhenClosed()
     {
@@ -215,7 +215,7 @@ class DiscountForm extends Component
 
             $this->fill([
                 'customerType' => $customer_details->customer_type,
-                'customer_discount_no' => $customer_details->customer_discount_no,
+                'senior_pwd_id' => $customer_details->senior_pwd_id,
 
             ]);
         }
@@ -242,13 +242,13 @@ class DiscountForm extends Component
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
                 'street' => 'required|string|max:255',
                 'customerType' => 'required|in:PWD,Senior Citizen',
-                'customer_discount_no' => 'required|string|max:255',
+                'senior_pwd_id' => 'required|string|max:255',
                 'discount_percentage' => 'required|numeric|min:1',
             ];
         } else {
             $rules = [
                 'customerType' => 'required|in:PWD,Senior Citizen',
-                'customer_discount_no' => 'required|string|max:255',
+                'senior_pwd_id' => 'required|string|max:255',
                 'customer_id' => 'required|numeric',
                 'discount_percentage' => 'required|numeric|min:1',
             ];
@@ -274,7 +274,7 @@ class DiscountForm extends Component
 
     public function clearSelectedCustomerName()
     {
-        $this->reset(['customer_name', 'customerType', 'discount_percentage', 'customer_discount_no', 'customerDetails', 'credit_details']);
+        $this->reset(['customer_name', 'customerType', 'discount_percentage', 'senior_pwd_id', 'customerDetails', 'credit_details']);
     }
     public function getCreditDetail($creditDetail)
     {
