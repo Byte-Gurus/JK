@@ -29,8 +29,7 @@ class CreditForm extends Component
         })->pluck('id');
 
         // Get customers who are of type 'Credit' and either have fully paid credits or no credits at all
-        $customers = Customer::where('customer_type', 'Credit')
-            ->whereNotIn('id', $customersWithUnpaidCredits)
+        $customers = Customer::whereNotIn('id', $customersWithUnpaidCredits)
             ->where(function ($query) use ($searchCustomerTerm) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
                     ->orWhereRaw('LOWER(middlename) like ?', ["%{$searchCustomerTerm}%"])

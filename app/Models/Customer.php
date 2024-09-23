@@ -16,7 +16,7 @@ class Customer extends Model
         'birthdate',
         'contact_number',
         'customer_type',
-        'customer_discount_no',
+        'senior_pwd_id',
         'id_picture',
         'address_id',
     ];
