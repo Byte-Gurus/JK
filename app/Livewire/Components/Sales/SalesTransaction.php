@@ -42,7 +42,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $customer_discount_no, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -162,6 +162,8 @@ class SalesTransaction extends Component
 
         $this->credit_no = $credit->credit_number;
         $this->credit_limit =  $credit->credit_limit;
+        $this->discount_type = $credit->customerJoin->customer_type;
+        $this->senior_pwd_id = $credit->customerJoin->senior_pwd_id;
 
         $this->credit_details = [
             'customer_id' => $creditor_id,
@@ -188,7 +190,7 @@ class SalesTransaction extends Component
         'display-discount-form' => 'displayDiscountForm',
         'display-payment-form' => 'displayPaymentForm',
         'get-quantity' => 'getQuantity',
-        
+
         'get-customer-details' => 'getCustomerDetails',
         'get-customer-payments' => 'getCustomerPayments',
         'unselect-item' => 'unselectItem',
@@ -497,11 +499,11 @@ class SalesTransaction extends Component
             }
 
             $this->alert('success', 'Discount was applied successfully');
-            $this->customer_discount_no = $this->customerDetails['customer_discount_no'];
+            $this->senior_pwd_id = $this->customerDetails['senior_pwd_id'];
         } else {
             $this->customerDetails = null;
 
-            $this->reset('customer_name', 'customer_discount_no', 'discount_type');
+            $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
         }
     }
 
@@ -625,7 +627,7 @@ class SalesTransaction extends Component
                 'birthdate' => $this->customerDetails['birthdate'],
                 'address_id' => $address->id,
                 'customer_type' => $this->customerDetails['customer_type'],
-                'customer_discount_no' => $this->customerDetails['customer_discount_no'],
+                'senior_pwd_id' => $this->customerDetails['senior_pwd_id'],
                 'id_picture' => 'N/A',
 
             ]);

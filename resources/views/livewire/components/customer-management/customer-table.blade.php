@@ -165,7 +165,7 @@
 
                             {{-- //* customer discount number --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->customer_discount_no ?? 'N/A' }}
+                                {{ $customer->senior_pwd_id ?? 'N/A' }}
                             </th>
 
                             {{-- //* created at --}}
