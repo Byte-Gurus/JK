@@ -890,7 +890,7 @@ class SalesTransaction extends Component
 
     public function clearSelectedCustomerName()
     {
-        $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details');
+        $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details', 'senior_pwd_id', 'discount_type');
     }
 
 
