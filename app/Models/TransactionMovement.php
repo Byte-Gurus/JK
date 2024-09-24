@@ -39,6 +39,9 @@ class TransactionMovement extends Model
         return $query->whereHas('transactionJoin', function ($query) use ($value) {
             $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
         })
+            ->orWhereHas('creditJoin.transactionJoin', function ($query) use ($value) {
+                $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
+            })
             ->orWhereHas('transactionJoin.customerJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
@@ -54,6 +57,8 @@ class TransactionMovement extends Model
             ->orWhereHas('creditJoin.customerJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"]);
             });
+
+
     }
 
 }
