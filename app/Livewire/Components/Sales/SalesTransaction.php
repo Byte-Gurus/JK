@@ -742,13 +742,13 @@ class SalesTransaction extends Component
 
             $transaction_movements = TransactionMovement::create([
                 'movement_type' => 'Credit',
-                'transaction_id' => $transaction->id,
-                'credit_id' => null,
+                'transaction_id' => null,
+                'credit_id' => $credit->id,
                 'returns_id' => null
             ]);
         }
 
-      
+
 
 
 
