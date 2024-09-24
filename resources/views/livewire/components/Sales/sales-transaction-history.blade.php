@@ -152,12 +152,7 @@
                         <tr x-data="{ isSelected: false }" x-on:click="isSelected = !isSelected" :class="isSelected && 'bg-gray-200'"
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75"
                         @if ($sale['movement_type'] == 'Sales' && isset($sale['transactionJoin']))
-                            wire:click="getTransactionID({{ $sale['transactionJoin']['id'] }}, true)"
-                        @elseif ($sale['movement_type'] == 'Credit' && isset($sale['creditJoin']['transactionJoin']))
-                            wire:click="getTransactionID({{ $sale['creditJoin']['transactionJoin']['id'] }}, true)"
-                        @elseif ($sale['movement_type'] == 'Return' && isset($sale['returnsJoin']['transactionJoin']))
-                            wire:click="getTransactionID({{ $sale['returnsJoin']['transactionJoin']['id'] }}, true)"
-                        @endif
+                      
                     >
                             @if ($sale['movement_type'] == 'Sales')
                                 <th scope="row" class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap">

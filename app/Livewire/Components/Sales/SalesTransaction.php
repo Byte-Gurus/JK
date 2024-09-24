@@ -11,7 +11,6 @@ use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
 use App\Models\Credit;
-
 use App\Models\CreditHistory;
 use App\Models\Customer;
 use App\Models\Discount;
@@ -725,12 +724,7 @@ class SalesTransaction extends Component
                 'payment_type' => $this->payment['payment_type'],
             ]);
 
-            $transaction_movements = TransactionMovement::create([
-                'movement_type' => 'Sales',
-                'transaction_id' => $transaction->id,
-                'credit_id' => null,
-                'returns_id' => null
-            ]);
+
         } else {
             $credit = Credit::where('credit_number', $this->credit_no)->first();
             $credit->credit_amount = $this->grandTotal;
@@ -745,12 +739,7 @@ class SalesTransaction extends Component
                 'remaining_balance' => $this->grandTotal,
             ]);
 
-            $transaction_movements = TransactionMovement::create([
-                'movement_type' => 'Credit',
-                'transaction_id' => null,
-                'credit_id' => $credit->id,
-                'returns_id' => null
-            ]);
+
         }
 
 

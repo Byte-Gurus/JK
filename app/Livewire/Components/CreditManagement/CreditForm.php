@@ -106,12 +106,6 @@ class CreditForm extends Component
         ]);
 
 
-        // $transaction_movements = TransactionMovement::create([
-        //     'movement_type' => 'Credit',
-        //     'transaction_id' => null,
-        //     'credit_id' => $credit->id,
-        //     'returns_id' => null
-        // ]);
 
 
         $this->alert('success', 'Creditor was created successfully');

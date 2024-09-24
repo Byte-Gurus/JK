@@ -85,12 +85,7 @@ class SalesReturnDetails extends Component
 
         ]);
 
-        $transaction_movements = TransactionMovement::create([
-            'movement_type' => 'Return',
-            'transaction_id' => null,
-            'credit_id' => null,
-            'returns_id' => $returns->id
-        ]);
+      
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             // Ensure the index exists in return_info array
