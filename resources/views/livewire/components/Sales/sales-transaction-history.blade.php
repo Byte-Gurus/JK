@@ -181,6 +181,31 @@
                                         class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                         {{ $sale['transactionJoin']['created_at']->format(' M d Y h:i A ') }}
                                     </th>
+                                @elseif ($sale['movement_type'] == 'Credit')
+                                    <th
+                                        scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['creditJoin']['transaction_number'] }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ number_format($sale->transactionJoin->total_amount, 2) }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['movement_type'] }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['creditJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                                        {{ $sale['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['transactionJoin']['created_at']->format(' M d Y h:i A ') }}
+                                    </th>
                                 @endif
 
 
