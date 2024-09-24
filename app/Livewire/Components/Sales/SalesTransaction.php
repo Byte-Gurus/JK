@@ -553,6 +553,7 @@ class SalesTransaction extends Component
             return;
         }
         $this->isSales = !$this->isSales;
+        $this->reset('transaction_type');
         $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
     }
 
