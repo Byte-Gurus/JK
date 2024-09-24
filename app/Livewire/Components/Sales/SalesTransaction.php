@@ -512,11 +512,11 @@ class SalesTransaction extends Component
             $this->alert('success', 'Discount was applied successfully');
             $this->senior_pwd_id = $this->customerDetails['senior_pwd_id'];
         }
-        // else {
-        //     $this->customerDetails = null;
+        else {
+            $this->customerDetails = null;
 
-        //     $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
-        // }
+            $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
+        }
     }
 
     public function updatedBarcode()
