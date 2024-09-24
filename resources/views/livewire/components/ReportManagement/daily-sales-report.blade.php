@@ -175,26 +175,26 @@
                             <li class="col-span-3 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-left font-medium">
-                                        {{ $transaction->creditJoin->transaction_number }}</p>
+                                        {{ $transaction->creditJoin->transactionJoin->transaction_number }}</p>
                                 </div>
                             </li>
                             <li class="col-span-2 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-center font-medium">
-                                        {{ $transaction->creditJoin->transaction_type }}</p>
+                                        {{ $transaction->transaction_type }}</p>
                                 </div>
                             </li>
                             <li class="col-span-1 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-center font-bold">
-                                        {{ $transaction->creditJoin->created_at->format('H:i:s') }}
+                                        {{ $transaction->creditJoin->transactionJoin->created_at->format('H:i:s') }}
                                     </p>
                                 </div>
                             </li>
                             <li class="col-span-2 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->total_amount, 2) }}
+                                        {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
 
                                     </p>
                                 </div>
@@ -202,7 +202,7 @@
                             <li class="col-span-2 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->total_discount_amount, 2) }}
+                                        {{ number_format($transaction->creditJoin->transactionJoin->total_discount_amount, 2) }}
                                     </p>
                                 </div>
                             </li>
@@ -210,14 +210,14 @@
                             <li class="col-span-1 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->total_vat_amount, 2) }}
+                                        {{ number_format($transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
                                     </p>
                                 </div>
                             </li>
                             <li class="col-span-2 py-[3px]">
                                 <div>
                                     <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->total_amount - $transaction->creditJoin->total_vat_amount, 2) }}
+                                        {{ number_format($transaction->creditJoin->transactionJoin->total_amount - $transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
                                     </p>
                                 </div>
                             </li>
