@@ -548,7 +548,7 @@ class SalesTransaction extends Component
 
     public function updatedChangeTransactionType()
     {
-        if(!is_null($this->customerDetails)){
+        if(!$this->customerDetails){
             $this->alert('error', 'Remove discount first');
             return;
         }
