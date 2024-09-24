@@ -719,6 +719,13 @@ class SalesTransaction extends Component
                 'reference_number' => $this->payment['reference_no'] ?? 'N/A',
                 'payment_type' => $this->payment['payment_type'],
             ]);
+
+            $transaction_movements = TransactionMovement::create([
+                'movement_type' => 'Sales',
+                'transaction_id' => $transaction->id,
+                'credit_id' => null,
+                'returns_id' => null
+            ]);
         } else {
             $credit = Credit::where('credit_number', $this->credit_no)->first();
             $credit->credit_amount = $this->grandTotal;
@@ -732,16 +739,7 @@ class SalesTransaction extends Component
                 'credit_amount' => $this->grandTotal,
                 'remaining_balance' => $this->grandTotal,
             ]);
-        }
 
-        if (!$credit) {
-            $transaction_movements = TransactionMovement::create([
-                'movement_type' => 'Sales',
-                'transaction_id' => $transaction->id,
-                'credit_id' => null,
-                'returns_id' => null
-            ]);
-        } elseif ($credit) {
             $transaction_movements = TransactionMovement::create([
                 'movement_type' => 'Credit',
                 'transaction_id' => $transaction->id,
@@ -750,6 +748,7 @@ class SalesTransaction extends Component
             ]);
         }
 
+      
 
 
 
