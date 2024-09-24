@@ -42,20 +42,8 @@ class TransactionMovement extends Model
             ->orWhereHas('creditJoin.transactionJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
             })
-            ->orWhereHas('transactionJoin.customerJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
-            })
-            ->orWhereHas('transactionJoin.userJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
-            })
-            ->orWhereHas('transactionJoin.discountJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(CAST(percentage AS TEXT)) like ?', ["%{$value}%"]);
-            })
-            ->orWhereHas('transactionJoin.paymentJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(payment_type) like ?', ["%{$value}%"]);
-            })
-            ->orWhereHas('creditJoin.customerJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"]);
+            ->orWhereHas('returnsJoin.transactionJoin', function ($query) use ($value) {
+                $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
             });
 
 
