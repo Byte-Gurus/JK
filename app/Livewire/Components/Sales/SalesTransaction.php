@@ -734,15 +734,15 @@ class SalesTransaction extends Component
             ]);
         }
 
-        if ($transaction) {
-            $transaction_movements = TransactionMovement::create([
-                'movement_type' => 'Sales',
-                'transaction_id' => $transaction->id,
-                'credit_id' => null,
-                'returns_id' => null
-            ]);
-        }
-      
+
+        $transaction_movements = TransactionMovement::create([
+            'movement_type' => 'Sales',
+            'transaction_id' => $transaction->id,
+            'credit_id' => null,
+            'returns_id' => null
+        ]);
+
+
 
         CreditEvent::dispatch('refresh-credit');
 

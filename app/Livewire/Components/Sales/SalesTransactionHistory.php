@@ -5,6 +5,7 @@ namespace App\Livewire\Components\Sales;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use App\Models\TransactionMovement;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -28,7 +29,7 @@ class SalesTransactionHistory extends Component
     public $startDate, $endDate;
     public function render()
     {
-        $query = Transaction::query();
+        $query = TransactionMovement::query();
 
         if ($this->transactionFilter != 0) {
             $query->where('transaction_type', $this->transactionFilter);

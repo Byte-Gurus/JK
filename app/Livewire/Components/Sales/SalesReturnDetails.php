@@ -7,6 +7,7 @@ use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use App\Models\TransactionMovement;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -83,6 +84,14 @@ class SalesReturnDetails extends Component
             'original_amount' => $this->total_amount,
 
         ]);
+
+        $transaction_movements = TransactionMovement::create([
+            'movement_type' => 'Return',
+            'transaction_id' => null,
+            'credit_id' => null,
+            'returns_id' => $returns->id
+        ]);
+
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             // Ensure the index exists in return_info array
             if (isset($this->return_info[$index])) {
