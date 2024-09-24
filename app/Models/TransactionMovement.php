@@ -36,7 +36,9 @@ class TransactionMovement extends Model
     {
         $value = strtolower($value);
 
-        return $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"])
+        return $query->whereHas('transactionJoin', function ($query) use ($value) {
+            $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
+        })
             ->orWhereHas('transactionJoin.customerJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
@@ -44,7 +46,6 @@ class TransactionMovement extends Model
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('transactionJoin.discountJoin', function ($query) use ($value) {
-                // Cast percentage to text if it's a numeric field
                 $query->whereRaw('LOWER(CAST(percentage AS TEXT)) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('transactionJoin.paymentJoin', function ($query) use ($value) {
@@ -54,4 +55,5 @@ class TransactionMovement extends Model
                 $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"]);
             });
     }
+
 }
