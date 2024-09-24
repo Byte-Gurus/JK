@@ -30,21 +30,21 @@
                     </div>
 
                     {{-- //* close button --}}
-                    @if (!$customerDetails)
-                        <button type="button" x-on:click="showDiscountForm=false" wire:click=' resetFormWhenClosed() '
-                            class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
-                            data-modal-hide="UserModal">
 
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
+                    <button type="button" x-on:click="showDiscountForm=false" wire:click=' resetFormWhenClosed() '
+                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
+                        data-modal-hide="UserModal">
 
-                            <span class="sr-only">Close modal</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
 
-                        </button>
-                    @endif
+                        <span class="sr-only">Close modal</span>
+
+                    </button>
+
 
                 </div>
 
@@ -389,14 +389,17 @@
                                                 <p class="text-2xl font-bold ">{{ $customer_name }}</p>
 
                                                 {{-- clear customer name --}}
-                                                <div wire:click='clearSelectedCustomerName()'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                        class="size-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                    </svg>
-                                                </div>
+                                                @if (!$customerDetails)
+                                                    <div wire:click='clearSelectedCustomerName()'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth={1.5}
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                        </svg>
+                                                    </div>
+                                                @endif
+
                                             </div>
                                         </div>
                                     @endif
