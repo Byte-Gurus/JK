@@ -181,14 +181,14 @@
                                         class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                         {{ $sale['transactionJoin']['created_at']->format(' M d Y h:i A ') }}
                                     </th>
-                                @elseif ($sale['movement_type'] == 'Credit')
+                                @elseif ($sale['creditJoin']['transactionJoin']
                                     <th
                                         scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
                                         {{ $sale['creditJoin']['transactionJoin']['transaction_number'] ?? 'N/A'}}
                                     </th>
                                     <th
                                         scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                        {{ number_format($sale->creditJoin->transactionJoin->total_amount, 2) }}
+                                        {{ number_format($sale->creditJoin->transactionJoin->total_amount, 2)  ?? 'N/A' }}
                                     </th>
                                     <th
                                         scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -204,7 +204,7 @@
                                     </th>
                                     <th scope="row"
                                         class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                        {{ $sale['creditJoin']['transactionJoin']['created_at']->format(' M d Y h:i A ') }}
+                                        {{ $sale['creditJoin']['transactionJoin']['created_at']->format(' M d Y h:i A ') ?? 'N/A'}}
                                     </th>
                                 @elseif ($sale['movement_type'] == 'Return')
                                     <th
