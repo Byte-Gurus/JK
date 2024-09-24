@@ -548,6 +548,10 @@ class SalesTransaction extends Component
 
     public function updatedChangeTransactionType()
     {
+        if(!is_null($this->customerDetails)){
+            $this->alert('error', 'Remove discount first');
+            return;
+        }
         $this->isSales = !$this->isSales;
         $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
     }
