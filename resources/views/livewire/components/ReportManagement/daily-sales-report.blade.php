@@ -115,7 +115,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($transaction_info)
                 @foreach ($transactions as $transaction)
-                    @if ($transaction->movement_type == 'Sales')
+                    @if (isset($transaction->transactionJoin))
                         <ul class="grid justify-between grid-flow-col grid-cols-12 mx-4 ">
 
                             <li class="col-span-3 py-[3px]">
@@ -164,60 +164,6 @@
                                 <div>
                                     <p class="text-[0.8em] text-center font-bold">
                                         {{ number_format($transaction->transactionJoin->total_amount - $transaction->transactionJoin->total_vat_amount, 2) }}
-                                    </p>
-                                </div>
-                            </li>
-
-                        </ul>
-                    @elseif ($transaction->movement_type == 'Credit')
-                        <ul class="grid justify-between grid-flow-col grid-cols-12 mx-4 ">
-
-                            <li class="col-span-3 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-left font-medium">
-                                        {{ $transaction->creditJoin->transactionJoin->transaction_number }}</p>
-                                </div>
-                            </li>
-                            <li class="col-span-2 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-center font-medium">
-                                        {{ $transaction->transaction_type }}</p>
-                                </div>
-                            </li>
-                            <li class="col-span-1 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-center font-bold">
-                                        {{ $transaction->creditJoin->transactionJoin->created_at->format('H:i:s') }}
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="col-span-2 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
-
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="col-span-2 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->transactionJoin->total_discount_amount, 2) }}
-                                    </p>
-                                </div>
-                            </li>
-
-                            <li class="col-span-1 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="col-span-2 py-[3px]">
-                                <div>
-                                    <p class="text-[0.8em] text-center font-bold">
-                                        {{ number_format($transaction->creditJoin->transactionJoin->total_amount - $transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
                                     </p>
                                 </div>
                             </li>

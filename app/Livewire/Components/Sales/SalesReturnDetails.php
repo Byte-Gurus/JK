@@ -80,7 +80,7 @@ class SalesReturnDetails extends Component
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
-            'return_total_amount' => $this->return_total_amount * -1,
+            'return_total_amount' => $this->return_total_amount,
             'original_amount' => $this->total_amount,
 
         ]);
