@@ -1,4 +1,4 @@
-    <div class="relative overflow-hidden bg-white h-[68vh] mb-[3vh]">
+    <div class="relative overflow-hidden bg-white h-[66vh] mb-[3vh]">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between mb-[3vh] ">
@@ -38,7 +38,7 @@
             </div>
         </div>
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll border rounded-md border-[rgb(143,143,143)] h-[54vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll border rounded-md border-[rgb(143,143,143)] h-[52vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 

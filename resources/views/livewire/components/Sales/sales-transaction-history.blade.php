@@ -138,9 +138,6 @@
 
                             </div>
                         </th>
-
-
-
                     </tr>
                 </thead>
 
@@ -222,7 +219,6 @@
                             @endif
                         </tr>
                     @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -313,7 +309,7 @@
                     @endif
                 </div>
             </div>
-            <div class="w-full h-[260px] overflow-x-auto overflow-y-scroll scroll ">
+            <div class="w-full h-[30vh] overflow-x-auto overflow-y-scroll scroll ">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
