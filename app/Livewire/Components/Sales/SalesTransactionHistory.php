@@ -32,10 +32,10 @@ class SalesTransactionHistory extends Component
         $query = TransactionMovement::query();
 
         if ($this->transactionFilter != 0) {
-            $query->where('transaction_type', $this->transactionFilter);
+            $query->where('movement_type', $this->transactionFilter);
         }
         if ($this->paymentFilter != 0) {
-            $query->whereHas('paymentJoin', function ($query) {
+            $query->whereHas('transactionjoin.paymentJoin', function ($query) {
                 $query->where('payment_type', $this->paymentFilter);
             });
         }
