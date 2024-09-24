@@ -156,33 +156,33 @@
                             <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
                                 x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                                @if ($sale['transactionJoin'])
+                                @if ($sale['movement_type'] == 'Sales')
                                     <th
                                         scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
                                         {{ $sale['transactionJoin']['transaction_number'] }}
                                     </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ number_format($sale->total_amount, 2) }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['movement_type'] }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                    </th>
+                                    <th
+                                        scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                                        {{ $sale['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['transactionJoin']['created_at']->format(' M d Y h:i A ') }}
+                                    </th>
                                 @endif
 
-                                <th
-                                    scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ number_format($sale->total_amount, 2) }}
-                                </th>
-                                <th
-                                    scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['transaction_type'] }}
-                                </th>
-                                <th
-                                    scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['paymentJoin']['payment_type'] ?? 'N/A' }}
-                                </th>
-                                <th
-                                    scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
-                                    {{ $sale['paymentJoin->reference_number'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['created_at']->format(' M d Y h:i A ') }}
-                                </th>
 
 
                             </tr>
