@@ -303,7 +303,7 @@
                                         <select id="customertype" wire:model.live="customertype" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value=""selected>Select Customer Type</option>
-                                            <option value="Credit">Normal</option>
+                                            <option value="Normal">Normal</option>
                                             <option value="PWD">PWD</option>
                                             <option value="Senior Citizen">Senior Citizen</option>
 
