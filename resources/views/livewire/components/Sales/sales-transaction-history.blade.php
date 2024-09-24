@@ -148,163 +148,130 @@
                     @row-selected.window="isSelected = ($event.detail === {{ $sale->id }})"> --}}
                 <tbody>
 
-                        @foreach ($sales as $index => $sale)
-                        <tr x-data="{ isSelected: false }" x-on:click="isSelected = !isSelected" :class="isSelected && 'bg-gray-200'"
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75"
-                        @if ($sale['movement_type'] == 'Sales' && isset($sale['transactionJoin']))
-                      
-                    >
-                            @if ($sale['movement_type'] == 'Sales')
-                                <th scope="row" class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['transactionJoin']['transaction_number'] }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ number_format($sale['transactionJoin']['total_amount'], 2) }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['movement_type'] }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap">
-                                    {{ $sale['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['transactionJoin']['created_at']->format('M d Y h:i A') }}
-                                </th>
-                            @elseif (isset($sale['creditJoin']['transactionJoin']))
-                                <th scope="row" class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['creditJoin']['transactionJoin']['transaction_number'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ number_format($sale['creditJoin']['transactionJoin']['total_amount'], 2) ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['movement_type'] }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['creditJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap">
-                                    {{ $sale['creditJoin']['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['creditJoin']['transactionJoin']['created_at']->format('M d Y h:i A') ?? 'N/A' }}
-                                </th>
-                            @elseif ($sale['movement_type'] == 'Return')
-                                <th scope="row" class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['returnsJoin']['transactionJoin']['transaction_number'] }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ number_format($sale['returnsJoin']['transactionJoin']['total_amount'], 2) }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['movement_type'] }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['returnsJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap">
-                                    {{ $sale['returnsJoin']['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
-                                </th>
-                                <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ $sale['returnsJoin']['transactionJoin']['created_at']->format('M d Y h:i A') }}
-                                </th>
-                            @endif
+                    @foreach ($sales as $index => $sale)
+                        <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
+                            x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                            <th
+                                scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $sale['transaction_number'] }}
+                            </th>
+                            <th
+                                scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($sale->total_amount, 2) }}
+                            </th>
+                            <th
+                                scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $sale['transaction_type'] }}
+                            </th>
+                            <th
+                                scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $sale['paymentJoin']['payment_type'] ?? 'N/A' }}
+                            </th>
+                            <th
+                                scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                                {{ $sale['paymentJoin->reference_number'] ?? 'N/A' }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $sale['created_at']->format(' M d Y h:i A ') }}
+                            </th>
+
+
                         </tr>
                     @endforeach
-                    </tbody>
-                </table>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex flex-row w-full border border-black rounded-md">
+        <div class="w-1/3 border-r border-black ">
+            <div class="flex flex-col items-center justify-center px-2">
+                <div>
+                    <p>Transaction No</p>
+                </div>
+                <div>
+                    <p class=" text-[2em] font-black">{{ $transaction_number }}</p>
+                </div>
+            </div>
+            <div class="border border-black"></div>
+            <div class="flex flex-col gap-2 px-6 py-2 overflow-hidden">
+                <div class="flex flex-row justify-between">
+                    <div>
+                        <p class=" text-[1.2em] font-medium">Subtotal</p>
+                    </div>
+                    <div>
+                        <p class=" text-[1.2em] font-black">{{ number_format($subtotal, 2) }}</p>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-between">
+                    <div>
+                        <p class=" text-[1.2em] font-medium">Discount (%)</p>
+                    </div>
+                    <div>
+                        <p class=" text-[1.2em] font-black">{{ $discount_percent }}</p>
+                    </div>
+                </div>
+                @if ($transaction_type == 'Return')
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Total</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Total</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
+                        </div>
+                    </div>
+                @endif
+                <div class="flex flex-row justify-between">
+                    <div>
+                        <p class=" text-[1.2em] font-medium">Tendered Amount</p>
+                    </div>
+                    <div>
+                        <p class=" text-[1.2em] font-black">{{ number_format($tendered_amount, 2) }}</p>
+                    </div>
+                </div>
+                <div class="border border-black "></div>
+                <div class="flex flex-row justify-between">
+                    @if ($payment_type != 'GCash' && !is_null($payment_type))
+                        <div>
+                            <p class=" text-[1.6em] font-medium">Change</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
+                        </div>
+                    @endif
+                </div>
+                @if ($transaction_type == 'Return')
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Original Amount</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Return Amount</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) }}</p>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
-        <div class="flex flex-row w-full border border-black rounded-md">
-            <div class="w-1/3 border-r border-black ">
-                <div class="flex flex-col items-center justify-center px-2">
-                    <div>
-                        <p>Transaction No</p>
-                    </div>
-                    <div>
-                        <p class=" text-[2em] font-black">{{ $transaction_number }}</p>
-                    </div>
-                </div>
-                <div class="border border-black"></div>
-                <div class="flex flex-col gap-2 px-6 py-2 overflow-hidden">
-                    <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.2em] font-medium">Subtotal</p>
-                        </div>
-                        <div>
-                            <p class=" text-[1.2em] font-black">{{ number_format($subtotal, 2) }}</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.2em] font-medium">Discount (%)</p>
-                        </div>
-                        <div>
-                            <p class=" text-[1.2em] font-black">{{ $discount_percent }}</p>
-                        </div>
-                    </div>
-                    @if ($transaction_type == 'Return')
-                        <div class="flex flex-row justify-between">
-                            <div>
-                                <p class=" text-[1.2em] font-medium">Total</p>
-                            </div>
-                            <div>
-                                <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
-                            </div>
-                        </div>
-                    @else
-                        <div class="flex flex-row justify-between">
-                            <div>
-                                <p class=" text-[1.2em] font-medium">Total</p>
-                            </div>
-                            <div>
-                                <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
-                            </div>
-                        </div>
-                    @endif
-                    <div class="flex flex-row justify-between">
-                        <div>
-                            <p class=" text-[1.2em] font-medium">Tendered Amount</p>
-                        </div>
-                        <div>
-                            <p class=" text-[1.2em] font-black">{{ number_format($tendered_amount, 2) }}</p>
-                        </div>
-                    </div>
-                    <div class="border border-black "></div>
-                    <div class="flex flex-row justify-between">
-                        @if ($payment_type != 'GCash' && !is_null($payment_type))
-                            <div>
-                                <p class=" text-[1.6em] font-medium">Change</p>
-                            </div>
-                            <div>
-                                <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
-                            </div>
-                        @endif
-                    </div>
-                    @if ($transaction_type == 'Return')
-                        <div class="flex flex-row justify-between">
-                            <div>
-                                <p class=" text-[1.2em] font-medium">Original Amount</p>
-                            </div>
-                            <div>
-                                <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row justify-between">
-                            <div>
-                                <p class=" text-[1.2em] font-medium">Return Amount</p>
-                            </div>
-                            <div>
-                                <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) }}</p>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-            <div class="w-full h-[30vh] overflow-x-auto overflow-y-scroll scroll ">
+        <div class="w-full h-[30vh] overflow-x-auto overflow-y-scroll scroll ">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
