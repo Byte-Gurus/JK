@@ -32,7 +32,7 @@ class SalesTransactionHistory extends Component
         $query = Transaction::query();
 
         if ($this->transactionFilter != 0) {
-            $query->where('movement_type', $this->transactionFilter);
+            $query->where('transaction_type', $this->transactionFilter);
         }
         if ($this->paymentFilter != 0) {
             $query->whereHas('paymentJoin', function ($query) {
@@ -44,8 +44,8 @@ class SalesTransactionHistory extends Component
         }
 
         $sales = $query->search($this->search) //?search the user
-            ->orderBy($this->sortColumn, $this->sortDirection)//? i sort ang column based sa $sortColumn na var
-            ->paginate($this->perPage);
+            ->orderBy($this->sortColumn, $this->sortDirection); //? i sort ang column based sa $sortColumn na var
+            // ->paginate($this->perPage);
 
         return view(
             'livewire.components.Sales.sales-transaction-history',
