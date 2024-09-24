@@ -181,7 +181,7 @@
                                         class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                         {{ $sale['transactionJoin']['created_at']->format(' M d Y h:i A ') }}
                                     </th>
-                                @elseif ($sale['creditJoin']['transactionJoin'])
+                                    @elseif (isset($sale['creditJoin']['transactionJoin']))
                                     <th
                                         scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
                                         {{ $sale['creditJoin']['transactionJoin']['transaction_number'] ?? 'N/A'}}
