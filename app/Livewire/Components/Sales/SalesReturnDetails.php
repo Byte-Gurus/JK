@@ -58,7 +58,7 @@ class SalesReturnDetails extends Component
     public function returnConfirmed()
     {
 
-        // $old_transaction = Transaction::find($this->transaction_id);
+        $old_transaction = Transaction::find($this->transaction_id);
         // $old_transaction->transaction_type = 'Return';
         // $old_transaction->save();
 
@@ -66,17 +66,6 @@ class SalesReturnDetails extends Component
         // $transaction->total_vat_amount = $this->new_vat_amount;
         $this->generateTransactionNumber();
 
-        // $new_transaction = Transaction::create([
-        //     'transaction_number' => $this->new_transaction_number,
-        //     'transaction_type' => 'Return',
-        //     'subtotal' => '',
-        //     'discount_id' => '',
-        //     'total_amount' => '',
-        //     'total_vat_amount' => '',
-        //     'total_discount_amount' => '',
-        //     'customer_id' => '',
-        //     'user_id' => '',
-        // ]);
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
@@ -85,7 +74,19 @@ class SalesReturnDetails extends Component
 
         ]);
 
-      
+        // $tranasction = Transaction::create([
+        //     'transaction_number' =
+        // 'transaction_type' =>
+        // 'subtotal',
+        // 'discount_id',
+        // 'total_amount',
+        // 'total_vat_amount',
+        // 'total_discount_amount',
+        // 'customer_id',
+        // 'user_id'
+        // ])
+
+
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             // Ensure the index exists in return_info array
