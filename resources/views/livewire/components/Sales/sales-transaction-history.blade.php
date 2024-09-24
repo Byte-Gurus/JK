@@ -184,7 +184,7 @@
                                 @elseif ($sale['movement_type'] == 'Credit')
                                     <th
                                         scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
-                                        {{ $sale['creditJoin']['transactionJoin']['transaction_number'] }}
+                                        {{ $sale['creditJoin']['transactionJoin']['transaction_number'] ?? 'N/A'}}
                                     </th>
                                     <th
                                         scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
