@@ -30,19 +30,21 @@
                     </div>
 
                     {{-- //* close button --}}
-                    <button type="button" x-on:click="showDiscountForm=false" wire:click=' resetFormWhenClosed() '
-                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
-                        data-modal-hide="UserModal">
+                    @if (!$customerDetails)
+                        <button type="button" x-on:click="showDiscountForm=false" wire:click=' resetFormWhenClosed() '
+                            class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
+                            data-modal-hide="UserModal">
 
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
 
-                        <span class="sr-only">Close modal</span>
+                            <span class="sr-only">Close modal</span>
 
-                    </button>
+                        </button>
+                    @endif
 
                 </div>
 
@@ -306,8 +308,7 @@
                                                     Discount
                                                     No</label>
 
-                                                <input type="number" id="senior_pwd_id"
-                                                    wire:model="senior_pwd_id"
+                                                <input type="number" id="senior_pwd_id" wire:model="senior_pwd_id"
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                                     placeholder="PWD/Senior Citizen ID" required />
                                                 @error('senior_pwd_id')
@@ -450,8 +451,7 @@
                                             Discount
                                             No</label>
 
-                                        <input type="number" id="senior_pwd_id" disabled
-                                            wire:model="senior_pwd_id"
+                                        <input type="number" id="senior_pwd_id" disabled wire:model="senior_pwd_id"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="PWD/Senior Citizen ID" required />
                                         @error('senior_pwd_id')
