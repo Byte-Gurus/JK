@@ -66,21 +66,21 @@ class SalesReturnDetails extends Component
         // $transaction->total_vat_amount = $this->new_vat_amount;
         $this->generateTransactionNumber();
 
-        $new_transaction = Transaction::create([
-            'transaction_number' => $this->new_transaction_number,
-            'transaction_type' => 'Return',
-            'subtotal' => '',
-            'discount_id' => '',
-            'total_amount' => '',
-            'total_vat_amount' => '',
-            'total_discount_amount' => '',
-            'customer_id' => '',
-            'user_id' => '',
-        ]);
+        // $new_transaction = Transaction::create([
+        //     'transaction_number' => $this->new_transaction_number,
+        //     'transaction_type' => 'Return',
+        //     'subtotal' => '',
+        //     'discount_id' => '',
+        //     'total_amount' => '',
+        //     'total_vat_amount' => '',
+        //     'total_discount_amount' => '',
+        //     'customer_id' => '',
+        //     'user_id' => '',
+        // ]);
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
-            'return_total_amount' => $this->return_total_amount,
+            'return_total_amount' => $this->return_total_amount * -1,
             'original_amount' => $this->total_amount,
 
         ]);
