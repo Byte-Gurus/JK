@@ -36,7 +36,7 @@ class DailySalesReport extends Component
 
         foreach ($this->transactions as $transaction) {
 
-            if ($this->transactions->movement_type == 'Return') {
+            if ($transaction->movement_type == 'Return') {
                 $creditTotalGross = $transaction['returnsJoin']['transactionJoin']['return_total_amount'] * -1;
             }
 
