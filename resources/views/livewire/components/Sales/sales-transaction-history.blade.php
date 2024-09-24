@@ -153,8 +153,13 @@
                     <tbody>
 
                         @foreach ($sales as $index => $sale)
-                            <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
-                                x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
+                            <tr @if ($sale['movement_type'] == 'Sales') wire:click="getTransactionID({{ $sale->transactionJoin->id }}, true )"
+                            @if ($sale['movement_type'] == 'Credit')
+                            wire:click="getTransactionID({{ $sale->creditJoin->transactionJoin->id }}, true )"
+                            @if ($sale['movement_type'] == 'Return')
+                            wire:click="getTransactionID({{ $sale->returnsJoin->transactionJoin->id }}, true )" @endif
+                                x-data="{ isSelected: false }" x-on:click=" isSelected = !isSelected "
+                                :class="isSelected && ' bg-gray-200'"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                                 @if ($sale['movement_type'] == 'Sales')
                                     <th
