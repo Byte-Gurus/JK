@@ -112,24 +112,24 @@ class DiscountForm extends Component
     {
         $isSales = $this->isSales;
         // dd($isSales);
-        if (!$isSales && isset($this->credit_details['customer_id'])) {
-            $customer = Customer::find($this->customer_id);
-            $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+        // if (!$isSales && isset($this->credit_details['customer_id'])) {
+        //     $customer = Customer::find($this->customer_id);
+        //     $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
 
-            $creditor = Customer::find($this->credit_details['customer_id']);
-            $creditor_name = $creditor->firstname . ' ' . $creditor->middlename . ' ' . $creditor->lastname;
+        //     $creditor = Customer::find($this->credit_details['customer_id']);
+        //     $creditor_name = $creditor->firstname . ' ' . $creditor->middlename . ' ' . $creditor->lastname;
 
-            if ($customer_name != $creditor_name) {
-                $this->alert('error', 'Name doesnt match with the credit');
-                return;
-            } else {
-                $this->populateForm();
-            }
-        } else {
-            $this->alert('warning', 'Select creditor');
-            $this->clearSelectedCustomerName();
-            return;
-        }
+        //     if ($customer_name != $creditor_name) {
+        //         $this->alert('error', 'Name doesnt match with the credit');
+        //         return;
+        //     } else {
+        //         $this->populateForm();
+        //     }
+        // } else {
+        //     $this->alert('warning', 'Select creditor');
+        //     $this->clearSelectedCustomerName();
+        //     return;
+        // }
 
 
         $validated = $this->validateForm();
