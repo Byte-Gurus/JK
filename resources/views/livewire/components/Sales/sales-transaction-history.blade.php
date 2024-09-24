@@ -156,10 +156,13 @@
                             <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
                                 x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                                <th
-                                    scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $sale['transaction_number'] }}
-                                </th>
+                                @if ($sale['transactionJoin'])
+                                    <th
+                                        scope="row"class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $sale['transactionJoin']['transaction_number'] }}
+                                    </th>
+                                @endif
+
                                 <th
                                     scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     {{ number_format($sale->total_amount, 2) }}
