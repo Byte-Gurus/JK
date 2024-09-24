@@ -33,14 +33,11 @@ class DailySalesReport extends Component
         $totalTax = 0;
         $totalNet = 0;
 
-        foreach ($this->transactions as $transaction) {
-
-            $totalGross += $transaction['transactionJoin']['total_amount'];
-
-            $totalTax += $transaction['transactionJoin']['total_vat_amount'];
+        foreach($this->transactions as $transaction){
+            $totalGross += $transaction['total_amount'];
+            $totalTax += $transaction['total_vat_amount'];
 
         }
-
 
         $totalNet = $totalGross - $totalTax;
 
