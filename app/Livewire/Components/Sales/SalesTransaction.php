@@ -734,13 +734,22 @@ class SalesTransaction extends Component
             ]);
         }
 
+        if (!$credit) {
+            $transaction_movements = TransactionMovement::create([
+                'movement_type' => 'Sales',
+                'transaction_id' => $transaction->id,
+                'credit_id' => null,
+                'returns_id' => null
+            ]);
+        } elseif ($credit) {
+            $transaction_movements = TransactionMovement::create([
+                'movement_type' => 'Credit',
+                'transaction_id' => $transaction->id,
+                'credit_id' => null,
+                'returns_id' => null
+            ]);
+        }
 
-        $transaction_movements = TransactionMovement::create([
-            'movement_type' => 'Sales',
-            'transaction_id' => $transaction->id,
-            'credit_id' => null,
-            'returns_id' => null
-        ]);
 
 
 
