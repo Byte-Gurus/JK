@@ -1,8 +1,7 @@
-<div>
-    <div class="relative overflow-hidden bg-white h-[620px] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
+    <div class="relative overflow-hidden bg-white h-[68vh] mb-[3vh]">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-4 py-4 ">
+        <div class="flex flex-row items-center justify-between mb-[3vh] ">
 
             {{-- //* search filter --}}
             <div class="relative w-1/2 ">
@@ -39,7 +38,7 @@
             </div>
         </div>
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[300px]">
+        <div class="overflow-x-auto overflow-y-scroll scroll border rounded-md border-[rgb(143,143,143)] h-[54vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -130,4 +129,3 @@
             </table>
         </div>
     </div>
-</div>
