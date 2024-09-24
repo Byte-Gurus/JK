@@ -69,7 +69,7 @@ class SalesTransactionHistory extends Component
         $transaction = Transaction::with('discountJoin')
             ->find($transaction_id);
 
-        $this->transaction_type = $transaction->transactionJoin->transaction_type;
+        $this->transaction_type = $transaction->transaction_type;
         $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
         $this->transaction_number = $transaction->transaction_number;
         $this->subtotal = $transaction->subtotal;
