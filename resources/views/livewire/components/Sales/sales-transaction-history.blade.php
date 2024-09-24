@@ -163,7 +163,7 @@
                                     </th>
                                     <th
                                         scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                        {{ number_format($sale->total_amount, 2) }}
+                                        {{ number_format($sale->transactionJoin->total_amount, 2) }}
                                     </th>
                                     <th
                                         scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
