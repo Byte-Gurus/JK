@@ -15,7 +15,7 @@ class ReportManagement extends Component
 
     public $reportSelected = false;
 
-    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal,$showSlowMovingItemsReportDatePickerModal,$showFastMovingItemsReportDatePickerModal = false;
+    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal,$showSlowMovingItemsReportDatePickerModal,$showFastMovingItemsReportDatePickerModal, $showSalesReturnReportDatePickerModal = false;
 
     public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport = false;
 
@@ -43,6 +43,8 @@ class ReportManagement extends Component
         'close-slow-moving-items-report-date-picker-modal' => 'closeSlowMovingItemsReportDatePickerModal',
         'close-fast-moving-items-report-date-picker-modal' => 'closeFastMovingItemsReportDatePickerModal',
         'display-fast-moving-items-report' => 'displayFastMovingItemsReport',
+        'display-sales-return-report-date-picker-modal' => 'displaySalesReturnReportDatePickerModal',
+        'close-sales-return-report-date-picker-modal' => 'closeSalesReturnReportDatePickerModal'
     ];
 
 
@@ -152,6 +154,7 @@ class ReportManagement extends Component
         $this->showYearlySalesReportDatePickerModal = false;
         $this->showSlowMovingItemsReportDatePickerModal = false;
         $this->showFastMovingItemsReportDatePickerModal = false;
+        $this->showSalesReturnReport = false;
     }
 
     // Daily Sales Report
@@ -228,12 +231,21 @@ class ReportManagement extends Component
 
     // Sales Return Report
 
+    public function displaySalesReturnReportDatePickerModal()
+    {
+        $this->showSalesReturnReportDatePickerModal = true;
+    }
+
     public function displaySalesReturnReport()
     {
-        $this->reportSelected = true;
-        $this->showNavbar = false;
-        $this->sidebarStatus = true;
-        $this->showSalesReturnReport = true;
+        $this->showSalesReturnReport = !$this->showSalesReturnReport;
+        $this->hideExtras();
+
+    }
+
+    public function closeSalesReturnReportDatePickerModal()
+    {
+        $this->showSalesReturnReportDatePickerModal = false;
     }
 
     // Customer Credit List Report
