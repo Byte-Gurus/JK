@@ -12,7 +12,6 @@ class AdminLoginForm extends Component
     public $password;
 
     public $showPassword = true;
-    public $showStockAdjustModal = false;
 
     public $showAdminLoginForm = false;
 
