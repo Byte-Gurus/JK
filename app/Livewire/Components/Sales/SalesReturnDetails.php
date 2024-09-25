@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Events\ReturnEvent;
+use App\Livewire\Pages\CashierPage;
 use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
@@ -15,7 +16,7 @@ class SalesReturnDetails extends Component
 {
     use LivewireAlert;
     public $showSalesReturnForm = false;
-    public $showAdminLoginForm = false;
+    public $showSalesAdminLoginForm = false;
 
     public $returnQuantity = [];
     public $operation = [];
@@ -35,8 +36,14 @@ class SalesReturnDetails extends Component
     }
     protected $listeners = [
         'get-transaction' => 'getTransaction',
+        'return-sales-return-details' => 'returnSalesReturnDetails',
         'returnConfirmed'
     ];
+
+    public function returnSalesReturnDetails()
+    {
+        $this->showSalesAdminLoginForm = false;
+    }
 
     public function return()
     {
@@ -49,6 +56,11 @@ class SalesReturnDetails extends Component
         }
         $this->validate($this->rules);
 
+        $this->showSalesAdminLoginForm = true;
+    }
+
+    public function returnConfirmation()
+    {
         $this->confirm('Do you want to return this items?', [
             'onConfirmed' => 'returnConfirmed', //* call the createconfirmed method
 
@@ -112,6 +124,8 @@ class SalesReturnDetails extends Component
         ReturnEvent::dispatch('refresh-return');
 
         $this->alert('success', 'Item/s was returned successfully');
+
+        // $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
     }
     public function updatedOperation($value, $ind)
     {
@@ -251,11 +265,6 @@ class SalesReturnDetails extends Component
     public function displaySalesReturnForm()
     {
         $this->showSalesReturnForm = true;
-    }
-
-    public function displayAdminLoginForm()
-    {
-        $this->showAdminLoginForm = true;
     }
 
     public function getItem($transactionDetails_id)
