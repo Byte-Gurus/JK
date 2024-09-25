@@ -276,7 +276,7 @@ class SalesReturnDetails extends Component
             $returnNumber = 'RN-' . $formattedNumber . '-' . now()->format('mdY');
 
             // Check if the transaction number already exists
-            $exists = Returns::where('transaction_number', $returnNumber)->exists();
+            $exists = Returns::where('return_number', $returnNumber)->exists();
         } while ($exists);
 
         // Assign the unique transaction number
