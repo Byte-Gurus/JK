@@ -50,16 +50,15 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            @if ($date)
+                            {{-- @if ($date)
                                 <button type="button" wire:click="getDate"
-                                    x-on:click='$wire.displaySlowMovingItemsReport()'
+                                    x-on:click='$wire.displaySalesReturnReport()'
                                     class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
                             @else
                                 <button type="button" wire:click="getDate" disabled
-                                    x-on:click='$wire.displaySlowMovingItemsReport()'
+                                    x-on:click='$wire.displaySalesReturnReport()'
                                     class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
-                            @endif
-
+                            @endif --}}
                         </div>
                     </div>
                 </form>
