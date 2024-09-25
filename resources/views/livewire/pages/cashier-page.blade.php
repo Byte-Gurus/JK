@@ -14,7 +14,4 @@
     <div x-show="showSalesReceipt" x-data="{ showSalesReceipt: @entangle('showSalesReceipt') }">
         @livewire('components.Sales.sales-receipt')
     </div>
-    <div x-show="showSalesReturnSlip" x-data="{ showSalesReturnSlip: @entangle('showSalesReturnSlip') }">
-        @livewire('components.Sales.sales-return-slip')
-    </div>
 </div>

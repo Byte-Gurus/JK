@@ -17,11 +17,6 @@ class SalesAdminLoginForm extends Component
         return view('livewire.components.Sales.sales-admin-login-form');
     }
 
-    public function closeInventoryAdminLoginForm()
-    {
-        $this->dispatch('return-sales-return-details')->to(SalesReturnDetails::class);
-    }
-
     public function showPasswordStatus()
     {
         $this->showPassword = !$this->showPassword;
