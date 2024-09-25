@@ -21,9 +21,14 @@ class SalesReturnDetails extends Component
     public $returnQuantity = [];
     public $operation = [];
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $new_transaction_number;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number;
 
     public $return_info = [];
+
+    public function mount()
+    {
+        $this->generateReturnNumber();
+    }
 
     public function render()
     {
@@ -76,12 +81,11 @@ class SalesReturnDetails extends Component
 
         // $transaction->total_amount = $this->new_total;
         // $transaction->total_vat_amount = $this->new_vat_amount;
-        $this->generateTransactionNumber();
-
 
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
             'return_total_amount' => $this->return_total_amount,
+            'return_number' => $this->return_number,
             'original_amount' => $this->total_amount,
 
         ]);
@@ -273,19 +277,19 @@ class SalesReturnDetails extends Component
         $this->dispatch('get-transaction-details', transactionDetails_ID: $transactionDetails_id)->to(SalesReturnForm::class);
     }
 
-    public function generateTransactionNumber()
+    public function generateReturnNumber()
     {
         do {
             $randomNumber = random_int(0, 9999);
             $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
-            $transactionNumber = 'TN-' . $formattedNumber . '-' . now()->format('mdY');
+            $returnNumber = 'RN-' . $formattedNumber . '-' . now()->format('mdY');
 
             // Check if the transaction number already exists
-            $exists = Transaction::where('transaction_number', $transactionNumber)->exists();
+            $exists = Returns::where('return_number', $returnNumber)->exists();
         } while ($exists);
 
         // Assign the unique transaction number
-        $this->new_transaction_number = $transactionNumber;
+        $this->return_number = $returnNumber;
     }
 
 }
