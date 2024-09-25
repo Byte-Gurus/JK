@@ -8,6 +8,6 @@ class SalesReturnSlip extends Component
 {
     public function render()
     {
-        return view('livewire.components.Sales.sales-return-slip');
+        return view('livewire.components.sales.sales-return-slip');
     }
 }
