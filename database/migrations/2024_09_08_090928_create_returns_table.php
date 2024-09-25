@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('returns', function (Blueprint $table) {
             $table->id();
-            $table->string('return_number')->unique();
             $table->double('return_total_amount');
             $table->double('original_amount');
             $table->timestamps();

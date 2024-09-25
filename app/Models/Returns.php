@@ -11,7 +11,6 @@ class Returns extends Model
 
     protected $fillable = [
         'transaction_id',
-        'return_number',
         'return_total_amount',
         'original_amount'
     ];
