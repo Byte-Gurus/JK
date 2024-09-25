@@ -72,11 +72,19 @@
                     @foreach ($returns as $return)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $return->return_number }}
+
+                            </th>
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return->transactionJoin->transaction_number }}
 
                             </th>
+
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
