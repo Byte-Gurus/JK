@@ -11,7 +11,7 @@ class AdminLoginForm extends Component
     public $username;
     public $password;
 
-    public $showPassword = true;
+    public $showPassword = false;
 
     public $showAdminLoginForm = false;
 
