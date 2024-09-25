@@ -42,6 +42,7 @@ class SalesReturnDetails extends Component
     protected $listeners = [
         'get-transaction' => 'getTransaction',
         'return-sales-return-details' => 'returnSalesReturnDetails',
+        'admin-confirmed' => 'adminConfirmed',
         'returnConfirmed'
     ];
 
@@ -64,13 +65,13 @@ class SalesReturnDetails extends Component
         $this->showSalesAdminLoginForm = true;
     }
 
-    public function returnConfirmation()
-    {
-        $this->confirm('Do you want to return this items?', [
-            'onConfirmed' => 'returnConfirmed', //* call the createconfirmed method
+    // public function returnConfirmation()
+    // {
+    //     $this->confirm('Do you want to return this items?', [
+    //         'onConfirmed' => 'returnConfirmed', //* call the createconfirmed method
 
-        ]);
-    }
+    //     ]);
+    // }
 
     public function returnConfirmed()
     {
@@ -290,6 +291,16 @@ class SalesReturnDetails extends Component
 
         // Assign the unique transaction number
         $this->return_number = $returnNumber;
+    }
+
+    public function adminConfirmed($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+
+        if ($this->isAdmin) {
+            $this->returnConfirmed();
+        }
     }
 
 }

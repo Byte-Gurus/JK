@@ -18,7 +18,7 @@
 
                     <div class="flex flex-col mb-4">
                         <label for="username" class="text-[rgb(53,53,53)]">Username</label>
-                        <input type="text" id="username" name="username" value="{{ old('username') }}" required
+                        <input type="text" id="username"  value="{{ old('username') }}" required
                             class="w-full px-4 py-2 text-sm border-2 border-black rounded-md outline-none cursor-pointer bg-gray-50 text-none focus:outline-none"
                             wire:model="username">
                         @error('username')

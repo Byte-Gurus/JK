@@ -42,9 +42,9 @@ class SalesAdminLoginForm extends Component
             // Check if the user is an admin and active
             if ($user && $user->user_role_id == 1 && $user->status_id == 1) {
                 $this->isAdmin = true;
-                // $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustFormReRe::class);
+                $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesReturnDetails::class);
 
-                // $this->dispatch('admin-confirmed')->to(StockAdjustPage::class);
+                $this->dispatch('admin-confirmed')->to(SalesReturnDetails::class);
             } else {
                 $this->addError('submit', 'This account is inactive or not an admin.');
             }
