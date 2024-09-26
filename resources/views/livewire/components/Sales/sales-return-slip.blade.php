@@ -43,8 +43,7 @@
                     <br>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Total Return Amount</p>
-                        <p class="text-[0.6em] font-bold uppercase">
-                            {{ item_return_amount ?? 'N/A'}}</p>
+                        <p class="text-[0.6em] font-bold uppercase"> {{ $item_return_amount ?? 'N/A'}}</p>
                     </div>
                 </div>
             </div>
