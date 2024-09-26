@@ -79,7 +79,7 @@ class SalesReturnDetails extends Component
     public function returnConfirmed()
     {
 
-        $old_transaction = Transaction::find($this->transaction_id);
+        // $old_transaction = Transaction::find($this->transaction_id);
         // $old_transaction->transaction_type = 'Return';
         // $old_transaction->save();
 
@@ -156,7 +156,7 @@ class SalesReturnDetails extends Component
     public function updatedReturnQuantity()
     {
         $validated = $this->validateForm();
-        $this->calculateTotalRefundAmount();
+        // $this->calculateTotalRefundAmount();
     }
 
     public function calculateTotalRefundAmount()
@@ -207,7 +207,7 @@ class SalesReturnDetails extends Component
         }
 
 
-        // $this->new_total = $this->total_amount - $this->return_total_amount;
+        $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()
     {
