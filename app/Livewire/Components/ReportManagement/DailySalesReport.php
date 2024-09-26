@@ -29,17 +29,16 @@ class DailySalesReport extends Component
 
         $date = Carbon::parse($date);
         $this->transactions = DB::table('transactions')
-            ->leftJoin('returns', 'transactions.id', '=', 'returns.transaction_id')
-            ->select(
-                'transactions.created_at as date',
-                'transactions.transaction_number',
-                'returns.return_number',
-                'transactions.total_amount as transaction_total_amount',
-                'returns.return_total_amount as total_amount',
-                'transactions.total_vat_amount' // Assuming this column exists in transactions
-            )
-            ->whereDate('transactions.created_at', $date) // Filter by date
-            ->get();
+        ->leftJoin('returns', 'transactions.id', '=', 'returns.transaction_id')
+        ->select(
+            'transactions.*',
+            'returns.*',
+            'transactions.created_at as salesDate',
+            'returns.created_at as returnDate',
+
+        )
+        ->whereDate('transactions.created_at', $date) // Filter by date
+        ->get();
 
 
 
@@ -49,7 +48,7 @@ class DailySalesReport extends Component
 
         foreach ($this->transactions as $transaction) {
             $totalGross += $transaction->total_amount;
-            $totalTax += $transaction->total_vat_amount; 
+            $totalTax += $transaction->total_vat_amount;
         }
 
 
