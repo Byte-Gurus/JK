@@ -31,7 +31,7 @@ class SalesReturnSlip extends Component
             'transaction_number' => $returns->transactionJoin->transaction_number,
             'transaction_date' => $returns->transactionJoin->created_at,
             'user' =>  Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'item_return_amount' => $this->return_details['item_return_amount']
+            'item_return_amount' => $returns->return_total_amount
             // 'total_amount' => $transaction->total_amount,
             // 'payment_method' => $transaction->paymentJoin->payment_type ?? 'N/A',
             // 'reference_number' => $transaction->paymentJoin->reference_number ?? 'N/A',
