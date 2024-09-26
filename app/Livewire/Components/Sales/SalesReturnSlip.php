@@ -42,7 +42,7 @@ class SalesReturnSlip extends Component
     }
     public function getReturnDetails($return_details){
         $this->return_details = $return_details;
-
+        $this->populateForm();
 
     }
 }
