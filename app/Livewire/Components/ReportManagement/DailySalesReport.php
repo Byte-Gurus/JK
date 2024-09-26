@@ -33,15 +33,15 @@ class DailySalesReport extends Component
         ->leftJoin('returns', 'transactions.id', '=', 'returns.transaction_id')
         ->select(
             'transactions.*',
-            'returns.*',
+            'returns.return_number',
             'transactions.created_at as salesDate',
             'returns.created_at as returnDate'
         )
         ->whereDate('transactions.created_at', $date) // Filter by date
         ->get();
-        $returns = Returns::where('created_at', $date);
+        // $returns = Returns::where('created_at', $date);
 
-        dd($this->transactions,  $returns);
+        // dd($this->transactions,  $returns);
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
