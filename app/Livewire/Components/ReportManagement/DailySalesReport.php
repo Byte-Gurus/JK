@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
+use App\Models\Returns;
 use App\Models\Transaction;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +39,9 @@ class DailySalesReport extends Component
         )
         ->whereDate('transactions.created_at', $date) // Filter by date
         ->get();
+        $returns = Returns::where('created_at', $date);
 
-        dd($this->transactions);
+        dd($this->transactions,  $returns);
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
