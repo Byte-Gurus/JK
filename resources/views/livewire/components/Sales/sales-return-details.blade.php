@@ -141,7 +141,7 @@
                 {{-- //* table body --}}
                 <tbody>
 
-                    @foreach ($transactionDetails as  $transactionDetail)
+                    @foreach ($transactionDetails as $index => $transactionDetail)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                             <th scope="row"
@@ -150,7 +150,7 @@
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transactionDetail->inventoryJoin->sku_code}}
+                                {{ $transactionDetail['inventoryJoin']['sku_code'] }}
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">

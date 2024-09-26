@@ -36,7 +36,7 @@ class SalesReturnDetails extends Component
     public function render()
     {
 
-        $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get()->toArray();
+        $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
         return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
