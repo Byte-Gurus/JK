@@ -140,8 +140,8 @@ class SalesReturnDetails extends Component
 
         $this->alert('success', 'Item/s was returned successfully');
 
-        $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
-        $this->dispatch('get-return-details', $return_details)->to(CashierPage::class);
+        // $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+        // $this->dispatch('get-return-details', $return_details)->to(CashierPage::class);
 
 
     }
