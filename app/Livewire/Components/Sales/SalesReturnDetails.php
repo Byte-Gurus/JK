@@ -56,23 +56,6 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-
-
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
-                $this->return_info[$index] = [
-                    'item_return_amount' => $this->item_return_amount,
-                    'return_quantity' => $this->returnQuantity[$index],
-                    'description' => $this->description[$index] ?? '',
-                    'transaction_details_id' => $transactionDetail->id,
-                    'item_id' => $transactionDetail->item_id,
-                    'inventory_id' => $transactionDetail->inventory_id,
-                    'operation' => $this->operation[$index]
-
-                ];
-            }
-        }
-
 
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
@@ -119,7 +102,7 @@ class SalesReturnDetails extends Component
                 $info = $this->return_info[$index];
 
                 // Create return details record
-                $return_details = ReturnDetails::create([
+               $return_details[] = ReturnDetails::create([
                     'return_quantity' => $info['return_quantity'],
                     'item_return_amount' => $info['item_return_amount'],
                     'description' => $info['description'],
@@ -140,9 +123,8 @@ class SalesReturnDetails extends Component
 
         $this->alert('success', 'Item/s was returned successfully');
 
-        // $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
-        // $this->dispatch('get-return-details', $return_details)->to(CashierPage::class);
-
+        $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+        $this->dispatch('get-return-details', $this->return_details)->to(CashierPage::class);
 
     }
     public function updatedOperation($value, $ind)
@@ -211,16 +193,16 @@ class SalesReturnDetails extends Component
                 }
 
 
-                // $this->return_info[$index] = [
-                //     'item_return_amount' => $this->item_return_amount,
-                //     'return_quantity' => $this->returnQuantity[$index],
-                //     'description' => $this->description[$index] ?? '',
-                //     'transaction_details_id' => $transactionDetail->id,
-                //     'item_id' => $transactionDetail->item_id,
-                //     'inventory_id' => $transactionDetail->inventory_id,
-                //     'operation' => $this->operation[$index]
+                $this->return_info[$index] = [
+                    'item_return_amount' => $this->item_return_amount,
+                    'return_quantity' => $this->returnQuantity[$index],
+                    'description' => $this->description[$index] ?? '',
+                    'transaction_details_id' => $transactionDetail->id,
+                    'item_id' => $transactionDetail->item_id,
+                    'inventory_id' => $transactionDetail->inventory_id,
+                    'operation' => $this->operation[$index]
 
-                // ];
+                ];
             }
         }
 
