@@ -42,7 +42,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType, $receiptData;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -605,7 +605,7 @@ class SalesTransaction extends Component
             return;
         }
 
-        $receiptData = [];
+        $this->receiptData = [];
         $this->transaction_info = [
             'subtotal' => $this->subtotal,
             'grandTotal' => $this->grandTotal,
@@ -755,7 +755,7 @@ class SalesTransaction extends Component
         $this->alert('success', 'New Transaction saved successfully');
 
         $this->dispatch('print-sales-receipt', array_merge(
-            $receiptData,
+            $this->receiptData,
             [
                 'payment' => $this->payment,
                 'selectedItems' => $this->selectedItems,
