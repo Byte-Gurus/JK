@@ -4,7 +4,8 @@ namespace App\Livewire\Components\Sales;
 
 use App\Models\ReturnDetails;
 use App\Models\Returns;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
 use Carbon\Carbon;
 use Livewire\Component;
 
