@@ -125,6 +125,7 @@ class SalesReturnDetails extends Component
 
         $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
         $this->dispatch('get-return-details', $return_details)->to(CashierPage::class);
+        return;
 
     }
     public function updatedOperation($value, $ind)
