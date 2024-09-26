@@ -184,7 +184,8 @@
                     @else
                         <div
                             class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button class="py-2 text-center ">
+                            <button 
+                                class="py-2 text-center ">
                                 Cancel Transaction
                             </button>
                         </div>
