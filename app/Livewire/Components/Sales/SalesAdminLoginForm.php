@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Livewire\Pages\CashierPage;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,6 @@ class SalesAdminLoginForm extends Component
                 $this->isAdmin = true;
                 $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesReturnDetails::class);
 
-                $this->dispatch('admin-confirmed')->to(SalesReturnDetails::class);
             } else {
                 $this->addError('submit', 'This account is inactive or not an admin.');
             }
