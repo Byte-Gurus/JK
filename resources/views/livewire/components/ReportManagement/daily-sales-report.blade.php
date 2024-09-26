@@ -127,7 +127,7 @@
                             <div>
                                 <p class="text-[0.8em] text-center font-medium">
 
-                                    {{ $transaction->transaction_type ?? $transaction->transactiionJoin->transaction_type}}</p>
+                                    {{ $transaction->transaction_type ?? $transaction->transactionJoin->transaction_type}}</p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
