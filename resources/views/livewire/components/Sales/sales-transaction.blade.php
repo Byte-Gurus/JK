@@ -256,7 +256,7 @@
                         </div>
                     @endif
                 </div>
-                @if (!empty($payment) && $isSale && !$receiptDatas)
+                @if (!empty($payment) && $isSales && !$receiptData)
                     <div
                         class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                         <button type="button" class="py-2 "
