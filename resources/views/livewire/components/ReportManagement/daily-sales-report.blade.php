@@ -120,7 +120,7 @@
                         <li class="col-span-3 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-                                    {{ $transaction->transaction_number ?? $transaction->return_number }}</p>
+                                    {{$transaction->return_number }}</p>
                             </div>
                         </li>
                         {{-- <li class="col-span-2 py-[3px]">
