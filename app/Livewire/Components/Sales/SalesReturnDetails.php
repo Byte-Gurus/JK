@@ -94,18 +94,6 @@ class SalesReturnDetails extends Component
 
         ]);
 
-        // $tranasction = Transaction::create([
-        //     'transaction_number' =
-        // 'transaction_type' =>
-        // 'subtotal',
-        // 'discount_id',
-        // 'total_amount',
-        // 'total_vat_amount',
-        // 'total_discount_amount',
-        // 'customer_id',
-        // 'user_id'
-        // ])
-
 
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
@@ -114,7 +102,7 @@ class SalesReturnDetails extends Component
                 $info = $this->return_info[$index];
 
                 // Create return details record
-                ReturnDetails::create([
+                $return_details = ReturnDetails::create([
                     'return_quantity' => $info['return_quantity'],
                     'item_return_amount' => $info['item_return_amount'],
                     'description' => $info['description'],
@@ -126,6 +114,8 @@ class SalesReturnDetails extends Component
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
                 $transactionDetails->status = $info['operation'];
                 $transactionDetails->save();
+
+
             }
         }
 
@@ -134,6 +124,8 @@ class SalesReturnDetails extends Component
         $this->alert('success', 'Item/s was returned successfully');
 
         $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+        $this->dispatch('get-return-details', $return_details)->to(CashierPage::class);
+
     }
     public function updatedOperation($value, $ind)
     {
