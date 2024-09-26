@@ -120,21 +120,13 @@
                         <li class="col-span-3 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-                                    {{ $transaction->transaction_number }}</p>
+                                    {{ $transaction->transaction_number ?? $transaction->return_number }}</p>
                             </div>
                         </li>
                         <li class="col-span-2 py-[3px]">
                             <div>
-                                @if ($transaction->transaction_type)
-                                    <p class="text-[0.8em] text-center font-medium">
-                                        Sales
-                                    </p>
-                                @elseif ($transaction->returnJoin)
-                                    <p class="text-[0.8em] text-center font-medium">
-                                        Return
-                                    </p>
-                                @endif
-
+                                <p class="text-[0.8em] text-center font-medium">
+                                    {{ $transaction->transaction_type }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
@@ -170,7 +162,7 @@
                         <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($transaction->total_amount - $transaction->total_vat_amount, 2) }}
+                                    {{ number_format($transaction->total_amount - $transaction->total_vat_amount , 2) }}
                                 </p>
                             </div>
                         </li>
