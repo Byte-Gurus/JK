@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit"  x-on:keydown.window.prevent.ctrl.enter="$wire.call('adjust')"
+                            <button type="submit" 
                                 class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Apply</button>
                         </div>
                     </div>
