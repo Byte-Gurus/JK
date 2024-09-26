@@ -123,7 +123,7 @@
                                     {{ $transaction->transaction_number ?? $transaction->return_number }}</p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        {{-- <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-medium">
                                     {{ $transaction->transaction_type }}</p>
@@ -132,7 +132,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{-- {{ $transaction->created_at->format('H:i:s') }} --}}
+                                    {{ $transaction->created_at->format('H:i:s') }}
                                 </p>
                             </div>
                         </li>
@@ -165,7 +165,7 @@
                                     {{ number_format($transaction->total_amount - $transaction->total_vat_amount , 2) }}
                                 </p>
                             </div>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 @endforeach

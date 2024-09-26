@@ -41,7 +41,7 @@ class DailySalesReport extends Component
         ->get();
 
 
-
+        dd($this->transactions);
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
