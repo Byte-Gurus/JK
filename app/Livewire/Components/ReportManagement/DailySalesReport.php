@@ -30,16 +30,16 @@ class DailySalesReport extends Component
 
         $date = Carbon::parse($date);
         $this->transactions = DB::table('transactions')
-        ->leftJoin('returns', 'transactions.id', '=', 'returns.transaction_id')
-        ->select(
-            'transactions.*',
-            'returns.*',
-            'transactions.created_at as salesDate',
-            'returns.created_at as returnDate'
-        )
-        ->whereDate('transactions.created_at', $date) // Filter by date
-        ->orderBy('transactions.created_at', 'asc')
-        ->get();
+            ->leftJoin('returns', 'transactions.id', '=', 'returns.transaction_id')
+            ->select(
+                'transactions.*',
+                'returns.*',
+                'transactions.created_at as salesDate',
+                'returns.created_at as returnDate'
+            )
+            ->whereDate('transactions.created_at', $date) // Filter by transaction date
+            ->whereDate('returns.created_at', $date)
+            ->get();
         // $returns = Returns::where('created_at', $date);
 
         dd($this->transactions);
