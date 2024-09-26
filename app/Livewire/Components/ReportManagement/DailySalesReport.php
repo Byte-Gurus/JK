@@ -4,9 +4,9 @@ namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
 use App\Models\Transaction;
-use DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class DailySalesReport extends Component
@@ -48,14 +48,10 @@ class DailySalesReport extends Component
         $totalNet = 0;
 
         foreach ($this->transactions as $transaction) {
-            
-            $transactionNumber = $transaction->return_number ?? $transaction->transaction_number;
 
-            if ($transaction->total_amount) {
-                $totalGross += $transaction['total_amount'];
-                $totalTax += $transaction['total_vat_amount'];
 
-            }
+            $totalGross += $transaction['total_amount'];
+            $totalTax += $transaction['total_vat_amount'];
 
         }
 
