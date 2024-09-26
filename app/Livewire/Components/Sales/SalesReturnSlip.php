@@ -14,6 +14,7 @@ class SalesReturnSlip extends Component
     public $return_details, $dateCreated, $return_number, $transaction_number, $transaction_date, $user, $item_return_amount;
     public function render()
     {
+        $this->return_details = ReturnDetails::where('return_id', $this->return_id)->get();
         return view('livewire.components.Sales.sales-return-slip', [
             'return_details' => $this->return_details
         ]);
@@ -37,8 +38,8 @@ class SalesReturnSlip extends Component
 
         ]);
     }
-    public function getReturnDetails($return_details, $return_id){
-        $this->return_details = $return_details;
+    public function getReturnDetails($return_id){
+
         $this->return_id = $return_id;
         $this->populateForm();
 
