@@ -17,27 +17,27 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $dateCreated }}
+                            {{ $dateCreated ?? 'N/A'  }}
                         </p>
                     </div>
 
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Return No.</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number ?? 'N/A'  }}</p>
                     </div>
                     <br>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Transaction No.</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_number }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_number ?? 'N/A'  }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date of Purchase</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_date }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_date ?? 'N/A' }}</p>
                     </div>
 
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $user }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $user ?? 'N/A'  }}</p>
 
                     </div>
                     <br>
