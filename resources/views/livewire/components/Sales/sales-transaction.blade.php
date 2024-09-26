@@ -50,6 +50,7 @@
                             class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
                             <option selected value="1">Sales</option>
                             <option value="2">Credit</option>
+                            <option value="3">Return</option>
                         </select>
                     </div>
                 @endif
@@ -274,7 +275,7 @@
         </div>
     </div>
     <div class="bg-[rgba(245,214,162,0.58)] ml-[28px] border-2 border-[rgb(53,53,53)] text-nowrap rounded-md">
-        @if ($isSales)
+        @if ($changeTransactionType == 1)
             <div class="grid grid-flow-row">
                 {{-- date & time section --}}
                 <div class="flex flex-row items-center justify-center gap-8 p-2">
@@ -363,7 +364,7 @@
                     </div>
                 </div>
             </div>
-        @else
+        @elseif ($changeTransactionType == 2)
             {{-- credit details --}}
             <div class="grid grid-flow-row">
                 {{-- date & time section --}}
@@ -532,6 +533,166 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        @elseif ($changeTransactionType)
+            {{-- credit details --}}
+            <div class="grid grid-flow-row">
+                {{-- date & time section --}}
+                <div class="flex flex-row items-center justify-center gap-8 p-2">
+                    <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
+                        <input type="text" x-ref="barcodeInput" wire.live="barcode" id="barcode"
+                            style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
+                            wire:model.live="barcode">
+                    </div>
+                    <div>
+                        <p>Time</p>
+                    </div>
+                </div>
+                {{-- transaction number section --}}
+                <div class="border border-black"></div>
+
+                <div class="flex flex-col p-2">
+                    <div>
+
+                        <label for="credit_id" class="block mb-1 font-medium text-[1.6em] text-gray-900 ">Return No.
+                        </label>
+
+                        {{-- @if (empty($returnNo)) --}}
+                        <div class="relative w-1/2">
+
+                            <input wire:model.live.debounce.300ms='searchReturnNo' type="search" list="returnList"
+                                class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
+                                placeholder="Search Return No." required="">
+
+                        </div>
+                        {{-- @if (!empty($searchCustomer))
+                                <div
+                                    class="fixed max-h-[400px] z-99 h-fit rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                    @foreach ($credit_customers as $credit_customer)
+                                        <ul wire:click="selectCustomer({{ $credit_customer->id }})"
+                                            class="w-full px-4 py-2 transition-all  justify-between duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
+
+                                            <li class="flex items-start justify-between">
+                                                <!-- Item details on the left side -->
+                                                <div
+                                                    class="text-[0.8em] w-full gap-4 justify-between flex flex-row text-wrap">
+                                                    <p class="font-medium">
+                                                        {{ $credit_customer->firstname . ' ' . ($credit_customer->middlename ?? '') . ' ' . $credit_customer->lastname }}
+                                                    </p>
+                                                    @foreach ($credit_customer->creditJoin as $credit)
+                                                        @if ($credit->status != 'Fully paid' && !$credit->transactionJoin)
+                                                            <p class="italic font-thin">
+                                                                {{ $credit->credit_number }}
+                                                            </p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    @endforeach
+                                </div>
+                            @endif --}}
+                        {{-- @endgitif --}}
+                        <div class="flex flex-col">
+                            <div class="flex flex-col gap-2 mb-2">
+                                <div class="flex flex-row items-center gap-6 ">
+                                    <div class=" font-medium text-[1.2em]">Return Credit:
+                                        {{ $senior_pwd_id }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="grid grid-flow-row">
+                {{-- date & time section --}}
+                <div class="flex flex-row items-center justify-center gap-8 p-2">
+                    <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
+                        <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
+                            x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
+                    </div>
+                    <div>
+                        <p class="italic font-medium ">Time</p>
+                    </div>
+                </div>
+                <div class="border border-black"></div>
+                <div class="flex flex-col p-2">
+                    <p class="text-[1.2em] font-bold">Transaction No.</p>
+                    <p class="self-center text-[1.8em] italic font-black">{{ $transaction_number }}</p>
+                </div>
+                <div class="flex flex-row items-center">
+                    <div class="w-full ">
+                        <div class="border border-black "></div>
+                    </div>
+                    <div class="m-1">
+                        <p class=" font-medium text-[1em]">Discount</p>
+                    </div>
+                    <div class="w-full">
+                        <div class="border border-black "></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 p-2 mb-2">
+                    <div class="flex flex-row items-center gap-6">
+                        <div class=" font-medium text-[1.2em]">Discount Type: {{ $discount_type }}</div>
+                    </div>
+                    <div class="flex flex-row items-center gap-6 ">
+                        <div class=" font-medium text-[1.2em]">Customer Name: {{ $customer_name }}</div>
+                    </div>
+                    <div class="flex flex-row items-center gap-6 ">
+                        <div class=" font-medium text-[1.2em]">ID No.: {{ $senior_pwd_id }}</div>
+                    </div>
+                </div>
+                <div class="border border-black "></div>
+                <div class="flex flex-col h-full gap-2 p-2 justify-evenly">
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Tax Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">₱ {{ number_format($totalVat, 2) }}</div>
+                    </div>
+                    <div class="border border-black "></div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-[1.8em]">
+                            <p>Subtotal</p>
+                        </div>
+                        <div class=" font-black text-[1.8em]">₱ {{ number_format($subtotal, 2) }}</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Senior & PWD </p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">{{ $discount_percent }} %</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Discount Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">₱ {{ number_format($PWD_Senior_discount_amount, 2) }}
+                        </div>
+                    </div>
+                    <div class="border border-black "></div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-[1.8em]">
+                            <p>Total</p>
+                        </div>
+                        <div class=" font-black text-[1.8em]">₱ {{ number_format($grandTotal, 2) }}</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Tendered Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">₱ {{ number_format($tendered_amount, 2) }}</div>
+                    </div>
+                    <div class="border border-black "></div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-green-900 text-[2.4em]">
+                            <p>Change</p>
+                        </div>
+                        <div class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</div>
                     </div>
                 </div>
             </div>
