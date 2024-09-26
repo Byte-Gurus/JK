@@ -15,47 +15,36 @@
             <div class="flex flex-col justify-between px-4 mb-2">
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Date:</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}
-                        </p> --}}
+                        <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
+                        <p class="text-[0.6em] font-bold uppercase">
+                            {{ $dateCreated }}
+                        </p>
                     </div>
+
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Time:</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}
-                        </p> --}}
-                    </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Return Slip No.</p>
-                        <p class="text-[0.6em] font-bold uppercase">hi</p>
+                        <p class="text-[0.6em] font-bold uppercase">Return No.</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number }}</p>
                     </div>
                     <br>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Transaction No.</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p> --}}
+                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_number }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date of Purchase</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['payment']['reference_no'] ?? null }}</p> --}}
+                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_date }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Reason for Return:</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['user'] ?? null }}</p> --}}
-                    </div>
+
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['user'] ?? null }}</p> --}}
+                        <p class="text-[0.6em] font-bold uppercase">{{ $user }}</p>
+
                     </div>
                     <br>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Total Return Amount</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['user'] ?? null }}</p> --}}
+                        <p class="text-[0.6em] font-bold uppercase">
+                            {{ item_return_amount }}</p>
                     </div>
                 </div>
             </div>
