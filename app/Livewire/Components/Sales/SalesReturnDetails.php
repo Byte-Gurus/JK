@@ -8,24 +8,20 @@ use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
-use App\Models\TransactionMovement;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class SalesReturnDetails extends Component
 {
     use LivewireAlert;
+
     public $showSalesReturnForm = false;
-
     public $showSalesAdminLoginForm = false;
-
     public $returnQuantity = [];
     public $operation = [];
-
     public $isAdmin;
     public $description = [];
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number;
-
     public $return_info = [];
 
     public function mount()
@@ -35,13 +31,13 @@ class SalesReturnDetails extends Component
 
     public function render()
     {
-
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
         return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
         ]);
     }
+
     protected $listeners = [
         'get-transaction' => 'getTransaction',
         'return-sales-return-details' => 'returnSalesReturnDetails',
@@ -56,7 +52,6 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
-
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
                 $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
@@ -68,41 +63,20 @@ class SalesReturnDetails extends Component
         $this->showSalesAdminLoginForm = true;
     }
 
-    // public function returnConfirmation()
-    // {
-    //     $this->confirm('Do you want to return this items?', [
-    //         'onConfirmed' => 'returnConfirmed', //* call the createconfirmed method
-
-    //     ]);
-    // }
-
     public function returnConfirmed()
     {
-
-        // $old_transaction = Transaction::find($this->transaction_id);
-        // $old_transaction->transaction_type = 'Return';
-        // $old_transaction->save();
-
-        // $transaction->total_amount = $this->new_total;
-        // $transaction->total_vat_amount = $this->new_vat_amount;
-
         $returns = Returns::create([
             'transaction_id' => $this->transaction_id,
             'return_total_amount' => $this->return_total_amount,
             'return_number' => $this->return_number,
             'original_amount' => $this->total_amount,
-
         ]);
 
-
-
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            // Ensure the index exists in return_info array
             if (isset($this->return_info[$index])) {
                 $info = $this->return_info[$index];
 
-                // Create return details record
-               $return_details[] = ReturnDetails::create([
+                $return_details[] = ReturnDetails::create([
                     'return_quantity' => $info['return_quantity'],
                     'item_return_amount' => $info['item_return_amount'],
                     'description' => $info['description'],
@@ -114,8 +88,6 @@ class SalesReturnDetails extends Component
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
                 $transactionDetails->status = $info['operation'];
                 $transactionDetails->save();
-
-
             }
         }
 
@@ -125,12 +97,11 @@ class SalesReturnDetails extends Component
 
         $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
         $this->dispatch('get-return-details', $this->return_details)->to(CashierPage::class);
-
     }
+
     public function updatedOperation($value, $ind)
     {
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-
             if (isset($this->operation[$index])) {
                 $this->return_info[$index]['operation'] = $this->operation[$index];
             }
@@ -146,17 +117,16 @@ class SalesReturnDetails extends Component
             unset($this->description[$ind]);
             unset($this->return_info[$ind]);
             unset($this->operation[$ind]);
-
-
             $this->calculateTotalRefundAmount();
         }
 
         $this->resetValidation();
     }
+
     public function updatedReturnQuantity()
     {
         $validated = $this->validateForm();
-        // $this->calculateTotalRefundAmount();
+        $this->calculateTotalRefundAmount();
     }
 
     public function calculateTotalRefundAmount()
@@ -166,32 +136,21 @@ class SalesReturnDetails extends Component
         $this->return_vat_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-
-
             if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
-
                 if ($this->operation[$index] != 'Exchange') {
-                    $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail['inventoryJoin']['selling_price'];
-
+                    $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->inventoryJoin->selling_price;
                     $this->return_total_amount += $this->item_return_amount;
 
-                    $transactionDetail->item_subtotal -= ($transactionDetail->item_subtotal / ($transactionDetail->itemJoin->vat_percent + 100) * 100);
-
-                    $this->return_vat_amount += $transactionDetail->item_subtotal;
-
+                    $item_subtotal_excluding_vat = $transactionDetail->item_subtotal - ($transactionDetail->item_subtotal / (1 + $transactionDetail->itemJoin->vat_percent / 100));
+                    $this->return_vat_amount += $item_subtotal_excluding_vat;
 
                     $total_vat_amount = $transactionDetail->transactionJoin->total_vat_amount;
-
                     $this->new_vat_amount = round($total_vat_amount - $this->return_vat_amount);
-
                 }
-
-
 
                 if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
-                    $this->return_total_amount = $this->return_total_amount - $transactionDetail->item_discount_amount;
+                    $this->return_total_amount -= $transactionDetail->item_discount_amount;
                 }
-
 
                 $this->return_info[$index] = [
                     'item_return_amount' => $this->item_return_amount,
@@ -201,20 +160,17 @@ class SalesReturnDetails extends Component
                     'item_id' => $transactionDetail->item_id,
                     'inventory_id' => $transactionDetail->inventory_id,
                     'operation' => $this->operation[$index]
-
                 ];
             }
         }
 
-
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
+
     public function updatedDescription()
     {
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            // Check if returnQuantity at $index is set and greater than 0
             if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
-                // Check if description at $index exists
                 if (isset($this->description[$index])) {
                     $this->return_info[$index]['description'] = $this->description[$index];
                 }
@@ -222,9 +178,8 @@ class SalesReturnDetails extends Component
         }
     }
 
-    private function populateForm() //*lagyan ng laman ang mga input
+    private function populateForm()
     {
-
         $transaction = Transaction::find($this->transaction_id);
 
         $this->fill([
@@ -238,20 +193,17 @@ class SalesReturnDetails extends Component
             'change' => ($transaction->paymentJoin->tendered_amount ?? 0) - ($transaction->paymentJoin->amount ?? 0),
             'tendered_amount' => $transaction->paymentJoin->tendered_amount ?? 0,
             'subtotal' => $transaction->subtotal,
-
         ]);
     }
+
     protected function validateForm()
     {
-
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index])) {
-                $availableQty = $transactionDetail['item_quantity']; // Replace with the actual field for quantity
+                $availableQty = $transactionDetail['item_quantity'];
                 $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
-
-
 
         return $this->validate($this->rules);
     }
@@ -269,7 +221,6 @@ class SalesReturnDetails extends Component
 
     public function getItem($transactionDetails_id)
     {
-
         $this->dispatch('get-transaction-details', transactionDetails_ID: $transactionDetails_id)->to(SalesReturnForm::class);
     }
 
