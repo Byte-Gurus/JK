@@ -69,32 +69,35 @@
                 </ul>
                 <span class="">------------------------</span>
 
-                @foreach ($return_details as $return_detail)
-                    <ul class="grid justify-between grid-flow-col grid-cols-4">
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] uppercase text-center font-medium">
-                                    {{ $return_detail->return_quantity }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-4 py-[3px]">
-                            <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
-                                <div class=" text-wrap">
+                @if ($return_details)
+                    @foreach ($return_details as $return_detail)
+                        <ul class="grid justify-between grid-flow-col grid-cols-4">
+                            <li class="col-span-1 py-[3px]">
+                                <div>
                                     <p class="text-[0.6em] uppercase text-center font-medium">
-                                        {{ $return_detail->transactionDetailsJoin->itemJoin->item_name . ' ' . $return_detail->transactionDetailsJoin->itemJoin->description }}
-                                    </p>
+                                        {{ $return_detail->return_quantity }}</p>
                                 </div>
-                                <div class="flex flex-col w-full justify-center gap-[3px]">
-                                    <div class="flex flex-row justify-end gap-[5px]">
+                            </li>
+                            <li class="col-span-4 py-[3px]">
+                                <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
+                                    <div class=" text-wrap">
                                         <p class="text-[0.6em] uppercase text-center font-medium">
-                                            {{ $return_detail->transactionDetailsJoin->inventoryJoin->selling_price }}
+                                            {{ $return_detail->transactionDetailsJoin->itemJoin->item_name . ' ' . $return_detail->transactionDetailsJoin->itemJoin->description }}
                                         </p>
                                     </div>
+                                    <div class="flex flex-col w-full justify-center gap-[3px]">
+                                        <div class="flex flex-row justify-end gap-[5px]">
+                                            <p class="text-[0.6em] uppercase text-center font-medium">
+                                                {{ $return_detail->transactionDetailsJoin->inventoryJoin->selling_price }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                @endforeach
+                            </li>
+                        </ul>
+                    @endforeach
+                @endif
+
             </div>
         </div>
     </div>
