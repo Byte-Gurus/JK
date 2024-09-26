@@ -34,12 +34,10 @@ class DailySalesReport extends Component
             'transactions.*',
             'returns.*',
             'transactions.created_at as salesDate',
-            'returns.created_at as returnDate',
-
+            'returns.created_at as returnDate'
         )
         ->whereDate('transactions.created_at', $date) // Filter by date
         ->get();
-
 
         dd($this->transactions);
         $totalGross = 0;
