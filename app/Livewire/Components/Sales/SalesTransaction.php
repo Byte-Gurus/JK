@@ -342,12 +342,15 @@ class SalesTransaction extends Component
         $this->isSelected = $flag;
     }
 
-    public function hi()
-    {
-        dd('hi');
-        // $this->reset('selectedIndex', 'isSelected');
-    }
+    // public function resetSelected()
+    // {
+    //     $this->reset('selectedIndex', 'isSelected');
 
+    //     $this->selectedIndex =  null;
+    //     $this->isSelected = null;
+    //
+
+    
     public function setQuantity()
     {
 
