@@ -534,7 +534,7 @@
                     </div>
                 </div>
             </div>
-        @elseif ($changeTransactionType)
+        @elseif ($changeTransactionType === 3)
             {{-- credit details --}}
             <div class="grid grid-flow-row">
                 {{-- date & time section --}}
