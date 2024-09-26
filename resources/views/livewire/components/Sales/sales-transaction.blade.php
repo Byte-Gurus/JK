@@ -173,26 +173,16 @@
                         class="py-4 text-center font-bold bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                         <button class="py-2 text-center ">Return</button>
                     </div>
-                    @if (is_null($receiptData))
-                        <div
-                            class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button wire:click="cancel" x-on:keydown.window.prevent.ctrl.1="$wire.call('cancel')"
-                                class="py-2 text-center ">
-                                Cancel Transaction
-                            </button>
-                        </div>
-                    @else
-                        <div
-                            class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button
-                                class="py-2 text-center ">
-                                Cancel Transaction
-                            </button>
-                        </div>
-                    @endif
+                    <div
+                        class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                        <button wire:click="cancel" x-on:keydown.window.prevent.ctrl.1="$wire.call('cancel')"
+                            class="py-2 text-center ">
+                            Cancel Transaction
+                        </button>
+                    </div>
                 </div>
                 <div class="flex flex-col gap-2 ">
-                    @if (!empty($selectedItems) && empty($payment) && $isSales && is_null($receiptData))
+                    @if (!empty($selectedItems) && empty($payment) && $isSales)
                         <div x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
                             x-on:click="$wire.displayDiscountForm()"
                             class="py-4 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -207,7 +197,7 @@
                             </button>
                         </div>
                     @endif
-                    @if (!empty($selectedItems) && empty($payment) && is_null($receiptData))
+                    @if (!empty($selectedItems) && empty($payment))
                         <div wire:click="removeItem" x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')"
                             class="py-4 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="py-2 ">
@@ -239,7 +229,7 @@
                             </button>
                         </div>
                     @endif
-                    @if (!empty($selectedItems) && $isSales && is_null($receiptData))
+                    @if (!empty($selectedItems) && $isSales)
                         <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
                             x-on:click="$wire.displayPaymentForm()"
                             class="py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -255,7 +245,7 @@
                         </div>
                     @endif
                 </div>
-                @if (!empty($payment) && $isSales && is_null($receiptData))
+                @if (!empty($payment) && $isSales)
                     <div
                         class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                         <button type="button" class="py-2 "
