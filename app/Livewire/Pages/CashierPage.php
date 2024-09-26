@@ -19,6 +19,8 @@ class CashierPage extends Component
 
     public $showSalesReturn = false;
 
+    public $showSalesReturnSlip = false;
+
     public function render()
     {
         return view('livewire.pages.cashier-page');
@@ -28,6 +30,7 @@ class CashierPage extends Component
         'close-backorder-form' => 'closeBackorderForm',
         'display-sales-transaction' => 'displaySalesTransaction',
         'display-sales-transaction-history' => 'displaySalesTransactionHistory',
+        'display-sales-return-slip' => 'displaySalesReturnSlip',
         'display-sales-return' => 'displaySalesReturn',
         'display-sales-receipt' => 'displaySalesReceipt',
     ];
@@ -57,5 +60,10 @@ class CashierPage extends Component
     {
         $this->showSalesTransaction = false;
         $this->showSalesReturn = $showSalesReturn;
+    }
+
+    public function displaySalesReturnSlip($showSalesReturnSlip)
+    {
+
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Events\ReturnEvent;
+use App\Livewire\Pages\CashierPage;
 use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
@@ -130,7 +131,7 @@ class SalesReturnDetails extends Component
 
         $this->alert('success', 'Item/s was returned successfully');
 
-        // $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+        $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
     }
     public function updatedOperation($value, $ind)
     {
