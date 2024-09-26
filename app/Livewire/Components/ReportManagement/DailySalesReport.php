@@ -37,8 +37,10 @@ class DailySalesReport extends Component
                 'transactions.created_at as salesDate',
                 'returns.created_at as returnDate'
             )
-            ->whereDate('transactions.created_at', $date) // Filter by transaction date
-            ->whereDate('returns.created_at', $date)
+            ->where(function ($query) use ($date) {
+                $query->whereDate('transactions.created_at', $date)
+                      ->orWhereDate('returns.created_at', $date);
+            })
             ->get();
         // $returns = Returns::where('created_at', $date);
 
