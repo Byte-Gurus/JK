@@ -12,11 +12,9 @@ class SalesAdminLoginForm extends Component
     public $username;
     public $password;
 
-    public $showPassword = false;
+    public $showPassword = true;
 
     public $showSalesAdminLoginForm = false;
-
-
 
     public function render()
     {

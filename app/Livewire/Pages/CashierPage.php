@@ -64,6 +64,9 @@ class CashierPage extends Component
 
     public function displaySalesReturnSlip($showSalesReturnSlip)
     {
-
+        $this->showNavbarNoSidebar = false;
+        $this->showSalesTransaction = false;
+        $this->showSalesReturn = false;
+        $this->showSalesReturnSlip = $showSalesReturnSlip;
     }
 }
