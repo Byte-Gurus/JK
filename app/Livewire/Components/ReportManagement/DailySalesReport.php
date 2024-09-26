@@ -27,7 +27,12 @@ class DailySalesReport extends Component
     {
 
         $date = Carbon::parse($date);
-        $this->transactions = Transaction::whereDate('created_at', $date)->get();
+
+        $this->transactions = Transaction::with('returnJoin')
+        ->whereDate('created_at', $date)
+        ->get();
+
+
 
         $totalGross = 0;
         $totalTax = 0;

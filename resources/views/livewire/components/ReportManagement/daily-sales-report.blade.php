@@ -126,12 +126,8 @@
                         <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-medium">
-                                    @if (!isset($transaction->returnsJoin))
-                                    {{ $transaction->transaction_type }}</p>
-                                    @else
-                                    {{ $transaction->returnsJoin->transaction_type }}</p>
-                                    @endif
 
+                                    {{ $transaction->transaction_type ?? $transaction->transactiionJoin->transaction_type}}</p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
