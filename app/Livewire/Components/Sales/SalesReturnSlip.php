@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class SalesReturnSlip extends Component
 {
-    public $return_details =[], $dateCreated, $return_number, $transaction_number, $transaction_date, $user;
+    public $return_details =[], $dateCreated, $return_number, $transaction_number, $transaction_date, $user, $item_return_amount;
     public function render()
     {
         return view('livewire.components.Sales.sales-return-slip');
