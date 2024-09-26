@@ -44,7 +44,7 @@ class SalesTransactionHistory extends Component
         }
 
         $sales = $query->search($this->search) //?search the user
-            ->orderBy($this->sortColumn, $this->sortDirection)git 
+            ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);
 
         return view(
