@@ -47,7 +47,8 @@
 
                     <tr class=" text-nowrap">
 
-
+                        {{-- //* transaction no --}}
+                        <th scope="col" class="px-4 py-3">Return No.</th>
 
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3">Transaction No.</th>
