@@ -193,21 +193,21 @@ class SalesReturnDetails extends Component
                 }
 
 
-                // $this->return_info[$index] = [
-                //     'item_return_amount' => $this->item_return_amount,
-                //     'return_quantity' => $this->returnQuantity[$index],
-                //     'description' => $this->description[$index] ?? '',
-                //     'transaction_details_id' => $transactionDetail->id,
-                //     'item_id' => $transactionDetail->item_id,
-                //     'inventory_id' => $transactionDetail->inventory_id,
-                //     'operation' => $this->operation[$index]
+                $this->return_info[$index] = [
+                    'item_return_amount' => $this->item_return_amount,
+                    'return_quantity' => $this->returnQuantity[$index],
+                    'description' => $this->description[$index] ?? '',
+                    'transaction_details_id' => $transactionDetail->id,
+                    'item_id' => $transactionDetail->item_id,
+                    'inventory_id' => $transactionDetail->inventory_id,
+                    'operation' => $this->operation[$index]
 
-                // ];
+                ];
             }
         }
 
 
-        $this->new_total = $this->total_amount - $this->return_total_amount;
+        // $this->new_total = $this->total_amount - $this->return_total_amount;
     }
     public function updatedDescription()
     {
