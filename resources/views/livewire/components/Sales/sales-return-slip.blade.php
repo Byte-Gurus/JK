@@ -17,18 +17,18 @@
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $dateCreated ?? 'N/A'  }}
+                            {{ $dateCreated ?? 'N/A' }}
                         </p>
                     </div>
 
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Return No.</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number ?? 'N/A'  }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number ?? 'N/A' }}</p>
                     </div>
                     <br>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Transaction No.</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_number ?? 'N/A'  }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_number ?? 'N/A' }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date of Purchase</p>
@@ -37,13 +37,13 @@
 
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $user ?? 'N/A'  }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $user ?? 'N/A' }}</p>
 
                     </div>
                     <br>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Total Return Amount</p>
-                        <p class="text-[0.6em] font-bold uppercase"> {{ $item_return_amount ?? 'N/A'}}</p>
+                        <p class="text-[0.6em] font-bold uppercase"> {{ $item_return_amount ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>
@@ -68,41 +68,33 @@
                     </li>
                 </ul>
                 <span class="">------------------------</span>
-                {{-- @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
-                    @foreach ($receiptDetails['selectedItems'] as $item) --}}
-                <ul class="grid justify-between grid-flow-col grid-cols-4">
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            {{-- <p class="text-[0.6em] uppercase text-center font-medium">
-                                        {{ $item['quantity'] }}</p> --}}
-                        </div>
-                    </li>
-                    <li class="col-span-4 py-[3px]">
-                        <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
-                            <div class=" text-wrap">
-                                {{-- <p class="text-[0.6em] flex uppercase text-justify font-bold">
-                                            {{ $item['item_name'] }} {{ $item['item_description'] }}
-                                        </p> --}}
+
+                @foreach ($return_details as $return_detail)
+                    <ul class="grid justify-between grid-flow-col grid-cols-4">
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.6em] uppercase text-center font-medium">
+                                    {{ $return_detail->return_quantity }}</p>
                             </div>
-                            <div class="flex flex-col w-full justify-center gap-[3px]">
-                                <div class="flex flex-row justify-end gap-[5px]">
-                                    <p class="text-[0.6em] uppercase text-justify italic font-bold">RP</p>
-                                    {{-- <p class="text-[0.6em] uppercase text-justify italic font-bold">
-                                                {{ number_format($item['selling_price'], 2) }}</p> --}}
+                        </li>
+                        <li class="col-span-4 py-[3px]">
+                            <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
+                                <div class=" text-wrap">
+                                    <p class="text-[0.6em] uppercase text-center font-medium">
+                                        {{ $return_detail->transactionDetailsJoin->itemJoin->item_name . ' ' . $return_detail->transactionDetailsJoin->itemJoin->description }}
+                                    </p>
+                                </div>
+                                <div class="flex flex-col w-full justify-center gap-[3px]">
+                                    <div class="flex flex-row justify-end gap-[5px]">
+                                        <p class="text-[0.6em] uppercase text-center font-medium">
+                                            {{ $return_detail->transactionDetailsJoin->inventoryJoin->selling_price }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            {{-- <p class="text-[0.6em] text-right uppercase font-bold">
-                                        {{ number_format($item['total_amount'], 2) }}
-                                    </p> --}}
-                        </div>
-                    </li>
-                </ul>
-                {{-- @endforeach
-                @endif --}}
+                        </li>
+                    </ul>
+                @endforeach
             </div>
         </div>
     </div>
