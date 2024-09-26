@@ -10,4 +10,12 @@ class SalesReturnSlip extends Component
     {
         return view('livewire.components.Sales.sales-return-slip');
     }
+
+    protected $listeners = [
+        'get-return-details' => 'getReturnDetails'
+    ];
+
+    public function getReturnDetails($return_details){
+        dd($return_details);
+    }
 }
