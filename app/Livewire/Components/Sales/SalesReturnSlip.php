@@ -22,7 +22,7 @@ class SalesReturnSlip extends Component
 
     private function populateForm()
     {
-        $returns = Returns::find($this->return_details['return_id'])->first();
+        $returns = Returns::find($this->return_details['return_id']);
 
         $this->fill([
             'dateCreated' => Carbon::now()->format('M d Y h:i:s A'),
@@ -42,7 +42,7 @@ class SalesReturnSlip extends Component
     }
     public function getReturnDetails($return_details){
         $this->return_details = $return_details;
-        dd($return_details);
+
         $this->populateForm();
 
 
