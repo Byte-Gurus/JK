@@ -350,7 +350,6 @@ class SalesTransaction extends Component
     //     $this->isSelected = null;
     //
 
-    
     public function setQuantity()
     {
 
