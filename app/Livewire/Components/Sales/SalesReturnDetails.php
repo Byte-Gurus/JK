@@ -56,6 +56,23 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
+        foreach ($this->transactionDetails as $index => $transactionDetail) {
+
+
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
+                $this->return_info[$index] = [
+                    'item_return_amount' => $this->item_return_amount,
+                    'return_quantity' => $this->returnQuantity[$index],
+                    'description' => $this->description[$index] ?? '',
+                    'transaction_details_id' => $transactionDetail->id,
+                    'item_id' => $transactionDetail->item_id,
+                    'inventory_id' => $transactionDetail->inventory_id,
+                    'operation' => $this->operation[$index]
+
+                ];
+            }
+        }
+
 
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
@@ -194,16 +211,16 @@ class SalesReturnDetails extends Component
                 }
 
 
-                $this->return_info[$index] = [
-                    'item_return_amount' => $this->item_return_amount,
-                    'return_quantity' => $this->returnQuantity[$index],
-                    'description' => $this->description[$index] ?? '',
-                    'transaction_details_id' => $transactionDetail->id,
-                    'item_id' => $transactionDetail->item_id,
-                    'inventory_id' => $transactionDetail->inventory_id,
-                    'operation' => $this->operation[$index]
+                // $this->return_info[$index] = [
+                //     'item_return_amount' => $this->item_return_amount,
+                //     'return_quantity' => $this->returnQuantity[$index],
+                //     'description' => $this->description[$index] ?? '',
+                //     'transaction_details_id' => $transactionDetail->id,
+                //     'item_id' => $transactionDetail->item_id,
+                //     'inventory_id' => $transactionDetail->inventory_id,
+                //     'operation' => $this->operation[$index]
 
-                ];
+                // ];
             }
         }
 
