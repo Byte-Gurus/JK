@@ -663,6 +663,7 @@ class SalesTransaction extends Component
 
         if($this->changeTransactionType == 1 || $this->changeTransactionType == 3){
             $transactionType = "Sales";
+            dd($transactionType);
         }elseif($this->changeTransactionType == 2){
             $transactionType = "Credit";
         }
