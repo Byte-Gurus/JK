@@ -34,12 +34,14 @@
 
                         <div class="flex flex-col gap-1">
                             <p class="text-white ">From</p>
-                            <input id="toDate" type="date" wire:model.live="toDate" class="w-full p-4 rounded-md hover:bg-gray-300">
+                            <input id="toDate" type="date" wire:model.live="toDate"
+                                class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <p class="text-white ">To</p>
-                            <input id="fromDate" type="date" wire:model.live="fromDate" class="w-full p-4 rounded-md hover:bg-gray-300">
+                            <input id="fromDate" type="date" wire:model.live="fromDate"
+                                class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
                     </div>
                     <div class="flex flex-row self-end gap-2 mb-6">
@@ -50,7 +52,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            {{-- @if ($date)
+                            @if ($toDate && $fromDate)
                                 <button type="button" wire:click="getDate"
                                     x-on:click='$wire.displaySalesReturnReport()'
                                     class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
@@ -58,7 +60,7 @@
                                 <button type="button" wire:click="getDate" disabled
                                     x-on:click='$wire.displaySalesReturnReport()'
                                     class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
-                            @endif --}}
+                            @endif
                         </div>
                     </div>
                 </form>
