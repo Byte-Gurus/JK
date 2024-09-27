@@ -26,7 +26,7 @@ class DiscountForm extends Component
     public $barangays = null;
 
     public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $senior_pwd_id, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
-    public $isSales = true;
+
     public $customerDetails = [];
     public $credit_details = [];
 
@@ -56,7 +56,6 @@ class DiscountForm extends Component
 
         'createConfirmed',
         'removeDiscountConfirmed',
-        'change-credit-discount' => 'changeCreditDiscount',
         'get-credit-detail' => 'getCreditDetail'
     ];
 
@@ -110,7 +109,7 @@ class DiscountForm extends Component
 
     public function create() //* create process
     {
-        $isSales = $this->isSales;
+
         // dd($isSales);
         // if (!$isSales && isset($this->credit_details['customer_id'])) {
         //     $customer = Customer::find($this->customer_id);
@@ -256,11 +255,7 @@ class DiscountForm extends Component
 
         return $this->validate($rules);
     }
-    public function changeCreditDiscount($isSales)
-    {
-        $this->clearSelectedCustomerName();
-        $this->isSales = $isSales;
-    }
+
     public function createCustomer()
     {
         $this->resetForm();

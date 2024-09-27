@@ -38,7 +38,7 @@ class SalesTransaction extends Component
     use LivewireAlert;
     public $transaction_number;
 
-    public $isSales = true;
+
     public $search = '';
     public $selectedItems = [];
     public $payment = [];
@@ -221,10 +221,7 @@ class SalesTransaction extends Component
             return;
         }
 
-        // if (!$this->isSales && !$this->credit_no) {
-        //     $this->alert('error', 'Please select creditor');
-        //     return;
-        // }
+
 
 
 
@@ -563,8 +560,9 @@ class SalesTransaction extends Component
         if($this->changeTransactionType == 3){
             $this->selectedItems = [];
         }
-        $this->isSales = !$this->isSales;
-        $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
+
+
+
     }
 
 
