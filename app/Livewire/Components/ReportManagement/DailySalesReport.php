@@ -30,13 +30,15 @@ class DailySalesReport extends Component
     {
 
         $date = Carbon::parse($date);
-        $startOfDay = $date->startOfDay();
-        $endOfDay = $date->endOfDay();
+        // Define the start and end of the day
+        $startOfDay = $date->copy()->startOfDay();
+        $endOfDay = $date->copy()->endOfDay();
 
-        $this->transactions = TransactionMovement::where('created_at', $date)->get();
+        // Retrieve transactions within the date range
+        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfDay, $endOfDay])->get();
 
         // $returns = Returns::where('created_at', $date);
-        dd($this->transactions, $date);
+        dd($this->transactions);
 
         $totalGross = 0;
         $totalTax = 0;
