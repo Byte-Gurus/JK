@@ -38,7 +38,6 @@ class DailySalesReport extends Component
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfDay, $endOfDay])->get();
 
         // $returns = Returns::where('created_at', $date);
-        dd($this->transactions);
 
         $totalGross = 0;
         $totalTax = 0;
