@@ -216,6 +216,10 @@ class SalesTransaction extends Component
             return;
         }
 
+        if($this->changeTransactionType == 3 && !$this->returnInfo){
+            $this->alert('error', 'Enter return number first');
+        }
+
         // if (!$this->isSales && !$this->credit_no) {
         //     $this->alert('error', 'Please select creditor');
         //     return;
