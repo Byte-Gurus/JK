@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('transaction_type');
             $table->timestamps();
 
-            $table->foreignId('transaction_id')->constrained('transactions');
-            $table->foreignId('credit_id')->constrained('credits');
-            $table->foreignId('returns_id')->constrained('returns');
+            $table->foreignId('transaction_id')->nullable()->constrained('transactions');
+            $table->foreignId('credit_id')->nullable()->constrained('credits');
+            $table->foreignId('returns_id')->nullable()->constrained('returns');
 
         });
     }
