@@ -30,16 +30,20 @@ class DailySalesReport extends Component
     {
 
         $date = Carbon::parse($date);
-        $this->transactions = TransactionMovement::where('created_at', $date)->get();
+        $startOfDay = $date->startOfDay();
+        $endOfDay = $date->endOfDay();
+
+        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfDay, $endOfDay])->get();
+
         // $returns = Returns::where('created_at', $date);
-        dd($this->transactions );
+        dd($this->transactions);
 
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
 
         foreach ($this->transactions as $transaction) {
-            $totalGross += $transaction->transactionJoin->total_amount ;
+            $totalGross += $transaction->transactionJoin->total_amount;
             $totalTax += $transaction->transactionJoin->total_vat_amount;
         }
 
