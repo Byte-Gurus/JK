@@ -291,9 +291,7 @@
                         <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
                             x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
                     </div>
-                    <div>
-                        <p class="italic font-medium ">Time</p>
-                    </div>
+
                 </div>
                 <div class="border border-black"></div>
                 <div class="flex flex-col p-2">
@@ -382,7 +380,7 @@
                             style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
                             wire:model.live="barcode">
                     </div>
-                   
+
                 </div>
                 {{-- transaction number section --}}
                 <div class="border border-black"></div>
@@ -552,9 +550,7 @@
                             style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
                             wire:model.live="barcode">
                     </div>
-                    <div>
-                        <p>Time</p>
-                    </div>
+
                 </div>
                 {{-- transaction number section --}}
                 <div class="border border-black"></div>
@@ -599,9 +595,7 @@
                         <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
                             x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
                     </div>
-                    <div>
-                        <p class="italic font-medium ">Time</p>
-                    </div>
+                  
                 </div>
                 <div class="border border-black"></div>
                 <div class="flex flex-col p-2">
