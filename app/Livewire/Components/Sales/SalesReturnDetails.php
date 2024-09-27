@@ -148,17 +148,18 @@ class SalesReturnDetails extends Component
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
 
+
                 if ($this->operation[$index] != 'Exchange') {
+
+                    if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
+                        $this->item_return_amount -= $transactionDetail->item_discount_amount;
+                    }
 
                     $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->inventoryJoin->selling_price;
                     $this->return_total_amount += $this->item_return_amount;
 
                 }
 
-                if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
-                    $this->item_return_amount -= $transactionDetail->item_discount_amount;
-
-                }
 
                 if ($transactionDetail->vat_type === 'Vat') {
                     $vatable_Return_Subtotal += $this->item_return_amount;
@@ -203,7 +204,6 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
-        dd($vatable_return_total_amount, $non_vatable_return_total_amount);
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
 
