@@ -133,17 +133,19 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ $transaction->created_at->format('H:i:s') }}
+                                    {{ $transaction->created_at->format('H:i A') }}
                                 </p>
                             </div>
                         </li>
-                        {} <li class="col-span-2 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     @if ($transaction->transaction_type == 'Sales')
                                         {{ number_format($transaction->transactionJoin->total_amount, 2) }}
                                     @elseif ($transaction->transaction_type == 'Return')
-                                    {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
+                                        {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Credit')
+                                        {{ number_format($transaction->creditJoin->credit_amount, 2) }}
                                     @endif
 
                                 </p>
@@ -152,15 +154,26 @@
                         <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($transaction->total_discount_amount, 2) }}
+                                    @if ($transaction->transaction_type == 'Sales')
+                                    {{ number_format($transaction->transactionJoin->total_discount_amount, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Credit')
+                                    {{ number_format($transaction->creditJoin->transactionJoin->total_discount_amount, 2) }}
+                                    @endif
                                 </p>
                             </div>
                         </li>
 
-                        {{-- <li class="col-span-1 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($transaction->total_vat_amount, 2) }}
+                                    @if ($transaction->transaction_type == 'Sales')
+                                    {{ number_format($transaction->transactionJoin->total_vat_amount, 2) }}
+
+                                    @elseif ($transaction->transaction_type == 'Return')
+                                    {{ number_format($transaction->transactionJoin->total_vat_amount, 2) }}
+
+                                    @elseif ($transaction->transaction_type == 'Credit')
+                                    @endif
                                 </p>
                             </div>
                         </li>
@@ -170,7 +183,7 @@
                                     {{ number_format($transaction->total_amount - $transaction->total_vat_amount, 2) }}
                                 </p>
                             </div>
-                        </li> --}} 
+                        </li>
 
                     </ul>
                 @endforeach
