@@ -33,7 +33,7 @@ class DailySalesReport extends Component
         $startOfDay = $date->startOfDay();
         $endOfDay = $date->endOfDay();
 
-        $this->transactions = TransactionMovement::all();
+        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfDay, $endOfDay])->get();
 
         // $returns = Returns::where('created_at', $date);
         dd($this->transactions);
