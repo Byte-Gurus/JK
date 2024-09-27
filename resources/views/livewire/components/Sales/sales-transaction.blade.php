@@ -192,7 +192,7 @@
 
                 </div>
                 <div class="flex flex-col gap-2 ">
-                    @if (!empty($selectedItems) && empty($payment) && $isSales && !$unableShortcut)
+                    @if (!empty($selectedItems) && empty($payment) && $changeTransactionType == 1 && !$unableShortcut)
                         <div x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
                             x-on:click="$wire.displayDiscountForm()"
                             class="py-4 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
