@@ -30,33 +30,54 @@ class WeeklySalesReport extends Component
         $endOfWeek = Carbon::parse($week)->endOfWeek();
 
         // Fetch transactions within the week range
-        $transactions = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
+        $this->transactions = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
         // Initialize totals and daily summaries
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
+        $totalReturnAmount = 0;
+        $totalReturnVatAmount = 0;
         $dailySummaries = [];
 
         // Iterate through transactions to group and sum by day
-        foreach ($transactions as $transaction) {
+        foreach ($this->transactions as $transaction) {
             $date = $transaction->created_at->format('Y-m-d');
 
             if (!isset($dailySummaries[$date])) {
                 $dailySummaries[$date] = [
                     'totalGross' => 0,
                     'totalTax' => 0,
+                    'totalNet' => 0,
+                    'totalReturnAmount' => 0,
+                    'totalReturnVatAmount' => 0
                 ];
             }
 
-            $dailySummaries[$date]['totalGross'] += $transaction->total_amount;
-            $dailySummaries[$date]['totalTax'] += $transaction->total_vat_amount;
-
-            // Accumulate weekly totals
-            $totalGross += $transaction->total_amount;
-            $totalTax += $transaction->total_vat_amount;
-            $totalNet = $totalGross - $totalTax;
+            if ($transaction->transaction_type == 'Sales') {
+                $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
+                $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+            } elseif ($transaction->transaction_type == 'Return') {
+                $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
+            } elseif ($transaction->transaction_type == 'Credit') {
+                $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+            }
         }
+
+        // Calculate weekly totals
+        foreach ($dailySummaries as $summary) {
+            $totalGross += $summary['totalGross'];
+            $totalTax += $summary['totalTax'];
+            $totalReturnAmount += $summary['totalReturnAmount'];
+            $totalReturnVatAmount += $summary['totalReturnVatAmount'];
+        }
+
+        // Adjust totals for returns
+        $totalGross -= $totalReturnAmount;
+        $totalTax -= $totalReturnVatAmount;
+        $totalNet = $totalGross - $totalTax;
 
         // Prepare report information
         $this->transaction_info = [
