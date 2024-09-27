@@ -48,14 +48,16 @@ class DailySalesReport extends Component
             if ($transaction->transaction_type == 'Sales') {
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
+
             } elseif ($transaction->transaction_type == 'Return') {
                 $totalReturnAmount += $transaction->returnsjoin->return_total_amount;
+                $totalReturnVatAmount += $transaction->returnsjoin->return_vat_amount;
             }
 
         }
 
         $totalGross -= $totalReturnAmount;
-        $totalNet = $totalGross - $totalTax;
+        $totalNet = $totalGross - ($totalTax - $totalReturnVatAmount);
 
         $this->transaction_info = [
 
