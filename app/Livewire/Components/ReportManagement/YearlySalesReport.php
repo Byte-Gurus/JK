@@ -46,6 +46,7 @@ class YearlySalesReport extends Component
 
             if (!isset($monthlySummaries[$month])) {
                 $monthlySummaries[$month] = [
+                    'monthName' => $monthName,
                     'totalGross' => 0,
                     'totalTax' => 0,
                     'totalNet' => 0,
