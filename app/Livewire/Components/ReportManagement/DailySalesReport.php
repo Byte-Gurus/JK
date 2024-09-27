@@ -43,6 +43,7 @@ class DailySalesReport extends Component
         $totalTax = 0;
         $totalNet = 0;
         $totalReturnAmount = 0;
+        $totalReturnVatAmount =0;
 
         foreach ($this->transactions as $transaction) {
             if ($transaction->transaction_type == 'Sales') {
