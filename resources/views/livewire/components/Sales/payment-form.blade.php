@@ -139,7 +139,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            <button type="submit" x-on:keydown.window.prevent.ctrl.enter="$wire.call('pay')"
+                            <button type="submit"
                                 class=" px-6 py-2 bg-orange-300 rounded-md text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Pay</button>
                         </div>
                     </div>

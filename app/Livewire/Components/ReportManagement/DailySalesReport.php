@@ -3,9 +3,11 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Livewire\Pages\ReportManagement;
+use App\Models\Returns;
 use App\Models\Transaction;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class DailySalesReport extends Component
@@ -27,17 +29,31 @@ class DailySalesReport extends Component
     {
 
         $date = Carbon::parse($date);
-        $this->transactions = Transaction::whereDate('created_at', $date)->get();
+        $this->transactions = DB::table('transactions')
+            ->leftJoin('returns', 'transactions.id', '=', 'returns.transaction_id')
+            ->select(
+                'transactions.*',
+                'returns.*',
+                'transactions.created_at as salesDate',
+                'returns.created_at as returnDate'
+            )
+            ->where(function ($query) use ($date) {
+                $query->whereDate('transactions.created_at', $date)
+                      ->orWhereDate('returns.created_at', $date);
+            })
+            ->get();
+        // $returns = Returns::where('created_at', $date);
 
+        dd($this->transactions);
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
 
-        foreach($this->transactions as $transaction){
-            $totalGross += $transaction['total_amount'];
-            $totalTax += $transaction['total_vat_amount'];
-
+        foreach ($this->transactions as $transaction) {
+            $totalGross += $transaction->total_amount;
+            $totalTax += $transaction->total_vat_amount;
         }
+
 
         $totalNet = $totalGross - $totalTax;
 

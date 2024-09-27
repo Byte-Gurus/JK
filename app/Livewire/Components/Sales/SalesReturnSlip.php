@@ -4,16 +4,20 @@ namespace App\Livewire\Components\Sales;
 
 use App\Models\ReturnDetails;
 use App\Models\Returns;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
 use Carbon\Carbon;
 use Livewire\Component;
 
 class SalesReturnSlip extends Component
 {
-    public $return_details =[], $dateCreated, $return_number, $transaction_number, $transaction_date, $user, $item_return_amount;
+    public $return_details, $dateCreated, $return_number, $transaction_number, $transaction_date, $user, $item_return_amount, $return_id;
     public function render()
     {
-        return view('livewire.components.Sales.sales-return-slip');
+        $this->return_details = ReturnDetails::where('return_id', $this->return_id)->get();
+        return view('livewire.components.Sales.sales-return-slip', [
+            'return_details' => $this->return_details
+        ]);
 }
 
     protected $listeners = [
@@ -22,7 +26,7 @@ class SalesReturnSlip extends Component
 
     private function populateForm()
     {
-        $returns = Returns::find($this->return_details['return_id'])->first();
+        $returns = Returns::find($this->return_id);
 
         $this->fill([
             'dateCreated' => Carbon::now()->format('M d Y h:i:s A'),
@@ -30,19 +34,13 @@ class SalesReturnSlip extends Component
             'transaction_number' => $returns->transactionJoin->transaction_number,
             'transaction_date' => $returns->transactionJoin->created_at,
             'user' =>  Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'item_return_amount' => $this->return_details['item_return_amount']
-            // 'total_amount' => $transaction->total_amount,
-            // 'payment_method' => $transaction->paymentJoin->payment_type ?? 'N/A',
-            // 'reference_number' => $transaction->paymentJoin->reference_number ?? 'N/A',
-            // 'discount_amount' => $transaction->total_discount_amount,
-            // 'change' => ($transaction->paymentJoin->tendered_amount ?? 0) - ($transaction->paymentJoin->amount ?? 0),
-            // 'tendered_amount' => $transaction->paymentJoin->tendered_amount ?? 0,
-            // 'subtotal' => $transaction->subtotal,
+            'item_return_amount' => $returns->return_total_amount
+
         ]);
     }
-    public function getReturnDetails($return_details){
-        $this->return_details = $return_details;
-        dd($return_details);
+    public function getReturnDetails($return_id){
+
+        $this->return_id = $return_id;
         $this->populateForm();
 
 
