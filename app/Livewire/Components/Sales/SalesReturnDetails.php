@@ -164,7 +164,7 @@ class SalesReturnDetails extends Component
                     $non_vatable_return_total_amount = $vatable_Return_Subtotal - ($this->return_total_amount / (100 + $vat_Percent) * 100);
                 }
 
-                dd($vatable_return_total_amount, $non_vatable_return_total_amount);
+
 
                 if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
                     $this->return_total_amount -= $transactionDetail->item_discount_amount;
@@ -181,7 +181,7 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
-
+        dd($vatable_return_total_amount, $non_vatable_return_total_amount);
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
 
