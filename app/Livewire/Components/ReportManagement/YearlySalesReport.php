@@ -42,6 +42,7 @@ class YearlySalesReport extends Component
         // Iterate through transactions to group and sum by month
         foreach ($this->transactions as $transaction) {
             $month = $transaction->created_at->format('Y-m'); // Format to 'YYYY-MM'
+            $monthName = $transaction->created_at->format('F');
 
             if (!isset($monthlySummaries[$month])) {
                 $monthlySummaries[$month] = [
@@ -50,6 +51,7 @@ class YearlySalesReport extends Component
                     'totalNet' => 0,
                     'totalReturnAmount' => 0,
                     'totalReturnVatAmount' => 0
+
                 ];
             }
 
