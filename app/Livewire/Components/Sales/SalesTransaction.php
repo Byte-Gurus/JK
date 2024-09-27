@@ -730,7 +730,7 @@ class SalesTransaction extends Component
             $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
         }
 
-        if ($this->changeTransactionType == 1) {
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 2) {
             $payment = Payment::create([
                 'transaction_id' => $transaction->id,
                 'amount' => $this->payment['tendered_amount'],
@@ -740,7 +740,7 @@ class SalesTransaction extends Component
             ]);
 
 
-        } else {
+        } elseif ($this->changeTransactionType == 2) {
             $credit = Credit::where('credit_number', $this->credit_no)->first();
             $credit->credit_amount = $this->grandTotal;
             $credit->remaining_balance = $this->grandTotal;
