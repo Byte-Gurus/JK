@@ -571,39 +571,14 @@
                         {{-- @if (empty($returnNo)) --}}
                         <div class="relative w-1/2">
 
-                            <input wire:model.live.debounce.300ms='searchReturnNo' type="search" list="returnList"
+                            <input wire:model='search_return_number' type="search"
                                 class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
-                                placeholder="Search Return No." required="">
+                                placeholder="Return No." required="">
+
+                                <button type="button" wire:click='getReturnDetails'
 
                         </div>
-                        {{-- @if (!empty($searchCustomer))
-                                <div
-                                    class="fixed max-h-[400px] z-99 h-fit rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
-                                    @foreach ($credit_customers as $credit_customer)
-                                        <ul wire:click="selectCustomer({{ $credit_customer->id }})"
-                                            class="w-full px-4 py-2 transition-all  justify-between duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
 
-                                            <li class="flex items-start justify-between">
-                                                <!-- Item details on the left side -->
-                                                <div
-                                                    class="text-[0.8em] w-full gap-4 justify-between flex flex-row text-wrap">
-                                                    <p class="font-medium">
-                                                        {{ $credit_customer->firstname . ' ' . ($credit_customer->middlename ?? '') . ' ' . $credit_customer->lastname }}
-                                                    </p>
-                                                    @foreach ($credit_customer->creditJoin as $credit)
-                                                        @if ($credit->status != 'Fully paid' && !$credit->transactionJoin)
-                                                            <p class="italic font-thin">
-                                                                {{ $credit->credit_number }}
-                                                            </p>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    @endforeach
-                                </div>
-                            @endif --}}
-                        {{-- @endgitif --}}
                         <div>
                             <div class=" font-medium text-[1.2em]">Subtotal:
 

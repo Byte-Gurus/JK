@@ -20,6 +20,7 @@ use App\Models\Item;
 use App\Models\Notification;
 use App\Models\Payment;
 use App\Models\PurchaseDetails;
+use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
@@ -42,7 +43,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType, $receiptData = [], $unableShortcut = false;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType, $receiptData = [], $unableShortcut = false, $search_return_number;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -960,5 +961,18 @@ class SalesTransaction extends Component
     public function focusInput()
     {
         $this->dispatch('barcode_focus');
+    }
+
+
+    public function getReturnDetails(){
+
+        $rules = [
+            'search_return_number' => 'required'
+        ];
+
+        $this->validate($rules);
+
+        $returnDetails =  Returns::where('return_number', $this->search_return_number)->first();
+        dd( $returnDetails );
     }
 }
