@@ -120,7 +120,8 @@
                         <li class="col-span-3 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-                                    {{$transaction->transactionJoin->transaction_number ?? $transaction->returnsJoin->return_number }}</p>
+                                    {{ $transaction->transactionJoin->transaction_number ?? $transaction->returnsJoin->return_number }}
+                                </p>
                             </div>
                         </li>
                         <li class="col-span-2 py-[3px]">
@@ -129,17 +130,21 @@
                                     {{ $transaction->transaction_type }}</p>
                             </div>
                         </li>
-                        {{-- <li class="col-span-1 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     {{ $transaction->created_at->format('H:i:s') }}
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        {} <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($transaction->total_amount, 2) }}
+                                    @if ($transaction->transaction_type == 'Sales')
+                                        {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Return')
+                                    {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
+                                    @endif
 
                                 </p>
                             </div>
@@ -162,7 +167,7 @@
                         <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($transaction->total_amount - $transaction->total_vat_amount , 2) }}
+                                    {{ number_format($transaction->total_amount - $transaction->total_vat_amount, 2) }}
                                 </p>
                             </div>
                         </li> --}}
