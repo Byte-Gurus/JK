@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class SalesReturnReportDatePickerModal extends Component
 {
+    public $toDate, $fromDate;
     public function render()
     {
         return view('livewire.components.ReportManagement.sales-return-report-date-picker-modal');
@@ -21,7 +22,7 @@ class SalesReturnReportDatePickerModal extends Component
     public function resetForm()
     {
         $this->reset([
-            'date'
+            'toDate', 'fromDate'
         ]);
     }
 
@@ -32,6 +33,6 @@ class SalesReturnReportDatePickerModal extends Component
 
     public function getDate()
     {
-        $this->dispatch('generate-report', $this->date)->to(SalesReturnReport::class);
+        $this->dispatch('generate-report', $this->toDate, $this->fromDate)->to(SalesReturnReport::class);
     }
 }

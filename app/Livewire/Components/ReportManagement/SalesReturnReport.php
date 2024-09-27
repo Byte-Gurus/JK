@@ -10,21 +10,34 @@ use Livewire\Component;
 
 class SalesReturnReport extends Component
 {
-    public $createdBy, $dateCreated;
+    public $createdBy, $dateCreated, $fromDate, $toDate;
 
     public function render()
     {
-        $returnItems = ReturnDetails::all();
+        $startDate = $this->fromDate;
+        $endDate = $this->toDate;
+
+        $returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get();
 
         $this->reportInfo();
         return view('livewire.components.ReportManagement.sales-return-report', [
             'returnItems' => $returnItems
         ]);
     }
+
+    protected $listeners = [
+        'generate-report' => 'generateReport'
+    ];
     public function reportInfo()
     {
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
 
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');
+    }
+
+    public function generateReport($toDate, $fromDate)
+    {
+        $this->fromDate = $fromDate;
+        $this->toDate = $toDate;
     }
 }
