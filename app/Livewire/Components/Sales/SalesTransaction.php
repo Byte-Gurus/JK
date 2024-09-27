@@ -667,8 +667,9 @@ class SalesTransaction extends Component
             $transactionType = "sales";
         }elseif($this->changeTransactionType == 2){
             $transactionType = "Credit";
+        }elseif($this->changeTransactionType == 3){
+            $transactionType = "Sales";
         }
-
 
         $transaction = Transaction::create([
             'transaction_number' => $this->transaction_info['transaction_number'],
