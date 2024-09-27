@@ -40,6 +40,6 @@ class SalesReturnReport extends Component
         $this->fromDate = $fromDate;
         $this->toDate = $toDate;
 
-        dd( $returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get());
+        dd( $returnItems = ReturnDetails::whereBetween('created_at', [$toDate, $fromDate])->get());
     }
 }
