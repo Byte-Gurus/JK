@@ -372,7 +372,7 @@ class SalesTransaction extends Component
                 'grandTotal' => $this->grandTotal,
             ];
 
-            if (!$this->changeTransactionType = 2) {
+            if (!$this->changeTransactionType == 2) {
                 $data['credit_limit'] = $this->credit_limit;
             } else {
                 $data['credit_limit'] = null;
@@ -660,8 +660,6 @@ class SalesTransaction extends Component
 
 
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
-
-        $transactionType = null;
 
         if($this->changeTransactionType == 1 || $this->changeTransactionType == 3){
             $transactionType = "sales";
