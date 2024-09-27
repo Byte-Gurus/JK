@@ -39,6 +39,6 @@ class SalesReturnReport extends Component
     {
         $this->fromDate = $fromDate;
         $this->toDate = $toDate;
-        dd('sasas');
+        // dd('sasas');
     }
 }

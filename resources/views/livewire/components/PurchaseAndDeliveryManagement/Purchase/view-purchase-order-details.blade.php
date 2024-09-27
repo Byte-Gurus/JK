@@ -1,6 +1,6 @@
 {{-- // --}}
-<div class="relative">
-    <div class="flex flex-row h-[655px] gap-4 ">
+<div class="relative my-[3vh] rounded-lg" x-cloak >
+    <div class="flex flex-row h-[64vh] gap-4 ">
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
 
             <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">

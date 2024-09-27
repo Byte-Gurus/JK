@@ -4,7 +4,7 @@
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
     <div x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal'), showInventoryHistory: @entangle('showInventoryHistory'), showInventoryTable: @entangle('showInventoryTable') }">
-        <div class="m-[28px]">
+        <div class="m-[3vh]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
@@ -45,16 +45,16 @@
                     </div>
                 </div>
             </div>
-            <div x-cloak class="my-[28px]" x-show="showInventoryTable" x-data="{ showInventoryTable: @entangle('showInventoryTable') }">
+            <div x-cloak x-show="showInventoryTable" x-data="{ showInventoryTable: @entangle('showInventoryTable') }">
                 @livewire('components.InventoryManagement.inventory-table')
             </div>
-            <div x-cloak class="my-[28px]" x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
+            <div x-cloak x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                 @livewire('components.InventoryManagement.view-stock-card')
             </div>
-            <div x-cloak class="my-[28px]" x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
+            <div x-cloak x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
                 @livewire('components.InventoryManagement.inventory-history')
             </div>
-            <div x-cloak class="my-[28px]" x-show="showStockAdjustPage" x-data="{ showStockAdjustPage: @entangle('showStockAdjustPage') }">
+            <div x-cloak x-show="showStockAdjustPage" x-data="{ showStockAdjustPage: @entangle('showStockAdjustPage') }">
                 @livewire('components.InventoryManagement.stock-adjust-page')
             </div>
         </div>

@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative" x-cloak>
+<div class="relative my-[3vh] rounded-lg" x-cloak wire:poll.visible="1000ms">
 
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-md">
 
@@ -20,15 +20,10 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-1/2 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Purchase Order No." required="" />
 
             </div>
-
-
-
-
-
 
             <div class="flex flex-row items-center justify-center gap-4">
 
@@ -48,18 +43,14 @@
 
                     </select>
                 </div>
-
-
-
-
             </div>
         </div>
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[450px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[42vh] ">
 
-            <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
+            <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] top-0   ">

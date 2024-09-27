@@ -1,6 +1,7 @@
 {{-- // --}}
-<div class="relative" x-cloak>
-    <div class="flex flex-col h-[705px] ">
+<div class="relative my-[3vh] rounded-lg" x-cloak>
+
+    <div class="flex flex-col ">
         <div
             class="flex flex-row items-center border leading-none border-[rgb(53,53,53)] justify-between gap-4 p-4 text-nowrap mb-4">
 
@@ -100,7 +101,7 @@
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white">
 
             {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll h-[600px] no-scrollbar scroll">
+            <div class="overflow-x-auto overflow-y-scroll h-[52vh] no-scrollbar scroll">
 
                 <table class="w-full h-10 mb-[108px] overflow-auto text-sm text-left scroll no-scrollbar">
 

@@ -37,6 +37,7 @@ class ReportManagement extends Component
         'close-monthly-sales-report-date-picker-modal' => 'closeMonthlySalesReportDatePickerModal',
         'display-weekly-sales-report' => 'displayWeeklySalesReport',
         'display-monthly-sales-report' => 'displayMonthlySalesReport',
+        'display-sales-return-report' => 'displaySalesReturnReport',
         'display-yearly-sales-report' => 'displayYearlySalesReport',
         'display-customer-credit-list-report' => 'displayYearlySalesReport',
         'display-slow-moving-items-report' => 'displaySlowMovingItemsReport',
@@ -154,7 +155,7 @@ class ReportManagement extends Component
         $this->showYearlySalesReportDatePickerModal = false;
         $this->showSlowMovingItemsReportDatePickerModal = false;
         $this->showFastMovingItemsReportDatePickerModal = false;
-        $this->showSalesReturnReport = false;
+        $this->showSalesReturnReportDatePickerModal = false;
     }
 
     // Daily Sales Report
