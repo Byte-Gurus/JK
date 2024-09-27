@@ -170,7 +170,7 @@
                                     {{ number_format($transaction->transactionJoin->total_vat_amount, 2) }}
 
                                     @elseif ($transaction->transaction_type == 'Return')
-                                    {{ number_format($transaction->returnsJoin->return_vat_amount, 2) }}
+                                    {{ number_format($transaction->returnsJoin->return_vat_amount * -1, 2) }}
 
                                     @elseif ($transaction->transaction_type == 'Credit')
                                     @endif
