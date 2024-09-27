@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Models\Transaction;
+use App\Models\TransactionMovement;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -30,7 +31,7 @@ class WeeklySalesReport extends Component
         $endOfWeek = Carbon::parse($week)->endOfWeek();
 
         // Fetch transactions within the week range
-        $this->transactions = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
+        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
         // Initialize totals and daily summaries
         $totalGross = 0;
