@@ -32,7 +32,7 @@ class DailySalesReport extends Component
         $date = Carbon::parse($date);
         $this->transactions = TransactionMovement::where('created_at', $date)->get();
         // $returns = Returns::where('created_at', $date);
-
+        dd($this->transactions );
 
         $totalGross = 0;
         $totalTax = 0;
