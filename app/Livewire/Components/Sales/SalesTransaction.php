@@ -679,6 +679,11 @@ class SalesTransaction extends Component
             'user_id' => Auth::id(),
         ]);
 
+        $transaction_movement = TransactionMovement::create([
+            'transaction_type' => 'Sales',
+            'transaction_id' => $transaction->id
+        ]);
+
 
         foreach ($this->selectedItems as $index => $selectedItem) {
 
@@ -752,6 +757,11 @@ class SalesTransaction extends Component
                 'remaining_balance' => $this->grandTotal,
             ]);
 
+
+            $transaction_movement = TransactionMovement::create([
+                'transaction_type' => 'Credit',
+                'credit_id' => $credit->id
+            ]);
 
         }
 
