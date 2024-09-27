@@ -157,7 +157,7 @@
                             </div>
                         </li>
 
-                        <li class="col-span-1 py-[3px]">
+                        {{-- <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->total_vat_amount, 2) }}
@@ -170,7 +170,7 @@
                                     {{ number_format($transaction->total_amount - $transaction->total_vat_amount, 2) }}
                                 </p>
                             </div>
-                        </li> --}}
+                        </li> --}} 
 
                     </ul>
                 @endforeach
