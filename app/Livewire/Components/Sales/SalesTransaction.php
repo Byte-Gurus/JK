@@ -218,6 +218,7 @@ class SalesTransaction extends Component
 
         if($this->changeTransactionType == 3 && !$this->returnInfo){
             $this->alert('error', 'Enter return number first');
+            return;
         }
 
         // if (!$this->isSales && !$this->credit_no) {
@@ -558,6 +559,9 @@ class SalesTransaction extends Component
             $this->alert('error', 'Remove discount first');
             $this->reset('changeTransactionType');
             return;
+        }
+        if($this->changeTransactionType == 3){
+            $this->selectedItems = [];
         }
         $this->isSales = !$this->isSales;
         $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
