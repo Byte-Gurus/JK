@@ -346,19 +346,19 @@
                                                     value="{{ $customer_name }}" list="itemList"
                                                     class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                                                     placeholder="Search Customer">
-                                                @if ($isSales)
-                                                    <div class="mt-6.5">
-                                                        <button type="button" wire:loading.remove
-                                                            wire:click="createCustomer"
-                                                            class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                                            <div class="flex flex-row items-center gap-2">
-                                                                <p>
-                                                                    +
-                                                                </p>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                @endif
+
+                                                <div class="mt-6.5">
+                                                    <button type="button" wire:loading.remove
+                                                        wire:click="createCustomer"
+                                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                                        <div class="flex flex-row items-center gap-2">
+                                                            <p>
+                                                                +
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                </div>
+
 
                                             </div>
                                             @if (!empty($searchCustomer))
