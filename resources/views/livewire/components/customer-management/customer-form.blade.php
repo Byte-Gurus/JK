@@ -321,7 +321,7 @@
                                     <div class="mb-3">
 
                                         <label for="senior_pwd_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">ID No.</label>
 
                                         @if ($customertype != 'Normal')
                                             <input type="number" id="senior_pwd_id"

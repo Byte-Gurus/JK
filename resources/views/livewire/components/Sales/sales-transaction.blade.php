@@ -545,7 +545,7 @@
                     </div>
                 </div>
             </div>
-        @elseif ($changeTransactionType === 3)
+        @elseif ($changeTransactionType == 3)
             {{-- credit details --}}
             <div class="grid grid-flow-row">
                 {{-- date & time section --}}
@@ -604,6 +604,11 @@
                                 </div>
                             @endif --}}
                         {{-- @endgitif --}}
+                        <div>
+                            <div class=" font-medium text-[1.2em]">Subtotal:
+
+                            </div>
+                        </div>
                         <div class="flex flex-col">
                             <div class="flex flex-col gap-2 mb-2">
                                 <div class="flex flex-row items-center gap-6 ">
