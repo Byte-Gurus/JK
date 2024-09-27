@@ -577,18 +577,18 @@
                             <button type="button" wire:click='getReturnDetails'> Search</button>
 
                         </div>
-                        @if ($returnInfo)
+
                             <div>
                                 <div class=" font-medium text-[1.2em]">Return Number:
-                                    {{ $return_number }}
+                                    {{ $return_number ?? ' ' }}
                                 </div>
                             </div>
                             <div>
                                 <div class=" font-medium text-[1.2em]">Return Amount:
-                                    {{ $return_amount }}
+                                    {{ $return_amount ?? ' ' }}
                                 </div>
                             </div>
-                        @endif
+
 
                     </div>
                 </div>
