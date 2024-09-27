@@ -382,9 +382,7 @@
                             style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
                             wire:model.live="barcode">
                     </div>
-                    <div>
-                        <p>Time</p>
-                    </div>
+                   
                 </div>
                 {{-- transaction number section --}}
                 <div class="border border-black"></div>
