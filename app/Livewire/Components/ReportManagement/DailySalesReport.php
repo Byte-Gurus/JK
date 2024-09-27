@@ -36,7 +36,7 @@ class DailySalesReport extends Component
         $this->transactions = TransactionMovement::where('created_at', $date)->get();
 
         // $returns = Returns::where('created_at', $date);
-        dd($this->transactions);
+        dd($this->transactions, $date);
 
         $totalGross = 0;
         $totalTax = 0;
