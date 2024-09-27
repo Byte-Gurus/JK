@@ -140,7 +140,10 @@ class SalesReturnDetails extends Component
         $this->return_total_amount = 0;
         $this->item_return_amount = 0;
         $this->return_vat_amount = 0;
+        $vatable_Return_Subtotal = 0;
+        $non_vatable_Return_Subtotal = 0;
         $vatable_return_total_amount = 0;
+        $non_vatable_return_total_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
@@ -154,11 +157,14 @@ class SalesReturnDetails extends Component
                 if ($transactionDetail->vat_type === 'Vat') {
                     $vatable_Return_Subtotal += $this->return_total_amount;
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $total_Amount = $transactionDetail->item_subtotal;
-                    $vatable_return_total_amount = $vatable_Return_Subtotal - ($total_Amount / (100 + $vat_Percent) * 100);
+                    $vatable_return_total_amount = $vatable_Return_Subtotal - ($this->return_total_amount / (100 + $vat_Percent) * 100);
+                } elseif ($transactionDetail->vat_type === 'Non vatable') {
+                    $non_vatable_Return_Subtotal += $this->return_total_amount;
+                    $vat_Percent = $transactionDetail->itemJoin->vat_percent;
+                    $non_vatable_return_total_amount = $vatable_Return_Subtotal - ($this->return_total_amount / (100 + $vat_Percent) * 100);
                 }
 
-                dd($vatable_return_total_amount);
+                dd($vatable_return_total_amount, $non_vatable_return_total_amount);
 
                 if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
                     $this->return_total_amount -= $transactionDetail->item_discount_amount;
