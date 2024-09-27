@@ -22,7 +22,7 @@ class SalesReturnDetails extends Component
     public $operation = [];
     public $isAdmin;
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
     public $return_info = [];
 
     public function mount()
@@ -158,7 +158,7 @@ class SalesReturnDetails extends Component
                     if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
                         $this->item_return_amount -= $transactionDetail->item_discount_amount;
                     }
-                    
+
                     $this->return_total_amount += $this->item_return_amount;
 
                 }
@@ -170,27 +170,12 @@ class SalesReturnDetails extends Component
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
                     $vatable_return_total_amount = $vatable_Return_Subtotal - ($this->item_return_amount / (100 + $vat_Percent) * 100);
 
-                    dd(
-                        $vatable_Return_Subtotal,
-                        $vat_Percent,
-                        $vatable_return_total_amount,
-                        $vat_Percent,
-                        $this->item_return_amount,
-                        $total_vat = $non_vatable_return_total_amount + $vatable_return_total_amount
-                    );
+
                 } elseif ($transactionDetail->vat_type === 'Non Vatable') {
                     $non_vatable_Return_Subtotal += $this->item_return_amount;
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
                     $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($this->item_return_amount / (100 + $vat_Percent) * 100);
 
-                    dd(
-                        $non_vatable_Return_Subtotal,
-                        $vat_Percent,
-                        $non_vatable_return_total_amount,
-                        $vat_Percent,
-                        $this->item_return_amount,
-                        $total_vat = $non_vatable_return_total_amount + $vatable_return_total_amount
-                    );
                 }
 
 
@@ -208,6 +193,7 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
+        $this->return_vat_amount = $non_vatable_return_total_amount + $vatable_return_total_amount;
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
 
@@ -237,6 +223,7 @@ class SalesReturnDetails extends Component
             'change' => ($transaction->paymentJoin->tendered_amount ?? 0) - ($transaction->paymentJoin->amount ?? 0),
             'tendered_amount' => $transaction->paymentJoin->tendered_amount ?? 0,
             'subtotal' => $transaction->subtotal,
+            'current_tax_amount' => $transaction->total_vat_amount,
         ]);
     }
 

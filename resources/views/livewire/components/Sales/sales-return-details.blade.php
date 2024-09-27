@@ -12,7 +12,7 @@
                     <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
             </div>
-               <div class="relative p-4 rounded-r-2xl bg-[rgb(53,53,53)]">
+            <div class="relative p-4 rounded-r-2xl bg-[rgb(53,53,53)]">
                 <div class="flex flex-row items-center gap-2 text-white ">
                     <p class=" text-[1em] italic  font-medium">Return No.</p>
                     <p class=" text-[1.2em] font-black">{{ $return_number }}</p>
@@ -265,6 +265,23 @@
                     <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
                 </div>
             </div>
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.6em] font-medium">Current Tax Amount</p>
+                </div>
+                <div>
+                    <p class=" text-[1.6em] font-black">{{ number_format($current_tax_amount, 2) }}</p>
+                </div>
+            </div>
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.6em] font-medium">New Tax Amount</p>
+                </div>
+                <div>
+                    <p class=" text-[1.6em] font-black">{{ number_format($return_vat_amount, 2) }}</p>
+                </div>
+            </div>
+
         </div>
     </div>
     <div x-show="showSalesAdminLoginForm" x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
