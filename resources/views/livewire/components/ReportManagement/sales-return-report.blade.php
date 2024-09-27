@@ -94,66 +94,68 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
+            @if ($returnItems)
+                @foreach ($returnItems as $returnItem)
+                    <ul class="grid justify-between grid-flow-col grid-cols-8 mx-2 ">
 
-            @foreach ($returnItems as $returnItem)
-                <ul class="grid justify-between grid-flow-col grid-cols-8 mx-2 ">
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.6em] text-left font-medium">
+                                    {{ $returnItem->returnJoin->transactionJoin->transaction_number }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.6em] text-left font-medium">
+                                    {{ $returnItem->transactionDetailsJoin->itemJoin->barcode }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-center py-[3px]">
+                            <div>
+                                <p class="text-[0.6em] text-center font-bold">
+                                    {{ $returnItem->transactionDetailsJoin->itemJoin->item_name }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-center py-[3px]">
+                            <div>
+                                <p class="text-[0.6em] text-center font-bold">
+                                    {{ $returnItem->transactionDetailsJoin->itemJoin->item_description }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-center py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center font-bold">
+                                    {{ $returnItem->operation }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-center py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center font-bold">
+                                    {{ $returnItem->description }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.6em] text-center font-bold">
+                                    {{ $returnItem->return_quantity }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center font-bold">
+                                    {{ $returnItem->item_return_amount }}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                @endforeach
+            @endif
 
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.6em] text-left font-medium">
-                                {{ $returnItem->returnJoin->transactionJoin->transaction_number }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.6em] text-left font-medium">
-                                {{ $returnItem->transactionDetailsJoin->itemJoin->barcode }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 text-center py-[3px]">
-                        <div>
-                            <p class="text-[0.6em] text-center font-bold">
-                                {{ $returnItem->transactionDetailsJoin->itemJoin->item_name }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 text-center py-[3px]">
-                        <div>
-                            <p class="text-[0.6em] text-center font-bold">
-                                {{ $returnItem->transactionDetailsJoin->itemJoin->item_description }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 text-center py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center font-bold">
-                                {{ $returnItem->operation }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 text-center py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center font-bold">
-                                {{ $returnItem->description }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.6em] text-center font-bold">
-                                {{ $returnItem->return_quantity }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-center font-bold">
-                                {{ $returnItem->item_return_amount }}
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-            @endforeach
         </div>
     </div>
 </div>
