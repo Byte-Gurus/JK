@@ -71,6 +71,7 @@ class SalesReturnDetails extends Component
             'return_total_amount' => $this->return_total_amount,
             'return_number' => $this->return_number,
             'original_amount' => $this->total_amount,
+            'return_vat_amount' => $this->return_vat_amount
         ]);
 
         $transaction_movement = TransactionMovement::create([

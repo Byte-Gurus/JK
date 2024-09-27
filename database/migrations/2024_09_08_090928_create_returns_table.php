@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('return_number')->unique();
             $table->double('return_total_amount');
             $table->double('original_amount');
+            $table->double('return_vat_amount');
             $table->timestamps();
 
             $table->foreignId('transaction_id')->constrained('transactions');
