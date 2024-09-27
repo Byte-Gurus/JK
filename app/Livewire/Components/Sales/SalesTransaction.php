@@ -375,7 +375,7 @@ class SalesTransaction extends Component
                 'grandTotal' => $this->grandTotal,
             ];
 
-            if (!$this->isSales) {
+            if (!$this->changeTransactionType = 2) {
                 $data['credit_limit'] = $this->credit_limit;
             } else {
                 $data['credit_limit'] = null;
@@ -609,7 +609,7 @@ class SalesTransaction extends Component
     public function save()
     {
 
-        if (empty($this->payment) && $this->isSales) {
+        if (empty($this->payment) && $this->changeTransactionType != 2) {
             $this->alert('warning', 'No payment yet');
             return;
         }
@@ -663,7 +663,12 @@ class SalesTransaction extends Component
 
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
 
-        $transactionType = $this->isSales ? 'Sales' : 'Credit';
+        if($this->changeTransactionType == 1){
+            $transactionType = "sales";
+        }elseif($this->changeTransactionType == 2){
+            $transactionType = "Credit";
+        }
+
 
         $transaction = Transaction::create([
             'transaction_number' => $this->transaction_info['transaction_number'],
@@ -726,7 +731,7 @@ class SalesTransaction extends Component
             $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
         }
 
-        if ($this->isSales) {
+        if ($this->changeTransactionType == 1) {
             $payment = Payment::create([
                 'transaction_id' => $transaction->id,
                 'amount' => $this->payment['tendered_amount'],
