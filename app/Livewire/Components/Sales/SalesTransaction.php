@@ -927,6 +927,10 @@ class SalesTransaction extends Component
         $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details', 'senior_pwd_id', 'discount_type');
     }
 
+    public function clearSelectedReturnNo()
+    {
+        $this->reset('return_number');
+    }
 
 
 
