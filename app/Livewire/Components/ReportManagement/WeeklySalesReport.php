@@ -34,12 +34,12 @@ class WeeklySalesReport extends Component
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
         // Initialize totals and daily summaries
+        $dailySummaries = [];
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
         $totalReturnAmount = 0;
         $totalReturnVatAmount = 0;
-        $dailySummaries = [];
 
         // Iterate through transactions to group and sum by day
         foreach ($this->transactions as $transaction) {
@@ -55,6 +55,7 @@ class WeeklySalesReport extends Component
                 ];
             }
 
+            // Summing daily transactions
             if ($transaction->transaction_type == 'Sales') {
                 $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
                 $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
@@ -67,24 +68,31 @@ class WeeklySalesReport extends Component
             }
         }
 
-        // Calculate weekly totals
-        foreach ($dailySummaries as $summary) {
-            $totalGross += $summary['totalGross'];
-            $totalTax += $summary['totalTax'];
+        // Calculate daily net values and accumulate weekly totals
+        foreach ($dailySummaries as $date => $summary) {
+            $dailyGross = $summary['totalGross'] - $summary['totalReturnAmount'];
+            $dailyTax = $summary['totalTax'] - $summary['totalReturnVatAmount'];
+            $dailyNet = $dailyGross - $dailyTax;
+
+            $dailySummaries[$date]['totalGross'] = $dailyGross;
+            $dailySummaries[$date]['totalTax'] = $dailyTax;
+            $dailySummaries[$date]['totalNet'] = $dailyNet;
+
+            // Accumulate weekly totals
+            $totalGross += $dailyGross;
+            $totalTax += $dailyTax;
+            $totalNet += $dailyNet;
             $totalReturnAmount += $summary['totalReturnAmount'];
             $totalReturnVatAmount += $summary['totalReturnVatAmount'];
         }
-
-        // Adjust totals for returns
-        $totalGross -= $totalReturnAmount;
-        $totalTax -= $totalReturnVatAmount;
-        $totalNet = $totalGross - $totalTax;
 
         // Prepare report information
         $this->transaction_info = [
             'totalGross' => $totalGross,
             'totalTax' => $totalTax,
             'totalNet' => $totalNet,
+            'totalReturnAmount' => $totalReturnAmount,
+            'totalReturnVatAmount' => $totalReturnVatAmount,
             'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
