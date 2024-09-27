@@ -275,10 +275,18 @@
             </div>
             <div class="flex flex-row justify-between">
                 <div>
-                    <p class=" text-[1.6em] font-medium">New Tax Amount</p>
+                    <p class=" text-[1.6em] font-medium">Retuned Tax Amount</p>
                 </div>
                 <div>
                     <p class=" text-[1.6em] font-black">{{ number_format($return_vat_amount, 2) }}</p>
+                </div>
+            </div>
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.6em] font-medium">New Tax Amount</p>
+                </div>
+                <div>
+                    <p class=" text-[1.6em] font-black">{{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
                 </div>
             </div>
 
