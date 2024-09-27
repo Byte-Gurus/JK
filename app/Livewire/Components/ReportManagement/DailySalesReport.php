@@ -43,7 +43,7 @@ class DailySalesReport extends Component
         $totalTax = 0;
         $totalNet = 0;
         $totalReturnAmount = 0;
-        $totalReturnVatAmount =0;
+        $totalReturnVatAmount = 0;
 
         foreach ($this->transactions as $transaction) {
             if ($transaction->transaction_type == 'Sales') {
@@ -53,6 +53,9 @@ class DailySalesReport extends Component
             } elseif ($transaction->transaction_type == 'Return') {
                 $totalReturnAmount += $transaction->returnsjoin->return_total_amount;
                 $totalReturnVatAmount += $transaction->returnsjoin->return_vat_amount;
+            } elseif ($transaction->transaction_type == 'Credit') {
+                $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
+                $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
             }
 
         }
