@@ -62,7 +62,7 @@ class DailySalesReport extends Component
         $this->transaction_info = [
 
             'totalGross' => $totalGross,
-            'totalTax' => $totalTax,
+            'totalTax' => $totalTax - $totalReturnVatAmount,
             'date' => $date->format('M d Y '),
             'totalNet' => $totalNet,
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
