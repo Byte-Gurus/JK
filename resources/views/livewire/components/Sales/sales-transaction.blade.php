@@ -575,7 +575,7 @@
                                 class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                                 placeholder="Return No." required="">
 
-                                <button type="button" wire:click='getReturnDetails'
+                                <button type="button" wire:click='getReturnDetails'> Search</button>
 
                         </div>
 
