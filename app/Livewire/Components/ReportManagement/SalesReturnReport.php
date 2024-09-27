@@ -38,8 +38,7 @@ class SalesReturnReport extends Component
     public function generateReport($toDate, $fromDate)
     {
         $this->fromDate = $fromDate;
-        $this->fromDate = $toDate;
-        dd( $this->fromDate,  $this->fromDate);
-        // dd('sasas');
+        $this->toDate = $toDate;
+       
     }
 }
