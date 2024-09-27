@@ -580,19 +580,16 @@
                         </div>
 
                         <div>
-                            <div class=" font-medium text-[1.2em]">Subtotal:
+                            <div class=" font-medium text-[1.2em]">Return Number:
+                                {{ $return_number }}
+                            </div>
+                        </div>
+                        <div>
+                            <div class=" font-medium text-[1.2em]">Return Amount:
+                                {{ $return_amount }}
+                            </div>
+                        </div>
 
-                            </div>
-                        </div>
-                        <div class="flex flex-col">
-                            <div class="flex flex-col gap-2 mb-2">
-                                <div class="flex flex-row items-center gap-6 ">
-                                    <div class=" font-medium text-[1.2em]">Return Credit:
-                                        {{ $senior_pwd_id }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
