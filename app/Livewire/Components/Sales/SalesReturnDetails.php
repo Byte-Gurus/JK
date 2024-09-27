@@ -176,7 +176,7 @@ class SalesReturnDetails extends Component
                 } elseif ($transactionDetail->vat_type === 'Non Vatable') {
                     $non_vatable_Return_Subtotal += $this->item_return_amount;
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $non_vatable_return_total_amount = $vatable_Return_Subtotal - ($this->item_return_amount / (100 + $vat_Percent) * 100);
+                    $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($this->item_return_amount / (100 + $vat_Percent) * 100);
 
                     dd(
                         $non_vatable_Return_Subtotal,
