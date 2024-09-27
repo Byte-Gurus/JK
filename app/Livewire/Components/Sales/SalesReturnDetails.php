@@ -154,6 +154,11 @@ class SalesReturnDetails extends Component
                     $this->return_total_amount += $this->item_return_amount;
 
                 }
+
+                if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
+                    $this->return_total_amount -= $transactionDetail->item_discount_amount;
+                }
+                
                 if ($transactionDetail->vat_type === 'Vat') {
                     $vatable_Return_Subtotal += $transactionDetail->inventoryJoin->selling_price;
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
@@ -178,9 +183,7 @@ class SalesReturnDetails extends Component
 
 
 
-                if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
-                    $this->return_total_amount -= $transactionDetail->item_discount_amount;
-                }
+
 
                 $this->return_info[$index] = [
                     'item_return_amount' => $this->item_return_amount,
