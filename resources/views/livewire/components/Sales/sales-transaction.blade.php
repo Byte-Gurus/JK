@@ -255,7 +255,7 @@
                         </div>
                     @endif
                 </div>
-                @if (!empty($payment) && $isSales && !$unableShortcut)
+                @if (!empty($payment) && $changeTransactionType != 2 && !$unableShortcut)
                     <div x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save"
                         class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                         <button type="button" class="py-2 ">
