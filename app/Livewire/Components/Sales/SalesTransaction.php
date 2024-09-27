@@ -43,7 +43,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -971,16 +971,16 @@ class SalesTransaction extends Component
         ];
         $this->validate($rules);
 
-        $returnInfo =  Returns::where('return_number', $this->search_return_number)->first();
+        $this->returnInfo =  Returns::where('return_number', $this->search_return_number)->first();
 
-        if (!$returnInfo) {
+        if (!$this->returnInfo) {
             $this->alert('error', 'The return number does not exist.');
             return;
         }
 
 
-        $this->return_number = $returnInfo->return_number;
-        $this->return_amount = $returnInfo->return_total_amount;
+        $this->return_number = $this->returnInfo->return_number;
+        $this->return_amount = $this->returnInfo->return_total_amount;
 
 
     }

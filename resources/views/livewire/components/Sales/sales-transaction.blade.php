@@ -184,8 +184,7 @@
                     @else
                         <div
                             class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                            <button
-                                class="py-2 text-center ">
+                            <button class="py-2 text-center ">
                                 Cancel Transaction
                             </button>
                         </div>
@@ -568,27 +567,28 @@
                         <label for="credit_id" class="block mb-1 font-medium text-[1.6em] text-gray-900 ">Return No.
                         </label>
 
-                        {{-- @if (empty($returnNo)) --}}
+
                         <div class="relative w-1/2">
 
                             <input wire:model='search_return_number' type="search"
                                 class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                                 placeholder="Return No." required="">
 
-                                <button type="button" wire:click='getReturnDetails'> Search</button>
+                            <button type="button" wire:click='getReturnDetails'> Search</button>
 
                         </div>
-
-                        <div>
-                            <div class=" font-medium text-[1.2em]">Return Number:
-                                {{ $return_number }}
+                        @if ($returnInfo)
+                            <div>
+                                <div class=" font-medium text-[1.2em]">Return Number:
+                                    {{ $return_number }}
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class=" font-medium text-[1.2em]">Return Amount:
-                                {{ $return_amount }}
+                            <div>
+                                <div class=" font-medium text-[1.2em]">Return Amount:
+                                    {{ $return_amount }}
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                     </div>
                 </div>
