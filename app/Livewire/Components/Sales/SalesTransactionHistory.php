@@ -45,7 +45,7 @@ class SalesTransactionHistory extends Component
 
         $sales = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection);
-            // ->paginate($this->perPage);
+            ->paginate($this->perPage);
 
         return view(
             'livewire.components.Sales.sales-transaction-history',
