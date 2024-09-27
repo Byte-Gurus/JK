@@ -661,6 +661,8 @@ class SalesTransaction extends Component
 
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
 
+        $transactionType = null;
+
         if($this->changeTransactionType == 1 || $this->changeTransactionType == 3){
             $transactionType = "sales";
         }elseif($this->changeTransactionType == 2){
