@@ -28,7 +28,7 @@ class SalesReturnReportDatePickerModal extends Component
 
     public function displaySalesReturnReport()
     {
-        $this->dispatch(event: 'display-sales-return-report')->to(ReportManagement::class);
+        $this->dispatch('display-sales-return-report')->to(ReportManagement::class);
     }
 
     public function getDate()
