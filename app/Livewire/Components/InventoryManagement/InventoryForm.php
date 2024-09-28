@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class InventoryForm extends Component
 {
-    public $inventory_id;
+    public $inventory_id, $item_cost,$markup,$seling_price;
     public function render()
     {
         return view('livewire.components.InventoryManagement.inventory-form');
