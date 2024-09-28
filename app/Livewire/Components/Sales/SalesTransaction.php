@@ -907,10 +907,6 @@ class SalesTransaction extends Component
         })->min();
 
 
-        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
-            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
-        })->sum('item_quantity');
-
 
         // Calculate maximum level using the formula
         $reorderPoint = $item['reorder_point'];
@@ -923,14 +919,22 @@ class SalesTransaction extends Component
 
         Item::where('id', $item_id)->update(['maximum_stock_level' => $maximumLevel]);
 
-        // $maximum_level_req[] = [
-        //     'item_id' => $item_id,
-        //     'min_quantity' => $minConsumption,
-        //     'purchase_quantity' => $reorderQuantity,
-        //     'reorder_point' => $reorderPoint,
-        //     'min_reorder_period' => $minReorderPeriod,
-        //     'maximum_level' => $maximumLevel
-        // ];
+        $maximum_level_req[] = [
+            'days' => $days,
+            'po_date' => $po_date,
+            'delivery_date' => $delivery_date,
+            'item_id' => $item_id,
+            'item_name' => $item->item_name,
+            'min_quantity' => $minConsumption,
+            'purchase_quantity' => $reorderQuantity,
+            'reorder_point' => $reorderPoint,
+            'min_reorder_period' => $minReorderPeriod,
+            'maximum_level' => $maximumLevel,
+            'todayTotalItemQuantity' => $todayTotalItemQuantity,
+            'restockDate' => $restockDate
+        ];
+
+        dd($maximum_level_req);
     }
 
 
