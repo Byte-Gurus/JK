@@ -252,9 +252,12 @@ class RestockForm extends Component
             'supplier' => $delivery_details->purchaseJoin->supplierJoin->company_name,
         ]);
 
-        foreach ($this->purchaseDetails as $index => $purchaseDetail) {
-            $this->restock_quantity[$index] = $purchaseDetail->purchase_quantity;
-        }
+        dd($this->purchaseDetails);
+
+        // foreach ($this->purchaseDetails as $index => $purchaseDetail) {
+
+        //     $this->restock_quantity[$index] = $purchaseDetail->purchase_quantity;
+        // }
     }
     public function duplicateItem($item_id)
     {
