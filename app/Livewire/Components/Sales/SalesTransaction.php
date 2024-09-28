@@ -844,7 +844,7 @@ class SalesTransaction extends Component
         $item->reorder_point = $reorder_point;
         $item->save();
 
-        dd($reorder_requirements);
+     
     }
 
     public function getMaximumLevel($delivery_date, $po_date, $item_id, )
