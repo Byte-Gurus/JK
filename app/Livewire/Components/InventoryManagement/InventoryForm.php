@@ -29,7 +29,7 @@ class InventoryForm extends Component
 
         $this->fill([
             'item_cost' => $inventory->cost,
-            'markup' => (($inventory->selling_price - $inventory->cost) / $inventory->cost) * 100,
+            'markup' => round((($this->inventory->selling_price - $this->inventory->cost) / $this->inventory->cost) * 100),
             'seling_price' => $inventory->selling_price
         ]);
     }
