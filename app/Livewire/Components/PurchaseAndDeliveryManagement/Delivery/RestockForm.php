@@ -254,12 +254,12 @@ class RestockForm extends Component
 
         $purchase_details = PurchaseDetails::where('purchase_id', $this->purchase_id)->get();
 
-        dd($purchase_details);
 
-        // foreach ($this-> $this->restock_quantity[$index] as $index => $purchaseDetail) {
 
-        //     $this->restock_quantity[$index] = $purchaseDetail->purchase_quantity;
-        // }
+        foreach ($purchase_details as $index => $purchaseDetail) {
+
+            $this->restock_quantity[$index] = $purchaseDetail->purchase_quantity;
+        }
     }
     public function duplicateItem($item_id)
     {
