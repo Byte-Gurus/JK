@@ -810,8 +810,7 @@ class SalesTransaction extends Component
         $startOfDay = Carbon::today()->startOfDay();
         $endOfDay = Carbon::today()->endOfDay();
 
-        $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
-        ->distinct(DB::raw('DATE(created_at)'))
+        $daysWithSales = TransactionDetails::distinct(DB::raw('DATE(created_at)'))
         ->count(DB::raw('distinct DATE(created_at)'));
 
         $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
