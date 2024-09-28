@@ -39,7 +39,7 @@ class ReportManagement extends Component
         'display-monthly-sales-report' => 'displayMonthlySalesReport',
         'display-sales-return-report' => 'displaySalesReturnReport',
         'display-yearly-sales-report' => 'displayYearlySalesReport',
-        'display-customer-credit-list-report' => 'displayYearlySalesReport',
+        'display-customer-credit-list-report' => 'displayCustomerCreditListReport',
         'display-slow-moving-items-report' => 'displaySlowMovingItemsReport',
         'close-slow-moving-items-report-date-picker-modal' => 'closeSlowMovingItemsReportDatePickerModal',
         'close-fast-moving-items-report-date-picker-modal' => 'closeFastMovingItemsReportDatePickerModal',
@@ -49,6 +49,7 @@ class ReportManagement extends Component
         'close-customer-credit-lust-report-date-picker-modal' => 'closeCustomerCreditListReportDatePickerModal',
         'close-expired-items-report-date-picker-modal' => 'closeExpiredItemsReportDatePickerModal',
         'display-expired-items-report-date-picker-modal' => 'displayExpiredItemsReportDatePickerModal',
+        'display-expired-items-report' => 'displayExpiredItemsReport',
         'close-sales-return-report-date-picker-modal' => 'closeSalesReturnReportDatePickerModal'
     ];
 
@@ -348,10 +349,8 @@ class ReportManagement extends Component
 
     public function displayExpiredItemsReport()
     {
-        $this->reportSelected = true;
-        $this->showNavbar = false;
-        $this->sidebarStatus = true;
         $this->showExpiredItemsReport = true;
+        $this->hideExtras();
     }
 
     public function closeExpiredItemsReportDatePickerModal()

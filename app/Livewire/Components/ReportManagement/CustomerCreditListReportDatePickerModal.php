@@ -30,7 +30,7 @@ class CustomerCreditListReportDatePickerModal extends Component
         ]);
     }
 
-    public function displayMonthlySalesReport()
+    public function displayCustomerCreditListReport()
     {
         $this->dispatch(event: 'display-customer-credit-list-report')->to(ReportManagement::class);
     }

@@ -18,7 +18,7 @@
             </div>
         </div>
         <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">DAILY SALES REPORT</p>
+            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">CUSTOMER CREDIT REPORT</p>
 
         </div>
         {{-- @if ($transaction_info) --}}
