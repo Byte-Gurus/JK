@@ -24,7 +24,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class RestockForm extends Component
 {
     use LivewireAlert;
-    public $delivery_id, $po_number, $supplier, $purchase_id,  $delivery_date, $po_date;
+    public $delivery_id, $po_number, $supplier, $purchase_id, $delivery_date, $po_date;
     public $purchaseDetails = [];
     public $restock_quantity = [null], $cost = [null], $markup = [null], $srp = [null], $expiration_date = [null];
 
@@ -178,9 +178,9 @@ class RestockForm extends Component
                 'mark_up_price' => $this->cost[$index] * ($validated['markup'][$index] / 100),
                 'selling_price' => $validated['srp'][$index],
                 'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
-                'current_stock_quantity' =>  $validated['restock_quantity'][$index],
-                'stock_in_quantity' =>  $validated['restock_quantity'][$index],
-                'expiration_date' =>  $validated['expiration_date'][$index] ?? null,
+                'current_stock_quantity' => $validated['restock_quantity'][$index],
+                'stock_in_quantity' => $validated['restock_quantity'][$index],
+                'expiration_date' => $validated['expiration_date'][$index] ?? null,
                 'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
                 'status' => 'Available',   // Set default status or customize as needed
                 'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
@@ -251,6 +251,10 @@ class RestockForm extends Component
             'po_number' => $delivery_details->purchaseJoin->po_number,
             'supplier' => $delivery_details->purchaseJoin->supplierJoin->company_name,
         ]);
+
+        foreach ($this->purchaseDetails as $index => $purchaseDetail) {
+            $this->restock_quantity[$index] = $purchaseDetail->purchase_quantity;
+        }
     }
     public function duplicateItem($item_id)
     {
