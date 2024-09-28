@@ -829,22 +829,22 @@ class SalesTransaction extends Component
 
         $reorder_point = round($days * $demandRate);
 
-        $reorder_requirements[] = [
-            'reorder_point' => $reorder_point,
-            'demandRate' => $demandRate,
-            'daysDIff' => $days,
-            'todayTotalItemQuantity' => $todayTotalItemQuantity,
-            'daysWithSales' => $daysWithSales,
-            'deliveryDate' => $deliveryDate,
-            'poDate' => $poDate
-        ];
+        // $reorder_requirements[] = [
+        //     'reorder_point' => $reorder_point,
+        //     'demandRate' => $demandRate,
+        //     'daysDIff' => $days,
+        //     'todayTotalItemQuantity' => $todayTotalItemQuantity,
+        //     'daysWithSales' => $daysWithSales,
+        //     'deliveryDate' => $deliveryDate,
+        //     'poDate' => $poDate
+        // ];
 
 
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
 
-     
+
     }
 
     public function getMaximumLevel($delivery_date, $po_date, $item_id, )
