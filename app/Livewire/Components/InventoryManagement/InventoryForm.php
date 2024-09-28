@@ -12,6 +12,9 @@ class InventoryForm extends Component
     use LivewireAlert;
 
     public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description;
+    public $showInventoryForm = true;
+    public $showInventoryAdminLoginForm = false;
+
     public function render()
     {
         return view('livewire.components.InventoryManagement.inventory-form');
@@ -36,11 +39,12 @@ class InventoryForm extends Component
 
         $attributes = $inventories->toArray();
 
+        $this->displayInventoryAdminLoginForm();
 
-        $this->confirm('Do you want to update this stock?', [
-            'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
-        ]);
+        // $this->confirm('Do you want to update this stock?', [
+        //     'onConfirmed' => 'updateConfirmed', //* call the confmired method
+        //     'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
+        // ]);
     }
 
 
@@ -65,6 +69,8 @@ class InventoryForm extends Component
         InventoryEvent::dispatch('refresh-inventory');
         // $this->refreshTable();
         // $this->closeModal();
+
+
     }
     public function resetFormWhenClosed()
     {
@@ -129,5 +135,11 @@ class InventoryForm extends Component
     {
         $this->inventory_id = $stockID;
         $this->populateForm();
+    }
+
+    public function displayInventoryAdminLoginForm()
+    {
+        $this->showInventoryForm = !$this->showInventoryForm;
+        $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }
 }
