@@ -54,9 +54,9 @@ class InventoryForm extends Component
             'seling_price',
         ]);
     }
-    public function getStockPrice($stockId)
+    public function getStockPrice($stockID)
     {
-        $this->inventory = Inventory::find($stockId);
+        $this->inventory = Inventory::find($stockID);
         $this->populateForm();
     }
 }
