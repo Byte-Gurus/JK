@@ -54,12 +54,11 @@ class InventoryForm extends Component
 
 
         //* hanapin id na attribute sa $updatedAttributes array
-        $inventories = Inventory::find($updatedAttributes['id']);
+        $inventory = Inventory::find($updatedAttributes['id']);
 
-        $inventories->fill($updatedAttributes);
-        $inventories->save(); //* Save the item model to the database
+        $inventory->fill($updatedAttributes);
+        $inventory->save(); //* Save the item model to the database
 
-        dd($inventories);
         $this->resetForm();
         $this->alert('success', 'Stock was updated successfully');
         InventoryEvent::dispatch('refresh-inventory');
