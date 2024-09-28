@@ -34,12 +34,12 @@
 
                         <div class="flex flex-col gap-1">
                             <p class="text-white ">From</p>
-                            <input id="fromMonth" type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                            <input id="fromDate" type="date" wire:model.live="fromDate" class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <p class="text-white ">To</p>
-                            <input id="toMonth" type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                            <input id="toDate" type="date" wire:model.live="toDate" class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
                     </div>
 
@@ -51,7 +51,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            @if ($date)
+                            @if ($toDate && $fromDate)
                                 <button type="button" wire:click="getDate"
                                     x-on:click='$wire.displayExpiredItemsReport()'
                                     class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>

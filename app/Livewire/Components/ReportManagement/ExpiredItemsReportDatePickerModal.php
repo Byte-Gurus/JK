@@ -9,7 +9,7 @@ class ExpiredItemsReportDatePickerModal extends Component
 {
     public $showExpiredItemsReportDatePickerModal = true;
 
-    public $date;
+    public $toDate, $fromDate;
 
     public function render()
     {
@@ -25,7 +25,8 @@ class ExpiredItemsReportDatePickerModal extends Component
     public function resetForm()
     {
         $this->reset([
-            'date'
+            'toDate',
+            'fromDate'
         ]);
     }
 
@@ -36,6 +37,6 @@ class ExpiredItemsReportDatePickerModal extends Component
 
     public function getDate()
     {
-        $this->dispatch('generate-report', $this->date)->to(ExpiredItemsReport::class);
+        $this->dispatch('generate-report', $this->toDate, $this->fromDate)->to(ExpiredItemsReport::class);
     }
 }
