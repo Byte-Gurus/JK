@@ -252,9 +252,11 @@ class RestockForm extends Component
             'supplier' => $delivery_details->purchaseJoin->supplierJoin->company_name,
         ]);
 
-        dd($this->purchaseDetails);
+        $purchase_details = PurchaseDetails::where('purchase_id', $this->purchase_id)->get();
 
-        // foreach ($this->purchaseDetails as $index => $purchaseDetail) {
+        dd($purchase_details);
+
+        // foreach ($this-> $this->restock_quantity[$index] as $index => $purchaseDetail) {
 
         //     $this->restock_quantity[$index] = $purchaseDetail->purchase_quantity;
         // }
