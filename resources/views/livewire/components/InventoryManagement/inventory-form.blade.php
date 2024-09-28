@@ -23,7 +23,7 @@
                         {{ $item_description }}
                     </p>
                 </div>
-               
+
             </div>
             <div
                 class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
@@ -56,7 +56,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Item Cost</label>
 
-                            <input type="number" wire:model="item_cost"
+                            <input type="number" wire:model.live="cost"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
@@ -65,7 +65,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Markup %</label>
 
-                            <input type="number" wire:model="markup"
+                            <input type="number" wire:model.live="markup"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
@@ -75,7 +75,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Selling Price</label>
 
-                            <input type="number" wire:model="seling_price"
+                            <input type="number" wire:model.live="seling_price"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
