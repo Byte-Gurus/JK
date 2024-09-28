@@ -25,7 +25,7 @@ class InventoryForm extends Component
         $inventories = Inventory::find($this->inventory_id); //? kunin lahat ng data ng may ari ng proxy_item_id
 
         //* ipasa ang laman ng validated inputs sa models
-        $inventories->cost = $validated['item_cost'];
+        $inventories->cost = $validated['cost'];
         $inventories->mark_up_price =$validated['item_cost'] *  ($validated['markup'] / 100);
         $inventories->seling_price = $validated['seling_price'];
 
