@@ -51,6 +51,9 @@ class InventoryAdminLoginForm extends Component
                 }elseif($this->fromPage === 'AdjustForm'){
                     $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustForm::class);
                 }
+                // }elseif($this->fromPage === 'ReturnDetails'){
+                //     $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+                // }
 
 
             } else {
