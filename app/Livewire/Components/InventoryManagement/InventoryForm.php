@@ -31,7 +31,7 @@ class InventoryForm extends Component
         //* ipasa ang laman ng validated inputs sa models
         $inventories->cost = $validated['cost'];
         $inventories->mark_up_price = $validated['cost'] * ($validated['markup'] / 100);
-        $inventories->seling_price = $validated['seling_price'];
+        $inventories->selling_price = $validated['seling_price'];
 
 
         $attributes = $inventories->toArray();
@@ -54,10 +54,11 @@ class InventoryForm extends Component
 
 
         //* hanapin id na attribute sa $updatedAttributes array
-        $inventory = Inventory::find($updatedAttributes['id']);
+        $inventories = Inventory::find($updatedAttributes['id']);
 
-        $inventory->fill($updatedAttributes);
-        $inventory->save(); //* Save the item model to the database
+        $inventories->fill($updatedAttributes);
+        $inventories->save();
+
 
         $this->resetForm();
         $this->alert('success', 'Stock was updated successfully');
