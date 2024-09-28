@@ -37,10 +37,6 @@
                             <input id="fromMonth" type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
 
-                        <div class="flex flex-col gap-1">
-                            <p class="text-white ">To</p>
-                            <input id="toMonth" type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
-                        </div>
                     </div>
 
                     <div class="flex flex-row self-end gap-2 mb-6">
