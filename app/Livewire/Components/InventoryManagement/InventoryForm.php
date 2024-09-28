@@ -18,7 +18,8 @@ class InventoryForm extends Component
     }
 
     protected $listeners = [
-        'stock-price' => 'getStockPrice'
+        'stock-price' => 'getStockPrice',
+        'updateConfirmed'
     ];
     public function update() //* update process
     {
