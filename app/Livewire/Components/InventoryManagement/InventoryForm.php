@@ -10,7 +10,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class InventoryForm extends Component
 {
     use LivewireAlert;
-    
+
     public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description;
     public function render()
     {
@@ -58,15 +58,12 @@ class InventoryForm extends Component
         $inventories->fill($updatedAttributes);
         $inventories->save(); //* Save the item model to the database
 
-        $inventories = Inventory::where('item_id', $inventories->id)->get();
-
-
 
         $this->resetForm();
         $this->alert('success', 'Stock was updated successfully');
         InventoryEvent::dispatch('refresh-inventory');
-        $this->refreshTable();
-        $this->closeModal();
+        // $this->refreshTable();
+        // $this->closeModal();
     }
     public function resetFormWhenClosed()
     {
