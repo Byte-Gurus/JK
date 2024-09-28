@@ -303,7 +303,7 @@
                                         <select id="customertype" wire:model.live="customertype" required
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value=""selected>Select Customer Type</option>
-                                            <option value="Credit">Normal</option>
+                                            <option value="Normal">Normal</option>
                                             <option value="PWD">PWD</option>
                                             <option value="Senior Citizen">Senior Citizen</option>
 
@@ -321,7 +321,7 @@
                                     <div class="mb-3">
 
                                         <label for="senior_pwd_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Customer Discount</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">ID No.</label>
 
                                         @if ($customertype != 'Normal')
                                             <input type="number" id="senior_pwd_id"

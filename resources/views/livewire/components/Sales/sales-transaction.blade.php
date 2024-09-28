@@ -3,7 +3,6 @@
         <div class="flex flex-row items-start justify-between flex-1 ">
             <div class="w-2/4">
                 <div class="relative w-full">
-
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
                             viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -11,7 +10,6 @@
                                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </div>
-
                     <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
                         class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                         placeholder="Search by Item Name or Barcode" required="">
@@ -50,6 +48,7 @@
                             class=" bg-[rgb(255,206,121)] px-8 py-4 border border-[rgb(143,143,143)] text-gray-900 text-md font-black rounded-sm block w-full ">
                             <option selected value="1">Sales</option>
                             <option value="2">Credit</option>
+                            <option value="3">Return</option>
                         </select>
                     </div>
                 @endif
@@ -174,16 +173,26 @@
                         class="py-4 text-center font-bold bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                         <button class="py-2 text-center ">Return</button>
                     </div>
-                    <div
-                        class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                        <button wire:click="cancel" x-on:keydown.window.prevent.ctrl.1="$wire.call('cancel')"
-                            class="py-2 text-center ">
-                            Cancel Transaction
-                        </button>
-                    </div>
+                    @if (!$unableShortcut)
+                        <div
+                            class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            <button wire:click="cancel" x-on:keydown.window.prevent.ctrl.1="$wire.call('cancel')"
+                                class="py-2 text-center ">
+                                Cancel Transaction
+                            </button>
+                        </div>
+                    @else
+                        <div
+                            class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            <button class="py-2 text-center ">
+                                Cancel Transaction
+                            </button>
+                        </div>
+                    @endif
+
                 </div>
                 <div class="flex flex-col gap-2 ">
-                    @if (!empty($selectedItems) && empty($payment))
+                    @if (!empty($selectedItems) && empty($payment) && $changeTransactionType == 1 && !$unableShortcut)
                         <div x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
                             x-on:click="$wire.displayDiscountForm()"
                             class="py-4 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -198,7 +207,7 @@
                             </button>
                         </div>
                     @endif
-                    @if (!empty($selectedItems) && empty($payment))
+                    @if (!empty($selectedItems) && empty($payment) && !$unableShortcut)
                         <div wire:click="removeItem" x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')"
                             class="py-4 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="py-2 ">
@@ -215,7 +224,7 @@
                 </div>
                 <div class="flex flex-col gap-2 ">
 
-                    @if (!empty($selectedItems) && empty($payment))
+                    @if (!empty($selectedItems) && empty($payment) && !$unableShortcut)
                         <div wire:click="setQuantity" id="setQuantity"
                             x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')"
                             class="py-4 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -230,7 +239,7 @@
                             </button>
                         </div>
                     @endif
-                    @if (!empty($selectedItems) && $isSales)
+                    @if (!empty($selectedItems) && $changeTransactionType != 2 && !$unableShortcut)
                         <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
                             x-on:click="$wire.displayPaymentForm()"
                             class="py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
@@ -246,19 +255,17 @@
                         </div>
                     @endif
                 </div>
-                @if (!empty($payment) && $isSales)
-                    <div
+                @if (!empty($payment) && $changeTransactionType != 2 && !$unableShortcut)
+                    <div x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save"
                         class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
-                        <button type="button" class="py-2 "
-                            x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
+                        <button type="button" class="py-2 ">
                             Save
                         </button>
                     </div>
-                @elseif (!$isSales && $credit_details && $selectedItems)
-                    <div
+                @elseif ($changeTransactionType == 2 && $credit_details && $selectedItems && !$unableShortcut)
+                    <div x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save"
                         class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
-                        <button type="button" class="py-2 "
-                            x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save">
+                        <button type="button" class="py-2 ">
                             Save
                         </button>
                     </div>
@@ -274,7 +281,7 @@
         </div>
     </div>
     <div class="bg-[rgba(245,214,162,0.58)] ml-[28px] border-2 border-[rgb(53,53,53)] text-nowrap rounded-md">
-        @if ($isSales)
+        @if ($changeTransactionType == 1)
             <div class="grid grid-flow-row">
                 {{-- date & time section --}}
                 <div class="flex flex-row items-center justify-center gap-8 p-2">
@@ -282,9 +289,7 @@
                         <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
                             x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
                     </div>
-                    <div>
-                        <p class="italic font-medium ">Time</p>
-                    </div>
+
                 </div>
                 <div class="border border-black"></div>
                 <div class="flex flex-col p-2">
@@ -363,7 +368,7 @@
                     </div>
                 </div>
             </div>
-        @else
+        @elseif ($changeTransactionType == 2)
             {{-- credit details --}}
             <div class="grid grid-flow-row">
                 {{-- date & time section --}}
@@ -373,9 +378,7 @@
                             style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
                             wire:model.live="barcode">
                     </div>
-                    <div>
-                        <p>Time</p>
-                    </div>
+
                 </div>
                 {{-- transaction number section --}}
                 <div class="border border-black"></div>
@@ -532,6 +535,191 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        @elseif ($changeTransactionType == 3)
+            {{-- credit details --}}
+            <div class="grid grid-flow-row">
+                {{-- date & time section --}}
+                <div class="flex flex-row items-center justify-center gap-8 p-2">
+                    <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
+                        <input type="text" x-ref="barcodeInput" wire.live="barcode" id="barcode"
+                            style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
+                            wire:model.live="barcode">
+                    </div>
+
+                </div>
+                {{-- transaction number section --}}
+                <div class="border border-black"></div>
+
+                @if (empty($return_number))
+                    <div class="flex items-center justify-center p-2 ">
+                        <div class="flex flex-col items-center justify-start h-full mt-[50vh]">
+                            <label for="return_no"
+                                class="block mb-1 self-start font-medium text-[1.6em] text-gray-900 ">Return
+                                No.
+                            </label>
+                            <div class="relative flex flex-row self-start gap-4">
+
+                                <input wire:model='search_return_number' type="search"
+                                    class=" w-full px-4 py-3 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
+                                    placeholder="Return No." autofocus required="">
+
+                                <button type="button" class="gap-2 px-4 py-2 bg-orange-400 rounded-md"
+                                    wire:click='getReturnDetails'> Search</button>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="flex flex-col">
+                        <div class="flex flex-col p-2">
+                            <p class="text-[1.2em] font-bold">Transaction No.</p>
+                            <p class="self-center text-[1.8em] italic font-black">{{ $transaction_number }}</p>
+                        </div>
+                        <div class="border border-black"></div>
+                        <div class="p-2 ">
+                            <div class="flex flex-row items-center justify-between">
+                                <div>
+                                    <div class="flex flex-col">
+                                        <p class=" text-[1.2em] font-medium">Return No</p>
+                                        <p class=" text-[2em] font-black">{{ $return_number ?? ' ' }}</p>
+                                    </div>
+                                </div>
+                                <div type="button" wire:click='clearSelectedReturnNo()'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        strokeWidth={1.5} stroke="currentColor" class="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <p class=" text-[1.2em] font-medium">Return Amount</p>
+                                <p class=" text-[2em] font-black">{{ $return_amount ?? ' ' }}</p>
+                            </div>
+                        </div>
+                        <div class="border border-black"></div>
+                        <div class="p-2">
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-medium text-[1.2em]">
+                                    <p>Tax Amount</p>
+                                </div>
+                                <div class=" font-black text-[1.2em]">₱ {{ number_format($totalVat, 2) }}
+                                </div>
+                            </div>
+
+                            <div class="w-full my-2">
+                                <div class="border border-black"></div>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-black text-[1.8em]">
+                                    <p>Total</p>
+                                </div>
+                                <div class=" font-black text-[1.8em]">₱ {{ number_format($grandTotal, 2) }}</div>
+                            </div>
+                            {{-- if lumagpas uncomment mo 'to' --}}
+                            {{-- <div class="flex flex-row justify-between">
+                                <div class=" font-medium text-[1.2em]">
+                                    <p>Tendered Amount</p>
+                                </div>
+                                <div class=" font-black text-[1.2em]">₱ {{ number_format($tendered_amount, 2) }}</div>
+                            </div>
+                            <div class="border border-black "></div>
+                            <div class="flex flex-row justify-between">
+                                <div class=" font-black text-green-900 text-[2.4em]">
+                                    <p>Change</p>
+                                </div>
+                                <div class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</div>
+                            </div> --}}
+                        </div>
+                    </div>
+                @endif
+            </div>
+        @else
+            <div class="grid grid-flow-row">
+                {{-- date & time section --}}
+                <div class="flex flex-row items-center justify-center gap-8 p-2">
+                    <div x-data="{ focusInput() { this.$refs.barcodeInput.focus(); } }">
+                        <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
+                            x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
+                    </div>
+
+                </div>
+                <div class="border border-black"></div>
+                <div class="flex flex-col p-2">
+                    <p class="text-[1.2em] font-bold">Transaction No.</p>
+                    <p class="self-center text-[1.8em] italic font-black">{{ $transaction_number }}</p>
+                </div>
+                <div class="flex flex-row items-center">
+                    <div class="w-full ">
+                        <div class="border border-black "></div>
+                    </div>
+                    <div class="m-1">
+                        <p class=" font-medium text-[1em]">Discount</p>
+                    </div>
+                    <div class="w-full">
+                        <div class="border border-black "></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2 p-2 mb-2">
+                    <div class="flex flex-row items-center gap-6">
+                        <div class=" font-medium text-[1.2em]">Discount Type: {{ $discount_type }}</div>
+                    </div>
+                    <div class="flex flex-row items-center gap-6 ">
+                        <div class=" font-medium text-[1.2em]">Customer Name: {{ $customer_name }}</div>
+                    </div>
+                    <div class="flex flex-row items-center gap-6 ">
+                        <div class=" font-medium text-[1.2em]">ID No.: {{ $senior_pwd_id }}</div>
+                    </div>
+                </div>
+                <div class="border border-black "></div>
+                <div class="flex flex-col h-full gap-2 p-2 justify-evenly">
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Tax Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">₱ {{ number_format($totalVat, 2) }}</div>
+                    </div>
+                    <div class="border border-black "></div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-[1.8em]">
+                            <p>Subtotal</p>
+                        </div>
+                        <div class=" font-black text-[1.8em]">₱ {{ number_format($subtotal, 2) }}</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Senior & PWD </p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">{{ $discount_percent }} %</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Discount Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">₱ {{ number_format($PWD_Senior_discount_amount, 2) }}
+                        </div>
+                    </div>
+                    <div class="border border-black "></div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-[1.8em]">
+                            <p>Total</p>
+                        </div>
+                        <div class=" font-black text-[1.8em]">₱ {{ number_format($grandTotal, 2) }}</div>
+                    </div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-medium text-[1.2em]">
+                            <p>Tendered Amount</p>
+                        </div>
+                        <div class=" font-black text-[1.2em]">₱ {{ number_format($tendered_amount, 2) }}</div>
+                    </div>
+                    <div class="border border-black "></div>
+                    <div class="flex flex-row justify-between">
+                        <div class=" font-black text-green-900 text-[2.4em]">
+                            <p>Change</p>
+                        </div>
+                        <div class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</div>
                     </div>
                 </div>
             </div>

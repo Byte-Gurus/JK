@@ -1,8 +1,7 @@
-<div>
-    <div class="relative overflow-hidden bg-white h-[620px] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
+    <div class="relative overflow-hidden bg-white h-[66vh] mb-[3vh]">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between px-4 py-4 ">
+        <div class="flex flex-row items-center justify-between mb-[3vh] ">
 
             {{-- //* search filter --}}
             <div class="relative w-1/2 ">
@@ -39,7 +38,7 @@
             </div>
         </div>
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[300px]">
+        <div class="overflow-x-auto overflow-y-scroll scroll border rounded-md border-[rgb(143,143,143)] h-[52vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -48,7 +47,8 @@
 
                     <tr class=" text-nowrap">
 
-
+                        {{-- //* transaction no --}}
+                        <th scope="col" class="px-4 py-3">Return No.</th>
 
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3">Transaction No.</th>
@@ -73,21 +73,29 @@
                     @foreach ($returns as $return)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $return->return_number }}
+
+                            </th>
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return->transactionJoin->transaction_number }}
 
                             </th>
 
+
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ number_format($return->original_amount, 2) }}
 
                             </th>
 
 
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ number_format($return->return_total_amount, 2) }}
 
                             </th>
@@ -130,4 +138,3 @@
             </table>
         </div>
     </div>
-</div>

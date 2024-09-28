@@ -11,7 +11,6 @@ use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
 use App\Models\Credit;
-
 use App\Models\CreditHistory;
 use App\Models\Customer;
 use App\Models\Discount;
@@ -21,6 +20,7 @@ use App\Models\Item;
 use App\Models\Notification;
 use App\Models\Payment;
 use App\Models\PurchaseDetails;
+use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
@@ -38,12 +38,12 @@ class SalesTransaction extends Component
     use LivewireAlert;
     public $transaction_number;
 
-    public $isSales = true;
+
     public $search = '';
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType = 1, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo, $return_number;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -216,10 +216,12 @@ class SalesTransaction extends Component
             return;
         }
 
-        // if (!$this->isSales && !$this->credit_no) {
-        //     $this->alert('error', 'Please select creditor');
-        //     return;
-        // }
+        if($this->changeTransactionType == 3 && !$this->returnInfo){
+            $this->alert('error', 'Enter return number first');
+            return;
+        }
+
+
 
 
 
@@ -343,11 +345,13 @@ class SalesTransaction extends Component
         $this->isSelected = $flag;
     }
 
-    public function hi()
-    {
-        dd('hi');
-        // $this->reset('selectedIndex', 'isSelected');
-    }
+    // public function resetSelected()
+    // {
+    //     $this->reset('selectedIndex', 'isSelected');
+
+    //     $this->selectedIndex =  null;
+    //     $this->isSelected = null;
+    //
 
     public function setQuantity()
     {
@@ -368,7 +372,7 @@ class SalesTransaction extends Component
                 'grandTotal' => $this->grandTotal,
             ];
 
-            if (!$this->isSales) {
+            if (!$this->changeTransactionType == 2) {
                 $data['credit_limit'] = $this->credit_limit;
             } else {
                 $data['credit_limit'] = null;
@@ -512,11 +516,11 @@ class SalesTransaction extends Component
             $this->alert('success', 'Discount was applied successfully');
             $this->senior_pwd_id = $this->customerDetails['senior_pwd_id'];
         }
-        // else {
-        //     $this->customerDetails = null;
+        else {
+            $this->customerDetails = null;
 
-        //     $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
-        // }
+            $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
+        }
     }
 
     public function updatedBarcode()
@@ -548,8 +552,17 @@ class SalesTransaction extends Component
 
     public function updatedChangeTransactionType()
     {
-        $this->isSales = !$this->isSales;
-        $this->dispatch('change-credit-discount', isSales: $this->isSales)->to(DiscountForm::class);
+        if($this->customerDetails){
+            $this->alert('error', 'Remove discount first');
+            $this->reset('changeTransactionType');
+            return;
+        }
+        if($this->changeTransactionType == 3){
+            $this->selectedItems = [];
+        }
+
+
+
     }
 
 
@@ -594,17 +607,17 @@ class SalesTransaction extends Component
     public function save()
     {
 
-        if (empty($this->payment) && $this->isSales) {
+        if (empty($this->payment) && $this->changeTransactionType != 2) {
             $this->alert('warning', 'No payment yet');
             return;
         }
 
-        $receiptData = [];
+        $this->receiptData = [];
         $this->transaction_info = [
             'subtotal' => $this->subtotal,
             'grandTotal' => $this->grandTotal,
             'transaction_number' => $this->transaction_number,
-            'transaction_time' => now()->format('H:i:s'),
+            'transaction_time' => now()->format('H:i A'),
             'transaction_date' => now()->format('d-m-Y'),
             'user' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
 
@@ -648,7 +661,11 @@ class SalesTransaction extends Component
 
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
 
-        $transactionType = $this->isSales ? 'Sales' : 'Credit';
+        if($this->changeTransactionType == 1 || $this->changeTransactionType == 3){
+            $transactionType = "Sales";
+        }elseif($this->changeTransactionType == 2){
+            $transactionType = "Credit";
+        }
 
         $transaction = Transaction::create([
             'transaction_number' => $this->transaction_info['transaction_number'],
@@ -660,6 +677,11 @@ class SalesTransaction extends Component
             'discount_id' => $this->customerDetails['discount_id'] ?? null,
             'customer_id' => $customer_id,
             'user_id' => Auth::id(),
+        ]);
+
+        $transaction_movement = TransactionMovement::create([
+            'transaction_type' => 'Sales',
+            'transaction_id' => $transaction->id
         ]);
 
 
@@ -711,7 +733,7 @@ class SalesTransaction extends Component
             $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
         }
 
-        if ($this->isSales) {
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 2) {
             $payment = Payment::create([
                 'transaction_id' => $transaction->id,
                 'amount' => $this->payment['tendered_amount'],
@@ -719,7 +741,9 @@ class SalesTransaction extends Component
                 'reference_number' => $this->payment['reference_no'] ?? 'N/A',
                 'payment_type' => $this->payment['payment_type'],
             ]);
-        } else {
+
+
+        } elseif ($this->changeTransactionType == 2) {
             $credit = Credit::where('credit_number', $this->credit_no)->first();
             $credit->credit_amount = $this->grandTotal;
             $credit->remaining_balance = $this->grandTotal;
@@ -732,17 +756,18 @@ class SalesTransaction extends Component
                 'credit_amount' => $this->grandTotal,
                 'remaining_balance' => $this->grandTotal,
             ]);
+
+
+            $transaction_movement = TransactionMovement::create([
+                'transaction_type' => 'Credit',
+                'credit_id' => $credit->id
+            ]);
+
         }
 
-        if ($transaction) {
-            $transaction_movements = TransactionMovement::create([
-                'movement_type' => 'Sales',
-                'transaction_id' => $transaction->id,
-                'credit_id' => null,
-                'returns_id' => null
-            ]);
-        }
-      
+
+
+
 
         CreditEvent::dispatch('refresh-credit');
 
@@ -751,7 +776,7 @@ class SalesTransaction extends Component
         $this->alert('success', 'New Transaction saved successfully');
 
         $this->dispatch('print-sales-receipt', array_merge(
-            $receiptData,
+            $this->receiptData,
             [
                 'payment' => $this->payment,
                 'selectedItems' => $this->selectedItems,
@@ -770,6 +795,7 @@ class SalesTransaction extends Component
 
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
+        $this->unableShortcut = true;
     }
 
     public function getReorderPoint($item_id, $delivery_date, $po_date)
@@ -913,6 +939,10 @@ class SalesTransaction extends Component
         $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details', 'senior_pwd_id', 'discount_type');
     }
 
+    public function clearSelectedReturnNo()
+    {
+        $this->reset('return_number');
+    }
 
 
 
@@ -955,5 +985,27 @@ class SalesTransaction extends Component
     public function focusInput()
     {
         $this->dispatch('barcode_focus');
+    }
+
+
+    public function getReturnDetails(){
+
+        $rules = [
+            'search_return_number' => 'required'
+        ];
+        $this->validate($rules);
+
+        $this->returnInfo =  Returns::where('return_number', $this->search_return_number)->first();
+
+        if (!$this->returnInfo) {
+            $this->alert('error', 'The return number does not exist.');
+            return;
+        }
+
+
+        $this->return_number = $this->returnInfo->return_number;
+        $this->return_amount = $this->returnInfo->return_total_amount;
+
+
     }
 }

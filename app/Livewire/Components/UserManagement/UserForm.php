@@ -17,16 +17,18 @@ use Livewire\Component;
 class UserForm extends Component
 {
     use LivewireAlert;
+    
     public $show_password; //var true for show password false for hindi
+
     public $isCreate; //var true for create false for edit
 
     public $showModal = false;
-
 
     //var form inputs
     public $user_id, $firstname, $middlename, $lastname, $contact_number, $role, $status, $username, $password, $retype_password;
 
     public $proxy_user_id;  //var proxy id para sa supplier id, same sila ng value ng
+
     public function render()
     {
 

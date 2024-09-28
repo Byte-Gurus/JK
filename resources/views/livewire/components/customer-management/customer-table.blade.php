@@ -1,6 +1,5 @@
 {{-- // --}}
-<div class="relative" wire:poll.visible="1000ms">
-
+<div class="relative my-[3vh] rounded-lg" wire:poll.visible="1000ms">
 
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
 
@@ -40,9 +39,9 @@
         </div>
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[480px] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[56vh]">
 
-            <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
+            <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky z-30 top-0   ">

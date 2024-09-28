@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Models\Transaction;
+use App\Models\TransactionMovement;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -24,38 +25,66 @@ class YearlySalesReport extends Component
     public function generateReport($year)
     {
         // Parse the year into start and end dates
-        $startOfYear = Carbon::parse($year . '-01-01')->startOfYear();
-        $endOfYear = Carbon::parse($year . '-12-31')->endOfYear();
+        $startOfYear = Carbon::parse($year)->startOfYear();
+        $endOfYear = Carbon::parse($year)->endOfYear();
 
         // Fetch transactions within the year range
-        $transactions = Transaction::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
+        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
 
         // Initialize totals and monthly summaries
+        $monthlySummaries = [];
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
-        $monthlySummaries = [];
+        $totalReturnAmount = 0;
+        $totalReturnVatAmount = 0;
 
         // Iterate through transactions to group and sum by month
-        foreach ($transactions as $transaction) {
-            $month = $transaction->created_at->format('Y-m');
+        foreach ($this->transactions as $transaction) {
+            $month = $transaction->created_at->format('Y-m'); // Format to 'YYYY-MM'
+            $monthName = $transaction->created_at->format('F');
 
             if (!isset($monthlySummaries[$month])) {
                 $monthlySummaries[$month] = [
+                    'monthName' => $monthName,
                     'totalGross' => 0,
                     'totalTax' => 0,
-                    'monthName' => Carbon::parse($month . '-01')->format('F'), // Get month name
+                    'totalNet' => 0,
+                    'totalReturnAmount' => 0,
+                    'totalReturnVatAmount' => 0
+
                 ];
             }
 
-            $monthlySummaries[$month]['totalGross'] += $transaction->total_amount;
-            $monthlySummaries[$month]['totalTax'] += $transaction->total_vat_amount;
+            // Summing monthly transactions
+            if ($transaction->transaction_type == 'Sales') {
+                $monthlySummaries[$month]['totalGross'] += $transaction->transactionJoin->total_amount;
+                $monthlySummaries[$month]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+            } elseif ($transaction->transaction_type == 'Return') {
+                $monthlySummaries[$month]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                $monthlySummaries[$month]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
+            } elseif ($transaction->transaction_type == 'Credit') {
+                $monthlySummaries[$month]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                $monthlySummaries[$month]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+            }
+        }
 
+        // Calculate monthly net values and accumulate yearly totals
+        foreach ($monthlySummaries as $month => $summary) {
+            $monthlyGross = $summary['totalGross'] - $summary['totalReturnAmount'];
+            $monthlyTax = $summary['totalTax'] - $summary['totalReturnVatAmount'];
+            $monthlyNet = $monthlyGross - $monthlyTax;
+
+            $monthlySummaries[$month]['totalGross'] = $monthlyGross;
+            $monthlySummaries[$month]['totalTax'] = $monthlyTax;
+            $monthlySummaries[$month]['totalNet'] = $monthlyNet;
 
             // Accumulate yearly totals
-            $totalGross += $transaction->total_amount;
-            $totalTax += $transaction->total_vat_amount;
-            $totalNet = $totalGross - $totalTax;
+            $totalGross += $monthlyGross;
+            $totalTax += $monthlyTax;
+            $totalNet += $monthlyNet;
+            $totalReturnAmount += $summary['totalReturnAmount'];
+            $totalReturnVatAmount += $summary['totalReturnVatAmount'];
         }
 
         // Prepare report information
@@ -63,10 +92,13 @@ class YearlySalesReport extends Component
             'totalGross' => $totalGross,
             'totalTax' => $totalTax,
             'totalNet' => $totalNet,
-            'date' => $startOfYear->format('Y'),
+            'totalReturnAmount' => $totalReturnAmount,
+            'totalReturnVatAmount' => $totalReturnVatAmount,
+            'date' => $startOfYear->format('Y'), // Year format
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'monthlySummaries' => $monthlySummaries
+            'monthlySummaries' => $monthlySummaries,
         ];
     }
+
 }

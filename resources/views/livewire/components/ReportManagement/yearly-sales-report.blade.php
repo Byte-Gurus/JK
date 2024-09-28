@@ -116,7 +116,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalGross'] - $summary['totalTax'], 2) }}
+                                    {{ number_format($summary['totalNet'] , 2) }}
                                 </p>
                             </div>
                         </li>

@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col gap-4 ">
-                            <div x-on:click="$wire.displaySalesReturnReport()"
+                            <div x-on:click="$wire.displaySalesReturnReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Sales Return List</button>
                             </div>
@@ -194,6 +194,9 @@
     {{-- Return --}}
     <div x-show="showSalesReturnReport" x-data="{ showSalesReturnReport: @entangle('showSalesReturnReport') }">
         @livewire('components.ReportManagement.sales-return-report')
+    </div>
+    <div x-show="showSalesReturnReportDatePickerModal" x-data="{ showSalesReturnReportDatePickerModal: @entangle('showSalesReturnReportDatePickerModal') }">
+        @livewire('components.ReportManagement.sales-return-report-date-picker-modal')
     </div>
 
     {{-- Customer Credit --}}

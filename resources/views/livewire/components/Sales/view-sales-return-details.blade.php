@@ -7,6 +7,16 @@
             <div class="flex flex-col gap-4 py-2 pr-4 my-2 text-nowrap">
 
                 <div
+                class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
+                <div>
+                    <p class="text-[0.8em] font-thin text-center w-full">Return Number</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <p class="text-[1em] font-black">{{ $return_number }}</p>
+                </div>
+            </div>
+
+                <div
                     class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
                     <div>
                         <p class="text-[1em] font-thin text-center w-full">Transaction No.</p>

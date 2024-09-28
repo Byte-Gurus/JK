@@ -24,6 +24,10 @@ class SalesReturnModal extends Component
             $this->addError('transaction_number', 'The transaction number does not exist.');
             return;
         }
+        if(isset($transaction->returnJoin)){
+            $this->addError('transaction_number', 'The transaction number already have return.');
+            return;
+        }
 
         $this->dispatch('display-sales-return-details')->to(SalesReturn::class);
         $this->dispatch('get-transaction', Transaction: $transaction)->to(SalesReturnDetails::class);

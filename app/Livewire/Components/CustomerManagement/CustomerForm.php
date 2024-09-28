@@ -272,7 +272,7 @@ class CustomerForm extends Component
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:255',
             'id_picture' => 'nullable|image|max:20480',
-            'customertype' => 'required|in:Credit,PWD,Senior Citizen,Wholesale',
+            'customertype' => 'required|in:Normal,PWD,Senior Citizen,Wholesale',
 
         ];
 

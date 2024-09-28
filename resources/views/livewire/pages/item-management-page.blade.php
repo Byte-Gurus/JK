@@ -4,7 +4,7 @@
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
     @livewire('components.navbar')
     <div x-data="{ showModal: @entangle('showModal'), showPrintModal: @entangle('showPrintModal'), isPrint: @entangle('isPrint')}">
-        <div class="m-[28px]">
+        <div class="m-[3vh]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
@@ -30,7 +30,7 @@
             <div>
                 @livewire('components.ItemManagement.item-form')
             </div>
-            <div class="my-[28px]">
+            <div>
                 @livewire('components.ItemManagement.item-table')
             </div>
             <div>

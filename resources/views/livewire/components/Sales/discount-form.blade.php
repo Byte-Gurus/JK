@@ -30,6 +30,7 @@
                     </div>
 
                     {{-- //* close button --}}
+
                     <button type="button" x-on:click="showDiscountForm=false" wire:click=' resetFormWhenClosed() '
                         class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">
@@ -43,6 +44,7 @@
                         <span class="sr-only">Close modal</span>
 
                     </button>
+
 
                 </div>
 
@@ -306,8 +308,7 @@
                                                     Discount
                                                     No</label>
 
-                                                <input type="number" id="senior_pwd_id"
-                                                    wire:model="senior_pwd_id"
+                                                <input type="number" id="senior_pwd_id" wire:model="senior_pwd_id"
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                                     placeholder="PWD/Senior Citizen ID" required />
                                                 @error('senior_pwd_id')
@@ -345,19 +346,19 @@
                                                     value="{{ $customer_name }}" list="itemList"
                                                     class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                                                     placeholder="Search Customer">
-                                                @if ($isSales)
-                                                    <div class="mt-6.5">
-                                                        <button type="button" wire:loading.remove
-                                                            wire:click="createCustomer"
-                                                            class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                                            <div class="flex flex-row items-center gap-2">
-                                                                <p>
-                                                                    +
-                                                                </p>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                @endif
+
+                                                <div class="mt-6.5">
+                                                    <button type="button" wire:loading.remove
+                                                        wire:click="createCustomer"
+                                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                                        <div class="flex flex-row items-center gap-2">
+                                                            <p>
+                                                                +
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                </div>
+
 
                                             </div>
                                             @if (!empty($searchCustomer))
@@ -388,14 +389,17 @@
                                                 <p class="text-2xl font-bold ">{{ $customer_name }}</p>
 
                                                 {{-- clear customer name --}}
-                                                <div wire:click='clearSelectedCustomerName()'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                        class="size-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                    </svg>
-                                                </div>
+                                                @if (!$customerDetails)
+                                                    <div wire:click='clearSelectedCustomerName()'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth={1.5}
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                        </svg>
+                                                    </div>
+                                                @endif
+
                                             </div>
                                         </div>
                                     @endif
@@ -450,8 +454,7 @@
                                             Discount
                                             No</label>
 
-                                        <input type="number" id="senior_pwd_id" disabled
-                                            wire:model="senior_pwd_id"
+                                        <input type="number" id="senior_pwd_id" disabled wire:model="senior_pwd_id"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="PWD/Senior Citizen ID" required />
                                         @error('senior_pwd_id')

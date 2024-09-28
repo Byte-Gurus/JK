@@ -26,7 +26,7 @@ class DiscountForm extends Component
     public $barangays = null;
 
     public $firstname, $middlename, $lastname, $birthdate, $contact_number, $street, $searchCustomer, $customerType, $senior_pwd_id, $customer_id, $discount_percentage, $discounts, $discount_id, $customer_name;
-    public $isSales = true;
+
     public $customerDetails = [];
     public $credit_details = [];
 
@@ -37,7 +37,7 @@ class DiscountForm extends Component
         $searchCustomerTerm = trim($this->searchCustomer);
 
         $customers = Customer::where(function ($query) {
-            $query->where('customer_type', '!=', 'Credit');
+            $query->where('customer_type', '!=', 'Normal');
         })
             ->where(function ($query) use ($searchCustomerTerm) {
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$searchCustomerTerm}%"])
@@ -56,7 +56,6 @@ class DiscountForm extends Component
 
         'createConfirmed',
         'removeDiscountConfirmed',
-        'change-credit-discount' => 'changeCreditDiscount',
         'get-credit-detail' => 'getCreditDetail'
     ];
 
@@ -110,26 +109,26 @@ class DiscountForm extends Component
 
     public function create() //* create process
     {
-        $isSales = $this->isSales;
+
         // dd($isSales);
-        if (!$isSales && isset($this->credit_details['customer_id'])) {
-            $customer = Customer::find($this->customer_id);
-            $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
+        // if (!$isSales && isset($this->credit_details['customer_id'])) {
+        //     $customer = Customer::find($this->customer_id);
+        //     $customer_name = $customer->firstname . ' ' . $customer->middlename . ' ' . $customer->lastname;
 
-            $creditor = Customer::find($this->credit_details['customer_id']);
-            $creditor_name = $creditor->firstname . ' ' . $creditor->middlename . ' ' . $creditor->lastname;
+        //     $creditor = Customer::find($this->credit_details['customer_id']);
+        //     $creditor_name = $creditor->firstname . ' ' . $creditor->middlename . ' ' . $creditor->lastname;
 
-            if ($customer_name != $creditor_name) {
-                $this->alert('error', 'Name doesnt match with the credit');
-                return;
-            } else {
-                $this->populateForm();
-            }
-        } else {
-            $this->alert('warning', 'Select creditor');
-            $this->clearSelectedCustomerName();
-            return;
-        }
+        //     if ($customer_name != $creditor_name) {
+        //         $this->alert('error', 'Name doesnt match with the credit');
+        //         return;
+        //     } else {
+        //         $this->populateForm();
+        //     }
+        // } else {
+        //     $this->alert('warning', 'Select creditor');
+        //     $this->clearSelectedCustomerName();
+        //     return;
+        // }
 
 
         $validated = $this->validateForm();
@@ -256,11 +255,7 @@ class DiscountForm extends Component
 
         return $this->validate($rules);
     }
-    public function changeCreditDiscount($isSales)
-    {
-        $this->clearSelectedCustomerName();
-        $this->isSales = $isSales;
-    }
+
     public function createCustomer()
     {
         $this->resetForm();

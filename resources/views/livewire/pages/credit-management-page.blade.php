@@ -6,7 +6,7 @@
         @livewire('components.navbar')
     </div>
     <div x-data="{ showModal: @entangle('showModal') }">
-        <div class="m-[28px]">
+        <div class="m-[3vh]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
                     <div>
@@ -68,13 +68,13 @@
             <div>
                 @livewire('components.CreditManagement.credit-form')
             </div>
-            <div class="my-[28px]" x-show="showCreditTable" x-data="{ showCreditTable: @entangle('showCreditTable') }">
+            <div x-show="showCreditTable" x-data="{ showCreditTable: @entangle('showCreditTable') }">
                 @livewire('components.CreditManagement.credit-table')
             </div>
-            <div class="my-[28px]" x-show="showCreditHistory" x-data="{ showCreditHistory: @entangle('showCreditHistory') }">
+            <div x-show="showCreditHistory" x-data="{ showCreditHistory: @entangle('showCreditHistory') }">
                 @livewire('components.CreditManagement.credit-history-table')
             </div>
-            <div class="my-[28px]" x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
+            <div x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
                 @livewire('components.CreditManagement.credit-payment-form')
             </div>
             <div x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
