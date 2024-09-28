@@ -175,7 +175,7 @@ class RestockForm extends Component
             $inventory = Inventory::create([
                 'sku_code' => $detail['sku_code'],
                 'cost' => $this->cost[$index],
-                'mark_up_price' => $validated['markup'][$index],
+                'mark_up_price' => $this->cost[$index] * ($validated['markup'][$index] / 100),
                 'selling_price' => $validated['srp'][$index],
                 'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
                 'current_stock_quantity' =>  $validated['restock_quantity'][$index],

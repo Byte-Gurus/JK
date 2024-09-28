@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\InventoryManagement;
 
+use App\Events\InventoryEvent;
 use App\Models\Inventory;
 use Livewire\Component;
 
@@ -16,68 +17,54 @@ class InventoryForm extends Component
     protected $listeners = [
         'stock-price' => 'getStockPrice'
     ];
-    // public function update() //* update process
-    // {
-    //     $validated = $this->validateForm();
+    public function update() //* update process
+    {
+        $validated = $this->validateForm();
 
 
-    //     $inventories = Inventory::find($this->inventory_id); //? kunin lahat ng data ng may ari ng proxy_item_id
+        $inventories = Inventory::find($this->inventory_id); //? kunin lahat ng data ng may ari ng proxy_item_id
+
+        //* ipasa ang laman ng validated inputs sa models
+        $inventories->cost = $validated['item_cost'];
+        $inventories->mark_up_price =$validated['item_cost'] *  ($validated['markup'] / 100);
+        $inventories->seling_price = $validated['seling_price'];
 
 
-
-    //     //* ipasa ang laman ng validated inputs sa models
-    //     $inventories->item_cost = $validated['item_cost'];
-    //     $inventories->markup = $validated['markup'];
-    //     $inventories->seling_price = $validated['seling_price'];
+        $attributes = $inventories->toArray();
 
 
-    //     if ($this->hasBarcode) {
-    //         $items->barcode = $validated['create_barcode'];
-    //     } else {
-    //         $items->barcode = $validated['barcode'];
-    //     }
-
-    //     $attributes = $items->toArray();
-
-
-    //     $this->confirm('Do you want to update this item?', [
-    //         'onConfirmed' => 'updateConfirmed', //* call the confmired method
-    //         'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
-    //     ]);
-    // }
+        $this->confirm('Do you want to update this stock?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+        ]);
+    }
 
 
 
-    // public function updateConfirmed($data) //* confirmation process ng update
-    // {
+    public function updateConfirmed($data) //* confirmation process ng update
+    {
 
 
-    //     //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
-    //     $updatedAttributes = $data['inputAttributes'];
+        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
+        $updatedAttributes = $data['inputAttributes'];
 
 
-    //     //* hanapin id na attribute sa $updatedAttributes array
-    //     $item = Item::find($updatedAttributes['id']);
+        //* hanapin id na attribute sa $updatedAttributes array
+        $inventories = Inventory::find($updatedAttributes['id']);
 
-    //     $item->fill($updatedAttributes);
-    //     $item->save(); //* Save the item model to the database
+        $inventories->fill($updatedAttributes);
+        $inventories->save(); //* Save the item model to the database
 
-    //     $inventories = Inventory::where('item_id', $item->id)->get();
+        $inventories = Inventory::where('item_id', $inventories->id)->get();
 
-    //     // Update vat_amount for each related Inventory record
-    //     foreach ($inventories as $inventory) {
 
-    //         // Update the vat_amount in the Inventory model
-    //         $inventory->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
-    //         $inventory->save(); // Save each updated inventory record
-    //     }
 
-    //     $this->resetForm();
-    //     $this->alert('success', 'items was updated successfully');
-    //     ItemEvent::dispatch('refresh-item');
-    //     $this->refreshTable();
-    //     $this->closeModal();
-    // }
+        $this->resetForm();
+        $this->alert('success', 'Stock was updated successfully');
+        InventoryEvent::dispatch('refresh-inventory');
+        $this->refreshTable();
+        $this->closeModal();
+    }
     public function resetFormWhenClosed()
     {
         $this->resetForm();
