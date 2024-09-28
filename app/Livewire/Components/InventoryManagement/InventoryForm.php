@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class InventoryForm extends Component
 {
-    public $inventory;
+    public $inventory_id;
     public function render()
     {
         return view('livewire.components.InventoryManagement.inventory-form');
@@ -25,17 +25,17 @@ class InventoryForm extends Component
 
     public function populateForm()
     {
+        $inventory = Inventory::find($this->inventory_id);
 
         $this->fill([
-            'item_cost' => $this->inventory->cost,
-            'markup' => (($this->inventory->selling_price - $this->inventory->cost) / $this->inventory->cost) * 100,
-            'seling_price' => $this->inventory->selling_price
+            'item_cost' => $inventory->cost,
+            'markup' => (($inventory->selling_price - $inventory->cost) / $inventory->cost) * 100,
+            'seling_price' => $inventory->selling_price
         ]);
     }
 
     protected function validateForm()
     {
-        $this->item_name = trim($this->item_name);
 
         $rules = [
             'item_cost' => 'required|numeric',
@@ -56,7 +56,7 @@ class InventoryForm extends Component
     }
     public function getStockPrice($stockID)
     {
-        $this->inventory = Inventory::find($stockID);
+        $this->inventory_id = $stockID;
         $this->populateForm();
     }
 }
