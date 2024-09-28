@@ -810,12 +810,9 @@ class SalesTransaction extends Component
         $startOfDay = Carbon::today()->startOfDay();
         $endOfDay = Carbon::today()->endOfDay();
 
-        $daysWithSales = TransactionDetails::distinct(DB::raw('DATE(created_at)'))
+        $daysWithSales = TransactionDetails::where('item_id', $item_id)
+        ->distinct(DB::raw('DATE(created_at)'))
         ->count(DB::raw('distinct DATE(created_at)'));
-
-        $dayList = TransactionDetails::selectRaw('DATE(created_at) as date')
-        ->distinct()
-        ->get();
 
         $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
             $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
@@ -832,7 +829,6 @@ class SalesTransaction extends Component
         $reorder_point = round($days * $demandRate);
 
         $reorder_requirements[] = [
-            'dayList' => $dayList,
             'reorder_point' => $reorder_point,
             'demandRate' => $demandRate,
             'daysDIff' => $days,
