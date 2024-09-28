@@ -94,7 +94,7 @@ class InventoryForm extends Component
             'item_name' => $inventory->itemJoin->item_name,
             'item_description' => $inventory->itemJoin->item_description,
             'cost' => $inventory->cost,
-            'markup' => round((($this->inventory->selling_price - $this->inventory->cost) / $this->inventory->cost) * 100),
+            'markup' => round((($inventory->selling_price - $inventory->cost) / $inventory->cost) * 100),
             'seling_price' => $inventory->selling_price
         ]);
     }
