@@ -112,6 +112,11 @@ class InventoryTable extends Component
         $this->dispatch('stock-card', stockID: $stockId)->to(ViewStockCard::class);
     }
 
+    public function getStockPrice($stockId){
+        $this->dispatch('stock-price', stockID: $stockId)->to(InventoryForm::class);
+
+    }
+
     public function refreshFromPusher()
     {
         $this->resetPage();

@@ -49,24 +49,36 @@
                 </div>
 
                 {{-- //* first row --}} {{-- //* adjust reason --}}
-                <form wire:submit.prevent="adjust"
+                <form wire:submit.prevent="update"
                     class="flex flex-col items-center w-full h-full pr-6 mt-2 justify-evenly">
                     @csrf
 
                     <div class="flex flex-col justify-start w-fit">
                         <div class="flex flex-col gap-1 mb-3">
-                            <label for="itemPrice" class="text-white">Item Price</label>
+                            <label for="itemPrice" class="text-white">Item Cost</label>
 
-                            <input type="number" id="itemPrice"
+                            <input type="number" wire:model="item_cost"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
+                    </div>
+                    <div class="flex flex-col justify-start w-fit">
+                        <div class="flex flex-col gap-1 mb-3">
+                            <label for="itemPrice" class="text-white">Markup %</label>
 
+                            <input type="number" wire:model="markup"
+                                class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
+                        </div>
 
+                    </div>
 
+                    <div class="flex flex-col justify-start w-fit">
+                        <div class="flex flex-col gap-1 mb-3">
+                            <label for="itemPrice" class="text-white">Selling Price</label>
 
-
-
+                            <input type="number" wire:model="seling_price"
+                                class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
+                        </div>
 
                     </div>
                     <div class="flex flex-row self-end gap-2 mb-6">
