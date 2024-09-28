@@ -40,6 +40,7 @@ class InventoryForm extends Component
 
         $attributes = $inventories->toArray();
 
+        $this->dispatch('get-from-page', $this->fromPage)->to(InventoryAdminLoginForm::class);
         $this->displayInventoryAdminLoginForm();
 
         // $this->confirm('Do you want to update this stock?', [
@@ -140,7 +141,6 @@ class InventoryForm extends Component
 
     public function displayInventoryAdminLoginForm()
     {
-        $this->dispatch('get-from-page', $this->fromPage)->to(InventoryAdminLoginForm::class);
         $this->showInventoryForm = !$this->showInventoryForm;
         $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }
