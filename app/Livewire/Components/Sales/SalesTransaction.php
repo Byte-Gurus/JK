@@ -813,8 +813,7 @@ class SalesTransaction extends Component
         $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
             ->select(DB::raw('DATE(created_at) as sale_date'))
             ->distinct()
-            ->get()
-            ->count();
+            ->count('sale_date');
 
         $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
             $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
