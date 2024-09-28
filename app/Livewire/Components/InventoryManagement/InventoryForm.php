@@ -26,7 +26,7 @@ class InventoryForm extends Component
 
         //* ipasa ang laman ng validated inputs sa models
         $inventories->cost = $validated['cost'];
-        $inventories->mark_up_price =$validated['item_cost'] *  ($validated['markup'] / 100);
+        $inventories->mark_up_price =$validated['cost'] *  ($validated['markup'] / 100);
         $inventories->seling_price = $validated['seling_price'];
 
 
