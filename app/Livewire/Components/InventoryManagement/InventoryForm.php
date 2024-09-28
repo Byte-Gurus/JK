@@ -5,9 +5,12 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Events\InventoryEvent;
 use App\Models\Inventory;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class InventoryForm extends Component
 {
+    use LivewireAlert;
+    
     public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description;
     public function render()
     {
@@ -26,7 +29,7 @@ class InventoryForm extends Component
 
         //* ipasa ang laman ng validated inputs sa models
         $inventories->cost = $validated['cost'];
-        $inventories->mark_up_price =$validated['cost'] *  ($validated['markup'] / 100);
+        $inventories->mark_up_price = $validated['cost'] * ($validated['markup'] / 100);
         $inventories->seling_price = $validated['seling_price'];
 
 
@@ -35,7 +38,7 @@ class InventoryForm extends Component
 
         $this->confirm('Do you want to update this stock?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
