@@ -921,8 +921,8 @@ class SalesTransaction extends Component
 
         $maximum_level_req[] = [
             'days' => $days,
-            'po_date' => $po_date,
-            'delivery_date' => $delivery_date,
+            'po_date' => $poDate,
+            'delivery_date' => $deliveryDate,
             'item_id' => $item_id,
             'item_name' => $item->item_name,
             'min_quantity' => $minConsumption,
