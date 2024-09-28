@@ -30,9 +30,9 @@ class ExpiredItemsReportDatePickerModal extends Component
         ]);
     }
 
-    public function displayMonthlySalesReport()
+    public function displayExpiredItemsReport()
     {
-        $this->dispatch( 'display-expired-items-report-date-picker-modal')->to(ReportManagement::class);
+        $this->dispatch('display-monthly-sales-report')->to(ReportManagement::class);
     }
 
     public function getDate()

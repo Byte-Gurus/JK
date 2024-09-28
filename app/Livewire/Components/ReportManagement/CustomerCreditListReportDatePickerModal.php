@@ -9,7 +9,7 @@ class CustomerCreditListReportDatePickerModal extends Component
 {
     public $showExpiredItemsReportDatePickerModal = true;
 
-    public $date;
+    public $toDate, $fromDate;
 
     public function render()
     {
@@ -25,7 +25,8 @@ class CustomerCreditListReportDatePickerModal extends Component
     public function resetForm()
     {
         $this->reset([
-            'date'
+            'toDate',
+            'fromDate'
         ]);
     }
 
@@ -36,6 +37,6 @@ class CustomerCreditListReportDatePickerModal extends Component
 
     public function getDate()
     {
-        $this->dispatch('generate-report', $this->date)->to(CustomerCreditListReport::class);
+        $this->dispatch('generate-report', $this->fromDate, $this->toDate)->to(CustomerCreditListReport::class);
     }
 }
