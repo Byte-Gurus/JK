@@ -712,10 +712,16 @@ class SalesTransaction extends Component
 
 
             if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
-                Notification::create([
-                    'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
-                    'inventory_id' => $inventory->id,
-                ]);
+
+                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")
+                    ->exists();
+
+                if (!$notificationExists) {
+                    Notification::create([
+                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                        'inventory_id' => $inventory->id,
+                    ]);
+                }
             }
 
 
@@ -811,13 +817,13 @@ class SalesTransaction extends Component
         $endOfDay = Carbon::today()->endOfDay();
 
         $daysWithSales = TransactionDetails::where('item_id', $item_id)
-        ->distinct(DB::raw('DATE(created_at)'))
-        ->count(DB::raw('distinct DATE(created_at)'));
+            ->distinct(DB::raw('DATE(created_at)'))
+            ->count(DB::raw('distinct DATE(created_at)'));
 
         $todayTotalItemQuantity = TransactionDetails::where('item_id', $item_id)
-        ->whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
-            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
-        })->sum('item_quantity');
+            ->whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+                $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+            })->sum('item_quantity');
 
 
         // Calculate the number of days in the date range
