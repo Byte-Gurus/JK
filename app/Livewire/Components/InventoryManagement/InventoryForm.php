@@ -114,7 +114,7 @@ class InventoryForm extends Component
 
     public function updatedMarkup($markup)
     {
-        $this->calculateSRP($this->item_cost, $markup);
+        $this->calculateSRP($this->cost, $markup);
     }
     public function updatedCost($cost)
     {
