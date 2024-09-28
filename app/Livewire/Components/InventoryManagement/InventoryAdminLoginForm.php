@@ -21,7 +21,7 @@ class InventoryAdminLoginForm extends Component
     {
         return view('livewire.components.InventoryManagement.inventory-admin-login-form');
     }
-    protected $listener = [
+    protected $listeners = [
         'get-from-page' => 'getFromPage'
     ];
 
