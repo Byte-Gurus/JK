@@ -87,8 +87,7 @@ Artisan::command('inventory:check-expiration', function () {
         $item->save();
         $this->info("Updated status for item SKU: {$item->sku_code} to 'expired'");
 
-        $notificationExists = Notification::where('inventory_id', $item->id)
-            ->where('description', "Item with SKU {$item->sku_code} has expired.")
+        $notificationExists = Notification::where('description', "Item with SKU {$item->sku_code} has expired.")
             ->exists();
 
         if (!$notificationExists) {
