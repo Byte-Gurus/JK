@@ -59,7 +59,7 @@ class InventoryForm extends Component
         $inventories->fill($updatedAttributes);
         $inventories->save(); //* Save the item model to the database
 
-dd($inventories);
+        dd($inventories);
         $this->resetForm();
         $this->alert('success', 'Stock was updated successfully');
         InventoryEvent::dispatch('refresh-inventory');
