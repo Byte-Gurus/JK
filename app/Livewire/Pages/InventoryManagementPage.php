@@ -11,6 +11,7 @@ class InventoryManagementPage extends Component
     public $showInventoryTable = true;
     public $showInventoryHistory = false;
     public $showStockAdjustPage = false;
+    public $showInventoryForm = false;
     public $sidebarStatus;
     public $showStockCard = false;
     public function render()
@@ -24,6 +25,7 @@ class InventoryManagementPage extends Component
         'display-inventoyry-table' => 'displayInventoryTable',
         'display-stock-adjust-page' => 'displayStockAdjustPage',
         'display-stock-card' => 'displayStockCard',
+        'display-inventory-form' => 'displayInventoryForm'
     ];
 
     public function closeModal()
@@ -52,6 +54,11 @@ class InventoryManagementPage extends Component
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
+    }
+
+    public function displayInventoryForm()
+    {
+        $this->showInventoryForm = true;
     }
 
     public function displayStockCard($showStockCard)

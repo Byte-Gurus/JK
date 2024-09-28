@@ -15,7 +15,7 @@ class ReportManagement extends Component
 
     public $reportSelected = false;
 
-    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal,$showSlowMovingItemsReportDatePickerModal,$showFastMovingItemsReportDatePickerModal, $showSalesReturnReportDatePickerModal = false;
+    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal,$showSlowMovingItemsReportDatePickerModal,$showFastMovingItemsReportDatePickerModal, $showSalesReturnReportDatePickerModal, $showCustomerCreditListReportDatePickerModal, $showExpiredItemsReportDatePickerModal = false;
 
     public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport = false;
 
@@ -45,6 +45,10 @@ class ReportManagement extends Component
         'close-fast-moving-items-report-date-picker-modal' => 'closeFastMovingItemsReportDatePickerModal',
         'display-fast-moving-items-report' => 'displayFastMovingItemsReport',
         'display-sales-return-report-date-picker-modal' => 'displaySalesReturnReportDatePickerModal',
+        'display-customer-credit-list-report-date-picker-modal' => 'displayCustomerCreditListReportDatePickerModal',
+        'close-customer-credit-lust-report-date-picker-modal' => 'closeCustomerCreditListReportDatePickerModal',
+        'close-expired-items-report-date-picker-modal' => 'closeExpiredItemsReportDatePickerModal',
+        'display-expired-items-report-date-picker-modal' => 'displayExpiredItemsReportDatePickerModal',
         'close-sales-return-report-date-picker-modal' => 'closeSalesReturnReportDatePickerModal'
     ];
 
@@ -156,6 +160,8 @@ class ReportManagement extends Component
         $this->showSlowMovingItemsReportDatePickerModal = false;
         $this->showFastMovingItemsReportDatePickerModal = false;
         $this->showSalesReturnReportDatePickerModal = false;
+        $this->showCustomerCreditListReportDatePickerModal = false;
+        $this->showExpiredItemsReportDatePickerModal = false;
     }
 
     // Daily Sales Report
@@ -251,13 +257,23 @@ class ReportManagement extends Component
 
     // Customer Credit List Report
 
+    public function displayCustomerCreditListReportDatePickerModal()
+    {
+        $this->showCustomerCreditListReportDatePickerModal = true;
+    }
+
     public function displayCustomerCreditListReport()
     {
         $this->showCustomerCreditListReport = true;
-        $this->reportSelected = true;
-        $this->showNavbar = false;
-        $this->sidebarStatus = true;
+        $this->hideExtras();
     }
+
+    public function closeCustomerCreditListReportDatePickerModal()
+    {
+        $this->showCustomerCreditListReportDatePickerModal = false;
+    }
+
+    // Stock-on-and
 
     public function displayStockonhandReport()
     {
@@ -325,11 +341,21 @@ class ReportManagement extends Component
 
     // Expired Items Report
 
+    public function displayExpiredItemsReportDatePickerModal()
+    {
+        $this->showExpiredItemsReportDatePickerModal = true;
+    }
+
     public function displayExpiredItemsReport()
     {
         $this->reportSelected = true;
         $this->showNavbar = false;
         $this->sidebarStatus = true;
         $this->showExpiredItemsReport = true;
+    }
+
+    public function closeExpiredItemsReportDatePickerModal()
+    {
+        $this->showExpiredItemsReportDatePickerModal = false;
     }
 }

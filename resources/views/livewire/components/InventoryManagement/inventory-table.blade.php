@@ -274,7 +274,8 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="relative flex items-center justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
+                            <th
+                                class="relative flex items-center justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
                                         class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
@@ -299,11 +300,31 @@
                                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
                                         min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
+
+                                                @if ($inventory->status !== 'New Item')
+                                                    <button
+                                                        x-on:click="$wire.displayInventoryForm(), openActions = !openActions"
+                                                        wire:click="getStock({{ $inventory->id }})"
+                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                        <div>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" strokeWidth={1.5}
+                                                                stroke="currentColor" class="size-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>Edit</div>
+                                                    </button>
+                                                @endif
+
+                                                <div class="w-full border border-[rgb(39,39,39)]"></div>
+
                                                 @if ($inventory->status !== 'New Item')
                                                     <button
                                                         x-on:click="$wire.displayStockAdjustPage(), openActions = !openActions"
                                                         wire:click="getStockID({{ $inventory->id }})"
-                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-red-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" strokeWidth="1.5"
                                                                 stroke="currentColor" class="size-6">
