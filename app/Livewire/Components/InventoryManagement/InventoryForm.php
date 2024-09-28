@@ -11,7 +11,7 @@ class InventoryForm extends Component
 {
     use LivewireAlert;
 
-    public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description;
+    public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description, $inventoryInfo;
     public $showInventoryForm = true;
     public $showInventoryAdminLoginForm = false;
 
@@ -23,6 +23,7 @@ class InventoryForm extends Component
 
     protected $listeners = [
         'stock-price' => 'getStockPrice',
+        'admin-confirmed' => 'adminConfirmed',
         'updateConfirmed'
     ];
     public function update() //* update process
@@ -38,7 +39,8 @@ class InventoryForm extends Component
         $inventories->selling_price = $validated['seling_price'];
 
 
-        $attributes = $inventories->toArray();
+
+        $this->inventoryInfo = $inventories->toArray();
 
         $this->dispatch('get-from-page', $this->fromPage)->to(InventoryAdminLoginForm::class);
         $this->displayInventoryAdminLoginForm();
@@ -51,12 +53,12 @@ class InventoryForm extends Component
 
 
 
-    public function updateConfirmed($data) //* confirmation process ng update
+    public function updateConfirmed() //* confirmation process ng update
     {
 
 
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
-        $updatedAttributes = $data['inputAttributes'];
+        $updatedAttributes = $this->inventoryInfo;
 
 
         //* hanapin id na attribute sa $updatedAttributes array
@@ -143,5 +145,15 @@ class InventoryForm extends Component
     {
         $this->showInventoryForm = !$this->showInventoryForm;
         $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
+    }
+
+    public function adminConfirmed($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+
+        if ($this->isAdmin) {
+            $this->updateConfirmed();
+        }
     }
 }
