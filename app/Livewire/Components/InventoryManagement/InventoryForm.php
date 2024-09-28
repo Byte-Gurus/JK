@@ -15,6 +15,7 @@ class InventoryForm extends Component
     public $showInventoryForm = true;
     public $showInventoryAdminLoginForm = false;
 
+    public $fromPage = "InventoryTable";
     public function render()
     {
         return view('livewire.components.InventoryManagement.inventory-form');
@@ -139,7 +140,7 @@ class InventoryForm extends Component
 
     public function displayInventoryAdminLoginForm()
     {
-        $this->dispatch('get-from-page', 'fromInventoryTable')->to(InventoryAdminLoginForm::class);
+        $this->dispatch('get-from-page', $this->fromPage)->to(InventoryAdminLoginForm::class);
         $this->showInventoryForm = !$this->showInventoryForm;
         $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }
