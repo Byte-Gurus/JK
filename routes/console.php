@@ -120,8 +120,7 @@ Artisan::command('credit:check-overdue', function () {
         $this->info("Updated status for credit number: {$credit->credit_number} to 'Overdue'");
 
         // Check if notification already exists
-        $notificationExists = Notification::where('credit_id', $credit->id)
-            ->where('description', "Credit with number {$credit->credit_number} is overdue.")
+        $notificationExists = Notification::where('description', "Credit with number {$credit->credit_number} is overdue.")
             ->exists();
 
         if (!$notificationExists) {
