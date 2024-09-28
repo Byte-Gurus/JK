@@ -139,6 +139,7 @@ class InventoryForm extends Component
 
     public function displayInventoryAdminLoginForm()
     {
+        $this->dispatch('get-from-page', 'fromInventoryTable')->to(InventoryAdminLoginForm::class);
         $this->showInventoryForm = !$this->showInventoryForm;
         $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }

@@ -13,6 +13,7 @@ class InventoryAdminLoginForm extends Component
     public $isAdmin;
     public $username;
     public $password;
+    public $fromPage;
 
     public $showPassword = true;
     public $showStockAdjustModal = false;
@@ -20,6 +21,9 @@ class InventoryAdminLoginForm extends Component
     {
         return view('livewire.components.InventoryManagement.inventory-admin-login-form');
     }
+    protected $listener = [
+        'get-from-page' => 'getFromPage'
+    ];
 
     public function closeInventoryAdminLoginForm()
     {
@@ -55,6 +59,11 @@ class InventoryAdminLoginForm extends Component
 
     public function showPasswordStatus()
     {
-     $this->showPassword = !$this->showPassword;
+        $this->showPassword = !$this->showPassword;
+    }
+
+    public function getFromPage($fromPage)
+    {
+        dd($fromPage);
     }
 }
