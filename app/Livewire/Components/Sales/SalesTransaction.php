@@ -216,7 +216,7 @@ class SalesTransaction extends Component
             return;
         }
 
-        if($this->changeTransactionType == 3 && !$this->returnInfo){
+        if ($this->changeTransactionType == 3 && !$this->returnInfo) {
             $this->alert('error', 'Enter return number first');
             return;
         }
@@ -515,8 +515,7 @@ class SalesTransaction extends Component
 
             $this->alert('success', 'Discount was applied successfully');
             $this->senior_pwd_id = $this->customerDetails['senior_pwd_id'];
-        }
-        else {
+        } else {
             $this->customerDetails = null;
 
             $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
@@ -552,12 +551,12 @@ class SalesTransaction extends Component
 
     public function updatedChangeTransactionType()
     {
-        if($this->customerDetails){
+        if ($this->customerDetails) {
             $this->alert('error', 'Remove discount first');
             $this->reset('changeTransactionType');
             return;
         }
-        if($this->changeTransactionType == 3){
+        if ($this->changeTransactionType == 3) {
             $this->selectedItems = [];
         }
 
@@ -661,9 +660,9 @@ class SalesTransaction extends Component
 
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
 
-        if($this->changeTransactionType == 1 || $this->changeTransactionType == 3){
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
             $transactionType = "Sales";
-        }elseif($this->changeTransactionType == 2){
+        } elseif ($this->changeTransactionType == 2) {
             $transactionType = "Credit";
         }
 
@@ -800,6 +799,7 @@ class SalesTransaction extends Component
 
     public function getReorderPoint($item_id, $delivery_date, $po_date)
     {
+        $reorer_requirements = [];
         $deliveryDate = Carbon::parse($delivery_date);
         $poDate = Carbon::parse($po_date);
 
@@ -828,6 +828,17 @@ class SalesTransaction extends Component
         $demandRate = $todayTotalItemQuantity / $daysWithSales;
 
         $reorder_point = round($days * $demandRate);
+
+        $reorder_requirements[] = [
+            'reorder_point' => $reorder_point,
+            'demandRate' => $demandRate,
+            'daysDIff' => $days,
+            'todayTotalItemQuantity' => $todayTotalItemQuantity,
+            'daysWithSales' => $daysWithSales,
+            'deliveryDate' => $deliveryDate,
+            'poDate' => $poDate
+        ];
+        dd($reorder_requirements);
 
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
@@ -919,22 +930,22 @@ class SalesTransaction extends Component
 
         Item::where('id', $item_id)->update(['maximum_stock_level' => $maximumLevel]);
 
-        $maximum_level_req[] = [
-            'days' => $days,
-            'po_date' => $poDate,
-            'delivery_date' => $deliveryDate,
-            'item_id' => $item_id,
-            'item_name' => $item->item_name,
-            'min_quantity' => $minConsumption,
-            'purchase_quantity' => $reorderQuantity,
-            'reorder_point' => $reorderPoint,
-            'min_reorder_period' => $minReorderPeriod,
-            'maximum_level' => $maximumLevel,
-            'todayTotalItemQuantity' => $todayTotalItemQuantity,
-            'restockDate' => $restockDate
-        ];
+        // $maximum_level_req[] = [
+        //     'days' => $days,
+        //     'po_date' => $poDate,
+        //     'delivery_date' => $deliveryDate,
+        //     'item_id' => $item_id,
+        //     'item_name' => $item->item_name,
+        //     'min_quantity' => $minConsumption,
+        //     'purchase_quantity' => $reorderQuantity,
+        //     'reorder_point' => $reorderPoint,
+        //     'min_reorder_period' => $minReorderPeriod,
+        //     'maximum_level' => $maximumLevel,
+        //     'todayTotalItemQuantity' => $todayTotalItemQuantity,
+        //     'restockDate' => $restockDate
+        // ];
 
-        dd($maximum_level_req);
+        // dd($maximum_level_req);
     }
 
 
@@ -992,14 +1003,15 @@ class SalesTransaction extends Component
     }
 
 
-    public function getReturnDetails(){
+    public function getReturnDetails()
+    {
 
         $rules = [
             'search_return_number' => 'required'
         ];
         $this->validate($rules);
 
-        $this->returnInfo =  Returns::where('return_number', $this->search_return_number)->first();
+        $this->returnInfo = Returns::where('return_number', $this->search_return_number)->first();
 
         if (!$this->returnInfo) {
             $this->alert('error', 'The return number does not exist.');
