@@ -814,7 +814,8 @@ class SalesTransaction extends Component
         ->distinct(DB::raw('DATE(created_at)'))
         ->count(DB::raw('distinct DATE(created_at)'));
 
-        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+        $todayTotalItemQuantity = TransactionDetails::where('item_id', $item_id)
+        ->whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
             $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
         })->sum('item_quantity');
 
