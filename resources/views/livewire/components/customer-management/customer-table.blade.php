@@ -140,7 +140,7 @@
 
                             {{-- //* birthdate --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->birthdate }}
+                                {{ $customer->birthdate->format(' M d Y ') }}
                             </th>
 
                             {{-- //* contact number --}}
