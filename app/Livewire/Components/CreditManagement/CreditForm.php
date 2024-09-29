@@ -54,10 +54,16 @@ class CreditForm extends Component
 
     public function getCustomer($customer_id)
     {
-        $this->customer_id = $customer_id;
-
 
         $customer = Customer::find($customer_id);
+
+        if (!$customer->id_picture) {
+            $this->alert('error', 'This customer nned picture');
+            return;
+        }
+
+        $this->customer_id = $customer_id;
+
         $this->customer_name = $customer->firstname . ' ' . ($customer->middlename ? $customer->middlename . ' ' : '') . $customer->lastname;
 
 
