@@ -56,7 +56,11 @@ class CreditForm extends Component
     {
 
         $customer = Customer::find($customer_id);
-dd('sasasa');
+
+        if (!$customer->id_picture) {
+            $this->alert('error', 'This customer need picture');
+            return;
+        }
 
         $this->customer_id = $customer_id;
 
