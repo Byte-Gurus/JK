@@ -739,7 +739,7 @@ class SalesTransaction extends Component
             $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
         }
 
-        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 2) {
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
             $payment = Payment::create([
                 'transaction_id' => $transaction->id,
                 'amount' => $this->payment['tendered_amount'],
