@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Livewire\Components\InventoryManagement\InventoryForm;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class InventoryManagementPage extends Component
 {
@@ -25,7 +26,8 @@ class InventoryManagementPage extends Component
         'display-inventoyry-table' => 'displayInventoryTable',
         'display-stock-adjust-page' => 'displayStockAdjustPage',
         'display-stock-card' => 'displayStockCard',
-        'display-inventory-form' => 'displayInventoryForm'
+        'display-inventory-form' => 'displayInventoryForm',
+        'close-inventory-form' => 'closeInventoryForm'
     ];
 
     public function closeModal()
@@ -59,6 +61,11 @@ class InventoryManagementPage extends Component
     public function displayInventoryForm()
     {
         $this->showInventoryForm = true;
+    }
+
+    public function closeInventoryForm()
+    {
+        $this->showInventoryForm = false;
     }
 
     public function displayStockCard($showStockCard)

@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\InventoryManagement;
 
 use App\Events\InventoryEvent;
+use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -13,6 +14,8 @@ class InventoryForm extends Component
 
     public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description, $inventoryInfo;
     public $showInventoryForm = true;
+
+    public $isAdmin;
     public $showInventoryAdminLoginForm = false;
 
     public $fromPage = "InventoryTable";
@@ -71,6 +74,9 @@ class InventoryForm extends Component
         $this->resetForm();
         $this->alert('success', 'Stock was updated successfully');
         InventoryEvent::dispatch('refresh-inventory');
+        $this->displayInventoryAdminLoginForm();
+        $this->dispatch('close-inventory-form')->to(InventoryManagementPage::class);
+        $this->dispatch('refresh-table')->to(InventoryTable::class);
         // $this->refreshTable();
         // $this->closeModal();
 
