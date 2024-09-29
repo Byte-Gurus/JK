@@ -667,6 +667,7 @@ class SalesTransaction extends Component
             $transactionType = "Credit";
         }
 
+
         $transaction = Transaction::create([
             'transaction_number' => $this->transaction_info['transaction_number'],
             'transaction_type' => $transactionType,
@@ -679,10 +680,14 @@ class SalesTransaction extends Component
             'user_id' => Auth::id(),
         ]);
 
-        $transaction_movement = TransactionMovement::create([
-            'transaction_type' => 'Sales',
-            'transaction_id' => $transaction->id
-        ]);
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
+            $transaction_movement = TransactionMovement::create([
+                'transaction_type' => 'Sales',
+                'transaction_id' => $transaction->id
+            ]);
+
+        }
+
 
 
         foreach ($this->selectedItems as $index => $selectedItem) {
