@@ -17,7 +17,7 @@ class CreditForm extends Component
     use LivewireAlert;
 
     public $isCreate;
-    public $credit_number, $searchCustomer, $credit_limit = 5000, $status = 'Pending', $due_date, $customer_id, $customer_name;
+    public $credit_number, $searchCustomer, $credit_limit = 5000, $status = 'Pending', $due_date, $customer_id, $customer_name, $imageUrl;
 
     public function render()
     {
@@ -56,14 +56,14 @@ class CreditForm extends Component
     {
 
         $customer = Customer::find($customer_id);
-        
+
         if ($customer->id_picture == 'N/A') {
             $this->alert('error', 'This customer need picture');
             return;
         }
 
         $this->customer_id = $customer_id;
-
+        $this->imageUrl = $customer->id_picture;
         $this->customer_name = $customer->firstname . ' ' . ($customer->middlename ? $customer->middlename . ' ' : '') . $customer->lastname;
 
 

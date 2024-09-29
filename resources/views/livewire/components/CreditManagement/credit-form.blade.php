@@ -165,6 +165,11 @@
                                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                                     @enderror
 
+                                    @if ($imageUrl)
+                                        <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+                                    @endif
+
+
                                     {{-- //* credit limit --}}
                                     <div class="mb-3">
 
