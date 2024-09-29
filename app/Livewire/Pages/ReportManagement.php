@@ -46,7 +46,7 @@ class ReportManagement extends Component
         'display-fast-moving-items-report' => 'displayFastMovingItemsReport',
         'display-sales-return-report-date-picker-modal' => 'displaySalesReturnReportDatePickerModal',
         'display-customer-credit-list-report-date-picker-modal' => 'displayCustomerCreditListReportDatePickerModal',
-        'close-customer-credit-lust-report-date-picker-modal' => 'closeCustomerCreditListReportDatePickerModal',
+        'close-customer-credit-list-report-date-picker-modal' => 'closeCustomerCreditListReportDatePickerModal',
         'close-expired-items-report-date-picker-modal' => 'closeExpiredItemsReportDatePickerModal',
         'display-expired-items-report-date-picker-modal' => 'displayExpiredItemsReportDatePickerModal',
         'display-expired-items-report' => 'displayExpiredItemsReport',

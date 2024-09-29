@@ -1,4 +1,4 @@
-<div class="flex justify-center h-fit">
+<div x-cloak class="flex justify-center h-fit">
 
     <div class="  w-[816px] border border-black">
         <div class="flex flex-row justify-around my-8">
