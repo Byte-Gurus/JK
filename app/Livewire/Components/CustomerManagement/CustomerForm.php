@@ -317,7 +317,8 @@ class CustomerForm extends Component
             'street',
             'id_picture',
             'customertype',
-            'senior_pwd_id'
+            'senior_pwd_id',
+            'imageUrl'
         ]);
     }
 

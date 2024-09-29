@@ -131,7 +131,7 @@ class CreditForm extends Component
 
     public function resetForm()
     {
-        $this->reset(['credit_number', 'searchCustomer', 'due_date', 'customer_name']);
+        $this->reset(['credit_number', 'searchCustomer', 'due_date', 'customer_name', 'imageUrl']);
     }
 
     public function refreshTable() //* refresh ang table after confirmation
