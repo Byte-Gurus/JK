@@ -127,7 +127,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ $fastmoving_info['fast_slow'] }}
+                                    {{  number_format($fastmoving_info['fast_slow'], 2) }}
                                 </p>
                             </div>
                         </li>
