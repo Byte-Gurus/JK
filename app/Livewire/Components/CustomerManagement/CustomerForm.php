@@ -202,7 +202,7 @@ class CustomerForm extends Component
             'contact_number' => $updatedAttributes['contact_number'],
             'birthdate' => $updatedAttributes['birthdate'],
             'address_id' => $address->id ?? null,
-            'customer_type' => $updatedAttributes['customertype'],
+            'customer_type' => $updatedAttributes['customer_type'],
             'senior_pwd_id' => $updatedAttributes['senior_pwd_id'] ?? null,
             'id_picture' => $updatedAttributes['id_picture'],
         ]);
