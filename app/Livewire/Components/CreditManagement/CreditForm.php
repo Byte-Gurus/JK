@@ -56,8 +56,8 @@ class CreditForm extends Component
     {
 
         $customer = Customer::find($customer_id);
-        dd($customer);
-        if (!$customer->id_picture) {
+        
+        if ($customer->id_picture == 'N/A') {
             $this->alert('error', 'This customer need picture');
             return;
         }
