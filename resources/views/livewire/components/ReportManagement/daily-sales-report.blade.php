@@ -120,7 +120,15 @@
                         <li class="col-span-3 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-                                    {{ $transaction->transactionJoin->transaction_number ?? $transaction->returnsJoin->return_number }}
+
+                                    @if ($transaction->transaction_type == 'Sales')
+                                        {{ $transaction->transactionJoin->transaction_number }}
+                                    @elseif ($transaction->transaction_type == 'Return')
+                                        {{ $transaction->returnsJoin->return_number }}
+                                    @elseif ($transaction->transaction_type == 'Credit')
+                                        {{ $transaction->creditJoin->credit_number }}
+                                    @endif
+
                                 </p>
                             </div>
                         </li>
