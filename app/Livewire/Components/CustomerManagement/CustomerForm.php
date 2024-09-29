@@ -76,7 +76,7 @@ class CustomerForm extends Component
 
         $this->confirm('Do you want to add this customer?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -163,7 +163,7 @@ class CustomerForm extends Component
 
         $this->confirm('Do you want to update this customer?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
@@ -178,7 +178,9 @@ class CustomerForm extends Component
         $customer = Customer::find($updatedAttributes['id']);
         $address = Address::find($updatedAttributes['address_id']);
 
-        if (!$this->id_picture) {
+        if ($this->id_picture) {
+
+            // Validate and store the uploaded file temporarily
             $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
             // Generate a new filename
@@ -195,7 +197,7 @@ class CustomerForm extends Component
 
             $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
         } else {
-            $updatedAttributes['id_picture'] =  'null'; // Keep existing value or set to null
+            $updatedAttributes['id_picture'] = 'null'; // Keep existing value or set to null
         }
 
         $address->fill([
@@ -291,9 +293,9 @@ class CustomerForm extends Component
         ];
 
         if ($this->customertype != 'Normal') {
-            $rules['senior_pwd_id'] =  'required|string|max:255';
+            $rules['senior_pwd_id'] = 'required|string|max:255';
         } else {
-            $rules['senior_pwd_id'] =  'nullable|string|max:255';
+            $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 
 
