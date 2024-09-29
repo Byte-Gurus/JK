@@ -178,8 +178,22 @@ class CustomerForm extends Component
         $customer = Customer::find($updatedAttributes['id']);
         $address = Address::find($updatedAttributes['address_id']);
 
-        if ($this->id_picture) {
-            $updatedAttributes['id_picture'] = $this->id_picture->store('public');
+        if (!$this->id_picture) {
+            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
+
+            // Generate a new filename
+            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
+
+            // Get the contents of the file
+            $fileContents = Storage::disk('local')->get($path);
+
+            // Store the file on S3
+            $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+            // Optionally delete the temporary file
+            Storage::disk('local')->delete($path);
+
+            $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
         } else {
             $updatedAttributes['id_picture'] =  'null'; // Keep existing value or set to null
         }
