@@ -246,6 +246,7 @@ class CustomerForm extends Component
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
             'id_picture' => $customer_details->id_picture ?? null,
+            'imageUrl' => $customer_details->id_picture ?? null,
             'customertype' => $customer_details->customer_type,
             'senior_pwd_id' => $customer_details->senior_pwd_id ?? null,
             'selectProvince' => $customer_details->addressJoin->province_code,
