@@ -141,6 +141,7 @@ class StockAdjustForm extends Component
 
     public function resetFormWhenClosed()
     {
+        $this->dispatch('close-stock-adjust-page')->to(InventoryManagementPage::class);
         $this->resetForm();
         $this->resetValidation();
     }

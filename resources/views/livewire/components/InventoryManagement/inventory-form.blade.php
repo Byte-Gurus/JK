@@ -34,7 +34,7 @@
                     </h3>
 
                     {{-- //* close button --}}
-                    <button type="button" x-on:click="showInventoryForm=false" wire:click="resetFormWhenClosed"
+                    <button type="button" wire:click="resetFormWhenClosed"
                         class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto"
                         data-modal-hide="UserModal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"

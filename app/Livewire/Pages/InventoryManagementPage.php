@@ -27,7 +27,8 @@ class InventoryManagementPage extends Component
         'display-stock-adjust-page' => 'displayStockAdjustPage',
         'display-stock-card' => 'displayStockCard',
         'display-inventory-form' => 'displayInventoryForm',
-        'close-inventory-form' => 'closeInventoryForm'
+        'close-inventory-form' => 'closeInventoryForm',
+        'close-stock-adjust-page' => 'closeStockAdjustPage'
     ];
 
     public function closeModal()
@@ -77,5 +78,10 @@ class InventoryManagementPage extends Component
     public function displayStockAdjustPage()
     {
         $this->showStockAdjustPage = true;
+    }
+
+    public function closeStockAdjustPage()
+    {
+        $this->showStockAdjustPage = false;
     }
 }

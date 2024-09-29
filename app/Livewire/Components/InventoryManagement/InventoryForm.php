@@ -27,6 +27,7 @@ class InventoryForm extends Component
     protected $listeners = [
         'stock-price' => 'getStockPrice',
         'admin-confirmed' => 'adminConfirmed',
+        'return-inventory-form' => 'returnInventoryForm',
         'updateConfirmed'
     ];
     public function update() //* update process
@@ -84,6 +85,7 @@ class InventoryForm extends Component
     }
     public function resetFormWhenClosed()
     {
+        $this->dispatch('close-inventory-form')->to(InventoryManagementPage::class);
         $this->resetForm();
         $this->resetValidation();
     }
@@ -161,5 +163,11 @@ class InventoryForm extends Component
         if ($this->isAdmin) {
             $this->updateConfirmed();
         }
+    }
+
+    public function returnInventoryForm()
+    {
+        $this->showInventoryForm = !$this->showInventoryForm;
+        $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }
 }
