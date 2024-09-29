@@ -113,7 +113,7 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            @if ($transaction_info)
+            @if ($transactions)
                 @foreach ($transactions as $transaction)
                     <ul class="grid justify-between grid-flow-col grid-cols-12 mx-4 ">
 
