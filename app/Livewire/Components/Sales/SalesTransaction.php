@@ -4,6 +4,7 @@ namespace App\Livewire\Components\Sales;
 
 use App\Events\CreditEvent;
 
+use App\Events\CustomerEvent;
 use App\Events\InventoryEvent;
 use App\Events\ItemEvent;
 use App\Events\PurchaseOrderEvent;
@@ -797,6 +798,7 @@ class SalesTransaction extends Component
         ItemEvent::dispatch('refresh-item');
         InventoryEvent::dispatch('refresh-inventory');
         PurchaseOrderEvent::dispatch('refresh-purchase-order');
+        CustomerEvent::dispatch('refresh-customer');
 
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
