@@ -208,7 +208,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (operation[$index] != "")
+                                @if ($operation[$index] != "")
                                     <select id="status"
                                         wire:model.live.debounce.300ms="description.{{ $index }}"
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
