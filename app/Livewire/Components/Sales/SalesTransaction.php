@@ -441,7 +441,7 @@ class SalesTransaction extends Component
     public function computeTransaction()
     {
 
-
+        $test = [];
         $this->subtotal = 0;
 
         $vatable_amount = 0;
