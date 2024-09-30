@@ -97,7 +97,7 @@
                             <li class="col-span-1 py-[3px]">
                                 <div>
                                     <p class="text-[0.6em] uppercase text-center font-medium">
-                                        {{ $return_detail->returnDetailsJoin->item_return_amount }}</p>
+                                        {{ $return_detail->item_return_amount }}</p>
                                 </div>
                             </li>
                         </ul>
