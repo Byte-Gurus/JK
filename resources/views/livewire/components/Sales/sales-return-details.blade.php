@@ -177,7 +177,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($transactionDetail['discount_id'] == 3)
-                                    {{ number_format($transactionDetail['item_discount_amount'] - $transactionDetail['item_discount_amount'] * $transactionDetail['discountJoin']['percentage'], 2) }}
+                                    {{ number_format($transactionDetail['inventoryJoin']['selling_price'] * ($transactionDetail['discountJoin']['percentage'] / 100), 2) }}
                                 @else
                                     0.00
                                 @endif
