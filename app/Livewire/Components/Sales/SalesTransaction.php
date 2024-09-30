@@ -463,9 +463,23 @@ class SalesTransaction extends Component
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
                 $vatable_amount = $vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
+                dump([
+                    "vat",
+                    'vatable_subtotal' => $non_vatable_subtotal,
+                    'vatable_amount' => $non_vatable_amount,
+                    'total_amount' => $index['total_amount'],
+                    'vat_percent' => $index['vat_percent']
+                ]);
             } elseif ($index['vat_type'] === 'Non Vatable') {
                 $non_vatable_subtotal += $index['total_amount'];
                 $non_vatable_amount = $non_vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
+                dump([
+                    "non vat",
+                    'non_vatable_subtotal' => $non_vatable_subtotal,
+                    'non_vatable_amount' => $non_vatable_amount,
+                    'total_amount' => $index['total_amount'],
+                    'vat_percent' => $index['vat_percent']
+                ]);
             }
 
             $this->totalVat = $vatable_amount + $non_vatable_amount;
