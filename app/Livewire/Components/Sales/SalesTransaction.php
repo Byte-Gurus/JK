@@ -498,6 +498,18 @@ class SalesTransaction extends Component
         if (isset($this->credit_details['credit_no'])) {
             $this->credit_details['credit_amount'] = $this->grandTotal;
         }
+
+        $test = [
+            'subtotal' => $this->subtotal,
+            'vatable_subtotal' => $vatable_subtotal,
+            'vatable_amount' => $vatable_amount,
+            'non_vatable_subtotal' => $non_vatable_subtotal,
+            'non_vatable_amount' => $non_vatable_amount,
+            'netAmount' => $this->netAmount,
+
+        ];
+
+        dump($test);
     }
 
     public function getCustomerDetails($customerDetails)
