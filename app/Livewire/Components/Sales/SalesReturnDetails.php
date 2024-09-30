@@ -167,22 +167,20 @@ class SalesReturnDetails extends Component
 
                     $this->return_total_amount += $this->item_return_amount;
 
+                    if ($transactionDetail->vat_type === 'Vat') {
+                        $vatable_Return_Subtotal += $this->item_return_amount;
+                        $vat_Percent = $transactionDetail->itemJoin->vat_percent;
+                        $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+
+
+                    } elseif ($transactionDetail->vat_type === 'Non Vatable') {
+                        $non_vatable_Return_Subtotal += $this->item_return_amount;
+                        $vat_Percent = $transactionDetail->itemJoin->vat_percent;
+                        $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+
+                    }
 
                 }
-
-                if ($transactionDetail->vat_type === 'Vat') {
-                    $vatable_Return_Subtotal += $this->item_return_amount;
-                    $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
-
-
-                } elseif ($transactionDetail->vat_type === 'Non Vatable') {
-                    $non_vatable_Return_Subtotal += $this->item_return_amount;
-                    $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
-
-                }
-
 
 
                 $this->return_info[$index] = [
