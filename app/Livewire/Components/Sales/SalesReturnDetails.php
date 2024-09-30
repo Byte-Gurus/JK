@@ -119,7 +119,7 @@ class SalesReturnDetails extends Component
             $this->returnQuantity[$ind] = 0;
         }
 
-        if ($this->operation[$ind] === '') {
+        if ($this->operation[$ind] == "") {
 
             $this->returnQuantity[$ind] = null;
             $this->description[$ind] = null;
