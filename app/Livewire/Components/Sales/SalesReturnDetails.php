@@ -153,11 +153,16 @@ class SalesReturnDetails extends Component
 
                 if ($this->operation[$index] != 'Exchange') {
 
+
+
+
+
                     if ($transactionDetail->discount_id == 3) {
-                        $this->item_return_amount = $transactionDetail->inventoryJoin->selling_price -($transactionDetail->inventoryJoin->selling_price * ($transactionDetail->discountJoin->percentage / 100));
+                        $this->item_return_amount = $transactionDetail->inventoryJoin->selling_price - ($transactionDetail->inventoryJoin->selling_price * ($transactionDetail->discountJoin->percentage / 100));
+                    } else {
+                        $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->inventoryJoin->selling_price;
+
                     }
-                    
-                    $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->inventoryJoin->selling_price;
 
                     $this->return_total_amount += $this->item_return_amount;
 
