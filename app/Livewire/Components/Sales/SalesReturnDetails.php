@@ -117,7 +117,6 @@ class SalesReturnDetails extends Component
 
         if (isset($this->returnQuantity[$ind])) {
             $this->returnQuantity[$ind] = 0;
-            $this->calculateTotalRefundAmount();
         }
 
         if ($this->operation[$ind] === '') {
@@ -126,8 +125,9 @@ class SalesReturnDetails extends Component
             $this->return_info[$ind] = null;
             $this->operation[$ind] = null;
 
-            $this->calculateTotalRefundAmount();
         }
+        
+        $this->calculateTotalRefundAmount();
 
 
         $this->resetValidation();
