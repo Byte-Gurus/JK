@@ -208,7 +208,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
+                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != null)
                                     <select id="status"
                                         wire:model.live.debounce.300ms="description.{{ $index }}"
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
@@ -229,7 +229,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
+                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != null)
                                     <input type="number"
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
                                         wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
