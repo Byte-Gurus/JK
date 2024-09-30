@@ -161,8 +161,7 @@ class SalesReturnDetails extends Component
                     if($transactionDetail->discount_id == 3){
                         $this->item_return_amount =  $this->item_return_amount - ($this->item_return_amount * $transactionDetail->discountJoin->percentage);
                     }
-                    dump($transactionDetail);
-
+                   
                     $this->return_total_amount += $this->item_return_amount;
 
 
