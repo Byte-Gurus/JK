@@ -41,7 +41,7 @@ class InventoryForm extends Component
         $inventories->cost = $validated['cost'];
         $inventories->mark_up_price = $validated['cost'] * ($validated['markup'] / 100);
         $inventories->selling_price = $validated['seling_price'];
-        $inventories->vat_amount = ($inventories->vat_percent / 100) * $validated['seling_price'];
+        $inventories->vat_amount = ($inventories->itemJoin->vat_percent / 100) * $validated['seling_price'];
 
 
         $this->inventoryInfo = $inventories->toArray();
