@@ -252,4 +252,12 @@ class SalesReturnDetails extends Component
         }
     }
 
+    public function updatedOperation($value, $index){
+        $this->returnQuantity[$index] = 0;
+    }
+    public function updatedDescription($value, $index){
+        $this->returnQuantity[$index] = 0;
+    }
+
+
 }
