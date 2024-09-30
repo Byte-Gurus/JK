@@ -191,7 +191,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                <select id="status" wire:model="operation.{{ $index }}"
+                                <select id="status" wire:model.live="operation.{{ $index }}"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
                                     <option value="" selected>Set your operation</option>
                                     <option value="Refund">Refund</option>
@@ -209,7 +209,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                <select id="status" wire:model="description.{{ $index }}"
+                                <select id="status" wire:model.live="description.{{ $index }}"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
                                     <option value="" selected>Set your description</option>
                                     <option value="Damaged">Damaged</option>
