@@ -123,10 +123,18 @@ class SalesReturnDetails extends Component
 
             $this->returnQuantity[$ind] = null;
             $this->description[$ind] = null;
-            // $this->return_info[$ind] = null;
+            $this->return_info[$ind] = null;
             $this->operation[$ind] = null;
 
         }
+
+        dd([
+            $ind,
+            $this->returnQuantity[$ind],
+            $this->description[$ind],
+            $this->return_info[$ind],
+            $this->operation[$ind],
+        ]);
         $this->calculateTotalRefundAmount();
 
         $this->resetValidation();
