@@ -1067,6 +1067,11 @@ class SalesTransaction extends Component
             return;
         }
 
+        if (isset($this->returnInfo->tranasactionJoin)) {
+            $this->alert('error', 'The return number has already have a transaction.');
+            return;
+        }
+
 
         $this->return_number = $this->returnInfo->return_number;
         $this->return_amount = $this->returnInfo->return_total_amount;
