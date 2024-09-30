@@ -121,6 +121,9 @@
                         {{-- //* gcash reference no. --}}
                         <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
+                        {{-- payment --}}
+                        <th scope="col" class="px-4 py-3 text-center">Tax Amount</th>
+
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -173,6 +176,12 @@
                                 scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 {{ $sale['paymentJoin->reference_number'] ?? 'N/A' }}
                             </th>
+
+                            <th
+                                scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                                {{ $sale['total_vat_amount'] ?? 'N/A' }}
+                            </th>
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $sale['created_at']->format(' M d Y h:i A ') }}
