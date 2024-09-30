@@ -1066,6 +1066,7 @@ class SalesTransaction extends Component
             $this->alert('error', 'The return number does not exist.');
             return;
         }
+        dd($this->returnInfo->tranasactionJoin);
 
         if (isset($this->returnInfo->tranasactionJoin)) {
             $this->alert('error', 'The return number has already have a transaction.');
