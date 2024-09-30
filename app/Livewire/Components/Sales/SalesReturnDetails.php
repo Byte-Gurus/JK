@@ -117,7 +117,6 @@ class SalesReturnDetails extends Component
 
         if (isset($this->returnQuantity[$ind])) {
             $this->returnQuantity[$ind] = 0;
-            $this->calculateTotalRefundAmount();
         }
 
         if ($this->operation[$ind] === '') {
@@ -126,15 +125,9 @@ class SalesReturnDetails extends Component
             $this->description[$ind] = null;
             $this->return_info[$ind] = null;
             $this->operation[$ind] = null;
-            $this->calculateTotalRefundAmount();
-            dump([
-                $ind,
-                $this->returnQuantity[$ind],
-                $this->description[$ind],
-                $this->return_info[$ind],
-                $this->operation[$ind],
-            ]);
+
         }
+        $this->calculateTotalRefundAmount();
 
         $this->resetValidation();
     }
@@ -215,6 +208,9 @@ class SalesReturnDetails extends Component
                 }
             }
         }
+
+        $this->calculateTotalRefundAmount();
+
     }
 
     private function populateForm()
