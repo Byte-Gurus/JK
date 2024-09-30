@@ -223,6 +223,7 @@
                                     @enderror
 
                                     <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
+                                @else
                                 @endif
 
                             </th>
@@ -237,6 +238,7 @@
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                     @enderror
+                                @else
                                 @endif
                             </th>
                         </tr>
