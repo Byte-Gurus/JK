@@ -191,7 +191,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                <select id="status" wire:model.live.debounce.300ms="operation.{{ $index }}"
+                                <select id="status" wire:model="operation.{{ $index }}"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
                                     <option value="" selected>Set your operation</option>
                                     <option value="Refund">Refund</option>
@@ -208,36 +208,35 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != null)
-                                    <select id="status"
-                                        wire:model.live.debounce.300ms="description.{{ $index }}"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
-                                        <option value="" selected>Set your description</option>
-                                        <option value="Damaged">Damaged</option>
-                                        <option value="Expired">Expired</option>
-                                    </select>
 
-                                    @error("description.$index")
-                                        <span
-                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                    @enderror
+                                <select id="status" wire:model="description.{{ $index }}"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
+                                    <option value="" selected>Set your description</option>
+                                    <option value="Damaged">Damaged</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
 
-                                    <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
-                                @endif
+                                @error("description.$index")
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
+
 
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != null)
-                                    <input type="number"
-                                        class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                        wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
-                                    @error("returnQuantity.$index")
-                                        <span
-                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                    @enderror
-                                @endif
+
+                                <input type="number"
+                                    class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                    wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
+                                @error("returnQuantity.$index")
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
                             </th>
                         </tr>
                     @endforeach

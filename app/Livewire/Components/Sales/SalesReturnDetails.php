@@ -107,39 +107,7 @@ class SalesReturnDetails extends Component
         $this->dispatch('get-return-details', $returns->id)->to(SalesReturnSlip::class);
     }
 
-    public function updatedOperation($value, $ind)
-    {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->operation[$index])) {
-                $this->return_info[$index]['operation'] = $this->operation[$index];
-            }
-        }
-
-        if (isset($this->returnQuantity[$ind])) {
-            $this->returnQuantity[$ind] = 0;
-        }
-
-        if ($this->operation[$ind] == "") {
-
-            $this->returnQuantity[$ind] = null;
-            $this->description[$ind] = null;
-            $this->return_info[$ind] = null;
-            $this->operation[$ind] = null;
-
-        }
-
-        dump([
-            $ind,
-            $this->returnQuantity[$ind],
-            $this->description[$ind],
-            $this->return_info[$ind],
-            $this->operation[$ind],
-        ]);
-        $this->calculateTotalRefundAmount();
-
-        $this->resetValidation();
-    }
-
+  
     public function updatedReturnQuantity()
     {
         $validated = $this->validateForm();
@@ -157,8 +125,10 @@ class SalesReturnDetails extends Component
         $non_vatable_return_total_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index]) && isset($this->description[$index])) {
 
+                $this->return_info[$index]['operation'] = $this->operation[$index];
+                $this->return_info[$index]['description'] = $this->description[$index];
 
                 if ($this->operation[$index] != 'Exchange') {
 
@@ -207,19 +177,7 @@ class SalesReturnDetails extends Component
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
 
-    public function updatedDescription()
-    {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
-                if (isset($this->description[$index])) {
-                    $this->return_info[$index]['description'] = $this->description[$index];
-                }
-            }
-        }
 
-        $this->calculateTotalRefundAmount();
-
-    }
 
     private function populateForm()
     {
