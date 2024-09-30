@@ -179,7 +179,7 @@
 
                             <th
                                 scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
-                                {{ $sale['total_vat_amount'] ?? 'N/A' }}
+                                {{ number_format($sale['total_vat_amount'], 2) ?? 'N/A' }}
                             </th>
 
                             <th scope="row"
