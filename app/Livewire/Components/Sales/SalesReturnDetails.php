@@ -121,10 +121,10 @@ class SalesReturnDetails extends Component
         }
 
         if ($this->operation[$ind] === '') {
-            unset($this->returnQuantity[$ind]);
-            unset($this->description[$ind]);
-            unset($this->return_info[$ind]);
-            unset($this->operation[$ind]);
+            $this->returnQuantity[$ind] = [];
+            $this->description[$ind] = [];
+            $this->return_info[$ind] = [];
+            $this->operation[$ind] = [];
             $this->calculateTotalRefundAmount();
         }
 
