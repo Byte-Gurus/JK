@@ -128,7 +128,7 @@ class SalesReturnDetails extends Component
 
         }
 
-        dd([
+        dump([
             $ind,
             $this->returnQuantity[$ind],
             $this->description[$ind],
