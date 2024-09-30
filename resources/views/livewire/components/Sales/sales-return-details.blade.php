@@ -191,7 +191,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                <select id="status" wire:model.live="operation.{{ $index }}"
+                                <select id="status" wire:model.debounce.300ms="operation.{{ $index }}"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
                                     <option value="" selected>Set your operation</option>
                                     <option value="Refund">Refund</option>
@@ -209,7 +209,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
-                                    <select id="status" wire:model.live="description.{{ $index }}"
+                                    <select id="status" wire:model.debounce.300ms="description.{{ $index }}"
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
                                         <option value="" selected>Set your description</option>
                                         <option value="Damaged">Damaged</option>
@@ -231,7 +231,7 @@
                                 @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
                                     <input type="number"
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                        wire:model.live="returnQuantity.{{ $index }}">
+                                        wire:model.debounce.300ms="returnQuantity.{{ $index }}">
                                     @error("returnQuantity.$index")
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
