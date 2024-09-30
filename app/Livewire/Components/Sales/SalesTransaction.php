@@ -465,8 +465,8 @@ class SalesTransaction extends Component
                 $vatable_amount = $vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
                 dump([
                     "vat",
-                    'vatable_subtotal' => $non_vatable_subtotal,
-                    'vatable_amount' => $non_vatable_amount,
+                    'vatable_subtotal' => $vatable_subtotal,
+                    'vatable_amount' => $vatable_amount,
                     'total_amount' => $index['total_amount'],
                     'vat_percent' => $index['vat_percent']
                 ]);
