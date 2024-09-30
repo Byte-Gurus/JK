@@ -107,7 +107,7 @@ class SalesReturnDetails extends Component
         $this->dispatch('get-return-details', $returns->id)->to(SalesReturnSlip::class);
     }
 
-  
+
     public function updatedReturnQuantity()
     {
         $validated = $this->validateForm();

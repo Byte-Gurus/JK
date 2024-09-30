@@ -229,13 +229,15 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                <input type="number"
-                                    class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                    wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
-                                @error("returnQuantity.$index")
-                                    <span
-                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                @enderror
+                                @if ($operation[$index] && $description[$index])
+                                    <input type="number"
+                                        class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                        wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
+                                    @error("returnQuantity.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
+                                @endif
 
                             </th>
                         </tr>
