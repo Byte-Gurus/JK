@@ -122,7 +122,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
                         {{-- //* wholesale --}}
-                        <th scope="col" class="px-4 py-3 text-center">Wholesale (₱)</th>
+                        <th scope="col" class="px-4 py-3 text-center">Discouted Amount (₱)</th>
 
                         {{-- //* subtotal --}}
                         <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
