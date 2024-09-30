@@ -34,6 +34,14 @@ class SalesReturnDetails extends Component
     {
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
+        foreach ($this->transactionDetails as $transactionDetail) {
+            if ($transactionDetail->discount_id == 3) {
+
+                $this->transactionDetails->item_discount_amount = $this->item_return_amount - ($this->item_return_amount * $transactionDetail->discountJoin->percentage);
+            }
+        }
+
+
         return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
         ]);
@@ -158,10 +166,7 @@ class SalesReturnDetails extends Component
                     // if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
                     //     $this->item_return_amount -= $transactionDetail->item_discount_amount;
                     // }
-                    if($transactionDetail->discount_id == 3){
-                        $this->item_return_amount =  $this->item_return_amount - ($this->item_return_amount * $transactionDetail->discountJoin->percentage);
-                    }
-                   
+
                     $this->return_total_amount += $this->item_return_amount;
 
 
@@ -170,13 +175,13 @@ class SalesReturnDetails extends Component
                 if ($transactionDetail->vat_type === 'Vat') {
                     $vatable_Return_Subtotal += $this->item_return_amount;
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $vatable_return_total_amount = $vatable_Return_Subtotal - ($this->vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+                    $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
 
                 } elseif ($transactionDetail->vat_type === 'Non Vatable') {
                     $non_vatable_Return_Subtotal += $this->item_return_amount;
                     $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($this->non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+                    $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
                 }
 

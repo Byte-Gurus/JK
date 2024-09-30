@@ -173,6 +173,8 @@
                                 {{ $transactionDetail['item_quantity'] }}
                             </th>
 
+
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ number_format($transactionDetail['item_discount_amount'], 2) }}
