@@ -121,10 +121,16 @@ class SalesReturnDetails extends Component
         }
 
         if ($this->operation[$ind] === '') {
-            $this->returnQuantity[$ind] = [null];
-            $this->description[$ind] = [null];
-            $this->return_info[$ind] = [null];
-            $this->operation[$ind] = [null];
+            unset($this->returnQuantity[$ind]);
+            unset($this->description[$ind]);
+            unset($this->return_info[$ind]);
+            // unset($this->operation[$ind]);
+
+            // Add placeholder to maintain structure
+            $this->returnQuantity[$ind] = null;
+            $this->description[$ind] = null;
+            $this->return_info[$ind] = null;
+            // $this->operation[$ind] = null;
             $this->calculateTotalRefundAmount();
         }
 
@@ -175,7 +181,7 @@ class SalesReturnDetails extends Component
 
                     } elseif ($transactionDetail->vat_type === 'Non Vatable') {
                         $non_vatable_Return_Subtotal += $this->item_return_amount;
-                        $vat_Percent = $transactionDetail->item_vat_percent;
+                        $vat_Percent = $transactionDetail->vat_percent;
                         $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
                     }
