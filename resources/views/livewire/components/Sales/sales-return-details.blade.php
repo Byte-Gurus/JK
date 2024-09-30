@@ -229,7 +229,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                @if ($operation[$index] && $description[$index])
+                                @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] && $description[$index])
                                     <input type="number"
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
                                         wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
