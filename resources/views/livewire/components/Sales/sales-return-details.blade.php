@@ -208,7 +208,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if ($operation[$index] != "")
+                                @if (isset($operation[$index])&& $operation[$index] != "")
                                     <select id="status"
                                         wire:model.live.debounce.300ms="description.{{ $index }}"
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
@@ -223,14 +223,13 @@
                                     @enderror
 
                                     <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
-                                @else
                                 @endif
 
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if ($operation[$index] != "")
+                                @if (isset($operation[$index]) && $operation[$index] != "")
                                     <input type="number"
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
                                         wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
