@@ -39,7 +39,7 @@
             @endif
         </button>
     </div>
-    <div class=" m-[28px] duration-700 ease-linear transition-all">
+    <div class=" m-[3vh] duration-700 ease-linear transition-all">
         @if ($purchaseOrderOpen)
             @livewire('pages.purchase-page')
         @else

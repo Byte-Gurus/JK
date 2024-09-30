@@ -59,7 +59,6 @@ class ChangeQuantityForm extends Component
     // public function adjustConfirmed($data)
     // {
 
-
     // }
 
     protected function validateForm()

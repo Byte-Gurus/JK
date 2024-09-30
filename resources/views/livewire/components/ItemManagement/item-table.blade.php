@@ -57,7 +57,7 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll h-[56vh] ">
+        <div class="overflow-x-auto overflow-y-scroll h-[50vh] ">
 
             <table class="w-full text-sm text-left">
 
