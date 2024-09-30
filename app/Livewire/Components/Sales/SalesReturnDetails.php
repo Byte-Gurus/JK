@@ -34,13 +34,6 @@ class SalesReturnDetails extends Component
     {
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
-        foreach ($this->transactionDetails as $transactionDetail) {
-            if ($transactionDetail->discount_id == 3) {
-
-                $this->transactionDetails->item_discount_amount = $this->item_return_amount - ($this->item_return_amount * $transactionDetail->discountJoin->percentage);
-            }
-        }
-
 
         return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,

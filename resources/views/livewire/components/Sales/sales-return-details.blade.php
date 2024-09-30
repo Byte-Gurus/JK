@@ -174,10 +174,14 @@
                             </th>
 
 
-
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($transactionDetail['item_discount_amount'], 2) }}
+                                @if ($transactionDetail->discount_id == 3)
+                                    {{ number_format($transactionDetail['item_discount_amount'] - $transactionDetail['item_discount_amount'] * transactionDetail['discountJoin']['percentage'], 2) }}
+                                @else
+                                    0.00
+                                @endif
+
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -288,7 +292,8 @@
                     <p class=" text-[1.6em] font-medium">New Tax Amount</p>
                 </div>
                 <div>
-                    <p class=" text-[1.6em] font-black">{{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
+                    <p class=" text-[1.6em] font-black">
+                        {{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
                 </div>
             </div>
 
