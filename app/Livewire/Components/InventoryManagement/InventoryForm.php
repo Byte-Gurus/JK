@@ -12,7 +12,7 @@ class InventoryForm extends Component
 {
     use LivewireAlert;
 
-    public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description, $inventoryInfo;
+    public $inventory_id, $cost, $markup, $seling_price, $barcode, $sku_code, $item_name, $item_description, $inventoryInfo, $vat_amount;
     public $showInventoryForm = true;
 
     public $isAdmin;
@@ -41,7 +41,7 @@ class InventoryForm extends Component
         $inventories->cost = $validated['cost'];
         $inventories->mark_up_price = $validated['cost'] * ($validated['markup'] / 100);
         $inventories->selling_price = $validated['seling_price'];
-
+        $inventories->vat_amount = ($inventories->vat_percent / 100) * $validated['seling_price'];
 
 
         $this->inventoryInfo = $inventories->toArray();
