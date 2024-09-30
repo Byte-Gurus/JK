@@ -1,35 +1,32 @@
 {{-- // --}}
 <div class="relative my-[3vh] rounded-lg" x-cloak>
 
-    <div class="grid grid-flow-col grid-cols-9 h-[64vh] gap-4 ">
+    <div class="grid grid-flow-col grid-cols-9 h-[65vh] gap-4 ">
         <div
             class="relative w-full col-span-6 overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
             <form wire:submit.prevent="create">
 
-                <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
-                    <div class="flex flex-row gap-6">
-                        <div>
-                            <h1 class="text-[1.2em]">Purchase Order No</h1>
-                            <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                            <select id="supplier" wire:model="select_supplier" required
-                                class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-md text-gray-900 text-sm block w-full px-4 py-2 appearance-auto ">
-                                <option value="" selected>Select Supplier</option>
-                                @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}">
-                                        {{ $supplier->company_name }}</option>
-                                @endforeach
-
-                                @error('select_supplier')
-                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                @enderror
-                            </select>
-                        </div>
+                <div class="grid items-center justify-between grid-flow-col grid-cols-3 gap-4 px-4 py-4 text-nowrap">
+                    <div class="flex flex-col col-span-1 gap-2 ">
+                        <p class="text-[1em]">Purchase Order No</p>
+                        <p class="text-[1.2em] font-black text-center w-fit">{{ $po_number }}</p>
                     </div>
-                    <div class="flex flex-row items-center justify-center gap-4 flex-nowrap text-nowrap">
+                    <div class="flex flex-col col-span-1 gap-2 ">
+                        <p class="text-[1em]">Supplier Name</p>
+                        <select id="supplier" wire:model="select_supplier" required
+                            class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-md text-gray-900 text-sm block w-full px-4 py-2 appearance-auto ">
+                            <option value="" selected>Select Supplier</option>
+                            @foreach ($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">
+                                    {{ $supplier->company_name }}</option>
+                            @endforeach
 
+                            @error('select_supplier')
+                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                            @enderror
+                        </select>
+                    </div>
+                    <div class="flex flex-row items-center justify-center col-span-1 gap-4 flex-nowrap text-nowrap">
                         <div>
                             <button wire:click="removeRow" type="button"
                                 class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] rounded-lg text-[rgb(53,53,53)] border hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">
@@ -48,12 +45,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-2 pt-1 bg-[rgb(29,29,29)] text-white border border-black rounded-tr-lg w-fit">
+            <div class="px-3 pt-1 bg-[rgb(29,29,29)] text-white border border-black rounded-tr-lg w-fit">
                     <p class="font-bold ">Item Information</p>
                 </div>
 
                 {{-- //* tablea area --}}
-                <div class=" pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+                <div class=" pb-[136px] overflow-x-auto overflow-y-scroll h-[64vh]  no-scrollbar scroll">
 
                     <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 
@@ -63,7 +60,8 @@
                             <tr class=" text-nowrap">
 
                                 {{-- //* action --}}
-                                <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center ">
+                                <th scope="col"
+                                    class="flex items-center justify-center gap-2 px-4 py-3 text-center ">
 
                                     <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
                                         class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
@@ -162,14 +160,14 @@
                     <h1 class="text-[1.8em] text-[rgb(65,47,20)] font-black">Removed Items</h1>
                 </div>
                 @if (!empty($removed_items))
-                <div>
+                    <div>
 
-                    <button wire:click="restoreRow" type="button"
-                        class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,215,153)] hover:bg-[rgb(255,201,99)] text-[rgb(53,53,53)] border rounded-sm">
-                        Restore Row
-                    </button>
+                        <button wire:click="restoreRow" type="button"
+                            class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(254,215,153)] hover:bg-[rgb(255,201,99)] text-[rgb(53,53,53)] border rounded-sm">
+                            Restore Row
+                        </button>
 
-                </div>
+                    </div>
                 @else
                     <button wire:click="restoreRow" type="button" disabled
                         class=" px-8 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(130,130,130)]  text-[rgb(53,53,53)] border rounded-sm">
@@ -177,7 +175,8 @@
                     </button>
                 @endif
             </div>
-            <div class="px-4 pt-1 bg-[rgb(255,221,146)] text-[rgb(90,74,26)] border border-[rgb(143,143,143)] rounded-tr-lg w-fit">
+            <div
+                class="px-4 pt-1 bg-[rgb(255,221,146)] text-[rgb(90,74,26)] border border-[rgb(143,143,143)] rounded-tr-lg w-fit">
                 <p class="font-bold ">Item Information</p>
             </div>
 
