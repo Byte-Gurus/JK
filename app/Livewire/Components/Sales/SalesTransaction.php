@@ -485,6 +485,18 @@ class SalesTransaction extends Component
             }
 
             $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+
+            $test = [
+                'items' => $index['item_name'],
+                'percent' => $index['vat_percent'],
+                'subtotal' => $this->subtotal,
+                'vatable_subtotal' => $vatable_subtotal,
+                'vatable_amount' => $vatable_amount,
+                'non_vatable_subtotal' => $non_vatable_subtotal,
+                'non_vatable_amount' => $non_vatable_amount,
+                'netAmount' => $this->netAmount,
+
+            ];
         }
 
 
@@ -499,15 +511,7 @@ class SalesTransaction extends Component
             $this->credit_details['credit_amount'] = $this->grandTotal;
         }
 
-        $test = [
-            'subtotal' => $this->subtotal,
-            'vatable_subtotal' => $vatable_subtotal,
-            'vatable_amount' => $vatable_amount,
-            'non_vatable_subtotal' => $non_vatable_subtotal,
-            'non_vatable_amount' => $non_vatable_amount,
-            'netAmount' => $this->netAmount,
 
-        ];
 
         dump($test);
     }
