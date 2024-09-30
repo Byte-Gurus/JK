@@ -179,7 +179,7 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->inventoryJoin->selling_price }}
+                                {{ $return_detail->transactionDetailsJoin->item_price }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">

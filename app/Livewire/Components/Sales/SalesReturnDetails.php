@@ -156,12 +156,12 @@ class SalesReturnDetails extends Component
 
 
                     if ($transactionDetail->discount_id == 3) {
-                        $discounted_selling_price = $transactionDetail->inventoryJoin->selling_price - ($transactionDetail->inventoryJoin->selling_price * ($transactionDetail->discountJoin->percentage / 100));
+                        $discounted_selling_price = $transactionDetail->item_price - ($transactionDetail->item_price * ($transactionDetail->discountJoin->percentage / 100));
 
                         $this->item_return_amount = $this->returnQuantity[$index] * $discounted_selling_price;
 
                     } else {
-                        $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->inventoryJoin->selling_price;
+                        $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->item_price;
 
                     }
 
@@ -169,13 +169,13 @@ class SalesReturnDetails extends Component
 
                     if ($transactionDetail->vat_type === 'Vat') {
                         $vatable_Return_Subtotal += $this->item_return_amount;
-                        $vat_Percent = $transactionDetail->itemJoin->vat_percent;
+                        $vat_Percent = $transactionDetail->item_vat_percent;
                         $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
 
                     } elseif ($transactionDetail->vat_type === 'Non Vatable') {
                         $non_vatable_Return_Subtotal += $this->item_return_amount;
-                        $vat_Percent = $transactionDetail->itemJoin->vat_percent;
+                        $vat_Percent = $transactionDetail->item_vat_percent;
                         $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
                     }

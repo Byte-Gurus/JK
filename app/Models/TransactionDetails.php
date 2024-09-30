@@ -16,6 +16,8 @@ class TransactionDetails extends Model
         'item_subtotal',
         'item_discount_amount',
         'discount_id',
+        'item_price',
+        'item_vat_percent',
         'transaction_id',
         'item_id',
         'inventory_id',

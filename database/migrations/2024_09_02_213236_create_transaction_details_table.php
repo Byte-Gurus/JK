@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('item_quantity');
             $table->string('vat_type');
             $table->string('status');
+            $table->double('item_price');
+            $table->double('item_vat_percent');
             $table->double('item_subtotal');
             $table->double('item_discount_amount');
             $table->timestamps();

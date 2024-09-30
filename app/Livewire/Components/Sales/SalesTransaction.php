@@ -320,6 +320,7 @@ class SalesTransaction extends Component
                     'original_total' => 0,
                     'delivery_date' => $item->deliveryJoin->date_delivered,
                     'po_date' => $item->deliveryJoin->purchaseJoin->created_at,
+
                 ];
             }
         } else {
@@ -735,7 +736,10 @@ class SalesTransaction extends Component
                 'discount_id' => $selectedItem['discount_id'],
                 'transaction_id' => $transaction->id,
                 'item_id' => $selectedItem['item_id'],
-                'inventory_id' => $inventory->id
+                'inventory_id' => $inventory->id,
+                'item_price' => $selectedItem['selling_price'],
+                'item_vat_percent' => $selectedItem['vat_percent'],
+
             ]);
 
 
