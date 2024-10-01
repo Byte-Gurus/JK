@@ -216,7 +216,7 @@
                                                 @if (!$customer->picture_id)
                                                     <button
                                                         class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]"
-                                                        x-on:click="showPrintModal=true; $wire.showImage('{{ $customer->id }}'), openActions = !openActions">
+                                                        x-on:click=" $wire.showImage('{{ $customer->id }}'), openActions = !openActions">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
@@ -262,12 +262,11 @@
     @if ($imageUrl)
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
-            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg ">
-
-                <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
-            </div>
             <div class="absolute bg-red-200 z-60">
-                <button> Click Me</button>
+                <button>Close</button>
+            </div>
+            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg ">
+                <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
             </div>
         </div>
     @endif
