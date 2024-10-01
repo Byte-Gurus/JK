@@ -780,7 +780,7 @@ class SalesTransaction extends Component
             ]);
 
 
-            dd($selectedItem);
+
 
             $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
 
@@ -910,8 +910,7 @@ class SalesTransaction extends Component
         $po_date = Carbon::parse($po_date);
 
         // reorder quantity = Average sales / average lead time
-        $item_info = Inventory::find($item_id);
-        dd($item_info, item_id);
+        $item_info = Inventory::find($item_id)->first();
         $first_stock_in_date = $item_info->stock_in_date;
 
         $startDate = $first_stock_in_date->startOfDay();
