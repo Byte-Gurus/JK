@@ -118,7 +118,7 @@ class SalesReturnDetails extends Component
             $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
 
         }
-        $validated = $this->validateForm($this->rules);
+        $this->validate($this->rules);
         $this->calculateTotalRefundAmount();
     }
 
