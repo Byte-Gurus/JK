@@ -75,7 +75,8 @@ class SalesReturnDetails extends Component
             'return_total_amount' => $this->return_total_amount,
             'return_number' => $this->return_number,
             'original_amount' => $this->total_amount,
-            'return_vat_amount' => $this->return_vat_amount
+            'return_vat_amount' => $this->return_vat_amount,
+            'hasTransaction' => false
         ]);
 
         $transaction_movement = TransactionMovement::create([
@@ -94,6 +95,7 @@ class SalesReturnDetails extends Component
                     'return_id' => $returns->id,
                     'transaction_details_id' => $info['transaction_details_id'],
                     'operation' => $info['operation'],
+
                 ]);
 
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);

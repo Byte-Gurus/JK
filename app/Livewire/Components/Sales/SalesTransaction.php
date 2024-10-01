@@ -718,8 +718,12 @@ class SalesTransaction extends Component
             ]);
 
         }
+        if ( $this->changeTransactionType == 3) {
+            $return =  Returns::where('return_number', $this->return_number)->first();
+            $return->hasTransaction = True;
+            $return->save();
 
-
+        }
 
         foreach ($this->selectedItems as $index => $selectedItem) {
 
@@ -1066,9 +1070,9 @@ class SalesTransaction extends Component
             $this->alert('error', 'The return number does not exist.');
             return;
         }
-       
 
-        if (isset($this->returnInfo->transactionJoin)) {
+
+        if ($this->returnInfo->hasTransaction) {
             $this->alert('error', 'The return number has already have a transaction.');
             return;
         }
