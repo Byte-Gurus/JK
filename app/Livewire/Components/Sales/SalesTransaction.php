@@ -905,6 +905,9 @@ class SalesTransaction extends Component
     {
         $maximum_level_req = [];
 
+        $delivery_date = Carbon::parse($delivery_date);
+        $po_date = Carbon::parse($po_date);
+
         // reorder quantity = Average sales / average lead time
         $item_info = Inventory::find($item_id);
         $first_stock_in_date = $item_info->stock_in_date;
