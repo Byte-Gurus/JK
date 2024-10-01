@@ -1,33 +1,20 @@
-<div x-show="showBackorderForm">
+<div x-cloak x-show="showBackorderForm">
     <div class="grid grid-flow-col grid-cols-12 gap-4 ">
         <div
             class="relative overflow-hidden col-span-8 border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
 
-            <div class="flex flex-row items-center justify-between gap-4 py-6 pr-4 my-2 text-nowrap">
+            <div class="flex flex-row justify-between gap-4 py-2 pr-4 my-2 text-nowrap">
 
-                <div
-                    class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
+                <div class="grid grid-flow-col gap-6 p-2 pr-4 text-black justify-evenly">
                     <div>
-                        <p class="text-[1em] font-thin text-center w-full">PO #</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
+                        <p class="text-[1em] font-thin text-left">Purchase Order No.</p>
                         <p class="text-[1.2em] font-black">{{ $po_number }}</p>
-
-
                     </div>
                     <div>
-                        |
-                    </div>
-                    <div>
-                        <p class="text-[1em] font-thin text-center w-full">Supplier</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
+                        <p class="text-[1em] font-thin text-left">Supplier</p>
                         <p class="text-[1.2em] font-black text-wrap">{{ $supplier }}</p>
                     </div>
-
-
                 </div>
-
                 <div>
                     <button wire:click="purchaseRow" type="button"
                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Insert</button>
@@ -35,7 +22,7 @@
             </div>
 
             {{-- //* tablea area --}}
-            <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+            <div class="h-[40vh] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 

@@ -17,6 +17,10 @@ class PurchaseAndDeliveryManagementPage extends Component
 
     public $purchaseOrderOpen = true;
 
+    public $showDeliveryPage = false;
+
+    public $showPurchasePage = true;
+
 
     public function render()
     {
@@ -27,7 +31,21 @@ class PurchaseAndDeliveryManagementPage extends Component
         'change-sidebar-status' => 'changeSidebarStatus',
         'hide-navbar' => 'hideNavbar',
         'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
+        'display-delivery-page' => 'displayDeliveryPage',
+        'display-purchase-page' => 'displayPurchasePage',
     ];
+
+    public function displayDeliveryPage()
+    {
+        $this->showDeliveryPage = !$this->showDeliveryPage;
+        $this->showPurchasePage = !$this->showPurchasePage;
+    }
+
+    public function displayPurchasePage()
+    {
+        $this->showDeliveryPage = !$this->showDeliveryPage;
+        $this->showPurchasePage = !$this->showPurchasePage;
+    }
 
     public function togglePurchaseOrder()
     {

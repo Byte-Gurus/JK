@@ -1,28 +1,29 @@
 {{-- // --}}
 <div class="relative my-[3vh] rounded-lg" x-cloak >
-    <div class="flex flex-row h-[64vh] gap-4 ">
+    <div class="flex flex-row h-[74vh] gap-4 ">
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
 
-            <div class="flex flex-row items-center justify-between gap-4 px-4 py-4 text-nowrap">
-                <div class="flex flex-row gap-6">
-                    <div>
-                        <h1 class="text-[1.2em]">Purchase Order No</h1>
-                        <h2 class="text-[2em] font-black text-center w-full">{{ $po_number }}</h2>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="supplier" class="text-[1.2em]">Supplier Name</label>
-                        <p>{{ $supplier }}</p>
-                    </div>
+            <div class="grid items-center grid-flow-col gap-4 py-[3vh] px-4 text-wrap">
 
-                    <div class="flex flex-col gap-2">
-                        <label for="supplier" class="text-[1.2em]">Date Created</label>
-                        <p>{{ $dateCreated }}</p>
-                    </div>
+                <div class="flex flex-col gap-1 text-black rounded-r-full">
+                    <p class="text-[1em] font-thin text-left w-full">Purchase Order No.</p>
+                    <p class="text-[1.2em] font-black">{{ $po_number }}</p>
+                </div>
 
-                    <div class="flex flex-col gap-2">
-                        <label for="supplier" class="text-[1.2em]"> Created by</label>
-                        <p>{{ $createdBy }}</p>
-                    </div>
+                <div class="flex flex-col gap-1 text-black ">
+                    <p class="text-[1em] font-thin text-left w-full">Supplier Name</p>
+                    <p class="text-[1.2em] font-black">{{ $supplier }}</p>
+                </div>
+
+
+                <div class="flex flex-col gap-1 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Date Created</p>
+                    <p class="text-[1em] font-black">{{ $dateCreated }}</p>
+                </div>
+
+                <div class="flex flex-col gap-1 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Created By</p>
+                    <p class="text-[1em] font-black">{{ $createdBy }}</p>
                 </div>
             </div>
 

@@ -15,14 +15,14 @@
                             <div>
                                 <button x-on:click="$wire.displayInventoryHistory()">
                                     <div
-                                        class="flex flex-col items-center justify-center px-4 py-2 transition-all duration-75 ease-in-out bg-blue-100 rounded-md hover:bg-blue-200">
+                                        class="flex flex-row items-center justify-center gap-2 px-4 py-2 font-bold transition-all duration-75 ease-in-out bg-blue-100 rounded-md hover:bg-blue-200">
                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 strokeWidth={1.5} stroke="currentColor" class="size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                     d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                                             </svg>
                                         </div>
-                                        <div>History</div>
+                                        <div>Inventory History</div>
                                     </div>
                                 </button>
                             </div>
@@ -30,7 +30,7 @@
                             <div>
                                 <button x-on:click="$wire.returnToInventoryTable()">
                                     <div
-                                        class="flex flex-col items-center justify-center px-4 py-2 transition-all duration-75 ease-in-out bg-red-100 rounded-md hover:bg-red-200">
+                                        class="flex flex-row items-center justify-center gap-2 px-4 py-2 font-bold transition-all duration-75 ease-in-out bg-red-100 rounded-md hover:bg-red-200">
                                         <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 strokeWidth={1.5} stroke="currentColor" class="size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round"
