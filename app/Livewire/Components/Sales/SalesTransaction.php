@@ -910,6 +910,7 @@ class SalesTransaction extends Component
 
         // reorder quantity = Average sales / average lead time
         $item_info = Inventory::find($item_id);
+        dd($item_info);
         $first_stock_in_date = $item_info->stock_in_date;
 
         $startDate = $first_stock_in_date->startOfDay();
