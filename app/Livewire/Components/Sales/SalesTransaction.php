@@ -250,9 +250,9 @@ class SalesTransaction extends Component
             }
 
             // Get the first item from the query
-            $item = $itemQuery;
+            $item = $itemQuery->first();
 
-            dd($item_id);
+            dd($item);
 
             foreach ($this->selectedItems as $index => $selectedItem) {
                 if ($selectedItem['sku_code'] === $item->sku_code) {
