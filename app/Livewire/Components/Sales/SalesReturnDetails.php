@@ -110,15 +110,16 @@ class SalesReturnDetails extends Component
     }
 
 
-    public function updatedReturnQuantity($value, $ind)
+    public function updatedReturnQuantity($value, $index)
     {
+        $this->resetSpecificValidation('returnQuantity.$index');
         // Check if the provided index exists in the transaction details
-        if (isset($this->transactionDetails[$ind])) {
-            $availableQty = $this->transactionDetails[$ind]['item_quantity'];
+        if (isset($this->transactionDetails[$index])) {
+            $availableQty = $this->transactionDetails[$index]['item_quantity'];
 
             // Check if the return quantity exceeds the available quantity
-            if (isset($this->returnQuantity[$ind]) && $this->returnQuantity[$ind] > $availableQty) {
-                $this->addError('returnQuantity.' . $ind, 'The return quantity must be less than or equal to the available quantity.');
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
+                $this->addError('returnQuantity.' . $index, 'The return quantity must be less than or equal to the available quantity.');
                 return;
             }
         }
