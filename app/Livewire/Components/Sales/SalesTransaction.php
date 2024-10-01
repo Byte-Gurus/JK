@@ -922,7 +922,7 @@ class SalesTransaction extends Component
         })->sum('item_quantity');
 
         $average_lead_time = $po_date->diffInDays($delivery_date);
-
+        dd($average_sales, $average_lead_time);
         $reorder_quantity = $average_sales / $average_lead_time;
 
         //minimum consumption = daily sales / days of sales
