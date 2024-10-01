@@ -237,14 +237,6 @@
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                     @enderror
-                                @else
-                                    <input type="number"
-                                        class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                        disabled>
-                                    @error("returnQuantity.$index")
-                                        <span
-                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                    @enderror
                                 @endif
 
                             </th>
