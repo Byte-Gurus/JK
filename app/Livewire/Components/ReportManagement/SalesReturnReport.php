@@ -10,18 +10,14 @@ use Livewire\Component;
 
 class SalesReturnReport extends Component
 {
-    public $createdBy, $dateCreated, $fromDate, $toDate;
+    public $createdBy, $dateCreated, $returnItems;
 
     public function render()
     {
-        $startDate = $this->fromDate;
-        $endDate = $this->toDate;
-
-        $returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get();
 
         $this->reportInfo();
         return view('livewire.components.ReportManagement.sales-return-report', [
-            'returnItems' => $returnItems
+            'returnItems' => $this->returnItems
         ]);
     }
 
@@ -37,8 +33,9 @@ class SalesReturnReport extends Component
 
     public function generateReport($toDate, $fromDate)
     {
-        $this->fromDate = $fromDate;
-        $this->toDate = $toDate;
-        // dd('sasas');
+        $startDate = Carbon::parse($fromDate)->startOfDay();
+        $endDate = Carbon::parse($toDate)->endOfDay();
+        
+        $this->returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }

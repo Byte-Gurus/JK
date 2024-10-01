@@ -408,7 +408,8 @@
                         @if (empty($credit_no))
                             <div class="relative w-1/2">
 
-                                <input wire:model.live.debounce.300ms='searchCustomer' type="search" list="itemList"
+                                <input wire:model.live.debounce.300ms='searchCustomer' type="search"
+                                    list="customerList"
                                     class="w-full p-2 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                                     placeholder="Search Customer" required="">
 
@@ -594,10 +595,6 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div class="flex flex-col">
-                                <p class=" text-[1.2em] font-medium">Return Amount</p>
-                                <p class=" text-[2em] font-black">{{ $return_amount ?? ' ' }}</p>
-                            </div>
                         </div>
                         <div class="border border-black"></div>
                         <div class="p-2">
@@ -613,10 +610,36 @@
                                 <div class="border border-black"></div>
                             </div>
                             <div class="flex flex-row justify-between">
-                                <div class=" font-black text-[1.8em]">
-                                    <p>Total</p>
-                                </div>
-                                <div class=" font-black text-[1.8em]">₱ {{ number_format($grandTotal, 2) }}</div>
+                                <p class=" text-[1.2em] font-medium">Return Amount</p>
+                                <p class=" text-[1.2em] font-black">{{  number_format($return_amount, 2) ?? ' ' }}</p>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <p class=" text-[1.2em] font-medium">Subtotal</p>
+                                <p class=" font-black text-[1.8em]">₱ {{ number_format($subtotal, 2) }}</p>
+
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <p class=" text-[1.2em] font-medium">Excess Amount</p>
+                                <p class=" text-[1.2em] font-black">{{ number_format($excess_amount, 2) ?? ' ' }}</p>
+                            </div>
+                            <div class="w-full my-2">
+                                <div class="border border-black"></div>
+                            </div>
+
+                            <div class="flex flex-row justify-between">
+                                <p class=" font-black text-[1.8em]">
+                                    Total
+                                </p>
+                                <p class=" font-black text-[1.8em]">₱ {{ number_format($grandTotal, 2) }}</p>
+                            </div>
+                            <div class="w-full my-2">
+                                <div class="border border-black"></div>
+                            </div>
+                            <div class="flex flex-row justify-between">
+                                <p class=" font-black text-green-900 text-[2.4em]">
+                                    Change
+                                </p>
+                                <p class=" font-black text-[2em]">₱ {{ number_format($change, 2) }}</p>
                             </div>
                             {{-- if lumagpas uncomment mo 'to' --}}
                             {{-- <div class="flex flex-row justify-between">

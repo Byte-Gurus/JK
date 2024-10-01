@@ -1,177 +1,109 @@
-<div class="relative" x-cloak x-show="showStockAdjustModal">
+<div class="relative" x-cloak>
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
-    <div
-        class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <form class="relative z-50 w-1/3 bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
-            @csrf
-
-            <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
-
-                <div class="flex justify-center w-full p-2">
-
-                    {{-- //* form title --}}
-                    <h3 class="text-xl font-black text-gray-900 item ">
-
-                        Stock Adjust
-
-                    </h3>
+    <div x-show="showInventoryForm" x-data="{ showInventoryForm: @entangle('showInventoryForm') }"
+        class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
+        <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
+            <div
+                class="flex flex-col h-full w-full justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
+                <div class="flex flex-col gap-1 leading-none">
+                    <p class="text-[1em] font-thin text-white">Barcode</p>
+                    <p class="text-[1.2em] font-bold text-white">{{ $barcode }}</p>
+                </div>
+                <div class="flex flex-col gap-1 leading-none">
+                    <p class="text-[1em] font-thin text-white">SKU</p>
+                    <p class="text-[1.2em] font-bold text-white">{{ $sku_code }}</p>
+                </div>
+                <div class="flex flex-col gap-1 leading-none">
+                    <p class="text-[1em] font-thin text-white">Item Name</p>
+                    <p class="text-[1.2em] font-bold text-white">{{ $item_name }}</p>
+                </div>
+                <div class="flex flex-col gap-1 leading-none">
+                    <p class="text-[1em] font-thin text-white">Item Description</p>
+                    <p class="text-[1.2em] font-bold text-white">
+                        {{ $item_description }}
+                    </p>
                 </div>
 
-                {{-- //* close button --}}
-                <button type="button" x-on:click="showStockAdjustModal=false" wire:click=' resetFormWhenClosed() '
-                    class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
-                    data-modal-hide="UserModal">
-
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-
-                    <span class="sr-only">Close modal</span>
-
-                </button>
-
             </div>
-            <div class="flex flex-col p-6 space-y-6">
+            <div
+                class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
+                <div class="flex flex-row items-center justify-between gap-4">
+                    {{-- //* form title --}}
+                    <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
+                        Update Stock Information
+                    </h3>
 
-                <div class="flex flex-col gap-4">
+                    {{-- //* close button --}}
+                    <button type="button" wire:click="resetFormWhenClosed"
+                        class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto"
+                        data-modal-hide="UserModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
 
-                    {{-- //* first area, personal information --}}
-                    <div class="border-2 border-[rgb(53,53,53)] rounded-sm">
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
 
-                        <div
-                            class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                            <h1 class="font-bold">Stock Adjust Information</h1>
+                {{-- //* first row --}} {{-- //* adjust reason --}}
+                <form wire:submit.prevent="update"
+                    class="flex flex-col items-center w-full h-full pr-6 mt-2 justify-evenly">
+                    @csrf
+
+                    <div class="flex flex-col justify-start w-fit">
+                        <div class="flex flex-col gap-1 mb-3">
+                            <label for="itemPrice" class="text-white">Item Cost</label>
+
+                            <input type="number" wire:model.live="cost"
+                                class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
-                        <div class="p-4">
+                    </div>
+                    <div class="flex flex-col justify-start w-fit">
+                        <div class="flex flex-col gap-1 mb-3">
+                            <label for="itemPrice" class="text-white">Markup %</label>
 
-                            {{-- //* first row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* sku --}}
-                                <div class="flex flex-row gap-4 mb-3">
-                                    <div>
-                                        <p class=" text-[1.2em] text-gray-900">SKU</p>
-                                    </div>
-                                    <div>
-                                        <p class=" text-[1.2em] font-black text-gray-900">ITM-000000</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- //* second row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* item name --}}
-                                <div class="flex flex-row gap-4 mb-3">
-                                    <div>
-                                        <p class=" text-[1.2em] text-gray-900">Item Name</p>
-                                    </div>
-                                    <div>
-                                        <p class=" text-[1.2em] font-black text-gray-900">N a m e</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- //* third row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* item quantity --}}
-                                <div class="flex flex-row gap-4 mb-3">
-                                    <div>
-                                        <p class=" text-[1.2em] text-gray-900">Current Quantity</p>
-                                    </div>
-                                    <div>
-                                        <p class=" text-[1.2em] font-black text-gray-900"> 123 </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- //* fourth row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* operation --}}
-                                <div class="flex flex-row gap-4 mb-3">
-                                    <fieldset class="flex flex-col gap-8">
-                                        <legend class=" text-[1.2em] text-gray-900">Select Adjustment Operation</legend>
-                                        <div class="flex flex-row justify-center gap-2">
-                                            <label class="flex gap-2 font-black radio">
-                                                <input type="radio" name="answer" />
-                                                Add
-                                            </label>
-                                            <label class="flex gap-2 font-black radio">
-                                                <input type="radio" name="answer" />
-                                                Deduct
-                                            </label>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-
-                            {{-- //* fifth row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* adjust quantity --}}
-                                <div class="flex flex-col gap-1 mb-3">
-
-                                    <div>
-                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Adjust Quantity</label>
-                                    </div>
-
-                                    <div>
-                                        <input type="number"
-                                        placeholder="Quantity"
-
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            {{-- //* sixth row --}}
-                            <div class="flex justify-between gap-4">
-
-                                {{-- //* adjust reason --}}
-                                <div class="flex flex-col gap-1 mb-3">
-
-                                    <div>
-                                        <label for="adjust_quantity" class="text-[1.2em] text-gray-900">Reason</label>
-                                    </div>
-
-                                    <div>
-                                        <input type="text"
-                                        placeholder="Reason"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                                    </div>
-
-                                </div>
-                            </div>
-
-
+                            <input type="number" wire:model.live="markup"
+                                class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
                     </div>
 
-                </div>
-                <div class="flex flex-row justify-end gap-2 mt-4">
-                    <div>
-                        <div>
+                    <div class="flex flex-col justify-start w-fit">
+                        <div class="flex flex-col gap-1 mb-3">
+                            <label for="itemPrice" class="text-white">Selling Price</label>
 
+                            <input type="number" wire:model.live="seling_price"
+                                class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
+                        </div>
+
+                    </div>
+                    <div class="flex flex-row self-end gap-2 mb-6">
+                        <div>
                             {{-- //* clear all button for create --}}
-                            <button
-                                class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                            <button type="button" wire:click="resetFormWhenClosed()"
+                                class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>
+                        <div>
+                            <button
+                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Update</button>
+                        </div>
                     </div>
-                    <div>
-                        <button
-                            class=" px-6 py-2 bg-orange-300 rounded-sm text-[rgb(53,53,53)] hover:bg-orange-400 font-bold ease-in-out duration-100 transition-all">Adjust</button>
-                    </div>
-                </div>
-                {{-- //* form footer --}}
+                </form>
             </div>
-        </form>
+        </div>
+    </div>
+    <div x-cloak x-show="showInventoryAdminLoginForm" x-data="{ showInventoryAdminLoginForm: @entangle('showInventoryAdminLoginForm') }">
+        @livewire('components.InventoryManagement.inventory-admin-login-form')
     </div>
 </div>
+@script
+    <script>
+        Livewire.on("adjust_quantity_focus", () => {
+            document.getElementById("adjust_quantity").focus();
+        });
+    </script>
+@endscript

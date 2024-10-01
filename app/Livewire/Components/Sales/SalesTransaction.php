@@ -4,6 +4,7 @@ namespace App\Livewire\Components\Sales;
 
 use App\Events\CreditEvent;
 
+use App\Events\CustomerEvent;
 use App\Events\InventoryEvent;
 use App\Events\ItemEvent;
 use App\Events\PurchaseOrderEvent;
@@ -43,7 +44,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType = 1, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo, $return_number;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType = 1, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo, $return_number, $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -216,7 +217,7 @@ class SalesTransaction extends Component
             return;
         }
 
-        if($this->changeTransactionType == 3 && !$this->returnInfo){
+        if ($this->changeTransactionType == 3 && !$this->returnInfo) {
             $this->alert('error', 'Enter return number first');
             return;
         }
@@ -319,6 +320,7 @@ class SalesTransaction extends Component
                     'original_total' => 0,
                     'delivery_date' => $item->deliveryJoin->date_delivered,
                     'po_date' => $item->deliveryJoin->purchaseJoin->created_at,
+
                 ];
             }
         } else {
@@ -440,7 +442,7 @@ class SalesTransaction extends Component
     public function computeTransaction()
     {
 
-
+        $test = [];
         $this->subtotal = 0;
 
         $vatable_amount = 0;
@@ -461,10 +463,28 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount = $vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
+                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $index['vat_percent']) * 100);
+                // dump([
+                //     "vat",
+                //     'vatable_subtotal' => $vatable_subtotal,
+                //     'vatable_amount' => $vatable_amount,
+                //     'total_amount' => $index['total_amount'],
+                //     'vat_percent' => $index['vat_percent']
+                // ]);
             } elseif ($index['vat_type'] === 'Non Vatable') {
                 $non_vatable_subtotal += $index['total_amount'];
-                $non_vatable_amount = $non_vatable_subtotal - ($index['total_amount'] / (100 + $index['vat_percent']) * 100);
+                $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $index['vat_percent']) * 100);
+                // dump([
+                //     "non vat",
+                //     'non_vatable_subtotal' => $non_vatable_subtotal,
+                //     'non_vatable_amount' => $non_vatable_amount,
+                //     'total_amount' => $index['total_amount'],
+                //     'vat_percent' => $index['vat_percent']
+                // ]);
+            }
+
+            if ($this->changeTransactionType == 3 && $this->subtotal > $this->return_amount) {
+                $this->excess_amount = $this->subtotal - $this->return_amount;
             }
 
             $this->totalVat = $vatable_amount + $non_vatable_amount;
@@ -484,6 +504,18 @@ class SalesTransaction extends Component
             }
 
             $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+
+            // $test = [
+            //     'items' => $index['item_name'],
+            //     'percent' => $index['vat_percent'],
+            //     'subtotal' => $this->subtotal,
+            //     'vatable_subtotal' => $vatable_subtotal,
+            //     'vatable_amount' => $vatable_amount,
+            //     'non_vatable_subtotal' => $non_vatable_subtotal,
+            //     'non_vatable_amount' => $non_vatable_amount,
+            //     'netAmount' => $this->netAmount,
+
+            // ];
         }
 
 
@@ -497,6 +529,10 @@ class SalesTransaction extends Component
         if (isset($this->credit_details['credit_no'])) {
             $this->credit_details['credit_amount'] = $this->grandTotal;
         }
+
+
+
+        // dump($test);
     }
 
     public function getCustomerDetails($customerDetails)
@@ -515,8 +551,7 @@ class SalesTransaction extends Component
 
             $this->alert('success', 'Discount was applied successfully');
             $this->senior_pwd_id = $this->customerDetails['senior_pwd_id'];
-        }
-        else {
+        } else {
             $this->customerDetails = null;
 
             $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
@@ -552,12 +587,12 @@ class SalesTransaction extends Component
 
     public function updatedChangeTransactionType()
     {
-        if($this->customerDetails){
+        if ($this->customerDetails) {
             $this->alert('error', 'Remove discount first');
             $this->reset('changeTransactionType');
             return;
         }
-        if($this->changeTransactionType == 3){
+        if ($this->changeTransactionType == 3) {
             $this->selectedItems = [];
         }
 
@@ -661,11 +696,12 @@ class SalesTransaction extends Component
 
         $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
 
-        if($this->changeTransactionType == 1 || $this->changeTransactionType == 3){
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
             $transactionType = "Sales";
-        }elseif($this->changeTransactionType == 2){
+        } elseif ($this->changeTransactionType == 2) {
             $transactionType = "Credit";
         }
+
 
         $transaction = Transaction::create([
             'transaction_number' => $this->transaction_info['transaction_number'],
@@ -679,11 +715,19 @@ class SalesTransaction extends Component
             'user_id' => Auth::id(),
         ]);
 
-        $transaction_movement = TransactionMovement::create([
-            'transaction_type' => 'Sales',
-            'transaction_id' => $transaction->id
-        ]);
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
+            $transaction_movement = TransactionMovement::create([
+                'transaction_type' => 'Sales',
+                'transaction_id' => $transaction->id
+            ]);
 
+        }
+        if ($this->changeTransactionType == 3) {
+            $return = Returns::where('return_number', $this->return_number)->first();
+            $return->hasTransaction = True;
+            $return->save();
+
+        }
 
         foreach ($this->selectedItems as $index => $selectedItem) {
 
@@ -700,7 +744,10 @@ class SalesTransaction extends Component
                 'discount_id' => $selectedItem['discount_id'],
                 'transaction_id' => $transaction->id,
                 'item_id' => $selectedItem['item_id'],
-                'inventory_id' => $inventory->id
+                'inventory_id' => $inventory->id,
+                'item_price' => $selectedItem['selling_price'],
+                'item_vat_percent' => $selectedItem['vat_percent'],
+
             ]);
 
 
@@ -713,10 +760,16 @@ class SalesTransaction extends Component
 
 
             if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
-                Notification::create([
-                    'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
-                    'inventory_id' => $inventory->id,
-                ]);
+
+                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")
+                    ->exists();
+
+                if (!$notificationExists) {
+                    Notification::create([
+                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                        'inventory_id' => $inventory->id,
+                    ]);
+                }
             }
 
 
@@ -733,7 +786,7 @@ class SalesTransaction extends Component
             $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
         }
 
-        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 2) {
+        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
             $payment = Payment::create([
                 'transaction_id' => $transaction->id,
                 'amount' => $this->payment['tendered_amount'],
@@ -792,6 +845,7 @@ class SalesTransaction extends Component
         ItemEvent::dispatch('refresh-item');
         InventoryEvent::dispatch('refresh-inventory');
         PurchaseOrderEvent::dispatch('refresh-purchase-order');
+        CustomerEvent::dispatch('refresh-customer');
 
 
         $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
@@ -800,6 +854,7 @@ class SalesTransaction extends Component
 
     public function getReorderPoint($item_id, $delivery_date, $po_date)
     {
+        $reorer_requirements = [];
         $deliveryDate = Carbon::parse($delivery_date);
         $poDate = Carbon::parse($po_date);
 
@@ -810,14 +865,14 @@ class SalesTransaction extends Component
         $startOfDay = Carbon::today()->startOfDay();
         $endOfDay = Carbon::today()->endOfDay();
 
-        $daysWithSales = TransactionDetails::where('item_quantity', '>', 0)
-            ->distinct()
-            ->get([TransactionDetails::raw('DATE(created_at) as sale_date')])
-            ->count();
+        $daysWithSales = TransactionDetails::where('item_id', $item_id)
+            ->distinct(DB::raw('DATE(created_at)'))
+            ->count(DB::raw('distinct DATE(created_at)'));
 
-        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
-            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
-        })->sum('item_quantity');
+        $todayTotalItemQuantity = TransactionDetails::where('item_id', $item_id)
+            ->whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
+                $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
+            })->sum('item_quantity');
 
 
         // Calculate the number of days in the date range
@@ -827,11 +882,25 @@ class SalesTransaction extends Component
         // Calculate the demand rate
         $demandRate = $todayTotalItemQuantity / $daysWithSales;
 
-        $reorder_point = round($days * $demandRate);
+        $reorder_point = round($demandRate * $days  );
 
+        $reorder_requirements[] = [
+            'reorder_point' => $reorder_point,
+            'demandRate' => $demandRate,
+            'daysDIff' => $days,
+            'todayTotalItemQuantity' => $todayTotalItemQuantity,
+            'daysWithSales' => $daysWithSales,
+            'deliveryDate' => $deliveryDate,
+            'poDate' => $poDate
+        ];
+
+
+        dump($reorder_requirements);
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
+
+
     }
 
     public function getMaximumLevel($delivery_date, $po_date, $item_id, )
@@ -907,10 +976,6 @@ class SalesTransaction extends Component
         })->min();
 
 
-        $todayTotalItemQuantity = TransactionDetails::whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
-            $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
-        })->sum('item_quantity');
-
 
         // Calculate maximum level using the formula
         $reorderPoint = $item['reorder_point'];
@@ -924,13 +989,21 @@ class SalesTransaction extends Component
         Item::where('id', $item_id)->update(['maximum_stock_level' => $maximumLevel]);
 
         // $maximum_level_req[] = [
+        //     'days' => $days,
+        //     'po_date' => $poDate,
+        //     'delivery_date' => $deliveryDate,
         //     'item_id' => $item_id,
+        //     'item_name' => $item->item_name,
         //     'min_quantity' => $minConsumption,
         //     'purchase_quantity' => $reorderQuantity,
         //     'reorder_point' => $reorderPoint,
         //     'min_reorder_period' => $minReorderPeriod,
-        //     'maximum_level' => $maximumLevel
+        //     'maximum_level' => $maximumLevel,
+        //     'todayTotalItemQuantity' => $todayTotalItemQuantity,
+        //     'restockDate' => $restockDate
         // ];
+
+        // dd($maximum_level_req);
     }
 
 
@@ -988,17 +1061,24 @@ class SalesTransaction extends Component
     }
 
 
-    public function getReturnDetails(){
+    public function getReturnDetails()
+    {
 
         $rules = [
             'search_return_number' => 'required'
         ];
         $this->validate($rules);
 
-        $this->returnInfo =  Returns::where('return_number', $this->search_return_number)->first();
+        $this->returnInfo = Returns::where('return_number', $this->search_return_number)->first();
 
         if (!$this->returnInfo) {
             $this->alert('error', 'The return number does not exist.');
+            return;
+        }
+
+
+        if ($this->returnInfo->hasTransaction) {
+            $this->alert('error', 'The return number has already have a transaction.');
             return;
         }
 

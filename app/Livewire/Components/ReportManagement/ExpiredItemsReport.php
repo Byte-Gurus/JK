@@ -9,23 +9,34 @@ use Livewire\Component;
 
 class ExpiredItemsReport extends Component
 {
-    public $createdBy, $dateCreated;
+    public $createdBy, $dateCreated, $expiredItems;
 
     public function render()
     {
 
-        $expiredItems = Inventory::where('status', 'Expired')->get();
 
         $this->reportInfo();
-        return view('livewire.components.ReportManagement.expired-items-report',[
-            'expiredItems' => $expiredItems
+        return view('livewire.components.ReportManagement.expired-items-report', [
+            'expiredItems' => $this->expiredItems
         ]);
     }
+    protected $listeners = [
+        'generate-report' => 'generateReport'
+    ];
 
     public function reportInfo()
     {
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
 
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');
+    }
+
+    public function generateReport($toDate, $fromDate)
+    {
+        $startDate = Carbon::parse($fromDate)->startOfDay();
+        $endDate = Carbon::parse($toDate)->endOfDay();
+
+        $this->expiredItems = Inventory::where('status', 'Expired')
+            ->whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }

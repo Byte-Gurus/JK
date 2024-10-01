@@ -88,10 +88,16 @@
                                     <div class="flex flex-col w-full justify-center gap-[3px]">
                                         <div class="flex flex-row justify-end gap-[5px]">
                                             <p class="text-[0.6em] uppercase text-center font-medium">
-                                                {{ $return_detail->transactionDetailsJoin->inventoryJoin->selling_price }}
+                                                {{ $return_detail->transactionDetailsJoin->item_price }}
                                             </p>
                                         </div>
                                     </div>
+                                </div>
+                            </li>
+                            <li class="col-span-1 py-[3px]">
+                                <div>
+                                    <p class="text-[0.6em] uppercase text-center font-medium">
+                                        {{ $return_detail->item_return_amount }}</p>
                                 </div>
                             </li>
                         </ul>

@@ -76,7 +76,7 @@ class CustomerForm extends Component
 
         $this->confirm('Do you want to add this customer?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -163,7 +163,7 @@ class CustomerForm extends Component
 
         $this->confirm('Do you want to update this customer?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
@@ -179,9 +179,25 @@ class CustomerForm extends Component
         $address = Address::find($updatedAttributes['address_id']);
 
         if ($this->id_picture) {
-            $updatedAttributes['id_picture'] = $this->id_picture->store('public');
+
+            // Validate and store the uploaded file temporarily
+            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
+
+            // Generate a new filename
+            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
+
+            // Get the contents of the file
+            $fileContents = Storage::disk('local')->get($path);
+
+            // Store the file on S3
+            $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+            // Optionally delete the temporary file
+            Storage::disk('local')->delete($path);
+
+            $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
         } else {
-            $updatedAttributes['id_picture'] =  'null'; // Keep existing value or set to null
+            $updatedAttributes['id_picture'] = 'null'; // Keep existing value or set to null
         }
 
         $address->fill([
@@ -202,7 +218,7 @@ class CustomerForm extends Component
             'contact_number' => $updatedAttributes['contact_number'],
             'birthdate' => $updatedAttributes['birthdate'],
             'address_id' => $address->id ?? null,
-            'customer_type' => $updatedAttributes['customertype'],
+            'customer_type' => $updatedAttributes['customer_type'],
             'senior_pwd_id' => $updatedAttributes['senior_pwd_id'] ?? null,
             'id_picture' => $updatedAttributes['id_picture'],
         ]);
@@ -230,6 +246,7 @@ class CustomerForm extends Component
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
             'id_picture' => $customer_details->id_picture ?? null,
+            'imageUrl' => $customer_details->id_picture ?? null,
             'customertype' => $customer_details->customer_type,
             'senior_pwd_id' => $customer_details->senior_pwd_id ?? null,
             'selectProvince' => $customer_details->addressJoin->province_code,
@@ -277,9 +294,9 @@ class CustomerForm extends Component
         ];
 
         if ($this->customertype != 'Normal') {
-            $rules['senior_pwd_id'] =  'required|string|max:255';
+            $rules['senior_pwd_id'] = 'required|string|max:255';
         } else {
-            $rules['senior_pwd_id'] =  'nullable|string|max:255';
+            $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 
 
@@ -300,7 +317,8 @@ class CustomerForm extends Component
             'street',
             'id_picture',
             'customertype',
-            'senior_pwd_id'
+            'senior_pwd_id',
+            'imageUrl'
         ]);
     }
 

@@ -16,6 +16,8 @@ class TransactionDetails extends Model
         'item_subtotal',
         'item_discount_amount',
         'discount_id',
+        'item_price',
+        'item_vat_percent',
         'transaction_id',
         'item_id',
         'inventory_id',
@@ -35,4 +37,9 @@ class TransactionDetails extends Model
     {
         return $this->belongsTo(Item::class, 'item_id');
     }
+    public function discountJoin()
+    {
+        return $this->belongsTo(Discount::class, 'discount_id');
+    }
+
 }

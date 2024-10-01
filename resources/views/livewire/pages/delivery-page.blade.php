@@ -1,6 +1,6 @@
 <div>
     <div class="flex flex-col justify-between">
-        <div class="flex flex-row items-center justify-between mb-4">
+        <div class="flex flex-row items-center justify-between mb-[3vh]">
             <div>
                 <h1 class="text-[2em] font-bold pointer-events-none">
                         @if ($this->showDeliveryTable)

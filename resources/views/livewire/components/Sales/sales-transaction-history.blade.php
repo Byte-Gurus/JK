@@ -121,6 +121,9 @@
                         {{-- //* gcash reference no. --}}
                         <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
+                        {{-- payment --}}
+                        <th scope="col" class="px-4 py-3 text-center">Tax Amount</th>
+
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
@@ -173,6 +176,12 @@
                                 scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 {{ $sale['paymentJoin->reference_number'] ?? 'N/A' }}
                             </th>
+
+                            <th
+                                scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                                {{ number_format($sale['total_vat_amount'], 2) ?? 'N/A' }}
+                            </th>
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $sale['created_at']->format(' M d Y h:i A ') }}
@@ -346,7 +355,7 @@
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($transactionDetail['inventoryJoin']['selling_price'], 2) }}
+                                {{ number_format($transactionDetail['item_price'], 2) }}
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -355,7 +364,13 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($transactionDetail['item_discount_amount'], 2) }}
+                                @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
+                                    {{ number_format($transactionDetail['item_price'] - $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100), 2) }}
+                                @else
+                                    0.00
+                                @endif
+
+
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">

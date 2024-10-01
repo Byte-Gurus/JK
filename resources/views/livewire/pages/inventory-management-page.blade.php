@@ -57,6 +57,9 @@
             <div x-cloak x-show="showStockAdjustPage" x-data="{ showStockAdjustPage: @entangle('showStockAdjustPage') }">
                 @livewire('components.InventoryManagement.stock-adjust-page')
             </div>
+            <div x-cloak x-show="showInventoryForm" x-data="{ showInventoryForm: @entangle('showInventoryForm') }">
+                @livewire('components.InventoryManagement.inventory-form')
+            </div>
         </div>
     </div>
 </div>

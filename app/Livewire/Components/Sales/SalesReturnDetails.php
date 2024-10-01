@@ -34,6 +34,7 @@ class SalesReturnDetails extends Component
     {
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
+
         return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
         ]);
@@ -71,7 +72,8 @@ class SalesReturnDetails extends Component
             'return_total_amount' => $this->return_total_amount,
             'return_number' => $this->return_number,
             'original_amount' => $this->total_amount,
-            'return_vat_amount' => $this->return_vat_amount
+            'return_vat_amount' => $this->return_vat_amount,
+            'hasTransaction' => false
         ]);
 
         $transaction_movement = TransactionMovement::create([
@@ -90,6 +92,7 @@ class SalesReturnDetails extends Component
                     'return_id' => $returns->id,
                     'transaction_details_id' => $info['transaction_details_id'],
                     'operation' => $info['operation'],
+
                 ]);
 
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
@@ -106,35 +109,25 @@ class SalesReturnDetails extends Component
         $this->dispatch('get-return-details', $returns->id)->to(SalesReturnSlip::class);
     }
 
-    public function updatedOperation($value, $ind)
+
+    public function updatedReturnQuantity($value, $index)
     {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->operation[$index])) {
-                $this->return_info[$index]['operation'] = $this->operation[$index];
+        $this->resetSpecificValidation("returnQuantity.$index");
+        // Check if the provided index exists in the transaction details
+        if (isset($this->transactionDetails[$index])) {
+            $availableQty = $this->transactionDetails[$index]['item_quantity'];
+
+            // Check if the return quantity exceeds the available quantity
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
+                $this->addError('returnQuantity.' . $index, 'The return quantity must be less than or equal to the available quantity.');
+                return;
             }
         }
 
-        if (isset($this->returnQuantity[$ind])) {
-            $this->returnQuantity[$ind] = 0;
-            $this->calculateTotalRefundAmount();
-        }
-
-        if ($this->operation[$ind] === '') {
-            unset($this->returnQuantity[$ind]);
-            unset($this->description[$ind]);
-            unset($this->return_info[$ind]);
-            unset($this->operation[$ind]);
-            $this->calculateTotalRefundAmount();
-        }
-
-        $this->resetValidation();
-    }
-
-    public function updatedReturnQuantity()
-    {
-        $validated = $this->validateForm();
+        // If all checks pass, calculate the total refund amount
         $this->calculateTotalRefundAmount();
     }
+
 
     public function calculateTotalRefundAmount()
     {
@@ -147,43 +140,45 @@ class SalesReturnDetails extends Component
         $non_vatable_return_total_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index])) {
+            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index]) && isset($this->description[$index])) {
 
+                $this->return_info[$index]['operation'] = $this->operation[$index];
+                $this->return_info[$index]['description'] = $this->description[$index];
 
                 if ($this->operation[$index] != 'Exchange') {
 
 
 
-                    $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->inventoryJoin->selling_price;
+                    if ($transactionDetail->discount_id == 3) {
+                        $discounted_selling_price = $transactionDetail->item_price - ($transactionDetail->item_price * ($transactionDetail->discountJoin->percentage / 100));
 
-                    if ($this->returnQuantity[$index] >= $transactionDetail->itemJoin->bulk_quantity) {
-                        $this->item_return_amount -= $transactionDetail->item_discount_amount;
+                        $this->item_return_amount = $this->returnQuantity[$index] * $discounted_selling_price;
+
+                    } else {
+                        $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->item_price;
+
                     }
 
                     $this->return_total_amount += $this->item_return_amount;
 
-                }
+                    if ($transactionDetail->vat_type === 'Vat') {
+                        $vatable_Return_Subtotal += $this->item_return_amount;
+                        $vat_Percent = $transactionDetail->item_vat_percent;
+                        $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
 
+                    } elseif ($transactionDetail->vat_type === 'Non Vatable') {
+                        $non_vatable_Return_Subtotal += $this->item_return_amount;
+                        $vat_Percent = $transactionDetail->item_vat_percent;
+                        $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
-                if ($transactionDetail->vat_type === 'Vat') {
-                    $vatable_Return_Subtotal += $this->item_return_amount;
-                    $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $vatable_return_total_amount = $vatable_Return_Subtotal - ($this->item_return_amount / (100 + $vat_Percent) * 100);
-
-
-                } elseif ($transactionDetail->vat_type === 'Non Vatable') {
-                    $non_vatable_Return_Subtotal += $this->item_return_amount;
-                    $vat_Percent = $transactionDetail->itemJoin->vat_percent;
-                    $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($this->item_return_amount / (100 + $vat_Percent) * 100);
+                    }
 
                 }
-
-
-
 
 
                 $this->return_info[$index] = [
+                    'availableQty' => $transactionDetail->item_quantity,
                     'item_return_amount' => $this->item_return_amount,
                     'return_quantity' => $this->returnQuantity[$index],
                     'description' => $this->description[$index] ?? '',
@@ -198,16 +193,7 @@ class SalesReturnDetails extends Component
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
 
-    public function updatedDescription()
-    {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && $this->returnQuantity[$index] > 0) {
-                if (isset($this->description[$index])) {
-                    $this->return_info[$index]['description'] = $this->description[$index];
-                }
-            }
-        }
-    }
+
 
     private function populateForm()
     {
@@ -228,17 +214,16 @@ class SalesReturnDetails extends Component
         ]);
     }
 
-    protected function validateForm()
-    {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index])) {
-                $availableQty = $transactionDetail['item_quantity'];
-                $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
-            }
-        }
+    // protected function validateForm()
+    // {
+    //     foreach ($this->transactionDetails as $index => $transactionDetail) {
+    //         if (isset($this->returnQuantity[$index])  && $this->returnQuantity[$index] && $this->returnQuantity[$index] != null) {
 
-        return $this->validate($this->rules);
-    }
+    //         }
+    //     }
+
+    //     return $this->validate($this->rules);
+    // }
 
     public function getTransaction($Transaction)
     {
@@ -280,6 +265,28 @@ class SalesReturnDetails extends Component
             $this->returnConfirmed();
             $this->returnSalesReturnDetails();
         }
+    }
+
+    public function updatedOperation($value, $index)
+    {
+        $this->returnQuantity[$index] = null;
+        $this->resetSpecificValidation("returnQuantity.$index");
+        $this->return_info[$index] = null;
+        $this->calculateTotalRefundAmount();
+
+    }
+    public function updatedDescription($value, $index)
+    {
+        $this->returnQuantity[$index] = null;
+        $this->resetSpecificValidation("returnQuantity.$index");
+        $this->return_info[$index] = null;
+        $this->calculateTotalRefundAmount();
+
+    }
+
+    public function resetSpecificValidation($fieldName)
+    {
+        $this->resetErrorBag($fieldName);
     }
 
 }

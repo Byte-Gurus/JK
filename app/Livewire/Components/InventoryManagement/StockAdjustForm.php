@@ -20,6 +20,7 @@ class StockAdjustForm extends Component
 
     public $sku_code, $item_name, $current_quantity, $description, $selectOperation, $quantityToAdjust, $adjustReason, $isAdmin;
 
+    public $fromPage = 'AdjustForm';
     public $adjustInfo = [];
     public $showStockAdjustForm = true;
 
@@ -49,9 +50,10 @@ class StockAdjustForm extends Component
         $stockAdjust->adjustReason = $validated['adjustReason'];
         $stockAdjust->selectOperation = $validated['selectOperation'];
 
-        $this->adjustInfo  = $stockAdjust->toArray();
+        $this->adjustInfo = $stockAdjust->toArray();
 
         if ($validated) {
+            $this->dispatch('get-from-page', $this->fromPage)->to(InventoryAdminLoginForm::class);
             $this->dispatch('display-inventory-admin-login-form')->to(StockAdjustPage::class);
         }
     }
@@ -139,6 +141,7 @@ class StockAdjustForm extends Component
 
     public function resetFormWhenClosed()
     {
+        $this->dispatch('close-stock-adjust-page')->to(InventoryManagementPage::class);
         $this->resetForm();
         $this->resetValidation();
     }

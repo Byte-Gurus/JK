@@ -13,6 +13,7 @@ class InventoryAdminLoginForm extends Component
     public $isAdmin;
     public $username;
     public $password;
+    public $fromPage;
 
     public $showPassword = true;
     public $showStockAdjustModal = false;
@@ -20,9 +21,13 @@ class InventoryAdminLoginForm extends Component
     {
         return view('livewire.components.InventoryManagement.inventory-admin-login-form');
     }
+    protected $listeners = [
+        'get-from-page' => 'getFromPage'
+    ];
 
     public function closeInventoryAdminLoginForm()
     {
+        $this->dispatch('return-inventory-form')->to(InventoryForm::class);
         $this->dispatch('return-stock-adjust-form')->to(StockAdjustPage::class);
     }
 
@@ -41,9 +46,17 @@ class InventoryAdminLoginForm extends Component
             // Check if the user is an admin and active
             if ($user && $user->user_role_id == 1 && $user->status_id == 1) {
                 $this->isAdmin = true;
-                $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustForm::class);
-                $this->dispatch('admin-confirmed')->to(StockAdjustPage::class);
-                $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+
+                if($this->fromPage === 'InventoryTable'){
+                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(InventoryForm::class);
+                }elseif($this->fromPage === 'AdjustForm'){
+                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustForm::class);
+                }
+                // }elseif($this->fromPage === 'ReturnDetails'){
+                //     $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
+                // }
+
+
             } else {
                 $this->addError('submit', 'This account is inactive or not an admin.');
             }
@@ -55,6 +68,13 @@ class InventoryAdminLoginForm extends Component
 
     public function showPasswordStatus()
     {
-     $this->showPassword = !$this->showPassword;
+        $this->showPassword = !$this->showPassword;
     }
+
+    public function getFromPage($fromPage)
+    {
+        $this->fromPage = $fromPage;
+    }
+
+
 }

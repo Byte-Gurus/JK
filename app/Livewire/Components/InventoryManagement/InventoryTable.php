@@ -5,6 +5,7 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\Supplier;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -42,7 +43,9 @@ class InventoryTable extends Component
             });
         }
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('stock_in_date', [$this->startDate, $this->endDate]);
+            $startDate = Carbon::parse($this->startDate)->startOfDay();
+            $endDate = Carbon::parse($this->endDate)->endOfDay();
+            $query->whereBetween('stock_in_date', [$startDate, $endDate]);
         }
 
 
@@ -90,6 +93,11 @@ class InventoryTable extends Component
         $this->resetPage();
     }
 
+    public function displayInventoryForm()
+    {
+        $this->dispatch('display-inventory-form')->to(InventoryManagementPage::class);
+    }
+
     public function displayStockAdjustPage()
     {
         $this->dispatch('display-stock-adjust-page')->to(InventoryManagementPage::class);
@@ -105,6 +113,11 @@ class InventoryTable extends Component
     {
 
         $this->dispatch('stock-card', stockID: $stockId)->to(ViewStockCard::class);
+    }
+
+    public function getStockPrice($stockId){
+        $this->dispatch('stock-price', stockID: $stockId)->to(InventoryForm::class);
+
     }
 
     public function refreshFromPusher()

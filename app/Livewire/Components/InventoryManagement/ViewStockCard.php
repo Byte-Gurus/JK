@@ -4,6 +4,7 @@ namespace App\Livewire\Components\InventoryManagement;
 
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -72,7 +73,9 @@ class ViewStockCard extends Component
 
         // Apply date range filter if both startDate and endDate are provided
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+            $startDate = Carbon::parse($this->startDate)->startOfDay();
+            $endDate = Carbon::parse($this->endDate)->endOfDay();
+            $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
         $this->stock_cards = $query->get();

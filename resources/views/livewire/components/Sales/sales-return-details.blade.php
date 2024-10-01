@@ -122,7 +122,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
                         {{-- //* wholesale --}}
-                        <th scope="col" class="px-4 py-3 text-center">Wholesale (₱)</th>
+                        <th scope="col" class="px-4 py-3 text-center">Wholesale Amount (₱)</th>
 
                         {{-- //* subtotal --}}
                         <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
@@ -166,16 +166,22 @@
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
-                                {{ number_format($transactionDetail['inventoryJoin']['selling_price'], 2) }}
+                                {{ number_format($transactionDetail['item_price'], 2) }}
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $transactionDetail['item_quantity'] }}
                             </th>
 
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($transactionDetail['item_discount_amount'], 2) }}
+                                @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
+                                    {{ number_format($transactionDetail['item_price'] - $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100), 2) }}
+                                @else
+                                    0.00
+                                @endif
+
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -185,7 +191,7 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                                <select id="status" wire:model.lazy="operation.{{ $index }}"
+                                <select id="status" wire:model.live="operation.{{ $index }}"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
                                     <option value="" selected>Set your operation</option>
                                     <option value="Refund">Refund</option>
@@ -202,35 +208,37 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
-                                    <select id="status" wire:model.lazy="description.{{ $index }}"
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
-                                        <option value="" selected>Set your description</option>
-                                        <option value="Damaged">Damaged</option>
-                                        <option value="Expired">Expired</option>
-                                    </select>
 
-                                    @error("description.$index")
-                                        <span
-                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                    @enderror
+                                <select id="status" wire:model.live="description.{{ $index }}"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
+                                    <option value="" selected>Set your description</option>
+                                    <option value="Damaged">Damaged</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
 
-                                    <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
-                                @endif
+                                @error("description.$index")
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
+
 
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($operation[$index]) && !is_null($operation[$index]) && $operation[$index] != '')
+
+                                @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] && $description[$index])
                                     <input type="number"
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                        wire:model.live="returnQuantity.{{ $index }}">
+                                        wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
                                     @error("returnQuantity.$index")
                                         <span
                                             class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                     @enderror
                                 @endif
+
                             </th>
                         </tr>
                     @endforeach
@@ -286,7 +294,8 @@
                     <p class=" text-[1.6em] font-medium">New Tax Amount</p>
                 </div>
                 <div>
-                    <p class=" text-[1.6em] font-black">{{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
+                    <p class=" text-[1.6em] font-black">
+                        {{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
                 </div>
             </div>
 

@@ -87,8 +87,7 @@ Artisan::command('inventory:check-expiration', function () {
         $item->save();
         $this->info("Updated status for item SKU: {$item->sku_code} to 'expired'");
 
-        $notificationExists = Notification::where('inventory_id', $item->id)
-            ->where('description', "Item with SKU {$item->sku_code} has expired.")
+        $notificationExists = Notification::where('description', "Item with SKU {$item->sku_code} has expired.")
             ->exists();
 
         if (!$notificationExists) {
@@ -121,8 +120,7 @@ Artisan::command('credit:check-overdue', function () {
         $this->info("Updated status for credit number: {$credit->credit_number} to 'Overdue'");
 
         // Check if notification already exists
-        $notificationExists = Notification::where('credit_id', $credit->id)
-            ->where('description', "Credit with number {$credit->credit_number} is overdue.")
+        $notificationExists = Notification::where('description', "Credit with number {$credit->credit_number} is overdue.")
             ->exists();
 
         if (!$notificationExists) {

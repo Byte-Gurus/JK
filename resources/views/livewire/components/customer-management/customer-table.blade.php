@@ -39,7 +39,7 @@
         </div>
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[56vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[55vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -140,7 +140,7 @@
 
                             {{-- //* birthdate --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $customer->birthdate }}
+                                {{ \Carbon\Carbon::parse($customer->birthdate)->format('M d Y') }}
                             </th>
 
                             {{-- //* contact number --}}
@@ -216,7 +216,7 @@
                                                 @if (!$customer->picture_id)
                                                     <button
                                                         class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]"
-                                                        x-on:click="showPrintModal=true; $wire.showImage('{{ $customer->id }}'), openActions = !openActions">
+                                                        x-on:click=" $wire.showImage('{{ $customer->id }}'), openActions = !openActions">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
@@ -262,12 +262,22 @@
     @if ($imageUrl)
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
-            <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg ">
 
+            <div class="flex flex-col items-center justify-center w-screen h-screen p-4 rounded-lg ">
+                <div class="self-center bg-red-200 z-60">
+                    <button type="button" wire:click='closeImage'
+                        class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto "
+                        data-modal-hide="UserModal">
+
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
                 <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
-            </div>
-            <div class="absolute bg-red-200 z-60">
-                <button> Click Me</button>
             </div>
         </div>
     @endif

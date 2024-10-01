@@ -4,6 +4,7 @@ namespace App\Livewire\Components\Sales;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class SalesReturnModal extends Component
@@ -24,8 +25,14 @@ class SalesReturnModal extends Component
             $this->addError('transaction_number', 'The transaction number does not exist.');
             return;
         }
-        if(isset($transaction->returnJoin)){
-            $this->addError('transaction_number', 'The transaction number already have return.');
+
+        if ($transaction->created_at->diffInHours(Carbon::now()) > 24) {
+            $this->addError('transaction_number', 'The transaction is older than 24 hours and cannot be returned.');
+            return;
+        }
+
+        if (isset($transaction->returnJoin)) {
+            $this->addError('transaction_number', 'The transaction number already have returns.');
             return;
         }
 
