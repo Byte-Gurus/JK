@@ -4,7 +4,7 @@
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between py-4 pr-4 ">
 
-            <div class="grid grid-flow-col grid-col-3 grid-rows-2 items-center gap-4 my-[3vh] justify-start text-nowrap">
+            <div class="grid items-center justify-start grid-flow-col grid-rows-2 gap-4 grid-col-3 text-nowrap">
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black rounded-r-full">
                     <p class="text-[1em] font-thin text-left w-full">Return Number</p>
