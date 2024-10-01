@@ -909,7 +909,7 @@ class SalesTransaction extends Component
         $po_date = Carbon::parse($po_date);
 
         // reorder quantity = Average sales / average lead time
-        $item_info = Inventory::find($item_id);
+        $item_info = Inventory::find($item_id)->first();
         dd($item_info);
         $first_stock_in_date = $item_info->stock_in_date;
 
