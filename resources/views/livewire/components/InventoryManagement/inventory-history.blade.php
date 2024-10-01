@@ -100,10 +100,10 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll h-[44vh]">
+        <div class="overflow-x-auto overflow-y-scroll h-[41vh]">
             <table class="w-full text-sm text-left">
                 {{-- //* table header --}}
-                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
                     <tr class=" text-nowrap">
 
                         {{-- //* date --}}

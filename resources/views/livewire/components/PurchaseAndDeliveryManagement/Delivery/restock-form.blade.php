@@ -1,4 +1,4 @@
-<div x-show="showRestockForm">
+<div x-cloak x-show="showRestockForm">
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
         <form wire:submit.prevent="create">
 
@@ -6,7 +6,7 @@
                 <div
                     class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
                     <div>
-                        <p class="text-[1em] font-thin text-center w-full">PO number</p>
+                        <p class="text-[1em] font-thin text-center w-full">Purchase Order No</p>
                     </div>
                     <div class="flex flex-col gap-2">
                         <p class="text-[1.2em] font-black">{{ $po_number }}</p>
@@ -28,13 +28,11 @@
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(180,255,199)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(128,255,153)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out">
                             Restock</button>
                     </div>
-
-
                 </div>
             </div>
 
             {{-- //* tablea area --}}
-            <div class="h-[500px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+            <div class="h-[62vh] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
                     {{-- //* table header --}}

@@ -1,5 +1,5 @@
 <div x-cloak class="flex justify-center h-screen ">
-    <div class="w-[816px] border border-black">
+    <div class="w-[816px] max-h-[1056px] h-full border border-black">
         <div class="flex flex-row justify-around my-8">
             <div>
                 <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
@@ -116,7 +116,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalNet'] , 2) }}
+                                    {{ number_format($summary['totalNet'], 2) }}
                                 </p>
                             </div>
                         </li>

@@ -1,7 +1,7 @@
 {{-- // --}}
 <div class="relative my-[3vh] rounded-lg" x-cloak>
 
-    <div class="grid grid-flow-col grid-cols-9 h-[65vh] gap-4 ">
+    <div class="grid grid-flow-col grid-cols-9 gap-4 ">
         <div
             class="relative w-full col-span-6 overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
             <form wire:submit.prevent="create">
@@ -50,7 +50,7 @@
                 </div>
 
                 {{-- //* tablea area --}}
-                <div class=" pb-[136px] overflow-x-auto overflow-y-scroll h-[64vh]  no-scrollbar scroll">
+                <div class=" overflow-x-auto overflow-y-scroll h-[58vh]  no-scrollbar scroll">
 
                     <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 

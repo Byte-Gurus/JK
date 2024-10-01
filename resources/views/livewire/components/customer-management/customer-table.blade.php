@@ -39,7 +39,7 @@
         </div>
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[55vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll h-[52vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -194,7 +194,7 @@
                                         x-transition:leave="transition ease-out duration-100"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0"
-                                        class="absolute overflow-hidden  right-11 z-10 transform max-w-m origin-top-right w-[170px]"
+                                        class="absolute overflow-hidden right-11 z-10 transform max-w-m origin-top-right w-[170px]"
                                         x-on:click.away="openActions = false">
                                         <div
                                             class="overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none  z-99 h-3/5 max-h-full min-h-[20%]">

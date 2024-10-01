@@ -54,6 +54,11 @@ class PurchasePage extends Component
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
     }
 
+    public function goDeliveryPage()
+    {
+        $this->dispatch(event: 'display-delivery-page')->to(PurchaseAndDeliveryManagementPage::class); //var assign ang parameter value sa global variable
+    }
+
     public function closeModal()
     {
         $this->showPurchaseOrderForm = false;

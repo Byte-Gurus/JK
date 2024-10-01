@@ -27,6 +27,11 @@ class DeliveryPage extends Component
         'closeRestockFormConfirmed'
     ];
 
+    public function goPurchasePage()
+    {
+        $this->dispatch(event: 'display-purchase-page')->to(PurchaseAndDeliveryManagementPage::class); //var assign ang parameter value sa global variable
+    }
+
     public function displayDeliveryTable($showDeliveryTable)
     {
         $this->showDeliveryTable = $showDeliveryTable;

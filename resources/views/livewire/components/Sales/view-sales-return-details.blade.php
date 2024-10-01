@@ -8,7 +8,7 @@
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black rounded-r-full">
                     <p class="text-[1em] font-thin text-left w-full">Return Number</p>
-                    <p class="text-[1em] font-black">{{ $return_number }}</p>
+                    <p class="text-[1.2em] font-black">{{ $return_number }}</p>
                 </div>
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black ">
