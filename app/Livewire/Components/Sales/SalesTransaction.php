@@ -44,7 +44,7 @@ class SalesTransaction extends Component
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType = 1, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo, $return_number;
+    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType = 1, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo, $return_number, $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -463,7 +463,7 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount = $vatable_subtotal - ( $vatable_subtotal / (100 + $index['vat_percent']) * 100);
+                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $index['vat_percent']) * 100);
                 // dump([
                 //     "vat",
                 //     'vatable_subtotal' => $vatable_subtotal,
@@ -481,6 +481,10 @@ class SalesTransaction extends Component
                 //     'total_amount' => $index['total_amount'],
                 //     'vat_percent' => $index['vat_percent']
                 // ]);
+            }
+
+            if ($this->changeTransactionType == 3 && $this->subtotal > $this->return_amount) {
+                $this->excess_amount = $this->subtotal - $this->return_amount;
             }
 
             $this->totalVat = $vatable_amount + $non_vatable_amount;
@@ -718,8 +722,8 @@ class SalesTransaction extends Component
             ]);
 
         }
-        if ( $this->changeTransactionType == 3) {
-            $return =  Returns::where('return_number', $this->return_number)->first();
+        if ($this->changeTransactionType == 3) {
+            $return = Returns::where('return_number', $this->return_number)->first();
             $return->hasTransaction = True;
             $return->save();
 
