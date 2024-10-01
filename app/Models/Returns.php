@@ -15,7 +15,7 @@ class Returns extends Model
         'return_total_amount',
         'original_amount',
         'return_vat_amount',
-        'isReturned'
+        'hasTransaction'
     ];
 
     public function transactionJoin()
