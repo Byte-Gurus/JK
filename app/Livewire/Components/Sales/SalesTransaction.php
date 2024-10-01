@@ -784,7 +784,7 @@ class SalesTransaction extends Component
 
             $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
 
-            $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['item_id']);
+            $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
         }
 
         if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
@@ -902,7 +902,7 @@ class SalesTransaction extends Component
 
 
     }
-    public function getMaximumLevel($delivery_date, $po_date, $item_id )
+    public function getMaximumLevel($delivery_date, $po_date, $sku_code)
     {
         $maximum_level_req = [];
 
@@ -910,7 +910,8 @@ class SalesTransaction extends Component
         $po_date = Carbon::parse($po_date);
 
         // reorder quantity = Average sales / average lead time
-        $item_info = Inventory::find($item_id)->first();
+        $item_info = Inventory::where('sku_code', $sku_code)->first();
+
         $first_stock_in_date = $item_info->stock_in_date;
 
         $startDate = $first_stock_in_date->startOfDay();
