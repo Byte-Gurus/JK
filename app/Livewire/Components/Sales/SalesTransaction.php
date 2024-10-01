@@ -930,6 +930,7 @@ class SalesTransaction extends Component
             ->whereBetween('created_at', [$delivery_date, $endDateToday])
             ->sum('item_quantity');
 
+            dd($delivery_date, $endDateToday);
         $days_of_sale = (int) $delivery_date->diffInDays($endDateToday);
 
         dd( $days_of_sale, $daily_sales);
