@@ -930,9 +930,9 @@ class SalesTransaction extends Component
             ->whereBetween('created_at', [$delivery_date, $endDateToday])
             ->sum('item_quantity');
 
-        $days_of_sale = (int)  $delivery_date->diffInDays($endDateToday);
+        $days_of_sale = (int) $delivery_date->diffInDays($endDateToday);
 
-        $minimum_consumption = $daily_sales / $daily_sales;
+        $minimum_consumption = $daily_sales / $days_of_sale;
 
 
         // minimum lead time = order delivered - order placed
