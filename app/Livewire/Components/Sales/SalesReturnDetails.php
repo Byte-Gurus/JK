@@ -54,12 +54,13 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
+        dd($this->return_info);
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
                 $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
                 $this->rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
 
-                $availableQty = $this->return_info['availableQty'];
+                $availableQty = $info['availableQty'];
                 $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
