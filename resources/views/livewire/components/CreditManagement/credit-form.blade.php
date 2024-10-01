@@ -29,7 +29,6 @@
 
                             Create Credit
 
-
                         </h3>
                     </div>
 
@@ -45,9 +44,7 @@
                         </svg>
 
                         <span class="sr-only">Close modal</span>
-
                     </button>
-
                 </div>
 
 
@@ -129,6 +126,7 @@
                                                         @endforeach
                                                     </div>
                                                 @endif
+                                            @endif
                                         </div>
                                         {{-- <div class="font-medium text-[1.6em] w-1/2">
                                             <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
@@ -142,7 +140,6 @@
                                                 @endforeach
                                             </select>
                                         </div> --}}
-
                                     </div>
                                 @else
                                     <div class="mb-3">
@@ -166,7 +163,10 @@
                                     @enderror
 
                                     @if ($imageUrl)
+                                    <div class="flex flex-col">
+                                        <p class=" text-[1.2em] font-bold">Customer Profile</p>
                                         <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+                                    </div>
                                     @endif
 
 
