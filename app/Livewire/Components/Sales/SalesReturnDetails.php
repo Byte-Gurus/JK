@@ -59,7 +59,7 @@ class SalesReturnDetails extends Component
                 $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
                 $this->rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
 
-                $availableQty = $this->transactionDetails0[$index]['item_quantity'];
+                $availableQty = $this->return_info['availableQty'];
                 $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
@@ -166,6 +166,7 @@ class SalesReturnDetails extends Component
 
 
                 $this->return_info[$index] = [
+                    'availableQty' => $transactionDetail->item_quantity,
                     'item_return_amount' => $this->item_return_amount,
                     'return_quantity' => $this->returnQuantity[$index],
                     'description' => $this->description[$index] ?? '',
