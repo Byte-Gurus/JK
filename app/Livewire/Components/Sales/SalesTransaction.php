@@ -923,17 +923,22 @@ class SalesTransaction extends Component
 
         $reorder_quantity = $average_sales / $average_lead_time;
 
-        dd(
-            $reorder_quantity,
-            $item_info,
-            $first_stock_in_date,
-            $startDate,
-            $endDateToday,
-            $average_sales,
-            $average_lead_time,
-            $reorder_quantity,
 
-        );
+        $maximum_level_req = [
+            'delivery_date' => $delivery_date,
+            'po_date' => $po_date,
+            'reorder_quantity' => $reorder_quantity,
+            'item_info' => $item_info,
+            'first_stock_in_date' => $first_stock_in_date,
+            'startDate' => $startDate,
+            'endDateToday' => $endDateToday,
+            'average_sales' => $average_sales,
+            'average_lead_time' => $average_lead_time,
+        ];
+
+        dd($maximum_level_req);
+
+
 
     }
 
