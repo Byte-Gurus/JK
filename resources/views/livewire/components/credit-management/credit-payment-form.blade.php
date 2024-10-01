@@ -1,4 +1,4 @@
-<div class="relative" x-cloak x-show="showCreditPaymentForm" x-data="{ payWithCash: @entangle('payWithCash'); showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
+<div class="relative" x-cloak x-show="showCreditPaymentForm" x-data="{ payWithCash: @entangle('payWithCash');showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -69,8 +69,8 @@
                                             </div>
 
                                             <div>
-                                                <input type="number" step=".01" wire:model='tendered_amount' placeholder="Amount"
-                                                    required
+                                                <input type="number" step=".01" wire:model='tendered_amount'
+                                                    placeholder="Amount" required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                 @error('tendered_amount')
@@ -90,7 +90,7 @@
                                                 <div>
                                                     <input type="number" wire:model='reference_no'
                                                         placeholder="Reference No" required
-                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                     @error('reference_no')
                                                         <span
@@ -109,10 +109,7 @@
                                         <p class="text-[1.6em] font-thin text-center">To Pay</p>
                                     </div>
                                     <div>
-                                        <p class="text-[1.6em] font-thin text-center">{{ $credit_amount }}</p>
-                                    </div>
-                                    <div>
-                                        {{-- <p class="text-[2em] font-black">{{ number_format($grand_total, 2) }}</p> --}}
+                                        <p class="text-[2em] font-black text-center">{{ $credit_amount }}</p>
                                     </div>
                                 </div>
                             </div>
