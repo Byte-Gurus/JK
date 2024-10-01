@@ -907,6 +907,7 @@ class SalesTransaction extends Component
         $maximum_level_req = [];
 
         $delivery_date = Carbon::parse($delivery_date);
+
         $po_date = Carbon::parse($po_date);
 
         // reorder quantity = Average sales / average lead time
@@ -923,6 +924,10 @@ class SalesTransaction extends Component
 
         $average_lead_time = (int) $po_date->diffInDays($delivery_date);
 
+        if($average_lead_time == 0){
+            $average_lead_time = 1;
+        }
+
         $reorder_quantity = $average_sales / $average_lead_time;
 
         //minimum consumption = daily sales / days of sales
@@ -932,6 +937,9 @@ class SalesTransaction extends Component
 
         $days_of_sale = (int) $delivery_date->diffInDays($endDateToday);
 
+        if($days_of_sale == 0){
+            $days_of_sale = 1;
+        }
         $minimum_consumption = $daily_sales / $days_of_sale;
 
 
