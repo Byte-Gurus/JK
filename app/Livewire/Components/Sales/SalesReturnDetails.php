@@ -117,7 +117,7 @@ class SalesReturnDetails extends Component
 
             $availableQty = $transactionDetail['availableQty'];
 
-            if ($this->returnQuantity[$index] < $availableQty) {
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] < $availableQty) {
                 $this->addError('returnQuantity.$index', 'The return quantity must be less than or equal to puchased quantity');
                 return;
             }
