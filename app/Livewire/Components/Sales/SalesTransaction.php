@@ -925,6 +925,49 @@ class SalesTransaction extends Component
 
         $reorder_quantity = $average_sales / $average_lead_time;
 
+        //minimum consumption = daily sales / days of sales
+        $daily_sales = TransactionDetails::where('item_id', $item_info->item_id)
+            ->whereBetween('created_at', [$delivery_date, $endDateToday])
+            ->sum('item_quantity');
+
+        $days_of_sale = $delivery_date->diffInDays($endDateToday);
+
+        $minimum_consumption = $daily_sales / $daily_sales;
+
+
+        // minimum lead time = order delivered - order placed
+        $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])
+            ->find($item_info->item_id);
+
+        $purchaseDetails = $item->purchaseDetailsJoin;
+
+        $minimum_lead_time = $purchaseDetails->flatMap(function ($purchaseDetail) {
+            // Ensure delivery is a single instance or null
+            $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
+
+            // Initialize minReorderPeriod as null
+            $reorderPeriods = [];
+
+            // Check if delivery and purchase dates are valid
+            if ($delivery && $delivery->date_delivered && $purchaseDetail->purchaseJoin->created_at) {
+                try {
+                    $deliveryDate = Carbon::parse($delivery->date_delivered);
+                    $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+                    // Calculate the difference in days if both dates are valid
+                    $reorderPeriods[] = $purchaseDate->diffInDays($deliveryDate);
+                } catch (\Exception $e) {
+                    // Ignore invalid date parsing
+                }
+            }
+
+            return $reorderPeriods;
+        })->min();
+
+        //maximum level = reorder quantity + reorder point - [minimum consumption * minimum lead time]
+
+        $maximum_level = $reorder_quantity + $item->reorder_point - ($minimum_consumption * $minimum_lead_time);
+
+
 
         $maximum_level_req = [
             'delivery_date' => $delivery_date,
@@ -936,6 +979,11 @@ class SalesTransaction extends Component
             'endDateToday' => $endDateToday,
             'average_sales' => $average_sales,
             'average_lead_time' => $average_lead_time,
+            'minimum_consumption' => $minimum_consumption,
+            'daily_sales' => $daily_sales,
+            'days_of_sale' => $days_of_sale,
+            'minimum_lead_time' => $minimum_lead_time,
+            'maximum_level' => $maximum_level
         ];
 
         dd($maximum_level_req);
