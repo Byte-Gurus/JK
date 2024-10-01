@@ -42,7 +42,7 @@ class SalesReturnTable extends Component
 
     public function dDisplaySalesReturnDetails()
     {
-        $this->dispatch('d-display-s    ales-return-details', sShowSalesReturnDetails: true)->to(SalesReturn::class);
+        $this->dispatch('d-display-sales-return-details', sShowSalesReturnDetails: true)->to(SalesReturn::class);
     }
 
     public function sortByColumn($column)
