@@ -921,7 +921,7 @@ class SalesTransaction extends Component
             $query->whereBetween('created_at', [$startDate, $endDateToday]);
         })->sum('item_quantity');
 
-        $average_lead_time = $delivery_date->diffInDays($po_date);
+        $average_lead_time = $po_date->diffInDays($delivery_date);
 
         $reorder_quantity = $average_sales / $average_lead_time;
 
