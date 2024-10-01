@@ -272,5 +272,9 @@ class SalesReturnDetails extends Component
 
     }
 
+    public function resetSpecificValidation($fieldName)
+{
+    $this->resetErrorBag($fieldName);
+}
 
 }
