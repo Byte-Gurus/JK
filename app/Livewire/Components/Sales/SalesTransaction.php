@@ -983,7 +983,8 @@ class SalesTransaction extends Component
             'daily_sales' => $daily_sales,
             'days_of_sale' => $days_of_sale,
             'minimum_lead_time' => $minimum_lead_time,
-            'maximum_level' => $maximum_level
+            'maximum_level' => $maximum_level,
+            'reorder_point' => $item->reorder_point
         ];
 
         dd($maximum_level_req);
