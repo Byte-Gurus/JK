@@ -252,7 +252,7 @@ class SalesTransaction extends Component
             // Get the first item from the query
             $item = $itemQuery->first();
 
-            dd($item);
+
 
             foreach ($this->selectedItems as $index => $selectedItem) {
                 if ($selectedItem['sku_code'] === $item->sku_code) {
@@ -780,6 +780,7 @@ class SalesTransaction extends Component
             ]);
 
 
+            dd($selectedItem);
 
             $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
 
@@ -910,7 +911,7 @@ class SalesTransaction extends Component
 
         // reorder quantity = Average sales / average lead time
         $item_info = Inventory::find($item_id);
-        dd($item_info, $item_id);
+        dd($item_info, item_id);
         $first_stock_in_date = $item_info->stock_in_date;
 
         $startDate = $first_stock_in_date->startOfDay();
