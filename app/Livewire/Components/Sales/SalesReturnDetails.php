@@ -255,14 +255,18 @@ class SalesReturnDetails extends Component
         }
     }
 
-    public function updatedOperation($value, $index){
+    public function updatedOperation($value, $index)
+    {
         $this->returnQuantity[$index] = null;
+        $this->resetSpecificValidation("returnQuantity.$index");
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
 
     }
-    public function updatedDescription($value, $index){
+    public function updatedDescription($value, $index)
+    {
         $this->returnQuantity[$index] = null;
+        $this->resetSpecificValidation("returnQuantity.$index");
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
 
