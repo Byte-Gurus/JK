@@ -252,7 +252,7 @@ class SalesTransaction extends Component
             // Get the first item from the query
             $item = $itemQuery->first();
 
-
+            dd($item_id);
 
             foreach ($this->selectedItems as $index => $selectedItem) {
                 if ($selectedItem['sku_code'] === $item->sku_code) {
@@ -901,7 +901,7 @@ class SalesTransaction extends Component
 
 
     }
-    public function getMaximumLevel($delivery_date, $po_date, $item_id, )
+    public function getMaximumLevel($delivery_date, $po_date, $item_id )
     {
         $maximum_level_req = [];
 
