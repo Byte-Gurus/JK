@@ -201,7 +201,7 @@ class SalesReturnDetails extends Component
     protected function validateForm()
     {
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] != 0) {
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] != 0 && $this->operation[$index] != "") {
                 $availableQty = $transactionDetail['item_quantity'];
                 $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
             }
