@@ -112,19 +112,22 @@ class SalesReturnDetails extends Component
 
     public function updatedReturnQuantity($value, $index)
     {
-        dd($value, $index);
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
+        $this->resetSpecificValidation("returnQuantity.$index");
+        // Check if the provided index exists in the transaction details
+        if (isset($this->transactionDetails[$index])) {
+            $availableQty = $this->transactionDetails[$index]['item_quantity'];
 
-            $availableQty = $transactionDetail['availableQty'];
-
-            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] < $availableQty) {
-                $this->addError('returnQuantity.$index', 'The return quantity must be less than or equal to puchased quantity');
+            // Check if the return quantity exceeds the available quantity
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
+                $this->addError('returnQuantity.' . $index, 'The return quantity must be less than or equal to the available quantity.');
                 return;
             }
         }
 
+        // If all checks pass, calculate the total refund amount
         $this->calculateTotalRefundAmount();
     }
+
 
     public function calculateTotalRefundAmount()
     {
