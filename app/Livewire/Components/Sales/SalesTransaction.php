@@ -932,6 +932,7 @@ class SalesTransaction extends Component
 
         $days_of_sale = (int) $delivery_date->diffInDays($endDateToday);
 
+        dd( $days_of_sale, $daily_sales);
         $minimum_consumption = $daily_sales / $days_of_sale;
 
 
