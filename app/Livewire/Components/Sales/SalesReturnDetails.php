@@ -253,13 +253,13 @@ class SalesReturnDetails extends Component
     }
 
     public function updatedOperation($value, $index){
-        $this->returnQuantity[$index] = 0;
+        $this->returnQuantity[$index] = null;
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
 
     }
     public function updatedDescription($value, $index){
-        $this->returnQuantity[$index] = 0;
+        $this->returnQuantity[$index] = null;
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
 
