@@ -620,7 +620,7 @@
                             </div>
                             <div class="flex flex-row justify-between">
                                 <p class=" text-[1.2em] font-medium">Excess Amount</p>
-                                {{-- <p class=" text-[1.2em] font-black">{{ $return_amount ?? ' ' }}</p> --}}
+                                <p class=" text-[1.2em] font-black">{{ number_format($excess_amount, 2) ?? ' ' }}</p>
                             </div>
                             <div class="w-full my-2">
                                 <div class="border border-black"></div>
