@@ -6,6 +6,7 @@ use App\Livewire\Pages\CashierPage;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -40,7 +41,9 @@ class SalesTransactionHistory extends Component
             });
         }
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+            $startDate = Carbon::parse($this->startDate)->startOfDay();
+            $endDate = Carbon::parse($this->endDate)->endOfDay();
+            $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
         $sales = $query->search($this->search) //?search the user

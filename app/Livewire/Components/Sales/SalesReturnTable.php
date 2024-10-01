@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Models\Returns;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -25,7 +26,9 @@ class SalesReturnTable extends Component
         $query = Returns::query();
 
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
+            $startDate = Carbon::parse($this->startDate)->startOfDay();
+            $endDate = Carbon::parse($this->endDate)->endOfDay();
+            $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
         $returns = $query->search($this->search) //?search the user

@@ -5,6 +5,7 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\Supplier;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -42,7 +43,9 @@ class InventoryTable extends Component
             });
         }
         if ($this->startDate && $this->endDate) {
-            $query->whereBetween('stock_in_date', [$this->startDate, $this->endDate]);
+            $startDate = Carbon::parse($this->startDate)->startOfDay();
+            $endDate = Carbon::parse($this->endDate)->endOfDay();
+            $query->whereBetween('stock_in_date', [$startDate, $endDate]);
         }
 
 
