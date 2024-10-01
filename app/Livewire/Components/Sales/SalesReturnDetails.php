@@ -54,7 +54,6 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
-        dd($this->return_info);
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
                 $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
