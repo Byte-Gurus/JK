@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('return_total_amount');
             $table->double('original_amount');
             $table->double('return_vat_amount');
+            $table->boolean('isReturned');
             $table->timestamps();
 
             $table->foreignId('transaction_id')->constrained('transactions');
