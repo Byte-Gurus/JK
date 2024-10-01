@@ -895,7 +895,6 @@ class SalesTransaction extends Component
         ];
 
 
-        dump($reorder_requirements);
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
