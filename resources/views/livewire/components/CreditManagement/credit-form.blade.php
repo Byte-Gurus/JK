@@ -163,8 +163,8 @@
                                     @enderror
 
                                     @if ($imageUrl)
-                                        <div class="flex flex-col">
-                                            <p class=" text-[1.2em] font-bold">Customer Profile</p>
+                                        <div class="flex mb-4 flex-co">
+                                            <p class="mb-1 font-medium text-gray-900 text-md">Customer Profile</p>
                                             <img src="{{ $imageUrl }}" alt="Customer ID Picture"
                                                 class="w-1/3 h-1/2">
                                         </div>
