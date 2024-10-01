@@ -108,10 +108,13 @@ class SalesReturnDetails extends Component
     }
 
 
-    public function updatedReturnQuantity()
+    public function updatedReturnQuantity($value, $index)
     {
-        $validated = $this->validateForm();
-        $this->calculateTotalRefundAmount();
+        if ($index) {
+            $validated = $this->validateForm();
+            $this->calculateTotalRefundAmount();
+        }
+
     }
 
     public function calculateTotalRefundAmount()
@@ -252,12 +255,14 @@ class SalesReturnDetails extends Component
         }
     }
 
-    public function updatedOperation($value, $index){
+    public function updatedOperation($value, $index)
+    {
         $this->returnQuantity[$index] = 0;
         $this->calculateTotalRefundAmount();
 
     }
-    public function updatedDescription($value, $index){
+    public function updatedDescription($value, $index)
+    {
         $this->returnQuantity[$index] = 0;
         $this->calculateTotalRefundAmount();
 
