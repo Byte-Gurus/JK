@@ -112,7 +112,7 @@ class SalesReturnDetails extends Component
 
     public function updatedReturnQuantity($value, $index)
     {
-        $this->resetSpecificValidation('returnQuantity.$index');
+        $this->resetSpecificValidation("returnQuantity.$index");
         // Check if the provided index exists in the transaction details
         if (isset($this->transactionDetails[$index])) {
             $availableQty = $this->transactionDetails[$index]['item_quantity'];
