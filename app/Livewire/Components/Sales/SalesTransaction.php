@@ -987,22 +987,22 @@ class SalesTransaction extends Component
 
         Item::where('id', $item_id)->update(['maximum_stock_level' => $maximumLevel]);
 
-        // $maximum_level_req[] = [
-        //     'days' => $days,
-        //     'po_date' => $poDate,
-        //     'delivery_date' => $deliveryDate,
-        //     'item_id' => $item_id,
-        //     'item_name' => $item->item_name,
-        //     'min_quantity' => $minConsumption,
-        //     'purchase_quantity' => $reorderQuantity,
-        //     'reorder_point' => $reorderPoint,
-        //     'min_reorder_period' => $minReorderPeriod,
-        //     'maximum_level' => $maximumLevel,
-        //     'todayTotalItemQuantity' => $todayTotalItemQuantity,
-        //     'restockDate' => $restockDate
-        // ];
+        $maximum_level_req[] = [
+            'days' => $days,
+            'po_date' => $poDate,
+            'delivery_date' => $deliveryDate,
+            'item_id' => $item_id,
+            'item_name' => $item->item_name,
+            'min_quantity' => $minConsumption,
+            'purchase_quantity' => $reorderQuantity,
+            'reorder_point' => $reorderPoint,
+            'min_reorder_period' => $minReorderPeriod,
+            'maximum_level' => $maximumLevel,
+            'todayTotalItemQuantity' => $todayTotalItemQuantity,
+            'restockDate' => $restockDate
+        ];
 
-        // dd($maximum_level_req);
+        dump($maximum_level_req);
     }
 
 
