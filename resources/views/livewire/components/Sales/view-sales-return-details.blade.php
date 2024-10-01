@@ -4,76 +4,39 @@
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between py-4 pr-4 ">
 
-            <div class="flex flex-col gap-4 py-2 pr-4 my-2 text-nowrap">
+            <div class="grid items-center justify-start grid-flow-col grid-rows-2 gap-2 grid-col-3 text-nowrap">
 
-                <div
-                class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                <div>
-                    <p class="text-[0.8em] font-thin text-center w-full">Return Number</p>
-                </div>
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black rounded-r-full">
+                    <p class="text-[1em] font-thin text-left w-full">Return Number</p>
                     <p class="text-[1em] font-black">{{ $return_number }}</p>
                 </div>
-            </div>
 
-                <div
-                    class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                    <div>
-                        <p class="text-[1em] font-thin text-center w-full">Transaction No.</p>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <p class="text-[1.2em] font-black">{{ $transaction_number }}</p>
-                    </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black ">
+                    <p class="text-[1em] font-thin text-left w-full">Transaction No.</p>
+                    <p class="text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
 
-                <div class="grid grid-flow-row grid-rows-4 gap-1">
 
-                    <div
-                        class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                        <div>
-                            <p class="text-[0.8em] font-thin text-center w-full">Transaction Date</p>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <p class="text-[1em] font-black">{{ $transaction_date }}</p>
-                        </div>
-                    </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Transaction Date</p>
+                    <p class="text-[1em] font-black">{{ $transaction_date }}</p>
+                </div>
 
-                    <div
-                        class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                        <div>
-                            <p class="text-[0.8em] font-thin text-center w-full">Return Date</p>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <p class="text-[1em] font-black">{{ $return_date }}</p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                        <div>
-                            <p class="text-[0.8em] font-thin text-center w-full">Original Amount</p>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <p class="text-[1em] font-black">{{ $orignal_amount }}</p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                        <div>
-                            <p class="text-[0.8em] font-thin text-center w-full">Return Total Amount</p>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <p class="text-[1em] font-black">{{ $return_total_amount }}</p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(0,0,0)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
-                        <div>
-                            <p class="text-[0.8em] font-thin text-center w-full">Current Amount</p>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <p class="text-[1em] font-black">{{ $current_amount }}</p>
-                        </div>
-                    </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Return Date</p>
+                    <p class="text-[1em] font-black">{{ $return_date }}</p>
+                </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Original Amount</p>
+                    <p class="text-[1em] font-black">{{ $orignal_amount }}</p>
+                </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Return Total Amount</p>
+                    <p class="text-[1em] font-black">{{ $return_total_amount }}</p>
+                </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Current Amount</p>
+                    <p class="text-[1em] font-black">{{ $current_amount }}</p>
                 </div>
             </div>
 
@@ -110,7 +73,6 @@
                 </div>
             </div>
         </div>
-        {{-- //* tablea area --}}
         <div class="overflow-x-auto overflow-y-scroll scroll h-[300px]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
