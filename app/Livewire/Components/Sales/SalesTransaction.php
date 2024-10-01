@@ -882,19 +882,20 @@ class SalesTransaction extends Component
         // Calculate the demand rate
         $demandRate = $todayTotalItemQuantity / $daysWithSales;
 
-        $reorder_point = round($days * $demandRate);
+        $reorder_point = round($demandRate * $days  );
 
-        // $reorder_requirements[] = [
-        //     'reorder_point' => $reorder_point,
-        //     'demandRate' => $demandRate,
-        //     'daysDIff' => $days,
-        //     'todayTotalItemQuantity' => $todayTotalItemQuantity,
-        //     'daysWithSales' => $daysWithSales,
-        //     'deliveryDate' => $deliveryDate,
-        //     'poDate' => $poDate
-        // ];
+        $reorder_requirements[] = [
+            'reorder_point' => $reorder_point,
+            'demandRate' => $demandRate,
+            'daysDIff' => $days,
+            'todayTotalItemQuantity' => $todayTotalItemQuantity,
+            'daysWithSales' => $daysWithSales,
+            'deliveryDate' => $deliveryDate,
+            'poDate' => $poDate
+        ];
 
 
+        dump($reorder_requirements);
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
