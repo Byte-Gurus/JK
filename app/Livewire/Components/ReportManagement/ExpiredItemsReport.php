@@ -33,8 +33,10 @@ class ExpiredItemsReport extends Component
 
     public function generateReport($toDate, $fromDate)
     {
+        $startDate = Carbon::parse($fromDate)->startOfDay();
+        $endDate = Carbon::parse($toDate)->endOfDay();
 
         $this->expiredItems = Inventory::where('status', 'Expired')
-            ->whereBetween('created_at', [$toDate, $fromDate])->get();
+            ->whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }

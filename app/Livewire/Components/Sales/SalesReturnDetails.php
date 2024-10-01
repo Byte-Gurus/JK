@@ -58,6 +58,9 @@ class SalesReturnDetails extends Component
             if ($this->returnQuantity[$index] > 0) {
                 $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
                 $this->rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
+
+                $availableQty = $info['availableQty'];
+                $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
         $this->validate($this->rules);
@@ -110,7 +113,7 @@ class SalesReturnDetails extends Component
 
     public function updatedReturnQuantity()
     {
-        $validated = $this->validateForm();
+        // $validated = $this->validateForm();
         $this->calculateTotalRefundAmount();
     }
 
@@ -163,6 +166,7 @@ class SalesReturnDetails extends Component
 
 
                 $this->return_info[$index] = [
+                    'availableQty' => $transactionDetail->item_quantity,
                     'item_return_amount' => $this->item_return_amount,
                     'return_quantity' => $this->returnQuantity[$index],
                     'description' => $this->description[$index] ?? '',
@@ -198,17 +202,16 @@ class SalesReturnDetails extends Component
         ]);
     }
 
-    protected function validateForm()
-    {
-        foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if ($this->returnQuantity[$index] ){
-                $availableQty = $transactionDetail['item_quantity'];
-                $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
-            }
-        }
+    // protected function validateForm()
+    // {
+    //     foreach ($this->transactionDetails as $index => $transactionDetail) {
+    //         if (isset($this->returnQuantity[$index])  && $this->returnQuantity[$index] && $this->returnQuantity[$index] != null) {
 
-        return $this->validate($this->rules);
-    }
+    //         }
+    //     }
+
+    //     return $this->validate($this->rules);
+    // }
 
     public function getTransaction($Transaction)
     {
@@ -252,18 +255,26 @@ class SalesReturnDetails extends Component
         }
     }
 
-    public function updatedOperation($value, $index){
-        $this->returnQuantity[$index] = 0;
+    public function updatedOperation($value, $index)
+    {
+        $this->returnQuantity[$index] = null;
+        $this->resetSpecificValidation("returnQuantity.$index");
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
 
     }
-    public function updatedDescription($value, $index){
-        $this->returnQuantity[$index] = 0;
+    public function updatedDescription($value, $index)
+    {
+        $this->returnQuantity[$index] = null;
+        $this->resetSpecificValidation("returnQuantity.$index");
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
 
     }
 
+    public function resetSpecificValidation($fieldName)
+{
+    $this->resetErrorBag($fieldName);
+}
 
 }

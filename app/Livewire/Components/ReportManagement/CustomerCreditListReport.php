@@ -30,7 +30,10 @@ class CustomerCreditListReport extends Component
     public function generateReport($toDate, $fromDate)
     {
 
+        $startDate = Carbon::parse($fromDate)->startOfDay();
+        $endDate = Carbon::parse($toDate)->endOfDay();
+
         $this->credits = Credit::whereHas('transactionJoin')
-            ->whereBetween('created_at', [$toDate, $fromDate])->get();
+            ->whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }
