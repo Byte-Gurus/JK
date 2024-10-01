@@ -110,9 +110,9 @@ class SalesReturnDetails extends Component
     }
 
 
-    public function updatedReturnQuantity()
+    public function updatedReturnQuantity($value, $index)
     {
-
+        dd($value, $index);
         foreach ($this->transactionDetails as $index => $transactionDetail) {
 
             $availableQty = $transactionDetail['availableQty'];
