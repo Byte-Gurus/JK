@@ -262,8 +262,8 @@
     @if ($imageUrl)
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
-            <div class="absolute bg-red-200 z-60">
-                <button>Close</button>
+            <div class="absolute top-0 bg-red-200 z-60">
+                <button wire:click="closeImage()">Close</button>
             </div>
             <div class="flex items-center justify-center w-screen h-screen p-4 rounded-lg ">
                 <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
