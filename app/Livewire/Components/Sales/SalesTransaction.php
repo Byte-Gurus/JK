@@ -250,7 +250,7 @@ class SalesTransaction extends Component
             }
 
             // Get the first item from the query
-            $item = $itemQuery->first();
+            $item = $itemQuery;
 
             dd($item_id);
 
