@@ -69,6 +69,11 @@ class CustomerTable extends Component
         $customer = Customer::find($customer_id);
         $this->imageUrl =  $customer->id_picture;
     }
+
+    public function closeImage()
+    {
+        $this->reset([$this->imageUrl]);
+    }
     public function refreshFromPusher()
     {
         $this->resetPage();
