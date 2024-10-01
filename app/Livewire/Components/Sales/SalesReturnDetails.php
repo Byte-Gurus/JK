@@ -114,7 +114,7 @@ class SalesReturnDetails extends Component
     {
         // Check if the provided index exists in the transaction details
         if (isset($this->transactionDetails[$ind])) {
-            $availableQty = $this->transactionDetails[$ind]['availableQty'];
+            $availableQty = $this->transactionDetails[$ind]['item_quantity'];
 
             // Check if the return quantity exceeds the available quantity
             if (isset($this->returnQuantity[$ind]) && $this->returnQuantity[$ind] > $availableQty) {
