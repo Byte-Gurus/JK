@@ -204,6 +204,9 @@ class SalesReturnDetails extends Component
             if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] != null && $this->operation[$index] != "") {
                 $availableQty = $transactionDetail['item_quantity'];
                 $this->rules["returnQuantity.$index"] = ['required', 'numeric', 'min:1', "lte:$availableQty"];
+            }else{
+                $availableQty = $transactionDetail['item_quantity'];
+                $this->rules["returnQuantity.$index"] = [ 'numeric', 'min:1', "lte:$availableQty"];
             }
         }
 
