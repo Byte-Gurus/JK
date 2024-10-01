@@ -72,7 +72,7 @@ class CustomerTable extends Component
 
     public function closeImage()
     {
-        $this->reset([$this->imageUrl]);
+        $this->reset(['imageUrl']);
     }
     public function refreshFromPusher()
     {
