@@ -126,7 +126,7 @@
                                                         @endforeach
                                                     </div>
                                                 @endif
-                                            @endif
+
                                         </div>
                                         {{-- <div class="font-medium text-[1.6em] w-1/2">
                                             <select id="selectCustomer" wire:model.live="selectCustomer" autofocus
@@ -163,10 +163,11 @@
                                     @enderror
 
                                     @if ($imageUrl)
-                                    <div class="flex flex-col">
-                                        <p class=" text-[1.2em] font-bold">Customer Profile</p>
-                                        <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
-                                    </div>
+                                        <div class="flex mb-4 flex-co">
+                                            <p class="mb-1 font-medium text-gray-900 text-md">Customer Profile</p>
+                                            <img src="{{ $imageUrl }}" alt="Customer ID Picture"
+                                                class="w-1/3 h-1/2">
+                                        </div>
                                     @endif
 
 
@@ -242,7 +243,8 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                    <div class="flex items-center justify-center loader loader--style3 "
+                                        title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
                                             height="40px" viewBox="0 0 50 50"
