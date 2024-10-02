@@ -31,10 +31,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PhilippineCitiesTableSeeder::class);
         $this->call(PhilippineBarangaysTableSeeder::class);
 
-        Supplier::factory(5)->create();
-        // Customer::factory(5)->create();
-        $this->call(ItemSeeder::class);
-        Inventory::factory(100)->create();
+        // Supplier::factory(5)->create();
+        // // Customer::factory(5)->create();
+        // $this->call(ItemSeeder::class);
+        // Inventory::factory(100)->create();
 
     }
 }
