@@ -12,6 +12,5 @@ class VoidTransaction extends Model
     protected $fillable = [
         'transaction_id',
         'user_id',
-        'hasTransaction'
     ];
 }

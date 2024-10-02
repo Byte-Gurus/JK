@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('void_transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->boolean('hasTransaction');
 
             $table->foreignId('transaction_id')->constrained('transactions');
             $table->foreignId('user_id')->constrained('users');
