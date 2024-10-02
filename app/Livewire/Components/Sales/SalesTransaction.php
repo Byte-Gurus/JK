@@ -995,7 +995,7 @@ class SalesTransaction extends Component
             'reorder_point' => $item->reorder_point
         ];
 
-        dd($maximum_level_req);
+        // dd($maximum_level_req);
 
 
 
