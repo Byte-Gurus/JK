@@ -9,6 +9,7 @@ use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Customer;
 use App\Models\TransactionMovement;
+use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -101,7 +102,8 @@ class CreditForm extends Component
             'credit_number' => $this->credit_number,
             'credit_limit' => $validated['credit_limit'],
             'transaction_id' => null,
-            'customer_id' => $this->customer_id
+            'customer_id' => $this->customer_id,
+            'user_id' => Auth::id(),
         ]);
 
         $creditHistory = CreditHistory::create([

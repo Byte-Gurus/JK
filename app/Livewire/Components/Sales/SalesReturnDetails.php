@@ -9,6 +9,7 @@ use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
+use Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -92,6 +93,7 @@ class SalesReturnDetails extends Component
                     'return_id' => $returns->id,
                     'transaction_details_id' => $info['transaction_details_id'],
                     'operation' => $info['operation'],
+                    'user_id' => Auth::id(),
 
                 ]);
 

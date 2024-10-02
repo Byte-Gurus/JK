@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('returns', function (Blueprint $table) {
+        Schema::create('void_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('return_number')->unique();
-            $table->double('return_total_amount');
-            $table->double('original_amount');
-            $table->double('return_vat_amount');
-            $table->boolean('hasTransaction');
             $table->timestamps();
+            $table->boolean('hasTransaction');
 
-            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('transaction_id')->constrained('transactions');
+            $table->foreignId('user_id')->constrained('users');
+
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('returns');
+        Schema::dropIfExists('void_transactions');
     }
 };

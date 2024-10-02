@@ -15,7 +15,8 @@ class Returns extends Model
         'return_total_amount',
         'original_amount',
         'return_vat_amount',
-        'hasTransaction'
+        'hasTransaction',
+        'user_id'
     ];
 
     public function transactionJoin()
@@ -26,6 +27,10 @@ class Returns extends Model
     public function returnDetailsJoin()
     {
         return $this->hasMany(ReturnDetails::class, 'returns_id');
+    }
+    public function userJoin()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeSearch($query, $value)

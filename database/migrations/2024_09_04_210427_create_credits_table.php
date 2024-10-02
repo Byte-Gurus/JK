@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('credit_limit');
             $table->timestamps();
 
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('transaction_id')->nullable()->constrained('transactions');
             $table->foreignId('customer_id')->constrained('customers');
         });

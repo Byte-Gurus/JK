@@ -18,11 +18,16 @@ class Credit extends Model
         'credit_limit',
         'transaction_id',
         'customer_id',
+        'user_id'
     ];
 
     public function customerJoin()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+    public function userJoin()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function transactionJoin()
