@@ -141,6 +141,9 @@
 
                             </div>
                         </th>
+
+                        {{-- payment --}}
+                        <th scope="col" class="px-4 py-3 text-center">Action</th>
                     </tr>
                 </thead>
 
@@ -187,6 +190,10 @@
                                 {{ $sale['created_at']->format(' M d Y h:i A ') }}
                             </th>
 
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
+                                <button wire:click='displaySalesAdminLoginForm()' type="button">Void</button>
+                            </th>
 
                         </tr>
                     @endforeach
@@ -382,5 +389,8 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div x-show="showSalesAdminLoginForm" x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
+        @livewire('components.Sales.sales-admin-login-form')
     </div>
 </div>

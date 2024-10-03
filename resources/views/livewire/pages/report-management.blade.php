@@ -290,8 +290,6 @@
         @livewire('components.ReportManagement.expired-items-report-date-picker-modal')
     </div>
 
-<<<<<<< Updated upstream
-=======
     {{-- Damaged Item --}}
 
     <div x-show="showDamagedItemsReport" x-data="{ showDamagedItemsReport: @entangle('showDamagedItemsReport') }">
@@ -302,5 +300,4 @@
         @livewire('components.ReportManagement.damaged-items-report-date-picker-modal')
     </div>
 
->>>>>>> Stashed changes
 </div>
