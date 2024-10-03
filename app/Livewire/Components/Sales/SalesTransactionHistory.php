@@ -21,11 +21,11 @@ class SalesTransactionHistory extends Component
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
-
     public $transactionFilter = 0; //var filtering value = all
     public $paymentFilter = 0;
     public $vatFilter = 0; //var filtering value = all
     public $supplierFilter = 0;
+    public $showSalesAdminLoginForm = false;
 
     public $startDate, $endDate;
     public function render()
@@ -137,5 +137,10 @@ class SalesTransactionHistory extends Component
     public function refreshFromPusher()
     {
         $this->resetPage();
+    }
+
+    public function displaySalesAdminLoginForm()
+    {
+        $this->showSalesAdminLoginForm = !$this->showSalesAdminLoginForm;
     }
 }
