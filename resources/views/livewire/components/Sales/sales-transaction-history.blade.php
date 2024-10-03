@@ -173,91 +173,91 @@
 
 
                             </th>
-                            {{-- <th scope="row"
+                            <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if ($sale->transaction_type == 'Sales')
-                                {{ number_format($sale->transactionJoin->total_amount, 2) }}
-                                @elseif ($sale->transaction_type == 'Return')
-                                {{ number_format($sale->returnsJoin->transactionJoin->total_amount, 2) }}
-                                @elseif ($sale->transaction_type == 'Credit')
-                                {{ number_format($sale->creditJoin->transactionJoin->total_amount, 2) }}
-                                @elseif ($sale->transaction_type == 'Void')
-                                {{ number_format($sale->transactionJoin->total_amount, 2) }}
+                                @if ($transaction->transaction_type == 'Sales')
+                                {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                                @elseif ($transaction->transaction_type == 'Return')
+                                {{ number_format($transaction->returnsJoin->transactionJoin->total_amount, 2) }}
+                                @elseif ($transaction->transaction_type == 'Credit')
+                                {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
+                                @elseif ($transaction->transaction_type == 'Void')
+                                {{ number_format($transaction->transactionJoin->total_amount, 2) }}
                                 @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $sale['transaction_type'] }}
+                                {{ $transaction['transaction_type'] }}
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if ($sale->transaction_type == 'Sales')
-                                {{ $sale['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
-                                @elseif ($sale->transaction_type == 'Return')
-                                {{ $sale['returnsJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
-                                @elseif ($sale->transaction_type == 'Credit')
+                                @if ($transaction->transaction_type == 'Sales')
+                                {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Return')
+                                {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Credit')
                                 'N/A'
-                                @elseif ($sale->transaction_type == 'Void')
-                                {{ $sale['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Void')
+                                {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
-                                @if ($sale->transaction_type == 'Sales')
-                                {{ $sale['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
-                                @elseif ($sale->transaction_type == 'Return')
-                                {{ $sale['returnsJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
-                                @elseif ($sale->transaction_type == 'Credit')
-                                {{ $sale['creditJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
-                                @elseif ($sale->transaction_type == 'Void')
-                                {{ $sale['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                @if ($transaction->transaction_type == 'Sales')
+                                {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Return')
+                                {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Credit')
+                                {{ $transaction['creditJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Void')
+                                {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
                                 @endif
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
-                                @if ($sale->transaction_type == 'Sales')
+                                @if ($transaction->transaction_type == 'Sales')
                                 {{ number_format($sale['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
-                                @elseif ($sale->transaction_type == 'Return')
+                                @elseif ($transaction->transaction_type == 'Return')
                                 {{ number_format($sale['returnsJoin']['transactionJoin']['total_vat_amount'], 2) ??
                                 'N/A'}}
-                                @elseif ($sale->transaction_type == 'Credit')
+                                @elseif ($transaction->transaction_type == 'Credit')
                                 {{ number_format($sale['creditJoin']['transactionJoin']['total_vat_amount'], 2) ??
                                 'N/A'}}
-                                @elseif ($sale->transaction_type == 'Void')
+                                @elseif ($transaction->transaction_type == 'Void')
                                 {{ number_format($sale['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @endif
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $sale['created_at']->format(' M d Y h:i A ') }}
+                                {{ $transaction['created_at']->format(' M d Y h:i A ') }}
                             </th>
 
-                            @if ( $sale->transactionJoin->transaction_type == "Sales")
+                            @if ( $transaction->transactionJoin->transaction_type == "Sales")
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
                                 <button wire:click="voidTransaction({{ $sale->transaction_id }})" type="button">Void
                                     Transaction</button>
                             </th>
-                            @elseif ($sale->transaction_type == 'Return')
+                            @elseif ($transaction->transaction_type == 'Return')
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
                                 <button wire:click="voidTransaction({{ $sale->returnsJoin->transactionJoin->id }})"
                                     type="button">Void
                                     Transaction</button>
                             </th>
-                            @elseif ($sale->transaction_type == 'Credit')
+                            @elseif ($transaction->transaction_type == 'Credit')
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
                                 <button wire:click="voidTransaction({{ $sale->creditJoin->transactionJoin->id }})"
                                     type="button">Void
                                     Transaction</button>
                             </th>
-                            @elseif ($sale->transaction_type == 'Void')
+                            @elseif ($transaction->transaction_type == 'Void')
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $sale->transaction_id }})" type="button">Void
+                                <button wire:click="voidTransaction({{ $transaction->transaction_id }})" type="button">Void
                                     Transaction</button>
                             </th>
                             @else
@@ -266,7 +266,7 @@
                                 <button type="button">Void
                                     Transaction</button>
                             </th>
-                            @endif --}}
+                            @endif
 
 
 
