@@ -15,7 +15,7 @@
                         <p class="text-[1.2em] font-black text-wrap">{{ $supplier }}</p>
                     </div>
                 </div>
-                <div>
+                <div class="flex items-center">
                     <button wire:click="purchaseRow" type="button"
                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(195,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(141,255,128)] transition-all duration-100 ease-in-out">Insert</button>
                 </div>
