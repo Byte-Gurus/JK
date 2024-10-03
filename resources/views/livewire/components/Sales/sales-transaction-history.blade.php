@@ -166,12 +166,12 @@
                                 @elseif ($transaction->transaction_type == 'Return')
                                 {{ $transaction['returnsJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ $transaction['creditJoin']['credit_number'] }}
+                                {{ $transaction['creditJoin']['transactionJoin']['transaction_number']  }}
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @endif
 
-                               
+
                             </th>
                             {{-- <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
