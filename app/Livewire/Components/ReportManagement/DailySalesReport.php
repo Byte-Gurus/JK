@@ -73,11 +73,11 @@ class DailySalesReport extends Component
 
                         if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
-                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->vatable_amount += $vatable_amount;
                         } elseif ($detail->vat_type === 'Non Vatable') {
                             $non_vatable_subtotal += $detail->item_subtotal;
-                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
@@ -97,11 +97,11 @@ class DailySalesReport extends Component
 
                         if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
-                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->vatable_amount += $vatable_amount;
                         } elseif ($detail->vat_type === 'Non Vatable') {
                             $non_vatable_subtotal += $detail->item_subtotal;
-                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
@@ -116,11 +116,11 @@ class DailySalesReport extends Component
 
                         if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
-                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->vatable_amount += $vatable_amount;
                         } elseif ($detail->vat_type === 'Non Vatable') {
                             $non_vatable_subtotal += $detail->item_subtotal;
-                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
