@@ -32,4 +32,14 @@ class TransactionMovement extends Model
     {
         return $this->belongsTo(Returns::class, 'returns_id');
     }
+    public function scopeSearch($query, $value)
+    {
+        $value = strtolower($value);
+
+        return $query->whereHas('transactionJoin', function ($query) use ($value) {
+            $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
+        });
+
+
+    }
 }
