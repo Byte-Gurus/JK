@@ -31,13 +31,13 @@ class SalesTransactionHistory extends Component
     public $fromPage = "SalesHistory";
     public function render()
     {
-        $query = Transaction::query();
+        $query = TransactionMovement::query();
 
         if ($this->transactionFilter != 0) {
             $query->where('transaction_type', $this->transactionFilter);
         }
         if ($this->paymentFilter != 0) {
-            $query->whereHas('paymentJoin', function ($query) {
+            $query->whereHas('transactionnJoin.paymentJoin', function ($query) {
                 $query->where('payment_type', $this->paymentFilter);
             });
         }

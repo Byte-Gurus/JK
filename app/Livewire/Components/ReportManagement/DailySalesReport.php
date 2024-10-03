@@ -53,6 +53,8 @@ class DailySalesReport extends Component
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
 
+                // if($transaction->transactionJoin->transactionDetailsJoin->status == 'Void')
+
             } elseif ($transaction->transaction_type == 'Return') {
                 $totalReturnAmount += $transaction->returnsjoin->return_total_amount;
                 $totalReturnVatAmount += $transaction->returnsjoin->return_vat_amount;
