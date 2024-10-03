@@ -114,15 +114,20 @@
 
                                                     <div class="col-span-1 ">
                                                         <button type="button" wire:click="changeBarcodeForm()"
-                                                            class="px-2 text-sm font-medium rounded-lg bg-[rgb(36,36,36)] text-white hover:bg-[rgb(86,86,86)] duration-100 ease-in-out transition-all">
-                                                            Generate Barcode
+                                                            class="px-2 text-sm h-full w-full flex items-center justify-center font-medium rounded-lg bg-[rgb(36,36,36)] text-white hover:bg-[rgb(86,86,86)] duration-100 ease-in-out transition-all">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="size-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M12 4.5v15m7.5-7.5h-15" />
+                                                            </svg>
                                                         </button>
                                                     </div>
                                                 </div>
                                             @else
                                                 {{-- //* generate barcode --}}
                                                 @if ($barcode)
-                                                    <div class="flex justify-between mb-3">
+                                                    <div class="grid items-center grid-flow-col gap-1 grid-col-5">
 
                                                         <div class="flex justify-center w-full ">
                                                             <img id="barcode"
@@ -134,10 +139,14 @@
                                                             <span
                                                                 class="font-medium text-red-500 error">{{ $message }}</span>
                                                         @enderror
-
                                                         <button type="button" wire:click="changeBarcodeForm()"
-                                                            class="px-2 text-sm font-medium rounded-lg bg-[rgb(36,36,36)] text-white hover:bg-[rgb(86,86,86)] duration-100 ease-in-out transition-all">
-                                                            Remove
+                                                            class="text-sm h-3/4 w-3/4 flex items-center justify-center font-medium rounded-lg bg-[rgb(36,36,36)] text-white hover:bg-[rgb(86,86,86)] duration-100 ease-in-out transition-all">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="size-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M5 12h14" />
+                                                            </svg>
                                                         </button>
                                                     </div>
                                                 @endif
@@ -194,7 +203,8 @@
                                     {{-- //* vat type --}}
                                     <div class="col-span-1 mb-3">
 
-                                        <label for="vatType" class="block mb-2 text-sm font-medium text-gray-900 ">Vat
+                                        <label for="vatType"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Vat
                                             Type</label>
 
                                         <select id="vatType" wire:model.live="vatType"
@@ -224,10 +234,6 @@
                                         @enderror
 
                                     </div>
-
-
-
-
                                 </div>
 
                                 {{-- //* third row --}}
@@ -364,12 +370,9 @@
                             </div>
                         </div>
                     @endif
-
                 </div>
-
             </form>
         </div>
-
     </div>
 </div>
 
