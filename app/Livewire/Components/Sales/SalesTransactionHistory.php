@@ -31,7 +31,7 @@ class SalesTransactionHistory extends Component
     public $fromPage = "SalesHistory";
     public function render()
     {
-        $transactions = TransactionMovement::all();
+        $query = TransactionMovement::query();
 
         // if ($this->transactionFilter != 0) {
         //     $query->where('transaction_type', $this->transactionFilter);
@@ -54,7 +54,7 @@ class SalesTransactionHistory extends Component
 
         return view(
             'livewire.components.Sales.sales-transaction-history',
-            ['transactions' => $transactions,]
+            ['transactions' => $query,]
         );
     }
 
