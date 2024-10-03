@@ -1,4 +1,4 @@
-<div class="p-4 border border-[rgb(143,143,143)] shadow-2xl bg-white rounded-lg ">
+<div class="p-4 border h-full border-[rgb(143,143,143)] shadow-2xl bg-white rounded-lg ">
     <div class="flex flex-row items-center justify-between ">
         <div>
             <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Fast & Slow Moving Items</p>

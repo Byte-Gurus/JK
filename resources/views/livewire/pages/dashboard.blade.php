@@ -36,12 +36,20 @@
                 @endif
             </div>
         </div>
-        <div class="grid w-full grid-flow-col grid-cols-3 gap-4 my-4">
-            <div class="w-full col-span-2">
-                @livewire('charts.fast-slow-moving-chart')
-
+        <div class="grid w-full grid-flow-col grid-cols-10 gap-4 my-4">
+            <div class="w-full h-full col-span-2">
+                <div class="p-4 h-full border border-[rgb(143,143,143)] shadow-2xl bg-white rounded-lg ">
+                    <div class="flex flex-row items-center justify-between ">
+                        <div>
+                            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Critical Items</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="w-full col-span-1">
+            <div class="w-full h-full col-span-5">
+                @livewire('charts.fast-slow-moving-chart')
+            </div>
+            <div class="w-full h-full col-span-3">
                 @livewire('charts.inventory-movement-chart')
             </div>
         </div>

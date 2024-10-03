@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
 use App\Events\PurchaseOrderEvent;
+use App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery\DeliveryTable;
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Delivery;
 use App\Models\Item;
@@ -534,6 +535,7 @@ class PurchaseOrderForm extends Component
     public function refreshTable() //* refresh ang table after confirmation
     {
         $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
+        $this->dispatch('refresh-table')->to(DeliveryTable::class);
     }
 
     public function resetModal()
