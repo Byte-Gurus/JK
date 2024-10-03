@@ -81,11 +81,7 @@ class DailySalesReport extends Component
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
-                    dump([
-                        'detail' => $detail,
-                        'vatable_subtotal' => $vatable_subtotal,
-                        'vatable_amount' => $transaction->vatable_amount,
-                    ]);
+
                 }
             } elseif ($transaction->transaction_type == 'Return') {
                 $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
