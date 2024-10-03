@@ -28,6 +28,7 @@ class SalesReturn extends Component
         if ($this->showSalesReturnTable) {
             $this->dispatch('display-sales-transaction', showSalesTransaction: true)->to(CashierPage::class);
         } else {
+            $this->showSalesReturnDetails = false;
             $this->sShowSalesReturnDetails = false;
             $this->showSalesReturnTable = true;
         }
