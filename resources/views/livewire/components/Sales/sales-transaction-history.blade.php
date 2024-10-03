@@ -234,7 +234,7 @@
                                 {{ $transaction['created_at']->format(' M d Y h:i A ') }}
                             </th>
 
-                            @if ( $transaction->transactionJoin->transaction_type == "Sales")
+                            @if ( $transaction->transaction_type == "Sales")
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
                                 <button wire:click="voidTransaction({{ $transaction->transaction_id }})" type="button">Void
