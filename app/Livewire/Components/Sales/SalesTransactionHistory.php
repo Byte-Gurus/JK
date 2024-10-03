@@ -164,7 +164,7 @@ class SalesTransactionHistory extends Component
         $this->isAdmin = $isAdmin;
 
 
-        if ($this->isAdmin && $this->whatVoid == 'Transaction') {
+        if ($this->isAdmin && $this->whatVoid === 'Transaction') {
             $transaction = transaction::find($this->salesID)->first();
             $transaction->transaction_type = 'Void';
             $transaction->save();
@@ -172,7 +172,7 @@ class SalesTransactionHistory extends Component
             $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
             $transactionMovement->transaction_type = 'Void';
             $transactionMovement->save();
-        } elseif ($this->isAdmin && $this->whatVoid == 'TransactionDetails') {
+        } elseif ($this->isAdmin && $this->whatVoid === 'TransactionDetails') {
             $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID)->first();
             $transactionDetail->status = 'Void';
             $transactionDetail->save();
