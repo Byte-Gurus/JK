@@ -166,7 +166,7 @@
                                 @elseif ($sale->transaction_type == 'Return')
                                 {{ $sale['returnsJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($sale->transaction_type == 'Credit')
-                                {{ $sale['creditJoin']['transaction_number'] }}
+                                {{ $sale['creditJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($sale->transaction_type == 'Void')
                                 {{ $sale['transactionJoin']['transaction_number'] }}
                                 @endif
@@ -178,7 +178,7 @@
                                 @elseif ($sale->transaction_type == 'Return')
                                 {{ number_format($sale->returnsJoin->transactionJoin->total_amount, 2) }}
                                 @elseif ($sale->transaction_type == 'Credit')
-                                0.00
+                                {{ number_format($sale->creditJoin->transactionJoin->total_amount, 2) }}
                                 @elseif ($sale->transaction_type == 'Void')
                                 {{ number_format($sale->transactionJoin->total_amount, 2) }}
                                 @endif
