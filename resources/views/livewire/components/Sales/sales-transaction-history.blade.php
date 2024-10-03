@@ -161,7 +161,7 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                             <th scope="row"
                                 class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{-- @if ($transaction->transaction_type == 'Sales')
+                                @if ($transaction->transaction_type == 'Sales')
                                 {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Return')
                                 {{ $transaction['returnsJoin']['transactionJoin']['transaction_number'] }}
@@ -169,9 +169,9 @@
                                 {{ $transaction['creditJoin']['credit_number'] }}
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ $transaction['transactionJoin']['transaction_number'] }}
-                                @endif --}}
+                                @endif
 
-                                {{ $transaction['transaction_type'] }}
+                               
                             </th>
                             {{-- <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
