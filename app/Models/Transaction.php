@@ -61,11 +61,18 @@ class Transaction extends Model
                 $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('discountJoin', function ($query) use ($value) {
-                // Cast percentage to text if it's a numeric field
-                $query->whereRaw('LOWER(CAST(percentage AS TEXT)) like ?', ["%{$value}%"]);
+                // Check the database connection driver and use the appropriate CAST syntax
+                $dbDriver = config('database.default');
+                if ($dbDriver == 'pgsql') {
+                    $query->whereRaw('LOWER(CAST(percentage AS TEXT)) like ?', ["%{$value}%"]);
+                } else {
+                    // Assume MySQL or other compatible database
+                    $query->whereRaw('LOWER(CAST(percentage AS CHAR)) like ?', ["%{$value}%"]);
+                }
             })
             ->orWhereHas('paymentJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(payment_type) like ?', ["%{$value}%"]);
             });
+
     }
 }

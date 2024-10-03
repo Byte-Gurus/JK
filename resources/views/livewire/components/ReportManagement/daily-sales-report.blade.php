@@ -127,6 +127,8 @@
                                         {{ $transaction->returnsJoin->return_number }}
                                     @elseif ($transaction->transaction_type == 'Credit')
                                         {{ $transaction->creditJoin->credit_number }}
+                                    @elseif ($transaction->transaction_type == 'Void')
+                                        {{ $transaction->transactionJoin->transaction_number }}
                                     @endif
 
                                 </p>
@@ -154,6 +156,8 @@
                                         {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
                                     @elseif ($transaction->transaction_type == 'Credit')
                                         {{ number_format($transaction->creditJoin->credit_amount, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Void')
+                                        {{ number_format($transaction->transactionJoin->total_amount * -1, 2) }}
                                     @endif
 
                                 </p>
@@ -168,6 +172,8 @@
                                         0.00
                                     @elseif ($transaction->transaction_type == 'Credit')
                                         {{ number_format($transaction->creditJoin->transactionJoin->total_discount_amount, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Void')
+                                        0.00
                                     @endif
                                 </p>
                             </div>
@@ -182,6 +188,8 @@
                                         {{ number_format($transaction->returnsJoin->return_vat_amount * -1, 2) }}
                                     @elseif ($transaction->transaction_type == 'Credit')
                                         {{ number_format($transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Void')
+                                        {{ number_format($transaction->transactionJoin->total_vat_amount * -1, 2) }}
                                     @endif
                                 </p>
                             </div>
@@ -195,6 +203,8 @@
                                         {{ number_format(($transaction->returnsJoin->return_total_amount - $transaction->returnsJoin->return_vat_amount) * -1, 2) }}
                                     @elseif ($transaction->transaction_type == 'Credit')
                                         {{ number_format($transaction->creditJoin->transactionJoin->total_amount - $transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
+                                    @elseif ($transaction->transaction_type == 'Void')
+                                        {{ number_format($transaction->transactionJoin->total_amount - $transaction->transactionJoin->total_vat_amount * -1, 2) }}
                                     @endif
 
                                 </p>

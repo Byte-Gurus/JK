@@ -15,12 +15,15 @@ class SalesAdminLoginForm extends Component
     public $showPassword = true;
 
     public $showSalesAdminLoginForm = false;
+    public $fromPage;
 
     public function render()
     {
         return view('livewire.components.Sales.sales-admin-login-form');
     }
-
+    protected $listeners = [
+        'get-from-page' => 'getFromPage'
+    ];
     public function closeSalesAdminLoginForm()
     {
         $this->dispatch('return-sales-return-details')->to(SalesReturnDetails::class);
@@ -41,7 +44,14 @@ class SalesAdminLoginForm extends Component
             // Check if the user is an admin and active
             if ($user && $user->user_role_id == 1 && $user->status_id == 1) {
                 $this->isAdmin = true;
-                $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesReturnDetails::class);
+
+                if ($this->fromPage === 'SalesHistory') {
+                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesTransactionHistory::class);
+
+                } elseif ($this->fromPage === 'ReturnDetails') {
+                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesReturnDetails::class);
+
+                }
 
             } else {
                 $this->addError('submit', 'This account is inactive or not an admin.');
@@ -56,5 +66,10 @@ class SalesAdminLoginForm extends Component
     public function showPasswordStatus()
     {
         $this->showPassword = !$this->showPassword;
+    }
+
+    public function getFromPage($fromPage)
+    {
+        $this->fromPage = $fromPage;
     }
 }

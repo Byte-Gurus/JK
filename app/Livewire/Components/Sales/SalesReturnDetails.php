@@ -9,7 +9,7 @@ use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -24,6 +24,7 @@ class SalesReturnDetails extends Component
     public $isAdmin;
     public $description = [];
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
+    public $fromPage = 'ReturnDetails';
     public $return_info = [];
 
     public function mount()
@@ -48,10 +49,7 @@ class SalesReturnDetails extends Component
         'returnConfirmed'
     ];
 
-    public function returnSalesReturnDetails()
-    {
-        $this->showSalesAdminLoginForm = false;
-    }
+
 
     public function return()
     {
@@ -62,8 +60,10 @@ class SalesReturnDetails extends Component
             }
         }
         $this->validate($this->rules);
+        
+        $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+        $this->displaySalesAdminLoginForm();
 
-        $this->showSalesAdminLoginForm = true;
     }
 
     public function returnConfirmed()
@@ -74,7 +74,8 @@ class SalesReturnDetails extends Component
             'return_number' => $this->return_number,
             'original_amount' => $this->total_amount,
             'return_vat_amount' => $this->return_vat_amount,
-            'hasTransaction' => false
+            'hasTransaction' => false,
+            'user_id' => Auth::id(),
         ]);
 
         $transaction_movement = TransactionMovement::create([
@@ -285,7 +286,10 @@ class SalesReturnDetails extends Component
         $this->calculateTotalRefundAmount();
 
     }
-
+    public function displaySalesAdminLoginForm()
+    {
+        $this->showSalesAdminLoginForm = !$this->showSalesAdminLoginForm;
+    }
     public function resetSpecificValidation($fieldName)
     {
         $this->resetErrorBag($fieldName);

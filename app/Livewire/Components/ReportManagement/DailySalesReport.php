@@ -42,8 +42,11 @@ class DailySalesReport extends Component
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
+
         $totalReturnAmount = 0;
         $totalReturnVatAmount = 0;
+        $totalVoidAmount = 0;
+        $totalVoidVatAmount = 0;
 
         foreach ($this->transactions as $transaction) {
             if ($transaction->transaction_type == 'Sales') {
@@ -56,17 +59,20 @@ class DailySalesReport extends Component
             } elseif ($transaction->transaction_type == 'Credit') {
                 $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
                 $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
+            } elseif ($transaction->transaction_type == 'Void') {
+                $totalVoidAmount += $transaction->transactionJoin->total_amount;
+                $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
             }
 
         }
 
-        $totalGross -= $totalReturnAmount;
-        $totalNet = $totalGross - ($totalTax - $totalReturnVatAmount);
+        $totalGross -= $totalReturnAmount + $totalVoidAmount;
+        $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
 
         $this->transaction_info = [
 
             'totalGross' => $totalGross,
-            'totalTax' => $totalTax - $totalReturnVatAmount,
+            'totalTax' => $totalTax - $totalReturnVatAmount - $totalVoidVatAmount,
             'date' => $date->format('M d Y '),
             'totalNet' => $totalNet,
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),

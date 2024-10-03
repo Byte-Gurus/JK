@@ -170,4 +170,6 @@ class InventoryForm extends Component
         $this->showInventoryForm = !$this->showInventoryForm;
         $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }
+
+   
 }

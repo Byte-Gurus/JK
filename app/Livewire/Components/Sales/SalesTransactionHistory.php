@@ -13,8 +13,8 @@ use Livewire\WithPagination;
 
 class SalesTransactionHistory extends Component
 {
-    use WithPagination,  WithoutUrlPagination;
-    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type;
+    use WithPagination, WithoutUrlPagination;
+    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID, $isAdmin;
     public $transactionDetails = [];
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
@@ -28,6 +28,7 @@ class SalesTransactionHistory extends Component
     public $showSalesAdminLoginForm = false;
 
     public $startDate, $endDate;
+    public $fromPage = "SalesHistory";
     public function render()
     {
         $query = Transaction::query();
@@ -59,7 +60,7 @@ class SalesTransactionHistory extends Component
     protected $listeners = [
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
         "echo:refresh-return,ReturnEvent" => 'refreshFromPusher',
-
+        'admin-confirmed' => 'adminConfirmed',
     ];
     public function getTransactionID($transaction_id)
     {
@@ -85,10 +86,10 @@ class SalesTransactionHistory extends Component
         $this->return_amount = $transaction->returnJoin->return_total_amount ?? 0;
 
         if ($this->transaction_type == 'Return') {
-            $this->change =  $this->tendered_amount - $this->original_amount;
+            $this->change = $this->tendered_amount - $this->original_amount;
 
         } else {
-            $this->change =  $this->tendered_amount - $this->grandTotal;
+            $this->change = $this->tendered_amount - $this->grandTotal;
         }
     }
 
@@ -142,5 +143,28 @@ class SalesTransactionHistory extends Component
     public function displaySalesAdminLoginForm()
     {
         $this->showSalesAdminLoginForm = !$this->showSalesAdminLoginForm;
+    }
+
+    public function voidTransaction($salesID)
+    {
+        $this->salesID = $salesID;
+        $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+        $this->displaySalesAdminLoginForm();
+    }
+
+    public function adminConfirmed($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+
+        if ($this->isAdmin) {
+            $transaction = transaction::find($this->salesID)->first();
+            $transaction->transaction_type = 'Void';
+            $transaction->save();
+
+            $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
+            $transactionMovement->transaction_type = 'Void';
+            $transactionMovement->save();
+        }
     }
 }
