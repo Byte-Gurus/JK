@@ -48,10 +48,6 @@ class DailySalesReport extends Component
         $totalVoidAmount = 0;
         $totalVoidVatAmount = 0;
 
-        $totalVoidAmount = 0;
-        $totalVoidVatAmount = 0;
-
-
         $totalVoidItemAmount = 0;
         $totalVoidTaxAmount = 0;
 
@@ -63,6 +59,8 @@ class DailySalesReport extends Component
 
         foreach ($this->transactions as $transaction) {
             $transaction->totalVoidItemAmount = 0; // Initialize void amount for the transaction
+            $transaction->vatable_amount = 0;
+            $transaction->non_vatable_amount = 0;
 
             if ($transaction->transaction_type == 'Sales') {
                 $totalGross += $transaction->transactionJoin->total_amount;
@@ -75,9 +73,11 @@ class DailySalesReport extends Component
                         if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
                             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $transaction->vatable_amount += $vatable_amount;
                         } elseif ($detail->vat_type === 'Non Vatable') {
                             $non_vatable_subtotal += $detail->item_subtotal;
                             $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
                 }
@@ -92,9 +92,11 @@ class DailySalesReport extends Component
                         if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
                             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $transaction->vatable_amount += $vatable_amount;
                         } elseif ($detail->vat_type === 'Non Vatable') {
                             $non_vatable_subtotal += $detail->item_subtotal;
                             $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
                 }
@@ -109,9 +111,11 @@ class DailySalesReport extends Component
                         if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
                             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $transaction->vatable_amount += $vatable_amount;
                         } elseif ($detail->vat_type === 'Non Vatable') {
                             $non_vatable_subtotal += $detail->item_subtotal;
                             $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                            $transaction->non_vatable_amount += $non_vatable_amount;
                         }
                     }
                 }
@@ -121,12 +125,12 @@ class DailySalesReport extends Component
             }
 
             $totalVoidItemAmount += $transaction->totalVoidItemAmount; // Accumulate void item amount
-            $transaction->$totalVoidTaxAmount += $non_vatable_amount + $vatable_amount;
+            $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->non_vatable_amount; // Accumulate void tax amount
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
         $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
-        // $transaction->VoidAmount = $totalVoidItemAmount;
+
 
         $this->transaction_info = [
 
