@@ -25,8 +25,12 @@ class SalesReturn extends Component
 
     public function returnToSalesTransaction()
     {
-        $this->sShowSalesReturnDetails = false;
-        $this->dispatch('display-sales-transaction', showSalesTransaction: true)->to(CashierPage::class);
+        if ($this->showSalesReturnTable) {
+            $this->dispatch('display-sales-transaction', showSalesTransaction: true)->to(CashierPage::class);
+        } else {
+            $this->sShowSalesReturnDetails = false;
+            $this->showSalesReturnTable = true;
+        }
     }
 
     public function displaySalesReturnModal()
@@ -47,5 +51,4 @@ class SalesReturn extends Component
         $this->showSalesReturnDetails = false;
         $this->sShowSalesReturnDetails = $sShowSalesReturnDetails;
     }
-
 }
