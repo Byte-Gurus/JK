@@ -974,7 +974,7 @@ class SalesTransaction extends Component
 
         //maximum level = reorder quantity + reorder point - [minimum consumption * minimum lead time]
 
-        $maximum_level = $reorder_quantity + $item->reorder_point - ($minimum_consumption * $minimum_lead_time);
+        $maximum_level = (int) $reorder_quantity + $item->reorder_point - ($minimum_consumption * $minimum_lead_time);
 
         Item::where('id', $item_info->item_id)->update(['maximum_stock_level' => $maximum_level]);
 
