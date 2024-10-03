@@ -25,6 +25,7 @@ class SalesReturn extends Component
 
     public function returnToSalesTransaction()
     {
+        $this->sShowSalesReturnDetails = false;
         $this->dispatch('display-sales-transaction', showSalesTransaction: true)->to(CashierPage::class);
     }
 
