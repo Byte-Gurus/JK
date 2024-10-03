@@ -50,7 +50,6 @@ class ViewSalesReturnDetails extends Component
             'return_total_amount' => $return_info->return_total_amount,
             'current_amount' => $return_info->transactionJoin->total_amount,
             'return_number' => $return_info->return_number
-
         ]);
     }
 
