@@ -129,14 +129,14 @@
                         {{ number_format($receiptDetails['tax_details']['vatable_amount'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold uppercase">Non-Vatable Sale</p>
+                    <p class="text-[0.6em] font-bold uppercase">Vat Exempt Sale</p>
                     <p class="text-[0.6em] font-bold uppercase">
-                        {{ number_format($receiptDetails['tax_details']['non_vatable_amount'] ?? null, 2) }}</p>
+                        {{ number_format($receiptDetails['tax_details']['vat_exempt_amount'] ?? null, 2) }}</p>
                 </div>
-                <div class="flex flex-row justify-between">
+                {{-- <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">VAT-Exempt Sale</p>
                     <p class="text-[0.6em] font-bold uppercase">0.00</p>
-                </div>
+                </div> --}}
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">VAT Zero-Rated Sale</p>
                     <p class="text-[0.6em] font-bold uppercase">0.00</p>

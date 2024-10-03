@@ -49,9 +49,9 @@ class ItemForm extends Component
 
             $this->vat_percent = 12;
 
-        } elseif ($vat_type == 'Non Vatable') {
+        } elseif ($vat_type == 'Vat Exempt') {
 
-            $this->vat_percent = 3;
+            $this->vat_percent = 0;
         }
     }
     public function create() //* create process
@@ -224,7 +224,7 @@ class ItemForm extends Component
             'shelf_life_type' =>  'required|in:Perishable,Non Perishable',
             'vat_percent' => ['required', 'numeric', 'min:0'],
             'bulk_quantity' => ['required', 'numeric', 'min:0'],
-            'vatType' => 'required|in:Vat,Non Vatable',
+            'vatType' => 'required|in:Vat,Vat Exempt',
             'status' => 'required|in:1,2',
         ];
 

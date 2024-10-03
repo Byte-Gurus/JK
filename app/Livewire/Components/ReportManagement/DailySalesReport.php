@@ -54,13 +54,13 @@ class DailySalesReport extends Component
         $vatable_subtotal = 0;
         $vatable_amount = 0;
 
-        $non_vatable_subtotal = 0;
-        $non_vatable_amount = 0;
+        $vat_exempt_subtotal = 0;
+        $vat_exempt_amount = 0;
 
         foreach ($this->transactions as $transaction) {
             $transaction->totalVoidItemAmount = 0; // Initialize void amount for the transaction
             $transaction->vatable_amount = 0;
-            $transaction->non_vatable_amount = 0;
+            $transaction->vat_exempt_amount = 0;
             $transaction->VoidTaxAmount = 0;
             $transaction->totalVoidTaxAmount = 0;
 
@@ -165,7 +165,7 @@ class DailySalesReport extends Component
 
 
             $totalVoidItemAmount += $transaction->totalVoidItemAmount;
-            $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->non_vatable_amount;
+            $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->vat_exempt_amount;
 
         }
 
@@ -194,13 +194,13 @@ class DailySalesReport extends Component
                 $vatable_subtotal = $detail->item_subtotal;
                 $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                 $transaction->vatable_amount += $vatable_amount;
-            } elseif ($detail->vat_type === 'Non Vatable') {
-                $non_vatable_subtotal = $detail->item_subtotal;
-                $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-                $transaction->non_vatable_amount += $non_vatable_amount;
+            } elseif ($detail->vat_type === 'Vat Exempt') {
+                $vat_exempt_subtotal = $detail->item_subtotal;
+                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
+                $transaction->vat_exempte_amount += $vat_exempt_amount;
             }
 
-            $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
+            $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->vat_exempt_amount;
         }
     }
 

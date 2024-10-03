@@ -137,9 +137,9 @@ class SalesReturnDetails extends Component
         $this->item_return_amount = 0;
         $this->return_vat_amount = 0;
         $vatable_Return_Subtotal = 0;
-        $non_vatable_Return_Subtotal = 0;
+        $vat_exempt_Return_Subtotal = 0;
         $vatable_return_total_amount = 0;
-        $non_vatable_return_total_amount = 0;
+        $vat_exempt_return_total_amount = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index]) && isset($this->operation[$index]) && is_numeric($this->returnQuantity[$index]) && isset($this->description[$index])) {
@@ -169,10 +169,10 @@ class SalesReturnDetails extends Component
                         $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
 
 
-                    } elseif ($transactionDetail->vat_type === 'Non Vatable') {
-                        $non_vatable_Return_Subtotal += $this->item_return_amount;
+                    } elseif ($transactionDetail->vat_type === 'Vat Exempt') {
+                        $vat_exempt_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
-                        $non_vatable_return_total_amount = $non_vatable_Return_Subtotal - ($non_vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+                        $vat_exempt_return_total_amount = $vat_exempt_Return_Subtotal - ($vat_exempt_Return_Subtotal / (100 + $vat_Percent) * 100);
 
                     }
 
@@ -191,7 +191,7 @@ class SalesReturnDetails extends Component
                 ];
             }
         }
-        $this->return_vat_amount = $non_vatable_return_total_amount + $vatable_return_total_amount;
+        $this->return_vat_amount = $vat_exempt_return_total_amount + $vatable_return_total_amount;
         $this->new_total = $this->total_amount - $this->return_total_amount;
     }
 

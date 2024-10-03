@@ -446,10 +446,10 @@ class SalesTransaction extends Component
         $this->subtotal = 0;
 
         $vatable_amount = 0;
-        $non_vatable_amount = 0;
+        $vat_exempt_amount = 0;
 
         $vatable_subtotal = 0;
-        $non_vatable_subtotal = 0;
+        $vat_exempt_subtotal = 0;
 
         $this->netAmount = 0;
         $this->discount_percent = 0;
@@ -471,13 +471,13 @@ class SalesTransaction extends Component
                 //     'total_amount' => $index['total_amount'],
                 //     'vat_percent' => $index['vat_percent']
                 // ]);
-            } elseif ($index['vat_type'] === 'Non Vatable') {
-                $non_vatable_subtotal += $index['total_amount'];
-                $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $index['vat_percent']) * 100);
+            } elseif ($index['vat_type'] === 'Vat Exempt') {
+                $vat_exempt_subtotal += $index['total_amount'];
+                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $index['vat_percent']) * 100);
                 // dump([
                 //     "non vat",
-                //     'non_vatable_subtotal' => $non_vatable_subtotal,
-                //     'non_vatable_amount' => $non_vatable_amount,
+                //     'vat_exempt_subtotal' => $vat_exempt_subtotal,
+                //     'vat_exempt_amount' => $vat_exempt_amount,
                 //     'total_amount' => $index['total_amount'],
                 //     'vat_percent' => $index['vat_percent']
                 // ]);
@@ -487,7 +487,7 @@ class SalesTransaction extends Component
                 $this->excess_amount = $this->subtotal - $this->return_amount;
             }
 
-            $this->totalVat = $vatable_amount + $non_vatable_amount;
+            $this->totalVat = $vatable_amount + $vat_exempt_amount;
 
             if ($this->customerDetails) {
 
@@ -511,8 +511,8 @@ class SalesTransaction extends Component
             //     'subtotal' => $this->subtotal,
             //     'vatable_subtotal' => $vatable_subtotal,
             //     'vatable_amount' => $vatable_amount,
-            //     'non_vatable_subtotal' => $non_vatable_subtotal,
-            //     'non_vatable_amount' => $non_vatable_amount,
+            //     'vat_exempt_subtotal' => $vat_exempt_subtotal,
+            //     'vat_exempt_amount' => $vat_exempt_amount,
             //     'netAmount' => $this->netAmount,
 
             // ];
@@ -520,7 +520,7 @@ class SalesTransaction extends Component
 
 
         $this->tax_details = [
-            'non_vatable_amount' => $non_vatable_amount,
+            'vat_exempt_amount' => $vat_exempt_amount,
             'vatable_amount' => $vatable_amount,
             'total_vat' => $this->totalVat,
             'PWD_Senior_discount_amount' => $this->PWD_Senior_discount_amount,

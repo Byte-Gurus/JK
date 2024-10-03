@@ -211,7 +211,7 @@
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Set vat</option>
                                             <option value="Vat">Vat</option>
-                                            <option value="Non Vatable">Non Vatable</option>
+                                            <option value="Vat Exempt">Vat Exempt</option>
                                             @error('vat_type')
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
