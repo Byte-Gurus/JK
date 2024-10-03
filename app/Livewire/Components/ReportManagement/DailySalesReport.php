@@ -71,7 +71,7 @@ class DailySalesReport extends Component
                     if ($detail->status == 'Void') {
                         $transaction->totalVoidItemAmount += $detail->item_subtotal;
 
-                        if ($detail->vat_type === 'Vatable') {
+                        if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
                             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
                             $transaction->vatable_amount += $vatable_amount;
@@ -90,7 +90,7 @@ class DailySalesReport extends Component
                     if ($detail->status == 'Void') {
                         $transaction->totalVoidItemAmount += $detail->item_subtotal;
 
-                        if ($detail->vat_type === 'Vatable') {
+                        if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
                             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
                             $transaction->vatable_amount += $vatable_amount;
@@ -109,7 +109,7 @@ class DailySalesReport extends Component
                     if ($detail->status == 'Void') {
                         $transaction->totalVoidItemAmount += $detail->item_subtotal;
 
-                        if ($detail->vat_type === 'Vatable') {
+                        if ($detail->vat_type === 'Vat') {
                             $vatable_subtotal += $detail->item_subtotal;
                             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
                             $transaction->vatable_amount += $vatable_amount;
@@ -127,7 +127,7 @@ class DailySalesReport extends Component
 
             $totalVoidItemAmount += $transaction->totalVoidItemAmount; // Accumulate void item amount
             $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->non_vatable_amount; // Accumulate void tax amount
-            dump($transaction->transactionJoin->transactionDetailsJoin );
+            // dump($transaction->transactionJoin->transactionDetailsJoin );
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
