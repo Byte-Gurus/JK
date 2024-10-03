@@ -153,7 +153,7 @@
                     </div>
                 </li>
                 <li class="col-span-2 py-[3px]">
-                    {{ number_format($transaction->VoidAmount, 2) }}
+                    {{ number_format($transaction->totalVoidItemAmount , 2) }}
                 </li>
                 <li class="col-span-2 py-[3px]">
                     <div>
