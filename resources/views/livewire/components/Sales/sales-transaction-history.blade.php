@@ -250,7 +250,7 @@
                             @elseif ($transaction->transaction_type == 'Credit')
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $sale->creditJoin->transactionJoin->id }})"
+                                <button wire:click="voidTransaction({{ $transaction->creditJoin->transactionJoin->id }})"
                                     type="button">Void
                                     Transaction</button>
                             </th>
