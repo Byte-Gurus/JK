@@ -166,7 +166,7 @@
                                 @elseif ($sale->transaction_type == 'Return')
                                 {{ $sale['returnsJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($sale->transaction_type == 'Credit')
-                                {{ $sale['creditJoin']['transactionJoin']['transaction_number'] }}
+                                {{ $sale['creditJoin']['credit_number'] }}
                                 @elseif ($sale->transaction_type == 'Void')
                                 {{ $sale['transactionJoin']['transaction_number'] }}
                                 @endif
