@@ -36,7 +36,6 @@ class SalesReturnDetails extends Component
     {
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
-
         return view('livewire.components.Sales.sales-return-details', [
             'transactionDetails' => $this->transactionDetails,
         ]);
@@ -60,7 +59,7 @@ class SalesReturnDetails extends Component
             }
         }
         $this->validate($this->rules);
-        
+
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
 

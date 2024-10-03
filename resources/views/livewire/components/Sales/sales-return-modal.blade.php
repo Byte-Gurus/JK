@@ -47,7 +47,6 @@
 
                         <div class="p-4">
 
-
                             {{-- //* first row --}}
                             <div class="flex flex-row items-center justify-between w-full">
 
