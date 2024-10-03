@@ -8,8 +8,8 @@ use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
 use App\Models\TransactionMovement;
-use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
