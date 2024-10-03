@@ -169,6 +169,7 @@
                                 {{ $sale['creditJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ $sale['transactionJoin']['transaction_number'] }}
+                                @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -180,6 +181,7 @@
                                 0.00
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ number_format($sale->transactionJoin->total_amount, 2) }}
+                                @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -195,7 +197,7 @@
                                 'N/A'
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ $sale['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
-
+                                @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
@@ -207,6 +209,7 @@
                                 {{ $sale['creditJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ $sale['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                @endif
                             </th>
 
                             <th scope="row"
@@ -221,6 +224,7 @@
                                 'N/A'}}
                                 @elseif ($transaction->transaction_type == 'Void')
                                 {{ number_format($sale['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
+                                @endif
                             </th>
 
                             <th scope="row"
