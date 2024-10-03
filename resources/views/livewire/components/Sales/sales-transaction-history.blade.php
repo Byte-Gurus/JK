@@ -169,7 +169,8 @@
                                 {{-- {{ $sale['creditJoin']['transactionJoin']['transaction_number'] }} --}}
                                 sasasasasasasa
                                 @elseif ($sale->transaction_type == 'Void')
-                                {{ $sale['transactionJoin']['transaction_number'] }}
+                                sasasasasasasa
+                                {{-- {{ $sale['transactionJoin']['transaction_number'] }} --}}
                                 @endif
                             </th>
                             <th scope="row"
