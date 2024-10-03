@@ -157,6 +157,20 @@
                         </p>
                     </div>
                 </li>
+                <div>
+                    <p class="text-[0.8em] text-center font-bold">
+                        @if ($transaction->transaction_type == 'Sales')
+                        {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                        @elseif ($transaction->transaction_type == 'Return')
+                        {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
+                        @elseif ($transaction->transaction_type == 'Credit')
+                        {{ number_format($transaction->creditJoin->credit_amount, 2) }}
+                        @elseif ($transaction->transaction_type == 'Void')
+                        {{ number_format($transaction->transactionJoin->total_amount * -1, 2) }}
+                        @endif
+
+                    </p>
+                </div>
                 <li class="col-span-2 py-[3px]">
                     {{ number_format($transaction->totalVoidItemAmount * -1 , 2) }}
                 </li>
@@ -191,20 +205,7 @@
                         </p>
                     </div>
                 </li>
-                <div>
-                    <p class="text-[0.8em] text-center font-bold">
-                        @if ($transaction->transaction_type == 'Sales')
-                        {{ number_format($transaction->transactionJoin->total_amount, 2) }}
-                        @elseif ($transaction->transaction_type == 'Return')
-                        {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
-                        @elseif ($transaction->transaction_type == 'Credit')
-                        {{ number_format($transaction->creditJoin->credit_amount, 2) }}
-                        @elseif ($transaction->transaction_type == 'Void')
-                        {{ number_format($transaction->transactionJoin->total_amount * -1, 2) }}
-                        @endif
 
-                    </p>
-                </div>
                 <li class="col-span-2 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-center font-bold">
