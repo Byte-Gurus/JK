@@ -217,15 +217,15 @@
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                {{ number_format($sale['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
+                                {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ number_format($sale['returnsJoin']['transactionJoin']['total_vat_amount'], 2) ??
+                                {{ number_format($transaction['returnsJoin']['transactionJoin']['total_vat_amount'], 2) ??
                                 'N/A'}}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ number_format($sale['creditJoin']['transactionJoin']['total_vat_amount'], 2) ??
+                                {{ number_format($transaction['creditJoin']['transactionJoin']['total_vat_amount'], 2) ??
                                 'N/A'}}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ number_format($sale['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
+                                {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @endif
                             </th>
 
