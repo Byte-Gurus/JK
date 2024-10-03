@@ -68,15 +68,17 @@ class DailySalesReport extends Component
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
 
-                if ($detail->status == 'Void') {
-                    $transaction->totalVoidItemAmount += $detail->item_subtotal;
+                foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
+                    if ($detail->status == 'Void') {
+                        $transaction->totalVoidItemAmount += $detail->item_subtotal;
 
-                    if ($detail->vat_type === 'Vat') {
-                        $vatable_subtotal += $detail->item_subtotal;
-                        $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
-                    } elseif ($detail->vat_type === 'Non Vatable') {
-                        $non_vatable_subtotal += $detail->item_subtotal;
-                        $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                        if ($detail->vat_type === 'Vat') {
+                            $vatable_subtotal += $detail->item_subtotal;
+                            $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                        } elseif ($detail->vat_type === 'Non Vatable') {
+                            $non_vatable_subtotal += $detail->item_subtotal;
+                            $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->vat_percent) * 100);
+                        }
                     }
                 }
             } elseif ($transaction->transaction_type == 'Return') {
