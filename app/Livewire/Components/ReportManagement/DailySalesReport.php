@@ -127,7 +127,7 @@ class DailySalesReport extends Component
 
             $totalVoidItemAmount += $transaction->totalVoidItemAmount; // Accumulate void item amount
             $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->non_vatable_amount; // Accumulate void tax amount
-            dump( $totalVoidTaxAmount,  $transaction->vatable_amount, $transaction->non_vatable_amount);
+            dump($transaction->transactionJoin->transactionDetailsJoin );
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
