@@ -50,17 +50,15 @@
 
                 {{-- //* table body --}}
                 <tbody>
-
-
-                    <tr
+                    {{-- <tr
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th
                             scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ number_format($total_amount, 2) }} --}}
+                            {{ number_format($total_amount, 2) }}
                         </th>
                         <th
                             scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ $transaction_type }} --}}
+                            {{ $transaction_type }}
                         </th>
                         <th
                             scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -74,7 +72,7 @@
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
                         </th>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>
