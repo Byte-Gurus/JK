@@ -56,7 +56,7 @@
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th
                             scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ number_format($total_amount, 2) }} --}}
+                            {{ number_format($return_total_amount, 2) }}
                         </th>
                         <th
                             scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -247,7 +247,7 @@
                     <p class=" text-[1.2em] font-medium">Current Total Amount</p>
                 </div>
                 <div>
-                    {{ number_format($total_amount, 2) }}
+                    {{ number_format($return_total_amount, 2) }}
                 </div>
             </div>
             <div class="flex flex-row justify-between">
