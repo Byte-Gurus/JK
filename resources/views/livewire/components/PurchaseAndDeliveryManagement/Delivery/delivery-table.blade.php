@@ -184,7 +184,7 @@
                                     @if ($delivery->status === 'Cancelled')
                                         <p>N/A</p>
                                     @elseif ($delivery->status === 'In Progress')
-                                        <button wire:click="setDateToday({{ $delivery->id }})">Set delivery today</button>
+                                        <button wire:click="setDateToday({{ $delivery->id }})" class="px-4 py-2 transition-all duration-100 ease-in-out bg-red-200 rounded-md hover:bg-red-400">Set delivery today</button>
                                     @else
                                         <a scope="row"
                                             class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">

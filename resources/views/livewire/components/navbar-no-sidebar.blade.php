@@ -36,7 +36,7 @@
 
         <div class="flex items-center justify-between">
             <div class="flex flex-row items-center gap-10">
-                <div x-data="{ openNotifications: false }">
+                <div x-data="{ openNotifications: false }" x-on:click.away="openNotifications = false;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         x-on:click="openNotifications = !openNotifications" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -52,8 +52,7 @@
                         <div
                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none shadow-lg h-3/5 shadow-slate-300 ring-1 ring-black ring-opacity-5 max-h-full
                         min-h-[50%]">
-                            <div class="  font-black bg-[rgb(255,217,255)] grid gap-6 lg:grid-cols-2 sm:gap-8 sm:p-8">
-
+                            <div class="  font-black bg-[rgb(75,75,75)] rounded-md grid gap-6 lg:grid-cols-2 sm:gap-8 sm:p-8">
                                 @livewire('components.notifications')
                             </div>
                         </div>

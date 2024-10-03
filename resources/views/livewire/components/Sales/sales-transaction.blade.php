@@ -667,7 +667,6 @@
                         <input type="text" x-ref="barcodeInput" wire.live="barcode" style="opacity: 0;" autofocus
                             x-on:keydown.window.prevent.ctrl.0="focusInput()" wire:model.live="barcode">
                     </div>
-
                 </div>
                 <div class="border border-black"></div>
                 <div class="flex flex-col p-2">
