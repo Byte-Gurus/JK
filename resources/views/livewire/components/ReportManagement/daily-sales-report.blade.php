@@ -108,6 +108,11 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
                     </div>
                 </li>
+                <li class="col-span-2">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Voided Tax</p>
+                    </div>
+                </li>
 
                 <li class="col-span-2">
                     <div>
@@ -153,7 +158,7 @@
                     </div>
                 </li>
                 <li class="col-span-2 py-[3px]">
-                    {{ number_format($transaction->totalVoidItemAmount , 2) }}
+                    {{ number_format($transaction->totalVoidItemAmount * -1 , 2) }}
                 </li>
                 <li class="col-span-2 py-[3px]">
                     <div>
@@ -174,15 +179,29 @@
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-center font-bold">
+
+                            {{ number_format($transaction->totalVoidTaxAmount * -1 , 2) }}
+
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-2 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
                             @if ($transaction->transaction_type == 'Sales')
-                            {{ number_format($transaction->transactionJoin->total_vat_amount, 2) }}
+                            {{-- {{ number_format($transaction->transactionJoin->total_amount -
+                            $transaction->transactionJoin->total_vat_amount, 2) }} --}}
                             @elseif ($transaction->transaction_type == 'Return')
-                            {{ number_format($transaction->returnsJoin->return_vat_amount * -1, 2) }}
+                            {{-- {{ number_format(($transaction->returnsJoin->return_total_amount -
+                            $transaction->returnsJoin->return_vat_amount) * -1, 2) }} --}}
                             @elseif ($transaction->transaction_type == 'Credit')
-                            {{ number_format($transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
+                            {{-- {{ number_format($transaction->creditJoin->transactionJoin->total_amount -
+                            $transaction->creditJoin->transactionJoin->total_vat_amount, 2) }} --}}
                             @elseif ($transaction->transaction_type == 'Void')
-                            {{ number_format($transaction->transactionJoin->total_vat_amount * -1, 2) }}
+                            {{-- {{ number_format($transaction->transactionJoin->total_amount -
+                            $transaction->transactionJoin->total_vat_amount * -1, 2) }} --}}
                             @endif
+
                         </p>
                     </div>
                 </li>
