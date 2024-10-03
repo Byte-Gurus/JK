@@ -83,6 +83,7 @@ class DailySalesReport extends Component
                         }
 
                         $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
+                        dump($transaction->VoidTaxAmount);
                     }
 
                 }

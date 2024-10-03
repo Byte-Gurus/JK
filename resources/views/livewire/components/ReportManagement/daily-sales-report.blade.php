@@ -209,7 +209,7 @@
                 <li class="col-span-2 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-center font-bold">
-                            {{ number_format($transaction->totalVoidTaxAmount * -1 , 2) }}
+                            {{ number_format($transaction->VoidTaxAmount * -1 , 2) }}
 
 
                         </p>
