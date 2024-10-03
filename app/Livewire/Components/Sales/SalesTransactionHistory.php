@@ -37,7 +37,7 @@ class SalesTransactionHistory extends Component
             $query->where('transaction_type', $this->transactionFilter);
         }
         if ($this->paymentFilter != 0) {
-            $query->whereHas('transactionnJoin.paymentJoin', function ($query) {
+            $query->whereHas('transactionJoin.paymentJoin', function ($query) {
                 $query->where('payment_type', $this->paymentFilter);
             });
         }
