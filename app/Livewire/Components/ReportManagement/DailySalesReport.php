@@ -48,28 +48,45 @@ class DailySalesReport extends Component
         $totalVoidAmount = 0;
         $totalVoidVatAmount = 0;
 
+        $totalVoidAmount = 0;
+        $totalVoidVatAmount = 0;
+
+
+        $totalVoidItemAmount = 0;
+
+
         foreach ($this->transactions as $transaction) {
             if ($transaction->transaction_type == 'Sales') {
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
 
-                // if($transaction->transactionJoin->transactionDetailsJoin->status == 'Void')
 
             } elseif ($transaction->transaction_type == 'Return') {
                 $totalReturnAmount += $transaction->returnsjoin->return_total_amount;
                 $totalReturnVatAmount += $transaction->returnsjoin->return_vat_amount;
+
+
             } elseif ($transaction->transaction_type == 'Credit') {
                 $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
                 $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
+
+
             } elseif ($transaction->transaction_type == 'Void') {
                 $totalVoidAmount += $transaction->transactionJoin->total_amount;
                 $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
+
             }
 
+            foreach ($transaction->transactionDetailsJoin as $detail) {
+                if ($detail->status == 'Void') {
+                    $totalVoidItemAmount += $detail->item_subtotal;
+                }
+            }
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
         $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
+        $VoidAmount = $totalVoidItemAmount;
 
         $this->transaction_info = [
 
