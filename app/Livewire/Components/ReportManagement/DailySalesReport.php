@@ -61,6 +61,8 @@ class DailySalesReport extends Component
             $transaction->totalVoidItemAmount = 0; // Initialize void amount for the transaction
             $transaction->vatable_amount = 0;
             $transaction->non_vatable_amount = 0;
+            $transaction->VoidTaxAmount = 0;
+            $transaction->totalVoidTaxAmount = 0;
 
             if ($transaction->transaction_type == 'Sales') {
                 $totalGross += $transaction->transactionJoin->total_amount;
@@ -79,6 +81,8 @@ class DailySalesReport extends Component
                             $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
+
+                        $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
                     }
 
                 }
@@ -99,6 +103,8 @@ class DailySalesReport extends Component
                             $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
+
+                        $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
                     }
                 }
             } elseif ($transaction->transaction_type == 'Credit') {
@@ -118,6 +124,8 @@ class DailySalesReport extends Component
                             $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
                             $transaction->non_vatable_amount += $non_vatable_amount;
                         }
+
+                        $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
                     }
                 }
             } elseif ($transaction->transaction_type == 'Void') {
