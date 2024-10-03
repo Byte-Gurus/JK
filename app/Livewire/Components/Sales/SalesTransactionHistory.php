@@ -31,25 +31,26 @@ class SalesTransactionHistory extends Component
     public $fromPage = "SalesHistory";
     public function render()
     {
-        $query = TransactionMovement::query();
+        $transactions = TransactionMovement::all();
 
-        if ($this->transactionFilter != 0) {
-            $query->where('transaction_type', $this->transactionFilter);
-        }
+        // if ($this->transactionFilter != 0) {
+        //     $query->where('transaction_type', $this->transactionFilter);
+        // }
         // if ($this->paymentFilter != 0) {
         //     $query->whereHas('transactionJoin.paymentJoin', function ($query) {
         //         $query->where('payment_type', $this->paymentFilter);
         //     });
         // }
-        if ($this->startDate && $this->endDate) {
-            $startDate = Carbon::parse($this->startDate)->startOfDay();
-            $endDate = Carbon::parse($this->endDate)->endOfDay();
-            $query->whereBetween('created_at', [$startDate, $endDate]);
-        }
+        // if ($this->startDate && $this->endDate) {
+        //     $startDate = Carbon::parse($this->startDate)->startOfDay();
+        //     $endDate = Carbon::parse($this->endDate)->endOfDay();
+        //     $query->whereBetween('created_at', [$startDate, $endDate]);
+        // }
 
-        $transactions = $query->search($this->search) //?search the user
-            ->orderBy($this->sortColumn, $this->sortDirection)
-            ->paginate($this->perPage);
+        // $transactions = $query->search($this->search) //?search the user
+        //     ->orderBy($this->sortColumn, $this->sortDirection)
+        //     ->paginate($this->perPage);
+
 
         return view(
             'livewire.components.Sales.sales-transaction-history',
