@@ -171,7 +171,7 @@
                                 {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @endif --}}
 
-                                {{ $sale['transaction_type'] }}
+                                {{ $transaction['transaction_type'] }}
                             </th>
                             {{-- <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
