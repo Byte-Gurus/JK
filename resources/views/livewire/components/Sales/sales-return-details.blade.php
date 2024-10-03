@@ -31,7 +31,7 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* total --}}
-                        <th scope="col" class="px-4 py-3 text-center">Total (₱)</th>
+                        <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
 
                         {{-- transaction type --}}
                         <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
@@ -55,23 +55,23 @@
                     <tr
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th
-                            scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ number_format($total_amount, 2) }}
                         </th>
                         <th
-                            scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ $transaction_type }}
                         </th>
                         <th
-                            scope="row"class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ $payment_method }}
                         </th>
                         <th
-                            scope="row"class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                             {{ $reference_number }}
                         </th>
                         <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
                         </th>
 
@@ -91,9 +91,9 @@
                 Confirm
             </button>
         </div>
-        <div class="w-full h-[24vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
+        <div class="w-full h-[26vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
 
-            <table class="w-full h-10 text-sm text-left scroll no-scrollbar">
+            <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
@@ -270,31 +270,6 @@
                 </div>
                 <div>
                     <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
-                </div>
-            </div>
-            <div class="flex flex-row justify-between">
-                <div>
-                    <p class=" text-[1.6em] font-medium">Current Tax Amount</p>
-                </div>
-                <div>
-                    <p class=" text-[1.6em] font-black">{{ number_format($current_tax_amount, 2) }}</p>
-                </div>
-            </div>
-            <div class="flex flex-row justify-between">
-                <div>
-                    <p class=" text-[1.6em] font-medium">Retuned Tax Amount</p>
-                </div>
-                <div>
-                    <p class=" text-[1.6em] font-black">{{ number_format($return_vat_amount, 2) }}</p>
-                </div>
-            </div>
-            <div class="flex flex-row justify-between">
-                <div>
-                    <p class=" text-[1.6em] font-medium">New Tax Amount</p>
-                </div>
-                <div>
-                    <p class=" text-[1.6em] font-black">
-                        {{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
                 </div>
             </div>
         </div>
