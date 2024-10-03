@@ -56,6 +56,8 @@ class DailySalesReport extends Component
 
 
         foreach ($this->transactions as $transaction) {
+            $transaction->totalVoidItemAmount = 0; // Initialize void amount for the transaction
+
             if ($transaction->transaction_type == 'Sales') {
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
@@ -65,10 +67,9 @@ class DailySalesReport extends Component
                         $transaction->totalVoidItemAmount += $detail->item_subtotal;
                     }
                 }
-
             } elseif ($transaction->transaction_type == 'Return') {
-                $totalReturnAmount += $transaction->returnsjoin->return_total_amount;
-                $totalReturnVatAmount += $transaction->returnsjoin->return_vat_amount;
+                $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
+                $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
 
                 foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
                     if ($detail->status == 'Void') {
@@ -87,10 +88,9 @@ class DailySalesReport extends Component
             } elseif ($transaction->transaction_type == 'Void') {
                 $totalVoidAmount += $transaction->transactionJoin->total_amount;
                 $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
-
             }
 
-
+            $totalVoidItemAmount += $transaction->totalVoidItemAmount; // Accumulate void item amount
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
