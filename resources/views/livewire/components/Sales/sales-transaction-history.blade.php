@@ -237,13 +237,13 @@
                             @if ( $transaction->transactionJoin->transaction_type == "Sales")
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $sale->transaction_id }})" type="button">Void
+                                <button wire:click="voidTransaction({{ $transaction->transaction_id }})" type="button">Void
                                     Transaction</button>
                             </th>
                             @elseif ($transaction->transaction_type == 'Return')
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $sale->returnsJoin->transactionJoin->id }})"
+                                <button wire:click="voidTransaction({{ $transaction->returnsJoin->transactionJoin->id }})"
                                     type="button">Void
                                     Transaction</button>
                             </th>
@@ -257,7 +257,7 @@
                             @elseif ($transaction->transaction_type == 'Void')
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $transaction->transaction_id }})" type="button">Void
+                                <button witype="button">Void
                                     Transaction</button>
                             </th>
                             @else
