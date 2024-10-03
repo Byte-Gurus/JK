@@ -101,6 +101,8 @@ class DeliveryTable extends Component
     public function changeDate($id, $date)
     {
 
+
+
         $delivery = Delivery::find($id);
 
 
@@ -114,6 +116,10 @@ class DeliveryTable extends Component
 
         if ($inputDate < $purchaseOrderDate) {
             $this->alert('error', 'Delivery date must be after the creation of the purchase order.');
+            return;
+        }
+        if ($inputDate > Carbon::today()) {
+            $this->alert('error', 'Delivery date maximum date is today.');
             return;
         }
 

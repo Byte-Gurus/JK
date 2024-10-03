@@ -177,7 +177,7 @@
                                 {{ $delivery->created_at->format(' M d Y ') }}
                             </th>
 
-                            <th scope="row"
+                            {{-- <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <div class="flex justify-center ">
 
@@ -192,8 +192,8 @@
                                         </a>
                                     @endif
                                 </div>
-                            </th>
-                            {{-- <th scope="row"
+                            </th> --}}
+                            <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 <div class="flex justify-center ">
 
@@ -211,7 +211,7 @@
                                         </a>
                                     @endif
                                 </div>
-                            </th> --}}
+                            </th>
 
                             {{-- //* action --}}
                             <th class="relative h-full px-4 py-4 z-99 text-md text-nowrap">
