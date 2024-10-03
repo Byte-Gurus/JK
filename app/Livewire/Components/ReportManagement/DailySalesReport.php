@@ -60,28 +60,37 @@ class DailySalesReport extends Component
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
 
+                foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                    if ($detail->status == 'Void') {
+                        $totalVoidItemAmount += $detail->item_subtotal;
+                    }
+                }
 
             } elseif ($transaction->transaction_type == 'Return') {
                 $totalReturnAmount += $transaction->returnsjoin->return_total_amount;
                 $totalReturnVatAmount += $transaction->returnsjoin->return_vat_amount;
 
-
+                foreach ($transaction->returnsJoin->transactionDetailsJoin as $detail) {
+                    if ($detail->status == 'Void') {
+                        $totalVoidItemAmount += $detail->item_subtotal;
+                    }
+                }
             } elseif ($transaction->transaction_type == 'Credit') {
                 $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
                 $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
-
+                foreach ($transaction->creditJoin->transactionDetailsJoin as $detail) {
+                    if ($detail->status == 'Void') {
+                        $totalVoidItemAmount += $detail->item_subtotal;
+                    }
+                }
             } elseif ($transaction->transaction_type == 'Void') {
                 $totalVoidAmount += $transaction->transactionJoin->total_amount;
                 $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
 
             }
 
-            foreach ($transaction->transactionDetailsJoin as $detail) {
-                if ($detail->status == 'Void') {
-                    $totalVoidItemAmount += $detail->item_subtotal;
-                }
-            }
+
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
