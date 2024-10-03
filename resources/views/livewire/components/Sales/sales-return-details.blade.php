@@ -55,23 +55,23 @@
                     <tr
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th
-                            scope="row"class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ number_format($total_amount, 2) }}
                         </th>
                         <th
-                            scope="row"class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ $transaction_type }}
                         </th>
                         <th
-                            scope="row"class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ $payment_method }}
                         </th>
                         <th
-                            scope="row"class="px-4 py-1 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                            scope="row"class="px-4 py-1 italic font-black text-center text-left-900 text-md whitespace-nowrap ">
                             {{ $reference_number }}
                         </th>
                         <th scope="row"
-                            class="px-4 py-1 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
                         </th>
 
@@ -91,7 +91,7 @@
                 Confirm
             </button>
         </div>
-        <div class="w-full h-[26vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
+        <div class="w-full h-[28vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
