@@ -8,6 +8,6 @@ class DamagedItemsReport extends Component
 {
     public function render()
     {
-        return view('livewire.components.report-management.damaged-items-report');
+        return view('livewire.components.ReportManagement.damaged-items-report');
     }
 }

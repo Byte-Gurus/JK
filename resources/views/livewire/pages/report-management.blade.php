@@ -50,7 +50,7 @@
                             </div>
                             <div x-on:click="$wire.displayYearlySalesReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
-                                <button>Yearly Salesssssss</button>
+                                <button>Yearly Sales</button>
                             </div>
                             <div x-on:click="$wire.displayVoidedTransactionsReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
@@ -223,7 +223,7 @@
     {{-- Voided Transactions --}}
 
     <div x-show="showVoidedTransactionsReport" x-data="{ showVoidedTransactionsReport: @entangle('showVoidedTransactionsReport') }">
-        @livewire('components.ReportManagement.voided-transaction-items-report')
+        @livewire('components.ReportManagement.voided-transactions-report')
     </div>
 
     <div x-show="showVoidedTransactionsReportDatePickerModal" x-data="{ showVoidedTransactionsReportDatePickerModal: @entangle('showVoidedTransactionsReportDatePickerModal') }">
@@ -299,5 +299,4 @@
     <div x-show="showDamagedItemsReportDatePickerModal" x-data="{ showDamagedItemsReportDatePickerModal: @entangle('showDamagedItemsReportDatePickerModal') }">
         @livewire('components.ReportManagement.damaged-items-report-date-picker-modal')
     </div>
-
 </div>

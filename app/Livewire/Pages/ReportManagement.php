@@ -19,7 +19,6 @@ class ReportManagement extends Component
 
     public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport, $showDamagedItemsReport, $showVoidedTransactionsReport = false;
 
-
     public function render()
     {
         return view('livewire.pages.report-management');
@@ -50,7 +49,9 @@ class ReportManagement extends Component
         'close-expired-items-report-date-picker-modal' => 'closeExpiredItemsReportDatePickerModal',
         'display-expired-items-report-date-picker-modal' => 'displayExpiredItemsReportDatePickerModal',
         'close-damaged-items-report-date-picker-modal' => 'closeDamagedItemsReportDatePickerModal',
+        'close-voided-transactions-report-date-picker-modal' => 'closeVoidedTransactionsReportDatePickerModal',
         'display-expired-items-report' => 'displayExpiredItemsReport',
+        'display-voided-transactions-report' => 'displayVoidedTransactionsReport',
         'display-damaged-items-report' => 'displayDamagedItemsReport',
         'close-sales-return-report-date-picker-modal' => 'closeSalesReturnReportDatePickerModal'
     ];
@@ -272,7 +273,7 @@ class ReportManagement extends Component
         $this->hideExtras();
     }
 
-    public function closeVoidedTranstionsReportDatePickerModal()
+    public function closeVoidedTransactionsReportDatePickerModal()
     {
         $this->showVoidedTransactionsReportDatePickerModal = false;
     }

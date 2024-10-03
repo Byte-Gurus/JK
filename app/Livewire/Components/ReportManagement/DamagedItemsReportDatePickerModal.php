@@ -12,8 +12,9 @@ class DamagedItemsReportDatePickerModal extends Component
     public $toDate, $fromDate;
     public function render()
     {
-        return view('livewire.components.report-management.damaged-items-report-date-picker-modal');
+        return view('livewire.components.ReportManagement.damaged-items-report-date-picker-modal');
     }
+
     public function resetFormWhenClosed()
     {
         $this->resetForm();
@@ -28,7 +29,7 @@ class DamagedItemsReportDatePickerModal extends Component
         ]);
     }
 
-    public function displayDamagedItemsReport()
+    public function displayExpiredItemsReport()
     {
         $this->dispatch( 'display-damaged-items-report')->to(ReportManagement::class);
     }

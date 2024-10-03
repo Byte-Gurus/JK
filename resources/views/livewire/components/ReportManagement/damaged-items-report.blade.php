@@ -31,12 +31,15 @@
                 </div>
             </div>
             <div>
-                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">VOIDED TRANSACTION LIST REPORT</p>
+                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">DAMAGED ITEM LIST REPORT</p>
             </div>
         </div>
 
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
+
+
+
 
             <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
@@ -62,8 +65,8 @@
                 </li>
             </ul>
 
-            {{-- <div class="w-full my-4 border-b border-black"> </div>
-            @if ($expiredItems)
+            <div class="w-full my-4 border-b border-black"> </div>
+            {{-- @if ($expiredItems)
                 @foreach ($expiredItems as $expiredItem)
                     <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
@@ -103,8 +106,7 @@
                         </li>
                     </ul>
                 @endforeach
-            @endif
-
-        </div> --}}
+            @endif --}}
+        </div>
     </div>
 </div>
