@@ -42,6 +42,7 @@ class SalesReturnModal extends Component
 
         $this->dispatch('display-sales-return-details')->to(SalesReturn::class);
         $this->dispatch('get-transaction', Transaction: $transaction)->to(SalesReturnDetails::class);
+        $this->reset(['transaction_number']);
     }
 
     protected function validateForm()
