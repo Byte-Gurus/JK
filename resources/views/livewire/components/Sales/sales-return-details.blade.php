@@ -3,16 +3,16 @@
     <div class="relative overflow-hidden bg-white border rounded-md border-[rgb(143,143,143)] mb-[18px]">
 
         {{-- //* filters --}}
-        <div class="flex flex-row items-center justify-between py-4 ">
+        <div class="flex flex-row items-center justify-between py-2 ">
 
             {{-- //* search filter --}}
-            <div class="relative p-4 rounded-r-2xl bg-[rgb(53,53,53)]">
+            <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
                 <div class="flex flex-row items-center gap-2 text-white ">
                     <p class=" text-[1em] italic  font-medium">Transaction No.</p>
                     <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
             </div>
-            <div class="relative p-4 rounded-r-2xl bg-[rgb(53,53,53)]">
+            <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
                 <div class="flex flex-row items-center gap-2 text-white ">
                     <p class=" text-[1em] italic  font-medium">Return No.</p>
                     <p class=" text-[1.2em] font-black">{{ $return_number }}</p>
@@ -181,7 +181,6 @@
                                 @else
                                     0.00
                                 @endif
-
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -298,7 +297,6 @@
                         {{ number_format($current_tax_amount - $return_vat_amount, 2) }}</p>
                 </div>
             </div>
-
         </div>
     </div>
     <div x-show="showSalesAdminLoginForm" x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
