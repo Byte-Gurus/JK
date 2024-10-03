@@ -273,4 +273,14 @@
         @livewire('components.ReportManagement.expired-items-report-date-picker-modal')
     </div>
 
+    {{-- Damaged Item --}}
+
+    {{-- <div x-show="showExpiredItemsReport" x-data="{ showExpiredItemsReport: @entangle('showExpiredItemsReport') }">
+        @livewire('components.ReportManagement.expired-items-report')
+    </div>
+
+    <div x-show="showExpiredItemsReportDatePickerModal" x-data="{ showExpiredItemsReportDatePickerModal: @entangle('showExpiredItemsReportDatePickerModal') }">
+        @livewire('components.ReportManagement.expired-items-report-date-picker-modal')
+    </div> --}}
+
 </div>
