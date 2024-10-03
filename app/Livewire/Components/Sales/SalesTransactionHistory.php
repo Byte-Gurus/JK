@@ -14,9 +14,9 @@ use Livewire\WithPagination;
 class SalesTransactionHistory extends Component
 {
     use WithPagination, WithoutUrlPagination;
-    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID, $isAdmin;
+    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID, $isAdmin, $tranasactionDetails_ID;
     public $transactionDetails = [];
-
+    public $whatVoid;
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
@@ -150,14 +150,21 @@ class SalesTransactionHistory extends Component
         $this->salesID = $salesID;
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
+        $this->whatVoid = 'Transaction';
     }
-
+    public function voidTransactionDetails($tranasactionDetails_ID)
+    {
+        $this->tranasactionDetails_ID = $tranasactionDetails_ID;
+        $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+        $this->displaySalesAdminLoginForm();
+        $this->whatVoid = 'TransactionDetails';
+    }
     public function adminConfirmed($isAdmin)
     {
         $this->isAdmin = $isAdmin;
 
 
-        if ($this->isAdmin) {
+        if ($this->isAdmin && $this->whatVoid == 'Transaction') {
             $transaction = transaction::find($this->salesID)->first();
             $transaction->transaction_type = 'Void';
             $transaction->save();
@@ -165,6 +172,10 @@ class SalesTransactionHistory extends Component
             $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
             $transactionMovement->transaction_type = 'Void';
             $transactionMovement->save();
+        } elseif ($this->isAdmin && $this->whatVoid == 'TransactionDetails') {
+            $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID)->first();
+            $transactionDetail->status = 'Void';
+            $transactionDetail->save();
         }
     }
 }

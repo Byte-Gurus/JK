@@ -393,7 +393,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $sale->id }})"
+                                <button wire:click="voidTransactionDetails({{ $transactionDetail->id }})"
                                     type="button">Void</button>
                             </th>
                         </tr>
