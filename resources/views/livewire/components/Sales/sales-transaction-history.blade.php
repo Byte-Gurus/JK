@@ -154,24 +154,24 @@
                     @row-selected.window="isSelected = ($event.detail === {{ $sale->id }})"> --}}
                     <tbody>
 
-                        @foreach ($sales as $index => $sale)
+                        @foreach ($transactions as $index => $transaction)
                         <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
                             x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
                             x-on:click.away="isSelected = false;"
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                             <th scope="row"
                                 class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
-                                @if ($sale->transaction_type == 'Sales')
-                                {{ $sale['transactionJoin']['transaction_number'] }}
-                                @elseif ($sale->transaction_type == 'Return')
-                                {{ $sale['returnsJoin']['transactionJoin']['transaction_number'] }}
-                                @elseif ($sale->transaction_type == 'Credit')
-                                {{ $sale['creditJoin']['credit_number'] }}
-                                @elseif ($sale->transaction_type == 'Void')
-                                {{ $sale['transactionJoin']['transaction_number'] }}
+                                @if ($transaction->transaction_type == 'Sales')
+                                {{ $transaction['transactionJoin']['transaction_number'] }}
+                                @elseif ($transaction->transaction_type == 'Return')
+                                {{ $transaction['returnsJoin']['transactionJoin']['transaction_number'] }}
+                                @elseif ($transaction->transaction_type == 'Credit')
+                                {{ $transaction['creditJoin']['credit_number'] }}
+                                @elseif ($transaction->transaction_type == 'Void')
+                                {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @endif
                             </th>
-                            <th scope="row"
+                            {{-- <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($sale->transaction_type == 'Sales')
                                 {{ number_format($sale->transactionJoin->total_amount, 2) }}
@@ -264,7 +264,7 @@
                                 <button type="button">Void
                                     Transaction</button>
                             </th>
-                            @endif
+                            @endif --}}
 
 
 

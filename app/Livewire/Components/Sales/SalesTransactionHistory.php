@@ -47,13 +47,13 @@ class SalesTransactionHistory extends Component
             $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
-        $sales = $query->search($this->search) //?search the user
+        $transactions = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);
 
         return view(
             'livewire.components.Sales.sales-transaction-history',
-            ['sales' => $sales,]
+            ['transactions' => $transactions,]
         );
     }
 
