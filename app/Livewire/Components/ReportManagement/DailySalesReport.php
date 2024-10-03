@@ -61,6 +61,7 @@ class DailySalesReport extends Component
             $transaction->totalVoidItemAmount = 0; // Initialize void amount for the transaction
             $transaction->vatable_amount = 0;
             $transaction->non_vatable_amount = 0;
+            $transaction->totalVoidTaxAmount = 0;
 
             if ($transaction->transaction_type == 'Sales') {
                 $totalGross += $transaction->transactionJoin->total_amount;
