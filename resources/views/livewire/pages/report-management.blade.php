@@ -50,10 +50,13 @@
                             </div>
                             <div x-on:click="$wire.displayYearlySalesReportDatePickerModal()"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
-                                <button>Yearly Sales</button>
+                                <button>Yearly Salesssssss</button>
+                            </div>
+                            <div x-on:click="$wire.displayVoidedTransactionsReportDatePickerModal()"
+                                class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
+                                <button>Voided Transactions</button>
                             </div>
                         </div>
-
                     </div>
                     <div
                         class="flex-col hover:p-8 w-full hover:border-2  h-auto col-span-1 gap-2 p-4 transition-all duration-300 ease-in-out border border-black rounded-lg hover:shadow-[rgb(250,216,114)] hover:bg-[rgb(255,227,142)] hover:shadow-2xl">
@@ -136,6 +139,10 @@
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Expired Items List</button>
                             </div>
+                            <div x-on:click="$wire.displayDamagedItemsReportDatePickerModal()"
+                                class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
+                                <button>Damaged Items List</button>
+                            </div>
                         </div>
                     </div>
                     <div
@@ -213,6 +220,16 @@
         @livewire('components.ReportManagement.sales-return-report-date-picker-modal')
     </div>
 
+    {{-- Voided Transactions --}}
+
+    <div x-show="showVoidedTransactionsReport" x-data="{ showVoidedTransactionsReport: @entangle('showVoidedTransactionsReport') }">
+        @livewire('components.ReportManagement.voided-transaction-items-report')
+    </div>
+
+    <div x-show="showVoidedTransactionsReportDatePickerModal" x-data="{ showVoidedTransactionsReportDatePickerModal: @entangle('showVoidedTransactionsReportDatePickerModal') }">
+        @livewire('components.ReportManagement.voided-transactions-report-date-picker-modal')
+    </div>
+
     {{-- Customer Credit --}}
 
     <div x-show="showCustomerCreditListReport" x-data="{ showCustomerCreditListReport: @entangle('showCustomerCreditListReport') }">
@@ -273,4 +290,17 @@
         @livewire('components.ReportManagement.expired-items-report-date-picker-modal')
     </div>
 
+<<<<<<< Updated upstream
+=======
+    {{-- Damaged Item --}}
+
+    <div x-show="showDamagedItemsReport" x-data="{ showDamagedItemsReport: @entangle('showDamagedItemsReport') }">
+        @livewire('components.ReportManagement.damaged-items-report')
+    </div>
+
+    <div x-show="showDamagedItemsReportDatePickerModal" x-data="{ showDamagedItemsReportDatePickerModal: @entangle('showDamagedItemsReportDatePickerModal') }">
+        @livewire('components.ReportManagement.damaged-items-report-date-picker-modal')
+    </div>
+
+>>>>>>> Stashed changes
 </div>
