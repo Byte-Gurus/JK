@@ -161,14 +161,13 @@
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                             <th scope="row"
                                 class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
-                                @if ($sale->transaction_type == 'Sales')
+                                @if ($sale->transaction_type === 'Sales')
                                 {{ $sale['transactionJoin']['transaction_number'] }}
-                                @elseif ($sale->transaction_type == 'Return')
+                                @elseif ($sale->transaction_type === 'Return')
                                 {{ $sale['returnsJoin']['transactionJoin']['transaction_number'] }}
-                                @elseif ($sale->transaction_type == 'Credit')
-                                sasasasasasasasa
-                                {{-- {{ $sale['creditJoin']['transactionJoin']['transaction_number'] }} --}}
-                                @elseif ($sale->transaction_type == 'Void')
+                                @elseif ($sale->transaction_type === 'Credit')
+                                {{ $sale['creditJoin']['transactionJoin']['transaction_number'] }}
+                                @elseif ($sale->transaction_type === 'Void')
                                 {{ $sale['transactionJoin']['transaction_number'] }}
                                 @endif
                             </th>
