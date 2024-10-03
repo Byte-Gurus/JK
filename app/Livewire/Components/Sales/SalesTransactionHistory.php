@@ -170,6 +170,14 @@ class SalesTransactionHistory extends Component
             $transaction->transaction_type = 'Void';
             $transaction->save();
 
+            $transactionDetails = TransactionDetails::where('transaction_id', $this->salesID);
+
+            foreach ($transactionDetails as $transactionDetail) {
+                $transactionDetail->status = 'Void';
+                $transactionDetail->save();
+            }
+
+
             $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
             $transactionMovement->transaction_type = 'Void';
             $transactionMovement->save();
