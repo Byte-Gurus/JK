@@ -51,6 +51,7 @@ class SalesTransactionHistory extends Component
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);
 
+            dd($sales);
         return view(
             'livewire.components.Sales.sales-transaction-history',
             ['sales' => $sales,]
