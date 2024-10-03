@@ -62,7 +62,7 @@ class DailySalesReport extends Component
 
                 foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
                     if ($detail->status == 'Void') {
-                        $totalVoidItemAmount += $detail->item_subtotal;
+                        $transaction->totalVoidItemAmount += $detail->item_subtotal;
                     }
                 }
 
@@ -72,7 +72,7 @@ class DailySalesReport extends Component
 
                 foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
                     if ($detail->status == 'Void') {
-                        $totalVoidItemAmount += $detail->item_subtotal;
+                        $transaction->totalVoidItemAmount += $detail->item_subtotal;
                     }
                 }
             } elseif ($transaction->transaction_type == 'Credit') {
@@ -81,7 +81,7 @@ class DailySalesReport extends Component
 
                 foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
                     if ($detail->status == 'Void') {
-                        $totalVoidItemAmount += $detail->item_subtotal;
+                        $transaction->totalVoidItemAmount += $detail->item_subtotal;
                     }
                 }
             } elseif ($transaction->transaction_type == 'Void') {
@@ -95,7 +95,7 @@ class DailySalesReport extends Component
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
         $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
-        $transaction->VoidAmount = $totalVoidItemAmount;
+        // $transaction->VoidAmount = $totalVoidItemAmount;
 
         $this->transaction_info = [
 
