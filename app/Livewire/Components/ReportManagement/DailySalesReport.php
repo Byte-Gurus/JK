@@ -95,8 +95,8 @@ class DailySalesReport extends Component
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
         $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
-        $VoidAmount = $totalVoidItemAmount;
-
+        $transaction->void_amount = $totalVoidItemAmount;
+        
         $this->transaction_info = [
 
             'totalGross' => $totalGross,
