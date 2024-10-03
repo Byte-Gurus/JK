@@ -817,7 +817,7 @@ class SalesTransaction extends Component
                 'credit_id' => $credit->id
             ]);
 
-            dump($transaction_movement);
+            
         }
 
 

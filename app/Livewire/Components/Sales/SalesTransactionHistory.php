@@ -36,11 +36,11 @@ class SalesTransactionHistory extends Component
         if ($this->transactionFilter != 0) {
             $query->where('transaction_type', $this->transactionFilter);
         }
-        if ($this->paymentFilter != 0) {
-            $query->whereHas('transactionJoin.paymentJoin', function ($query) {
-                $query->where('payment_type', $this->paymentFilter);
-            });
-        }
+        // if ($this->paymentFilter != 0) {
+        //     $query->whereHas('transactionJoin.paymentJoin', function ($query) {
+        //         $query->where('payment_type', $this->paymentFilter);
+        //     });
+        // }
         if ($this->startDate && $this->endDate) {
             $startDate = Carbon::parse($this->startDate)->startOfDay();
             $endDate = Carbon::parse($this->endDate)->endOfDay();
