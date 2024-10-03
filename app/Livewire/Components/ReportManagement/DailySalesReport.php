@@ -68,7 +68,7 @@ class DailySalesReport extends Component
                 $totalGross += $transaction->transactionJoin->total_amount;
                 $totalTax += $transaction->transactionJoin->total_vat_amount;
 
-                foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
+                foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
                     if ($detail->status == 'Void') {
                         $transaction->totalVoidItemAmount += $detail->item_subtotal;
 
