@@ -155,7 +155,7 @@
                     <tbody>
 
                         @foreach ($transactions as $index => $transaction)
-                        <tr wire:click="getTransactionID({{ $sale->id }}, true )" x-data="{ isSelected: false }"
+                        <tr wire:click="getTransactionID({{ $transaction->id }}, true )" x-data="{ isSelected: false }"
                             x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
                             x-on:click.away="isSelected = false;"
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
