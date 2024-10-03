@@ -107,10 +107,7 @@
                                                         class=" bg-[rgb(245,245,245)] col-span-4 border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                                         placeholder="Barcode" />
 
-                                                    @error('create_barcode')
-                                                        <span
-                                                            class="font-medium text-red-500 error">{{ $message }}</span>
-                                                    @enderror
+
 
                                                     <div class="col-span-1 ">
                                                         <button type="button" wire:click="changeBarcodeForm()"
@@ -124,6 +121,9 @@
                                                         </button>
                                                     </div>
                                                 </div>
+                                                @error('create_barcode')
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
                                             @else
                                                 {{-- //* generate barcode --}}
                                                 @if ($barcode)
@@ -134,11 +134,6 @@
                                                                 wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcode, 'EAN13', 2, 60) !!}</img>
                                                         </div>
 
-
-                                                        @error('barcode')
-                                                            <span
-                                                                class="font-medium text-red-500 error">{{ $message }}</span>
-                                                        @enderror
                                                         <button type="button" wire:click="changeBarcodeForm()"
                                                             class="text-sm h-3/4 w-3/4 flex items-center justify-center font-medium rounded-lg bg-[rgb(36,36,36)] text-white hover:bg-[rgb(86,86,86)] duration-100 ease-in-out transition-all">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -149,6 +144,10 @@
                                                             </svg>
                                                         </button>
                                                     </div>
+                                                    @error('barcode')
+                                                        <span
+                                                            class="font-medium text-red-500 error">{{ $message }}</span>
+                                                    @enderror
                                                 @endif
                                             @endif
                                         </div>
