@@ -92,6 +92,10 @@ class DailySalesReport extends Component
                 case 'Void':
                     $totalVoidAmount += $transaction->transactionJoin->total_amount;
                     $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
+
+                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                        $transaction->VoidTaxAmount  =  $this->calculateVoidAmounts($detail, $transaction);
+                    }
                     break;
             }
 
