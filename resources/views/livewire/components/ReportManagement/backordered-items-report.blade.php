@@ -24,6 +24,10 @@
                         <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
+                    </div>
                 </div>
             </div>
             <div>
@@ -34,31 +38,34 @@
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
 
-            <ul class="grid items-center justify-between grid-flow-col grid-cols-5 mx-4 ">
+
+
+
+            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Item Name</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Item Description</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Purchase Number</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Purchase Number</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Supplier</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Supplier</p>
                     </div>
                 </li>
             </ul>
@@ -66,44 +73,41 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             @foreach ($backorderLists as $backorderList)
-                <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+                <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-left font-medium">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $backorderList->itemJoin->barcode }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-left font-medium">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $backorderList->itemJoin->item_name }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-left font-medium">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $backorderList->itemJoin->item_description }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-left font-medium">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $backorderList->purchaseJoin->po_number }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-left font-medium">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $backorderList->purchaseJoin->supplierJoin->company_name }}</p>
                         </div>
                     </li>
+
                 </ul>
             @endforeach
-        </div>
-        <div class="flex flex-row py-8 mx-4 text-nowrap">
-            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-            {{ $createdBy }}
         </div>
     </div>
 </div>

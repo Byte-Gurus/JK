@@ -26,6 +26,10 @@
                             </p>
                         </div>
                         <div class="flex flex-row text-nowrap">
+                            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                            <p class="text-[1em] font-medium uppercase">{{ $createdBy }}</p>
+                        </div>
+                        <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-black uppercase">Selected Date:</p>
                             <p class="text-[1em] font-medium uppercase">{{ $date ?? ' ' }}</p>
                         </div>
@@ -123,7 +127,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($fastmoving_info['fast_slow'], 2) }}
+                                    {{  number_format($fastmoving_info['fast_slow'], 2) }}
                                 </p>
                             </div>
                         </li>
@@ -132,11 +136,5 @@
             @endif
 
         </div>
-        @if ($fastmoving_info)
-            <div class="flex flex-row py-8 mx-4 text-nowrap">
-                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
-            </div>
-        @endif
     </div>
 </div>

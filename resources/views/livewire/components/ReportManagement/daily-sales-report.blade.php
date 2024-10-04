@@ -242,10 +242,10 @@
             @endif
         </div>
         @if ($transaction_info)
-            <div class="flex flex-row py-8 mx-4 text-nowrap">
-                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $transaction_info['createdBy'] }}
-            </div>
-        @endif
+        <div class="flex flex-row pt-4 mx-4 text-nowrap">
+            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+            {{ $transaction_info['createdBy'] }}
+        </div>
+    @endif
     </div>
 </div>

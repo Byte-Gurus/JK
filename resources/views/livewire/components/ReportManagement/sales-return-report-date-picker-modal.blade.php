@@ -9,7 +9,7 @@
                 <div class="flex flex-row items-center justify-between">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
-                        Set Date
+                        Set Month
                     </h3>
 
                     {{-- //* close button --}}

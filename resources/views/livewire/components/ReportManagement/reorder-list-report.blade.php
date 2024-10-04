@@ -24,6 +24,10 @@
                         <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
+                    </div>
                 </div>
             </div>
             <div>
@@ -119,10 +123,6 @@
                     </li>
                 </ul>
             @endforeach
-        </div>
-        <div class="flex flex-row py-8 mx-4 text-nowrap">
-            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-            {{ $createdBy }}
         </div>
     </div>
 </div>
