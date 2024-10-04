@@ -27,7 +27,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
-    public $dateDelivered = [], $delivery_date, $today_date;
+    public $dateDelivered = [], $delivery_date, $selectedDate;
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -109,7 +109,6 @@ class DeliveryTable extends Component
         $inputDate = Carbon::parse($date)->startOfDay();
         $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at)->startOfDay();
 
-        dd($inputDate, $purchaseOrderDate);
         $deliveries = [
             'date' => $date,
             'deliveryId' => $id
@@ -123,7 +122,7 @@ class DeliveryTable extends Component
             $this->alert('error', 'Delivery date maximum date is today.');
             return;
         }
-
+        $this->selectedDate = $inputDate;
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
@@ -176,7 +175,7 @@ class DeliveryTable extends Component
             }
 
             // Update the current delivery details
-            $delivery->date_delivered = $this->today_date;
+            $delivery->date_delivered = $this->selectedDate;
             $delivery->status = "Delivered";
             $delivery->save();
 
@@ -184,7 +183,7 @@ class DeliveryTable extends Component
             $this->resetPage();
         } else {
             // If there are no backorders, only update the current delivery details
-            $delivery->date_delivered = $this->today_date;
+            $delivery->date_delivered = $this->selectedDate;
             $delivery->status = "Delivered";
             $delivery->save();
 
