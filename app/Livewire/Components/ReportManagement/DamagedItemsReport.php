@@ -12,6 +12,7 @@ class DamagedItemsReport extends Component
     public $createdBy, $dateCreated, $damagedItems;
     public function render()
     {
+        $this->reportInfo();
         return view('livewire.components.ReportManagement.damaged-items-report');
     }
     protected $listeners = [
