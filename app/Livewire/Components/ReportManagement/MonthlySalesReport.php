@@ -39,6 +39,8 @@ class MonthlySalesReport extends Component
         $totalReturnVatAmount = 0;
         $totalVoidAmount = 0;
         $totalVoidVatAmount = 0;
+        $totalVoidItemAmount = 0;
+        $totalVoidTaxAmount = 0;
 
         // Iterate through transactions to group and sum by day
         foreach ($this->transactions as $transaction) {
@@ -53,23 +55,49 @@ class MonthlySalesReport extends Component
                     'totalReturnVatAmount' => 0,
                     'totalVoidAmount' => 0,
                     'totalVoidVatAmount' => 0,
+                    'totalVoidItemAmount' => 0,
+                    'totalVoidTaxAmount' => 0,
                 ];
             }
 
             // Summing daily transactions
-            if ($transaction->transaction_type == 'Sales') {
-                $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
-                $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
-            } elseif ($transaction->transaction_type == 'Return') {
-                $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
-                $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
-            } elseif ($transaction->transaction_type == 'Credit') {
-                $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
-                $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-            } elseif ($transaction->transaction_type == 'Void') {
-                $dailySummaries[$date]['totalVoidAmount'] += $transaction->transactionJoin->total_amount;
-                $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->transactionJoin->total_vat_amount;
+            switch ($transaction->transaction_type) {
+                case 'Sales':
+                    $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
+                    $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+
+                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    }
+                    break;
+                case 'Return':
+                    $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                    $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
+
+                    foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    }
+                    break;
+                case 'Credit':
+                    $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                    $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+
+                    foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    }
+                    break;
+                case 'Void':
+                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->transactionJoin->total_amount;
+                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->transactionJoin->total_vat_amount;
+
+                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    }
+                    break;
             }
+
+            $dailySummaries[$date]['totalVoidItemAmount'] += $transaction->totalVoidItemAmount;
+            $dailySummaries[$date]['totalVoidTaxAmount'] += $transaction->vatable_amount + $transaction->vat_exempt_amount;
         }
 
         // Calculate daily net values and accumulate monthly totals
@@ -90,6 +118,8 @@ class MonthlySalesReport extends Component
             $totalReturnVatAmount += $summary['totalReturnVatAmount'];
             $totalVoidAmount += $summary['totalVoidAmount'];
             $totalVoidVatAmount += $summary['totalVoidVatAmount'];
+            $totalVoidItemAmount += $summary['totalVoidItemAmount'];
+            $totalVoidTaxAmount += $summary['totalVoidTaxAmount'];
         }
 
         // Prepare report information
@@ -99,13 +129,32 @@ class MonthlySalesReport extends Component
             'totalNet' => $totalNet,
             'totalReturnAmount' => $totalReturnAmount,
             'totalReturnVatAmount' => $totalReturnVatAmount,
-            'totalVoidAmount' => $totalVoidAmount,
+            'totalVoidAmount' => $totalVoidAmount + $totalVoidItemAmount,
             'totalVoidVatAmount' => $totalVoidVatAmount,
+            'totalVoidItemAmount' => $totalVoidItemAmount,
+            'totalVoidTaxAmount' => $totalVoidTaxAmount,
             'date' => $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y'),
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
             'dailySummaries' => $dailySummaries,
         ];
+    }
+
+    function calculateVoidAmounts($detail, &$transaction)
+    {
+        if ($detail->status == 'Void') {
+            $transaction->totalVoidItemAmount += $detail->item_subtotal;
+            if ($detail->vat_type === 'Vat') {
+                $vatable_subtotal = $detail->item_subtotal;
+                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
+                $transaction->vatable_amount += $vatable_amount;
+            } elseif ($detail->vat_type === 'Vat Exempt') {
+                $vat_exempt_subtotal = $detail->item_subtotal;
+                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
+                $transaction->vat_exempt_amount += $vat_exempt_amount;
+            }
+            return $transaction->vatable_amount + $transaction->vat_exempt_amount;
+        }
     }
 
 
