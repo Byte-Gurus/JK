@@ -26,10 +26,6 @@
                             </p>
                         </div>
                         <div class="flex flex-row text-nowrap">
-                            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                            <p class="text-[1em] font-medium uppercase">{{ $createdBy }}</p>
-                        </div>
-                        <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-black uppercase">Selected Date:</p>
                             <p class="text-[1em] font-medium uppercase">{{ $date ?? ' ' }}</p>
                         </div>
@@ -134,5 +130,11 @@
                 @endforeach
             @endif
         </div>
+        @if ($slowmoving_info)
+        <div class="flex flex-row py-4 mx-4 text-nowrap">
+            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+            {{ $createdBy }}
+        </div>
+        @endif
     </div>
 </div>

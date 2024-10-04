@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">SALES RETURN REPORT</p>
+            <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">VOIDED TRANSACTIONS REPORT</p>
         </div>
         <div class="flex flex-row justify-between px-4 mb-2">
             <div class="flex flex-col ">
@@ -26,56 +26,47 @@
                     <p class="text-[0.8em] font-bold uppercase">{{ $dateCreated }}</p>
                     </p>
                 </div>
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[0.8em] font-bold uppercase">Prepared By:</p>
-                    <p class="text-[0.8em] font-bold uppercase">{{ $createdBy }}</p>
-                </div>
             </div>
-            <div class="flex flex-col self-start justify-between px-4 mb-2">
+            {{-- <div class="flex flex-col self-start justify-between px-4 mb-2">
                 <div class="flex flex-row border border-black text-nowrap">
                     <p class="text-[1em] font-black border-r border-black uppercase">Total Sales Return </p>
-                    {{-- {{ number_format($transaction_info['totalNet'], 2) }} --}}
+                    {{ number_format($transaction_info['totalNet'], 2) }}
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
 
-
-
-
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-2 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-2 ">
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Transaction No.</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Transaction No.</p>
+                    </div>
+                </li>
+                <li class="col-span-1 px-2">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Date</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-left font-bold">Date</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Item Name</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Item Description</p>
-                    </div>
-                </li>
-
-
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Voided Qty</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Voided Qty</p>
                     </div>
                 </li>
 
@@ -84,17 +75,17 @@
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($voidTransactions)
             @foreach ($voidTransactions as $voidTransaction)
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-2 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-2 ">
 
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[0.6em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $voidTransaction->transactionJoin->transaction_number }}</p>
                     </div>
                 </li>
-                <li class="col-span-1 py-[3px]">
+                <li class="col-span-1 px-2 py-[3px]">
                     <div>
-                        <p class="text-[0.6em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $voidTransaction->created_at }}</p>
                     </div>
                 </li>
@@ -102,7 +93,7 @@
                 <li class="col-span-1 py-[3px]">
                     <div>
                         @foreach ($voidTransaction->transactionJoin->transactionDetailsJoin as $voidItem)
-                        <p class="text-[0.6em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $voidItem->itemJoin->barcode }}</p>
                         @endforeach
 
@@ -111,7 +102,7 @@
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
                         @foreach ($voidTransaction->transactionJoin->transactionDetailsJoin as $voidItem)
-                        <p class="text-[0.6em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $voidItem->itemJoin->item_name }}</p>
                         @endforeach
                     </div>
@@ -119,7 +110,7 @@
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
                         @foreach ($voidTransaction->transactionJoin->transactionDetailsJoin as $voidItem)
-                        <p class="text-[0.6em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $voidItem->itemJoin->item_description }}</p>
 
                         @endforeach
@@ -128,7 +119,7 @@
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
                         @foreach ($voidTransaction->transactionJoin->transactionDetailsJoin as $voidItem)
-                        <p class="text-[0.6em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $voidItem->item_quantity }}</p>
                         @endforeach
                     </div>
@@ -139,5 +130,9 @@
             @endif
 
         </div>
+            <div class="flex flex-row py-4 mx-4 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                {{ $createdBy }}
+            </div>
     </div>
 </div>
