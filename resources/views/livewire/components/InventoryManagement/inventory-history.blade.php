@@ -76,7 +76,7 @@
                             <option value="0">All</option>
                             <option value="Inventory">Inventory</option>
                             <option value="Adjustment">Adjustment</option>
-                            <option value="Transaction">Transaction</option>
+                            <option value="Sales">Sales</option>
 
                         </select>
                     </div>
@@ -91,6 +91,7 @@
                             <option value="Stock Out">Stock Out</option>
                             <option value="Add">Add</option>
                             <option value="Deduct">Deduct</option>
+                            <option value="Void">Void</option>
 
                         </select>
                     </div>
