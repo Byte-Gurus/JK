@@ -15,12 +15,18 @@ class TransactionMovement extends Model
         'transaction_id',
         'credit_id',
         'returns_id',
+        'void_transaction_id',
+
 
     ];
 
     public function transactionJoin()
     {
         return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
+    public function voidTransactionJoin()
+    {
+        return $this->belongsTo(VoidTransaction::class, 'void_transaction_id');
     }
 
     public function creditJoin()

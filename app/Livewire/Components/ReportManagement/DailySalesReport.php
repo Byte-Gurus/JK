@@ -88,7 +88,7 @@ class DailySalesReport extends Component
                     $totalVoidAmount += $transaction->transactionJoin->total_amount;
                     $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
 
-                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                    foreach ($transaction->voidTransactionJoin->transactionJoin->transactionDetailsJoin as $detail) {
                         $transaction->VoidTaxAmount  =  $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;

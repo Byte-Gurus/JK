@@ -57,7 +57,7 @@ class ViewStockCard extends Component
 
     public function computeStockCardData()
     {
-        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin', 'transactionDetailsJoin.inventoryJoin'])
+        $query = InventoryMovement::with(['inventoryJoin', 'adjustmentJoin.inventoryJoin', 'transactionDetailsJoin.inventoryJoin', 'voidTransactionJoin.transactionJoin.transactionDetailsJoin.inventoryJoin'])
             ->where(function ($query) {
                 $query->whereHas('inventoryJoin', function ($query) {
                     $query->where('id', $this->stock_id);
@@ -66,6 +66,9 @@ class ViewStockCard extends Component
                         $query->where('id', $this->stock_id);
                     })
                     ->orWhereHas('transactionDetailsJoin.inventoryJoin', function ($query) {
+                        $query->where('id', $this->stock_id);
+                    })
+                    ->orWhereHas('voidTransactionJoin.transactionJoin.transactionDetailsJoin.inventoryJoin', function ($query) {
                         $query->where('id', $this->stock_id);
                     });
             });
@@ -118,9 +121,9 @@ class ViewStockCard extends Component
                     $out_value = $out_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
                     break;
                 case 'Void':
-                    $in_quantity = $stock_card->transactionDetailsJoin->item_quantity;
+                    $in_quantity = $stock_card->voidTransactionJoin->transactionJoin->transactionDetailsJoin->item_quantity;
                     $this->quantity_balance += $in_quantity;
-                    $in_value = $in_quantity * $stock_card->transactionDetailsJoin->item_price;
+                    $in_value = $in_quantity * $stock_card->voidTransactionJoin->transactionJoin->transactionDetailsJoin->item_price;
             }
 
             switch ($stock_card->operation) {
@@ -134,7 +137,7 @@ class ViewStockCard extends Component
                     break;
                 case 'Stock Out':
                 case 'Void':
-                    $selling_price = $stock_card->transactionDetailsJoin->item_price;
+                    $selling_price = $stock_card->voidTransactionJoin->transactionJoin->transactionDetailsJoin->item_price;
                     break;
             }
 
@@ -144,7 +147,7 @@ class ViewStockCard extends Component
                 $this->total_in_quantity += $in_quantity;
                 $this->total_in_value += $in_value;
             }
-            
+
             $this->total_out_quantity += $out_quantity;
             $this->total_out_value += $out_value;
 

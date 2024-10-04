@@ -11,6 +11,12 @@ class VoidTransaction extends Model
 
     protected $fillable = [
         'transaction_id',
+        
         'user_id',
     ];
+
+    public function transactionJoin()
+    {
+        return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
 }
