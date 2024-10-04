@@ -106,8 +106,9 @@ class DeliveryTable extends Component
         $delivery = Delivery::find($id);
 
 
-        $inputDate = Carbon::parse($date);
-        $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at);
+        $inputDate = Carbon::parse($date)->startOfDay();
+        $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at)->startOfDay();
+
 
         $deliveries = [
             'date' => $date,
