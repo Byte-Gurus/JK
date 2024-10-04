@@ -197,12 +197,10 @@ class SalesTransactionHistory extends Component
                 ]);
             }
 
-            $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
-            $transactionMovement->transaction_type = 'Void';
-            $transactionMovement->save();
-
-
-
+            $transactionMovement = TransactionMovement::create([
+                'transaction_id' => $transaction->id,
+                'transaction_type' => 'Void'
+            ]);
 
 
             $this->alert('success', 'Transaction was voided successfully');
