@@ -70,7 +70,7 @@ class DailySalesReport extends Component
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
 
                     foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-                        $this->calculateVoidAmounts($detail, $transaction);
+                        $transaction->VoidTaxAmount  =  $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
                 case 'Return':
@@ -78,7 +78,7 @@ class DailySalesReport extends Component
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
 
                     foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
-                        $this->calculateVoidAmounts($detail, $transaction);
+                        $transaction->VoidTaxAmount  = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
                 case 'Credit':
@@ -86,7 +86,7 @@ class DailySalesReport extends Component
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
                     foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
-                        $this->calculateVoidAmounts($detail, $transaction);
+                        $transaction->VoidTaxAmount  = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
                 case 'Void':
@@ -200,7 +200,7 @@ class DailySalesReport extends Component
                 $transaction->vat_exempte_amount += $vat_exempt_amount;
             }
 
-            $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->vat_exempt_amount;
+            return  $transaction->vatable_amount + $transaction->vat_exempt_amount;
         }
     }
 
