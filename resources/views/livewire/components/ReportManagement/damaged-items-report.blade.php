@@ -21,12 +21,12 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p> --}}
+                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        {{-- <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p> --}}
+                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
                     </div>
                 </div>
             </div>
@@ -66,47 +66,47 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            {{-- @if ($expiredItems)
-                @foreach ($expiredItems as $expiredItem)
+            @if ($damagedItems)
+                @foreach ($damagedItems as $damagedItem)
                     <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[1em] text-left font-medium">
-                                    {{ $expiredItem->itemJoin->barcode }}</p>
+                                    {{ $damagedItem->transactionDetailsJoin->itemJoin->barcode }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center font-bold">
-                                    {{ $expiredItem->itemJoin->item_name }}
+                                    {{ $damagedItem->transactionDetailsJoin->itemJoin->item_name }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center font-bold">
-                                    {{ $expiredItem->itemJoin->item_description }}
+                                    {{ $damagedItem-transactionDetailsJoin->>itemJoin->item_description }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center fot-bold">
-                                    {{ $expiredItem->current_stock_quantity }}
+                                    {{ $damagedItem->item_return_amount }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center fot-bold">
-                                    {{ $expiredItem->expiration_date }}
+                                    {{ $damagedItem->created_at }}
                                 </p>
                             </div>
                         </li>
                     </ul>
                 @endforeach
-            @endif --}}
+            @endif
         </div>
     </div>
 </div>
