@@ -8,7 +8,6 @@
                 class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
         </div>
     </div>
-
     <div wire:ignore class="">
         <div>
             <canvas class="w-full h-full" id="fastslowChart"></canvas>
