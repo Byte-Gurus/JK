@@ -899,7 +899,7 @@ class SalesTransaction extends Component
             'poDate' => $poDate
         ];
 
-        dd($reorder_requirements);
+      
 
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;

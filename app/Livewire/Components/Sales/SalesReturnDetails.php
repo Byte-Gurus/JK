@@ -265,7 +265,7 @@ class SalesReturnDetails extends Component
 
         if ($this->isAdmin) {
             $this->returnConfirmed();
-            $this->returnSalesReturnDetails();
+            $this->displaySalesAdminLoginForm();
         }
     }
 
