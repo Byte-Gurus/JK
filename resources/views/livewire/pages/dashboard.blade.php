@@ -37,24 +37,27 @@
             </div>
         </div>
         <div class="grid w-full grid-flow-col grid-cols-10 gap-4 my-4">
-            <div class="w-full h-full col-span-2">
-                <div class="p-4 h-full border border-[rgb(143,143,143)] shadow-2xl bg-white rounded-lg ">
-                    <div class="flex flex-row items-center justify-between ">
-                        <div>
-                            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Critical Items</p>
-
-                            @foreach ($reorder_lists as $index => $reorder_list)
-                            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">   {{ $reorder_list['item_name'] }}</p>
-                            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">   {{ $reorder_list['item_description'] }}</p>
-                            @endforeach
+            <div
+                class="p-4 border border-[rgb(143,143,143)] w-full  col-span-2 shadow-2xl bg-white rounded-lg ">
+                <div>
+                    <p class="text-2xl text-[rgb(72,72,72)] italic sticky font-black">Reorder Items</p>
+                </div>
+                <div class=" h-[40vh] overflow-y-auto">
+                    @foreach ($reorder_lists as $index => $reorder_list)
+                        <div class="flex hover:bg-[rgb(90,90,90)] text-[rgb(72,72,72)]  hover:text-white ease-in-out duration-100 transition-all flex-row items-center gap-2 p-2 my-4 border border-black rounded-sm cursor-default">
+                            <p class="italic font-black text-md">
+                                {{ $reorder_list['item_name'] }}</p>
+                                <p>-</p>
+                            <p class="text-sm italic font-medium">
+                                {{ $reorder_list['item_description'] }}</p>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="w-full h-full col-span-5">
+            <div class="w-full h-[50vh] col-span-5">
                 @livewire('charts.fast-slow-moving-chart')
             </div>
-            <div class="w-full h-full col-span-3">
+            <div class="w-full h-[50vh] col-span-3">
                 @livewire('charts.inventory-movement-chart')
             </div>
         </div>
