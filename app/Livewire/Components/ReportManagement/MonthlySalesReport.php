@@ -129,7 +129,7 @@ class MonthlySalesReport extends Component
             'totalNet' => $totalNet,
             'totalReturnAmount' => $totalReturnAmount,
             'totalReturnVatAmount' => $totalReturnVatAmount,
-            'totalVoidAmount' => $totalVoidAmount + $totalVoidItemAmount,
+            'totalVoidAmount' => $totalVoidAmount ,
             'totalVoidVatAmount' => $totalVoidVatAmount,
             'totalVoidItemAmount' => $totalVoidItemAmount,
             'totalVoidTaxAmount' => $totalVoidTaxAmount,
