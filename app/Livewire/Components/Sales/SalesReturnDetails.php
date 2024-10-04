@@ -53,7 +53,7 @@ class SalesReturnDetails extends Component
     public function return()
     {
 
-        $this->validate($this->validateForm());
+        $validated = $this->validateForm();
 
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
@@ -297,7 +297,7 @@ class SalesReturnDetails extends Component
                 $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
             }
         }
-        return $rules;
+        return $this->validate($rules);
     }
 
 }
