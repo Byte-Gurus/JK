@@ -104,73 +104,6 @@ class DailySalesReport extends Component
 
 
 
-            //     foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-            //         if ($detail->status == 'Void') {
-            //             $transaction->totalVoidItemAmount += $detail->item_subtotal;
-
-            //             if ($detail->vat_type === 'Vat') {
-            //                 $vatable_subtotal += $detail->item_subtotal;
-            //                 $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-            //                 $transaction->vatable_amount += $vatable_amount;
-            //             } elseif ($detail->vat_type === 'Non Vatable') {
-            //                 $non_vatable_subtotal += $detail->item_subtotal;
-            //                 $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-            //                 $transaction->non_vatable_amount += $non_vatable_amount;
-            //             }
-
-            //             $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
-
-            //         }
-
-            //     }
-            // } elseif ($transaction->transaction_type == 'Return') {
-            //     $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
-            //     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
-
-            //     foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
-            //         if ($detail->status == 'Void') {
-            //             $transaction->totalVoidItemAmount += $detail->item_subtotal;
-
-            //             if ($detail->vat_type === 'Vat') {
-            //                 $vatable_subtotal += $detail->item_subtotal;
-            //                 $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-            //                 $transaction->vatable_amount += $vatable_amount;
-            //             } elseif ($detail->vat_type === 'Non Vatable') {
-            //                 $non_vatable_subtotal += $detail->item_subtotal;
-            //                 $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-            //                 $transaction->non_vatable_amount += $non_vatable_amount;
-            //             }
-
-            //             $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
-            //         }
-            //     }
-            // } elseif ($transaction->transaction_type == 'Credit') {
-            //     $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
-            //     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
-            //     foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
-            //         if ($detail->status == 'Void') {
-            //             $transaction->totalVoidItemAmount += $detail->item_subtotal;
-
-            //             if ($detail->vat_type === 'Vat') {
-            //                 $vatable_subtotal += $detail->item_subtotal;
-            //                 $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-            //                 $transaction->vatable_amount += $vatable_amount;
-            //             } elseif ($detail->vat_type === 'Non Vatable') {
-            //                 $non_vatable_subtotal += $detail->item_subtotal;
-            //                 $non_vatable_amount = $non_vatable_subtotal - ($non_vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-            //                 $transaction->non_vatable_amount += $non_vatable_amount;
-            //             }
-
-            //             $transaction->VoidTaxAmount = $transaction->vatable_amount + $transaction->non_vatable_amount;
-            //         }
-            //     }
-            // } elseif ($transaction->transaction_type == 'Void') {
-            //     $totalVoidAmount += $transaction->transactionJoin->total_amount;
-            //     $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
-            // }
-
-
             $totalVoidItemAmount += $transaction->totalVoidItemAmount;
             $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->vat_exempt_amount;
 
@@ -215,4 +148,3 @@ class DailySalesReport extends Component
 
 
 }
-// if ($transaction->transaction_type == 'Sales') {
