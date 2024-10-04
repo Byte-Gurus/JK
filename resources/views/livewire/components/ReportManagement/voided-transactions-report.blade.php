@@ -53,6 +53,11 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[0.6em] uppercase text-left font-bold">Date</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[0.6em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
@@ -67,30 +72,13 @@
                     </div>
                 </li>
 
-                <li class="col-span-1">
-                    <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Operation</p>
-
-                    </div>
-                </li>
-
-                <li class="col-span-1">
-                    <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Description</p>
-
-                    </div>
-                </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Return Qty</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Voided Qty</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Return Amount(₱)</p>
-                    </div>
-                </li>
+
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
@@ -116,6 +104,12 @@
                         @foreach ($voidTransaction->transactionJoin->transactionDetailsJoin as $voidItem)
                         <p class="text-[0.6em] text-left font-medium">
                             {{ $voidItem->itemJoin->barcode }}</p>
+                        <p class="text-[0.6em] text-left font-medium">
+                            {{ $voidItem->itemJoin->item_name }}</p>
+                        <p class="text-[0.6em] text-left font-medium">
+                            {{ $voidItem->itemJoin->item_description }}</p>
+                        <p class="text-[0.6em] text-left font-medium">
+                            {{ $voidItem->item_quantity }}</p>
                         @endforeach
 
                     </div>
