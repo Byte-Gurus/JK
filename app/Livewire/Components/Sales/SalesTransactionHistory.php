@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Events\InventoryEvent;
+use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
@@ -225,6 +227,8 @@ class SalesTransactionHistory extends Component
         }
 
         $this->displaySalesAdminLoginForm();
+        TransactionEvent::dispatch('refresh-transaction');
+
         $this->resetPage();
     }
 }
