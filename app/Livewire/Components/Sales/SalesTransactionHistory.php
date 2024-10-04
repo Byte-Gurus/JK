@@ -220,11 +220,6 @@ class SalesTransactionHistory extends Component
                 'transaction_detail_id' => $transactionDetail->id
             ]);
 
-            $transactionMovement = TransactionMovement::create([
-                'transaction_id' => $transactionDetail->transaction_id,
-                'transaction_type' => 'Void'
-            ]);
-            
             $this->alert('success', 'Item was voided successfully');
 
         }

@@ -189,6 +189,7 @@ class DailySalesReport extends Component
         if ($detail->status == 'Void' ) {
             $transaction->totalVoidItemAmount += $detail->item_subtotal;
 
+            dd( $transaction->totalVoidItemAmount);
             if ($detail->vat_type === 'Vat') {
                 $vatable_subtotal = $detail->item_subtotal;
                 $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
@@ -200,6 +201,8 @@ class DailySalesReport extends Component
             }
 
             return  $transaction->vatable_amount + $transaction->vat_exempt_amount;
+
+
         }
     }
 
