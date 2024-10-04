@@ -72,10 +72,10 @@
                                 <th scope="col" class="py-2 text-left">Barcode</th>
 
                                 {{-- //* item name --}}
-                                <th scope="col" class="py-2 text-left">Name</th>
+                                <th scope="col" class="px-2 py-2 text-left">Name</th>
 
                                 {{-- //* item name --}}
-                                <th scope="col" class="py-2 text-left">Description</th>
+                                <th scope="col" class="px-2 py-2 text-left">Description</th>
 
                                 {{-- //* stocks on hand --}}
                                 <th scope="col" class="py-2 text-center">Stocks-On-Hand</th>
@@ -111,11 +111,11 @@
                                         {{ $reorder_list['barcode'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-6 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
+                                        class="px-2 py-6 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
                                         {{ $reorder_list['item_name'] }}
                                     </th>
                                     <th scope="row"
-                                        class="py-6 font-medium text-left text-gray-900 break-all text-wrap text-md whitespace-nowrap">
+                                        class="px-2 py-6 font-medium text-left text-gray-900 break-all text-wrap text-md whitespace-nowrap">
                                         {{ $reorder_list['item_description'] }}
                                     </th>
                                     <th scope="row"
