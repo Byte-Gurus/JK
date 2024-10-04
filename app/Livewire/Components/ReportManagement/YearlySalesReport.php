@@ -109,6 +109,8 @@ class YearlySalesReport extends Component
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
             'monthlySummaries' => $monthlySummaries,
         ];
+
+        dd($this->transaction_info);
     }
 
 
