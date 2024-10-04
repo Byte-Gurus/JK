@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('transaction_id')->nullable()->constrained('transactions');
             $table->foreignId('credit_id')->nullable()->constrained('credits');
             $table->foreignId('returns_id')->nullable()->constrained('returns');
-            $table->foreignId('void_transaction_id')->nullable()->constrained('void_transactions');
 
         });
     }

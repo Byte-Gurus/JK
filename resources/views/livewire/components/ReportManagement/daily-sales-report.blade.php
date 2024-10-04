@@ -230,7 +230,7 @@
                                         ) }}
                                     @elseif ($transaction->transaction_type == 'Void')
                                         {{ number_format(
-                                            ($transaction->voidTransactionJoin->transactionJoin->total_amount - $transaction->voidTransactionJoin->transactionJoin->total_vat_amount) * -1,
+                                            ($transaction->transactionJoin->total_amount - $transaction->transactionJoin->total_vat_amount) * -1,
                                             2,
                                         ) }}
                                     @endif

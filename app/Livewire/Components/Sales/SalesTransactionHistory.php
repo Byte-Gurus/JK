@@ -10,9 +10,7 @@ use App\Models\InventoryMovement;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
-use App\Models\VoidTransaction;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -179,13 +177,8 @@ class SalesTransactionHistory extends Component
 
         if ($this->isAdmin && $this->whatVoid === 'Transaction') {
             $transaction = Transaction::find($this->salesID);
-            // $transaction->transaction_type = 'Void';
-            // $transaction->save();
-
-            $voidTransaction = VoidTransaction::create([
-                'transaction_id' => $transaction->id,
-                'user_id' => Auth::id(),
-            ]);
+            $transaction->transaction_type = 'Void';
+            $transaction->save();
 
             $transactionDetails = TransactionDetails::where('transaction_id', $this->salesID)->get();
 
@@ -200,18 +193,16 @@ class SalesTransactionHistory extends Component
                 $inventoryMovement = InventoryMovement::create([
                     'movement_type' => 'Sales',
                     'operation' => 'Void',
-                    'void_transaction_id' => $voidTransaction->id
+                    'transaction_detail_id' => $transactionDetail->id
                 ]);
             }
 
-            // $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
-            // $transactionMovement->transaction_type = 'Void';
-            // $transactionMovement->save();
+            $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
+            $transactionMovement->transaction_type = 'Void';
+            $transactionMovement->save();
 
-            $transactionMovement = TransactionMovement::create([
-                'transaction_type' => 'Void',
-                'void_transaction_id' => $voidTransaction->id,
-            ]);
+
+
 
 
             $this->alert('success', 'Transaction was voided successfully');
@@ -221,11 +212,6 @@ class SalesTransactionHistory extends Component
             $transactionDetail->status = 'Void';
             $transactionDetail->save();
 
-            $voidTransaction = VoidTransaction::create([
-                'transaction_id' => $transactionDetail->id,
-                'user_id' => Auth::id(),
-            ]);
-
             $inventory = Inventory::where('sku_code', $transactionDetail->inventoryJoin->sku_code)->first();
             $inventory->current_stock_quantity += $transactionDetail->item_quantity;
             $inventory->save();
@@ -233,12 +219,7 @@ class SalesTransactionHistory extends Component
             $inventoryMovement = InventoryMovement::create([
                 'movement_type' => 'Sales',
                 'operation' => 'Void',
-                'void_transaction_id' => $voidTransaction->id
-            ]);
-
-            $transactionMovement = TransactionMovement::create([
-                'transaction_type' => 'Void',
-                'void_transaction_id' => $voidTransaction->id,
+                'transaction_detail_id' => $transactionDetail->id
             ]);
 
             $this->alert('success', 'Item was voided successfully');
@@ -247,7 +228,6 @@ class SalesTransactionHistory extends Component
 
         $this->displaySalesAdminLoginForm();
         TransactionEvent::dispatch('refresh-transaction');
-        InventoryEvent::dispatch('refresh-inventory');
 
         $this->resetPage();
     }
