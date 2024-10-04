@@ -878,7 +878,7 @@ class SalesTransaction extends Component
 
 
         // Calculate the number of days in the date range
-        $days = floor($startDate->diffInDays($endDate));
+        $days = round($startDate->diffInDays($endDate));
         if ($days = 0) {
             $days = 1;
         }
