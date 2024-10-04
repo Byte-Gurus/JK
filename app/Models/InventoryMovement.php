@@ -53,10 +53,6 @@ class InventoryMovement extends Model
             ->orWhereHas('transactionDetailsJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
                     ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
-            })
-            ->orWhereHas('voidTransactionJoin.transactionJoin.transactionDetailsJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
             });
     }
 }
