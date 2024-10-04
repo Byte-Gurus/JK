@@ -42,6 +42,11 @@
                     <div class="flex flex-row items-center justify-between ">
                         <div>
                             <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Critical Items</p>
+
+                            @foreach ($reorder_lists as $index => $reorder_list)
+                            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">   {{ $reorder_list['item_name'] }}</p>
+                            <p class="text-2xl text-[rgb(72,72,72)] italic font-black">   {{ $reorder_list['item_description'] }}</p>
+                            @endforeach
                         </div>
                     </div>
                 </div>
