@@ -72,7 +72,7 @@
             {{-- //* table header --}}
             <ul class="grid items-center justify-between grid-flow-col grid-cols-12 mx-4 ">
 
-                <li class="col-span-3 ">
+                <li class="col-span-2 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Transaction No</p>
                     </div>
@@ -98,7 +98,7 @@
                     </div>
                 </li>
 
-                <li class="col-span-1">
+                <li class="col-span-2">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD(20%)</p>
                     </div>
@@ -125,7 +125,7 @@
             @if ($transactions)
                 @foreach ($transactions as $transaction)
                     <ul class="grid justify-between grid-flow-col grid-cols-12 mx-4 ">
-                        <li class="col-span-3 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
                                     @if ($transaction->transaction_type == 'Sales')
@@ -175,7 +175,7 @@
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-1 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     @if ($transaction->transaction_type == 'Sales')
