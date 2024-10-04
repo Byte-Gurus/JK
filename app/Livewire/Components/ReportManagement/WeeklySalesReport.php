@@ -95,6 +95,7 @@ class WeeklySalesReport extends Component
             $totalVoidVatAmount += $summary['totalVoidVatAmount'];
         }
 
+
         // Prepare report information
         $this->transaction_info = [
             'totalGross' => $totalGross,
@@ -104,10 +105,10 @@ class WeeklySalesReport extends Component
             'totalReturnVatAmount' => $totalReturnVatAmount,
             'totalVoidAmount' => $totalVoidAmount,
             'totalVoidVatAmount' => $totalVoidVatAmount,
-            'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
-            'dateCreated' => Carbon::now()->format('M d Y h:i A'),
-            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
             'dailySummaries' => $dailySummaries,
+            'week' => $startOfWeek->format('M d, Y') . ' - ' . $endOfWeek->format('M d, Y'),
+            'dateCreated' => Carbon::now()->format('M d, Y h:i A'),
+            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
     }
 

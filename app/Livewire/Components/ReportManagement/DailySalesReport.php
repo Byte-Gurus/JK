@@ -51,14 +51,9 @@ class DailySalesReport extends Component
         $totalVoidItemAmount = 0;
         $totalVoidTaxAmount = 0;
 
-        $vatable_subtotal = 0;
-        $vatable_amount = 0;
-
-        $vat_exempt_subtotal = 0;
-        $vat_exempt_amount = 0;
 
         foreach ($this->transactions as $transaction) {
-            $transaction->totalVoidItemAmount = 0; // Initialize void amount for the transaction
+            $transaction->totalVoidItemAmount = 0;
             $transaction->vatable_amount = 0;
             $transaction->vat_exempt_amount = 0;
             $transaction->VoidTaxAmount = 0;
@@ -99,7 +94,7 @@ class DailySalesReport extends Component
                     break;
             }
 
-            // if ($transaction->transaction_type == 'Sales') {
+
 
             //     foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
             //         if ($detail->status == 'Void') {
@@ -210,3 +205,4 @@ class DailySalesReport extends Component
 
 
 }
+  // if ($transaction->transaction_type == 'Sales') {
