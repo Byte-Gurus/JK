@@ -114,8 +114,8 @@ class DeliveryTable extends Component
             'deliveryId' => $id
         ];
 
-        if ($inputDate < $purchaseOrderDate) {
-            $this->alert('error', 'Delivery date must be after the creation of the purchase order.');
+        if ($inputDate->lessThan($purchaseOrderDate)) {
+            $this->alert('error', 'Delivery date must be after or on the creation date of the purchase order.');
             return;
         }
         if ($inputDate > Carbon::today()) {
