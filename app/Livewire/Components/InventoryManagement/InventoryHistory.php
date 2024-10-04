@@ -40,7 +40,8 @@ class InventoryHistory extends Component
                 $query->where('status', '!=', 'new Item');
             })
                 ->orWhereHas('adjustmentJoin')
-                ->orWhereHas('transactionDetailsJoin');
+                ->orWhereHas('transactionDetailsJoin')
+                ->orWhereHas('voidTransactionJoin');
         });
 
         if ($this->statusFilter != 0) {
