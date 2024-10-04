@@ -43,9 +43,12 @@ class MonthlySalesChart extends Component
         for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
             $totalAmount = Transaction::whereDate('created_at', $date->toDateString())
                 ->whereNotIn('transaction_type', ['Return', 'Void'])
+                ->whereDoesntHave('transactionDetailsJoin', function ($query) {
+                    $query->whereIn('status', ['Void', 'Return']);
+                })
                 ->sum('total_amount');
+
             $dailyTransactionCount = Transaction::whereDate('created_at', $date->toDateString())
-                ->whereNotIn('transaction_type', ['Return', 'Void'])
                 ->count();
             $formattedDate = $date->format('M d Y');
             $this->monthlyTotal[] = [

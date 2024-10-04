@@ -46,9 +46,11 @@ class YearlySalesChart extends Component
 
             $totalAmount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])
                 ->whereNotIn('transaction_type', ['Return', 'Void'])
+                ->whereDoesntHave('transactionDetailsJoin', function ($query) {
+                    $query->whereIn('status', ['Void', 'Return']);
+                })
                 ->sum('total_amount');
             $dailyTransactionCount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])
-                ->whereNotIn('transaction_type', ['Return', 'Void'])
                 ->count();
             $formattedMonth = $startOfMonth->format('M Y');
             $this->yearlyTotal[] = [

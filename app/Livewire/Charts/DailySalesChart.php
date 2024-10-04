@@ -47,7 +47,6 @@ class DailySalesChart extends Component
             ->sum('total_amount');
 
         $this->transactionCount = Transaction::whereDate('created_at', $currentDate)
-            ->whereNotIn('transaction_type', ['Return', 'Void'])
             ->count();
 
 
