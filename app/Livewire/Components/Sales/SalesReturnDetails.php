@@ -23,7 +23,7 @@ class SalesReturnDetails extends Component
     public $operation = [];
     public $isAdmin;
     public $description = [];
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
     public $fromPage = 'ReturnDetails';
     public $return_info = [];
 
@@ -52,23 +52,18 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
-        $rules = [];  // Initialize the rules array
-
         foreach ($this->return_info as $index => $info) {
             if ($this->returnQuantity[$index] > 0) {
-                $rules["description.$index"] = ['required', 'in:Damaged,Expired'];
-                $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
+                $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
+                $this->rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
             }
         }
+        $this->validate($this->rules);
 
-        // Validate the rules
-        $this->validate($rules);
-
-        // Dispatch the event and display the form
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
-    }
 
+    }
 
     public function returnConfirmed()
     {
@@ -270,7 +265,6 @@ class SalesReturnDetails extends Component
 
         if ($this->isAdmin) {
             $this->returnConfirmed();
-            $this->displaySalesAdminLoginForm();
         }
     }
 
