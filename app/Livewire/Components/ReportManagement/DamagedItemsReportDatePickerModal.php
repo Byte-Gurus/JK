@@ -29,7 +29,7 @@ class DamagedItemsReportDatePickerModal extends Component
         ]);
     }
 
-    public function displayExpiredItemsReport()
+    public function displayDamagedItemsReport()
     {
         $this->dispatch( 'display-damaged-items-report')->to(ReportManagement::class);
     }
