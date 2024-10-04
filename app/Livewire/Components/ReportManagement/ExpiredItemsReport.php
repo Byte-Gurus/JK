@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\ReportManagement;
 
 use App\Models\Inventory;
+use App\Models\ReturnDetails;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -33,10 +34,26 @@ class ExpiredItemsReport extends Component
 
     public function generateReport($toDate, $fromDate)
     {
-        $startDate = Carbon::parse($fromDate)->startOfDay();
-        $endDate = Carbon::parse($toDate)->endOfDay();
+        $returnDetails = ReturnDetails::where('operation', 'expired')->get();
 
-        $this->expiredItems = Inventory::where('status', 'Expired')
-            ->whereBetween('created_at', [$startDate, $endDate])->get();
+        // Fetch records from Inventory where status is 'expired'
+        $inventory = Inventory::where('status', 'expired')->get();
+
+        // Combine the two collections
+        $combined = $returnDetails->map(function ($item) {
+            // Add a type to distinguish between the models if necessary
+            $item->type = 'return';
+            $item->date = $item->created_at; // or any date field you want to use for sorting
+            return $item;
+        })->merge($inventory->map(function ($item) {
+            // Add a type to distinguish between the models if necessary
+            $item->type = 'inventory';
+            $item->date = $item->expiration_date; // or any date field you want to use for sorting
+            return $item;
+        }));
+
+        // Sort the combined collection by date
+        $this->expiredItems = $combined->sortBy('date');
+        dd($this->expiredItems);
     }
 }
