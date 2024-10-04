@@ -3,6 +3,8 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Livewire\Pages\CashierPage;
+use App\Models\Inventory;
+use App\Models\InventoryMovement;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
@@ -13,7 +15,7 @@ use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 class SalesTransactionHistory extends Component
 {
-    use WithPagination, WithoutUrlPagination,  LivewireAlert;
+    use WithPagination, WithoutUrlPagination, LivewireAlert;
     public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID, $isAdmin, $tranasactionDetails_ID;
     public $transactionDetails = [];
     public $whatVoid;
@@ -181,20 +183,44 @@ class SalesTransactionHistory extends Component
             foreach ($transactionDetails as $transactionDetail) {
                 $transactionDetail->status = 'Void';
                 $transactionDetail->save();
+
+                $inventory = Inventory::where('sku_code', $transactionDetail->inventoryJoin->sku_code)->first();
+                $inventory->current_stock_quantity += $transactionDetail->item_quantity;
+                $inventory->save();
+
+                $inventoryMovement = InventoryMovement::create([
+                    'movement_type' => 'Sales',
+                    'operation' => 'Void',
+                    'inventory_id' => $inventory->id
+                ]);
             }
 
             $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
             $transactionMovement->transaction_type = 'Void';
             $transactionMovement->save();
 
-        $this->alert('success', 'Transaction was voided successfully');
+
+
+
+
+            $this->alert('success', 'Transaction was voided successfully');
 
         } elseif ($this->isAdmin && $this->whatVoid === 'TransactionDetails') {
             $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID)->first();
             $transactionDetail->status = 'Void';
             $transactionDetail->save();
 
-        $this->alert('success', 'Item was voided successfully');
+            $inventory = Inventory::where('sku_code', $transactionDetail->inventoryJoin->sku_code)->first();
+            $inventory->current_stock_quantity += $transactionDetail->item_quantity;
+            $inventory->save();
+
+            $inventoryMovement = InventoryMovement::create([
+                'movement_type' => 'Sales',
+                'operation' => 'Void',
+                'inventory_id' => $inventory->id
+            ]);
+
+            $this->alert('success', 'Item was voided successfully');
 
         }
 
