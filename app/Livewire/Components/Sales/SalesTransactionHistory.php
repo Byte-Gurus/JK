@@ -77,7 +77,7 @@ class SalesTransactionHistory extends Component
             ->get();
 
         $transaction = Transaction::find($transaction_id);
-
+        dd($transaction);
         $this->transaction_type = $transaction->transaction_type;
         $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
         $this->transaction_number = $transaction->transaction_number;
