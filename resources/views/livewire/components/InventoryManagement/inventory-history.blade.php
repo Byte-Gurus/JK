@@ -17,7 +17,7 @@
                     </svg>
                 </div>
 
-                <input type="text" wire:model.live.debounce.100ms="search"
+                <input type="text" wire:model.live.debounce.100ms = "search"
                     class="w-4/5 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name or Barcode" required="" />
 
@@ -63,7 +63,7 @@
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md block p-3">
                             <option value="0">All</option>
                             @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -151,106 +151,95 @@
                 <tbody>
 
                     @foreach ($InventoryHistories as $InventoryHistory)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $InventoryHistory->created_at->format(' M d Y h:i A') }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->created_at->format(' M d Y h:i A') }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $InventoryHistory->movement_type }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->movement_type }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->movement_type === 'Inventory')
-                            {{ $InventoryHistory->inventoryJoin->status ?? 'N/A' }}
-                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->status ?? 'N/A' }}
-                            @elseif ($InventoryHistory->movement_type === 'Sales')
-                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->status }}
-                            @endif
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->status ?? 'N/A' }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->status ?? 'N/A' }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->status }}
+                                @endif
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->movement_type === 'Inventory')
-                            {{ $InventoryHistory->inventoryJoin->sku_code ?? 'N/A' }}
-                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->sku_code }}
-                            @elseif ($InventoryHistory->movement_type === 'Sales')
-                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->sku_code }}
-                            @endif
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->sku_code ?? 'N/A' }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->sku_code }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->sku_code }}
+                                @endif
 
-                        </th>
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->movement_type === 'Inventory')
-                            {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
-                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->barcode }}
-                            @elseif ($InventoryHistory->movement_type === 'Sales')
-                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->barcode }}
-                            @endif
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->itemJoin->barcode }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->barcode }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->barcode }}
+                                @endif
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->movement_type === 'Inventory')
-                            {{ $InventoryHistory->inventoryJoin->itemJoin->item_name }}
-                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_name }}
-                            @elseif ($InventoryHistory->movement_type === 'Sales')
-                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_name }}
-                            @endif
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->itemJoin->item_name }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_name }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_name }}
+                                @endif
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->movement_type === 'Inventory')
-                            {{ $InventoryHistory->inventoryJoin->itemJoin->item_description }}
-                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_description }}
-                            @elseif ($InventoryHistory->movement_type === 'Sales')
-                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_description }}
-                            @endif
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->itemJoin->item_description }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_description }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_description }}
+                                @endif
+                            </th>
 
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $InventoryHistory->operation }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->operation }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $InventoryHistory->adjustmentJoin->reason ?? 'N/A' }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $InventoryHistory->adjustmentJoin->reason ?? 'N/A' }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->operation === 'Stock In' || $InventoryHistory->operation === 'Stock
-                            out')
-                            {{ $InventoryHistory->inventoryJoin->stock_in_quantity ??
-                            $InventoryHistory->transactionDetailsJoin->item_quantity }}
-                            @elseif ($InventoryHistory->operation === 'Add' || $InventoryHistory->operation ===
-                            'Deduct')
-                            {{ $InventoryHistory->adjustmentJoin->adjusted_quantity }}
-                            @elseif ($InventoryHistory->movement_type === 'Void')
-                            {{ $InventoryHistory->transactionDetailsJoin->item_quantity }}
-                            @endif
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->operation === 'Stock In' || $InventoryHistory->operation === 'Stock out')
+                                    {{ $InventoryHistory->inventoryJoin->stock_in_quantity ?? $InventoryHistory->transactionDetailsJoin->item_quantity }}
+                                @elseif ($InventoryHistory->operation === 'Add' || $InventoryHistory->operation === 'Deduct')
+                                    {{ $InventoryHistory->adjustmentJoin->adjusted_quantity }}
+                                @endif
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($InventoryHistory->movement_type === 'Inventory')
-                            {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name
-                            ?? 'N/A' }}
-                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                            {{
-                            $InventoryHistory->adjustmentJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name
-                            }}
-                            @elseif ($InventoryHistory->movement_type === 'Sales')
-                            {{
-                            $InventoryHistory->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name
-                            }}
-
-                            @endif
-                        </th>
-                    </tr>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($InventoryHistory->movement_type === 'Inventory')
+                                    {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name ?? 'N/A' }}
+                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                @elseif ($InventoryHistory->movement_type === 'Sales')
+                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name }}
+                                @endif
+                            </th>
+                        </tr>
                     @endforeach
                 </tbody>
 
@@ -273,7 +262,7 @@
 
                 <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
 
-                <select wire:model.live="perPage"
+                <select wire:model.live = "perPage"
                     class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
                     <option value="10">10</option>
                     <option value="50">50</option>
