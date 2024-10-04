@@ -41,6 +41,7 @@ Artisan::command('migration-order', function () {
         '2024_09_02_213236_create_transaction_details_table.php',
         '2024_09_04_210427_create_credits_table.php',
         '2024_09_05_220930_create_credit_histories_table.php',
+        '2024_10_02_154815_create_void_transactions_table.php',
 
         '2024_08_26_221603_create_inventory_movements_table.php',
         '2024_09_07_233147_create_notifications_table.php',
@@ -49,7 +50,6 @@ Artisan::command('migration-order', function () {
         '2024_09_08_090030_create_return_details_table.php',
 
         '2024_09_27_123857_create_transaction_movements_table.php',
-        '2024_10_02_154815_create_void_transactions_table.php',
         '0001_01_01_000001_create_cache_table.php',
         '0001_01_01_000002_create_jobs_table.php',
 
