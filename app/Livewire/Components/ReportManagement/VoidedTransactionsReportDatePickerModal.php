@@ -28,7 +28,7 @@ class VoidedTransactionsReportDatePickerModal extends Component
         ]);
     }
 
-    public function displayExpiredItemsReport()
+    public function displayVoidedTransactionsReport()
     {
         $this->dispatch( 'display-voided-transactions-report')->to(ReportManagement::class);
     }

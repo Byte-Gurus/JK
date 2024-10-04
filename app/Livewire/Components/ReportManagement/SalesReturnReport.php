@@ -35,7 +35,7 @@ class SalesReturnReport extends Component
     {
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
-        
+
         $this->returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }
