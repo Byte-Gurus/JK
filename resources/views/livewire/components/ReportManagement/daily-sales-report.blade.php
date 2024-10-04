@@ -77,7 +77,7 @@
                         <p class="text-[0.8em] uppercase text-left font-bold">Transaction No</p>
                     </div>
                 </li>
-                <li class="col-span-2 ">
+                <li class="col-span-2">
                     <div>
                         <p class="text-[0.8em] text-center uppercase font-bold">Transaction type</p>
                     </div>
@@ -98,19 +98,19 @@
                     </div>
                 </li>
 
-                <li class="col-span-2">
+                <li class="col-span-1">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD(20%)</p>
-                    </div>
-                </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD (20%)</p>
                     </div>
                 </li>
                 <li class="col-span-1">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Voided Tax</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
+                    </div>
+                </li>
+                <li class="col-span-2">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Voided VAT Amount (₱)</p>
                     </div>
                 </li>
 
@@ -175,7 +175,7 @@
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     @if ($transaction->transaction_type == 'Sales')
@@ -207,7 +207,7 @@
                             </div>
                         </li>
 
-                        <li class="col-span-1 py-[3px]">
+                        <li class="col-span-2 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->VoidTaxAmount * -1, 2) }}
