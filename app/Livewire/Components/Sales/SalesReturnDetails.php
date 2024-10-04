@@ -213,16 +213,15 @@ class SalesReturnDetails extends Component
     //             $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
     protected function validateForm()
     {
+        $rules = [];
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] && $this->returnQuantity[$index] != null) {
-                $rules = [
-                    'operation.$index' => 'required|in:Refund,Exchange',
-                    'description.$index' => 'required|in:Refund,Exchange',
-                ];
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] != null) {
+                $rules["operation.$index"] = 'required|in:Refund,Exchange';
+                $rules["description.$index"] = 'required|in:Damaged,Expired';
             }
         }
 
-        return $this->validate($this->rules);
+        return $this->validate($rules);
     }
 
     public function getTransaction($Transaction)
