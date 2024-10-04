@@ -70,7 +70,6 @@ class DailySalesReport extends Component
                         if ($detail->status == 'Void') {
                             $transaction->totalVoidItemAmount += $detail->item_subtotal;
                         }
-                        dump($detail);
                         $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
