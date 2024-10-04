@@ -113,7 +113,19 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
+                                    {{ number_format($summary['totalVoidAmount'], 2) }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($summary['totalTax'], 2) }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center font-bold">
+                                    {{ number_format($summary['totalVoidVatAmount'], 2) }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
