@@ -24,23 +24,14 @@
                         <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
-                    </div>
                 </div>
             </div>
             <div>
                 <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">DAMAGED ITEM LIST REPORT</p>
             </div>
         </div>
-
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
-
-
-
-
             <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
                 <li class="col-span-1 ">
@@ -107,6 +98,10 @@
                     </ul>
                 @endforeach
             @endif
+        </div>
+        <div class="flex flex-row py-4 mx-4 text-nowrap">
+            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+            {{ $createdBy }}
         </div>
     </div>
 </div>

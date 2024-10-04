@@ -24,10 +24,6 @@
                         <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
                         </p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
-                    </div>
                 </div>
             </div>
             <div>
@@ -82,7 +78,7 @@
 
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-left font-medium">
+                            <p class="text-[0.8em] text-left font-bold">
                                 {{ $reorder_list['barcode'] }}</p>
                         </div>
                     </li>
@@ -95,34 +91,38 @@
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-center fot-bold">
+                            <p class="text-[0.8em] text-left font-bold">
                                 {{ $reorder_list['item_description'] }}</p>
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-center fot-bold">
+                            <p class="text-[0.8em] text-center font-bold">
                                 {{ $reorder_list['total_quantity'] }}</p>
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-center fot-bold">
+                            <p class="text-[0.8em] text-center font-bold">
                                 {{ $reorder_list['maximum_stock_level'] }}</p>
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[0.8em] text-center fot-bold">
+                            <p class="text-[0.8em] text-center font-bold">
                                 {{ $reorder_list['reorder_point'] }}</p>
                             </p>
                         </div>
                     </li>
                 </ul>
             @endforeach
+        </div>
+        <div class="flex flex-row py-4 mx-4 text-nowrap">
+            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+            {{ $createdBy }}
         </div>
     </div>
 </div>

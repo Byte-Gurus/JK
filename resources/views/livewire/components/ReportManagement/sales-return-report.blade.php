@@ -155,7 +155,10 @@
                     </ul>
                 @endforeach
             @endif
-
+        </div>
+        <div class="flex flex-row py-4 mx-4 text-nowrap">
+            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+            {{ $createdBy }}
         </div>
     </div>
 </div>
