@@ -85,7 +85,7 @@
     </div>
     <div class="flex flex-col">
         <div class="flex justify-end w-full mb-[3vh]">
-            @if (!$returnQuantity)
+            @if (is_null($return_info))
             <button type="button"
                 class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(117,141,109)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(117,141,109)]">
                 Confirm
