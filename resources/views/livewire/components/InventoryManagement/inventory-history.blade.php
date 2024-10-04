@@ -230,7 +230,6 @@
                                     {{ $InventoryHistory->adjustmentJoin->adjusted_quantity }}
                                 @endif
                             </th>
-zz
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->movement_type === 'Inventory')
                                     {{ $InventoryHistory->inventoryJoin->deliveryJoin->purchaseJoin->supplierJoin->company_name ?? 'N/A' }}
