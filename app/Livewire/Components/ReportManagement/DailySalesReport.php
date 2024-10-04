@@ -93,7 +93,7 @@ class DailySalesReport extends Component
 
                     foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
 
-                        if ($detail->status == 'Void') {
+                        if ($detail->status === 'Void') {
                             $transaction->totalVoidItemAmount += $detail->item_subtotal;
                         }
 
@@ -205,7 +205,7 @@ class DailySalesReport extends Component
 
     function calculateVoidAmounts($detail, &$transaction)
     {
-        if ($detail->status == 'Void') {
+        if ($detail->status === 'Void') {
 
 
             if ($detail->vat_type === 'Vat') {
