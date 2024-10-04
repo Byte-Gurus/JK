@@ -290,6 +290,16 @@ class SalesReturnDetails extends Component
         $this->resetErrorBag($fieldName);
     }
 
+    public function allReturnQuantitiesNull()
+{
+    foreach ($this->returnQuantity as $quantity) {
+        if (!is_null($quantity)) {
+            return false;
+        }
+    }
+    return true;
+}
+
     // public function validateForm()
     // {
     //     $rules = [];
