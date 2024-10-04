@@ -65,7 +65,11 @@ class DailySalesReport extends Component
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
 
                     foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount  =  $this->calculateVoidAmounts($detail, $transaction);
+                        if ($detail->status == 'Void') {
+                            $transaction->totalVoidItemAmount += $detail->item_subtotal;
+                        }
+
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
                 case 'Return':
@@ -73,7 +77,12 @@ class DailySalesReport extends Component
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
 
                     foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount  = $this->calculateVoidAmounts($detail, $transaction);
+
+                        if ($detail->status == 'Void') {
+                            $transaction->totalVoidItemAmount += $detail->item_subtotal;
+                        }
+
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
                 case 'Credit':
@@ -81,7 +90,12 @@ class DailySalesReport extends Component
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
                     foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount  = $this->calculateVoidAmounts($detail, $transaction);
+
+                        if ($detail->status == 'Void') {
+                            $transaction->totalVoidItemAmount += $detail->item_subtotal;
+                        }
+
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
                 case 'Void':
@@ -89,7 +103,10 @@ class DailySalesReport extends Component
                     $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
 
                     foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount  =  $this->calculateVoidAmounts($detail, $transaction);
+                        if ($detail->status == 'Void') {
+                            $transaction->totalVoidItemAmount += $detail->item_subtotal;
+                        }
+                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
                     break;
             }
@@ -186,8 +203,8 @@ class DailySalesReport extends Component
 
     function calculateVoidAmounts($detail, &$transaction)
     {
-        if ($detail->status == 'Void' ) {
-            $transaction->totalVoidItemAmount += $detail->item_subtotal;
+        if ($detail->status == 'Void') {
+
 
             if ($detail->vat_type === 'Vat') {
                 $vatable_subtotal = $detail->item_subtotal;
@@ -199,7 +216,7 @@ class DailySalesReport extends Component
                 $transaction->vat_exempte_amount += $vat_exempt_amount;
             }
 
-            return  $transaction->vatable_amount + $transaction->vat_exempt_amount;
+            return $transaction->vatable_amount + $transaction->vat_exempt_amount;
 
 
         }
@@ -207,4 +224,4 @@ class DailySalesReport extends Component
 
 
 }
-  // if ($transaction->transaction_type == 'Sales') {
+// if ($transaction->transaction_type == 'Sales') {

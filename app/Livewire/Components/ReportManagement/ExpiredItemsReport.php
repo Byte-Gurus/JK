@@ -34,26 +34,32 @@ class ExpiredItemsReport extends Component
 
     public function generateReport($toDate, $fromDate)
     {
-        $returnDetails = ReturnDetails::where('operation', 'expired')->get();
+        $startDate = Carbon::parse($fromDate)->startOfDay();
+        $endDate = Carbon::parse($toDate)->endOfDay();
 
-        // Fetch records from Inventory where status is 'expired'
-        $inventory = Inventory::where('status', 'expired')->get();
+        // Fetch records from ReturnDetails where operation is 'Expired'
+        $returnDetails = ReturnDetails::where('operation', 'Expired')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
 
-        // Combine the two collections
+        // Fetch records from Inventory where status is 'Expired'
+        $inventory = Inventory::where('status', 'Expired')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
+
+        // Combine the two collections and add type and date for sorting
         $combined = $returnDetails->map(function ($item) {
-            // Add a type to distinguish between the models if necessary
             $item->type = 'return';
-            $item->date = $item->created_at; // or any date field you want to use for sorting
+            $item->date = $item->created_at; // Assuming created_at is the date field to use
             return $item;
         })->merge($inventory->map(function ($item) {
-            // Add a type to distinguish between the models if necessary
             $item->type = 'inventory';
-            $item->date = $item->expiration_date; // or any date field you want to use for sorting
+            $item->date = $item->expiration_date; // Assuming expiration_date is the date field to use
             return $item;
         }));
 
         // Sort the combined collection by date
-        $this->expiredItems = $combined->sortBy('date');
-        dd($this->expiredItems);
+        $this->expiredItems = $combined->sortBy('date')->values();
+
     }
 }
