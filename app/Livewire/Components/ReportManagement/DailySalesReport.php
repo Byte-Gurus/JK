@@ -72,6 +72,8 @@ class DailySalesReport extends Component
                         }
                         $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
+                    dump( $transaction->totalVoidItemAmount);
+
                     break;
                 case 'Return':
                     $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
@@ -84,7 +86,6 @@ class DailySalesReport extends Component
                         }
 
                         $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    dump( $transaction->totalVoidItemAmount);
 
                     }
                     break;
