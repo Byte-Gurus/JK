@@ -206,7 +206,7 @@ class SalesTransactionHistory extends Component
             $this->alert('success', 'Transaction was voided successfully');
 
         } elseif ($this->isAdmin && $this->whatVoid === 'TransactionDetails') {
-            $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID)->first();
+            $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID);
             $transactionDetail->status = 'Void';
             $transactionDetail->save();
 
