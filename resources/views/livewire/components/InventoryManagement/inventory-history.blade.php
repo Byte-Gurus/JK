@@ -225,7 +225,7 @@
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($InventoryHistory->operation === 'Stock In' || $InventoryHistory->operation === 'Stock out' || $InventoryHistory->operation === 'Void')
-                                    {{ $InventoryHistory->inventoryJoin->stock_in_quantity ?? $InventoryHistory->voidTransactionJoin->transactionDetailsJoin->item_quantity }}
+                                    {{ $InventoryHistory->inventoryJoin->stock_in_quantity ?? $InventoryHistory->voidTransactionJoin->transactionJoin->transactionDetailsJoin->item_quantity }}
                                 @elseif ($InventoryHistory->operation === 'Add' || $InventoryHistory->operation === 'Deduct')
                                     {{ $InventoryHistory->adjustmentJoin->adjusted_quantity }}
                                 @endif
