@@ -879,6 +879,9 @@ class SalesTransaction extends Component
 
         // Calculate the number of days in the date range
         $days = floor($startDate->diffInDays($endDate));
+        if ($days = 0) {
+            $days = 1;
+        }
         // dd($totalQuantity);
 
         // Calculate the demand rate
@@ -926,7 +929,7 @@ class SalesTransaction extends Component
 
         $average_lead_time = (int) $po_date->diffInDays($delivery_date);
 
-        if($average_lead_time == 0){
+        if ($average_lead_time == 0) {
             $average_lead_time = 1;
         }
 
@@ -939,7 +942,7 @@ class SalesTransaction extends Component
 
         $days_of_sale = (int) $delivery_date->diffInDays($endDateToday);
 
-        if($days_of_sale == 0){
+        if ($days_of_sale == 0) {
             $days_of_sale = 1;
         }
         $minimum_consumption = $daily_sales / $days_of_sale;
@@ -975,7 +978,7 @@ class SalesTransaction extends Component
 
         //maximum level = reorder quantity + reorder point - [minimum consumption * minimum lead time]
 
-       $maximum_level = round($reorder_quantity + $item->reorder_point - ($minimum_consumption * $minimum_lead_time));
+        $maximum_level = round($reorder_quantity + $item->reorder_point - ($minimum_consumption * $minimum_lead_time));
 
 
         Item::where('id', $item_info->item_id)->update(['maximum_stock_level' => $maximum_level]);
