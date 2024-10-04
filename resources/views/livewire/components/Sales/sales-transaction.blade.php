@@ -57,6 +57,9 @@
                         class="px-6 py-4 bg-[rgb(230,254,134)] border border-black hover:bg-[rgb(214,255,49)] font-bold ease-in-out duration-100 transition-all">Transaction
                         History</button>
                 </div>
+                {{-- @if ($)
+<p>Back</p>
+                @endif --}}
             </div>
         </div>
 

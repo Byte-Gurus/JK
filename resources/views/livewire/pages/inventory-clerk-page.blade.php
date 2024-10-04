@@ -1,3 +1,3 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
+    @livewire('pages.inventory-management-page')
 </div>
