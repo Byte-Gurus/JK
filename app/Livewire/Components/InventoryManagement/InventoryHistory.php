@@ -16,7 +16,7 @@ use Livewire\WithPagination;
 class InventoryHistory extends Component
 {
 
-    use WithPagination, WithoutUrlPagination;
+    use WithPagination,  WithoutUrlPagination;
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
@@ -39,8 +39,8 @@ class InventoryHistory extends Component
             $query->whereHas('inventoryJoin', function ($query) {
                 $query->where('status', '!=', 'new Item');
             })
-                ->orWhereHas('adjustmentJoin')
-                ->orWhereHas('transactionDetailsJoin');
+            ->orWhereHas('adjustmentJoin')
+            ->orWhereHas('transactionDetailsJoin');
         });
 
         if ($this->statusFilter != 0) {
@@ -48,12 +48,9 @@ class InventoryHistory extends Component
                 $query->whereHas('inventoryJoin', function ($query) {
                     $query->where('status', $this->statusFilter);
                 })
-                    ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
-                        $query->where('status', $this->statusFilter);
-                    })
-                    ->orWhereHas('voidTransactionJoin.transactionJoin.transactionDetailsJoin.inventoryJoin', function ($query) {
-                        $query->where('status', $this->statusFilter);
-                    });
+                ->orWhereHas('adjustmentJoin.inventoryJoin', function ($query) {
+                    $query->where('status', $this->statusFilter);
+                });
             });
         }
 
@@ -62,12 +59,9 @@ class InventoryHistory extends Component
                 $query->whereHas('inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
                     $query->where('supplier_id', $this->supplierFilter);
                 })
-                    ->orWhereHas('adjustmentJoin.inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
-                        $query->where('supplier_id', $this->supplierFilter);
-                    })
-                    ->orWhereHas('voidTransactionJoin.transactionJoin.transactionDetailsJoin.inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
-                        $query->where('status', $this->statusFilter);
-                    });
+                ->orWhereHas('adjustmentJoin.inventoryJoin.deliveryJoin.purchaseJoin', function ($query) {
+                    $query->where('supplier_id', $this->supplierFilter);
+                });
             });
         }
 
