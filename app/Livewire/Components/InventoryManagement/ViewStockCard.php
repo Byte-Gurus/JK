@@ -109,7 +109,7 @@ class ViewStockCard extends Component
                 case 'Stock out':
                     $out_quantity = $stock_card->transactionDetailsJoin->item_quantity;
                     $this->quantity_balance -= $out_quantity;
-                    $out_value = $out_quantity * $stock_card->transactionDetailsJoin->inventoryJoin->selling_price;
+                    $out_value = $out_quantity * $stock_card->transactionDetailsJoin->item_price;
                     break;
 
                 case 'Deduct':
@@ -120,7 +120,7 @@ class ViewStockCard extends Component
                 case 'Void':
                     $in_quantity = $stock_card->transactionDetailsJoin->item_quantity;
                     $this->quantity_balance += $in_quantity;
-                    $in_value = $in_quantity * $stock_card->transactionDetailsJoin->inventoryJoin->selling_price;
+                    $in_value = $in_quantity * $stock_card->transactionDetailsJoin->item_price;
             }
 
             switch ($stock_card->operation) {
@@ -130,11 +130,11 @@ class ViewStockCard extends Component
                     break;
 
                 case 'Stock In':
-                case 'Stock Out':
                     $selling_price = $stock_card->inventoryJoin->selling_price;
                     break;
+                case 'Stock Out':
                 case 'Void':
-                    $selling_price = $stock_card->inventoryJoin->selling_price;
+                    $selling_price = $stock_card->transactionDetailsJoin->item_price;
                     break;
             }
 
