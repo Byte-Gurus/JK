@@ -76,8 +76,7 @@ class SalesTransactionHistory extends Component
             ->whereHas('transactionJoin')
             ->get();
 
-        $transaction = Transaction::with('discountJoin')
-            ->find($transaction_id);
+        $transaction = Transaction::find($transaction_id);
 
         $this->transaction_type = $transaction->transaction_type;
         $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
