@@ -68,16 +68,16 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
+            <ul class="grid items-center justify-between grid-flow-col grid-cols-6 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Date</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Date</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Gross Sales(₱)</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Gross Sales(₱)</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -87,7 +87,7 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">VAT Amount(₱)</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount(₱)</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -97,7 +97,7 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Net Sales(₱)</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Net Sales(₱)</p>
                     </div>
                 </li>
 
@@ -106,7 +106,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($transaction_info)
             @foreach ($transaction_info['dailySummaries'] as $date => $summary)
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4">
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-left font-medium">

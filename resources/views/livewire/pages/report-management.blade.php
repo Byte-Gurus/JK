@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div
+                    {{-- <div
                         class="flex-col hover:p-8 w-full hover:border-2  h-auto col-span-1 gap-2 p-4 transition-all duration-300 ease-in-out border border-black rounded-lg hover:shadow-[rgb(250,216,114)] hover:bg-[rgb(255,227,142)] hover:shadow-2xl">
                         <div class="flex flex-row items-center w-full">
                             <div class="w-full ">
@@ -97,7 +97,7 @@
                                 <button>3% Percentage Tax Liability </button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="grid grid-flow-row col-span-1 grid-rows-3 gap-6">
                     <div
