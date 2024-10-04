@@ -33,7 +33,7 @@ class VoidedTransactionsReport extends Component
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
 
-        $this->voidTransactions = TransactionMovement::where('transaction_type', 'Void')
+        $this->voidTransactions = TransactionDetails::where('status', 'Void')
             ->whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }
