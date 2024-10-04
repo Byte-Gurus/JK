@@ -210,17 +210,20 @@ class SalesReturnDetails extends Component
             'current_tax_amount' => $transaction->total_vat_amount,
         ]);
     }
+    //             $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
+    protected function validateForm()
+    {
+        foreach ($this->transactionDetails as $index => $transactionDetail) {
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] && $this->returnQuantity[$index] != null) {
+                $rules = [
+                    'operation.$index' => 'required|in:Refund,Exchange',
+                    'description.$index' => 'required|in:Refund,Exchange',
+                ];
+            }
+        }
 
-    // protected function validateForm()
-    // {
-    //     foreach ($this->transactionDetails as $index => $transactionDetail) {
-    //         if (isset($this->returnQuantity[$index])  && $this->returnQuantity[$index] && $this->returnQuantity[$index] != null) {
-
-    //         }
-    //     }
-
-    //     return $this->validate($this->rules);
-    // }
+        return $this->validate($this->rules);
+    }
 
     public function getTransaction($Transaction)
     {
@@ -288,16 +291,17 @@ class SalesReturnDetails extends Component
         $this->resetErrorBag($fieldName);
     }
 
-    public function validateForm()
-    {
-        $rules = [];
-        foreach ($this->return_info as $index => $info) {
-            if ($this->returnQuantity[$index] != null) {
-                $rules["description.$index"] = ['required', 'in:Damaged,Expired'];
-                $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
-            }
-        }
-        return $this->validate($rules);
-    }
+    // public function validateForm()
+    // {
+    //     $rules = [];
+    //     foreach ($this->return_info as $index => $info) {
+    //         if ($this->returnQuantity[$index] != null) {
+    //             $rules["description.$index"] = ['required', 'in:Damaged,Expired'];
+    //             $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
+    //             return $this->validate($rules);
+
+    //         }
+    //     }
+    // }
 
 }
