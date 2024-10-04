@@ -292,8 +292,10 @@ class SalesReturnDetails extends Component
     {
         $rules = [];
         foreach ($this->return_info as $index => $info) {
+            if ($this->returnQuantity[$index] != null) {
                 $rules["description.$index"] = ['required', 'in:Damaged,Expired'];
                 $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
+            }
         }
         return $this->validate($rules);
     }
