@@ -31,11 +31,6 @@
 
                             </p>
                         </div>
-                        <div class="flex flex-row text-nowrap">
-                            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                            {{ $transaction_info['createdBy'] }}
-
-                        </div>
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[1em] font-black uppercase">Selected Date:</p>
@@ -246,5 +241,11 @@
                 @endforeach
             @endif
         </div>
+        @if ($transaction_info)
+        <div class="flex flex-row pt-4 mx-4 text-nowrap">
+            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+            {{ $transaction_info['createdBy'] }}
+        </div>
+    @endif
     </div>
 </div>
