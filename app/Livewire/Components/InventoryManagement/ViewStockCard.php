@@ -119,7 +119,7 @@ class ViewStockCard extends Component
                     break;
                 case 'Void':
                     $in_quantity = $stock_card->transactionDetailsJoin->item_quantity;
-                    // $this->quantity_balance += $in_quantity;
+                    $this->quantity_balance += $in_quantity;
                     $in_value = $in_quantity * $stock_card->transactionDetailsJoin->item_price;
             }
 
@@ -140,8 +140,11 @@ class ViewStockCard extends Component
 
             $value = $this->quantity_balance * $selling_price;
 
-            $this->total_in_quantity += $in_quantity;
-            $this->total_in_value += $in_value;
+            if ($stock_card->operation !== 'Void') {
+                $this->total_in_quantity += $in_quantity;
+                $this->total_in_value += $in_value;
+            }
+            
             $this->total_out_quantity += $out_quantity;
             $this->total_out_value += $out_value;
 
