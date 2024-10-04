@@ -110,7 +110,6 @@ class YearlySalesReport extends Component
             'monthlySummaries' => $monthlySummaries,
         ];
 
-        dd($this->transaction_info);
     }
 
 
