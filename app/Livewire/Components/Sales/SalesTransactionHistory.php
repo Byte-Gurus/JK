@@ -60,6 +60,7 @@ class SalesTransactionHistory extends Component
 
     protected $listeners = [
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
+        'return-sales-transaction-history' => 'returnSalesTransactionHistory',
         "echo:refresh-return,ReturnEvent" => 'refreshFromPusher',
         'admin-confirmed' => 'adminConfirmed',
     ];
@@ -106,6 +107,11 @@ class SalesTransactionHistory extends Component
         }
 
         $this->sortColumn = $column; //* gawing global variable ang $column
+    }
+
+    public function returnSalesTransactionHistory()
+    {
+        $this->showSalesAdminLoginForm = false;
     }
 
     public function returnToSalesTransaction()
