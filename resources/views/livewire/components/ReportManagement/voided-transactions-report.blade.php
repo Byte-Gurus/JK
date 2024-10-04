@@ -94,7 +94,7 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            @if ($returnItems)
+            @if ($voidTransactions)
             @foreach ($voidTransactions as $voidTransaction)
             <ul class="grid justify-between grid-flow-col grid-cols-8 mx-2 ">
 
