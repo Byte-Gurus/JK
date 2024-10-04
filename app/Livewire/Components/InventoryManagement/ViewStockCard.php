@@ -11,14 +11,13 @@ use Livewire\WithPagination;
 
 class ViewStockCard extends Component
 {
-    use WithPagination,  WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination;
     public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode, $selling_price;
 
     public $stock_cards = [];
     public $quantity_balance, $total_in_quantity, $total_in_value, $total_out_quantity, $total_out_value;
     public $startDate, $endDate;
     public function render()
-
     {
         if ($this->stock_id) {
             $this->computeStockCardData();
@@ -42,11 +41,11 @@ class ViewStockCard extends Component
 
         $this->fill([
             'item_name' => $stock_details->itemJoin->item_name,
-            'item_description' =>  $stock_details->itemJoin->item_description,
+            'item_description' => $stock_details->itemJoin->item_description,
             'expiration_date' => $stock_details->expiration_date,
             'barcode' => $stock_details->itemJoin->barcode,
             'supplier' => $stock_details->deliveryJoin->purchaseJoin->supplierJoin->company_name,
-            'selling_price' =>  $stock_details->selling_price,
+            'selling_price' => $stock_details->selling_price,
         ]);
     }
 
@@ -118,6 +117,10 @@ class ViewStockCard extends Component
                     $this->quantity_balance -= $out_quantity;
                     $out_value = $out_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
                     break;
+                case 'Void':
+                    $in_quantity = $stock_card->transactionDetailsJoin->item_quantity;
+                    $this->quantity_balance += $in_quantity;
+                    $in_value = $in_quantity * $stock_card->transactionDetailsJoin->inventoryJoin->selling_price;
             }
 
             switch ($stock_card->operation) {
@@ -128,6 +131,9 @@ class ViewStockCard extends Component
 
                 case 'Stock In':
                 case 'Stock Out':
+                    $selling_price = $stock_card->inventoryJoin->selling_price;
+                    break;
+                case 'Void':
                     $selling_price = $stock_card->inventoryJoin->selling_price;
                     break;
             }
