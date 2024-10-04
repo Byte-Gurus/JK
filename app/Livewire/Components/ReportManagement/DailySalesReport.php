@@ -84,6 +84,8 @@ class DailySalesReport extends Component
                         }
 
                         $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    dump( $transaction->totalVoidItemAmount);
+
                     }
                     break;
                 case 'Credit':
@@ -98,7 +100,6 @@ class DailySalesReport extends Component
 
                         $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
                     }
-                    dump( $transaction->totalVoidItemAmount);
                     break;
                 case 'Void':
                     $totalVoidAmount += $transaction->transactionJoin->total_amount;
