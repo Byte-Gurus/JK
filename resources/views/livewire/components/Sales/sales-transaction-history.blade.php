@@ -157,9 +157,9 @@
                         <tr @if ($transaction->transaction_type == 'Sales')
                             wire:click="getTransactionID({{ $transaction->transaction_id }}, true )"
                             @elseif ($transaction->transaction_type == 'Return')
-                            wire:click="getTransactionID({{ $transaction->returns_id }}, true )"
+                            wire:click="getTransactionID({{ $transaction->returnsJoin->transactionJoin->transaction_id }}, true )"
                             @elseif ($transaction->transaction_type == 'Credit')
-                            wire:click="getTransactionID({{ $transaction->credit_id }}, true )"
+                            wire:click="getTransactionID({{ $transaction->creditJoin->transactionJoin->transaction_id }}, true )"
 
                             @elseif ($transaction->transaction_type == 'Void')
                             wire:click="getTransactionID({{ $transaction->transaction_id }}, true )"
