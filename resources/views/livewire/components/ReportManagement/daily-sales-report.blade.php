@@ -155,7 +155,7 @@
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     @if ($transaction->transaction_type == 'Sales')
@@ -170,14 +170,14 @@
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->totalVoidItemAmount * -1, 2) }}
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     @if ($transaction->transaction_type == 'Sales')
@@ -209,14 +209,14 @@
                             </div>
                         </li>
 
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     {{ number_format($transaction->VoidTaxAmount * -1, 2) }}
                                 </p>
                             </div>
                         </li>
-                        <li class="col-span-2 py-[3px]">
+                        <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-center font-bold">
                                     @if ($transaction->transaction_type == 'Sales')
