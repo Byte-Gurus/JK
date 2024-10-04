@@ -182,6 +182,7 @@ class SalesTransactionHistory extends Component
             $transactionMovement->save();
 
         $this->alert('success', 'Transaction was voided successfully');
+        $this->displaySalesAdminLoginForm();
 
         } elseif ($this->isAdmin && $this->whatVoid === 'TransactionDetails') {
             $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID)->first();
@@ -189,6 +190,7 @@ class SalesTransactionHistory extends Component
             $transactionDetail->save();
 
         $this->alert('success', 'Item was voided successfully');
+        $this->displaySalesAdminLoginForm();
 
         }
     }
