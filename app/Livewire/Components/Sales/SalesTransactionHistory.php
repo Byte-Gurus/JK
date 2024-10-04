@@ -166,11 +166,11 @@ class SalesTransactionHistory extends Component
 
 
         if ($this->isAdmin && $this->whatVoid === 'Transaction') {
-            $transaction = transaction::find($this->salesID)->first();
+            $transaction = Transaction::find($this->salesID);
             $transaction->transaction_type = 'Void';
             $transaction->save();
 
-            $transactionDetails = TransactionDetails::where('transaction_id', $this->salesID);
+            $transactionDetails = TransactionDetails::where('transaction_id', $this->salesID)->get();
 
             foreach ($transactionDetails as $transactionDetail) {
                 $transactionDetail->status = 'Void';
