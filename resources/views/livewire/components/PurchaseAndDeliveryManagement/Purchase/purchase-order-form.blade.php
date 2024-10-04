@@ -69,25 +69,25 @@
                                 </th>
 
                                 {{-- //* barcode --}}
-                                <th scope="col" class="py-3 text-left">Barcode</th>
+                                <th scope="col" class="py-2 text-left">Barcode</th>
 
                                 {{-- //* item name --}}
-                                <th scope="col" class="py-3 text-left">Name</th>
+                                <th scope="col" class="py-2 text-left">Name</th>
 
                                 {{-- //* item name --}}
-                                <th scope="col" class="py-3 text-left">Description</th>
+                                <th scope="col" class="py-2 text-left">Description</th>
 
                                 {{-- //* stocks on hand --}}
-                                <th scope="col" class="py-3 text-center">Stocks-On-Hand</th>
+                                <th scope="col" class="py-2 text-center">Stocks-On-Hand</th>
 
                                 {{-- {-- //* stocks on hand --}}
-                                <th scope="col" class="py-3 text-center text-wrap">Maximum stock level</th>
+                                <th scope="col" class="py-2 text-center text-wrap">Maximum stock level</th>
 
                                 {{-- //* item reorder quantity --}}
-                                <th scope="col" class="py-3 text-center text-wrap">Item Reorder Qty</th>
+                                <th scope="col" class="py-2 text-center text-wrap">Item Reorder Qty</th>
 
                                 {{-- //* purchase quantity --}}
-                                <th scope="col" class="py-3 text-center text-nowrap">Purchase Qty</th>
+                                <th scope="col" class="py-2 text-center text-wrap">Purchase Qty</th>
 
                             </tr>
                         </thead>
