@@ -87,18 +87,18 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">Time</p>
                     </div>
                 </li>
-                <li class="col-span-2">
+                <li class="col-span-1">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Gross Sales</p>
                     </div>
                 </li>
-                <li class="col-span-2">
+                <li class="col-span-1">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Voided Amount</p>
                     </div>
                 </li>
 
-                <li class="col-span-2 ">
+                <li class="col-span-1">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">SC/PWD(20%)</p>
                     </div>
@@ -108,13 +108,13 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount</p>
                     </div>
                 </li>
-                <li class="col-span-2">
+                <li class="col-span-1">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Voided Tax</p>
                     </div>
                 </li>
 
-                <li class="col-span-2">
+                <li class="col-span-1">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Net Sales(₱)</p>
                     </div>
@@ -125,11 +125,9 @@
             @if ($transactions)
                 @foreach ($transactions as $transaction)
                     <ul class="grid justify-between grid-flow-col grid-cols-12 mx-4 ">
-
                         <li class="col-span-3 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-
                                     @if ($transaction->transaction_type == 'Sales')
                                         {{ $transaction->transactionJoin->transaction_number }}
                                     @elseif ($transaction->transaction_type == 'Return')
