@@ -21,48 +21,48 @@
 
         </div>
         @if ($transaction_info)
-            <div class="grid grid-flow-col grid-cols-2 ">
-                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                    <div class="flex flex-col ">
-                        <div class="flex flex-row text-nowrap">
-                            <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                            {{ $transaction_info['dateCreated'] ?? ' ' }}
+        <div class="grid grid-flow-col grid-cols-2 ">
+            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                <div class="flex flex-col ">
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                        {{ $transaction_info['dateCreated'] ?? ' ' }}
 
 
-                            </p>
-                        </div>
-                        <div class="flex flex-row text-nowrap">
-                            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                            {{ $transaction_info['createdBy'] ?? ' ' }}
-
-                        </div>
+                        </p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-black uppercase">Selected Date:</p>
-                        {{ $transaction_info['date'] ?? ' ' }}
+                        <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                        {{ $transaction_info['createdBy'] ?? ' ' }}
+
                     </div>
                 </div>
-                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                    <div class="flex flex-col ">
-                        <div class="flex flex-row border border-black text-nowrap">
-                            <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
-                            {{ number_format($transaction_info['totalGross'], 2) ?? ' ' }}
-                            </p>
-                        </div>
-                        <div class="flex flex-row border border-black text-nowrap ">
-                            <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
-
-                            {{ number_format($transaction_info['totalTax'], 2) ?? ' ' }}
-
-                        </div>
-                    </div>
-                    <div class="flex flex-row border border-black text-nowrap">
-                        <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
-                        {{ number_format($transaction_info['totalNet'], 2) ?? ' ' }}
-
-                    </div>
+                <div class="flex flex-row text-nowrap">
+                    <p class="text-[1em] font-black uppercase">Selected Date:</p>
+                    {{ $transaction_info['date'] ?? ' ' }}
                 </div>
             </div>
+            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                <div class="flex flex-col ">
+                    <div class="flex flex-row border border-black text-nowrap">
+                        <p class="text-[1em] w-1/2 font-bold border-black  border-r uppercase">Gross Sales</p>
+                        {{ number_format($transaction_info['totalGross'], 2) ?? ' ' }}
+                        </p>
+                    </div>
+                    <div class="flex flex-row border border-black text-nowrap ">
+                        <p class="text-[1em] font-bold w-1/2 border-r border-black uppercase">Tax Amount</p>
+
+                        {{ number_format($transaction_info['totalTax'], 2) ?? ' ' }}
+
+                    </div>
+                </div>
+                <div class="flex flex-row border border-black text-nowrap">
+                    <p class="text-[1em] font-black border-r border-black w-1/2 uppercase">Net Sales </p>
+                    {{ number_format($transaction_info['totalNet'], 2) ?? ' ' }}
+
+                </div>
+            </div>
+        </div>
         @endif
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
@@ -82,10 +82,19 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Voided Amount(₱)</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[1em] uppercase text-center font-bold">VAT Amount(₱)</p>
                     </div>
                 </li>
-
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Voided VAT Amount(₱)</p>
+                    </div>
+                </li>
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[1em] uppercase text-center font-bold">Net Sales(₱)</p>
@@ -96,47 +105,47 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($transaction_info)
-                @foreach ($transaction_info['dailySummaries'] as $date => $summary)
-                    <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-left font-medium">
-                                    {{ \Carbon\Carbon::parse($date)->format('M d, Y') }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalGross'], 2) }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalVoidAmount'], 2) }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalTax'], 2) }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalVoidVatAmount'], 2) }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-bold">
-                                    {{ number_format($summary['totalNet'], 2) }}
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                @endforeach
+            @foreach ($transaction_info['dailySummaries'] as $date => $summary)
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ \Carbon\Carbon::parse($date)->format('M d, Y') }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
+                            {{ number_format($summary['totalGross'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
+                            {{ number_format($summary['totalVoidAmount'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
+                            {{ number_format($summary['totalTax'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
+                            {{ number_format($summary['totalVoidVatAmount'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-bold">
+                            {{ number_format($summary['totalNet'], 2) }}
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            @endforeach
             @endif
         </div>
     </div>
