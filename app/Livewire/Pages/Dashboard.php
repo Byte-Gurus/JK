@@ -6,7 +6,7 @@ use App\Livewire\Charts\DailySalesChart;
 use App\Livewire\Charts\WeeklySalesChart;
 use App\Models\Item;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Dashboard extends Component
