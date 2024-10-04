@@ -134,5 +134,11 @@
                 @endforeach
             @endif
         </div>
+        @if ($slowmoving_info)
+            <div class="flex flex-row py-8 mx-4 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                {{ $createdBy }}
+            </div>
+        @endif
     </div>
 </div>
