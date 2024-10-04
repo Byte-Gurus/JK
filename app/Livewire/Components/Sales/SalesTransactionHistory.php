@@ -10,10 +10,10 @@ use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class SalesTransactionHistory extends Component
 {
-    use WithPagination, WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination,  LivewireAlert;
     public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID, $isAdmin, $tranasactionDetails_ID;
     public $transactionDetails = [];
     public $whatVoid;
@@ -191,7 +191,7 @@ class SalesTransactionHistory extends Component
         $this->alert('success', 'Item was voided successfully');
 
         }
-        
+
         $this->displaySalesAdminLoginForm();
         $this->resetPage();
     }
