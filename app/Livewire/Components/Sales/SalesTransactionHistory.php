@@ -193,7 +193,7 @@ class SalesTransactionHistory extends Component
                 $inventoryMovement = InventoryMovement::create([
                     'movement_type' => 'Sales',
                     'operation' => 'Void',
-                    'inventory_id' => $inventory->id
+                    'transaction_detail_id' => $transactionDetail->id
                 ]);
             }
 
@@ -219,7 +219,7 @@ class SalesTransactionHistory extends Component
             $inventoryMovement = InventoryMovement::create([
                 'movement_type' => 'Sales',
                 'operation' => 'Void',
-                'inventory_id' => $inventory->id
+                'transaction_detail_id' => $transactionDetail->id
             ]);
 
             $this->alert('success', 'Item was voided successfully');
