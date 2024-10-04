@@ -19,7 +19,7 @@ class YearlySalesReport extends Component
     }
 
     protected $listeners = [
-        'generate-report' => 'generateReport'
+        'generate-report' => 'generateYearlyReport'
     ];
 
     public function generateYearlyReport($year)
