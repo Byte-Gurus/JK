@@ -226,6 +226,7 @@ class SalesTransactionHistory extends Component
 
         $this->displaySalesAdminLoginForm();
         TransactionEvent::dispatch('refresh-transaction');
+        InventoryEvent::dispatch('refresh-inventory');
 
         $this->resetPage();
     }
