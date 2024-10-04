@@ -43,8 +43,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-7 mx-4 ">
-
+            <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">ID</p>
@@ -52,12 +51,12 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold"> Name</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Contact No.</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Contact No.</p>
                     </div>
                 </li>
 
@@ -71,8 +70,6 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">Due date</p>
                     </div>
                 </li>
-
-
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Credit Amount</p>
@@ -94,13 +91,12 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">Credit Limit</p>
                     </div>
                 </li>
-
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($credits)
                 @foreach ($credits as $credit)
-                    <ul class="grid justify-between grid-flow-col grid-cols-7 mx-4 ">
+                    <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
 
                         <li class="col-span-1 py-[3px]">
                             <div>

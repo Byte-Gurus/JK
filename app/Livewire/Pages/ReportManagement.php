@@ -252,7 +252,7 @@ class ReportManagement extends Component
     public function displaySalesReturnReport()
     {
         $this->showSalesReturnReport = !$this->showSalesReturnReport;
-        $this->hideExtrass();
+        $this->hideExtras();
     }
 
     public function closeSalesReturnReportDatePickerModal()
