@@ -52,13 +52,8 @@ class SalesReturnDetails extends Component
 
     public function return()
     {
-        foreach ($this->return_info as $index => $info) {
-            if ($this->returnQuantity[$index] > 0) {
-                $this->rules["description.$index"] = ['required', 'in:Damaged,Expired'];
-                $this->rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
-            }
-        }
-        $this->validate($this->rules);
+
+        $this->validate($this->validateForm());
 
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
@@ -291,6 +286,18 @@ class SalesReturnDetails extends Component
     public function resetSpecificValidation($fieldName)
     {
         $this->resetErrorBag($fieldName);
+    }
+
+    public function validateForm()
+    {
+        $rules = [];
+        foreach ($this->return_info as $index => $info) {
+            if ($this->returnQuantity[$index] > 0) {
+                $rules["description.$index"] = ['required', 'in:Damaged,Expired'];
+                $rules["operation.$index"] = ['required', 'in:Refund,Exchange'];
+            }
+        }
+        return $rules;
     }
 
 }
