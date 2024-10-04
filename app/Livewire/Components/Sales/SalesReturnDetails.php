@@ -293,7 +293,7 @@ class SalesReturnDetails extends Component
     public function allReturnQuantitiesNull()
 {
     foreach ($this->returnQuantity as $quantity) {
-        if (!is_null($quantity)) {
+        if (!is_null($quantity) && !empty($quantity)) {
             return false;
         }
     }
