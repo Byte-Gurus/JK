@@ -14,6 +14,7 @@ class VoidedTransactionsReport extends Component
 
     public function render()
     {
+        $this->reportInfo();
         return view('livewire.components.ReportManagement.voided-transactions-report');
     }
 
