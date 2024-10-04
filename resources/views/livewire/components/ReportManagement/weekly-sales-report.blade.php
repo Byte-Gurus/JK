@@ -84,7 +84,6 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount(₱)</p>
                     </div>
                 </li>
-
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Voided VAT Amount(₱)</p>
