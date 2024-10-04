@@ -86,7 +86,7 @@
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center font-bold">
-                                    {{ $damagedItem-transactionDetailsJoin->>itemJoin->item_description }}
+                                    {{ $damagedItem-transactionDetailsJoin->itemJoin->item_description }}
                                 </p>
                             </div>
                         </li>
