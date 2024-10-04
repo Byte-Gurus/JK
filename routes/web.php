@@ -59,7 +59,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
 
         //InventoryManagement
-        Route::get('admin/SalesTransactionHistory', SalesTransactionHistory::class)->name('salestransactionhistory.index');
+        Route::get('admin/SalesTransaction', CashierPage::class)->name('cashierpage.index');
 
         //CreditManagement
         Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');

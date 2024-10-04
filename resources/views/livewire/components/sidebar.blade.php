@@ -93,8 +93,7 @@
                 </a>
             </li>
             <li>
-                {{-- href="{{ route('salestransactionhistory.index') }}" --}}
-                <a  wire:navigate
+                <a wire:navigate href="{{ route('cashierpage.index') }}"
                     class="w-full bg-transparent text-sm font-medium text-[#EFEFEF] hover:bg-[#464646] px-6 py-2 flex flex-row gap-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
