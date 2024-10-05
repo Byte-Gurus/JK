@@ -7,6 +7,7 @@ use App\Livewire\Pages\ItemManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
 use App\Models\Item;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -18,7 +19,7 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description,  $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity; //var form inputs
     //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -61,7 +62,7 @@ class ItemForm extends Component
 
         $this->confirm('Do you want to add this item?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -71,43 +72,54 @@ class ItemForm extends Component
         $validated = $data['inputAttributes'];
 
 
-        $item = [
-            'item_name' => $validated['item_name'],
-            'item_description' => $validated['item_description'],
-            'vat_type' => $validated['vatType'],
-            'shelf_life_type' => $validated['shelf_life_type'],
-            'bulk_quantity' => $validated['bulk_quantity'],
-            'vat_percent' => $validated['vat_percent'],
-            'status_id' => $validated['status'],
+        DB::beginTransaction();
 
-        ];
+        try {
+
+            $item = [
+                'item_name' => $validated['item_name'],
+                'item_description' => $validated['item_description'],
+                'vat_type' => $validated['vatType'],
+                'shelf_life_type' => $validated['shelf_life_type'],
+                'bulk_quantity' => $validated['bulk_quantity'],
+                'vat_percent' => $validated['vat_percent'],
+                'status_id' => $validated['status'],
+
+            ];
+
+            if ($this->hasBarcode) {
+                $item['barcode'] = $validated['create_barcode'];
+            } else {
+                $item['barcode'] = $validated['barcode'];
+            }
+
+            $item = Item::create($item);
+
+            $inventory = Inventory::create([
+                'item_id' => $item->id,
+            ]);
+
+            $inventoryMovement = InventoryMovement::create([
+                'inventory_id' => $inventory->id,
+                'movement_type' => 'Inventory',
+                'operation' => 'Stock In',
+            ]);
+
+            DB::commit();
+
+            $this->alert('success', 'Item was created successfully');
+            $this->refreshTable();
+            ItemEvent::dispatch('refresh-item');
+            $this->resetForm();
+            $this->closeModal();
 
 
-
-        // Add barcode based on the condition
-        if ($this->hasBarcode) {
-            $item['barcode'] = $validated['create_barcode'];
-        } else {
-            $item['barcode'] = $validated['barcode'];
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating the Item, please refresh the page ');
         }
 
-        $item = Item::create($item);
-
-        $inventory = Inventory::create([
-            'item_id' => $item->id,
-        ]);
-
-        $inventoryMovement = InventoryMovement::create([
-            'inventory_id' => $inventory->id,
-            'movement_type' => 'Inventory',
-            'operation' => 'Stock In',
-        ]);
-
-        $this->alert('success', 'Item was created successfully');
-        $this->refreshTable();
-        ItemEvent::dispatch('refresh-item');
-        $this->resetForm();
-        $this->closeModal();
     }
 
     public function update() //* update process
@@ -116,8 +128,6 @@ class ItemForm extends Component
 
 
         $items = Item::find($this->proxy_item_id); //? kunin lahat ng data ng may ari ng proxy_item_id
-
-
 
         //* ipasa ang laman ng validated inputs sa models
         $items->item_name = $validated['item_name'];
@@ -142,7 +152,7 @@ class ItemForm extends Component
 
         $this->confirm('Do you want to update this item?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
@@ -152,31 +162,49 @@ class ItemForm extends Component
     {
 
 
-        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
 
+        DB::beginTransaction();
 
-        //* hanapin id na attribute sa $updatedAttributes array
-        $item = Item::find($updatedAttributes['id']);
+        try {
 
-        $item->fill($updatedAttributes);
-        $item->save(); //* Save the item model to the database
+            $item = Item::find($updatedAttributes['id']);
 
-        $inventories = Inventory::where('item_id', $item->id)->get();
+            if (!$item) {
+                // If the item does not exist, rollback and alert the user
+                DB::rollback();
+                $this->alert('error', 'Item not found.');
+                return; // Exit the method
+            }
 
-        // Update vat_amount for each related Inventory record
-        foreach ($inventories as $inventory) {
+            $item->fill($updatedAttributes);
+            $item->save(); //* Save the item model to the database
 
-            // Update the vat_amount in the Inventory model
-            $inventory->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
-            $inventory->save(); // Save each updated inventory record
+            $inventories = Inventory::where('item_id', $item->id)->get();
+
+            // Update vat_amount for each related Inventory record
+            foreach ($inventories as $inventory) {
+
+                // Update the vat_amount in the Inventory model
+                $inventory->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
+                $inventory->save(); // Save each updated inventory record
+            }
+
+            DB::commit();
+
+            $this->resetForm();
+            $this->alert('success', 'items was updated successfully');
+            ItemEvent::dispatch('refresh-item');
+            $this->refreshTable();
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating the Item, please refresh the page ');
         }
 
-        $this->resetForm();
-        $this->alert('success', 'items was updated successfully');
-        ItemEvent::dispatch('refresh-item');
-        $this->refreshTable();
-        $this->closeModal();
+
     }
     public function changeBarcodeForm()
     {
@@ -221,9 +249,9 @@ class ItemForm extends Component
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
 
-            'shelf_life_type' =>  'required|in:Perishable,Non Perishable',
+            'shelf_life_type' => 'required|in:Perishable,Non Perishable',
             'vat_percent' => ['required', 'numeric', 'min:0'],
-            'bulk_quantity' => ['required', 'numeric', 'min:0'],
+            'bulk_quantity' => ['required', 'numeric', 'min:0', 'max:100'],
             'vatType' => 'required|in:Vat,Vat Exempt',
             'status' => 'required|in:1,2',
         ];

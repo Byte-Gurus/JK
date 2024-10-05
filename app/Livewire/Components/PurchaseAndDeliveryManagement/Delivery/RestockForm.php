@@ -123,99 +123,106 @@ class RestockForm extends Component
     public function createConfirmed($data)
     {
 
-
         $validated = $data['inputAttributes'];
         $hasBackorder = false;
 
 
         $backorder_Items = [];
 
-        // $this->getMaximumLevel();
+        DB::beginTransaction();
 
-        foreach ($this->purchaseDetails as $index => $detail) {
-            $details = $detail['item_id'];
+        try {
+            foreach ($this->purchaseDetails as $index => $detail) {
+                $details = $detail['item_id'];
 
-            if (!isset($backorder_Items[$details])) {
-                $backorder_Items[$details] = [
-                    'details' => $detail,
-                    'total_restock_quantity' => 0
-                ];
+                if (!isset($backorder_Items[$details])) {
+                    $backorder_Items[$details] = [
+                        'details' => $detail,
+                        'total_restock_quantity' => 0
+                    ];
+                }
+                $backorder_Items[$details]['total_restock_quantity'] += $this->restock_quantity[$index];
             }
-            $backorder_Items[$details]['total_restock_quantity'] += $this->restock_quantity[$index];
-        }
 
 
 
-        foreach ($backorder_Items as $index => $backorder) {
+            foreach ($backorder_Items as $index => $backorder) {
 
-            $detail = $backorder['details'];
+                $detail = $backorder['details'];
 
 
-            $totalRestockQuantity = $backorder['total_restock_quantity'];
+                $totalRestockQuantity = $backorder['total_restock_quantity'];
 
-            if ($totalRestockQuantity < $detail['purchase_quantity'] && !$detail['isDuplicate']) {
-                $hasBackorder = true;
+                if ($totalRestockQuantity < $detail['purchase_quantity'] && !$detail['isDuplicate']) {
+                    $hasBackorder = true;
 
-                BackOrder::create([
-                    'purchase_id' => $this->purchase_id,
-                    'item_id' => $detail['item_id'],
-                    'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
-                    'status' => 'Missing',
+                    BackOrder::create([
+                        'purchase_id' => $this->purchase_id,
+                        'item_id' => $detail['item_id'],
+                        'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
+                        'status' => 'Missing',
+                    ]);
+                }
+            }
+
+            foreach ($this->purchaseDetails as $index => $detail) {
+
+
+                $item = Item::find($detail['item_id']);
+                $item->status_id = "1";
+                $item->save();
+
+                $inventory = Inventory::create([
+                    'sku_code' => $detail['sku_code'],
+                    'cost' => $this->cost[$index],
+                    'mark_up_price' => $this->cost[$index] * ($validated['markup'][$index] / 100),
+                    'selling_price' => $validated['srp'][$index],
+                    'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
+                    'current_stock_quantity' => $validated['restock_quantity'][$index],
+                    'stock_in_quantity' => $validated['restock_quantity'][$index],
+                    'expiration_date' => $validated['expiration_date'][$index] ?? null,
+                    'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
+                    'status' => 'Available',   // Set default status or customizek as needed
+                    'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
+                    'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
+                    'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
+                ]);
+
+
+
+                $inventoryMovement = InventoryMovement::create([
+                    'inventory_id' => $inventory->id,
+                    'movement_type' => 'Inventory',
+                    'operation' => 'Stock In',
                 ]);
             }
+
+            $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
+
+
+
+            if ($hasBackorder) {
+                $delivery->status = "Stocked in with backorder";
+            } else {
+                $delivery->status = "Complete Stock in";
+            }
+            $delivery->save();
+
+            DB::commit();
+
+            $this->resetForm();
+            $this->alert('success', 'Restocked successfully');
+
+            RestockEvent::dispatch('refresh-stock');
+            $this->refreshTable();
+            $this->closeModal();
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while Restocking, please refresh the page ');
         }
 
-        foreach ($this->purchaseDetails as $index => $detail) {
 
-
-            $item = Item::find($detail['item_id']);
-            $item->status_id = "1";
-            $item->save();
-
-            $inventory = Inventory::create([
-                'sku_code' => $detail['sku_code'],
-                'cost' => $this->cost[$index],
-                'mark_up_price' => $this->cost[$index] * ($validated['markup'][$index] / 100),
-                'selling_price' => $validated['srp'][$index],
-                'vat_amount' => ($item->vat_percent / 100) * $validated['srp'][$index],
-                'current_stock_quantity' => $validated['restock_quantity'][$index],
-                'stock_in_quantity' => $validated['restock_quantity'][$index],
-                'expiration_date' => $validated['expiration_date'][$index] ?? null,
-                'stock_in_date' => now(),  // Assuming you want to set the current date as stock in date
-                'status' => 'Available',   // Set default status or customizek as needed
-                'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
-                'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
-                'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
-            ]);
-
-
-
-            $inventoryMovement = InventoryMovement::create([
-                'inventory_id' => $inventory->id,
-                'movement_type' => 'Inventory',
-                'operation' => 'Stock In',
-            ]);
-        }
-
-        $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
-
-
-
-        if ($hasBackorder) {
-            $delivery->status = "Stocked in with backorder";
-        } else {
-            $delivery->status = "Complete Stock in";
-        }
-        $delivery->save();
-
-
-
-        $this->resetForm();
-        $this->alert('success', 'Restocked successfully');
-
-        RestockEvent::dispatch('refresh-stock');
-        $this->refreshTable();
-        $this->closeModal();
     }
 
     public function updatedCost($value, $index)
@@ -233,8 +240,9 @@ class RestockForm extends Component
         // Check if both cost and markup are set and are numeric
         if (isset($this->cost[$index]) && isset($this->markup[$index])) {
             if (is_numeric($this->cost[$index]) && is_numeric($this->markup[$index])) {
-                $srp = $this->cost[$index] * (1 + $this->markup[$index] / 100);
-                $this->srp[$index] = ceil($srp); // Round up to the nearest whole number
+                $this->srp[$index] = number_format($this->cost[$index] * (1 + $this->markup[$index] / 100), 2);
+
+                // Round up to the nearest whole number
             } else {
                 // Handle the case where cost or markup is not numeric
                 $this->srp[$index] = null; // Or set it to some default value or handle the error accordingly

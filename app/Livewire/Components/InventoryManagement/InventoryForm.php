@@ -5,6 +5,7 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Events\InventoryEvent;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -61,23 +62,43 @@ class InventoryForm extends Component
     {
 
 
-        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $this->inventoryInfo;
 
+        DB::beginTransaction();
 
+        try {
+
+            $inventories = Inventory::find($updatedAttributes['id']);
+
+            if (!$inventories) {
+
+                DB::rollback();
+                $this->alert('error', 'Inventory not found.');
+                return; // Exit the method
+
+            }
+
+            $inventories->fill($updatedAttributes);
+            $inventories->save();
+
+            DB::commit();
+
+            $this->resetForm();
+            $this->alert('success', 'Stock was updated successfully');
+            InventoryEvent::dispatch('refresh-inventory');
+            $this->displayInventoryAdminLoginForm();
+            $this->dispatch('close-inventory-form')->to(InventoryManagementPage::class);
+            $this->dispatch('refresh-table')->to(InventoryTable::class);
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating inventory, please refresh the page ');
+        }
         //* hanapin id na attribute sa $updatedAttributes array
-        $inventories = Inventory::find($updatedAttributes['id']);
-
-        $inventories->fill($updatedAttributes);
-        $inventories->save();
 
 
-        $this->resetForm();
-        $this->alert('success', 'Stock was updated successfully');
-        InventoryEvent::dispatch('refresh-inventory');
-        $this->displayInventoryAdminLoginForm();
-        $this->dispatch('close-inventory-form')->to(InventoryManagementPage::class);
-        $this->dispatch('refresh-table')->to(InventoryTable::class);
+
+
         // $this->refreshTable();
         // $this->closeModal();
 
@@ -171,5 +192,5 @@ class InventoryForm extends Component
         $this->showInventoryAdminLoginForm = !$this->showInventoryAdminLoginForm;
     }
 
-   
+
 }

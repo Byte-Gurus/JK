@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -85,54 +86,67 @@ class CustomerForm extends Component
 
 
         $validated = $data['inputAttributes'];
-        if ($this->id_picture) {
-            // Validate and store the uploaded file temporarily
-            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
-            // Generate a new filename
-            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
+        DB::beginTransaction();
 
-            // Get the contents of the file
-            $fileContents = Storage::disk('local')->get($path);
+        try {
+            if ($this->id_picture) {
+                // Validate and store the uploaded file temporarily
+                $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
-            // Store the file on S3
-            $isStored = Storage::disk('s3')->put($filename, $fileContents);
+                // Generate a new filename
+                $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
 
-            // Optionally delete the temporary file
-            Storage::disk('local')->delete($path);
+                // Get the contents of the file
+                $fileContents = Storage::disk('local')->get($path);
 
-            $validated['id_picture'] = Storage::disk('s3')->url($filename);
-        } else {
-            $validated['id_picture'] = null; // or provide a default value if necessary
+                // Store the file on S3
+                $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+                // Optionally delete the temporary file
+                Storage::disk('local')->delete($path);
+
+                $validated['id_picture'] = Storage::disk('s3')->url($filename);
+            } else {
+                $validated['id_picture'] = null; // or provide a default value if necessary
+            }
+
+
+
+            $address = Address::create([
+                'province_code' => $validated['selectProvince'],
+                'city_municipality_code' => $validated['selectCity'],
+                'barangay_code' => $validated['selectBrgy'],
+                'street' => $validated['street'],
+            ]);
+
+            $customer = Customer::create([
+                'firstname' => $validated['firstname'],
+                'middlename' => $validated['middlename'],
+                'lastname' => $validated['lastname'],
+                'contact_number' => $validated['contact_number'],
+                'birthdate' => $validated['birthdate'],
+                'address_id' => $address->id,
+                'customer_type' => $validated['customertype'],
+                'senior_pwd_id' => $validated['senior_pwd_id'],
+                'id_picture' => $validated['id_picture'],
+            ]);
+
+            DB::commit();
+
+            $this->alert('success', 'Customer was created successfully');
+            $this->refreshTable();
+            CustomerEvent::dispatch('refresh-customer');
+            $this->resetForm();
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating the Customer, please refresh the page ');
         }
 
 
-
-        $address = Address::create([
-            'province_code' => $validated['selectProvince'],
-            'city_municipality_code' => $validated['selectCity'],
-            'barangay_code' => $validated['selectBrgy'],
-            'street' => $validated['street'],
-        ]);
-
-        $customer = Customer::create([
-            'firstname' => $validated['firstname'],
-            'middlename' => $validated['middlename'],
-            'lastname' => $validated['lastname'],
-            'contact_number' => $validated['contact_number'],
-            'birthdate' => $validated['birthdate'],
-            'address_id' => $address->id,
-            'customer_type' => $validated['customertype'],
-            'senior_pwd_id' => $validated['senior_pwd_id'],
-            'id_picture' => $validated['id_picture'],
-        ]);
-
-
-        $this->alert('success', 'Customer was created successfully');
-        $this->refreshTable();
-        CustomerEvent::dispatch('refresh-customer');
-        $this->resetForm();
-        $this->closeModal();
     }
 
     public function update() //* update process
@@ -169,64 +183,77 @@ class CustomerForm extends Component
 
     public function updateConfirmed($data) //* confirmation process ng update
     {
-
-
-        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
 
-        //* hanapin id na attribute sa $updatedAttributes array
-        $customer = Customer::find($updatedAttributes['id']);
-        $address = Address::find($updatedAttributes['address_id']);
+        DB::beginTransaction();
 
-        if ($this->id_picture) {
+        try {
+            $customer = Customer::find($updatedAttributes['id']);
+            $address = Address::find($updatedAttributes['address_id']);
 
-            // Validate and store the uploaded file temporarily
-            $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
+            if (!$customer || !$address) {
 
-            // Generate a new filename
-            $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
+                DB::rollback();
+                $this->alert('error', 'Customer not found.');
+                return; // Exit the method
 
-            // Get the contents of the file
-            $fileContents = Storage::disk('local')->get($path);
+            }
+            if ($this->id_picture) {
 
-            // Store the file on S3
-            $isStored = Storage::disk('s3')->put($filename, $fileContents);
+                // Validate and store the uploaded file temporarily
+                $path = $this->id_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
-            // Optionally delete the temporary file
-            Storage::disk('local')->delete($path);
+                // Generate a new filename
+                $filename = Str::random(40) . '.' . $this->id_picture->getClientOriginalExtension();
 
-            $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
+                // Get the contents of the file
+                $fileContents = Storage::disk('local')->get($path);
+
+                // Store the file on S3
+                $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+                // Optionally delete the temporary file
+                Storage::disk('local')->delete($path);
+
+                $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
+            }
+
+            $address->fill([
+                'province_code' => $updatedAttributes['province_code'],
+                'city_municipality_code' => $updatedAttributes['city_municipality_code'],
+                'barangay_code' => $updatedAttributes['barangay_code'],
+                'street' => $updatedAttributes['street'],
+            ]);
+            $address->save();
+
+            $customer->fill([
+                'firstname' => $updatedAttributes['firstname'],
+                'middlename' => $updatedAttributes['middlename'],
+                'lastname' => $updatedAttributes['lastname'],
+                'contact_number' => $updatedAttributes['contact_number'],
+                'birthdate' => $updatedAttributes['birthdate'],
+                'address_id' => $address->id ?? null,
+                'customer_type' => $updatedAttributes['customer_type'],
+                'senior_pwd_id' => $updatedAttributes['senior_pwd_id'] ?? null,
+                'id_picture' => $updatedAttributes['id_picture'] ?? $customer->id_picture,
+            ]);
+            $customer->save();
+
+            DB::commit();
+
+            $this->resetForm();
+            $this->alert('success', 'Customer was updated successfully');
+            CustomerEvent::dispatch('refresh-customer');
+            $this->refreshTable();
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating the Customer, please refresh the page ');
         }
 
-        $address->fill([
-            'province_code' => $updatedAttributes['province_code'],
-            'city_municipality_code' => $updatedAttributes['city_municipality_code'],
-            'barangay_code' => $updatedAttributes['barangay_code'],
-            'street' => $updatedAttributes['street'],
-        ]);
-        $address->save();
 
-        //* fill() method [key => value] means [paglalagyan => ilalagay]
-        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
-        //var ipasa ang laman ng $updatedAttributes sa $item model
-        $customer->fill([
-            'firstname' => $updatedAttributes['firstname'],
-            'middlename' => $updatedAttributes['middlename'],
-            'lastname' => $updatedAttributes['lastname'],
-            'contact_number' => $updatedAttributes['contact_number'],
-            'birthdate' => $updatedAttributes['birthdate'],
-            'address_id' => $address->id ?? null,
-            'customer_type' => $updatedAttributes['customer_type'],
-            'senior_pwd_id' => $updatedAttributes['senior_pwd_id'] ?? null,
-            'id_picture' => $updatedAttributes['id_picture'] ?? $customer->id_picture,
-        ]);
-        $customer->save();
-
-        $this->resetForm();
-        $this->alert('success', 'Customer was updated successfully');
-        CustomerEvent::dispatch('refresh-customer');
-        $this->refreshTable();
-        $this->closeModal();
     }
 
     private function populateForm() //*lagyan ng laman ang mga input
@@ -277,9 +304,9 @@ class CustomerForm extends Component
         $this->lastname = trim($this->lastname);
 
         $rules = [
-            'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'firstname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
+            'middlename' => 'nullable|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
+            'lastname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
             'birthdate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
             'contact_number' => 'required|numeric|digits:11',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',

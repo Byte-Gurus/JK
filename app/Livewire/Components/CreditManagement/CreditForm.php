@@ -10,6 +10,7 @@ use App\Models\CreditHistory;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TransactionMovement;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -94,36 +95,44 @@ class CreditForm extends Component
     {
         $validated = $data['inputAttributes'];
 
-        $credit = Credit::create([
-            'status' => $validated['status'],
-            'due_date' => $validated['due_date'],
-            'credit_amount' => null,
-            'remaining_balance' => null,
-            'credit_number' => $this->credit_number,
-            'credit_limit' => $validated['credit_limit'],
-            'transaction_id' => null,
-            'customer_id' => $this->customer_id,
-            'user_id' => Auth::id(),
-        ]);
+        DB::beginTransaction();
+        try {
+            $credit = Credit::create([
+                'status' => $validated['status'],
+                'due_date' => $validated['due_date'],
+                'credit_amount' => null,
+                'remaining_balance' => null,
+                'credit_number' => $this->credit_number,
+                'credit_limit' => $validated['credit_limit'],
+                'transaction_id' => null,
+                'customer_id' => $this->customer_id,
+                'user_id' => Auth::id(),
+            ]);
 
-        $creditHistory = CreditHistory::create([
-            'description' => 'Credit Approved',
-            'credit_id' => $credit->id,
-            'credit_amount' => null,
-            'remaining_balance' => null,
-        ]);
+            $creditHistory = CreditHistory::create([
+                'description' => 'Credit Approved',
+                'credit_id' => $credit->id,
+                'credit_amount' => null,
+                'remaining_balance' => null,
+            ]);
+
+            DB::commit();
+
+            $this->alert('success', 'Creditor was created successfully');
+            $this->resetForm();
+
+            $this->refreshTable();
+            CreditEvent::dispatch('refresh-credit');
 
 
+            $this->closeModal();
 
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating the Credit, please refresh the page ');
+        }
 
-        $this->alert('success', 'Creditor was created successfully');
-        $this->resetForm();
-
-        $this->refreshTable();
-        CreditEvent::dispatch('refresh-credit');
-
-
-        $this->closeModal();
     }
 
     public function clearSelectedCustomerName()

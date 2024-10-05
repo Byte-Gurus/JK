@@ -117,7 +117,7 @@ class PurchaseOrderForm extends Component
                         'item_id' => $this->reorder_lists[$index]['item_id'],
                         'barcode' => $this->reorder_lists[$index]['barcode'],
                         'item_name' => $this->reorder_lists[$index]['item_name'],
-                        'item_description'  => $this->reorder_lists[$index]['item_description'],
+                        'item_description' => $this->reorder_lists[$index]['item_description'],
                         'total_quantity' => $this->reorder_lists[$index]['total_quantity'],
                         'reorder_point' => $this->reorder_lists[$index]['reorder_point'],
                         'maximum_stock_level' => $this->reorder_lists[$index]['maximum_stock_level'],
@@ -266,7 +266,7 @@ class PurchaseOrderForm extends Component
 
         $this->confirm('Do you want to create this purchase order?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -275,34 +275,54 @@ class PurchaseOrderForm extends Component
 
         $validated = $data['inputAttributes'];
 
-        $purchase_order = Purchase::create([
-            'po_number' => $validated['po_number'],
-            'supplier_id' => $validated['select_supplier'],
-            'user_id' => Auth::id(),
-        ]);
+        DB::beginTransaction();
 
+        try {
 
-        foreach ($this->reorder_lists as $index => $reorder_list) {
-            PurchaseDetails::create([
-                'purchase_id' => $purchase_order->id,
-                'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
+            $existingPurchaseOrder = Purchase::where('po_number', $validated['po_number'])->first();
+
+            if ($existingPurchaseOrder) {
+                $this->alert('error', 'Purchase order number already exists.');
+                return; // Exit if it exists
+            }
+
+            $purchase_order = Purchase::create([
                 'po_number' => $validated['po_number'],
-                'purchase_quantity' => $this->purchase_quantities[$index],
+                'supplier_id' => $validated['select_supplier'],
+                'user_id' => Auth::id(),
             ]);
+
+
+            foreach ($this->reorder_lists as $index => $reorder_list) {
+                PurchaseDetails::create([
+                    'purchase_id' => $purchase_order->id,
+                    'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
+                    'po_number' => $validated['po_number'],
+                    'purchase_quantity' => $this->purchase_quantities[$index],
+                ]);
+            }
+
+            $delivery = Delivery::create([
+                'status' => "In Progress",
+                'date_delivered' => "N/A",
+                'purchase_id' => $purchase_order->id
+            ]);
+
+            DB::commit();
+
+            $this->alert('success', 'Purchase order was created successfully');
+            $this->refreshTable();
+            PurchaseOrderEvent::dispatch('refresh-purchase-order');
+
+            $this->resetForm();
+            $this->closeModal();
+            
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating the purchase order, please refresh the page ' );
         }
 
-        $delivery = Delivery::create([
-            'status' => "In Progress",
-            'date_delivered' => "N/A",
-            'purchase_id' => $purchase_order->id
-        ]);
-
-        $this->alert('success', 'Purchase order was created successfully');
-        $this->refreshTable();
-        PurchaseOrderEvent::dispatch('refresh-purchase-order');
-
-        $this->resetForm();
-        $this->closeModal();
     }
 
     // public function update() //* update process

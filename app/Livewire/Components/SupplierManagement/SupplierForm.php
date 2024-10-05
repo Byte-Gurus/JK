@@ -10,6 +10,7 @@ use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
 use App\Models\PhilippineRegion;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -78,7 +79,7 @@ class SupplierForm extends Component
 
         $this->confirm('Do you want to add this supplier?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
     public function createConfirmed($data) //* confirmation process ng create
@@ -86,28 +87,37 @@ class SupplierForm extends Component
 
         $validated = $data['inputAttributes'];
 
-        $address = Address::create([
-            'province_code' => $validated['selectProvince'],
-            'city_municipality_code' => $validated['selectCity'],
-            'barangay_code' => $validated['selectBrgy'],
-            'street' => $validated['street'],
-        ]);
+        DB::beginTransaction();
+        try {
+            $address = Address::create([
+                'province_code' => $validated['selectProvince'],
+                'city_municipality_code' => $validated['selectCity'],
+                'barangay_code' => $validated['selectBrgy'],
+                'street' => $validated['street'],
+            ]);
 
-        $supplier = Supplier::create([
-            'company_name' => $validated['company_name'],
-            'contact_number' => $validated['contact_number'],
-            'status_id' => $validated['status'],
-            'address_id' => $address->id
-        ]);
+            $supplier = Supplier::create([
+                'company_name' => $validated['company_name'],
+                'contact_number' => $validated['contact_number'],
+                'status_id' => $validated['status'],
+                'address_id' => $address->id
+            ]);
+
+            DB::commit();
 
 
+            $this->alert('success', 'Supplier was created successfully');
+            $this->refreshTable();
+            SupplierEvent::dispatch('refresh-supplier');
+            $this->resetForm();
+            $this->closeModal();
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating the Supplier, please refresh the page ');
+        }
 
 
-        $this->alert('success', 'Supplier was created successfully');
-        $this->refreshTable();
-        SupplierEvent::dispatch('refresh-supplier');
-        $this->resetForm();
-        $this->closeModal();
     }
 
     public function update() //* update process
@@ -135,7 +145,7 @@ class SupplierForm extends Component
 
         $this->confirm('Do you want to update this supplier?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
@@ -146,34 +156,48 @@ class SupplierForm extends Component
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
 
-        //* hanapin id na attribute sa $updatedAttributes array
-        $supplier = Supplier::find($updatedAttributes['id']);
-        $address = Address::find($updatedAttributes['address_id']);
+        DB::beginTransaction();
 
-        $address->fill([
-            'province_code' => $updatedAttributes['province_code'],
-            'city_municipality_code' => $updatedAttributes['city_municipality_code'],
-            'barangay_code' => $updatedAttributes['barangay_code'],
-            'street' => $updatedAttributes['street'],
-        ]);
-        $address->save();
+        try {
+            $supplier = Supplier::find($updatedAttributes['id']);
+            $address = Address::find($updatedAttributes['address_id']);
 
-        //* fill() method [key => value] means [paglalagyan => ilalagay]
-        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $supplier have same keys with $updatedAttributes array
-        //var ipasa ang laman ng $updatedAttributes sa $item model
-        $supplier->fill([
-            'company_name' => $updatedAttributes['company_name'],
-            'contact_number' => $updatedAttributes['contact_number'],
-            'status_id' => $updatedAttributes['status_id'],
-            'address_id' => $address->id, // Associate with the updated address
-        ]);
-        $supplier->save;
+            if (!$supplier || !$address) {
+                // If the item does not exist, rollback and alert the user
+                DB::rollback();
+                $this->alert('error', 'Supplier or Address not found.');
+                return; // Exit the method
+            }
+            $address->fill([
+                'province_code' => $updatedAttributes['province_code'],
+                'city_municipality_code' => $updatedAttributes['city_municipality_code'],
+                'barangay_code' => $updatedAttributes['barangay_code'],
+                'street' => $updatedAttributes['street'],
+            ]);
+            $address->save();
 
-        $this->resetForm();
-        $this->alert('success', 'Supplier was updated successfully');
-        SupplierEvent::dispatch('refresh-supplier');
-        $this->refreshTable();
-        $this->closeModal();
+            $supplier->fill([
+                'company_name' => $updatedAttributes['company_name'],
+                'contact_number' => $updatedAttributes['contact_number'],
+                'status_id' => $updatedAttributes['status_id'],
+                'address_id' => $address->id, // Associate with the updated address
+            ]);
+            $supplier->save;
+
+            DB::commit();
+
+            $this->resetForm();
+            $this->alert('success', 'Supplier was updated successfully');
+            SupplierEvent::dispatch('refresh-supplier');
+            $this->refreshTable();
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating the Supplier, please refresh the page ');
+        }
+
     }
     private function populateForm() //*lagyan ng laman ang mga input
     {
@@ -240,7 +264,7 @@ class SupplierForm extends Component
 
 
         $rules = [
-            'company_name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-0-9@]+$/',
 
             //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
@@ -248,7 +272,7 @@ class SupplierForm extends Component
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
-            'street' => 'required|string|max:255',
+            'street' => 'required|string|max:50',
 
         ];
 

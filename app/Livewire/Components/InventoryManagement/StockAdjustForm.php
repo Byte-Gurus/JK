@@ -8,6 +8,7 @@ use App\Models\Inventory;
 use App\Models\InventoryAdjustment;
 use App\Models\InventoryMovement;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -65,46 +66,59 @@ class StockAdjustForm extends Component
 
     public function updateConfirmed() //* confirmation process ng update
     {
-        //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
+
         $updatedAttributes = $this->adjustInfo;
 
-        if ($this->selectOperation == "Add") {
-            $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
-        } elseif ($this->selectOperation == "Deduct") {
-            $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
-        }
+        DB::beginTransaction();
 
-        $inventory = Inventory::find($updatedAttributes['id']);
-        $inventory->current_stock_quantity = $adjustedQuantity;
+        try {
+            if ($this->selectOperation == "Add") {
+                $adjustedQuantity = $this->current_quantity + $updatedAttributes['quantityToAdjust'];
+            } elseif ($this->selectOperation == "Deduct") {
+                $adjustedQuantity = $this->current_quantity - $updatedAttributes['quantityToAdjust'];
+            }
 
-        if ($adjustedQuantity <= 0) {
-            $inventory->status = "Not available";
-        } else {
-            $inventory->status = "Available";
-        }
+            $inventory = Inventory::find($updatedAttributes['id']);
 
-        $inventory->save();
+            if (!$inventory ) {
+
+                DB::rollback();
+                $this->alert('error', 'Inventory not found.');
+                return; // Exit the method
+
+            }
+
+            $inventory->current_stock_quantity = $adjustedQuantity;
+
+            if ($adjustedQuantity <= 0) {
+                $inventory->status = "Not available";
+            } else {
+                $inventory->status = "Available";
+            }
+
+            $inventory->save();
 
 
 
-        $inventoryAdjust = InventoryAdjustment::create([
-            'reason' => $updatedAttributes['adjustReason'],
-            'operation' => $updatedAttributes['selectOperation'],
-            'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
-            'inventory_id' => $inventory->id,
-            'user_id' => Auth::id(),
-        ]);
+            $inventoryAdjust = InventoryAdjustment::create([
+                'reason' => $updatedAttributes['adjustReason'],
+                'operation' => $updatedAttributes['selectOperation'],
+                'adjusted_quantity' => $updatedAttributes['quantityToAdjust'],
+                'inventory_id' => $inventory->id,
+                'user_id' => Auth::id(),
+            ]);
 
-        $inventoryMovement = InventoryMovement::create([
-            'inventory_adjustment_id' => $inventoryAdjust->id,
-            'movement_type' => 'Adjustment',
-            'operation' => $updatedAttributes['selectOperation'],
-        ]);
+            $inventoryMovement = InventoryMovement::create([
+                'inventory_adjustment_id' => $inventoryAdjust->id,
+                'movement_type' => 'Adjustment',
+                'operation' => $updatedAttributes['selectOperation'],
+            ]);
+
+            DB::commit();
 
         $this->resetForm();
         $this->alert('success', 'Stock was adjusted successfully');
         AdjustmentEvent::dispatch('refresh-adjustment');
-        $this->dispatch('return-stock-adjust-form')->to(StockAdjustPage::class);
         $this->refreshTable();
         $this->closeModal();
     }
