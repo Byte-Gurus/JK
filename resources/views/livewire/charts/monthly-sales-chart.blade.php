@@ -22,7 +22,7 @@
         <div class="p-4 bg-white border border-[rgb(143,143,143)] shadow-2xl rounded-lg">
             <div class="flex flex-row justify-between ">
                 <div>
-                    <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Sales Performance - Monthly</p>
+                    <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Sales Performance - Monthly/p>
                 </div>
 
                 <div class="col-span-1 ">
