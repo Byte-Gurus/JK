@@ -186,7 +186,7 @@
 
                                             @if ($id_picture instanceof \Illuminate\Http\UploadedFile)
                                             <img src="{{ $id_picture->temporaryUrl() }}">
-                                            @elseif($id_picture)
+                                            @elseif($imageUrl)
                                             <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
                                             @endif
 
