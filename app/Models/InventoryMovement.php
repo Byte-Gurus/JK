@@ -15,6 +15,7 @@ class InventoryMovement extends Model
         'operation',
         'inventory_adjustment_id',
         'transaction_detail_id',
+        'void_transaction_details_id'
 
     ];
 
@@ -27,6 +28,11 @@ class InventoryMovement extends Model
     {
         return $this->belongsTo(InventoryAdjustment::class, 'inventory_adjustment_id');
     }
+    public function voidTransactionDetailsJoin()
+    {
+        return $this->belongsTo(VoidTransactionDetails::class, 'void_transaction_details_id');
+    }
+
 
     public function transactionDetailsJoin()
     {

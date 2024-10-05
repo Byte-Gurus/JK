@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('return_details', function (Blueprint $table) {
+        Schema::create('void_transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('return_quantity');
-            $table->double('item_return_amount');
-            $table->string('operation');
-            $table->string('description');
-            $table->timestamps();
+            $table->double('void_quantity');
+            $table->double('item_void_amount');
+            $table->string('reason');
 
-            $table->foreignId('return_id')->constrained('returns');
+
+            $table->foreignId('void_transaction_id')->constrained('void_transactions');
             $table->foreignId('transaction_details_id')->constrained('transaction_details');
+
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('return_details');
+        Schema::dropIfExists('void_transaction_details');
     }
 };

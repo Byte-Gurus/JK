@@ -282,7 +282,7 @@ class CustomerForm extends Component
             'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'birthdate' => 'required|string|max:255',
+            'birthdate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
             'contact_number' => 'required|numeric|digits:11',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
@@ -293,9 +293,11 @@ class CustomerForm extends Component
 
         ];
 
-        if ($this->customertype != 'Normal') {
-            $rules['senior_pwd_id'] = 'required|string|max:255';
-        } else {
+        if ($this->customertype == 'Senior Citizen') {
+            $rules['senior_pwd_id'] = 'digits:4';
+        } elseif ($this->customertype == 'PWD') {
+            $rules['senior_pwd_id'] = 'digits:7';
+        } elseif ($this->customertype == 'Normal') {
             $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 
