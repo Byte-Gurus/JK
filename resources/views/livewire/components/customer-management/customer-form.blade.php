@@ -138,7 +138,7 @@
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Birth Date" required />
 
-                                        @error('birth_date')
+                                        @error('birthdate')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                         @enderror
 
