@@ -80,7 +80,7 @@ class StockAdjustForm extends Component
 
             $inventory = Inventory::find($updatedAttributes['id']);
 
-            if (!$inventory ) {
+            if (!$inventory) {
 
                 DB::rollback();
                 $this->alert('error', 'Inventory not found.');
