@@ -178,7 +178,7 @@
                                                 wire:model="id_picture"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
                                             @else
-                                            <input id="id_picture" type="file" accept="image/png, image/jpeg"
+                                            <input id="id_picture" type="file" accept="image/png, image/jpeg" nullable
                                                 wire:model="id_picture"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
                                             @endif
