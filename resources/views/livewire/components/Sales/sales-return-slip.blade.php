@@ -9,7 +9,7 @@
                     <p class="text-[0.6em] uppercase">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
                 </div>
                 <div>
-                    <p class="text-[0.6em] uppercase">Non-VAT Reg TIN 936-196-461-0000</p>
+                    <p class="text-[0.6em] uppercase">VAT Reg TIN 936-196-461-0000</p>
                 </div>
             </div>
             <div class="flex flex-col justify-between px-4 mb-2">
