@@ -17,8 +17,8 @@
             <div class="relative w-1/2 ">
 
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none" viewBox="0 0 24 24"
-                        strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
+                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round"
                             d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
@@ -139,9 +139,6 @@
 
                             </div>
                         </th>
-
-                        {{-- payment --}}
-                        <th scope="col" class="px-4 py-3 text-center">Action</th>
                     </tr>
                 </thead>
 
@@ -150,49 +147,43 @@
                     class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75"
                     @click="isSelected = true; $dispatch('row-selected', {{ $sale->id }})"
                     @row-selected.window="isSelected = ($event.detail === {{ $sale->id }})"> --}}
-                    <tbody>
+                <tbody>
 
-                        @foreach ($transactions as $index => $transaction)
-
-                        <tr @if ($transaction->transaction_type == 'Sales')
-                            wire:click="getTransactionID({{ $transaction->transaction_id }}, true )"
+                    @foreach ($transactions as $index => $transaction)
+                        <tr @if ($transaction->transaction_type == 'Sales') wire:click="getTransactionID({{ $transaction->transaction_id }}, true )"
                             @elseif ($transaction->transaction_type == 'Return')
                             wire:click="getTransactionID({{ $transaction->returnsJoin->transaction_id }}, true )"
                             @elseif ($transaction->transaction_type == 'Credit')
                             wire:click="getTransactionID({{ $transaction->creditJoin->transaction_id }}, true )"
 
                             @elseif ($transaction->transaction_type == 'Void')
-                            wire:click="getTransactionID({{ $transaction->transaction_id }}, true )"
-
-                            @endif
-
-                            x-data="{ isSelected: false }"
-                            x-on:click=" isSelected = !isSelected " :class="isSelected && ' bg-gray-200'"
-                            x-on:click.away="isSelected = false;"
+                            wire:click="getTransactionID({{ $transaction->transaction_id }}, true )" @endif
+                            x-data="{ isSelected: false }" x-on:click=" isSelected = !isSelected "
+                            :class="isSelected && ' bg-gray-200'" x-on:click.away="isSelected = false;"
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in
                             duration-75">
                             <th scope="row"
                                 class="px-4 py-4 font-bold text-left text-gray-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                {{ $transaction['transactionJoin']['transaction_number'] }}
+                                    {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ $transaction['returnsJoin']['transactionJoin']['transaction_number'] }}
+                                    {{ $transaction['returnsJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ $transaction['creditJoin']['transactionJoin']['transaction_number'] }}
+                                    {{ $transaction['creditJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ $transaction['transactionJoin']['transaction_number'] }}
+                                    {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                                    {{ number_format($transaction->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ number_format($transaction->returnsJoin->transactionJoin->total_amount, 2) }}
+                                    {{ number_format($transaction->returnsJoin->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
+                                    {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                                    {{ number_format($transaction->transactionJoin->total_amount, 2) }}
                                 @endif
                             </th>
                             <th scope="row"
@@ -202,43 +193,38 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                    {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin']['payment_type'] ??
-                                'N/A' }}
+                                    {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                'N/A'
+                                    'N/A'
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
+                                    {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 @endif
                             </th>
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin->reference_number'] ??
-                                'N/A' }}
+                                    {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ $transaction['creditJoin']['transactionJoin']['paymentJoin->reference_number'] ??
-                                'N/A' }}
+                                    {{ $transaction['creditJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
                                 @endif
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
+                                    {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ number_format($transaction['returnsJoin']['transactionJoin']['total_vat_amount'], 2)
-                                ?? 'N/A' }}
+                                    {{ number_format($transaction['returnsJoin']['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ number_format($transaction['creditJoin']['transactionJoin']['total_vat_amount'], 2)
-                                ?? 'N/A' }}
+                                    {{ number_format($transaction['creditJoin']['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
+                                    {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @endif
                             </th>
 
@@ -246,53 +232,9 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $transaction['created_at']->format(' M d Y h:i A ') }}
                             </th>
-
-                            @if ($transaction->transaction_type == 'Sales')
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button wire:click="voidTransaction({{ $transaction->transaction_id }})"
-                                    type="button">Void
-                                    Transaction</button>
-                            </th>
-                            @elseif ($transaction->transaction_type == 'Return')
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button
-                                    wire:click="voidTransaction({{ $transaction->returnsJoin->transactionJoin->id }})"
-                                    type="button">Void
-                                    Transaction</button>
-                            </th>
-                            @elseif ($transaction->transaction_type == 'Credit')
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button
-                                    wire:click="voidTransaction({{ $transaction->creditJoin->transactionJoin->id }})"
-                                    type="button">Void
-                                    Transaction</button>
-                            </th>
-                            @elseif ($transaction->transaction_type == 'Void')
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <div
-                                    class="flex items-center justify-center p-1 mx-auto text-center cursor-not-allowed w-fit">
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
-                                    </svg>
-                                </div>
-                            </th>
-                            @else
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                                <button type="button">Void
-                                    Transaction</button>
-                            </th>
-                            @endif
                         </tr>
-                        @endforeach
-                    </tbody>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>
@@ -325,23 +267,23 @@
                     </div>
                 </div>
                 @if ($transaction_type == 'Return')
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Total</p>
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Total</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
-                    </div>
-                </div>
                 @else
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Total</p>
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Total</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($grandTotal, 2) }}</p>
-                    </div>
-                </div>
                 @endif
                 <div class="flex flex-row justify-between">
                     <div>
@@ -354,31 +296,31 @@
                 <div class="border border-black "></div>
                 <div class="flex flex-row justify-between">
                     @if ($payment_type != 'GCash' && !is_null($payment_type))
-                    <div>
-                        <p class=" text-[1.6em] font-medium">Change</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
-                    </div>
+                        <div>
+                            <p class=" text-[1.6em] font-medium">Change</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.6em] font-black">{{ number_format($change, 2) }}</p>
+                        </div>
                     @endif
                 </div>
                 @if ($transaction_type == 'Return')
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Original Amount</p>
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Original Amount</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <p class=" text-[1.2em] font-medium">Return Amount</p>
+                        </div>
+                        <div>
+                            <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Return Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) }}</p>
-                    </div>
-                </div>
                 @endif
             </div>
         </div>
@@ -420,10 +362,6 @@
 
                         {{-- //* amount --}}
                         <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
-
-                        {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-center">Actions</th>
-
                     </tr>
                 </thead>
 
@@ -431,80 +369,59 @@
                 <tbody>
 
                     @foreach ($transactionDetails as $index => $transactionDetail)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $index + 1 }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['inventoryJoin']['sku_code'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['barcode'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['item_name'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['item_description'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['status'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($transactionDetail['item_price'], 2) }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['item_quantity'] }}
-                        </th>
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $index + 1 }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['inventoryJoin']['sku_code'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['barcode'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['item_name'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['item_description'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['status'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($transactionDetail['item_price'], 2) }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['item_quantity'] }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
-                            {{ number_format(
-                            $transactionDetail['item_price'] -
-                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
-                            2,
-                            ) }}
-                            @else
-                            0.00
-                            @endif
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
+                                    {{ number_format(
+                                        $transactionDetail['item_price'] -
+                                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
+                                        2,
+                                    ) }}
+                                @else
+                                    0.00
+                                @endif
 
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($transactionDetail['item_subtotal'], 2) }}
-                        </th>
-
-                        @if ($transactionDetail->transactionJoin->transaction_type == 'Sales' &&
-                        $transactionDetail->status == 'Sales')
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                            <button wire:click="voidTransactionDetails({{ $transactionDetail->id }})"
-                                type="button">Void</button>
-                        </th>
-                        @else
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-red-900 underline text-md whitespace-nowrap ">
-                            <div
-                                class="flex items-center justify-center p-1 mx-auto text-center cursor-not-allowed w-fit">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
-                                </svg>
-                            </div>
-                        </th>
-                        @endif
-                    </tr>
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($transactionDetail['item_subtotal'], 2) }}
+                            </th>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
