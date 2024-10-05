@@ -104,6 +104,7 @@ class StockAdjustForm extends Component
         $this->resetForm();
         $this->alert('success', 'Stock was adjusted successfully');
         AdjustmentEvent::dispatch('refresh-adjustment');
+        $this->dispatch('return-stock-adjust-form')->to(StockAdjustPage::class);
         $this->refreshTable();
         $this->closeModal();
     }

@@ -17,5 +17,8 @@
     <div x-show="showSalesReturnSlip" x-data="{ showSalesReturnSlip: @entangle('showSalesReturnSlip') }">
         @livewire('components.Sales.sales-return-slip')
     </div>
+    <div x-show="showVoidTransaction" x-data="{ showVoidTransaction: @entangle('showVoidTransaction') }">
+        @livewire('components.Sales.void-transaction-page')
+    </div>
 </div>
 

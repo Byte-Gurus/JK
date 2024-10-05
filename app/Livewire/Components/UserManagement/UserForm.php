@@ -17,8 +17,12 @@ use Livewire\Component;
 class UserForm extends Component
 {
     use LivewireAlert;
-    
+
     public $show_password; //var true for show password false for hindi
+
+    public $unhidePassword = true;
+
+    public $unhideRetypePassword = true;
 
     public $isCreate; //var true for create false for edit
 
@@ -48,7 +52,15 @@ class UserForm extends Component
         'createConfirmed',
     ];
 
+    public function showPasswordStatus()
+    {
+        $this->unhidePassword = !$this->unhidePassword;
+    }
 
+    public function showRetypePasswordStatus()
+    {
+        $this->unhideRetypePassword = !$this->unhideRetypePassword;
+    }
 
     public function create() //* create process
     {
@@ -59,9 +71,6 @@ class UserForm extends Component
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
-
-
-
 
     public function createConfirmed($data) //* confirmation process ng create
     {
@@ -229,8 +238,6 @@ class UserForm extends Component
 
         return $this->validate($rules);
     }
-
-
 
     public function edit($userID)
     {
