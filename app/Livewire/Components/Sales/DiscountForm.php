@@ -241,6 +241,7 @@ class DiscountForm extends Component
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
                 'street' => 'required|string|max:255',
                 'discount_percentage' => 'required|numeric|min:1',
+                'customerType' => 'required|in:PWD,Senior Citizen',
             ];
 
             if ($this->customerType == 'Senior Citizen') {
