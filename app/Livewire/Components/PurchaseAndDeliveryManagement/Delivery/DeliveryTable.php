@@ -9,6 +9,7 @@ use App\Models\Delivery;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -134,67 +135,82 @@ class DeliveryTable extends Component
     public function updateConfirmed($data)
     {
 
-
         $updatedAttributes = $data['inputAttributes'];
         $deliveryId = $updatedAttributes['deliveryId'];
 
+        DB::beginTransaction();
 
-        // Find the current delivery record
-        $delivery = Delivery::find($deliveryId);
+        try {
+            $delivery = Delivery::find($deliveryId);
+
+            if (!$delivery) {
+
+                DB::rollback();
+                $this->alert('error', 'Delivery not found.');
+                return; // Exit the method
+
+            }
+            if ($delivery->backorderJoin->isNotEmpty()) {
+
+                // Decode the old purchase order data from the delivery record
+                $oldPoData = json_decode($delivery->old_po_id, true);
+                $old_purchase = Purchase::find($oldPoData['id']);
 
 
-        // Check if the current delivery has associated backorders
-        if ($delivery->backorderJoin->isNotEmpty()) {
+                // dd($old_purchase->backorderJoin);
 
-            // Decode the old purchase order data from the delivery record
-            $oldPoData = json_decode($delivery->old_po_id, true);
-            $old_purchase = Purchase::find($oldPoData['id']);
-
-
-            // dd($old_purchase->backorderJoin);
-
-            // Loop through each backorder associated with the current delivery
-            foreach ($delivery->backorderJoin as $backorderDetail) {
-                if ($backorderDetail->status === 'Repurchased') {
-                    // Update the status of each backorder to "Delivered"
-                    $backorderDetail->update(['status' => 'Delivered']);
+                // Loop through each backorder associated with the current delivery
+                foreach ($delivery->backorderJoin as $backorderDetail) {
+                    if ($backorderDetail->status === 'Repurchased') {
+                        // Update the status of each backorder to "Delivered"
+                        $backorderDetail->update(['status' => 'Delivered']);
+                    }
                 }
+
+
+                $missingOrRepurchasedCount = $old_purchase->backorderJoin
+                    ->whereIn('status', ['Missing', 'Repurchased'])
+                    ->count();
+
+
+                // If all backorders are delivered, update the old delivery status to "Complete Backorder"
+                if ($missingOrRepurchasedCount == 0) {
+                    // Get the old delivery record associated with the old purchase order
+                    $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
+                    $old_delivery->update(['status' => 'Backorder complete']);
+                }
+
+                // Update the current delivery details
+                $delivery->date_delivered = $this->selectedDate;
+                $delivery->status = "Delivered";
+                $delivery->save();
+
+                $this->alert('success', 'Delivery date and applicable backorders updated successfully');
+                $this->resetPage();
+            } else {
+                // If there are no backorders, only update the current delivery details
+                $delivery->date_delivered = $this->selectedDate;
+                $delivery->status = "Delivered";
+                $delivery->save();
+
+                $this->alert('success', 'Delivery date changed successfully');
+                $this->resetPage();
             }
 
+            DB::commit();
 
-            $missingOrRepurchasedCount = $old_purchase->backorderJoin
-                ->whereIn('status', ['Missing', 'Repurchased'])
-                ->count();
-
-
-            // If all backorders are delivered, update the old delivery status to "Complete Backorder"
-            if ($missingOrRepurchasedCount == 0) {
-                // Get the old delivery record associated with the old purchase order
-                $old_delivery = Delivery::where('purchase_id', $oldPoData['id'])->first();
-                $old_delivery->update(['status' => 'Backorder complete']);
-            }
-
-            // Update the current delivery details
-            $delivery->date_delivered = $this->selectedDate;
-            $delivery->status = "Delivered";
-            $delivery->save();
-
-            $this->alert('success', 'Delivery date and applicable backorders updated successfully');
             $this->resetPage();
-        } else {
-            // If there are no backorders, only update the current delivery details
-            $delivery->date_delivered = $this->selectedDate;
-            $delivery->status = "Delivered";
-            $delivery->save();
+            DeliveryEvent::dispatch('refresh-delivery');
 
-            $this->alert('success', 'Delivery date changed successfully');
-            $this->resetPage();
+            return back();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating the Delivery, please refresh the page ');
         }
 
-        $this->resetPage();
-        DeliveryEvent::dispatch('refresh-delivery');
 
-        return back();
     }
 
     public function cancelDelivery($deliverId)

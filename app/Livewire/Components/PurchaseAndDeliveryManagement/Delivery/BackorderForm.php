@@ -10,6 +10,7 @@ use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -17,9 +18,9 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BackorderForm extends Component
 {
-    use LivewireAlert, WithPagination,  WithoutUrlPagination;
+    use LivewireAlert, WithPagination, WithoutUrlPagination;
     public $backorderList = [];
-    public $po_number,  $new_po_number, $purchase_id, $supplier, $delivery_id, $purchase, $select_supplier;
+    public $po_number, $new_po_number, $purchase_id, $supplier, $delivery_id, $purchase, $select_supplier;
     public $selectedToReorder = [];
     public $selectedToCancel = [];
     public $new_po_items = [];
@@ -74,7 +75,7 @@ class BackorderForm extends Component
 
         $this->confirm('Do you want to create this purchase order?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -83,50 +84,59 @@ class BackorderForm extends Component
 
         $validated = $data['inputAttributes'];
 
-        $purchase_order = Purchase::create([
-            'po_number' => $validated['new_po_number'],
-            'supplier_id' => $validated['select_supplier'],
-            'user_id' => Auth::id(),
-        ]);
+        DB::beginTransaction();
 
-        $old_po_id = Purchase::where('po_number', $this->po_number)->first();
+        try {
 
-        $delivery = Delivery::create([
-            'status' => "In Progress",
-            'date_delivered' => "N/A",
-            'purchase_id' => $purchase_order->id,
-            'old_po_id' => $old_po_id,
-
-        ]);
-
-
-        foreach ($this->new_po_items as $index => $new_po_item) {
-
-            PurchaseDetails::create([
-                'purchase_id' => $purchase_order->id,
-                'item_id' => $new_po_item['item_id'], // Use item_id from reorder_list
+            $purchase_order = Purchase::create([
                 'po_number' => $validated['new_po_number'],
-                'purchase_quantity' => $new_po_item['backorder_quantity'],
+                'supplier_id' => $validated['select_supplier'],
+                'user_id' => Auth::id(),
             ]);
 
-            BackOrder::where('item_id', $new_po_item['item_id'])
-                ->where('purchase_id', $this->purchase_id)
-                ->update([
-                    'status' => 'Repurchased',
-                    'delivery_id' => $delivery->id,
+            $old_po_id = Purchase::where('po_number', $this->po_number)->first();
+
+            $delivery = Delivery::create([
+                'status' => "In Progress",
+                'date_delivered' => "N/A",
+                'purchase_id' => $purchase_order->id,
+                'old_po_id' => $old_po_id,
+
+            ]);
+
+
+            foreach ($this->new_po_items as $index => $new_po_item) {
+
+                PurchaseDetails::create([
+                    'purchase_id' => $purchase_order->id,
+                    'item_id' => $new_po_item['item_id'], // Use item_id from reorder_list
+                    'po_number' => $validated['new_po_number'],
+                    'purchase_quantity' => $new_po_item['backorder_quantity'],
                 ]);
+
+                BackOrder::where('item_id', $new_po_item['item_id'])
+                    ->where('purchase_id', $this->purchase_id)
+                    ->update([
+                        'status' => 'Repurchased',
+                        'delivery_id' => $delivery->id,
+                    ]);
+            }
+            DB::commit();
+
+            $this->alert('success', 'Purchase order was created successfully');
+            $this->render();
+            $this->refreshTable();
+            BackorderEvent::dispatch('refresh-backorder');
+
+            $this->resetForm();
+            $this->closeBackorderForm();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating Backorder, please refresh the page ');
         }
 
-
-
-
-        $this->alert('success', 'Purchase order was created successfully');
-        $this->render();
-        $this->refreshTable();
-        BackorderEvent::dispatch('refresh-backorder');
-
-        $this->resetForm();
-        $this->closeBackorderForm();
     }
     private function populateForm() //*lagyan ng laman ang mga input
     {
@@ -261,7 +271,7 @@ class BackorderForm extends Component
         $this->new_po_number = 'PO-' . $formattedNumber . '-' . now()->format('dmY');
     }
 
-     public function refreshFromPusher()
+    public function refreshFromPusher()
     {
         $this->resetPage();
     }

@@ -7,6 +7,7 @@ use App\Events\NewUserCreatedEvent;
 use App\Events\UserEvent;
 use App\Livewire\Pages\UserManagementPage;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -17,7 +18,7 @@ use Livewire\Component;
 class UserForm extends Component
 {
     use LivewireAlert;
-    
+
     public $show_password; //var true for show password false for hindi
 
     public $isCreate; //var true for create false for edit
@@ -56,7 +57,7 @@ class UserForm extends Component
 
         $this->confirm('Do you want to add this user?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
@@ -67,28 +68,41 @@ class UserForm extends Component
     {
 
         $validated = $data['inputAttributes'];
+        DB::beginTransaction();
+
+        try {
+            $user = User::create([
+                'firstname' => $validated['firstname'],
+                'middlename' => $validated['middlename'],
+                'lastname' => $validated['lastname'],
+                'contact_number' => $validated['contact_number'],
+                'user_role_id' => $validated['role'],
+                'status_id' => $validated['status'],
+                'username' => $validated['username'],
+                'password' => Hash::make($validated['password']),
+
+            ]);
+
+            DB::commit();
+
+            $this->alert('success', 'User was created successfully');
+            // NewUserCreatedEvent::dispatch('new-user');
+            UserEvent::dispatch('refresh-user');
+            $this->refreshTable();
+
+            $this->resetForm();
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while Creating the User, please refresh the page ');
+        }
 
 
-        $user = User::create([
-            'firstname' => $validated['firstname'],
-            'middlename' => $validated['middlename'],
-            'lastname' => $validated['lastname'],
-            'contact_number' => $validated['contact_number'],
-            'user_role_id' => $validated['role'],
-            'status_id' => $validated['status'],
-            'username' => $validated['username'],
-            'password' => Hash::make($validated['password']),
-
-        ]);
 
 
-        $this->alert('success', 'User was created successfully');
-        // NewUserCreatedEvent::dispatch('new-user');
-        UserEvent::dispatch('refresh-user');
-        $this->refreshTable();
 
-        $this->resetForm();
-        $this->closeModal();
     }
 
     public function closeModal()
@@ -132,7 +146,7 @@ class UserForm extends Component
 
         $this->confirm('Do you want to update this user?', [
             'onConfirmed' => 'updateConfirmed', //* call the confmired method
-            'inputAttributes' =>  $attributes, //* pass the $attributes array to the confirmed method
+            'inputAttributes' => $attributes, //* pass the $attributes array to the confirmed method
         ]);
     }
 
@@ -144,22 +158,37 @@ class UserForm extends Component
 
         //var sa loob ng $data array, may array pa ulit (inputAttributes), extract the inputAttributes then assign the array to a variable array
         $updatedAttributes = $data['inputAttributes'];
+        DB::beginTransaction();
+        try {
 
-        //* hanapin id na attribute sa $updatedAttributes array
-        $user = User::find($updatedAttributes['id']);
+            $user = User::find($updatedAttributes['id']);
 
-        //* fill() method [key => value] means [paglalagyan => ilalagay]
-        //* the fill() method automatically knows kung saan ilalagay ang elements as long as mag match ang mga keys, $users have same keys with $updatedAttributes array
-        //var ipasa ang laman ng $updatedAttributes sa $user model
-        $user->fill($updatedAttributes);
+            if (!$user) {
+                // If the item does not exist, rollback and alert the user
+                DB::rollback();
+                $this->alert('error', 'User not found.');
+                return; // Exit the method
+            }
 
-        $user->save(); //* Save the user model to the database
+            $user->fill($updatedAttributes);
 
-        $this->resetForm();
-        $this->alert('success', 'User was updated successfully');
-        UserEvent::dispatch('refresh-user');
-        $this->refreshTable();
-        $this->closeModal();
+            $user->save();
+
+            DB::commit();
+
+            $this->resetForm();
+            $this->alert('success', 'User was updated successfully');
+            UserEvent::dispatch('refresh-user');
+            $this->refreshTable();
+            $this->closeModal();
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating the User, please refresh the page ');
+        }
+
+
     }
 
 
@@ -208,15 +237,15 @@ class UserForm extends Component
         $this->retype_password = trim($this->retype_password);
 
         $rules = [
-            'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'firstname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
+            'middlename' => 'nullable|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
+            'lastname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->proxy_user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:1,2',
             // 'user_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             //? validation sa username paro iignore ang user_id para maupdate ang username kahit unique
-            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($this->proxy_user_id)],
+            'username' => ['required', 'string', 'min:8', 'max:20', Rule::unique('users', 'username')->ignore($this->proxy_user_id)],
 
         ];
 
