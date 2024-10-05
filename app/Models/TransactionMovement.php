@@ -15,6 +15,7 @@ class TransactionMovement extends Model
         'transaction_id',
         'credit_id',
         'returns_id',
+        'void_transaction_id',
 
     ];
 
@@ -32,6 +33,11 @@ class TransactionMovement extends Model
     {
         return $this->belongsTo(Returns::class, 'returns_id');
     }
+    public function voidTransactionJoin()
+    {
+        return $this->belongsTo(VoidTransaction::class, 'void_transaction_id');
+    }
+    
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);

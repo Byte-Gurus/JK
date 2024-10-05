@@ -240,18 +240,29 @@ class DiscountForm extends Component
                 'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
                 'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
                 'street' => 'required|string|max:255',
-                'customerType' => 'required|in:PWD,Senior Citizen',
-                'senior_pwd_id' => 'required|string|max:255',
                 'discount_percentage' => 'required|numeric|min:1',
             ];
+
+            if ($this->customerType == 'Senior Citizen') {
+                $rules['senior_pwd_id'] = 'digits:4';
+            } elseif ($this->customerType == 'PWD') {
+                $rules['senior_pwd_id'] = 'digits:7';
+            }
         } else {
             $rules = [
                 'customerType' => 'required|in:PWD,Senior Citizen',
-                'senior_pwd_id' => 'required|string|max:255',
                 'customer_id' => 'required|numeric',
                 'discount_percentage' => 'required|numeric|min:1',
             ];
+
+            if ($this->customerType == 'Senior Citizen') {
+                $rules['senior_pwd_id'] = 'digits:4';
+            } elseif ($this->customerType == 'PWD') {
+                $rules['senior_pwd_id'] = 'digits:7';
+            }
         }
+
+
 
         return $this->validate($rules);
     }

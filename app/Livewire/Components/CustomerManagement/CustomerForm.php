@@ -196,8 +196,6 @@ class CustomerForm extends Component
             Storage::disk('local')->delete($path);
 
             $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
-        } else {
-            $updatedAttributes['id_picture'] = 'null'; // Keep existing value or set to null
         }
 
         $address->fill([
@@ -220,7 +218,7 @@ class CustomerForm extends Component
             'address_id' => $address->id ?? null,
             'customer_type' => $updatedAttributes['customer_type'],
             'senior_pwd_id' => $updatedAttributes['senior_pwd_id'] ?? null,
-            'id_picture' => $updatedAttributes['id_picture'],
+            'id_picture' => $updatedAttributes['id_picture'] ?? $customer->id_picture,
         ]);
         $customer->save();
 
@@ -245,7 +243,7 @@ class CustomerForm extends Component
             'lastname' => $customer_details->lastname,
             'birthdate' => $customer_details->birthdate,
             'contact_number' => $customer_details->contact_number,
-            'id_picture' => $customer_details->id_picture ?? null,
+            // 'id_picture' => $customer_details->id_picture ?? null,
             'imageUrl' => $customer_details->id_picture ?? null,
             'customertype' => $customer_details->customer_type,
             'senior_pwd_id' => $customer_details->senior_pwd_id ?? null,
@@ -282,7 +280,7 @@ class CustomerForm extends Component
             'firstname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'middlename' => 'nullable|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'lastname' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
-            'birthdate' => 'required|string|max:255',
+            'birthdate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
             'contact_number' => 'required|numeric|digits:11',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
@@ -293,9 +291,11 @@ class CustomerForm extends Component
 
         ];
 
-        if ($this->customertype != 'Normal') {
-            $rules['senior_pwd_id'] = 'required|string|max:255';
-        } else {
+        if ($this->customertype == 'Senior Citizen') {
+            $rules['senior_pwd_id'] = 'digits:4';
+        } elseif ($this->customertype == 'PWD') {
+            $rules['senior_pwd_id'] = 'digits:7';
+        } elseif ($this->customertype == 'Normal') {
             $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 

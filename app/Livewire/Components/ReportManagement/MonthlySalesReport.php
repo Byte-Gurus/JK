@@ -116,7 +116,7 @@ class MonthlySalesReport extends Component
             $totalNet += $dailyNet;
             $totalReturnAmount += $summary['totalReturnAmount'];
             $totalReturnVatAmount += $summary['totalReturnVatAmount'];
-            $totalVoidAmount += $summary['totalVoidAmount'];
+            $totalVoidAmount += $summary['totalVoidAmount'] + $summary['totalVoidItemAmount'];
             $totalVoidVatAmount += $summary['totalVoidVatAmount'];
             $totalVoidItemAmount += $summary['totalVoidItemAmount'];
             $totalVoidTaxAmount += $summary['totalVoidTaxAmount'];
