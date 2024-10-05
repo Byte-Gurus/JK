@@ -196,9 +196,7 @@ class CustomerForm extends Component
             Storage::disk('local')->delete($path);
 
             $updatedAttributes['id_picture'] = Storage::disk('s3')->url($filename);
-        } else {
-            $updatedAttributes['id_picture'] = 'null'; // Keep existing value or set to null
-        }
+        } 
 
         $address->fill([
             'province_code' => $updatedAttributes['province_code'],
