@@ -22,7 +22,7 @@
 
                 <input type="text" wire:model.live.debounce.100ms="search"
                     class="w-1/2 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="Search by Delivery ID" required="" />
+                    placeholder="Search Purchase Order No." required="" />
 
             </div>
 

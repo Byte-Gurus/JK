@@ -39,12 +39,40 @@ class SalesTransaction extends Component
     use LivewireAlert;
     public $transaction_number;
 
-
     public $search = '';
     public $selectedItems = [];
     public $payment = [];
 
-    public $selectedIndex, $isSelected, $subtotal, $grandTotal, $discount, $totalVat, $discount_percent, $PWD_Senior_discount_amount, $discount_type, $customer_name, $senior_pwd_id, $tendered_amount, $change, $original_total, $netAmount, $discounts, $wholesale_discount_amount, $credit_no, $searchCustomer, $creditor_name, $transaction_info, $credit_limit, $changeTransactionType = 1, $receiptData = [], $unableShortcut = false, $search_return_number, $return_amount, $returnInfo, $return_number, $excess_amount;
+    public $selectedIndex,
+    $isSelected,
+    $subtotal,
+    $grandTotal,
+    $discount,
+    $totalVat,
+    $discount_percent,
+    $PWD_Senior_discount_amount,
+    $discount_type,
+    $customer_name,
+    $senior_pwd_id,
+    $tendered_amount,
+    $change,
+    $original_total,
+    $netAmount,
+    $discounts,
+    $wholesale_discount_amount,
+    $credit_no,
+    $searchCustomer,
+    $creditor_name,
+    $transaction_info,
+    $credit_limit,
+    $changeTransactionType = 1,
+    $receiptData = [],
+    $unableShortcut = false,
+    $search_return_number,
+    $return_amount,
+    $returnInfo,
+    $return_number,
+    $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -62,22 +90,15 @@ class SalesTransaction extends Component
 
     public $si = [];
 
-
-
-
-
     public function mount()
     {
         $this->generateTransactionNumber();
     }
     public function render()
     {
-
-
-
-        $this->discounts = Discount::whereIn('id', [1, 2, 3])->get()->keyBy('id');
-
-
+        $this->discounts = Discount::whereIn('id', [1, 2, 3])
+            ->get()
+            ->keyBy('id');
 
         $searchTerm = trim($this->search);
         $searchCustomerTerm = trim($this->searchCustomer);
@@ -85,16 +106,15 @@ class SalesTransaction extends Component
         $credit_customers = Customer::where(function ($query) use ($searchCustomerTerm) {
             $searchCustomerTermLower = strtolower($searchCustomerTerm); // Convert search term to lowercase
 
-            $query->whereRaw('LOWER(firstname) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
+            $query
+                ->whereRaw('LOWER(firstname) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
                 ->orWhereRaw('LOWER(middlename) LIKE ?', ['%' . $searchCustomerTermLower . '%'])
                 ->orWhereRaw('LOWER(lastname) LIKE ?', ['%' . $searchCustomerTermLower . '%']);
         })
             ->whereHas('creditJoin', function ($query) {
-                $query->where('status', '!=', 'Fully paid')
-                    ->doesntHave('transactionJoin');
+                $query->where('status', '!=', 'Fully paid')->doesntHave('transactionJoin');
             })
             ->get();
-
 
         // Fetch items with their inventoryJoin
         $items = Item::where('status_id', 1)
@@ -105,14 +125,13 @@ class SalesTransaction extends Component
                 $searchTermLower = strtolower($searchTerm); // Convert search term to lowercase
 
                 $query->where(function ($subQuery) use ($searchTermLower) {
-                    $subQuery->whereRaw('LOWER(item_name) LIKE ?', ['%' . $searchTermLower . '%'])
-                        ->orWhereRaw('LOWER(barcode) LIKE ?', ['%' . $searchTermLower . '%']);
+                    $subQuery->whereRaw('LOWER(item_name) LIKE ?', ['%' . $searchTermLower . '%'])->orWhereRaw('LOWER(barcode) LIKE ?', ['%' . $searchTermLower . '%']);
                 });
             })
             ->with([
                 'inventoryJoin' => function ($query) {
                     $query->where('status', 'Available'); // Ensure only 'Available' inventory is eager-loaded
-                }
+                },
             ])
             ->get();
 
@@ -125,9 +144,11 @@ class SalesTransaction extends Component
 
             if ($item->shelf_life_type === 'Perishable') {
                 // Sort by expiration_date to find the nearest expiration date
-                $sortedInventory = $availableInventory->filter(function ($inventory) {
-                    return !is_null($inventory->expiration_date);
-                })->sortBy('expiration_date');
+                $sortedInventory = $availableInventory
+                    ->filter(function ($inventory) {
+                        return !is_null($inventory->expiration_date);
+                    })
+                    ->sortBy('expiration_date');
 
                 $item->inventoryJoin = $sortedInventory->first();
             } else {
@@ -143,20 +164,15 @@ class SalesTransaction extends Component
         return view('livewire.components.Sales.sales-transaction', [
             'items' => $items,
             'selectedItems' => $this->selectedItems,
-            'credit_customers' => $credit_customers
+            'credit_customers' => $credit_customers,
         ]);
     }
 
-
-
     public function selectCustomer($creditor_id)
     {
-
-
         $credit = Credit::where('customer_id', $creditor_id)->first();
 
         if ($credit->credit_limit <= $this->grandTotal) {
-
             $this->alert('error', 'Creditor reached the credit limit');
             $this->searchCustomer = '';
             return;
@@ -176,32 +192,14 @@ class SalesTransaction extends Component
             'creditor_name' => $this->creditor_name,
             'credit_limit' => $this->credit_limit,
             'senior_pwd_id' => $credit->customerJoin->senior_pwd_id ?? 'N/A',
-            'discount_type' => $credit->customerJoin->customer_type
+            'discount_type' => $credit->customerJoin->customer_type,
         ];
-
 
         $this->dispatch('get-credit-detail', creditDetail: $this->credit_details)->to(DiscountForm::class);
         $this->searchCustomer = '';
     }
 
-
-
-
-    protected $listeners = [
-        'removeRowConfirmed',
-        'removeRowCancelled',
-        'cancelConfirmed',
-        'display-change-quantity-form' => 'displayChangeQuantityForm',
-        'display-sales-transaction' => 'displaySalesTransaction',
-        'display-discount-form' => 'displayDiscountForm',
-        'display-payment-form' => 'displayPaymentForm',
-        'get-quantity' => 'getQuantity',
-
-        'get-customer-details' => 'getCustomerDetails',
-        'get-customer-payments' => 'getCustomerPayments',
-        'unselect-item' => 'unselectItem',
-        'display-sales-receipt' => 'displaySalesReceipt'
-    ];
+    protected $listeners = ['removeRowConfirmed', 'removeRowCancelled', 'cancelConfirmed', 'display-change-quantity-form' => 'displayChangeQuantityForm', 'display-sales-transaction' => 'displaySalesTransaction', 'display-discount-form' => 'displayDiscountForm', 'display-payment-form' => 'displayPaymentForm', 'get-quantity' => 'getQuantity', 'get-customer-details' => 'getCustomerDetails', 'get-customer-payments' => 'getCustomerPayments', 'unselect-item' => 'unselectItem', 'display-sales-receipt' => 'displaySalesReceipt'];
 
     public function unselectItem()
     {
@@ -210,8 +208,6 @@ class SalesTransaction extends Component
 
     public function selectItem($item_id = null)
     {
-
-
         if ($this->payment) {
             $this->alert('error', 'Transaction is paid');
             return;
@@ -222,10 +218,6 @@ class SalesTransaction extends Component
             return;
         }
 
-
-
-
-
         $itemExists = false;
         // Retrieve the item to check its shelf_life_type
         if ($item_id) {
@@ -235,7 +227,6 @@ class SalesTransaction extends Component
         }
 
         if ($itemData) {
-
             // Build the query for inventory
             $itemQuery = Inventory::with('itemJoin')
                 ->where('item_id', $item_id ?? $itemData->id)
@@ -251,13 +242,10 @@ class SalesTransaction extends Component
 
             // Get the first item from the query
             $item = $itemQuery->first();
-
-
+            // dd($item);
 
             foreach ($this->selectedItems as $index => $selectedItem) {
                 if ($selectedItem['sku_code'] === $item->sku_code) {
-
-
                     if ($selectedItem['selling_price'] + $this->grandTotal > $this->credit_limit && $this->credit_details) {
                         $this->alert('error', 'Credit limit reached');
                         return;
@@ -273,28 +261,20 @@ class SalesTransaction extends Component
                     $this->selectedItems[$index]['quantity'] += 1;
                     $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['selling_price'] * $this->selectedItems[$index]['quantity'];
 
-
-                    if (
-                        $this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity'] && $this->selectedItems[$index]['bulk_quantity'] >= 2
-                    ) {
+                    if ($this->selectedItems[$index]['quantity'] >= $this->selectedItems[$index]['bulk_quantity'] && $this->selectedItems[$index]['bulk_quantity'] >= 2) {
                         $this->selectedItems[$index]['discount'] = $this->discounts[3]->percentage;
                         $this->selectedItems[$index]['discount_id'] = $this->discounts[3]->id;
 
-
                         $this->selectedItems[$index]['original_total'] = $this->selectedItems[$index]['total_amount'];
-
 
                         $this->selectedItems[$index]['wholesale_discount_amount'] = $this->selectedItems[$index]['total_amount'] * ($this->selectedItems[$index]['discount'] / 100);
 
                         $this->selectedItems[$index]['total_amount'] = $this->selectedItems[$index]['total_amount'] - $this->selectedItems[$index]['wholesale_discount_amount'];
                     }
 
-
-
                     break;
                 }
             }
-
 
             // If the item does not exist, add it to the array
             if (!$itemExists) {
@@ -320,7 +300,6 @@ class SalesTransaction extends Component
                     'original_total' => 0,
                     'delivery_date' => $item->deliveryJoin->date_delivered,
                     'po_date' => $item->deliveryJoin->purchaseJoin->created_at,
-
                 ];
             }
         } else {
@@ -333,11 +312,9 @@ class SalesTransaction extends Component
     // public function getIndex($index)
     // {
 
-
     //     $this->reset('selectedIndex');
     //     $this->selectedIndex = $index;
     // }
-
 
     public function getIndex($index, $flag)
     {
@@ -357,7 +334,6 @@ class SalesTransaction extends Component
 
     public function setQuantity()
     {
-
         if ($this->isSelected) {
             $selectedItem = $this->selectedItems[$this->selectedIndex];
 
@@ -402,9 +378,6 @@ class SalesTransaction extends Component
         $this->transaction_number = $transactionNumber;
     }
 
-
-
-
     public function removeItem()
     {
         if ($this->isSelected) {
@@ -416,7 +389,6 @@ class SalesTransaction extends Component
     }
     public function getQuantity($newQuantity)
     {
-
         $this->selectedItems[$this->selectedIndex]['quantity'] = $newQuantity;
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
 
@@ -424,13 +396,9 @@ class SalesTransaction extends Component
             $this->selectedItems[$this->selectedIndex]['discount'] = $this->discounts[3]->percentage;
             $this->selectedItems[$this->selectedIndex]['discount_id'] = $this->discounts[3]->id;
 
-
-
-
             $this->selectedItems[$this->selectedIndex]['original_total'] = $this->selectedItems[$this->selectedIndex]['total_amount'];
 
             $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] * ($this->selectedItems[$this->selectedIndex]['discount'] / 100);
-
 
             $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['total_amount'] - $this->selectedItems[$this->selectedIndex]['wholesale_discount_amount'];
         }
@@ -438,10 +406,8 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
     }
 
-
     public function computeTransaction()
     {
-
         $test = [];
         $this->subtotal = 0;
 
@@ -455,15 +421,12 @@ class SalesTransaction extends Component
         $this->discount_percent = 0;
         $this->PWD_Senior_discount_amount = 0;
 
-
-
         foreach ($this->selectedItems as $index) {
-
             $this->subtotal += $index['total_amount'];
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $index['vat_percent']) * 100);
+                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $index['vat_percent'])) * 100;
                 // dump([
                 //     "vat",
                 //     'vatable_subtotal' => $vatable_subtotal,
@@ -473,7 +436,7 @@ class SalesTransaction extends Component
                 // ]);
             } elseif ($index['vat_type'] === 'Vat Exempt') {
                 $vat_exempt_subtotal += $index['total_amount'];
-                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $index['vat_percent']) * 100);
+                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $index['vat_percent'])) * 100;
                 // dump([
                 //     "non vat",
                 //     'vat_exempt_subtotal' => $vat_exempt_subtotal,
@@ -490,7 +453,6 @@ class SalesTransaction extends Component
             $this->totalVat = $vatable_amount + $vat_exempt_amount;
 
             if ($this->customerDetails) {
-
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
                 $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
@@ -518,7 +480,6 @@ class SalesTransaction extends Component
             // ];
         }
 
-
         $this->tax_details = [
             'vat_exempt_amount' => $vat_exempt_amount,
             'vatable_amount' => $vatable_amount,
@@ -529,8 +490,6 @@ class SalesTransaction extends Component
         if (isset($this->credit_details['credit_no'])) {
             $this->credit_details['credit_amount'] = $this->grandTotal;
         }
-
-
 
         // dump($test);
     }
@@ -567,7 +526,6 @@ class SalesTransaction extends Component
     {
         $this->confirm('Do you want to cancel this transaction?', [
             'onConfirmed' => 'cancelConfirmed', //* call the confmired method
-
         ]);
     }
 
@@ -575,15 +533,6 @@ class SalesTransaction extends Component
     {
         return redirect(request()->header('Referer'));
     }
-
-
-
-
-
-
-
-
-
 
     public function updatedChangeTransactionType()
     {
@@ -595,16 +544,10 @@ class SalesTransaction extends Component
         if ($this->changeTransactionType == 3) {
             $this->selectedItems = [];
         }
-
-
-
     }
-
-
 
     public function removeRowConfirmed()
     {
-
         $this->totalVat -= $this->tax_details['vatable_amount'];
         $this->grandTotal -= $this->selectedItems[$this->selectedIndex]['total_amount'];
         unset($this->selectedItems[$this->selectedIndex]);
@@ -625,7 +568,6 @@ class SalesTransaction extends Component
         $this->reset('selectedIndex', 'isSelected');
     }
 
-
     public function getCustomerPayments($Payment)
     {
         $this->payment = $Payment;
@@ -636,12 +578,8 @@ class SalesTransaction extends Component
         $this->payment['change'] = $this->change;
     }
 
-
-
-
     public function save()
     {
-
         if (empty($this->payment) && $this->changeTransactionType != 2) {
             $this->alert('warning', 'No payment yet');
             return;
@@ -654,9 +592,7 @@ class SalesTransaction extends Component
             'transaction_number' => $this->transaction_number,
             'transaction_time' => now()->format('H:i A'),
             'transaction_date' => now()->format('d-m-Y'),
-            'user' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
-
-
+            'user' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
         ];
 
         // dd($this->payment, $this->selectedItems, $this->customerDetails ?? null, $this->tax_details ?? null, $this->credit_details ?? null, $this->transaction_info ?? null);
@@ -667,191 +603,258 @@ class SalesTransaction extends Component
             $this->customerDetails['customer'] = $customer;
         }
 
+        DB::beginTransaction();
 
-
-
-        if (!isset($this->customerDetails['customer_id']) && isset($this->customerDetails['firstname'])) {
-
-            $address = Address::create([
-                'province_code' => $this->customerDetails['province_code'],
-                'city_municipality_code' => $this->customerDetails['city_municipality_code'],
-                'barangay_code' => $this->customerDetails['barangay_code'],
-                'street' => $this->customerDetails['street'],
-
-            ]);
-            $customer = Customer::create([
-                'firstname' => $this->customerDetails['firstname'],
-                'middlename' => $this->customerDetails['middlename'] ?? null,
-                'lastname' => $this->customerDetails['lastname'],
-                'contact_number' => $this->customerDetails['contact_number'],
-                'birthdate' => $this->customerDetails['birthdate'],
-                'address_id' => $address->id,
-                'customer_type' => $this->customerDetails['customer_type'],
-                'senior_pwd_id' => $this->customerDetails['senior_pwd_id'],
-                'id_picture' => 'N/A',
-
-            ]);
-        }
-
-
-        $customer_id = $this->customerDetails['customer_id'] ?? $customer->id ?? null;
-
-        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
-            $transactionType = "Sales";
-        } elseif ($this->changeTransactionType == 2) {
-            $transactionType = "Credit";
-        }
-
-
-        $transaction = Transaction::create([
-            'transaction_number' => $this->transaction_info['transaction_number'],
-            'transaction_type' => $transactionType,
-            'subtotal' => $this->transaction_info['subtotal'],
-            'total_amount' => $this->transaction_info['grandTotal'],
-            'total_vat_amount' => $this->tax_details['total_vat'],
-            'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
-            'discount_id' => $this->customerDetails['discount_id'] ?? null,
-            'customer_id' => $customer_id,
-            'user_id' => Auth::id(),
-        ]);
-
-        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
-            $transaction_movement = TransactionMovement::create([
-                'transaction_type' => 'Sales',
-                'transaction_id' => $transaction->id
-            ]);
-
-        }
-        if ($this->changeTransactionType == 3) {
-            $return = Returns::where('return_number', $this->return_number)->first();
-            $return->hasTransaction = True;
-            $return->save();
-
-        }
-
-        foreach ($this->selectedItems as $index => $selectedItem) {
-
-
-            $inventory = Inventory::where('sku_code', $selectedItem['sku_code'])->first();
-
-            $transactionDetails = TransactionDetails::create([
-                'item_quantity' => $selectedItem['quantity'],
-                'vat_type' => $selectedItem['vat_type'],
-                'item_subtotal' => $selectedItem['total_amount'],
-                'item_discount_amount' => $selectedItem['wholesale_discount_amount'],
-                'status' => $selectedItem['status'],
-                'discount' => $selectedItem['discount'],
-                'discount_id' => $selectedItem['discount_id'],
-                'transaction_id' => $transaction->id,
-                'item_id' => $selectedItem['item_id'],
-                'inventory_id' => $inventory->id,
-                'item_price' => $selectedItem['selling_price'],
-                'item_vat_percent' => $selectedItem['vat_percent'],
-
-            ]);
-
-
-            $inventory->current_stock_quantity -= $selectedItem['quantity'];
-
-            if ($inventory->current_stock_quantity == 0) {
-                $inventory->status = 'Not available';
+        try {
+            if (!isset($this->customerDetails['customer_id']) && isset($this->customerDetails['firstname'])) {
+                $address = Address::create([
+                    'province_code' => $this->customerDetails['province_code'],
+                    'city_municipality_code' => $this->customerDetails['city_municipality_code'],
+                    'barangay_code' => $this->customerDetails['barangay_code'],
+                    'street' => $this->customerDetails['street'],
+                ]);
+                $customer = Customer::create([
+                    'firstname' => $this->customerDetails['firstname'],
+                    'middlename' => $this->customerDetails['middlename'] ?? null,
+                    'lastname' => $this->customerDetails['lastname'],
+                    'contact_number' => $this->customerDetails['contact_number'],
+                    'birthdate' => $this->customerDetails['birthdate'],
+                    'address_id' => $address->id,
+                    'customer_type' => $this->customerDetails['customer_type'],
+                    'senior_pwd_id' => $this->customerDetails['senior_pwd_id'],
+                    'id_picture' => 'N/A',
+                ]);
             }
-            $inventory->save();
+
+            $customer_id = $this->customerDetails['customer_id'] ?? ($customer->id ?? null);
+
+            if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
+                $transactionType = 'Sales';
+            } elseif ($this->changeTransactionType == 2) {
+                $transactionType = 'Credit';
+            }
+
+            $transaction = Transaction::create([
+                'transaction_number' => $this->transaction_info['transaction_number'],
+                'transaction_type' => $transactionType,
+                'subtotal' => $this->transaction_info['subtotal'],
+                'total_amount' => $this->transaction_info['grandTotal'],
+                'total_vat_amount' => $this->tax_details['total_vat'],
+                'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
+                'discount_id' => $this->customerDetails['discount_id'] ?? null,
+                'customer_id' => $customer_id,
+                'user_id' => Auth::id(),
+            ]);
+
+            if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
+                $transaction_movement = TransactionMovement::create([
+                    'transaction_type' => 'Sales',
+                    'transaction_id' => $transaction->id,
+                ]);
+            }
+            if ($this->changeTransactionType == 3) {
+                $return = Returns::where('return_number', $this->return_number)->first();
+                $return->hasTransaction = true;
+                $return->save();
+            }
+
+            foreach ($this->selectedItems as $index => $selectedItem) {
+
+                $inventories = Inventory::where('selling_price', $selectedItem['selling_price'])
+                    ->where('item_id', $selectedItem['item_id'])
+                    ->orderBy('expiration_date', 'ASC')
+                    ->get();
+
+                $total_quantity_sold = $selectedItem['quantity'];
+
+                foreach ($inventories as $inventory) {
+
+                    if ($total_quantity_sold > 0) {
+                        if ($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
+
+                            $transactionDetails = TransactionDetails::create([
+                                'item_quantity' => $selectedItem['quantity'],
+                                'vat_type' => $selectedItem['vat_type'],
+                                'item_subtotal' => $selectedItem['total_amount'],
+                                'item_discount_amount' => $selectedItem['wholesale_discount_amount'],
+                                'status' => $selectedItem['status'],
+                                'discount' => $selectedItem['discount'],
+                                'discount_id' => $selectedItem['discount_id'],
+                                'transaction_id' => $transaction->id,
+                                'item_id' => $selectedItem['item_id'],
+                                'inventory_id' => $inventory->id,
+                                'item_price' => $selectedItem['selling_price'],
+                                'item_vat_percent' => $selectedItem['vat_percent'],
+                            ]);
+
+                            $inventory->current_stock_quantity -= $selectedItem['quantity'];
+
+                            if ($inventory->current_stock_quantity == 0) {
+                                $inventory->status = 'Not available';
+                            }
+                            $inventory->save();
+
+                            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
+                                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
+
+                                if (!$notificationExists) {
+                                    Notification::create([
+                                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                                        'inventory_id' => $inventory->id,
+                                    ]);
+                                }
+                            }
+                            $total_quantity_sold -= $selectedItem['quantity'];
 
 
-            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
+                        } else if ($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold != $selectedItem['quantity']) {
 
-                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")
-                    ->exists();
 
-                if (!$notificationExists) {
-                    Notification::create([
-                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
-                        'inventory_id' => $inventory->id,
-                    ]);
+                            $transactionDetails = TransactionDetails::create([
+                                'item_quantity' => $total_quantity_sold,
+                                'vat_type' => $selectedItem['vat_type'],
+                                'item_subtotal' => $this->calculateSubtotal($selectedItem['selling_price'], $total_quantity_sold, $selectedItem['discount']),
+                                'item_discount_amount' => $this->calculateWholeSaleDiscount($selectedItem['selling_price'], $total_quantity_sold, $selectedItem['discount']),
+                                'status' => $selectedItem['status'],
+                                'discount' => $selectedItem['discount'],
+                                'discount_id' => $selectedItem['discount_id'],
+                                'transaction_id' => $transaction->id,
+                                'item_id' => $selectedItem['item_id'],
+                                'inventory_id' => $inventory->id,
+                                'item_price' => $selectedItem['selling_price'],
+                                'item_vat_percent' => $selectedItem['vat_percent'],
+                            ]);
+
+                            $inventory->current_stock_quantity -= $selectedItem['quantity'];
+
+                            if ($inventory->current_stock_quantity == 0) {
+                                $inventory->status = 'Not available';
+                            }
+                            $inventory->save();
+
+                            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
+                                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
+
+                                if (!$notificationExists) {
+                                    Notification::create([
+                                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                                        'inventory_id' => $inventory->id,
+                                    ]);
+                                }
+                            }
+                            $total_quantity_sold -= $selectedItem['quantity'];
+
+                        } else {
+
+                            $transactionDetails = TransactionDetails::create([
+                                'item_quantity' => $inventory->current_stock_quantity,
+                                'vat_type' => $selectedItem['vat_type'],
+                                'item_subtotal' => $this->calculateSubtotal($selectedItem['selling_price'], $inventory->current_stock_quantity, $selectedItem['discount']),
+                                'item_discount_amount' => $this->calculateWholeSaleDiscount($selectedItem['selling_price'], $inventory->current_stock_quantity, $selectedItem['discount']),
+                                'status' => $selectedItem['status'],
+                                'discount' => $selectedItem['discount'],
+                                'discount_id' => $selectedItem['discount_id'],
+                                'transaction_id' => $transaction->id,
+                                'item_id' => $selectedItem['item_id'],
+                                'inventory_id' => $inventory->id,
+                                'item_price' => $selectedItem['selling_price'],
+                                'item_vat_percent' => $selectedItem['vat_percent'],
+                            ]);
+
+                            $inventory->current_stock_quantity -= $selectedItem['quantity'];
+
+                            if ($inventory->current_stock_quantity == 0) {
+                                $inventory->status = 'Not available';
+                            }
+                            $inventory->save();
+
+                            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
+                                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
+
+                                if (!$notificationExists) {
+                                    Notification::create([
+                                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                                        'inventory_id' => $inventory->id,
+                                    ]);
+                                }
+                            }
+                            $total_quantity_sold -= $selectedItem['quantity'];
+                        }
+                    }
                 }
+
+                $inventory_movements = InventoryMovement::create([
+                    'transaction_detail_id' => $transactionDetails->id,
+                    'movement_type' => 'Sales',
+                    'operation' => 'Stock out',
+                ]);
+
+                $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
+
+                $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
             }
 
+            if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
+                $payment = Payment::create([
+                    'transaction_id' => $transaction->id,
+                    'amount' => $this->payment['tendered_amount'],
+                    'tendered_amount' => $this->payment['tendered_amount'],
+                    'reference_number' => $this->payment['reference_no'] ?? 'N/A',
+                    'payment_type' => $this->payment['payment_type'],
+                ]);
+            } elseif ($this->changeTransactionType == 2) {
+                $credit = Credit::where('credit_number', $this->credit_no)->first();
+                $credit->credit_amount = $this->grandTotal;
+                $credit->remaining_balance = $this->grandTotal;
+                $credit->transaction_id = $transaction->id;
+                $credit->save();
 
-            $inventory_movements = InventoryMovement::create([
-                'transaction_detail_id' => $transactionDetails->id,
-                'movement_type' => 'Sales',
-                'operation' => 'Stock out',
-            ]);
+                $creditHistory = CreditHistory::create([
+                    'description' => 'Issuance of credit',
+                    'credit_id' => $credit->id,
+                    'credit_amount' => $this->grandTotal,
+                    'remaining_balance' => $this->grandTotal,
+                ]);
 
+                $transaction_movement = TransactionMovement::create([
+                    'transaction_type' => 'Credit',
+                    'credit_id' => $credit->id,
+                ]);
+            }
 
+            DB::commit();
 
+            CreditEvent::dispatch('refresh-credit');
 
-            $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
+            $this->alert('success', 'New Transaction saved successfully');
 
-            $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
+            $this->dispatch(
+                'print-sales-receipt',
+                array_merge($this->receiptData, [
+                    'payment' => $this->payment,
+                    'selectedItems' => $this->selectedItems,
+                    'customerDetails' => $this->customerDetails ?? null,
+                    'tax_details' => $this->tax_details,
+                    'transaction_info' => $this->transaction_info,
+                    'credit_details' => $this->credit_details ?? null,
+                ]),
+            )->to(SalesReceipt::class);
+
+            TransactionEvent::dispatch('refresh-transaction');
+
+            ItemEvent::dispatch('refresh-item');
+            InventoryEvent::dispatch('refresh-inventory');
+            PurchaseOrderEvent::dispatch('refresh-purchase-order');
+            CustomerEvent::dispatch('refresh-customer');
+
+            $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
+            $this->unableShortcut = true;
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while creating transaction, please refresh the page');
+            dd($e);
         }
-
-        if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
-            $payment = Payment::create([
-                'transaction_id' => $transaction->id,
-                'amount' => $this->payment['tendered_amount'],
-                'tendered_amount' => $this->payment['tendered_amount'],
-                'reference_number' => $this->payment['reference_no'] ?? 'N/A',
-                'payment_type' => $this->payment['payment_type'],
-            ]);
-
-
-        } elseif ($this->changeTransactionType == 2) {
-            $credit = Credit::where('credit_number', $this->credit_no)->first();
-            $credit->credit_amount = $this->grandTotal;
-            $credit->remaining_balance = $this->grandTotal;
-            $credit->transaction_id = $transaction->id;
-            $credit->save();
-
-            $creditHistory = CreditHistory::create([
-                'description' => 'Issuance of credit',
-                'credit_id' => $credit->id,
-                'credit_amount' => $this->grandTotal,
-                'remaining_balance' => $this->grandTotal,
-            ]);
-
-
-            $transaction_movement = TransactionMovement::create([
-                'transaction_type' => 'Credit',
-                'credit_id' => $credit->id
-            ]);
-
-
-        }
-
-
-
-
-
-        CreditEvent::dispatch('refresh-credit');
-
-
-
-        $this->alert('success', 'New Transaction saved successfully');
-
-        $this->dispatch('print-sales-receipt', array_merge(
-            $this->receiptData,
-            [
-                'payment' => $this->payment,
-                'selectedItems' => $this->selectedItems,
-                'customerDetails' => $this->customerDetails ?? null,
-                'tax_details' => $this->tax_details,
-                'transaction_info' => $this->transaction_info,
-                'credit_details' => $this->credit_details ?? null,
-            ]
-        ))->to(SalesReceipt::class);
-
-        TransactionEvent::dispatch('refresh-transaction');
-
-        ItemEvent::dispatch('refresh-item');
-        InventoryEvent::dispatch('refresh-inventory');
-        PurchaseOrderEvent::dispatch('refresh-purchase-order');
-        CustomerEvent::dispatch('refresh-customer');
-
-
-        $this->dispatch('display-sales-receipt', showSalesReceipt: true)->to(CashierPage::class);
-        $this->unableShortcut = true;
     }
 
     public function getReorderPoint($item_id, $delivery_date, $po_date)
@@ -867,15 +870,13 @@ class SalesTransaction extends Component
         $startOfDay = Carbon::today()->startOfDay();
         $endOfDay = Carbon::today()->endOfDay();
 
-        $daysWithSales = TransactionDetails::where('item_id', $item_id)
-            ->distinct(DB::raw('DATE(created_at)'))
-            ->count(DB::raw('distinct DATE(created_at)'));
+        $daysWithSales = TransactionDetails::where('item_id', $item_id)->distinct(DB::raw('DATE(created_at)'))->count(DB::raw('distinct DATE(created_at)'));
 
         $todayTotalItemQuantity = TransactionDetails::where('item_id', $item_id)
             ->whereHas('transactionJoin', function ($query) use ($startOfDay, $endOfDay) {
                 $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
-            })->sum('item_quantity');
-
+            })
+            ->sum('item_quantity');
 
         // Calculate the number of days in the date range
         $days = round($startDate->diffInDays($endDate));
@@ -896,16 +897,12 @@ class SalesTransaction extends Component
             'todayTotalItemQuantity' => $todayTotalItemQuantity,
             'daysWithSales' => $daysWithSales,
             'deliveryDate' => $deliveryDate,
-            'poDate' => $poDate
+            'poDate' => $poDate,
         ];
-
-      
 
         $item = Item::find($item_id);
         $item->reorder_point = $reorder_point;
         $item->save();
-
-
     }
     public function getMaximumLevel($delivery_date, $po_date, $sku_code)
     {
@@ -947,39 +944,38 @@ class SalesTransaction extends Component
         }
         $minimum_consumption = $daily_sales / $days_of_sale;
 
-
         // minimum lead time = order delivered - order placed
-        $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])
-            ->find($item_info->item_id);
+        $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])->find($item_info->item_id);
 
         $purchaseDetails = $item->purchaseDetailsJoin;
 
-        $minimum_lead_time = $purchaseDetails->flatMap(function ($purchaseDetail) {
-            // Ensure delivery is a single instance or null
-            $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
+        $minimum_lead_time = $purchaseDetails
+            ->flatMap(function ($purchaseDetail) {
+                // Ensure delivery is a single instance or null
+                $delivery = $purchaseDetail->purchaseJoin->deliveryJoin;
 
-            // Initialize minReorderPeriod as null
-            $reorderPeriods = [];
+                // Initialize minReorderPeriod as null
+                $reorderPeriods = [];
 
-            // Check if delivery and purchase dates are valid
-            if ($delivery && $delivery->date_delivered && $purchaseDetail->purchaseJoin->created_at) {
-                try {
-                    $deliveryDate = Carbon::parse($delivery->date_delivered);
-                    $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
-                    // Calculate the difference in days if both dates are valid
-                    $reorderPeriods[] = $purchaseDate->diffInDays($deliveryDate);
-                } catch (\Exception $e) {
-                    // Ignore invalid date parsing
+                // Check if delivery and purchase dates are valid
+                if ($delivery && $delivery->date_delivered && $purchaseDetail->purchaseJoin->created_at) {
+                    try {
+                        $deliveryDate = Carbon::parse($delivery->date_delivered);
+                        $purchaseDate = Carbon::parse($purchaseDetail->purchaseJoin->created_at);
+                        // Calculate the difference in days if both dates are valid
+                        $reorderPeriods[] = $purchaseDate->diffInDays($deliveryDate);
+                    } catch (\Exception $e) {
+                        // Ignore invalid date parsing
+                    }
                 }
-            }
 
-            return $reorderPeriods;
-        })->min();
+                return $reorderPeriods;
+            })
+            ->min();
 
         //maximum level = reorder quantity + reorder point - [minimum consumption * minimum lead time]
 
-        $maximum_level = round($reorder_quantity + $item->reorder_point - ($minimum_consumption * $minimum_lead_time));
-
+        $maximum_level = round($reorder_quantity + $item->reorder_point - $minimum_consumption * $minimum_lead_time);
 
         Item::where('id', $item_info->item_id)->update(['maximum_stock_level' => $maximum_level]);
 
@@ -998,13 +994,29 @@ class SalesTransaction extends Component
             'days_of_sale' => $days_of_sale,
             'minimum_lead_time' => $minimum_lead_time,
             'maximum_level' => $maximum_level,
-            'reorder_point' => $item->reorder_point
+            'reorder_point' => $item->reorder_point,
         ];
 
         // dd($maximum_level_req);
-
-
-
+    }
+    public function calculateSubtotal($selling_price, $quantity, $discount)
+    {
+        $subTotal = $selling_price * $quantity;
+        $subTotal = $subTotal - ($subTotal * ($discount / 100));
+        return $subTotal;
+    }
+    public function calculateWholeSaleDiscount($selling_price, $quantity, $discount)
+    {
+        $discount_amt = $selling_price * $quantity;
+        $discount_amt = $discount_amt * ($discount / 100);
+        return $discount_amt;
+    }
+    public function calculateVat($selling_price, $quantity, $discount, $vat_percent)
+    {
+        $subTotal = $selling_price * $quantity;
+        $subTotal = $subTotal - ($subTotal * ($discount / 100));
+        $vat = $subTotal * $vat_percent / 100;
+        return $vat;
     }
 
     // public function getMaximumLevel($delivery_date, $po_date, $item_id, )
@@ -1030,7 +1042,6 @@ class SalesTransaction extends Component
     //         $query->whereBetween('created_at', [$startOfDay, $endOfDay]);
     //     })->sum('item_quantity');
 
-
     //     // Calculate the number of days in the date range
     //     $days = floor($startDate->diffInDays($endDate));
     //     // dd($totalQuantity);
@@ -1048,12 +1059,10 @@ class SalesTransaction extends Component
     //         ->whereBetween('created_at', [$startRestockDate, $endCurrentDate])
     //         ->min('item_quantity');
 
-
     //     // $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
 
     //     $item = Item::with(['purchaseDetailsJoin.purchaseJoin.deliveryJoin'])
     //         ->find($item_id);
-
 
     //     $purchaseDetails = $item->purchaseDetailsJoin;
 
@@ -1079,14 +1088,11 @@ class SalesTransaction extends Component
     //         return $reorderPeriods;
     //     })->min();
 
-
-
     //     // Calculate maximum level using the formula
     //     $reorderPoint = $item['reorder_point'];
     //     $reorderQuantity = round($todayTotalItemQuantity / $days);
     //     $minConsumption = $minQuantity ?? 0;
     //     $minReorderPeriod = $minReorderPeriod = $minReorderPeriod !== null ? (int) $minReorderPeriod : 0;
-
 
     //     $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
 
@@ -1110,7 +1116,6 @@ class SalesTransaction extends Component
     //     dump($maximum_level_req);
     // }
 
-
     public function clearSelectedCustomerName()
     {
         $this->reset('creditor_name', 'credit_no', 'credit_limit', 'credit_details', 'senior_pwd_id', 'discount_type');
@@ -1120,8 +1125,6 @@ class SalesTransaction extends Component
     {
         $this->reset('return_number');
     }
-
-
 
     public function displayChangeQuantityForm($showChangeQuantityForm)
     {
@@ -1164,12 +1167,10 @@ class SalesTransaction extends Component
         $this->dispatch('barcode_focus');
     }
 
-
     public function getReturnDetails()
     {
-
         $rules = [
-            'search_return_number' => 'required'
+            'search_return_number' => 'required',
         ];
         $this->validate($rules);
 
@@ -1180,16 +1181,12 @@ class SalesTransaction extends Component
             return;
         }
 
-
         if ($this->returnInfo->hasTransaction) {
             $this->alert('error', 'The return number has already have a transaction.');
             return;
         }
 
-
         $this->return_number = $this->returnInfo->return_number;
         $this->return_amount = $this->returnInfo->return_total_amount;
-
-
     }
 }

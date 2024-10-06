@@ -27,11 +27,13 @@
                     </div>
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>
-                        <p class="text-[0.6em] font-bold uppercase"> {{ $credit_payment_info['payment']['payment_type'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold uppercase"> {{ $credit_payment_info['payment']['payment_type']
+                            ?? null }}</p>
                     </div>
                     <div>
                         <p class="text-[0.6em] font-bold uppercase">Reference no.</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $credit_payment_info['payment']['reference_number'] ?? null }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{
+                            $credit_payment_info['payment']['reference_number'] ?? null }}</p>
                     </div>
                 </div>
             </div>
@@ -43,15 +45,36 @@
                 <ul class="grid justify-between grid-flow-col grid-cols-2">
                     <li class="col-span-2 ">
                         <div>
-                            <p class="text-[0.2em]  font-bold">Amount Paid</p>
+                            <p class="text-[0.2em]  font-bold">Amount To Pay</p>
                         </div>
                     </li>
                     <li class="col-span-2 ">
                         <div>
-                            <p class="text-[0.2em] font-bold">{{ $credit_payment_info['payment']['amount'] ?? null }}</p>
+                            <p class="text-[0.2em] font-bold">{{ $credit_payment_info['payment']['amount'] ?? null }}
+                            </p>
                         </div>
                     </li>
-
+                    <li class="col-span-2 ">
+                        <div>
+                            <p class="text-[0.2em]  font-bold">Tendered Amount</p>
+                        </div>
+                    </li>
+                    <li class="col-span-2 ">
+                        <div>
+                            <p class="text-[0.2em] font-bold">{{ $credit_payment_info['payment']['tendered_amount'] ??
+                                null }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-2 ">
+                        <div>
+                            <p class="text-[0.2em]  font-bold">Change</p>
+                        </div>
+                    </li>
+                    <li class="col-span-2 ">
+                        <div>
+                            <p class="text-[0.2em] font-bold">{{ $credit_payment_info['change_or_balance'] ?? null }}</p>
+                        </div>
+                    </li>
                 </ul>
 
                 <span class="">------------------------</span>

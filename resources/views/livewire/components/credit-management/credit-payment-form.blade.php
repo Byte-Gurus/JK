@@ -1,4 +1,5 @@
-<div class="relative" x-cloak x-show="showCreditPaymentForm" x-data="{ payWithCash: @entangle('payWithCash');showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
+<div class="relative" x-cloak x-show="showCreditPaymentForm"
+    x-data="{ payWithCash: @entangle('payWithCash');showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed top-0 left-0 right-0 z-50 items-center flex justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -47,9 +48,9 @@
                             </div>
                             <div class="italic font-thin text-white">
                                 @if ($payWithCash)
-                                    Payment Method: <strong>Cash</strong>
+                                Payment Method: <strong>Cash</strong>
                                 @else
-                                    Payment Method: <strong>GCash</strong>
+                                Payment Method: <strong>GCash</strong>
                                 @endif
                             </div>
                         </div>
@@ -74,30 +75,28 @@
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                 @error('tendered_amount')
-                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
 
                                         @if (!$payWithCash)
-                                            <div class="flex flex-col transition-all duration-100 ease-in-out">
-                                                <div>
-                                                    <label for="reference_no"
-                                                        class="text-[1.2em] text-gray-900">Reference
-                                                        No.</label>
-                                                </div>
-
-                                                <div>
-                                                    <input type="number" wire:model='reference_no'
-                                                        placeholder="Reference No" required
-                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
-
-                                                    @error('reference_no')
-                                                        <span
-                                                            class="font-medium text-red-500 error">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                        <div class="flex flex-col transition-all duration-100 ease-in-out">
+                                            <div>
+                                                <label for="reference_no" class="text-[1.2em] text-gray-900">Reference
+                                                    No.</label>
                                             </div>
+
+                                            <div>
+                                                <input type="number" wire:model='reference_no'
+                                                    placeholder="Reference No" required
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
+
+                                                @error('reference_no')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         @endif
 
 
@@ -109,7 +108,9 @@
                                         <p class="text-[1.6em] font-thin text-center">To Pay</p>
                                     </div>
                                     <div>
-                                        <p class="text-[2em] font-black text-center">{{ $credit_amount }}</p>
+                                        <p class="text-[2em] font-black text-center">{{
+                                            number_format($remaining_balance, 2) }}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -118,19 +119,19 @@
                 </div>
                 <div class="flex flex-row items-center justify-between">
                     @if ($payWithCash)
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <div x-on:click="$wire.changePaymentMethod()"
-                                class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
-                                Pay with GCash</div>
-                        </div>
+                    <div>
+                        {{-- //* clear all button for create --}}
+                        <div x-on:click="$wire.changePaymentMethod()"
+                            class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                            Pay with GCash</div>
+                    </div>
                     @else
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <div x-on:click="$wire.changePaymentMethod()"
-                                class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
-                                Pay with Cash</div>
-                        </div>
+                    <div>
+                        {{-- //* clear all button for create --}}
+                        <div x-on:click="$wire.changePaymentMethod()"
+                            class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                            Pay with Cash</div>
+                    </div>
                     @endif
                     <div class="flex flex-row justify-end gap-2 mt-4">
                         <div>

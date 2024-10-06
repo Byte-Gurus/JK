@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Inventory extends Model
 {
@@ -53,5 +54,10 @@ class Inventory extends Model
             ->orWhereHas('deliveryJoin.purchaseJoin.supplierJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(company_name) LIKE ?', ["%{$value}%"]);
             });
+    }
+
+    //belongsto
+    public function item(){
+        return $this->belongsTo(Item::class);
     }
 }

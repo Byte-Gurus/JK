@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Models\Inventory;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -81,6 +82,7 @@ class ChangeQuantityForm extends Component
     public function getQuantity($data)
     {
 
+        $data = Inventory::with()->groupBy('item_id')->get()->sum('current_stock_quantity');
         $this->adjust_quantity = $data['itemQuantity'];
         $this->original_quantity = $data['itemQuantity'];
         $this->current_stock_quantity = $data['current_stock_quantity'];

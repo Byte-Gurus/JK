@@ -18,7 +18,7 @@ class CreditPaymentForm extends Component
 
     public $showCreditPaymentForm = false;
 
-    public $credit_amount, $tendered_amount, $reference_no, $credit_id;
+    public $remaining_balance, $tendered_amount, $reference_no, $credit_id;
     public $payWithCash = true;
 
     public function render()
@@ -36,7 +36,7 @@ class CreditPaymentForm extends Component
 
         $validated = $this->validateForm();
 
-        if (!$this->payWithCash && $this->tendered_amount != $this->credit_amount) {
+        if (!$this->payWithCash && $this->tendered_amount != $this->remaining_balance) {
             $this->addError('tendered_amount', 'The tendered amount must be equal to the grand total.');
             return;
         }
@@ -57,7 +57,7 @@ class CreditPaymentForm extends Component
         if ($this->payWithCash) {
             $payment = Payment::create([
                 'tendered_amount' => $validated['tendered_amount'],
-                'amount' => $this->credit_amount,
+                'amount' => $this->remaining_balance,
                 'payment_type' => 'Cash',
                 'reference_number' => 'N/A',
                 'transaction_id' => $credit->transaction_id
@@ -84,10 +84,16 @@ class CreditPaymentForm extends Component
         }
         $credit->save();
 
+        if($validated['tendered_amount'] > $this->remaining_balance){
+            $change = $validated['tendered_amount'] - $this->remaining_balance;
+        }else{
+            $remaining_balance = $this->remaining_balance - $validated['tendered_amount'];
+        }
+
         $creditHistory = CreditHistory::create([
             'description' => 'Payment made',
             'credit_id' => $credit->id,
-            'credit_amount' => $credit->credit_amount,
+            'credit_amount' => $credit->remaining_balance,
             'remaining_balance' => $credit->remaining_balance,
             'payment_id' => $payment->id
         ]);
@@ -100,6 +106,7 @@ class CreditPaymentForm extends Component
             'CreditHistory' => $creditHistory,
             'credit' => $credit,
             'payment' => $payment,
+            'change_or_balance' => $change ?? $remaining_balance,
             'name' => $credit->customerjoin->firstname . ' ' . ($credit->customerjoin->middlename ?? '') . ' ' . $credit->customerjoin->lastname,
             'user' =>  Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ])->to(PaymentReceipt::class);
@@ -111,7 +118,7 @@ class CreditPaymentForm extends Component
     {
         $credit = Credit::find($credit_ID);
         $this->credit_id = $credit->id;
-        $this->credit_amount = $credit->credit_amount;
+        $this->remaining_balance = $credit->remaining_balance;
     }
     public function changePaymentMethod()
     {

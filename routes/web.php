@@ -2,6 +2,7 @@
 
 
 use App\Livewire\Components\Logout;
+use App\Livewire\Components\ReportManagement\DailySalesReport;
 use App\Livewire\Components\Sales\SalesTransactionHistory;
 use App\Livewire\Pages\CashierPage;
 use App\Livewire\Pages\CreditManagementPage;
@@ -21,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 //login
 Route::get('/logout', Logout::class)->name('logout');
-Route::get('/', LoginPage::class)->name('login')->middleware('CheckIfLoggedIn');
-
+Route::get('/', LoginPage::class)->name('login')->middleware(['CheckIfLoggedIn', 'ClearSession']);
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
 
@@ -72,6 +72,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         //InventoryClerk Homepage
         Route::get('/inventoryClerk', InventoryClerkPage::class)->name('inventoryclerk.index');
+
+        Route::get('/dailySalesReport', DailySalesReport::class)->name('daily.sales.report');
+
     });
 });
 

@@ -264,7 +264,7 @@ class SupplierForm extends Component
 
 
         $rules = [
-            'company_name' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-0-9@]+$/',
+            'company_name' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-0-9@ ]+$/',
 
             //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],

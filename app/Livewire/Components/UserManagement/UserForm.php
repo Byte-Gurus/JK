@@ -237,9 +237,9 @@ class UserForm extends Component
         $this->retype_password = trim($this->retype_password);
 
         $rules = [
-            'firstname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
-            'middlename' => 'nullable|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
-            'lastname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
+            'firstname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\- ]+$/',
+            'middlename' => 'nullable|string|max:50|regex:/^[a-zA-ZñÑ\'\- ]+$/',
+            'lastname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\- ]+$/',
             'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->proxy_user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:1,2',

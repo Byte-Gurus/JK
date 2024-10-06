@@ -26,27 +26,34 @@ class LoginPage extends Component
         ]);
 
         if (Auth::attempt($validated)) {
+            $user = Auth::user();
+
+            if ($user->current_session && $user->current_session !== session()->getId()) {
+                Auth::logout();
+                $this->addError('submit', 'This account is already logged in from another device.');
+                return;
+            }
+
+            $user->current_session = session()->getId();
+            $user->save();
 
 
-            if (Auth::user()->user_role_id == 1 && Auth::user()->status_id == 1) {
-                Auth::logoutOtherDevices($this->password);
+            if ($user->user_role_id == 1 && $user->status_id == 1) {
                 return redirect()->route('admin.index');
-            } elseif (Auth::user()->user_role_id == '2' && Auth::user()->status_id == 1) {
-                Auth::logoutOtherDevices($this->password);
+            } elseif ($user->user_role_id == 2 && $user->status_id == 1) {
                 return redirect()->route('cashier.index');
-            } elseif (Auth::user()->user_role_id == '3' && Auth::user()->status_id == 1) {
-                Auth::logoutOtherDevices($this->password);
+            } elseif ($user->user_role_id == 3 && $user->status_id == 1) {
                 return redirect()->route('inventoryclerk.index');
             } else {
                 $this->addError('submit', 'This account is inactive');
             }
+        } else {
+            $this->addError('submit', 'No matching user with provided username and password');
         }
-
-        $this->addError('submit', 'No matching user with provided username and password');
     }
 
     public function showPasswordStatus()
     {
-     $this->showPassword = !$this->showPassword;
+        $this->showPassword = !$this->showPassword;
     }
 }

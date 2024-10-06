@@ -51,4 +51,9 @@ class Item extends Model
         return $query->whereRaw('LOWER(item_name) like ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
     }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

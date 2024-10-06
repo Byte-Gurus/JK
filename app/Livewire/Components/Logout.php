@@ -32,6 +32,10 @@ class Logout extends Component
 
     public function logoutConfirmed()
     {
+        $user = Auth::user();
+        $user->current_session = null;
+        $user->save();
+
         Auth::logout();
         return redirect()->route('login');
     }
