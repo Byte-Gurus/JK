@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\Sales;
 
 use App\Models\Transaction;
+use App\Models\VoidTransaction;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
@@ -40,8 +41,8 @@ class VoidTransactionModal extends Component
             return;
         }
 
-        $this->dispatch('display-sales-return-details')->to(SalesReturn::class);
-        $this->dispatch('get-transaction', Transaction: $transaction)->to(SalesReturnDetails::class);
+        $this->dispatch('display-void-transaction-form')->to(VoidTransactionPage::class);
+        $this->dispatch('get-transaction', Transaction: $transaction)->to(VoidTransactionForm::class);
         $this->reset(['transaction_number']);
     }
 

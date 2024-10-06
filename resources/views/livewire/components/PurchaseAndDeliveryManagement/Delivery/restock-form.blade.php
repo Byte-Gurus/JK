@@ -121,7 +121,7 @@
                                     @error("restock_quantity.$index")
                                         <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-2">
                                             <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
                                         </div>
                                     @enderror
                                 </th>
@@ -134,9 +134,9 @@
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
                                     @error("cost.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[24%]">
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[22%]">
                                             <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
                                         </div>
                                     @enderror
                                 </th>
@@ -149,9 +149,9 @@
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
 
                                     @error("markup.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[42%]">
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[40%]">
                                             <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
                                         </div>
                                     @enderror
                                 </th>
@@ -164,9 +164,9 @@
                                         class="  bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
 
                                     @error("srp.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[64%]">
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[57%]">
                                             <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
                                         </div>
                                     @enderror
                                 </th>
@@ -174,8 +174,6 @@
                                 {{-- exp date --}}
                                 <th scope="row"
                                     class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-
 
                                     @if ($purchaseDetail['shelf_life_type'] === 'Perishable')
                                         <input type="date" wire:model="expiration_date.{{ $index }}" required
@@ -185,9 +183,9 @@
                                     @endif
 
                                     @error("expiration_date.$index")
-                                        <div class="absolute mb-12 p-1 bg-[rgba(255,181,181,0.49)] rounded-lg right-0">
+                                        <div class="absolute p-1 bg-[rgba(255,181,181,0.49)] mt-3 rounded-t-lg right-2">
                                             <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                                class="col-span-1 text-center text-red-500 text-[0.8em] fontfont-medium error text-wrap">{{ $message }}</span>
                                         </div>
                                     @enderror
                                 </th>
