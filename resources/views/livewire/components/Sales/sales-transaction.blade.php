@@ -178,11 +178,12 @@
                     </div>
                     @if (!$unableShortcut)
                         <div
-                            class="py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class=" relative py-4 text-center font-bold bg-[rgb(251,143,143)] hover:bg-[rgb(255,111,111)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button wire:click="cancel" x-on:keydown.window.prevent.ctrl.1="$wire.call('cancel')"
                                 class="py-2 text-center ">
                                 Cancel Transaction
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(42,13,13)] font-bold">CTRL + 1</p>
                         </div>
                     @else
                         <div
@@ -190,38 +191,42 @@
                             <button class="py-2 text-center ">
                                 Cancel Transaction
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 1</p>
                         </div>
                     @endif
-
                 </div>
                 <div class="flex flex-col gap-2 ">
                     @if (!empty($selectedItems) && empty($payment) && $changeTransactionType == 1 && !$unableShortcut)
                         <div x-on:keydown.window.prevent.ctrl.4="$wire.call('displayDiscountForm')"
                             x-on:click="$wire.displayDiscountForm()"
-                            class="py-4 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class=" relative py-4 text-center font-bold bg-[rgb(251,143,206)] hover:bg-[rgb(255,111,209)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="py-2 ">
                                 Discount
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(63,18,45)] font-bold">CTRL + 4</p>
                         </div>
                     @else
-                        <div class="py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button class="py-2 " disabled>
                                 Discount
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 4</p>
                         </div>
                     @endif
                     @if (!empty($selectedItems) && empty($payment) && !$unableShortcut)
                         <div wire:click="removeItem" x-on:keydown.window.prevent.ctrl.3="$wire.call('removeItem')"
-                            class="py-4 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class=" relative py-4 text-center font-bold bg-[rgb(154,143,251)] hover:bg-[rgb(128,111,255)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="py-2 ">
                                 Remove Item
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(21,17,55)] font-bold">CTRL + 3</p>
                         </div>
                     @else
-                        <div class="py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button disabled class="py-2 ">
                                 Remove Item
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 3</p>
                         </div>
                     @endif
                 </div>
@@ -230,54 +235,68 @@
                     @if (!empty($selectedItems) && empty($payment) && !$unableShortcut)
                         <div wire:click="setQuantity" id="setQuantity"
                             x-on:keydown.window.prevent.ctrl.2="$wire.call('setQuantity')"
-                            class="py-4 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class=" relative py-4 text-center font-bold bg-[rgb(143,244,251)] hover:bg-[rgb(100,228,231)] border border-black hover:shadow-md  hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="py-2 ">
                                 Quantity
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(143,244,251)] font-bold">CTRL + 2</p>
                         </div>
                     @else
-                        <div class="py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button disabled class="py-2 ">
                                 Quantity
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 2</p>
                         </div>
                     @endif
                     @if (!empty($selectedItems) && $changeTransactionType != 2 && !$unableShortcut)
                         <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
                             x-on:click="$wire.displayPaymentForm()"
-                            class="py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            class=" relative py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
                             <button class="py-2">
                                 Pay
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">CTRL + 5</p>
                         </div>
                     @else
-                        <div class="py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button class="py-2" disabled>
                                 Pay
                             </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 5</p>
                         </div>
                     @endif
                 </div>
                 @if (!empty($payment) && $changeTransactionType != 2 && !$unableShortcut)
                     <div x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save"
-                        class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
+                        class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                         <button type="button" class="py-2 ">
                             Save
                         </button>
+                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-green-900 font-bold">
+                            CTRL + ENTER
+                        </p>
+
                     </div>
                 @elseif ($changeTransactionType == 2 && $credit_details && $selectedItems && !$unableShortcut)
                     <div x-on:keydown.window.prevent.ctrl.enter="$wire.call('save')" wire:click="save"
-                        class="flex items-center justify-center w-full font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
+                        class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                         <button type="button" class="py-2 ">
                             Save
                         </button>
+                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
+                            CTRL + ENTER
+                        </p>
                     </div>
                 @else
                     <div
-                        class="py-4 px-8 font-bold w-full items-center flex justify-center text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
-                        <button type="button" class="y-2 ">
+                    class="py-4 px-8 font-bold w-full flex items-center justify-center text-center bg-[rgb(201,201,201)] border border-black text-nowrap relative">
+                        <button type="button" class="py-2">
                             Save
                         </button>
+                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
+                            CTRL + ENTER
+                        </p>
                     </div>
                 @endif
             </div>
