@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col justify-evenly">
-                            <div x-on:click="$wire.displayStockonhandReport()"
+                            <div x-on:click="window.open('{{ route('stockonhand.sales.report') }}', '_blank')"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Stock-on-hand</button>
                             </div>
@@ -127,11 +127,11 @@
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Fast-moving Items</button>
                             </div>
-                            <div x-on:click="$wire.displayReorderListReport()"
+                            <div x-on:click="window.open('{{ route('reorderlist.sales.report') }}', '_blank')"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Reorder List</button>
                             </div>
-                            <div x-on:click="$wire.displayBackorderedItemsReport()"
+                            <div x-on:click="window.open('{{ route('backordereditems.sales.report') }}', '_blank')"
                                 class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
                                 <button>Backordered Items</button>
                             </div>
