@@ -112,7 +112,7 @@
                                     </th>
                                     <th scope="row"
                                         class="px-2 py-6 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
-                                        {{ $reorder_list['item_name'] }}
+                                    {{ $reorder_list['item_name'] }}
                                     </th>
                                     <th scope="row"
                                         class="px-2 py-6 font-medium text-left text-gray-900 break-all text-wrap text-md whitespace-nowrap">

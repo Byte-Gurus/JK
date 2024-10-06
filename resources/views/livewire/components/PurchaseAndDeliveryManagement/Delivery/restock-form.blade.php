@@ -117,6 +117,13 @@
                                     class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     <input type="number" wire:model="restock_quantity.{{ $index }}" required
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
+
+                                    @error("restock_quantity.$index")
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-2">
+                                            <span
+                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                        </div>
+                                    @enderror
                                 </th>
 
                                 {{-- cost --}}
@@ -125,6 +132,13 @@
                                     <input type="number" wire:model.live.debounce.500ms="cost.{{ $index }}"
                                         required
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+                                    @error("cost.$index")
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[24%]">
+                                            <span
+                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                        </div>
+                                    @enderror
                                 </th>
 
                                 {{-- markup --}}
@@ -133,6 +147,13 @@
                                     <input type="number"
                                         wire:model.live.debounce.500ms="markup.{{ $index }}"required
                                         class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
+
+                                    @error("markup.$index")
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[42%]">
+                                            <span
+                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                        </div>
+                                    @enderror
                                 </th>
 
                                 {{-- srp --}}
@@ -141,11 +162,20 @@
                                     <input type="number" wire:model.live.debounce.500ms="srp.{{ $index }}"
                                         required readonly
                                         class="  bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+                                    @error("srp.$index")
+                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[64%]">
+                                            <span
+                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                        </div>
+                                    @enderror
                                 </th>
 
                                 {{-- exp date --}}
                                 <th scope="row"
                                     class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+
 
                                     @if ($purchaseDetail['shelf_life_type'] === 'Perishable')
                                         <input type="date" wire:model="expiration_date.{{ $index }}" required
@@ -153,6 +183,13 @@
                                     @elseif($purchaseDetail['shelf_life_type'] === 'Non Perishable')
                                         N/A
                                     @endif
+
+                                    @error("expiration_date.$index")
+                                        <div class="absolute mb-12 p-1 bg-[rgba(255,181,181,0.49)] rounded-lg right-0">
+                                            <span
+                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
+                                        </div>
+                                    @enderror
                                 </th>
 
 
@@ -179,35 +216,20 @@
                                     @endif
                                 </th>
 
-                                <div class="absolute bottom-[58%] mx-4">
+                                {{-- <div class="absolute bottom-[58%] mx-4">
                                     <div
                                         class="grid grid-flow-col grid-cols-5 gap-4 leading-none text-justify justify-evenly">
-                                        @error("restock_quantity.$index")
-                                            <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        @enderror
 
-                                        @error("cost.$index")
-                                            <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        @enderror
 
-                                        @error("markup.$index")
-                                            <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        @enderror
 
-                                        @error("srp.$index")
-                                            <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        @enderror
 
-                                        @error("expiration_date.$index")
-                                            <span
-                                                class="col-span-1 font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        @enderror
+
+
+
+
+
                                     </div>
-                                </div>
+                                </div> --}}
                             </tr>
                         @endforeach
                     </tbody>
