@@ -864,7 +864,6 @@ class SalesTransaction extends Component
             // Rollback the transaction if something fails
             DB::rollback();
             $this->alert('error', 'An error occurred while creating transaction, please refresh the page');
-            dd($e);
         }
     }
 

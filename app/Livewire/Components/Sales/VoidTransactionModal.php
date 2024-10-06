@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Models\Transaction;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class VoidTransactionModal extends Component
@@ -14,46 +16,45 @@ class VoidTransactionModal extends Component
         return view('livewire.components.sales.void-transaction-modal');
     }
 
-    // public function enterTransaction()
-    // {
-    //     $validated = $this->validateForm();
-    //     $transaction = Transaction::where('transaction_number', $validated['transaction_number'])->first();
+    public function enterTransaction()
+    {
+        $validated = $this->validateForm();
+        $transaction = Transaction::where('transaction_number', $validated['transaction_number'])->first();
 
-    //     if (!$transaction) {
-    //         $this->addError('transaction_number', 'The transaction number does not exist.');
-    //         return;
-    //     }
+        if (!$transaction) {
+            $this->addError('transaction_number', 'The transaction number does not exist.');
+            return;
+        }
 
-    //     if ($transaction->transaction_type != "Sales") {
-    //         $this->addError('transaction_number', 'The transaction number is not a sales.');
-    //         return;
-    //     }
-    //     if ($transaction->created_at->diffInHours(Carbon::now()) > 24) {
-    //         $this->addError('transaction_number', 'The transaction is older than 24 hours and cannot be returned.');
-    //         return;
-    //     }
+        if ($transaction->transaction_type != "Sales") {
+            $this->addError('transaction_number', 'The transaction number is not a sales.');
+            return;
+        }
+        if ($transaction->created_at->diffInHours(Carbon::now()) > 24) {
+            $this->addError('transaction_number', 'The transaction is older than 24 hours and cannot be voided.');
+            return;
+        }
 
-    //     if (isset($transaction->returnJoin)) {
-    //         $this->addError('transaction_number', 'The transaction number already have returns.');
-    //         return;
-    //     }
+        if (isset($transaction->voidTransactionJoin)) {
+            $this->addError('transaction_number', 'The transaction number already have void.');
+            return;
+        }
 
-    //     $this->dispatch('display-sales-return-details')->to(SalesReturn::class);
-    //     $this->dispatch('get-transaction', Transaction: $transaction)->to(SalesReturnDetails::class);
-    //     $this->reset(['transaction_number']);
-    // }
+        $this->dispatch('display-sales-return-details')->to(SalesReturn::class);
+        $this->dispatch('get-transaction', Transaction: $transaction)->to(SalesReturnDetails::class);
+        $this->reset(['transaction_number']);
+    }
 
-    // protected function validateForm()
-    // {
-    //     $this->transaction_number = trim($this->transaction_number);
+    protected function validateForm()
+    {
 
-    //     $rules = [
-    //         'transaction_number' => 'required|string|max:255',
-    //     ];
+        $rules = [
+            'transaction_number' => 'required|string|max:255',
+        ];
 
 
-    //     return $this->validate($rules);
-    // }
+        return $this->validate($rules);
+    }
 
     public function resetFormWhenClosed()
     {

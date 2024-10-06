@@ -49,6 +49,11 @@ class Transaction extends Model
         return $this->hasOne(Returns::class, 'transaction_id');
     }
 
+    public function voidTransactionJoin()
+    {
+        return $this->hasOne(VoidTransaction::class, 'transaction_id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);

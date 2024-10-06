@@ -33,7 +33,6 @@ class SalesTransactionHistory extends Component
     public $showSalesAdminLoginForm = false;
 
     public $startDate, $endDate;
-    public $fromPage = "SalesHistory";
     public function render()
     {
         $query = TransactionMovement::query();
@@ -168,69 +167,6 @@ class SalesTransactionHistory extends Component
         $this->displaySalesAdminLoginForm();
         $this->whatVoid = 'Transaction';
     }
-    public function voidTransactionDetails($tranasactionDetails_ID)
-    {
-        $this->tranasactionDetails_ID = $tranasactionDetails_ID;
-        $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
-        $this->displaySalesAdminLoginForm();
-        $this->whatVoid = 'TransactionDetails';
-    }
-    public function adminConfirmed($isAdmin)
-    {
-        $this->isAdmin = $isAdmin;
+   
 
-
-        if ($this->isAdmin && $this->whatVoid === 'Transaction') {
-            $transaction = Transaction::find($this->salesID);
-            $transaction->transaction_type = 'Void';
-            $transaction->save();
-
-            $transactionDetails = TransactionDetails::where('transaction_id', $this->salesID)->get();
-
-            foreach ($transactionDetails as $transactionDetail) {
-                $transactionDetail->status = 'Void';
-                $transactionDetail->save();
-
-                $inventory = Inventory::where('sku_code', $transactionDetail->inventoryJoin->sku_code)->first();
-                $inventory->current_stock_quantity += $transactionDetail->item_quantity;
-                $inventory->save();
-
-                $inventoryMovement = InventoryMovement::create([
-                    'movement_type' => 'Sales',
-                    'operation' => 'Void',
-                    'transaction_detail_id' => $transactionDetail->id
-                ]);
-            }
-
-            $transactionMovement = TransactionMovement::create([
-                'transaction_id' => $transaction->id,
-                'transaction_type' => 'Void'
-            ]);
-
-
-            $this->alert('success', 'Transaction was voided successfully');
-        } elseif ($this->isAdmin && $this->whatVoid === 'TransactionDetails') {
-            $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID);
-            $transactionDetail->status = 'Void';
-            $transactionDetail->save();
-
-            $inventory = Inventory::where('sku_code', $transactionDetail->inventoryJoin->sku_code)->first();
-            $inventory->current_stock_quantity += $transactionDetail->item_quantity;
-            $inventory->save();
-
-            $inventoryMovement = InventoryMovement::create([
-                'movement_type' => 'Sales',
-                'operation' => 'Void',
-                'transaction_detail_id' => $transactionDetail->id
-            ]);
-
-            $this->alert('success', 'Item was voided successfully');
-        }
-
-        $this->displaySalesAdminLoginForm();
-        TransactionEvent::dispatch('refresh-transaction');
-        InventoryEvent::dispatch('refresh-inventory');
-
-        $this->resetPage();
-    }
 }

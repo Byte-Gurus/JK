@@ -28,7 +28,8 @@ class LoginPage extends Component
         if (Auth::attempt($validated)) {
             $user = Auth::user();
 
-            if ($user->current_session == null) {
+            $user->current_session = null;
+            if ($user->current_session = null) {
                 $user->current_session = session()->getId();
                 $user->save();
             }
