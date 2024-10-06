@@ -20,9 +20,9 @@
                             {{ $credit_payment_info['payment']['created_at'] ?? null }}
                         </p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Creditor Name:</p>
-                        <p class="text-[0.6em] font-bold uppercase">
+                    <div class="flex flex-row break-words text-wrap">
+                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Creditor Name:</p>
+                        <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $credit_payment_info['name'] ?? null }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
@@ -81,13 +81,13 @@
             </div>
 
             <div class="flex flex-col gap-4 m-4 mb-6">
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[0.6em] font-bold uppercase">Prepared by:</p>
-                    <p class="text-[0.6em] font-bold uppercase">
+                <div class="flex flex-row break-words text-wrap">
+                    <p class="text-[0.6em] font-bold uppercas text-nowrap">Prepared by:</p>
+                    <p class="text-[0.6em] font-bold uppercase w-[116px]">
                         {{ $credit_payment_info['user'] ?? null }}</p>
                 </div>
                 <div class="flex flex-row text-nowrap">
-                    <p class="text-[0.6em] font-bold uppercase">Signiture:</p>
+                    <p class="text-[0.6em] font-bold uppercase">Signature:</p>
                     <p class="text-[0.6em] font-bold uppercase">
                         _________________
                 </div>

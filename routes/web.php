@@ -2,7 +2,20 @@
 
 
 use App\Livewire\Components\Logout;
+use App\Livewire\Components\ReportManagement\BackorderedItemsReport;
+use App\Livewire\Components\ReportManagement\CustomerCreditListReport;
 use App\Livewire\Components\ReportManagement\DailySalesReport;
+use App\Livewire\Components\ReportManagement\DamagedItemsReport;
+use App\Livewire\Components\ReportManagement\ExpiredItemsReport;
+use App\Livewire\Components\ReportManagement\FastMovingItemsReport;
+use App\Livewire\Components\ReportManagement\MonthlySalesReport;
+use App\Livewire\Components\ReportManagement\ReorderListReport;
+use App\Livewire\Components\ReportManagement\SalesReturnReport;
+use App\Livewire\Components\ReportManagement\SlowMovingItemsReport;
+use App\Livewire\Components\ReportManagement\StockonhandReport;
+use App\Livewire\Components\ReportManagement\VoidedTransactionsReport;
+use App\Livewire\Components\ReportManagement\WeeklySalesReport;
+use App\Livewire\Components\ReportManagement\YearlySalesReport;
 use App\Livewire\Components\Sales\SalesTransactionHistory;
 use App\Livewire\Pages\CashierPage;
 use App\Livewire\Pages\CreditManagementPage;
@@ -73,7 +86,66 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         //InventoryClerk Homepage
         Route::get('/inventoryClerk', InventoryClerkPage::class)->name('inventoryclerk.index');
 
-        Route::get('/dailySalesReport', DailySalesReport::class)->name('daily.sales.report');
+
+
+        // Reports
+
+
+        // Daily Reports
+
+        Route::get('admin/ReportManagement/dailySalesReport', DailySalesReport::class)->name('daily.sales.report');
+
+        // Weekly Reports
+
+        Route::get('admin/ReportManagement/weeklySalesReport', WeeklySalesReport::class)->name('weekly.sales.report');
+
+        // Monthly Reports
+
+        Route::get('admin/ReportManagement/monthlySalesReport', MonthlySalesReport::class)->name('monthly.sales.report');
+
+        // Yearly Reports
+
+        Route::get('admin/ReportManagement/yearlySalesReport', YearlySalesReport::class)->name('yearly.sales.report');
+
+        // Yearly Reports
+
+        Route::get('admin/ReportManagement/voidedTransactions', VoidedTransactionsReport::class)->name('voidedtransactions.sales.report');
+
+        // Sales Return Reports
+
+        Route::get('admin/ReportManagement/salesReturnReport', SalesReturnReport::class)->name('salesreturn.sales.report');
+
+        // Stock-on-hand Reports
+
+        Route::get('admin/ReportManagement/stockonhandReport', StockonhandReport::class)->name('stockonhand.sales.report');
+
+        // Slow-moving Items Reports
+
+        Route::get('admin/ReportManagement/slowMovingItemsReport', SlowMovingItemsReport::class)->name('slowmovingitems.sales.report');
+
+        // Fast-moving Items Reports
+
+        Route::get('admin/ReportManagement/fastMovingItemsReport', FastMovingItemsReport::class)->name('fastmovingitems.sales.report');
+
+        // Reorder List Reports
+
+        Route::get('admin/ReportManagement/reorderListReport', ReorderListReport::class)->name('reorderlist.sales.report');
+
+        // Backordered Items Reports
+
+        Route::get('admin/ReportManagement/backorderedItemsReport', BackorderedItemsReport::class)->name('backordereditems.sales.report');
+
+        // Expired Items List
+
+        Route::get('admin/ReportManagement/expiredItemsReport', ExpiredItemsReport::class)->name('expireditems.sales.report');
+
+        // Damaged Items List
+
+        Route::get('admin/ReportManagement/damagedItemsReport', DamagedItemsReport::class)->name('damageditems.sales.report');
+
+        // Customer Credit List
+
+        Route::get('admin/ReportManagement/customerCreditListReport', CustomerCreditListReport::class)->name('customercreditlist.sales.report');
 
     });
 });

@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Livewire\Features\SupportPagination\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class PurchaseOrderForm extends Component
 {
 
-    use LivewireAlert;
+    use LivewireAlert, WithPagination, WithoutUrlPagination;
 
     public $isCreate = true;
 
@@ -50,6 +52,7 @@ class PurchaseOrderForm extends Component
      */
     public function mount()
     {
+        $this->resetPage();
         $this->generatePurchaseOrderNumber();
     }
     public function render()
@@ -103,6 +106,7 @@ class PurchaseOrderForm extends Component
         'edit-po-from-table' => 'edit',
         'change-method' => 'changeMethod',
         'reset-modal' => 'resetModal',
+        'reset-form' => 'mount',
         'updateConfirmed',
         'createConfirmed',
     ];
@@ -316,13 +320,11 @@ class PurchaseOrderForm extends Component
 
             $this->resetForm();
             $this->closeModal();
-            
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
             DB::rollback();
-            $this->alert('error', 'An error occurred while creating the purchase order, please refresh the page ' );
+            $this->alert('error', 'An error occurred while creating the purchase order, please refresh the page ');
         }
-
     }
 
     // public function update() //* update process
@@ -435,8 +437,13 @@ class PurchaseOrderForm extends Component
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['purchase_id', 'proxy_purchase_id', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
+        $this->reset(['po_number', 'purchase_id', 'proxy_purchase_id', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
     }
+
+    // private function resetPONumber() //*tanggalin ang laman ng input pati $item_id value
+    // {
+    //     $this->reset(['po_number']);
+    // }
     // public function populateForm()
     // {
 

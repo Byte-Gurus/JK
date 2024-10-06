@@ -45,9 +45,9 @@
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['payment']['reference_no'] ?? null }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold uppercase">
+                    <div class="flex flex-row gap-2 break-words text-wrap">
+                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Prepared By:</p>
+                        <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $receiptDetails['transaction_info']['user'] ?? null }}</p>
                     </div>
                 </div>
@@ -193,13 +193,13 @@
                     <p class="text-[0.6em] font-bold uppercase">Customer Name</p>
 
                     @if (isset($receiptDetails['customerDetails']['customer']))
-                        <p class="text-[0.6em] font-bold uppercase">
+                        <p class="text-[0.6em] font-bold uppercase w-[216px]">
                             {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
                             {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
                             {{ $receiptDetails['customerDetails']['customer']['lastname'] ?? null }}
                         </p>
                     @else
-                        <p class="text-[0.6em] font-bold uppercase">
+                        <p class="text-[0.6em] font-bold uppercase w-[216px]">
                             {{ $receiptDetails['customerDetails']['firstname'] ?? null }}
                             {{ $receiptDetails['customerDetails']['middlename'] ?? null }}
                             {{ $receiptDetails['customerDetails']['lastname'] ?? null }}
@@ -207,7 +207,7 @@
                     @endif
 
                     @if (isset($receiptDetails['credit_details']['creditor_name']))
-                        <p class="text-[0.6em] font-bold uppercase">
+                        <p class="text-[0.6em] font-bold uppercase w-[216px]">
                             {{ $receiptDetails['credit_details']['creditor_name'] ?? null }}
                         </p>
                     @endif

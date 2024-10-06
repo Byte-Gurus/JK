@@ -96,7 +96,7 @@
                                                 class="text-red-400 ">*</span></label>
 
                                         <input type="number" id="contact_number" wire:model="contact_number" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                             placeholder="Contact No" />
 
                                         @error('contact_number')
@@ -117,7 +117,7 @@
                                         </label>
 
                                         <select id="selectProvince" wire:model.live="selectProvince" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             <option value="" selected>Select province</option>
                                             @foreach ($provinces as $province)
                                                 <option value="{{ $province->province_code }}">
@@ -140,25 +140,46 @@
                                             / Municipality
                                         </label>
 
+                                        @if (empty($selectProvince))
 
-                                        <select id="selectCity" wire:model.live="selectCity" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                            <option value="" selected>Select a City / Municipality</option>
+                                            <select disabled id="selectCity" wire:model.live="selectCity" required
+                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value="" selected>Select a City / Municipality</option>
 
-                                            @if (!is_null($cities))
-                                                @foreach ($cities as $city)
-                                                    <option value="{{ $city->city_municipality_code }}"
-                                                        {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
-                                                        {{ $city->city_municipality_description }}</option>
-                                                @endforeach
+                                                @if (!is_null($cities))
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->city_municipality_code }}"
+                                                            {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
+                                                            {{ $city->city_municipality_description }}</option>
+                                                    @endforeach
 
 
-                                            @endif
-                                        </select>
+                                                @endif
+                                            </select>
+                                        @else
+                                            <select id="selectCity" wire:model.live="selectCity" required
+                                                class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value="" selected>Select a City / Municipality</option>
 
-                                        @error('selectCity')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
+                                                @if (!is_null($cities))
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->city_municipality_code }}"
+                                                            {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
+                                                            {{ $city->city_municipality_description }}</option>
+                                                    @endforeach
+
+
+                                                @endif
+                                            </select>
+
+                                            @error('selectCity')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        @endif
+
+
+
 
                                     </div>
 
@@ -173,23 +194,42 @@
                                         <label for="selectBrgy"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
-                                        <select id="selectBrgy" wire:model.live="selectBrgy" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                        @if (empty($selectCity))
 
-                                            <option value="" selected>Select a barangay</option>
+                                            <select id="selectBrgy" wire:model.live="selectBrgy" required
+                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
 
-                                            @if (!is_null($barangays))
-                                                @foreach ($barangays as $barangay)
-                                                    <option value="{{ $barangay->barangay_code }}"
-                                                        {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
-                                                        {{ $barangay->barangay_description }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
+                                                <option value="" selected>Select a barangay</option>
 
-                                        @error('selectBrgy')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
+                                                @if (!is_null($barangays))
+                                                    @foreach ($barangays as $barangay)
+                                                        <option value="{{ $barangay->barangay_code }}"
+                                                            {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
+                                                            {{ $barangay->barangay_description }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        @else
+                                            <select id="selectBrgy" wire:model.live="selectBrgy" required
+                                                class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+
+                                                <option value="" selected>Select a barangay</option>
+
+                                                @if (!is_null($barangays))
+                                                    @foreach ($barangays as $barangay)
+                                                        <option value="{{ $barangay->barangay_code }}"
+                                                            {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
+                                                            {{ $barangay->barangay_description }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+
+                                            @error('selectBrgy')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        @endif
+
 
                                     </div>
 
@@ -199,9 +239,16 @@
                                         <label for="street"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
-                                        <input type="text" id="street" wire:model="street"
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                            placeholder="Street" required />
+                                        @if (empty($selectBrgy))
+                                            <input disabled type="text" id="street" wire:model="street"
+                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Street" required />
+                                        @else
+                                            <input type="text" id="street" wire:model="street"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Street" required />
+                                        @endif
+
 
 
 

@@ -157,7 +157,7 @@
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Contact No</label>
 
                                             <input type="number" id="contactno" wire:model="contact_number"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
+                                                class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
                                                 placeholder="Contact No" required />
 
                                             @error('contact_number')
@@ -168,22 +168,32 @@
 
                                         <div class="mb-3">
 
-                                            <label for="id_picture"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">ID
-                                                Picture
-                                            </label>
+                                            <div class="flex flex-row justify-between mb-2 ">
+                                                <label for="id_picture"
+                                                    class="block text-sm font-medium text-gray-900 ">ID
+                                                    Picture
+                                                </label>
 
-                                            @if ($this->isCreate)
-                                            <input id="id_picture" type="file" accept="image/png, image/jpeg" required
-                                                wire:model="id_picture"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                                                @if (!empty($id_picture))
+                                                <button
+                                                type="button"
+                                                wire:click='removeSelectedPicture()'
+                                                class="px-4 text-sm font-medium transition-all duration-100 ease-in-out bg-red-200 rounded-md hover:bg-red-400">Remove Picture</button>
+                                                @endif
+                                            </div>
 
-                                            @else
-                                            <input id="id_picture" type="file" accept="image/png, image/jpeg" nullable
-                                                wire:model="id_picture"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                                            @if (empty($id_picture))
+                                                @if ($this->isCreate)
+                                                <input id="id_picture" type="file" accept="image/png, image/jpeg" required
+                                                    wire:model="id_picture"
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+
+                                                @else
+                                                <input id="id_picture" type="file" accept="image/png, image/jpeg" nullable
+                                                    wire:model="id_picture"
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                                                @endif
                                             @endif
-
 
                                             @if ($id_picture instanceof \Illuminate\Http\UploadedFile)
                                             <img src="{{ $id_picture->temporaryUrl() }}">
@@ -232,25 +242,42 @@
                                                 / Municipality
                                             </label>
 
+                                            @if (empty($selectProvince))
 
-                                            <select id="selectCity" wire:model.live="selectCity" required
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value="" selected>Select a city / municipality</option>
+                                                <select disabled id="selectCity" wire:model.live="selectCity" required
+                                                    class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                    <option value="" selected>Select a city / municipality</option>
 
-                                                @if (!is_null($cities))
-                                                @foreach ($cities as $city)
-                                                <option value="{{ $city->city_municipality_code }}" {{ $city->
-                                                    city_municipality_code == $selectCity ? 'selected' : '' }}>
-                                                    {{ $city->city_municipality_description }}</option>
-                                                @endforeach
-                                                @endif
+                                                    @if (!is_null($cities))
+                                                    @foreach ($cities as $city)
+                                                    <option value="{{ $city->city_municipality_code }}" {{ $city->
+                                                        city_municipality_code == $selectCity ? 'selected' : '' }}>
+                                                        {{ $city->city_municipality_description }}</option>
+                                                    @endforeach
+                                                    @endif
 
-                                            </select>
+                                                </select>
+                                            @else
 
-                                            @error('selectCity')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
+                                                <select id="selectCity" wire:model.live="selectCity" required
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                    <option value="" selected>Select a city / municipality</option>
 
+                                                    @if (!is_null($cities))
+                                                    @foreach ($cities as $city)
+                                                    <option value="{{ $city->city_municipality_code }}" {{ $city->
+                                                        city_municipality_code == $selectCity ? 'selected' : '' }}>
+                                                        {{ $city->city_municipality_description }}</option>
+                                                    @endforeach
+                                                    @endif
+
+                                                </select>
+
+                                                @error('selectCity')
+                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+
+                                            @endif
                                         </div>
                                     </div>
 
@@ -262,24 +289,45 @@
                                         <div class="mb-3">
 
                                             <label for="selectBrgy"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
 
-                                            <select id="selectBrgy" wire:model.live="selectBrgy" required
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            @if (empty($selectCity))
+
+                                                <select disabled id="selectBrgy" wire:model.live="selectBrgy" required
+                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Select a barangay</option>
 
                                                 @if (!is_null($barangays))
-                                                @foreach ($barangays as $barangay)
-                                                <option value="{{ $barangay->barangay_code }}" {{ $barangay->
-                                                    barangay_code == $selectBrgy ? 'selected' : '' }}>
-                                                    {{ $barangay->barangay_description }}</option>
-                                                @endforeach
+                                                    @foreach ($barangays as $barangay)
+                                                    <option value="{{ $barangay->barangay_code }}" {{ $barangay->
+                                                        barangay_code == $selectBrgy ? 'selected' : '' }}>
+                                                        {{ $barangay->barangay_description }}</option>
+                                                    @endforeach
                                                 @endif
-                                            </select>
+                                                </select>
 
-                                            @error('selectBrgy')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
+                                            @else
+
+                                                <select id="selectBrgy" wire:model.live="selectBrgy" required
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                    <option value="" selected>Select a barangay</option>
+
+                                                    @if (!is_null($barangays))
+                                                        @foreach ($barangays as $barangay)
+                                                        <option value="{{ $barangay->barangay_code }}" {{ $barangay->
+                                                            barangay_code == $selectBrgy ? 'selected' : '' }}>
+                                                            {{ $barangay->barangay_description }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+
+                                                @error('selectBrgy')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+
+                                            @endif
+
+
 
                                         </div>
 
@@ -289,14 +337,26 @@
                                             <label for="street"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
 
-                                            <input type="text" id="street" wire:model="street"
+
+                                            @if (empty($selectBrgy))
+
+                                                <input disabled type="text" id="street" wire:model="street"
+                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Street" required />
+
+                                            @else
+
+                                                <input type="text" id="street" wire:model="street"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                                 placeholder="Street" required />
-                                            @error('street')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-                                        </div>
 
+                                                @error('street')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+
+                                            @endif
+
+                                        </div>
 
                                     </div>
 
@@ -316,7 +376,6 @@
                                                 <option value="PWD">PWD</option>
                                                 <option value="Senior Citizen">Senior Citizen</option>
 
-
                                             </select>
 
                                             @error('customerType')
@@ -333,19 +392,25 @@
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">ID No.</label>
 
                                             @if ($customertype != 'Normal')
-                                            <input type="number" id="senior_pwd_id" wire:model="senior_pwd_id"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                placeholder="senior_pwd_id" required />
-                                            @error('senior_pwd_id')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
+
+                                                <input type="number" id="senior_pwd_id" wire:model="senior_pwd_id"
+                                                    class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                    placeholder="senior_pwd_id" required />
+
+                                                @error('senior_pwd_id')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+
                                             @else
-                                            <input type="number" id="senior_pwd_id" disabled wire:model="senior_pwd_id"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                placeholder="senior_pwd_id" required />
-                                            @error('senior_pwd_id')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
+
+                                                <input type="number" id="senior_pwd_id" disabled wire:model="senior_pwd_id"
+                                                    class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                    placeholder="senior_pwd_id" required />
+
+                                                @error('senior_pwd_id')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+
                                             @endif
 
                                         </div>
@@ -359,76 +424,71 @@
 
                             {{-- *if form is edit --}}
                             @if (!$this->isCreate)
-                            <div class="flex flex-row justify-end gap-2">
+                                <div class="flex flex-row justify-end gap-2">
+                                    <div>
+                                        {{-- //* submit button for edit --}}
+                                        <button type="submit" wire:loading.remove
+                                            class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                            <div class="flex flex-row items-center gap-2">
+                                                <p>Update</p>
+                                            </div>
+                                        </button>
 
-                                <div>
-
-                                    {{-- //* submit button for edit --}}
-                                    <button type="submit" wire:loading.remove
-                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                        <div class="flex flex-row items-center gap-2">
-                                            <p>Update</p>
-
-                                        </div>
-
-                                    </button>
-
-                                    <div wire:loading>
-                                        <div class="flex items-center justify-center loader loader--style3 " title="2">
-                                            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
-                                                height="40px" viewBox="0 0 50 50"
-                                                style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                                                <path fill="#000"
-                                                    d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-                                                    <animateTransform attributeType="xml" attributeName="transform"
-                                                        type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
-                                                        repeatCount="indefinite" />
-                                                </path>
-                                            </svg>
+                                        <div wire:loading>
+                                            <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+                                                    height="40px" viewBox="0 0 50 50"
+                                                    style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                                    <path fill="#000"
+                                                        d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                        <animateTransform attributeType="xml" attributeName="transform"
+                                                            type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
+                                                            repeatCount="indefinite" />
+                                                    </path>
+                                                </svg>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @else
-                            {{-- *if form is create --}}
-                            <div class="flex flex-row justify-end gap-2">
-                                <div>
+                                {{-- *if form is create --}}
+                                <div class="flex flex-row justify-end gap-2">
+                                    <div>
 
-                                    {{-- //* clear all button for create --}}
-                                    <button type="reset" wire:click="resetForm"
-                                        class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
-                                        All</button>
-                                </div>
+                                        {{-- //* clear all button for create --}}
+                                        <button type="reset" wire:click="resetForm"
+                                            class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
+                                            All</button>
+                                    </div>
 
-                                <div>
-                                    {{-- //* submit button for create --}}
-                                    <button type="submit" wire:loading.remove
-                                        class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-                                        <div class="flex flex-row items-center gap-2">
-                                            <p>
-                                                Create
-                                            </p>
+                                    <div>
+                                        {{-- //* submit button for create --}}
+                                        <button type="submit" wire:loading.remove
+                                            class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                            <div class="flex flex-row items-center gap-2">
+                                                <p>
+                                                    Create
+                                                </p>
+                                            </div>
+                                        </button>
+                                        <div wire:loading>
+                                            <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+                                                    height="40px" viewBox="0 0 50 50"
+                                                    style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                                                    <path fill="#000"
+                                                        d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                        <animateTransform attributeType="xml" attributeName="transform"
+                                                            type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
+                                                            repeatCount="indefinite" />
+                                                    </path>
+                                                </svg>
+                                            </div>
                                         </div>
-                                    </button>
-                                    <div wire:loading>
-                                        <div class="flex items-center justify-center loader loader--style3 " title="2">
-                                            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
-                                                height="40px" viewBox="0 0 50 50"
-                                                style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                                                <path fill="#000"
-                                                    d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
-                                                    <animateTransform attributeType="xml" attributeName="transform"
-                                                        type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
-                                                        repeatCount="indefinite" />
-                                                </path>
-                                            </svg>
-                                        </div>
-
                                     </div>
                                 </div>
-                            </div>
                             @endif
                         </div>
                     </div>

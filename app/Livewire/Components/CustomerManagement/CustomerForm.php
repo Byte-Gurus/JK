@@ -70,6 +70,11 @@ class CustomerForm extends Component
         $this->senior_pwd_id = null;
     }
 
+    public function removeSelectedPicture()
+    {
+        $this->reset(['id_picture']);
+    }
+
 
     public function create() //* create process
     {
