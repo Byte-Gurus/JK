@@ -119,9 +119,9 @@
                                     <div class="flex flex-row gap-2 w-fit">
                                         <div class="text-sm italic font-medium text-[rgb(122,122,122)]">
                                             {{ $selectedItem['barcode'] }}</div>
-                                        <div class="font-black text-[rgb(80,80,80)]">|</div>
-                                        <div class="text-sm italic font-medium text-[rgb(122,122,122)]">
-                                            {{ $selectedItem['sku_code'] }}</div>
+                                        {{-- <div class="font-black text-[rgb(80,80,80)]">|</div> --}}
+                                        {{-- <div class="text-sm italic font-medium text-[rgb(122,122,122)]">
+                                            {{ $selectedItem['sku_code'] }}</div> --}}
                                     </div>
                                 </div>
 
@@ -381,15 +381,18 @@
                             style="opacity: 0;" autofocus x-on:keydown.window.prevent.ctrl.0="focusInput()"
                             wire:model.live="barcode">
                     </div>
-
                 </div>
+
                 {{-- transaction number section --}}
+
                 <div class="border border-black"></div>
                 <div class="flex flex-col p-2">
                     <p class="text-[1.2em] font-bold">Transaction No.</p>
                     <p class="self-center text-[1.8em] italic font-black">{{ $transaction_number }}</p>
                 </div>
+
                 {{-- credit section --}}
+
                 <div class="flex flex-row items-center">
                     <div class="w-full ">
                         <div class="border border-black "></div>
@@ -401,9 +404,9 @@
                         <div class="border border-black "></div>
                     </div>
                 </div>
+
                 <div class="flex flex-col p-2">
                     <div>
-
                         <label for="credit_id" class="block mb-1 font-medium text-[1.6em] text-gray-900 ">Customer
                             Name
                         </label>
