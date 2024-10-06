@@ -116,11 +116,17 @@ class StockAdjustForm extends Component
 
             DB::commit();
 
-        $this->resetForm();
-        $this->alert('success', 'Stock was adjusted successfully');
-        AdjustmentEvent::dispatch('refresh-adjustment');
-        $this->refreshTable();
-        $this->closeModal();
+            $this->resetForm();
+            $this->alert('success', 'Stock was adjusted successfully');
+            AdjustmentEvent::dispatch('refresh-adjustment');
+            $this->refreshTable();
+            $this->closeModal();
+            $this->dispatch('close-inventory-admin-login-form')->to(StockAdjustPage::class);
+        } catch (\Exception $e) {
+            // Rollback the transaction if something fails
+            DB::rollback();
+            $this->alert('error', 'An error occurred while Adjusting, please refresh the page ');
+        }
     }
     protected function validateForm()
     {

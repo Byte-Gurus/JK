@@ -19,6 +19,7 @@ class StockAdjustPage extends Component
         'display-stock-adjust-confirmation' => 'displayStockAdjustConfirmation',
         'display-inventory-admin-login-form' => 'displayInventoryAdminLoginForm',
         'return-stock-adjust-form' => 'returnStockAdjustForm',
+        'close-inventory-admin-login-form' => 'closeInventoryAdminLoginForm',
         'admin-confirmed' => 'closeLoginForm',
         'updateConfirmed',
         'createConfirmed',
@@ -28,6 +29,12 @@ class StockAdjustPage extends Component
     {
         $this->showStockAdjustForm = false;
         $this->showInventoryAdminLoginForm = true;
+    }
+
+    public function closeInventoryAdminLoginForm()
+    {
+        $this->showStockAdjustForm = true;
+        $this->showInventoryAdminLoginForm = false;
     }
 
     public function returnStockAdjustForm()
