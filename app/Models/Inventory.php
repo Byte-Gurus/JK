@@ -57,7 +57,5 @@ class Inventory extends Model
     }
 
     //belongsto
-    public function item(){
-        return $this->belongsTo(Item::class);
-    }
+
 }
