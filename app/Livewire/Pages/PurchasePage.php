@@ -35,6 +35,7 @@ class PurchasePage extends Component
 
     public function formCreate()
     {
+        $this->dispatch(event: 'reset-form')->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
         $this->showPurchaseOrderTable = false;
         $this->showPurchaseOrderForm = true;
     }
@@ -80,7 +81,7 @@ class PurchasePage extends Component
     {
         $this->showPurchaseOrderForm = false;
         $this->showPurchaseOrderTable = true;
-        $this->dispatch('reset-modal')->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
+        $this->dispatch(event: 'reset-form')->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
     }
 
     public function displayPurchaseOrderDetails()
