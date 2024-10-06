@@ -40,6 +40,8 @@ class WeeklySalesReport extends Component
         $totalNet = 0;
         $totalReturnAmount = 0;
         $totalReturnVatAmount = 0;
+        $totalVoidAmount = 0;
+        $totalVoidVatAmount = 0;
 
         // Iterate through transactions to group and sum by day
         foreach ($this->transactions as $transaction) {
@@ -51,7 +53,9 @@ class WeeklySalesReport extends Component
                     'totalTax' => 0,
                     'totalNet' => 0,
                     'totalReturnAmount' => 0,
-                    'totalReturnVatAmount' => 0
+                    'totalReturnVatAmount' => 0,
+                    'totalVoidAmount' => 0,
+                    'totalVoidVatAmount' => 0,
                 ];
             }
 
@@ -65,13 +69,16 @@ class WeeklySalesReport extends Component
             } elseif ($transaction->transaction_type == 'Credit') {
                 $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
                 $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+            } elseif ($transaction->transaction_type == 'Void') {
+                $dailySummaries[$date]['totalVoidAmount'] += $transaction->transactionJoin->total_amount;
+                $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->transactionJoin->total_vat_amount;
             }
         }
 
         // Calculate daily net values and accumulate weekly totals
         foreach ($dailySummaries as $date => $summary) {
-            $dailyGross = $summary['totalGross'] - $summary['totalReturnAmount'];
-            $dailyTax = $summary['totalTax'] - $summary['totalReturnVatAmount'];
+            $dailyGross = $summary['totalGross'] - $summary['totalReturnAmount'] - $summary['totalVoidAmount'];
+            $dailyTax = $summary['totalTax'] - $summary['totalReturnVatAmount'] - $summary['totalVoidVatAmount'];
             $dailyNet = $dailyGross - $dailyTax;
 
             $dailySummaries[$date]['totalGross'] = $dailyGross;
@@ -84,6 +91,8 @@ class WeeklySalesReport extends Component
             $totalNet += $dailyNet;
             $totalReturnAmount += $summary['totalReturnAmount'];
             $totalReturnVatAmount += $summary['totalReturnVatAmount'];
+            $totalVoidAmount += $summary['totalVoidAmount'];
+            $totalVoidVatAmount += $summary['totalVoidVatAmount'];
         }
 
         // Prepare report information
@@ -93,10 +102,13 @@ class WeeklySalesReport extends Component
             'totalNet' => $totalNet,
             'totalReturnAmount' => $totalReturnAmount,
             'totalReturnVatAmount' => $totalReturnVatAmount,
+            'totalVoidAmount' => $totalVoidAmount,
+            'totalVoidVatAmount' => $totalVoidVatAmount,
             'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'dailySummaries' => $dailySummaries
+            'dailySummaries' => $dailySummaries,
         ];
     }
+
 }

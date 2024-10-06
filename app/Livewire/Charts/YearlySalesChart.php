@@ -44,8 +44,12 @@ class YearlySalesChart extends Component
             $startOfMonth = Carbon::createFromDate($year, $month, 1)->startOfMonth();
             $endOfMonth = Carbon::createFromDate($year, $month, 1)->endOfMonth();
 
-            $totalAmount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_amount');
-            $dailyTransactionCount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+            $totalAmount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->whereNotIn('transaction_type', ['Return', 'Void'])
+                ->sum('total_amount');
+            $dailyTransactionCount = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->whereNotIn('transaction_type', ['Return', 'Void'])
+                ->count();
             $formattedMonth = $startOfMonth->format('M Y');
             $this->yearlyTotal[] = [
                 'date' => $formattedMonth,

@@ -14,7 +14,7 @@ use Livewire\WithPagination;
 class SalesTransactionHistory extends Component
 {
     use WithPagination, WithoutUrlPagination;
-    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID ,$isAdmin;
+    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $original_amount, $return_amount, $payment_type, $salesID, $isAdmin;
     public $transactionDetails = [];
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
@@ -162,6 +162,9 @@ class SalesTransactionHistory extends Component
             $transaction->transaction_type = 'Void';
             $transaction->save();
 
+            $transactionMovement = TransactionMovement::where('transaction_id', $transaction->id)->first();
+            $transactionMovement->transaction_type = 'Void';
+            $transactionMovement->save();
         }
     }
 }

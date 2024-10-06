@@ -39,8 +39,14 @@ class DailySalesChart extends Component
         $this->currentDate = $currentDate->toDateString(); // Get today's date in 'YYYY-MM-DD' format
         $formattedDate = $currentDate->format('M d Y');
 
-        $this->totalAmount = Transaction::whereDate('created_at', $currentDate)->sum('total_amount');
-        $this->transactionCount = Transaction::whereDate('created_at', $currentDate)->count();
+        $this->totalAmount = Transaction::whereDate('created_at', $currentDate)
+            ->whereNotIn('transaction_type', ['Return', 'Void'])
+            ->sum('total_amount');
+
+        $this->transactionCount = Transaction::whereDate('created_at', $currentDate)
+            ->whereNotIn('transaction_type', ['Return', 'Void'])
+            ->count();
+
 
         $this->dailyTotal[] = [
             'date' => $formattedDate,
