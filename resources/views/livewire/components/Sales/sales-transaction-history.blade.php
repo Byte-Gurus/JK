@@ -3,9 +3,15 @@
         <div>
             <p class="text-[2em] font-black ">Transaction History</p>
         </div>
-        <div>
-            <button x-on:click="$wire.returnToSalesTransaction()"
-                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Return</button>
+        <div class="flex flex-row justify-between gap-4 ">
+            <div>
+                <button x-on:click="$wire.displayVoidTransaction()"
+                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(224,180,255)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(181,128,255)] transition-all duration-100 ease-in-out">Void Transaction</button>
+            </div>
+            <div>
+                <button x-on:click="$wire.returnToSalesTransaction()"
+                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Return</button>
+            </div>
         </div>
     </div>
     <div class="relative overflow-hidden bg-white mb-[3vh]">

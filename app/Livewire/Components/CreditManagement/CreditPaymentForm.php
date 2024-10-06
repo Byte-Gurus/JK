@@ -41,7 +41,7 @@ class CreditPaymentForm extends Component
             return;
         }
 
-        $this->confirm('Do you want to add this user?', [
+        $this->confirm('Do you want to tender this amount?', [
             'onConfirmed' => 'paymentConfirmed', //* call the createconfirmed method
             'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
         ]);

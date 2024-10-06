@@ -49,8 +49,10 @@ class InventoryAdminLoginForm extends Component
 
                 if($this->fromPage === 'InventoryTable'){
                     $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(InventoryForm::class);
+                    $this->resetForm();
                 }elseif($this->fromPage === 'AdjustForm'){
                     $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(StockAdjustForm::class);
+                    $this->resetForm();
                 }
                 // }elseif($this->fromPage === 'ReturnDetails'){
                 //     $this->dispatch('display-sales-return-slip', showSalesReturnSlip: true)->to(CashierPage::class);
@@ -76,5 +78,8 @@ class InventoryAdminLoginForm extends Component
         $this->fromPage = $fromPage;
     }
 
-
+    public function resetForm()
+    {
+        $this->reset(['username', 'password']);
+    }
 }

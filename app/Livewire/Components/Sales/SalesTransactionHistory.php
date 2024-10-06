@@ -15,6 +15,7 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 class SalesTransactionHistory extends Component
 {
     use WithPagination, WithoutUrlPagination, LivewireAlert;
@@ -93,7 +94,6 @@ class SalesTransactionHistory extends Component
 
         if ($this->transaction_type == 'Return') {
             $this->change = $this->tendered_amount - $this->original_amount;
-
         } else {
             $this->change = $this->tendered_amount - $this->grandTotal;
         }
@@ -116,6 +116,11 @@ class SalesTransactionHistory extends Component
     public function returnSalesTransactionHistory()
     {
         $this->showSalesAdminLoginForm = false;
+    }
+
+    public function displayVoidTransaction()
+    {
+        $this->dispatch('display-void-transaction', showVoidTransaction: true)->to(CashierPage::class);
     }
 
     public function returnToSalesTransaction()
@@ -204,7 +209,6 @@ class SalesTransactionHistory extends Component
 
 
             $this->alert('success', 'Transaction was voided successfully');
-
         } elseif ($this->isAdmin && $this->whatVoid === 'TransactionDetails') {
             $transactionDetail = TransactionDetails::find($this->tranasactionDetails_ID);
             $transactionDetail->status = 'Void';
@@ -221,7 +225,6 @@ class SalesTransactionHistory extends Component
             ]);
 
             $this->alert('success', 'Item was voided successfully');
-
         }
 
         $this->displaySalesAdminLoginForm();
