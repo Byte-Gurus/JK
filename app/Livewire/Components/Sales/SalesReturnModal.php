@@ -26,6 +26,10 @@ class SalesReturnModal extends Component
             return;
         }
 
+        if ($transaction->transaction_type != "Sales") {
+            $this->addError('transaction_number', 'The transaction number is not a sales.');
+            return;
+        }
         if ($transaction->created_at->diffInHours(Carbon::now()) > 24) {
             $this->addError('transaction_number', 'The transaction is older than 24 hours and cannot be returned.');
             return;
