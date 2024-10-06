@@ -52,8 +52,4 @@ class Item extends Model
             ->orWhereRaw('LOWER(barcode) like ?', ["%{$value}%"]);
     }
 
-    public function inventory()
-    {
-        return $this->hasMany(Inventory::class);
-    }
 }

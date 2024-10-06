@@ -44,35 +44,35 @@ class SalesTransaction extends Component
     public $payment = [];
 
     public $selectedIndex,
-    $isSelected,
-    $subtotal,
-    $grandTotal,
-    $discount,
-    $totalVat,
-    $discount_percent,
-    $PWD_Senior_discount_amount,
-    $discount_type,
-    $customer_name,
-    $senior_pwd_id,
-    $tendered_amount,
-    $change,
-    $original_total,
-    $netAmount,
-    $discounts,
-    $wholesale_discount_amount,
-    $credit_no,
-    $searchCustomer,
-    $creditor_name,
-    $transaction_info,
-    $credit_limit,
-    $changeTransactionType = 1,
-    $receiptData = [],
-    $unableShortcut = false,
-    $search_return_number,
-    $return_amount,
-    $returnInfo,
-    $return_number,
-    $excess_amount;
+        $isSelected,
+        $subtotal,
+        $grandTotal,
+        $discount,
+        $totalVat,
+        $discount_percent,
+        $PWD_Senior_discount_amount,
+        $discount_type,
+        $customer_name,
+        $senior_pwd_id,
+        $tendered_amount,
+        $change,
+        $original_total,
+        $netAmount,
+        $discounts,
+        $wholesale_discount_amount,
+        $credit_no,
+        $searchCustomer,
+        $creditor_name,
+        $transaction_info,
+        $credit_limit,
+        $changeTransactionType = 1,
+        $receiptData = [],
+        $unableShortcut = false,
+        $search_return_number,
+        $return_amount,
+        $returnInfo,
+        $return_number,
+        $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -657,21 +657,25 @@ class SalesTransaction extends Component
                 $return->hasTransaction = true;
                 $return->save();
             }
-
+            $ids ="inventory_ids:";
             foreach ($this->selectedItems as $index => $selectedItem) {
+                $total_quantity_sold = $selectedItem['quantity'];
 
                 $inventories = Inventory::where('selling_price', $selectedItem['selling_price'])
                     ->where('item_id', $selectedItem['item_id'])
                     ->orderBy('expiration_date', 'ASC')
                     ->get();
 
-                $total_quantity_sold = $selectedItem['quantity'];
+
 
                 foreach ($inventories as $inventory) {
+                    // dd($inventory->current_stock_quantity);
+                    // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']);
+                    // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold != $selectedItem['quantity']);
 
                     if ($total_quantity_sold > 0) {
-                        if ($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
-
+                        if (($inventory->current_stock_quantity - $total_quantity_sold) >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
+                            dump('if');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $selectedItem['quantity'],
                                 'vat_type' => $selectedItem['vat_type'],
@@ -686,7 +690,7 @@ class SalesTransaction extends Component
                                 'item_price' => $selectedItem['selling_price'],
                                 'item_vat_percent' => $selectedItem['vat_percent'],
                             ]);
-
+                            $total_quantity_sold -= $selectedItem['quantity'];
                             $inventory->current_stock_quantity -= $selectedItem['quantity'];
 
                             if ($inventory->current_stock_quantity == 0) {
@@ -704,12 +708,11 @@ class SalesTransaction extends Component
                                     ]);
                                 }
                             }
-                            $total_quantity_sold -= $selectedItem['quantity'];
 
 
-                        } else if ($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold != $selectedItem['quantity']) {
+                        } elseif (($inventory->current_stock_quantity - $total_quantity_sold) >= 0) {
 
-
+                            dump('elseif');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $total_quantity_sold,
                                 'vat_type' => $selectedItem['vat_type'],
@@ -725,7 +728,8 @@ class SalesTransaction extends Component
                                 'item_vat_percent' => $selectedItem['vat_percent'],
                             ]);
 
-                            $inventory->current_stock_quantity -= $selectedItem['quantity'];
+                            $inventory->current_stock_quantity -= $total_quantity_sold;
+                            $total_quantity_sold -= $total_quantity_sold;
 
                             if ($inventory->current_stock_quantity == 0) {
                                 $inventory->status = 'Not available';
@@ -742,10 +746,10 @@ class SalesTransaction extends Component
                                     ]);
                                 }
                             }
-                            $total_quantity_sold -= $selectedItem['quantity'];
+
 
                         } else {
-
+                            dump('else');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $inventory->current_stock_quantity,
                                 'vat_type' => $selectedItem['vat_type'],
@@ -760,8 +764,9 @@ class SalesTransaction extends Component
                                 'item_price' => $selectedItem['selling_price'],
                                 'item_vat_percent' => $selectedItem['vat_percent'],
                             ]);
-
-                            $inventory->current_stock_quantity -= $selectedItem['quantity'];
+                            $total_quantity_sold -= $inventory->current_stock_quantity;
+                            $inventory->current_stock_quantity -=
+                            $inventory->current_stock_quantity;
 
                             if ($inventory->current_stock_quantity == 0) {
                                 $inventory->status = 'Not available';
@@ -778,21 +783,27 @@ class SalesTransaction extends Component
                                     ]);
                                 }
                             }
-                            $total_quantity_sold -= $selectedItem['quantity'];
+
+                            dump($inventory->current_stock_quantity);
                         }
+                        //append inventory id
+                        $ids .= $inventory->id . ',';
+                        $inventory_movements = InventoryMovement::create([
+                            'transaction_detail_id' => $transactionDetails->id,
+                            'movement_type' => 'Sales',
+                            'operation' => 'Stock out',
+                        ]);
+
+                        $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
+
+                        $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
                     }
                 }
+                dump($ids);
 
-                $inventory_movements = InventoryMovement::create([
-                    'transaction_detail_id' => $transactionDetails->id,
-                    'movement_type' => 'Sales',
-                    'operation' => 'Stock out',
-                ]);
 
-                $this->getReorderPoint($selectedItem['item_id'], $selectedItem['delivery_date'], $selectedItem['po_date']);
-
-                $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
             }
+
 
             if ($this->changeTransactionType == 1 || $this->changeTransactionType == 3) {
                 $payment = Payment::create([

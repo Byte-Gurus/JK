@@ -82,10 +82,19 @@ class ChangeQuantityForm extends Component
     public function getQuantity($data)
     {
 
-        $data = Inventory::with()->groupBy('item_id')->get()->sum('current_stock_quantity');
+        $groupedItems = Inventory::whereHas(
+            'itemJoin',
+            function ($query) use ($data) {
+                $query->where('barcode', $data['barcode']);
+            }
+        )->get()->groupBy('item_id');
+
+        $totalStock = $groupedItems->map(function ($group) {
+            return $group->sum('current_stock_quantity');
+        })->sum();
         $this->adjust_quantity = $data['itemQuantity'];
         $this->original_quantity = $data['itemQuantity'];
-        $this->current_stock_quantity = $data['current_stock_quantity'];
+        $this->current_stock_quantity =$totalStock;
         $this->barcode = $data['barcode'];
         $this->item_name = $data['item_name'];
         $this->item_description = $data['item_description'];
