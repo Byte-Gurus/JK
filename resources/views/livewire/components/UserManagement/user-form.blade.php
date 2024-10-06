@@ -134,7 +134,7 @@
                                             No</label>
 
                                         <input type="number" id="contactno" wire:model="contact_number"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
+                                            class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                             placeholder="Contact No" required />
 
                                         @error('contact_number')
