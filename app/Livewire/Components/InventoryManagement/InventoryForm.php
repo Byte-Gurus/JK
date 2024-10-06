@@ -68,7 +68,7 @@ class InventoryForm extends Component
 
         try {
 
-            $inventories = Inventory::find($updatedAttributes['id']);
+            $inventories = Inventory::find($this->inventory_id);
 
             if (!$inventories) {
 
