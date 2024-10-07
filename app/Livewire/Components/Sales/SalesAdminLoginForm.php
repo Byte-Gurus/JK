@@ -59,7 +59,6 @@ class SalesAdminLoginForm extends Component
         } else {
             $this->addError('submit', 'No matching user with provided username and password.');
         }
-
         // $this->dispatch('returnConfirmed')->to(SalesReturnDetails::class);
     }
 
