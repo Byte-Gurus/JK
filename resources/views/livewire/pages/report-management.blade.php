@@ -172,7 +172,7 @@
 
     {{-- Daily Sales --}}
 
-    <div x-show="showDailySalesReport" x-data="{ showDailySalesReport: @entangle('showDailySalesReport') }">
+    <div x-show="showDailySalesReport" x-data="{ showDailySalesReport: @entangle('showDailySalesReport') } ">
         @livewire('components.ReportManagement.daily-sales-report')
     </div>
 
