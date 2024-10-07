@@ -2,6 +2,7 @@
 
 
 use App\Livewire\Components\Logout;
+use App\Livewire\Components\PurchaseAndDeliveryManagement\PrintPurchaseOrderDetails;
 use App\Livewire\Components\ReportManagement\BackorderedItemsReport;
 use App\Livewire\Components\ReportManagement\CustomerCreditListReport;
 use App\Livewire\Components\ReportManagement\DailySalesReport;
@@ -146,6 +147,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         // Customer Credit List
 
         Route::get('admin/ReportManagement/customerCreditListReport', CustomerCreditListReport::class)->name('customercreditlist.sales.report');
+
+        // Print Purchase Order Details
+
+        Route::get('admin/ReportManagement/printPurchaseOrderDetails', PrintPurchaseOrderDetails::class)->name('printpurchaseorderdetails.sales.report');
 
     });
 });
