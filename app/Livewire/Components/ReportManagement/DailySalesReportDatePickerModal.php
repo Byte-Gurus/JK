@@ -29,11 +29,6 @@ class DailySalesReportDatePickerModal extends Component
         ]);
     }
 
-    public function displayDailySalesReport()
-    {
-        $this->dispatch(event: 'display-daily-sales-report')->to(ReportManagement::class);
-    }
-
     public function getDate()
     {
         $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
