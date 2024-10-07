@@ -416,7 +416,6 @@
                                                         </ul>
                                                     @endforeach
                                                 </div>
-                                            @else
                                             @endif
 
                                         </div>
