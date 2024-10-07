@@ -42,19 +42,13 @@
                     </div>
                 </div>
                 <div class="flex flex-row justify-between w-full">
-                    @if (empty($selectedToRemove))
-                        <div class="flex items-center px-4 pb-2">
-                            <button disabled wire:click="removeRow" type="button"
-                                class=" px-4 text-nowrap py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] rounded-lg text-[rgb(53,53,53)] border">
-                                Remove Selected Row</button>
-                        </div>
-                    @else
-                        <div class="flex items-center px-4 pb-2">
-                            <button wire:click="removeRow" type="button"
-                                class=" px-4 text-nowrap py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] rounded-lg text-[rgb(53,53,53)] border hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">
-                                Remove Selected Row</button>
-                        </div>
-                    @endif
+
+                    <div class="flex items-center px-4 pb-2">
+                        <button wire:click="removeRow" type="button"
+                            class=" px-4 text-nowrap py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] rounded-lg text-[rgb(53,53,53)] border hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">
+                            Remove Selected Row</button>
+                    </div>
+
                     <div
                         class=" px-3 pt-1 bg-[rgb(20,20,20)] text-white w-full flex items-center  justify-center text-center border border-[rgb(99,99,99)] rounded-t-lg">
                         <p class="font-bold ">Item Information</p>
