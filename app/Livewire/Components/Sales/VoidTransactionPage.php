@@ -14,7 +14,7 @@ class VoidTransactionPage extends Component
     public $showVoidTransactionDetails = false;
     public function render()
     {
-        return view('livewire.components.sales.void-transaction-page');
+        return view('livewire.components.Sales.void-transaction-page');
     }
 
     protected $listeners = [
