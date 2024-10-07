@@ -35,6 +35,7 @@ class VoidTransactionForm extends Component
         'get-transaction' => 'getTransaction',
         // 'void-sales-void-details' => 'voidSalesVoidDetails',
         'admin-confirmed' => 'adminConfirmed',
+        'return-void-transaction-form' => 'returnVoidTransactionForm',
         'voidConfirmed'
     ];
 
@@ -55,6 +56,11 @@ class VoidTransactionForm extends Component
             'subtotal' => $transaction->subtotal,
             'current_tax_amount' => $transaction->total_vat_amount,
         ]);
+    }
+
+    public function returnVoidTransactionForm()
+    {
+        $this->displaySalesAdminLoginForm();
     }
 
     public function voidSelectedItem()

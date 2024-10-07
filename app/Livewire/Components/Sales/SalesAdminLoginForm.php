@@ -28,6 +28,7 @@ class SalesAdminLoginForm extends Component
     {
         $this->dispatch('return-sales-return-details')->to(SalesReturnDetails::class);
         $this->dispatch('return-sales-transaction-history')->to(SalesTransactionHistory::class);
+        $this->dispatch('return-void-transaction-form')->to(VoidTransactionForm::class);
     }
 
     public function authenticate()
