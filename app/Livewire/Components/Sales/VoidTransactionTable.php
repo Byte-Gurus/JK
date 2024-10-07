@@ -8,6 +8,6 @@ class VoidTransactionTable extends Component
 {
     public function render()
     {
-        return view('livewire.components.sales.void-transaction-table');
+        return view('livewire.components.Sales.void-transaction-table');
     }
 }

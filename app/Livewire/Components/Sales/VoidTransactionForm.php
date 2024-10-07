@@ -8,6 +8,6 @@ class VoidTransactionForm extends Component
 {
     public function render()
     {
-        return view('livewire.components.sales.void-transaction-form');
+        return view('livewire.components.Sales.void-transaction-form');
     }
 }

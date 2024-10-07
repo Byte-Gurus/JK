@@ -8,6 +8,6 @@ class ViewVoidTransactionDetails extends Component
 {
     public function render()
     {
-        return view('livewire.components.sales.view-void-transaction-details');
+        return view('livewire.components.Sales.view-void-transaction-details');
     }
 }
