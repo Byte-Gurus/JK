@@ -103,13 +103,11 @@
                         {{-- stock in quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Stock In quantity</th>
 
-
                         {{-- //* reorder point --}}
                         <th scope="col" class="px-4 py-3 text-center">Reorder point</th>
 
                         {{-- //* item cost --}}
                         <th scope="col" class="px-4 py-3 text-center">Item Cost (₱)</th>
-
 
                         {{-- //* mark-up price --}}
                         <th scope="col" class="px-4 py-3 text-center">Mark-up price (₱)</th>
@@ -137,7 +135,6 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
 
@@ -156,16 +153,11 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
-                        </th>
-
                         </th>
 
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
-                        </th>
-
 
                     </tr>
                 </thead>
@@ -203,7 +195,6 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->current_stock_quantity }}
                             </th>
-
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -275,10 +266,10 @@
 
                             {{-- //* Action --}}
                             <th
-                                class="relative flex items-center justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
+                                class="px-4 py-4 text-center  z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
-                                        class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
+                                        class="p-1 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">

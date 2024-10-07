@@ -83,7 +83,6 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
 
                         </th>
@@ -95,10 +94,9 @@
 
                         {{-- //* Maximum stock ratio --}}
                         <th scope="col" class="px-4 py-3">Maximum stock level</th>
+
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Bulk quantity</th>
-
-
 
                         {{-- //* Reorder point --}}
                         <th scope="col" class="px-4 py-3">Reorder point</th>
@@ -127,7 +125,6 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
 
@@ -146,12 +143,10 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
                         {{-- //* action --}}
                         <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
-                        </th>
 
                     </tr>
                 </thead>
@@ -238,9 +233,9 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
+                            <th class="px-4 py-4 text-center z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
-                                    <div x-on:click="openActions = !openActions" class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
+                                    <div x-on:click="openActions = !openActions" class="p-1 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
