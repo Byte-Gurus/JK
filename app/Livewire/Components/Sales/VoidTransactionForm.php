@@ -11,6 +11,8 @@ class VoidTransactionForm extends Component
 {
     public $transaction_number, $transaction_date, $transaction_type, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $current_tax_amount, $void_number, $transaction_id, $void_total_amount, $item_void_amount, $void_vat_amount, $transactionDetails, $new_total, $void_item_quantity;
 
+    public $showSalesAdminLoginForm = false;
+
     public $toVoid_info = [];
     public $voidedDetails = [];
     public $reason = [];
@@ -55,6 +57,30 @@ class VoidTransactionForm extends Component
         ]);
     }
 
+    public function voidSelectedItem()
+    {
+        // $validated = $this->validateForm();
+
+        // $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+        $this->displaySalesAdminLoginForm();
+    }
+
+    public function voidWholeTransaction()
+    {
+        $this->displaySalesAdminLoginForm();
+    }
+
+    public function voidConfirmed()
+    {
+
+    }
+
+    public function displaySalesAdminLoginForm()
+    {
+        $this->showSalesAdminLoginForm = !$this->showSalesAdminLoginForm;
+    }
+
+
     public function calculateTotalVoidAmount()
     {
         $this->void_total_quantity = 0;
@@ -95,7 +121,6 @@ class VoidTransactionForm extends Component
 
         $this->void_vat_amount = $vat_exempt_Void_Subtotal + $vatable_Void_Subtotal;
         $this->new_total = $this->total_amount - $this->void_total_amount;
-
     }
 
     public function updatedReason($value, $index)
@@ -159,5 +184,4 @@ class VoidTransactionForm extends Component
         $this->transaction_id = $Transaction['id'];
         $this->populateForm();
     }
-
 }

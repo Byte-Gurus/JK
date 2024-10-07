@@ -74,31 +74,27 @@
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
                         </th>
-
-
                     </tr>
-
-
                 </tbody>
             </table>
         </div>
     </div>
     <div class="flex flex-col">
-        {{-- <div class="flex justify-end w-full mb-[3vh]">
-            @if (!$returnQuantity || $this->allReturnQuantitiesNull())
-            <button type="button"
-                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(117,141,109)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(117,141,109)]">
-                Confirm
-            </button>
-            @else
+        <div class="flex justify-end w-full mb-[3vh]">
+
             <button type="button"
                 class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                wire:click="return">
-                Confirm
+                wire:click="voidWholeTransaction()">
+                Void Whole Transaction
             </button>
 
-            @endif
-        </div> --}}
+            <button type="button"
+                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                wire:click="voidSelectedItem()">
+                Void Item
+            </button>
+
+        </div>
         <div class="w-full h-[28vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
@@ -147,87 +143,89 @@
                 <tbody>
 
                     @foreach ($transactionDetails as $index => $transactionDetail)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $index + 1 }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['inventoryJoin']['sku_code'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['barcode'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['item_name'] }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['item_description'] }}
-                        </th>
-                        <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
-                            {{ number_format($transactionDetail['item_price'], 2) }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['item_quantity'] }}
-                        </th>
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $index + 1 }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['inventoryJoin']['sku_code'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['barcode'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['item_name'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['item_description'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
+                                {{ number_format($transactionDetail['item_price'], 2) }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['item_quantity'] }}
+                            </th>
 
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
-                            {{ number_format($transactionDetail['item_price'] - $transactionDetail['item_price'] *
-                            ($transactionDetail['discountJoin']['percentage'] / 100), 2) }}
-                            @else
-                            0.00
-                            @endif
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($transactionDetail['item_subtotal'], 2) }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
+                                    {{ number_format(
+                                        $transactionDetail['item_price'] -
+                                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
+                                        2,
+                                    ) }}
+                                @else
+                                    0.00
+                                @endif
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($transactionDetail['item_subtotal'], 2) }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            <select id="status" wire:model.live="reason.{{ $index }}"
-                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
-                                <option value="" selected>Set your Reason</option>
-                                <option value="Cashier Error">Cashier Error</option>
-                                <option value="System Error">System Error</option>
-                            </select>
+                                <select id="status" wire:model.live="reason.{{ $index }}"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
+                                    <option value="" selected>Set your Reason</option>
+                                    <option value="Cashier Error">Cashier Error</option>
+                                    <option value="System Error">System Error</option>
+                                </select>
 
-                            @error("reason.$index")
-                            <span
-                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                $message }}</span>
-                            @enderror
-
-
-                        </th>
-
+                                @error("reason.$index")
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
 
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            </th>
 
-                            @if (isset($reason[$index]) && $reason[$index])
-                            <input type="checkbox"
-                                wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
-                            @error("checkedItem.$index")
-                            <span
-                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                $message }}</span>
-                            @enderror
-                            @endif
 
-                        </th>
-                    </tr>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+                                @if (isset($reason[$index]) && $reason[$index])
+                                    <input type="checkbox"
+                                        wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
+                                    @error("checkedItem.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
+                                @endif
+
+                            </th>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
