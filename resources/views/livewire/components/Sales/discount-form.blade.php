@@ -44,10 +44,7 @@
                         <span class="sr-only">Close modal</span>
 
                     </button>
-
-
                 </div>
-
 
                 <div class="p-6 space-y-6">
 
@@ -354,11 +351,10 @@
                                             </button>
                                         </div>
 
-
                                     </div>
                                     @if (!empty($searchCustomer))
                                     <div
-                                        class="fixed max-h-1/2 z-99 h-[200px] mt-16 rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
+                                        class="fixed max-h-[200px] z-99 h-fit mt-16 rounded-lg overflow-y-scroll bg-[rgb(75,75,75)]">
                                         @foreach ($customers as $customer)
                                         <ul wire:click="getCustomer({{ $customer->id }})"
                                             class="w-full px-4 py-2 transition-all duration-100 ease-in-out text-white cursor-pointer hover:bg-[rgb(233,72,84)] h-fit">
@@ -374,7 +370,6 @@
                                     </div>
                                     @else
                                     @endif
-
 
                                 </div>
                                 @else
