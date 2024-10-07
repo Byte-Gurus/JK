@@ -10,7 +10,7 @@ class ChangeQuantityForm extends Component
 {
     use LivewireAlert;
     public $adjust_quantity, $current_stock_quantity, $barcode, $item_name, $item_description, $credit_limit,
-        $selling_price, $grandTotal, $original_quantity;
+    $selling_price, $grandTotal, $original_quantity;
 
     public function render()
     {
@@ -85,16 +85,17 @@ class ChangeQuantityForm extends Component
         $groupedItems = Inventory::whereHas(
             'itemJoin',
             function ($query) use ($data) {
-                $query->where('barcode', $data['barcode']);
-            }
-        )->get()->groupBy('item_id');
+                $query->where('barcode', $data['barcode'])
+                    ->where('selling_price', $data['selling_price']);
+            })->get()->groupBy('item_id');
 
         $totalStock = $groupedItems->map(function ($group) {
             return $group->sum('current_stock_quantity');
         })->sum();
+
         $this->adjust_quantity = $data['itemQuantity'];
         $this->original_quantity = $data['itemQuantity'];
-        $this->current_stock_quantity =$totalStock;
+        $this->current_stock_quantity = $totalStock;
         $this->barcode = $data['barcode'];
         $this->item_name = $data['item_name'];
         $this->item_description = $data['item_description'];

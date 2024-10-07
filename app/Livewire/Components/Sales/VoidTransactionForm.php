@@ -4,7 +4,10 @@ namespace App\Livewire\Components\Sales;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use App\Models\TransactionMovement;
 use App\Models\VoidTransaction;
+use App\Models\VoidTransactionDetails;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class VoidTransactionForm extends Component
@@ -17,7 +20,7 @@ class VoidTransactionForm extends Component
     public $voidedDetails = [];
     public $reason = [];
     public $checkedItem = [];
-
+    public $fromPage = 'VoidTransactionForm';
     public function mount()
     {
         $this->generateVoidNumber();
@@ -38,6 +41,44 @@ class VoidTransactionForm extends Component
         'return-void-transaction-form' => 'returnVoidTransactionForm',
         'voidConfirmed'
     ];
+
+    public function voidConfirmed(){
+
+
+        $voidTransaction = VoidTransaction::create([
+            'transaction_id' => $this->transaction_id,
+            'void_number' =>  $this->void_number,
+            'void_total_amount' => $this->void_total_amount,
+            'original_amount' => $this->total_amount,
+            'void_vat_amount' => $this->void_vat_amount,
+            'hasTransaction' => false,
+            'user_id' => Auth::id(),
+        ]);
+
+        $transaction_movement = TransactionMovement::create([
+            'transaction_type' => 'Void',
+            'void_transaction_id' => $voidTransaction->id
+        ]);
+
+        foreach ($this->transactionDetails as $index => $transactionDetail) {
+            if (isset($this->voidedDetails[$index])) {
+                $info = $this->voidedDetails[$index];
+
+                $voidTransactionDetail[] = VoidTransactionDetails::create([
+                    'void_quantity' => $info['item_quantity'],
+                    'item_void_amount' => $info['item_subtotal'],
+                    'reason' => $info['reason'],
+                    'void_transaction_id' => $voidTransaction->id,
+                    'transaction_details_id' => $info['transaction_details_id'],
+                ]);
+
+                $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
+                $transactionDetails->status = 'Void';
+                $transactionDetails->save();
+            }
+        }
+
+    }
 
     private function populateForm()
     {
@@ -65,9 +106,9 @@ class VoidTransactionForm extends Component
 
     public function voidSelectedItem()
     {
-        // $validated = $this->validateForm();
 
-        // $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+
+        $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
     }
 
@@ -76,9 +117,14 @@ class VoidTransactionForm extends Component
         $this->displaySalesAdminLoginForm();
     }
 
-    public function voidConfirmed()
+    public function adminConfirmed($isAdmin)
     {
+        $this->isAdmin = $isAdmin;
 
+
+        if ($this->isAdmin) {
+            $this->voidConfirmed();
+        }
     }
 
     public function displaySalesAdminLoginForm()
@@ -113,10 +159,9 @@ class VoidTransactionForm extends Component
                     }
 
                     $this->voidedDetails[] = [
-                        'item_void_amount' => $this->void_total_amount,
-                        'void_item_quantity' => $this->void_total_quantity,
-                        'void_vat_amount' => $vat_exempt_Void_Subtotal + $vatable_Void_Subtotal,
-                        'reason' => $this->reason[$toVoid['index']] ?? null, // Ensure correct indexing for reasons
+                        'item_subtotal' =>  $toVoid['item_subtotal'],
+                        'item_quantity' => $toVoid['item_quantity'],
+                        'reason' => $this->reason[$toVoid['index']] ?? null,
                         'transaction_details_id' => $toVoid['transactionDetail']->id,
                         'item_id' => $toVoid['transactionDetail']->item_id,
                         'inventory_id' => $toVoid['transactionDetail']->inventory_id,
@@ -127,6 +172,8 @@ class VoidTransactionForm extends Component
 
         $this->void_vat_amount = $vat_exempt_Void_Subtotal + $vatable_Void_Subtotal;
         $this->new_total = $this->total_amount - $this->void_total_amount;
+        // dump($this->void_total_quantity, $this->void_total_amount, $this->void_vat_amount,$this->voidedDetails );
+
     }
 
     public function updatedReason($value, $index)

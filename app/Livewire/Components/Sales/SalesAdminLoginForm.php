@@ -47,8 +47,8 @@ class SalesAdminLoginForm extends Component
             if ($user && $user->user_role_id == 1 && $user->status_id == 1) {
                 $this->isAdmin = true;
 
-                if ($this->fromPage === 'SalesHistory') {
-                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesTransactionHistory::class);
+                if ($this->fromPage === 'VoidTransactionForm') {
+                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(VoidTransactionForm::class);
 
                 } elseif ($this->fromPage === 'ReturnDetails') {
                     $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesReturnDetails::class);

@@ -163,7 +163,7 @@
                             wire:click="getTransactionID({{ $transaction->creditJoin->transaction_id }}, true )"
 
                             @elseif ($transaction->transaction_type == 'Void')
-                            wire:click="getTransactionID({{ $transaction->transaction_id }}, true )" @endif
+                            wire:click="getTransactionID({{ $transaction->voidTransactionJoin->transaction_id }}, true )" @endif
                             x-data="{ isSelected: false }" x-on:click=" isSelected = !isSelected "
                             :class="isSelected && ' bg-gray-200'" x-on:click.away="isSelected = false;"
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in
@@ -177,7 +177,7 @@
                                 @elseif ($transaction->transaction_type == 'Credit')
                                     {{ $transaction['creditJoin']['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                    {{ $transaction['transactionJoin']['transaction_number'] }}
+                                    {{ $transaction['voidTransactionJoin']['transactionJoin']['transaction_number'] }}
                                 @endif
                             </th>
                             <th scope="row"
@@ -189,7 +189,7 @@
                                 @elseif ($transaction->transaction_type == 'Credit')
                                     {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                    {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                                    {{ number_format($transaction->voidTransactionJoin->transactionJoin->total_amount, 2) }}
                                 @endif
                             </th>
                             <th scope="row"

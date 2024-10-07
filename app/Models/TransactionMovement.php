@@ -37,7 +37,7 @@ class TransactionMovement extends Model
     {
         return $this->belongsTo(VoidTransaction::class, 'void_transaction_id');
     }
-    
+
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);

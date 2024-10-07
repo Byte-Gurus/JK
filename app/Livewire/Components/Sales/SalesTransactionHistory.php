@@ -33,7 +33,6 @@ class SalesTransactionHistory extends Component
     public $showSalesAdminLoginForm = false;
 
     public $startDate, $endDate;
-    public $fromPage = "SalesHistory";
     public function render()
     {
         $query = TransactionMovement::query();
