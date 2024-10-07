@@ -14,7 +14,7 @@ class VoidTransactionModal extends Component
 
     public function render()
     {
-        return view('livewire.components.sales.void-transaction-modal');
+        return view('livewire.components.Sales.void-transaction-modal');
     }
 
     public function enterTransaction()
