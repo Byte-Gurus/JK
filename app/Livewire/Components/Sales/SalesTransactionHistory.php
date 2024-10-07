@@ -33,6 +33,7 @@ class SalesTransactionHistory extends Component
     public $showSalesAdminLoginForm = false;
 
     public $startDate, $endDate;
+    public $fromPage = "SalesHistory";
     public function render()
     {
         $query = TransactionMovement::query();
@@ -167,6 +168,12 @@ class SalesTransactionHistory extends Component
         $this->displaySalesAdminLoginForm();
         $this->whatVoid = 'Transaction';
     }
-   
+    public function voidTransactionDetails($tranasactionDetails_ID)
+    {
+        $this->tranasactionDetails_ID = $tranasactionDetails_ID;
+        $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+        $this->displaySalesAdminLoginForm();
+        $this->whatVoid = 'TransactionDetails';
+    }
 
 }

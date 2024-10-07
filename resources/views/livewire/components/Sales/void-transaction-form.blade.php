@@ -9,13 +9,13 @@
             <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
                 <div class="flex flex-row items-center gap-2 text-white ">
                     <p class=" text-[1em] italic  font-medium">Transaction No.</p>
-                    {{-- <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p> --}}
+                    <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
             </div>
             <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
                 <div class="flex flex-row items-center gap-2 text-white ">
-                    <p class=" text-[1em] italic  font-medium">Return No.</p>
-                    {{-- <p class=" text-[1.2em] font-black">{{ $return_number }}</p> --}}
+                    <p class=" text-[1em] italic  font-medium">Void No.</p>
+                    <p class=" text-[1.2em] font-black">{{ $void_number }}</p>
                 </div>
             </div>
 
@@ -56,23 +56,23 @@
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ number_format($total_amount, 2) }} --}}
+                            {{ number_format($total_amount, 2) }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ $transaction_type }} --}}
+                            {{ $transaction_type }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ $payment_method }} --}}
+                            {{ $payment_method }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 italic font-black text-center text-left-900 text-md whitespace-nowrap ">
-                            {{-- {{ $reference_number }} --}}
+                            {{ $reference_number }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{-- {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }} --}}
+                            {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
                         </th>
 
 
@@ -136,20 +136,17 @@
                         <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
 
                         {{-- //* operation --}}
-                        <th scope="col" class="px-4 py-3 text-center">Operation</th>
+                        <th scope="col" class="px-4 py-3 text-center">Reason</th>
 
-                        {{-- //* description --}}
-                        <th scope="col" class="px-4 py-3 text-center">Description</th>
 
-                        {{-- //* return quantity --}}
-                        <th scope="col" class="px-4 py-3 text-center">Return quantity</th>
+
                     </tr>
                 </thead>
 
                 {{-- //* table body --}}
                 <tbody>
 
-                    {{-- @foreach ($transactionDetails as $index => $transactionDetail)
+                    @foreach ($transactionDetails as $index => $transactionDetail)
                     <tr
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th scope="row"
@@ -198,14 +195,14 @@
                         <th scope="row"
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            <select id="status" wire:model.live="operation.{{ $index }}"
+                            <select id="status" wire:model.live="reason.{{ $index }}"
                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
-                                <option value="" selected>Set your operation</option>
-                                <option value="Refund">Refund</option>
-                                <option value="Exchange">Exchange</option>
+                                <option value="" selected>Set your Reason</option>
+                                <option value="Cashier Error">Cashier Error</option>
+                                <option value="System Error">System Error</option>
                             </select>
 
-                            @error("description.$index")
+                            @error("reason.$index")
                             <span
                                 class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
                                 $message }}</span>
@@ -214,36 +211,15 @@
 
                         </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            <select id="status" wire:model.live="description.{{ $index }}"
-                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
-                                <option value="" selected>Set your description</option>
-                                <option value="Damaged">Damaged</option>
-                                <option value="Expired">Expired</option>
-                            </select>
-
-                            @error("description.$index")
-                            <span
-                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                $message }}</span>
-                            @enderror
-
-
-
-
-                        </th>
 
                         <th scope="row"
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] &&
-                            $description[$index])
-                            <input type="number"
-                                class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
-                            @error("returnQuantity.$index")
+                            @if (isset($reason[$index]) && $reason[$index])
+                            <input type="checkbox"
+                                wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
+                            @error("checkedItem.$index")
                             <span
                                 class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
                                 $message }}</span>
@@ -252,7 +228,7 @@
 
                         </th>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -264,7 +240,7 @@
                     <p class=" text-[1.2em] font-medium">Current Total Amount</p>
                 </div>
                 <div>
-                    {{-- {{ number_format($total_amount, 2) }} --}}
+                    {{ number_format($total_amount, 2) }}
                 </div>
             </div>
             <div class="flex flex-row justify-between">
@@ -272,7 +248,7 @@
                     <p class=" text-[1.2em] font-medium">Refund Amount</p>
                 </div>
                 <div>
-                    {{-- <p class=" text-[1.2em] font-black">{{ number_format($return_total_amount, 2) }}</p> --}}
+                    <p class=" text-[1.2em] font-black">{{ number_format($void_total_amount, 2) }}</p>
                 </div>
             </div>
             <div class="border border-black "></div>
@@ -281,7 +257,7 @@
                     <p class=" text-[1.6em] font-medium">New Total Amount</p>
                 </div>
                 <div>
-                    {{-- <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p> --}}
+                    <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
                 </div>
             </div>
         </div>
