@@ -23,6 +23,11 @@
                     <p class="text-[1.6em] font-black text-white">{{ $current_stock_quantity }}
                     </p>
                 </div>
+                <div class="flex flex-col gap-1 leading-none">
+                    <p class="text-[1em] font-thin text-white">Wholesale Quantity</p>
+                    {{-- <p class="text-[1.6em] font-black text-white">{{ $bulk_quantity }} --}}
+                    </p>
+                </div>
             </div>
             <div
                 class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
