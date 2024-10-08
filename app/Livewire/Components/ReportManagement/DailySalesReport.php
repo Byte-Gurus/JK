@@ -32,6 +32,7 @@ class DailySalesReport extends Component
     public function generateReport($date)
     {
         // $this->ss = true;
+
         $date = Carbon::parse($date);
         // Define the start and end of the day
         $startOfDay = $date->copy()->startOfDay();
@@ -68,39 +69,39 @@ class DailySalesReport extends Component
                     $totalGross += $transaction->transactionJoin->total_amount;
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
 
-                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                    // foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
 
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
+                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    // }
                     break;
                 case 'Return':
                     $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
 
-                    foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
+                    // foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
 
 
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
+                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    // }
                     break;
                 case 'Credit':
                     $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
-                    foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
+                    // foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
 
 
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
+                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    // }
                     break;
                 case 'Void':
-                    $totalVoidAmount += $transaction->transactionJoin->total_amount;
-                    $totalVoidVatAmount += $transaction->transactionJoin->total_vat_amount;
+                    $totalVoidAmount += $transaction->voidTransactionJoin->void_total_amount;
+                    $totalVoidVatAmount += $transaction->voidTransactionJoin->void_vat_amount;
 
-                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
+                    // foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
 
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
+                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
+                    // }
                     break;
             }
 
@@ -151,26 +152,26 @@ class DailySalesReport extends Component
             'Content-Disposition' => 'attachment; filename="sample.pdf"',
         ]);
     }
-    function calculateVoidAmounts($detail, &$transaction)
-    {
-        if ($detail->status == 'Void') {
+    // function calculateVoidAmounts($detail, &$transaction)
+    // {
+    //     if ($detail->status == 'Void') {
 
-            $transaction->totalVoidItemAmount += $detail->item_subtotal;
-            if ($detail->vat_type === 'Vat') {
-                $vatable_subtotal = $detail->item_subtotal;
-                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-                $transaction->vatable_amount += $vatable_amount;
-            } elseif ($detail->vat_type === 'Vat Exempt') {
-                $vat_exempt_subtotal = $detail->item_subtotal;
-                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
-                $transaction->vat_exempte_amount += $vat_exempt_amount;
-            }
+    //         $transaction->totalVoidItemAmount += $detail->item_subtotal;
+    //         if ($detail->vat_type === 'Vat') {
+    //             $vatable_subtotal = $detail->item_subtotal;
+    //             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
+    //             $transaction->vatable_amount += $vatable_amount;
+    //         } elseif ($detail->vat_type === 'Vat Exempt') {
+    //             $vat_exempt_subtotal = $detail->item_subtotal;
+    //             $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
+    //             $transaction->vat_exempte_amount += $vat_exempt_amount;
+    //         }
 
-            return $transaction->vatable_amount + $transaction->vat_exempt_amount;
+    //         return $transaction->vatable_amount + $transaction->vat_exempt_amount;
 
 
-        }
-    }
+    //     }
+    // }
 
 
 }

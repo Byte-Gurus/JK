@@ -32,8 +32,8 @@ class DailySalesReportDatePickerModal extends Component
 
     public function displayDailySalesReport()
     {
-        route('daily.sales.report', '_blank');
-        $this->dispatch(event: 'display-daily-sales-report')->to(ReportManagement::class);
+        // route('daily.sales.report', '_blank');
+        $this->dispatch('display-daily-sales-report')->to(ReportManagement::class);
 
     }
 
@@ -41,9 +41,9 @@ class DailySalesReportDatePickerModal extends Component
     {
         $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
 
-        $livewireComponent = App::make(DailySalesReport::class);
+        // $livewireComponent = App::make(DailySalesReport::class);
 
-        // Call the download method
-        return $livewireComponent->download();
+        // // Call the download method
+        // return $livewireComponent->download();
     }
 }
