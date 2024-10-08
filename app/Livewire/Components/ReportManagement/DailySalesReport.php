@@ -106,10 +106,6 @@ class DailySalesReport extends Component
             }
 
 
-
-            $totalVoidItemAmount += $transaction->totalVoidItemAmount;
-            $totalVoidTaxAmount += $transaction->vatable_amount + $transaction->vat_exempt_amount;
-
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;

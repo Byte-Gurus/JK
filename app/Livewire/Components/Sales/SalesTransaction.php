@@ -347,6 +347,7 @@ class SalesTransaction extends Component
                 'item_name' => $selectedItem['item_name'],
                 'item_description' => $selectedItem['item_description'],
                 'selling_price' => $selectedItem['selling_price'],
+                'bulk_quantity' => $selectedItem['bulk_quantity'],
                 'grandTotal' => $this->grandTotal,
             ];
 
@@ -675,7 +676,7 @@ class SalesTransaction extends Component
 
                     if ($total_quantity_sold > 0) {
                         if (($inventory->current_stock_quantity - $total_quantity_sold) >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
-                            dump('if');
+                            // dump('if');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $selectedItem['quantity'],
                                 'vat_type' => $selectedItem['vat_type'],

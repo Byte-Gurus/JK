@@ -4,6 +4,7 @@ namespace App\Livewire\Components\ReportManagement;
 
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
+use App\Models\VoidTransaction;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -17,6 +18,7 @@ class VoidedTransactionsReport extends Component
         $this->reportInfo();
         return view('livewire.components.ReportManagement.voided-transactions-report');
     }
+
 
     protected $listeners = [
         'generate-report' => 'generateReport'
@@ -34,7 +36,6 @@ class VoidedTransactionsReport extends Component
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
 
-        $this->voidTransactions = TransactionDetails::where('status', 'Void')
-            ->whereBetween('created_at', [$startDate, $endDate])->get();
+        $this->voidTransactions = VoidTransaction::whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }

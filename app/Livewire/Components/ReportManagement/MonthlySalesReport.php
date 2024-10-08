@@ -66,44 +66,30 @@ class MonthlySalesReport extends Component
                     $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
                     $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
 
-                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
                     break;
                 case 'Return':
                     $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
                     $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
 
-                    foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
                     break;
                 case 'Credit':
                     $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
                     $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
-                    foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
                     break;
                 case 'Void':
-                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->transactionJoin->total_vat_amount;
+                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
+                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
 
-                    foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-                        $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    }
                     break;
             }
 
-            $dailySummaries[$date]['totalVoidItemAmount'] += $transaction->totalVoidItemAmount;
-            $dailySummaries[$date]['totalVoidTaxAmount'] += $transaction->vatable_amount + $transaction->vat_exempt_amount;
         }
 
         // Calculate daily net values and accumulate monthly totals
         foreach ($dailySummaries as $date => $summary) {
-            $dailyGross = $summary['totalGross'] - $summary['totalReturnAmount'] - $summary['totalVoidAmount'];
-            $dailyTax = $summary['totalTax'] - $summary['totalReturnVatAmount'] - $summary['totalVoidVatAmount'];
+            $dailyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
+            $dailyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
             $dailyNet = $dailyGross - $dailyTax;
 
             $dailySummaries[$date]['totalGross'] = $dailyGross;
@@ -139,24 +125,6 @@ class MonthlySalesReport extends Component
             'dailySummaries' => $dailySummaries,
         ];
     }
-
-    function calculateVoidAmounts($detail, &$transaction)
-    {
-        if ($detail->status == 'Void') {
-            $transaction->totalVoidItemAmount += $detail->item_subtotal;
-            if ($detail->vat_type === 'Vat') {
-                $vatable_subtotal = $detail->item_subtotal;
-                $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-                $transaction->vatable_amount += $vatable_amount;
-            } elseif ($detail->vat_type === 'Vat Exempt') {
-                $vat_exempt_subtotal = $detail->item_subtotal;
-                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
-                $transaction->vat_exempt_amount += $vat_exempt_amount;
-            }
-            return $transaction->vatable_amount + $transaction->vat_exempt_amount;
-        }
-    }
-
 
 
 }

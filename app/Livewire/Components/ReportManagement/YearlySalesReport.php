@@ -70,15 +70,15 @@ class YearlySalesReport extends Component
                 $monthlySummaries[$month]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
                 $monthlySummaries[$month]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
             } elseif ($transaction->transaction_type == 'Void') {
-                $monthlySummaries[$month]['totalVoidAmount'] += $transaction->transactionJoin->total_amount;
-                $monthlySummaries[$month]['totalVoidVatAmount'] += $transaction->transactionJoin->total_vat_amount;
+                $monthlySummaries[$month]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
+                $monthlySummaries[$month]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
             }
         }
 
         // Calculate monthly net values and accumulate yearly totals
         foreach ($monthlySummaries as $month => $summary) {
-            $monthlyGross = $summary['totalGross'] - $summary['totalReturnAmount'] - $summary['totalVoidAmount'];
-            $monthlyTax = $summary['totalTax'] - $summary['totalReturnVatAmount'] - $summary['totalVoidVatAmount'];
+            $monthlyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
+            $monthlyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
             $monthlyNet = $monthlyGross - $monthlyTax;
 
             $monthlySummaries[$month]['totalGross'] = $monthlyGross;
