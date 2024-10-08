@@ -12,7 +12,7 @@
                     <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
             </div>
-            <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
+            <div class="relative p-2 rounded-l-2xl bg-[rgb(53,53,53)]">
                 <div class="flex flex-row items-center gap-2 text-white ">
                     <p class=" text-[1em] italic  font-medium">Return No.</p>
                     <p class=" text-[1.2em] font-black">{{ $return_number }}</p>

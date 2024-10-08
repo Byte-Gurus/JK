@@ -37,7 +37,7 @@ class TransactionMovement extends Model
     {
         return $this->belongsTo(VoidTransaction::class, 'void_transaction_id');
     }
-    
+
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
@@ -49,6 +49,9 @@ class TransactionMovement extends Model
                 $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
             })
             ->orWhereHas('returnsJoin.transactionJoin', function ($query) use ($value) {
+                $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
+            })
+            ->orWhereHas('voidTransactionJoin.transactionJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
             });
     }

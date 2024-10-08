@@ -67,6 +67,9 @@ class ViewStockCard extends Component
                     })
                     ->orWhereHas('transactionDetailsJoin.inventoryJoin', function ($query) {
                         $query->where('id', $this->stock_id);
+                    })
+                    ->orWhereHas('voidTransactionDetailsJoin.transactionDetailsJoin.inventoryJoin', function ($query) {
+                        $query->where('id', $this->stock_id);
                     });
             });
 
@@ -118,9 +121,9 @@ class ViewStockCard extends Component
                     $out_value = $out_quantity * $stock_card->adjustmentJoin->inventoryJoin->selling_price;
                     break;
                 case 'Void':
-                    $in_quantity = $stock_card->transactionDetailsJoin->item_quantity;
+                    $in_quantity = $stock_card->voidTransactionDetailsJoin->void_quantity;
                     $this->quantity_balance += $in_quantity;
-                    $in_value = $in_quantity * $stock_card->transactionDetailsJoin->item_price;
+                    $in_value = $in_quantity * $stock_card->voidTransactionDetailsJoin->transactionDetailsJoin->item_price;
             }
 
             switch ($stock_card->operation) {
@@ -133,8 +136,10 @@ class ViewStockCard extends Component
                     $selling_price = $stock_card->inventoryJoin->selling_price;
                     break;
                 case 'Stock Out':
-                case 'Void':
                     $selling_price = $stock_card->transactionDetailsJoin->item_price;
+                    break;
+                case 'Void':
+                    $selling_price = $stock_card->voidTransactionDetailsJoin->transactionDetailsJoin->item_price;
                     break;
             }
 
@@ -144,7 +149,7 @@ class ViewStockCard extends Component
                 $this->total_in_quantity += $in_quantity;
                 $this->total_in_value += $in_value;
             }
-            
+
             $this->total_out_quantity += $out_quantity;
             $this->total_out_value += $out_value;
 
