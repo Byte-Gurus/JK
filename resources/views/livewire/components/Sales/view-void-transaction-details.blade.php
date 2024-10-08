@@ -8,35 +8,35 @@
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black rounded-r-full">
                     <p class="text-[1em] font-thin text-left w-full">Void Number</p>
-                    {{-- <p class="text-[1.2em] font-black">{{ $return_number }}</p> --}}
+                    <p class="text-[1.2em] font-black">{{ $void_number }}</p>
                 </div>
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black ">
                     <p class="text-[1em] font-thin text-left w-full">Transaction No.</p>
-                    {{-- <p class="text-[1.2em] font-black">{{ $transaction_number }}</p> --}}
+                    <p class="text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
 
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Transaction Date</p>
-                    {{-- <p class="text-[1em] font-black">{{ $transaction_date }}</p> --}}
+                    <p class="text-[1em] font-black">{{ $transaction_date }}</p>
                 </div>
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Void Date</p>
-                    {{-- <p class="text-[1em] font-black">{{ $return_date }}</p> --}}
+                    <p class="text-[1em] font-black">{{ $void_date }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Original Amount</p>
-                    {{-- <p class="text-[1em] font-black">{{ $orignal_amount }}</p> --}}
+                    <p class="text-[1em] font-black">{{ $orignal_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Return Total Amount</p>
-                    {{-- <p class="text-[1em] font-black">{{ $return_total_amount }}</p> --}}
+                    <p class="text-[1em] font-black">{{ $void_total_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Current Amount</p>
-                    {{-- <p class="text-[1em] font-black">{{ $current_amount }}</p> --}}
+                    <p class="text-[1em] font-black">{{ $current_amount }}</p>
                 </div>
             </div>
 
@@ -91,8 +91,7 @@
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3 text-center">item_return_amount</th>
 
-                        {{-- //* sku --}}
-                        <th scope="col" class="px-4 py-3 text-center">description</th>
+                       
 
                     </tr>
                 </thead>
@@ -100,48 +99,46 @@
                 {{-- //* table body --}}
                 <tbody>
 
-                    {{-- @foreach ($return_details as $return_detail)
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                    {@foreach ($voidTransactionDetails as $voidTransactionDetail)
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->itemJoin->barcode }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->barcode }}
+                        </th>
 
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->inventoryJoin->sku_code }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->transactionDetailsJoin->inventoryJoin->sku_code }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->itemJoin->item_name }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_name }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->itemJoin->item_description }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->operation }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_description }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->reason }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->item_price }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->return_quantity }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->void_quantity }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->item_return_amount }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->item_void_amount }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->description }}
-                            </th>
-                        </tr>
-                    @endforeach --}}
+
+                    </tr>
+                    @endforeach
 
                 </tbody>
             </table>
