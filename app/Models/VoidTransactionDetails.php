@@ -25,4 +25,16 @@ class VoidTransactionDetails extends Model
     {
         return $this->belongsTo(TransactionDetails::class, 'transaction_details_id');
     }
+
+    public function scopeSearch($query, $value)
+    {
+        $value = strtolower($value);
+
+        return $query->whereHas('voidTransactionJoin', function ($query) use ($value) {
+            $query->whereRaw('LOWER(void_number) LIKE ?', ["%{$value}%"]);
+        })
+            ->orWhereHas('transactionDetailsJoin.transactionJoin', function ($query) use ($value) {
+                $query->whereRaw('LOWER(transaction_number) LIKE ?', ["%{$value}%"]);
+            });
+    }
 }

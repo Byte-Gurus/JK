@@ -14,7 +14,7 @@
                 </svg>
             </div>
 
-            <input type="text" wire:model.live.debounce.100ms = "search"
+            <input type="text" wire:model.live.debounce.100ms="search"
                 class="w-2/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                 placeholder="Search by Transaction No. or Sales Invoice No." required="" />
         </div>
@@ -48,7 +48,7 @@
                 <tr class=" text-nowrap">
 
                     {{-- //* transaction no --}}
-                    <th scope="col" class="px-4 py-3">Return No.</th>
+                    <th scope="col" class="px-4 py-3">Void No.</th>
 
                     {{-- //* transaction no --}}
                     <th scope="col" class="px-4 py-3">Transaction No.</th>
@@ -70,34 +70,31 @@
 
             {{-- //* table body --}}
             <tbody>
-                {{-- @foreach ($returns as $return) --}}
+                @foreach ($voidTransactions as $voidTransaction)
                 <tr
                     class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
                     <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                        {{-- {{ $return->return_number }} --}}
+                        {{ $voidTransaction->void_number }}
                     </th>
 
                     <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                        {{-- {{ $return->transactionJoin->transaction_number }} --}}
+                        {{ $voidTransaction->transactionJoin->transaction_number }}
                     </th>
 
-                    <th scope="row"
-                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{-- {{ number_format($return->original_amount, 2) }} --}}
-
-                    </th>
-
-
-                    <th scope="row"
-                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{-- {{ number_format($return->return_total_amount, 2) }} --}}
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ number_format($voidTransaction->original_amount, 2) }}
 
                     </th>
 
-                    <th scope="row"
-                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{-- {{ $return->created_at->format(' M d Y h:i A') }} --}}
+
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ number_format($voidTransaction->void_total_amount, 2) }}
+
+                    </th>
+
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ $voidTransaction->created_at->format(' M d Y h:i A') }}
                     </th>
                     <th class="px-4 py-4 text-center text-md text-nowrap">
                         <div
@@ -123,7 +120,7 @@
                         </div>
                     </th>
                 </tr>
-                {{-- @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>

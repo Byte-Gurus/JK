@@ -50,6 +50,9 @@ class TransactionMovement extends Model
             })
             ->orWhereHas('returnsJoin.transactionJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
+            })
+            ->orWhereHas('voidTransactionJoin.transactionJoin', function ($query) use ($value) {
+                $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
             });
     }
 }
