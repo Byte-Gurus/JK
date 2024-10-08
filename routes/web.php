@@ -93,7 +93,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
 
         // Daily Reports
-
+        // Route::get('/download-pdf', DailySalesReport::class);
         Route::get('admin/ReportManagement/dailySalesReport', DailySalesReport::class)->name('daily.sales.report');
 
         // Weekly Reports

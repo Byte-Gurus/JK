@@ -8,6 +8,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 
 class DailySalesReport extends Component
@@ -17,7 +18,7 @@ class DailySalesReport extends Component
     public $transactions = [], $transaction_info = [];
     public function render()
     {
-        
+
         return view('livewire.components.ReportManagement.daily-sales-report', [
             'transactions' => $this->transactions
         ]);
@@ -123,10 +124,10 @@ class DailySalesReport extends Component
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
 
-        $data = [
-            'title' => 'DailySalesReport',
-            'date'=> Carbon::now()->format('M d Y h:i A')
-        ];
+        // $data = [
+        //     'title' => 'DailySalesReport',
+        //     'date'=> Carbon::now()->format('M d Y h:i A')
+        // ];
 
         // $pdf = Pdf::loadView('livewire.components.ReportManagement.daily-sales-report', $data)->output();
 
@@ -134,7 +135,21 @@ class DailySalesReport extends Component
         //     echo  $pdf->download();
         // }, 'report.pdf');
     }
+    public function download()
+    {
+        dd('sa');
+        $data = [
+            'title' => 'Sample PDF',
+            'date' => date('m/d/Y')
+        ];
 
+        $pdf = Pdf::loadView('livewire.components.ReportManagement.daily-sales-report', $data);
+
+        return Response::make($pdf->stream('sample.pdf'), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="sample.pdf"',
+        ]);
+    }
     function calculateVoidAmounts($detail, &$transaction)
     {
         if ($detail->status == 'Void') {
