@@ -23,6 +23,7 @@ class SalesReturnDetails extends Component
     public $operation = [];
     public $isAdmin;
     public $description = [];
+    
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
     public $fromPage = 'ReturnDetails';
     public $return_info = [];

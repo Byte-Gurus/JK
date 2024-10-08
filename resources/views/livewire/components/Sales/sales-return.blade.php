@@ -38,15 +38,15 @@
         </div>
     @endif
     <div x-show="showSalesReturnTable" x-data="{ showSalesReturnTable: @entangle('showSalesReturnTable') }">
-        @livewire('components.sales.sales-return-table')
+        @livewire('components.Sales.sales-return-table')
     </div>
     <div x-show="showSalesReturnDetails" x-data="{ showSalesReturnDetails: @entangle('showSalesReturnDetails') }">
-        @livewire('components.sales.sales-return-details')
+        @livewire('components.Sales.sales-return-details')
     </div>
     <div x-show="showSalesReturnModal" x-data="{ showSalesReturnModal: @entangle('showSalesReturnModal') }">
-        @livewire('components.sales.sales-return-modal')
+        @livewire('components.Sales.sales-return-modal')
     </div>
     <div x-show="sShowSalesReturnDetails" x-data="{ sShowSalesReturnDetails: @entangle('sShowSalesReturnDetails') }">
-        @livewire('components.sales.view-sales-return-details')
+        @livewire('components.Sales.view-sales-return-details')
     </div>
 </div>

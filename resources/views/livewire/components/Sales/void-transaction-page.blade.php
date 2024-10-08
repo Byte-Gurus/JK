@@ -38,13 +38,13 @@
         </div>
     @endif
     <div x-show="showVoidTransactionTable" x-data="{ showVoidTransactionTable: @entangle('showVoidTransactionTable') }">
-        @livewire('components.sales.void-transaction-table')
+        @livewire('components.Sales.void-transaction-table')
     </div>
     <div x-show="showVoidTransactionDetails" x-data="{ showVoidTransactionDetails: @entangle('showVoidTransactionDetails') }">
-        @livewire('components.sales.view-void-transaction-details')
+        @livewire('components.Sales.view-void-transaction-details')
     </div>
     <div x-show="showVoidTransactionModal" x-data="{ showVoidTransactionModal: @entangle('showVoidTransactionModal') }">
-        @livewire('components.sales.void-transaction-modal')
+        @livewire('components.Sales.void-transaction-modal')
     </div>
     <div x-show="showVoidTransactionForm" x-data="{ showVoidTransactionForm: @entangle('showVoidTransactionForm') }">
         @livewire('components.Sales.void-transaction-form')
