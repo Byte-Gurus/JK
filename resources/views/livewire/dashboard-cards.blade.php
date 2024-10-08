@@ -4,7 +4,7 @@
         <div class="grid grid-cols-3">
             <div class="col-span-2">
                 <p class="pb-3 text-lg font-extrabold text-lime-800">Overall Sales (₱)</p>
-                <p class="text-3xl font-black text-lime-900">{{ number_format($overallSales, 2) }}</p>
+                <p class="text-2xl font-black text-lime-900">{{ number_format($overallSales, 2) }}</p>
             </div>
             <div class="col-span-1 m-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -20,7 +20,7 @@
         <div class="grid grid-cols-3">
             <div class="col-span-2">
                 <p class="pb-3 text-lg font-extrabold text-yellow-800">Stocks-on-hand</p>
-                <p class="text-3xl font-black text-yellow-900">{{ $overallStocks }}</p>
+                <p class="text-2xl font-black text-yellow-900">{{ $overallStocks }}</p>
             </div>
             <div class="col-span-1 m-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -36,7 +36,7 @@
         <div class="grid grid-cols-3">
             <div class="col-span-2">
                 <p class="pb-3 text-lg font-extrabold text-teal-800">Returns</p>
-                <p class="text-3xl font-black text-teal-900">{{ $overallReturn }}</p>
+                <p class="text-2xl font-black text-teal-900">{{ $overallReturn }}</p>
             </div>
             <div class="col-span-1 m-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -52,7 +52,7 @@
         <div class="grid grid-cols-3">
             <div class="col-span-2">
                 <p class="pb-3 text-lg font-extrabold text-pink-800">Delivery</p>
-                <p class="text-3xl font-black text-pink-900">{{ $deliveryInProgress }}</p>
+                <p class="text-2xl font-black text-pink-900">{{ $deliveryInProgress }}</p>
             </div>
             <div class="col-span-1 m-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
