@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\ReportManagement;
 
+use App;
 use App\Livewire\Pages\ReportManagement;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -29,8 +30,20 @@ class DailySalesReportDatePickerModal extends Component
         ]);
     }
 
+    public function displayDailySalesReport()
+    {
+        // route('daily.sales.report', '_blank');
+        $this->dispatch('display-daily-sales-report')->to(ReportManagement::class);
+
+    }
+
     public function getDate()
     {
         $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
+
+        // $livewireComponent = App::make(DailySalesReport::class);
+
+        // // Call the download method
+        // return $livewireComponent->download();
     }
 }

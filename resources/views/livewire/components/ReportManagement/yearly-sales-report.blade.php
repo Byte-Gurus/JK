@@ -73,21 +73,13 @@
                         <p class="text-[0.8em] uppercase text-center font-bold">Gross Sales(₱)</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Voided Amount(₱)</p>
-                    </div>
-                </li>
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">VAT Amount(₱)</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Voided VAT Amount(₱)</p>
-                    </div>
-                </li>
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Net Sales(₱)</p>
@@ -111,24 +103,14 @@
                             {{ number_format($summary['totalGross'], 2) }}</p>
                     </div>
                 </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center font-bold">
-                            {{ number_format($summary['totalVoidAmount'] * -1, 2) }}</p>
-                    </div>
-                </li>
+
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-center font-bold">
                             {{ number_format($summary['totalTax'], 2) }}</p>
                     </div>
                 </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center font-bold">
-                            {{ number_format($summary['totalVoidVatAmount'] * -1, 2) }}</p>
-                    </div>
-                </li>
+             
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-center font-bold">

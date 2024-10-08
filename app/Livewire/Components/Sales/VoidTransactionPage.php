@@ -19,7 +19,8 @@ class VoidTransactionPage extends Component
 
     protected $listeners = [
         'display-void-transaction-form' => 'displayVoidTransactionForm',
-        'display-void-transaction-details' => 'displayVoidTransactionDetails'
+        'display-void-transaction-details' => 'displayVoidTransactionDetails',
+        'return-void-transaction-page' => 'returnVoidTransactionPage'
     ];
 
     public function returnToSalesTransaction()
@@ -31,6 +32,12 @@ class VoidTransactionPage extends Component
             $this->showVoidTransactionDetails = false;
             $this->showVoidTransactionTable = true;
         }
+    }
+
+    public function returnVoidTransactionPage()
+    {
+        $this->showVoidTransactionForm = false;
+        $this->showVoidTransactionTable = true;
     }
 
     public function displayVoidTransactionModal()

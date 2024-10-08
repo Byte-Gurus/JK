@@ -11,11 +11,14 @@ use App\Models\TransactionMovement;
 use App\Models\VoidTransaction;
 use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class VoidTransactionForm extends Component
 {
-    public $transaction_number, $transaction_date, $transaction_type, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $current_tax_amount, $void_number, $transaction_id, $void_total_amount, $item_void_amount, $void_vat_amount, $transactionDetails, $new_total, $void_item_quantity;
+    use LivewireAlert;
+
+    public $isAdmin, $transaction_number, $transaction_date, $transaction_type, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $current_tax_amount, $void_number, $transaction_id, $void_total_amount, $item_void_amount, $void_vat_amount, $transactionDetails, $new_total, $void_item_quantity, $void_total_quantity;
 
     public $showSalesAdminLoginForm = false;
 
@@ -32,7 +35,7 @@ class VoidTransactionForm extends Component
     {
         $this->transactionDetails = TransactionDetails::where('transaction_id', $this->transaction_id)->get();
 
-        return view('livewire.components.sales.void-transaction-form', [
+        return view('livewire.components.Sales.void-transaction-form', [
             'transactionDetails' => $this->transactionDetails,
         ]);
     }
@@ -47,8 +50,6 @@ class VoidTransactionForm extends Component
 
     public function voidConfirmed()
     {
-
-
         $voidTransaction = VoidTransaction::create([
             'transaction_id' => $this->transaction_id,
             'void_number' => $this->void_number,
@@ -93,9 +94,10 @@ class VoidTransactionForm extends Component
             }
         }
 
-
         VoidEvent::dispatch('refresh-void');
 
+        $this->alert('success', 'Item/s was voided successfully');
+        $this->dispatch('return-void-transaction-page')->to(VoidTransactionPage::class);
     }
 
     private function populateForm()
@@ -124,8 +126,6 @@ class VoidTransactionForm extends Component
 
     public function voidSelectedItem()
     {
-
-
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
     }
@@ -250,6 +250,15 @@ class VoidTransactionForm extends Component
         $this->void_number = $void_number;
     }
 
+    public function allVoidNull()
+    {
+        foreach ($this->toVoid_info as $info) {
+            if (!is_null($info) && !empty($info)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public function getTransaction($Transaction)
     {
         $this->transaction_id = $Transaction['id'];

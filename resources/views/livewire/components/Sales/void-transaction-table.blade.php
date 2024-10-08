@@ -100,7 +100,8 @@
                         <div
                             class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
                             {{-- wire:click="getReturn({{ $return->id }})" --}}
-                            <button x-on:click="$wire.displayVoidTransactionDetails();">
+                            <button wire:click="getVoid({{$voidTransaction->id}})"
+                                x-on:click="$wire.displayVoidTransactionDetails();">
 
                                 <div class="flex items-center">
 

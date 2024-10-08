@@ -13,7 +13,8 @@
                     </h3>
 
                     {{-- //* close button --}}
-                    <button type="button" wire:click="resetFormWhenClosed" x-on:click="showVoidedTransactionReportDatePickerModal = false"
+                    <button type="button" wire:click="resetFormWhenClosed"
+                        x-on:click="showVoidedTransactionReportDatePickerModal = false"
                         class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto"
                         data-modal-hide="UserModal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -36,12 +37,14 @@
 
                         <div class="flex flex-col gap-1">
                             <p class="text-white ">From</p>
-                            <input id="fromDate" type="date" wire:model.live="fromDate" class="w-full p-4 rounded-md hover:bg-gray-300">
+                            <input id="fromDate" type="date" wire:model.live="fromDate"
+                                class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <p class="text-white ">To</p>
-                            <input id="toDate" type="date" wire:model.live="toDate" class="w-full p-4 rounded-md hover:bg-gray-300">
+                            <input id="toDate" type="date" wire:model.live="toDate"
+                                class="w-full p-4 rounded-md hover:bg-gray-300">
                         </div>
                     </div>
 
@@ -54,13 +57,13 @@
                         </div>
                         <div>
                             @if ($toDate && $fromDate)
-                                <button type="button" wire:click="getDate" x-on:click="window.open('{{ route('voidedtransactions.sales.report') }}', '_blank')"
-                                    x-on:click='$wire.displayVoidedTransactionsReport()'
-                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
+                            <button type="button" wire:click="getDate"
+                                x-on:click='$wire.displayVoidedTransactionsReport()'
+                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
                             @else
-                                <button type="button" wire:click="getDate" disabled
-                                    x-on:click='$wire.displayVoidedTransactionsReport()'
-                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
+                            <button type="button" wire:click="getDate" disabled
+                                x-on:click='$wire.displayVoidedTransactionsReport()'
+                                class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Generate</button>
                             @endif
                         </div>
                     </div>

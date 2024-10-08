@@ -10,7 +10,7 @@ class ChangeQuantityForm extends Component
 {
     use LivewireAlert;
     public $adjust_quantity, $current_stock_quantity, $barcode, $item_name, $item_description, $credit_limit,
-    $selling_price, $grandTotal, $original_quantity;
+    $selling_price, $grandTotal, $original_quantity, $bulk_quantity;
 
     public function render()
     {
@@ -102,6 +102,7 @@ class ChangeQuantityForm extends Component
         $this->credit_limit = $data['credit_limit'];
         $this->selling_price = $data['selling_price'];
         $this->grandTotal = $data['grandTotal'];
+        $this->bulk_quantity =  $data['bulk_quantity'];
 
         $this->focusInput();
     }

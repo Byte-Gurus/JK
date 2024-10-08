@@ -244,6 +244,8 @@ class ItemForm extends Component
     protected function validateForm()
     {
         $this->item_name = trim($this->item_name);
+        $this->create_barcode = trim($this->create_barcode);
+        $this->barcode = trim($this->barcode);
 
         $rules = [
             'item_name' => 'required|string|max:255',

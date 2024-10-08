@@ -44,35 +44,35 @@ class SalesTransaction extends Component
     public $payment = [];
 
     public $selectedIndex,
-        $isSelected,
-        $subtotal,
-        $grandTotal,
-        $discount,
-        $totalVat,
-        $discount_percent,
-        $PWD_Senior_discount_amount,
-        $discount_type,
-        $customer_name,
-        $senior_pwd_id,
-        $tendered_amount,
-        $change,
-        $original_total,
-        $netAmount,
-        $discounts,
-        $wholesale_discount_amount,
-        $credit_no,
-        $searchCustomer,
-        $creditor_name,
-        $transaction_info,
-        $credit_limit,
-        $changeTransactionType = 1,
-        $receiptData = [],
-        $unableShortcut = false,
-        $search_return_number,
-        $return_amount,
-        $returnInfo,
-        $return_number,
-        $excess_amount;
+    $isSelected,
+    $subtotal,
+    $grandTotal,
+    $discount,
+    $totalVat,
+    $discount_percent,
+    $PWD_Senior_discount_amount,
+    $discount_type,
+    $customer_name,
+    $senior_pwd_id,
+    $tendered_amount,
+    $change,
+    $original_total,
+    $netAmount,
+    $discounts,
+    $wholesale_discount_amount,
+    $credit_no,
+    $searchCustomer,
+    $creditor_name,
+    $transaction_info,
+    $credit_limit,
+    $changeTransactionType = 1,
+    $receiptData = [],
+    $unableShortcut = false,
+    $search_return_number,
+    $return_amount,
+    $returnInfo,
+    $return_number,
+    $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -303,7 +303,7 @@ class SalesTransaction extends Component
                 ];
             }
         } else {
-            $this->alert('warning', 'Please Wait');
+            $this->alert('warning', 'Cant recognize the barcode');
         }
         $this->barcode = '';
         $this->search = '';
@@ -347,6 +347,7 @@ class SalesTransaction extends Component
                 'item_name' => $selectedItem['item_name'],
                 'item_description' => $selectedItem['item_description'],
                 'selling_price' => $selectedItem['selling_price'],
+                'bulk_quantity' => $selectedItem['bulk_quantity'],
                 'grandTotal' => $this->grandTotal,
             ];
 
@@ -458,7 +459,10 @@ class SalesTransaction extends Component
                 $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
                 $this->PWD_Senior_discount_amount = $this->netAmount;
             }
-            if ($this->credit_details) {
+
+
+            if ($this->credit_details && $this->credit_details['discount_type'] !== 'Normal') {
+
                 $this->discount_percent = $this->discounts[1]->percentage;
 
                 $this->netAmount = $this->subtotal * ($this->discount_percent / 100);
@@ -511,9 +515,10 @@ class SalesTransaction extends Component
             $this->alert('success', 'Discount was applied successfully');
             $this->senior_pwd_id = $this->customerDetails['senior_pwd_id'];
         } else {
+            // $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
+
             $this->customerDetails = null;
 
-            $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
         }
     }
 
@@ -657,7 +662,7 @@ class SalesTransaction extends Component
                 $return->hasTransaction = true;
                 $return->save();
             }
-            $ids ="inventory_ids:";
+            $ids = "inventory_ids:";
             foreach ($this->selectedItems as $index => $selectedItem) {
                 $total_quantity_sold = $selectedItem['quantity'];
 
@@ -675,7 +680,7 @@ class SalesTransaction extends Component
 
                     if ($total_quantity_sold > 0) {
                         if (($inventory->current_stock_quantity - $total_quantity_sold) >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
-                            dump('if');
+                            // dump('if');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $selectedItem['quantity'],
                                 'vat_type' => $selectedItem['vat_type'],
@@ -712,7 +717,7 @@ class SalesTransaction extends Component
 
                         } elseif (($inventory->current_stock_quantity - $total_quantity_sold) >= 0) {
 
-                            dump('elseif');
+                            // dump('elseif');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $total_quantity_sold,
                                 'vat_type' => $selectedItem['vat_type'],
@@ -766,7 +771,7 @@ class SalesTransaction extends Component
                             ]);
                             $total_quantity_sold -= $inventory->current_stock_quantity;
                             $inventory->current_stock_quantity -=
-                            $inventory->current_stock_quantity;
+                                $inventory->current_stock_quantity;
 
                             if ($inventory->current_stock_quantity == 0) {
                                 $inventory->status = 'Not available';

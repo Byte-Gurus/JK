@@ -42,7 +42,7 @@
                         </div>
                         <div>
                             @if ($date)
-                                <button type="button" wire:click="getDate" x-on:click="window.open('{{ route('monthly.sales.report') }}', '_blank')"
+                                <button type="button" wire:click="getDate"
                                     x-on:click='$wire.displayMonthlySalesReport()'
                                     class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
                             @else
