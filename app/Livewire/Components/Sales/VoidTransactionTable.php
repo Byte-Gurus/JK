@@ -52,6 +52,11 @@ class VoidTransactionTable extends Component
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
 
+    public function displayVoidTransactionDetails()
+    {
+        $this->dispatch('display-void-transaction-details', showVoidTransactionDetails: true)->to(VoidTransactionPage::class);
+    }
+
     public function refreshFromPusher()
     {
         $this->resetPage();
