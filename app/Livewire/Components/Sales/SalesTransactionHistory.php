@@ -126,7 +126,7 @@ class SalesTransactionHistory extends Component
 
     public function displayVoidTransaction()
     {
-        $this->dispatch('display-void-transaction', showVoidTransaction: true)->to(CashierPage::class);
+        $this->dispatch('display-void-transaction', showVoidTransactionPage: true)->to(CashierPage::class);
     }
 
     public function returnToSalesTransaction()

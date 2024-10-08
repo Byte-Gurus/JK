@@ -21,7 +21,7 @@ class CashierPage extends Component
 
     public $showSalesReturnSlip = false;
 
-    public $showVoidTransaction = false;
+    public $showVoidTransactionPage = false;
 
     public function render()
     {
@@ -36,6 +36,7 @@ class CashierPage extends Component
         'display-sales-return' => 'displaySalesReturn',
         'display-sales-receipt' => 'displaySalesReceipt',
         'display-void-transaction' => 'displayVoidTransaction',
+        'return-to-void-transaction-page' => 'returnToVoidTransactionPage',
     ];
 
     public function displaySalesTransactionHistory($showSalesTransactionHistory)
@@ -44,10 +45,16 @@ class CashierPage extends Component
         $this->showSalesTransactionHistory = $showSalesTransactionHistory;
     }
 
-    public function displayVoidTransaction($showVoidTransaction)
+    public function displayVoidTransaction($showVoidTransactionPage)
     {
         $this->showSalesTransactionHistory = false;
-        $this->showVoidTransaction = $showVoidTransaction;
+        $this->showVoidTransactionPage = $showVoidTransactionPage;
+    }
+
+    public function returnToVoidTransactionPage($showVoidTransactionPage)
+    {
+        $this->showSalesTransactionHistory = true;
+        $this->showVoidTransactionPage = $showVoidTransactionPage;
     }
 
     public function displaySalesTransaction($showSalesTransaction)

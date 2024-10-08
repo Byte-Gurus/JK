@@ -23,15 +23,29 @@ class VoidTransactionPage extends Component
         'return-void-transaction-page' => 'returnVoidTransactionPage'
     ];
 
-    public function returnToSalesTransaction()
+    public function returnToVoidTransactionPageFromVoidTransactionForm()
     {
-        if ($this->showVoidTransactionTable) {
-            $this->dispatch('display-sales-transaction', showSalesTransaction: true)->to(CashierPage::class);
-        } else {
-            $this->showVoidTransactionForm = false;
-            $this->showVoidTransactionDetails = false;
-            $this->showVoidTransactionTable = true;
-        }
+        $this->dispatch('return-to-void-transaction-page', showVoidTransactionPage: true)->to(CashierPage::class);
+        $this->dispatch('display-sales-transaction-history', showSalesTransactionHistory: false)->to(CashierPage::class);
+        $this->showVoidTransactionTable = true;
+        $this->showVoidTransactionForm = false;
+    }
+
+    public function returnToVoidTransactionPageFromVoidTransactionDetails()
+    {
+        $this->dispatch('return-to-void-transaction-page', showVoidTransactionPage: true)->to(CashierPage::class);
+        $this->dispatch('display-sales-transaction-history', showSalesTransactionHistory: false)->to(CashierPage::class);
+        $this->showVoidTransactionDetails = false;
+        $this->showVoidTransactionTable = true;
+    }
+
+    public function returnToTransactionHistory()
+    {
+        $this->dispatch('display-sales-transaction-history', showSalesTransactionHistory: true)->to(CashierPage::class);
+        $this->dispatch('return-to-void-transaction-page', showVoidTransactionPage: false)->to(CashierPage::class);
+        $this->showVoidTransactionForm = false;
+        $this->showVoidTransactionDetails = false;
+        $this->showVoidTransactionTable = true;
     }
 
     public function returnVoidTransactionPage()
