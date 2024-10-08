@@ -250,6 +250,15 @@ class VoidTransactionForm extends Component
         $this->void_number = $void_number;
     }
 
+    public function allVoidNull()
+    {
+        foreach ($this->toVoid_info as $info) {
+            if (!is_null($info) && !empty($info)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public function getTransaction($Transaction)
     {
         $this->transaction_id = $Transaction['id'];
