@@ -11,10 +11,13 @@ use App\Models\TransactionMovement;
 use App\Models\VoidTransaction;
 use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class VoidTransactionForm extends Component
 {
+    use LivewireAlert;
+
     public $isAdmin, $transaction_number, $transaction_date, $transaction_type, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $current_tax_amount, $void_number, $transaction_id, $void_total_amount, $item_void_amount, $void_vat_amount, $transactionDetails, $new_total, $void_item_quantity, $void_total_quantity;
 
     public $showSalesAdminLoginForm = false;
@@ -93,6 +96,8 @@ class VoidTransactionForm extends Component
 
         VoidEvent::dispatch('refresh-void');
 
+        $this->alert('success', 'Item/s was voided successfully');
+        $this->dispatch('return-void-transaction-page')->to(VoidTransactionPage::class);
     }
 
     private function populateForm()
