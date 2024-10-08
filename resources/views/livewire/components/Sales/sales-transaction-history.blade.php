@@ -33,7 +33,7 @@
 
                 <input type="text" wire:model.live.debounce.100ms="search"
                     class="w-2/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="Search by Transaction No. or Sales Invoice No." required="" />
+                    placeholder="Search by No." required="" />
             </div>
 
             <div class="flex flex-row items-center justify-between gap-4">
@@ -100,23 +100,7 @@
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3">Transaction No.</th>
 
-                        <th wire:click="sortByColumn('total_amount')" scope="col"
-                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
-
-                            <div class="flex items-center justify-center">
-
-                                <p>Total (₱)</p>
-
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>
-                                </span>
-
-                            </div>
-                        </th>
+                        <th scope="col" class="px-4 py-3 text-center">Total (₱)</th>
 
                         {{-- payment --}}
                         <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
@@ -126,6 +110,7 @@
                         {{-- //* gcash reference no. --}}
                         <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
+                        <th scope="col" class="px-4 py-3 text-center">PWD/SC Discount Amount</th>
                         {{-- payment --}}
                         <th scope="col" class="px-4 py-3 text-center">Tax Amount</th>
 
@@ -177,11 +162,11 @@
                                 @if ($transaction->transaction_type == 'Sales')
                                 {{ $transaction['transactionJoin']['transaction_number'] }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                {{ $transaction['returnsJoin']['transactionJoin']['transaction_number'] }}
+                                {{ $transaction['returnsJoin']['return_number'] }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                {{ $transaction['creditJoin']['transactionJoin']['transaction_number'] }}
+                                {{ $transaction['creditJoin']['credit_number'] }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                {{ $transaction['voidTransactionJoin']['transactionJoin']['transaction_number'] }}
+                                {{ $transaction['voidTransactionJoin']['void_number'] }}
                                 @endif
                             </th>
                             <th scope="row"
@@ -231,6 +216,21 @@
                                 @endif
                             </th>
 
+                            <th scope="row"
+                                class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
+                                @if ($transaction->transaction_type == 'Sales')
+                                {{ number_format($transaction['transactionJoin']['total_discount_amount'], 2) ?? 'N/A'
+                                }}
+                                @elseif ($transaction->transaction_type == 'Return')
+                                0.00
+                                @elseif ($transaction->transaction_type == 'Credit')
+                                {{ number_format($transaction['creditJoin']['transactionJoin']['total_discount_amount'],
+                                2)
+                                ?? 'N/A' }}
+                                @elseif ($transaction->transaction_type == 'Void')
+                                0.00
+                                @endif
+                            </th>
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
