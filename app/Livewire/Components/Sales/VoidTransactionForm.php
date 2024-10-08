@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Components\Sales;
 
+use App\Events\VoidEvent;
+use App\Models\Inventory;
+use App\Models\InventoryMovement;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
@@ -42,12 +45,13 @@ class VoidTransactionForm extends Component
         'voidConfirmed'
     ];
 
-    public function voidConfirmed(){
+    public function voidConfirmed()
+    {
 
 
         $voidTransaction = VoidTransaction::create([
             'transaction_id' => $this->transaction_id,
-            'void_number' =>  $this->void_number,
+            'void_number' => $this->void_number,
             'void_total_amount' => $this->void_total_amount,
             'original_amount' => $this->total_amount,
             'void_vat_amount' => $this->void_vat_amount,
@@ -64,7 +68,7 @@ class VoidTransactionForm extends Component
             if (isset($this->voidedDetails[$index])) {
                 $info = $this->voidedDetails[$index];
 
-                $voidTransactionDetail[] = VoidTransactionDetails::create([
+                $voidTransactionDetail = VoidTransactionDetails::create([
                     'void_quantity' => $info['item_quantity'],
                     'item_void_amount' => $info['item_subtotal'],
                     'reason' => $info['reason'],
@@ -73,10 +77,24 @@ class VoidTransactionForm extends Component
                 ]);
 
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
+                $inventory = Inventory::find($transactionDetails->inventory_id);
+
+                $inventory->current_stock_quantity += $voidTransactionDetail->void_quantity;
+                $inventory->save();
+
+                InventoryMovement::create([
+                    'movement_type' => 'Sales',
+                    'operation' => 'Void',
+                    'void_transaction_details_id' => $voidTransactionDetail->id,
+                ]);
+
                 $transactionDetails->status = 'Void';
                 $transactionDetails->save();
             }
         }
+
+
+        VoidEvent::dispatch('refresh-void');
 
     }
 
@@ -159,7 +177,7 @@ class VoidTransactionForm extends Component
                     }
 
                     $this->voidedDetails[] = [
-                        'item_subtotal' =>  $toVoid['item_subtotal'],
+                        'item_subtotal' => $toVoid['item_subtotal'],
                         'item_quantity' => $toVoid['item_quantity'],
                         'reason' => $this->reason[$toVoid['index']] ?? null,
                         'transaction_details_id' => $toVoid['transactionDetail']->id,

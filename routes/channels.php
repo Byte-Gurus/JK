@@ -102,3 +102,17 @@ Broadcast::channel(
         return 'Inventory refreshed';
     }
 );
+Broadcast::channel(
+    'refresh-return',
+    function () {
+        return 'Return refreshed';
+    }
+);
+
+Broadcast::channel(
+    'refresh-void',
+    function () {
+        return 'Void refreshed';
+    }
+);
+

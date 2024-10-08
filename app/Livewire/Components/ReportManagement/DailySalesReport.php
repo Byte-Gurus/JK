@@ -2,23 +2,23 @@
 
 namespace App\Livewire\Components\ReportManagement;
 
-use App\Livewire\Pages\ReportManagement;
-use App\Models\Returns;
-use App\Models\Transaction;
-use App\Models\TransactionDetails;
+
 use App\Models\TransactionMovement;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 use Livewire\Component;
 
 class DailySalesReport extends Component
 {
+
     public $showDailySalesReport = false;
 
     public $transactions = [], $transaction_info = [];
     public function render()
     {
+        
         return view('livewire.components.ReportManagement.daily-sales-report', [
             'transactions' => $this->transactions
         ]);
@@ -124,13 +124,23 @@ class DailySalesReport extends Component
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
 
+        $data = [
+            'title' => 'DailySalesReport',
+            'date'=> Carbon::now()->format('M d Y h:i A')
+        ];
+
+        // $pdf = Pdf::loadView('livewire.components.ReportManagement.daily-sales-report', $data)->output();
+
+        // return response()->streamDownload(function () use($pdf) {
+        //     echo  $pdf->download();
+        // }, 'report.pdf');
     }
 
     function calculateVoidAmounts($detail, &$transaction)
     {
         if ($detail->status == 'Void') {
 
-            $transaction->totalVoidItemAmount +=  $detail->item_subtotal;
+            $transaction->totalVoidItemAmount += $detail->item_subtotal;
             if ($detail->vat_type === 'Vat') {
                 $vatable_subtotal = $detail->item_subtotal;
                 $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);

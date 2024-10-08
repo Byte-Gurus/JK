@@ -749,7 +749,7 @@ class SalesTransaction extends Component
 
 
                         } else {
-                            dump('else');
+                            // dump('else');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $inventory->current_stock_quantity,
                                 'vat_type' => $selectedItem['vat_type'],
@@ -784,7 +784,7 @@ class SalesTransaction extends Component
                                 }
                             }
 
-                            dump($inventory->current_stock_quantity);
+                            // dump($inventory->current_stock_quantity);
                         }
                         //append inventory id
                         $ids .= $inventory->id . ',';
@@ -799,7 +799,7 @@ class SalesTransaction extends Component
                         $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
                     }
                 }
-                dump($ids);
+                // dump($ids);
 
 
             }
