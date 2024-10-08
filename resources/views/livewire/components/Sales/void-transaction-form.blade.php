@@ -1,143 +1,149 @@
-<div>
-    <div x-cloak class="flex flex-col">
+<div x-cloak class="flex flex-col">
 
-        <div class="relative overflow-hidden bg-white border rounded-md border-[rgb(143,143,143)] mb-[18px]">
+    <div class="relative overflow-hidden bg-white border rounded-md border-[rgb(143,143,143)] mb-[18px]">
 
-            {{-- //* filters --}}
-            <div class="flex flex-row items-center justify-between py-2 ">
+        {{-- //* filters --}}
+        <div class="flex flex-row items-center justify-between py-2 ">
 
-                {{-- //* search filter --}}
-                <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
-                    <div class="flex flex-row items-center gap-2 text-white ">
-                        <p class=" text-[1em] italic  font-medium">Transaction No.</p>
-                        <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
-                    </div>
+            {{-- //* search filter --}}
+            <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
+                <div class="flex flex-row items-center gap-2 text-white ">
+                    <p class=" text-[1em] italic  font-medium">Transaction No.</p>
+                    <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
                 </div>
-                <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
-                    <div class="flex flex-row items-center gap-2 text-white ">
-                        <p class=" text-[1em] italic  font-medium">Void No.</p>
-                        <p class=" text-[1.2em] font-black">{{ $void_number }}</p>
-                    </div>
+            </div>
+            <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
+                <div class="flex flex-row items-center gap-2 text-white ">
+                    <p class=" text-[1em] italic  font-medium">Void No.</p>
+                    <p class=" text-[1.2em] font-black">{{ $void_number }}</p>
                 </div>
-
             </div>
-            {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll scroll h-fit">
 
-                <table class="w-full text-sm text-left scroll no-scrollbar">
-
-                    {{-- //* table header --}}
-                    <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
-
-                        <tr class=" text-nowrap">
-
-                            {{-- //* total --}}
-                            <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
-
-                            {{-- transaction type --}}
-                            <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
-
-                            {{-- payment methods --}}
-                            <th scope="col" class="px-4 py-3 text-center">Payment method</th>
-
-                            {{-- //* gcash reference no. --}}
-                            <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
-
-                            {{-- //* date --}}
-                            <th scope="col" class="px-4 py-3 text-center">Date</th>
-
-                        </tr>
-                    </thead>
-
-                    {{-- //* table body --}}
-                    <tbody>
-
-
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($total_amount, 2) }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transaction_type }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $payment_method }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 italic font-black text-center text-left-900 text-md whitespace-nowrap ">
-                                {{ $reference_number }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
-        <div class="flex flex-col">
-            <div class="flex justify-end w-full mb-[3vh]">
+        {{-- //* tablea area --}}
+        <div class="overflow-x-auto overflow-y-scroll scroll h-fit">
 
-                <button type="button"
-                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                    wire:click="voidSelectedItem()">
-                    Void Item
-                </button>
+            <table class="w-full text-sm text-left scroll no-scrollbar">
 
-            </div>
-            <div class="w-full h-[28vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
+                {{-- //* table header --}}
+                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
 
-                <table class="w-full text-sm text-left scroll no-scrollbar">
+                    <tr class=" text-nowrap">
 
-                    {{-- //* table header --}}
-                    <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                        {{-- //* total --}}
+                        <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
 
-                        <tr class=" text-nowrap">
+                        {{-- transaction type --}}
+                        <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
 
-                            {{-- //* transaction no --}}
-                            <th scope="col" class="px-4 py-3">#</th>
+                        {{-- payment methods --}}
+                        <th scope="col" class="px-4 py-3 text-center">Payment method</th>
 
-                            {{-- //* sku --}}
-                            <th scope="col" class="px-4 py-3 text-left">SKU</th>
+                        {{-- //* gcash reference no. --}}
+                        <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
-                            {{-- //* barcode --}}
-                            <th scope="col" class="px-4 py-3 text-left">Barcode</th>
+                        {{-- //* date --}}
+                        <th scope="col" class="px-4 py-3 text-center">Date</th>
 
-                            {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+                    </tr>
+                </thead>
 
-                            {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Item Description</th>
-
-                            {{-- //* unit price --}}
-                            <th scope="col" class="px-4 py-3 text-center">Unit Price (₱)</th>
-
-                            {{-- //* quantity --}}
-                            <th scope="col" class="px-4 py-3 text-center">Quantity</th>
-
-                            {{-- //* wholesale --}}
-                            <th scope="col" class="px-4 py-3 text-center">Wholesale Amount (₱)</th>
-
-                            {{-- //* subtotal --}}
-                            <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
-
-                            {{-- //* operation --}}
-                            <th scope="col" class="px-4 py-3 text-center">Reason</th>
+                {{-- //* table body --}}
+                <tbody>
 
 
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <th scope="row"
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($total_amount, 2) }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $transaction_type }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $payment_method }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-1 italic font-black text-center text-left-900 text-md whitespace-nowrap ">
+                            {{ $reference_number }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="flex flex-col">
+        <div class="flex justify-end w-full mb-[3vh]">
 
-                        </tr>
-                    </thead>
+            <button type="button"
+                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                wire:click="voidSelectedItem()">
+                Void Item
+            </button>
 
-                    {{-- //* table body --}}
-                    <tbody>
+        </div>
+        <div class="w-full h-[28vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
 
-                        @foreach ($transactionDetails as $index => $transactionDetail)
+            <table class="w-full text-sm text-left scroll no-scrollbar">
+
+                {{-- //* table header --}}
+                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+
+                    <tr class=" text-nowrap">
+
+                        {{-- //* transaction no --}}
+                        <th scope="col" class="px-4 py-3">#</th>
+
+                        {{-- //* sku --}}
+                        <th scope="col" class="px-4 py-3 text-left">SKU</th>
+
+                        {{-- //* barcode --}}
+                        <th scope="col" class="px-4 py-3 text-left">Barcode</th>
+
+                        {{-- item name --}}
+                        <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+
+                        {{-- item name --}}
+                        <th scope="col" class="px-4 py-3 text-center">Item Description</th>
+
+                        {{-- //* unit price --}}
+                        <th scope="col" class="px-4 py-3 text-center">Unit Price (₱)</th>
+
+                        {{-- //* quantity --}}
+                        <th scope="col" class="px-4 py-3 text-center">Quantity</th>
+
+                        {{-- //* wholesale --}}
+                        <th scope="col" class="px-4 py-3 text-center">Wholesale Amount (₱)</th>
+
+                        {{-- //* subtotal --}}
+                        <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
+
+                        {{-- //* operation --}}
+                        <th scope="col" class="px-4 py-3 text-center">Reason</th>
+
+                        {{-- //* action --}}
+                        <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center ">
+
+                            {{-- wire:model="selectAllToRemove" wire:click="removeAll" --}}
+                            <input type="checkbox"
+                                class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
+
+                        </th>
+
+                    </tr>
+                </thead>
+
+                {{-- //* table body --}}
+                <tbody>
+
+                    @foreach ($transactionDetails as $index => $transactionDetail)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                             <th scope="row"
@@ -160,7 +166,8 @@
                                 class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                                 {{ $transactionDetail['itemJoin']['item_description'] }}
                             </th>
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
                                 {{ number_format($transactionDetail['item_price'], 2) }}
                             </th>
                             <th scope="row"
@@ -172,14 +179,13 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
-                                {{ number_format(
-                                $transactionDetail['item_price'] -
-                                $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] /
-                                100),
-                                2,
-                                ) }}
+                                    {{ number_format(
+                                        $transactionDetail['item_price'] -
+                                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
+                                        2,
+                                    ) }}
                                 @else
-                                0.00
+                                    0.00
                                 @endif
                             </th>
                             <th scope="row"
@@ -198,347 +204,60 @@
                                 </select>
 
                                 @error("reason.$index")
-                                <span
-                                    class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                    $message }}</span>
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                 @enderror
-
-
                             </th>
-
-
-
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
                                 @if (isset($reason[$index]) && $reason[$index])
-                                <input type="checkbox"
-                                    wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
-                                @error("checkedItem.$index")
-                                <span
-                                    class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                    $message }}</span>
-                                @enderror
+                                    <input type="checkbox"
+                                        wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
+                                    @error("checkedItem.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
                                 @endif
-
                             </th>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="flex flex-col justify-around row-span-1 gap-1 px-4 py-2 bg-orange-200 border border-black text-wrap rounded-b-2xl">
 
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Current Total Amount</p>
-                    </div>
-                    <div>
-                        {{ number_format($total_amount, 2) }}
-                    </div>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div
+            class="flex flex-col justify-around row-span-1 gap-1 px-4 py-2 bg-orange-200 border border-black text-wrap rounded-b-2xl">
+
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.2em] font-medium">Current Total Amount</p>
                 </div>
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Refund Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($void_total_amount, 2) }}</p>
-                    </div>
-                </div>
-                <div class="border border-black "></div>
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.6em] font-medium">New Total Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
-                    </div>
+                <div>
+                    {{ number_format($total_amount, 2) }}
                 </div>
             </div>
-        </div>
-        <div x-show="showSalesAdminLoginForm"
-            x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
-            @livewire('components.Sales.sales-admin-login-form')
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.2em] font-medium">Refund Amount</p>
+                </div>
+                <div>
+                    <p class=" text-[1.2em] font-black">{{ number_format($void_total_amount, 2) }}</p>
+                </div>
+            </div>
+            <div class="border border-black "></div>
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.6em] font-medium">New Total Amount</p>
+                </div>
+                <div>
+                    <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div x-cloak class="flex flex-col">
-
-        <div class="relative overflow-hidden bg-white border rounded-md border-[rgb(143,143,143)] mb-[18px]">
-
-            {{-- //* filters --}}
-            <div class="flex flex-row items-center justify-between py-2 ">
-
-                {{-- //* search filter --}}
-                <div class="relative p-2 rounded-r-2xl bg-[rgb(53,53,53)]">
-                    <div class="flex flex-row items-center gap-2 text-white ">
-                        <p class=" text-[1em] italic  font-medium">Transaction No.</p>
-                        <p class=" text-[1.2em] font-black">{{ $transaction_number }}</p>
-                    </div>
-                </div>
-                <div class="relative p-2 rounded-l-2xl bg-[rgb(42,13,52)]">
-                    <div class="flex flex-row items-center gap-2 text-white ">
-                        <p class=" text-[1em] italic  font-medium">Void No.</p>
-                        <p class=" text-[1.2em] font-black">{{ $void_number }}</p>
-                    </div>
-                </div>
-
-            </div>
-            {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll scroll h-fit">
-
-                <table class="w-full text-sm text-left scroll no-scrollbar">
-
-                    {{-- //* table header --}}
-                    <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
-
-                        <tr class=" text-nowrap">
-
-                            {{-- //* total --}}
-                            <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
-
-                            {{-- transaction type --}}
-                            <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
-
-                            {{-- payment methods --}}
-                            <th scope="col" class="px-4 py-3 text-center">Payment method</th>
-
-                            {{-- //* gcash reference no. --}}
-                            <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
-
-                            {{-- //* date --}}
-                            <th scope="col" class="px-4 py-3 text-center">Date</th>
-
-                        </tr>
-                    </thead>
-
-                    {{-- //* table body --}}
-                    <tbody>
-
-
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($total_amount, 2) }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transaction_type }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $payment_method }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 italic font-black text-center text-left-900 text-md whitespace-nowrap ">
-                                {{ $reference_number }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ \Carbon\Carbon::parse($transaction_date)->format(' M d Y h:i A') }}
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="flex flex-col">
-            <div class="flex justify-end w-full mb-[3vh]">
-
-                <div class="flex flex-row gap-4 ">
-                    <button type="button"
-                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,96,96)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                        wire:click="voidWholeTransaction()">
-                        Void Whole Transaction
-                    </button>
-
-                    <button type="button"
-                        class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                        wire:click="voidSelectedItem()">
-                        Void Selected Item
-                    </button>
-                </div>
-
-            </div>
-            <div class="w-full h-[28vh] mb-[3vh] overflow-x-auto overflow-y-scroll border border-black scroll ">
-
-                <table class="w-full text-sm text-left scroll no-scrollbar">
-
-                    {{-- //* table header --}}
-                    <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
-
-                        <tr class=" text-nowrap">
-
-                            {{-- //* transaction no --}}
-                            <th scope="col" class="px-4 py-3">#</th>
-
-                            {{-- //* sku --}}
-                            <th scope="col" class="px-4 py-3 text-left">SKU</th>
-
-                            {{-- //* barcode --}}
-                            <th scope="col" class="px-4 py-3 text-left">Barcode</th>
-
-                            {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Item Name</th>
-
-                            {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Item Description</th>
-
-                            {{-- //* unit price --}}
-                            <th scope="col" class="px-4 py-3 text-center">Unit Price (₱)</th>
-
-                            {{-- //* quantity --}}
-                            <th scope="col" class="px-4 py-3 text-center">Quantity</th>
-
-                            {{-- //* wholesale --}}
-                            <th scope="col" class="px-4 py-3 text-center">Wholesale Amount (₱)</th>
-
-                            {{-- //* subtotal --}}
-                            <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
-
-                            {{-- //* operation --}}
-                            <th scope="col" class="px-4 py-3 text-center">Reason</th>
-
-                            {{-- //* action --}}
-                            <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center ">
-
-                                <input type="checkbox" wire:model="selectAllToRemove" wire:click="removeAll"
-                                    class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
-
-                            </th>
-                        </tr>
-                    </thead>
-
-                    {{-- //* table body --}}
-                    <tbody>
-
-                        @foreach ($transactionDetails as $index => $transactionDetail)
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $index + 1 }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transactionDetail['inventoryJoin']['sku_code'] }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transactionDetail['itemJoin']['barcode'] }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transactionDetail['itemJoin']['item_name'] }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transactionDetail['itemJoin']['item_description'] }}
-                            </th>
-
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 whitespace-nowrap ">
-                                {{ number_format($transactionDetail['item_price'], 2) }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $transactionDetail['item_quantity'] }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
-                                {{ number_format(
-                                $transactionDetail['item_price'] -
-                                $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] /
-                                100),
-                                2,
-                                ) }}
-                                @else
-                                0.00
-                                @endif
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($transactionDetail['item_subtotal'], 2) }}
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                                <select id="status" wire:model.live="reason.{{ $index }}"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
-                                    <option value="" selected>Set your Reason</option>
-                                    <option value="Cashier Error">Cashier Error</option>
-                                    <option value="System Error">System Error</option>
-                                </select>
-
-                                @error("g")
-                                <span
-                                    class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                    $message }}</span>
-                                @enderror
-                            </th>
-
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                                @if (isset($reason[$index]) && $reason[$index])
-                                <input type="checkbox"
-                                    wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
-                                @error("checkedItem.$index")
-                                <span
-                                    class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                    $message }}</span>
-                                @enderror
-                                @endif
-                            </th>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="flex flex-col justify-around row-span-1 gap-1 px-4 py-2 bg-orange-200 border border-black text-wrap rounded-b-2xl">
-
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Current Total Amount</p>
-                    </div>
-                    <div>
-                        {{ number_format($total_amount, 2) }}
-                    </div>
-                </div>
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Refund Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($void_total_amount, 2) }}</p>
-                    </div>
-                </div>
-                <div class="border border-black "></div>
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.6em] font-medium">New Total Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.6em] font-black">{{ number_format($new_total, 2) }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div x-show="showSalesAdminLoginForm"
-            x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
-            @livewire('components.Sales.sales-admin-login-form')
-        </div>
+    <div x-show="showSalesAdminLoginForm" x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
+        @livewire('components.Sales.sales-admin-login-form')
     </div>
-
 </div>

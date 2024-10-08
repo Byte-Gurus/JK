@@ -32,6 +32,7 @@ class DailySalesReportDatePickerModal extends Component
 
     public function displayDailySalesReport()
     {
+        route('daily.sales.report', '_blank');
         $this->dispatch(event: 'display-daily-sales-report')->to(ReportManagement::class);
 
     }

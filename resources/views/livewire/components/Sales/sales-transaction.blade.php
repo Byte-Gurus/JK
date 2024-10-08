@@ -239,7 +239,7 @@
                             <button class="py-2 ">
                                 Quantity
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(143,244,251)] font-bold">CTRL + 2</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(19,60,63)] font-bold">CTRL + 2</p>
                         </div>
                     @else
                         <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">

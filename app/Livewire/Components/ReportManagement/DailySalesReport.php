@@ -15,6 +15,7 @@ class DailySalesReport extends Component
 {
 
     public $showDailySalesReport = false;
+
     public $transactions = [], $transaction_info = [];
     public function render()
     {
@@ -25,12 +26,12 @@ class DailySalesReport extends Component
     }
 
     protected $listeners = [
-        'generate-report' => 'generateReport'
+        'generate-report' => 'generateReport',
     ];
 
     public function generateReport($date)
     {
-
+        // $this->ss = true;
         $date = Carbon::parse($date);
         // Define the start and end of the day
         $startOfDay = $date->copy()->startOfDay();

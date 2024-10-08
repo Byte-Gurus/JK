@@ -47,6 +47,6 @@
         @livewire('components.sales.void-transaction-modal')
     </div>
     <div x-show="showVoidTransactionForm" x-data="{ showVoidTransactionForm: @entangle('showVoidTransactionForm') }">
-        @livewire('components.sales.void-transaction-form')
+        @livewire('components.Sales.void-transaction-form')
     </div>
 </div>
