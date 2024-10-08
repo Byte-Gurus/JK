@@ -717,7 +717,7 @@ class SalesTransaction extends Component
 
                         } elseif (($inventory->current_stock_quantity - $total_quantity_sold) >= 0) {
 
-                            dump('elseif');
+                            // dump('elseif');
                             $transactionDetails = TransactionDetails::create([
                                 'item_quantity' => $total_quantity_sold,
                                 'vat_type' => $selectedItem['vat_type'],

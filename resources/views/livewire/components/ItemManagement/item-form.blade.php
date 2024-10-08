@@ -263,7 +263,7 @@
                                             <label for="status"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
-                                            <select id="status" wire:model="status"
+                                            <select id="status" wire:model="status" disabled
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Set your status</option>
                                                 <option value="1">Active</option>
