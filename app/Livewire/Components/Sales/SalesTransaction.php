@@ -303,7 +303,7 @@ class SalesTransaction extends Component
                 ];
             }
         } else {
-            $this->alert('warning', 'Please Wait');
+            $this->alert('warning', 'Cant recognize the barcode');
         }
         $this->barcode = '';
         $this->search = '';
