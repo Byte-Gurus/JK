@@ -15,6 +15,7 @@ use App\Livewire\Pages\ReportManagement;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\UserManagementPage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Navbar extends Component
@@ -53,6 +54,18 @@ class Navbar extends Component
         $this->date = $manilaTime->format('F j, Y');
         $this->time = $manilaTime->format('h:i A');
     }
+
+    public function isAdmin(){
+        $user = Auth::user();
+
+        if ($user->user_role_id == 1 && $user->status_id == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
 }
