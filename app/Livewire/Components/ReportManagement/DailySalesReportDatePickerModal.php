@@ -21,6 +21,8 @@ class DailySalesReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-daily-sales-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()
@@ -29,7 +31,14 @@ class DailySalesReportDatePickerModal extends Component
             'date'
         ]);
     }
+    public function validateForm()
+    {
+        $rules = [
+            'date' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
+        ];
 
+        return $this->validate($rules);
+    }
     public function displayDailySalesReport()
     {
         // route('daily.sales.report', '_blank');
@@ -40,18 +49,11 @@ class DailySalesReportDatePickerModal extends Component
     public function getDate()
     {
         $validated = $this->validateForm();
-    
+
 
         $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
         $this->displayDailySalesReport();
     }
 
-    public function validateForm()
-    {
-        $rules = [
-            'date' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
-        ];
 
-        return $this->validate($rules);
-    }
 }

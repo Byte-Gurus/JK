@@ -17,6 +17,8 @@ class SlowMovingItemsReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-slow-moving-items-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()
@@ -25,6 +27,14 @@ class SlowMovingItemsReportDatePickerModal extends Component
             'date'
         ]);
     }
+    public function validateForm()
+    {
+        $rules = [
+            'date' => 'required|date|date_format:Y-m|before_or_equal:today',
+        ];
+
+        return $this->validate($rules);
+    }
 
     public function displaySlowMovingItemsReport()
     {
@@ -32,6 +42,8 @@ class SlowMovingItemsReportDatePickerModal extends Component
     }
     public function getDate()
     {
+        $validated = $this->validateForm();
         $this->dispatch('generate-report', $this->date)->to(SlowMovingItemsReport::class);
+        $this->displaySlowMovingItemsReport();
     }
 }

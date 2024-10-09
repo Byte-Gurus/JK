@@ -77,6 +77,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         //InventoryManagement
         Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
 
+        
+
         //InventoryManagement
         Route::get('admin/SalesTransaction', CashierPage::class)->name('cashierpage.index');
 
@@ -85,6 +87,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         //ReportManagement
         Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');
+
+
 
         //CashierHomepage
         Route::get('/cashier', CashierPage::class)->name('cashier.index');

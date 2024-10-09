@@ -246,10 +246,10 @@ class UserForm extends Component
         $this->retype_password = trim($this->retype_password);
 
         $rules = [
-            'firstname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\- ]+$/',
-            'middlename' => 'nullable|string|max:50|regex:/^[a-zA-ZñÑ\'\- ]+$/',
-            'lastname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\- ]+$/',
-            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('users', 'contact_number')->ignore($this->proxy_user_id)],
+            'firstname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
+            'middlename' => 'nullable|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
+            'lastname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
+            'contact_number' => ['required', 'numeric', 'digits:11', 'regex:/^09[0-9]{9}$/', Rule::unique('users', 'contact_number')->ignore($this->proxy_user_id)],
             'role' => 'required|in:1,2,3',
             'status' => 'required|in:1,2',
             // 'user_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
@@ -261,12 +261,15 @@ class UserForm extends Component
         //*para sa create na validation or //*para sa edit na may passowrd na validation
         if ($this->isCreate || $this->show_password) {
 
-            $rules['password'] = 'required|string|min:8|same:retype_password';
-            $rules['retype_password'] = 'required|string|min:8';
+            $rules['password'] = 'required|string|min:8|same:retype_password|regex:/^(?=.*[^\s])[ -~]*$/';
+            $rules['retype_password'] = 'required|string|min:8|regex:/^(?=.*[^\s])[ -~]*$/';
+
         }
 
         return $this->validate($rules);
     }
+
+
 
     public function edit($userID)
     {

@@ -19,6 +19,8 @@ class YearlySalesReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-yearly-sales-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()
@@ -27,12 +29,25 @@ class YearlySalesReportDatePickerModal extends Component
             'date'
         ]);
     }
+    public function validateForm()
+    {
+        $rules = [
+            'date' => 'required|integer|digits:4|before_or_equal:' . date('Y'),
+        ];
 
+        return $this->validate($rules);
+    }
     public function displayYearlySalesReport()
     {
         $this->dispatch(event: 'display-yearly-sales-report')->to(ReportManagement::class);
     }
-     public function getDate(){
+    public function getDate()
+    {
+
+
+        $validated = $this->validateForm();
+
         $this->dispatch('generate-report', $this->date)->to(YearlySalesReport::class);
-     }
+        $this->displayYearlySalesReport();
+    }
 }

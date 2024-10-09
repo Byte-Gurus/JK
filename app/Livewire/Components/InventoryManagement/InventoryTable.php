@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 
 class InventoryTable extends Component
 {
-    use WithPagination,  WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination;
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
@@ -62,7 +62,7 @@ class InventoryTable extends Component
         "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
         "echo:refresh-inventory,InventoryEvent" => 'refreshFromPusher',
-
+        'set-search-description' => 'setSearchDescription',
     ];
 
     public function sortByColumn($column)
@@ -115,9 +115,15 @@ class InventoryTable extends Component
         $this->dispatch('stock-card', stockID: $stockId)->to(ViewStockCard::class);
     }
 
-    public function getStockPrice($stockId){
+    public function getStockPrice($stockId)
+    {
         $this->dispatch('stock-price', stockID: $stockId)->to(InventoryForm::class);
 
+    }
+
+    public function setSearchDescription($sku_code){
+        dd($sku_code);
+        $this->search = $sku_code;
     }
 
     public function refreshFromPusher()

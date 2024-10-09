@@ -38,7 +38,7 @@
                         <option value="0">All</option>
 
                         @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                        <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                         @endforeach
 
                     </select>
@@ -78,6 +78,8 @@
 
                         {{-- //* purchase order number --}}
                         <th scope="col" class="px-4 py-3 text-center">Purchase Order No.</th>
+                        {{-- //* supplier name --}}
+                        <th scope="col" class="px-4 py-3 text-left">Status</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier Name</th>
@@ -92,88 +94,94 @@
                 <tbody>
 
                     @foreach ($purchases as $purchase)
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $purchase->created_at->format(' M d Y ') }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $purchase->created_at->format(' M d Y ') }}
+                        </th>
 
-                            {{-- //* purchase order no --}}
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $purchase->po_number }}
-                            </th>
+                        {{-- //* purchase order no --}}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $purchase->po_number }}
+                        </th>
 
-                            {{-- //* supplier --}}
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                {{ $purchase->supplierJoin->company_name }}
-                            </th>
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $purchase->deliveryJoin->status }}
+                        </th>
 
-                            {{-- //* Action --}}
-                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
+                        {{-- //* supplier --}}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                            {{ $purchase->supplierJoin->company_name }}
+                        </th>
 
-                                <div x-data="{ openActions: false }">
-                                    <div x-on:click="openActions = !openActions"
-                                        class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
+                        {{-- //* Action --}}
+                        <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
-                                        </svg>
-                                    </div>
+                            <div x-data="{ openActions: false }">
+                                <div x-on:click="openActions = !openActions"
+                                    class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
-                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
-                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
-                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                        x-transition:leave="transition ease-out duration-100"
-                                        x-transition:leave-start="transform opacity-100 scale-100"
-                                        x-transition:leave-end="transform opacity-0 scale-0"
-                                        x-on:click.away="openActions = false"
-                                        class="absolute overflow-hidden right-20 z-10 transform max-w-m origin-top-right w-[170px]">
-                                        <div
-                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                    </svg>
+                                </div>
+
+                                <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                    x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-out duration-100"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-0"
+                                    x-on:click.away="openActions = false"
+                                    class="absolute overflow-hidden right-20 z-10 transform max-w-m origin-top-right w-[170px]">
+                                    <div class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
                                         min-h-[20%]">
-                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
-                                                <button
-                                                    x-on:click=" $wire.displayPurchaseOrderDetails(); openActions = !openActions"
-                                                    wire:click="getPo_ID({{ $purchase->id }})"
-                                                    class="flex transition-all duration-100 ease-in-out hover:text-green-300 hover:pl-3 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
-                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="size-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                        </svg></div>
-                                                    <div>View PO</div>
-                                                </button>
+                                        <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
+                                            <button
+                                                x-on:click=" $wire.displayPurchaseOrderDetails(); openActions = !openActions"
+                                                wire:click="getPo_ID({{ $purchase->id }})"
+                                                class="flex transition-all duration-100 ease-in-out hover:text-green-300 hover:pl-3 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="size-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                    </svg></div>
+                                                <div>View PO</div>
+                                            </button>
 
-                                                <div class="w-full border border-[rgb(39,39,39)]"></div>
-                                                {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode }}'), openActions = !openActions " --}}
+                                            <div class="w-full border border-[rgb(39,39,39)]"></div>
+                                            {{-- x-on:click="showPrintModal=true; $wire.getBarcode('{{ $item->barcode
+                                            }}'), openActions = !openActions " --}}
 
-                                                <button wire:click="printPO({{ $purchase->id }})"
-                                                    x-on:click="window.open('{{ route('reorderlist.sales.report') }}', '_blank'); openActions = !openActions"
-                                                    {{-- x-on:click="$wire.displayPrintPurchaseOrderDetails(), openActions = !openActions" --}}
-                                                    {{-- wire:click="getStock({{ $inventory->id }})" --}}
-                                                    class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                            class="size-6">
-                                                            <path strokeLinecap="round" strokeLinejoin="round"
-                                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div>Print PO</div>
-                                                </button>
-                                            </div>
+                                            <button wire:click="printPO({{ $purchase->id }})"
+                                                x-on:click="window.open('{{ route('reorderlist.sales.report') }}', '_blank'); openActions = !openActions"
+                                                {{--
+                                                x-on:click="$wire.displayPrintPurchaseOrderDetails(), openActions = !openActions"
+                                                --}} {{-- wire:click="getStock({{ $inventory->id }})" --}}
+                                                class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                                        class="size-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                                    </svg>
+                                                </div>
+                                                <div>Print PO</div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </th>
-                        </tr>
+                            </div>
+                        </th>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

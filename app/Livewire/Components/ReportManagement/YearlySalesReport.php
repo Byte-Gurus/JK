@@ -25,9 +25,10 @@ class YearlySalesReport extends Component
     public function generateYearlyReport($year)
     {
         // Parse the year into start and end dates
-        $startOfYear = Carbon::parse($year)->startOfYear();
-        $endOfYear = Carbon::parse($year)->endOfYear();
+        $startOfYear = Carbon::createFromFormat('Y', $year)->startOfYear();
+        $endOfYear = Carbon::createFromFormat('Y', $year)->endOfYear();
 
+       
         // Fetch transactions within the year range
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
 

@@ -73,10 +73,13 @@ class User extends Authenticatable
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
         return $query->whereRaw('LOWER(username) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
-            ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"]);
+            ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(CONCAT(firstname, " ", lastname)) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(CONCAT(firstname, " ", middlename, " ", lastname)) LIKE ?', ["%{$value}%"]);
     }
 }

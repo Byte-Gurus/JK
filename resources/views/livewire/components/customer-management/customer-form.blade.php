@@ -395,7 +395,7 @@
 
                                                 <input type="number" id="senior_pwd_id" wire:model="senior_pwd_id"
                                                     class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                    placeholder="senior_pwd_id" required />
+                                                    placeholder="ID No." required />
 
                                                 @error('senior_pwd_id')
                                                 <span class="font-medium text-red-500 error">{{ $message }}</span>

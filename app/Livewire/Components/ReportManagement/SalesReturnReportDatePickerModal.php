@@ -17,15 +17,27 @@ class SalesReturnReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-sales-return-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()
     {
         $this->reset([
-            'toDate', 'fromDate'
+            'toDate',
+            'fromDate'
         ]);
     }
 
+    public function validateForm()
+    {
+        $rules = [
+            'toDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
+            'fromDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01|before_or_equal:toDate',
+        ];
+
+        return $this->validate($rules);
+    }
     public function displaySalesReturnReport()
     {
         $this->dispatch('display-sales-return-report')->to(ReportManagement::class);
@@ -33,6 +45,8 @@ class SalesReturnReportDatePickerModal extends Component
 
     public function getDate()
     {
+        $validated = $this->validateForm();
         $this->dispatch('generate-report', $this->toDate, $this->fromDate)->to(SalesReturnReport::class);
+        $this->displaySalesReturnReport();
     }
 }

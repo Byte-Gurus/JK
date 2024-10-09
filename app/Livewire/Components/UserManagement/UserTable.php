@@ -71,7 +71,6 @@ class UserTable extends Component
     public function updatedSearch()
     {
 
-
         $this->resetPage();
     }
 

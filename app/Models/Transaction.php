@@ -57,13 +57,22 @@ class Transaction extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
         return $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"])
             ->orWhereHas('customerJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(CONCAT(firstname, " ", lastname)) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(CONCAT(firstname, " ", middlename, " ", lastname)) LIKE ?', ["%{$value}%"]);
             })
             ->orWhereHas('userJoin', function ($query) use ($value) {
-                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"]);
+                $query->whereRaw('LOWER(firstname) like ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(CONCAT(firstname, " ", lastname)) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(CONCAT(firstname, " ", middlename, " ", lastname)) LIKE ?', ["%{$value}%"]);
             })
             ->orWhereHas('discountJoin', function ($query) use ($value) {
                 // Check the database connection driver and use the appropriate CAST syntax

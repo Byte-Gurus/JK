@@ -35,6 +35,7 @@ class Supplier extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
         return $query->whereRaw('LOWER(company_name) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(contact_number) LIKE ?', ["%{$value}%"])

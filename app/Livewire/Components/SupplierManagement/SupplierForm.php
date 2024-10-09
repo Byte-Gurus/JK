@@ -259,12 +259,11 @@ class SupplierForm extends Component
         $this->company_name = trim($this->company_name);
         $this->street = trim($this->street);
 
-
         $rules = [
-            'company_name' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-0-9@ ]+$/',
+            'company_name' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allo
 
             //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
-            'contact_number' => ['required', 'numeric', 'digits:11', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
+            'contact_number' => ['required', 'numeric', 'digits:11', 'regex:/^09[0-9]{9}$/',  Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
             'status' => 'required|in:1,2',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',

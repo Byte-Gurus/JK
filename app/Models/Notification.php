@@ -15,8 +15,13 @@ class Notification extends Model
         'credit_id',
     ];
 
-    public function inventory()
+    public function inventoryJoin()
     {
         return $this->belongsTo(Inventory::class, 'inventory_id');
     }
+    public function creditJoin()
+    {
+        return $this->belongsTo(Credit::class, 'credit_id');
+    }
+
 }

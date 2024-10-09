@@ -41,6 +41,8 @@ class TransactionMovement extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
+
 
         return $query->whereHas('transactionJoin', function ($query) use ($value) {
             $query->whereRaw('LOWER(transaction_number) like ?', ["%{$value}%"]);
