@@ -74,6 +74,4 @@ class Dashboard extends Component
     {
         $this->resetPage();
     }
-
-
 }

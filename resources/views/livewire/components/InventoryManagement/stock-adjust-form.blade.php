@@ -1,10 +1,9 @@
 <div class="relative" x-cloak>
-    <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
     <div
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
         <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
             <div
-                class="flex flex-col h-full w-full justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
+                class="flex backdrop-blur-xl flex-col h-full w-full justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
                 <div class="flex flex-col gap-1 leading-none">
                     <p class="text-[1em] font-thin text-white">SKU</p>
                     <p class="text-[1.2em] font-bold text-white">{{ $sku_code }}</p>

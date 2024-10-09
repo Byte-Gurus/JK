@@ -233,8 +233,8 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th class="px-4 py-4 text-center z-99 text-md text-nowrap">
-                                <div x-data="{ openActions: false }">
+                            <th class="z-50 px-4 py-4 text-center text-md text-nowrap">
+                                <div x-data="{ openActions: false }" class="relative ">
                                     <div x-on:click="openActions = !openActions" class="p-1 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -251,9 +251,9 @@
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0"
                                         x-on:click.away="openActions = false"
-                                        class="absolute overflow-hidden  right-11 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        class="absolute right-11 z-10 transform max-w-m origin-top-right w-[170px]">
                                         <div
-                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
+                                            class=" relative overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
                                         min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
                                                 <button
@@ -288,16 +288,12 @@
                             </th>
                         </tr>
                     @endforeach
-
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}
-        <div class="border-t border-black ">
+        <div class="z-10 border-t border-black ">
 
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
@@ -319,11 +315,6 @@
                 </select>
 
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>

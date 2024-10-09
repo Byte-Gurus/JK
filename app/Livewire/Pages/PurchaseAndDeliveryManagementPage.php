@@ -31,9 +31,15 @@ class PurchaseAndDeliveryManagementPage extends Component
         'change-sidebar-status' => 'changeSidebarStatus',
         'hide-navbar' => 'hideNavbar',
         'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
+        'show-navbar-for-create-form-dashboard' => 'showNavbarForCreatePurchaseOrderFormFromDashboard',
         'display-delivery-page' => 'displayDeliveryPage',
         'display-purchase-page' => 'displayPurchasePage',
     ];
+
+    public function showNavbarForCreatePurchaseOrderFormFromDashboard($showNavbar)
+    {
+        $this->showNavbar = $showNavbar;
+    }
 
     public function displayDeliveryPage()
     {
