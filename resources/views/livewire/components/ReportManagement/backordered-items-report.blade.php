@@ -12,30 +12,18 @@
                     <p class="text-[0.8em] uppercase">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
                 </div>
                 <div>
-                    <p class="text-[0.8em] uppercase">Non-VAT Reg TIN 936-196-461-0000</p>
+                    <p class="text-[0.8em] uppercase">VAT Reg TIN 936-196-461-0000</p>
                 </div>
             </div>
         </div>
-        <div class="grid grid-flow-col grid-cols-2 ">
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div>
+        <div class="grid grid-flow-col ">
+            <div class="self-end">
                 <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">BACKORDERED ITEMS REPORT</p>
             </div>
         </div>
 
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
-
-
-
 
             <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
 
@@ -44,26 +32,31 @@
                         <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Item Name</p>
                     </div>
                 </li>
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Item Description</p>
                     </div>
                 </li>
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Purchase Number</p>
                     </div>
                 </li>
+
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Supplier</p>
                     </div>
                 </li>
+
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
@@ -104,9 +97,15 @@
                 </ul>
             @endforeach
         </div>
-        <div class="flex flex-row py-4 mx-4 text-nowrap">
-            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-            {{ $createdBy }}
+        <div class="px-4 py-4">
+            <div class="flex flex-row text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                {{ $dateCreated }}
+            </div>
+            <div class="flex flex-row py-4 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                {{ $createdBy }}
+            </div>
         </div>
     </div>
 </div>
