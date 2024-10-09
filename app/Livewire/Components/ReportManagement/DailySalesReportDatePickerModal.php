@@ -39,11 +39,19 @@ class DailySalesReportDatePickerModal extends Component
 
     public function getDate()
     {
+        $validated = $this->validateForm();
+    
+
         $this->dispatch('generate-report', $this->date)->to(DailySalesReport::class);
+        $this->displayDailySalesReport();
+    }
 
-        // $livewireComponent = App::make(DailySalesReport::class);
+    public function validateForm()
+    {
+        $rules = [
+            'date' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
+        ];
 
-        // // Call the download method
-        // return $livewireComponent->download();
+        return $this->validate($rules);
     }
 }

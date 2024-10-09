@@ -23,7 +23,7 @@ class SalesReturnDetails extends Component
     public $operation = [];
     public $isAdmin;
     public $description = [];
-    
+
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
     public $fromPage = 'ReturnDetails';
     public $return_info = [];
@@ -157,6 +157,10 @@ class SalesReturnDetails extends Component
 
                     }
 
+                    if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
+                        $this->item_return_amount = $this->item_return_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
+                    }
+
                     $this->return_total_amount += $this->item_return_amount;
 
                     if ($transactionDetail->vat_type === 'Vat') {
@@ -171,6 +175,8 @@ class SalesReturnDetails extends Component
                         $vat_exempt_return_total_amount = $vat_exempt_Return_Subtotal - ($vat_exempt_Return_Subtotal / (100 + $vat_Percent) * 100);
 
                     }
+
+
 
                 }
 

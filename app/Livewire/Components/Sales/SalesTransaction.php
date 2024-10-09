@@ -553,8 +553,8 @@ class SalesTransaction extends Component
 
     public function removeRowConfirmed()
     {
-        $this->totalVat -= $this->tax_details['vatable_amount'];
-        $this->grandTotal -= $this->selectedItems[$this->selectedIndex]['total_amount'];
+        $this->totalVat -= $this->tax_details['vatable_amount'] ?? 0;
+        $this->grandTotal -= $this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0;
         unset($this->selectedItems[$this->selectedIndex]);
 
         $this->selectedItems = array_values($this->selectedItems);

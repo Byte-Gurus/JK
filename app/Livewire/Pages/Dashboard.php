@@ -11,11 +11,14 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public $id_from_kwan;
+
     public $day, $week, $month, $year;
     public $selectPicker = 1;
     public $sidebarStatus;
     public function render()
     {
+
         $reorder_lists = Item::join('inventories', 'items.id', '=', 'inventories.item_id')
             ->select(
                 'items.id as item_id',
@@ -60,6 +63,7 @@ class Dashboard extends Component
     public function changeSidebarStatus($sidebarOpen)
     {
         $this->sidebarStatus = $sidebarOpen;
+
     }
 
     public function updatedSelectPicker($picker)

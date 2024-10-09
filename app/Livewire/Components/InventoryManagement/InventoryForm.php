@@ -121,7 +121,7 @@ class InventoryForm extends Component
             'item_name' => $inventory->itemJoin->item_name,
             'item_description' => $inventory->itemJoin->item_description,
             'cost' => $inventory->cost,
-            'markup' => round((($inventory->selling_price - $inventory->cost) / $inventory->cost) * 100),
+            'markup' => number_format((($inventory->selling_price - $inventory->cost) / $inventory->cost) * 100, 2),
             'seling_price' => $inventory->selling_price
         ]);
     }
@@ -151,8 +151,8 @@ class InventoryForm extends Component
     {
 
         if ($cost !== null && $markup !== null) {
-            $srp = $cost * (1 + $markup / 100);
-            $this->seling_price = ceil($srp);
+            $this->seling_price  = $cost * (1 + $markup / 100);
+
         }
 
     }

@@ -86,149 +86,150 @@
 
                     <tbody>
                         @foreach ($purchaseDetails as $index => $purchaseDetail)
-                            <tr
-                                class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition-all ease-in-out duration-1000">
-                                <th scope="row"
-                                    class="px-4 py-10 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail['barcode'] }}
-                                </th>
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition-all ease-in-out duration-1000">
+                            <th scope="row" class="px-4 py-10 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchaseDetail['barcode'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="px-4 py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap ">
-                                    {{ $purchaseDetail['item_name'] }}
-                                </th>
+                            <th scope="row"
+                                class="px-4 py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap ">
+                                {{ $purchaseDetail['item_name'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
-                                    {{ $purchaseDetail['item_description'] }}
-                                </th>
-                                <th scope="row"
-                                    class="px-4 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail['purchase_quantity'] }}
-                                </th>
-
-
-                                <th scope="row"
-                                    class="px-4 py-10 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail['sku_code'] }}
-                                </th>
-                                {{-- restock quantity --}}
-                                <th scope="row"
-                                    class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <input type="number" wire:model="restock_quantity.{{ $index }}" required
-                                        class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
-
-                                    @error("restock_quantity.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-2">
-                                            <span
-                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        </div>
-                                    @enderror
-                                </th>
-
-                                {{-- cost --}}
-                                <th scope="row"
-                                    class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <input type="number" wire:model.live.debounce.500ms="cost.{{ $index }}"
-                                        required
-                                        class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
-
-                                    @error("cost.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[22%]">
-                                            <span
-                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        </div>
-                                    @enderror
-                                </th>
-
-                                {{-- markup --}}
-                                <th scope="row"
-                                    class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <input type="number"
-                                        wire:model.live.debounce.500ms="markup.{{ $index }}"required
-                                        class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
-
-                                    @error("markup.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[40%]">
-                                            <span
-                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        </div>
-                                    @enderror
-                                </th>
-
-                                {{-- srp --}}
-                                <th scope="row"
-                                    class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    <input type="number" wire:model.live.debounce.500ms="srp.{{ $index }}"
-                                        required readonly
-                                        class="  bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
-
-                                    @error("srp.$index")
-                                        <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[57%]">
-                                            <span
-                                                class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{ $message }}</span>
-                                        </div>
-                                    @enderror
-                                </th>
-
-                                {{-- exp date --}}
-                                <th scope="row"
-                                    class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                                    @if ($purchaseDetail['shelf_life_type'] === 'Perishable')
-                                        <input type="date" wire:model="expiration_date.{{ $index }}" required
-                                            class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
-                                    @elseif($purchaseDetail['shelf_life_type'] === 'Non Perishable')
-                                        N/A
-                                    @endif
-
-                                    @error("expiration_date.$index")
-                                        <div class="absolute p-1 bg-[rgba(255,181,181,0.49)] mt-3 rounded-t-lg right-2">
-                                            <span
-                                                class="col-span-1 text-center text-red-500 text-[0.8em] fontfont-medium error text-wrap">{{ $message }}</span>
-                                        </div>
-                                    @enderror
-                                </th>
+                            <th scope="row"
+                                class="py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
+                                {{ $purchaseDetail['item_description'] }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchaseDetail['purchase_quantity'] }}
+                            </th>
 
 
-                                <th scope="row"
-                                    class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    @if (isset($purchaseDetail['isDuplicate']) && $purchaseDetail['isDuplicate'])
-                                        <button type="button" wire:click="removeItem({{ $index }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                strokeWidth={1.5} stroke="currentColor"
-                                                class="transition-all duration-100 ease-in-out bg-red-100 rounded-full size-8 hover:bg-red-200">
-                                                <path strokeLinecap="round" strokeLinejoin="round"
-                                                    d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                            </svg>
-                                        </button>
-                                    @else
-                                        <button type="button" wire:click="duplicateItem({{ $purchaseDetail['id'] }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                strokeWidth={1.5} stroke="currentColor"
-                                                class="transition-all duration-100 ease-in-out bg-green-100 rounded-full size-8 hover:bg-green-200">
-                                                <path strokeLinecap="round" strokeLinejoin="round"
-                                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                            </svg>
-                                        </button>
-                                    @endif
-                                </th>
+                            <th scope="row" class="px-4 py-10 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $purchaseDetail['sku_code'] }}
+                            </th>
+                            {{-- restock quantity --}}
+                            <th scope="row"
+                                class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                <input type="number" wire:model="restock_quantity.{{ $index }}" required
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
 
-                                {{-- <div class="absolute bottom-[58%] mx-4">
-                                    <div
-                                        class="grid grid-flow-col grid-cols-5 gap-4 leading-none text-justify justify-evenly">
+                                @error("restock_quantity.$index")
+                                <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-2">
+                                    <span
+                                        class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{
+                                        $message }}</span>
+                                </div>
+                                @enderror
+                            </th>
+
+                            {{-- cost --}}
+                            <th scope="row"
+                                class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                <input type="number" wire:model.live.debounce.500ms="cost.{{ $index }}" required
+                                    class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+                                @error("cost.$index")
+                                <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[22%]">
+                                    <span
+                                        class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{
+                                        $message }}</span>
+                                </div>
+                                @enderror
+                            </th>
+
+                            {{-- markup --}}
+                            <th scope="row"
+                                class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                <input type="number" step="0.01" wire:model.live.debounce.500ms="markup.{{ $index }}"
+                                    required
+                                    class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-2/3 mx-auto p-2.5">
+
+                                @error("markup.$index")
+                                <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[40%]">
+                                    <span
+                                        class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{
+                                        $message }}</span>
+                                </div>
+                                @enderror
+                            </th>
+
+                            {{-- srp --}}
+                            <th scope="row"
+                                class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                <input type="number" wire:model.live.debounce.500ms="srp.{{ $index }}" required readonly
+                                    class="  bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+
+                                @error("srp.$index")
+                                <div class="absolute mt-3 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg left-[57%]">
+                                    <span
+                                        class="col-span-1 text-[0.8em] font-medium text-center text-red-500 error text-wrap">{{
+                                        $message }}</span>
+                                </div>
+                                @enderror
+                            </th>
+
+                            {{-- exp date --}}
+                            <th scope="row"
+                                class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+                                @if ($purchaseDetail['shelf_life_type'] === 'Perishable')
+                                <input type="date" wire:model="expiration_date.{{ $index }}" required
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] text-center text-gray-900 text-sm rounded-md  block w-full p-2.5">
+                                @elseif($purchaseDetail['shelf_life_type'] === 'Non Perishable')
+                                N/A
+                                @endif
+
+                                @error("expiration_date.$index")
+                                <div class="absolute p-1 bg-[rgba(255,181,181,0.49)] mt-3 rounded-t-lg right-2">
+                                    <span
+                                        class="col-span-1 text-center text-red-500 text-[0.8em] fontfont-medium error text-wrap">{{
+                                        $message }}</span>
+                                </div>
+                                @enderror
+                            </th>
 
 
+                            <th scope="row"
+                                class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                @if (isset($purchaseDetail['isDuplicate']) && $purchaseDetail['isDuplicate'])
+                                <button type="button" wire:click="removeItem({{ $index }})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        strokeWidth={1.5} stroke="currentColor"
+                                        class="transition-all duration-100 ease-in-out bg-red-100 rounded-full size-8 hover:bg-red-200">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                </button>
+                                @else
+                                <button type="button" wire:click="duplicateItem({{ $purchaseDetail['id'] }})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        strokeWidth={1.5} stroke="currentColor"
+                                        class="transition-all duration-100 ease-in-out bg-green-100 rounded-full size-8 hover:bg-green-200">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                </button>
+                                @endif
+                            </th>
 
+                            {{-- <div class="absolute bottom-[58%] mx-4">
+                                <div
+                                    class="grid grid-flow-col grid-cols-5 gap-4 leading-none text-justify justify-evenly">
 
 
 
 
 
 
-                                    </div>
-                                </div> --}}
-                            </tr>
+
+
+
+                                </div>
+                            </div> --}}
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

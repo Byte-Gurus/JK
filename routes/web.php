@@ -52,6 +52,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('/admin', HomePage::class)->name('admin.index');
 
         //Dashboard
+
         Route::get('/admin/Dashboard', Dashboard::class)->name('dashboard.index');
 
         //UserManagamenent
