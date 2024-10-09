@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12 col-span-2 gap-5 py-4 mb-5 justify-evenly">
-    <div class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border rounded-md shadow-md border-lime-900 shadow-lime-900 "
+    <a class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border rounded-md shadow-md border-lime-900 shadow-lime-900 "
         style="background-image: linear-gradient(115deg, #dcfdd6, #b9ffb8)">
         <div class="grid grid-cols-3">
             <div class="col-span-2">
@@ -14,8 +14,8 @@
                 </svg>
             </div>
         </div>
-    </div>
-    <div class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border border-yellow-900 rounded-md shadow-md shadow-yellow-900 "
+    </a>
+    <a href="{{ route('inventorymanagement.index') }}" class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border border-yellow-900 rounded-md shadow-md shadow-yellow-900 "
         style="background-image: linear-gradient(115deg, #f5fdd6, #fef8b6)">
         <div class="grid grid-cols-3">
             <div class="col-span-2">
@@ -30,8 +30,8 @@
                 </svg>
             </div>
         </div>
-    </div>
-    <div class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border border-teal-900 rounded-md shadow-md shadow-teal-900 "
+    </a>
+    <a class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border border-teal-900 rounded-md shadow-md shadow-teal-900 "
         style="background-image: linear-gradient(115deg, #d6fafd, #bafefe)">
         <div class="grid grid-cols-3">
             <div class="col-span-2">
@@ -46,7 +46,7 @@
                 </svg>
             </div>
         </div>
-    </div>
+    </a>
     <div class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border border-pink-900 rounded-md shadow-md shadow-pink-900 "
         style="background-image: linear-gradient(115deg, #fcd6fd, #febdfe)">
         <div class="grid grid-cols-3">

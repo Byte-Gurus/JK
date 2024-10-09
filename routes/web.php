@@ -3,6 +3,7 @@
 
 use App\Livewire\Components\Logout;
 use App\Livewire\Components\PurchaseAndDeliveryManagement\PrintPurchaseOrderDetails;
+use App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase\PurchaseOrderForm;
 use App\Livewire\Components\ReportManagement\BackorderedItemsReport;
 use App\Livewire\Components\ReportManagement\CustomerCreditListReport;
 use App\Livewire\Components\ReportManagement\DailySalesReport;
@@ -62,6 +63,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         //PurchaseAndDeliveryManagement
         Route::get('admin/PurchaseAndDeliveryManagement', PurchaseAndDeliveryManagementPage::class)->name('purchaseanddeliverymanagement.index');
+
+        //PurchaseOrderForm
+        Route::get('admin/PurchaseOrderForm', PurchaseOrderForm::class)->name('purchaseorderform.index');
 
         //ItemManagement
         Route::get('admin/ItemManagement', ItemManagementPage::class)->name('itemmanagement.index');

@@ -6,9 +6,12 @@ use App\Models\VoidTransaction;
 use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
+use Livewire\Features\SupportPagination\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class VoidTransactionTable extends Component
 {
+    use WithPagination, WithoutUrlPagination;
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination

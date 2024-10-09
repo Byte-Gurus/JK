@@ -33,6 +33,17 @@ class PurchasePage extends Component
         return view('livewire.pages.purchase-page');
     }
 
+    protected $listeners = [
+        'close-modal' => 'closeModal',
+        'change-method' => 'changeMethod',
+        'form-create-from-dashboard' => 'formCreateFromDashboard',
+        'display-edit-modal' => 'displayEditModal',
+        'display-purchase-order-details' => 'displayPurchaseOrderDetails',
+        'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
+        'form-cancel' => 'formCancel',
+        'display-table' => 'displayTable'
+    ];
+
     public function formCreate()
     {
         $this->dispatch(event: 'reset-form')->to(PurchaseOrderForm::class); //var assign ang parameter value sa global variable
@@ -40,15 +51,10 @@ class PurchasePage extends Component
         $this->showPurchaseOrderForm = true;
     }
 
-    protected $listeners = [
-        'close-modal' => 'closeModal',
-        'change-method' => 'changeMethod',
-        'display-edit-modal' => 'displayEditModal',
-        'display-purchase-order-details' => 'displayPurchaseOrderDetails',
-        'display-print-purchase-order-details' => 'displayPrintPurchaseOrderDetails',
-        'form-cancel' => 'formCancel',
-        'display-table' => 'displayTable'
-    ];
+    public function formCreateFromDashboard()
+    {
+        
+    }
 
     public function changeMethod($isCreate)
     {
