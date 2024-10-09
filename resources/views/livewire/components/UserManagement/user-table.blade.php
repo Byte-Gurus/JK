@@ -58,7 +58,6 @@
             </div>
         </div>
 
-
         {{-- //* tablea area --}}
         <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[52vh]">
 
@@ -215,7 +214,7 @@
 
                             {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $user->updated_at->format(' M d Y ')  }}
+                                {{ $user->updated_at->format(' M d Y ') }}
                             </th>
 
                             {{-- //* edit button --}}
@@ -246,12 +245,8 @@
                             </th>
                         </tr>
                     @endforeach
-
-
                 </tbody>
-
             </table>
-
         </div>
 
         {{-- //* table footer --}}
@@ -277,11 +272,6 @@
                 </select>
 
             </div>
-
-
         </div>
-
     </div>
-
-
 </div>

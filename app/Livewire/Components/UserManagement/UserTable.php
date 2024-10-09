@@ -70,7 +70,6 @@ class UserTable extends Component
 
     public function updatedSearch()
     {
-
         $this->resetPage();
     }
 
@@ -90,7 +89,6 @@ class UserTable extends Component
     }
     public function refreshFromPusher()
     {
-
         $this->resetPage();
     }
 
