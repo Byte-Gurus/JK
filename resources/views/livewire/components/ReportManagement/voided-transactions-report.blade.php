@@ -16,13 +16,14 @@
                 </div>
             </div>
         </div>
-        <div>
-            <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">VOIDED TRANSACTIONS REPORT</p>
-        </div>
-        <div class="flex flex-row justify-between px-4 mb-2">
+        <div class="grid items-center grid-flow-col m-4">
             <div class="flex flex-row text-nowrap">
                 <p class="text-[1em] font-black uppercase">Specified Date:</p>
                 {{-- {{ $transaction_info['date'] ?? ' ' }} --}}
+            </div>
+
+            <div>
+                <p class="text-[1.2em] font-bold text-right italic mr-10 uppercase">VOIDED TRANSACTIONS REPORT</p>
             </div>
 
             {{-- <div class="flex flex-col self-start justify-between px-4 mb-2">

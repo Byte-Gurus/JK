@@ -17,8 +17,8 @@
             </div>
         </div>
         @if ($slowmoving_info)
-            <div class="grid grid-flow-col grid-cols-2 ">
-                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+            <div class="grid items-center grid-flow-col grid-cols-2 ">
+                <div class="flex flex-col justify-between col-span-1 px-4">
                     <div class="flex flex-col ">
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-black uppercase">Selected Date:</p>

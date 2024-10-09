@@ -18,7 +18,6 @@ class FastMovingItemsReportDatePickerModal extends Component
         $this->resetForm();
         $this->dispatch(event: 'close-fast-moving-items-report-date-picker-modal')->to(ReportManagement::class);
         $this->resetValidation();
-
     }
 
     public function resetForm()
@@ -37,13 +36,11 @@ class FastMovingItemsReportDatePickerModal extends Component
     }
     public function displayFastMovingItemsReport()
     {
-
         $this->dispatch(event: 'display-fast-moving-items-report')->to(ReportManagement::class);
     }
     public function getDate()
     {
         $validated = $this->validateForm();
         $this->dispatch('generate-report', $this->date)->to(FastMovingItemsReport::class);
-        $this->displayFastMovingItemsReport();
     }
 }
