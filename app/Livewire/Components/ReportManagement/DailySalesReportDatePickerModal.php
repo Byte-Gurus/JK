@@ -21,6 +21,8 @@ class DailySalesReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-daily-sales-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()

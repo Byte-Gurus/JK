@@ -19,6 +19,8 @@ class YearlySalesReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-yearly-sales-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()
@@ -41,7 +43,7 @@ class YearlySalesReportDatePickerModal extends Component
     }
     public function getDate()
     {
-    
+
 
         $validated = $this->validateForm();
 

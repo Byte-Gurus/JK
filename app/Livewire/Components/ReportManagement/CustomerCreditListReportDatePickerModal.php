@@ -20,6 +20,8 @@ class CustomerCreditListReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-customer-credit-list-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()

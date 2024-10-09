@@ -19,6 +19,8 @@ class DamagedItemsReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-damaged-items-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()

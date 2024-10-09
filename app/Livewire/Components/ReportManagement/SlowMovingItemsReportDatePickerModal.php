@@ -17,6 +17,8 @@ class SlowMovingItemsReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-slow-moving-items-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()

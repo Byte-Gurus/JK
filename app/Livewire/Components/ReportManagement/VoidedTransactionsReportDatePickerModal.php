@@ -18,6 +18,8 @@ class VoidedTransactionsReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-voided-transactions-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()

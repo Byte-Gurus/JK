@@ -20,6 +20,8 @@ class ExpiredItemsReportDatePickerModal extends Component
     {
         $this->resetForm();
         $this->dispatch(event: 'close-expired-items-report-date-picker-modal')->to(ReportManagement::class);
+        $this->resetValidation();
+
     }
 
     public function resetForm()
