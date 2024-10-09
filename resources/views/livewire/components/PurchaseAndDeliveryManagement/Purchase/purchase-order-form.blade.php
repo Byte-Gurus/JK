@@ -107,7 +107,7 @@
                                     <th scope="row"
                                         class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                         <div class="flex justify-center">
-                                            <input type="checkbox" wire:model="selectedToRemove"
+                                            <input type="checkbox" wire:model.live="selectedToRemove"
                                                 value="{{ $index }}"
                                                 class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
                                         </div>

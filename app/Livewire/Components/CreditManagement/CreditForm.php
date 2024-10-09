@@ -155,7 +155,7 @@ class CreditForm extends Component
 
         $rules = [
             'customer_name' => 'required',
-            'credit_limit' => ['required', 'numeric', 'min:1'],
+            'credit_limit' => ['required', 'numeric', 'min:1', 'max:5000'],
             'status' => 'required|in:Paid,Pending,Overdue',
             'due_date' => 'required|date|after_or_equal:today'
         ];

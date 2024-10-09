@@ -45,6 +45,7 @@ class Inventory extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
         return $query->whereRaw('LOWER(sku_code) LIKE ?', ["%{$value}%"])
             ->orWhereHas('itemJoin', function ($query) use ($value) {

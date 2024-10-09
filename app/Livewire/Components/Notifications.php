@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Components\InventoryManagement\InventoryTable;
+use App\Models\Inventory;
 use App\Models\Notification;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -19,5 +21,17 @@ class Notifications extends Component
         return view('livewire.components.notifications', [
             'notifications' => $notifications
         ]);
+    }
+
+    public function goToOtherPage($id, $table)
+    {
+        if ($table == 'inventory') {
+            $inventory = Inventory::find($id);
+            $this->dispatch('set-search-description', $inventory->sku_code)->to(InventoryTable::class);
+
+            // return redirect()->route('inventorymanagement.index');
+        } elseif ($table == 'credit') {
+
+        }
     }
 }

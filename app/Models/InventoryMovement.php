@@ -43,22 +43,28 @@ class InventoryMovement extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
+
 
         return $query->whereHas('inventoryJoin.itemJoin', function ($query) use ($value) {
             $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
-                ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
+                ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"])
+                ->orWhereRaw('LOWER(item_description) LIKE ?', ["%{$value}%"]);
         })
             ->orWhereHas('adjustmentJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
+                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(item_description) LIKE ?', ["%{$value}%"]);
             })
             ->orWhereHas('transactionDetailsJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
+                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(item_description) LIKE ?', ["%{$value}%"]);
             })
             ->orWhereHas('voidTransactionDetailsJoin.transactionDetailsJoin.inventoryJoin.itemJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"]);
+                    ->orWhereRaw('LOWER(barcode) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(item_description) LIKE ?', ["%{$value}%"]);
             });
     }
 }

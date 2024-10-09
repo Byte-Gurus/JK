@@ -31,6 +31,7 @@ class VoidTransaction extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
         return $query->whereRaw('LOWER(void_number) LIKE ?', ["%{$value}%"])
             ->orWhereHas('transactionJoin', function ($query) use ($value) {

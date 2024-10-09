@@ -231,9 +231,9 @@ class DiscountForm extends Component
             $this->lastname = trim($this->lastname);
 
             $rules = [
-                'firstname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
-                'middlename' => 'nullable|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
-                'lastname' => 'required|string|max:50|regex:/^[a-zA-ZñÑ\'\-]+$/',
+                'firstname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
+                'middlename' => 'nullable|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
+                'lastname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u',
                 'birthdate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
                 'contact_number' => 'required|numeric|digits:11',
                 'selectProvince' => 'required|exists:philippine_provinces,province_code',

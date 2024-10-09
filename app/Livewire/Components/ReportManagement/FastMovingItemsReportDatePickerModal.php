@@ -25,12 +25,23 @@ class FastMovingItemsReportDatePickerModal extends Component
             'date'
         ]);
     }
+    public function validateForm()
+    {
+        $rules = [
+            'date' => 'required|date|date_format:Y-m|before_or_equal:today',
+        ];
 
+        return $this->validate($rules);
+    }
     public function displayFastMovingItemsReport()
     {
+
         $this->dispatch(event: 'display-fast-moving-items-report')->to(ReportManagement::class);
     }
-    public function getDate(){
+    public function getDate()
+    {
+        $validated = $this->validateForm();
         $this->dispatch('generate-report', $this->date)->to(FastMovingItemsReport::class);
-     }
+        $this->displayFastMovingItemsReport();
+    }
 }

@@ -28,14 +28,27 @@ class DamagedItemsReportDatePickerModal extends Component
             'fromDate'
         ]);
     }
+    public function validateForm()
+    {
+        $rules = [
+            'toDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
+            'fromDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01|before_or_equal:toDate',
+        ];
+
+        return $this->validate($rules);
+    }
 
     public function displayDamagedItemsReport()
     {
-        $this->dispatch( 'display-damaged-items-report')->to(ReportManagement::class);
+        $this->dispatch('display-damaged-items-report')->to(ReportManagement::class);
     }
 
     public function getDate()
     {
+        $validated = $this->validateForm();
+
         $this->dispatch('generate-report', $this->toDate, $this->fromDate)->to(DamagedItemsReport::class);
+        $this->displayDamagedItemsReport();
+
     }
 }

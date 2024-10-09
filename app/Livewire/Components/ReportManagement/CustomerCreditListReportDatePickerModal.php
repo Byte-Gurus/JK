@@ -30,6 +30,16 @@ class CustomerCreditListReportDatePickerModal extends Component
         ]);
     }
 
+    public function validateForm()
+    {
+        $rules = [
+            'toDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
+            'fromDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01|before_or_equal:toDate',
+        ];
+
+        return $this->validate($rules);
+    }
+
     public function displayCustomerCreditListReport()
     {
         $this->dispatch(event: 'display-customer-credit-list-report')->to(ReportManagement::class);
@@ -37,6 +47,8 @@ class CustomerCreditListReportDatePickerModal extends Component
 
     public function getDate()
     {
+        $validated = $this->validateForm();
         $this->dispatch('generate-report', $this->fromDate, $this->toDate)->to(CustomerCreditListReport::class);
+        $this->displayCustomerCreditListReport();
     }
 }

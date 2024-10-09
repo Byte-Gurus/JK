@@ -32,10 +32,13 @@ class Customer extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
         return $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(CONCAT(firstname, " ", lastname)) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(CONCAT(firstname, " ", middlename, " ", lastname)) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(senior_pwd_id) LIKE ?', ["%{$value}%"])
             ->orWhereHas('addressJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(street) LIKE ?', ["%{$value}%"])

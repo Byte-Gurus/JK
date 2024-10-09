@@ -28,12 +28,23 @@ class MonthlySalesReportDatePickerModal extends Component
         ]);
     }
 
+    public function validateForm()
+    {
+        $rules = [
+            'date' => 'required|date|date_format:Y-m|before_or_equal:today',
+        ];
+
+        return $this->validate($rules);
+    }
     public function displayMonthlySalesReport()
     {
         $this->dispatch(event: 'display-monthly-sales-report')->to(ReportManagement::class);
     }
     public function getDate()
     {
+        $validated = $this->validateForm();
+
         $this->dispatch('generate-report', $this->date)->to(MonthlySalesReport::class);
+        $this->displayMonthlySalesReport();
     }
 }

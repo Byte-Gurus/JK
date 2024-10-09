@@ -36,9 +36,13 @@ class Returns extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
+        $value = trim($value);
 
-        return $query->whereHas('transactionJoin', function ($query) use ($value) {
-            $query->whereRaw('LOWER(transaction_number) LIKE ?', ["%{$value}%"]);
+        return $query->where(function ($query) use ($value) {
+            $query->whereRaw('LOWER(return_number) LIKE ?', ["%{$value}%"])
+                ->orWhereHas('transactionJoin', function ($query) use ($value) {
+                    $query->whereRaw('LOWER(transaction_number) LIKE ?', ["%{$value}%"]);
+                });
         });
     }
 
