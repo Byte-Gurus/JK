@@ -86,6 +86,7 @@ class VoidTransactionFormModal extends Component
 
         }
 
+        $this->dispatch('refresh-table')->to(VoidTransactionTable::class);
         VoidEvent::dispatch('refresh-void');
 
         $this->alert('success', 'Item/s was voided successfully');
