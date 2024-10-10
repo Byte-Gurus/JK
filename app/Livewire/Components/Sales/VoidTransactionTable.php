@@ -24,7 +24,7 @@ class VoidTransactionTable extends Component
         if ($this->startDate && $this->endDate) {
             $startDate = Carbon::parse($this->startDate)->startOfDay();
             $endDate = Carbon::parse($this->endDate)->endOfDay();
-            $query->whereBetween('stock_in_date', [$startDate, $endDate]);
+            $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
         $voidTransactions = $query->search($this->search) //?search the user

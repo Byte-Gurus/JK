@@ -134,12 +134,6 @@
                                 {{ $voidTransactionDetail->reason }}
                             </th>
 
-<<<<<<< HEAD
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
-                            </th>
-=======
                         <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                             {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
                         </th>
@@ -153,7 +147,6 @@
                             @endif
 
                         </th>
->>>>>>> production
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->void_quantity }}
