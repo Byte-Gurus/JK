@@ -54,6 +54,8 @@ class PurchaseOrderForm extends Component
     {
         $this->resetPage();
         $this->generatePurchaseOrderNumber();
+        $this->resetValidation();
+        $this->resetForm();
     }
     public function render()
     {
@@ -437,7 +439,7 @@ class PurchaseOrderForm extends Component
     }
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['po_number', 'purchase_id', 'proxy_purchase_id', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
+        $this->reset([ 'purchase_id', 'proxy_purchase_id', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
     }
 
     // private function resetPONumber() //*tanggalin ang laman ng input pati $item_id value

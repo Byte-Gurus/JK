@@ -140,15 +140,17 @@
                                         class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
                                         <input type="number" wire:model="purchase_quantities.{{ $index }}"
                                             required
-                                            class="bg-[rgb(249,249,249)] self-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
+                                            class="bg-gray-100 self-center appearance-none border border-gray-400 text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" class="text-center">
                                         @error("purchase_quantities.$index")
-                                            <div
-                                                class="absolute mt-16 p-1 bg-[rgba(255,181,181,0.49)] rounded-t-lg right-1/4">
-                                                <span
-                                                    class="relative font-medium text-center text-red-500 error text-nowrap">{{ $message }}</span>
+                                            <div class="p-1 bg-red-100">
+                                                <span class="font-medium text-center text-red-500">{{ $message }}</span>
                                             </div>
                                         @enderror
-                                    </th>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

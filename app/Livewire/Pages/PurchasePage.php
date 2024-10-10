@@ -53,7 +53,7 @@ class PurchasePage extends Component
 
     public function formCreateFromDashboard()
     {
-        
+
     }
 
     public function changeMethod($isCreate)

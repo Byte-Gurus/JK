@@ -28,7 +28,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
-    public $dateDelivered = [], $delivery_date, $selectedDate;
+    public $dateDelivered = [], $delivery_date, $selectedDate, $today_date;
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
