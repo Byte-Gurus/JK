@@ -28,15 +28,15 @@
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Original Amount</p>
-                    <p class="text-[1em] font-black">{{ $orignal_amount }}</p>
+                    <p class="text-[1em] font-black">{{number_format($orignal_amount, 2) }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Return Total Amount</p>
-                    <p class="text-[1em] font-black">{{ $return_total_amount }}</p>
+                    <p class="text-[1em] font-black">{{number_format($return_total_amount, 2) }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Current Amount</p>
-                    <p class="text-[1em] font-black">{{ $current_amount }}</p>
+                    <p class="text-[1em] font-black">{{number_format($current_amount, 2) }}</p>
                 </div>
             </div>
 
@@ -99,6 +99,8 @@
 
                         {{-- //* unit price --}}
                         <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
+                        {{-- //* unit price --}}
+                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
 
                         {{-- //* employee name --}}
                         <th scope="col" class="px-4 py-3 text-center">return_quantity</th>
@@ -116,46 +118,57 @@
                 <tbody>
 
                     @foreach ($return_details as $return_detail)
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->itemJoin->barcode }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->transactionDetailsJoin->itemJoin->barcode }}
+                        </th>
 
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->inventoryJoin->sku_code }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->transactionDetailsJoin->inventoryJoin->sku_code }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->itemJoin->item_name }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->transactionDetailsJoin->itemJoin->item_name }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->itemJoin->item_description }}
-                            </th>
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->operation }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->transactionDetailsJoin->itemJoin->item_description }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->operation }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->transactionDetailsJoin->item_price }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->transactionDetailsJoin->item_price }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->return_quantity }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            @if ($return_detail->transactionDetailsJoin->discount_id == 3)
+                            {{ number_format($return_detail->transactionDetailsJoin->item_price -
+                            ($return_detail->transactionDetailsJoin->item_price *
+                            $return_detail->transactionDetailsJoin->discountJoin->percentage / 100 ), 2)}}
+                            @else
+                            0.00
+                            @endif
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->item_return_amount }}
-                            </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $return_detail->description }}
-                            </th>
-                        </tr>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->return_quantity }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($return_detail->item_return_amount, 2) }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return_detail->description }}
+                        </th>
+                    </tr>
                     @endforeach
 
                 </tbody>

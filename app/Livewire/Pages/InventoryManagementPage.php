@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Livewire\Components\InventoryManagement\InventoryForm;
+use App\Livewire\Components\InventoryManagement\InventoryTable;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,8 +16,15 @@ class InventoryManagementPage extends Component
     public $showInventoryForm = false;
     public $sidebarStatus;
     public $showStockCard = false;
+
+    public $sku_code;
+    public function mount($sku_code = null)
+    {
+        $this->sku_code = $sku_code;
+    }
     public function render()
     {
+        $this->dispatchSku();
         return view('livewire.pages.inventory-management-page');
     }
 
@@ -83,5 +91,10 @@ class InventoryManagementPage extends Component
     public function closeStockAdjustPage()
     {
         $this->showStockAdjustPage = false;
+    }
+
+    public function dispatchSku()
+    {
+        $this->dispatch('test')->to(InventoryTable::class);
     }
 }

@@ -50,8 +50,8 @@
                             <select wire:model.live="reasonFilter"
                                 class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
                                 <option value="0">All</option>
-                                <option value="Expired">Cashier Error</option>
-                                <option value="Damaged">System Error</option>
+                                <option value="Cashier Error">Cashier Error</option>
+                                <option value="System Error">System Error</option>
                             </select>
                         </div>
                     </div>
@@ -83,7 +83,13 @@
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
+<<<<<<< HEAD
                         <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
+=======
+                        <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
+                        {{-- //* unit price --}}
+                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
+>>>>>>> production
 
                         {{-- //* employee name --}}
                         <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
@@ -92,6 +98,10 @@
                         <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> production
 
                     </tr>
                 </thead>
@@ -124,10 +134,26 @@
                                 {{ $voidTransactionDetail->reason }}
                             </th>
 
+<<<<<<< HEAD
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
                             </th>
+=======
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
+                        </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
+                            {{ number_format($voidTransactionDetail->transactionDetailsJoin->item_price -
+                            ($voidTransactionDetail->transactionDetailsJoin->item_price *
+                            $voidTransactionDetail->transactionDetailsJoin->discountJoin->percentage / 100 ), 2)}}
+                            @else
+                            0.00
+                            @endif
+
+                        </th>
+>>>>>>> production
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->void_quantity }}

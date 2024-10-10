@@ -24,6 +24,10 @@ class InventoryTable extends Component
 
     public $startDate, $endDate;
 
+    public function mount($sku_code = null)
+    {
+        $this->search = $sku_code;
+    }
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')
@@ -63,6 +67,7 @@ class InventoryTable extends Component
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
         "echo:refresh-inventory,InventoryEvent" => 'refreshFromPusher',
         'set-search-description' => 'setSearchDescription',
+        'test' => 'test'
     ];
 
     public function sortByColumn($column)
@@ -120,10 +125,13 @@ class InventoryTable extends Component
         $this->dispatch('stock-price', stockID: $stockId)->to(InventoryForm::class);
 
     }
+    public function test(){
+        dd('test');
+    }
 
-    public function setSearchDescription($sku_code){
-        dd($sku_code);
-        $this->search = $sku_code;
+    public function setSearchDescription(){
+        dd('SASAS');
+        // $this->search = $sku_code;
     }
 
     public function refreshFromPusher()

@@ -7,9 +7,13 @@ use App\Events\TransactionEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
+use App\Models\ReturnDetails;
+use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
+use App\Models\VoidTransaction;
+use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -73,36 +77,64 @@ class SalesTransactionHistory extends Component
 
         $this->transaction_type = $type;
 
-        $this->transactionDetails = TransactionDetails::where('transaction_id', $transaction_id)
-            ->whereHas('transactionJoin')
-            ->get();
+        switch ($this->transaction_type) {
+            case 'Sales':
+            case 'Credit':
+                $this->transactionDetails = TransactionDetails::where('transaction_id', $transaction_id)
+                    ->whereHas('transactionJoin')
+                    ->get();
 
-        $transaction = Transaction::with('discountJoin')
-            ->find($transaction_id);
+                $transaction = Transaction::with('discountJoin')
+                    ->find($transaction_id);
 
-        $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
-        $this->transaction_number = $transaction->transaction_number;
-        $this->subtotal = $transaction->subtotal;
-        $this->grandTotal = $transaction->total_amount;
+                $this->payment_type = $transaction->paymentJoin->payment_type ?? null;
+                $this->transaction_number = $transaction->transaction_number;
+                $this->subtotal = $transaction->subtotal;
+                $this->grandTotal = $transaction->total_amount;
 
-        $this->discount_percent = $transaction->discountJoin->percentage ?? 0;
-        $this->tendered_amount = $transaction->paymentJoin->tendered_amount ?? 0;
+                $this->discount_percent = $transaction->discountJoin->percentage ?? 0;
+                $this->tendered_amount = $transaction->paymentJoin->tendered_amount ?? 0;
+                $this->change = $this->tendered_amount - $this->grandTotal;
+                break;
+            case 'Return':
+                $this->transactionDetails = ReturnDetails::where('return_id', $transaction_id)
+                    ->get();
 
-        if ($type == 'Return') {
-            $this->return_original_amount = $transaction->returnJoin->original_amount ?? 0;
-            $this->return_amount = $transaction->returnJoin->return_total_amount ?? 0;
-        } elseif ($type == 'Void') {
-            $this->void_original_amount = $transaction->voidTransactionJoin->original_amount ?? 0;
-            $this->void_amount = $transaction->voidTransactionJoin->void_total_amount ?? 0;
+                $transaction = Returns::find($transaction_id);
+
+                $this->transaction_number = $transaction->return_number;
+                $this->return_original_amount = $transaction->original_amount ?? 0;
+                $this->return_amount = $transaction->return_total_amount ?? 0;
+                break;
+
+            case 'Void':
+                $this->transactionDetails = VoidTransactionDetails::where('void_transaction_id', $transaction_id)
+                    ->get();
+
+                $transaction = VoidTransaction::find($transaction_id);
+
+                $this->transaction_number = $transaction->void_number;
+                $this->void_original_amount = $transaction->original_amount ?? 0;
+                $this->void_amount = $transaction->void_total_amount ?? 0;
+                break;
         }
 
-        if ($this->transaction_type == 'Return') {
-            $this->change = $this->tendered_amount - $this->return_original_amount;
-        } elseif ($this->transaction_type == 'Void') {
-            $this->change = $this->tendered_amount - $this->void_original_amount;
-        } else {
-            $this->change = $this->tendered_amount - $this->grandTotal;
-        }
+
+
+        // if ($type == 'Return') {
+        //     $this->return_original_amount = $transaction->returnJoin->original_amount ?? 0;
+        //     $this->return_amount = $transaction->returnJoin->return_total_amount ?? 0;
+        // } elseif ($type == 'Void') {
+
+        // }
+
+        // if ($this->transaction_type == 'Return') {
+        //     $this->change = $this->tendered_amount - $this->return_original_amount;
+        // } elseif ($this->transaction_type == 'Void') {
+        //     $this->change = $this->tendered_amount - $this->void_original_amount;
+        // } else {
+        //     $this->change = $this->tendered_amount - $this->grandTotal;
+        // }
     }
 
     public function sortByColumn($column)

@@ -51,6 +51,11 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[0.8em] uppercase text-left font-bold">SKU</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
@@ -83,13 +88,22 @@
                             {{ $voidTransaction->void_number }}</p>
                     </div>
                 </li>
-               
+
 
                 <li class="col-span-1 py-[3px]">
                     <div>
                         @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
                         <p class="text-[0.8em] text-left font-medium">
                             {{ $voidItem->transactionDetailsJoin->itemJoin->barcode }}</p>
+                        @endforeach
+
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidItem->transactionDetailsJoin->itemJoin->sku_code }}</p>
                         @endforeach
 
                     </div>
