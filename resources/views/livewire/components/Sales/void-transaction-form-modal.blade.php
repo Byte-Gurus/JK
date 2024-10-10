@@ -32,32 +32,41 @@
 
                     <div class="flex flex-col justify-start w-full gap-1 my-4">
 
-                        <label class="text-sm font-medium text-white text-nowrap">Status:</label>
+                        <label class="text-sm font-medium text-white text-nowrap">Reason:</label>
 
-                        <select wire:model.live="statusFilter" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <select wire:model.live="reason" class="w-full p-4 rounded-md hover:bg-gray-300">
                             <option value="" selected>Select a reason</option>
-                            <option value="1">Cashier Error</option>
-                            <option value="2">System Error</option>
+                            <option value="Cashier Error">Cashier Error</option>
+                            <option value="System Error">System Error</option>
 
                         </select>
 
                     </div>
 
                     @error('reason')
-                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                    <span class="font-medium text-red-500 error">{{ $message }}</span>
                     @enderror
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
-                            {{-- //* clear all button for create --}}
+
+
                             <button type="button" wire:click="resetFormWhenClosed"
                                 class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>
+                        @if ($reason)
                         <div>
-                            <button type="button" wire:click="getReason"
+                            <button type="button" wire:click="voidAll"
                                 class=" px-6 py-2 bg-[rgb(249,191,90)] rounded-md text-[rgb(30,30,30)] font-bold">Continue</button>
 
                         </div>
+                        @else
+                        <div>
+                            <button type="button" wire:click="voidAll"
+                                class=" px-6 py-2 bg-[rgb(249,191,90)] rounded-md text-[rgb(30,30,30)] font-bold">Continue</button>
+
+                        </div>
+                        @endif
                     </div>
                 </form>
             </div>
