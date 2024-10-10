@@ -83,9 +83,10 @@
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
+                        <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
+
                         {{-- //* unit price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
+                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price (₱)</th>
 
                         {{-- //* employee name --}}
                         <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
@@ -109,7 +110,6 @@
                                 {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->barcode }}
                             </th>
 
-
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->inventoryJoin->sku_code }}
                             </th>
@@ -121,24 +121,29 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_description }}
                             </th>
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->reason }}
                             </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
-                        </th>
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
-                            {{ number_format($voidTransactionDetail->transactionDetailsJoin->item_price -
-                            ($voidTransactionDetail->transactionDetailsJoin->item_price *
-                            $voidTransactionDetail->transactionDetailsJoin->discountJoin->percentage / 100 ), 2)}}
-                            @else
-                            0.00
-                            @endif
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
+                            </th>
 
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
+                                    {{ number_format(
+                                        $voidTransactionDetail->transactionDetailsJoin->item_price -
+                                            ($voidTransactionDetail->transactionDetailsJoin->item_price *
+                                                $voidTransactionDetail->transactionDetailsJoin->discountJoin->percentage) /
+                                                100,
+                                        2,
+                                    ) }}
+                                @else
+                                    0.00
+                                @endif
+                            </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->void_quantity }}
@@ -148,6 +153,7 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->item_void_amount }}
                             </th>
+
                         </tr>
                     @endforeach
                 </tbody>
