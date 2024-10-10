@@ -114,7 +114,7 @@
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-center fot-bold">
-                            {{ \Carbon\Carbon::parse($credit->transactionJoin->created_at)->format('M d Y') }}
+                            {{ \Carbon\Carbon::parse($credit->created_at)->format('M d Y') }}
                         </p>
                     </div>
                 </li>
