@@ -163,6 +163,13 @@ class VoidTransactionForm extends Component
     {
         $this->showVoidTransactionFormModal = false;
     }
+    public function sendtransaction()
+    {
+        $this->dispatch('get-transaction', [
+            "transaction_id" => $this->transaction_id,
+            'void_number' => $this->void_number,
+        ])->to(VoidTransactionFormModal::class);
+    }
 
     public function calculateTotalVoidAmount()
     {
@@ -215,6 +222,7 @@ class VoidTransactionForm extends Component
         // dump($this->void_total_quantity, $this->void_total_amount, $this->void_vat_amount,$this->voidedDetails );
 
     }
+
 
     public function updatedReason($value, $index)
     {
@@ -284,6 +292,7 @@ class VoidTransactionForm extends Component
     public function getTransaction($Transaction)
     {
         $this->transaction_id = $Transaction['id'];
+
         $this->populateForm();
     }
 }

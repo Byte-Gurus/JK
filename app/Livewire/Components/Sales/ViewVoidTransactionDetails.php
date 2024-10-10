@@ -42,8 +42,8 @@ class ViewVoidTransactionDetails extends Component
 
         $this->fill([
             'transaction_number' => $void_info->transactionJoin->transaction_number,
-            'transaction_date' => $void_info->transactionJoin->created_at->format('M d Y H:i A'),
-            'void_date' => $void_info->created_at->format('M d Y H:i A'),
+            'transaction_date' => $void_info->transactionJoin->created_at->format('M d Y h:i A'),
+            'void_date' => $void_info->created_at->format('M d Y h:i A'),
             'orignal_amount' => number_format($void_info->original_amount, 2),
             'void_total_amount' => number_format($void_info->void_total_amount, 2),
             'current_amount' => number_format($void_info->transactionJoin->total_amount, 2),

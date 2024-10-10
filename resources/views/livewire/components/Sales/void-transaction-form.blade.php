@@ -82,7 +82,7 @@
     <div class="flex flex-col">
 
         <div class="flex flex-row gap-4 justify-end w-full mb-[3vh]">
-            <button type="button" x-on:click='$wire.displayVoidTransactionFormModal()'
+            <button type="button" wire:click="sendtransaction()" x-on:click='$wire.displayVoidTransactionFormModal()'
                 class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,136,136)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,85,85)]">
                 Void Whole Transaction
             </button>
