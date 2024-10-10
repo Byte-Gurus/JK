@@ -125,14 +125,14 @@ class InventoryTable extends Component
         $this->dispatch('stock-price', stockID: $stockId)->to(InventoryForm::class);
 
     }
-    public function test(){
-        dd('test');
-    }
+    // public function test(){
+    //     dd('test');
+    // }
 
-    public function setSearchDescription(){
-        dd('SASAS');
-        // $this->search = $sku_code;
-    }
+    // public function setSearchDescription(){
+    //     dd('SASAS');
+    //     // $this->search = $sku_code;
+    // }
 
     public function refreshFromPusher()
     {

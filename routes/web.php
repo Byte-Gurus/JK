@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Livewire\Components\CreditManagement\CreditTable;
 use App\Livewire\Components\InventoryManagement\InventoryTable;
 use App\Livewire\Components\Logout;
 use App\Livewire\Components\PurchaseAndDeliveryManagement\PrintPurchaseOrderDetails;
@@ -89,6 +90,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         //CreditManagement
         Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');
+        Route::get('admin/CreditManagement/CreditTable/{credit_id}', CreditTable::class)->name('credittable.index');
 
         //ReportManagement
         Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');

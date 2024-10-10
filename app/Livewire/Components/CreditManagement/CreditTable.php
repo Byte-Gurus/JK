@@ -21,6 +21,11 @@ class CreditTable extends Component
     public $supplierFilter = 0;
 
     public $startDate, $endDate;
+    public function mount($credit_id = null)
+    {
+        $this->search = $credit_id;
+    }
+
     public function render()
     {
         $query = Credit::query();

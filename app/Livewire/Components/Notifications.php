@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Livewire\Components\InventoryManagement\InventoryTable;
+use App\Models\Credit;
 use App\Models\Inventory;
 use App\Models\Notification;
 use Carbon\Carbon;
@@ -30,7 +31,9 @@ class Notifications extends Component
 
             return redirect()->route('inventorytable.index', ['sku_code' => $inventory->sku_code]);
         } elseif ($table == 'credit') {
+            $credit = Credit::find($id);
 
+            return redirect()->route('credittable.index', ['sku_code' => $credit->sku_code]);
         }
     }
 }
