@@ -89,13 +89,13 @@
             @if (!$toVoid_info || $this->allVoidNull())
                 <button type="button" disable
                     class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(142,157,137)] text-[rgb(53,53,53)] border rounded-md ">
-                    Confirm
+                    Void Selected Item/s
                 </button>
             @else
                 <button type="button" wire:click="voidSelectedItem()"
                     class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
                     wire:click="return">
-                    Confirm
+                    Void Selected Item/s
                 </button>
             @endif
 

@@ -1,7 +1,7 @@
 <div class="grid grid-flow-col grid-cols-3 h-[90vh] p-[3vh]">
     <div class="flex flex-col col-span-2">
         <div class="flex flex-row items-start justify-between flex-1 ">
-            <div class="w-2/4">
+            <div class="relative w-2/4">
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
@@ -17,10 +17,10 @@
 
                 @if (!empty($search))
                     <div
-                        class="absolute z-10 w-1/3 h-fit max-h-[400px] overflow-y-scroll border-black border-2 bg-[rgb(255,255,255)]">
+                        class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
                         @foreach ($items as $item)
                             <ul wire:click="selectItem({{ $item->id }})"
-                                class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(233,233,233)] h-fit text-nowrap">
+                                class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
                                 <li class="flex items-start justify-between">
                                     <!-- Item details on the left side -->
                                     <div class="flex flex-col w-[200px] items-start leading-1">
@@ -30,7 +30,7 @@
                                     </div>
 
                                     <!-- Price on the right side -->
-                                    <div class="flex flex-row items-center self-center justify-between gap-2 ">
+                                    <div class="flex flex-row items-center self-center justify-between gap-2 pr-2 ">
 
                                         <p class="text-[1em] font-medium italic">PHP</p>
                                         <p class="text-[1.5em] font-bold ">
