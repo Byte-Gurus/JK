@@ -83,13 +83,9 @@
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
-<<<<<<< HEAD
-                        <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
-=======
                         <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
                         {{-- //* unit price --}}
                         <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
->>>>>>> production
 
                         {{-- //* employee name --}}
                         <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
@@ -98,10 +94,6 @@
                         <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> production
 
                     </tr>
                 </thead>

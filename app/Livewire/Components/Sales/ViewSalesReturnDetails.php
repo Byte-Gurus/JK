@@ -44,11 +44,11 @@ class ViewSalesReturnDetails extends Component
 
         $this->fill([
             'transaction_number' => $return_info->transactionJoin->transaction_number,
-            'transaction_date' => $return_info->transactionJoin->created_at->format('M d Y'),
-            'return_date' => $return_info->created_at->format('M d Y'),
-            'orignal_amount' => $return_info->original_amount,
-            'return_total_amount' => $return_info->return_total_amount,
-            'current_amount' => $return_info->transactionJoin->total_amount,
+            'transaction_date' => $return_info->transactionJoin->created_at->format('M d Y H:i A'),
+            'return_date' => $return_info->created_at->format('M d Y H:i A'),
+            'orignal_amount' => number_format($return_info->original_amount, 2),
+            'return_total_amount' => number_format($return_info->return_total_amount, 2),
+            'current_amount' => number_format($return_info->transactionJoin->total_amount, 2),
             'return_number' => $return_info->return_number
         ]);
     }
