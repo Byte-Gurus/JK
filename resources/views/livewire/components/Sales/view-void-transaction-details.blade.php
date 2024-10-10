@@ -19,24 +19,24 @@
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Transaction Date</p>
-                    <p class="text-[1em] font-black">{{ $transaction_date }}</p>
+                    <p class="text-[1.2em] font-black">{{ $transaction_date }}</p>
                 </div>
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Void Date</p>
-                    <p class="text-[1em] font-black">{{ $void_date }}</p>
+                    <p class="text-[1.2em] font-black">{{ $void_date }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
-                    <p class="text-[1em] font-thin text-left w-full">Original Amount</p>
-                    <p class="text-[1em] font-black">{{ $orignal_amount }}</p>
+                    <p class="text-[1em] font-thin text-left w-full">Original Amount (₱)</p>
+                    <p class="text-[1.2em] font-black">{{ $orignal_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
-                    <p class="text-[1em] font-thin text-left w-full">Return Total Amount</p>
-                    <p class="text-[1em] font-black">{{ $void_total_amount }}</p>
+                    <p class="text-[1em] font-thin text-left w-full">Return Total Amount (₱)</p>
+                    <p class="text-[1.2em] font-black">{{ $void_total_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
-                    <p class="text-[1em] font-thin text-left w-full">Current Amount</p>
-                    <p class="text-[1em] font-black">{{ $current_amount }}</p>
+                    <p class="text-[1em] font-thin text-left w-full">Current Amount (₱)</p>
+                    <p class="text-[1.2em] font-black">{{ $current_amount }}</p>
                 </div>
             </div>
 
@@ -83,13 +83,13 @@
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
+                        <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">return_quantity</th>
+                        <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
 
                         {{-- //* transaction no --}}
-                        <th scope="col" class="px-4 py-3 text-center">item_return_amount</th>
+                        <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
 
 
 
@@ -99,47 +99,46 @@
                 {{-- //* table body --}}
                 <tbody>
 
-                    {@foreach ($voidTransactionDetails as $voidTransactionDetail)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                    @foreach ($voidTransactionDetails as $voidTransactionDetail)
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->barcode }}
-                        </th>
-
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->inventoryJoin->sku_code }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_name }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_description }}
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->reason }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->void_quantity }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->item_void_amount }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->barcode }}
+                            </th>
 
 
-                    </tr>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->inventoryJoin->sku_code }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_name }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_description }}
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->reason }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->void_quantity }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->item_void_amount }}
+                            </th>
+                        </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>

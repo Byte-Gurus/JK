@@ -46,12 +46,12 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[52vh] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[52vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                     <tr class=" text-nowrap">
 
@@ -127,22 +127,22 @@
 
                         {{-- //* status --}}
                         <th scope="col" wire:click="sortByColumn('created_at')"
-                        class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
+                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
 
-                        <div class="flex items-center">
+                            <div class="flex items-center">
 
-                            <p>Issued Date</p>
+                                <p>Issued Date</p>
 
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                </svg>
-                            </span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                    </svg>
+                                </span>
 
-                        </div>
-                    </th>
+                            </div>
+                        </th>
 
                         <th scope="col" wire:click="sortByColumn('due_date')"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
@@ -172,103 +172,107 @@
                 <tbody>
 
                     @foreach ($credits as $credit)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        {{-- credit id --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $credit->credit_number }}
-                        </th>
+                            {{-- credit id --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->credit_number }}
+                            </th>
 
-                        {{-- customer name --}}
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $credit->customerJoin->firstname . ' ' . $credit->customerJoin->middlename . ' ' .
-                            $credit->customerJoin->lastname }}
-                        </th>
+                            {{-- customer name --}}
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->customerJoin->firstname .
+                                    ' ' .
+                                    $credit->customerJoin->middlename .
+                                    ' ' .
+                                    $credit->customerJoin->lastname }}
+                            </th>
 
-                        {{-- credit balance --}}
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $credit->credit_amount ?? 'N/A' }}
-                        </th>
+                            {{-- credit balance --}}
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->credit_amount ?? 'N/A' }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $credit->remaining_balance ?? 'N/A' }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->remaining_balance ?? 'N/A' }}
+                            </th>
 
-                        {{-- credit payment amount --}}
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $credit->credit_limit }}
-                        </th>
+                            {{-- credit payment amount --}}
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->credit_limit }}
+                            </th>
 
-                        {{-- credit limit --}}
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $credit->status }}
-                        </th>
+                            {{-- credit limit --}}
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $credit->status }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            @if ($credit->credit_amount)
-                            {{ $credit->created_at->format(' M d Y ') }}
-                            @else
-                            'N/A'
-                            @endif
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                @if ($credit->credit_amount)
+                                    {{ $credit->created_at->format(' M d Y ') }}
+                                @else
+                                    'N/A'
+                                @endif
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ \Carbon\Carbon::parse($credit->due_date)->format(' M d Y ') }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ \Carbon\Carbon::parse($credit->due_date)->format(' M d Y ') }}
+                            </th>
 
 
-                        {{-- //* actions --}}
-                        <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
-                            <div x-data="{ openActions: false }">
-                                <div x-on:click="openActions = !openActions"
-                                    class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
+                            {{-- //* actions --}}
+                            <th class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1  relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
-                                    </svg>
-                                </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
 
-                                <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
-                                    x-cloak x-transition:enter-start="transform opacity-100 scale-0"
-                                    x-transition:enter-end="transform opacity-100 scale-100"
-                                    x-transition:leave="transition ease-out duration-100"
-                                    x-transition:leave-start="transform opacity-100 scale-100"
-                                    x-transition:leave-end="transform opacity-0 scale-0"
-                                    x-on:click.away="openActions = false"
-                                    class="absolute right-14 z-10 transform max-w-m origin-top-right w-[170px]">
-                                    <div class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        x-on:click.away="openActions = false"
+                                        class="absolute right-14 z-10 transform max-w-m origin-top-right w-[170px]">
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
                                         min-h-[20%]">
-                                        <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
+                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
 
-                                            @if ($credit->transaction_id && $credit->status != 'Fully paid')
-                                            <button wire:click="getCredit({{ $credit->id }})"
-                                                x-on:click="$wire.displayCreditPaymentForm(); openActions = !openActions"
-                                                class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
-                                                <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                        class="size-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                            d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-                                                    </svg>
-                                                </div>
-                                                <div>Credit Payment</div>
-                                            </button>
-                                            @endif
+                                                @if ($credit->transaction_id && $credit->status != 'Fully paid')
+                                                    <button wire:click="getCredit({{ $credit->id }})"
+                                                        x-on:click="$wire.displayCreditPaymentForm(); openActions = !openActions"
+                                                        class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" strokeWidth={1.5}
+                                                                stroke="currentColor" class="size-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                                                            </svg>
+                                                        </div>
+                                                        <div>Credit Payment</div>
+                                                    </button>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </th>
-                    </tr>
+                            </th>
+                        </tr>
                     @endforeach
 
                 </tbody>

@@ -16,10 +16,11 @@
                 </div>
 
                 @if (!empty($search))
-                    <div class="absolute w-1/3 h-fit max-h-[400px] overflow-y-scroll bg-[rgb(248,248,248)]">
+                    <div
+                        class="absolute z-10 w-1/3 h-fit max-h-[400px] overflow-y-scroll border-black border-2 bg-[rgb(255,255,255)]">
                         @foreach ($items as $item)
                             <ul wire:click="selectItem({{ $item->id }})"
-                                class="w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(208,208,208)] h-fit text-nowrap">
+                                class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgb(233,233,233)] h-fit text-nowrap">
                                 <li class="flex items-start justify-between">
                                     <!-- Item details on the left side -->
                                     <div class="flex flex-col w-[200px] items-start leading-1">
@@ -57,19 +58,16 @@
                         class="px-6 py-4 bg-[rgb(230,254,134)] border border-black hover:bg-[rgb(214,255,49)] font-bold ease-in-out duration-100 transition-all">Transaction
                         History</button>
                 </div>
-                {{-- @if ($)
-<p>Back</p>
-                @endif --}}
             </div>
         </div>
 
         {{-- //* tablea area --}}
-        <div class=" flex-3 overflow-x-auto overflow-y-scroll border border-black scroll h-[52vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll border border-[rgb(143,143,143)] no-scrollbar h-[52vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] top-0">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                     <tr class=" text-nowrap">
 
@@ -86,13 +84,13 @@
                         <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
                         {{-- //* price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Price(₱)</th>
+                        <th scope="col" class="px-4 py-3 text-right">Price(₱)</th>
 
                         {{-- //* discount --}}
-                        <th scope="col" class="px-4 py-3 text-center">Wholesale(%)</th>
+                        <th scope="col" class="px-4 py-3 text-right">Wholesale(%)</th>
 
                         {{-- //* amount --}}
-                        <th scope="col" class="px-4 py-3 text-center">Subtotal(₱)</th>
+                        <th scope="col" class="px-4 py-3 text-right">Subtotal(₱)</th>
 
                     </tr>
                 </thead>
@@ -139,26 +137,26 @@
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-4 text-lg font-black text-center text-gray-900 whitespace-nowrap"
+                                class="px-4 py-4 text-lg font-black text-right text-gray-900 whitespace-nowrap"
                                 :class="isSelected && ' bg-gray-200'">
                                 {{ number_format($selectedItem['selling_price'], 2) }}
                             </th>
 
 
                             <th scope="row"
-                                class="px-4 py-4 text-lg font-medium text-center text-gray-900 whitespace-nowrap"
+                                class="px-4 py-4 text-lg font-medium text-right text-gray-900 whitespace-nowrap"
                                 :class="isSelected && ' bg-gray-200'">
                                 {{ $selectedItem['discount'] }} %
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-4 text-lg font-medium text-left text-gray-900 whitespace-nowrap text-wrap"
+                                class="px-4 py-4 text-lg font-medium text-right text-gray-900 whitespace-nowrap text-wrap"
                                 :class="isSelected && ' bg-gray-200'">
-                                <div class="flex flex-col items-center justify-center">
+                                <div class="flex flex-col justify-center items-right">
                                     <div class="text-xl font-black">
                                         {{ number_format($selectedItem['total_amount'], 2) }}
                                     </div>
-                                    <div class="text-sm text-left italic font-medium text-[rgb(122,122,122)]">
+                                    <div class="text-sm text-right italic font-medium text-[rgb(122,122,122)]">
 
                                         {{ number_format($selectedItem['original_total'], 2) }}
                                     </div>
@@ -183,7 +181,8 @@
                                 class="py-2 text-center ">
                                 Cancel Transaction
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(42,13,13)] font-bold">CTRL + 1</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(42,13,13)] font-bold">CTRL +
+                                1</p>
                         </div>
                     @else
                         <div
@@ -191,7 +190,8 @@
                             <button class="py-2 text-center ">
                                 Cancel Transaction
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 1</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL +
+                                1</p>
                         </div>
                     @endif
                 </div>
@@ -203,14 +203,17 @@
                             <button class="py-2 ">
                                 Discount
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(63,18,45)] font-bold">CTRL + 4</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(63,18,45)] font-bold">CTRL
+                                + 4</p>
                         </div>
                     @else
-                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div
+                            class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button class="py-2 " disabled>
                                 Discount
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 4</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL
+                                + 4</p>
                         </div>
                     @endif
                     @if (!empty($selectedItems) && empty($payment) && !$unableShortcut)
@@ -219,14 +222,17 @@
                             <button class="py-2 ">
                                 Remove Item
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(21,17,55)] font-bold">CTRL + 3</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(21,17,55)] font-bold">CTRL
+                                + 3</p>
                         </div>
                     @else
-                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div
+                            class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button disabled class="py-2 ">
                                 Remove Item
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 3</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL
+                                + 3</p>
                         </div>
                     @endif
                 </div>
@@ -239,14 +245,17 @@
                             <button class="py-2 ">
                                 Quantity
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(19,60,63)] font-bold">CTRL + 2</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(19,60,63)] font-bold">CTRL
+                                + 2</p>
                         </div>
                     @else
-                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div
+                            class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button disabled class="py-2 ">
                                 Quantity
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 2</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL
+                                + 2</p>
                         </div>
                     @endif
                     @if (!empty($selectedItems) && $changeTransactionType != 2 && !$unableShortcut)
@@ -256,14 +265,17 @@
                             <button class="py-2">
                                 Pay
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">CTRL + 5</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">CTRL
+                                + 5</p>
                         </div>
                     @else
-                        <div class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
+                        <div
+                            class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
                             <button class="py-2" disabled>
                                 Pay
                             </button>
-                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL + 5</p>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">CTRL
+                                + 5</p>
                         </div>
                     @endif
                 </div>
@@ -290,7 +302,7 @@
                     </div>
                 @else
                     <div
-                    class="py-4 px-8 font-bold w-full flex items-center justify-center text-center bg-[rgb(201,201,201)] border border-black text-nowrap relative">
+                        class="py-4 px-8 font-bold w-full flex items-center justify-center text-center bg-[rgb(201,201,201)] border border-black text-nowrap relative">
                         <button type="button" class="py-2">
                             Save
                         </button>
@@ -635,7 +647,7 @@
                             </div>
                             <div class="flex flex-row justify-between">
                                 <p class=" text-[1.2em] font-medium">Return Amount</p>
-                                <p class=" text-[1.2em] font-black">{{  number_format($return_amount, 2) ?? ' ' }}</p>
+                                <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) ?? ' ' }}</p>
                             </div>
                             <div class="flex flex-row justify-between">
                                 <p class=" text-[1.2em] font-medium">Subtotal</p>

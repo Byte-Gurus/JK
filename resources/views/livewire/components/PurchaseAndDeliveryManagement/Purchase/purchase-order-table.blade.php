@@ -53,7 +53,7 @@
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
+                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] top-0">
 
                     <tr class=" text-nowrap">
 
@@ -72,7 +72,6 @@
                                             d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                                     </svg>
                                 </span>
-
                             </div>
                         </th>
 

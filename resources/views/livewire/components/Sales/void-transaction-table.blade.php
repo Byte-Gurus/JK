@@ -38,12 +38,12 @@
         </div>
     </div>
     {{-- //* tablea area --}}
-    <div class="overflow-x-auto overflow-y-scroll scroll border rounded-md border-[rgb(143,143,143)] h-[52vh]">
+    <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[52vh]">
 
         <table class="w-full text-sm text-left scroll no-scrollbar">
 
             {{-- //* table header --}}
-            <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+            <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                 <tr class=" text-nowrap">
 
@@ -54,10 +54,10 @@
                     <th scope="col" class="px-4 py-3">Transaction No.</th>
 
                     {{-- original quantity --}}
-                    <th scope="col" class="px-4 py-3 text-center">Original Quantity</th>
+                    <th scope="col" class="px-4 py-3 text-right">Original Amount (₱)</th>
 
                     {{-- //* total return amount --}}
-                    <th scope="col" class="px-4 py-3 text-center">Total Return Amount</th>
+                    <th scope="col" class="px-4 py-3 text-right">Total Return Amount (₱)</th>
 
                     {{-- //* date --}}
                     <th scope="col" class="px-4 py-3 text-center">Date</th>
@@ -82,13 +82,13 @@
                         {{ $voidTransaction->transactionJoin->transaction_number }}
                     </th>
 
-                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                    <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                         {{ number_format($voidTransaction->original_amount, 2) }}
 
                     </th>
 
 
-                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                    <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                         {{ number_format($voidTransaction->void_total_amount, 2) }}
 
                     </th>

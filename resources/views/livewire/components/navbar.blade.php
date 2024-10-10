@@ -67,7 +67,7 @@
                     </a>
                 </div>
                 @endif
-                
+
                 <div x-data="{ openNotifications: false }" x-on:click.away="openNotifications = false;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         x-on:click="openNotifications = !openNotifications" stroke="currentColor">
@@ -81,7 +81,7 @@
                         x-transition:leave-start="transform opacity-100 scale-100"
                         x-transition:leave-end="transform opacity-0 scale-0"
                         class="absolute z-10 w-screen max-w-md origin-top-right transform right-40">
-                        <div class=" overflow-y-auto rounded-l-lg h-full max-h-[400px] rounded-br-lg rounded-tr-none shadow-lg shadow-slate-300 ring-1 ring-black ring-opacity-5
+                        <div class=" overflow-y-auto rounded-l-lg h-full max-h-[400px] rounded-br-lg rounded-tr-none
                         min-h-[50%]">
                             <div class="h-fit max-h-[400px]">
                                 @livewire('components.notifications')
