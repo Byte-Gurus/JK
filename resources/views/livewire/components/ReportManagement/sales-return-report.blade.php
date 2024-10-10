@@ -23,12 +23,12 @@
             <div class="flex flex-col ">
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                    {{-- {{  }} --}}
+                    {{  $fromDate . ' - ' . $toDate}}
                 </div>
             </div>
             <div class="flex flex-col self-start justify-between px-4 mb-2">
                 <div class="flex flex-row border border-black text-nowrap">
-                    <p class="text-[1em] font-black border-r border-black uppercase">Total Sales Return </p>
+                    {{-- <p class="text-[1em] font-black border-r border-black uppercase">Total Sales Return </p> --}}
                     {{-- {{ number_format($transaction_info['totalNet'], 2) }} --}}
                 </div>
             </div>

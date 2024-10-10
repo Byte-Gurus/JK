@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class CustomerCreditListReport extends Component
 {
-    public $dateCreated, $createdBy, $credits;
+    public $dateCreated, $createdBy, $credits, $fromDate, $toDate;
     public function render()
     {
 
@@ -19,6 +19,9 @@ class CustomerCreditListReport extends Component
             'credits' => $this->credits
         ]);
     }
+    protected $listeners = [
+        'generate-report' => 'generateReport'
+    ];
 
     public function reportInfo()
     {
@@ -27,13 +30,16 @@ class CustomerCreditListReport extends Component
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');
     }
 
-    public function generateReport($toDate, $fromDate)
+    public function generateReport($fromDate, $toDate)
     {
 
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
 
-        $this->credits = Credit::whereHas('transactionJoin')
-            ->whereBetween('created_at', [$startDate, $endDate])->get();
+        $this->fromDate = $startDate->format('M d Y');
+        $this->toDate = $endDate->format('M d Y');
+
+
+        $this->credits = Credit::whereBetween('created_at', [$startDate, $endDate])->get();
     }
 }

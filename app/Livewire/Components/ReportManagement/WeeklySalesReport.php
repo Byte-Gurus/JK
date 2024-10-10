@@ -79,7 +79,7 @@ class WeeklySalesReport extends Component
                 case 'Credit':
                     $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
                     $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-                    
+
                     break;
                 case 'Void':
                     $dailySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
@@ -126,7 +126,7 @@ class WeeklySalesReport extends Component
             'totalVoidItemAmount' => $totalVoidItemAmount,
             'totalVoidTaxAmount' => $totalVoidTaxAmount,
             'dailySummaries' => $dailySummaries,
-            'week' => $startOfWeek->format('M d, Y') . ' - ' . $endOfWeek->format('M d, Y'),
+            'date' => $startOfWeek->format('M d, Y') . ' - ' . $endOfWeek->format('M d, Y'),
             'dateCreated' => Carbon::now()->format('M d, Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];

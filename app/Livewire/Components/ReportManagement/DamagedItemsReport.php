@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class DamagedItemsReport extends Component
 {
-    public $createdBy, $dateCreated, $damagedItems;
+    public $createdBy, $dateCreated, $damagedItems, $fromDate, $toDate;
     public function render()
     {
         $this->reportInfo();
@@ -29,6 +29,9 @@ class DamagedItemsReport extends Component
     {
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
+
+        $this->fromDate = $startDate->format('M d Y');
+        $this->toDate = $endDate->format('M d Y');
 
         $this->damagedItems = ReturnDetails::where('operation', 'Damaged')
             ->whereBetween('created_at', [$startDate, $endDate])

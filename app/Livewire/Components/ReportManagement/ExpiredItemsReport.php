@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class ExpiredItemsReport extends Component
 {
-    public $createdBy, $dateCreated, $expiredItems;
+    public $createdBy, $dateCreated, $expiredItems, $fromDate, $toDate;
 
     public function render()
     {
@@ -36,6 +36,10 @@ class ExpiredItemsReport extends Component
     {
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
+
+        $this->fromDate = $startDate->format('M d Y');
+        $this->toDate = $endDate->format('M d Y');
+
 
         // Fetch records from ReturnDetails where operation is 'Expired'
         $returnDetails = ReturnDetails::where('operation', 'Expired')

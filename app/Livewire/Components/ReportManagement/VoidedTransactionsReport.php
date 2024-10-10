@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class VoidedTransactionsReport extends Component
 {
-    public $createdBy, $dateCreated, $voidTransactions;
+    public $createdBy, $dateCreated, $voidTransactions, $fromDate, $toDate;
 
     public function render()
     {
@@ -35,6 +35,9 @@ class VoidedTransactionsReport extends Component
     {
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
+
+        $this->fromDate = $startDate->format('M d Y');
+        $this->toDate = $endDate->format('M d Y');
 
         $this->voidTransactions = VoidTransaction::whereBetween('created_at', [$startDate, $endDate])->get();
     }

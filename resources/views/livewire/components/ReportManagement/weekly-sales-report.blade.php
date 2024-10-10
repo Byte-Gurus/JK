@@ -25,7 +25,7 @@
                     <div class="flex flex-col ">
                         <div class="flex flex-row text-nowrap">
                             <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                            {{-- {{ $transaction_info['date'] }} --}}
+                            {{ $transaction_info['date'] }}
                         </div>
                     </div>
                 </div>

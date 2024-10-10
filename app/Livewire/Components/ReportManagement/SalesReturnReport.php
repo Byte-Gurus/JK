@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class SalesReturnReport extends Component
 {
-    public $createdBy, $dateCreated, $returnItems;
+    public $createdBy, $dateCreated, $returnItems, $fromDate, $toDate;
 
     public function render()
     {
@@ -35,6 +35,10 @@ class SalesReturnReport extends Component
     {
         $startDate = Carbon::parse($fromDate)->startOfDay();
         $endDate = Carbon::parse($toDate)->endOfDay();
+
+
+        $this->fromDate = $startDate->format('M d Y');
+        $this->toDate = $endDate->format('M d Y');
 
         $this->returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get();
     }

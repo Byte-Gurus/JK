@@ -20,7 +20,8 @@
 
             <div class="flex flex-row text-nowrap">
                 <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                {{-- {{ $transaction_info['date'] }} --}}
+                {{ $fromDate . ' - ' . $toDate}}
+
             </div>
 
             <div>
