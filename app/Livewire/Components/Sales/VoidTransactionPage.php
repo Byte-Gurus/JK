@@ -4,10 +4,12 @@ namespace App\Livewire\Components\Sales;
 
 use App\Livewire\Pages\CashierPage;
 use Livewire\Component;
+use Livewire\Features\SupportPagination\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class VoidTransactionPage extends Component
 {
-
+    use WithPagination, WithoutUrlPagination;
     public $showVoidTransactionTable = true;
     public $showVoidTransactionForm = false;
     public $showVoidTransactionModal = false;
@@ -20,7 +22,8 @@ class VoidTransactionPage extends Component
     protected $listeners = [
         'display-void-transaction-form' => 'displayVoidTransactionForm',
         'display-void-transaction-details' => 'displayVoidTransactionDetails',
-        'return-void-transaction-page' => 'returnVoidTransactionPage'
+        'return-void-transaction-page' => 'returnVoidTransactionPage',
+        'refresh-table' => 'refreshTable',
     ];
 
     public function returnToVoidTransactionPageFromVoidTransactionForm()
@@ -46,6 +49,11 @@ class VoidTransactionPage extends Component
         $this->showVoidTransactionForm = false;
         $this->showVoidTransactionDetails = false;
         $this->showVoidTransactionTable = true;
+    }
+
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 
     public function returnVoidTransactionPage()

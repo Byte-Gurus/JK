@@ -68,4 +68,9 @@ class VoidTransactionTable extends Component
     {
         $this->resetPage();
     }
+
+    public function refreshTable()
+    {
+        $this->resetPage();
+    }
 }
