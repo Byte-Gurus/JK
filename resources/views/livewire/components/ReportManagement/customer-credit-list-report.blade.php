@@ -13,25 +13,22 @@
                     <p class="text-[0.8em] uppercase">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
                 </div>
                 <div>
-                    <p class="text-[0.8em] uppercase">Non-VAT Reg TIN 936-196-461-0000</p>
+                    <p class="text-[0.8em] uppercase">VAT Reg TIN 936-196-461-0000</p>
                 </div>
             </div>
-        </div>
-        <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">CUSTOMER CREDIT REPORT</p>
-
         </div>
         {{-- @if ($transaction_info) --}}
-        <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                        <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
-                        </p>
-                    </div>
-                </div>
+        <div class="grid items-center grid-flow-col m-4 ">
+
+            <div class="flex flex-row text-nowrap">
+                <p class="text-[1em] font-black uppercase">Specified Date:</p>
+                {{-- {{ $transaction_info['date'] }} --}}
             </div>
+
+            <div>
+                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">CUSTOMER CREDIT REPORT</p>
+            </div>
+
         </div>
         {{-- @endif --}}
 
@@ -160,9 +157,15 @@
                 @endforeach
             @endif
         </div>
-        <div class="flex flex-row py-4 mx-4 text-nowrap">
-            <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-            {{ $createdBy }}
+        <div class="px-4 py-4 ">
+            <div class="flex flex-row text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                {{ $dateCreated }}
+            </div>
+            <div class="flex flex-row py-4 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                {{ $createdBy }}
+            </div>
         </div>
     </div>
 </div>
