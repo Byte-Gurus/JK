@@ -27,9 +27,8 @@ class Notifications extends Component
     {
         if ($table == 'inventory') {
             $inventory = Inventory::find($id);
-            $this->dispatch('set-search-description', $inventory->sku_code)->to(InventoryTable::class);
 
-            // return redirect()->route('inventorymanagement.index');
+            return redirect()->route('inventorytable.index', ['sku_code' => $inventory->sku_code]);
         } elseif ($table == 'credit') {
 
         }

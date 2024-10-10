@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Livewire\Components\InventoryManagement\InventoryTable;
 use App\Livewire\Components\Logout;
 use App\Livewire\Components\PurchaseAndDeliveryManagement\PrintPurchaseOrderDetails;
 use App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase\PurchaseOrderForm;
@@ -77,7 +78,11 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         //InventoryManagement
         Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
 
-        
+        Route::get('admin/InventoryManagement/InventoryTable/{sku_code}', InventoryTable::class)->name('inventorytable.index');
+
+
+
+
 
         //InventoryManagement
         Route::get('admin/SalesTransaction', CashierPage::class)->name('cashierpage.index');

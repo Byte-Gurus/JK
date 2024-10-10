@@ -44,8 +44,8 @@ class ViewSalesReturnDetails extends Component
 
         $this->fill([
             'transaction_number' => $return_info->transactionJoin->transaction_number,
-            'transaction_date' => $return_info->transactionJoin->created_at,
-            'return_date' => $return_info->created_at,
+            'transaction_date' => $return_info->transactionJoin->created_at->format('M d Y'),
+            'return_date' => $return_info->created_at->format('M d Y'),
             'orignal_amount' => $return_info->original_amount,
             'return_total_amount' => $return_info->return_total_amount,
             'current_amount' => $return_info->transactionJoin->total_amount,
