@@ -56,7 +56,7 @@
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Reorder point</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Reorder Qty</p>
                     </div>
                 </li>
 

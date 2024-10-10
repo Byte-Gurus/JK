@@ -12,7 +12,7 @@
         @endif
         @if ($showVoidTransactionDetails)
             <div>
-                <p class="text-[2em] font-black ">View Sales Return Details</p>
+                <p class="text-[2em] font-black ">View Void Transaction Details</p>
             </div>
         @endif
         <div>
