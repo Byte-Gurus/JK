@@ -83,21 +83,16 @@
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
-                        <<<<<<< HEAD <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
-                            =======
-                            <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
-                            {{-- //* unit price --}}
-                            <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
-                            >>>>>>> production
+                        <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
 
-                            {{-- //* employee name --}}
-                            <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
+                        {{-- //* unit price --}}
+                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price (₱)</th>
 
-                            {{-- //* transaction no --}}
-                            <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
+                        {{-- //* employee name --}}
+                        <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
 
-
-                            <<<<<<< HEAD=======>>>>>>> production
+                        {{-- //* transaction no --}}
+                        <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
 
                     </tr>
                 </thead>
@@ -113,7 +108,6 @@
                                 {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->barcode }}
                             </th>
 
-
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->inventoryJoin->sku_code }}
                             </th>
@@ -125,6 +119,7 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->itemJoin->item_description }}
                             </th>
+
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->reason }}
@@ -133,6 +128,7 @@
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
                             </th>
+
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
                                     {{ number_format(
@@ -145,7 +141,6 @@
                                 @else
                                     0.00
                                 @endif
-
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
@@ -156,6 +151,7 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->item_void_amount }}
                             </th>
+
                         </tr>
                     @endforeach
                 </tbody>
