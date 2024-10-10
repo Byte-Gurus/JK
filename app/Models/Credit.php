@@ -46,8 +46,8 @@ class Credit extends Model
                 $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"])
                     ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
                     ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(CONCAT(firstname, " ", lastname)) LIKE ?', ["%{$value}%"])
-                    ->orWhereRaw('LOWER(CONCAT(firstname, " ", middlename, " ", lastname)) LIKE ?', ["%{$value}%"]);
+                    ->orWhereRaw('LOWER(CONCAT(firstname, \' \', lastname)) LIKE ?', ["%{$value}%"])
+                    ->orWhereRaw('LOWER(CONCAT(firstname, \' \', middlename, \' \', lastname)) LIKE ?', ["%{$value}%"]);
             });
     }
 
