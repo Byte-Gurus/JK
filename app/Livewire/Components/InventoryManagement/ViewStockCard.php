@@ -46,6 +46,7 @@ class ViewStockCard extends Component
             'barcode' => $stock_details->itemJoin->barcode,
             'supplier' => $stock_details->deliveryJoin->purchaseJoin->supplierJoin->company_name,
             'selling_price' => $stock_details->selling_price,
+            'sku_code' => $stock_details->sku_code,
         ]);
     }
 

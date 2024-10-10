@@ -65,7 +65,7 @@
                                 SKU</p>
                         </div>
                         <div class="flex flex-row items-center gap-2">
-                            <h1 class="text-[1.2em] font-black text-center">{{ $item_name }}</h1>
+                            <h1 class="text-[1.2em] font-black text-center">{{ $sku_code }}</h1>
                         </div>
                     </div>
 
