@@ -8,14 +8,16 @@ use Livewire\Component;
 class VoidTransactionFormModal extends Component
 {
     public $reason, $fromPage = 'VoidAll';
-    public $showSalesAdminLoginForm = false;
+
+    public $isAdmin;
+
     public function render()
     {
         return view('livewire.components.Sales.void-transaction-form-modal');
     }
     protected $listeners = [
         'admin-confirmed' => 'adminConfirmed',
-        
+
     ];
 
     public function resetFormWhenClosed()
@@ -36,19 +38,9 @@ class VoidTransactionFormModal extends Component
     public function voidAll()
     {
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
-        $this->displaySalesAdminLoginForm();
+        $this->dispatch('close-void-transaction-form-modal')->to(VoidTransactionForm::class);
+        $this->dispatch('display-sales-admin-login-form')->to(VoidTransactionForm::class);
     }
-    public function displaySalesAdminLoginForm()
-    {
-        $this->showSalesAdminLoginForm = !$this->showSalesAdminLoginForm;
-    }
-    public function adminConfirmed($isAdmin)
-    {
-        $this->isAdmin = $isAdmin;
 
-
-        if ($this->isAdmin) {
-            $this->voidAllConfirmed();
-        }
-    }
+    
 }

@@ -46,6 +46,7 @@ class VoidTransactionForm extends Component
         'get-transaction' => 'getTransaction',
         // 'void-sales-void-details' => 'voidSalesVoidDetails',
         'admin-confirmed' => 'adminConfirmed',
+        'display-sales-admin-login-form' => 'displaySalesAdminLoginForm',
         'return-void-transaction-form' => 'returnVoidTransactionForm',
         'close-void-transaction-form-modal' => 'closeVoidTransactionFormModal',
         'voidConfirmed'
