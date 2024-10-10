@@ -23,9 +23,11 @@
             <div class="grid grid-flow-col grid-cols-2 ">
                 <div class="flex flex-col justify-between col-span-1 px-4 mb-2 ">
                     <div class="flex flex-col ">
-                        <div class="flex flex-row text-nowrap">
-                            <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                            {{ $transaction_info['date'] }}
+                        <div class="flex flex-row gap-2 text-nowrap">
+                            <p class="text-[1em] font-black uppercase">Specified Week:</p>
+                            <p>
+                                {{ $transaction_info['date'] }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Gross Sales(₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Gross Sales (₱)</p>
                     </div>
                 </li>
                 {{-- <li class="col-span-1 ">
@@ -77,7 +79,7 @@
                 </li> --}}
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">VAT Amount(₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">VAT Amount (₱)</p>
                     </div>
                 </li>
                 {{-- <li class="col-span-1 ">
@@ -87,7 +89,7 @@
                 </li> --}}
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Net Sales(₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Net Sales (₱)</p>
                     </div>
                 </li>
             </ul>
@@ -164,14 +166,17 @@
         </div>
         @if ($transaction_info)
             <div class="px-4 py-4">
-                <div class="flex flex-row text-nowrap">
+                <div class="flex flex-row gap-2 text-nowrap">
                     <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                    {{ $transaction_info['dateCreated'] }}
+                    <p>
+                        {{ $transaction_info['dateCreated'] }}
                     </p>
                 </div>
-                <div class="flex flex-row py-4 text-nowrap">
+                <div class="flex flex-row gap-2 py-4 text-nowrap">
                     <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                    {{ $transaction_info['createdBy'] }}
+                    <p>
+                        {{ $transaction_info['createdBy'] }}
+                    </p>
                 </div>
             </div>
         @endif
