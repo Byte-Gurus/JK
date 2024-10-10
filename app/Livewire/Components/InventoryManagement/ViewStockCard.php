@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class ViewStockCard extends Component
 {
     use WithPagination, WithoutUrlPagination;
-    public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode, $selling_price;
+    public $stock_id, $item_name, $item_description, $expiration_date, $supplier, $barcode, $selling_price, $sku_code;
 
     public $stock_cards = [];
     public $quantity_balance, $total_in_quantity, $total_in_value, $total_out_quantity, $total_out_value;
