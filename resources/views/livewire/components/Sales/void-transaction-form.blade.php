@@ -81,10 +81,14 @@
     </div>
     <div class="flex flex-col">
 
-        <div class="flex justify-end w-full mb-[3vh]">
+        <div class="flex flex-row gap-4 justify-end w-full mb-[3vh]">
+            <button type="button" x-on:click='$wire.displayVoidTransactionFormModal()'
+                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,136,136)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,85,85)]">
+                Void Whole Transaction
+            </button>
             @if (!$toVoid_info || $this->allVoidNull())
                 <button type="button" disable
-                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(117,141,109)]text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(117,141,109)]">
+                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(142,157,137)] text-[rgb(53,53,53)] border rounded-md ">
                     Confirm
                 </button>
             @else
@@ -96,8 +100,7 @@
             @endif
 
         </div>
-        <div
-            class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[31vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[31vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -237,7 +240,6 @@
                                     @enderror
                                 @endif
                             </th>
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -272,6 +274,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div x-show="showVoidTransactionFormModal" x-data="{ showVoidTransactionFormModal: @entangle('showVoidTransactionFormModal') }">
+        @livewire('components.Sales.void-transaction-form-modal')
     </div>
     <div x-show="showSalesAdminLoginForm" x-data="{ showSalesAdminLoginForm: @entangle('showSalesAdminLoginForm') }">
         @livewire('components.Sales.sales-admin-login-form')

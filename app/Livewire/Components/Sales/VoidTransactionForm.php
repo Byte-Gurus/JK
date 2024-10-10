@@ -22,6 +22,8 @@ class VoidTransactionForm extends Component
 
     public $showSalesAdminLoginForm = false;
 
+    public $showVoidTransactionFormModal = false;
+
     public $toVoid_info = [];
     public $voidedDetails = [];
     public $reason = [];
@@ -45,6 +47,7 @@ class VoidTransactionForm extends Component
         // 'void-sales-void-details' => 'voidSalesVoidDetails',
         'admin-confirmed' => 'adminConfirmed',
         'return-void-transaction-form' => 'returnVoidTransactionForm',
+        'close-void-transaction-form-modal' => 'closeVoidTransactionFormModal',
         'voidConfirmed'
     ];
 
@@ -150,6 +153,15 @@ class VoidTransactionForm extends Component
         $this->showSalesAdminLoginForm = !$this->showSalesAdminLoginForm;
     }
 
+    public function displayVoidTransactionFormModal()
+    {
+        $this->showVoidTransactionFormModal = true;
+    }
+
+    public function closeVoidTransactionFormModal()
+    {
+        $this->showVoidTransactionFormModal = false;
+    }
 
     public function calculateTotalVoidAmount()
     {

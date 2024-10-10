@@ -83,25 +83,21 @@
                         <th scope="col" class="px-4 py-3 text-center">Operation</th>
 
                         {{-- //* unit price --}}
-<<<<<<< HEAD
-                        <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
-=======
-                        <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
-                        {{-- //* unit price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
->>>>>>> production
+                        <<<<<<< HEAD <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
+                            =======
+                            <th scope="col" class="px-4 py-3 text-center">Unit Price</th>
+                            {{-- //* unit price --}}
+                            <th scope="col" class="px-4 py-3 text-center">Wholesale Price</th>
+                            >>>>>>> production
 
-                        {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
+                            {{-- //* employee name --}}
+                            <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
 
-                        {{-- //* transaction no --}}
-                        <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
+                            {{-- //* transaction no --}}
+                            <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> production
+                            <<<<<<< HEAD=======>>>>>>> production
 
                     </tr>
                 </thead>
@@ -134,19 +130,23 @@
                                 {{ $voidTransactionDetail->reason }}
                             </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
-                        </th>
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
-                            {{ number_format($voidTransactionDetail->transactionDetailsJoin->item_price -
-                            ($voidTransactionDetail->transactionDetailsJoin->item_price *
-                            $voidTransactionDetail->transactionDetailsJoin->discountJoin->percentage / 100 ), 2)}}
-                            @else
-                            0.00
-                            @endif
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
+                            </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
+                                    {{ number_format(
+                                        $voidTransactionDetail->transactionDetailsJoin->item_price -
+                                            ($voidTransactionDetail->transactionDetailsJoin->item_price *
+                                                $voidTransactionDetail->transactionDetailsJoin->discountJoin->percentage) /
+                                                100,
+                                        2,
+                                    ) }}
+                                @else
+                                    0.00
+                                @endif
 
-                        </th>
+                            </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->void_quantity }}
