@@ -173,12 +173,10 @@
                                 @if ($transaction->transaction_type == 'Sales')
                                     {{ number_format($transaction->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                    {{ number_format($transaction->returnsJoin->transactionJoin->total_amount, 2) }}
                                     {{ number_format($transaction->returnsJoin->return_total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Credit')
                                     {{ number_format($transaction->creditJoin->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                    {{ number_format($transaction->voidTransactionJoin->transactionJoin->total_amount, 2) }}
                                     {{ number_format($transaction->voidTransactionJoin->void_total_amount, 2) }}
                                 @endif
                             </th>
