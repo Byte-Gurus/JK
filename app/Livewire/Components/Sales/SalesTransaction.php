@@ -119,7 +119,8 @@ class SalesTransaction extends Component
         // Fetch items with their inventoryJoin
         $items = Item::where('status_id', 1)
             ->whereHas('inventoryJoin', function ($query) {
-                $query->where('status', 'Available');
+                $query->where('status', 'Available')
+                    ->where('current_stock_quantity', '>', 0);
             })
             ->when($searchTerm, function ($query, $searchTerm) {
                 $searchTermLower = strtolower($searchTerm); // Convert search term to lowercase
@@ -130,7 +131,8 @@ class SalesTransaction extends Component
             })
             ->with([
                 'inventoryJoin' => function ($query) {
-                    $query->where('status', 'Available'); // Ensure only 'Available' inventory is eager-loaded
+                    $query->where('status', 'Available')
+                        ->where('current_stock_quantity', '>', 0); // Ensure only 'Available' inventory is eager-loaded
                 },
             ])
             ->get();
