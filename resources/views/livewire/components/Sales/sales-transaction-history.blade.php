@@ -88,7 +88,8 @@
             </div>
         </div>
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll border border-[rgb(53,53,53)] no-scrollbar h-[28vh]">
+        <div
+            class=" flex-1 overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll no-scrollbar h-[28vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -100,7 +101,7 @@
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3">Transaction No.</th>
 
-                        <th scope="col" class="px-4 py-3 text-right">Total (₱)</th>
+                        <th scope="col" class="px-4 py-3 text-center">Total (₱)</th>
 
                         {{-- payment --}}
                         <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
@@ -110,9 +111,9 @@
                         {{-- //* gcash reference no. --}}
                         <th scope="col" class="px-4 py-3 text-center">GCash Reference No.</th>
 
-                        <th scope="col" class="px-4 py-3 text-right">PWD/SC Discount Amount (₱)</th>
+                        <th scope="col" class="px-4 py-3 text-center">PWD/SC Discount Amount</th>
                         {{-- payment --}}
-                        <th scope="col" class="px-4 py-3 text-right">Tax Amount</th>
+                        <th scope="col" class="px-4 py-3 text-center">Tax Amount</th>
 
                         <th wire:click="sortByColumn('created_at')" scope="col"
                             class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
@@ -169,7 +170,7 @@
                                 @endif
                             </th>
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
                                     {{ number_format($transaction->transactionJoin->total_amount, 2) }}
                                 @elseif ($transaction->transaction_type == 'Return')
@@ -189,13 +190,10 @@
                                 @if ($transaction->transaction_type == 'Sales')
                                     {{ $transaction['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                    {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                     N/A
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                    'N/A'
                                     {{ $transaction['creditJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                    {{ $transaction['voidTransactionJoin']['transactionJoin']['paymentJoin']['payment_type'] ?? 'N/A' }}
                                     N/A
                                 @endif
                             </th>
@@ -213,7 +211,7 @@
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-4 italic font-medium text-right text-left-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
                                     {{ number_format($transaction['transactionJoin']['total_discount_amount'], 2) ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
@@ -225,7 +223,7 @@
                                 @endif
                             </th>
                             <th scope="row"
-                                class="px-4 py-4 italic font-medium text-right text-left-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
                                     {{ number_format($transaction['transactionJoin']['total_vat_amount'], 2) ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
@@ -247,12 +245,10 @@
             </table>
         </div>
     </div>
-    <div class="flex flex-row w-full border border-black rounded-md">
+    <div class="flex flex-row w-full h-[30vh] border border-black">
         @if (!$transactionDetails)
-            <div class="flex items-center bg-[rgb(222,222,222)] justify-center w-full h-[30vh]">
-                <p class=" text-[2em] italic font-black text-[rgb(56,56,56)]">SELECT A TRANSACTION TO VIEW
-                    TRANSACTION
-                    DETAILS</p>
+            <div class="flex items-center justify-center w-full  bg-slate-50">
+                <p class=" text-[2em] font-black opacity-30">SELECT A TRANSACTION TO VIEW TRANSACTION DETAILS</p>
             </div>
         @else
             <div class="w-1/3 border-r border-black ">
@@ -323,7 +319,6 @@
                             </div>
                         </div>
                     @endif
-
                     <div class="border border-black "></div>
                     <div class="flex flex-row justify-between">
                         @if ($payment_type != 'GCash' && !is_null($payment_type) && $transaction_type == 'Sales')
@@ -354,32 +349,33 @@
                             </div>
                         </div>
                     @endif
-                    {{-- @if ($transaction_type == 'Void')
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Original Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($void_original_amount, 2) }}</p>
-                    </div>
-                </div>
-                <div class="flex flex-row justify-between">
-                    <div>
-                        <p class=" text-[1.2em] font-medium">Void Amount</p>
-                    </div>
-                    <div>
-                        <p class=" text-[1.2em] font-black">{{ number_format($void_amount, 2) }}</p>
-                    </div>
-                </div>
-                @endif --}}
+                    @if ($transaction_type == 'Void')
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Original Amount</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($void_original_amount, 2) }}</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                <p class=" text-[1.2em] font-medium">Void Amount</p>
+                            </div>
+                            <div>
+                                <p class=" text-[1.2em] font-black">{{ number_format($void_amount, 2) }}</p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="w-full h-[30vh] overflow-x-auto overflow-y-scroll scroll ">
+            <div
+                class=" w-full overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll no-scrollbar">
 
-                <table class="w-full text-sm text-left scroll no-scrollbar">
+                <table class="w-full text-sm text-left h-fit scroll no-scrollbar">
 
                     {{-- //* table header --}}
-                    <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                    <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                         <tr class=" text-nowrap">
 
@@ -399,8 +395,6 @@
                             <th scope="col" class="px-4 py-3 text-left">Item Description</th>
 
                             {{-- item name --}}
-                            <th scope="col" class="px-4 py-3 text-left">Status</th>
-                            {{-- item name --}}
                             @if ($transaction_type == 'Sales' || $transaction_type == 'Credit')
                                 <th scope="col" class="px-4 py-3 text-left">Status</th>
                             @elseif($transaction_type == 'Return')
@@ -410,21 +404,22 @@
                             @endif
 
                             {{-- //* unit price --}}
-                            <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Unit Price (₱)</th>
 
                             {{-- //* quantity --}}
                             <th scope="col" class="px-4 py-3 text-center">Quantity</th>
 
                             {{-- //* wholesale --}}
-                            <th scope="col" class="px-4 py-3 text-right">Wholesale (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Wholesale (₱)</th>
 
                             {{-- //* amount --}}
-                            <th scope="col" class="px-4 py-3 text-right">Subtotal (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Subtotal (₱)</th>
                         </tr>
                     </thead>
 
                     {{-- //* table body --}}
                     <tbody>
+
                         @foreach ($transactionDetails as $index => $transactionDetail)
                             <tr
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
@@ -441,7 +436,6 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ $transactionDetail['transactionDetailsJoin']['inventoryJoin']['sku_code'] }}
                                     @endif
-
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
@@ -452,7 +446,6 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ $transactionDetail['transactionDetailsJoin']['inventoryJoin']['itemJoin']['barcode'] }}
                                     @endif
-
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
@@ -463,8 +456,6 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ $transactionDetail['transactionDetailsJoin']['inventoryJoin']['itemJoin']['item_name'] }}
                                     @endif
-
-
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
@@ -475,7 +466,6 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ $transactionDetail['transactionDetailsJoin']['inventoryJoin']['itemJoin']['item_description'] }}
                                     @endif
-
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
@@ -486,8 +476,6 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ $transactionDetail['reason'] }}
                                     @endif
-
-
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -498,8 +486,6 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ number_format($transactionDetail['transactionDetailsJoin']['item_price'], 2) }}
                                     @endif
-
-
                                 </th>
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
@@ -510,20 +496,8 @@
                                     @elseif ($transaction_type == 'Void')
                                         {{ $transactionDetail['void_quantity'] }}
                                     @endif
-
                                 </th>
 
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                                    @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
-                                        {{ number_format(
-                                            $transactionDetail['item_price'] -
-                                                $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
-                                            2,
-                                        ) }}
-                                    @else
-                                        0.00
-                                    @endif
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     @if ($transaction_type == 'Sales' || $transaction_type == 'Credit')
@@ -561,10 +535,17 @@
                                             0.00
                                         @endif
                                     @endif
+
                                 </th>
                                 <th scope="row"
-                                    class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                                    {{ number_format($transactionDetail['item_subtotal'], 2) }}
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    @if ($transaction_type == 'Sales' || $transaction_type == 'Credit')
+                                        {{ number_format($transactionDetail['item_subtotal'], 2) }}
+                                    @elseif ($transaction_type == 'Return')
+                                        {{ number_format($transactionDetail['item_return_amount'], 2) }}
+                                    @elseif ($transaction_type == 'Void')
+                                        {{ number_format($transactionDetail['item_void_amount'], 2) }}
+                                    @endif
                                 </th>
                             </tr>
                         @endforeach
