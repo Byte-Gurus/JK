@@ -1,4 +1,5 @@
 {{-- // --}}
+
 <div class="relative my-[3vh] rounded-lg" wire:poll.visible="500ms">
 
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
@@ -233,15 +234,15 @@
                                 <p
                                     @if ($inventory->status == 'Available') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
-                                    @elseif ($inventory->status == 'Not available')
+                                @elseif ($inventory->status == 'Not available')
 
-                                    class=" text-red-900 font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
-                                    @elseif ($inventory->status == 'New Item')
-                                    class=" text-yellow-900 font-medium  bg-yellow-100 border border-yellow-900 text-xs text-center px-2 py-0.5 rounded-sm"
+                                class=" text-red-900 font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
+                                @elseif ($inventory->status == 'New Item')
+                                class=" text-yellow-900 font-medium  bg-yellow-100 border border-yellow-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
-                                    @elseif ($inventory->status == 'Expired')
+                                @elseif ($inventory->status == 'Expired')
 
-                                    class=" text-orange-900 font-medium  bg-orange-100 border border-orange-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
+                                class=" text-orange-900 font-medium  bg-orange-100 border border-orange-900 text-xs text-center px-2 py-0.5 rounded-sm" @endif>
 
                                     {{ $inventory->status }}
                                 </p>
@@ -265,8 +266,7 @@
                             </th>
 
                             {{-- //* Action --}}
-                            <th
-                                class="px-4 py-4 text-center  z-99 text-md text-nowrap">
+                            <th class="px-4 py-4 text-center z-99 text-md text-nowrap">
                                 <div x-data="{ openActions: false }">
                                     <div x-on:click="openActions = !openActions"
                                         class="p-1 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
@@ -289,7 +289,7 @@
 
                                         <div
                                             class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
-                                        min-h-[20%]">
+                                    min-h-[20%]">
                                             <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
 
                                                 @if ($inventory->status !== 'New Item')
