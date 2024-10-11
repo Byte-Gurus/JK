@@ -77,7 +77,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('admin/CustomerManagement', CustomerManagementPage::class)->name('customermanagement.index');
 
         //InventoryManagement
-        Route::get('admin/InventoryManagement/{sku_code}', InventoryManagementPage::class)->name('inventorymanagement.index');
+        Route::get('admin/InventoryManagement/{sku_code?}', InventoryManagementPage::class)->name('inventorymanagement.index');
 
         // Route::get('admin/InventoryManagement/InventoryTable/{sku_code}', InventoryTable::class)->name('inventorytable.index');
 
@@ -85,7 +85,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('admin/SalesTransaction', CashierPage::class)->name('cashierpage.index');
 
         //CreditManagement
-        Route::get('admin/CreditManagement/{sku_code}', CreditManagementPage::class)->name('creditmanagement.index');
+        Route::get('admin/CreditManagement/{sku_code?}', CreditManagementPage::class)->name('creditmanagement.index');
         // Route::get('admin/CreditManagement/CreditTable/{credit_id}', CreditTable::class)->name('credittable.index');
 
         //ReportManagement
