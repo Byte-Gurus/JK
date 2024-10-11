@@ -19,7 +19,7 @@ class SalesReturn extends Component
     }
 
     protected $listeners = [
-        'display-sales-return-details' => '',
+        'display-sales-return-details' => 'displaySalesReturnDetails',
         'd-display-sales-return-details' => 'dDisplaySalesReturnDetails'
     ];
 
