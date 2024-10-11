@@ -371,7 +371,7 @@
                 </div>
             </div>
             <div
-                class=" w-full overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll no-scrollbar">
+                class=" w-full overflow-x-scroll overflow-y-scroll border border-[rgb(143,143,143)] scroll no-scrollbar">
 
                 <table class="w-full text-sm text-left h-fit scroll no-scrollbar">
 
