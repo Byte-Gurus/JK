@@ -77,7 +77,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('admin/CustomerManagement', CustomerManagementPage::class)->name('customermanagement.index');
 
         //InventoryManagement
-        Route::get('admin/InventoryManagement', InventoryManagementPage::class)->name('inventorymanagement.index');
+        Route::get('admin/InventoryManagement/{sku_code?}', InventoryManagementPage::class)->name('inventorymanagement.index');
 
         // Route::get('admin/InventoryManagement/InventoryTable/{sku_code}', InventoryTable::class)->name('inventorytable.index');
 
