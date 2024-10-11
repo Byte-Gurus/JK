@@ -66,10 +66,12 @@ class InventoryTable extends Component
         "echo:refresh-stock,RestockEvent" => 'refreshFromPusher',
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
         "echo:refresh-inventory,InventoryEvent" => 'refreshFromPusher',
-        'set-search-description' => 'setSearchDescription',
-        'test' => 'test'
+        'set-search' => 'setSearch'
     ];
-
+    public function setSearch($sku_code)
+    {
+        $this->search = $sku_code;
+    }
     public function sortByColumn($column)
     { //* sort the column
 

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Components\CreditManagement\CreditTable;
 use App\Livewire\Components\InventoryManagement\InventoryTable;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Credit;
@@ -30,11 +31,12 @@ class Notifications extends Component
         if ($table == 'inventory') {
             $inventory = Inventory::find($id);
 
-            return redirect()->route('inventorymanagement.index', ['sku_code' => $inventory->sku_code]);
+            $this->dispatch('set-search', $inventory->sku_code)->to(InventoryTable::class);
         } elseif ($table == 'credit') {
             $credit = Credit::find($id);
 
-            return redirect()->route('creditmanagement.index', ['sku_code' => $credit->sku_code]);
+            $this->dispatch('set-search', $credit->credit_number)->to(CreditTable::class);
+
         }
     }
 }

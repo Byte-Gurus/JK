@@ -21,10 +21,7 @@ class CreditTable extends Component
     public $supplierFilter = 0;
 
     public $startDate, $endDate;
-    public function mount($credit_id = null)
-    {
-        $this->search = $credit_id;
-    }
+
 
     public function render()
     {
@@ -33,7 +30,7 @@ class CreditTable extends Component
 
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
-        }else{
+        } else {
 
         }
 
@@ -49,9 +46,13 @@ class CreditTable extends Component
     protected $listeners = [
         'refresh-table' => 'refreshTable',//*  galing sa UserTable class
         "echo:refresh-credit,CreditEvent" => 'refreshFromPusher',
-
+        'set-search' => 'setSearch'
 
     ];
+    public function setSearch($credit_number)
+    {
+        $this->search = $credit_number;
+    }
 
     public function refreshTable()
     {

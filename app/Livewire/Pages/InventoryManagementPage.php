@@ -17,12 +17,6 @@ class InventoryManagementPage extends Component
     public $showInventoryForm = false;
     public $sidebarStatus;
     public $showStockCard = false;
-
-    public $sku_code;
-    public function mount($sku_code = null)
-    {
-        $this->sku_code = $sku_code;
-    }
     public function render()
     {
         return view('livewire.pages.inventory-management-page');
