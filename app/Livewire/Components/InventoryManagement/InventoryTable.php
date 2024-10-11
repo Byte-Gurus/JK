@@ -24,7 +24,7 @@ class InventoryTable extends Component
     public $supplierFilter = 0;
 
     public $startDate, $endDate;
-
+public $sku_code;
     public function mount($sku_code = null)
     {
         $this->search = $sku_code;
@@ -54,6 +54,10 @@ class InventoryTable extends Component
         }
 
 
+        if($this->sku_code){
+            $this->search = $this->sku_code;
+        }
+
         $inventories = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
@@ -71,8 +75,8 @@ class InventoryTable extends Component
     ];
     public function setSearch($sku_code)
     {
-        sleep(2);
-        $this->search = $sku_code;
+
+        $this->sku_code = $sku_code;
     }
     public function sortByColumn($column)
     { //* sort the column
