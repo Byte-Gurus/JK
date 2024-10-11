@@ -6,6 +6,7 @@ use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\Supplier;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Sleep;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -70,6 +71,7 @@ class InventoryTable extends Component
     ];
     public function setSearch($sku_code)
     {
+        sleep(2);
         $this->search = $sku_code;
     }
     public function sortByColumn($column)
