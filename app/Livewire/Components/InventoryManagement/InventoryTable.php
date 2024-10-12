@@ -27,7 +27,7 @@ class InventoryTable extends Component
     public $sku_code;
     public function mount($sku_code = null)
     {
-        $this->search = $sku_code;
+        $this->search = $this->sku_code;
     }
     public function render()
     {
