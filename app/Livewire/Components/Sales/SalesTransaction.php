@@ -675,7 +675,6 @@ class SalesTransaction extends Component
                     ->get();
 
 
-                $notificationCount = 0;
                 foreach ($inventories as $inventory) {
                     // dd($inventory->current_stock_quantity);
                     // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']);
@@ -753,7 +752,7 @@ class SalesTransaction extends Component
                                         'inventory_id' => $inventory->id,
                                     ]);
 
-                                    $notificationCount++;
+
                                 }
                             }
 
