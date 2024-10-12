@@ -86,8 +86,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         Route::get('admin/SalesTransaction', CashierPage::class)->name('cashierpage.index');
 
         //CreditManagement
-        Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');
-        // Route::get('admin/CreditManagement/CreditTable/{credit_id}', CreditTable::class)->name('credittable.index');
+        // Route::get('admin/CreditManagement', CreditManagementPage::class)->name('creditmanagement.index');
+        Route::get('admin/CreditManagement/{credit_id?}', CreditManagementPage::class)->name('creditmanagement.index');
 
         //ReportManagement
         Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');

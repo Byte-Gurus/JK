@@ -21,6 +21,13 @@ class CreditManagementPage extends Component
     public $showPaymentReceipt = false;
 
     public $sidebarStatus;
+
+    public $credit_number;
+    public function mount($credit_number = null)
+    {
+        $this->credit_number = $credit_number;
+    }
+
     public function render()
     {
         return view('livewire.pages.credit-management-page');
