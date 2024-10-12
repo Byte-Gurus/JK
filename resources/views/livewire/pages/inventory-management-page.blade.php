@@ -3,7 +3,6 @@
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
         {{-- @if ($this->)
-
         @endif --}}
     @livewire('components.navbar')
     <div x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal'), showInventoryHistory: @entangle('showInventoryHistory'), showInventoryTable: @entangle('showInventoryTable') }">
@@ -49,7 +48,7 @@
                 </div>
             </div>
             <div x-cloak x-show="showInventoryTable" x-data="{ showInventoryTable: @entangle('showInventoryTable') }">
-                @livewire('components.InventoryManagement.inventory-table')
+                @livewire('components.InventoryManagement.inventory-table' ,['sku_code' => $sku_code])
             </div>
             <div x-cloak x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                 @livewire('components.InventoryManagement.view-stock-card')

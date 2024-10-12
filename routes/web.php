@@ -79,6 +79,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         //InventoryManagement
         Route::get('admin/InventoryManagement/{sku_code?}', InventoryManagementPage::class)->name('inventorymanagement.index');
 
+
         // Route::get('admin/InventoryManagement/InventoryTable/{sku_code}', InventoryTable::class)->name('inventorytable.index');
 
         //InventoryManagement
