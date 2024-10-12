@@ -15,11 +15,14 @@ class Notifications extends Component
 {
     public function render()
     {
-        $startDate = Carbon::today();
-        $endDate = Carbon::today()->addMonth();
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+
 
         $notifications = Notification::whereBetween('created_at', [$startDate, $endDate])
             ->get();
+
+
 
         return view('livewire.components.notifications', [
             'notifications' => $notifications
