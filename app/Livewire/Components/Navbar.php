@@ -22,7 +22,7 @@ class Navbar extends Component
 {
     public $time;
     public $date;
-    public $notificationCount = 0;
+    public $notificationCount;
 
     public $sidebarOpen = true;
     public $sidebarStatusOpen = true;
