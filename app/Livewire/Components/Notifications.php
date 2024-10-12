@@ -31,13 +31,11 @@ class Notifications extends Component
         if ($table == 'inventory') {
             $inventory = Inventory::find($id);
 
-            // $this->dispatch('set-search', $inventory->sku_code)->to(InventoryTable::class);
-            return redirect()->route('inventorymanagement.index', ['sku_code' => $inventory->sku_code]);
-
+            $this->dispatch('set-search', $inventory->sku_code)->to(InventoryTable::class);
         } elseif ($table == 'credit') {
             $credit = Credit::find($id);
 
-            return redirect()->route('creditmanagement.index', ['credit_number' => $credit->credit_number]);
+            $this->dispatch('set-search', $credit->credit_number)->to(CreditTable::class);
         }
     }
 }

@@ -54,9 +54,9 @@ public $sku_code;
         }
 
 
-        if($this->sku_code){
-            $this->search = $this->sku_code;
-        }
+        // if($this->sku_code){
+        //     $this->search = $this->sku_code;
+        // }
 
         $inventories = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
@@ -76,7 +76,7 @@ public $sku_code;
     public function setSearch($sku_code)
     {
 
-        $this->sku_code = $sku_code;
+        $this->search = $sku_code;
     }
     public function sortByColumn($column)
     { //* sort the column

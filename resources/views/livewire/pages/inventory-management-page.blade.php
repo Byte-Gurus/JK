@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div x-cloak x-show="showInventoryTable" x-data="{ showInventoryTable: @entangle('showInventoryTable') }">
-                @livewire('components.InventoryManagement.inventory-table' ,['sku_code' => $sku_code])
+                @livewire('components.InventoryManagement.inventory-table')
             </div>
             <div x-cloak x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                 @livewire('components.InventoryManagement.view-stock-card')
