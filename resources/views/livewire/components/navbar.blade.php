@@ -74,8 +74,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
-                    <div class="absolute pointer-events-none top-0 right-0 bg-[rgb(255,190,99)] px-[6px] py-[2px] rounded-full translate-x-1 translate-y-[-8px]">
-                        <p class=" text-[0.2em] font-bold cursor-copy">2</p>
+                    <div class="absolute pointer-events-none top-0 right-0 bg-[rgb(255,190,99)] px-[10px] py-[6px] rounded-full translate-x-1 translate-y-[-8px]">
+                        <p class=" text-[0.6em] font-bold cursor-copy">100</p>
                     </div>
                     <div x-show="openNotifications" x-transition:enter="transition ease-in-out duration-300"
                         x-transition:enter-start="transform opacity-100 scale-0"
