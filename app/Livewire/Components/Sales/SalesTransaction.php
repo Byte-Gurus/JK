@@ -9,6 +9,7 @@ use App\Events\InventoryEvent;
 use App\Events\ItemEvent;
 use App\Events\PurchaseOrderEvent;
 use App\Events\TransactionEvent;
+use App\Livewire\Components\Navbar;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Address;
 use App\Models\Credit;
@@ -674,7 +675,7 @@ class SalesTransaction extends Component
                     ->get();
 
 
-
+                $notificationCount = 0;
                 foreach ($inventories as $inventory) {
                     // dd($inventory->current_stock_quantity);
                     // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']);
@@ -751,6 +752,8 @@ class SalesTransaction extends Component
                                         'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
                                         'inventory_id' => $inventory->id,
                                     ]);
+
+                                    $notificationCount++;
                                 }
                             }
 
@@ -806,7 +809,8 @@ class SalesTransaction extends Component
                         $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
                     }
                 }
-                // dump($ids);
+
+                $this->dispatch('get-notification-count', $notificationCount)->to(Navbar::class);
 
 
             }

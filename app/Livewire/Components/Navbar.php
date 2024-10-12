@@ -22,6 +22,7 @@ class Navbar extends Component
 {
     public $time;
     public $date;
+    public $notificationCount = 0;
 
     public $sidebarOpen = true;
     public $sidebarStatusOpen = true;
@@ -32,18 +33,29 @@ class Navbar extends Component
         return view('livewire.components.navbar');
     }
 
-    public function toggleSidebar($sidebarOpen) {
+    protected $listeners = [
+        'get-notification-count' => 'getNotificationCount'
+    ];
+
+
+    public function getNotificationCount($notificationCount)
+    {
+        $this->notificationCount = $notificationCount;
+    }
+
+    public function toggleSidebar($sidebarOpen)
+    {
         $this->sidebarOpen = !$this->sidebarOpen;
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(HomePage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(Dashboard::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(UserManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(CustomerManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(ItemManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(PurchaseAndDeliveryManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(SupplierManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(CreditManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(InventoryManagementPage::class);
-        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen )->to(ReportManagement::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(HomePage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(Dashboard::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(UserManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(CustomerManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(ItemManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(PurchaseAndDeliveryManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(SupplierManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(CreditManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(InventoryManagementPage::class);
+        $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(ReportManagement::class);
     }
 
 
@@ -55,7 +67,8 @@ class Navbar extends Component
         $this->time = $manilaTime->format('h:i A');
     }
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         $user = Auth::user();
 
         if ($user->user_role_id == 1 && $user->status_id == 1) {
