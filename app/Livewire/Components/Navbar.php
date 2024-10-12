@@ -16,14 +16,13 @@ use App\Livewire\Pages\SupplierManagementPage;
 use App\Livewire\Pages\UserManagementPage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Navbar extends Component
 {
     public $time;
     public $date;
-    public $notificationCount;
-
     public $sidebarOpen = true;
     public $sidebarStatusOpen = true;
 
@@ -38,10 +37,7 @@ class Navbar extends Component
     ];
 
 
-    public function getNotificationCount($notificationCount)
-    {
-        $this->notificationCount = $notificationCount;
-    }
+
 
     public function toggleSidebar($sidebarOpen)
     {

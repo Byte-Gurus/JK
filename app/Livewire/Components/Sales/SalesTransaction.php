@@ -810,7 +810,7 @@ class SalesTransaction extends Component
                     }
                 }
 
-                $this->dispatch('get-notification-count', $notificationCount)->to(Navbar::class);
+
 
 
             }
