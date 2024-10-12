@@ -3,16 +3,21 @@
     @foreach ($notifications as $notification)
         <div class="bg-[rgb(56,56,56)]  rounded-lg h-fit backdrop-blur-xl">
 
-            <div @if ($notification->inventoryJoin) wire:click="goToOtherPage({{ $notification->inventory_id }}, 'inventory')"
+            <div @if ($notification->inventoryJoin) wire:click="goToOtherPage({{ $notification->inventory_id }},
+            'inventory')"
+            href="{{ route('inventorymanagement.index') }}" wire:navigate
             @elseif ($notification->creditJoin)
-            wire:click="goToOtherPage({{ $notification->credit_id }}, 'credit')" @endif
-                class=" grid grid-flow-col grid-cols-12 text-white bg-[rgb(122, 122, 122)] p-2 text-sm rounded-md ease-in-out duration-100 text-wrap
+            wire:click="goToOtherPage({{ $notification->credit_id }}, 'credit')"
+            href="{{ route('creditmanagement.index') }}" wire:navigate @endif
+                class=" grid grid-flow-col grid-cols-12 text-white bg-[rgb(122, 122, 122)] p-2 text-sm rounded-md
+            ease-in-out duration-100 text-wrap
             transition-all cursor-pointer hover:bg-[rgb(233,72,84)]">
                 <p class="col-span-10 ">
                     {{ $notification->description }}
                 </p>
 
-                <div class="flex items-center justify-center col-span-2 text-[rgb(255,187,187)] rounded-full hover:bg-red-900">
+                <div
+                    class="flex items-center justify-center col-span-2 text-[rgb(255,187,187)] rounded-full hover:bg-red-900">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
