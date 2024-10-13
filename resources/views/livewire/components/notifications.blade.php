@@ -28,7 +28,7 @@
 
             </div>
             <p class="col-span-10 text-zinc-500 text-xs px-2">
-                {{ $notification->created_at->format('M d Y') }}
+                {{ $notification->created_at->format('M d Y h:i A') }}
             </p>
 
         </div>
