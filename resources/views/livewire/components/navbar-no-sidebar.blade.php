@@ -35,31 +35,36 @@
     <div class="flex items-center">
 
         <div class="flex items-center justify-between">
-            <div class="flex flex-row items-center gap-10">
+            <div class="flex flex-row items-center gap-8">
                 @if ($this->isAdmin())
-                    <div>
+                    <div
+                        class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
                         <a href="{{ route('admin.index') }}" wire:navigate>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                stroke-width="1.5" stroke="currentColor" class=" size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                             </svg>
                         </a>
                     </div>
                 @endif
-                <div x-data="{ openNotifications: false }" x-on:click.away="openNotifications = false;">
+
+                <div x-data="{ openNotifications: false }" x-on:click.away="openNotifications = false;"
+                    class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         x-on:click="openNotifications = !openNotifications" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
+
+
                     <div x-show="openNotifications" x-transition:enter="transition ease-in-out duration-300"
                         x-transition:enter-start="transform opacity-100 scale-0"
                         x-transition:enter-end="transform opacity-100 scale-100"
                         x-transition:leave="transition ease-out duration-300"
                         x-transition:leave-start="transform opacity-100 scale-100"
                         x-transition:leave-end="transform opacity-0 scale-0"
-                        class="absolute z-10 w-screen max-w-md origin-top-right transform right-40">
+                        class="absolute z-10 w-screen max-w-md origin-top-right transform right-3">
                         <div
                             class=" overflow-y-auto rounded-l-lg h-full max-h-[400px] rounded-br-lg rounded-tr-none
                         min-h-[50%]">

@@ -1,5 +1,5 @@
 <div>
-    <div class="relative overflow-hidden bg-white h-[620px] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
+    <div class="relative overflow-hidden bg-white h-[70vh] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between py-4 pr-4 ">
@@ -73,12 +73,12 @@
                 </div>
             </div>
         </div>
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[300px]">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                     <tr class=" text-nowrap">
 
@@ -142,11 +142,13 @@
                                 {{ $return_detail->operation }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return_detail->transactionDetailsJoin->item_price }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 @if ($return_detail->transactionDetailsJoin->discount_id == 3)
                                     {{ number_format(
                                         $return_detail->transactionDetailsJoin->item_price -
@@ -161,11 +163,13 @@
                             </th>
 
 
-                            <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $return_detail->return_quantity }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 {{ number_format($return_detail->item_return_amount, 2) }}
                             </th>
 
