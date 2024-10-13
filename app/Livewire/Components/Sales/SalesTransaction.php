@@ -396,7 +396,7 @@ class SalesTransaction extends Component
         $this->selectedItems[$this->selectedIndex]['quantity'] = $newQuantity;
         $this->selectedItems[$this->selectedIndex]['total_amount'] = $this->selectedItems[$this->selectedIndex]['selling_price'] * $newQuantity;
 
-        if ($this->selectedItems[$this->selectedIndex]['quantity'] >= $this->selectedItems[$this->selectedIndex]['bulk_quantity']) {
+        if ($this->selectedItems[$this->selectedIndex]['quantity'] >= $this->selectedItems[$this->selectedIndex]['bulk_quantity'] && $this->selectedItems[$this->selectedIndex]['bulk_quantity'] >= 2) {
             $this->selectedItems[$this->selectedIndex]['discount'] = $this->discounts[3]->percentage;
             $this->selectedItems[$this->selectedIndex]['discount_id'] = $this->discounts[3]->id;
 

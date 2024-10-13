@@ -20,8 +20,8 @@ class Notifications extends Component
 
 
         $notifications = Notification::whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'desc')
             ->get();
-
 
 
         return view('livewire.components.notifications', [
