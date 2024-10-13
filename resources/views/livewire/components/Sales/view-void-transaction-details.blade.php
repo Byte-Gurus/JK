@@ -1,5 +1,5 @@
 <div>
-    <div class="relative overflow-hidden bg-white h-[620px] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
+    <div class="relative overflow-hidden bg-white h-[70vh] border rounded-md border-[rgb(143,143,143)] mb-[18px]">
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between py-4 pr-4 ">
@@ -58,12 +58,12 @@
                 </div>
             </div>
         </div>
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[300px]">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0   ">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                     <tr class=" text-nowrap">
 
@@ -153,7 +153,6 @@
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->item_void_amount }}
                             </th>
-
                         </tr>
                     @endforeach
                 </tbody>
