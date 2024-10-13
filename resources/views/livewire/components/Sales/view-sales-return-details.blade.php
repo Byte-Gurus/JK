@@ -28,7 +28,7 @@
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Original Amount (₱)</p>
-                    <p class="text-[1.2em] font-black">{{ number_format($orignal_amount, 2) }}</p>
+                    <p class="text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Return Total Amount (₱)</p>

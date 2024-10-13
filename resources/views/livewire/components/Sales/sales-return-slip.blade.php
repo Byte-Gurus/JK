@@ -87,7 +87,8 @@
                                     </div>
                                     <div class="flex flex-col w-full justify-center gap-[3px]">
                                         <div class="flex flex-row justify-end gap-[5px]">
-                                            <p class="text-[0.6em] uppercase text-center font-medium">
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">IP</p>
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">
                                                 {{ $return_detail->transactionDetailsJoin->item_price }}
                                             </p>
                                         </div>
