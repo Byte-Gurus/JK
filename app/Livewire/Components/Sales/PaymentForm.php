@@ -102,7 +102,7 @@ class PaymentForm extends Component
         } else {
             $rules = [
                 'tendered_amount' => 'required|numeric|min:1',
-                'reference_no' => 'required|numeric',
+                'reference_no' => 'required|numeric|digits:13',
             ];
         }
 
