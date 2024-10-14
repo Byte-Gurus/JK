@@ -172,7 +172,7 @@
                 <div class="flex flex-col gap-2">
                     <div wire:click="displaySalesReturn()"
                         class="py-4 text-center font-bold bg-[rgb(251,143,242)] hover:bg-[rgb(255,111,231)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                        <button class="py-2 text-center ">Return</button>
+                        <button class="py-2 text-center ">Sales Return</button>
                     </div>
                     @if (!$unableShortcut)
                         <div
@@ -258,7 +258,17 @@
                                 + 2</p>
                         </div>
                     @endif
-                    @if (!empty($selectedItems) && $changeTransactionType != 2 && !$unableShortcut)
+                    @if (!empty($selectedItems) && $changeTransactionType == 1 && !$unableShortcut)
+                        <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
+                            x-on:click="$wire.displayPaymentForm()"
+                            class=" relative py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                            <button class="py-2">
+                                Pay
+                            </button>
+                            <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">CTRL
+                                + 5</p>
+                        </div>
+                    @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut && $excess_amount)
                         <div x-on:keydown.window.prevent.ctrl.5="$wire.call('displayPaymentForm')"
                             x-on:click="$wire.displayPaymentForm()"
                             class=" relative py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
