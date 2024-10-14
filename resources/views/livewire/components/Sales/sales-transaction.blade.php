@@ -1,4 +1,4 @@
-<div class="grid grid-flow-col grid-cols-3 h-[90vh] p-[3vh]">
+   <div class="grid grid-flow-col grid-cols-3 h-[90vh] p-[3vh]">
     <div class="flex flex-col col-span-2">
         <div class="flex flex-row items-start justify-between flex-1 ">
             <div class="relative w-2/4">
