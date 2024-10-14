@@ -2,9 +2,12 @@
     @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
-        {{-- @if ($this->)
-        @endif --}}
-    @livewire('components.navbar')
+
+    @if ($this->isAdmin())
+        @livewire('components.navbar')
+    @else
+        @livewire('components.navbar-no-sidebar')
+    @endif
     <div x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal'), showInventoryHistory: @entangle('showInventoryHistory'), showInventoryTable: @entangle('showInventoryTable') }">
         <div class="m-[3vh]">
             <div class="flex flex-col justify-between">
@@ -53,7 +56,7 @@
             <div x-cloak x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                 @livewire('components.InventoryManagement.view-stock-card')
             </div>
-        <div x-cloak x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
+            <div x-cloak x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
                 @livewire('components.InventoryManagement.inventory-history')
             </div>
             <div x-cloak x-show="showStockAdjustPage" x-data="{ showStockAdjustPage: @entangle('showStockAdjustPage') }">

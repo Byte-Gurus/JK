@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Pages\InventoryManagementPage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -29,6 +30,17 @@ class NavbarNoSidebar extends Component
         $user = Auth::user();
 
         if ($user->user_role_id == 1 && $user->status_id == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isInventoryClerk()
+    {
+        $user = Auth::user();
+
+        if ($user->user_role_id == 3 && $user->status_id == 3) {
             return true;
         }
 

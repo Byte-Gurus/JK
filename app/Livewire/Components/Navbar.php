@@ -33,11 +33,8 @@ class Navbar extends Component
     }
 
     protected $listeners = [
-        'get-notification-count' => 'getNotificationCount'
+        'get-notification-count' => 'getNotificationCount',
     ];
-
-
-
 
     public function toggleSidebar($sidebarOpen)
     {
@@ -52,8 +49,11 @@ class Navbar extends Component
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(CreditManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(InventoryManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(ReportManagement::class);
-    }
 
+        if ($this->isInventoryClerk()) {
+            $this->dispatch('change-sidebar-status', sidebarOpen: false)->to(InventoryManagementPage::class);
+        }
+    }
 
     public function showTime()
     {
@@ -74,7 +74,14 @@ class Navbar extends Component
         return false;
     }
 
+    public function isInventoryClerk()
+    {
+        $user = Auth::user();
 
+        if ($user->user_role_id == 3 && $user->status_id == 3) {
+            return true;
+        }
 
-
+        return false;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Livewire\Components\InventoryManagement\InventoryForm;
 use App\Livewire\Components\InventoryManagement\InventoryTable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Sleep;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -38,11 +39,17 @@ class InventoryManagementPage extends Component
         'display-inventory-form' => 'displayInventoryForm',
         'close-inventory-form' => 'closeInventoryForm',
         'close-stock-adjust-page' => 'closeStockAdjustPage',
+        'disable-sidebar' => 'disableSidebar',
     ];
 
     public function closeModal()
     {
         $this->showStockAdjustPage = false;
+    }
+
+    public function disableSidebar()
+    {
+        $this->sidebarStatus = true;
     }
 
     public function formCreate()
@@ -92,5 +99,34 @@ class InventoryManagementPage extends Component
     public function closeStockAdjustPage()
     {
         $this->showStockAdjustPage = false;
+    }
+
+    public function isAdmin()
+    {
+        $user = Auth::user();
+
+        if ($user->user_role_id == 1 && $user->status_id == 1) {
+            // $this->go();
+
+            return true;
+        }
+        return false;
+    }
+
+    public function isInventoryClerk()
+    {
+        $user = Auth::user();
+
+        if ($user->user_role_id == 3 && $user->status_id == 3) {
+            // $this->go();
+            return true;
+        }
+        return false;
+    }
+
+    public function go()
+    {
+        dd('h');
+        // $this->dispatch('disable-sidebar')->to(InventoryManagementPage::class);
     }
 }
