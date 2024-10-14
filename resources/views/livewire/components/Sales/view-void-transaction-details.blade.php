@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)]">
+        <div class="overflow-x-auto overflow-y-scroll h-full scroll no-scrollbar border border-[rgb(53,53,53)]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -80,16 +80,16 @@
                         <th scope="col" class="px-4 py-3 text-left">Item description</th>
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Operation</th>
+                        <th scope="col" class="px-4 py-3 text-center">Reason</th>
 
                         {{-- //* unit price --}}
                         <th scope="col" class="px-4 py-3 text-right">Unit Price (₱)</th>
 
                         {{-- //* unit price --}}
-                        <th scope="col" class="px-4 py-3 text-center">Wholesale Price (₱)</th>
+                        <th scope="col" class="px-4 py-3 text-right">Wholesale Price (₱)</th>
 
                         {{-- //* employee name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Void Quantity</th>
+                        <th scope="col" class="px-4 py-3 text-right">Void Quantity</th>
 
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
@@ -127,11 +127,11 @@
                                 {{ $voidTransactionDetail->reason }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 @if ($voidTransactionDetail->transactionDetailsJoin->discount_id == 3)
                                     {{ number_format(
                                         $voidTransactionDetail->transactionDetailsJoin->item_price -
@@ -145,12 +145,12 @@
                                 @endif
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->void_quantity }}
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
                                 {{ $voidTransactionDetail->item_void_amount }}
                             </th>
                         </tr>

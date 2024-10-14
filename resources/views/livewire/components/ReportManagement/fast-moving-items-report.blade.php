@@ -20,8 +20,8 @@
             <div class="grid items-center grid-flow-col grid-cols-2 ">
                 <div class="flex flex-col justify-between col-span-1 px-4">
                     <div class="flex flex-col ">
-                        <div class="flex flex-row text-nowrap">
-                            <p class="text-[1em] font-black uppercase">Selected Date:</p>
+                        <div class="flex flex-row gap-2 text-nowrap">
+                            <p class="text-[1em] font-black uppercase">Specified Date:</p>
                             <p class="text-[1em] font-medium uppercase">{{ $date ?? ' ' }}</p>
                         </div>
                     </div>
@@ -128,17 +128,19 @@
 
         </div>
         @if ($fastmoving_info)
-        <div class="px-4 py-4 ">
-            <div class="flex flex-row text-nowrap">
-                <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                <p class="text-[1em] font-medium uppercase">{{ $dateCreated }}</p>
-                </p>
+            <div class="px-4 py-4 ">
+                <div class="flex flex-row gap-2 text-nowrap">
+                    <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                    <p>{{ $dateCreated }}</p>
+                    </p>
+                </div>
+                <div class="flex flex-row gap-2 py-4 text-nowrap">
+                    <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                    <p>
+                        {{ $createdBy }}
+                    </p>
+                </div>
             </div>
-            <div class="flex flex-row py-4 text-nowrap">
-                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
-            </div>
-        </div>
         @endif
     </div>
 </div>

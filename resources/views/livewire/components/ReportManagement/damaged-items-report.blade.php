@@ -16,16 +16,17 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-flow-col grid-cols-2 ">
+        <div class="grid items-center grid-flow-col m-4 ">
 
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                {{ $fromDate . ' - ' . $toDate}}
-
+                <p>
+                    {{ $fromDate . ' - ' . $toDate }}
+                </p>
             </div>
 
             <div>
-                <p class="text-[1.4em] font-bold text-right italic m-4 mr-10 uppercase">DAMAGED ITEM LIST REPORT</p>
+                <p class="text-[1.4em] font-bold text-right italic mr-10 uppercase">DAMAGED ITEM LIST REPORT</p>
             </div>
 
         </div>
@@ -99,13 +100,17 @@
             @endif
         </div>
         <div class="px-4 py-4 ">
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                {{ $dateCreated }}
+                <p>
+                    {{ $dateCreated }}
+                </p>
             </div>
-            <div class="flex flex-row py-4 text-nowrap">
+            <div class="flex flex-row gap-2 py-4 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
+                <p>
+                    {{ $createdBy }}
+                </p>
             </div>
         </div>
     </div>

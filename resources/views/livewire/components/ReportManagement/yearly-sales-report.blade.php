@@ -18,11 +18,10 @@
         </div>
         <div>
             <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">YEARLY SALES REPORT</p>
-
         </div>
         @if ($transaction_info)
             <div class="grid grid-flow-col grid-cols-2 ">
-                <div class="flex flex-col justify-between col-span-1 px-4 mb-2 ">
+                <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
                     <div class="flex flex-col ">
                         <div class="flex flex-row gap-2 text-nowrap ">
                             <p class="text-[1em] font-black uppercase">Specified Year:</p>

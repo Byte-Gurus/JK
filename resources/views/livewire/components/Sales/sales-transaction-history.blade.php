@@ -89,9 +89,9 @@
         </div>
         {{-- //* tablea area --}}
         <div
-            class=" flex-1 overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll no-scrollbar h-[28vh]">
+            class=" flex-1 overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll h-[28vh]">
 
-            <table class="w-full text-sm text-left scroll no-scrollbar">
+            <table class="w-full text-sm text-left scroll">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
@@ -371,9 +371,9 @@
                 </div>
             </div>
             <div
-                class=" w-full overflow-x-scroll overflow-y-scroll border border-[rgb(143,143,143)] scroll no-scrollbar">
+                class=" w-full overflow-x-scroll overflow-y-scroll border border-[rgb(143,143,143)] scroll">
 
-                <table class="w-full text-sm text-left h-fit scroll no-scrollbar">
+                <table class="w-full text-sm text-left h-fit scroll ">
 
                     {{-- //* table header --}}
                     <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">

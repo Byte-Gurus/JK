@@ -1,7 +1,7 @@
 <div x-cloak
     class="flex flex-row items-center font-['Inter'] h-[10vh] justify-between ml-[0px] z-50 py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap">
     <div class="flex flex-row items-center">
-        <div class="pr-4">
+        <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
             <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
         </div>
         <div>

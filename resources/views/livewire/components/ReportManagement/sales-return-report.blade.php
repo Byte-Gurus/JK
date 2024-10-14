@@ -16,74 +16,66 @@
                 </div>
             </div>
         </div>
-        <div>
-            <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">SALES RETURN REPORT</p>
-        </div>
-        <div class="flex flex-row justify-between px-4 mb-2">
-            <div class="flex flex-col ">
-                <div class="flex flex-row text-nowrap">
+        <div class="flex flex-row items-center justify-between px-4 mb-2">
+            <div class="flex flex-col items-center">
+                <div class="flex flex-row gap-2 text-nowrap">
                     <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                    {{  $fromDate . ' - ' . $toDate}}
+                    <p>
+                        {{ $fromDate . ' - ' . $toDate }}
+                    </p>
                 </div>
             </div>
-            <div class="flex flex-col self-start justify-between px-4 mb-2">
-                <div class="flex flex-row border border-black text-nowrap">
-                    {{-- <p class="text-[1em] font-black border-r border-black uppercase">Total Sales Return </p> --}}
-                    {{-- {{ number_format($transaction_info['totalNet'], 2) }} --}}
-                </div>
+            <div>
+                <p class="text-[1.2em] font-bold text-right italic m-4 mr-10 uppercase">SALES RETURN REPORT</p>
             </div>
         </div>
-
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
 
-
-
-
-            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-2 ">
+            <ul class="grid items-center justify-between grid-flow-col grid-cols-8 mx-2 ">
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Transaction No.</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Transaction No.</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[0.8em] px-2 uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Item Name</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Item Description</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
 
                 <li class="col-span-1">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Operation</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Operation</p>
 
                     </div>
                 </li>
 
                 <li class="col-span-1">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Description</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Description</p>
 
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Return Qty</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Return Qty</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.6em] uppercase text-center font-bold">Return Amount(₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Return Amount(₱)</p>
                     </div>
                 </li>
             </ul>
@@ -101,48 +93,48 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.6em] text-left font-medium">
+                                <p class="text-[0.8em] px-2 text-left font-medium">
                                     {{ $returnItem->transactionDetailsJoin->itemJoin->barcode }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.6em] text-center font-bold">
+                                <p class="text-[0.8em] text-center font-medium">
                                     {{ $returnItem->transactionDetailsJoin->itemJoin->item_name }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.6em] text-center font-bold">
+                                <p class="text-[0.8em] text-center font-medium">
                                     {{ $returnItem->transactionDetailsJoin->itemJoin->item_description }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-bold">
+                                <p class="text-[0.8em] text-center font-medium">
                                     {{ $returnItem->operation }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-bold">
+                                <p class="text-[0.8em] text-center font-medium">
                                     {{ $returnItem->description }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.6em] text-center font-bold">
+                                <p class="text-[0.8em] text-right font-medium">
                                     {{ $returnItem->return_quantity }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-bold">
+                                <p class="text-[0.8em] text-right font-medium">
                                     {{ $returnItem->item_return_amount }}
                                 </p>
                             </div>
@@ -152,13 +144,15 @@
             @endif
         </div>
         <div class="px-4 py-4">
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[0.8em] font-bold uppercase">Date & Time Created:</p>
-                <p class="text-[0.8em] font-bold uppercase">{{ $dateCreated }}</p>
+                <p>{{ $dateCreated }}</p>
             </div>
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
+                <p>
+                    {{ $createdBy }}
+                </p>
             </div>
         </div>
     </div>

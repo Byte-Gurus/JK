@@ -20,9 +20,11 @@
         {{-- @if ($transaction_info) --}}
         <div class="grid items-center grid-flow-col m-4 ">
 
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-black uppercase">Specified Date:</p>
-                {{ $fromDate . ' - ' . $toDate}}
+                <p>
+                    {{ $fromDate . ' - ' . $toDate }}
+                </p>
             </div>
 
             <div>
@@ -65,12 +67,12 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Credit Amount</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Credit Amount</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Remaining Balance</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Remaining Balance</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -81,91 +83,98 @@
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Credit Limit</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Credit Limit</p>
                     </div>
                 </li>
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($credits)
-            @foreach ($credits as $credit)
-            <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
+                @foreach ($credits as $credit)
+                    <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
 
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-medium">
-                            {{ $credit->credit_number }}
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-medium">
-                            {{ $credit->customerJoin->firstname . ' ' . $credit->customerJoin->middlename . ' ' .
-                            $credit->customerJoin->lastname }}
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-bold">
-                            {{ $credit->customerJoin->contact_number }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            {{ \Carbon\Carbon::parse($credit->created_at)->format('M d Y') }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            {{ \Carbon\Carbon::parse($credit->due_date)->format('M d Y') }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            {{ $credit->credit_amount }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            {{ $credit->remaining_balance }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            {{ $credit->status }}
-                        </p>
-                    </div>
-                </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-left font-medium">
+                                    {{ $credit->credit_number }}
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-left font-medium">
+                                    {{ $credit->customerJoin->firstname .
+                                        ' ' .
+                                        $credit->customerJoin->middlename .
+                                        ' ' .
+                                        $credit->customerJoin->lastname }}
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-left font-bold">
+                                    {{ $credit->customerJoin->contact_number }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+                                    {{ \Carbon\Carbon::parse($credit->created_at)->format('M d Y') }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+                                    {{ \Carbon\Carbon::parse($credit->due_date)->format('M d Y') }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right fot-bold">
+                                    {{ $credit->credit_amount }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right fot-bold">
+                                    {{ $credit->remaining_balance }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-center fot-bold">
+                                    {{ $credit->status }}
+                                </p>
+                            </div>
+                        </li>
 
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center fot-bold">
-                            {{ $credit->credit_limit }}
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            @endforeach
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right fot-bold">
+                                    {{ $credit->credit_limit }}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                @endforeach
             @endif
         </div>
         <div class="px-4 py-4 ">
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                {{ $dateCreated }}
+                <p>
+                    {{ $dateCreated }}
+                </p>
             </div>
-            <div class="flex flex-row py-4 text-nowrap">
+            <div class="flex flex-row gap-2 py-4 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
+                <p>
+                    {{ $createdBy }}
+                </p>
             </div>
         </div>
     </div>

@@ -111,14 +111,17 @@
             @endforeach
         </div>
         <div class="px-4 py-4 ">
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                {{ $dateCreated }}
-
+                <p>
+                    {{ $dateCreated }}
+                </p>
             </div>
-            <div class="flex flex-row py-4 text-nowrap">
+            <div class="flex flex-row gap-2 py-4 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
+                <p>
+                    {{ $createdBy }}
+                </p>
             </div>
         </div>
     </div>

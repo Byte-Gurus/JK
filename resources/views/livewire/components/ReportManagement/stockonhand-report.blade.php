@@ -45,7 +45,7 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Quantity</p>
+                        <p class="text-[1em] uppercase text-right font-bold">Item Quantity</p>
                     </div>
                 </li>
             </ul>
@@ -77,7 +77,7 @@
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-center font-bold">
+                            <p class="text-[1em] text-right font-bold">
                                 {{ $inventory->current_stock_quantity }}
                             </p>
                         </div>
@@ -86,14 +86,16 @@
             @endforeach
         </div>
         <div class="px-4 py-4">
-            <div class="flex flex-row text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                <p class="text-[1em] font-medium uppercase">{{ $dateCreated }}</p>
+                <p>{{ $dateCreated }}</p>
                 </p>
             </div>
-            <div class="flex flex-row py-4 text-nowrap">
+            <div class="flex flex-row gap-2 py-4 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                {{ $createdBy }}
+                <p>
+                    {{ $createdBy }}
+                </p>
             </div>
         </div>
     </div>
