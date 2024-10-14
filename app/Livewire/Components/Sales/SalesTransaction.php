@@ -45,35 +45,35 @@ class SalesTransaction extends Component
     public $payment = [];
 
     public $selectedIndex,
-        $isSelected,
-        $subtotal,
-        $grandTotal,
-        $discount,
-        $totalVat,
-        $discount_percent,
-        $PWD_Senior_discount_amount,
-        $discount_type,
-        $customer_name,
-        $senior_pwd_id,
-        $tendered_amount,
-        $change,
-        $original_total,
-        $netAmount,
-        $discounts,
-        $wholesale_discount_amount,
-        $credit_no,
-        $searchCustomer,
-        $creditor_name,
-        $transaction_info,
-        $credit_limit,
-        $changeTransactionType = 1,
-        $receiptData = [],
-        $unableShortcut = false,
-        $search_return_number,
-        $return_amount,
-        $returnInfo,
-        $return_number,
-        $excess_amount;
+    $isSelected,
+    $subtotal,
+    $grandTotal,
+    $discount,
+    $totalVat,
+    $discount_percent,
+    $PWD_Senior_discount_amount,
+    $discount_type,
+    $customer_name,
+    $senior_pwd_id,
+    $tendered_amount,
+    $change,
+    $original_total,
+    $netAmount,
+    $discounts,
+    $wholesale_discount_amount,
+    $credit_no,
+    $searchCustomer,
+    $creditor_name,
+    $transaction_info,
+    $credit_limit,
+    $changeTransactionType = 1,
+    $receiptData = [],
+    $unableShortcut = false,
+    $search_return_number,
+    $return_amount,
+    $returnInfo,
+    $return_number,
+    $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -452,7 +452,6 @@ class SalesTransaction extends Component
 
             if ($this->changeTransactionType == 3 && $this->subtotal > $this->return_amount) {
                 $this->excess_amount = $this->subtotal - $this->return_amount;
-                $this->dispatch('get-grand-total', GrandTotal: $this->excess_amount)->to(PaymentForm::class);
             }
 
             $this->totalVat = $vatable_amount + $vat_exempt_amount;
@@ -522,6 +521,7 @@ class SalesTransaction extends Component
             // $this->reset('customer_name', 'senior_pwd_id', 'discount_type');
 
             $this->customerDetails = null;
+
         }
     }
 
@@ -671,6 +671,7 @@ class SalesTransaction extends Component
 
                 $inventories = Inventory::where('selling_price', $selectedItem['selling_price'])
                     ->where('item_id', $selectedItem['item_id'])
+                    ->where('status', 'Available')
                     ->orderBy('expiration_date', 'ASC')
                     ->get();
 
@@ -680,7 +681,7 @@ class SalesTransaction extends Component
                     // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']);
                     // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold != $selectedItem['quantity']);
 
-                    if ($total_quantity_sold > 0) {
+                    if ($total_quantity_sold > 0 ) {
                         if (($inventory->current_stock_quantity - $total_quantity_sold) >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
                             // dump('if');
                             $transactionDetails = TransactionDetails::create([
@@ -715,6 +716,8 @@ class SalesTransaction extends Component
                                     ]);
                                 }
                             }
+
+
                         } elseif (($inventory->current_stock_quantity - $total_quantity_sold) >= 0) {
 
                             // dump('elseif');
@@ -749,8 +752,12 @@ class SalesTransaction extends Component
                                         'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
                                         'inventory_id' => $inventory->id,
                                     ]);
+
+
                                 }
                             }
+
+
                         } else {
                             // dump('else');
                             $transactionDetails = TransactionDetails::create([
@@ -802,6 +809,10 @@ class SalesTransaction extends Component
                         $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
                     }
                 }
+
+
+
+
             }
 
 
