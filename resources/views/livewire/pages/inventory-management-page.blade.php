@@ -53,7 +53,7 @@
             <div x-cloak x-show="showStockCard" x-data="{ showStockCard: @entangle('showStockCard') }">
                 @livewire('components.InventoryManagement.view-stock-card')
             </div>
-            <div x-cloak x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
+        <div x-cloak x-show="showInventoryHistory" x-data="{ showInventoryHistory: @entangle('showInventoryHistory') }">
                 @livewire('components.InventoryManagement.inventory-history')
             </div>
             <div x-cloak x-show="showStockAdjustPage" x-data="{ showStockAdjustPage: @entangle('showStockAdjustPage') }">
