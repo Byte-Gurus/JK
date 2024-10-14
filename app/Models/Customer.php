@@ -40,6 +40,7 @@ class Customer extends Model
             ->orWhereRaw('LOWER(CONCAT(firstname, \' \', lastname)) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(CONCAT(firstname, \' \', middlename, \' \', lastname)) LIKE ?', ["%{$value}%"])
             ->orWhereRaw('LOWER(senior_pwd_id) LIKE ?', ["%{$value}%"])
+            ->orWhereRaw('LOWER(contact_number) LIKE ?', ["%{$value}%"])
             ->orWhereHas('addressJoin', function ($query) use ($value) {
                 $query->whereRaw('LOWER(street) LIKE ?', ["%{$value}%"])
                     ->orWhereHas('provinceJoin', function ($query) use ($value) {

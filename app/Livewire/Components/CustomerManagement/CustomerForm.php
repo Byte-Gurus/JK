@@ -309,10 +309,9 @@ class CustomerForm extends Component
         $this->lastname = trim($this->lastname);
 
         $rules = [
-          'firstname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
+            'firstname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
             'middlename' => 'nullable|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
             'lastname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u',
-            'birthdate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
             'contact_number' => 'required|numeric|digits:11|regex:/^09[0-9]{9}$/',
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
@@ -324,10 +323,16 @@ class CustomerForm extends Component
         ];
 
         if ($this->customertype == 'Senior Citizen') {
+            $sixtyYearsAgo = now()->subYears(60)->format('Y-m-d');
+            $rules['birthdate'] = 'required|date|before_or_equal:'. now()->subYears(60)->toDateString();
             $rules['senior_pwd_id'] = 'digits:4';
         } elseif ($this->customertype == 'PWD') {
+            $eighteenYearsAgo = now()->subYears(18)->format('Y-m-d');
+            $rules['birthdate'] = 'required|date|before_or_equal:' .now()->subYears(18)->toDateString();
             $rules['senior_pwd_id'] = 'digits:7';
         } elseif ($this->customertype == 'Normal') {
+            $eighteenYearsAgo = now()->subYears(18)->format('Y-m-d');
+            $rules['birthdate'] = 'required|date|before_or_equal:' .now()->subYears(18)->toDateString();
             $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 

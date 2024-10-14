@@ -234,7 +234,6 @@ class DiscountForm extends Component
                 'firstname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
                 'middlename' => 'nullable|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allow spaces between names
                 'lastname' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u',
-                'birthdate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
                 'contact_number' => 'required|numeric|digits:11',
                 'selectProvince' => 'required|exists:philippine_provinces,province_code',
                 'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
@@ -246,8 +245,10 @@ class DiscountForm extends Component
 
             if ($this->customerType == 'Senior Citizen') {
                 $rules['senior_pwd_id'] = 'digits:4';
+                $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
             } elseif ($this->customerType == 'PWD') {
                 $rules['senior_pwd_id'] = 'digits:7';
+                $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             }
         } else {
             $rules = [
@@ -258,8 +259,10 @@ class DiscountForm extends Component
 
             if ($this->customerType == 'Senior Citizen') {
                 $rules['senior_pwd_id'] = 'digits:4';
+                $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
             } elseif ($this->customerType == 'PWD') {
                 $rules['senior_pwd_id'] = 'digits:7';
+                $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             }
         }
 
