@@ -33,7 +33,7 @@ class DamagedItemsReport extends Component
         $this->fromDate = $startDate->format('M d Y');
         $this->toDate = $endDate->format('M d Y');
 
-        $this->damagedItems = ReturnDetails::where('operation', 'Damaged')
+        $this->damagedItems = ReturnDetails::where('description', 'Damaged')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get();
 

@@ -85,6 +85,9 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
+            @if ($isTransactionEmpty)
+            <p>NO DATA IN THIS DATE</p>
+            @endif
             @if ($transaction_info)
                 @foreach ($transaction_info['dailySummaries'] as $date => $summary)
                     <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">

@@ -11,6 +11,8 @@ use Livewire\Component;
 class MonthlySalesReport extends Component
 {
     public $transactions = [], $transaction_info = [];
+    public $isTransactionEmpty = false;
+
     public function render()
     {
         return view('livewire.components.ReportManagement.monthly-sales-report', [
@@ -29,6 +31,10 @@ class MonthlySalesReport extends Component
 
         // Fetch transactions within the month range
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfMonth, $endOfMonth])->get();
+
+        if ($this->transactions->isEmpty()) {
+            $this->isTransactionEmpty = true;
+        }
 
         // Initialize totals and daily summaries
         $dailySummaries = [];
@@ -115,7 +121,7 @@ class MonthlySalesReport extends Component
             'totalNet' => $totalNet,
             'totalReturnAmount' => $totalReturnAmount,
             'totalReturnVatAmount' => $totalReturnVatAmount,
-            'totalVoidAmount' => $totalVoidAmount ,
+            'totalVoidAmount' => $totalVoidAmount,
             'totalVoidVatAmount' => $totalVoidVatAmount,
             'totalVoidItemAmount' => $totalVoidItemAmount,
             'totalVoidTaxAmount' => $totalVoidTaxAmount,

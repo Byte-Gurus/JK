@@ -12,6 +12,7 @@ class YearlySalesChart extends Component
 
     public $year, $totalAmount, $transactionCount;
     public $yearlyTotal = [];
+
     public function render()
     {
         if (!$this->year) {
@@ -36,6 +37,9 @@ class YearlySalesChart extends Component
 
 
         $transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
+
+       
+
         $this->transactionCount = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->count();
 
         $monthlySummaries = [];

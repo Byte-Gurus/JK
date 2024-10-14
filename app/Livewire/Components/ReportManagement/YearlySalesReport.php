@@ -11,6 +11,7 @@ use Livewire\Component;
 class YearlySalesReport extends Component
 {
     public $transactions = [], $transaction_info = [];
+    public $isTransactionEmpty = false;
     public function render()
     {
         return view('livewire.components.ReportManagement.yearly-sales-report', [
@@ -28,10 +29,12 @@ class YearlySalesReport extends Component
         $startOfYear = Carbon::createFromFormat('Y', $year)->startOfYear();
         $endOfYear = Carbon::createFromFormat('Y', $year)->endOfYear();
 
-       
+
         // Fetch transactions within the year range
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
-
+        if ($this->transactions->isEmpty()) {
+            $this->isTransactionEmpty = true;
+        }
         // Initialize totals and monthly summaries
         $monthlySummaries = [];
         $totalGross = 0;

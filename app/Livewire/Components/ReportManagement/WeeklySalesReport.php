@@ -11,6 +11,8 @@ use Livewire\Component;
 class WeeklySalesReport extends Component
 {
     public $showWeeklySalesReport = false;
+    public $isTransactionEmpty = false;
+
     public $transactions = [], $transaction_info = [];
 
     public function render()
@@ -33,6 +35,9 @@ class WeeklySalesReport extends Component
         // Fetch transactions within the week range
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
+        if ($this->transactions->isEmpty()) {
+            $this->isTransactionEmpty = true;
+        }
         // Initialize totals and daily summaries
         $dailySummaries = [];
         $totalGross = 0;

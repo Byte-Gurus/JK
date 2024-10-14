@@ -15,6 +15,7 @@ class DailySalesReport extends Component
 {
 
     public $showDailySalesReport = false;
+    public $isTransactionEmpty = false;
 
     public $transactions = [], $transaction_info = [];
     public function render()
@@ -41,6 +42,9 @@ class DailySalesReport extends Component
         // Retrieve transactions within the date range
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfDay, $endOfDay])->get();
 
+        if ($this->transactions->isEmpty()) {
+            $this->isTransactionEmpty = true;
+        }
         // $returns = Returns::where('created_at', $date);
 
         $totalGross = 0;
