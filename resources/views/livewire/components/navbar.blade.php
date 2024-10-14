@@ -20,13 +20,13 @@
             </div>
         </div>
         <div class="flex flex-row items-center gap-4">
-            <a href="{{ route('admin.index') }}" wire:navigate>
-                <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
-            </a>
-            <div>
-                <h1 class="font-bold text-gray-800 pointer-events-none text-md">Frozen and Consumer Goods Store</h1>
-            </div>
+            @if ($this->isAdmin())
+                <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
+                    <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
+                </div>
+            @endif
         </div>
+
         <div class="flex flex-row items-center gap-12 ml-24 font-semibold text-gray-700">
             <div class="flex flex-row items-center gap-2">
                 <svg class="w-6 h-6 pointer-events-none" viewBox="0 0 24 24" fill="none"

@@ -1,11 +1,12 @@
 <div x-data="{ sidebar: @entangle('sidebarStatus') }"
-    @if (!$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
+    @if ($this->isAdmin() && !$this->sidebarStatus) class=" ml-[220px] transition-all ease-in-out duration-75"
+    @elseif ($this->isInventoryClerk())
+    class=" ml-[0px] transition-all ease-in-out duration-100"
     @else
         class=" ml-[0px] transition-all ease-in-out duration-100" @endif>
-
     @if ($this->isAdmin())
         @livewire('components.navbar')
-    @else
+    @elseif (!$this->isInventoryClerk())
         @livewire('components.navbar-no-sidebar')
     @endif
     <div x-data="{ showStockAdjustModal: @entangle('showStockAdjustModal'), showInventoryHistory: @entangle('showInventoryHistory'), showInventoryTable: @entangle('showInventoryTable') }">

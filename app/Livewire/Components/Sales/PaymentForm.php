@@ -96,12 +96,12 @@ class PaymentForm extends Component
         if ($this->payWithCash) {
 
             $rules = [
-                'tendered_amount' => 'required|numeric|min:1|gte:grand_total',
+                'tendered_amount' => 'required|numeric|min:1|gte:grand_total|max:999999',
 
             ];
         } else {
             $rules = [
-                'tendered_amount' => 'required|numeric|min:1',
+                'tendered_amount' => 'required|numeric|min:1|max:999999',
                 'reference_no' => 'required|numeric|digits:13',
             ];
         }

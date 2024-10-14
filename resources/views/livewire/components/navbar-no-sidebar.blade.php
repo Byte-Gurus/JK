@@ -1,9 +1,19 @@
 <div x-cloak
     class="flex flex-row items-center font-['Inter'] h-[10vh] justify-between ml-[0px] z-50 py-2 transition-all duration-100 ease-out border-b-2 border-black px-7 text-nowrap">
     <div class="flex flex-row items-center">
-        <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
-            <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
-        </div>
+        @if ($this->isAdmin())
+            <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
+                <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
+            </div>
+        @elseif (!$this->isCashier())
+            <div href="{{ route('cashier.index') }}" wire:navigate class="pr-4">
+                <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
+            </div>
+        @elseif (!$this->isInventoryClerk())
+            <div href="{{ route('inventoryclerk.index') }}" wire:navigate class="pr-4">
+                <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
+            </div>
+        @endif
         <div>
             <h1 class="font-bold text-gray-800 pointer-events-none text-md">Frozen and Consumer Goods Store</h1>
         </div>
@@ -47,7 +57,18 @@
                             </svg>
                         </a>
                     </div>
-                @elseif ($this->isInventoryClerk())
+                @elseif (!$this->isCashier())
+                    <div
+                        class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
+                        <a href="{{ route('cashier.index') }}" wire:navigate>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class=" size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                        </a>
+                    </div>
+                @elseif (!$this->isInventoryClerk())
                     <div
                         class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
                         <a href="{{ route('inventoryclerk.index') }}" wire:navigate>
@@ -59,7 +80,6 @@
                         </a>
                     </div>
                 @endif
-
                 <div x-data="{ openNotifications: false }" x-on:click.away="openNotifications = false;"
                     class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"

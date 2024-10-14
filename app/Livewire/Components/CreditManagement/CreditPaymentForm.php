@@ -133,12 +133,12 @@ class CreditPaymentForm extends Component
 
 
             $rules = [
-                'tendered_amount' => 'required|numeric|min:1',
+                'tendered_amount' => 'required|numeric|min:1|max:999999',
 
             ];
         } else {
             $rules = [
-                'tendered_amount' => 'required|numeric|min:1',
+                'tendered_amount' => 'required|numeric|min:1|max:999999',
                 'reference_no' => 'required|numeric|min:1|digits:13',
             ];
         }

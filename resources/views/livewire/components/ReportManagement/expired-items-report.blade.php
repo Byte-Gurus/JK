@@ -34,10 +34,10 @@
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
 
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Date</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Expiration Date</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -57,7 +57,7 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Quantity</p>
+                        <p class="text-[1em] uppercase text-right font-bold">Item Quantity</p>
                     </div>
                 </li>
             </ul>
@@ -65,10 +65,10 @@
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($expiredItems)
             @foreach ($expiredItems as $expiredItem)
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center fot-bold">
+                        <p class="text-[1em] text-left font-medium">
                             {{ $expiredItem->expiration_date }}
                         </p>
                     </div>
@@ -81,21 +81,21 @@
                 </li>
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center font-bold">
+                        <p class="text-[1em] text-center font-medium">
                             {{ $expiredItem->itemJoin->item_name }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center font-bold">
+                        <p class="text-[1em] text-center font-medium">
                             {{ $expiredItem->itemJoin->item_description }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center fot-bold">
+                        <p class="text-[1em] text-right font-medium">
                             {{ $expiredItem->current_stock_quantity }}
                         </p>
                     </div>

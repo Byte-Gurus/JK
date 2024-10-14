@@ -39,17 +39,11 @@ class InventoryManagementPage extends Component
         'display-inventory-form' => 'displayInventoryForm',
         'close-inventory-form' => 'closeInventoryForm',
         'close-stock-adjust-page' => 'closeStockAdjustPage',
-        'disable-sidebar' => 'disableSidebar',
     ];
 
     public function closeModal()
     {
         $this->showStockAdjustPage = false;
-    }
-
-    public function disableSidebar()
-    {
-        $this->sidebarStatus = true;
     }
 
     public function formCreate()
@@ -106,8 +100,6 @@ class InventoryManagementPage extends Component
         $user = Auth::user();
 
         if ($user->user_role_id == 1 && $user->status_id == 1) {
-            // $this->go();
-
             return true;
         }
         return false;
@@ -118,15 +110,8 @@ class InventoryManagementPage extends Component
         $user = Auth::user();
 
         if ($user->user_role_id == 3 && $user->status_id == 3) {
-            // $this->go();
             return true;
         }
         return false;
-    }
-
-    public function go()
-    {
-        dd('h');
-        // $this->dispatch('disable-sidebar')->to(InventoryManagementPage::class);
     }
 }

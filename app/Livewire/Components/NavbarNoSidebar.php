@@ -32,6 +32,16 @@ class NavbarNoSidebar extends Component
         if ($user->user_role_id == 1 && $user->status_id == 1) {
             return true;
         }
+        return false;
+    }
+
+    public function isCashier()
+    {
+        $user = Auth::user();
+
+        if ($user->user_role_id == 2 && $user->status_id == 2) {
+            return true;
+        }
 
         return false;
     }
@@ -43,7 +53,6 @@ class NavbarNoSidebar extends Component
         if ($user->user_role_id == 3 && $user->status_id == 3) {
             return true;
         }
-
         return false;
     }
 }

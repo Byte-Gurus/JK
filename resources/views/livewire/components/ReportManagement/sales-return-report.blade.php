@@ -35,47 +35,47 @@
             <ul class="grid items-center justify-between grid-flow-col grid-cols-8 mx-2 ">
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Transaction No.</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Transaction No.</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] px-2 uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[0.6em] px-2 uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Item Name</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Item Description</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
 
                 <li class="col-span-1">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Operation</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Operation</p>
 
                     </div>
                 </li>
 
                 <li class="col-span-1">
                     <div>
-                        <p class="text-[0.8em] uppercase text-center font-bold">Description</p>
+                        <p class="text-[0.6em] uppercase text-center font-bold">Description</p>
 
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Return Qty</p>
+                        <p class="text-[0.6em] uppercase text-right font-bold">Return Qty</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Return Amount(₱)</p>
+                        <p class="text-[0.6em] uppercase text-right font-bold">Return Amount (₱)</p>
                     </div>
                 </li>
             </ul>
@@ -93,48 +93,48 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] px-2 text-left font-medium">
+                                <p class="text-[0.6em] px-2 text-left font-medium">
                                     {{ $returnItem->transactionDetailsJoin->itemJoin->barcode }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-medium">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ $returnItem->transactionDetailsJoin->itemJoin->item_name }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-medium">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ $returnItem->transactionDetailsJoin->itemJoin->item_description }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-medium">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ $returnItem->operation }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center font-medium">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ $returnItem->description }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-right font-medium">
+                                <p class="text-[0.6em] text-right font-medium">
                                     {{ $returnItem->return_quantity }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-right font-medium">
+                                <p class="text-[0.6em] text-right font-medium">
                                     {{ $returnItem->item_return_amount }}
                                 </p>
                             </div>

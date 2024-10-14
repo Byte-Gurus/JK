@@ -57,27 +57,27 @@
 
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-left font-bold">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $inventory->itemJoin->barcode }}</p>
                         </div>
                     </li>
                     <li class="col-span-1 text-left py-[3px]">
                         <div>
-                            <p class="text-[1em] text-left font-bold">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $inventory->itemJoin->item_name }}
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 text-left py-[3px]">
                         <div>
-                            <p class="text-[1em] text-left font-bold">
+                            <p class="text-[1em] text-left font-medium">
                                 {{ $inventory->itemJoin->item_description }}
                             </p>
                         </div>
                     </li>
                     <li class="col-span-1 py-[3px]">
                         <div>
-                            <p class="text-[1em] text-right font-bold">
+                            <p class="text-[1em] text-right font-medium">
                                 {{ $inventory->current_stock_quantity }}
                             </p>
                         </div>

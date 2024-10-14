@@ -28,6 +28,9 @@ class Navbar extends Component
 
     public function render()
     {
+        if (!$this->isInventoryClerk()) {
+            $this->dispatch('disable-sidebar')->to(InventoryManagementPage::class);
+        }
         $this->showTime();
         return view('livewire.components.navbar');
     }
@@ -50,9 +53,7 @@ class Navbar extends Component
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(InventoryManagementPage::class);
         $this->dispatch('change-sidebar-status', sidebarOpen: $sidebarOpen)->to(ReportManagement::class);
 
-        if ($this->isInventoryClerk()) {
-            $this->dispatch('change-sidebar-status', sidebarOpen: false)->to(InventoryManagementPage::class);
-        }
+
     }
 
     public function showTime()
@@ -84,4 +85,5 @@ class Navbar extends Component
 
         return false;
     }
+
 }

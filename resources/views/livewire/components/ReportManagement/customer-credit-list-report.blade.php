@@ -38,7 +38,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
+            <ul class="grid items-center justify-between grid-flow-col grid-cols-9 mx-4 ">
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">ID</p>
@@ -67,12 +67,12 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Credit Amount</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Credit Amount (₱)</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Remaining Balance</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Remaining Balance (₱)</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -83,7 +83,7 @@
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Credit Limit</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Credit Limit (₱)</p>
                     </div>
                 </li>
             </ul>
@@ -95,13 +95,13 @@
 
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-left font-medium">
+                                <p class="text-[0.6em] text-left font-medium">
                                     {{ $credit->credit_number }}
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-left font-medium">
+                                <p class="text-[0.6em] text-left font-medium">
                                     {{ $credit->customerJoin->firstname .
                                         ' ' .
                                         $credit->customerJoin->middlename .
@@ -111,42 +111,42 @@
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-left font-bold">
+                                <p class="text-[0.6em] text-left font-medium">
                                     {{ $credit->customerJoin->contact_number }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ \Carbon\Carbon::parse($credit->created_at)->format('M d Y') }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ \Carbon\Carbon::parse($credit->due_date)->format('M d Y') }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-right fot-bold">
+                                <p class="text-[0.6em] text-right font-medium">
                                     {{ $credit->credit_amount }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-right fot-bold">
+                                <p class="text-[0.6em] text-right font-medium">
                                     {{ $credit->remaining_balance }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-center fot-bold">
+                                <p class="text-[0.6em] text-center font-medium">
                                     {{ $credit->status }}
                                 </p>
                             </div>
@@ -154,7 +154,7 @@
 
                         <li class="col-span-1 py-[3px]">
                             <div>
-                                <p class="text-[0.8em] text-right fot-bold">
+                                <p class="text-[0.6em] text-right font-medium">
                                     {{ $credit->credit_limit }}
                                 </p>
                             </div>
