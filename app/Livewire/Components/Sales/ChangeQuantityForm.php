@@ -82,12 +82,11 @@ class ChangeQuantityForm extends Component
     public function getQuantity($data)
     {
 
-        $groupedItems = Inventory::whereHas(
-            'itemJoin',
-            function ($query) use ($data) {
-                $query->where('barcode', $data['barcode'])
-                    ->where('selling_price', $data['selling_price']);
-            })->get()->groupBy('item_id');
+        $groupedItems = Inventory::whereHas('itemJoin', function ($query) use ($data) {
+            $query->where('barcode', $data['barcode'])
+                ->where('selling_price', $data['selling_price'])
+                ->where('status', 'Available');
+        })->get()->groupBy('item_id');
 
         $totalStock = $groupedItems->map(function ($group) {
             return $group->sum('current_stock_quantity');
@@ -102,7 +101,7 @@ class ChangeQuantityForm extends Component
         $this->credit_limit = $data['credit_limit'];
         $this->selling_price = $data['selling_price'];
         $this->grandTotal = $data['grandTotal'];
-        $this->bulk_quantity =  $data['bulk_quantity'];
+        $this->bulk_quantity = $data['bulk_quantity'];
 
         $this->focusInput();
     }
