@@ -200,13 +200,13 @@
                             <th scope="row"
                                 class="px-4 py-4 italic font-medium text-center text-left-900 text-md whitespace-nowrap ">
                                 @if ($transaction->transaction_type == 'Sales')
-                                    {{ $transaction['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    {{ $transaction['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Return')
-                                    {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    {{ $transaction['returnsJoin']['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Credit')
-                                    {{ $transaction['creditJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    {{ $transaction['creditJoin']['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
                                 @elseif ($transaction->transaction_type == 'Void')
-                                    {{ $transaction['voidTransactionJoin']['transactionJoin']['paymentJoin->reference_number'] ?? 'N/A' }}
+                                    {{ $transaction['voidTransactionJoin']['transactionJoin']['paymentJoin']['reference_number'] ?? 'N/A' }}
                                 @endif
                             </th>
 
