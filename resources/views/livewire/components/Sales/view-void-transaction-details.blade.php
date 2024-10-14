@@ -128,7 +128,7 @@
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                                {{ $voidTransactionDetail->transactionDetailsJoin->item_price }}
+                                {{ number_format($voidTransactionDetail->transactionDetailsJoin->item_price, 2) }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
@@ -151,7 +151,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                                {{ $voidTransactionDetail->item_void_amount }}
+                                {{ number_format($voidTransactionDetail->item_void_amount, 2) }}
                             </th>
                         </tr>
                     @endforeach
