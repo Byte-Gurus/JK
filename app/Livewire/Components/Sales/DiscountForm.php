@@ -195,7 +195,7 @@ class DiscountForm extends Component
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'senior_pwd_id', 'discount_percentage', 'searchCustomer']);
+        $this->reset(['customer_name','firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'senior_pwd_id', 'discount_percentage', 'searchCustomer']);
     }
     public function resetFormWhenClosed()
     {

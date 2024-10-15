@@ -1,7 +1,7 @@
 <div
-    class=" flex flex-col gap-2 font-bold overflow-auto bg-[rgb(75,75,75)] backdrop-blur-xl h-screen max-h-[400px] rounded-md rounded-tr-none px-4 py-2">
+    class=" flex flex-col gap-2 font-bold overflow-auto bg-[rgba(53,53,53,0.7)] backdrop-blur-md h-screen max-h-[400px] rounded-md rounded-tr-none px-4 py-2">
     @foreach ($notifications as $notification)
-        <div class="bg-[rgb(56,56,56)]  rounded-lg h-fit backdrop-blur-xl">
+        <div class="bg-[rgba(99,99,99,0.24)] rounded-lg h-fit backdrop-blur-xl">
             <div @if ($notification->inventoryJoin) wire:click="goToOtherPage({{ $notification->inventory_id }},
             'inventory')"
             href="{{ route('inventorymanagement.index') }}" wire:navigate
