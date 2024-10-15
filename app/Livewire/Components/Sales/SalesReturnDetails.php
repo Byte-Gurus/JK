@@ -46,6 +46,7 @@ class SalesReturnDetails extends Component
         'get-transaction' => 'getTransaction',
         'return-sales-return-details' => 'returnSalesReturnDetails',
         'admin-confirmed' => 'adminConfirmed',
+        'reset-form' => 'resetForm',
         'returnConfirmed'
     ];
 
@@ -59,6 +60,11 @@ class SalesReturnDetails extends Component
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
 
+    }
+
+    public function returnSalesReturnDetails()
+    {
+        $this->showSalesAdminLoginForm = false;
     }
 
     public function returnConfirmed()
@@ -324,6 +330,11 @@ class SalesReturnDetails extends Component
             }
         }
         return true;
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['returnQuantity','operation','description']);
     }
 
     // public function validateForm()

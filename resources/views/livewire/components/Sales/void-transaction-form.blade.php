@@ -145,15 +145,6 @@
                         {{-- //* operation --}}
                         <th scope="col" class="px-4 py-3 text-center">Reason</th>
 
-                        {{-- //* action --}}
-                        <th scope="col" class="flex items-center justify-center gap-2 px-4 py-3 text-center ">
-
-                            {{-- wire:model="selectAllToRemove" wire:click="removeAll" --}}
-                            <input type="checkbox"
-                                class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
-
-                        </th>
-
                     </tr>
                 </thead>
 
@@ -233,19 +224,6 @@
                                 @enderror
                             </th>
 
-                            <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                                @if (isset($reason[$index]) && $reason[$index])
-                                    <input type="checkbox"
-                                        class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600"
-                                        wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
-                                    @error("checkedItem.$index")
-                                        <span
-                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
-                                    @enderror
-                                @endif
-                            </th>
                         </tr>
                     @endforeach
                 </tbody>
