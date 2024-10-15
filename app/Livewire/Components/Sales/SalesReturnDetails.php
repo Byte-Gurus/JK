@@ -157,11 +157,9 @@ class SalesReturnDetails extends Component
 
                 if ($this->operation[$index] == 'Refund') {
 
-
                     if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
-                        $this->return_total_amount = $this->return_total_amount - ($this->return_total_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
+                        $this->return_total_amount = $this->return_total_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
                     }
-
                     if ($transactionDetail->vat_type === 'Vat') {
                         $vatable_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
@@ -178,11 +176,8 @@ class SalesReturnDetails extends Component
                     $this->total_refund_amount += $this->item_return_amount;
 
                 } elseif ($this->operation[$index] == 'Exchange') {
-
-
-
                     if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
-                        $this->return_total_amount = $this->return_total_amount - ($this->return_total_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
+                        $this->return_total_amount = $this->return_total_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
                     }
 
                     if ($transactionDetail->vat_type === 'Vat') {
@@ -200,6 +195,8 @@ class SalesReturnDetails extends Component
 
                     $this->total_exchange_amount += $this->item_return_amount;
                 }
+
+
 
                 $this->return_total_amount += $this->item_return_amount;
 
