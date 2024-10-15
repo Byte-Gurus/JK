@@ -49,6 +49,7 @@ class VoidTransactionForm extends Component
         'display-sales-admin-login-form' => 'displaySalesAdminLoginForm',
         'return-void-transaction-form' => 'returnVoidTransactionForm',
         'close-void-transaction-form-modal' => 'closeVoidTransactionFormModal',
+        'reset-form' => 'resetForm',
         'voidConfirmed'
     ];
 
@@ -294,5 +295,10 @@ class VoidTransactionForm extends Component
         $this->transaction_id = $Transaction['id'];
 
         $this->populateForm();
+    }
+
+    public function resetForm()
+    {
+        $this->reset(['reason']);
     }
 }

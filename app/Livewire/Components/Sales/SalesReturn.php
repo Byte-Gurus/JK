@@ -52,4 +52,12 @@ class SalesReturn extends Component
         $this->showSalesReturnDetails = false;
         $this->sShowSalesReturnDetails = $sShowSalesReturnDetails;
     }
+
+    public function returnAndClearSalesReturnForm()
+    {
+        $this->dispatch('reset-form')->to(SalesReturnDetails::class);
+        $this->showSalesReturnDetails = false;
+        $this->sShowSalesReturnDetails = false;
+        $this->showSalesReturnTable = true;
+    }
 }

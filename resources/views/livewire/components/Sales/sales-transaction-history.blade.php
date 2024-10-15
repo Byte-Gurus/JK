@@ -88,8 +88,7 @@
             </div>
         </div>
         {{-- //* tablea area --}}
-        <div
-            class=" flex-1 overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll h-[28vh]">
+        <div class=" flex-1 overflow-x-auto overflow-y-scroll border border-[rgb(143,143,143)] scroll h-[28vh]">
 
             <table class="w-full text-sm text-left scroll">
 
@@ -245,7 +244,7 @@
             </table>
         </div>
     </div>
-    <div class="flex flex-row w-full h-[30vh] border border-black">
+    <div class="flex flex-row w-full h-[28vh] border border-black">
         @if (!$transactionDetails)
             <div class="flex items-center justify-center w-full bg-slate-50">
                 <p class=" text-[2em] font-black opacity-30">SELECT A TRANSACTION TO VIEW TRANSACTION DETAILS</p>
@@ -257,8 +256,17 @@
                         <div>
                             <p>Transaction No</p>
                         </div>
-                        <div class="self-center ">
+                        <div class="flex flex-row items-center justify-evenly ">
                             <p class="text-[1.6em] text-center font-black">{{ $transaction_number }}</p>
+                            {{-- copy to clipboard --}}
+                            <div
+                                class="hover:translate-y-[-4px] ease-in-out transition-all hover:underline cursor-pointer duration-175 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,8 +378,7 @@
                     @endif
                 </div>
             </div>
-            <div
-                class=" w-full overflow-x-scroll overflow-y-scroll border border-[rgb(143,143,143)] scroll">
+            <div class=" w-full overflow-x-scroll overflow-y-scroll border border-[rgb(143,143,143)] scroll">
 
                 <table class="w-full text-sm text-left h-fit scroll ">
 

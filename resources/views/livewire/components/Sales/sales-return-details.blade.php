@@ -106,7 +106,7 @@
 
 
         </div>
-        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[31vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[28vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -216,7 +216,7 @@
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
                             <select id="status" wire:model.live="operation.{{ $index }}"
-                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
+                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-sm text-center rounded-md block l p-2.5 ">
                                 <option value="" selected>Set your operation</option>
                                 <option value="Refund">Refund</option>
                                 <option value="Exchange">Exchange</option>
@@ -235,7 +235,7 @@
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
                             <select id="status" wire:model.live="description.{{ $index }}"
-                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-center text-sm rounded-md block w-full p-2.5 ">
+                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-center text-sm rounded-md block p-2.5 ">
                                 <option value="" selected>Set your description</option>
                                 <option value="Damaged">Damaged</option>
                                 <option value="Expired">Expired</option>

@@ -30,6 +30,7 @@ class VoidTransactionPage extends Component
     {
         $this->dispatch('return-to-void-transaction-page', showVoidTransactionPage: true)->to(CashierPage::class);
         $this->dispatch('display-sales-transaction-history', showSalesTransactionHistory: false)->to(CashierPage::class);
+        $this->dispatch('reset-form')->to(VoidTransactionForm::class);
         $this->showVoidTransactionTable = true;
         $this->showVoidTransactionForm = false;
     }
