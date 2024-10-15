@@ -106,7 +106,7 @@
             @endif
 
         </div>
-        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[31vh]">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[35vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -209,10 +209,10 @@
                             </th>
 
                             <th scope="row"
-                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                class="row-span-2 px-4 py-4 font-medium text-center text-gray-900  text-md whitespace-nowrap">
 
                                 <select id="status" wire:model.live="reason.{{ $index }}"
-                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md block w-full p-2.5 ">
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md w-fit p-2.5 ">
                                     <option value="" selected>Set your Reason</option>
                                     <option value="Cashier Error">Cashier Error</option>
                                     <option value="System Error">System Error</option>

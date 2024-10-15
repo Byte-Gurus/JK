@@ -244,7 +244,7 @@
             </table>
         </div>
     </div>
-    <div class="flex flex-row w-full h-[30vh] border border-black">
+    <div class="flex flex-row w-full h-[28vh] border border-black">
         @if (!$transactionDetails)
             <div class="flex items-center justify-center w-full bg-slate-50">
                 <p class=" text-[2em] font-black opacity-30">SELECT A TRANSACTION TO VIEW TRANSACTION DETAILS</p>
