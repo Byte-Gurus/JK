@@ -45,7 +45,7 @@
                 <div class=" h-[40vh] overflow-y-auto">
                     @foreach ($reorder_lists as $index => $reorder_list)
                         <div
-                            class="flex bg-purple-50 flex-col text-[rgb(72,72,72)] p-2 my-4 border border-black shadow-md shadow-purple-300 rounded-lg cursor-default">
+                            class="flex bg-purple-50 flex-col text-[rgb(72,72,72)] p-2 my-4 border border-purple-900 shadow-md shadow-purple-300 rounded-lg cursor-default">
                             <p class="text-sm italic font-black">
                                 {{ $reorder_list['item_name'] }}</p>
                             <p class="text-sm italic font-thin">

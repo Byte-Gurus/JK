@@ -32,35 +32,35 @@
         </div>
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
-            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+            <ul class="grid items-center justify-between grid-flow-col grid-cols-6 mx-4 ">
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Date</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Date</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Name</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Description</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Description</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Item Quantity</p>
+                        <p class="text-[0.8em] uppercase text-center font-bold">Item Quantity</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-right font-bold">Item Amount</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Item Amount</p>
                     </div>
                 </li>
             </ul>
@@ -71,44 +71,44 @@
             @endif
             @if ($damagedItems)
             @foreach ($damagedItems as $damagedItem)
-            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[1em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $damagedItem->created_at->format('M d Y') }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[1em] text-left font-medium">
+                        <p class="text-[0.8em] text-left font-medium">
                             {{ $damagedItem->transactionDetailsJoin->itemJoin->barcode }}</p>
                     </div>
                 </li>
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center font-medium">
+                        <p class="text-[0.8em] text-center font-medium">
                             {{ $damagedItem->transactionDetailsJoin->itemJoin->item_name }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 text-center py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center font-medium">
+                        <p class="text-[0.8em] text-center font-medium">
                             {{ $damagedItem->transactionDetailsJoin->itemJoin->item_description }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[1em] text-center font-medium">
+                        <p class="text-[0.8em] text-center font-medium">
                             {{ $damagedItem->return_quantity }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text-[1em] text-right font-medium">
+                        <p class="text-[0.8em] text-right font-medium">
                             {{ $damagedItem->item_return_amount }}
                         </p>
                     </div>
