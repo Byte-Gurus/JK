@@ -55,14 +55,19 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-right font-bold">Item Quantity</p>
+                        <p class="text-[1em] uppercase text-center font-bold">Item Quantity</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-right font-bold">Item Amount</p>
                     </div>
                 </li>
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
             @endif
             @if ($damagedItems)
             @foreach ($damagedItems as $damagedItem)
@@ -91,6 +96,13 @@
                     <div>
                         <p class="text-[1em] text-center font-medium">
                             {{ $damagedItem->transactionDetailsJoin->itemJoin->item_description }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-center font-medium">
+                            {{ $damagedItem->return_quantity }}
                         </p>
                     </div>
                 </li>

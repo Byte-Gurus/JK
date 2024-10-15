@@ -45,6 +45,11 @@
                         <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
+                  <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-left font-bold">SKU</p>
+                    </div>
+                </li>
                 <li class="col-span-1 ">
                     <div>
                         <p class="text-[1em] uppercase text-center font-bold">Item Name</p>
@@ -72,34 +77,40 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[1em] text-left font-medium">
-                                    {{ $expiredItem->expiration_date }}
+                                    {{ $expiredItem->date->format('M d Y') }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[1em] text-left font-medium">
-                                    {{ $expiredItem->itemJoin->barcode }}</p>
+                                    {{ $expiredItem->barcode }}</p>
+                            </div>
+                        </li>
+                          <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ $expiredItem->sku_code }}</p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center font-medium">
-                                    {{ $expiredItem->itemJoin->item_name }}
+                                    {{ $expiredItem->item_name }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 text-center py-[3px]">
                             <div>
                                 <p class="text-[1em] text-center font-medium">
-                                    {{ $expiredItem->itemJoin->item_description }}
+                                    {{ $expiredItem->item_description }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[1em] text-right font-medium">
-                                    {{ $expiredItem->current_stock_quantity }}
+                                    {{ $expiredItem->quantity }}
                                 </p>
                             </div>
                         </li>

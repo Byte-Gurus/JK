@@ -11,7 +11,7 @@ use Livewire\Component;
 class ExpiredItemsReport extends Component
 {
     public $createdBy, $dateCreated, $expiredItems, $fromDate, $toDate;
-
+    public $isTransactionEmpty = false;
     public function render()
     {
 
@@ -42,7 +42,7 @@ class ExpiredItemsReport extends Component
 
 
         // Fetch records from ReturnDetails where operation is 'Expired'
-        $returnDetails = ReturnDetails::where('operation', 'Expired')
+        $returnDetails = ReturnDetails::where('description', 'Expired')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get();
 
@@ -53,17 +53,32 @@ class ExpiredItemsReport extends Component
 
         // Combine the two collections and add type and date for sorting
         $combined = $returnDetails->map(function ($item) {
-            $item->type = 'return';
-            $item->date = $item->created_at; // Assuming created_at is the date field to use
-            return $item;
+            return (object) [
+                'type' => 'return',
+                'date' => $item->created_at, // Assuming created_at is the date field to use
+                'sku_code' => $item->transactionDetailsJoin->inventoryJoin->sku_code,
+                'barcode' => $item->transactionDetailsJoin->itemJoin->barcode ?? 'N/A',
+                'item_name' => $item->transactionDetailsJoin->itemJoin->item_name ?? 'N/A',
+                'item_description' => $item->transactionDetailsJoin->itemJoin->item_description ?? 'N/A',
+                'quantity' => $item->return_quantity, // Return quantity for ReturnDetails
+            ];
         })->merge($inventory->map(function ($item) {
-            $item->type = 'inventory';
-            $item->date = $item->expiration_date; // Assuming expiration_date is the date field to use
-            return $item;
+            return (object) [
+                'type' => 'inventory',
+                'date' => $item->expiration_date, // Assuming expiration_date is the date field to use
+                'barcode' => $item->itemJoin->barcode ?? 'N/A',
+                'sku_code' => $item->sku_code,
+                'item_name' => $item->itemJoin->item_name ?? 'N/A',
+                'item_description' => $item->itemJoin->item_description ?? 'N/A',
+                'quantity' => $item->current_stock_quantity, // Current stock quantity for Inventory
+            ];
         }));
 
-        // Sort the combined collection by date
         $this->expiredItems = $combined->sortBy('date')->values();
 
+        if ($this->expiredItems->isEmpty()) {
+            $this->isTransactionEmpty = true;
+
+        }
     }
 }

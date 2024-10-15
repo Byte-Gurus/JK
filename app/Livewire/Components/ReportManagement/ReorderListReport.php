@@ -11,6 +11,8 @@ use Livewire\Component;
 class ReorderListReport extends Component
 {
     public $createdBy, $dateCreated;
+    public $isTransactionEmpty = false;
+
     public function render()
     {
 
@@ -47,6 +49,11 @@ class ReorderListReport extends Component
         return view('livewire.components.ReportManagement.reorder-list-report', [
             'reorder_lists' => $reorder_lists
         ]);
+
+        if ($this->reorder_lists->isEmpty()) {
+            $this->isTransactionEmpty = true;
+
+        }
     }
 
     public function reportInfo()

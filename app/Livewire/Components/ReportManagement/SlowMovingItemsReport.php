@@ -12,6 +12,7 @@ class SlowMovingItemsReport extends Component
 {
     public $slowmoving_info = [];
     public $date, $dateCreated, $createdBy;
+    public $isTransactionEmpty = false;
     public function render()
     {
         return view('livewire.components.ReportManagement.slow-moving-items-report');
@@ -30,8 +31,15 @@ class SlowMovingItemsReport extends Component
         $endOfMonth = $date->copy()->endOfMonth();
         $this->slowmoving_info = [];
 
-        $items = Inventory::select('item_id')->distinct()->get();
+        $items = Inventory::select('item_id')
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->distinct()
+            ->get();
 
+        if ($items->isEmpty()) {
+            $this->isTransactionEmpty = true;
+
+        }
         foreach ($items as $item) {
             $weeklyStockInQuantities = [];
             $weeklyQuantities = [];
@@ -96,8 +104,8 @@ class SlowMovingItemsReport extends Component
             $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;
 
             $this->slowmoving_info[] = [
-                'barcode' =>  $item->itemJoin->barcode,
-                'item_description' =>  $item->itemJoin->item_description,
+                'barcode' => $item->itemJoin->barcode,
+                'item_description' => $item->itemJoin->item_description,
                 'item_name' => $item->itemJoin->item_name,
                 'tsi' => $totalQuantity,
                 'totalStockInQuantity' => $totalStockInQuantity,
@@ -115,5 +123,7 @@ class SlowMovingItemsReport extends Component
         $this->date = $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y');
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');
         $this->createdBy = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+
     }
 }

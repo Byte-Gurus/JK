@@ -11,6 +11,7 @@ use Livewire\Component;
 class SalesReturnReport extends Component
 {
     public $createdBy, $dateCreated, $returnItems, $fromDate, $toDate;
+    public $isTransactionEmpty = false;
 
     public function render()
     {
@@ -41,5 +42,9 @@ class SalesReturnReport extends Component
         $this->toDate = $endDate->format('M d Y');
 
         $this->returnItems = ReturnDetails::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        if ($this->returnItems->isEmpty()) {
+            $this->isTransactionEmpty = true;
+        }
     }
 }

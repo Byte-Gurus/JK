@@ -10,6 +10,8 @@ use Livewire\Component;
 class DamagedItemsReport extends Component
 {
     public $createdBy, $dateCreated, $damagedItems, $fromDate, $toDate;
+    public $isTransactionEmpty = false;
+
     public function render()
     {
         $this->reportInfo();
@@ -36,6 +38,11 @@ class DamagedItemsReport extends Component
         $this->damagedItems = ReturnDetails::where('description', 'Damaged')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get();
+
+        if ($this->damagedItems->isEmpty()) {
+            $this->isTransactionEmpty = true;
+            return;
+        }
 
     }
 }

@@ -10,6 +10,8 @@ use Livewire\Component;
 class CustomerCreditListReport extends Component
 {
     public $dateCreated, $createdBy, $credits, $fromDate, $toDate;
+    public $isTransactionEmpty = false;
+
     public function render()
     {
 
@@ -41,5 +43,10 @@ class CustomerCreditListReport extends Component
 
 
         $this->credits = Credit::whereBetween('created_at', [$startDate, $endDate])->get();
+        if ($this->credits->isEmpty()) {
+            $this->isTransactionEmpty = true;
+
+        }
+
     }
 }

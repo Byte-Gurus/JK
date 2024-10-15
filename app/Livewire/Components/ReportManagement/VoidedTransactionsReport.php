@@ -12,7 +12,7 @@ use Livewire\Component;
 class VoidedTransactionsReport extends Component
 {
     public $createdBy, $dateCreated, $voidTransactions, $fromDate, $toDate;
-
+    public $isTransactionEmpty = false;
     public function render()
     {
         $this->reportInfo();
@@ -40,5 +40,10 @@ class VoidedTransactionsReport extends Component
         $this->toDate = $endDate->format('M d Y');
 
         $this->voidTransactions = VoidTransaction::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        if ($this->voidTransactions->isEmpty()) {
+            $this->isTransactionEmpty = true;
+
+        }
     }
 }

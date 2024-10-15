@@ -9,11 +9,17 @@ use Livewire\Component;
 
 class BackorderedItemsReport extends Component
 {
+    public $isTransactionEmpty = false;
     public $createdBy, $dateCreated;
     public function render()
     {
         $backorderLists = BackOrder::where('status', 'Missing')->get();
         $this->reportInfo();
+
+        if ($backorderLists->isEmpty()) {
+            $this->isTransactionEmpty = true;
+
+        }
 
         return view('livewire.components.ReportManagement.backordered-items-report', [
             'backorderLists' => $backorderLists

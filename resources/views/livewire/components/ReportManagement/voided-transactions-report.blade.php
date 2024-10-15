@@ -38,9 +38,7 @@
 
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
-            @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
-            @endif
+
             <ul class="grid items-center justify-between grid-flow-col grid-cols-7 mx-4">
                 <li class="col-span-2 ">
                     <div>
@@ -82,69 +80,72 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
+            @if ($isTransactionEmpty)
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+            @endif
             @if ($voidTransactions)
-                @foreach ($voidTransactions as $voidTransaction)
-                    <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4">
+            @foreach ($voidTransactions as $voidTransaction)
+            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4">
 
-                        <li class="col-span-2 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-left font-medium">
-                                    {{ $voidTransaction->void_number }}</p>
-                            </div>
-                        </li>
+                <li class="col-span-2 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidTransaction->void_number }}</p>
+                    </div>
+                </li>
 
 
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
-                                    <p class="text-[0.8em] text-left font-medium">
-                                        {{ $voidItem->transactionDetailsJoin->itemJoin->barcode }}</p>
-                                @endforeach
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidItem->transactionDetailsJoin->itemJoin->barcode }}</p>
+                        @endforeach
 
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
-                                    <p class="text-[0.8em] text-left font-medium">
-                                        {{ $voidItem->transactionDetailsJoin->itemJoin->sku_code }}</p>
-                                @endforeach
-                            </div>
-                        </li>
-                        <li class="col-span-1 text-center py-[3px]">
-                            <div>
-                                @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
-                                    <p class="text-[0.8em] text-left font-medium">
-                                        {{ $voidItem->transactionDetailsJoin->itemJoin->item_name }}</p>
-                                @endforeach
-                            </div>
-                        </li>
-                        <li class="col-span-1 text-center py-[3px]">
-                            <div>
-                                @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
-                                    <p class="text-[0.8em] text-left font-medium">
-                                        {{ $voidItem->transactionDetailsJoin->itemJoin->item_description }}</p>
-                                @endforeach
-                            </div>
-                        </li>
-                        <li class="col-span-1 text-center py-[3px]">
-                            <div>
-                                @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
-                                    <p class="text-[0.8em] text-left font-medium">
-                                        {{ $voidItem->void_quantity }}</p>
-                                @endforeach
-                            </div>
-                        </li>
-                        <li class="col-span-1 text-center py-[3px]">
-                            <div>
-                                @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
-                                    <p class="text-[0.8em] text-right font-medium">
-                                        {{ number_format($voidItem->item_void_amount, 2) }}</p>
-                                @endforeach
-                            </div>
-                        </li>
-                    </ul>
-                @endforeach
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidItem->transactionDetailsJoin->itemJoin->sku_code }}</p>
+                        @endforeach
+                    </div>
+                </li>
+                <li class="col-span-1 text-center py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidItem->transactionDetailsJoin->itemJoin->item_name }}</p>
+                        @endforeach
+                    </div>
+                </li>
+                <li class="col-span-1 text-center py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidItem->transactionDetailsJoin->itemJoin->item_description }}</p>
+                        @endforeach
+                    </div>
+                </li>
+                <li class="col-span-1 text-center py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $voidItem->void_quantity }}</p>
+                        @endforeach
+                    </div>
+                </li>
+                <li class="col-span-1 text-center py-[3px]">
+                    <div>
+                        @foreach ($voidTransaction->voidTransactionDetailsJoin as $voidItem)
+                        <p class="text-[0.8em] text-right font-medium">
+                            {{ number_format($voidItem->item_void_amount, 2) }}</p>
+                        @endforeach
+                    </div>
+                </li>
+            </ul>
+            @endforeach
             @endif
 
         </div>
