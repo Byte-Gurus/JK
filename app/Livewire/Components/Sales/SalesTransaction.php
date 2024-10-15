@@ -22,6 +22,7 @@ use App\Models\Item;
 use App\Models\Notification;
 use App\Models\Payment;
 use App\Models\PurchaseDetails;
+use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
@@ -1207,6 +1208,8 @@ class SalesTransaction extends Component
 
         $this->returnInfo = Returns::where('return_number', $this->search_return_number)->first();
 
+
+
         if (!$this->returnInfo) {
             $this->alert('error', 'The return number does not exist.');
             return;
@@ -1216,7 +1219,14 @@ class SalesTransaction extends Component
             $this->alert('error', 'The return number has already have a transaction.');
             return;
         }
+        $exchangeCount = ReturnDetails::where('return_id', $this->returnInfo->id)
+            ->where('operation', 'Exchange')
+            ->count();
 
+        if ($exchangeCount <= 0) {
+            $this->alert('error', 'The return number has no exchange.');
+            return;
+        }
         $this->return_number = $this->returnInfo->return_number;
         $this->exchange_amount = $this->returnInfo->exchange_amount;
     }
