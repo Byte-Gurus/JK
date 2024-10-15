@@ -154,9 +154,9 @@ class SalesTransaction extends Component
                     ->filter(function ($inventory) {
                         return !is_null($inventory->expiration_date);
                     })
-                    ->orderBy('current_stock_quantity', 'asc')
-                    ->orderBy('expiration_date', 'asc');
-
+                    ->sortBy(function ($inventory) {
+                        return [$inventory->expiration_date, $inventory->current_stock_quantity];
+                    });
                 $item->inventoryJoin = $sortedInventory->first();
             } else {
                 // For non-perishable items, get the latest inventory entry
