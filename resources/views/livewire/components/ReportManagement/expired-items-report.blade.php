@@ -21,7 +21,7 @@
             <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-black uppercase">Specified Date:</p>
                 <p>
-                    {{ $fromDate . ' - ' . $toDate}}
+                    {{ $fromDate . ' - ' . $toDate }}
                 </p>
             </div>
 
@@ -63,46 +63,49 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
+            @if ($isTransactionEmpty)
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+            @endif
             @if ($expiredItems)
-            @foreach ($expiredItems as $expiredItem)
-            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-left font-medium">
-                            {{ $expiredItem->expiration_date }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-left font-medium">
-                            {{ $expiredItem->itemJoin->barcode }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 text-center py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-center font-medium">
-                            {{ $expiredItem->itemJoin->item_name }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 text-center py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-center font-medium">
-                            {{ $expiredItem->itemJoin->item_description }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-right font-medium">
-                            {{ $expiredItem->current_stock_quantity }}
-                        </p>
-                    </div>
-                </li>
+                @foreach ($expiredItems as $expiredItem)
+                    <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ $expiredItem->expiration_date }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ $expiredItem->itemJoin->barcode }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-center py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-center font-medium">
+                                    {{ $expiredItem->itemJoin->item_name }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-center py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-center font-medium">
+                                    {{ $expiredItem->itemJoin->item_description }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-right font-medium">
+                                    {{ $expiredItem->current_stock_quantity }}
+                                </p>
+                            </div>
+                        </li>
 
-            </ul>
-            @endforeach
+                    </ul>
+                @endforeach
             @endif
         </div>
         <div class="px-4 py-4 ">

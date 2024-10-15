@@ -61,6 +61,9 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
+            @if ($isTransactionEmpty)
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+            @endif
             @if ($damagedItems)
             @foreach ($damagedItems as $damagedItem)
             <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
