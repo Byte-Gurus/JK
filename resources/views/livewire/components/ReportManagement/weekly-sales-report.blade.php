@@ -96,7 +96,7 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
             @endif
             @if ($transaction_info)
                 @foreach ($transaction_info['dailySummaries'] as $date => $summary)

@@ -64,7 +64,7 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO ITEMS TO BE REORDERED YET</p>
             @endif
             @foreach ($reorder_lists as $index => $reorder_list)
                 <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
