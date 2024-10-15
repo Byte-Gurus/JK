@@ -244,7 +244,8 @@ class SalesTransaction extends Component
 
             // Apply ordering if the item is perishable
             if ($itemData && $itemData->shelf_life_type === 'Perishable') {
-                $itemQuery->orderBy('expiration_date', 'asc');
+                $itemQuery->orderBy('expiration_date', 'asc')
+                    ->orderBy('current_stock_quantity', 'asc');
             }
 
             // Get the first item from the query
