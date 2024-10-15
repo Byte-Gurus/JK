@@ -154,7 +154,8 @@ class SalesTransaction extends Component
                     ->filter(function ($inventory) {
                         return !is_null($inventory->expiration_date);
                     })
-                    ->sortBy('expiration_date');
+                    ->orderBy('current_stock_quantity', 'asc')
+                    ->orderBy('expiration_date', 'asc');
 
                 $item->inventoryJoin = $sortedInventory->first();
             } else {

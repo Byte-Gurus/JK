@@ -181,7 +181,6 @@ class SalesReturnDetails extends Component
 
 
 
-
                     if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
                         $this->return_total_amount = $this->return_total_amount - ($this->return_total_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
                     }
