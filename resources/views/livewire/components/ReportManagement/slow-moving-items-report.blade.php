@@ -73,7 +73,9 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-
+            @if ($isTransactionEmpty)
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DATA IN THIS DATE</p>
+            @endif
             @if ($slowmoving_info)
                 @foreach ($slowmoving_info as $index => $slowmoving_info)
                     <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
