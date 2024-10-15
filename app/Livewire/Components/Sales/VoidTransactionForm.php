@@ -194,7 +194,7 @@ class VoidTransactionForm extends Component
 
                     if ($toVoid['transactionDetail']->transactionJoin->discount_id == 1 || $toVoid['transactionDetail']->transactionJoin->discount_id == 2) {
 
-                        $this->void_total_amount = $this->void_total_amount - ($this->void_total_amount * ($toVoid['transactionDetail']->transactionJoin->discountJoin->percentage / 100));
+                        $this->void_total_amount = $this->void_total_amount - ($toVoid['item_subtotal'] * ($toVoid['transactionDetail']->transactionJoin->discountJoin->percentage / 100));
                     }
 
                     if ($toVoid['vat_type'] === 'Vat') {

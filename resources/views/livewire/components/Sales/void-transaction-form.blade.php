@@ -32,6 +32,8 @@
 
                         {{-- //* total --}}
                         <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
+                         {{-- //* total --}}
+                        <th scope="col" class="px-4 py-1 text-center">Discount Amount (₱)</th>
 
                         {{-- transaction type --}}
                         <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
@@ -57,6 +59,10 @@
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ number_format($total_amount, 2) }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($discount_amount, 2) }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
