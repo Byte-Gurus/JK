@@ -94,9 +94,12 @@ class SalesTransaction extends Component
     public function mount()
     {
         $this->generateTransactionNumber();
+        $this->selectedItems = [];
     }
     public function render()
     {
+
+
         $this->discounts = Discount::whereIn('id', [1, 2, 3])
             ->get()
             ->keyBy('id');
@@ -681,7 +684,7 @@ class SalesTransaction extends Component
                     // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold == $selectedItem['quantity']);
                     // dd($inventory->current_stock_quantity - $total_quantity_sold >= 0 && $total_quantity_sold != $selectedItem['quantity']);
 
-                    if ($total_quantity_sold > 0 ) {
+                    if ($total_quantity_sold > 0) {
                         if (($inventory->current_stock_quantity - $total_quantity_sold) >= 0 && $total_quantity_sold == $selectedItem['quantity']) {
                             // dump('if');
                             $transactionDetails = TransactionDetails::create([

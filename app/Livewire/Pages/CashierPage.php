@@ -5,10 +5,12 @@ namespace App\Livewire\Pages;
 use App\Models\Inventory;
 use App\Models\Item;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 class CashierPage extends Component
 {
-
+    use WithPagination, WithoutUrlPagination;
     public $showNavbarNoSidebar = true;
 
     public $showSalesTransaction = true;
@@ -25,9 +27,11 @@ class CashierPage extends Component
 
     public function render()
     {
+
         return view('livewire.pages.cashier-page');
     }
 
+  
     protected $listeners = [
         'close-backorder-form' => 'closeBackorderForm',
         'display-sales-transaction' => 'displaySalesTransaction',

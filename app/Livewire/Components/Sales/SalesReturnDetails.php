@@ -24,7 +24,7 @@ class SalesReturnDetails extends Component
     public $isAdmin;
     public $description = [];
 
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount, $total_refund_amount, $total_exchange_amount;
     public $fromPage = 'ReturnDetails';
     public $return_info = [];
 
@@ -132,6 +132,8 @@ class SalesReturnDetails extends Component
         $this->return_total_amount = 0;
         $this->item_return_amount = 0;
         $this->return_vat_amount = 0;
+        $this->total_refund_amount = 0;
+        $this->total_exchange_amount = 0;
         $vatable_Return_Subtotal = 0;
         $vat_exempt_Return_Subtotal = 0;
         $vatable_return_total_amount = 0;
@@ -143,22 +145,18 @@ class SalesReturnDetails extends Component
                 $this->return_info[$index]['operation'] = $this->operation[$index];
                 $this->return_info[$index]['description'] = $this->description[$index];
 
-                if ($this->operation[$index] != 'Exchange') {
+                if ($transactionDetail->discount_id == 3) {
+                    $discounted_selling_price = $transactionDetail->item_price - ($transactionDetail->item_price * ($transactionDetail->discountJoin->percentage / 100));
 
+                    $this->item_return_amount = $this->returnQuantity[$index] * $discounted_selling_price;
 
+                } else {
+                    $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->item_price;
 
-                    if ($transactionDetail->discount_id == 3) {
-                        $discounted_selling_price = $transactionDetail->item_price - ($transactionDetail->item_price * ($transactionDetail->discountJoin->percentage / 100));
+                }
 
-                        $this->item_return_amount = $this->returnQuantity[$index] * $discounted_selling_price;
+                if ($this->operation[$index] == 'Refund') {
 
-                    } else {
-                        $this->item_return_amount = $this->returnQuantity[$index] * $transactionDetail->item_price;
-
-                    }
-
-
-                    $this->return_total_amount += $this->item_return_amount;
 
                     if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
                         $this->return_total_amount = $this->return_total_amount - ($this->return_total_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
@@ -177,10 +175,34 @@ class SalesReturnDetails extends Component
 
                     }
 
+                    $this->total_refund_amount += $this->item_return_amount;
+
+                } elseif ($this->operation[$index] == 'Exchange') {
 
 
+
+
+                    if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
+                        $this->return_total_amount = $this->return_total_amount - ($this->return_total_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
+                    }
+
+                    if ($transactionDetail->vat_type === 'Vat') {
+                        $vatable_Return_Subtotal += $this->item_return_amount;
+                        $vat_Percent = $transactionDetail->item_vat_percent;
+                        $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+
+
+                    } elseif ($transactionDetail->vat_type === 'Vat Exempt') {
+                        $vat_exempt_Return_Subtotal += $this->item_return_amount;
+                        $vat_Percent = $transactionDetail->item_vat_percent;
+                        $vat_exempt_return_total_amount = $vat_exempt_Return_Subtotal - ($vat_exempt_Return_Subtotal / (100 + $vat_Percent) * 100);
+
+                    }
+
+                    $this->total_exchange_amount += $this->item_return_amount;
                 }
 
+                $this->return_total_amount += $this->item_return_amount;
 
                 $this->return_info[$index] = [
                     'availableQty' => $transactionDetail->item_quantity,

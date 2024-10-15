@@ -281,6 +281,22 @@
                     <p class=" text-[1.2em] font-medium">Refund Amount</p>
                 </div>
                 <div>
+                    <p class=" text-[1.2em] font-black">{{ number_format($total_refund_amount, 2) }}</p>
+                </div>
+            </div>
+             <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.2em] font-medium">Exchange Amount</p>
+                </div>
+                <div>
+                    <p class=" text-[1.2em] font-black">{{ number_format($total_exchange_amount, 2) }}</p>
+                </div>
+            </div>
+            <div class="flex flex-row justify-between">
+                <div>
+                    <p class=" text-[1.2em] font-medium">Total Return Amount</p>
+                </div>
+                <div>
                     <p class=" text-[1.2em] font-black">{{ number_format($return_total_amount, 2) }}</p>
                 </div>
             </div>
