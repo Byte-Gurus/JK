@@ -73,6 +73,8 @@ class SalesReturnDetails extends Component
             'transaction_id' => $this->transaction_id,
             'return_total_amount' => $this->return_total_amount,
             'return_number' => $this->return_number,
+            'refund_amount' => $this->total_refund_amount,
+            'exchange_amount' => $this->total_exchange_amount,
             'original_amount' => $this->total_amount,
             'return_vat_amount' => $this->return_vat_amount,
             'hasTransaction' => false,
@@ -334,7 +336,7 @@ class SalesReturnDetails extends Component
 
     public function resetForm()
     {
-        $this->reset(['returnQuantity','operation','description']);
+        $this->reset(['returnQuantity', 'operation', 'description']);
     }
 
     // public function validateForm()
