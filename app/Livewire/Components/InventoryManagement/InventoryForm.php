@@ -78,8 +78,12 @@ class InventoryForm extends Component
 
             }
 
-            $inventories->fill($updatedAttributes);
-            $inventories->save();
+            $inventories->update([
+                'cost' => $this->inventoryInfo['cost'],
+                'mark_up_price' => $this->inventoryInfo['mark_up_price'],
+                'selling_price' => $this->inventoryInfo['selling_price'],
+                'vat_amount' => $this->inventoryInfo['vat_amount'],
+            ]);
 
             DB::commit();
 

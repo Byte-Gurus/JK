@@ -656,8 +656,8 @@
                                 <div class="border border-black"></div>
                             </div>
                             <div class="flex flex-row justify-between">
-                                <p class=" text-[1.2em] font-medium">Return Amount</p>
-                                <p class=" text-[1.2em] font-black">{{ number_format($return_amount, 2) ?? ' ' }}</p>
+                                <p class=" text-[1.2em] font-medium">Exchange Amount</p>
+                                <p class=" text-[1.2em] font-black">{{ number_format($exchange_amount, 2) ?? ' ' }}</p>
                             </div>
                             <div class="flex flex-row justify-between">
                                 <p class=" text-[1.2em] font-medium">Subtotal</p>
@@ -680,6 +680,7 @@
                             </div>
                             <div class="w-full my-2">
                                 <div class="border border-black"></div>
+                                <p class=" font-black text-[1.8em]">₱ {{ number_format($tendered_amount, 2) }}</p>
                             </div>
                             <div class="flex flex-row justify-between">
                                 <p class=" font-black text-green-900 text-[2.4em]">

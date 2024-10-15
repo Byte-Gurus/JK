@@ -14,7 +14,7 @@
                 </svg>
             </div>
 
-            <input type="text" wire:model.live.debounce.100ms = "search"
+            <input type="text" wire:model.live.debounce.100ms="search"
                 class="w-2/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                 placeholder="Search by Transaction No. or Sales Invoice No." required="" />
         </div>
@@ -57,6 +57,10 @@
                     <th scope="col" class="px-4 py-3 text-center">Original Amount (₱)</th>
 
                     {{-- //* total return amount --}}
+                    <th scope="col" class="px-4 py-3 text-right">Refund Amount (₱)</th>
+                    {{-- //* total return amount --}}
+                    <th scope="col" class="px-4 py-3 text-right">Exchange Amount (₱)</th>
+                    {{-- //* total return amount --}}
                     <th scope="col" class="px-4 py-3 text-right">Total Return Amount (₱)</th>
 
                     {{-- //* date --}}
@@ -71,65 +75,68 @@
             {{-- //* table body --}}
             <tbody>
                 @foreach ($returns as $return)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                <tr
+                    class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $return->return_number }}
+                    <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                        {{ $return->return_number }}
 
-                        </th>
+                    </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $return->transactionJoin->transaction_number }}
+                    <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                        {{ $return->transactionJoin->transaction_number }}
 
-                        </th>
+                    </th>
+
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ number_format($return->refund_amount, 2) }}
+
+                    </th>
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ number_format($return->exchange_amount, 2) }}
+
+                    </th>
+
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ number_format($return->original_amount, 2) }}
+
+                    </th>
 
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($return->original_amount, 2) }}
+                    <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                        {{ number_format($return->return_total_amount, 2) }}
 
-                        </th>
+                    </th>
 
+                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                        {{ $return->created_at->format(' M d Y h:i A') }}
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($return->return_total_amount, 2) }}
+                    </th>
+                    <th class="px-4 py-4 text-center text-md text-nowrap">
+                        <div
+                            class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
 
-                        </th>
+                            <button x-on:click="$wire.dDisplaySalesReturnDetails();"
+                                wire:click="getReturn({{ $return->id }})">
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $return->created_at->format(' M d Y h:i A') }}
+                                <div class="flex items-center">
 
-                        </th>
-                        <th class="px-4 py-4 text-center text-md text-nowrap">
-                            <div
-                                class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                        </svg>
+                                    </span>
 
-                                <button x-on:click="$wire.dDisplaySalesReturnDetails();"
-                                    wire:click="getReturn({{ $return->id }})">
-
-                                    <div class="flex items-center">
-
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                            </svg>
-                                        </span>
-
-                                        <div>
-                                            <p>View</p>
-                                        </div>
+                                    <div>
+                                        <p>View</p>
                                     </div>
-                                </button>
-                            </div>
-                        </th>
-                    </tr>
+                                </div>
+                            </button>
+                        </div>
+                    </th>
+                </tr>
                 @endforeach
             </tbody>
         </table>

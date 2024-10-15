@@ -70,7 +70,7 @@ class SalesTransaction extends Component
     $receiptData = [],
     $unableShortcut = false,
     $search_return_number,
-    $return_amount,
+    $exchange_amount,
     $returnInfo,
     $return_number,
     $excess_amount;
@@ -455,9 +455,7 @@ class SalesTransaction extends Component
                 // ]);
             }
 
-            if ($this->changeTransactionType == 3 && $this->subtotal > $this->return_amount) {
-                $this->excess_amount = $this->subtotal - $this->return_amount;
-            }
+
 
             $this->totalVat = $vatable_amount + $vat_exempt_amount;
 
@@ -477,7 +475,12 @@ class SalesTransaction extends Component
                 $this->PWD_Senior_discount_amount = $this->netAmount;
             }
 
-            $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+            if ($this->changeTransactionType == 3 && $this->subtotal > $this->exchange_amount) {
+                $this->excess_amount = $this->subtotal - $this->exchange_amount;
+                $this->grandTotal = $this->excess_amount;
+            } else {
+                $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
+            }
 
             // $test = [
             //     'items' => $index['item_name'],
@@ -556,6 +559,7 @@ class SalesTransaction extends Component
         }
         if ($this->changeTransactionType == 3) {
             $this->selectedItems = [];
+            $this->reset('totalVat', 'grandTotal', 'excess_amount', 'subtotal', 'customerDetails');
         }
     }
 
@@ -563,6 +567,7 @@ class SalesTransaction extends Component
     {
         $this->totalVat -= $this->tax_details['vatable_amount'] ?? 0;
         $this->grandTotal -= $this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0;
+        $this->excess_amount -= $this->subtotal - $this->exchange_amount ?? 0;
         unset($this->selectedItems[$this->selectedIndex]);
 
         $this->selectedItems = array_values($this->selectedItems);
@@ -1213,6 +1218,6 @@ class SalesTransaction extends Component
         }
 
         $this->return_number = $this->returnInfo->return_number;
-        $this->return_amount = $this->returnInfo->return_total_amount;
+        $this->exchange_amount = $this->returnInfo->exchange_amount;
     }
 }
