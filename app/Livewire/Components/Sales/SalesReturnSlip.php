@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class SalesReturnSlip extends Component
 {
-    public $return_details, $dateCreated, $return_number, $transaction_number, $transaction_date, $user, $item_return_amount, $return_id;
+    public $return_details, $dateCreated, $return_number, $transaction_number, $transaction_date, $user, $item_return_amount, $return_id, $exchange_amount, $refund_amount;
     public function render()
     {
         $this->return_details = ReturnDetails::where('return_id', $this->return_id)->get();
@@ -34,7 +34,9 @@ class SalesReturnSlip extends Component
             'transaction_number' => $returns->transactionJoin->transaction_number,
             'transaction_date' => $returns->transactionJoin->created_at,
             'user' =>  Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'item_return_amount' => $returns->return_total_amount
+            'item_return_amount' => $returns->return_total_amount,
+            'refund_amount' => $returns->refund_amount,
+            'exchange_amount' => $returns->exchange_amount,
 
         ]);
     }

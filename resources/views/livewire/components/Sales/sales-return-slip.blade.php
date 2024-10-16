@@ -45,6 +45,14 @@
                         <p class="text-[0.6em] font-bold uppercase">Total Return Amount</p>
                         <p class="text-[0.6em] font-bold uppercase"> {{ $item_return_amount ?? 'N/A' }}</p>
                     </div>
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[0.4pem] font-thin uppercase">Total Exchange Amount</p>
+                        <p class="text-[0.4em] font-thin uppercase"> {{ $exchange_amount ?? 'N/A' }}</p>
+                    </div>
+                    <div class="flex flex-row text-nowrap">
+                        <p class="text-[0.4pem] font-thin uppercase">Total Refund Amount</p>
+                        <p class="text-[0.4em] font-thin uppercase"> {{ $refund_amount ?? 'N/A' }}</p>
+                    </div>
                 </div>
             </div>
             <div class="mx-4">
@@ -92,9 +100,9 @@
                                             </p>
                                         </div>
                                         <div class="flex flex-row justify-end gap-[5px]">
-                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">IP</p>
+                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">RP</p>
                                             <p class="text-[0.6em] uppercase text-justify italic font-bold">
-                                                {{ $return_detail->transactionDetailsJoin->item_price }}
+                                                {{ number_format($return_detail->transactionDetailsJoin->item_price, 2) }}
                                             </p>
                                         </div>
                                     </div>
@@ -103,7 +111,7 @@
                             <li class="col-span-1 py-[3px]">
                                 <div>
                                     <p class="text-[0.6em] uppercase text-center font-medium">
-                                        {{ $return_detail->item_return_amount }}</p>
+                                        {{ number_format($return_detail->item_return_amount, 2) }}</p>
                                 </div>
                             </li>
                         </ul>
