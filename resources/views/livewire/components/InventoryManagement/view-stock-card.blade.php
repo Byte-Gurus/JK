@@ -101,7 +101,7 @@
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white">
 
             {{-- //* tablea area --}}
-            <div class="overflow-x-auto overflow-y-scroll h-[52vh] no-scrollbar scroll">
+            <div class="overflow-x-auto overflow-y-scroll h-[54vh] no-scrollbar scroll">
 
                 <table class="w-full h-10 mb-[108px] overflow-auto text-sm text-left scroll no-scrollbar">
 

@@ -48,12 +48,12 @@
 
 
         {{-- //* tablea area --}}
-        <div class="overflow-x-auto overflow-y-scroll scroll h-[52vh] ">
+        <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar h-[52vh]">
 
             <table class="w-full text-sm text-left scroll no-scrollbar">
 
                 {{-- //* table header --}}
-                <thead class="text-xs text-white z-10 uppercase cursor-default bg-[rgb(53,53,53)] top-0">
+                <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
 
                     <tr class=" text-nowrap">
 

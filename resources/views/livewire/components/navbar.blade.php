@@ -26,7 +26,9 @@
                 </div>
             @endif
         </div>
-
+        <div>
+            <h1 class="font-bold text-gray-800 pointer-events-none text-md">Frozen and Consumer Goods Store</h1>
+        </div>
         <div class="flex flex-row items-center gap-12 ml-24 font-semibold text-gray-700">
             <div class="flex flex-row items-center gap-2">
                 <svg class="w-6 h-6 pointer-events-none" viewBox="0 0 24 24" fill="none"
@@ -89,9 +91,9 @@
                         x-transition:leave="transition ease-out duration-300"
                         x-transition:leave-start="transform opacity-100 scale-100"
                         x-transition:leave-end="transform opacity-0 scale-0"
-                        class="absolute z-10 w-screen max-w-md origin-top-right transform right-3">
+                        class="absolute z-10 w-screen max-w-md mt-2 origin-top-right transform right-3">
                         <div
-                            class=" overflow-y-auto rounded-l-lg h-full max-h-[400px] rounded-br-lg rounded-tr-none
+                            class=" overflow-y-auto rounded-l-lg shadow-md shadow-black h-full max-h-[400px] rounded-br-lg rounded-tr-none
                         min-h-[50%]">
                             <div class="h-fit max-h-[400px]">
                                 @livewire('components.notifications')

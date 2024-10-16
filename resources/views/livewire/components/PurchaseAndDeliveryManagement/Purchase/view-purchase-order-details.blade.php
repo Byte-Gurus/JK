@@ -1,6 +1,6 @@
 {{-- // --}}
 <div class="relative my-[3vh] rounded-lg" x-cloak >
-    <div class="flex flex-row h-[74vh] gap-4 ">
+    <div class="flex flex-row h-[71vh] gap-4 ">
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
 
             <div class="grid items-center grid-flow-col gap-4 py-[3vh] px-4 text-wrap">
@@ -28,7 +28,7 @@
             </div>
 
             {{-- //* tablea area --}}
-            <div class="h-[680px] pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
+            <div class=" pb-[136px] overflow-x-auto overflow-y-scroll  no-scrollbar scroll">
 
                 <table class="w-full overflow-auto text-sm text-left scroll no-scrollbar">
 

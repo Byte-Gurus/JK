@@ -1,21 +1,25 @@
 <div
-    class=" flex flex-col gap-2 font-bold overflow-auto bg-[rgba(53,53,53,0.7)] backdrop-blur-md h-screen max-h-[400px] rounded-md rounded-tr-none px-4 py-2">
+    class=" flex flex-col gap-2 font-bold overflow-auto bg-[rgba(53,53,53,0.7)] shadow-2xl shadow-black backdrop-blur-md h-screen max-h-[400px] rounded-md rounded-tr-none py-2">
+    <div class="px-2 ">
+        <p class="font-black text-[rgb(241,241,241)] text-md">Notifications</p>
+
+    </div>
     @foreach ($notifications as $notification)
-        <div class="bg-[rgba(99,99,99,0.24)] rounded-lg h-fit backdrop-blur-xl">
+        <div class="bg-[rgba(99,99,99,0.24)] leading-none h-fit backdrop-blur-xl">
             <div @if ($notification->inventoryJoin) wire:click="goToOtherPage({{ $notification->inventory_id }},
             'inventory')"
             href="{{ route('inventorymanagement.index') }}" wire:navigate
             @elseif ($notification->creditJoin)
             wire:click="goToOtherPage({{ $notification->credit_id }}, 'credit')"
             href="{{ route('creditmanagement.index') }}" wire:navigate @endif
-                class=" grid grid-flow-row text-white gap-2 bg-[rgb(122, 122, 122)] p-2 text-sm rounded-md
-            ease-in-out duration-100 text-wrap
+                class=" grid grid-flow-row text-[rgb(235,235,235)] gap-2 bg-[rgb(122, 122, 122)] p-2 text-sm
+            ease-out duration-75 text-wrap
             transition-all cursor-pointer hover:bg-[rgb(233,72,84)]">
                 <p class="text-xs italic font-thin text-right text-white hover:text-black">
                     {{ $notification->created_at->format('M d Y h:i A') }}
                 </p>
                 <div class="grid items-center grid-flow-col">
-                    <p class="col-span-10 text-md">
+                    <p class="col-span-10 font-medium text-md">
                         {{ $notification->description }}
                     </p>
                     <div

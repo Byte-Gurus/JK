@@ -46,12 +46,12 @@
                         <p class="text-[0.6em] font-bold uppercase"> {{ $item_return_amount ?? 'N/A' }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.4pem] font-thin uppercase">Total Exchange Amount</p>
-                        <p class="text-[0.4em] font-thin uppercase"> {{ $exchange_amount ?? 'N/A' }}</p>
+                        <p class="text-[0.2em] font-thin uppercase">Total Exchange Amount</p>
+                        <p class="text-[0.2em] font-thin uppercase"> {{ $exchange_amount ?? 'N/A' }}</p>
                     </div>
                     <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.4pem] font-thin uppercase">Total Refund Amount</p>
-                        <p class="text-[0.4em] font-thin uppercase"> {{ $refund_amount ?? 'N/A' }}</p>
+                        <p class="text-[0.2em] font-thin uppercase">Total Refund Amount</p>
+                        <p class="text-[0.2em] font-thin uppercase"> {{ $refund_amount ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>

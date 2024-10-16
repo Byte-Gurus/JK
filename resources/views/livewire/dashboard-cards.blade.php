@@ -1,4 +1,4 @@
-<div class="grid grid-cols-12 col-span-2 gap-5 py-4 mb-5 justify-evenly">
+<div class="grid col-span-2 gap-5 py-4 mb-5 desktop:grid-cols-12 tablet:grid-cols-6 laptop:grid-cols-6 justify-evenly">
     <a class="content-start col-span-3 px-8 py-5 text-left duration-1000 ease-in-out border rounded-md shadow-md border-lime-900 shadow-lime-900 "
         style="background-image: linear-gradient(115deg, #dcfdd6, #b9ffb8)">
         <div class="grid grid-cols-3">
