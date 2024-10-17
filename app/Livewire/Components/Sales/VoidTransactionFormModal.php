@@ -14,12 +14,13 @@ use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 class VoidTransactionFormModal extends Component
 {
     use LivewireAlert;
     public $reason, $fromPage = 'VoidAll', $transaction_id, $void_number;
 
-    public $isAdmin;
+    public $isAdmin ,$adminAcc;
 
     public function render()
     {
@@ -35,7 +36,6 @@ class VoidTransactionFormModal extends Component
         $this->resetForm();
         $this->dispatch(event: 'close-void-transaction-form-modal')->to(VoidTransactionForm::class);
         $this->resetValidation();
-
     }
     public function voidAllConfirmed()
     {
@@ -48,7 +48,8 @@ class VoidTransactionFormModal extends Component
             'original_amount' => $transaction->total_amount,
             'void_vat_amount' => $transaction->total_vat_amount,
             'hasTransaction' => false,
-            'user_id' => Auth::id(),
+            'voidedBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+            'approvedBy' => $this->adminAcc,
         ]);
 
         $transaction_movement = TransactionMovement::create([
@@ -83,7 +84,6 @@ class VoidTransactionFormModal extends Component
 
             $transactionDetail->status = 'Void';
             $transactionDetail->save();
-
         }
 
         $this->dispatch('refresh-table')->to(VoidTransactionTable::class);
@@ -96,10 +96,10 @@ class VoidTransactionFormModal extends Component
     {
         $this->reset('reason');
     }
-    public function adminConfirmed($isAdmin)
+    public function adminConfirmed($data)
     {
-        $this->isAdmin = $isAdmin;
-
+        $this->isAdmin = $data['isAdmin'];
+        $this->adminAcc = $data['adminAcc'];
 
         if ($this->isAdmin) {
             $this->voidAllConfirmed();
@@ -110,7 +110,6 @@ class VoidTransactionFormModal extends Component
     {
         $this->transaction_id = $data['transaction_id'];
         $this->void_number = $data['void_number'];
-
     }
     public function voidAll()
     {
@@ -118,6 +117,4 @@ class VoidTransactionFormModal extends Component
         $this->dispatch('close-void-transaction-form-modal')->to(VoidTransactionForm::class);
         $this->dispatch('display-sales-admin-login-form')->to(VoidTransactionForm::class);
     }
-
-
 }
