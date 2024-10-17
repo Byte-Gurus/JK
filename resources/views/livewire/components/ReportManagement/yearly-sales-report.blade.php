@@ -63,7 +63,7 @@
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-left font-bold">Date</p>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Year</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">

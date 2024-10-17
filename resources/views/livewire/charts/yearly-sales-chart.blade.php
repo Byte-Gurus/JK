@@ -23,23 +23,31 @@
                     <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Sales Performance - Yearly</p>
                 </div>
 
-                <div>
-                    <select name="fromYear"
-                        class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
-                        id="fromYear" wire:model.live="fromYear">
-                        <option value="">Select a year</option>
-                        @for ($fromYear = 2000; $fromYear <= 2050; $fromYear++)
-                            <option value="{{ $fromYear }}">{{ $fromYear }}</option>
-                        @endfor
-                    </select>
-                    <select name="toYear"
-                        class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
-                        id="toYear" wire:model.live="toYear">
-                        <option value="">Select a year</option>
-                        @for ($toYear = 2000; $toYear <= 2050; $toYear++)
-                            <option value="{{ $toYear }}">{{ $toYear }}</option>
-                        @endfor
-                    </select>
+                <div class="flex flex-row gap-2">
+                    <div class="flex flex-row gap-3">
+                        <p class="text-sm font-medium">From</p>
+                        <select name="fromYear"
+                            class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
+                            id="fromYear" wire:model.live="fromYear">
+                            <option value="">Select a year</option>
+                            @for ($fromYear = 2000; $fromYear <= 2050; $fromYear++)
+                                <option value="{{ $fromYear }}">{{ $fromYear }}</option>
+                            @endfor
+                        </select>
+
+                    </div>
+                    <div class="flex flex-row gap-3">
+                        <p class="text-sm font-medium">To</p>
+                        <select name="toYear"
+                            class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
+                            id="toYear" wire:model.live="toYear">
+                            <option value="">Select a year</option>
+                            @for ($toYear = 2000; $toYear <= 2050; $toYear++)
+                                <option value="{{ $toYear }}">{{ $toYear }}</option>
+                            @endfor
+                        </select>
+                    </div>
+
                 </div>
             </div>
             <canvas wire:ignore width="300" height="100" id="yearChart"></canvas>

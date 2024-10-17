@@ -50,6 +50,12 @@
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $receiptDetails['transaction_info']['user'] ?? null }}</p>
                     </div>
+                    {{-- If Return --}}
+                    <div class="flex flex-row gap-2 break-words text-wrap">
+                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No</p>
+                        <p class="text-[0.6em] font-bold uppercase w-[116px]">
+                            {{-- {{ $receiptDetails['transaction_info']['user'] ?? null }}</p> --}}
+                    </div>
                 </div>
             </div>
 
@@ -146,18 +152,34 @@
                 <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-2 mx-2">
+                {{-- If Return --}}
                 <div class="flex flex-row justify-between">
+                    <p class="text-[0.6em] font-bold uppercase">Exchange Amount</p>
+                    <p class="text-[0.6em] font-bold uppercase">
+                        {{-- {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p> --}}
+                </div>
 
+                <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Subtotal</p>
                     <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p>
                 </div>
+
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Discount - SC/PWD (20%)</p>
                     <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['tax_details']['PWD_Senior_discount_amount'] ?? null, 2) }}
                     </p>
                 </div>
+            </div>
+            <div class="mx-4 ">
+                <span class="">------------------------</span>
+            </div>
+            {{-- If Return --}}
+            <div class="flex flex-row justify-between">
+                <p class="text-[0.6em] font-bold uppercase">Excess Amount</p>
+                <p class="text-[0.6em] font-bold uppercase">
+                    {{-- {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p> --}}
             </div>
             <div class="mx-4 ">
                 <span class="">------------------------</span>
