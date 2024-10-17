@@ -18,7 +18,8 @@ class Returns extends Model
         'refund_amount',
         'exchange_amount',
         'hasTransaction',
-        'user_id'
+        'returnedBy',
+        'approvedBy'
     ];
 
     public function transactionJoin()

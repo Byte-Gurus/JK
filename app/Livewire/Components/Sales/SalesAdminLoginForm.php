@@ -48,12 +48,21 @@ class SalesAdminLoginForm extends Component
                 $this->isAdmin = true;
 
                 if ($this->fromPage === 'VoidTransactionForm') {
-                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(VoidTransactionForm::class);
+                    $this->dispatch('admin-confirmed', [
+                        'isAdmin' => $this->isAdmin,
+                        'adminAcc' => $user->firstname . ' ' . ($user->middlename ? $user->middlename . ' ' : '') . $user->lastname
+                    ])->to(VoidTransactionForm::class);
 
                 } elseif ($this->fromPage === 'ReturnDetails') {
-                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(SalesReturnDetails::class);
+                    $this->dispatch('admin-confirmed', [
+                        'isAdmin' => $this->isAdmin,
+                        'adminAcc' => $user->firstname . ' ' . ($user->middlename ? $user->middlename . ' ' : '') . $user->lastname
+                    ])->to(SalesReturnDetails::class);
                 } elseif ($this->fromPage === 'VoidAll') {
-                    $this->dispatch('admin-confirmed', isAdmin: $this->isAdmin)->to(VoidTransactionFormModal::class);
+                    $this->dispatch('admin-confirmed', [
+                        'isAdmin' => $this->isAdmin,
+                        'adminAcc' => $user->firstname . ' ' . ($user->middlename ? $user->middlename . ' ' : '') . $user->lastname
+                    ])->to(VoidTransactionFormModal::class);
                 }
 
             } else {

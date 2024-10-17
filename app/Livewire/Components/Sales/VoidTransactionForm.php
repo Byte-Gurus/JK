@@ -18,7 +18,7 @@ class VoidTransactionForm extends Component
 {
     use LivewireAlert;
 
-    public $isAdmin, $transaction_number, $transaction_date, $transaction_type, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $current_tax_amount, $void_number, $transaction_id, $void_total_amount, $item_void_amount, $void_vat_amount, $transactionDetails, $new_total, $void_item_quantity, $void_total_quantity;
+    public $isAdmin, $transaction_number, $transaction_date, $transaction_type, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $current_tax_amount, $void_number, $transaction_id, $void_total_amount, $item_void_amount, $void_vat_amount, $transactionDetails, $new_total, $void_item_quantity, $void_total_quantity, $adminAcc;
 
     public $showSalesAdminLoginForm = false;
 
@@ -62,7 +62,8 @@ class VoidTransactionForm extends Component
             'original_amount' => $this->total_amount,
             'void_vat_amount' => $this->void_vat_amount,
             'hasTransaction' => false,
-            'user_id' => Auth::id(),
+            'voidedBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+            'approvedBy' => $this->adminAcc
         ]);
 
         $transaction_movement = TransactionMovement::create([
@@ -140,10 +141,10 @@ class VoidTransactionForm extends Component
         $this->displaySalesAdminLoginForm();
     }
 
-    public function adminConfirmed($isAdmin)
+    public function adminConfirmed($data)
     {
-        $this->isAdmin = $isAdmin;
-
+        $this->isAdmin = $data['isAdmin'];
+        $this->adminAcc = $data['adminAcc'];
 
         if ($this->isAdmin) {
             $this->voidConfirmed();

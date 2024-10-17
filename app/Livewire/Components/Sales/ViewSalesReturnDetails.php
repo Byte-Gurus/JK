@@ -11,7 +11,7 @@ class ViewSalesReturnDetails extends Component
     public $statusFilter = 0;
     public $operationFilter = 0;
 
-    public $return_id, $transaction_number, $transaction_date, $return_date, $original_amount, $return_total_amount, $current_amount, $return_number,$refund_amount, $exchange_amount;
+    public $return_id, $transaction_number, $transaction_date, $return_date, $original_amount, $return_total_amount, $current_amount, $return_number,$refund_amount, $exchange_amount, $returnedBy, $approvedBy;
     public function render()
     {
         $query = ReturnDetails::where('return_id', $this->return_id);
@@ -52,6 +52,8 @@ class ViewSalesReturnDetails extends Component
             'return_number' => $return_info->return_number,
             'refund_amount' => $return_info->refund_amount,
             'exchange_amount' => $return_info->exchange_amount,
+            'returnedBy' => $return_info->returnedBy,
+            'approvedBy' => $return_info->approvedBy,
         ]);
     }
 

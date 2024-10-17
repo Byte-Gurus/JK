@@ -16,7 +16,8 @@ class VoidTransaction extends Model
         'original_amount',
         'void_vat_amount',
         'hasTransaction',
-        'user_id',
+        'voidedBy',
+        'approvedBy'
     ];
 
     public function voidTransactionDetailsJoin()

@@ -18,11 +18,12 @@ return new class extends Migration {
             $table->double('original_amount');
             $table->double('void_vat_amount');
             $table->boolean('hasTransaction');
+            $table->string('voidedBy');
+            $table->string('approvedBy');
 
 
 
             $table->foreignId('transaction_id')->constrained('transactions');
-            $table->foreignId('user_id')->constrained('users');
 
         });
     }

@@ -24,7 +24,7 @@ class SalesReturnDetails extends Component
     public $isAdmin;
     public $description = [];
 
-    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount, $total_refund_amount, $total_exchange_amount;
+    public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount, $total_refund_amount, $total_exchange_amount, $adminAcc;
     public $fromPage = 'ReturnDetails';
     public $return_info = [];
 
@@ -78,7 +78,8 @@ class SalesReturnDetails extends Component
             'original_amount' => $this->total_amount,
             'return_vat_amount' => $this->return_vat_amount,
             'hasTransaction' => false,
-            'user_id' => Auth::id(),
+            'returnedBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+            'approvedBy' => $this->adminAcc
         ]);
 
         $transaction_movement = TransactionMovement::create([
@@ -289,9 +290,10 @@ class SalesReturnDetails extends Component
         $this->return_number = $returnNumber;
     }
 
-    public function adminConfirmed($isAdmin)
+    public function adminConfirmed($data)
     {
-        $this->isAdmin = $isAdmin;
+        $this->isAdmin = $data['isAdmin'];
+        $this->adminAcc = $data['adminAcc'];
 
 
         if ($this->isAdmin) {
