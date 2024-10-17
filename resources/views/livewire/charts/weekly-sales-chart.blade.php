@@ -40,7 +40,7 @@
     <script>
         const perWeek = document.getElementById('weekChart');
 
-        Livewire.on('weeklyTotalUpdated', (monthlyTotal) => {
+        Livewire.on('monthlyTotalUpdated', (monthlyTotal) => {
 
             dates = [];
             datas = [];

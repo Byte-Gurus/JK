@@ -9,34 +9,57 @@ use Livewire\Component;
 
 class MonthlySalesChart extends Component
 {
-    public $month, $totalAmount, $transactionCount;
+    public $year, $totalAmount, $transactionCount;
     public $monthlyTotal = [];
     public function render()
     {
 
-        if (!$this->month) {
-            $currentMonth = Carbon::now()->format('Y-m');
-            $this->updatedMonth($currentMonth);
+        if (!$this->year) {
+            $currentYear = Carbon::now()->format('Y');
+            $this->updatedYear($currentYear);
         }
         return view('livewire.charts.monthly-sales-chart');
     }
 
-    public function updatedMonth($currentMonth)
+    public function updatedYear($currentYear)
     {
-
-        if (!$this->month) {
-            $currentMonth = Carbon::now()->format('Y-m');
-
+        // If year is not set, use the current year
+        if (!$this->year) {
+            $currentYear = Carbon::now()->format('Y');
         }
-        $this->monthlyTotal = [];
-        // Get the start and end dates of the month
-        $startOfMonth = Carbon::parse($currentMonth)->startOfMonth();
-        $endOfMonth = Carbon::parse($currentMonth)->endOfMonth();
 
-        $transactions = TransactionMovement::whereBetween('created_at', [$startOfMonth, $endOfMonth])->get();
-        $this->transactionCount = TransactionMovement::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
-        // Loop through each day of the month
-        $dailySummaries = [];
+        // Reset monthly totals
+        $this->monthlyTotal = [];
+
+        // Set the start and end of the year
+        $startOfYear = Carbon::createFromFormat('Y', $currentYear)->startOfYear();
+        $endOfYear = Carbon::createFromFormat('Y', $currentYear)->endOfYear();
+
+        // Fetch transactions for the entire year
+        $transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
+
+        // Count all transactions for the year
+        $this->transactionCount = $transactions->count();
+
+        // Initialize monthly summaries
+        $monthlySummaries = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $month = Carbon::createFromDate($currentYear, $i, 1)->format('Y-M');
+            $monthName = Carbon::createFromDate($currentYear, $i, 1)->format('F');
+
+            $monthlySummaries[$month] = [
+                'monthName' => $monthName,
+                'totalGross' => 0,
+                'totalTax' => 0,
+                'totalNet' => 0,
+                'totalReturnAmount' => 0,
+                'totalReturnVatAmount' => 0,
+                'totalVoidAmount' => 0,
+                'totalVoidVatAmount' => 0
+            ];
+        }
+
+        // Initialize yearly totals
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
@@ -44,87 +67,59 @@ class MonthlySalesChart extends Component
         $totalReturnVatAmount = 0;
         $totalVoidAmount = 0;
         $totalVoidVatAmount = 0;
-        $totalVoidItemAmount = 0;
-        $totalVoidTaxAmount = 0;
 
+        // Process each transaction
         foreach ($transactions as $transaction) {
-            $date = $transaction->created_at->format('M d Y');
+            $month = $transaction->created_at->format('Y-M'); // Format to 'YYYY-MM'
 
-            if (!isset($dailySummaries[$date])) {
-                $dailySummaries[$date] = [
-                    'totalGross' => 0,
-                    'totalTax' => 0,
-                    'totalNet' => 0,
-                    'totalReturnAmount' => 0,
-                    'totalReturnVatAmount' => 0,
-                    'totalVoidAmount' => 0,
-                    'totalVoidVatAmount' => 0,
-                    'totalVoidItemAmount' => 0,
-                    'totalVoidTaxAmount' => 0,
-                ];
+            // Summing monthly transactions
+            if ($transaction->transaction_type == 'Sales') {
+                $monthlySummaries[$month]['totalGross'] += $transaction->transactionJoin->total_amount;
+                $monthlySummaries[$month]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+            } elseif ($transaction->transaction_type == 'Return') {
+                $monthlySummaries[$month]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                $monthlySummaries[$month]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
+            } elseif ($transaction->transaction_type == 'Credit') {
+                $monthlySummaries[$month]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                $monthlySummaries[$month]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+            } elseif ($transaction->transaction_type == 'Void') {
+                $monthlySummaries[$month]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
+                $monthlySummaries[$month]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
             }
-
-            // Summing daily transactions
-            switch ($transaction->transaction_type) {
-                case 'Sales':
-                    $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
-
-                    break;
-                case 'Return':
-                    $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
-                    $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
-
-                    break;
-                case 'Credit':
-                    $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
-                    break;
-                case 'Void':
-                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
-                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
-
-                    break;
-            }
-
         }
 
-        // Calculate daily net values and accumulate monthly totals
-        foreach ($dailySummaries as $date => $summary) {
-            $dailyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
-            $dailyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
-            $dailyNet = $dailyGross - $dailyTax;
+        // Calculate monthly net values and accumulate yearly totals
+        foreach ($monthlySummaries as $month => $summary) {
+            $monthlyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
+            $monthlyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
+            $monthlyNet = $monthlyGross - $monthlyTax;
 
-            $dailySummaries[$date]['totalGross'] = $dailyGross;
-            $dailySummaries[$date]['totalTax'] = $dailyTax;
-            $dailySummaries[$date]['totalNet'] = $dailyNet;
+            // Update the monthly summaries with calculated values
+            $monthlySummaries[$month]['totalGross'] = $monthlyGross;
+            $monthlySummaries[$month]['totalTax'] = $monthlyTax;
+            $monthlySummaries[$month]['totalNet'] = $monthlyNet;
 
-            // Accumulate monthly totals
-            $totalGross += $dailyGross;
-            $totalTax += $dailyTax;
-            $totalNet += $dailyNet;
+            // Accumulate yearly totals
+            $totalGross += $monthlyGross;
+            $totalTax += $monthlyTax;
+            $totalNet += $monthlyNet;
             $totalReturnAmount += $summary['totalReturnAmount'];
             $totalReturnVatAmount += $summary['totalReturnVatAmount'];
-            $totalVoidAmount += $summary['totalVoidAmount'] + $summary['totalVoidItemAmount'];
+            $totalVoidAmount += $summary['totalVoidAmount'];
             $totalVoidVatAmount += $summary['totalVoidVatAmount'];
-            $totalVoidItemAmount += $summary['totalVoidItemAmount'];
-            $totalVoidTaxAmount += $summary['totalVoidTaxAmount'];
 
+            // Store the results for the front-end
             $this->monthlyTotal[] = [
-                'date' => $date,
-                'totalAmount' => $dailyNet
+                'month' => $summary['monthName'],
+                'totalAmount' => $monthlyNet
             ];
-
-
         }
 
-
-
+        // Set the total amount for the entire year
         $this->totalAmount = $totalNet;
 
-
-
+        // Dispatch the updated monthly totals for the frontend
         $this->dispatch('monthlyTotalUpdated', $this->monthlyTotal);
     }
+
 }
