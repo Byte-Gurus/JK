@@ -5,6 +5,10 @@
             <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
                 <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
             </div>
+        @else
+            <div class="pr-4">
+                <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
+            </div>
         @endif
         <div>
             <h1 class="font-bold text-gray-800 pointer-events-none text-md">Frozen and Consumer Goods Store</h1>
