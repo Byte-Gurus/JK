@@ -14,8 +14,8 @@ class WeeklySalesChart extends Component
     public function render()
     {
         if (!$this->month) {
-            $currentWeek = Carbon::now()->format('o-\WW');
-            $this->updatedWeek($currentWeek);
+            $currentMonth = Carbon::now()->format('Y-m'); // Get current month in 'YYYY-MM' format
+            $this->updatedMonth($currentMonth);
         }
         return view('livewire.charts.weekly-sales-chart');
     }
@@ -23,7 +23,7 @@ class WeeklySalesChart extends Component
         'get-picker' => 'getPicker',
 
     ];
-    public function updatedWeeksInMonth($currentMonth)
+    public function updatedMonth($currentMonth)
 {
     if (!$this->month) {
         $currentMonth = Carbon::now()->format('Y-m'); // Get current month in 'YYYY-MM' format
