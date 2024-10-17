@@ -32,7 +32,7 @@
 
                         {{-- //* total --}}
                         <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
-                         {{-- //* total --}}
+                        {{-- //* total --}}
                         <th scope="col" class="px-4 py-1 text-center">Discount Amount (₱)</th>
 
                         {{-- transaction type --}}
@@ -145,6 +145,9 @@
                         {{-- //* operation --}}
                         <th scope="col" class="px-4 py-3 text-center">Reason</th>
 
+                        {{-- //* operation --}}
+                        <th scope="col" class="px-4 py-3 text-center"></th>
+
                     </tr>
                 </thead>
 
@@ -209,7 +212,7 @@
                             </th>
 
                             <th scope="row"
-                                class="row-span-2 px-4 py-4 font-medium text-center text-gray-900  text-md whitespace-nowrap">
+                                class="row-span-2 px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
 
                                 <select id="status" wire:model.live="reason.{{ $index }}"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm text-center rounded-md w-fit p-2.5 ">
@@ -222,6 +225,19 @@
                                     <span
                                         class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
                                 @enderror
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                @if (isset($reason[$index]) && $reason[$index])
+                                    <input type="checkbox"
+                                        class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600"
+                                        wire:change="getCheckedItem($event.target.checked, {{ $index }}, {{ $transactionDetail->id }})">
+                                    @error("checkedItem.$index")
+                                        <span
+                                            class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                    @enderror
+                                @endif
                             </th>
 
                         </tr>

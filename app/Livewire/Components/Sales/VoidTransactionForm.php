@@ -63,7 +63,7 @@ class VoidTransactionForm extends Component
             'void_vat_amount' => $this->void_vat_amount,
             'hasTransaction' => false,
             'voidedBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'approvedBy' => $this->adminAcc
+            'approvedBy' => $this->adminAcc,
         ]);
 
         $transaction_movement = TransactionMovement::create([
