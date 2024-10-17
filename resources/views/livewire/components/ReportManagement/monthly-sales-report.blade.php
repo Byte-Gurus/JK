@@ -85,16 +85,16 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            @if ($isTransactionEmpty)
+            @if (!$hasTransactions)
                 <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
             @endif
-            @if ($transaction_info)
-                @foreach ($transaction_info['dailySummaries'] as $date => $summary)
+            @if ($transaction_info && $hasTransactions)
+                @foreach ($transaction_info['monthlySummaries'] as $date => $summary)
                     <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.8em] text-left font-medium">
-                                    {{ \Carbon\Carbon::parse($date)->format('M d, Y') }}</p>
+                                    {{ \Carbon\Carbon::createFromFormat('n', $date)->format('F') }}
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">

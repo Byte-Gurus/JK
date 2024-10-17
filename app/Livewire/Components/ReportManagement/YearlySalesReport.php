@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components\ReportManagement;
 
-use App\Models\Transaction;
 use App\Models\TransactionMovement;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -11,11 +10,13 @@ use Livewire\Component;
 class YearlySalesReport extends Component
 {
     public $transactions = [], $transaction_info = [];
-    public $isTransactionEmpty = false;
+    public $hasTransaction = false;
+
     public function render()
     {
         return view('livewire.components.ReportManagement.yearly-sales-report', [
-            'transactions' => $this->transactions
+            'transactions' => $this->transactions,
+            'transaction_info' => $this->transaction_info,
         ]);
     }
 
@@ -23,98 +24,103 @@ class YearlySalesReport extends Component
         'generate-report' => 'generateYearlyReport'
     ];
 
-    public function generateYearlyReport($year)
+    public function generateYearlyReport($fromYear, $toYear)
     {
-        // Parse the year into start and end dates
-        $startOfYear = Carbon::createFromFormat('Y', $year)->startOfYear();
-        $endOfYear = Carbon::createFromFormat('Y', $year)->endOfYear();
+        // Initialize an array to hold yearly data
+        $yearlySummaries = [];
+        $this->hasTransaction = false; // Default to false
 
-
-        // Fetch transactions within the year range
-        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
-        if ($this->transactions->isEmpty()) {
-            $this->isTransactionEmpty = true;
-        }
-        // Initialize totals and monthly summaries
-        $monthlySummaries = [];
+        // Initialize overall totals
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
-        $totalReturnAmount = 0;
-        $totalReturnVatAmount = 0;
-        $totalVoidAmount = 0;
-        $totalVoidVatAmount = 0;
 
-        // Iterate through transactions to group and sum by month
-        foreach ($this->transactions as $transaction) {
-            $month = $transaction->created_at->format('Y-m'); // Format to 'YYYY-MM'
-            $monthName = $transaction->created_at->format('F');
+        // Iterate over the years from fromYear to toYear
+        for ($year = $fromYear; $year <= $toYear; $year++) {
+            // Parse the year into start and end dates
+            $startOfYear = Carbon::createFromFormat('Y', $year)->startOfYear();
+            $endOfYear = Carbon::createFromFormat('Y', $year)->endOfYear();
 
-            if (!isset($monthlySummaries[$month])) {
-                $monthlySummaries[$month] = [
-                    'monthName' => $monthName,
+            // Fetch transactions within the year range
+            $transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
+
+            $totalGrossForYear = 0;
+            $totalTaxForYear = 0;
+            $totalNetForYear = 0;
+            $totalReturnAmount = 0;
+            $totalReturnVatAmount = 0;
+            $totalVoidAmount = 0;
+            $totalVoidVatAmount = 0;
+
+            // Check if there are any transactions for the year
+            if ($transactions->isNotEmpty()) {
+                $this->hasTransaction = true; // Set to true if there are transactions
+
+                // Iterate through transactions to group and sum
+                foreach ($transactions as $transaction) {
+                    if ($transaction->transaction_type == 'Sales') {
+                        $totalGrossForYear += $transaction->transactionJoin->total_amount;
+                        $totalTaxForYear += $transaction->transactionJoin->total_vat_amount;
+                    } elseif ($transaction->transaction_type == 'Return') {
+                        $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
+                        $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
+                    } elseif ($transaction->transaction_type == 'Credit') {
+                        $totalGrossForYear += $transaction->creditJoin->transactionJoin->total_amount;
+                        $totalTaxForYear += $transaction->creditJoin->transactionJoin->total_vat_amount;
+                    } elseif ($transaction->transaction_type == 'Void') {
+                        $totalVoidAmount += $transaction->voidTransactionJoin->void_total_amount;
+                        $totalVoidVatAmount += $transaction->voidTransactionJoin->void_vat_amount;
+                    }
+                }
+
+                // Calculate net values for the year
+                $yearlyGross = $totalGrossForYear - ($totalReturnAmount + $totalVoidAmount);
+                $yearlyTax = $totalTaxForYear - ($totalReturnVatAmount + $totalVoidVatAmount);
+                $yearlyNet = $yearlyGross - $yearlyTax;
+
+                // Store the results for the year
+                $yearlySummaries[$year] = [
+                    'totalGross' => $yearlyGross,
+                    'totalTax' => $yearlyTax,
+                    'totalNet' => $yearlyNet,
+                    'totalReturnAmount' => $totalReturnAmount,
+                    'totalReturnVatAmount' => $totalReturnVatAmount,
+                    'totalVoidAmount' => $totalVoidAmount,
+                    'totalVoidVatAmount' => $totalVoidVatAmount,
+                ];
+
+                // Accumulate total values for the report
+                $totalGross += $yearlyGross;
+                $totalTax += $yearlyTax;
+                $totalNet += $yearlyNet;
+            } else {
+                // If there are no transactions for this year, add a placeholder with zeros
+                $yearlySummaries[$year] = [
                     'totalGross' => 0,
                     'totalTax' => 0,
                     'totalNet' => 0,
                     'totalReturnAmount' => 0,
                     'totalReturnVatAmount' => 0,
                     'totalVoidAmount' => 0,
-                    'totalVoidVatAmount' => 0
+                    'totalVoidVatAmount' => 0,
                 ];
             }
-
-            // Summing monthly transactions
-            if ($transaction->transaction_type == 'Sales') {
-                $monthlySummaries[$month]['totalGross'] += $transaction->transactionJoin->total_amount;
-                $monthlySummaries[$month]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
-            } elseif ($transaction->transaction_type == 'Return') {
-                $monthlySummaries[$month]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
-                $monthlySummaries[$month]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
-            } elseif ($transaction->transaction_type == 'Credit') {
-                $monthlySummaries[$month]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
-                $monthlySummaries[$month]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-            } elseif ($transaction->transaction_type == 'Void') {
-                $monthlySummaries[$month]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
-                $monthlySummaries[$month]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
-            }
-        }
-
-        // Calculate monthly net values and accumulate yearly totals
-        foreach ($monthlySummaries as $month => $summary) {
-            $monthlyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
-            $monthlyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
-            $monthlyNet = $monthlyGross - $monthlyTax;
-
-            $monthlySummaries[$month]['totalGross'] = $monthlyGross;
-            $monthlySummaries[$month]['totalTax'] = $monthlyTax;
-            $monthlySummaries[$month]['totalNet'] = $monthlyNet;
-
-            // Accumulate yearly totals
-            $totalGross += $monthlyGross;
-            $totalTax += $monthlyTax;
-            $totalNet += $monthlyNet;
-            $totalReturnAmount += $summary['totalReturnAmount'];
-            $totalReturnVatAmount += $summary['totalReturnVatAmount'];
-            $totalVoidAmount += $summary['totalVoidAmount'];
-            $totalVoidVatAmount += $summary['totalVoidVatAmount'];
         }
 
         // Prepare report information
         $this->transaction_info = [
-            'totalGross' => $totalGross,
+            'yearlySummaries' => $yearlySummaries,
+            'totalGross' => $totalGross, // Set overall totals
             'totalTax' => $totalTax,
             'totalNet' => $totalNet,
-            'totalReturnAmount' => $totalReturnAmount,
-            'totalReturnVatAmount' => $totalReturnVatAmount,
-            'totalVoidAmount' => $totalVoidAmount,
-            'totalVoidVatAmount' => $totalVoidVatAmount,
-            'date' => $startOfYear->format('Y'), // Year format
+            'date' => $fromYear . ' to ' . $toYear,
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'monthlySummaries' => $monthlySummaries,
         ];
 
+        // Check if there were transactions across the years
+        $this->hasTransaction = !empty(array_filter($yearlySummaries, function ($summary) {
+            return $summary['totalGross'] > 0;
+        }));
     }
-
-
 }

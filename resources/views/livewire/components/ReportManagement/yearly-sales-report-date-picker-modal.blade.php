@@ -30,15 +30,25 @@
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <select name="year" class="w-full p-4 rounded-md hover:bg-gray-300" id="year"
-                            wire:model.live="date">
+                        <select name="fromYear" class="w-full p-4 rounded-md hover:bg-gray-300" id="year"
+                            wire:model.live="fromYear">
+                            <option value="">Select a year</option>
+                            @for ($year = 2000; $year <= 2050; $year++) <option value="{{ $year }}">{{ $year }}</option>
+                                @endfor
+                        </select>
+                        @error('fromYear')
+                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                        @enderror
+
+                        <select name="toYear" class="w-full p-4 rounded-md hover:bg-gray-300" id="year"
+                            wire:model.live="toYear">
                             <option value="">Select a year</option>
                             @for ($year = 2000; $year <= 2050; $year++) <option value="{{ $year }}">{{ $year }}</option>
                                 @endfor
                         </select>
 
 
-                        @error('date')
+                        @error('toYear')
                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -50,7 +60,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            @if ($date)
+                            @if ($fromYear && $toYear)
                             <button type="button" wire:click="getDate()"
                                 class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Generate</button>
                             @else

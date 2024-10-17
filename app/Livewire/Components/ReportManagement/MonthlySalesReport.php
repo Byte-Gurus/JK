@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components\ReportManagement;
 
-use App\Models\Transaction;
 use App\Models\TransactionMovement;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +10,7 @@ use Livewire\Component;
 class MonthlySalesReport extends Component
 {
     public $transactions = [], $transaction_info = [];
-    public $isTransactionEmpty = false;
+    public $hasTransactions = false;
 
     public function render()
     {
@@ -19,118 +18,106 @@ class MonthlySalesReport extends Component
             'transactions' => $this->transactions
         ]);
     }
+
     protected $listeners = [
         'generate-report' => 'generateReport'
     ];
 
-    public function generateReport($month)
+    public function generateReport($year)
     {
-        // Parse the month into start and end dates
-        $startOfMonth = Carbon::parse($month)->startOfMonth();
-        $endOfMonth = Carbon::parse($month)->endOfMonth();
-
-        // Fetch transactions within the month range
-        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfMonth, $endOfMonth])->get();
-
-        if ($this->transactions->isEmpty()) {
-            $this->isTransactionEmpty = true;
+        // Initialize totals for each month
+        $monthlySummaries = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $monthlySummaries[$month] = [
+                'totalGross' => 0,
+                'totalTax' => 0,
+                'totalNet' => 0,
+                'totalReturnAmount' => 0,
+                'totalReturnVatAmount' => 0,
+                'totalVoidAmount' => 0,
+                'totalVoidVatAmount' => 0,
+                'totalVoidItemAmount' => 0,
+                'totalVoidTaxAmount' => 0,
+            ];
         }
 
-        // Initialize totals and daily summaries
-        $dailySummaries = [];
-        $totalGross = 0;
-        $totalTax = 0;
-        $totalNet = 0;
-        $totalReturnAmount = 0;
-        $totalReturnVatAmount = 0;
-        $totalVoidAmount = 0;
-        $totalVoidVatAmount = 0;
-        $totalVoidItemAmount = 0;
-        $totalVoidTaxAmount = 0;
+        // Fetch transactions within the year
+        $this->transactions = TransactionMovement::whereYear('created_at', $year)->get();
 
-        // Iterate through transactions to group and sum by day
-        foreach ($this->transactions as $transaction) {
-            $date = $transaction->created_at->format('Y-m-d');
+        // Check if transactions are not empty
+        if ($this->transactions->isNotEmpty()) {
+            $this->hasTransactions = true;
 
-            if (!isset($dailySummaries[$date])) {
-                $dailySummaries[$date] = [
-                    'totalGross' => 0,
-                    'totalTax' => 0,
-                    'totalNet' => 0,
-                    'totalReturnAmount' => 0,
-                    'totalReturnVatAmount' => 0,
-                    'totalVoidAmount' => 0,
-                    'totalVoidVatAmount' => 0,
-                    'totalVoidItemAmount' => 0,
-                    'totalVoidTaxAmount' => 0,
+            // Iterate through transactions to group and sum by month
+            foreach ($this->transactions as $transaction) {
+                $month = $transaction->created_at->format('n'); // Get month number (1-12)
+
+                // Summing monthly transactions
+                switch ($transaction->transaction_type) {
+                    case 'Sales':
+                        $monthlySummaries[$month]['totalGross'] += $transaction->transactionJoin->total_amount;
+                        $monthlySummaries[$month]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+                        break;
+                    case 'Return':
+                        $monthlySummaries[$month]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                        $monthlySummaries[$month]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
+                        break;
+                    case 'Credit':
+                        $monthlySummaries[$month]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                        $monthlySummaries[$month]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+                        break;
+                    case 'Void':
+                        $monthlySummaries[$month]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
+                        $monthlySummaries[$month]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
+                        break;
+                }
+            }
+
+            // Calculate net values for each month and accumulate totals
+            $totalGross = 0;
+            $totalTax = 0;
+            $totalNet = 0;
+
+            foreach ($monthlySummaries as $month => $summary) {
+                $monthlyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
+                $monthlyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
+                $monthlyNet = $monthlyGross - $monthlyTax;
+
+                $monthlySummaries[$month]['totalGross'] = $monthlyGross;
+                $monthlySummaries[$month]['totalTax'] = $monthlyTax;
+                $monthlySummaries[$month]['totalNet'] = $monthlyNet;
+
+                // Accumulate overall totals
+                $totalGross += $monthlyGross;
+                $totalTax += $monthlyTax;
+                $totalNet += $monthlyNet;
+            }
+
+            // Check if any month has transactions
+            $hasDataToShow = collect($monthlySummaries)->contains(function ($summary) {
+                return $summary['totalGross'] > 0 || $summary['totalNet'] > 0 || $summary['totalTax'] > 0;
+            });
+
+            // Prepare report information only if there is data
+            if ($hasDataToShow) {
+                $this->transaction_info = [
+                    'monthlySummaries' => $monthlySummaries,
+                    'date' => $year,
+                    'dateCreated' => Carbon::now()->format('M d Y h:i A'),
+                    'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
+                    'totalGross' => $totalGross,
+                    'totalTax' => $totalTax,
+                    'totalNet' => $totalNet,
                 ];
+            } else {
+                $this->transaction_info = []; // Clear transaction info if no data
+                $this->hasTransactions = false; // Set flag to indicate no transactions
             }
-
-            // Summing daily transactions
-            switch ($transaction->transaction_type) {
-                case 'Sales':
-                    $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
-
-                    break;
-                case 'Return':
-                    $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
-                    $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
-
-                    break;
-                case 'Credit':
-                    $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
-                    break;
-                case 'Void':
-                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
-                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
-
-                    break;
-            }
-
+        } else {
+            // No transactions found
+            $this->hasTransactions = false;
+            $this->transaction_info = []; // Clear transaction info
         }
-
-        // Calculate daily net values and accumulate monthly totals
-        foreach ($dailySummaries as $date => $summary) {
-            $dailyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
-            $dailyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
-            $dailyNet = $dailyGross - $dailyTax;
-
-            $dailySummaries[$date]['totalGross'] = $dailyGross;
-            $dailySummaries[$date]['totalTax'] = $dailyTax;
-            $dailySummaries[$date]['totalNet'] = $dailyNet;
-
-            // Accumulate monthly totals
-            $totalGross += $dailyGross;
-            $totalTax += $dailyTax;
-            $totalNet += $dailyNet;
-            $totalReturnAmount += $summary['totalReturnAmount'];
-            $totalReturnVatAmount += $summary['totalReturnVatAmount'];
-            $totalVoidAmount += $summary['totalVoidAmount'] + $summary['totalVoidItemAmount'];
-            $totalVoidVatAmount += $summary['totalVoidVatAmount'];
-            $totalVoidItemAmount += $summary['totalVoidItemAmount'];
-            $totalVoidTaxAmount += $summary['totalVoidTaxAmount'];
-        }
-
-        // Prepare report information
-        $this->transaction_info = [
-            'totalGross' => $totalGross,
-            'totalTax' => $totalTax,
-            'totalNet' => $totalNet,
-            'totalReturnAmount' => $totalReturnAmount,
-            'totalReturnVatAmount' => $totalReturnVatAmount,
-            'totalVoidAmount' => $totalVoidAmount,
-            'totalVoidVatAmount' => $totalVoidVatAmount,
-            'totalVoidItemAmount' => $totalVoidItemAmount,
-            'totalVoidTaxAmount' => $totalVoidTaxAmount,
-            'date' => $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y'),
-            'dateCreated' => Carbon::now()->format('M d Y h:i A'),
-            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            'dailySummaries' => $dailySummaries,
-        ];
     }
-
 
 }

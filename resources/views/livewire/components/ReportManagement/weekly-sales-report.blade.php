@@ -95,7 +95,7 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            @if ($isTransactionEmpty)
+            @if (!$hasTransactions)
                 <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
             @endif
             @if ($transaction_info)

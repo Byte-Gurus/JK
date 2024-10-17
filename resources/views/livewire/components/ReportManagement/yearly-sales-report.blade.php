@@ -19,41 +19,41 @@
         <div>
             <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">YEARLY SALES REPORT</p>
         </div>
-        @if ($transaction_info)
-            <div class="grid grid-flow-col grid-cols-2 ">
-                <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
-                    <div class="flex flex-col ">
-                        <div class="flex flex-row gap-2 text-nowrap ">
-                            <p class="text-[1em] font-black uppercase">Specified Year:</p>
-                            <p>
-                                {{ $transaction_info['date'] }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                    <div class="grid grid-flow-row border border-black">
-                        <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Gross Sales</p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text[1em] text-right">
-                                {{ number_format($transaction_info['totalGross'], 2) }}</p>
-                        </div>
-                        <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Tax Amount</p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text[1em] text-right">
-                                {{ number_format($transaction_info['totalTax'], 2) }}</p>
-                        </div>
-                        <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Net Sales </p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text[1em] text-right">
-                                {{ number_format($transaction_info['totalNet'], 2) }}</p>
-                        </div>
+        @if ($transaction_info && $hasTransaction)
+        <div class="grid grid-flow-col grid-cols-2 ">
+            <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
+                <div class="flex flex-col ">
+                    <div class="flex flex-row gap-2 text-nowrap ">
+                        <p class="text-[1em] font-black uppercase">Specified Year:</p>
+                        <p>
+                            {{ $transaction_info['date'] }}
+                        </p>
                     </div>
                 </div>
             </div>
+            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                <div class="grid grid-flow-row border border-black">
+                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
+                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Gross Sales</p>
+                        <p class="col-span-1 ">|</p>
+                        <p class=" col-span-3 text[1em] text-right">
+                            {{ number_format($transaction_info['totalGross'], 2) }}</p>
+                    </div>
+                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
+                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Tax Amount</p>
+                        <p class="col-span-1 ">|</p>
+                        <p class=" col-span-3 text[1em] text-right">
+                            {{ number_format($transaction_info['totalTax'], 2) }}</p>
+                    </div>
+                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
+                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Net Sales </p>
+                        <p class="col-span-1 ">|</p>
+                        <p class=" col-span-3 text[1em] text-right">
+                            {{ number_format($transaction_info['totalNet'], 2) }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         @endif
         <div>
             <div class="w-full my-4 border-b border-black"> </div>
@@ -87,82 +87,84 @@
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
+            @if (!$hasTransaction)
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
             @endif
-            @if ($transaction_info)
-                @foreach ($transaction_info['monthlySummaries'] as $month => $summary)
-                    <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-left font-bold">{{ $summary['monthName'] }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-right font-bold">
-                                    {{ number_format($summary['totalGross'], 2) }}</p>
-                            </div>
-                        </li>
+            @if ($transaction_info && $hasTransaction)
+            @foreach ($transaction_info['yearlySummaries'] as $year => $summary)
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-bold">{{ $year }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-right font-bold">
+                            {{ number_format($summary['totalGross'], 2) }}</p>
+                    </div>
+                </li>
 
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-right font-bold">
-                                    {{ number_format($summary['totalTax'], 2) }}</p>
-                            </div>
-                        </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-right font-bold">
+                            {{ number_format($summary['totalTax'], 2) }}</p>
+                    </div>
+                </li>
 
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-right font-bold">
-                                    {{ number_format($summary['totalNet'], 2) }}
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                @endforeach
-                <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 border-black border-y ">
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-bold">Total</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-right font-bold">
-                                {{ number_format($transaction_info['totalGross'], 2) }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-right font-bold">
-                                {{ number_format($transaction_info['totalTax'], 2) }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-right font-bold">
-                                {{ number_format($transaction_info['totalNet'], 2) }}</p>
-                        </div>
-                    </li>
-                </ul>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-right font-bold">
+                            {{ number_format($summary['totalNet'], 2) }}
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            @endforeach
+            @if ($hasTransaction)
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 border-black border-y ">
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-bold">Total</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-right font-bold">
+                            {{ number_format($transaction_info['totalGross'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-right font-bold">
+                            {{ number_format($transaction_info['totalTax'], 2) }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-right font-bold">
+                            {{ number_format($transaction_info['totalNet'], 2) }}</p>
+                    </div>
+                </li>
+            </ul>
+            @endif
             @endif
         </div>
-        @if ($transaction_info)
-            <div class="px-4 py-4">
-                <div class="flex flex-row gap-2 text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                    <p>
-                        {{ $transaction_info['dateCreated'] }}
-                    </p>
-                </div>
-                <div class="flex flex-row gap-2 py-4 text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                    <p>
-                        {{ $transaction_info['createdBy'] }}
-                    </p>
-                </div>
+        @if ($transaction_info && $hasTransaction)
+        <div class="px-4 py-4">
+            <div class="flex flex-row gap-2 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                <p>
+                    {{ $transaction_info['dateCreated'] }}
+                </p>
             </div>
+            <div class="flex flex-row gap-2 py-4 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                <p>
+                    {{ $transaction_info['createdBy'] }}
+                </p>
+            </div>
+        </div>
         @endif
     </div>
 </div>

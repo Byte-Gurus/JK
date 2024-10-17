@@ -11,7 +11,7 @@ use Livewire\Component;
 class WeeklySalesReport extends Component
 {
     public $showWeeklySalesReport = false;
-    public $isTransactionEmpty = false;
+    public $hasTransactions = false;
 
     public $transactions = [], $transaction_info = [];
 
@@ -44,21 +44,24 @@ class WeeklySalesReport extends Component
         $totalVoidItemAmount = 0;
         $totalVoidTaxAmount = 0;
 
+        // Flag to check if there are any transactions in the month
+
+
         // Loop through each week in the month
-        for ($startOfWeek = $startOfMonth->copy(); $startOfWeek->lessThanOrEqualTo($endOfMonth); $startOfWeek->addWeek()) {
-            $endOfWeek = $startOfWeek->copy()->endOfWeek();
+        $currentDate = $startOfMonth->copy();
+        while ($currentDate->lessThanOrEqualTo($endOfMonth)) {
+            $startOfWeek = $currentDate->copy()->startOfWeek();
+            $endOfWeek = $currentDate->copy()->endOfWeek();
 
             // Ensure the end of the week doesn't go beyond the end of the month
+            if ($startOfWeek->lessThan($startOfMonth)) {
+                $startOfWeek = $startOfMonth;
+            }
             if ($endOfWeek->greaterThan($endOfMonth)) {
                 $endOfWeek = $endOfMonth;
             }
 
-            // Fetch transactions for the current week
-            $weeklyTransactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-
-            if ($weeklyTransactions->isEmpty()) {
-                continue; // Skip empty weeks
-            }
+            $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
             // Initialize weekly summary
             $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')] = [
@@ -73,8 +76,13 @@ class WeeklySalesReport extends Component
                 'totalVoidTaxAmount' => 0,
             ];
 
-            // Iterate through weekly transactions to sum values
-            foreach ($weeklyTransactions as $transaction) {
+            // Check if there are any transactions in the current week
+            if ($this->transactions->isNotEmpty()) {
+                $this->hasTransactions = true;
+            }
+
+            // Process transactions for the current week
+            foreach ($this->transactions as $transaction) {
                 switch ($transaction->transaction_type) {
                     case 'Sales':
                         $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalGross'] += $transaction->transactionJoin->total_amount;
@@ -95,26 +103,36 @@ class WeeklySalesReport extends Component
                 }
             }
 
-            // Calculate weekly net values and accumulate totals
-            $weeklySummary = $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')];
-            $weeklyGross = $weeklySummary['totalGross'] - ($weeklySummary['totalReturnAmount'] + $weeklySummary['totalVoidAmount']);
-            $weeklyTax = $weeklySummary['totalTax'] - ($weeklySummary['totalReturnVatAmount'] + $weeklySummary['totalVoidVatAmount']);
-            $weeklyNet = $weeklyGross - $weeklyTax;
+            // Calculate weekly net values and accumulate totals if there were transactions
+            if ($this->hasTransactions) {
+                $weeklySummary = $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')];
+                $weeklyGross = $weeklySummary['totalGross'] - ($weeklySummary['totalReturnAmount'] + $weeklySummary['totalVoidAmount']);
+                $weeklyTax = $weeklySummary['totalTax'] - ($weeklySummary['totalReturnVatAmount'] + $weeklySummary['totalVoidVatAmount']);
+                $weeklyNet = $weeklyGross - $weeklyTax;
 
-            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalGross'] = $weeklyGross;
-            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalTax'] = $weeklyTax;
-            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalNet'] = $weeklyNet;
+                $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalGross'] = $weeklyGross;
+                $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalTax'] = $weeklyTax;
+                $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalNet'] = $weeklyNet;
 
-            // Accumulate monthly totals
-            $totalGross += $weeklyGross;
-            $totalTax += $weeklyTax;
-            $totalNet += $weeklyNet;
-            $totalReturnAmount += $weeklySummary['totalReturnAmount'];
-            $totalReturnVatAmount += $weeklySummary['totalReturnVatAmount'];
-            $totalVoidAmount += $weeklySummary['totalVoidAmount'] + $weeklySummary['totalVoidItemAmount'];
-            $totalVoidVatAmount += $weeklySummary['totalVoidVatAmount'];
-            $totalVoidItemAmount += $weeklySummary['totalVoidItemAmount'];
-            $totalVoidTaxAmount += $weeklySummary['totalVoidTaxAmount'];
+                // Accumulate monthly totals
+                $totalGross += $weeklyGross;
+                $totalTax += $weeklyTax;
+                $totalNet += $weeklyNet;
+                $totalReturnAmount += $weeklySummary['totalReturnAmount'];
+                $totalReturnVatAmount += $weeklySummary['totalReturnVatAmount'];
+                $totalVoidAmount += $weeklySummary['totalVoidAmount'] + $weeklySummary['totalVoidItemAmount'];
+                $totalVoidVatAmount += $weeklySummary['totalVoidVatAmount'];
+                $totalVoidItemAmount += $weeklySummary['totalVoidItemAmount'];
+                $totalVoidTaxAmount += $weeklySummary['totalVoidTaxAmount'];
+            }
+
+            // Move to the next week
+            $currentDate->addWeek();
+        }
+
+        // If there were no transactions for the entire month, return null or a specific message
+        if (!$this->hasTransactions) {
+            return null;
         }
 
         // Prepare report information
@@ -134,6 +152,8 @@ class WeeklySalesReport extends Component
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
     }
+
+
 
 
 }

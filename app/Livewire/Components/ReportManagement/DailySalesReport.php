@@ -2,25 +2,22 @@
 
 namespace App\Livewire\Components\ReportManagement;
 
-
 use App\Models\TransactionMovement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Response;
 use Livewire\Component;
 
 class DailySalesReport extends Component
 {
-
     public $showDailySalesReport = false;
-    public $isTransactionEmpty = false;
+    public $hasTransactions = false;
 
     public $transactions = [], $transaction_info = [];
+
     public function render()
     {
-
         return view('livewire.components.ReportManagement.daily-sales-report', [
             'transactions' => $this->transactions
         ]);
@@ -32,8 +29,6 @@ class DailySalesReport extends Component
 
     public function generateReport($date)
     {
-        // $this->ss = true;
-
         $date = Carbon::parse($date);
         // Define the start and end of the day
         $startOfDay = $date->copy()->startOfDay();
@@ -42,10 +37,8 @@ class DailySalesReport extends Component
         // Retrieve transactions within the date range
         $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfDay, $endOfDay])->get();
 
-        if ($this->transactions->isEmpty()) {
-            $this->isTransactionEmpty = true;
-        }
-        // $returns = Returns::where('created_at', $date);
+        // Check if transactions are empty and set the hasTransactions flag
+        $this->hasTransactions = !$this->transactions->isEmpty();
 
         $totalGross = 0;
         $totalTax = 0;
@@ -56,68 +49,38 @@ class DailySalesReport extends Component
         $totalVoidAmount = 0;
         $totalVoidVatAmount = 0;
 
-        $totalVoidItemAmount = 0;
-        $totalVoidTaxAmount = 0;
-
-
         foreach ($this->transactions as $transaction) {
+            // Initialize properties
             $transaction->totalVoidItemAmount = 0;
             $transaction->vatable_amount = 0;
             $transaction->vat_exempt_amount = 0;
             $transaction->VoidTaxAmount = 0;
             $transaction->totalVoidTaxAmount = 0;
 
-
             switch ($transaction->transaction_type) {
                 case 'Sales':
                     $totalGross += $transaction->transactionJoin->total_amount;
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
-
-                    // foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-
-                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    // }
                     break;
                 case 'Return':
                     $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
-
-                    // foreach ($transaction->returnsJoin->transactionJoin->transactionDetailsJoin as $detail) {
-
-
-                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    // }
                     break;
                 case 'Credit':
                     $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
-                    // foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
-
-
-                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    // }
                     break;
                 case 'Void':
                     $totalVoidAmount += $transaction->voidTransactionJoin->void_total_amount;
                     $totalVoidVatAmount += $transaction->voidTransactionJoin->void_vat_amount;
-
-                    // foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
-
-                    //     $transaction->VoidTaxAmount = $this->calculateVoidAmounts($detail, $transaction);
-                    // }
                     break;
             }
-
-
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
         $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
 
-
         $this->transaction_info = [
-
             'totalGross' => $totalGross,
             'totalTax' => $totalTax - $totalReturnVatAmount - $totalVoidVatAmount,
             'date' => $date->format('M d Y '),
@@ -125,21 +88,11 @@ class DailySalesReport extends Component
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
-
-        // $data = [
-        //     'title' => 'DailySalesReport',
-        //     'date'=> Carbon::now()->format('M d Y h:i A')
-        // ];
-
-        // $pdf = Pdf::loadView('livewire.components.ReportManagement.daily-sales-report', $data)->output();
-
-        // return response()->streamDownload(function () use($pdf) {
-        //     echo  $pdf->download();
-        // }, 'report.pdf');
     }
+
     public function download()
     {
-        dd('sa');
+        // Sample download method
         $data = [
             'title' => 'Sample PDF',
             'date' => date('m/d/Y')
@@ -152,26 +105,9 @@ class DailySalesReport extends Component
             'Content-Disposition' => 'attachment; filename="sample.pdf"',
         ]);
     }
-    // function calculateVoidAmounts($detail, &$transaction)
-    // {
-    //     if ($detail->status == 'Void') {
 
-    //         $transaction->totalVoidItemAmount += $detail->item_subtotal;
-    //         if ($detail->vat_type === 'Vat') {
-    //             $vatable_subtotal = $detail->item_subtotal;
-    //             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-    //             $transaction->vatable_amount += $vatable_amount;
-    //         } elseif ($detail->vat_type === 'Vat Exempt') {
-    //             $vat_exempt_subtotal = $detail->item_subtotal;
-    //             $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
-    //             $transaction->vat_exempte_amount += $vat_exempt_amount;
-    //         }
-
-    //         return $transaction->vatable_amount + $transaction->vat_exempt_amount;
-
-
-    //     }
+    // Uncomment and implement this method if needed
+    // function calculateVoidAmounts($detail, &$transaction) {
+    //     ...
     // }
-
-
 }

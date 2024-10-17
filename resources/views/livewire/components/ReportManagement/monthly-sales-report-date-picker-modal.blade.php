@@ -31,7 +31,12 @@
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <select name="year" class="w-full p-4 rounded-md hover:bg-gray-300" id="year"
+                            wire:model.live="date">
+                            <option value="">Select a year</option>
+                            @for ($year = 2000; $year <= 2050; $year++) <option value="{{ $year }}">{{ $year }}</option>
+                                @endfor
+                        </select>
 
 
                         @error('date')

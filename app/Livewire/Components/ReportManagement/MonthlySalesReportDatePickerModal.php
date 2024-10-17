@@ -33,7 +33,7 @@ class MonthlySalesReportDatePickerModal extends Component
     public function validateForm()
     {
         $rules = [
-            'date' => 'required|date|date_format:Y-m|before_or_equal:today',
+            'date' => 'required|integer|digits:4|before_or_equal:' . date('Y'),
         ];
 
         return $this->validate($rules);
