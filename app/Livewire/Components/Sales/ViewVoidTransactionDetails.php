@@ -11,7 +11,7 @@ class ViewVoidTransactionDetails extends Component
 
     public $reasonFilter = 0;
 
-    public $void_transaction_id, $transaction_number, $transaction_date, $void_date, $orignal_amount, $void_total_amount, $current_amount, $void_number;
+    public $void_transaction_id, $transaction_number, $transaction_date, $void_date, $orignal_amount, $void_total_amount, $current_amount, $void_number, $voidedBy, $approvedBy;
     public function render()
     {
 
@@ -47,7 +47,9 @@ class ViewVoidTransactionDetails extends Component
             'orignal_amount' => number_format($void_info->original_amount, 2),
             'void_total_amount' => number_format($void_info->void_total_amount, 2),
             'current_amount' => number_format($void_info->transactionJoin->total_amount, 2),
-            'void_number' => $void_info->void_number
+            'void_number' => $void_info->void_number,
+            'voidedBy' => $void_info->voidedBy,
+            'approvedBy' => $void_info->approvedBy,
         ]);
     }
 
