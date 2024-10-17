@@ -9,11 +9,11 @@ use Livewire\Component;
 
 class WeeklySalesChart extends Component
 {
-    public $week, $totalAmount, $transactionCount;
-    public $weeklyTotal = [];
+    public $month, $totalAmount, $transactionCount;
+    public $monthlyTotal = [];
     public function render()
     {
-        if (!$this->week) {
+        if (!$this->month) {
             $currentWeek = Carbon::now()->format('o-\WW');
             $this->updatedWeek($currentWeek);
         }
@@ -23,38 +23,52 @@ class WeeklySalesChart extends Component
         'get-picker' => 'getPicker',
 
     ];
-    public function updatedWeek($currentWeek)
-    {
+    public function updatedWeeksInMonth($currentMonth)
+{
+    if (!$this->month) {
+        $currentMonth = Carbon::now()->format('Y-m'); // Get current month in 'YYYY-MM' format
+    }
 
-        if (!$this->week) {
-            $currentWeek = Carbon::now()->format('o-\WW');
+    $this->monthlyTotal = [];
+
+    // Get the start and end of the month
+    $startOfMonth = Carbon::parse($currentMonth . '-01')->startOfMonth();
+    $endOfMonth = Carbon::parse($currentMonth . '-01')->endOfMonth();
+
+    // Initialize totals
+    $totalGross = 0;
+    $totalTax = 0;
+    $totalNet = 0;
+    $totalReturnAmount = 0;
+    $totalReturnVatAmount = 0;
+    $totalVoidAmount = 0;
+    $totalVoidVatAmount = 0;
+    $totalVoidItemAmount = 0;
+    $totalVoidTaxAmount = 0;
+
+    // Iterate through the weeks of the month
+    $currentWeek = $startOfMonth->copy();
+    while ($currentWeek->lessThanOrEqualTo($endOfMonth)) {
+        $startOfWeek = $currentWeek->copy()->startOfWeek();
+        $endOfWeek = $currentWeek->copy()->endOfWeek();
+
+        // Ensure the week stays within the bounds of the month
+        if ($startOfWeek->lessThan($startOfMonth)) {
+            $startOfWeek = $startOfMonth;
+        }
+        if ($endOfWeek->greaterThan($endOfMonth)) {
+            $endOfWeek = $endOfMonth;
         }
 
-        $this->weeklyTotal = [];
-
-        $startOfWeek = Carbon::parse($currentWeek)->startOfWeek();
-        $endOfWeek = Carbon::parse($currentWeek)->endOfWeek();
-
         $transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-        $this->transactionCount = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
-        // Initialize totals and daily summaries
-        $dailySummaries = [];
-        $totalGross = 0;
-        $totalTax = 0;
-        $totalNet = 0;
-        $totalReturnAmount = 0;
-        $totalReturnVatAmount = 0;
-        $totalVoidAmount = 0;
-        $totalVoidVatAmount = 0;
-        $totalVoidItemAmount = 0;
-        $totalVoidTaxAmount = 0;
+        $this->transactionCount += $transactions->count();
 
-        // Iterate through transactions to group and sum by day
+        $weeklySummaries = [];
         foreach ($transactions as $transaction) {
             $date = $transaction->created_at->format('M d Y');
 
-            if (!isset($dailySummaries[$date])) {
-                $dailySummaries[$date] = [
+            if (!isset($weeklySummaries[$date])) {
+                $weeklySummaries[$date] = [
                     'totalGross' => 0,
                     'totalTax' => 0,
                     'totalNet' => 0,
@@ -67,64 +81,61 @@ class WeeklySalesChart extends Component
                 ];
             }
 
-            // Summing daily transactions
+            // Summing weekly transactions
             switch ($transaction->transaction_type) {
                 case 'Sales':
-                    $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
-
-
+                    $weeklySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
+                    $weeklySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
                     break;
                 case 'Return':
-                    $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
-                    $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
-
+                    $weeklySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                    $weeklySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
                     break;
                 case 'Credit':
-                    $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
+                    $weeklySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                    $weeklySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
                     break;
                 case 'Void':
-                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
-                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
-
+                    $weeklySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
+                    $weeklySummaries[$date]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
                     break;
             }
-
-            // $dailySummaries[$date]['totalVoidItemAmount'] += $transaction->totalVoidItemAmount;
-            // $dailySummaries[$date]['totalVoidTaxAmount'] += $transaction->vatable_amount + $transaction->vat_exempt_amount;
         }
-        foreach ($dailySummaries as $date => $summary) {
-            $dailyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
-            $dailyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
-            $dailyNet = $dailyGross - $dailyTax;
 
-            $dailySummaries[$date]['totalGross'] = $dailyGross;
-            $dailySummaries[$date]['totalTax'] = $dailyTax;
-            $dailySummaries[$date]['totalNet'] = $dailyNet;
+        foreach ($weeklySummaries as $date => $summary) {
+            $weeklyGross = $summary['totalGross'] - ($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
+            $weeklyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
+            $weeklyNet = $weeklyGross - $weeklyTax;
 
-            // Accumulate weekly totals
-            $totalGross += $dailyGross;
-            $totalTax += $dailyTax;
-            $totalNet += $dailyNet;
+            $summary['totalGross'] = $weeklyGross;
+            $summary['totalTax'] = $weeklyTax;
+            $summary['totalNet'] = $weeklyNet;
+
+            // Accumulate monthly totals
+            $totalGross += $weeklyGross;
+            $totalTax += $weeklyTax;
+            $totalNet += $weeklyNet;
             $totalReturnAmount += $summary['totalReturnAmount'];
             $totalReturnVatAmount += $summary['totalReturnVatAmount'];
-            $totalVoidAmount += $summary['totalVoidAmount'] + $summary['totalVoidItemAmount'];
+            $totalVoidAmount += $summary['totalVoidAmount'];
             $totalVoidVatAmount += $summary['totalVoidVatAmount'];
             $totalVoidItemAmount += $summary['totalVoidItemAmount'];
             $totalVoidTaxAmount += $summary['totalVoidTaxAmount'];
 
-            $this->weeklyTotal[] = [
-                'date' => $date,
-                'totalAmount' => $dailyNet
+            $this->monthlyTotal[] = [
+                'week_start' => $startOfWeek->format('M d Y'),
+                'week_end' => $endOfWeek->format('M d Y'),
+                'totalAmount' => $weeklyNet
             ];
-
         }
 
-
-        $this->totalAmount = $totalNet;
-
-        $this->dispatch('weeklyTotalUpdated', $this->weeklyTotal);
+        // Move to the next week
+        $currentWeek->addWeek();
     }
+
+    $this->totalAmount = $totalNet;
+
+    $this->dispatch('monthlyTotalUpdated', $this->monthlyTotal);
+}
+
 }
