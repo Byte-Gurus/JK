@@ -41,17 +41,17 @@
 
                     </div>
                     <br>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Total Return Amount</p>
-                        <p class="text-[0.6em] font-bold uppercase"> {{ $item_return_amount ?? 'N/A' }}</p>
+                    <div class="flex flex-row gap-2 text-nowrap">
+                        <p class="text-[0.6em] font-bold uppercase">Total Return Amount:</p>
+                        <p class="text-[0.6em] font-bold uppercase w-[116px]"> {{ $item_return_amount ?? 'N/A' }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.2em] font-thin uppercase">Total Exchange Amount</p>
-                        <p class="text-[0.2em] font-thin uppercase"> {{ $exchange_amount ?? 'N/A' }}</p>
+                    <div class="flex flex-row gap-2 text-nowrap">
+                        <p class="text-[0.2em] font-thin uppercase">Total Exchange Amount:</p>
+                        <p class="text-[0.2em] font-thin uppercase w-[116px]"> {{ $exchange_amount ?? 'N/A' }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.2em] font-thin uppercase">Total Refund Amount</p>
-                        <p class="text-[0.2em] font-thin uppercase"> {{ $refund_amount ?? 'N/A' }}</p>
+                    <div class="flex flex-row gap-2 text-nowrap">
+                        <p class="text-[0.2em] font-thin uppercase">Total Refund Amount:</p>
+                        <p class="text-[0.2em] font-thin uppercase w-[116px]"> {{ $refund_amount ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                             <li class="col-span-4 py-[3px]">
                                 <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
                                     <div class=" text-wrap">
-                                        <p class="text-[0.6em] uppercase text-center font-medium">
+                                        <p class="text-[0.6em] uppercase text-justify font-medium">
                                             {{ $return_detail->transactionDetailsJoin->itemJoin->item_name . ' ' . $return_detail->transactionDetailsJoin->itemJoin->description }}
                                         </p>
                                     </div>
