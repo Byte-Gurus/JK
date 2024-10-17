@@ -38,6 +38,14 @@
                     <p class="text-[1em] font-thin text-left w-full">Current Amount (₱)</p>
                     <p class="text-[1.2em] font-black">{{ $current_amount }}</p>
                 </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Cashier:</p>
+                    {{-- <p class="text-[1.2em] font-black">{{ $current_amount }}</p> --}}
+                </div>
+                <div class="flex flex-col gap-1 p-2 pr-4 text-black">
+                    <p class="text-[1em] font-thin text-left w-full">Approved by:</p>
+                    {{-- <p class="text-[1.2em] font-black">{{ $current_amount }}</p> --}}
+                </div>
             </div>
 
             <div class="flex flex-row gap-4">
@@ -93,8 +101,6 @@
 
                         {{-- //* transaction no --}}
                         <th scope="col" class="px-4 py-3 text-right">Item Voided Amount (₱)</th>
-
-
 
                     </tr>
                 </thead>
