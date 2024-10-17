@@ -37,7 +37,7 @@
 
                     <div class="flex flex-row text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $user ?? 'N/A' }}</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $returnedBy ?? 'N/A' }}</p>
 
                     </div>
                     <br>

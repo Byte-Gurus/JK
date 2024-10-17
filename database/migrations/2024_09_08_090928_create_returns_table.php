@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,9 +19,10 @@ return new class extends Migration
             $table->double('exchange_amount');
             $table->double('return_vat_amount');
             $table->boolean('hasTransaction');
+            $table->string('returnedBy');
+            $table->string('approvedBy');
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('transaction_id')->constrained('transactions');
         });
     }
