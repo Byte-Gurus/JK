@@ -26,20 +26,14 @@ class WeeklySalesReport extends Component
         'generate-report' => 'generateReport'
     ];
 
-    public function generateReport($week)
+    public function generateReport($month)
     {
-        // Parse the week into start and end dates
-        $startOfWeek = Carbon::parse($week)->startOfWeek();
-        $endOfWeek = Carbon::parse($week)->endOfWeek();
+        // Parse the month into start and end dates
+        $startOfMonth = Carbon::parse($month . '-01')->startOfMonth();
+        $endOfMonth = Carbon::parse($month . '-01')->endOfMonth();
 
-        // Fetch transactions within the week range
-        $this->transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-
-        if ($this->transactions->isEmpty()) {
-            $this->isTransactionEmpty = true;
-        }
-        // Initialize totals and daily summaries
-        $dailySummaries = [];
+        // Initialize weekly summaries
+        $weeklySummaries = [];
         $totalGross = 0;
         $totalTax = 0;
         $totalNet = 0;
@@ -50,77 +44,82 @@ class WeeklySalesReport extends Component
         $totalVoidItemAmount = 0;
         $totalVoidTaxAmount = 0;
 
-        // Iterate through transactions to group and sum by day
-        foreach ($this->transactions as $transaction) {
-            $date = $transaction->created_at->format('Y-m-d');
+        // Loop through each week in the month
+        for ($startOfWeek = $startOfMonth->copy(); $startOfWeek->lessThanOrEqualTo($endOfMonth); $startOfWeek->addWeek()) {
+            $endOfWeek = $startOfWeek->copy()->endOfWeek();
 
-            if (!isset($dailySummaries[$date])) {
-                $dailySummaries[$date] = [
-                    'totalGross' => 0,
-                    'totalTax' => 0,
-                    'totalNet' => 0,
-                    'totalReturnAmount' => 0,
-                    'totalReturnVatAmount' => 0,
-                    'totalVoidAmount' => 0,
-                    'totalVoidVatAmount' => 0,
-                    'totalVoidItemAmount' => 0,
-                    'totalVoidTaxAmount' => 0,
-                ];
+            // Ensure the end of the week doesn't go beyond the end of the month
+            if ($endOfWeek->greaterThan($endOfMonth)) {
+                $endOfWeek = $endOfMonth;
             }
 
-            // Summing daily transactions
-            switch ($transaction->transaction_type) {
-                case 'Sales':
-                    $dailySummaries[$date]['totalGross'] += $transaction->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+            // Fetch transactions for the current week
+            $weeklyTransactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
 
-
-                    break;
-                case 'Return':
-                    $dailySummaries[$date]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
-                    $dailySummaries[$date]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
-
-                    break;
-                case 'Credit':
-                    $dailySummaries[$date]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
-                    $dailySummaries[$date]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
-                    break;
-                case 'Void':
-                    $dailySummaries[$date]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
-                    $dailySummaries[$date]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
-
-                    break;
+            if ($weeklyTransactions->isEmpty()) {
+                continue; // Skip empty weeks
             }
 
-            // $dailySummaries[$date]['totalVoidItemAmount'] += $transaction->totalVoidItemAmount;
-            // $dailySummaries[$date]['totalVoidTaxAmount'] += $transaction->vatable_amount + $transaction->vat_exempt_amount;
-        }
+            // Initialize weekly summary
+            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')] = [
+                'totalGross' => 0,
+                'totalTax' => 0,
+                'totalNet' => 0,
+                'totalReturnAmount' => 0,
+                'totalReturnVatAmount' => 0,
+                'totalVoidAmount' => 0,
+                'totalVoidVatAmount' => 0,
+                'totalVoidItemAmount' => 0,
+                'totalVoidTaxAmount' => 0,
+            ];
 
-        // Calculate daily net values and accumulate weekly totals
-        foreach ($dailySummaries as $date => $summary) {
-            $dailyGross = $summary['totalGross'] -($summary['totalReturnAmount'] + $summary['totalVoidAmount']);
-            $dailyTax = $summary['totalTax'] - ($summary['totalReturnVatAmount'] + $summary['totalVoidVatAmount']);
-            $dailyNet = $dailyGross - $dailyTax;
+            // Iterate through weekly transactions to sum values
+            foreach ($weeklyTransactions as $transaction) {
+                switch ($transaction->transaction_type) {
+                    case 'Sales':
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalGross'] += $transaction->transactionJoin->total_amount;
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalTax'] += $transaction->transactionJoin->total_vat_amount;
+                        break;
+                    case 'Return':
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalReturnAmount'] += $transaction->returnsJoin->return_total_amount;
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalReturnVatAmount'] += $transaction->returnsJoin->return_vat_amount;
+                        break;
+                    case 'Credit':
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalGross'] += $transaction->creditJoin->transactionJoin->total_amount;
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalTax'] += $transaction->creditJoin->transactionJoin->total_vat_amount;
+                        break;
+                    case 'Void':
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalVoidAmount'] += $transaction->voidTransactionJoin->void_total_amount;
+                        $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalVoidVatAmount'] += $transaction->voidTransactionJoin->void_vat_amount;
+                        break;
+                }
+            }
 
-            $dailySummaries[$date]['totalGross'] = $dailyGross;
-            $dailySummaries[$date]['totalTax'] = $dailyTax;
-            $dailySummaries[$date]['totalNet'] = $dailyNet;
+            // Calculate weekly net values and accumulate totals
+            $weeklySummary = $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')];
+            $weeklyGross = $weeklySummary['totalGross'] - ($weeklySummary['totalReturnAmount'] + $weeklySummary['totalVoidAmount']);
+            $weeklyTax = $weeklySummary['totalTax'] - ($weeklySummary['totalReturnVatAmount'] + $weeklySummary['totalVoidVatAmount']);
+            $weeklyNet = $weeklyGross - $weeklyTax;
 
-            // Accumulate weekly totals
-            $totalGross += $dailyGross;
-            $totalTax += $dailyTax;
-            $totalNet += $dailyNet;
-            $totalReturnAmount += $summary['totalReturnAmount'];
-            $totalReturnVatAmount += $summary['totalReturnVatAmount'];
-            $totalVoidAmount += $summary['totalVoidAmount'] + $summary['totalVoidItemAmount'];
-            $totalVoidVatAmount += $summary['totalVoidVatAmount'];
-            $totalVoidItemAmount += $summary['totalVoidItemAmount'];
-            $totalVoidTaxAmount += $summary['totalVoidTaxAmount'];
+            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalGross'] = $weeklyGross;
+            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalTax'] = $weeklyTax;
+            $weeklySummaries[$startOfWeek->format('M d, Y') . ' to ' . $endOfWeek->format('M d, Y')]['totalNet'] = $weeklyNet;
+
+            // Accumulate monthly totals
+            $totalGross += $weeklyGross;
+            $totalTax += $weeklyTax;
+            $totalNet += $weeklyNet;
+            $totalReturnAmount += $weeklySummary['totalReturnAmount'];
+            $totalReturnVatAmount += $weeklySummary['totalReturnVatAmount'];
+            $totalVoidAmount += $weeklySummary['totalVoidAmount'] + $weeklySummary['totalVoidItemAmount'];
+            $totalVoidVatAmount += $weeklySummary['totalVoidVatAmount'];
+            $totalVoidItemAmount += $weeklySummary['totalVoidItemAmount'];
+            $totalVoidTaxAmount += $weeklySummary['totalVoidTaxAmount'];
         }
 
         // Prepare report information
         $this->transaction_info = [
+            'date' => $startOfMonth->format('M d, Y') . ' - ' . $endOfMonth->format('M d, Y'), // This can remain as is
             'totalGross' => $totalGross,
             'totalTax' => $totalTax,
             'totalNet' => $totalNet,
@@ -130,26 +129,11 @@ class WeeklySalesReport extends Component
             'totalVoidVatAmount' => $totalVoidVatAmount,
             'totalVoidItemAmount' => $totalVoidItemAmount,
             'totalVoidTaxAmount' => $totalVoidTaxAmount,
-            'dailySummaries' => $dailySummaries,
-            'date' => $startOfWeek->format('M d, Y') . ' - ' . $endOfWeek->format('M d, Y'),
+            'weeklySummaries' => $weeklySummaries,
             'dateCreated' => Carbon::now()->format('M d, Y h:i A'),
             'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
         ];
     }
-    // function calculateVoidAmounts($detail, &$transaction)
-    // {
-    //     if ($detail->status == 'Void') {
-    //         $transaction->totalVoidItemAmount += $detail->item_subtotal;
-    //         if ($detail->vat_type === 'Vat') {
-    //             $vatable_subtotal = $detail->item_subtotal;
-    //             $vatable_amount = $vatable_subtotal - ($vatable_subtotal / (100 + $detail->item_vat_percent) * 100);
-    //             $transaction->vatable_amount += $vatable_amount;
-    //         } elseif ($detail->vat_type === 'Vat Exempt') {
-    //             $vat_exempt_subtotal = $detail->item_subtotal;
-    //             $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal / (100 + $detail->item_vat_percent) * 100);
-    //             $transaction->vat_exempt_amount += $vat_exempt_amount;
-    //         }
-    //         return $transaction->vatable_amount + $transaction->vat_exempt_amount;
-    //     }
-    // }
+
+
 }

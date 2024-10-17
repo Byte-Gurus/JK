@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="col-span-1 ">
-                    <input type="week" wire:model.live="week" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
+                    <input type="month" wire:model.live="month" class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
                 </div>
             </div>
             <canvas wire:ignore width="300" height="100" id="weekChart"></canvas>
@@ -40,7 +40,7 @@
     <script>
         const perWeek = document.getElementById('weekChart');
 
-        Livewire.on('weeklyTotalUpdated', (weeklyTotal) => {
+        Livewire.on('monthlyTotalUpdated', (monthlyTotal) => {
 
             dates = [];
             datas = [];
@@ -48,7 +48,7 @@
                 Chart.getChart("weekChart")?.destroy();
             }
 
-            weekly = $wire.weeklyTotal;
+            weekly = $wire.monthlyTotal;
             console.log('Weekly Total:', weekly);
 
 
