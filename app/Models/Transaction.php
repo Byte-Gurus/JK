@@ -16,6 +16,7 @@ class Transaction extends Model
         'total_amount',
         'total_vat_amount',
         'total_discount_amount',
+        'excess_amount',
         'customer_id',
         'user_id'
     ];

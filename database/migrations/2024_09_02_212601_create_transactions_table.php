@@ -19,6 +19,8 @@ return new class extends Migration
             $table->double('total_amount');
             $table->double('total_vat_amount');
             $table->double('total_discount_amount');
+            $table->double('excess_amount')->nullable();
+
             $table->timestamps();
 
 

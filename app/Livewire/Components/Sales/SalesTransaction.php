@@ -664,6 +664,7 @@ class SalesTransaction extends Component
                     'total_amount' => $exchange_and_excess_amount,
                     'total_vat_amount' => $this->tax_details['total_vat'],
                     'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
+                    'excess_amount' => $this->excess_amount,
                     'discount_id' => $this->customerDetails['discount_id'] ?? null,
                     'customer_id' => $customer_id,
                     'user_id' => Auth::id(),

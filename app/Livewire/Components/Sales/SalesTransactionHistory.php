@@ -94,7 +94,13 @@ class SalesTransactionHistory extends Component
 
                 $this->discount_percent = $transaction->discountJoin->percentage ?? 0;
                 $this->tendered_amount = $transaction->paymentJoin->tendered_amount ?? 0;
-                $this->change = $this->tendered_amount - $this->grandTotal;
+
+                if ($transaction->exchange_amount > 0) {
+                    $this->change = $this->tendered_amount - $this->exchange_amount;
+
+                } else {
+                    $this->change = $this->tendered_amount - $this->grandTotal;
+                }
                 break;
             case 'Return':
                 $this->transactionDetails = ReturnDetails::where('return_id', $transaction_id)
