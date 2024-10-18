@@ -50,7 +50,7 @@
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $receiptDetails['transaction_info']['user'] ?? null }}</p>
                     </div>
-                    @if($receiptDetails['transaction_type'] == 3)
+                    @if(isset($receiptDetails['transaction_type']) && $receiptDetails['transaction_type'] == 3)
                     <div class="flex flex-row gap-2 break-words text-wrap">
                         <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No</p>
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
@@ -153,7 +153,7 @@
                 <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-2 mx-2">
-                @if($receiptDetails['transaction_type'] == 3)
+                @if(isset($receiptDetails['transaction_type']) && $receiptDetails['transaction_type'] == 3)
 
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Exchange Amount</p>
