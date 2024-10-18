@@ -279,7 +279,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-flow-row px-2 py-2 overflow-hidden row-span-10">
+            <div class="grid grid-flow-row px-2 py-2 leading-none row-span-10">
                 @if ($transaction_type == 'Sales' || $transaction_type == 'Credit')
                 <div class="flex flex-row justify-between">
                     <div>
@@ -398,7 +398,7 @@
         </div>
         <div class=" w-full overflow-x-scroll overflow-y-scroll border border-[rgb(143,143,143)] scroll">
 
-            <table class="w-full text-sm text-left h-fit scroll ">
+            <table class="w-full overflow-x-scroll text-sm text-left h-fit scroll ">
 
                 {{-- //* table header --}}
                 <thead class="text-xs text-white uppercase cursor-default bg-[rgb(53,53,53)] sticky top-0">
