@@ -16,12 +16,12 @@
 </div>
 
 @assets
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 @endassets
 @script
-    <script>
-        const perMonth = document.getElementById('fastslowChart');
+<script>
+    const perMonth = document.getElementById('fastslowChart');
 
 
         Livewire.on('fastSlowUpdated', (fastmoving_info) => {
@@ -39,7 +39,8 @@
 
             for (let index = 0; index < fastSlow.length; index++) {
 
-                items[index] = fastSlow[index].item_name;
+                items[index] = fastSlow[index].item_name + ' ' + fastSlow[index].item_description;
+
                 datas[index] = fastSlow[index].totalStockInQuantity;
                 tsi[index] = fastSlow[index].tsi;
             }
@@ -68,5 +69,5 @@
                 }
             });
         });
-    </script>
+</script>
 @endscript
