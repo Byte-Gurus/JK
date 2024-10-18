@@ -860,7 +860,7 @@ class SalesTransaction extends Component
             CreditEvent::dispatch('refresh-credit');
 
             $this->alert('success', 'New Transaction saved successfully');
-
+            dump($this->return_info);
             $this->dispatch(
                 'print-sales-receipt',
                 array_merge($this->receiptData, [
