@@ -112,7 +112,7 @@
                                 <p
                                     @if ($purchase->deliveryJoin->status == 'Delivered') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
-                                    @elseif ($purchase->deliveryJoin->statusstatus == 'Cancelled')
+                                    @elseif ($purchase->deliveryJoin->status == 'Cancelled')
 
                                     class=" text-red-900 pointer-events-none font-medium  bg-red-100 border border-red-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
