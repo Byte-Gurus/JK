@@ -16,12 +16,12 @@
 </div>
 
 @assets
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 @endassets
 @script
-<script>
-    const perMonth = document.getElementById('fastslowChart');
+    <script>
+        const perMonth = document.getElementById('fastslowChart');
 
 
         Livewire.on('fastSlowUpdated', (fastmoving_info) => {
@@ -50,7 +50,14 @@
             new Chart(perMonth, {
                 type: 'bar',
                 data: {
-                    labels: items,
+                    labels: items.map(name => {
+                        let maxLength = 12;
+                        if (name.length > maxLength) {
+                            return name.substring(0, maxLength) + '...';
+                        } else {
+                            return name;
+                        }
+                    }),
                     datasets: [{
                         label: 'Item',
                         data: datas,
@@ -64,10 +71,19 @@
                             beginAtZero: true
                         }
                     },
-
-
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    let index = tooltipItems[0]
+                                    .dataIndex; // Get the index of the item being hovered
+                                    return items[index]; // Show the full item name in the tooltip title
+                                }
+                            }
+                        }
+                    }
                 }
             });
         });
-</script>
+    </script>
 @endscript
