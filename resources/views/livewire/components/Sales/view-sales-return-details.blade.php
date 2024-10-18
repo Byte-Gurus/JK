@@ -28,24 +28,24 @@
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Original Amount (₱)</p>
-                    <p class="text-[1.2em] font-black">{{ number_format($original_amount, 2) }}</p>
+                    <p class="text-[1.2em] font-black">{{ $original_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Refund Amount (₱)</p>
-                    <p class="text-[1.2em] font-black">{{ number_format($refund_amount, 2) }}</p>
+                    <p class="text-[1.2em] font-black">{{ $refund_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Exchange Amount (₱)</p>
-                    <p class="text-[1.2em] font-black">{{ number_format($exchange_amount, 2) }}</p>
+                    <p class="text-[1.2em] font-black">{{ $exchange_amount }}</p>
                 </div>
 
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Return Total Amount (₱)</p>
-                    <p class="text-[1.2em] font-black">{{ number_format($return_total_amount, 2) }}</p>
+                    <p class="text-[1.2em] font-black">{{ $return_total_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Current Amount (₱)</p>
-                    <p class="text-[1.2em] font-black">{{ number_format($current_amount, 2) }}</p>
+                    <p class="text-[1.2em] font-black">{{ $current_amount }}</p>
                 </div>
                 <div class="flex flex-col gap-1 p-2 pr-4 text-black">
                     <p class="text-[1em] font-thin text-left w-full">Cashier:</p>
