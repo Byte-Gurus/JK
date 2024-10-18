@@ -653,11 +653,17 @@ class SalesTransaction extends Component
                 $transactionType = 'Credit';
             }
 
+
+            if ( $this->changeTransactionType == 3) {
+                $exchange_and_excess_amount =  $this->exchange_amount + $this->excess_amount;
+            }
+
+
             $transaction = Transaction::create([
                 'transaction_number' => $this->transaction_info['transaction_number'],
                 'transaction_type' => $transactionType,
                 'subtotal' => $this->transaction_info['subtotal'],
-                'total_amount' => $this->transaction_info['grandTotal'],
+                'total_amount' =>  $exchange_and_excess_amount,
                 'total_vat_amount' => $this->tax_details['total_vat'],
                 'total_discount_amount' => $this->tax_details['PWD_Senior_discount_amount'],
                 'discount_id' => $this->customerDetails['discount_id'] ?? null,
