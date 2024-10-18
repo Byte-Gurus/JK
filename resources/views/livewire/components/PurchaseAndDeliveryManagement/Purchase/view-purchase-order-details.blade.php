@@ -64,6 +64,10 @@
                                     <p>{{ $purchaseDetail->itemsJoin->item_name }}</p>
                                 </th>
                                 <th scope="row"
+                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                <p>{{ $purchaseDetail->itemsJoin->item_description }}</p>
+                            </th>
+                                <th scope="row"
                                     class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     <p>{{ $purchaseDetail->purchase_quantity }}</p>
                                 </th>
