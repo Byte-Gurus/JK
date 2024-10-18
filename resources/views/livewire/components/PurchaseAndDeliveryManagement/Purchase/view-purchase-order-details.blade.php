@@ -1,5 +1,5 @@
 {{-- // --}}
-<div class="relative my-[3vh] rounded-lg" x-cloak >
+<div class="relative my-[3vh] rounded-lg" x-cloak>
     <div class="flex flex-row h-[71vh] gap-4 ">
         <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
 
@@ -42,6 +42,8 @@
 
                             {{-- //* item name --}}
                             <th scope="col" class="py-3 text-left">Item Name</th>
+                            {{-- //* item name --}}
+                            <th scope="col" class="py-3 text-left">Item Description</th>
 
                             {{-- //* purchase quantity --}}
                             <th scope="col" class="py-3 text-center text-nowrap">Purchase Quantity</th>
@@ -53,26 +55,24 @@
 
                     <tbody>
                         @foreach ($purchaseDetails as $purchaseDetail)
-                            <tr
-                                class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                    <p>{{ $purchaseDetail->itemsJoin->barcode }}</p>
-                                </th>
-                                <th scope="row"
-                                    class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                    <p>{{ $purchaseDetail->itemsJoin->item_name }}</p>
-                                </th>
-                                <th scope="row"
-                                class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                        <tr
+                            class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                <p>{{ $purchaseDetail->itemsJoin->barcode }}</p>
+                            </th>
+                            <th scope="row" class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                <p>{{ $purchaseDetail->itemsJoin->item_name }}</p>
+                            </th>
+                            <th scope="row" class="py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                 <p>{{ $purchaseDetail->itemsJoin->item_description }}</p>
                             </th>
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    <p>{{ $purchaseDetail->purchase_quantity }}</p>
-                                </th>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                <p>{{ $purchaseDetail->purchase_quantity }}</p>
+                            </th>
 
-                            </tr>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
