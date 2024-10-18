@@ -23,7 +23,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class SalesTransactionHistory extends Component
 {
     use WithPagination, WithoutUrlPagination, LivewireAlert;
-    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $return_original_amount, $return_amount, $payment_type, $salesID, $isAdmin, $tranasactionDetails_ID, $void_amount, $void_original_amount;
+    public $transaction_number, $subtotal, $discount_percent, $total_discount_amount, $grandTotal, $tendered_amount, $change, $transaction_type, $return_original_amount, $return_amount, $payment_type, $salesID, $isAdmin, $tranasactionDetails_ID, $void_amount, $void_original_amount, $excess_amount;
     public $transactionDetails = [];
     public $whatVoid;
     public $sortDirection = 'desc'; //var default sort direction is ascending
@@ -94,9 +94,10 @@ class SalesTransactionHistory extends Component
 
                 $this->discount_percent = $transaction->discountJoin->percentage ?? 0;
                 $this->tendered_amount = $transaction->paymentJoin->tendered_amount ?? 0;
+                $this->excess_amount = $transaction->excess_amount ?? 0;
 
-                if ($transaction->exchange_amount > 0) {
-                    $this->change = $this->tendered_amount - $this->exchange_amount;
+                if ($this->excess_amount > 0) {
+                    $this->change = $this->tendered_amount - $this->excess_amount;
 
                 } else {
                     $this->change = $this->tendered_amount - $this->grandTotal;
