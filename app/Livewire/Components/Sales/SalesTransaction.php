@@ -864,6 +864,8 @@ class SalesTransaction extends Component
             $this->dispatch(
                 'print-sales-receipt',
                 array_merge($this->receiptData, [
+                    'return_details' => $this->return_info ?? null,
+                    'transaction_type' => $this->changeTransactionType,
                     'payment' => $this->payment,
                     'selectedItems' => $this->selectedItems,
                     'customerDetails' => $this->customerDetails ?? null,

@@ -50,12 +50,13 @@
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $receiptDetails['transaction_info']['user'] ?? null }}</p>
                     </div>
-                    {{-- If Return --}}
+                    @if($receiptDetails['transaction_type'] == 3)
                     <div class="flex flex-row gap-2 break-words text-wrap">
                         <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No</p>
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
-                            {{-- {{ $receiptDetails['transaction_info']['user'] ?? null }}</p> --}}
+                            {{ $receiptDetails['return_details']['return_number'] ?? null }}</p>
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -85,44 +86,44 @@
 
 
                 @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
-                    @foreach ($receiptDetails['selectedItems'] as $item)
-                        <ul class="grid justify-between grid-flow-col grid-cols-4">
-                            <li class="col-span-1 py-[3px]">
-                                <div>
-                                    <p class="text-[0.6em] uppercase text-center font-medium">
-                                        {{ $item['quantity'] }}</p>
+                @foreach ($receiptDetails['selectedItems'] as $item)
+                <ul class="grid justify-between grid-flow-col grid-cols-4">
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.6em] uppercase text-center font-medium">
+                                {{ $item['quantity'] }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-4 py-[3px]">
+                        <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
+                            <div class=" text-wrap">
+                                <p class="text-[0.6em] flex uppercase text-justify font-bold">
+                                    {{ $item['item_name'] }} {{ $item['item_description'] }}
+                                </p>
+                            </div>
+                            <div class="flex flex-col w-full justify-center gap-[3px]">
+                                <div class="flex flex-row justify-end gap-[5px]">
+                                    <p class="text-[0.6em] uppercase text-justify italic font-bold">RP</p>
+                                    <p class="text-[0.6em] uppercase text-justify italic font-bold">
+                                        {{ number_format($item['selling_price'], 2) }}</p>
                                 </div>
-                            </li>
-                            <li class="col-span-4 py-[3px]">
-                                <div class="flex flex-col px-[3px] max-w-[90px] break-all leading-none">
-                                    <div class=" text-wrap">
-                                        <p class="text-[0.6em] flex uppercase text-justify font-bold">
-                                            {{ $item['item_name'] }} {{ $item['item_description'] }}
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col w-full justify-center gap-[3px]">
-                                        <div class="flex flex-row justify-end gap-[5px]">
-                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">RP</p>
-                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">
-                                                {{ number_format($item['selling_price'], 2) }}</p>
-                                        </div>
-                                        <div class="flex flex-row justify-end gap-[3px]">
-                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">WS</p>
-                                            <p class="text-[0.6em] uppercase text-justify italic font-bold">
-                                                {{ $item['discount'] }}</p>
-                                        </div>
-                                    </div>
+                                <div class="flex flex-row justify-end gap-[3px]">
+                                    <p class="text-[0.6em] uppercase text-justify italic font-bold">WS</p>
+                                    <p class="text-[0.6em] uppercase text-justify italic font-bold">
+                                        {{ $item['discount'] }}</p>
                                 </div>
-                            </li>
-                            <li class="col-span-1 py-[3px]">
-                                <div>
-                                    <p class="text-[0.6em] text-right uppercase font-bold">
-                                        {{ number_format($item['total_amount'], 2) }}
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-                    @endforeach
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[0.6em] text-right uppercase font-bold">
+                                {{ number_format($item['total_amount'], 2) }}
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                @endforeach
                 @endif
 
                 <span class="">------------------------</span>
@@ -152,12 +153,14 @@
                 <span class="">------------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-2 mx-2">
-                {{-- If Return --}}
+                @if($receiptDetails['transaction_type'] == 3)
+
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Exchange Amount</p>
                     <p class="text-[0.6em] font-bold uppercase">
-                        {{-- {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p> --}}
+                        {{ number_format($receiptDetails['return_details']['exchange_amount'] ?? null, 2) }}</p>
                 </div>
+                @endif
 
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Subtotal</p>
@@ -172,15 +175,7 @@
                     </p>
                 </div>
             </div>
-            <div class="mx-4 ">
-                <span class="">------------------------</span>
-            </div>
-            {{-- If Return --}}
-            <div class="flex flex-row justify-between">
-                <p class="text-[0.6em] font-bold uppercase">Excess Amount</p>
-                <p class="text-[0.6em] font-bold uppercase">
-                    {{-- {{ number_format($receiptDetails['transaction_info']['subtotal'] ?? null, 2) }}</p> --}}
-            </div>
+
             <div class="mx-4 ">
                 <span class="">------------------------</span>
             </div>
@@ -215,23 +210,23 @@
                     <p class="text-[0.6em] font-bold uppercase">Customer Name</p>
 
                     @if (isset($receiptDetails['customerDetails']['customer']))
-                        <p class="text-[0.6em] font-bold uppercase w-[216px]">
-                            {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
-                            {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
-                            {{ $receiptDetails['customerDetails']['customer']['lastname'] ?? null }}
-                        </p>
+                    <p class="text-[0.6em] font-bold uppercase w-[216px]">
+                        {{ $receiptDetails['customerDetails']['customer']['firstname'] ?? null }}
+                        {{ $receiptDetails['customerDetails']['customer']['middlename'] ?? null }}
+                        {{ $receiptDetails['customerDetails']['customer']['lastname'] ?? null }}
+                    </p>
                     @else
-                        <p class="text-[0.6em] font-bold uppercase w-[216px]">
-                            {{ $receiptDetails['customerDetails']['firstname'] ?? null }}
-                            {{ $receiptDetails['customerDetails']['middlename'] ?? null }}
-                            {{ $receiptDetails['customerDetails']['lastname'] ?? null }}
-                        </p>
+                    <p class="text-[0.6em] font-bold uppercase w-[216px]">
+                        {{ $receiptDetails['customerDetails']['firstname'] ?? null }}
+                        {{ $receiptDetails['customerDetails']['middlename'] ?? null }}
+                        {{ $receiptDetails['customerDetails']['lastname'] ?? null }}
+                    </p>
                     @endif
 
                     @if (isset($receiptDetails['credit_details']['creditor_name']))
-                        <p class="text-[0.6em] font-bold uppercase w-[216px]">
-                            {{ $receiptDetails['credit_details']['creditor_name'] ?? null }}
-                        </p>
+                    <p class="text-[0.6em] font-bold uppercase w-[216px]">
+                        {{ $receiptDetails['credit_details']['creditor_name'] ?? null }}
+                    </p>
                     @endif
 
 
