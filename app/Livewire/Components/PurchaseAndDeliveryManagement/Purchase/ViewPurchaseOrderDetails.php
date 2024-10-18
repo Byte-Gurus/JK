@@ -31,7 +31,7 @@ class ViewPurchaseOrderDetails extends Component
         $this->fill([
             'po_number' => $po_details->po_number,
             'supplier' => $po_details->purchaseJoin->supplierJoin->company_name,
-            'dateCreated' => $po_details->created_at,
+            'dateCreated' => $po_details->created_at->format('M d Y'),
             'createdBy' => $po_details->purchaseJoin->userjoin->firstname . ' ' . $po_details->purchaseJoin->userjoin->lastname,
         ]);
     }
