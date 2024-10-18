@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase;
 
+use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use Livewire\Component;
 
@@ -12,8 +13,8 @@ class ViewPurchaseOrderDetails extends Component
     public function render()
     {
         $purchaseDetails = PurchaseDetails::where('purchase_id', $this->purchase_id)
-        ->with('itemsJoin') // Load related itemsJoin to avoid N+1 query problem
-        ->get();
+            ->with('itemsJoin') // Load related itemsJoin to avoid N+1 query problem
+            ->get();
 
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.view-purchase-order-details', compact('purchaseDetails'));
@@ -26,13 +27,13 @@ class ViewPurchaseOrderDetails extends Component
 
     public function populateForm()
     {
-        $po_details = PurchaseDetails::find($this->purchase_id);
+        $po_details = Purchase::find($this->purchase_id);
 
         $this->fill([
             'po_number' => $po_details->po_number,
-            'supplier' => $po_details->purchaseJoin->supplierJoin->company_name,
+            'supplier' => $po_details->supplierJoin->company_name,
             'dateCreated' => $po_details->created_at->format('M d Y h:i A'),
-            'createdBy' => $po_details->purchaseJoin->userjoin->firstname . ' ' . $po_details->purchaseJoin->userjoin->lastname,
+            'createdBy' => $po_details->userJoin->firstname . ' ' . ($po_details->userJoin->middlename ? $po_details->userJoin->middlename . ' ' : '') . $po_details->userJoin->lastname,
         ]);
     }
 
