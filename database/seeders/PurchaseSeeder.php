@@ -19,17 +19,17 @@ class PurchaseSeeder extends Seeder
         $purchases = [
             [
                 'created_at' => now()->subWeek(),
-                'item_id' => 1, // Change to a valid item ID
+                'item_id' => 7, // Change to a valid item ID
                 'quantity' => 150,
             ],
             [
                 'created_at' => now()->subMonth(),
-                'item_id' => 2, // Change to a valid item ID
+                'item_id' => 8, // Change to a valid item ID
                 'quantity' => 50,
             ],
             [
                 'created_at' => now()->subDays(10),
-                'item_id' => 3, // Change to a valid item ID
+                'item_id' => 9, // Change to a valid item ID
                 'quantity' => 100,
             ],
         ];
