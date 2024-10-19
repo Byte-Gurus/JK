@@ -744,16 +744,7 @@ class SalesTransaction extends Component
                             }
                             $inventory->save();
 
-                            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
-                                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
 
-                                if (!$notificationExists) {
-                                    Notification::create([
-                                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
-                                        'inventory_id' => $inventory->id,
-                                    ]);
-                                }
-                            }
 
 
                         } elseif (($inventory->current_stock_quantity - $total_quantity_sold) >= 0) {
@@ -782,18 +773,6 @@ class SalesTransaction extends Component
                             }
                             $inventory->save();
 
-                            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
-                                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
-
-                                if (!$notificationExists) {
-                                    Notification::create([
-                                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
-                                        'inventory_id' => $inventory->id,
-                                    ]);
-
-
-                                }
-                            }
 
 
                         } else {
@@ -821,17 +800,6 @@ class SalesTransaction extends Component
                             }
                             $inventory->save();
 
-                            if ($inventory->current_stock_quantity <= $selectedItem['reorder_point']) {
-                                $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
-
-                                if (!$notificationExists) {
-                                    Notification::create([
-                                        'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
-                                        'inventory_id' => $inventory->id,
-                                    ]);
-                                }
-                            }
-
                             // dump($inventory->current_stock_quantity);
                         }
                         //append inventory id
@@ -846,10 +814,18 @@ class SalesTransaction extends Component
 
                         $this->getMaximumLevel($selectedItem['delivery_date'], $selectedItem['po_date'], $selectedItem['sku_code']);
                     }
+
+                    if ($inventory->current_stock_quantity <= $inventory->itemJoin->reorder_point) {
+                        $notificationExists = Notification::where('description', "Item with SKU {$inventory->sku_code} has reached the reorder point.")->exists();
+
+                        if (!$notificationExists) {
+                            Notification::create([
+                                'description' => "Item with SKU {$inventory->sku_code} has reached the reorder point.",
+                                'inventory_id' => $inventory->id,
+                            ]);
+                        }
+                    }
                 }
-
-
-
 
             }
 
@@ -881,6 +857,8 @@ class SalesTransaction extends Component
                     'credit_id' => $credit->id,
                 ]);
             }
+
+
 
             DB::commit();
 
