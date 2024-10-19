@@ -71,6 +71,7 @@
 
                                             <div>
                                                 <input type="number" step=".01" wire:model='tendered_amount'
+                                                    oninput="this.value = this.value.replace(/[^\d.]/g, '')"
                                                     placeholder="Amount" required
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 

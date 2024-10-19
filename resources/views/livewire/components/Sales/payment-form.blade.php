@@ -69,7 +69,7 @@
                                             </div>
 
                                             <div>
-                                                <input type="number" step=".01" wire:model='tendered_amount' id="tendered_amount" placeholder="Amount" required
+                                                <input type="number" step=".01" wire:model='tendered_amount' id="tendered_amount"  placeholder="Amount" required oninput="this.value = this.value.replace(/[^\d.]/g, '')" 
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                 @error('tendered_amount')

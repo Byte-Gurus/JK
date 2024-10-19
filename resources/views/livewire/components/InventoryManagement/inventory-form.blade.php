@@ -55,7 +55,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Item Cost</label>
 
-                            <input type="number" wire:model.live="cost"
+                            <input type="number" step="0.01"  wire:model.live="cost" oninput="this.value = this.value.replace(/[^\d.]/g, '')"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
@@ -64,7 +64,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Markup %</label>
 
-                            <input type="number" step="0.01" wire:model.live="markup"
+                            <input type="number" step="0.01" wire:model.live="markup" oninput="this.value = this.value.replace(/[^\d.]/g, '')"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
