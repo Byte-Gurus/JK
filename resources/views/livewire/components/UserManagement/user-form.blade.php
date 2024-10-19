@@ -262,10 +262,10 @@
                             </div>
 
                             {{-- //* script that show password and retype pass if create form --}}
-                            <div x-show="showPassword" x-cloak class="transition-all duration-100 ease-in-out">
+                            <div x-show="showPassword" x-cloak class="relative transition-all duration-100 ease-in-out">
 
                                 {{-- //* password --}}
-                                <div class="flex flex-col mb-3" x-data="{ unhidePassword: @entangle('unhidePassword') }">
+                                <div class="relative flex flex-col mb-3" x-data="{ unhidePassword: @entangle('unhidePassword') }">
                                     <label for="password"
                                         class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
                                     <input :type="unhidePassword ? 'password' : 'text'" id="password" name="password"
@@ -274,7 +274,7 @@
                                         wire:model="password">
 
                                     @if ($this->unhidePassword)
-                                        <p x-cloak class="fixed self-end mr-3 cursor-pointer mt-9 "
+                                        <p x-cloak class="absolute self-end mr-3 cursor-pointer mt-9 "
                                             x-on:click=" $wire.showPasswordStatus()">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -284,7 +284,7 @@
                                             </svg>
                                         </p>
                                     @else
-                                        <p class="fixed self-end mr-3 cursor-pointer mt-9 "
+                                        <p class="absolute self-end mr-3 cursor-pointer mt-9 "
                                             x-on:click=" $wire.showPasswordStatus()">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -303,19 +303,19 @@
                                 </div>
 
                                 {{-- //* retype password --}}
-                                <div class="mb-3">
+                                <div class="mb-3" x-data="{ unhidePassword: @entangle('unhidePassword') }">
 
-                                    <div class="flex flex-col mb-3" x-data="{ unhideRetypePassword: @entangle('unhideRetypePassword') }">
+                                    <div class="flex flex-col mb-3">
                                         <label for="retype_password"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
-                                        <input :type="unhideRetypePassword ? 'password' : 'text'" id="retype_password"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Re-type Password</label>
+                                        <input :type="unhidePassword ? 'password' : 'text'" id="retype_password"
                                             name="retype_password" required
                                             class="w-full p-2.5 pl-4 pr-12 text-sm rounded-md outline-none bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-none focus:outline-none"
                                             wire:model="retype_password">
 
-                                        @if ($this->unhideRetypePassword)
-                                            <p x-cloak class="fixed self-end mr-3 cursor-pointer mt-9 "
-                                                x-on:click=" $wire.showRetypePasswordStatus()">
+                                        @if ($this->unhidePassword)
+                                            <p x-cloak class="absolute self-end mr-3 cursor-pointer mt-9 "
+                                                x-on:click=" $wire.showPasswordStatus()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                     class="size-6">
@@ -324,8 +324,8 @@
                                                 </svg>
                                             </p>
                                         @else
-                                            <p class="fixed self-end mr-3 cursor-pointer mt-9 "
-                                                x-on:click=" $wire.showRetypePasswordStatus()">
+                                            <p class="absolute self-end mr-3 cursor-pointer mt-9 "
+                                                x-on:click=" $wire.showPasswordStatus()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                     class="size-6">
