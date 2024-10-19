@@ -207,7 +207,7 @@
                                 @if ($delivery->status === 'Cancelled')
                                 <p>N/A</p>
                                 @elseif ($delivery->status === 'In Progress')
-                                <button x-on:click='displayDeliveryDatePicker()'
+                                <button x-on:click='$wire.displayDeliveryDatePicker()'
                                     wire:click="changeDate({{$delivery->id}})"
                                     class="px-4 py-2 font-bold transition-none ease-in-out bg-green-200 rounded-lg hover:bg-green-400 duration-0">SET
                                     DELIVERY DATE</button>

@@ -97,8 +97,7 @@ class DeliveryTable extends Component
 
     public function changeDate($id)
     {
-        $this->dispatch('get-date',$id)->to(DeliveryDatePicker::class);
-
+        $this->dispatch('get-date', $id)->to(DeliveryDatePicker::class);
     }
 
 
@@ -156,7 +155,6 @@ class DeliveryTable extends Component
 
     public function displayDeliveryDatePicker()
     {
-
         $this->dispatch('display-delivery-date-picker')->to(DeliveryPage::class);
     }
 }
