@@ -280,7 +280,7 @@ class SupplierForm extends Component
         $this->isCreate = $isCreate; //var assign ang parameter value sa global variable
 
         if ($this->isCreate) {
-
+            $this->status = 1;
             $this->resetForm();
         }
     }

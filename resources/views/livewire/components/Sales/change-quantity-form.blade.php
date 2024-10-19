@@ -25,7 +25,7 @@
                 </div>
                 <div class="flex flex-col gap-1 leading-none">
                     <p class="text-[1em] font-thin text-white">Wholesale Quantity</p>
-                    <p class="text-[1.6em] font-black text-white">{{ $bulk_quantity }}^
+                    <p class="text-[1.6em] font-black text-white">{{ $bulk_quantity }}
                     </p>
                 </div>
             </div>

@@ -19,7 +19,6 @@ class LoginPage extends Component
 
     public function authenticate()
     {
-
         $validated = $this->validate([
             'username' => 'required',
             'password' => 'required|min:8',
@@ -28,34 +27,42 @@ class LoginPage extends Component
         if (Auth::attempt($validated)) {
             $user = Auth::user();
 
-
-
-
-            if ($user->current_session != null && $user->current_session !== session()->getId()) {
+            // Check for existing session
+            if ($user->current_session && $user->current_session !== session()->getId()) {
                 Auth::logout();
                 $this->addError('submit', 'This account is already logged in from another device.');
                 return;
             }
 
-            $user->current_session = null;
-            if ($user->current_session = null) {
-                $user->current_session = session()->getId();
-                $user->save();
+            // Set or update the session ID
+            $user->current_session = session()->getId();
+            $user->save();
+
+            // Redirect based on user role
+            switch ($user->user_role_id) {
+                case 1:
+                    if ($user->status_id == 1) {
+                        return redirect()->route('admin.index');
+                    }
+                    break;
+                case 2:
+                    if ($user->status_id == 1) {
+                        return redirect()->route('cashier.index');
+                    }
+                    break;
+                case 3:
+                    if ($user->status_id == 1) {
+                        return redirect()->route('inventoryclerk.index');
+                    }
+                    break;
             }
 
-            if ($user->user_role_id == 1 && $user->status_id == 1) {
-                return redirect()->route('admin.index');
-            } elseif ($user->user_role_id == 2 && $user->status_id == 1) {
-                return redirect()->route('cashier.index');
-            } elseif ($user->user_role_id == 3 && $user->status_id == 1) {
-                return redirect()->route('inventoryclerk.index');
-            } else {
-                $this->addError('submit', 'This account is inactive');
-            }
+            $this->addError('submit', 'This account is inactive');
         } else {
             $this->addError('submit', 'No matching user with provided username and password');
         }
     }
+
 
     public function showPasswordStatus()
     {

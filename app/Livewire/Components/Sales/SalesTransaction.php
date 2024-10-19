@@ -231,8 +231,9 @@ class SalesTransaction extends Component
         if ($item_id) {
             $itemData = Item::find($item_id);
         } else {
+            $this->barcode = substr($this->barcode, 0, -1);
             $itemData = Item::where('barcode', $this->barcode)->first();
-           
+
         }
 
         if ($itemData) {
@@ -311,6 +312,10 @@ class SalesTransaction extends Component
                     'delivery_date' => $item->deliveryJoin->date_delivered,
                     'po_date' => $item->deliveryJoin->purchaseJoin->created_at,
                 ];
+                $this->isSelected = true;
+                $this->selectedIndex = count($this->selectedItems) - 1;
+                $this->setQuantity();
+
             }
         } else {
             $this->alert('warning', 'Cant recognize the barcode');
