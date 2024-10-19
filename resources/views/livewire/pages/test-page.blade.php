@@ -17,31 +17,26 @@
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            sdsdsa
-                            {{-- {{ $credit_payment_info['payment']['created_at'] ?? null }} --}}
+                            {{ $credit_payment_info['payment']['created_at'] ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row gap-2 break-words text-wrap">
                         <p class="text-[0.6em] font-bold uppercase text-nowrap">Creditor Name:</p>
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
-                            asdsada</p>
-                        {{-- {{ $credit_payment_info['name'] ?? null }}</p> --}}
+
+                            {{ $credit_payment_info['name'] ?? null }}</p>
+                        </p>
                     </div>
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            sdasdas
-                        </p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
                             {{ $credit_payment_info['payment']['payment_type'] ?? null }}
-                        </p> --}}
+                        </p>
                     </div>
                     <div>
                         <p class="text-[0.6em] font-bold uppercase">Reference no.</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            sadasd</p>
-                        {{-- <p class="text-[0.6em] font-bold uppercase">
-                            {{ $credit_payment_info['payment']['reference_number'] ?? null }}</p> --}}
+                            {{ $credit_payment_info['payment']['reference_number'] ?? null }}</p>
                     </div>
                 </div>
             </div>
@@ -50,35 +45,34 @@
                 <span class="">------------------------</span>
 
                 {{-- //* table header --}}
-                <div class="grid justify-between grid-flow-row">
-                    <div class="grid justify-between w-full grid-flow-col">
-                        <div>
-                            <p class="text-[0.2em]  font-bold">Amount To Pay</p>
-                        </div>
-                        <div>
-                            <p class="text-[0.2em] self-end font-bold">dsadasd
-                                {{-- <p class="text-[0.2em] font-bold">{{ $credit_payment_info['payment']['amount'] ?? null }} --}}
-                            </p>
-                        </div>
+                <div class="grid justify-between w-full grid-flow-col">
+                    <div>
+                        <p class="text-[0.4em] font-bold">Amount To Pay</p>
                     </div>
-                    <div class="grid justify-between w-full grid-flow-col">
-                        <div>
-                            <p class="text-[0.2em]  font-bold">Tendered Amount</p>
-                        </div>
-                        <div>
-                            <p class="text-[0.2em] font-bold">sdsd</p>
-                            {{-- <p class="text-[0.2em] font-bold">{{ $credit_payment_info['payment']['tendered_amount'] ??
-                                    null }}</p> --}}
-                        </div>
+                    <div>
+                        <p class="text-[0.4em] font-bold">
+                        <p class="text-[0.4em] font-bold">{{ $credit_payment_info['payment']['amount'] ?? null }}
+                        </p>
                     </div>
-                    <div class="grid justify-between w-full grid-flow-col">
-                        <div>
-                            <p class="text-[0.2em]  font-bold">Change</p>
-                        </div>
-                        <div>
-                            <p class="text-[0.2em] font-bold">232323</p>
-                            {{-- <p class="text-[0.2em] font-bold">{{ $credit_payment_info['change_or_balance'] ?? null }}</p> --}}
-                        </div>
+                </div>
+                <div class="grid justify-between w-full grid-flow-col">
+                    <div>
+                        <p class="text-[0.4em] font-bold">Tendered Amount</p>
+                    </div>
+                    <div>
+                        <p class="text-[0.4em] font-bold">
+                            {{ $credit_payment_info['payment']['tendered_amount'] ?? null }}
+                        </p>
+                    </div>
+                </div>
+                <span class="">------------------------</span>
+                <div class="grid justify-between w-full grid-flow-col">
+                    <div>
+                        <p class="text-[0.6em] font-black">Change</p>
+                    </div>
+                    <div>
+                        <p class="text-[0.6em] font-black">232323</p>
+                        {{ $credit_payment_info['change_or_balance'] ?? null }}
                     </div>
                 </div>
 
@@ -89,8 +83,7 @@
                 <div class="flex flex-row break-words text-wrap">
                     <p class="text-[0.6em] font-bold uppercas text-nowrap">Prepared by:</p>
                     <p class="text-[0.6em] font-bold uppercase w-[116px]">
-                        ssss
-                        {{-- {{ $credit_payment_info['user'] ?? null }}</p> --}}
+                        {{ $credit_payment_info['user'] ?? null }}</p>
                 </div>
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[0.6em] font-bold uppercase">Signature:</p>
