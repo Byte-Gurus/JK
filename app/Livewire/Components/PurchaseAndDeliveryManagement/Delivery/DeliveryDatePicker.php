@@ -121,7 +121,7 @@ class DeliveryDatePicker extends Component
 
             $this->resetPage();
             DeliveryEvent::dispatch('refresh-delivery');
-
+            $this->resetFormWhenClosed();
             return back();
 
         } catch (\Exception $e) {
