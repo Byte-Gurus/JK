@@ -1,14 +1,20 @@
-<div x-cloak class="flex justify-center ">
+<div x-cloak class="flex justify-center h-fit">
+
     <div class="w-[816px] max-h-[1056px] h-full border border-black">
-        <div class="flex flex-col justify-center mx-3 mb-6 text-center">
-            <div class="font-black ">
-                <p class="text-[1em] uppercase">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>
-            </div>
+        <div class="flex flex-row justify-around my-8">
             <div>
-                <p class="text-[1em] uppercase">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
+                <img src="{{ asset('jk-logo-cropped.png') }}" alt="logo" class="w-[120px]">
             </div>
-            <div>
-                <p class="text-[1em] uppercase">VAT Reg TIN 936-196-461-0000</p>
+            <div class="flex flex-col justify-center mx-3 mb-6 text-center">
+                <div class="font-black ">
+                    <p class="text-[1em] uppercase">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>
+                </div>
+                <div>
+                    <p class="text-[1em] uppercase">Quezon Avenue St., Poblacion, Tacurong City, Sultan Kudarat</p>
+                </div>
+                <div>
+                    <p class="text-[1em] uppercase">VAT Reg TIN 936-196-461-0000</p>
+                </div>
             </div>
         </div>
         <div class="flex flex-col justify-between px-4 mb-2">
@@ -20,20 +26,8 @@
                     </p>
                 </div>
                 <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                    <p class="text-[1em] font-bold uppercase">{{ $dateCreated }}</p>
-                    {{-- {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }} --}}
-                    </p>
-                </div>
-
-                <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-bold uppercase">Supplier Name:</p>
                     <p class="text-[1em] font-bold uppercase">{{ $supplier }}</p>
-                    {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
-                </div>
-                <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                    <p class="text-[1em] font-bold uppercase">{{ $createdBy }}</p>
                     {{-- {{ $receiptDetails['payment']['payment_type'] ?? null }}</p> --}}
                 </div>
             </div>
@@ -68,7 +62,7 @@
             {{-- @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
                     @foreach ($receiptDetails['selectedItems'] as $item) --}}
             @foreach ($purchaseDetails as $purchaseDetail)
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+                <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
                     <li class="col-span-1 py-[3px]">
                         <div>
@@ -95,6 +89,17 @@
             @endforeach
             {{-- @endforeach
                 @endif --}}
+        </div>
+        <div class="px-4 py-4 ">
+            <div class="flex flex-row gap-2 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                <p>{{ $dateCreated }}</p>
+                </p>
+            </div>
+            <div class="flex flex-row gap-2 text-nowrap">
+                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                <p>{{ $createdBy }}</p>
+            </div>
         </div>
     </div>
 </div>
