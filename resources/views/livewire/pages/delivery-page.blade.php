@@ -55,4 +55,7 @@
     <div x-show="showBackorderForm" x-data="{ showBackorderForm: @entangle('showBackorderForm') }">
         @livewire('components.PurchaseAndDeliveryManagement.Delivery.backorder-form')
     </div>
+    <div x-show="showDeliveryDatePicker" x-data="{ showDeliveryDatePicker: @entangle('showDeliveryDatePicker') }">
+        @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-date-picker')
+    </div>
 </div>

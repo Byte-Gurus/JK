@@ -264,4 +264,9 @@ class DeliveryTable extends Component
     {
         $this->resetPage();
     }
+
+    public function displayDeliveryDatePicker()
+    {
+        $this->dispatch('display-delivery-date-picker')->to(DeliveryPage::class);
+    }
 }

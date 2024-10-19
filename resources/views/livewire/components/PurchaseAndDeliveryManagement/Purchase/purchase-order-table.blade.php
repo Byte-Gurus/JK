@@ -186,7 +186,7 @@
                                             }}'), openActions = !openActions " --}}
 
                                                 <button wire:click="printPO({{ $purchase->id }})"
-                                                    x-on:click="window.open('{{ route('reorderlist.sales.report') }}', '_blank'); openActions = !openActions"
+                                                    x-on:click="$wire.displayPrintPurchaseOrderDetails(); openActions = !openActions"
                                                     {{--
                                                 x-on:click="$wire.displayPrintPurchaseOrderDetails(), openActions = !openActions"
                                                 --}} {{-- wire:click="getStock({{ $inventory->id }})" --}}

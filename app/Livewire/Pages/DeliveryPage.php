@@ -12,6 +12,7 @@ class DeliveryPage extends Component
     public $showDeliveryTable = true;
     public $showRestockForm = false;
     public $showBackorderForm = false;
+    public $showDeliveryDatePicker = false;
 
 
     public function render()
@@ -24,6 +25,8 @@ class DeliveryPage extends Component
         'display-restock-form' => 'displayRestockForm',
         'display-delivery-table' => 'displayDeliveryTable',
         'display-backorder-form' => 'displayBackorderForm',
+        'display-delivery-date-picker' => 'displayDeliveryDatePicker',
+        'close-delivery-date-picker' => 'closeDeliveryDatePicker',
         'closeRestockFormConfirmed'
     ];
 
@@ -66,5 +69,15 @@ class DeliveryPage extends Component
     {
         $this->showBackorderForm = false;
         $this->showDeliveryTable = true;
+    }
+
+    public function displayDeliveryDatePicker()
+    {
+        $this->showDeliveryDatePicker = true;
+    }
+
+    public function closeDeliveryDatePicker()
+    {
+        $this->showDeliveryDatePicker = false;
     }
 }
