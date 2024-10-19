@@ -12,6 +12,7 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 class DeliveryDatePicker extends Component
 {
     use WithPagination, WithoutUrlPagination, LivewireAlert;
@@ -120,17 +121,15 @@ class DeliveryDatePicker extends Component
             DB::commit();
 
             $this->resetPage();
+            $this->dispatch(event: 'refresh-table')->to(DeliveryTable::class);
             DeliveryEvent::dispatch('refresh-delivery');
             $this->resetFormWhenClosed();
             return back();
-
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
             DB::rollback();
             $this->alert('error', 'An error occurred while updating the Delivery, please refresh the page ');
         }
-
-
     }
 
     public function resetFormWhenClosed()
@@ -142,9 +141,7 @@ class DeliveryDatePicker extends Component
 
     public function getDate($id)
     {
-
         $this->delivery_id = $id;
-
     }
     public function resetForm()
     {
