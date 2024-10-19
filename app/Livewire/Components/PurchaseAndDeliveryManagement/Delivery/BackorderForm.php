@@ -128,8 +128,10 @@ class BackorderForm extends Component
             $this->refreshTable();
             BackorderEvent::dispatch('refresh-backorder');
 
+
             $this->resetForm();
             $this->closeBackorderForm();
+            return back();
 
         } catch (\Exception $e) {
             // Rollback the transaction if something fails

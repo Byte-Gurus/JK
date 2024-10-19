@@ -9,11 +9,14 @@ use App\Models\Purchase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 class DeliveryDatePicker extends Component
 {
-    use LivewireAlert;
-    public $date, $delivery_id;
+    use WithPagination, WithoutUrlPagination, LivewireAlert;
+
+    public $date, $delivery_id, $selectedDate;
 
     public function render()
     {
@@ -21,21 +24,20 @@ class DeliveryDatePicker extends Component
     }
 
     protected $listeners = [
-        'get-date' => 'getDate'
+        'get-date' => 'getDate',
+        'updateConfirmed'
     ];
 
     public function changeDate()
     {
+
         $delivery = Delivery::find($this->delivery_id);
 
 
         $inputDate = Carbon::parse($this->date)->startOfDay();
         $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at)->startOfDay();
 
-        $deliveries = [
-            'date' => $this->date,
-            'deliveryId' => $this->delivery_id
-        ];
+
 
         if ($inputDate->lessThan($purchaseOrderDate)) {
             $this->alert('error', 'Delivery date must be after or on the creation date of the purchase order.');
@@ -49,21 +51,17 @@ class DeliveryDatePicker extends Component
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
-            'onDismissed' => 'dateCancelled',
-            'inputAttributes' => $deliveries,
         ]);
     }
 
-    public function updateConfirmed($data)
+    public function updateConfirmed()
     {
 
-        $updatedAttributes = $data['inputAttributes'];
-        $deliveryId = $updatedAttributes['deliveryId'];
 
         DB::beginTransaction();
 
         try {
-            $delivery = Delivery::find($deliveryId);
+            $delivery = Delivery::find($this->delivery_id);
 
             if (!$delivery) {
 
@@ -144,7 +142,9 @@ class DeliveryDatePicker extends Component
 
     public function getDate($id)
     {
+
         $this->delivery_id = $id;
+
     }
     public function resetForm()
     {
