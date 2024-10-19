@@ -48,6 +48,7 @@ class ExpiredItemsReport extends Component
 
         // Fetch records from Inventory where status is 'Expired'
         $inventory = Inventory::where('status', 'Expired')
+            ->orWhere('status', ' !=', 'Expired')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get();
 

@@ -28,15 +28,15 @@ class LoginPage extends Component
             $user = Auth::user();
 
             // Check for existing session
-            if ($user->current_session && $user->current_session !== session()->getId()) {
-                Auth::logout();
-                $this->addError('submit', 'This account is already logged in from another device.');
-                return;
-            }
+            // if ($user->current_session && $user->current_session !== session()->getId()) {
+            //     Auth::logout();
+            //     $this->addError('submit', 'This account is already logged in from another device.');
+            //     return;
+            // }
 
-            // Set or update the session ID
-            $user->current_session = session()->getId();
-            $user->save();
+            // // Set or update the session ID
+            // $user->current_session = session()->getId();
+            // $user->save();
 
             // Redirect based on user role
             switch ($user->user_role_id) {

@@ -34,7 +34,7 @@ class ExpiredItemsReportDatePickerModal extends Component
     public function validateForm()
     {
         $rules = [
-            'toDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01',
+            'toDate' => 'required|date|after_or_equal:1924-01-01',
             'fromDate' => 'required|date|before_or_equal:today|after_or_equal:1924-01-01|before_or_equal:toDate',
         ];
 
