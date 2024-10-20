@@ -178,8 +178,7 @@
                             Cancel Transaction
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(42,13,13)] font-bold">
-                            CTRL +
-                            1</p>
+                            F1</p>
                     </div>
                     @else
                     <div
@@ -188,8 +187,7 @@
                             Cancel Transaction
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
-                            CTRL +
-                            1</p>
+                            F1</p>
                     </div>
                     @endif
                 </div>
@@ -202,8 +200,7 @@
                             Discount
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(63,18,45)] font-bold">
-                            CTRL
-                            + 4</p>
+                            F4</p>
                     </div>
                     @else
                     <div
@@ -212,8 +209,7 @@
                             Discount
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
-                            CTRL
-                            + 4</p>
+                            F4</p>
                     </div>
                     @endif
                     @if (!empty($selectedItems) && empty($payment) && !$unableShortcut)
@@ -223,8 +219,7 @@
                             Remove Item
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(21,17,55)] font-bold">
-                            CTRL
-                            + 3</p>
+                            F3</p>
                     </div>
                     @else
                     <div
@@ -233,8 +228,7 @@
                             Remove Item
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
-                            CTRL
-                            + 3</p>
+                            F3</p>
                     </div>
                     @endif
                 </div>
@@ -248,8 +242,7 @@
                             Quantity
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(19,60,63)] font-bold">
-                            CTRL
-                            + 2</p>
+                            F2</p>
                     </div>
                     @else
                     <div
@@ -258,8 +251,7 @@
                             Quantity
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
-                            CTRL
-                            + 2</p>
+                            F2</p>
                     </div>
                     @endif
                     @if (!empty($selectedItems) && $changeTransactionType == 1 && !$unableShortcut)
@@ -270,8 +262,7 @@
                             Pay
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
-                            CTRL
-                            + 5</p>
+                            F9</p>
                     </div>
                     @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
                     $excess_amount)
@@ -282,8 +273,7 @@
                             Pay
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
-                            CTRL
-                            + 5</p>
+                            F9</p>
                     </div>
                     @else
                     <div
@@ -292,8 +282,7 @@
                             Pay
                         </button>
                         <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
-                            CTRL
-                            + 5</p>
+                            F9</p>
                     </div>
                     @endif
                 </div>
@@ -304,7 +293,7 @@
                         Save
                     </button>
                     <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-green-900 font-bold">
-                        CTRL + ENTER
+                        F10
                     </p>
 
                 </div>
@@ -315,7 +304,7 @@
                         Save
                     </button>
                     <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
-                        CTRL + ENTER
+                        F10
                     </p>
                 </div>
                 @else
@@ -325,7 +314,7 @@
                         Save
                     </button>
                     <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
-                        CTRL + ENTER
+                        F10
                     </p>
                 </div>
                 @endif
