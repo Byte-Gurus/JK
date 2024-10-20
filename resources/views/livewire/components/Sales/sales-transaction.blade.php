@@ -177,7 +177,7 @@
                             class="py-2 text-center ">
                             Cancel Transaction
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(42,13,13)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(42,13,13)] font-bold">
                             F1</p>
                     </div>
                     @else
@@ -186,7 +186,7 @@
                         <button class="py-2 text-center ">
                             Cancel Transaction
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(61,61,61)] font-bold">
                             F1</p>
                     </div>
                     @endif
@@ -199,7 +199,7 @@
                         <button class="py-2 ">
                             Discount
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(63,18,45)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(63,18,45)] font-bold">
                             F4</p>
                     </div>
                     @else
@@ -208,7 +208,7 @@
                         <button class="py-2 " disabled>
                             Discount
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(61,61,61)] font-bold">
                             F4</p>
                     </div>
                     @endif
@@ -218,7 +218,7 @@
                         <button class="py-2 ">
                             Remove Item
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(21,17,55)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(21,17,55)] font-bold">
                             F3</p>
                     </div>
                     @else
@@ -227,7 +227,7 @@
                         <button disabled class="py-2 ">
                             Remove Item
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(61,61,61)] font-bold">
                             F3</p>
                     </div>
                     @endif
@@ -241,7 +241,7 @@
                         <button class="py-2 ">
                             Quantity
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(19,60,63)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(19,60,63)] font-bold">
                             F2</p>
                     </div>
                     @else
@@ -250,7 +250,7 @@
                         <button disabled class="py-2 ">
                             Quantity
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(61,61,61)] font-bold">
                             F2</p>
                     </div>
                     @endif
@@ -261,7 +261,7 @@
                         <button class="py-2">
                             Pay
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                             F9</p>
                     </div>
                     @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
@@ -272,7 +272,7 @@
                         <button class="py-2">
                             Pay
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                             F9</p>
                     </div>
                     @else
@@ -281,7 +281,7 @@
                         <button class="py-2" disabled>
                             Pay
                         </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(61,61,61)] font-bold">
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(61,61,61)] font-bold">
                             F9</p>
                     </div>
                     @endif
@@ -292,7 +292,7 @@
                     <button type="button" class="py-2 ">
                         Save
                     </button>
-                    <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-green-900 font-bold">
+                    <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-green-900 font-bold">
                         F10
                     </p>
 
@@ -303,7 +303,7 @@
                     <button type="button" class="py-2 ">
                         Save
                     </button>
-                    <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
+                    <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                         F10
                     </p>
                 </div>
@@ -313,7 +313,7 @@
                     <button type="button" class="py-2">
                         Save
                     </button>
-                    <p class="absolute bottom-0 right-0 pr-2 text-[0.6em] text-[rgb(71,66,21)] font-bold">
+                    <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                         F10
                     </p>
                 </div>
