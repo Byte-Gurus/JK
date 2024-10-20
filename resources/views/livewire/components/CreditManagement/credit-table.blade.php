@@ -281,15 +281,16 @@
                                 <th
                                     class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
                                     <div x-data="{ openActions: false }">
-                                        <div x-on:click="openActions = !openActions"
+                                        <div disabled x-on:click="openActions = !openActions"
                                             class="p-1 relative cursor-not-allowed transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                 class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                                    d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
                                             </svg>
+
                                         </div>
 
                                         <div x-show="openActions"
