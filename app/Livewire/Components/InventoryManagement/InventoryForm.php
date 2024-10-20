@@ -84,7 +84,6 @@ class InventoryForm extends Component
                 'selling_price' => $this->inventoryInfo['selling_price'],
                 'vat_amount' => $this->inventoryInfo['vat_amount'],
             ]);
-
             DB::commit();
 
             $this->resetForm();

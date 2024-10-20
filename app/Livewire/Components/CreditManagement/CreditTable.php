@@ -62,7 +62,10 @@ class CreditTable extends Component
     {
         $this->search = $credit_number;
     }
-
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
     public function refreshTable()
     {
         $this->resetPage();
