@@ -231,9 +231,7 @@ class SalesTransaction extends Component
         if ($item_id) {
             $itemData = Item::find($item_id);
         } else {
-            $this->barcode = substr($this->barcode, 0, -1);
             $itemData = Item::where('barcode', $this->barcode)->first();
-
         }
 
         if ($itemData) {
