@@ -259,9 +259,9 @@ class ItemForm extends Component
         ];
 
         if ($this->hasBarcode) {
-            $rules['create_barcode'] = ['required', 'numeric ', 'digits_between:12,13', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+            $rules['create_barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         } else {
-            $rules['barcode'] = ['required', 'numeric ', 'digits_between:12,13', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+            $rules['barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         }
 
 
