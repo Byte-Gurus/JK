@@ -21,7 +21,7 @@ class DeliveryDatePicker extends Component
 
     public function render()
     {
-        return view('livewire.components.purchaseanddeliverymanagement.delivery.delivery-date-picker');
+        return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.delivery-date-picker');
     }
 
     protected $listeners = [
