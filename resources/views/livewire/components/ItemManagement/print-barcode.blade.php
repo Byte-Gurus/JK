@@ -5,7 +5,9 @@
         @php
         if (strlen($barcode) == 13) {
         $barcodeNum = substr($barcode, 0, -1);
-        dump($barcode);
+
+        }else{
+        $barcodeNum = $barcode;
         }
         @endphp
         @for ($i = 0; $i < $barcode_quantity; $i++) <div class="p-4 border border-black w-fit">

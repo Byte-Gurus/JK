@@ -73,8 +73,10 @@
 
                                 @if ($barcode)
                                 @php
-                                if (strlen($this->barcode) == 13) {
+                                if (strlen($barcode) == 13) {
                                 $barcodeNum = substr($barcode, 0, -1);
+                                }else{
+                                    $barcodeNum = $barcode;
                                 }
                                 @endphp
                                 <div class="mb-3">
@@ -83,7 +85,8 @@
                                         {{ $barcode }}
                                     </label>
 
-                                    <img id="barcode" wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcodeNum, 'EAN13',
+                                    <img id="barcode" wire:model="barcode">{!! DNS1D::getBarcodeSVG($barcodeNum,
+                                    'EAN13',
                                     2, 60) !!}</img>
 
 
