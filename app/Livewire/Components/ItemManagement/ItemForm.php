@@ -213,7 +213,7 @@ class ItemForm extends Component
     public function generateBarcode()  //* generate a random barcode and contatinate the ITM
     {
 
-        $this->barcode = random_int(100000000000, 999999999999);
+        $this->barcode = random_int(1000000000000, 9999999999999);
     }
 
     public function resetFormWhenClosed()

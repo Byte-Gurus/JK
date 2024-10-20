@@ -24,9 +24,9 @@ class PrintBarcode extends Component
     {
 
         $this->barcode = $barcode_info['barcode'];
-        if (strlen($this->barcode) == 13) {
-            $this->barcode = substr($this->barcode, 0, -1);
-        }
+        // if (strlen($this->barcode) == 13) {
+        //     $this->barcode = substr($this->barcode, 0, -1);
+        // }
         $this->barcode_quantity = $barcode_info['barcode_quantity'];
 
 

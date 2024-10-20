@@ -81,8 +81,6 @@ class PrintBarcodeForm extends Component
     public function getBarcode($barcode)
     {
         $this->barcode = $barcode['Barcode'];
-        if (strlen($this->barcode) == 13) {
-            $this->barcode = substr($this->barcode, 0, -1);
-        }
+       
     }
 }
