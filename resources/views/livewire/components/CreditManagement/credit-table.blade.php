@@ -282,7 +282,7 @@
                                     class="relative flex justify-center px-4 py-4 text-center z-99 text-md text-nowrap">
                                     <div x-data="{ openActions: false }">
                                         <div disabled x-on:click="openActions = !openActions"
-                                            class="p-1 relative cursor-not-allowed transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
+                                            class="relative p-1 cursor-not-allowed">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
