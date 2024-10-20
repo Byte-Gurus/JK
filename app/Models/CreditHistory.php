@@ -33,7 +33,7 @@ class CreditHistory extends Model
             $query->whereHas('creditJoin', function ($query) use ($value) {
                 $query->where('credit_number', 'like', "%{$value}%");
             })
-                ->orWhereHas('creditJoin.transactionJoin.customerJoin', function ($query) use ($value) {
+                ->orWhereHas('creditJoin.customerJoin', function ($query) use ($value) {
                     $query->whereRaw('LOWER(firstname) LIKE ?', ["%{$value}%"])
                         ->orWhereRaw('LOWER(middlename) LIKE ?', ["%{$value}%"])
                         ->orWhereRaw('LOWER(lastname) LIKE ?', ["%{$value}%"])
