@@ -19,17 +19,17 @@ class PurchaseSeeder extends Seeder
         $purchases = [
             [
                 'created_at' => now()->subWeek(),
-                'item_id' => 7, // Change to a valid item ID
+                'item_id' => 11, // Change to a valid item ID
                 'quantity' => 150,
             ],
             [
                 'created_at' => now()->subMonth(),
-                'item_id' => 8, // Change to a valid item ID
+                'item_id' => 9, // Change to a valid item ID
                 'quantity' => 50,
             ],
             [
                 'created_at' => now()->subDays(10),
-                'item_id' => 9, // Change to a valid item ID
+                'item_id' => 12, // Change to a valid item ID
                 'quantity' => 100,
             ],
         ];
@@ -42,7 +42,7 @@ class PurchaseSeeder extends Seeder
             // Create the purchase order
             $purchase = Purchase::create([
                 'po_number' => $po_number, // Unique PO number
-                'supplier_id' => 1, // Set to a valid supplier ID
+                'supplier_id' => 3, // Set to a valid supplier ID
                 'user_id' => 1, // Set to a valid user ID
                 'created_at' => $purchaseData['created_at'], // Set created_at date
                 'updated_at' => $purchaseData['created_at'], // Set updated_at date
