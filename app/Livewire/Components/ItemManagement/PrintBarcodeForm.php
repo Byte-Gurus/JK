@@ -30,7 +30,7 @@ class PrintBarcodeForm extends Component
 
         $this->confirm('Do you want to print this barcodes?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' =>  $validated, //* pass the user to the confirmed method, as a form of array
+            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
     public function createConfirmed($data) //* confirmation process ng create
@@ -64,7 +64,7 @@ class PrintBarcodeForm extends Component
     {
         $this->resetForm();
         $this->resetValidation();
-    }               
+    }
     public function print($quantity, $barcode)
     {
         $this->dispatch('change-print-status')->to(ItemManagementPage::class);
@@ -81,5 +81,8 @@ class PrintBarcodeForm extends Component
     public function getBarcode($barcode)
     {
         $this->barcode = $barcode['Barcode'];
+        if (strlen($this->barcode) == 13) {
+            $this->barcode = substr($this->barcode, 0, -1);
+        }
     }
 }
