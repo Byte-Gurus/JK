@@ -1,6 +1,6 @@
 <div x-cloak class="flex justify-center w-full">
     <div class=" w-full max-w-[216px]">
-        <div class="w-full border-2 h-fit">
+        <div class="w-full px-2 border-2 h-fit">
             <div class="flex flex-col justify-center mx-3 mb-6 text-center">
                 <div class="font-black ">
                     <p class="text-[0.6em] uppercase">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="mx-4">
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
 
                 {{-- //* table header --}}
                 <ul class="grid justify-between grid-flow-col grid-cols-4">
@@ -82,7 +82,7 @@
                     </li>
                 </ul>
 
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
 
 
                 @if (isset($receiptDetails['selectedItems']) && is_array($receiptDetails['selectedItems']))
@@ -126,7 +126,7 @@
                 @endforeach
                 @endif
 
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
             </div>
 
             <div class="flex flex-col px-2 mx-2">
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-2 mx-2">
                 @if(isset($receiptDetails['transaction_type']) && $receiptDetails['transaction_type'] == 3)
@@ -177,7 +177,7 @@
             </div>
 
             <div class="mx-4 ">
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
             </div>
             <div class="flex flex-col gap-1 px-3 m-1">
                 <div class="flex flex-row justify-between">
@@ -193,7 +193,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
             </div>
             <div class="flex flex-col gap-2 px-3 mx-1">
                 <div class="flex flex-row justify-between">
@@ -203,7 +203,7 @@
                 </div>
             </div>
             <div class="mx-4 ">
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
             </div>
             <div class="flex flex-col gap-2 px-2 mx-2 pb-[34px] mt-2p">
                 <div class="flex flex-col justify-between">
