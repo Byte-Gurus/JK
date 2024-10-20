@@ -259,9 +259,9 @@ class ItemForm extends Component
         ];
 
         if ($this->hasBarcode) {
-            $rules['create_barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+            $rules['create_barcode'] = ['required', 'numeric ', 'digits_between:12,13', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         } else {
-            $rules['barcode'] = ['required', 'numeric ', 'digits:12', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
+            $rules['barcode'] = ['required', 'numeric ', 'digits_between:12,13', Rule::unique('items', 'barcode')->ignore($this->proxy_item_id)];
         }
 
 
@@ -278,6 +278,10 @@ class ItemForm extends Component
 
         //* ipasa ang laman ng model sa inputs
         //* fill() method [key => value] means [paglalagyan => ilalagay]
+        if (strlen($this->barcode) == 13) {
+            $this->barcode = substr($this->barcode, 0, -1);
+        }
+
         $this->fill([
             'barcode' => $this->barcode,
             'create_barcode' => $item_details->barcode,
