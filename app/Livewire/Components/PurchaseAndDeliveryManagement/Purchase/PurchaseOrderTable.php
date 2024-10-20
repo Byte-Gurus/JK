@@ -13,11 +13,12 @@ use Livewire\WithPagination;
 
 class PurchaseOrderTable extends Component
 {
-    use WithPagination,  WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination;
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
+    public $statusFilter = 0; //var filtering value = all
 
     public $supplierFilter = 0; //var filtering value = all
 
@@ -29,6 +30,12 @@ class PurchaseOrderTable extends Component
 
         if ($this->supplierFilter != 0) {
             $query->where('supplier_id', $this->supplierFilter); //?hanapin ang status na may same value sa statusFilter
+        }
+        if ($this->statusFilter != 0) {
+            $query->whereHas('deliveryJoin', function ($query) {
+                $query->where('status', $this->statusFilter); // Filter by status
+
+            });
         }
         $purchases = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection)

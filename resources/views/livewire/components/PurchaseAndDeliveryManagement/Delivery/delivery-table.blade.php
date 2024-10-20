@@ -39,9 +39,12 @@
                     <select wire:model.live="statusFilter"
                         class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
                         <option value="0">All</option>
+                        <option value="Complete Stock in">Complete Stock in</option>
                         <option value="Delivered">Delivered</option>
                         <option value="In progress">In progress</option>
                         <option value="Cancelled">Cancelled</option>
+                        <option value="Stocked in with backorder">Stocked in with backorder</option>
+
                     </select>
                 </div>
 
