@@ -31,7 +31,7 @@ class SupplierForm extends Component
     public $barangays = null;
 
     //var form inputs
-    public $supplier_id, $company_name, $status = 1, $contact_number, $street;
+    public $supplier_id, $company_name, $status, $contact_number, $street;
 
     //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $proxy_supplier_id;
