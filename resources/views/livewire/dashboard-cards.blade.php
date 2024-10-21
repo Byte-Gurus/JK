@@ -4,7 +4,7 @@
         <div class="grid grid-cols-3">
             <div class="col-span-2">
                 <p class="pb-3 text-lg font-extrabold text-lime-800">Overall Sales (₱)</p>
-                <p class="text-2xl font-black text-lime-900">{{ number_format($overallSales, 2) }}</p>
+                <p class="text-2xl font-black text-wrap text-lime-900">{{ number_format($overallSales, 2) }}</p>
             </div>
             <div class="col-span-1 m-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
