@@ -278,10 +278,9 @@
                                                 <option value="2">Inactive</option>
                                             </select>
                                             @else
-                                            <select id="status" wire:model="status" required disabled
+                                            <input type="text" wire:model="status" readonly value="1"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value="1" selected>Active</option>
-                                            </select>
+                                            </input>
                                             @endif
 
                                             @error('status')
