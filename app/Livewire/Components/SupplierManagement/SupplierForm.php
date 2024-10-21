@@ -99,7 +99,7 @@ class SupplierForm extends Component
             $supplier = Supplier::create([
                 'company_name' => $validated['company_name'],
                 'contact_number' => $validated['contact_number'],
-                'status_id' => $validated['status'],
+                'status_id' => 1,
                 'address_id' => $address->id
             ]);
 
@@ -263,14 +263,18 @@ class SupplierForm extends Component
             'company_name' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u', // Allo
 
             //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
-            'contact_number' => ['required', 'numeric', 'digits:11', 'regex:/^09[0-9]{9}$/',  Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
-            'status' => 'required|in:1,2',
+            'contact_number' => ['required', 'numeric', 'digits:11', 'regex:/^09[0-9]{9}$/', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
             'selectProvince' => 'required|exists:philippine_provinces,province_code',
             'selectCity' => 'required|exists:philippine_cities,city_municipality_code',
             'selectBrgy' => 'required|exists:philippine_barangays,barangay_code',
             'street' => 'required|string|max:50',
 
         ];
+
+        if (!$this->isCreate) {
+            $rules['status'] = 'required|in:1,2';
+
+        }
 
         return $this->validate($rules);
     }
