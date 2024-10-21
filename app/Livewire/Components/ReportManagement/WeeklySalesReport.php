@@ -13,7 +13,7 @@ class WeeklySalesReport extends Component
     public $showWeeklySalesReport = false;
     public $hasTransactions = false;
 
-    public $transactions = [], $transaction_info = [];
+    public $transactions = [], $transaction_info = []; 
 
     public function render()
     {

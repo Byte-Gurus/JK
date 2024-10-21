@@ -111,12 +111,12 @@ class MonthlySalesChart extends Component
             // Store the results for the front-end
             $this->monthlyTotal[] = [
                 'month' => $summary['monthName'],
-                'totalAmount' => $monthlyNet
+                'totalAmount' => $monthlyGross
             ];
         }
 
         // Set the total amount for the entire year
-        $this->totalAmount = $totalNet;
+        $this->totalAmount = $totalGross;
 
         // Dispatch the updated monthly totals for the frontend
         $this->dispatch('monthlyTotalUpdated', $this->monthlyTotal);

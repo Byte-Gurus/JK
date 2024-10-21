@@ -96,7 +96,7 @@ class WeeklySalesChart extends Component
 
             $this->monthlyTotal[] = [
                 'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
-                'totalAmount' => $weeklyNet
+                'totalAmount' => $weeklyGross
             ];
             // Add to monthly totals
             $totalGross += $weeklyGross;
@@ -108,7 +108,7 @@ class WeeklySalesChart extends Component
         }
 
         // Set the total amount for the entire month
-        $this->totalAmount = $totalNet;
+        $this->totalAmount = $totalGross;
 
         // Dispatch event with updated monthly totals
         $this->dispatch('monthlyTotalUpdated', $this->monthlyTotal);

@@ -124,9 +124,9 @@ class DailySalesChart extends Component
 
         $this->dailyTotal[] = [
             'date' => $formattedDate,
-            'totalAmount' => $totalNet
+            'totalAmount' => $totalGross
         ];
-        $this->totalAmount = $totalNet;
+        $this->totalAmount = $totalGross;
 
         $this->dispatch('DailyTotalUpdated', $this->dailyTotal);
     }

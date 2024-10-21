@@ -96,12 +96,12 @@ class YearlySalesChart extends Component
             // Add yearly summary to the array
             $this->yearlyTotal[] = [
                 'year' => $year,
-                'totalAmount' => $yearlyNet,
+                'totalAmount' => $yearlyGross,
             ];
 
             // Add to the global transaction count and total amount
             $this->transactionCount += $yearlyTransactionCount;
-            $this->totalAmount += $yearlyNet;
+            $this->totalAmount += $yearlyGross;
         }
 
         // Dispatch event for front-end updates

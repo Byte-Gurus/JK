@@ -55,7 +55,7 @@ class DashboardCards extends Component
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
         $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
 
-        $this->overallSales = $totalNet;
+        $this->overallSales = $totalGross;
         $this->overallStocks = Inventory::where('status', 'Available')->sum('current_stock_quantity');
         $this->overallReturn = ReturnDetails::sum('return_quantity');
         $this->deliveryInProgress = Delivery::where('status', 'In Progress')->count();
