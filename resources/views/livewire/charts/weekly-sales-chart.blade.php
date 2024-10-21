@@ -6,7 +6,7 @@
                     <div
                         class="col-span-1 px-8 py-5 border border-red-900 rounded-md shadow-md shadow-red-900 "
                         style="background-image: linear-gradient(115deg, #ffcccc, #feaeae)">
-                        <p class="pb-3 text-lg font-extrabold text-red-800">Weekly Total Sales Amount (₱)</p>
+                        <p class="pb-3 text-lg font-extrabold text-red-800">Weekly Gross Sales Amount (₱)</p>
                         <p class="text-3xl font-black text-red-900">{{ number_format($totalAmount, 2)  }}</p>
                     </div>
                     <div
