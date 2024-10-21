@@ -57,6 +57,15 @@
     <div class="flex items-center">
 
         <div class="flex items-center justify-between">
+            <div class="flex flex-col justify-center mx-8">
+                <div>
+                    <p class=" text-[1em] italic text-center font-medium">Username</p>
+                </div>
+                <div class="border border-black "></div>
+                <div>
+                    <p class=" text-[0.8em] italic text-center font-medium">Role</p>
+                </div>
+            </div>
             <div class="flex flex-row items-center gap-8">
                 @if ($this->isAdmin())
                     <div
