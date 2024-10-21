@@ -21,13 +21,16 @@ use Livewire\Component;
 
 class Navbar extends Component
 {
-    public $time;
+    public $time, $fullname, $role;
     public $date;
     public $sidebarOpen = true;
     public $sidebarStatusOpen = true;
 
     public function render()
     {
+        $this->fullname = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+        $this->role = Auth::user()->roleJoin->role;
+
         if (!$this->isInventoryClerk()) {
             $this->dispatch('disable-sidebar')->to(InventoryManagementPage::class);
         }

@@ -1,5 +1,5 @@
-<div x-data="{ openSidebar: @entangle('sidebarOpen') }" x-cloak
-    @if ($this->sidebarOpen) class="z-50 flex flex-row font-['Inter'] items-center justify-between py-2 transition-all duration-100 ease-out
+<div x-data="{ openSidebar: @entangle('sidebarOpen') }" x-cloak @if ($this->sidebarOpen) class="z-50 flex flex-row
+    font-['Inter'] items-center justify-between py-2 transition-all duration-100 ease-out
     border-b-2 border-black px-[3vh] text-nowrap"
     @else
     class="flex flex-row items-center font-['Inter'] justify-between ml-[0px] z-50 py-2 transition-all duration-100
@@ -21,9 +21,9 @@
         </div>
         <div class="flex flex-row items-center gap-4">
             @if ($this->isAdmin())
-                <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
-                    <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
-                </div>
+            <div href="{{ route('admin.index') }}" wire:navigate class="pr-4">
+                <img src="{{ asset('jk-logo-cropped.png') }}" width="50px" alt="logo">
+            </div>
             @endif
         </div>
         <div>
@@ -59,25 +59,25 @@
         <div class="flex items-center justify-between">
             <div class="flex flex-col justify-center mx-8">
                 <div>
-                    <p class=" text-[1em] italic text-center font-medium">Username</p>
+                    <p class=" text-[1em] italic text-center font-medium">{{$fullname}}</p>
                 </div>
                 <div class="border border-black "></div>
                 <div>
-                    <p class=" text-[0.8em] italic text-center font-medium">Role</p>
+                    <p class=" text-[0.8em] italic text-center font-medium">{{$role}}</p>
                 </div>
             </div>
             <div class="flex flex-row items-center gap-8">
                 @if ($this->isAdmin())
-                    <div
-                        class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
-                        <a href="{{ route('admin.index') }}" wire:navigate>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class=" size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                            </svg>
-                        </a>
-                    </div>
+                <div
+                    class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
+                    <a href="{{ route('admin.index') }}" wire:navigate>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class=" size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </a>
+                </div>
                 @endif
 
                 <div x-data="{ openNotifications: false }" x-on:click.away="openNotifications = false;"
@@ -101,8 +101,7 @@
                         x-transition:leave-start="transform opacity-100 scale-100"
                         x-transition:leave-end="transform opacity-0 scale-0"
                         class="absolute z-10 w-screen max-w-md mt-2 origin-top-right transform right-3">
-                        <div
-                            class=" overflow-y-auto rounded-l-lg shadow-md shadow-black h-full max-h-[400px] rounded-br-lg rounded-tr-none
+                        <div class=" overflow-y-auto rounded-l-lg shadow-md shadow-black h-full max-h-[400px] rounded-br-lg rounded-tr-none
                         min-h-[50%]">
                             <div class="h-fit max-h-[400px]">
                                 @livewire('components.notifications')

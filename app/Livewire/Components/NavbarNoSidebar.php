@@ -9,11 +9,15 @@ use Livewire\Component;
 
 class NavbarNoSidebar extends Component
 {
-    public $time;
+
+    public $time, $fullname, $role;
     public $date;
     public function render()
     {
         $this->showTime();
+
+        $this->fullname = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+        $this->role = Auth::user()->roleJoin->role;
         return view('livewire.components.navbar-no-sidebar');
     }
 
