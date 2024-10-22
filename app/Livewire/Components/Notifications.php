@@ -8,8 +8,9 @@ use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Credit;
 use App\Models\Inventory;
 use App\Models\Notification;
-use Auth;
+
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Notifications extends Component
