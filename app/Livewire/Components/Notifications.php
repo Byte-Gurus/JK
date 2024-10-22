@@ -8,6 +8,7 @@ use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Credit;
 use App\Models\Inventory;
 use App\Models\Notification;
+use Auth;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -31,14 +32,18 @@ class Notifications extends Component
 
     public function goToOtherPage($id, $table)
     {
-        if ($table == 'inventory') {
-            $inventory = Inventory::find($id);
+        $inventory = Inventory::find($id);
 
+        if ($table == 'inventory') {
             return redirect()->route('inventorymanagement.index', ['sku_code' => $inventory->sku_code]);
         } elseif ($table == 'credit') {
             $credit = Credit::find($id);
 
             return redirect()->route('creditmanagement.index', ['sku_code' => $credit->sku_code]);
+        }
+
+        if(Auth::user()->user_role_id == 3){
+            $this->dispatch('set-search', $inventory->sku_code)->to(InventoryTable::class);
         }
     }
 }
