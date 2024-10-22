@@ -136,14 +136,14 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.6em] text-right font-medium">
-                                    {{ $credit->credit_amount }}
+                                    {{ number_format($credit->credit_amount, 2) }}
                                 </p>
                             </div>
                         </li>
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.6em] text-right font-medium">
-                                    {{ $credit->remaining_balance }}
+                                    {{ number_format($credit->remaining_balance, 2) }}
                                 </p>
                             </div>
                         </li>
@@ -158,7 +158,7 @@
                         <li class="col-span-1 py-[3px]">
                             <div>
                                 <p class="text-[0.6em] text-right font-medium">
-                                    {{ $credit->credit_limit }}
+                                    {{ number_format($credit->credit_limit, 2) }}
                                 </p>
                             </div>
                         </li>

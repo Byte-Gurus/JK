@@ -192,18 +192,18 @@
                             {{-- credit balance --}}
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $credit->credit_amount ?? 'N/A' }}
+                                {{ number_format($credit->credit_amount, 2) ?? 'N/A' }}
                             </th>
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $credit->remaining_balance ?? 'N/A' }}
+                                {{ number_format($credit->remaining_balance, 2) ?? 'N/A' }}
                             </th>
 
                             {{-- credit payment amount --}}
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $credit->credit_limit }}
+                                {{ number_format($credit->credit_limit, 2) }}
                             </th>
 
                             {{-- credit limit --}}
