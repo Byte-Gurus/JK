@@ -34,16 +34,21 @@ class Notifications extends Component
     {
         $inventory = Inventory::find($id);
 
-        if ($table == 'inventory') {
-            return redirect()->route('inventorymanagement.index', ['sku_code' => $inventory->sku_code]);
-        } elseif ($table == 'credit') {
-            $credit = Credit::find($id);
-
-            return redirect()->route('creditmanagement.index', ['sku_code' => $credit->sku_code]);
-        }
-
-        if(Auth::user()->user_role_id == 3){
+        if (Auth::user()->user_role_id == 3) {
             $this->dispatch('set-search', $inventory->sku_code)->to(InventoryTable::class);
+        } else {
+            if ($table == 'inventory') {
+                return redirect()->route('inventorymanagement.index', ['sku_code' => $inventory->sku_code]);
+            } elseif ($table == 'credit') {
+                $credit = Credit::find($id);
+
+                return redirect()->route('creditmanagement.index', ['sku_code' => $credit->sku_code]);
+            }
         }
+
+
+
+
+
     }
 }

@@ -9,7 +9,7 @@
             <div @if ($notification->inventoryJoin) wire:click="goToOtherPage({{ $notification->inventory_id }},
             'inventory')"
             href="{{ route('inventorymanagement.index') }}" wire:navigate
-            @elseif ($notification->creditJoin)
+            @elseif ($notification->creditJoin && Auth::user()->user_role_id == 1)
             wire:click="goToOtherPage({{ $notification->credit_id }}, 'credit')"
             href="{{ route('creditmanagement.index') }}" wire:navigate @endif
                 class=" grid grid-flow-row text-[rgb(235,235,235)] gap-2 bg-[rgb(122, 122, 122)] p-2 text-sm
