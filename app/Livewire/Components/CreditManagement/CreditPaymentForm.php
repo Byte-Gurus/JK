@@ -67,7 +67,7 @@ class CreditPaymentForm extends Component
 
             $payment = Payment::create([
                 'tendered_amount' => $validated['tendered_amount'],
-                'amount' => $this->credit_amount,
+                'amount' => $this->remaining_balance,
                 'reference_number' => $validated['reference_no'],
                 'payment_type' => 'GCash',
                 'transaction_id' => $credit->transaction_id

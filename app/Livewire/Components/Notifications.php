@@ -47,9 +47,5 @@ class Notifications extends Component
             }
         }
 
-
-
-
-
     }
 }
