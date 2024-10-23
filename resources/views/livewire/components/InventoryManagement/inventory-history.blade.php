@@ -88,7 +88,7 @@
                             class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-3">
                             <option value="0">All</option>
                             <option value="Stock In">Stock In</option>
-                            <option value="Stock Out">Stock Out</option>
+                            <option value="Stock out">Stock Out</option>
                             <option value="Add">Add</option>
                             <option value="Deduct">Deduct</option>
                             <option value="Void">Void</option>
