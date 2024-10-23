@@ -71,7 +71,7 @@
 
                                             <div>
                                                 <input type="number" step=".01" wire:model='tendered_amount'
-                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                                                    oninput="validateInput(this)"
                                                     placeholder="Amount" required class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)]
                                                 text-gray-900 text-xl font-black rounded-lg block w-full p-2.5">
 
@@ -152,3 +152,23 @@
         </form>
     </div>
 </div>
+@script
+<script>
+    function validateInput(input) {
+      // Allow only digits and a single decimal point
+      let value = input.value;
+      const parts = value.split('.');
+
+      // Remove any characters that are not digits or a decimal point
+      value = value.replace(/[^0-9.]/g, '');
+
+      // Allow only one decimal point
+      if (parts.length > 2) {
+        value = parts[0] + '.' + parts.slice(1).join('');
+      }
+
+      // Update the input value
+      input.value = value;
+    }
+</script>
+@endscript

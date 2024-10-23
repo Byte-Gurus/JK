@@ -183,7 +183,7 @@
                                             </label>
 
                                             <input type="number" id="credit_limit" wire:model="credit_limit"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                                                oninput="validateInput(this)"
                                                 class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
                                                 placeholder="Enter Credit Limit" tabindex="2" required />
 
@@ -313,7 +313,26 @@
         </div>
     </div>
 </div>
+@script
+<script>
+    function validateInput(input) {
+      // Allow only digits and a single decimal point
+      let value = input.value;
+      const parts = value.split('.');
 
+      // Remove any characters that are not digits or a decimal point
+      value = value.replace(/[^0-9.]/g, '');
+
+      // Allow only one decimal point
+      if (parts.length > 2) {
+        value = parts[0] + '.' + parts.slice(1).join('');
+      }
+
+      // Update the input value
+      input.value = value;
+    }
+</script>
+@endscript
 <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
 
 <x-livewire-alert::flash />

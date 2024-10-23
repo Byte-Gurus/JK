@@ -47,9 +47,9 @@
                             </div>
                             <div class="italic font-thin text-white">
                                 @if ($payWithCash)
-                                    Payment Method: <strong>Cash</strong>
+                                Payment Method: <strong>Cash</strong>
                                 @else
-                                    Payment Method: <strong>GCash</strong>
+                                Payment Method: <strong>GCash</strong>
                                 @endif
                             </div>
                         </div>
@@ -69,34 +69,34 @@
                                             </div>
 
                                             <div>
-                                                <input type="number" step=".01" wire:model='tendered_amount' id="tendered_amount"  placeholder="Amount" required oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                                                <input type="number" step=".01" wire:model='tendered_amount'
+                                                    id="tendered_amount" placeholder="Amount" required
+                                                    oninput="validateInput(this)"
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
 
                                                 @error('tendered_amount')
-                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
 
                                         @if (!$payWithCash)
-                                            <div class="flex flex-col transition-all duration-100 ease-in-out">
-                                                <div>
-                                                    <label for="reference_no"
-                                                        class="text-[1.2em] text-gray-900">Reference
-                                                        No.</label>
-                                                </div>
-
-                                                <div>
-                                                    <input type="number" wire:model='reference_no'
-                                                        placeholder="Reference No" required
-                                                        class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
-
-                                                    @error('reference_no')
-                                                        <span
-                                                            class="font-medium text-red-500 error">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
+                                        <div class="flex flex-col transition-all duration-100 ease-in-out">
+                                            <div>
+                                                <label for="reference_no" class="text-[1.2em] text-gray-900">Reference
+                                                    No.</label>
                                             </div>
+
+                                            <div>
+                                                <input type="number" wire:model='reference_no'
+                                                    placeholder="Reference No" required
+                                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-xl font-black  rounded-lg  block w-full p-2.5">
+
+                                                @error('reference_no')
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         @endif
                                     </div>
                                 </div>
@@ -115,19 +115,19 @@
                 </div>
                 <div class="flex flex-row items-center justify-between">
                     @if ($payWithCash)
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <div x-on:click="$wire.changePaymentMethod()"
-                                class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
-                                Pay with GCash</div>
-                        </div>
+                    <div>
+                        {{-- //* clear all button for create --}}
+                        <div x-on:click="$wire.changePaymentMethod()"
+                            class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                            Pay with GCash</div>
+                    </div>
                     @else
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <div x-on:click="$wire.changePaymentMethod()"
-                                class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
-                                Pay with Cash</div>
-                        </div>
+                    <div>
+                        {{-- //* clear all button for create --}}
+                        <div x-on:click="$wire.changePaymentMethod()"
+                            class="text-[rgb(228,228,228)] bg-[rgb(79,79,79)] cursor-pointer hover:bg-[rgb(21,21,21)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                            Pay with Cash</div>
+                    </div>
                     @endif
                     <div class="flex flex-row justify-end gap-2 mt-4">
                         <div>
@@ -148,9 +148,29 @@
     </div>
 </div>
 @script
-    <script>
-        Livewire.on('tendered_amount_focus', () => {
+<script>
+    Livewire.on('tendered_amount_focus', () => {
             document.getElementById('tendered_amount').focus();
         });
-    </script>
+</script>
+
+<script>
+    function validateInput(input) {
+      // Allow only digits and a single decimal point
+      let value = input.value;
+      const parts = value.split('.');
+
+      // Remove any characters that are not digits or a decimal point
+      value = value.replace(/[^0-9.]/g, '');
+
+      // Allow only one decimal point
+      if (parts.length > 2) {
+        value = parts[0] + '.' + parts.slice(1).join('');
+      }
+
+      // Update the input value
+      input.value = value;
+    }
+</script>
+
 @endscript

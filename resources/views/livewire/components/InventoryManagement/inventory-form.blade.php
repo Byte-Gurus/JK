@@ -55,7 +55,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Item Cost</label>
 
-                            <input type="number" step="0.01"  wire:model.live="cost" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                            <input type="number" step="0.01"  wire:model.live="cost" oninput="validateInput(this)"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
@@ -64,7 +64,7 @@
                         <div class="flex flex-col gap-1 mb-3">
                             <label for="itemPrice" class="text-white">Markup %</label>
 
-                            <input type="number" step="0.01" wire:model.live="markup" oninput="this.value = this.value.replace(/[^0-9.]/g, '')"
+                            <input type="number" step="0.01" wire:model.live="markup" oninput="validateInput(this)"
                                 class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
                         </div>
 
@@ -105,4 +105,24 @@
             document.getElementById("adjust_quantity").focus();
         });
     </script>
+
+<script>
+    function validateInput(input) {
+      // Allow only digits and a single decimal point
+      let value = input.value;
+      const parts = value.split('.');
+
+      // Remove any characters that are not digits or a decimal point
+      value = value.replace(/[^0-9.]/g, '');
+
+      // Allow only one decimal point
+      if (parts.length > 2) {
+        value = parts[0] + '.' + parts.slice(1).join('');
+      }
+
+      // Update the input value
+      input.value = value;
+    }
+</script>
+
 @endscript
