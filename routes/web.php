@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Route;
 
 //login
 Route::get('/logout', Logout::class)->name('logout');
-Route::get('/', LoginPage::class)->name('login')->middleware(['CheckIfLoggedIn', 'ClearSession']);
+Route::get('/', LoginPage::class)->name('login')->middleware(['CheckIfLoggedIn']);
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
 

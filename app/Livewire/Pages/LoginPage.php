@@ -27,6 +27,7 @@ class LoginPage extends Component
         if (Auth::attempt($validated)) {
             $user = Auth::user();
 
+           if(Auth::logoutOtherDevices($this->password)) 
             // Check for existing session
             // if ($user->current_session && $user->current_session !== session()->getId()) {
             //     Auth::logout();
