@@ -52,7 +52,7 @@
                     </div>
                     @if(isset($receiptDetails['transaction_type']) && $receiptDetails['transaction_type'] == 3)
                     <div class="flex flex-row gap-2 break-words text-wrap">
-                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No</p>
+                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No.</p>
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $receiptDetails['return_details']['return_number'] ?? null }}</p>
                     </div>
