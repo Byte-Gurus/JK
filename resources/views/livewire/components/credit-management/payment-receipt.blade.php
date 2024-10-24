@@ -34,7 +34,7 @@
                         </p>
                     </div>
                     <div>
-                        <p class="text-[0.6em] font-bold uppercase">Reference no.</p>
+                        <p class="text-[0.6em] font-bold uppercase gap-2">Reference no.</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $credit_payment_info['payment']['reference_number'] ?? null }}</p>
                     </div>

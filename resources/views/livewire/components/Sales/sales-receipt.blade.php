@@ -1,7 +1,7 @@
 <div x-cloak class="flex justify-center w-full">
     <div class=" w-full max-w-[216px]">
         <div class="w-full px-2 border-2 h-fit">
-            <div class="flex flex-col justify-center mx-3 mb-6 text-center">
+            <div class="flex flex-col justify-center mx-3 mb-2 text-center">
                 <div class="font-black ">
                     <p class="text-[0.6em] uppercase">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>
                 </div>
@@ -14,33 +14,33 @@
             </div>
             <div class="flex flex-col justify-between px-4 mb-2">
                 <div class="flex flex-col ">
-                    <div class="flex flex-row self-end mb-4 mr-2 text-nowrap">
-                        <p class="text-[0.6em] font-black uppercase">Sales Invoice No.</p>
-                        <p class="text-[0.6em] font-black uppercase">1234</p>
+                    <div class="flex flex-col items-center justify-center mb-4 text-nowrap">
+                        <p class="text-[0.8em] font-bold uppercase">Sales Invoice</p>
+                        <p class="text-[0.8em] font-medium uppercase"># 1234</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
+                    <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date:</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}
                         </p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
+                    <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}
                         </p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Transaction No.</p>
+                    <div class="flex flex-row gap-2 text-nowrap">
+                        <p class="text-[0.6em] font-bold uppercase">Trans No.</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['transaction_info']['transaction_number'] ?? null }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
+                    <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Payment Method:</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['payment']['payment_type'] ?? null }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
+                    <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Reference No.</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $receiptDetails['payment']['reference_no'] ?? null }}</p>
@@ -52,7 +52,7 @@
                     </div>
                     @if(isset($receiptDetails['transaction_type']) && $receiptDetails['transaction_type'] == 3)
                     <div class="flex flex-row gap-2 break-words text-wrap">
-                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No</p>
+                        <p class="text-[0.6em] font-bold uppercase text-nowrap">Return No.</p>
                         <p class="text-[0.6em] font-bold uppercase w-[116px]">
                             {{ $receiptDetails['return_details']['return_number'] ?? null }}</p>
                     </div>

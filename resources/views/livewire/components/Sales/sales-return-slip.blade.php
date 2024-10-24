@@ -14,31 +14,19 @@
             </div>
             <div class="flex flex-col justify-between px-4 mb-2">
                 <div class="flex flex-col ">
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
+                    <div class="flex flex-col text-nowrap">
+                        <p class="text-[0.6em] font-bold uppercase">Date & Time Created:</p>
                         <p class="text-[0.6em] font-bold uppercase">
                             {{ $dateCreated ?? 'N/A' }}
                         </p>
                     </div>
-
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Return No.</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number ?? 'N/A' }}</p>
-                    </div>
-                    <br>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Transaction No.</p>
+                    <div class="flex flex-row gap-2 text-nowrap">
+                        <p class="text-[0.6em] font-bold uppercase">Trans No.</p>
                         <p class="text-[0.6em] font-bold uppercase">{{ $transaction_number ?? 'N/A' }}</p>
                     </div>
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Date of Purchase</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $transaction_date ?? 'N/A' }}</p>
-                    </div>
-
-                    <div class="flex flex-row text-nowrap">
-                        <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                        <p class="text-[0.6em] font-bold uppercase">{{ $returnedBy ?? 'N/A' }}</p>
-
+                    <div class="flex flex-row gap-2 text-nowrap">
+                        <p class="text-[0.6em] font-bold uppercase">Return No.</p>
+                        <p class="text-[0.6em] font-bold uppercase">{{ $return_number ?? 'N/A' }}</p>
                     </div>
                     <br>
                     <div class="flex flex-row gap-2 text-nowrap">
@@ -46,12 +34,12 @@
                         <p class="text-[0.6em] font-bold uppercase w-[116px]"> {{ $item_return_amount ?? 'N/A' }}</p>
                     </div>
                     <div class="flex flex-row gap-2 text-nowrap">
-                        <p class="text-[0.2em] font-thin uppercase">Total Exchange Amount:</p>
-                        <p class="text-[0.2em] font-thin uppercase w-[116px]"> {{ $exchange_amount ?? 'N/A' }}</p>
+                        <p class="text-[0.2em] font-medium uppercase">Total Exchange Amount:</p>
+                        <p class="text-[0.2em] font-medium uppercase w-[116px]"> {{ $exchange_amount ?? 'N/A' }}</p>
                     </div>
                     <div class="flex flex-row gap-2 text-nowrap">
-                        <p class="text-[0.2em] font-thin uppercase">Total Refund Amount:</p>
-                        <p class="text-[0.2em] font-thin uppercase w-[116px]"> {{ $refund_amount ?? 'N/A' }}</p>
+                        <p class="text-[0.2em] font-medium uppercase">Total Refund Amount:</p>
+                        <p class="text-[0.2em] font-medium uppercase w-[116px]"> {{ $refund_amount ?? 'N/A' }}</p>
                     </div>
                 </div>
             </div>
@@ -117,6 +105,17 @@
                         </ul>
                     @endforeach
                 @endif
+                <span class="">------------------------</span>
+            </div>
+            <div class="px-4 py-4 ">
+                <div class="flex flex-col text-nowrap">
+                    <p class="text-[0.6em] font-bold uppercase">Date of Purchase:</p>
+                    <p class="text-[0.6em] font-bold uppercase">{{ $transaction_date ?? 'N/A' }}</p>
+                </div>
+                <div class="flex flex-row gap-2 my-2 break-words text-nowrap">
+                    <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
+                    <p class="text-[0.6em] font-bold uppercase w-[116px]">{{ $returnedBy ?? 'N/A' }}</p>
+                </div>
             </div>
         </div>
     </div>
