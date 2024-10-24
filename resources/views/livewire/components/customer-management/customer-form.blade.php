@@ -384,7 +384,7 @@
 
                                                 <input type="number" id="senior_pwd_id" wire:model="senior_pwd_id"
                                                     class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                    @if ($customertype == 'PWD ID No.') placeholder="PWD"
+                                                    @if ($customertype == 'PWD') placeholder="PWD ID No."
                                                     @else placeholder="Senior Citizen ID No." @endif
                                                     required />
 
