@@ -184,10 +184,7 @@
                                     @if ($delivery->status === 'Cancelled')
                                         <p>N/A</p>
                                     @elseif ($delivery->status === 'In Progress')
-                                        <input type="date"
-                                            wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
-                                            wire:model="delivery_date{{ $delivery-k>id }}"
-                                            class="bg-white focus:outline-black hover:shadow-sm hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
+                                        <button wire:click="setDateToday({{ $delivery->id }})">Set delivery today</button>
                                     @else
                                         <a scope="row"
                                             class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
@@ -196,6 +193,25 @@
                                     @endif
                                 </div>
                             </th>
+                            {{-- <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                <div class="flex justify-center ">
+
+                                    @if ($delivery->status === 'Cancelled')
+                                        <p>N/A</p>
+                                    @elseif ($delivery->status === 'In Progress')
+                                        <input type="date"
+                                            wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
+                                            wire:model="delivery_date{{ $delivery->id }}"
+                                            class="bg-white focus:outline-black hover:shadow-sm hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
+                                    @else
+                                        <a scope="row"
+                                            class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
+                                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ') }}
+                                        </a>
+                                    @endif
+                                </div>
+                            </th> --}}
 
                             {{-- //* action --}}
                             <th class="relative h-full px-4 py-4 z-99 text-md text-nowrap">
@@ -214,9 +230,8 @@
                                         <div x-on:click="openActions = !openActions"
                                             class="p-1 w-fit mx-auto relative cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
                                             </svg>

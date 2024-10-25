@@ -16,7 +16,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DeliveryTable extends Component
 {
-    use WithPagination,  WithoutUrlPagination, LivewireAlert;
+    use WithPagination, WithoutUrlPagination, LivewireAlert;
 
     public $sortDirection = 'desc'; //var default sort direction is ascending
     public $sortColumn = 'id'; //var defualt sort is ID
@@ -27,7 +27,7 @@ class DeliveryTable extends Component
     //var filtering value = all
     public $supplierFilter = 0;
 
-    public $dateDelivered = [], $delivery_date;
+    public $dateDelivered = [], $delivery_date, $today_date;
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
@@ -65,7 +65,11 @@ class DeliveryTable extends Component
         'dateCancelled',
     ];
 
-
+    public function setDateToday($deliverId)
+    {
+        $this->today_date = Carbon::today();
+        $this->changeDate($deliverId, $this->today_date);
+    }
     public function sortByColumn($column)
     { //* sort the column
 
@@ -96,22 +100,23 @@ class DeliveryTable extends Component
 
     public function changeDate($id, $date)
     {
+
+        $delivery = Delivery::find($id);
+
+
+        $inputDate = Carbon::parse($date);
+        $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at);
+
         $deliveries = [
             'date' => $date,
             'deliveryId' => $id
         ];
 
-        $delivery = Delivery::find($deliveries['deliveryId']);
-
-
-        $inputDate = Carbon::parse($deliveries['date']);
-        $purchaseOrderDate = Carbon::parse($delivery->purchaseJoin->created_at);
-
-
         if ($inputDate < $purchaseOrderDate) {
             $this->alert('error', 'Delivery date must be after the creation of the purchase order.');
             return;
         }
+
 
         $this->confirm("Do you want to update this delivery?", [
             'onConfirmed' => 'updateConfirmed',
@@ -126,6 +131,7 @@ class DeliveryTable extends Component
 
         $updatedAttributes = $data['inputAttributes'];
         $deliveryId = $updatedAttributes['deliveryId'];
+
 
         // Find the current delivery record
         $delivery = Delivery::find($deliveryId);
@@ -163,7 +169,7 @@ class DeliveryTable extends Component
             }
 
             // Update the current delivery details
-            $delivery->date_delivered = $updatedAttributes['date'];
+            $delivery->date_delivered = $this->today_date;
             $delivery->status = "Delivered";
             $delivery->save();
 
@@ -171,7 +177,7 @@ class DeliveryTable extends Component
             $this->resetPage();
         } else {
             // If there are no backorders, only update the current delivery details
-            $delivery->date_delivered = $updatedAttributes['date'];
+            $delivery->date_delivered = $this->today_date;
             $delivery->status = "Delivered";
             $delivery->save();
 
