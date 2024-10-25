@@ -1054,7 +1054,8 @@ class SalesTransaction extends Component
     {
         $subTotal = $selling_price * $quantity;
         $subTotal = $subTotal - ($subTotal * ($discount / 100));
-        $vat = $subTotal *(100 + $vat_percent ) / 100;
+        $vat = $subTotal *(100 + 12 ) / 100;
+        dump($selling_price, $quantity, $discount, $subTotal, $vat);
         return $vat;
     }
 
