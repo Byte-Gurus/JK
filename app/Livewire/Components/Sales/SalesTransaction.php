@@ -443,7 +443,7 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount = $vatable_subtotal - ($vatable_subtotal * (100 + $index['vat_percent'])) / 100;
+                $vatable_amount = (($vatable_subtotal * (100 + $index['vat_percent'])) / 100) -  $vatable_subtotal ;
                 // dump([
                 //     "vat",
                 //     'vatable_subtotal' => $vatable_subtotal,
