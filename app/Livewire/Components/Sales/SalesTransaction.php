@@ -467,6 +467,8 @@ class SalesTransaction extends Component
 
             $this->totalVat = $vatable_amount + $vat_exempt_amount;
 
+            dump(this->$totalVat, $vatable_subtotal,  $index['vat_percent']);
+
             if ($this->customerDetails) {
                 $this->discount_percent = $this->customerDetails['discount_percentage'];
 
