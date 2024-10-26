@@ -53,7 +53,7 @@ class MonthlySalesReport extends Component
                 // Summing monthly transactions
                 switch ($transaction->transaction_type) {
                     case 'Sales':
-                        $totalGross += $transaction->transactionJoin->total_amount;
+                        $totalGross += $transaction->transactionJoin->subtotal;
                         $totalTax += $transaction->transactionJoin->total_vat_amount;
 
                         $totalDiscount += $transaction->transactionJoin->total_discount_amount;
@@ -64,7 +64,7 @@ class MonthlySalesReport extends Component
                         $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
                         break;
                     case 'Credit':
-                        $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
+                        $totalGross += $transaction->creditJoin->transactionJoin->subtotal;
                         $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
                         $totalDiscount += $transaction->creditJoin->transactionJoin->total_discount_amount;
