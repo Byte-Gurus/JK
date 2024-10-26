@@ -41,6 +41,7 @@ class DailySalesReport extends Component
         $this->hasTransactions = !$this->transactions->isEmpty();
 
         $totalGross = 0;
+        $totalDiscount = 0;
         $totalTax = 0;
         $totalNet = 0;
 
@@ -50,25 +51,23 @@ class DailySalesReport extends Component
         $totalVoidVatAmount = 0;
 
         foreach ($this->transactions as $transaction) {
-            // Initialize properties
-            $transaction->totalVoidItemAmount = 0;
-            $transaction->vatable_amount = 0;
-            $transaction->vat_exempt_amount = 0;
-            $transaction->VoidTaxAmount = 0;
-            $transaction->totalVoidTaxAmount = 0;
+
 
             switch ($transaction->transaction_type) {
                 case 'Sales':
-                    $totalGross += $transaction->transactionJoin->total_amount;
+                    $totalGross += $transaction->transactionJoin->subtotal;
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
+                    $totalDiscount +=  $transaction->transactionJoin->total_discount_amount;
                     break;
                 case 'Return':
                     $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
                     break;
                 case 'Credit':
-                    $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
+                    $totalGross += $transaction->creditJoin->transactionJoin->subtotal;
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
+                    $totalDiscount +=  $transaction->creditJoin->transactionJoin->total_discount_amount;
+
                     break;
                 case 'Void':
                     $totalVoidAmount += $transaction->voidTransactionJoin->void_total_amount;
@@ -78,11 +77,12 @@ class DailySalesReport extends Component
         }
 
         $totalGross -= $totalReturnAmount + $totalVoidAmount;
-        $totalNet = $totalGross - ($totalTax - ($totalReturnVatAmount + $totalVoidVatAmount));
+        $totalNet = $totalGross - ($totalTax + $totalReturnVatAmount + $totalVoidVatAmount + $totalDiscount);
 
         $this->transaction_info = [
             'totalGross' => $totalGross,
-            'totalTax' => $totalTax - $totalReturnVatAmount - $totalVoidVatAmount,
+            'totalTax' => $totalTax - $totalReturnVatAmount - $totalVoidVatAmount ,
+            'totalDiscount' => $totalDiscount,
             'date' => $date->format('M d Y '),
             'totalNet' => $totalNet,
             'dateCreated' => Carbon::now()->format('M d Y h:i A'),

@@ -172,14 +172,13 @@ class SalesReturnDetails extends Component
                     if ($transactionDetail->vat_type === 'Vat') {
                         $vatable_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
-                        $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+                        $vatable_return_total_amount = (($vatable_Return_Subtotal * (100 + $vat_Percent)) / 100) - $vatable_Return_Subtotal;
 
-
+                        // $vatable_amount = (($vatable_subtotal * (100 + $index['vat_percent'])) / 100) -  $vatable_subtotal;
                     } elseif ($transactionDetail->vat_type === 'Vat Exempt') {
                         $vat_exempt_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
-                        $vat_exempt_return_total_amount = $vat_exempt_Return_Subtotal - ($vat_exempt_Return_Subtotal / (100 + $vat_Percent) * 100);
-
+                        $vat_exempt_return_total_amount = (($vat_exempt_Return_Subtotal * (100 + $vat_Percent)) / 100) - $vat_exempt_Return_Subtotal;
                     }
 
                     $this->total_refund_amount += $this->item_return_amount;

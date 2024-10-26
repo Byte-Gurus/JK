@@ -41,6 +41,12 @@
                             {{ number_format($transaction_info['totalGross'], 2) }}</p>
                     </div>
                     <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
+                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Discount Amount</p>
+                        <p class="col-span-1 ">|</p>
+                        <p class=" col-span-3 text[1em] text-right">
+                            {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
+                    </div>
+                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
                         <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Tax Amount</p>
                         <p class="col-span-1 ">|</p>
                         <p class=" col-span-3 text[1em] text-right">
@@ -146,11 +152,11 @@
                     <div>
                         <p class="text-[0.8em] text-right font-bold">
                             @if ($transaction->transaction_type == 'Sales')
-                            {{ number_format($transaction->transactionJoin->total_amount, 2) }}
+                            {{ number_format($transaction->transactionJoin->subtotal, 2) }}
                             @elseif ($transaction->transaction_type == 'Return')
                             {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
                             @elseif ($transaction->transaction_type == 'Credit')
-                            {{ number_format($transaction->creditJoin->credit_amount, 2) }}
+                            {{ number_format($transaction->creditJoin->transactionJoin->subtotal, 2) }}
                             @elseif ($transaction->transaction_type == 'Void')
                             {{ number_format($transaction->voidTransactionJoin->void_total_amount * -1, 2) }}
                             @endif
@@ -251,7 +257,8 @@
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        <p class="text[1em] text-right"></p>
+                        <p class="text-[1em] text-right font-bold">
+                            {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">

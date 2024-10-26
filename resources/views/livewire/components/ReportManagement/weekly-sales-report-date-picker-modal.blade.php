@@ -31,7 +31,7 @@
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <input type="week" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">
                     </div>
 
 

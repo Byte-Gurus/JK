@@ -443,14 +443,14 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount = (($vatable_subtotal * (100 + $index['vat_percent'])) / 100) -  $vatable_subtotal ;
-                dump([
-                    "vat",
-                    'vatable_subtotal' => $vatable_subtotal,
-                    'vatable_amount' => $vatable_amount,
-                    'total_amount' => $index['total_amount'],
-                    'vat_percent' => $index['vat_percent']
-                ]);
+                $vatable_amount = (($vatable_subtotal * (100 + $index['vat_percent'])) / 100) -  $vatable_subtotal;
+                // dump([
+                //     "vat",
+                //     'vatable_subtotal' => $vatable_subtotal,
+                //     'vatable_amount' => $vatable_amount,
+                //     'total_amount' => $index['total_amount'],
+                //     'vat_percent' => $index['vat_percent']
+                // ]);
             } elseif ($index['vat_type'] === 'Vat Exempt') {
                 $vat_exempt_subtotal += $index['total_amount'];
                 $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal * (100 + $index['vat_percent'])) / 100;
@@ -467,7 +467,7 @@ class SalesTransaction extends Component
 
             $this->totalVat = $vatable_amount + $vat_exempt_amount;
 
-            dump($this->totalVat, $vatable_subtotal,  $index['vat_percent']);
+            // dump($this->totalVat, $vatable_subtotal,  $index['vat_percent']);
 
             if ($this->customerDetails) {
                 $this->discount_percent = $this->customerDetails['discount_percentage'];

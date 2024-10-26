@@ -9,7 +9,7 @@ class YearlySalesReportDatePickerModal extends Component
 {
     public $showYearlySalesReportDatePircker = false;
 
-    public $toYear, $fromYear;
+    public $year;
     public function render()
     {
         return view('livewire.components.ReportManagement.yearly-sales-report-date-picker-modal');
@@ -26,15 +26,13 @@ class YearlySalesReportDatePickerModal extends Component
     public function resetForm()
     {
         $this->reset([
-            'toYear',
-            'fromYear'
+            'year',
         ]);
     }
     public function validateForm()
     {
         $rules = [
-            'toYear' => 'required|integer|digits:4|before_or_equal:' . date('Y'),
-            'fromYear' => 'required|integer|digits:4|before_or_equal:toYear',
+            'year' => 'required|integer|digits:4',
         ];
 
         return $this->validate($rules);
@@ -49,7 +47,7 @@ class YearlySalesReportDatePickerModal extends Component
 
         $validated = $this->validateForm();
 
-        $this->dispatch('generate-report', $this->fromYear, $this->toYear)->to(YearlySalesReport::class);
+        $this->dispatch('generate-report', $this->year)->to(YearlySalesReport::class);
         $this->displayYearlySalesReport();
     }
 }

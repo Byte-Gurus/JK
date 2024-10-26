@@ -201,10 +201,12 @@ class VoidTransactionForm extends Component
 
                     if ($toVoid['vat_type'] === 'Vat') {
                         $vat_Percent = $toVoid['item_vat_percent'];
-                        $vatable_Void_Subtotal += $toVoid['item_subtotal'] - ($toVoid['item_subtotal'] / (100 + $vat_Percent) * 100);
+                        $vatable_Void_Subtotal +=  (($toVoid['item_subtotal'] * (100 + $vat_Percent) / 100)) - $toVoid['item_subtotal'];
+                        // $vatable_return_total_amount = (($vatable_Return_Subtotal * (100 + $vat_Percent)) / 100) - $vatable_Return_Subtotal;
+
                     } elseif ($toVoid['vat_type'] === 'Vat Exempt') {
                         $vat_Percent = $toVoid['item_vat_percent'];
-                        $vat_exempt_Void_Subtotal += $toVoid['item_subtotal'] - ($toVoid['item_subtotal'] / (100 + $vat_Percent) * 100);
+                        $vat_exempt_Void_Subtotal +=  (($toVoid['item_subtotal'] * (100 + $vat_Percent) / 100)) - $toVoid['item_subtotal'];
                     }
 
                     $this->voidedDetails[] = [
