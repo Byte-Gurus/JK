@@ -25,7 +25,7 @@
             <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
                 <div class="flex flex-col ">
                     <div class="flex flex-row gap-2 text-nowrap">
-                        <p class="text-[1em] font-black uppercase">Specified Date:</p>
+                        <p class="text-[1em] font-black uppercase">Date as of</p>
                         <p>
                             {{ $transaction_info['date'] }}
                         </p>
@@ -52,10 +52,10 @@
                         <p class=" col-span-3 text[1em] text-right">
                             {{ number_format($transaction_info['totalTax'], 2) }}</p>
                     </div>
-                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Net Sales </p>
+                    <div class="grid items-center grid-flow-col grid-cols-12 border border-black text-nowrap">
+                        <p class=" col-span-8 w-1/2 text-[1.4em] font-black uppercase">Net Sales </p>
                         <p class="col-span-1 ">|</p>
-                        <p class=" col-span-3 text[1em] text-right">
+                        <p class=" col-span-3 text-[1.4em] font-black text-right">
                             {{ number_format($transaction_info['totalNet'], 2) }}</p>
                     </div>
                 </div>
