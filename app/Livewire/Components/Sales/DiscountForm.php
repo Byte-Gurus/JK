@@ -195,7 +195,7 @@ class DiscountForm extends Component
     }
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
     {
-        $this->reset(['customer_name','firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'senior_pwd_id', 'discount_percentage', 'searchCustomer']);
+        $this->reset(['customer_name', 'firstname', 'middlename', 'lastname', 'birthdate', 'contact_number', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'isCreate', 'customerType', 'senior_pwd_id', 'discount_percentage', 'searchCustomer']);
     }
     public function resetFormWhenClosed()
     {
@@ -244,10 +244,10 @@ class DiscountForm extends Component
             ];
 
             if ($this->customerType == 'Senior Citizen') {
-                $rules['senior_pwd_id'] = 'digits:4';
+                $rules['senior_pwd_id'] = 'min:4|numeric';
                 $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
             } elseif ($this->customerType == 'PWD') {
-                $rules['senior_pwd_id'] = 'digits:7';
+                $rules['senior_pwd_id'] = 'min:7|numeric';
                 $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             }
         } else {

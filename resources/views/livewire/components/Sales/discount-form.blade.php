@@ -138,7 +138,7 @@
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
                                                     placeholder="Birth Date" required />
 
-                                                @error('birth_date')
+                                                @error('birthdate')
                                                     <span class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
 
@@ -365,7 +365,7 @@
                                                 Percentage
                                                 (%)<span class="text-red-400 ">*</span></label>
 
-                                            <input type="number" id="discount_percentage" required 
+                                            <input type="number" id="discount_percentage" required  disabled
                                                 wire:model="discount_percentage"
                                                 class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5"
                                                 placeholder="Discount Percentage" />
