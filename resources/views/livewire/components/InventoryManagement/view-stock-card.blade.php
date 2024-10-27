@@ -26,7 +26,7 @@
                                 Selling Price (₱)</p>
                         </div>
                         <div class="flex flex-row items-center justify-center gap-2">
-                            <h1 class="text-[1.6em] font-black text-center">{{ $selling_price }}</h1>
+                            <h1 class="text-[1.6em] font-black text-center">{{ number_format($selling_price, 2) }}</h1>
                         </div>
                     </div>
                 </div>
@@ -40,9 +40,9 @@
                         <div class="flex flex-row items-center gap-2">
                             <h1 class="text-[1.2em] font-black text-center">
                                 @if ($expiration_date)
-                                    {{ \Carbon\Carbon::parse($expiration_date)->format(' M d Y ') }}
+                                {{ \Carbon\Carbon::parse($expiration_date)->format(' M d Y ') }}
                                 @else
-                                    N/A
+                                N/A
                                 @endif
                             </h1>
 
@@ -150,52 +150,52 @@
                     <tbody>
 
                         @foreach ($stock_cards as $stock_card)
-                            <tr class="transition duration-75 ease-in border-b hover:bg-gray-100 index:bg-red-400">
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
-                                    {{ \Carbon\Carbon::parse($stock_card['created_at'])->format(' M d Y h:i A') }}
-                                </th>
+                        <tr class="transition duration-75 ease-in border-b hover:bg-gray-100 index:bg-red-400">
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
+                                {{ \Carbon\Carbon::parse($stock_card['created_at'])->format(' M d Y h:i A') }}
+                            </th>
 
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
-                                    {{ $stock_card['movement_type'] }}
-                                </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 border-r-2 text-md whitespace-nowrap">
+                                {{ $stock_card['movement_type'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="px-4 py-4 font-medium text-left text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
-                                    {{ $stock_card['operation'] }}
-                                </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
+                                {{ $stock_card['operation'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
-                                    {{ $stock_card['in_quantity'] }}
-                                </th>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
+                                {{ $stock_card['in_quantity'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
-                                    {{ number_format($stock_card['in_value'], 2) }}
-                                </th>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
+                                {{ number_format($stock_card['in_value'], 2) }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
-                                    {{ $stock_card['out_quantity'] }}
-                                </th>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
+                                {{ $stock_card['out_quantity'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
-                                    {{ number_format($stock_card['out_value'], 2) }}
-                                </th>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 border-r-4 border-black text-md whitespace-nowrap">
+                                {{ number_format($stock_card['out_value'], 2) }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
-                                    {{ $stock_card['quantity_balance'] }}
-                                </th>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 border-r-2 text-md whitespace-nowrap">
+                                {{ $stock_card['quantity_balance'] }}
+                            </th>
 
-                                <th scope="row"
-                                    class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                    {{ number_format($stock_card['value'], 2) }}
-                                </th>
-                            </tr>
+                            <th scope="row"
+                                class="py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                {{ number_format($stock_card['value'], 2) }}
+                            </th>
+                        </tr>
                         @endforeach
 
                     </tbody>
