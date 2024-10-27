@@ -24,23 +24,11 @@
                 </div>
 
                 <div class="flex flex-row gap-2">
-                    <div class="flex flex-row gap-3">
-                        <p class="text-sm font-medium">From</p>
-                        <select name="fromYear"
-                            class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
-                            id="fromYear" wire:model.live="fromYear">
-                            <option value="">Select a year</option>
-                            @for ($fromYear = 2000; $fromYear <= 2050; $fromYear++)
-                                <option value="{{ $fromYear }}">{{ $fromYear }}</option>
-                            @endfor
-                        </select>
 
-                    </div>
                     <div class="flex flex-row gap-3">
-                        <p class="text-sm font-medium">To</p>
-                        <select name="toYear"
+                        <select name="year"
                             class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
-                            id="toYear" wire:model.live="toYear">
+                            id="toYear" wire:model.live="year">
                             <option value="">Select a year</option>
                             @for ($toYear = 2000; $toYear <= 2050; $toYear++)
                                 <option value="{{ $toYear }}">{{ $toYear }}</option>
@@ -75,7 +63,7 @@
 
             for (let index = 0; index < yearly.length; index++) {
 
-                dates[index] = yearly[index].year;
+                dates[index] = yearly[index].date;
                 datas[index] = yearly[index].totalAmount;
 
             }

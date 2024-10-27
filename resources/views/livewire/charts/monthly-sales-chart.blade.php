@@ -23,25 +23,18 @@
                     <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Sales Performance - Monthly</p>
                 </div>
 
-                <select name="year"
-                    class="p-2 text-center text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 "
-                    id="year" wire:model.live="year">
-                    <option value="">Select a year</option>
-                    @for ($year = 2000; $year <= 2050; $year++)
-                        <option value="{{ $year }}">{{ $year }}</option>
-                    @endfor
-                </select>
+                <input type="month" wire:model.live="month">
             </div>
             <canvas wire:ignore width="300" height="100" id="monthChart"></canvas>
         </div>
     </div>
 </div>
 @assets
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @endassets
 @script
-    <script>
-        const perMonth = document.getElementById('monthChart');
+<script>
+    const perMonth = document.getElementById('monthChart');
 
         Livewire.on('monthlyTotalUpdated', (monthlyTotal) => {
 
@@ -57,7 +50,7 @@
 
             for (let index = 0; index < monthly.length; index++) {
 
-                dates[index] = monthly[index].month;
+                dates[index] = monthly[index].date;
                 datas[index] = monthly[index].totalAmount;
 
             }
@@ -85,5 +78,5 @@
 
 
         });
-    </script>
+</script>
 @endscript

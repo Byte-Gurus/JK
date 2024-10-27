@@ -10,68 +10,46 @@ use Livewire\Component;
 class YearlySalesChart extends Component
 {
 
-    public $fromYear, $toYear, $totalAmount, $transactionCount;
+    public $year, $totalAmount, $transactionCount;
     public $yearlyTotal = [];
 
     public function render()
     {
-        if (!$this->fromYear || !$this->toYear) {
+        if (!$this->year) {
             $currentYear = Carbon::now()->format('Y');
-            $this->fromYear = $currentYear;
-            $this->toYear = $currentYear;
-            $this->updatedYearRange();
+            $this->updatedYear();
         }
         return view('livewire.charts.yearly-sales-chart');
     }
 
-    public function updatedToYear($toYear)
+    public function updatedYear()
     {
-        // Check if both fromYear and toYear have values
-        if ($this->fromYear && $this->toYear) {
-            $this->updatedYearRange(); // Call the method to update the range
-        }
-    }
-
-    public function updatedFromYear($fromYear)
-    {
-        // Check if both fromYear and toYear have values
-        if ($this->fromYear && $this->toYear) {
-            $this->updatedYearRange(); // Call the method to update the range
-        }
-    }
-    public function updatedYearRange()
-    {
-        // Ensure that fromYear and toYear are defined
-        if (!$this->fromYear || !$this->toYear) {
-            $currentYear = Carbon::now()->format('Y');
-            $this->fromYear = $currentYear;
-            $this->toYear = $currentYear;
+        if (!$this->year) {
+            $this->year = Carbon::now()->year;
         }
 
-        // Reset yearly totals
         $this->yearlyTotal = [];
         $this->totalAmount = 0;
         $this->transactionCount = 0;
 
-        // Loop through each year in the range
-        for ($year = $this->fromYear; $year <= $this->toYear; $year++) {
-            $startOfYear = Carbon::createFromFormat('Y', $year)->startOfYear();
-            $endOfYear = Carbon::createFromFormat('Y', $year)->endOfYear();
+        // Loop through each month of the selected year
+        for ($month = 1; $month <= 12; $month++) {
+            $startOfMonth = Carbon::create($this->year, $month, 1)->startOfMonth();
+            $endOfMonth = Carbon::create($this->year, $month, 1)->endOfMonth();
 
-            // Fetch transactions for the year
-            $transactions = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->get();
-            $yearlyTransactionCount = TransactionMovement::whereBetween('created_at', [$startOfYear, $endOfYear])->count();
+            // Fetch transactions for the month
+            $transactions = TransactionMovement::whereBetween('created_at', [$startOfMonth, $endOfMonth])->get();
+            $monthlyTransactionCount = TransactionMovement::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
 
-            // Initialize yearly totals
+            // Initialize monthly totals
             $totalGross = 0;
             $totalTax = 0;
-            $totalNet = 0;
             $totalReturnAmount = 0;
             $totalReturnVatAmount = 0;
             $totalVoidAmount = 0;
             $totalVoidVatAmount = 0;
 
-            // Process transactions for the year
+            // Process transactions for the month
             foreach ($transactions as $transaction) {
                 if ($transaction->transaction_type == 'Sales') {
                     $totalGross += $transaction->transactionJoin->total_amount;
@@ -88,23 +66,24 @@ class YearlySalesChart extends Component
                 }
             }
 
-            // Calculate yearly net values
-            $yearlyGross = $totalGross - ($totalReturnAmount + $totalVoidAmount);
-            $yearlyTax = $totalTax - ($totalReturnVatAmount + $totalVoidVatAmount);
-            $yearlyNet = $yearlyGross - $yearlyTax;
+            // Calculate monthly net values
+            $monthlyGross = $totalGross - ($totalReturnAmount + $totalVoidAmount);
+            $monthlyTax = $totalTax - ($totalReturnVatAmount + $totalVoidVatAmount);
+            $monthlyNet = $monthlyGross - $monthlyTax;
 
-            // Add yearly summary to the array
+            // Add monthly summary to the array
             $this->yearlyTotal[] = [
-                'year' => $year,
-                'totalAmount' => $yearlyGross,
+                'date' => $startOfMonth->format('F'),
+                'totalAmount' => $monthlyGross,
             ];
 
             // Add to the global transaction count and total amount
-            $this->transactionCount += $yearlyTransactionCount;
-            $this->totalAmount += $yearlyGross;
+            $this->transactionCount += $monthlyTransactionCount;
+            $this->totalAmount += $monthlyGross;
         }
 
         // Dispatch event for front-end updates
         $this->dispatch('yearlyTotalUpdated', $this->yearlyTotal);
+
     }
 }

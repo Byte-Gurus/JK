@@ -17,9 +17,10 @@
             </div>
         </div>
         <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">Monthly SALES REPORT</p>
+            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">MONTHLY SALES REPORT</p>
         </div>
         @if ($transaction_info && $hasTransactions)
+
         <div class="grid grid-flow-col grid-cols-2 ">
             <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
                 <div class="flex flex-col ">
@@ -78,6 +79,12 @@
                         <p class="text-[0.8em] uppercase text-right font-bold">Gross Sales (₱)</p>
                     </div>
                 </li>
+
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Discount Amount (₱)</p>
+                    </div>
+                </li>
                 {{-- <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-center font-bold">Voided Amount(₱)</p>
@@ -105,122 +112,43 @@
             <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
             @endif
             @if ($transaction_info && $hasTransactions)
-
-            @foreach ($transactions as $transaction)
-            <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
-                <li class="col-span-2 py-[3px]">
+            @foreach ($transaction_info['dailySummaries'] as $summary) {{-- Change here --}}
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
+                <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-left font-medium">
-                            @if ($transaction->transaction_type == 'Sales')
-                            {{ $transaction->transactionJoin->transaction_number }}
-                            @elseif ($transaction->transaction_type == 'Return')
-                            {{ $transaction->returnsJoin->return_number }}
-                            @elseif ($transaction->transaction_type == 'Credit')
-                            {{ $transaction->creditJoin->credit_number }}
-                            @elseif ($transaction->transaction_type == 'Void')
-                            {{ $transaction->voidTransactionJoin->void_number }}
-                            @endif
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-2 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center font-medium">
-                            {{ $transaction->transaction_type }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-center font-bold">
-                            {{ $transaction->created_at->format('h:i A') }}
+                            {{ $summary['date'] }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-right font-bold">
-                            @if ($transaction->transaction_type == 'Sales')
-                            {{ number_format($transaction->transactionJoin->subtotal, 2) }}
-                            @elseif ($transaction->transaction_type == 'Return')
-                            {{ number_format($transaction->returnsJoin->return_total_amount * -1, 2) }}
-                            @elseif ($transaction->transaction_type == 'Credit')
-                            {{ number_format($transaction->creditJoin->transactionJoin->subtotal, 2) }}
-                            @elseif ($transaction->transaction_type == 'Void')
-                            {{ number_format($transaction->voidTransactionJoin->void_total_amount * -1, 2) }}
-                            @endif
-                        </p>
+                            {{ number_format($summary['totalGross'], 2) }}</p>
                     </div>
                 </li>
-
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-right font-bold">
-                            @if ($transaction->transaction_type == 'Sales')
-                            {{ number_format($transaction->transactionJoin->total_discount_amount, 2) }}
-                            @elseif ($transaction->transaction_type == 'Return')
-                            0.00
-                            @elseif ($transaction->transaction_type == 'Credit')
-                            {{ number_format($transaction->creditJoin->transactionJoin->total_discount_amount, 2) }}
-                            @elseif ($transaction->transaction_type == 'Void')
-                            0.00
-                            @endif
-                        </p>
+                            {{ number_format($summary['totalDiscount'], 2) }}</p>
                     </div>
                 </li>
-
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-right font-bold">
-                            @if ($transaction->transaction_type == 'Sales')
-                            {{ number_format($transaction->transactionJoin->total_vat_amount, 2) }}
-                            @elseif ($transaction->transaction_type == 'Return')
-                            {{ number_format($transaction->returnsJoin->return_vat_amount * -1, 2) }}
-                            @elseif ($transaction->transaction_type == 'Credit')
-                            {{ number_format($transaction->creditJoin->transactionJoin->total_vat_amount, 2) }}
-                            @elseif ($transaction->transaction_type == 'Void')
-                            {{ number_format($transaction->voidTransactionJoin->void_vat_amount * -1, 2) }}
-                            @endif
-                        </p>
+                            {{ number_format($summary['totalTax'], 2) }}</p>
                     </div>
                 </li>
-
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-right font-bold">
-                            @if ($transaction->transaction_type == 'Sales')
-                            {{ number_format(
-                            $transaction->transactionJoin->total_amount -
-                            $transaction->transactionJoin->total_vat_amount,
-                            2,
-                            ) }}
-                            @elseif ($transaction->transaction_type == 'Return')
-                            {{ number_format(
-                            ($transaction->returnsJoin->return_total_amount -
-                            $transaction->returnsJoin->return_vat_amount) * -1,
-                            2,
-                            ) }}
-                            @elseif ($transaction->transaction_type == 'Credit')
-                            {{ number_format(
-                            $transaction->creditJoin->transactionJoin->total_amount -
-                            $transaction->creditJoin->transactionJoin->total_vat_amount,
-                            2,
-                            ) }}
-                            @elseif ($transaction->transaction_type == 'Void')
-                            {{ number_format(
-                            ($transaction->voidTransactionJoin->void_total_amount -
-                            $transaction->voidTransactionJoin->void_vat_amount) * -1,
-                            2,
-                            ) }}
-                            @endif
+                            {{ number_format($summary['totalNet'], 2) }}
                         </p>
                     </div>
                 </li>
             </ul>
             @endforeach
-
-
-
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 border-black border-y ">
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 border-black border-y">
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">Total</p>
@@ -252,8 +180,10 @@
                 </li>
             </ul>
             @endif
+
         </div>
-        @if ($transaction_info)
+        @if ($transaction_info && $hasTransactions)
+
         <div class="px-4 py-4">
             <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>

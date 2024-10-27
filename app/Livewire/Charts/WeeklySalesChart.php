@@ -8,14 +8,14 @@ use Livewire\Component;
 
 class WeeklySalesChart extends Component
 {
-    public $month, $totalAmount = 0, $transactionCount = 0;
-    public $monthlyTotal = [];
+    public $week, $totalAmount = 0, $transactionCount = 0;
+    public $weeklyTotal = [];
 
     public function render()
     {
-        if (!$this->month) {
-            $currentMonth = Carbon::now()->format('Y-m'); // Get current month in 'YYYY-MM' format
-            $this->updatedMonth($currentMonth);
+        if (!$this->week) {
+            $currentWeek = Carbon::now()->format('Y-\WW'); // Get current week in 'YYYY-WW' format            // Get current month in 'YYYY-MM' format
+            $this->updatedWeek($currentWeek);
         }
         return view('livewire.charts.weekly-sales-chart');
     }
@@ -24,93 +24,70 @@ class WeeklySalesChart extends Component
         'get-picker' => 'getPicker',
     ];
 
-    public function updatedMonth($currentMonth)
+    public function updatedWeek($currentWeek)
     {
         // Reset totals for recalculation
-        $this->monthlyTotal = [];
+        $this->weeklyTotal = [];
         $this->totalAmount = 0;
         $this->transactionCount = 0;
 
-        if (!$this->month) {
-            $currentMonth = Carbon::now()->format('Y-m'); // Get current month in 'YYYY-MM' format
+        if (!$this->week) {
+            $currentWeek = Carbon::now()->format('Y-\WW'); // Get current week in 'YYYY-WW' format
         }
 
-        // Get the start and end of the month
-        $startOfMonth = Carbon::parse($currentMonth . '-01')->startOfMonth();
-        $endOfMonth = Carbon::parse($currentMonth . '-01')->endOfMonth();
+        // Get the start and end of the week
+        $startOfWeek = Carbon::parse($currentWeek)->startOfWeek();
+        $endOfWeek = Carbon::parse($currentWeek)->endOfWeek();
 
-        // Initialize totals for the entire month
-        $totalGross = 0;
-        $totalTax = 0;
-        $totalNet = 0;
 
-        // Iterate through the weeks of the month
-        $currentWeek = $startOfMonth->copy();
-        while ($currentWeek->lessThanOrEqualTo($endOfMonth)) {
-            $startOfWeek = $currentWeek->copy()->startOfWeek();
-            $endOfWeek = $currentWeek->copy()->endOfWeek();
+        // Get transactions within the current week
+        for ($date = $startOfWeek->copy(); $date->lte($endOfWeek); $date->addDay()) {
+            // Daily totals
+            $dailyGross = 0;
+            $dailyTax = 0;
 
-            // Ensure the week stays within the bounds of the month
-            if ($startOfWeek->lessThan($startOfMonth)) {
-                $startOfWeek = $startOfMonth;
-            }
-            if ($endOfWeek->greaterThan($endOfMonth)) {
-                $endOfWeek = $endOfMonth;
-            }
+            // Fetch transactions for the current day
+            $dailyTransactions = TransactionMovement::whereDate('created_at', $date)->get();
+            $dailyTransactionCount = $dailyTransactions->count();
+            $this->transactionCount += $dailyTransactionCount;
 
-            // Get transactions within the current week
-            $transactions = TransactionMovement::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
-            $weeklyTransactionCount = $transactions->count();
-            $this->transactionCount += $weeklyTransactionCount;
-
-            // Initialize weekly totals
-            $weeklyGross = 0;
-            $weeklyTax = 0;
-            $weeklyNet = 0;
-
-            foreach ($transactions as $transaction) {
+            foreach ($dailyTransactions as $transaction) {
                 switch ($transaction->transaction_type) {
                     case 'Sales':
-                        $weeklyGross += $transaction->transactionJoin->total_amount;
-                        $weeklyTax += $transaction->transactionJoin->total_vat_amount;
+                        $dailyGross += $transaction->transactionJoin->total_amount;
+                        $dailyTax += $transaction->transactionJoin->total_vat_amount;
                         break;
                     case 'Return':
-                        $weeklyGross -= $transaction->returnsJoin->return_total_amount;
-                        $weeklyTax -= $transaction->returnsJoin->return_vat_amount;
+                        $dailyGross -= $transaction->returnsJoin->return_total_amount;
+                        $dailyTax -= $transaction->returnsJoin->return_vat_amount;
                         break;
                     case 'Credit':
-                        $weeklyGross += $transaction->creditJoin->transactionJoin->total_amount;
-                        $weeklyTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
+                        $dailyGross += $transaction->creditJoin->transactionJoin->total_amount;
+                        $dailyTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
                         break;
                     case 'Void':
-                        $weeklyGross -= $transaction->voidTransactionJoin->void_total_amount;
-                        $weeklyTax -= $transaction->voidTransactionJoin->void_vat_amount;
+                        $dailyGross -= $transaction->voidTransactionJoin->void_total_amount;
+                        $dailyTax -= $transaction->voidTransactionJoin->void_vat_amount;
                         break;
                 }
             }
 
-            // Calculate net for the week
-            $weeklyNet = $weeklyGross - $weeklyTax;
+            // Calculate net for the day
+            $dailyNet = $dailyGross - $dailyTax;
 
-            // Store weekly totals in monthly summary
-
-            $this->monthlyTotal[] = [
-                'date' => $startOfWeek->format('M d Y') . ' - ' . $endOfWeek->format('M d Y'),
-                'totalAmount' => $weeklyGross
+            // Add daily totals to weeklyTotal array
+            $this->weeklyTotal[] = [
+                'date' => $date->format('M d, Y'),
+                'totalAmount' => $dailyGross,
             ];
-            // Add to monthly totals
-            $totalGross += $weeklyGross;
-            $totalTax += $weeklyTax;
-            $totalNet += $weeklyNet;
 
-            // Move to the next week
-            $currentWeek->addWeek();
+
+            // Set the total amount for the week
+            $this->totalAmount += $dailyGross;
+
+            // Dispatch event with updated weekly totals
+            $this->dispatch('weeklyTotalUpdated', $this->weeklyTotal);
         }
-
-        // Set the total amount for the entire month
-        $this->totalAmount = $totalGross;
-
-        // Dispatch event with updated monthly totals
-        $this->dispatch('monthlyTotalUpdated', $this->monthlyTotal);
     }
+
 }

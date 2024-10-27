@@ -26,75 +26,87 @@ class MonthlySalesReport extends Component
     public function generateReport($month)
     {
 
-        $startDate = Carbon::parse($month)->startOfMonth();
-        $endDate = Carbon::parse($month)->endOfMonth();
-        // Initialize totals for the month
-        // Initialize weekly summaries
-        $totalGross = 0;
-        $totalDiscount = 0;
-        $totalTax = 0;
-        $totalNet = 0;
+        $startOfMonth = Carbon::parse($month)->startOfMonth();
+        $endOfMonth = Carbon::parse($month)->endOfMonth();
 
-        $totalReturnAmount = 0;
-        $totalReturnVatAmount = 0;
-        $totalVoidAmount = 0;
-        $totalVoidVatAmount = 0;
+        $dailySummaries = [];
+        $weeklyGross = 0;
+        $weeklyTax = 0;
+        $weeklyDiscount = 0;
+        $weeklyNet = 0;
 
 
-        // Fetch transactions for the specific month (current year)
-        $this->transactions = TransactionMovement::whereBetween('created_at', [$startDate, $endDate])
-            ->get();
-        // Check if transactions are not empty
-        if ($this->transactions->isNotEmpty()) {
-            $this->hasTransactions = true;
+        // Loop through each day of the week
+        for ($date = $startOfMonth->copy(); $date->lte($endOfMonth); $date->addDay()) {
+            $dailyGross = $dailyDiscount = $dailyTax = $dailyNet = 0;
+            $dailyReturnAmount = $dailyReturnVatAmount = $dailyVoidAmount = $dailyVoidVatAmount = 0;
 
-            // Iterate through transactions to sum up
-            foreach ($this->transactions as $transaction) {
-                // Summing monthly transactions
-                switch ($transaction->transaction_type) {
-                    case 'Sales':
-                        $totalGross += $transaction->transactionJoin->subtotal;
-                        $totalTax += $transaction->transactionJoin->total_vat_amount;
+            // Fetch transactions for the specific day
+            $dayTransactions = TransactionMovement::whereDate('created_at', $date)->get();
 
-                        $totalDiscount += $transaction->transactionJoin->total_discount_amount;
+            // Check if there are any transactions for the day
+            if ($dayTransactions->isNotEmpty()) {
+                $this->hasTransactions = true;
 
-                        break;
-                    case 'Return':
-                        $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
-                        $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
-                        break;
-                    case 'Credit':
-                        $totalGross += $transaction->creditJoin->transactionJoin->subtotal;
-                        $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
-
-                        $totalDiscount += $transaction->creditJoin->transactionJoin->total_discount_amount;
-                        break;
-                    case 'Void':
-                        $totalVoidAmount += $transaction->voidTransactionJoin->void_total_amount;
-                        $totalVoidVatAmount += $transaction->voidTransactionJoin->void_vat_amount;
-                        break;
+                foreach ($dayTransactions as $transaction) {
+                    switch ($transaction->transaction_type) {
+                        case 'Sales':
+                            $dailyGross += $transaction->transactionJoin->subtotal;
+                            $dailyTax += $transaction->transactionJoin->total_vat_amount;
+                            $dailyDiscount += $transaction->transactionJoin->total_discount_amount;
+                            break;
+                        case 'Return':
+                            $dailyReturnAmount += $transaction->returnsJoin->return_total_amount;
+                            $dailyReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
+                            break;
+                        case 'Credit':
+                            $dailyGross += $transaction->creditJoin->transactionJoin->subtotal;
+                            $dailyTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
+                            $dailyDiscount += $transaction->creditJoin->transactionJoin->total_discount_amount;
+                            break;
+                        case 'Void':
+                            $dailyVoidAmount += $transaction->voidTransactionJoin->void_total_amount;
+                            $dailyVoidVatAmount += $transaction->voidTransactionJoin->void_vat_amount;
+                            break;
+                    }
                 }
+
+                // Calculate daily net amount
+                $dailyGross -= $dailyReturnAmount + $dailyVoidAmount;
+                $dailyNet = $dailyGross - ($dailyTax + $dailyReturnVatAmount + $dailyVoidVatAmount + $dailyDiscount);
+
+
+                // Add daily summary to array
+                $dailySummaries[] = [
+                    'date' => $date->format('M d, Y'),
+                    'totalGross' => $dailyGross,
+                    'totalTax' => $dailyTax - $dailyReturnVatAmount - $dailyVoidVatAmount,
+                    'totalNet' => $dailyNet,
+                    'totalDiscount' => $dailyDiscount,
+
+                ];
+
+                $weeklyGross += $dailyGross;
+                $weeklyTax += $dailyTax;
+                $weeklyDiscount += $dailyDiscount;
+                $weeklyNet += $dailyNet;
             }
 
-            // Calculate net values for the month
-            $totalGross -= $totalReturnAmount + $totalVoidAmount;
-            $totalNet = $totalGross - ($totalTax + $totalReturnVatAmount + $totalVoidVatAmount + $totalDiscount);
 
-            // Prepare report information
-            $this->transaction_info = [
-                'date' => Carbon::createFromDate($month)->format('Y M'), // Format the month and year
-                'totalGross' => $totalGross,
-                'totalTax' => $totalTax - $totalReturnVatAmount - $totalVoidVatAmount,
-                'totalNet' => $totalNet,
-                'totalDiscount' => $totalDiscount,
-                'dateCreated' => Carbon::now()->format('M d, Y h:i A'),
-                'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
-            ];
-        } else {
-            // No transactions found
-            $this->hasTransactions = false;
-            $this->transaction_info = []; // Clear transaction info
+
         }
+
+        $this->transaction_info = [
+            'date' => $startOfMonth->format('M d, Y') . ' - ' . $endOfMonth->format('M d, Y'),
+            'totalTax' => $weeklyTax,
+            'totalGross' => $weeklyGross,
+            'totalNet' => $weeklyNet,
+            'totalDiscount' => $weeklyDiscount,
+            'dailySummaries' => $dailySummaries,
+            'dateCreated' => Carbon::now()->format('M d, Y h:i A'),
+            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname
+        ];
+
     }
 
 
