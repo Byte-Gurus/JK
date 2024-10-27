@@ -507,6 +507,7 @@ class SalesTransaction extends Component
 
         $this->tax_details = [
             'vat_exempt_amount' => $vat_exempt_amount,
+            'vatable_subtotal' => $vatable_subtotal,
             'vatable_amount' => $vatable_amount,
             'total_vat' => $this->totalVat,
             'PWD_Senior_discount_amount' => $this->PWD_Senior_discount_amount,

@@ -21,4 +21,13 @@ class SalesReceipt extends Component
         $this->receiptDetails = $receiptData;
 
     }
+
+    public function generateInvoiceNumber()
+    {
+        $randomNumber = random_int(0, 9999);
+        $formattedNumber = str_pad($randomNumber, 4, '0', STR_PAD_LEFT);
+
+
+        return $formattedNumber;
+    }
 }

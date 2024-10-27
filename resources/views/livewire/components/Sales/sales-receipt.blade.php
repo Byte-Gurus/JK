@@ -16,7 +16,7 @@
                 <div class="flex flex-col ">
                     <div class="flex flex-col items-center justify-center mb-4 text-nowrap">
                         <p class="text-[0.8em] font-bold uppercase">Sales Invoice</p>
-                        <p class="text-[0.8em] font-medium uppercase"># 1234</p>
+                        <p class="text-[0.8em] font-medium uppercase"># {{$this->generateInvoiceNumber()}}</p>
                     </div>
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date:</p>
@@ -131,9 +131,14 @@
 
             <div class="flex flex-col px-2 mx-2">
                 <div class="flex flex-row justify-between">
-                    <p class="text-[0.6em] font-bold uppercase">VATable</p>
+                    <p class="text-[0.6em] font-bold uppercase">Vat Amount</p>
                     <p class="text-[0.6em] font-bold uppercase">
                         {{ number_format($receiptDetails['tax_details']['vatable_amount'] ?? null, 2) }}</p>
+                </div>
+                <div class="flex flex-row justify-between">
+                    <p class="text-[0.6em] font-bold uppercase">VATable Sale</p>
+                    <p class="text-[0.6em] font-bold uppercase">
+                        {{ number_format($receiptDetails['tax_details']['vatable_subtotal'] ?? null, 2) }}</p>
                 </div>
                 <div class="flex flex-row justify-between">
                     <p class="text-[0.6em] font-bold uppercase">Vat Exempt Sale</p>
