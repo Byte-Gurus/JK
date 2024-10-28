@@ -4,6 +4,7 @@ namespace App\Livewire\Components\Sales;
 
 use App\Events\ReturnEvent;
 use App\Livewire\Pages\CashierPage;
+use App\Models\Inventory;
 use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
@@ -191,13 +192,13 @@ class SalesReturnDetails extends Component
                     if ($transactionDetail->vat_type === 'Vat') {
                         $vatable_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
-                        $vatable_return_total_amount = $vatable_Return_Subtotal - ($vatable_Return_Subtotal / (100 + $vat_Percent) * 100);
+                        $vatable_return_total_amount = (($vatable_Return_Subtotal * (100 + $vat_Percent)) / 100) - $vatable_Return_Subtotal;
 
 
                     } elseif ($transactionDetail->vat_type === 'Vat Exempt') {
                         $vat_exempt_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
-                        $vat_exempt_return_total_amount = $vat_exempt_Return_Subtotal - ($vat_exempt_Return_Subtotal / (100 + $vat_Percent) * 100);
+                        $vat_exempt_return_total_amount = (($vat_exempt_Return_Subtotal * (100 + $vat_Percent) / 100)) - $vat_exempt_Return_Subtotal;
 
                     }
 
@@ -300,8 +301,22 @@ class SalesReturnDetails extends Component
         }
     }
 
-    public function updatedOperation($value, $index)
+    public function updateOperation($value, $index, $id)
     {
+        if ($value == 'Exchange') {
+            $itemDetails = TransactionDetails::find($id);
+            $itemInventory = Inventory::where('sku_code', $itemDetails->inventoryJoin->sku_code)->first();
+
+            if ($itemInventory->current_stock_quantity == 0) {
+                $this->alert('error', 'The inventory stock of this item is out of stock');
+                return;
+            }
+
+            if ($itemDetails->item_quantity > $itemInventory->current_stock_quantity) {
+                $this->alert('warning', message: 'The inventory stock of this item is insufficient to the purchased quantity');
+            }
+
+        }
         $this->returnQuantity[$index] = null;
         $this->resetSpecificValidation("returnQuantity.$index");
         $this->return_info[$index] = null;

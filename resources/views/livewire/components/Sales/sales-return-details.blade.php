@@ -215,7 +215,7 @@
                         <th scope="row"
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            <select id="status" wire:model.live="operation.{{ $index }}"
+                            <select id="status" wire:model.live="operation" wire:change="updateOperation($event.target.value, {{ $index }}, {{ $transactionDetail->id }})"
                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-sm text-center rounded-md block l p-2.5 ">
                                 <option value="" selected>Set your operation</option>
                                 <option value="Refund">Refund</option>

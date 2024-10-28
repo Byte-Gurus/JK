@@ -443,7 +443,7 @@ class SalesTransaction extends Component
 
             if ($index['vat_type'] === 'Vat') {
                 $vatable_subtotal += $index['total_amount'];
-                $vatable_amount = (($vatable_subtotal * (100 + $index['vat_percent'])) / 100) -  $vatable_subtotal;
+                $vatable_amount = (($vatable_subtotal * (100 + $index['vat_percent'])) / 100) - $vatable_subtotal;
                 // dump([
                 //     "vat",
                 //     'vatable_subtotal' => $vatable_subtotal,
@@ -453,7 +453,8 @@ class SalesTransaction extends Component
                 // ]);
             } elseif ($index['vat_type'] === 'Vat Exempt') {
                 $vat_exempt_subtotal += $index['total_amount'];
-                $vat_exempt_amount = $vat_exempt_subtotal - ($vat_exempt_subtotal * (100 + $index['vat_percent'])) / 100;
+                $vat_exempt_amount = (($vat_exempt_subtotal * (100 + $index['vat_percent'])) / 100) - $vat_exempt_subtotal;
+
                 // dump([
                 //     "non vat",
                 //     'vat_exempt_subtotal' => $vat_exempt_subtotal,
@@ -1057,8 +1058,8 @@ class SalesTransaction extends Component
     {
         $subTotal = $selling_price * $quantity;
         $subTotal = $subTotal - ($subTotal * ($discount / 100));
-        $vat = $subTotal *(100 + 12 ) / 100;
-        dump($selling_price, $quantity, $discount, $subTotal, $vat,  $vat_percent);
+        $vat = $subTotal * (100 + 12) / 100;
+        dump($selling_price, $quantity, $discount, $subTotal, $vat, $vat_percent);
         return $vat;
     }
 

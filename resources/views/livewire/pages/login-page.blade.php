@@ -12,7 +12,7 @@
         <div
             class="bg-white flex transition-all duration-100 ease-in-out border-2 border-[rgb(22,22,22)] rounded-br-xl rounded-tr-xl p-10 w-[520px]">
             <form wire:submit.prevent="authenticate" class="flex flex-col justify-center w-full flex-nowrap text-nowrap">
-                @csrf
+
                 <div class="flex flex-col mb-8">
                     <p class="font-bold pointer-events-none text-[3em]">
                         Sign In
