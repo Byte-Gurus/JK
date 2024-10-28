@@ -126,7 +126,7 @@ class SalesReturnDetails extends Component
                     'transaction_details_id' => $info['transaction_details_id'],
                     'operation' => $info['operation'],
                     'user_id' => Auth::id(),
-                    
+
                 ]);
 
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
@@ -367,11 +367,13 @@ class SalesReturnDetails extends Component
 
             if ($itemInventory->current_stock_quantity == 0) {
                 $this->alert('error', 'The inventory stock of this item is out of stock');
+                $this->operation[$index] = null;
                 return;
             }
 
 
         }
+
         $this->returnQuantity[$index] = null;
         $this->toBeRefundQuantity[$index] = null;
         $this->resetSpecificValidation("returnQuantity.$index");
