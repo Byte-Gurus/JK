@@ -132,10 +132,14 @@ class SalesReturnDetails extends Component
                 $this->allowReturn = false;
                 return;
             }
-
-              // Check if the return quantity exceeds the available quantity
-              if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] < 1) {
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] < 1) {
                 $this->addError('returnQuantity.' . $index, 'The return quantity minimum quantity is 1.');
+                $this->allowReturn = false;
+                return;
+            }
+
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
+                $this->addError('returnQuantity.' . $index, 'The return quantity should be less than or equal to ' . $availableQty);
                 $this->allowReturn = false;
                 return;
             }
@@ -143,7 +147,6 @@ class SalesReturnDetails extends Component
             $this->allowReturn = true;
         }
 
-        // If all checks pass, calculate the total refund amount
 
         $this->calculateTotalRefundAmount();
     }
