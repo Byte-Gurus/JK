@@ -27,6 +27,7 @@ class SalesReturnDetails extends Component
 
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount, $total_refund_amount, $total_exchange_amount, $adminAcc;
     public $fromPage = 'ReturnDetails';
+    public $allowReturn = false;
     public $return_info = [];
 
     public function mount()
@@ -57,6 +58,7 @@ class SalesReturnDetails extends Component
     {
 
         $validated = $this->validateForm();
+
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
 
@@ -127,11 +129,15 @@ class SalesReturnDetails extends Component
             // Check if the return quantity exceeds the available quantity
             if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
                 $this->addError('returnQuantity.' . $index, 'The return quantity must be less than or equal to the available quantity.');
+                $this->allowReturn = false;
                 return;
             }
+
+            $this->allowReturn = true;
         }
 
         // If all checks pass, calculate the total refund amount
+
         $this->calculateTotalRefundAmount();
     }
 
