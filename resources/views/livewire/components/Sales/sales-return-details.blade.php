@@ -97,16 +97,16 @@
     <div class="flex flex-col">
         <div class="flex justify-end w-full mb-[3vh]">
             @if (!$returnQuantity || $this->allReturnQuantitiesNull() || !$allowReturn)
-            <button type="button"
-                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(117,141,109)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(117,141,109)]">
-                Confirm
-            </button>
+                <button type="button"
+                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(117,141,109)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(117,141,109)]">
+                    Confirm
+                </button>
             @else
-            <button type="button"
-                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
-                wire:click="return">
-                Confirm
-            </button>
+                <button type="button"
+                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] hover:translate-y-[-2px] transition-all duration-100 ease-in-out"
+                    wire:click="return">
+                    Confirm
+                </button>
             @endif
 
 
@@ -157,11 +157,11 @@
                         <th scope="col" class="px-4 py-3 text-center">Return quantity</th>
 
                         @if (in_array('Exchange', $operation))
-                        {{-- Available Stock --}}
-                        <th scope="col" class="px-4 py-3 text-center">Available Stock</th>
+                            {{-- Available Stock --}}
+                            <th scope="col" class="px-4 py-3 text-center">Available Stock</th>
 
-                        {{-- Refund Quantity --}}
-                        <th scope="col" class="px-4 py-3 text-center">Refunded Quantity</th>
+                            {{-- Refund Quantity --}}
+                            <th scope="col" class="px-4 py-3 text-center">Refunded Quantity</th>
                         @endif
 
 
@@ -172,135 +172,133 @@
                 <tbody>
 
                     @foreach ($transactionDetails as $index => $transactionDetail)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $index + 1 }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $index + 1 }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['inventoryJoin']['sku_code'] }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['inventoryJoin']['sku_code'] }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['barcode'] }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['barcode'] }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['item_name'] }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['item_name'] }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['itemJoin']['item_description'] }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['itemJoin']['item_description'] }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 whitespace-nowrap ">
-                            {{ number_format($transactionDetail['item_price'], 2) }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 whitespace-nowrap ">
+                                {{ number_format($transactionDetail['item_price'], 2) }}
+                            </th>
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['item_quantity'] }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                {{ $transactionDetail['item_quantity'] }}
+                            </th>
 
 
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                            @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
-                            {{ number_format(
-                            $transactionDetail['item_price'] -
-                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
-                            3,
-                            ) }}
-                            @else
-                            0.00
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                                @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
+                                    {{ number_format(
+                                        $transactionDetail['item_price'] -
+                                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
+                                        3,
+                                    ) }}
+                                @else
+                                    0.00
+                                @endif
+                            </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($transactionDetail['item_subtotal'], 2) }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+                                <select id="status" wire:model.live="operation.{{ $index }}"
+                                    wire:change="updateOperation($event.target.value, {{ $index }}, {{ $transactionDetail->id }})"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-sm text-center rounded-md block l p-2.5 ">
+                                    <option value="" selected>Set your operation</option>
+                                    <option value="Refund">Refund</option>
+                                    <option value="Exchange">Exchange</option>
+                                </select>
+
+                                @error("description.$index")
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+                                <select id="status" wire:model.live="description.{{ $index }}"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-center text-sm rounded-md block p-2.5 ">
+                                    <option value="" selected>Set your description</option>
+                                    <option value="Damaged">Damaged</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
+
+                                @error("description.$index")
+                                    <span
+                                        class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{ $message }}</span>
+                                @enderror
+
+                                <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
+
+
+                            </th>
+                            @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] && $description[$index])
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+
+                                    <input type="number"
+                                        class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                        wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
+                                </th>
+
+                                @if ($operation[$index] == 'Exchange')
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $transactionDetail['inventoryJoin']['current_stock_quantity'] }}
+                                    </th>
+                                @endif
+
+                                @if ($operation[$index] == 'Exchange')
+                                    <th scope="row"
+                                        class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                        {{ $toBeRefundQuantity[$index] ?? 0 }}
+                                    </th>
+                                @endif
                             @endif
-                        </th>
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($transactionDetail['item_subtotal'], 2) }}
-                        </th>
-
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                            <select id="status" wire:model.live="operation.{{ $index }}"
-                                wire:change="updateOperation($event.target.value, {{ $index }}, {{ $transactionDetail->id }})"
-                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-sm text-center rounded-md block l p-2.5 ">
-                                <option value="" selected>Set your operation</option>
-                                <option value="Refund">Refund</option>
-                                <option value="Exchange">Exchange</option>
-                            </select>
-
-                            @error("description.$index")
-                            <span
-                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                $message }}</span>
-                            @enderror
-
-
-                        </th>
-
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                            <select id="status" wire:model.live="description.{{ $index }}"
-                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-center text-sm rounded-md block p-2.5 ">
-                                <option value="" selected>Set your description</option>
-                                <option value="Damaged">Damaged</option>
-                                <option value="Expired">Expired</option>
-                            </select>
-
-                            @error("description.$index")
-                            <span
-                                class="mt-2 font-medium text-red-500 vsm:text-sm phone:text-sm tablet:text-sm laptop:text-md">{{
-                                $message }}</span>
-                            @enderror
-
-                            <!-- Content to display if returnQuantity at the given index is not greater than 0 -->
-
-
-                        </th>
-                        @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] &&
-                        $description[$index])
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-
-                            <input type="number"
-                                class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
-                        </th>
-
-                        @if ($operation[$index] == 'Exchange')
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $transactionDetail['inventoryJoin']['current_stock_quantity'] }}
-                        </th>
-                        @endif
-
-                        @if ($operation[$index] == 'Exchange')
-                        <th scope="row"
-                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ $toBeRefundQuantity[$index] ?? 0 }}
-                        </th>
-                        @endif
-                        @endif
-                    </tr>
-                    <tr>
-                        <td colspan="14" class="text-center">
-                            @error("returnQuantity.$index")
-                            <div class="p-1 bg-red-100">
-                                <span class="font-medium text-center text-red-500">{{ $message }}</span>
-                            </div>
-                            @enderror
-                        </td>
-                    </tr>
+                        </tr>
+                        <tr>
+                            <td colspan="14" class="text-center">
+                                @error("returnQuantity.$index")
+                                    <div class="p-1 bg-red-100">
+                                        <span class="font-medium text-center text-red-500">{{ $message }}</span>
+                                    </div>
+                                @enderror
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
