@@ -251,9 +251,9 @@ class SalesReturnDetails extends Component
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] != null) {
 
-                foreach ($this->operation as $index => $value) {
-                    $rules["operation.$index"] = 'required|in:Refund,Exchange';
-                }
+
+                $rules["operation.$index"] = 'required|in:Refund,Exchange';
+
                 $rules["description.$index"] = 'required|in:Damaged,Expired';
             }
         }
