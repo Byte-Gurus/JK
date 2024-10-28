@@ -1167,7 +1167,7 @@ class SalesTransaction extends Component
 
     public function clearSelectedReturnNo()
     {
-        $this->reset('return_number');
+        $this->reset('return_number', 'selectedItems');
     }
 
     public function displayChangeQuantityForm($showChangeQuantityForm)
@@ -1220,7 +1220,7 @@ class SalesTransaction extends Component
 
         $this->returnInfo = Returns::where('return_number', $this->search_return_number)->first();
 
-
+        $returnDetails = ReturnDetails::where('return_id', $this->returnInfo->id)->get();
 
         if (!$this->returnInfo) {
             $this->alert('error', 'The return number does not exist.');
@@ -1239,6 +1239,36 @@ class SalesTransaction extends Component
             $this->alert('error', 'The return number has no exchange.');
             return;
         }
+
+        foreach ($returnDetails as $returnDetail) {
+
+            $this->selectedItems[] = [
+                'item_id' => $returnDetail->transactionDetailsJoin->item_id,
+                'item_name' => $returnDetail->transactionDetailsJoin->itemJoin->item_name,
+                'item_description' => $returnDetail->transactionDetailsJoin->itemJoin->item_description,
+                'vat_type' => $returnDetail->transactionDetailsJoin->itemJoin->vat_type,
+                'reorder_point' => $returnDetail->transactionDetailsJoin->itemJoin->reorder_point,
+                'vat' => $returnDetail->transactionDetailsJoin->itemJoin->vat_amount,
+                'vat_percent' => $returnDetail->transactionDetailsJoin->itemJoin->vat_percent,
+                'quantity' => $returnDetail->return_quantity,
+                'barcode' => $returnDetail->transactionDetailsJoin->itemJoin->barcode,
+                'sku_code' => $returnDetail->transactionDetailsJoin->inventoryJoin->sku_code,
+                'selling_price' => $returnDetail->transactionDetailsJoin->item_price,
+                'total_amount' => $returnDetail->transactionDetailsJoin->item_price * $returnDetail->return_quantity,
+                'current_stock_quantity' => $returnDetail->transactionDetailsJoin->inventoryJoin->current_stock_quantity,
+                'bulk_quantity' => $returnDetail->transactionDetailsJoin->itemJoin->bulk_quantity,
+                'wholesale_discount_amount' => $returnDetail->transactionDetailsJoin->item_discount_amount,
+                'status' => 'Sales',
+                'discount' => 0,
+                'discount_id' => null,
+                'original_total' => 0,
+                'delivery_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->date_delivered,
+                'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
+            ];
+
+        }
+
+
         $this->return_number = $this->returnInfo->return_number;
         $this->exchange_amount = $this->returnInfo->exchange_amount;
     }
