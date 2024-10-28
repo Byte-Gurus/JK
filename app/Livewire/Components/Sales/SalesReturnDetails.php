@@ -133,6 +133,13 @@ class SalesReturnDetails extends Component
                 return;
             }
 
+              // Check if the return quantity exceeds the available quantity
+              if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] < 1) {
+                $this->addError('returnQuantity.' . $index, 'The return quantity minimum quantity is 1.');
+                $this->allowReturn = false;
+                return;
+            }
+
             $this->allowReturn = true;
         }
 
@@ -259,7 +266,6 @@ class SalesReturnDetails extends Component
 
 
                 $rules["operation.$index"] = 'required|in:Refund,Exchange';
-
                 $rules["description.$index"] = 'required|in:Damaged,Expired';
             }
         }
