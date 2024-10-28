@@ -208,7 +208,8 @@
                             @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
                             {{ number_format(
                             $transactionDetail['item_price'] -
-                            ($transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100)),
+                            ($transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] /
+                            100)),
                             3,
                             ) }}
                             @else
@@ -273,6 +274,12 @@
                         <th scope="row"
                             class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
                             {{ $transactionDetail['inventoryJoin']['current_stock_quantity'] }}
+                        </th>
+
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                            {{ $toBeRefundQuantity[$index] ?? 0 }}
+
                         </th>
                         @endif
                     </tr>

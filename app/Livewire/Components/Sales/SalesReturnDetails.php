@@ -24,6 +24,7 @@ class SalesReturnDetails extends Component
     public $operation = [];
     public $isAdmin;
     public $description = [];
+    public $toBeRefundQuantity = [];
 
     public $transaction_number, $transaction_date, $total_amount, $payment_method, $reference_number, $discount_amount, $change, $tendered_amount, $subtotal, $transaction_id, $transaction_type, $new_total, $transactionDetails, $return_total_amount, $item_return_amount, $rules = [], $return_vat_amount, $new_vat_amount, $return_number, $current_tax_amount, $total_refund_amount, $total_exchange_amount, $adminAcc;
     public $fromPage = 'ReturnDetails';
@@ -125,7 +126,7 @@ class SalesReturnDetails extends Component
                     'transaction_details_id' => $info['transaction_details_id'],
                     'operation' => $info['operation'],
                     'user_id' => Auth::id(),
-
+                    
                 ]);
 
                 $transactionDetails = TransactionDetails::find($info['transaction_details_id']);
@@ -166,21 +167,11 @@ class SalesReturnDetails extends Component
             if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $itemInventory->current_stock_quantity && $this->operation[$index] == "Exchange") {
                 $this->alert('warning', 'The inventory stock of this item less than the return quantity');
 
-                $toBeReturnedQuantity = $this->returnQuantity[$index] - $itemInventory->current_stock_quantity;
-                $this->returnQuantity[$index] -= $toBeReturnedQuantity;
+                $this->toBeRefundQuantity[$index] = $this->returnQuantity[$index] - $itemInventory->current_stock_quantity;
+                $this->returnQuantity[$index] -= $this->toBeRefundQuantity[$index];
 
 
-                $newTransactionDetail = $this->transactionDetails[$index]->replicate();
-                $this->transactionDetails[] = $newTransactionDetail;
 
-                // Update attributes for the new transaction detail
-                $this->returnQuantity[] = $toBeReturnedQuantity;
-                $this->operation[] = $this->operation[$index];
-                $this->description[] = $this->description[$index];
-
-                // Reassign transaction details to trigger reactivity
-                $this->transactionDetails = collect($this->transactionDetails->values());
-                dump($this->transactionDetails);
             }
 
 
@@ -225,6 +216,11 @@ class SalesReturnDetails extends Component
                     $this->item_return_amount = $this->item_return_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
                 }
 
+                if (isset($this->toBeRefundQuantity[$index]) && $this->toBeRefundQuantity[$index]) {
+                    $this->total_refund_amount = $this->total_refund_amount + ($this->toBeRefundQuantity[$index] * $transactionDetail->item_price);
+
+                    $this->return_total_amount = $this->return_total_amount + ($this->toBeRefundQuantity[$index] * $transactionDetail->item_price);
+                }
 
                 if ($this->operation[$index] == 'Refund') {
 
@@ -258,6 +254,8 @@ class SalesReturnDetails extends Component
                         $vat_exempt_return_total_amount = (($vat_exempt_Return_Subtotal * (100 + $vat_Percent) / 100)) - $vat_exempt_Return_Subtotal;
 
                     }
+
+
 
                     $this->total_exchange_amount += $this->item_return_amount;
                 }
@@ -375,6 +373,7 @@ class SalesReturnDetails extends Component
 
         }
         $this->returnQuantity[$index] = null;
+        $this->toBeRefundQuantity[$index] = null;
         $this->resetSpecificValidation("returnQuantity.$index");
         $this->return_info[$index] = null;
         $this->calculateTotalRefundAmount();
