@@ -62,7 +62,7 @@ class SalesReturnDetails extends Component
         $moreThanStockQuantity = 0;
 
         foreach ($this->transactionDetails as $index => $transactionDetail) {
-            if (isset($this->transactionDetails[$index])) {
+            if (isset($this->transactionDetails[$index]) && isset($this->operation[$index]) && $this->operation[$index] == 'Exchange') {
                 $itemInventory = Inventory::where('sku_code', $this->transactionDetails[$index]['inventoryJoin']['sku_code'])->first();
 
                 if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $itemInventory->current_stock_quantity) {
@@ -163,8 +163,24 @@ class SalesReturnDetails extends Component
                 return;
             }
 
-            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $itemInventory->current_stock_quantity) {
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $itemInventory->current_stock_quantity && $this->operation[$index] == "Exchange") {
                 $this->alert('warning', 'The inventory stock of this item less than the return quantity');
+
+                $toBeReturnedQuantity = $this->returnQuantity[$index] - $itemInventory->current_stock_quantity;
+                $this->returnQuantity[$index] -= $toBeReturnedQuantity;
+
+
+                $newTransactionDetail = $this->transactionDetails[$index]->replicate();
+                $this->transactionDetails[] = $newTransactionDetail;
+
+                // Update attributes for the new transaction detail
+                $this->returnQuantity[] = $toBeReturnedQuantity;
+                $this->operation[] = $this->operation[$index];
+                $this->description[] = $this->description[$index];
+
+                // Reassign transaction details to trigger reactivity
+                $this->transactionDetails = collect($this->transactionDetails->values());
+                dump($this->transactionDetails);
             }
 
 

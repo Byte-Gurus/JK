@@ -294,7 +294,7 @@
 
             <div class="flex flex-row justify-between">
                 <div>
-                    <p class=" text-[1.2em] font-medium">Purchased Amount</p>
+                    <p class=" text-[1.2em] font-medium">Current Total Amount</p>
                 </div>
                 <div>
                     {{ number_format($total_amount, 2) }}
@@ -302,7 +302,7 @@
             </div>
             <div class="flex flex-row justify-between">
                 <div>
-                    <p class=" text-[1.2em] font-medium">Amount to Refund</p>
+                    <p class=" text-[1.2em] font-medium">Refund Amount</p>
                 </div>
                 <div>
                     <p class=" text-[1.2em] font-black">{{ number_format($total_refund_amount, 2) }}</p>
@@ -310,7 +310,7 @@
             </div>
             <div class="flex flex-row justify-between">
                 <div>
-                    <p class=" text-[1.2em] font-medium">Exchange Item Value</p>
+                    <p class=" text-[1.2em] font-medium">Exchange Amount</p>
                 </div>
                 <div>
                     <p class=" text-[1.2em] font-black">{{ number_format($total_exchange_amount, 2) }}</p>
