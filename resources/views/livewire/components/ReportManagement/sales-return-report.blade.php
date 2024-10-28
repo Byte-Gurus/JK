@@ -19,7 +19,7 @@
         <div class="flex flex-row items-center justify-between px-4 mb-2">
             <div class="flex flex-col items-center">
                 <div class="flex flex-row gap-2 text-nowrap">
-                    <p class="text-[1em] font-black uppercase">Specified Date:</p>
+                    <p class="text-[1em] font-black uppercase">Date as of</p>
                     <p>
                         {{ $fromDate . ' - ' . $toDate }}
                     </p>

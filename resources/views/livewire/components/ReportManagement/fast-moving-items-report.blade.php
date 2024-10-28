@@ -21,7 +21,7 @@
                 <div class="flex flex-col justify-between col-span-1 px-4">
                     <div class="flex flex-col ">
                         <div class="flex flex-row gap-2 text-nowrap">
-                            <p class="text-[1em] font-black uppercase">Specified Date:</p>
+                            <p class="text-[1em] font-black uppercase">Date as of</p>
                             <p class="text-[1em] font-medium uppercase">{{ $date ?? ' ' }}</p>
                         </div>
                     </div>
