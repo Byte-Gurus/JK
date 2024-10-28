@@ -49,7 +49,8 @@ class SalesReturnDetails extends Component
         'return-sales-return-details' => 'returnSalesReturnDetails',
         'admin-confirmed' => 'adminConfirmed',
         'reset-form' => 'resetForm',
-        'returnConfirmed'
+        'returnConfirmed',
+        'loginConfirmed'
     ];
 
 
@@ -58,10 +59,33 @@ class SalesReturnDetails extends Component
     {
 
         $validated = $this->validateForm();
+        $moreThanStockQuantity = 0;
+
+        foreach ($this->transactionDetails as $index => $transactionDetail) {
+            if (isset($this->transactionDetails[$index])) {
+                $itemInventory = Inventory::where('sku_code', $this->transactionDetails[$index]['inventoryJoin']['sku_code'])->first();
+
+                if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $itemInventory->current_stock_quantity) {
+                    $moreThanStockQuantity++;
+                }
+            }
+        }
+
+        if ($moreThanStockQuantity >= 1) {
+            $this->confirm('Items returned with quantities exceeding available stock will be refunded. Would you like to proceed?', [
+                'onConfirmed' => 'loginConfirmed', //* call the confmired method
+            ]);
+        } else {
+            $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
+            $this->displaySalesAdminLoginForm();
+        }
+    }
+
+    public function loginConfirmed()
+    {
 
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
-
     }
 
     public function returnSalesReturnDetails()
@@ -125,6 +149,7 @@ class SalesReturnDetails extends Component
         // Check if the provided index exists in the transaction details
         if (isset($this->transactionDetails[$index])) {
             $availableQty = $this->transactionDetails[$index]['item_quantity'];
+            $itemInventory = Inventory::where('sku_code', $this->transactionDetails[$index]['inventoryJoin']['sku_code'])->first();
 
             // Check if the return quantity exceeds the available quantity
             if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
@@ -138,11 +163,11 @@ class SalesReturnDetails extends Component
                 return;
             }
 
-            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $availableQty) {
-                $this->addError('returnQuantity.' . $index, 'The return quantity should be less than or equal to ' . $availableQty);
-                $this->allowReturn = false;
-                return;
+            if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] > $itemInventory->current_stock_quantity) {
+                $this->alert('warning', 'The inventory stock of this item less than the return quantity');
             }
+
+
 
             $this->allowReturn = true;
         }
@@ -180,11 +205,14 @@ class SalesReturnDetails extends Component
 
                 }
 
+                if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
+                    $this->item_return_amount = $this->item_return_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
+                }
+
+
                 if ($this->operation[$index] == 'Refund') {
 
-                    if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
-                        $this->return_total_amount = $this->return_total_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
-                    }
+
                     if ($transactionDetail->vat_type === 'Vat') {
                         $vatable_Return_Subtotal += $this->item_return_amount;
                         $vat_Percent = $transactionDetail->item_vat_percent;
@@ -200,9 +228,7 @@ class SalesReturnDetails extends Component
                     $this->total_refund_amount += $this->item_return_amount;
 
                 } elseif ($this->operation[$index] == 'Exchange') {
-                    if ($transactionDetail->transactionJoin->discount_id == 1 || $transactionDetail->transactionJoin->discount_id == 2) {
-                        $this->return_total_amount = $this->return_total_amount - ($this->item_return_amount * ($transactionDetail->transactionJoin->discountJoin->percentage / 100));
-                    }
+
 
                     if ($transactionDetail->vat_type === 'Vat') {
                         $vatable_Return_Subtotal += $this->item_return_amount;
@@ -330,9 +356,6 @@ class SalesReturnDetails extends Component
                 return;
             }
 
-            if ($itemDetails->item_quantity > $itemInventory->current_stock_quantity) {
-                $this->alert('warning', message: 'The inventory stock of this item is insufficient to the purchased quantity');
-            }
 
         }
         $this->returnQuantity[$index] = null;

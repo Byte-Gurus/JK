@@ -31,10 +31,11 @@
                     <tr class=" text-nowrap">
 
                         {{-- //* total --}}
-                        <th scope="col" class="px-4 py-1 text-center">Total (₱)</th>
+                        <th scope="col" class="px-4 py-1 text-center">Subtotal (₱)</th>
                         {{-- //* total --}}
                         <th scope="col" class="px-4 py-1 text-center">Discount Amount (₱)</th>
 
+                        <th scope="col" class="px-4 py-1 text-center">Total Amount (₱)</th>
                         {{-- transaction type --}}
                         <th scope="col" class="px-4 py-3 text-center">Transaction type</th>
 
@@ -58,11 +59,15 @@
                         class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($total_amount, 2) }}
+                            {{ number_format($subtotal, 2) }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
                             {{ number_format($discount_amount, 2) }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($total_amount, 2) }}
                         </th>
                         <th scope="row"
                             class="px-4 py-1 font-black text-center text-gray-900 text-md whitespace-nowrap ">
@@ -151,6 +156,8 @@
 
                         {{-- //* return quantity --}}
                         <th scope="col" class="px-4 py-3 text-center">Return quantity</th>
+
+                        <th scope="col" class="px-4 py-3 text-center">Available Stock</th>
                     </tr>
                 </thead>
 
@@ -201,8 +208,8 @@
                             @if (isset($transactionDetail['discount_id']) && $transactionDetail['discount_id'] == 3)
                             {{ number_format(
                             $transactionDetail['item_price'] -
-                            $transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100),
-                            2,
+                            ($transactionDetail['item_price'] * ($transactionDetail['discountJoin']['percentage'] / 100)),
+                            3,
                             ) }}
                             @else
                             0.00
@@ -253,18 +260,21 @@
 
 
                         </th>
-
+                        @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] &&
+                        $description[$index])
                         <th scope="row"
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            @if (isset($operation[$index]) && isset($description[$index]) && $operation[$index] &&
-                            $description[$index])
                             <input type="number"
                                 class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-center text-gray-900 text-sm rounded-md block w-full p-2.5"
                                 wire:model.live.debounce.300ms="returnQuantity.{{ $index }}">
-                            @endif
-
                         </th>
+
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                            {{ $transactionDetail['inventoryJoin']['current_stock_quantity'] }}
+                        </th>
+                        @endif
                     </tr>
                     <tr>
                         <td colspan="12" class="text-center">
