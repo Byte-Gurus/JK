@@ -1,6 +1,6 @@
 <div x-cloak class="flex justify-center w-full">
     <div class=" w-full max-w-[216px]">
-        <div class="w-full border-2 h-fit">
+        <div class="w-full px-2 border-2 h-fit">
             <div class="flex flex-col justify-center mx-3 mb-6 text-center">
                 <div class="font-black ">
                     <p class="text-[0.6em] uppercase">JK FROZEN PRODUCTS AND CONSUMER SUPPLIES STORE</p>

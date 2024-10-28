@@ -19,7 +19,7 @@
         <div class="grid items-center grid-flow-col m-4 ">
 
             <div class="flex flex-row gap-2 text-nowrap">
-                <p class="text-[1em] font-black uppercase">Specified Date:</p>
+                <p class="text-[1em] font-black uppercase">Report as of</p>
                 <p>
                     {{ $fromDate . ' - ' . $toDate }}
                 </p>

@@ -25,7 +25,7 @@
             <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
                 <div class="flex flex-col ">
                     <div class="flex flex-row gap-2 text-nowrap">
-                        <p class="text-[1em] font-black uppercase">Specified Week:</p>
+                        <p class="text-[1em] font-black uppercase">Report as of</p>
                         <p>
                             {{ $transaction_info['date'] }}
                         </p>
@@ -52,10 +52,10 @@
                         <p class=" col-span-3 text[1em] text-right">
                             {{ number_format($transaction_info['totalTax'], 2) }}</p>
                     </div>
-                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Net Sales </p>
+                    <div class="grid items-center grid-flow-col grid-cols-12 border border-black text-nowrap">
+                        <p class=" col-span-8 w-1/2 text-[1.4em] font-black uppercase">Net Sales </p>
                         <p class="col-span-1 ">|</p>
-                        <p class=" col-span-3 text[1em] text-right">
+                        <p class=" col-span-3 text-[1.4em] font-black text-right">
                             {{ number_format($transaction_info['totalNet'], 2) }}</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid items-center justify-between grid-flow-col grid-cols-4 mx-4 ">
+            <ul class="grid items-center justify-between grid-flow-col grid-cols-5 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
@@ -113,7 +113,7 @@
             @endif
             @if ($transaction_info && $hasTransactions)
             @foreach ($transaction_info['dailySummaries'] as $summary) {{-- Change here --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4">
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[0.8em] text-left font-medium">
@@ -148,7 +148,7 @@
                 </li>
             </ul>
             @endforeach
-            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 border-black border-y">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 border-black border-y">
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">Total</p>
