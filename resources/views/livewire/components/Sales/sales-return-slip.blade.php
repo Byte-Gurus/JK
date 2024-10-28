@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="mx-4">
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
                 {{-- //* table header --}}
                 <ul class="grid justify-between grid-flow-col grid-cols-4">
                     <li class="col-span-1 ">
@@ -63,7 +63,7 @@
                         </div>
                     </li>
                 </ul>
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
 
                 @if ($return_details)
                     @foreach ($return_details as $return_detail)
@@ -105,7 +105,7 @@
                         </ul>
                     @endforeach
                 @endif
-                <span class="">------------------------</span>
+                <span class="">----------------------</span>
             </div>
             <div class="px-4 py-4 ">
                 <div class="flex flex-col text-nowrap">
