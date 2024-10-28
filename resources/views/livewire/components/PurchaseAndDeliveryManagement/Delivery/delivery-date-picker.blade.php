@@ -6,7 +6,7 @@
 
             <div
                 class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-lg shadow-md text-nowrap">
-                <div class="flex flex-row items-center justify-between">
+                <div class="flex flex-row items-center justify-between gap-4">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
                         Set Date of Delivery
