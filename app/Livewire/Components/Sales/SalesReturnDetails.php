@@ -57,7 +57,6 @@ class SalesReturnDetails extends Component
     {
 
         $validated = $this->validateForm();
-
         $this->dispatch('get-from-page', $this->fromPage)->to(SalesAdminLoginForm::class);
         $this->displaySalesAdminLoginForm();
 
@@ -251,7 +250,10 @@ class SalesReturnDetails extends Component
         $rules = [];
         foreach ($this->transactionDetails as $index => $transactionDetail) {
             if (isset($this->returnQuantity[$index]) && $this->returnQuantity[$index] != null) {
-                $rules["operation.$index"] = 'required|in:Refund,Exchange';
+
+                foreach ($this->operation as $index => $value) {
+                    $rules["operation.$index"] = 'required|in:Refund,Exchange';
+                }
                 $rules["description.$index"] = 'required|in:Damaged,Expired';
             }
         }
@@ -304,6 +306,7 @@ class SalesReturnDetails extends Component
     public function updateOperation($value, $index, $id)
     {
         if ($value == 'Exchange') {
+            $this->operation[$index] = $value;
             $itemDetails = TransactionDetails::find($id);
             $itemInventory = Inventory::where('sku_code', $itemDetails->inventoryJoin->sku_code)->first();
 

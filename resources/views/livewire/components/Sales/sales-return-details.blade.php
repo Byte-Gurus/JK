@@ -94,7 +94,7 @@
             @if (!$returnQuantity || $this->allReturnQuantitiesNull())
             <button type="button"
                 class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(117,141,109)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(117,141,109)]">
-                Confirm
+                Confirm aaaaaa
             </button>
             @else
             <button type="button"
@@ -215,7 +215,8 @@
                         <th scope="row"
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
 
-                            <select id="status" wire:model.live="operation" wire:change="updateOperation($event.target.value, {{ $index }}, {{ $transactionDetail->id }})"
+                            <select id="status" wire:model.live="operation.{{ $index }}"
+                                wire:change="updateOperation($event.target.value, {{ $index }}, {{ $transactionDetail->id }})"
                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] w-fit text-gray-900 text-sm text-center rounded-md block l p-2.5 ">
                                 <option value="" selected>Set your operation</option>
                                 <option value="Refund">Refund</option>
