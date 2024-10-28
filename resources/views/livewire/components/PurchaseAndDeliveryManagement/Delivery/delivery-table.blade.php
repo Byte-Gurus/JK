@@ -207,14 +207,22 @@
                             class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                             <div class="flex justify-center ">
 
-                                @if ($delivery->status === 'Cancelled')
-                                <p>N/A</p>
-                                @elseif ($delivery->status === 'In Progress')
-                                <button x-on:click='$wire.displayDeliveryDatePicker()'
-                                    wire:click="changeDate({{ $delivery->id }})"
-                                    class="px-4 py-2 font-bold transition-none ease-in-out bg-green-200 rounded-lg hover:bg-green-400 duration-0">SET
-                                    DELIVERY DATE</button>
-                                {{-- <input type="date"
+                                    @if ($delivery->status === 'Cancelled')
+                                        <p>N/A</p>
+                                    @elseif ($delivery->status === 'In Progress')
+                                        <button x-on:click='$wire.displayDeliveryDatePicker()'
+                                            wire:click="changeDate({{ $delivery->id }})"
+                                            class="flex flex-row items-center gap-2 px-4 py-2 font-bold transition-none ease-in-out bg-green-100 border border-green-900 rounded-lg hover:bg-green-300 duration-0">
+                                            <p>SET
+                                                DELIVERY DATE</p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                            </svg>
+
+                                        </button>
+                                        {{-- <input type="date"
                                     wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
                                     wire:model="delivery_date{{ $delivery->id }}"
                                     class="bg-white focus:outline-black hover:shadow-sm hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
