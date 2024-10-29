@@ -4,9 +4,11 @@ namespace App\Livewire\Pages;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 class LoginPage extends Component
 {
+    use WithPagination, WithoutUrlPagination;
     public $username;
     public $password;
 
