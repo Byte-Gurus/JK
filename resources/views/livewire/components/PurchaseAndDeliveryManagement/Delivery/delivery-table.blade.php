@@ -310,7 +310,7 @@
                                         @else
                                             <a scope="row"
                                                 class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
-                                                {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ') }}
+                                                {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ')  ?? 'N/A'}}
                                             </a>
                                         @endif
                                     @endif
