@@ -213,7 +213,6 @@
                                     @elseif ($delivery->status === 'In Progress')
                                         <button x-on:click='$wire.displayDeliveryDatePicker()'
                                             wire:click="changeDate({{ $delivery->id }})"
-<<<<<<< HEAD
                                             class="flex flex-row items-center gap-2 px-4 py-2 font-bold transition-none ease-in-out bg-green-100 border border-green-900 rounded-lg hover:bg-green-300 duration-0">
                                             <p>SET
                                                 DELIVERY DATE</p>
@@ -224,16 +223,11 @@
                                             </svg>
 
                                         </button>
-=======
-                                            class="px-4 py-2 font-bold transition-none ease-in-out bg-green-200 rounded-lg hover:bg-green-400 duration-0">SET
-                                            DELIVERY DATE</button>
->>>>>>> 61d0eacbd9f75b700a84d88fade0b46476253fba
                                         {{-- <input type="date"
                                     wire:change="changeDate({{ $delivery->id }}, $event.target.value)"
                                     wire:model="delivery_date{{ $delivery->id }}"
                                     class="bg-white focus:outline-black hover:shadow-sm hover:shadow-[rgb(53,53,53)] ease-in-out duration-100 transition-all cursor-pointer select-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-fit text-center p-2.5">
                                 --}}
-<<<<<<< HEAD
                                 @else
                                 @if ($delivery->status == 'Delivered')
                                 <div class="flex flex-row items-center gap-2 p-2">
@@ -306,22 +300,6 @@
                                                 x-on:click="$wire.viewRestockForm(); $wire.getDeliveryID({{ $delivery->id }}); openActions = !openActions"
                                                 class="flex transition-all duration-100 ease-in-out hover:text-blue-300 hover:pl-3 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                 <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-=======
-                                    @else
-                                        @if ($delivery->status == 'Delivered')
-                                            <div class="flex flex-row items-center gap-2 p-2">
-                                                <div>
-                                                    <a scope="row"
-                                                        class="px-4 py-4 font-black text-center text-gray-900 text-md whitespace-nowrap">
-                                                        {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ') }}
-                                                    </a>
-                                                </div>
-                                                <div
-                                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 transition-all duration-100 ease-in-out rounded-lg hover:bg-blue-100 "
-                                                    x-on:click='$wire.displayDeliveryDatePicker()'
-                                                    >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
->>>>>>> 61d0eacbd9f75b700a84d88fade0b46476253fba
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="size-6">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
