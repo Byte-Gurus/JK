@@ -100,6 +100,11 @@ class DeliveryTable extends Component
         $this->dispatch('get-date', $id)->to(DeliveryDatePicker::class);
     }
 
+    public function ss()
+    {
+        dd('hi');
+    }
+
 
     public function cancelDelivery($deliverId)
     {
