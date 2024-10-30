@@ -86,7 +86,7 @@ class UserForm extends Component
                 'lastname' => $validated['lastname'],
                 'contact_number' => $validated['contact_number'],
                 'user_role_id' => $validated['role'],
-                'status_id' => $validated['status'],
+                'status_id' => 1,
                 'username' => $validated['username'],
                 'password' => Hash::make($validated['password']),
 
