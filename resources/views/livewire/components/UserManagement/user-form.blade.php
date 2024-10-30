@@ -187,13 +187,15 @@
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
-                                        </div>
-                                        @else
-                                        <input type="text" readonly value="Active"
-                                            class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5">
-                                        </input>
+                                            @else
+                                            <input type="text" readonly value="Active"
+                                                class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md block w-full p-2.5">
+                                            </input>
 
-                                        @endif
+
+
+                                            @endif
+                                        </div>
                                     </div>
 
                                     {{-- user image --}}
