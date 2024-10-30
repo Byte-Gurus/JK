@@ -275,6 +275,18 @@
                         <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                             F9</p>
                     </div>
+                    @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
+                    !$excess_amount)
+                    <div x-on:keydown.window.prevent.F9="$wire.call('displayPaymentForm')"
+                        x-on:click="$wire.displayPaymentForm()"
+                        class=" relative py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
+                        <button class="py-2">
+                            Pay
+                        </button>
+                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
+                            F9</p>
+                    </div>
+
                     @else
                     <div
                         class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
@@ -307,7 +319,7 @@
                         F10
                     </p>
                 </div>
-                
+
                 @else
                 <div
                     class="py-4 px-8 font-bold w-full flex items-center justify-center text-center bg-[rgb(201,201,201)] border border-black text-nowrap relative">
