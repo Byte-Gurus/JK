@@ -615,7 +615,7 @@ class SalesTransaction extends Component
             $this->alert('warning', 'No payment yet');
             return;
         }
-        if (empty($this->payment) && $this->changeTransactionType != 2) {
+        if (empty($this->payment) && $this->changeTransactionType == 1) {
             $this->alert('warning', 'No payment yet');
             return;
         }
