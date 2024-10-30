@@ -61,57 +61,59 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO BACKORDERED ITEMS YET</p>
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO BACKORDERED ITEMS YET</p>
             @endif
             @foreach ($backorderLists as $backorderList)
-                <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 ">
 
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em]] text-left font-medium">
-                                {{ $backorderList->itemJoin->barcode }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                {{ $backorderList->itemJoin->item_name }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                {{ $backorderList->itemJoin->item_description }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                {{ $backorderList->purchaseJoin->po_number }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[0.8em] text-left font-medium">
-                                {{ $backorderList->purchaseJoin->supplierJoin->company_name }}</p>
-                        </div>
-                    </li>
-                </ul>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em]] text-left font-medium">
+                            {{ $backorderList->itemJoin->barcode }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $backorderList->itemJoin->item_name }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $backorderList->itemJoin->item_description }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $backorderList->purchaseJoin->po_number }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $backorderList->purchaseJoin->supplierJoin->company_name }}</p>
+                    </div>
+                </li>
+            </ul>
             @endforeach
         </div>
-        <div class="px-4 py-4">
+        @if (!$isTransactionEmpty)
+        <div class="px-4 py-4 ">
             <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
                 <p>
                     {{ $dateCreated }}
                 </p>
             </div>
-            <div class="flex flex-row gap-2 py-4 text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
                 <p>
                     {{ $createdBy }}
                 </p>
             </div>
         </div>
+        @endif
     </div>
 </div>

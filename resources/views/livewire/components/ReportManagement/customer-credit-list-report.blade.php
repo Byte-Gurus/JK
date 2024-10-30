@@ -90,82 +90,84 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO CUSTOMER CREDIT FOUND FOR THIS DATE</p>
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO CUSTOMER CREDIT FOUND FOR THIS DATE
+            </p>
             @endif
             @if ($credits)
-                @foreach ($credits as $credit)
-                    <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
+            @foreach ($credits as $credit)
+            <ul class="grid justify-between grid-flow-col grid-cols-9 mx-4 ">
 
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-left font-medium">
-                                    {{ $credit->credit_number }}
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-left font-medium">
-                                    {{ $credit->customerJoin->firstname .
-                                        ' ' .
-                                        $credit->customerJoin->middlename .
-                                        ' ' .
-                                        $credit->customerJoin->lastname }}
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-left font-medium">
-                                    {{ $credit->customerJoin->contact_number }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-center font-medium">
-                                    {{ \Carbon\Carbon::parse($credit->created_at)->format('M d Y') }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-center font-medium">
-                                    {{ \Carbon\Carbon::parse($credit->due_date)->format('M d Y') }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-right font-medium">
-                                    {{ number_format($credit->credit_amount, 2) }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-right font-medium">
-                                    {{ number_format($credit->remaining_balance, 2) }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-center font-medium">
-                                    {{ $credit->status }}
-                                </p>
-                            </div>
-                        </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-left font-medium">
+                            {{ $credit->credit_number }}
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-left font-medium">
+                            {{ $credit->customerJoin->firstname .
+                            ' ' .
+                            $credit->customerJoin->middlename .
+                            ' ' .
+                            $credit->customerJoin->lastname }}
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-left font-medium">
+                            {{ $credit->customerJoin->contact_number }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-center font-medium">
+                            {{ \Carbon\Carbon::parse($credit->created_at)->format('M d Y') }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-center font-medium">
+                            {{ \Carbon\Carbon::parse($credit->due_date)->format('M d Y') }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-right font-medium">
+                            {{ number_format($credit->credit_amount, 2) }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-right font-medium">
+                            {{ number_format($credit->remaining_balance, 2) }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-center font-medium">
+                            {{ $credit->status }}
+                        </p>
+                    </div>
+                </li>
 
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.6em] text-right font-medium">
-                                    {{ number_format($credit->credit_limit, 2) }}
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                @endforeach
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.6em] text-right font-medium">
+                            {{ number_format($credit->credit_limit, 2) }}
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            @endforeach
             @endif
         </div>
+        @if (!$isTransactionEmpty)
         <div class="px-4 py-4 ">
             <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
@@ -173,12 +175,13 @@
                     {{ $dateCreated }}
                 </p>
             </div>
-            <div class="flex flex-row gap-2 py-4 text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
                 <p>
                     {{ $createdBy }}
                 </p>
             </div>
         </div>
+        @endif
     </div>
 </div>

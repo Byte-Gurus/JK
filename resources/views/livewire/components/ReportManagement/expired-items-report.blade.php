@@ -45,7 +45,7 @@
                         <p class="text-[0.8em] uppercase text-left font-bold">Barcode</p>
                     </div>
                 </li>
-                  <li class="col-span-1 ">
+                <li class="col-span-1 ">
                     <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">SKU</p>
                     </div>
@@ -69,56 +69,57 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO EXPIRED ITEMS FOUND FOR THIS DATE</p>
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO EXPIRED ITEMS FOUND FOR THIS DATE</p>
             @endif
             @if ($expiredItems)
-                @foreach ($expiredItems as $expiredItem)
-                    <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-left font-medium">
-                                    {{ $expiredItem->date->format('M d Y') }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-left font-medium">
-                                    {{ $expiredItem->barcode }}</p>
-                            </div>
-                        </li>
-                          <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-left font-medium">
-                                    {{ $expiredItem->sku_code }}</p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 text-center py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-medium">
-                                    {{ $expiredItem->item_name }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 text-center py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-center font-medium">
-                                    {{ $expiredItem->item_description }}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="col-span-1 py-[3px]">
-                            <div>
-                                <p class="text-[0.8em] text-right font-medium">
-                                    {{ $expiredItem->quantity }}
-                                </p>
-                            </div>
-                        </li>
+            @foreach ($expiredItems as $expiredItem)
+            <ul class="grid justify-between grid-flow-col grid-cols-6 mx-4 ">
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $expiredItem->date->format('M d Y') }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $expiredItem->barcode }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $expiredItem->sku_code }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 text-center py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-medium">
+                            {{ $expiredItem->item_name }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 text-center py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-center font-medium">
+                            {{ $expiredItem->item_description }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[0.8em] text-right font-medium">
+                            {{ $expiredItem->quantity }}
+                        </p>
+                    </div>
+                </li>
 
-                    </ul>
-                @endforeach
+            </ul>
+            @endforeach
             @endif
         </div>
+        @if (!$isTransactionEmpty)
         <div class="px-4 py-4 ">
             <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
@@ -126,12 +127,13 @@
                     {{ $dateCreated }}
                 </p>
             </div>
-            <div class="flex flex-row gap-2 py-4 text-nowrap">
+            <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
                 <p>
                     {{ $createdBy }}
                 </p>
             </div>
         </div>
+        @endif
     </div>
 </div>
