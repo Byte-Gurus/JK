@@ -610,14 +610,16 @@ class SalesTransaction extends Component
 
     public function save()
     {
-        if (empty($this->payment) && $this->changeTransactionType != 2) {
-            $this->alert('warning', 'No payment yet');
-            return;
-        }
+
         if (empty($this->payment) && $this->changeTransactionType == 3 && $this->excess_amount) {
             $this->alert('warning', 'No payment yet');
             return;
         }
+        if (empty($this->payment) && $this->changeTransactionType != 2) {
+            $this->alert('warning', 'No payment yet');
+            return;
+        }
+
 
 
         $this->receiptData = [];
