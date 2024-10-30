@@ -307,6 +307,7 @@
                         F10
                     </p>
                 </div>
+                
                 @else
                 <div
                     class="py-4 px-8 font-bold w-full flex items-center justify-center text-center bg-[rgb(201,201,201)] border border-black text-nowrap relative">

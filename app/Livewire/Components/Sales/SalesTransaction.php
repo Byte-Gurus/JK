@@ -1167,7 +1167,13 @@ class SalesTransaction extends Component
 
     public function clearSelectedReturnNo()
     {
-        $this->reset('return_number', 'selectedItems');
+        $this->reset(
+            'return_number',
+            'selectedItems',
+            'excess_amount',
+            'tendered_amount',
+            'change'
+        );
     }
 
     public function displayChangeQuantityForm($showChangeQuantityForm)
