@@ -1172,7 +1172,8 @@ class SalesTransaction extends Component
             'selectedItems',
             'excess_amount',
             'tendered_amount',
-            'change'
+            'change',
+            'search_return_number'
         );
     }
 
