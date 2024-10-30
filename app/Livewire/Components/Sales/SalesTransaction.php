@@ -1241,30 +1241,33 @@ class SalesTransaction extends Component
         }
 
         foreach ($returnDetails as $returnDetail) {
+            if ($returnDetails->operation === 'Exchange') {
+                $this->selectedItems[] = [
+                    'item_id' => $returnDetail->transactionDetailsJoin->item_id,
+                    'item_name' => $returnDetail->transactionDetailsJoin->itemJoin->item_name,
+                    'item_description' => $returnDetail->transactionDetailsJoin->itemJoin->item_description,
+                    'vat_type' => $returnDetail->transactionDetailsJoin->itemJoin->vat_type,
+                    'reorder_point' => $returnDetail->transactionDetailsJoin->itemJoin->reorder_point,
+                    'vat' => $returnDetail->transactionDetailsJoin->itemJoin->vat_amount,
+                    'vat_percent' => $returnDetail->transactionDetailsJoin->itemJoin->vat_percent,
+                    'quantity' => $returnDetail->return_quantity,
+                    'barcode' => $returnDetail->transactionDetailsJoin->itemJoin->barcode,
+                    'sku_code' => $returnDetail->transactionDetailsJoin->inventoryJoin->sku_code,
+                    'selling_price' => $returnDetail->transactionDetailsJoin->item_price,
+                    'total_amount' => $returnDetail->transactionDetailsJoin->item_price * $returnDetail->return_quantity,
+                    'current_stock_quantity' => $returnDetail->transactionDetailsJoin->inventoryJoin->current_stock_quantity,
+                    'bulk_quantity' => $returnDetail->transactionDetailsJoin->itemJoin->bulk_quantity,
+                    'wholesale_discount_amount' => $returnDetail->transactionDetailsJoin->item_discount_amount,
+                    'status' => 'Sales',
+                    'discount' => 0,
+                    'discount_id' => null,
+                    'original_total' => 0,
+                    'delivery_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->date_delivered,
+                    'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
+                ];
+            }
 
-            $this->selectedItems[] = [
-                'item_id' => $returnDetail->transactionDetailsJoin->item_id,
-                'item_name' => $returnDetail->transactionDetailsJoin->itemJoin->item_name,
-                'item_description' => $returnDetail->transactionDetailsJoin->itemJoin->item_description,
-                'vat_type' => $returnDetail->transactionDetailsJoin->itemJoin->vat_type,
-                'reorder_point' => $returnDetail->transactionDetailsJoin->itemJoin->reorder_point,
-                'vat' => $returnDetail->transactionDetailsJoin->itemJoin->vat_amount,
-                'vat_percent' => $returnDetail->transactionDetailsJoin->itemJoin->vat_percent,
-                'quantity' => $returnDetail->return_quantity,
-                'barcode' => $returnDetail->transactionDetailsJoin->itemJoin->barcode,
-                'sku_code' => $returnDetail->transactionDetailsJoin->inventoryJoin->sku_code,
-                'selling_price' => $returnDetail->transactionDetailsJoin->item_price,
-                'total_amount' => $returnDetail->transactionDetailsJoin->item_price * $returnDetail->return_quantity,
-                'current_stock_quantity' => $returnDetail->transactionDetailsJoin->inventoryJoin->current_stock_quantity,
-                'bulk_quantity' => $returnDetail->transactionDetailsJoin->itemJoin->bulk_quantity,
-                'wholesale_discount_amount' => $returnDetail->transactionDetailsJoin->item_discount_amount,
-                'status' => 'Sales',
-                'discount' => 0,
-                'discount_id' => null,
-                'original_total' => 0,
-                'delivery_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->date_delivered,
-                'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
-            ];
+
 
         }
 
