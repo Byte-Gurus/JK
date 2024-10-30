@@ -275,17 +275,6 @@
                         <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                             F9</p>
                     </div>
-                    @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
-                    !$excess_amount)
-                    <div x-on:keydown.window.prevent.F9="$wire.call('displayPaymentForm')"
-                        x-on:click="$wire.displayPaymentForm()"
-                        class=" relative py-4 font-bold text-center bg-[rgb(251,240,143)] hover:bg-[rgb(232,219,101)] border border-black hover:shadow-md hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap">
-                        <button class="py-2">
-                            Pay
-                        </button>
-                        <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
-                            F9</p>
-                    </div>
 
                     @else
                     <div
@@ -299,6 +288,18 @@
                     @endif
                 </div>
                 @if (!empty($payment) && $changeTransactionType != 2 && !$unableShortcut)
+                <div x-on:keydown.window.prevent.F10="$wire.call('save')" wire:click="save"
+                    class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
+                    <button type="button" class="py-2 ">
+                        Save
+                    </button>
+                    <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-green-900 font-bold">
+                        F10
+                    </p>
+
+                </div>
+                @if (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
+                    !$excess_amount)
                 <div x-on:keydown.window.prevent.F10="$wire.call('save')" wire:click="save"
                     class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
                     <button type="button" class="py-2 ">
