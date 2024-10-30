@@ -36,7 +36,8 @@ class Logout extends Component
         $user->current_session = null;
         $user->save();
 
-        Auth::logout();
+        $user->logout();
+        // Auth::logout();
         return redirect()->route('login');
     }
 }
