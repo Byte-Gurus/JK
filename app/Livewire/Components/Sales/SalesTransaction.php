@@ -1241,7 +1241,7 @@ class SalesTransaction extends Component
         }
 
         foreach ($returnDetails as $returnDetail) {
-            if ($returnDetails->operation === 'Exchange') {
+            if ($returnDetail->operation === 'Exchange') {
                 $this->selectedItems[] = [
                     'item_id' => $returnDetail->transactionDetailsJoin->item_id,
                     'item_name' => $returnDetail->transactionDetailsJoin->itemJoin->item_name,
