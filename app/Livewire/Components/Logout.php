@@ -36,8 +36,13 @@ class Logout extends Component
         $user->current_session = null;
         $user->save();
 
-        $user->logout();
-        // Auth::logout();
+        // Correctly log out the user using the Auth facade
+        Auth::logout();
+
+        // Optionally invalidate the session and regenerate the token
+        session()->invalidate();
+        session()->regenerateToken();
+
         return redirect()->route('login');
     }
 }
