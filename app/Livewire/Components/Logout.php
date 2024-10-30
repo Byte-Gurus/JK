@@ -37,6 +37,6 @@ class Logout extends Component
         $user->save();
 
         Auth::logout();
-        return redirect()->route('admin');
+        return redirect()->route('login');
     }
 }
