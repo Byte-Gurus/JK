@@ -275,7 +275,6 @@
                         <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-[rgb(71,66,21)] font-bold">
                             F9</p>
                     </div>
-
                     @else
                     <div
                         class=" relative py-4 font-bold text-center bg-[rgb(201,201,201)] border border-black  text-nowrap">
@@ -298,18 +297,6 @@
                     </p>
 
                 </div>
-                @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
-                    !$excess_amount)
-                <div x-on:keydown.window.prevent.F10="$wire.call('save')" wire:click="save"
-                    class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
-                    <button type="button" class="py-2 ">
-                        Save
-                    </button>
-                    <p class="absolute bottom-0 right-0 pr-2 text-[1.2em] text-green-900 font-bold">
-                        F10
-                    </p>
-
-                </div>
                 @elseif ($changeTransactionType == 2 && $credit_details && $selectedItems && !$unableShortcut)
                 <div x-on:keydown.window.prevent.F10="$wire.call('save')" wire:click="save"
                     class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
@@ -320,7 +307,6 @@
                         F10
                     </p>
                 </div>
-
                 @else
                 <div
                     class="py-4 px-8 font-bold w-full flex items-center justify-center text-center bg-[rgb(201,201,201)] border border-black text-nowrap relative">
