@@ -298,7 +298,7 @@
                     </p>
 
                 </div>
-                @if (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
+                @elseif (!empty($selectedItems) && $changeTransactionType == 3 && !$unableShortcut &&
                     !$excess_amount)
                 <div x-on:keydown.window.prevent.F10="$wire.call('save')" wire:click="save"
                     class=" w-full flex items-center justify-center relative font-black bg-green-400 border hover:translate-y-[-2px] ease-in-out duration-100 transition-all text-nowrap hover:shadow-md border-black hover:bg-green-500">
