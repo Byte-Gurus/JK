@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Events\RestockEvent;
+use App\Livewire\Components\PurchaseAndDeliveryManagement\Purchase\PurchaseOrderTable;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
@@ -370,6 +371,7 @@ class RestockForm extends Component
     public function refreshTable()
     {
         $this->dispatch('refresh-table')->to(DeliveryTable::class);
+        $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
     }
 
     public function closeModal()
