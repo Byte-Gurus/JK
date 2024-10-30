@@ -594,6 +594,10 @@
                             class=" w-full px-4 py-3 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(143,143,143)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)]"
                             placeholder="Return No." autofocus required="">
 
+                        @error('search_return_number')
+                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                        @enderror
+
                         <button type="button" class="gap-2 px-4 py-2 bg-orange-400 rounded-md"
                             wire:click='getReturnDetails'> Search</button>
                     </div>

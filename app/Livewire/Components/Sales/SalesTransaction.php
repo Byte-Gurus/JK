@@ -1225,10 +1225,8 @@ class SalesTransaction extends Component
         ];
         $this->validate($rules);
 
+
         $this->returnInfo = Returns::where('return_number', $this->search_return_number)->first();
-
-        $returnDetails = ReturnDetails::where('return_id', $this->returnInfo->id)->get();
-
         if (!$this->returnInfo) {
             $this->alert('error', 'The return number does not exist.');
             return;
@@ -1238,6 +1236,11 @@ class SalesTransaction extends Component
             $this->alert('error', 'The return number has already have a transaction.');
             return;
         }
+
+
+        $returnDetails = ReturnDetails::where('return_id', $this->returnInfo->id)->get();
+
+
         $exchangeCount = ReturnDetails::where('return_id', $this->returnInfo->id)
             ->where('operation', 'Exchange')
             ->count();
