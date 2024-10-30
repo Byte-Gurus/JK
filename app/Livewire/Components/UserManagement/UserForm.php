@@ -259,10 +259,13 @@ class UserForm extends Component
 
         //*para sa create na validation or //*para sa edit na may passowrd na validation
         if ($this->isCreate || $this->show_password) {
-            $rules['status'] = 'required|in:1,2';
+
             $rules['password'] = 'required|string|min:8|same:retype_password|regex:/^(?=.*[^\s])[ -~]*$/';
             $rules['retype_password'] = 'required|string|min:8|regex:/^(?=.*[^\s])[ -~]*$/';
 
+        }
+        if (!$this->isCreate) {
+            $rules['status'] = 'required|in:1,2';
         }
 
         return $this->validate($rules);
