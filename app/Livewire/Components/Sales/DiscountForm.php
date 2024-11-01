@@ -244,10 +244,10 @@ class DiscountForm extends Component
             ];
 
             if ($this->customerType == 'Senior Citizen') {
-                $rules['senior_pwd_id'] = 'min:4|numeric';
+                $rules['senior_pwd_id'] = 'numeric|min:1000';
                 $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
             } elseif ($this->customerType == 'PWD') {
-                $rules['senior_pwd_id'] = 'min:7|numeric';
+                $rules['senior_pwd_id'] = 'numeric|min:1000000';
                 $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             }
         } else {
