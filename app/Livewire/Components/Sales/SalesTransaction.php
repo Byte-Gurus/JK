@@ -1285,6 +1285,7 @@ class SalesTransaction extends Component
 
                     $this->selectedItems['total_amount'] = $this->selectedItems['total_amount'] - $this->selectedItems['wholesale_discount_amount'];
 
+                    dump($this->selectedItems['total_amount']);
                 }
 
                 dump($this->selectedItems);
