@@ -323,18 +323,24 @@ class CustomerForm extends Component
         ];
 
         if ($this->customertype == 'Senior Citizen') {
-            $rules['birthdate'] = 'required|date|before_or_equal:'. now()->subYears(60)->toDateString();
+            $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
             $rules['senior_pwd_id'] = 'numeric|min:1000';
+            $messages = [
+                'senior_pwd_id.min' => 'The senior Senior Citizen ID must be at least 4 digits long.', // Custom message for min rule
+            ];
         } elseif ($this->customertype == 'PWD') {
-            $rules['birthdate'] = 'required|date|before_or_equal:' .now()->subYears(18)->toDateString();
+            $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             $rules['senior_pwd_id'] = 'numeric|min:1000000';
+            $messages = [
+                'senior_pwd_id.min' => 'The senior PWD ID must be at least 7 digits long.', // Custom message for min rule
+            ];
         } elseif ($this->customertype == 'Normal') {
-            $rules['birthdate'] = 'required|date|before_or_equal:' .now()->subYears(18)->toDateString();
+            $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 
 
-        return $this->validate($rules);
+        return $this->validate($rules, $messages ?? []);
     }
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
