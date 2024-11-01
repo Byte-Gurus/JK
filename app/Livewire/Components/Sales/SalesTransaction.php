@@ -1279,6 +1279,7 @@ class SalesTransaction extends Component
 
                 // Apply discount logic if applicable
                 if (isset($selectedItem['discount_id']) && $selectedItem['discount_id'] == 3) {
+                    $selectedItem['discount'] = 10;
                     $selectedItem['wholesale_discount_amount'] = $selectedItem['total_amount'] * ($selectedItem['discount'] / 100);
                     $selectedItem['total_amount'] -= $selectedItem['wholesale_discount_amount'];
                 }
