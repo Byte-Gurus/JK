@@ -1288,7 +1288,6 @@ class SalesTransaction extends Component
                 $this->selectedItems[] = $selectedItem;
 
                 // For debugging purposes
-                dump($this->selectedItems);
             }
         }
 
