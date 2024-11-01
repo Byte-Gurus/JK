@@ -1252,6 +1252,9 @@ class SalesTransaction extends Component
 
         foreach ($returnDetails as $returnDetail) {
             if ($returnDetail->operation === 'Exchange') {
+
+
+
                 $this->selectedItems[] = [
                     'item_id' => $returnDetail->transactionDetailsJoin->item_id,
                     'item_name' => $returnDetail->transactionDetailsJoin->itemJoin->item_name,
@@ -1270,7 +1273,7 @@ class SalesTransaction extends Component
                     'wholesale_discount_amount' => $returnDetail->transactionDetailsJoin->item_discount_amount,
                     'status' => 'Sales',
                     'discount' => 0,
-                    'discount_id' => null,
+                    'discount_id' => $returnDetail->transactionDetailsJoin->discount_id,
                     'original_total' => 0,
                     'delivery_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->date_delivered,
                     'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
