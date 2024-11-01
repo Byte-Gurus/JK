@@ -9,7 +9,7 @@
                 <div class="flex flex-row items-center justify-between">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
-                        Set Year
+                        Set Month
                     </h3>
 
                     {{-- //* close button --}}
@@ -31,7 +31,7 @@
                     @csrf
 
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="month" wire:model.live="date">
+                        <input type="month" wire:model.live="date" class="w-full p-4 rounded-md hover:bg-gray-300">>
 
 
                         @error('date')
