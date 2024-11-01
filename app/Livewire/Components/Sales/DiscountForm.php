@@ -243,19 +243,20 @@ class DiscountForm extends Component
                 'customerType' => 'required|in:PWD,Senior Citizen',
             ];
 
+            $isValidated = true;
             if ($this->customerType == 'Senior Citizen') {
                 $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
 
                 if (strlen((string) $this->senior_pwd_id) < 4) {
                     $this->addError('senior_pwd_id', 'The minimum digits for Senior Citizen ID is 4');
-                    return;
+                    $isValidated = false;
                 }
             } elseif ($this->customerType == 'PWD') {
                 $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
 
                 if (strlen((string) $this->senior_pwd_id) < 7) {
                     $this->addError('senior_pwd_id', 'The minimum digits for PWD ID is 7');
-                    return;
+                    $isValidated = false;
                 }
             }
         } else {
@@ -274,7 +275,10 @@ class DiscountForm extends Component
 
 
 
-        return $this->validate($rules);
+        if ($isValidated == true) {
+            return $this->validate($rules);
+        }
+
     }
 
     public function createCustomer()

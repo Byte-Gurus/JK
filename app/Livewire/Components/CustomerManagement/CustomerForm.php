@@ -322,13 +322,14 @@ class CustomerForm extends Component
 
         ];
 
+        $isValidated = true;
         if ($this->customertype == 'Senior Citizen') {
             $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
             $rules['senior_pwd_id'] = 'numeric';
 
             if (strlen((string) $this->senior_pwd_id) < 4) {
                 $this->addError('senior_pwd_id', 'The minimum digits for Senior Citizen ID is 4');
-                return;
+                $isValidated = false;
             }
         } elseif ($this->customertype == 'PWD') {
             $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
@@ -337,17 +338,20 @@ class CustomerForm extends Component
 
             if (strlen((string) $this->senior_pwd_id) < 7) {
                 $this->addError('senior_pwd_id', 'The minimum digits for PWD ID is 7');
-                return;
+                $isValidated = false;
             }
         } elseif ($this->customertype == 'Normal') {
             $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 
+        if($isValidated == true){
+            return $this->validate($rules);
+        }
 
 
 
-        return $this->validate($rules);
+
     }
 
     public function resetForm() //*tanggalin ang laman ng input pati $user_id value
