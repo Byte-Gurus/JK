@@ -1279,7 +1279,10 @@ class SalesTransaction extends Component
                     'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
                 ];
 
-                if  (isset($this->selectedItems['wholesale_discount_amount']) && $this->selectedItems['wholesale_discount_amount']) {
+                if (isset($this->selectedItems['discount_id']) && $this->selectedItems['discount_id'] == 3) {
+
+                    $this->selectedItems['wholesale_discount_amount'] = $this->selectedItems['total_amount'] * ($this->selectedItems['discount'] / 100);
+
                     $this->selectedItems['total_amount'] = $this->selectedItems['total_amount'] - $this->selectedItems['wholesale_discount_amount'];
 
                 }
