@@ -1288,7 +1288,7 @@ class SalesTransaction extends Component
                     dump($this->selectedItems['total_amount']);
                 }
 
-                dump($this->selectedItems);
+
 
             }
 
