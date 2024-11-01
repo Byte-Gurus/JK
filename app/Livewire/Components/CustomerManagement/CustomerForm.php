@@ -323,13 +323,13 @@ class CustomerForm extends Component
         ];
 
         if ($this->customertype == 'Senior Citizen') {
-            $rules['birthdate'] = 'required|date|before_or_equal:'. now()->subYears(60)->toDateString();
-            $rules['senior_pwd_id'] = 'numeric|min:1000';
+            $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(60)->toDateString();
+            $rules['senior_pwd_id'] = 'string|min:4|numeric';
         } elseif ($this->customertype == 'PWD') {
-            $rules['birthdate'] = 'required|date|before_or_equal:' .now()->subYears(18)->toDateString();
-            $rules['senior_pwd_id'] = 'numeric|min:1000000';
+            $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
+            $rules['senior_pwd_id'] = 'string|min:7|numeric';
         } elseif ($this->customertype == 'Normal') {
-            $rules['birthdate'] = 'required|date|before_or_equal:' .now()->subYears(18)->toDateString();
+            $rules['birthdate'] = 'required|date|before_or_equal:' . now()->subYears(18)->toDateString();
             $rules['senior_pwd_id'] = 'nullable|string|max:255';
         }
 
