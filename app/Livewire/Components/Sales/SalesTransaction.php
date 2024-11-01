@@ -1250,12 +1250,10 @@ class SalesTransaction extends Component
             return;
         }
 
-        foreach ($returnDetails as $returnDetail) {
+        foreach ($returnDetails as $index => $returnDetail) {
             if ($returnDetail->operation === 'Exchange') {
-
-
-
-                $this->selectedItems[] = [
+                // Create selected item array
+                $selectedItem = [
                     'item_id' => $returnDetail->transactionDetailsJoin->item_id,
                     'item_name' => $returnDetail->transactionDetailsJoin->itemJoin->item_name,
                     'item_description' => $returnDetail->transactionDetailsJoin->itemJoin->item_description,
@@ -1279,22 +1277,20 @@ class SalesTransaction extends Component
                     'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
                 ];
 
-                if ($returnDetail->transactionDetailsJoin->discount_id == 3) {
-
-                    $this->selectedItems['wholesale_discount_amount'] = $this->selectedItems['total_amount'] * ($this->selectedItems['discount'] / 100);
-
-                    $this->selectedItems['total_amount'] = $this->selectedItems['total_amount'] - $this->selectedItems['wholesale_discount_amount'];
-
-                    dump($this->selectedItems['total_amount']);
+                // Apply discount logic if applicable
+                if (isset($selectedItem['discount_id']) && $selectedItem['discount_id'] == 3) {
+                    $selectedItem['wholesale_discount_amount'] = $selectedItem['total_amount'] * ($selectedItem['discount'] / 100);
+                    $selectedItem['total_amount'] -= $selectedItem['wholesale_discount_amount'];
                 }
 
+                // Add to selected items
+                $this->selectedItems[] = $selectedItem;
 
-
+                // For debugging purposes
+                dump($this->selectedItems);
             }
-
-
-
         }
+
 
 
         $this->return_number = $this->returnInfo->return_number;
