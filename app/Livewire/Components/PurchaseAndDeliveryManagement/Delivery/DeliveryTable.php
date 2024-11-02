@@ -123,6 +123,7 @@ class DeliveryTable extends Component
         $delivery->status = "Cancelled";
         $delivery->save();
 
+
         $this->alert('success', 'Delivery cancelled successfully');
         $this->resetPage();
 

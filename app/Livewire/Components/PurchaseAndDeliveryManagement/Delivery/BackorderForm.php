@@ -113,6 +113,7 @@ class BackorderForm extends Component
 
 
             $this->resetForm();
+            $this->resetPage();
             $this->closeBackorderForm();
             return back();
 
