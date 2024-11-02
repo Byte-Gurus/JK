@@ -22,12 +22,15 @@ class VoidTransactionModal extends Component
     {
         $validated = $this->validateForm();
         $transaction = Transaction::where('transaction_number', $validated['transaction_number'])->first();
-        $return = Returns::where('transaction_id',$transaction->id)->first();
 
         if (!$transaction) {
             $this->addError('transaction_number', 'The transaction number does not exist.');
             return;
         }
+        
+        $return = Returns::where('transaction_id', $transaction->id)->first();
+
+
         if ($return) {
             $this->addError('transaction_number', 'The transaction number is already returned');
             return;
