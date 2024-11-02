@@ -32,24 +32,7 @@ class BackorderForm extends Component
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
         // Fetch the purchase with related backorders and items
-        $this->purchase = Purchase::with('backorderJoin.itemJoin')
-            ->find($this->purchase_id);
 
-
-        if ($this->purchase && empty($this->backorderList) && !$this->isReorderListsCleared) {
-            $this->backorderList = $this->purchase->backorderJoin->map(function ($backOrder) {
-                return [
-                    'backorder_quantity' => $backOrder->backorder_quantity,
-                    'status' => $backOrder->status,
-                    'new_po_number' => optional($backOrder->deliveryJoin)->purchaseJoin->po_number ?? 'N/A',
-                    'barcode' => $backOrder->itemJoin->barcode,
-                    'item_id' => $backOrder->itemJoin->id,
-                    'item_name' => $backOrder->itemJoin->item_name,
-                    'item_description' => $backOrder->itemJoin->item_description,
-                    // Provide an empty array if no item details
-                ];
-            })->toArray();
-        }
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.backorder-form', [
             'backorder_lists' => $this->backorderList,
@@ -259,6 +242,24 @@ class BackorderForm extends Component
         $delivery = Delivery::find($this->delivery_id);
         $this->purchase_id = $delivery->purchase_id;
 
+        $this->purchase = Purchase::with('backorderJoin.itemJoin')
+            ->find($this->purchase_id);
+
+
+        if ($this->purchase && empty($this->backorderList) && !$this->isReorderListsCleared) {
+            $this->backorderList = $this->purchase->backorderJoin->map(function ($backOrder) {
+                return [
+                    'backorder_quantity' => $backOrder->backorder_quantity,
+                    'status' => $backOrder->status,
+                    'new_po_number' => optional($backOrder->deliveryJoin)->purchaseJoin->po_number ?? 'N/A',
+                    'barcode' => $backOrder->itemJoin->barcode,
+                    'item_id' => $backOrder->itemJoin->id,
+                    'item_name' => $backOrder->itemJoin->item_name,
+                    'item_description' => $backOrder->itemJoin->item_description,
+                    // Provide an empty array if no item details
+                ];
+            })->toArray();
+        }
 
 
         $this->generatePurchaseOrderNumber();
