@@ -16,7 +16,7 @@
 
             <input type="text" wire:model.live.debounce.100ms="search"
                 class="w-2/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                placeholder="Search by Transaction No. or Sales Invoice No." required="" />
+                placeholder="Search by Transaction No." required="" />
         </div>
 
         <div class="flex flex-row items-center justify-between gap-4">
