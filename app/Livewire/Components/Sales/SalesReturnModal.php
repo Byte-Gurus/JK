@@ -21,6 +21,13 @@ class SalesReturnModal extends Component
     {
         $validated = $this->validateForm();
         $transaction = Transaction::where('transaction_number', $validated['transaction_number'])->first();
+
+        if (!$transaction) {
+            $this->addError('transaction_number', 'The transaction number does not exist.');
+            return;
+        }
+
+
         $voidTransaction = VoidTransaction::where('transaction_id', $transaction->id)->first();
 
 
@@ -29,10 +36,7 @@ class SalesReturnModal extends Component
             return;
         }
 
-        if (!$transaction) {
-            $this->addError('transaction_number', 'The transaction number does not exist.');
-            return;
-        }
+
 
         if ($transaction->transaction_type != "Sales") {
             $this->addError('transaction_number', 'The transaction number is not a sales.');
