@@ -112,9 +112,9 @@
                     <p class="text-[0.6em] font-bold uppercase">Date of Purchase:</p>
                     <p class="text-[0.6em] font-bold uppercase">{{ $transaction_date ?? 'N/A' }}</p>
                 </div>
-                <div class="flex flex-row gap-2 my-2 break-words text-nowrap">
-                    <p class="text-[0.6em] font-bold uppercase">Prepared By:</p>
-                    <p class="text-[0.6em] font-bold uppercase w-[116px]">{{ $returnedBy ?? 'N/A' }}</p>
+                <div class="flex flex-col">
+                    <p class="text-[0.6em] font-bold uppercase text-nowrap">Prepared By:</p>
+                    <p class="text-[0.6em] font-bold uppercase text-wrap">{{ $returnedBy ?? 'N/A' }}</p>
                 </div>
             </div>
         </div>

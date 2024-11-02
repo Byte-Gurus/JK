@@ -56,6 +56,8 @@ class PurchaseOrderForm extends Component
         $this->generatePurchaseOrderNumber();
         $this->resetValidation();
         $this->resetForm();
+        $this->removed_items = [];
+        $this->reorder_lists = [];
     }
     public function render()
     {

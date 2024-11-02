@@ -17,7 +17,7 @@
             </div>
         </div>
         <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">YEARLY SALES REPORT</p>
+            <p class="text-[2em] font-bold text-right italic m-4 mr-8 uppercase">YEARLY SALES REPORT</p>
         </div>
         @if ($transaction_info)
             <div class="grid grid-flow-col grid-cols-2 ">
@@ -33,29 +33,26 @@
                 </div>
                 <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
                     <div class="grid grid-flow-row border border-black">
-                        <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Gross Sales</p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text[1em] text-right">
-                                {{ number_format($transaction_info['totalGross'], 2) }}</p>
+                        <div class="grid items-center justify-between grid-flow-col border-b border-black text-nowrap">
+                            <p class=" text-[1em] font-bold uppercase">Gross Sales</p>
+                            <p class="text[1em] text-right">
+                                ₱ {{ number_format($transaction_info['totalGross'], 2) }}</p>
                         </div>
-                        <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Discount Amount</p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text[1em] text-right">
-                                {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
+                        <div class="grid items-center justify-between grid-flow-col border-b border-black text-nowrap">
+
+                            <p class="  text-[1em] font-bold uppercase">Discount Amount</p>
+                            <p class=" text[1em] text-right">
+                                ₱ {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
                         </div>
-                        <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Tax Amount</p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text[1em] text-right">
-                                {{ number_format($transaction_info['totalTax'], 2) }}</p>
+                        <div class="grid items-center justify-between grid-flow-col border-b border-black text-nowrap">
+                            <p class=" text-[1em] font-bold uppercase">Tax Amount</p>
+                            <p class=" text[1em] text-right">
+                                ₱ {{ number_format($transaction_info['totalTax'], 2) }}</p>
                         </div>
-                        <div class="grid items-center grid-flow-col grid-cols-12 border border-black text-nowrap">
-                            <p class=" col-span-8 w-1/2 text-[1.4em] font-black uppercase">Net Sales </p>
-                            <p class="col-span-1 ">|</p>
-                            <p class=" col-span-3 text-[1.4em] font-black text-right">
-                                {{ number_format($transaction_info['totalNet'], 2) }}</p>
+                        <div class="grid items-center justify-between grid-flow-col text-nowrap">
+                            <p class="text-[1.4em] font-black uppercase pr-2">Net Sales </p>
+                            <p class="text-[1.4em] font-black text-right">
+                                ₱ {{ number_format($transaction_info['totalNet'], 2) }}</p>
                         </div>
                     </div>
                 </div>

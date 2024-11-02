@@ -17,50 +17,46 @@
             </div>
         </div>
         <div>
-            <p class="text-[2em] font-bold text-right italic m-4 mr-10 uppercase">MONTHLY SALES REPORT</p>
+            <p class="text-[2em] font-bold text-right italic m-4 mr-8 uppercase">MONTHLY SALES REPORT</p>
         </div>
         @if ($transaction_info && $hasTransactions)
+            <div class="grid grid-flow-col grid-cols-2 ">
+                <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
+                    <div class="flex flex-col ">
+                        <div class="flex flex-row gap-2 text-nowrap">
+                            <p class="text-[1em] font-black uppercase">Report as of</p>
+                            <p>
+                                {{ $transaction_info['date'] }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
+                    <div class="grid grid-flow-row border border-black">
+                        <div class="grid items-center justify-between grid-flow-col border-b border-black text-nowrap">
+                            <p class=" text-[1em] font-bold uppercase">Gross Sales</p>
+                            <p class="text[1em] text-right">
+                                ₱ {{ number_format($transaction_info['totalGross'], 2) }}</p>
+                        </div>
+                        <div class="grid items-center justify-between grid-flow-col border-b border-black text-nowrap">
 
-        <div class="grid grid-flow-col grid-cols-2 ">
-            <div class="flex flex-col items-start justify-end col-span-1 px-4 mb-2 ">
-                <div class="flex flex-col ">
-                    <div class="flex flex-row gap-2 text-nowrap">
-                        <p class="text-[1em] font-black uppercase">Report as of</p>
-                        <p>
-                            {{ $transaction_info['date'] }}
-                        </p>
+                            <p class="  text-[1em] font-bold uppercase">Discount Amount</p>
+                            <p class=" text[1em] text-right">
+                                ₱ {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
+                        </div>
+                        <div class="grid items-center justify-between grid-flow-col border-b border-black text-nowrap">
+                            <p class=" text-[1em] font-bold uppercase">Tax Amount</p>
+                            <p class=" text[1em] text-right">
+                                ₱ {{ number_format($transaction_info['totalTax'], 2) }}</p>
+                        </div>
+                        <div class="grid items-center justify-between grid-flow-col text-nowrap">
+                            <p class="text-[1.4em] font-black uppercase pr-2">Net Sales </p>
+                            <p class="text-[1.4em] font-black text-right">
+                                ₱ {{ number_format($transaction_info['totalNet'], 2) }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col justify-between col-span-1 px-4 mb-2">
-                <div class="grid grid-flow-row border border-black">
-                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Gross Sales</p>
-                        <p class="col-span-1 ">|</p>
-                        <p class=" col-span-3 text[1em] text-right">
-                            {{ number_format($transaction_info['totalGross'], 2) }}</p>
-                    </div>
-                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Discount Amount</p>
-                        <p class="col-span-1 ">|</p>
-                        <p class=" col-span-3 text[1em] text-right">
-                            {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
-                    </div>
-                    <div class="grid grid-flow-col grid-cols-12 border border-black text-nowrap">
-                        <p class=" col-span-8 w-1/2 text-[1em] font-bold uppercase">Tax Amount</p>
-                        <p class="col-span-1 ">|</p>
-                        <p class=" col-span-3 text[1em] text-right">
-                            {{ number_format($transaction_info['totalTax'], 2) }}</p>
-                    </div>
-                    <div class="grid items-center grid-flow-col grid-cols-12 border border-black text-nowrap">
-                        <p class=" col-span-8 w-1/2 text-[1.4em] font-black uppercase">Net Sales </p>
-                        <p class="col-span-1 ">|</p>
-                        <p class=" col-span-3 text-[1.4em] font-black text-right">
-                            {{ number_format($transaction_info['totalNet'], 2) }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         @endif
 
         <div>
@@ -76,13 +72,13 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Gross Sales (₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Gross Sales(₱)</p>
                     </div>
                 </li>
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Discount Amount (₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Discount Amount(₱)</p>
                     </div>
                 </li>
                 {{-- <li class="col-span-1 ">
@@ -92,7 +88,7 @@
                 </li> --}}
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">VAT Amount (₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">VAT Amount(₱)</p>
                     </div>
                 </li>
                 {{-- <li class="col-span-1 ">
@@ -102,102 +98,103 @@
                 </li> --}}
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[0.8em] uppercase text-right font-bold">Net Sales (₱)</p>
+                        <p class="text-[0.8em] uppercase text-right font-bold">Net Sales(₱)</p>
                     </div>
                 </li>
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
             @if (!$hasTransactions)
-            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE</p>
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO TRANSACTIONS FOUND FOR THIS DATE
+                </p>
             @endif
             @if ($transaction_info && $hasTransactions)
-            @foreach ($transaction_info['dailySummaries'] as $summary) {{-- Change here --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4">
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-left font-medium">
-                            {{ $summary['date'] }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-right font-bold">
-                            {{ number_format($summary['totalGross'], 2) }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-right font-bold">
-                            {{ number_format($summary['totalDiscount'], 2) }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-right font-bold">
-                            {{ number_format($summary['totalTax'], 2) }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[0.8em] text-right font-bold">
-                            {{ number_format($summary['totalNet'], 2) }}
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            @endforeach
-            <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 border-black border-y">
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-left font-bold">Total</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-right font-bold">
-                            {{ number_format($transaction_info['totalGross'], 2) }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-right font-bold">
-                            {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-right font-bold">
-                            {{ number_format($transaction_info['totalTax'], 2) }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-right font-bold">
-                            {{ number_format($transaction_info['totalNet'], 2) }}</p>
-                    </div>
-                </li>
-            </ul>
+                @foreach ($transaction_info['dailySummaries'] as $summary)
+                    {{-- Change here --}}
+                    <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4">
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-left font-medium">
+                                    {{ $summary['date'] }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right font-bold">
+                                    {{ number_format($summary['totalGross'], 2) }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right font-bold">
+                                    {{ number_format($summary['totalDiscount'], 2) }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right font-bold">
+                                    {{ number_format($summary['totalTax'], 2) }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[0.8em] text-right font-bold">
+                                    {{ number_format($summary['totalNet'], 2) }}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                @endforeach
+                <ul class="grid justify-between grid-flow-col grid-cols-5 mx-4 border-black border-y">
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-left font-bold">Total</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-right font-bold">
+                                {{ number_format($transaction_info['totalGross'], 2) }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-right font-bold">
+                                {{ number_format($transaction_info['totalDiscount'], 2) }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-right font-bold">
+                                {{ number_format($transaction_info['totalTax'], 2) }}</p>
+                        </div>
+                    </li>
+                    <li class="col-span-1 py-[3px]">
+                        <div>
+                            <p class="text-[1em] text-right font-bold">
+                                {{ number_format($transaction_info['totalNet'], 2) }}</p>
+                        </div>
+                    </li>
+                </ul>
             @endif
 
         </div>
         @if ($transaction_info && $hasTransactions)
-
-        <div class="px-4 py-4">
-            <div class="flex flex-row gap-2 text-nowrap">
-                <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                <p>
-                    {{ $transaction_info['dateCreated'] }}
-                </p>
+            <div class="px-4 py-4">
+                <div class="flex flex-row gap-2 text-nowrap">
+                    <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
+                    <p>
+                        {{ $transaction_info['dateCreated'] }}
+                    </p>
+                </div>
+                <div class="flex flex-row gap-2 py-4 text-nowrap">
+                    <p class="text-[1em] font-bold uppercase">Prepared By:</p>
+                    <p>
+                        {{ $transaction_info['createdBy'] }}
+                    </p>
+                </div>
             </div>
-            <div class="flex flex-row gap-2 py-4 text-nowrap">
-                <p class="text-[1em] font-bold uppercase">Prepared By:</p>
-                <p>
-                    {{ $transaction_info['createdBy'] }}
-                </p>
-            </div>
-        </div>
         @endif
     </div>
 </div>
