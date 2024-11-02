@@ -68,6 +68,7 @@ class SalesTransactionHistory extends Component
 
     protected $listeners = [
         "echo:refresh-transaction,TransactionEvent" => 'refreshFromPusher',
+        "echo:refresh-transaction,VoidEvent" => 'refreshFromPusher',
         'return-sales-transaction-history' => 'returnSalesTransactionHistory',
         "echo:refresh-return,ReturnEvent" => 'refreshFromPusher',
         'admin-confirmed' => 'adminConfirmed',
