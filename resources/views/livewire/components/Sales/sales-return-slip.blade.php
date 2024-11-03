@@ -33,14 +33,14 @@
                         <p class="text-[0.6em] font-bold uppercase">Total Return Amount:</p>
                         <p class="text-[0.6em] font-bold uppercase w-[116px]"> {{ $item_return_amount ?? 'N/A' }}</p>
                     </div>
-                    <div class="flex flex-row gap-2 break-words text-nowrap">
+                    {{-- <div class="flex flex-row gap-2 break-words text-nowrap">
                         <p class="text-[0.2em] font-medium uppercase">Total EXCH Amount:</p>
                         <p class="text-[0.2em] font-medium uppercase w-[116px]"> {{ $exchange_amount ?? 'N/A' }}</p>
                     </div>
                     <div class="flex flex-row gap-2 break-words text-nowrap">
                         <p class="text-[0.2em] font-medium uppercase">Total Refund Amount:</p>
                         <p class="text-[0.2em] font-medium uppercase w-[116px]"> {{ $refund_amount ?? 'N/A' }}</p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="mx-4">
