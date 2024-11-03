@@ -653,18 +653,18 @@
                         <p class=" text-[1.2em] font-black">{{ number_format($exchange_amount, 2) ?? ' ' }}
                         </p>
                     </div>
-
+                    <div class="flex flex-row justify-between">
+                        <p class=" text-[1.2em] font-medium">Discount Amount</p>
+                        <p class=" text-[1.2em] font-black">{{ number_format($transactionDiscount, 2) ?? ' ' }}
+                        </p>
+                    </div>
                     <div class="flex flex-row justify-between">
                         <p class=" text-[1.8em] font-black">Subtotal</p>
                         <p class=" font-black text-[1.8em]">₱ {{ number_format($subtotal, 2) }}</p>
 
                     </div>
 
-                    <div class="flex flex-row justify-between">
-                        <p class=" text-[1.2em] font-medium">Discount Amount</p>
-                        <p class=" text-[1.2em] font-black">{{ number_format($transactionDiscount, 2) ?? ' ' }}
-                        </p>
-                    </div>
+
                     <div class="w-full my-2">
                         <div class="border border-black"></div>
                     </div>

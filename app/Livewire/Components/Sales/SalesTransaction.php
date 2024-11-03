@@ -497,6 +497,7 @@ class SalesTransaction extends Component
             if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
 
                 $this->transactionDiscount = $this->subtotal * 0.20;
+                $this->subtotal -= $this->transactionDiscount;
             }
             // $test = [
             //     'items' => $index['item_name'],
