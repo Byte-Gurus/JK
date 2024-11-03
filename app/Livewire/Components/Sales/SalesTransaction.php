@@ -487,18 +487,25 @@ class SalesTransaction extends Component
                 $this->PWD_Senior_discount_amount = $this->netAmount;
             }
 
+
+
             if ($this->changeTransactionType == 3 && $this->subtotal > $this->exchange_amount) {
+
+
+                if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
+
+                    $this->transactionDiscount = $this->subtotal * 0.20;
+                    $this->subtotal -= $this->transactionDiscount;
+                }
+
                 $this->excess_amount = $this->subtotal - $this->exchange_amount;
                 $this->grandTotal = $this->excess_amount;
+
             } else {
                 $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
             }
 
-            if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
 
-                $this->transactionDiscount = $this->subtotal * 0.20;
-                $this->subtotal -= $this->transactionDiscount;
-            }
             // $test = [
             //     'items' => $index['item_name'],
             //     'percent' => $index['vat_percent'],
