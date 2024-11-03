@@ -74,7 +74,8 @@ class SalesTransaction extends Component
     $exchange_amount,
     $returnInfo,
     $return_number,
-    $excess_amount;
+    $excess_amount,
+    $transactionDiscount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -494,8 +495,8 @@ class SalesTransaction extends Component
             }
 
             if($this->changeTransactionType == 3 && $this->returnInfo->transactionJoin->total_discount_amount > 0){
-                $this->PWD_Senior_discount_amount = $this->returnInfo->transactionJoin->total_discount_amount;
-                $this->grandTotal -= $this->PWD_Senior_discount_amount;
+                $this->transactionDiscount = $this->returnInfo->transactionJoin->total_discount_amount;
+                $this->grandTotal = $this->subtotal - $this->transactionDiscount
 
             }
 
