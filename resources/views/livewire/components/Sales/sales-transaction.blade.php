@@ -655,7 +655,7 @@
                     </div>
                     <div class="flex flex-row justify-between">
                         <p class=" text-[1.2em] font-medium">Discount Amount</p>
-                        <p class=" text-[1.2em] font-black">{{ number_format($exchange_amount, 2) ?? ' ' }}
+                        <p class=" text-[1.2em] font-black">{{ number_format($PWD_Senior_discount_amount, 2) ?? ' ' }}
                         </p>
                     </div>
                     <div class="flex flex-row justify-between">
