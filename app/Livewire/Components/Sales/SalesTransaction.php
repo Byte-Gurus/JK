@@ -74,8 +74,8 @@ class SalesTransaction extends Component
     $exchange_amount,
     $returnInfo,
     $return_number,
-    $excess_amount,
-    $transactionDiscount;
+    $transactionDiscount,
+    $excess_amount;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -493,13 +493,6 @@ class SalesTransaction extends Component
             } else {
                 $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
             }
-
-            if($this->changeTransactionType == 3 && $this->returnInfo->transactionJoin->total_discount_amount > 0){
-                $this->transactionDiscount = $this->returnInfo->transactionJoin->total_discount_amount;
-                $this->grandTotal = $this->subtotal - $this->transactionDiscount;
-
-            }
-
 
             // $test = [
             //     'items' => $index['item_name'],
@@ -1258,6 +1251,7 @@ class SalesTransaction extends Component
             return;
         }
 
+
         foreach ($returnDetails as $index => $returnDetail) {
             if ($returnDetail->operation === 'Exchange') {
                 // Create selected item array
@@ -1292,6 +1286,10 @@ class SalesTransaction extends Component
                     $selectedItem['total_amount'] -= $selectedItem['wholesale_discount_amount'];
                 }
 
+                if ($returnDetail->transactionDetailsJoin->transactionJoin->discount_id == 1 || $returnDetail->transactionDetailsJoin->transactionJoin->discount_id == 2) {
+
+                    $this->transactionDiscount = $this->subtotal * 0.20;
+                }
 
                 // Add to selected items
                 $this->selectedItems[] = $selectedItem;
