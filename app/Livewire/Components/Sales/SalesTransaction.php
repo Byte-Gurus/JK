@@ -1284,9 +1284,9 @@ class SalesTransaction extends Component
                     $selectedItem['total_amount'] -= $selectedItem['wholesale_discount_amount'];
                 }
 
-                if (isset($selectedItem['discount_id']) && $selectedItem['discount_id'] == 1 || $selectedItem['discount_id'] == 2) {
-                    $selectedItem['discount'] = 20;
-                    $selectedItem['total_amount'] = $selectedItem['total_amount'] - ($selectedItem['total_amount'] * ($selectedItem['discount'] / 100));
+                if ($returnDetail->transactionJoin->discount_id == 1 || $returnDetail->transactionJoin->discount_id == 2) {
+
+                    $selectedItem['total_amount'] = $selectedItem['total_amount'] - ($selectedItem['total_amount'] * (20 / 100));
                 }
 
                 // Add to selected items
