@@ -494,6 +494,10 @@ class SalesTransaction extends Component
                 $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
             }
 
+            if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
+
+                $this->transactionDiscount = $this->subtotal * 0.20;
+            }
             // $test = [
             //     'items' => $index['item_name'],
             //     'percent' => $index['vat_percent'],
@@ -1286,10 +1290,7 @@ class SalesTransaction extends Component
                     $selectedItem['total_amount'] -= $selectedItem['wholesale_discount_amount'];
                 }
 
-                if ($returnDetail->transactionDetailsJoin->transactionJoin->discount_id == 1 || $returnDetail->transactionDetailsJoin->transactionJoin->discount_id == 2) {
 
-                    $this->transactionDiscount = $this->subtotal * 0.20;
-                }
 
                 // Add to selected items
                 $this->selectedItems[] = $selectedItem;
