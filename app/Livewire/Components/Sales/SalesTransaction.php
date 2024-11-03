@@ -496,7 +496,7 @@ class SalesTransaction extends Component
 
             if($this->changeTransactionType == 3 && $this->returnInfo->transactionJoin->total_discount_amount > 0){
                 $this->transactionDiscount = $this->returnInfo->transactionJoin->total_discount_amount;
-                $this->grandTotal = $this->subtotal - $this->transactionDiscount
+                $this->grandTotal = $this->subtotal - $this->transactionDiscount;
 
             }
 
