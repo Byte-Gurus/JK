@@ -41,7 +41,7 @@ Artisan::command('migration-order', function () {
         '2024_09_02_213236_create_transaction_details_table.php',
         '2024_09_04_210427_create_credits_table.php',
         '2024_09_05_220930_create_credit_histories_table.php',
-        
+
         '2024_10_02_154815_create_void_transactions_table.php',
         '2024_10_05_095447_create_void_transaction_details_table.php',
 
@@ -135,3 +135,33 @@ Artisan::command('credit:check-overdue', function () {
         }
     }
 })->purpose('Check credit creditor and update status if overdue')->daily();
+
+Artisan::command('transaction:delete-duplicates', function () {
+
+    $duplicates = DB::table('transaction_movements')
+        ->select('credit_number', DB::raw('COUNT(*) as count'))
+        ->groupBy('credit_number')
+        ->having('count', '>', 1)
+        ->get();
+
+    dd($duplicates);
+
+    foreach ($duplicates as $duplicate) {
+        // Get the IDs of all transactions with this credit_number
+        $idsToDelete = DB::table('transaction_movements')
+            ->where('credit_number', $duplicate->credit_number)
+            ->pluck('id')
+            ->toArray();
+
+        // Keep the first entry, delete the rest
+        array_shift($idsToDelete); // Remove the first id to keep
+
+        if (count($idsToDelete) > 0) {
+            // Delete duplicates
+            DB::table('transaction_movements')->whereIn('id', $idsToDelete)->delete();
+            $this->info('Deleted ' . count($idsToDelete) . ' duplicates of credit_number: ' . $duplicate->credit_number);
+        }
+    }
+
+    $this->info('Duplicate transaction movements deleted successfully.');
+});
