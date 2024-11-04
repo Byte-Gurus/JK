@@ -71,7 +71,6 @@
                         <p class="text-[0.6em] font-black">Change</p>
                     </div>
                     <div>
-                        <p class="text-[0.6em] font-black">232323</p>
                         {{ $credit_payment_info['change_or_balance'] ?? null }}
                     </div>
                 </div>
