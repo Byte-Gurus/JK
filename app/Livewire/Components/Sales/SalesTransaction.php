@@ -633,7 +633,7 @@ class SalesTransaction extends Component
             'grandTotal' => $this->grandTotal,
             'transaction_number' => $this->transaction_number,
             'transaction_time' => now()->format('H:i A'),
-            'transaction_date' => now()->format('d-m-Y'),
+            'transaction_date' => now()->format('M d Y'),
             'user' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
         ];
 
