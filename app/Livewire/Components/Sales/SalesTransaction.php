@@ -180,7 +180,6 @@ class SalesTransaction extends Component
     public function selectCustomer($creditor_id)
     {
         $credit = Credit::where('customer_id', $creditor_id)->latest()->first();
-        dump($credit);
 
         if ($credit->credit_limit <= $this->grandTotal) {
             $this->alert('error', 'Creditor reached the credit limit');

@@ -17,7 +17,10 @@
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $credit_payment_info['payment']['created_at'] ?? null }}
+                            {{ isset($credit_payment_info['payment']['created_at']) ?
+                            \Illuminate\Support\Carbon::parse($credit_payment_info['payment']['created_at'])->format('M
+                            d Y h:i A') : null }}
+
                         </p>
                     </div>
                     <div class="flex flex-row gap-2 break-words text-wrap">
