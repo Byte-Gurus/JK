@@ -143,8 +143,9 @@ Artisan::command('transaction:delete-duplicates', function () {
         ->join('credits', 'transaction_movements.credit_id', '=', 'credits.id') // Join with the credits table
         ->select('credits.credit_number', DB::raw('COUNT(*) as count')) // Select the credit_number
         ->groupBy('credits.credit_number')
-        ->having('count', '>', 1)
+        ->having(DB::raw('COUNT(*)'), '>', 1) // Use COUNT(*) directly in the HAVING clause
         ->get();
+
 
     dd($duplicates);
 
