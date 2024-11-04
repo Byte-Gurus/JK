@@ -139,25 +139,27 @@ Artisan::command('credit:check-overdue', function () {
 Artisan::command('transaction:delete-duplicates', function () {
 
     $duplicates = DB::table('transaction_movements')
-        ->select('credit_number', DB::raw('COUNT(*) as count'))
-        ->groupBy('credit_number')
+        ->join('credits', 'transaction_movements.credit_id', '=', 'credits.id') // Join with the credits table
+        ->select('credits.credit_number', DB::raw('COUNT(*) as count')) // Select the credit_number
+        ->groupBy('credits.credit_number')
         ->having('count', '>', 1)
         ->get();
 
     dd($duplicates);
 
     foreach ($duplicates as $duplicate) {
-        // Get the IDs of all transactions with this credit_number
+        // Step 2: Get the IDs of all transactions with this credit_number
         $idsToDelete = DB::table('transaction_movements')
-            ->where('credit_number', $duplicate->credit_number)
-            ->pluck('id')
+            ->join('credits', 'transaction_movements.credit_id', '=', 'credits.id')
+            ->where('credits.credit_number', $duplicate->credit_number)
+            ->pluck('transaction_movements.id')
             ->toArray();
 
         // Keep the first entry, delete the rest
         array_shift($idsToDelete); // Remove the first id to keep
 
         if (count($idsToDelete) > 0) {
-            // Delete duplicates
+            // Step 3: Delete duplicates
             DB::table('transaction_movements')->whereIn('id', $idsToDelete)->delete();
             $this->info('Deleted ' . count($idsToDelete) . ' duplicates of credit_number: ' . $duplicate->credit_number);
         }
