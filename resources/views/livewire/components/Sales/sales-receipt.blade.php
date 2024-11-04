@@ -21,13 +21,17 @@
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_date'] ?? null }}
+                            {{
+                            \Illuminate\Support\Carbon::parse($receiptDetails['transaction_info']['transaction_date'])->format('M d Y')
+                            ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ $receiptDetails['transaction_info']['transaction_time'] ?? null }}
+
+                            {{ \Illuminate\Support\Carbon::parse($receiptDetails['transaction_info']['transaction_time']
+                            )->format('H:i:s') ?? null }}
                         </p>
                     </div>
                     <div class="flex flex-row gap-2 text-nowrap">

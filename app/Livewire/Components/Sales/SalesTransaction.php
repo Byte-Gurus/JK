@@ -505,7 +505,6 @@ class SalesTransaction extends Component
                 $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
             }
 
-
             // $test = [
             //     'items' => $index['item_name'],
             //     'percent' => $index['vat_percent'],
