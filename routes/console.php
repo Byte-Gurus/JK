@@ -147,7 +147,6 @@ Artisan::command('transaction:delete-duplicates', function () {
         ->get();
 
 
-    dd($duplicates);
 
     foreach ($duplicates as $duplicate) {
         // Step 2: Get the IDs of all transactions with this credit_number
