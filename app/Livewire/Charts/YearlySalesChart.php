@@ -52,13 +52,13 @@ class YearlySalesChart extends Component
             // Process transactions for the month
             foreach ($transactions as $transaction) {
                 if ($transaction->transaction_type == 'Sales') {
-                    $totalGross += $transaction->transactionJoin->total_amount;
+                    $totalGross += $transaction->transactionJoin->subtotal;
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
                 } elseif ($transaction->transaction_type == 'Return') {
                     $totalReturnAmount += $transaction->returnsJoin->return_total_amount;
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
                 } elseif ($transaction->transaction_type == 'Credit') {
-                    $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
+                    $totalGross += $transaction->creditJoin->transactionJoin->subtotal;
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
                 } elseif ($transaction->transaction_type == 'Void') {
                     $totalVoidAmount += $transaction->voidTransactionJoin->void_total_amount;

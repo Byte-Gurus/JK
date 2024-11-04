@@ -73,7 +73,7 @@ class DailySalesChart extends Component
 
             switch ($transaction->transaction_type) {
                 case 'Sales':
-                    $totalGross += $transaction->transactionJoin->total_amount;
+                    $totalGross += $transaction->transactionJoin->subtotal;
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
 
                     // foreach ($transaction->transactionJoin->transactionDetailsJoin as $detail) {
@@ -92,7 +92,7 @@ class DailySalesChart extends Component
                     // }
                     break;
                 case 'Credit':
-                    $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
+                    $totalGross += $transaction->creditJoin->transactionJoin->subtotal;
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
 
                     // foreach ($transaction->creditJoin->transactionJoin->transactionDetailsJoin as $detail) {
