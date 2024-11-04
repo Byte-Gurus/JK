@@ -34,7 +34,7 @@ class DashboardCards extends Component
 
             switch ($transaction->transaction_type) {
                 case 'Sales':
-                    $totalGross += $transaction->transactionJoin->total_amount;
+                    $totalGross += $transaction->transactionJoin->subtotal;
                     $totalTax += $transaction->transactionJoin->total_vat_amount;
                     break;
                 case 'Return':
@@ -42,7 +42,7 @@ class DashboardCards extends Component
                     $totalReturnVatAmount += $transaction->returnsJoin->return_vat_amount;
                     break;
                 case 'Credit':
-                    $totalGross += $transaction->creditJoin->transactionJoin->total_amount;
+                    $totalGross += $transaction->creditJoin->transactionJoin->subtotal;
                     $totalTax += $transaction->creditJoin->transactionJoin->total_vat_amount;
                     break;
                 case 'Void':
