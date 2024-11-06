@@ -400,19 +400,25 @@ class SalesTransaction extends Component
     public function removeItem()
     {
 
-        if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
-            $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] - $this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
+
+        if ($this->changeTransactionType == 3) {
+
+            if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
+                $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] - $this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
 
 
+            }
+            $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0);
+
+            dump($this->subtotal, $newGrandTotal - $this->transactionDiscount);
+
+            if ($newGrandTotal < $this->subtotal - $this->transactionDiscount) {
+                $this->alert('error', 'Subtotal must not be below exchange amount');
+                return;
+            }
         }
-        $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0);
 
-        dump($this->subtotal, $newGrandTotal);
 
-        if ($newGrandTotal < $this->subtotal) {
-            $this->alert('error', 'Subtotal must not be below exchange amount');
-            return;
-        }
 
         if ($this->isSelected) {
             $this->confirm('Do you want to remove this item?', [
