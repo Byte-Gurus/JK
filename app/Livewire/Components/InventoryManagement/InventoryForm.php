@@ -5,6 +5,8 @@ namespace App\Livewire\Components\InventoryManagement;
 use App\Events\InventoryEvent;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
+use App\Models\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -84,6 +86,15 @@ class InventoryForm extends Component
                 'selling_price' => $this->inventoryInfo['selling_price'],
                 'vat_amount' => $this->inventoryInfo['vat_amount'],
             ]);
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated item price',
+                'action' => 'Price Update'
+            ]);
+
             DB::commit();
 
             $this->resetForm();
@@ -154,7 +165,7 @@ class InventoryForm extends Component
     {
 
         if ($cost !== null && $markup !== null) {
-            $this->seling_price  = $cost * (1 + $markup / 100);
+            $this->seling_price = $cost * (1 + $markup / 100);
 
         }
 

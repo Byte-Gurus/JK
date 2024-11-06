@@ -7,6 +7,7 @@ use App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery\DeliveryTable
 use App\Livewire\Pages\PurchasePage;
 use App\Models\Delivery;
 use App\Models\Item;
+use App\Models\Log;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use App\Models\Supplier;
@@ -314,6 +315,14 @@ class PurchaseOrderForm extends Component
                 'status' => "In Progress",
                 'date_delivered' => "N/A",
                 'purchase_id' => $purchase_order->id
+            ]);
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created a purchase order',
+                'action' => 'PO Create'
             ]);
 
             DB::commit();

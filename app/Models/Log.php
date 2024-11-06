@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Logs extends Model
+class Log extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,8 @@ class Logs extends Model
         'message',
         'action',
     ];
-    public function usersJoin()
+
+    public function userJoin()
     {
         return $this->hasMany(User::class, 'user_id');
     }

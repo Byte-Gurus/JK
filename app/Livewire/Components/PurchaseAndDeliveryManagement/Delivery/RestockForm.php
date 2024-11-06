@@ -10,6 +10,7 @@ use App\Models\Delivery;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
 use App\Models\Item;
+use App\Models\Log;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
@@ -208,6 +209,15 @@ class RestockForm extends Component
                 $delivery->status = "Complete Stock in";
             }
             $delivery->save();
+
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Restocked an item',
+                'action' => 'Item Restock'
+            ]);
 
             DB::commit();
 

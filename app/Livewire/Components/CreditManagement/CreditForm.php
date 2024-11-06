@@ -8,6 +8,7 @@ use App\Livewire\Pages\CreditManagementPage;
 use App\Models\Credit;
 use App\Models\CreditHistory;
 use App\Models\Customer;
+use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TransactionMovement;
 use Illuminate\Support\Facades\DB;
@@ -114,6 +115,14 @@ class CreditForm extends Component
                 'credit_id' => $credit->id,
                 'credit_amount' => null,
                 'remaining_balance' => null,
+            ]);
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created a credit',
+                'action' => 'Credit Create'
             ]);
 
             DB::commit();

@@ -7,6 +7,8 @@ use App\Livewire\Pages\ItemManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
 use App\Models\Item;
+use App\Models\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -105,6 +107,14 @@ class ItemForm extends Component
                 'operation' => 'Stock In',
             ]);
 
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created an item',
+                'action' => 'Item Create'
+            ]);
+
             DB::commit();
 
             $this->alert('success', 'Item was created successfully');
@@ -189,6 +199,14 @@ class ItemForm extends Component
                 $inventory->vat_amount = ($item->vat_percent / 100) * $inventory->selling_price;
                 $inventory->save(); // Save each updated inventory record
             }
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated an item',
+                'action' => 'Item Update'
+            ]);
 
             DB::commit();
 

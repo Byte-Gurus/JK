@@ -6,9 +6,11 @@ use App\Events\CustomerEvent;
 use App\Livewire\Pages\CustomerManagementPage;
 use App\Models\Address;
 use App\Models\Customer;
+use App\Models\Log;
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -137,6 +139,14 @@ class CustomerForm extends Component
                 'id_picture' => $validated['id_picture'],
             ]);
 
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created a customer',
+                'action' => 'Customer Create'
+            ]);
+
             DB::commit();
 
             $this->alert('success', 'Customer was created successfully');
@@ -243,6 +253,15 @@ class CustomerForm extends Component
                 'id_picture' => $updatedAttributes['id_picture'] ?? $customer->id_picture,
             ]);
             $customer->save();
+
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated a customer',
+                'action' => 'Customer Update'
+            ]);
 
             DB::commit();
 

@@ -7,6 +7,7 @@ use App\Livewire\Pages\InventoryManagementPage;
 use App\Models\Inventory;
 use App\Models\InventoryAdjustment;
 use App\Models\InventoryMovement;
+use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -112,6 +113,14 @@ class StockAdjustForm extends Component
                 'inventory_adjustment_id' => $inventoryAdjust->id,
                 'movement_type' => 'Adjustment',
                 'operation' => $updatedAttributes['selectOperation'],
+            ]);
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated item stock',
+                'action' => 'Stock Update'
             ]);
 
             DB::commit();

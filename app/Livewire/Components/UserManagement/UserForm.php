@@ -6,7 +6,9 @@ namespace App\Livewire\Components\UserManagement;
 use App\Events\NewUserCreatedEvent;
 use App\Events\UserEvent;
 use App\Livewire\Pages\UserManagementPage;
+use App\Models\Log;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -92,6 +94,14 @@ class UserForm extends Component
 
             ]);
 
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created a user',
+                'action' => 'User Create'
+            ]);
+
             DB::commit();
 
             $this->alert('success', 'User was created successfully');
@@ -102,14 +112,14 @@ class UserForm extends Component
             $this->resetForm();
             $this->closeModal();
 
+
+
+
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
             DB::rollback();
             $this->alert('error', 'An error occurred while Creating the User, please refresh the page ');
         }
-
-
-
 
 
     }
@@ -182,6 +192,14 @@ class UserForm extends Component
             $user->fill($updatedAttributes);
 
             $user->save();
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated a user',
+                'action' => 'User Update'
+            ]);
 
             DB::commit();
 

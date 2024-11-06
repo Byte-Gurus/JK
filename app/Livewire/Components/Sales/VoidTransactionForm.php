@@ -11,6 +11,7 @@ use App\Models\TransactionMovement;
 use App\Models\VoidTransaction;
 use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -99,6 +100,15 @@ class VoidTransactionForm extends Component
                 $transactionDetails->save();
             }
         }
+
+
+        $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+        $log = Log::create([
+            'user_id' => Auth::user()->id,
+            'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Voided a transaction',
+            'action' => 'Void transaction  '
+        ]);
 
         VoidEvent::dispatch('refresh-void');
 

@@ -5,8 +5,10 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 use App\Events\DeliveryEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\Delivery;
+use App\Models\Log;
 use App\Models\Purchase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -117,6 +119,14 @@ class DeliveryDatePicker extends Component
                 $this->alert('success', 'Delivery date changed successfully');
                 $this->resetPage();
             }
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated a delivery',
+                'action' => 'Delivery Update'
+            ]);
 
             DB::commit();
 

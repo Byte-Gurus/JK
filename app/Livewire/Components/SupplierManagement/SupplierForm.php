@@ -5,11 +5,13 @@ namespace App\Livewire\Components\SupplierManagement;
 use App\Events\SupplierEvent;
 use App\Livewire\Pages\SupplierManagementPage;
 use App\Models\Address;
+use App\Models\Log;
 use App\Models\PhilippineBarangay;
 use App\Models\PhilippineCity;
 use App\Models\PhilippineProvince;
 use App\Models\PhilippineRegion;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -103,6 +105,14 @@ class SupplierForm extends Component
                 'address_id' => $address->id
             ]);
 
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created a supplier',
+                'action' => 'Supplier Create'
+            ]);
+
             DB::commit();
 
 
@@ -180,6 +190,14 @@ class SupplierForm extends Component
                 'address_id' => $address->id, // Associate with the updated address
             ]);
             $supplier->save();
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated a supplier',
+                'action' => 'Supplier Update'
+            ]);
 
             DB::commit();
 
@@ -260,7 +278,7 @@ class SupplierForm extends Component
         $this->street = trim($this->street);
 
         $rules = [
-           'company_name' => 'required|string|max:50|regex:/^[\p{L}\'\-\.0-9]+(?: [\p{L}\'\-\.0-9]+)*$/u', 
+           'company_name' => 'required|string|max:50|regex:/^[\p{L}\'\-\.0-9]+(?: [\p{L}\'\-\.0-9]+)*$/u',
 
             //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
             'contact_number' => ['required', 'numeric', 'digits:11', 'regex:/^09[0-9]{9}$/', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],

@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -134,6 +135,14 @@ class SalesReturnDetails extends Component
                 $transactionDetails->save();
             }
         }
+
+        $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+        $log = Log::create([
+            'user_id' => Auth::user()->id,
+            'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Returned a transaction',
+            'action' => 'Returned transaction  '
+        ]);
 
         ReturnEvent::dispatch('refresh-return');
 

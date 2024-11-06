@@ -57,6 +57,8 @@ Artisan::command('migration-order', function () {
         '0001_01_01_000001_create_cache_table.php',
         '0001_01_01_000002_create_jobs_table.php',
 
+        '2024_11_06_161241_create_logs_table.php'
+
     ];
 
     foreach ($migrations as $migration) {

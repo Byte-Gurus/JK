@@ -6,6 +6,7 @@ use App\Events\BackorderEvent;
 use App\Livewire\Pages\DeliveryPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
+use App\Models\Log;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use App\Models\Supplier;
@@ -104,6 +105,15 @@ class BackorderForm extends Component
                         'delivery_id' => $delivery->id,
                     ]);
             }
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated a backorder',
+                'action' => 'Backorder Update'
+            ]);
+
             DB::commit();
 
             $this->alert('success', 'Purchase order was created successfully');
