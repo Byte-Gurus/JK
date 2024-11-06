@@ -5,13 +5,13 @@ namespace App\Livewire\Components\Sales;
 use App\Events\ReturnEvent;
 use App\Livewire\Pages\CashierPage;
 use App\Models\Inventory;
+use App\Models\Log;
 use App\Models\ReturnDetails;
 use App\Models\Returns;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
