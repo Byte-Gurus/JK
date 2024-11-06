@@ -400,7 +400,7 @@ class SalesTransaction extends Component
     public function removeItem()
     {
 
-        $newGrandTotal = $this->grandTotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
+        $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
 
         if ($newGrandTotal < $this->exchange_amount) {
             $this->alert('error', 'Subtotal must not be below exchange amount');
