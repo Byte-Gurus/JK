@@ -1,5 +1,6 @@
 <div class="flex justify-center">
     <div class="flow-root">
+        @foreach ($logs as $log)
         <ul role="list" class="-mb-8">
             <li>
                 <div class="relative pb-8">
@@ -17,16 +18,20 @@
                         </div>
                         <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                             <div>
-                                <p class="text-sm text-gray-500">Applied to <a href="#"
-                                        class="font-medium text-gray-900">Front End Developer</a></p>
+                                <p class="text-sm text-gray-500">{{$log->message}}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-500">{{$log->action}}</p>
                             </div>
                             <div class="text-sm text-right text-gray-500 whitespace-nowrap">
-                                <time datetime="2020-09-20">Sep 20</time>
+                                <p>{{ $log->created_at->format('M d Y h:i:s A') }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
+        @endforeach
+
     </div>
 </div>
