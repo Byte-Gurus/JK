@@ -402,6 +402,8 @@ class SalesTransaction extends Component
 
         $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
 
+        dump($this->subtotal, $newGrandTotal)
+
         if ($newGrandTotal < $this->exchange_amount) {
             $this->alert('error', 'Subtotal must not be below exchange amount');
             return;
