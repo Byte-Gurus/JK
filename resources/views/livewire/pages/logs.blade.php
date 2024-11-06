@@ -6,6 +6,18 @@
                 <div class="relative pb-8">
                     <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative flex space-x-3">
+                        @if (strpos($log->action, 'Logged in') !== false)
+
+                        @elseif(strpos($log->action, 'Logged out') !== false)
+
+                        @elseif(strpos($log->action, 'Created') !== false)
+                        @elseif(strpos($log->action, 'Updated') !== false)Adjusted
+                        
+                        @elseif(strpos($log->action, 'Restocked') !== false)
+                        @elseif(strpos($log->action, 'Voided') !== false)
+                        @elseif(strpos($log->action, 'Returned  ') !== false)
+
+                        @endif
                         <div>
                             <span
                                 class="flex items-center justify-center w-8 h-8 bg-gray-400 rounded-full ring-8 ring-white">
@@ -33,5 +45,10 @@
         </ul>
         @endforeach
 
+        <div class="mx-4 my-2 text-nowrap">
+
+            {{ $logs->links() }}
+
+        </div>
     </div>
 </div>
