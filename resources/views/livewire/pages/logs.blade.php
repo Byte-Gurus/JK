@@ -79,7 +79,7 @@
                                             </svg>
                                         </span>
                                     </div>
-                                @elseif(strpos($log->message, 'Returned  ') !== false)
+                                @elseif(strpos($log->message, 'Returned') !== false)
                                     <div>
                                         <span
                                             class="flex items-center justify-center w-8 h-8 bg-[rgb(47,11,11)] rounded-full ring-4 ring-[rgb(56,13,13)]">
