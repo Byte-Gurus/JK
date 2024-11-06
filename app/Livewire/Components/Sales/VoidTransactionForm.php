@@ -5,13 +5,13 @@ namespace App\Livewire\Components\Sales;
 use App\Events\VoidEvent;
 use App\Models\Inventory;
 use App\Models\InventoryMovement;
+use App\Models\Log;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use App\Models\TransactionMovement;
 use App\Models\VoidTransaction;
 use App\Models\VoidTransactionDetails;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 

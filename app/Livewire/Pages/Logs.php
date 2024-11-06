@@ -12,8 +12,7 @@ class Logs extends Component
     public $perPage = 10;
     public function render()
     {
-        $logs = Log::query()->paginate($this->perPage);
-        ;
+        $logs = Log::query()->orderBy('created_at', 'desc')->paginate($this->perPage);
 
         return view('livewire.pages.logs', [
             'logs' => $logs
