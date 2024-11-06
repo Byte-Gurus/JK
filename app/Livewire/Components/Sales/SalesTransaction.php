@@ -496,7 +496,7 @@ class SalesTransaction extends Component
                 if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
 
                     $this->transactionDiscount = $this->subtotal * (20 / 100);
-                    $this->subtotal = $this->subtotal - $this->transactionDiscount;
+                    $this->grandTotal = $this->subtotal - $this->transactionDiscount;
                 }
 
                 $this->excess_amount = $this->subtotal - $this->exchange_amount;
