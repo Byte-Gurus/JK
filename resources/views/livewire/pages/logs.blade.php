@@ -2,8 +2,8 @@
     <div class="flex items-center py-2">
         <p class="text-2xl font-black text-[rgb(226,226,226)]">L O G S</p>
     </div>
-    <div class=" bg-[rgba(20,20,20,0.44)] overflow-auto rounded-lg border border-[rgb(53,53,53)]">
-        <div class="justify-center flow-root max-h-[90vh] h-full p-4 pr-4 overflow-auto">
+    <div class=" bg-[rgba(20,20,20,0.44)] max-h-[90vh] overflow-auto rounded-lg border border-[rgb(53,53,53)]">
+        <div class="justify-center flow-root h-full p-4 pr-4">
             <ul role="list" class="-mb-8">
                 @foreach ($logs as $log)
                     <li>
