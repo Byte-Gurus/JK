@@ -1,10 +1,13 @@
-<div class="flex flex-col items-center bg-[rgb(13,14,18)] h-screen w-screen p-10 justify-center">
-    <div class=" bg-[rgba(20,20,20,0.44)] rounded-lg border border-[rgb(53,53,53)]  p-4">
-        <div class="justify-center flow-root pr-4 overflow-y-scroll">
+<div class="flex flex-col items-center bg-[rgb(13,14,18)] h-screen w-screen">
+    <div class="flex items-center py-2">
+        <p class="text-2xl font-black text-[rgb(226,226,226)]">L O G S</p>
+    </div>
+    <div class=" bg-[rgba(20,20,20,0.44)] overflow-auto rounded-lg border border-[rgb(53,53,53)]">
+        <div class="justify-center flow-root p-4 pr-4 overflow-y-scroll">
             <ul role="list" class="-mb-8">
                 @foreach ($logs as $log)
                     <li>
-                        <div class="relative pb-8 mx-2 mt-1">
+                        <div class="relative pb-8 mx-2 ">
                             <span class="absolute left-4 top-11 -ml-px h-1/3 w-0.5 bg-gray-700" aria-hidden="true"></span>
                             <div class="relative flex space-x-3">
                                 @if (strpos($log->message, 'Logged in') !== false)
@@ -47,12 +50,10 @@
                                     <div>
                                         <span
                                             class="flex items-center justify-center w-8 h-8 bg-[rgb(47,34,11)] rounded-full ring-4 ring-[rgb(56,42,13)]">
-                                            <svg class="text-orange-700" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M12 4.5v15m7.5-7.5h-15" />
-                                            </svg>
+                                            <svg class="text-orange-700 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                                              </svg>
+
                                         </span>
                                     </div>
                                 @elseif(strpos($log->message, 'Restocked') !== false)
@@ -70,7 +71,7 @@
                                 @elseif(strpos($log->message, 'Voided') !== false)
                                     <div>
                                         <span
-                                            class="flex items-center justify-center w-6 h-6 bg-[rgb(47,11,11)] rounded-full ring-4 ring-[rgb(56,13,13)]">
+                                            class="flex items-center justify-center w-8 h-8 bg-[rgb(47,11,11)] rounded-full ring-4 ring-[rgb(56,13,13)]">
                                             <svg class="text-red-700" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                 class="size-4">
@@ -79,7 +80,7 @@
                                             </svg>
                                         </span>
                                     </div>
-                                @elseif(strpos($log->message, 'Returned  ') !== false)
+                                @elseif(strpos($log->message, 'Returned') !== false)
                                     <div>
                                         <span
                                             class="flex items-center justify-center w-8 h-8 bg-[rgb(47,11,11)] rounded-full ring-4 ring-[rgb(56,13,13)]">
