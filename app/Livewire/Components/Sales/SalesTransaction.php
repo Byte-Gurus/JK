@@ -492,8 +492,9 @@ class SalesTransaction extends Component
 
             if ($this->changeTransactionType == 3 && $this->subtotal > $this->exchange_amount) {
 
+
+
                 $this->excess_amount = $this->subtotal - $this->exchange_amount;
-                $this->grandTotal = $this->excess_amount;
 
                 if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
 
@@ -501,7 +502,8 @@ class SalesTransaction extends Component
                     $this->subtotal -= $this->transactionDiscount;
                 }
 
-
+                
+                $this->grandTotal = $this->excess_amount;
 
             } else {
                 $this->grandTotal = $this->subtotal - $this->PWD_Senior_discount_amount;
