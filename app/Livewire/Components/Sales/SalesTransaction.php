@@ -400,13 +400,12 @@ class SalesTransaction extends Component
     public function removeItem()
     {
 
-        $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
+        $newGrandTotal = $this->grandTotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
 
         if ($newGrandTotal < $this->exchange_amount) {
-            $this->alert('error', 'Subtotal must not be below exchange amount');
+            $this->alert('alert', 'Subtotal must not be below exchange amount');
             return;
         }
-
 
         if ($this->isSelected) {
             $this->confirm('Do you want to remove this item?', [
@@ -599,6 +598,7 @@ class SalesTransaction extends Component
 
     public function removeRowConfirmed()
     {
+
 
         $this->totalVat -= $this->tax_details['vatable_amount'] ?? 0;
         $this->grandTotal -= $this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0;
