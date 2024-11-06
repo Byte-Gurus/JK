@@ -27,7 +27,7 @@
             @endif
         </div>
         <div>
-            <h1 class="font-bold text-gray-800 pointer-events-none text-md">Frozen and Consumer Goods Store</h1>
+            <h1 class="font-bold text-gray-800 pointer-events-none text-md">Frozen and Consumer Goods Store Ror</h1>
         </div>
         <div class="flex flex-row items-center gap-12 ml-24 font-semibold text-gray-700">
             <div class="flex flex-row items-center gap-2">
