@@ -30,6 +30,7 @@ use App\Livewire\Pages\InventoryClerkPage;
 use App\Livewire\Pages\InventoryManagementPage;
 use App\Livewire\Pages\ItemManagementPage;
 use App\Livewire\Pages\LoginPage;
+use App\Livewire\Pages\Logs;
 use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
 use App\Livewire\Pages\ReportManagement;
 use App\Livewire\Pages\SupplierManagementPage;
@@ -92,6 +93,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         //ReportManagement
         Route::get('admin/ReportManagement', ReportManagement::class)->name('reportmanagement.index');
+
+        //Logs
+        Route::get('admin/logs', Logs::class)->name('logs.index');
+
 
         //CashierHomepage
         Route::get('/cashier', CashierPage::class)->name('cashier.index');
