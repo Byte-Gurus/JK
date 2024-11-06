@@ -499,7 +499,7 @@ class SalesTransaction extends Component
                     $this->grandTotal = $this->subtotal - $this->transactionDiscount;
                 }
 
-                $this->excess_amount = $this->subtotal - $this->exchange_amount;
+                $this->excess_amount = $this->subtotal - ($this->exchange_amount + $this->transactionDiscount );
                 $this->grandTotal = $this->excess_amount;
 
             } else {
