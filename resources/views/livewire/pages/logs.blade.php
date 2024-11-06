@@ -3,7 +3,7 @@
         <p class="text-2xl font-black text-[rgb(226,226,226)]">L O G S</p>
     </div>
     <div class=" bg-[rgba(20,20,20,0.44)] overflow-auto rounded-lg border border-[rgb(53,53,53)]">
-        <div class="justify-center flow-root p-4 pr-4 overflow-auto">
+        <div class="justify-center flow-root max-h-[90vh] h-full p-4 pr-4 overflow-auto">
             <ul role="list" class="-mb-8">
                 @foreach ($logs as $log)
                     <li>
@@ -112,7 +112,7 @@
                 @endforeach
             </ul>
         </div>
-        <div class="gap-6 mx-4 my-2 bottom-0self-center justify-evenly text-nowrap">
+        <div class="absolute gap-6 mx-4 my-2 bottom-0self-center justify-evenly text-nowrap">
             {{ $logs->links() }}
 
         </div>
