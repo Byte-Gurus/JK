@@ -411,11 +411,12 @@ class SalesTransaction extends Component
             $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0);
 
 
-            // if ($newGrandTotal < $this->subtotal - $this->transactionDiscount - $this->excess_amount) {
-            //     $this->alert('error', 'Subtotal must not be below exchange amount');
-            //     return;
-            // }
+            if ($newGrandTotal < $this->subtotal - $this->transactionDiscount - $this->excess_amount) {
+                $this->alert('error', 'Subtotal must not be below exchange amount');
+                return;
+            }
 
+            dump($this->selectedItems[$this->selectedIndex], $this->selectedItems);
             if (
                 isset($this->selectedItems[$this->selectedIndex]['isRemovable']) &&
                 $this->selectedItems[$this->selectedIndex]['isRemovable'] == 'false'
