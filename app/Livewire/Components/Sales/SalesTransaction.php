@@ -415,6 +415,11 @@ class SalesTransaction extends Component
                 $this->alert('error', 'Subtotal must not be below exchange amount');
                 return;
             }
+
+            if ($this->selectedItems[$this->selectedIndex]['isRemovable'] == 'false') {
+                $this->alert('error', 'Exchanged items cannot be removed');
+                return;
+            }
         }
 
 
@@ -1318,6 +1323,7 @@ class SalesTransaction extends Component
                     'original_total' => 0,
                     'delivery_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->date_delivered,
                     'po_date' => $returnDetail->transactionDetailsJoin->inventoryJoin->deliveryJoin->purchaseJoin->created_at,
+                    'isRemovable' => false,
                 ];
 
                 // Apply discount logic if applicable
