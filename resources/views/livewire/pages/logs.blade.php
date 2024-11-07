@@ -1,6 +1,16 @@
 <div class="flex flex-col items-center bg-[rgb(13,14,18)] h-screen w-screen">
-    <div class="flex items-center py-2">
-        <p class="text-2xl font-black text-[rgb(226,226,226)]">L O G S</p>
+    <div class="flex items-center justify-center py-2">
+        <a href="{{ route('admin.index') }}" wire:navigate
+            class="absolute left-[2%] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(245,245,245)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto ">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+        </a>
+        <div class="self-center ">
+            <p class="text-2xl font-black text-[rgb(226,226,226)]">L O G S</p>
+        </div>
     </div>
     <div class=" bg-[rgba(20,20,20,0.44)] max-h-[90vh] overflow-auto rounded-lg border border-[rgb(53,53,53)]">
         <div class="justify-center flow-root h-full p-4 pr-4">
@@ -8,7 +18,8 @@
                 @foreach ($logs as $log)
                     <li>
                         <div class="relative pb-8 mx-2 ">
-                            <span class="absolute left-4 top-11 -ml-px h-1/3 w-0.5 bg-gray-700" aria-hidden="true"></span>
+                            <span class="absolute left-4 top-11 -ml-px h-1/3 w-0.5 bg-gray-700"
+                                aria-hidden="true"></span>
                             <div class="relative flex space-x-3">
                                 @if (strpos($log->message, 'Logged in') !== false)
                                     <div>
