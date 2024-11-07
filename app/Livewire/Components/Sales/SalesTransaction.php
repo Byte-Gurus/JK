@@ -403,6 +403,8 @@ class SalesTransaction extends Component
 
         if ($this->changeTransactionType == 3) {
 
+            dump($this->selectedItems[$this->selectedIndex], $this->selectedItems);
+            
             if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
                 $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] - $this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
 
@@ -416,7 +418,7 @@ class SalesTransaction extends Component
                 return;
             }
 
-            dump($this->selectedItems[$this->selectedIndex], $this->selectedItems);
+
             if (
                 isset($this->selectedItems[$this->selectedIndex]['isRemovable']) &&
                 $this->selectedItems[$this->selectedIndex]['isRemovable'] == 'false'
