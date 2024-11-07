@@ -41,19 +41,33 @@
     <div class="flex items-center">
 
         <div class="flex items-center justify-between">
+            @if ($this->isAdmin())
+                <div
+                    class="relative p-1.5 hover:bg-[rgb(231,231,231)] rounded-full ease-in-out transition-all duration-200 cursor-pointer">
+                    <a href="{{ route('logs.index') }}" wire:navigate>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
+                        </svg>
+                    </a>
+                </div>
+            @endif
             <div class="flex flex-row items-center gap-2 px-4 py-1 mx-8 border border-black rounded-lg bg-slate-100">
                 <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
                 </div>
                 <div class="flex flex-col justify-center">
                     <div>
-                        <p class=" text-[0.8em] italic text-center font-medium">{{$fullname}}</p>
+                        <p class=" text-[0.8em] italic text-center font-medium">{{ $fullname }}</p>
                     </div>
                     <div class="border border-black "></div>
                     <div>
-                        <p class=" text-[0.6em] opacity-60 italic text-center font-medium">{{$role}}</p>
+                        <p class=" text-[0.6em] opacity-60 italic text-center font-medium">{{ $role }}</p>
                     </div>
                 </div>
             </div>
