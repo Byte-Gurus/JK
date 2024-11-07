@@ -416,7 +416,10 @@ class SalesTransaction extends Component
                 return;
             }
 
-            if ($this->selectedItems[$this->selectedIndex]['isRemovable'] == 'false') {
+            if (
+                isset($this->selectedItems[$this->selectedIndex]['isRemovable']) &&
+                $this->selectedItems[$this->selectedIndex]['isRemovable'] == 'false'
+            ) {
                 $this->alert('error', 'Exchanged items cannot be removed');
                 return;
             }
