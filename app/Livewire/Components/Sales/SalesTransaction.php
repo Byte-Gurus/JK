@@ -1255,7 +1255,7 @@ class SalesTransaction extends Component
         $this->showPaymentForm = !$this->showPaymentForm;
 
         if ($this->changeTransactionType == 3 && $this->excess_amount == 0) {
-            $this->dispatch('get-grand-total', GrandTotal: $this->excess_amount)->to(PaymentForm::class);
+            $this->dispatch('get-grand-total', GrandTotal: $this->exchange_amount)->to(PaymentForm::class);
         } else {
             $this->dispatch('get-grand-total', GrandTotal: $this->grandTotal)->to(PaymentForm::class);
 
