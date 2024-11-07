@@ -403,25 +403,25 @@ class SalesTransaction extends Component
 
         if ($this->changeTransactionType == 3) {
 
-            dump($this->selectedItems[$this->selectedIndex], $this->selectedItems);
-            
+
             if ($this->returnInfo->transactionJoin->discount_id == 1 || $this->returnInfo->transactionJoin->discount_id == 2) {
                 $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] - $this->selectedItems[$this->selectedIndex]['total_amount'] * (20 / 100) ?? 0);
 
 
             }
+
             $newGrandTotal = $this->subtotal - ($this->selectedItems[$this->selectedIndex]['total_amount'] ?? 0);
 
 
-            if ($newGrandTotal < $this->subtotal - $this->transactionDiscount - $this->excess_amount) {
-                $this->alert('error', 'Subtotal must not be below exchange amount');
-                return;
-            }
+            // if ($newGrandTotal < $this->subtotal - $this->transactionDiscount - $this->excess_amount) {
+            //     $this->alert('error', 'Subtotal must not be below exchange amount');
+            //     return;
+            // }
 
 
             if (
                 isset($this->selectedItems[$this->selectedIndex]['isRemovable']) &&
-                $this->selectedItems[$this->selectedIndex]['isRemovable'] == 'false'
+                $this->selectedItems[$this->selectedIndex]['isRemovable'] === 'false'
             ) {
                 $this->alert('error', 'Exchanged items cannot be removed');
                 return;
