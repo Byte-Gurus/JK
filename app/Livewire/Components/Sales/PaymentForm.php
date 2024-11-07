@@ -91,7 +91,7 @@ class PaymentForm extends Component
 
     protected function validateForm()
     {
-
+        $this->tendered_amount = number_format((float)$this->tendered_amount, 2, '.', '');
 
         if ($this->payWithCash) {
 
