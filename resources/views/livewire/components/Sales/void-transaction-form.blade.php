@@ -258,7 +258,7 @@
             </div>
             <div class="flex flex-row justify-between">
                 <div>
-                    <p class=" text-[1.2em] font-medium">Voidedkw Amount</p>
+                    <p class=" text-[1.2em] font-medium">Voided Amount</p>
                 </div>
                 <div>
                     <p class=" text-[1.2em] font-black">{{ number_format($void_total_amount, 2) }}</p>
