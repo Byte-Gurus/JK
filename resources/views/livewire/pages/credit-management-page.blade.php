@@ -6,7 +6,8 @@
     <div x-show="showNavbar" x-data="{ showNavbar: @entangle('showNavbar') }">
         @livewire('components.navbar')
     </div>
-    <div x-data="{ showModal: @entangle('showModal') }">
+    <div x-data="{ showModal: @entangle('showModal'), showPaymentReceipt: @entangle('showPaymentReceipt') }">
+        @if (!$showPaymentReceipt)
         <div class="m-[3vh]">
             <div class="flex flex-col justify-between">
                 <div class="flex flex-row items-center justify-between">
@@ -78,9 +79,10 @@
             <div x-show="showCreditPaymentForm" x-data="{ showCreditPaymentForm: @entangle('showCreditPaymentForm') }">
                 @livewire('components.CreditManagement.credit-payment-form')
             </div>
-            <div x-show="showPaymentReceipt" x-data="{ showPaymentReceipt: @entangle('showPaymentReceipt') }">
-                @livewire('components.CreditManagement.payment-receipt')
-            </div>
+        </div>
+        @endif
+        <div x-show="showPaymentReceipt">
+            @livewire('components.CreditManagement.payment-receipt')
         </div>
     </div>
 </div>
