@@ -17,10 +17,9 @@
                     <div class="flex flex-row gap-2 text-nowrap">
                         <p class="text-[0.6em] font-bold uppercase">Date & Time:</p>
                         <p class="text-[0.6em] font-bold uppercase">
-                            {{ isset($credit_payment_info['payment']['created_at']) ?
-                            \Illuminate\Support\Carbon::parse($credit_payment_info['payment']['created_at'])->format('M
-                            d Y h:i A') : null }}
-
+                            {{ isset($credit_payment_info['payment']['created_at'])
+                                ? \Illuminate\Support\Carbon::parse($credit_payment_info['payment']['created_at'])->format('Md Y h:i A')
+                                : null }}
                         </p>
                     </div>
                     <div class="flex flex-row gap-2 break-words text-wrap">
@@ -54,7 +53,7 @@
                     </div>
                     <div>
                         <p class="text-[0.4em] font-bold">
-                        <p class="text-[0.4em] font-bold">{{ $credit_payment_info['payment']['amount'] ?? null }}
+                            {{ $credit_payment_info['payment']['amount'] ?? null }}
                         </p>
                     </div>
                 </div>
@@ -74,7 +73,9 @@
                         <p class="text-[0.6em] font-black">Change</p>
                     </div>
                     <div>
-                        {{ $credit_payment_info['change_or_balance'] ?? null }}
+                        <p class="text-[0.6em] font-black">
+                            {{ $credit_payment_info['change_or_balance'] ?? null }}
+                        </p>
                     </div>
                 </div>
 
