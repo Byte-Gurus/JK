@@ -95,7 +95,7 @@
 
                                         <label for="middlename"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Middle
-                                            Name <span class="text-red-400 ">*</span></label>
+                                            Name</label>
 
                                         <input type="text" id="middlename" wire:model="middlename"
                                             class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
