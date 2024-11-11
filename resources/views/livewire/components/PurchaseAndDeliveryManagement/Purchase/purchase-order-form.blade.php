@@ -172,15 +172,15 @@
                                     {{ $reorderList->item_description }}
                                 </th>
                                 <th scope="row"
-                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     {{ $reorderList->total_stock_quantity }}
                                 </th>
                                 <th scope="row"
-                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     {{ $reorderList->maximum_stock_level }}
                                 </th>
                                 <th scope="row"
-                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     {{ $reorderList->reorder_point }}
                                 </th>
                                 <th scope="row"
