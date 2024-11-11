@@ -93,7 +93,7 @@
 
                                                 <label for="middlename"
                                                     class="block mb-2 text-sm font-medium text-gray-900 ">Middle
-                                                    Name <span class="text-red-400 ">*</span></label>
+                                                    Name</label>
 
                                                 <input type="text" id="middlename" wire:model="middlename"
                                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md  block w-full p-2.5"
@@ -473,7 +473,7 @@
                                             <label for="discount_percentage"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Discount
                                                 Percentage
-                                                (%)<span class="text-red-400 ">*</span></label>
+                                                (%)</label>
 
                                             <input type="number" id="discount_percentage" required disabled
                                                 wire:model="discount_percentage"

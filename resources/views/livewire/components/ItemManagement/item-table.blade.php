@@ -48,7 +48,7 @@
                         class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
                         <option value="0">All</option>
                         <option value="Vat">Vat</option>
-                        <option value="Non vat">Non vat</option>
+                        <option value="Vat Exempt">Vat Exempt</option>
                     </select>
 
                 </div>

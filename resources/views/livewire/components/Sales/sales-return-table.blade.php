@@ -38,7 +38,7 @@
         </div>
     </div>
     {{-- //* tablea area --}}
-    <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(143,143,143)] h-[52vh]">
+    <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(143,143,143)] h-[42vh]">
 
         <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -75,70 +75,101 @@
             {{-- //* table body --}}
             <tbody>
                 @foreach ($returns as $return)
-                <tr
-                    class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                    <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                        {{ $return->return_number }}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return->return_number }}
 
-                    </th>
+                        </th>
 
-                    <th scope="row" class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                        {{ $return->transactionJoin->transaction_number }}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return->transactionJoin->transaction_number }}
 
-                    </th>
+                        </th>
 
-                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{ number_format($return->refund_amount, 2) }}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($return->refund_amount, 2) }}
 
-                    </th>
-                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{ number_format($return->exchange_amount, 2) }}
+                        </th>
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($return->exchange_amount, 2) }}
 
-                    </th>
+                        </th>
 
-                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{ number_format($return->original_amount, 2) }}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($return->original_amount, 2) }}
 
-                    </th>
+                        </th>
 
 
-                    <th scope="row" class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
-                        {{ number_format($return->return_total_amount, 2) }}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($return->return_total_amount, 2) }}
 
-                    </th>
+                        </th>
 
-                    <th scope="row" class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                        {{ $return->created_at->format(' M d Y h:i A') }}
+                        <th scope="row"
+                            class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                            {{ $return->created_at->format(' M d Y h:i A') }}
 
-                    </th>
-                    <th class="px-4 py-4 text-center text-md text-nowrap">
-                        <div
-                            class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
+                        </th>
+                        <th class="px-4 py-4 text-center text-md text-nowrap">
+                            <div
+                                class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-sm hover:bg-blue-100 ">
 
-                            <button x-on:click="$wire.dDisplaySalesReturnDetails();"
-                                wire:click="getReturn({{ $return->id }})">
+                                <button x-on:click="$wire.dDisplaySalesReturnDetails();"
+                                    wire:click="getReturn({{ $return->id }})">
 
-                                <div class="flex items-center">
+                                    <div class="flex items-center">
 
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                        </svg>
-                                    </span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                            </svg>
+                                        </span>
 
-                                    <div>
-                                        <p>View</p>
+                                        <div>
+                                            <p>View</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </button>
-                        </div>
-                    </th>
-                </tr>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+    {{-- //* table footer --}}
+    <div class="border border-black ">
+
+        {{-- //*pagination --}}
+        <div class="mx-4 my-2 text-nowrap">
+
+            {{ $returns->links() }}
+
+        </div>
+
+        {{-- //* per page --}}
+        <div class="flex items-center px-4 py-2 mb-3">
+
+            <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
+
+            <select wire:model.live = "perPage"
+                class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+
+        </div>
     </div>
 </div>

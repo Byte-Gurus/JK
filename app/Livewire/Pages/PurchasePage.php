@@ -51,9 +51,8 @@ class PurchasePage extends Component
         $this->showPurchaseOrderForm = true;
     }
 
-    public function formCreateFromDashboard()
-    {
-
+    public function createPO(){
+        $this->dispatch('create-po')->to(PurchaseOrderForm::class);
     }
 
     public function changeMethod($isCreate)

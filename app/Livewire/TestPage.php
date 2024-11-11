@@ -13,6 +13,8 @@ class TestPage extends Component
     public $name;
     public $photo;
 
+    public $selected = false;
+
     public function render()
     {
 

@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </button>
-                <button x-on:click="$wire.formCreate()"
+                <button x-on:click="$wire.formCreate()" wire:click="createPO"
                     class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

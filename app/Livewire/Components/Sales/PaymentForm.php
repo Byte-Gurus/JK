@@ -92,6 +92,8 @@ class PaymentForm extends Component
     protected function validateForm()
     {
 
+        $this->grand_total = round($this->grand_total, 2);
+
 
         if ($this->payWithCash) {
 

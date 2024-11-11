@@ -38,7 +38,7 @@
         </div>
     </div>
     {{-- //* tablea area --}}
-    <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[52vh]">
+    <div class="overflow-x-auto overflow-y-scroll scroll no-scrollbar border border-[rgb(53,53,53)] h-[42vh]">
 
         <table class="w-full text-sm text-left scroll no-scrollbar">
 
@@ -124,5 +124,29 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    {{-- //* table footer --}}
+    <div class="border border-black ">
+
+        {{-- //*pagination --}}
+        <div class="mx-4 my-2 text-nowrap">
+
+            {{ $voidTransactions->links() }}
+
+        </div>
+
+        {{-- //* per page --}}
+        <div class="flex items-center px-4 py-2 mb-3">
+
+            <label class="text-sm font-medium text-gray-900 w-15">Per Page</label>
+
+            <select wire:model.live = "perPage"
+                class="bg-[rgb(243,243,243)] border border-[rgb(53,53,53)] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2.5 ml-4">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+
+        </div>
     </div>
 </div>
