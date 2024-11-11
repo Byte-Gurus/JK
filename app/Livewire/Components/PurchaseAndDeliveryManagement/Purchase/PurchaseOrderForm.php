@@ -23,7 +23,7 @@ class PurchaseOrderForm extends Component
 
     use LivewireAlert, WithPagination, WithoutUrlPagination;
 
-    public $isCreate = true;
+
 
     public $po_number, $items, $selectAll, $select_supplier;
 
@@ -245,6 +245,11 @@ class PurchaseOrderForm extends Component
 
 
         return $this->validate($rules);
+    }
+
+    private function resetForm() //*tanggalin ang laman ng input pati $item_id value
+    {
+        $this->reset([ 'po_number', 'items', 'selectAll', 'select_supplier', 'reorderLists', 'toOrderItems', 'selectedItems', 'purchaseQuantities', 'search']);
     }
 
     public function closeModal() //* close ang modal after confirmation
