@@ -201,17 +201,18 @@ class PurchaseOrderForm extends Component
     public function po()
     {
         $this->generatePurchaseOrderNumber();
-        
+
         $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
 
         foreach ($items as $item) {
+
             $inventory = $item->inventoryJoin->first();
 
             if ($inventory && $inventory->current_stock_quantity <= $item->reorder_point) {
-                dump($item);
+                // dump($item);
             }
         }
-
+        dump($items);
 
     }
 
