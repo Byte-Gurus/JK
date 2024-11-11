@@ -68,7 +68,6 @@
                     @foreach ($suppliers as $supplier)
                         <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                     @endforeach
-
                 </select>
             </div>
         </div>
@@ -76,7 +75,7 @@
 
     {{-- //* tablea area --}}
     <div class="overflow-x-auto overflow-y-scroll border-black scroll no-scrollbar h-[60vh]">
-        <div class="grid grid-flow-row-dense grid-cols-3 gap-4 transition-transform duration-1000 ease-in-out">
+        <div class="grid grid-cols-2 gap-4 transition-transform duration-1000 ease-in-out lg:grid-cols-3">
             @foreach ($purchases as $purchase)
                 <div
                     class="w-full grid grid-row-col grid-rows-12 h-[30vh] transition duration-1000 ease-in-out border shadow-md border-[rgb(53,53,53)] rounded-md bg-[rgb(255,248,241)]">
@@ -99,7 +98,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="grid h-full grid-flow-row px-4 overflow-auto leading-none row-span-7">
+                    <div class="grid h-full grid-flow-row px-4 overflow-auto leading-none bg-[rgb(252,237,222)] row-span-7">
                         <div class="flex flex-row justify-between py-2">
                             <p>hi</p>
                             <p>hello</p>
