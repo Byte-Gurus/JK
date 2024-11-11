@@ -41,6 +41,9 @@ class Purchase extends Model
     {
         $value = strtolower($value);
 
-        return $query->whereRaw('LOWER(po_number) like ?', ["%{$value}%"]);
+        return $query->whereRaw('LOWER(po_number) like ?', ["%{$value}%"])
+            ->orWhereHas('purchaseDetailsJoin.itemsJoin', function ($query) use ($value) {
+                $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"]);
+            });
     }
 }
