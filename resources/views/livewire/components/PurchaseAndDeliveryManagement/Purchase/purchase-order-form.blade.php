@@ -4,25 +4,25 @@
     <div class="relative w-full overflow-hidden border-[rgb(143,143,143)] border bg-white rounded-lg sm:rounded-lg">
         <form wire:submit.prevent="create">
 
-            <div class="grid items-center justify-between grid-flow-col grid-cols-3 gap-4 px-4 py-4 text-nowrap">
-                <div class="flex flex-col col-span-1 gap-2 ">
+            <div class="grid items-center justify-between grid-flow-col grid-cols-3 gap-4 py-4 pr-4 text-nowrap">
+                <div
+                    class="flex flex-row items-center gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
                     <p class="text-[1em]">Purchase Order No</p>
                     <p class="text-[1.2em] font-black text-center w-fit">{{ $po_number }}</p>
                 </div>
-                <div class="flex flex-col col-span-1 gap-2 ">
-                    <p class="text-[1em]">Item Name</p>
-                    <select id="supplier" wire:model="select_supplier" required
-                        class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-md text-gray-900 text-sm block w-1/2 px-4 py-2 appearance-auto ">
-                        <option value="" selected>Select Supplier</option>
-                        @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}">
-                                {{ $supplier->company_name }}</option>
-                        @endforeach
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
-                        @error('select_supplier')
-                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                        @enderror
-                    </select>
+                        <svg aria-hidden="true" class="w-5 h-5 text-black" fill="currentColor" viewbox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input type="text" wire:model.live.debounce.100ms="search"
+                        class="w-1/2 p-3 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Search an Item" required="" />
                 </div>
                 <div class="flex flex-col col-span-1 gap-2 ">
                     <p class="text-[1em]">Supplier Name</p>
@@ -77,7 +77,7 @@
                             <th scope="col" class="py-2 text-left">Barcode</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="px-2 py-2 text-left">Name</th>
+                            <th scope="col" class="px-2 py-2 text-left">Item Name</th>
 
                             {{-- //* item name --}}
                             <th scope="col" class="px-2 py-2 text-left">Description</th>
