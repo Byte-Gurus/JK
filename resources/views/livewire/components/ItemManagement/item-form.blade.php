@@ -231,8 +231,8 @@
                                             <select id="item_category" wire:model="item_category"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Set item category</option>
-                                                <option value="Frozen">Frozen</option>
-                                                <option value="Consumer">Consumer</option>
+                                                <option value="Frozen">Frozen Supply</option>
+                                                <option value="Consumer">Consumer Supply</option>
 
                                             </select>
 
