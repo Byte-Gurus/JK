@@ -79,6 +79,26 @@
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="flex-col hover:p-8 hover:border-2 w-full row-span-1  gap-2 p-4 transition-all duration-300 ease-in-out border border-black rounded-lg hover:shadow-[rgb(250,216,114)] hover:bg-[rgb(255,227,142)] hover:shadow-2xl">
+                        <div class="flex flex-row items-center w-full">
+                            <div class="w-full ">
+                                <div class="border border-black "></div>
+                            </div>
+                            <div class="m-2 font-bold text-[rgb(55,55,55)] italic text-[2em]">
+                                <p>Delivery</p>
+                            </div>
+                            <div class="w-full ">
+                                <div class="border border-black "></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-4 ">
+                            <div x-on:click="$wire.displayDeliveryListReportDatePickerModal()"
+                                class="px-4 py-2 transition-all font-bold hover:text-[1.4em] duration-100 ease-in-out hover:ml-4 hover:bg-[rgb(53,53,53)] hover:text-white rounded-md text-nowrap">
+                                <button>Delivery List</button>
+                            </div>
+                        </div>
+                    </div>
                     {{-- <div
                     class="flex-col hover:p-8 w-full hover:border-2  h-auto col-span-1 gap-2 p-4 transition-all duration-300 ease-in-out border border-black rounded-lg hover:shadow-[rgb(250,216,114)] hover:bg-[rgb(255,227,142)] hover:shadow-2xl">
                     <div class="flex flex-row items-center w-full">
@@ -300,4 +320,15 @@
     <div x-show="showDamagedItemsReportDatePickerModal" x-data="{ showDamagedItemsReportDatePickerModal: @entangle('showDamagedItemsReportDatePickerModal') }">
         @livewire('components.ReportManagement.damaged-items-report-date-picker-modal')
     </div>
+
+    {{-- Delivery Lists --}}
+
+    {{-- <div x-show="showDeliveryListReport" x-data="{ showDeliveryListReport: @entangle('showDeliveryListReport') }">
+        @livewire('components.ReportManagement.delivery-list-report')
+    </div>
+
+    <div x-show="showDeliveryListReportDatePickerModal" x-data="{ showDeliveryListReportDatePickerModal: @entangle('showDeliveryListReportDatePickerModal') }">
+        @livewire('components.ReportManagement.delivery-list-report-date-picker-modal')
+    </div> --}}
+
 </div>
