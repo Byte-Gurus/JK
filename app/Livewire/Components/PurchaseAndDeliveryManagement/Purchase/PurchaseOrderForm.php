@@ -27,7 +27,7 @@ class PurchaseOrderForm extends Component
 
     public $po_number, $items;
 
-    public $reorderList = [];
+    public $reorderLists = [];
 
 
 
@@ -41,7 +41,7 @@ class PurchaseOrderForm extends Component
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
-
+            'reorderLists' => $this->reorderLists
         ]);
     }
 
@@ -210,10 +210,10 @@ class PurchaseOrderForm extends Component
 
 
             if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
-                $this->reorderList[] = $item;
+                $this->reorderLists[] = $item;
             }
         }
-        dump($this->reorderList);
+
 
     }
 
