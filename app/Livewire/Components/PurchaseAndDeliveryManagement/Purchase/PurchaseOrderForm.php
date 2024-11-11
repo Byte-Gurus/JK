@@ -204,11 +204,12 @@ class PurchaseOrderForm extends Component
 
         $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
 
+        $this->reorderList = [];
+
         foreach ($items as $item) {
 
-            $inventory = $item->inventoryJoin->first();
 
-            if ($inventory && $inventory->total_stock_quantity <= $item->reorder_point) {
+            if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
                 $this->reorderList[] = $item;
             }
         }
