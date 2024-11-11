@@ -29,15 +29,9 @@ class PurchaseOrderForm extends Component
 
     public $reorderLists = [];
 
-
-
-
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
-
-
-
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
@@ -45,24 +39,16 @@ class PurchaseOrderForm extends Component
         ]);
     }
 
-
     protected $listeners = [
         'edit-po-from-table' => 'edit',
         'create-po' => 'po',
         'change-method' => 'changeMethod',
-        'reset-modal' => 'resetModal',
-        'reset-form' => 'mount',
         'updateConfirmed',
         'createConfirmed',
     ];
 
-
-
-
     public function create() //* create process
     {
-
-
         $validated = $this->validateForm();
 
         $this->confirm('Do you want to create this purchase order?', [
@@ -171,11 +157,6 @@ class PurchaseOrderForm extends Component
         $this->dispatch('refresh-table')->to(PurchaseOrderTable::class);
         $this->resetValidation();
     }
-    private function resetForm() //*tanggalin ang laman ng input pati $item_id value
-    {
-        $this->reset(['purchase_id', 'proxy_purchase_id', 'purchase_quantities', 'select_supplier', 'removed_items', 'selectedToRemove', 'edit_reorder_lists', 'selectAllToRemove', 'selectAllToRestore']);
-    }
-
 
     public function generatePurchaseOrderNumber()
     {
@@ -204,7 +185,7 @@ class PurchaseOrderForm extends Component
 
         $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
 
-        $this->reorderList = [];
+        $this->reorderLists = [];
 
         foreach ($items as $item) {
 
