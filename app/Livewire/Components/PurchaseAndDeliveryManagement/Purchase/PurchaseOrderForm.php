@@ -27,7 +27,7 @@ class PurchaseOrderForm extends Component
 
     public $po_number, $items;
 
-
+    public $reorderList = [];
 
 
 
@@ -209,10 +209,10 @@ class PurchaseOrderForm extends Component
             $inventory = $item->inventoryJoin->first();
 
             if ($inventory && $inventory->current_stock_quantity <= $item->reorder_point) {
-                // dump($item);
+                $this->reorderList[] = $item;
             }
         }
-        dump($items);
+        dump($this->reorderList);
 
     }
 
