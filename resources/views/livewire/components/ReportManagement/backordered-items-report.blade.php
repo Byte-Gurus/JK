@@ -47,6 +47,12 @@
 
                 <li class="col-span-1 ">
                     <div>
+                        <p class="text-[0.8em] uppercase text-left font-bold">Backorder Qty</p>
+                    </div>
+                </li>
+
+                <li class="col-span-1 ">
+                    <div>
                         <p class="text-[0.8em] uppercase text-left font-bold">Purchase Number</p>
                     </div>
                 </li>
@@ -82,6 +88,12 @@
                     <div>
                         <p class="text-[0.8em] text-left font-medium">
                             {{ $backorderList->itemJoin->item_description }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        {{-- <p class="text-[0.8em] text-left font-medium">
+                            {{ $backorderList->itemJoin->item_description }}</p> --}}
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
