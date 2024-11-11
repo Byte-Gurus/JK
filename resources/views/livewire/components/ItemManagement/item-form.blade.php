@@ -199,51 +199,29 @@
 
                                         </div>
 
+                                        <div class="mb-3">
+
+                                            <label for="shelf_life_type"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Shelf life
+                                                type</label>
+
+                                            <select id="shelf_life_type" wire:model="shelf_life_type"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value="" selected>Set item shelf life</option>
+                                                <option value="Perishable">Perishable</option>
+                                                <option value="Non Perishable">Non Perishable</option>
+                                            </select>
+
+                                            @error('shelf_life_type')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+
+
                                     </div>
 
                                     {{-- //* third row --}}
-                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
-                                        {{-- //* shelf life type --}}
-                                        <div class="mb-3">
-
-                                            <label for="shelf_life_type"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Shelf life
-                                                type</label>
-
-                                            <select id="shelf_life_type" wire:model="shelf_life_type"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value="" selected>Set item shelf life</option>
-                                                <option value="Perishable">Perishable</option>
-                                                <option value="Non Perishable">Non Perishable</option>
-                                            </select>
-
-                                            @error('shelf_life_type')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-
-                                        </div>
-
-                                        <div class="mb-3">
-
-                                            <label for="shelf_life_type"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Shelf life
-                                                type</label>
-
-                                            <select id="shelf_life_type" wire:model="shelf_life_type"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value="" selected>Set item shelf life</option>
-                                                <option value="Perishable">Perishable</option>
-                                                <option value="Non Perishable">Non Perishable</option>
-                                            </select>
-
-                                            @error('shelf_life_type')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-
-                                        </div>
-
-                                    </div>
 
 
                                     {{-- //* third row row --}}
@@ -331,8 +309,8 @@
                                             <label for="status"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
 
-                                            <select id="status" wire:model="status" disabled readonly
-ur                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <select id="status" wire:model="status" disabled readonly ur
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Set your status</option>
                                                 <option value="1">Active</option>
                                                 <option value="2">Inactive</option>

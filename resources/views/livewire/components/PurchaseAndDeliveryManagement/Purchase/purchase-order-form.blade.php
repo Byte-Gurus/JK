@@ -20,9 +20,9 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="text" wire:model.live.debounce.100ms="search" wire:keyup="filterReorderLists"
+                    {{-- <input type="text" wire:model.live.debounce.100ms="search"
                         class="w-1/2 p-3 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="Search an Item" required="" />
+                        placeholder="Search an Item" required="" /> --}}
                 </div>
                 <div class="flex flex-col col-span-1 gap-2 ">
                     <p class="text-[1em]">Supplier Name</p>
@@ -44,7 +44,7 @@
                         class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
                         Test</button>
                     <div>
-                        @if (!empty($selectedToRemove) || empty($reorder_lists))
+                        @if (empty($purchaseQuantities) || empty($reorderLists))
                         <button type="submit" disabled
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
                             Save</button>
@@ -187,15 +187,23 @@
                                 {{ $reorderList->reorder_point }}
                             </th>
 
-                            @if(isset($toOrderItems[$index]) && $toOrderItems[$index] === true)
+                            @if(isset($toOrderItems[$index]) && $toOrderItems[$index])
                             <th scope="row"
                                 class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
                                 <input type="number" wire:model.live="purchaseQuantities.{{ $index }}" required
                                     class="bg-gray-100 self-center appearance-none border border-gray-400 text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
+
+                                @error("purchaseQuantities.$index")
+                                <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                @enderror
                             </th>
                             @else
                             @endif
+
+
                         </tr>
+
+
                         @endforeach
                     </tbody>
                 </table>

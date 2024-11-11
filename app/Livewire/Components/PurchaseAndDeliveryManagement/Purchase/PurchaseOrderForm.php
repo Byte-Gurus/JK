@@ -25,29 +25,29 @@ class PurchaseOrderForm extends Component
 
     public $isCreate = true;
 
-    public $po_number, $items, $selectAll;
+    public $po_number, $items, $selectAll, $select_supplier;
 
     public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [];
     public $search = '';
 
     public function render()
     {
-
-        $this->filterReorderLists();
-        
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
-        $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
+        if (empty($this->search)) {
+            $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
 
-        $this->reorderLists = [];
+            $this->reorderLists = [];
 
-        foreach ($items as $item) {
+            foreach ($items as $item) {
 
 
-            if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
-                $this->reorderLists[] = $item;
+                if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
+                    $this->reorderLists[] = $item;
+                }
             }
         }
+
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
@@ -96,13 +96,16 @@ class PurchaseOrderForm extends Component
             ]);
 
 
-            foreach ($this->reorder_lists as $index => $reorder_list) {
-                PurchaseDetails::create([
-                    'purchase_id' => $purchase_order->id,
-                    'item_id' => $reorder_list['item_id'], // Use item_id from reorder_list
-                    'po_number' => $validated['po_number'],
-                    'purchase_quantity' => $this->purchase_quantities[$index],
-                ]);
+            foreach ($this->selectedItems as $index => $selectedItem) {
+                if (isset($this->purchaseQuantities) && $this->purchaseQuantities[$index]) {
+                    PurchaseDetails::create([
+                        'purchase_id' => $purchase_order->id,
+                        'item_id' => $selectedItem['id'], // Use item_id from reorder_list
+                        'po_number' => $validated['po_number'],
+                        'purchase_quantity' => $this->purchaseQuantities[$index],
+                    ]);
+                }
+
             }
 
             $delivery = Delivery::create([
@@ -129,6 +132,7 @@ class PurchaseOrderForm extends Component
             $this->closeModal();
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while creating the purchase order, please refresh the page ');
         }
@@ -151,10 +155,10 @@ class PurchaseOrderForm extends Component
         }
     }
 
-    public function filterReorderLists()
+    public function updatedSearch()
     {
         $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
-            ->where('item_name', 'like', '%' . $this->search . '%') // Filter by item name
+            ->where('item_name', 'like', '%' . $this->search . '%')
             ->get();
 
         $this->reorderLists = [];
@@ -164,7 +168,13 @@ class PurchaseOrderForm extends Component
                 $this->reorderLists[] = $item;
             }
         }
+
+        $this->toOrderItems = array_fill(0, count($this->reorderLists), false);
+
+
     }
+
+
 
     public function UpdatedPurchaseQuantities($index, $value)
     {
@@ -188,6 +198,7 @@ class PurchaseOrderForm extends Component
                 ->values()
                 ->toArray();
         }
+
     }
 
     public function test()
@@ -206,22 +217,29 @@ class PurchaseOrderForm extends Component
             'select_supplier' => 'required|numeric',
         ];
 
-        if ($this->isCreate) {
-            // Add validation rules for each purchase quantity
-            foreach ($this->reorder_lists as $index => $reorder_list) {
-                $maxStockLevel = $reorder_list['maximum_stock_level'];
+        // Add validation rules for each purchase quantity
+        foreach ($this->selectedItems as $index => $selectedItem) {
+
+            if (isset($this->purchaseQuantities) && $this->purchaseQuantities[$index]) {
+
+                $maxStockLevel = $selectedItem['maximum_stock_level'];
 
                 if ($maxStockLevel > 0) {
-                    $rules["purchase_quantities.$index"] = [
+                    $rules["purchaseQuantities.$index"] = [
                         'required',
                         'numeric',
                         'min:1',
                         'lte:' . $maxStockLevel
                     ];
+
+
                 } else {
-                    $rules["purchase_quantities.$index"] = ['required', 'numeric', 'min:1'];
+                    $rules["purchaseQuantities.$index"] = ['required', 'numeric', 'min:1'];
+
                 }
             }
+
+
         }
 
 
