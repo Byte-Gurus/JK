@@ -208,7 +208,7 @@ class PurchaseOrderForm extends Component
 
             $inventory = $item->inventoryJoin->first();
 
-            if ($inventory && $inventory->current_stock_quantity <= $item->reorder_point) {
+            if ($inventory && $inventory->total_stock_quantity <= $item->reorder_point) {
                 $this->reorderList[] = $item;
             }
         }
