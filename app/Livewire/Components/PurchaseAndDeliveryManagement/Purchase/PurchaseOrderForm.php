@@ -25,13 +25,29 @@ class PurchaseOrderForm extends Component
 
     public $isCreate = true;
 
-    public $po_number, $items;
+    public $po_number, $items, $selectAll;
 
-    public $reorderLists = [];
+    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [];
+    public $search = '';
 
     public function render()
     {
+
+        $this->filterReorderLists();
+        
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
+
+        $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
+
+        $this->reorderLists = [];
+
+        foreach ($items as $item) {
+
+
+            if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
+                $this->reorderLists[] = $item;
+            }
+        }
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
@@ -118,6 +134,68 @@ class PurchaseOrderForm extends Component
         }
     }
 
+    public function updatedSelectAll()
+    {
+        if ($this->selectAll === true) {
+            $this->toOrderItems = array_fill(0, count($this->reorderLists), true);
+            foreach ($this->reorderLists as $index => $reorderList) {
+                $this->selectedItems[] = $reorderList;
+            }
+
+
+        } else {
+            $this->toOrderItems = array_fill(0, count($this->reorderLists), false);
+            foreach ($this->reorderLists as $index => $reorderList) {
+                $this->selectedItems = null;
+            }
+        }
+    }
+
+    public function filterReorderLists()
+    {
+        $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
+            ->where('item_name', 'like', '%' . $this->search . '%') // Filter by item name
+            ->get();
+
+        $this->reorderLists = [];
+
+        foreach ($items as $item) {
+            if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
+                $this->reorderLists[] = $item;
+            }
+        }
+    }
+
+    public function UpdatedPurchaseQuantities($index, $value)
+    {
+
+    }
+
+    public function updatedToOrderItems($state, $index)
+    {
+        // Get the item from the reorderLists using the index
+        $reorderList = $this->reorderLists[$index];
+
+        if ($state === true) {
+            // Add the item to the selectedItems array if it is checked
+            $this->selectedItems[] = $reorderList;
+        } else {
+            // Remove the item from the selectedItems array if it is unchecked
+            $this->selectedItems = collect($this->selectedItems)
+                ->reject(function ($item) use ($reorderList) {
+                    return $item['id'] === $reorderList['id']; // Remove based on the 'id'
+                })
+                ->values()
+                ->toArray();
+        }
+    }
+
+    public function test()
+    {
+        dump($this->selectedItems);
+    }
+
+
 
 
     protected function validateForm()
@@ -182,18 +260,6 @@ class PurchaseOrderForm extends Component
     public function po()
     {
         $this->generatePurchaseOrderNumber();
-
-        $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
-
-        $this->reorderLists = [];
-
-        foreach ($items as $item) {
-
-
-            if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
-                $this->reorderLists[] = $item;
-            }
-        }
 
 
     }
