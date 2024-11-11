@@ -21,7 +21,7 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity, $item_unit; //var form inputs
     //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -81,6 +81,7 @@ class ItemForm extends Component
             $item = [
                 'item_name' => $validated['item_name'],
                 'item_description' => $validated['item_description'],
+                'item_unit' => $validated['item_unit'],
                 'vat_type' => $validated['vatType'],
                 'shelf_life_type' => $validated['shelf_life_type'],
                 'bulk_quantity' => $validated['bulk_quantity'],
@@ -148,6 +149,7 @@ class ItemForm extends Component
         $items->vat_type = $validated['vatType'];
         $items->vat_percent = $validated['vat_percent'];
         $items->status_id = $validated['status'];
+        $items->item_unit = $validated['item_unit'];
 
 
 
@@ -268,7 +270,7 @@ class ItemForm extends Component
         $rules = [
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
-
+            'item_unit' => 'required|in:Kilo,Pack,Piece',
             'shelf_life_type' => 'required|in:Perishable,Non Perishable',
             'vat_percent' => ['required', 'numeric', 'min:0'],
             'bulk_quantity' => ['required', 'numeric', 'min:0', 'max:100'],

@@ -89,6 +89,9 @@
                         {{-- //* desc --}}
                         <th scope="col" class="px-4 py-3">Description</th>
 
+                        {{-- //* unit --}}
+                        <th scope="col" class="px-4 py-3">Unit</th>
+
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
 
@@ -173,6 +176,12 @@
                                 class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $item->item_description }}
                             </th>
+
+                             {{-- //* item unit --}}
+                             <th scope="row"
+                             class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                             {{ $item->item_unit }}
+                         </th>
 
 
                             {{-- //* status --}}

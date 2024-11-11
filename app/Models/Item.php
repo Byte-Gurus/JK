@@ -12,6 +12,7 @@ class Item extends Model
     protected $fillable = [
         'barcode',
         'item_name',
+        'item_unit',
         'item_description',
         'maximum_stock_level',
         'bulk_quantity',

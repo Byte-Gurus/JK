@@ -180,6 +180,27 @@
 
                                         <div class="mb-3">
 
+                                            <label for="item_unit"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Item Unit
+                                                type</label>
+
+                                            <select id="item_unit" wire:model="item_unit"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value="" selected>Set item unit</option>
+                                                <option value="Kilo">Kilo</option>
+                                                <option value="Pack">Pack</option>
+                                                <option value="Piece">Piece</option>
+                                                
+                                            </select>
+
+                                            @error('item_unit')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
+
+                                        <div class="mb-3">
+
                                             <label for="shelf_life_type"
                                                 class="block mb-2 text-sm font-medium text-gray-900 ">Shelf life
                                                 type</label>

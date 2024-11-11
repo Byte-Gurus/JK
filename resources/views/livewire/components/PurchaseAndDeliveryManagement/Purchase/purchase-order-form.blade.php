@@ -67,6 +67,9 @@
                             {{-- //* item name --}}
                             <th scope="col" class="px-2 py-2 text-left">Description</th>
 
+                             {{-- //* item name --}}
+                             <th scope="col" class="px-2 py-2 text-left">Unit</th>
+
                             {{-- //* stocks on hand --}}
                             <th scope="col" class="py-2 text-center">Stocks-On-Hand</th>
 
@@ -142,6 +145,9 @@
                         </th>
                         <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                             {{ $reorderList->item_description }}
+                        </th>
+                        <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                            {{ $reorderList->item_unit }}
                         </th>
                         <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                             {{ $reorderList->total_stock_quantity }}
