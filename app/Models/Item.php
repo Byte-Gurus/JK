@@ -13,6 +13,7 @@ class Item extends Model
         'barcode',
         'item_name',
         'item_unit',
+        'item_category',
         'item_description',
         'maximum_stock_level',
         'bulk_quantity',

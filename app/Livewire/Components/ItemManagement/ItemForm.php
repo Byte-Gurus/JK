@@ -21,7 +21,8 @@ class ItemForm extends Component
     public $vatType = null;
 
 
-    public $item_id, $barcode, $item_name, $item_description, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity, $item_unit; //var form inputs
+    public $item_id, $barcode, $item_name, $item_description, $vat_percent, $status, $create_barcode, $shelf_life_type, $bulk_quantity, $item_unit, $item_category;
+    //var form inputs
     //var diasble and vat amount by default
     public $proxy_item_id;  //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $isCreate; //var true for create false for edit
@@ -81,6 +82,7 @@ class ItemForm extends Component
             $item = [
                 'item_name' => $validated['item_name'],
                 'item_description' => $validated['item_description'],
+                'item_category' => $validated['item_category'],
                 'item_unit' => $validated['item_unit'],
                 'vat_type' => $validated['vatType'],
                 'shelf_life_type' => $validated['shelf_life_type'],
@@ -150,6 +152,7 @@ class ItemForm extends Component
         $items->vat_percent = $validated['vat_percent'];
         $items->status_id = $validated['status'];
         $items->item_unit = $validated['item_unit'];
+        $items->item_category = $validated['item_category'];
 
 
 
@@ -251,7 +254,7 @@ class ItemForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'vatType', 'vat_percent', 'status', 'bulk_quantity', 'shelf_life_type']);
+        $this->reset(['item_id', 'item_description', 'item_name', 'barcode', 'create_barcode', 'vatType', 'vat_percent', 'status', 'bulk_quantity', 'shelf_life_type', 'item_unit', 'item_category']);
 
         $this->hasBarcode = true;
     }
@@ -271,6 +274,7 @@ class ItemForm extends Component
             'item_name' => 'required|string|max:255',
             'item_description' => 'required|string|max:255',
             'item_unit' => 'required|in:Kilo,Pack,Piece',
+            'item_category' =>'required|in:Frozen,Consumer',
             'shelf_life_type' => 'required|in:Perishable,Non Perishable',
             'vat_percent' => ['required', 'numeric', 'min:0'],
             'bulk_quantity' => ['required', 'numeric', 'min:0', 'max:100'],
@@ -307,6 +311,7 @@ class ItemForm extends Component
             'create_barcode' => $item_details->barcode,
             'item_name' => $item_details->item_name,
             'item_description' => $item_details->item_description,
+            'item_category' => $item_details->item_category,
             'shelf_life_type' => $item_details->shelf_life_type,
             'bulk_quantity' => $item_details->bulk_quantity,
             'vatType' => $item_details->vat_type,

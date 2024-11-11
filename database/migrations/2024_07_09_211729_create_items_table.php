@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('item_name');
             $table->string('item_description');
             $table->string('item_unit');
-
+            $table->string('item_category');
             $table->double('maximum_stock_level')->default(0);
             $table->double('bulk_quantity')->default(0);
             $table->double('reorder_point')->default(0);

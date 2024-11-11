@@ -190,7 +190,7 @@
                                                 <option value="Kilo">Kilo</option>
                                                 <option value="Pack">Pack</option>
                                                 <option value="Piece">Piece</option>
-                                                
+
                                             </select>
 
                                             @error('item_unit')
@@ -223,6 +223,24 @@
 
                                     {{-- //* third row row --}}
                                     <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+                                        <div class="mb-3">
+
+                                            <label for="item_category"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Category</label>
+
+                                            <select id="item_category" wire:model="item_category"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                                <option value="" selected>Set item category</option>
+                                                <option value="Frozen">Frozen</option>
+                                                <option value="Consumer">Consumer</option>
+
+                                            </select>
+
+                                            @error('item_category')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+
+                                        </div>
 
                                         {{-- //* vat type --}}
                                         <div class="col-span-1 mb-3">
