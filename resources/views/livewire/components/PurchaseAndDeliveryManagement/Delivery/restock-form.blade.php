@@ -47,13 +47,13 @@
                             <th scope="col" class="px-4 py-3 text-left">Item Name</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="py-3 text-left">Item Description</th>
+                            <th scope="col" class="px-4 py-3 text-left">Item Description</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="py-3 text-left"> Unit</th>
+                            <th scope="col" class="px-4 py-3 text-left"> Unit</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="py-3 text-left">Category</th>
+                            <th scope="col" class="px-4 py-3 text-left">Category</th>
 
                             {{-- //* stocks on hand --}}
                             <th scope="col" class="px-4 py-3 text-center ">Purchased Quantity</th>
@@ -63,23 +63,23 @@
                             </th>
 
                             {{-- //* restock quantity --}}
-                            <th scope="col" class="py-3 text-center ">Restock Quantity</th>
+                            <th scope="col" class="px-4 py-3 text-center ">Restock Quantity</th>
                             </th>
 
                             {{-- //* cost --}}
-                            <th scope="col" class="py-3 text-center ">Cost (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center ">Cost (₱)</th>
                             </th>
 
                             {{-- //* markup --}}
-                            <th scope="col" class="py-3 text-center">Markup (%)</th>
+                            <th scope="col" class="px-4 py-3 text-center">Markup (%)</th>
                             </th>
 
                             {{-- //* srp --}}
-                            <th scope="col" class="py-3 text-center">SRP (₱)</th>
+                            <th scope="col" class="px-4 py-3 text-center">SRP (₱)</th>
                             </th>
 
                             {{-- //* expiration date --}}
-                            <th scope="col" class="py-3 text-center ">Expiration Date</th>
+                            <th scope="col" class="px-4 py-3 text-center ">Expiration Date</th>
                             </th>
 
                             {{-- //* actions --}}
@@ -95,38 +95,52 @@
                             <tr
                                 class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition-all ease-in-out duration-1000">
                                 <th scope="row"
-                                    class="px-4 py-10 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail['barcode'] }}
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                    <p>
+                                        {{ $purchaseDetail['barcode'] }}
+                                    </p>
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap ">
-                                    {{ $purchaseDetail['item_name'] }}
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                    <p class=" w-[100px]">
+                                        {{ $purchaseDetail['item_name'] }}
+                                    </p>
                                 </th>
 
                                 <th scope="row"
-                                    class="py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
-                                    {{ $purchaseDetail['item_description'] }}
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                    <p class=" w-[100px]">
+                                        {{ $purchaseDetail['item_description'] }}
+                                    </p>
                                 </th>
 
                                 <th scope="row"
-                                    class="py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
-                                    {{ $purchaseDetail['item_unit'] }}
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                    <p>
+                                        {{ $purchaseDetail['item_unit'] }}
+                                    </p>
                                 </th>
 
                                 <th scope="row"
-                                    class="py-10 font-medium text-left text-gray-900 break-all text-md text-wrap whitespace-nowrap">
-                                    {{ $purchaseDetail['item_category'] }}
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                    <p>
+                                        {{ $purchaseDetail['item_category'] }}
+                                    </p>
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail['purchase_quantity'] }}
+                                    class="px-4 py-10 font-medium text-center text-gray-900 text-md whitespace-wrap ">
+                                    <p>
+                                        {{ $purchaseDetail['purchase_quantity'] }}
+                                    </p>
                                 </th>
 
                                 <th scope="row"
-                                    class="px-4 py-10 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                    {{ $purchaseDetail['sku_code'] }}
+                                    class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-nowrap">
+                                    <p>
+                                        {{ $purchaseDetail['sku_code'] }}
+                                    </p>
                                 </th>
                                 {{-- restock quantity --}}
                                 <th scope="row"
@@ -134,8 +148,6 @@
                                     <input type="number" wire:model="restock_quantity.{{ $index }}" required
                                         oninput="validateInput(this)"
                                         class=" bg-[rgb(245,245,245)] border border-[rgb(53,53,53)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-center text-gray-900 text-sm rounded-md  block mx-auto w-2/3 p-2.5">
-
-
                                 </th>
 
                                 {{-- cost --}}
@@ -180,8 +192,8 @@
                                     class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     @if (isset($purchaseDetail['isDuplicate']) && $purchaseDetail['isDuplicate'])
                                         <button type="button" wire:click="removeItem({{ $index }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                strokeWidth={1.5} stroke="currentColor"
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
                                                 class="transition-all duration-100 ease-in-out bg-red-100 rounded-full size-8 hover:bg-red-100">
                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                     d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
