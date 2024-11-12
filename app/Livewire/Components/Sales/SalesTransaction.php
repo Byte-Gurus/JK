@@ -151,21 +151,9 @@ class SalesTransaction extends Component
                 return $inventory->status === 'Available'; // Ensure only available items are considered
             });
 
-            if ($item->shelf_life_type === 'Perishable') {
-                // Sort by expiration_date to find the nearest expiration date
-                $sortedInventory = $availableInventory
-                    ->filter(function ($inventory) {
-                        return !is_null($inventory->expiration_date);
-                    })
-                    ->sortBy(function ($inventory) {
-                        return [$inventory->expiration_date, $inventory->current_stock_quantity];
-                    });
-                $item->inventoryJoin = $sortedInventory->first();
-            } else {
-                // For non-perishable items, get the latest inventory entry
-                $sortedInventory = $availableInventory->sortBy('created_at');
-                $item->inventoryJoin = $sortedInventory->first();
-            }
+            $highestPricedInventory = $availableInventory->sortByDesc('selling_price')->first();
+            $item->highestPricedInventory = $highestPricedInventory;
+
             return $item;
         });
 
@@ -246,16 +234,10 @@ class SalesTransaction extends Component
                 ->where('status', 'Available')
                 ->whereHas('itemJoin', function ($query) {
                     $query->where('status_id', 1);
-                });
+                })->orderBy('selling_price', 'desc')
+                ->first();
 
-            // Apply ordering if the item is perishable
-            if ($itemData && $itemData->shelf_life_type === 'Perishable') {
-                $itemQuery->orderBy('expiration_date', 'asc')
-                    ->orderBy('current_stock_quantity', 'asc');
-            }
-
-            // Get the first item from the query
-            $item = $itemQuery->first();
+            $item = $itemQuery;
             // dd($item);
 
             foreach ($this->selectedItems as $index => $selectedItem) {
