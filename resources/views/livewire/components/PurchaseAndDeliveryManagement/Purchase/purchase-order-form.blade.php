@@ -184,6 +184,12 @@
                                     class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
                                     {{ $reorderList->item_unit }}
                                 </th>
+
+                                <th scope="row"
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->item_category }}
+                                </th>
+
                                 <th scope="row"
                                     class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                     {{ $reorderList->total_stock_quantity }}
