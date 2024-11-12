@@ -84,8 +84,9 @@
                             </p>
                         </div>
                     </div>
-                    <div>
-                        <p class="italic font-bold ">
+                    <div class="flex flex-row items-start gap-1 justify-">
+                        <p class="text-sm italic font-thin pt-0.5">Created</p>
+                        <p class="italic font-bold text-right">
                             {{ $purchase->created_at->format(' M d Y ') }}
                         </p>
                     </div>
@@ -124,7 +125,7 @@
 
                                 @elseif ($purchase->deliveryjoin->status == 'In Progress')
 
-                                class="text-xs font-thin text-center bg-orange-320000 border border-orange-900
+                                class="text-xs font-thin text-center bg-orange-200 border border-orange-900
                                 rounded-full w-[16px] h-[16px] pointer-events-none "
 
                                 @elseif ($purchase->deliveryjoin->status == 'Backorder complete')
