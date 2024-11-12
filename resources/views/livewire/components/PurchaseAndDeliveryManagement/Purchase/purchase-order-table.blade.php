@@ -52,7 +52,7 @@
                     <option value="0">All</option>
 
                     @foreach ($suppliers as $supplier)
-                    <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                        <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -62,50 +62,63 @@
     <div
         class="overflow-x-auto overflow-y-scroll border rounded-md border-[rgb(149,149,149)] shadow-md bg-[rgb(252,252,252)] p-2 scroll no-scrollbar h-[60vh]">
         @if (empty($purchases))
-        <div class="flex items-center justify-center w-full h-full">
-            <p class="text-[1.8em] opacity-40 font-black">NO PURCHASE ORDERS YET</p>
-        </div>
+            <div class="flex items-center justify-center w-full h-full">
+                <p class="text-[1.8em] opacity-40 font-black">NO PURCHASE ORDERS YET</p>
+            </div>
         @else
-        <div class="grid grid-cols-2 gap-4 transition-transform duration-1000 ease-in-out lg:grid-cols-3">
-            @foreach ($purchases as $purchase)
-            <div
-                class="w-full grid grid-row-col grid-rows-12 h-[30vh] transition duration-200 ease-in-out border shadow-md hover:shadow-orange-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(255,248,241)]">
-                <div
-                    class="flex text-[rgb(53,53,53)] h-fit border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
-                    <div class="flex flex-col">
-                        <p class="text-2xl font-black">{{ $purchase->po_number }}</p>
-                        <div class="flex flex-row items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-                            </svg>
-                            <p class="text-sm italic font-medium"> {{ $purchase->supplierJoin->company_name }}
-                            </p>
+            <div class="grid grid-cols-2 gap-4 transition-transform duration-1000 ease-in-out lg:grid-cols-3">
+                @foreach ($purchases as $purchase)
+                    <div
+                        class="w-full grid grid-row-col grid-rows-12 h-[30vh] transition duration-200 ease-in-out border shadow-md hover:shadow-orange-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(255,248,241)]">
+                        <div
+                            class="flex text-[rgb(53,53,53)] h-fit border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
+                            <div class="flex flex-col">
+                                <p class="text-2xl font-black">{{ $purchase->po_number }}</p>
+                                <div class="flex flex-row items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                    </svg>
+                                    <p class="text-sm italic font-medium"> {{ $purchase->supplierJoin->company_name }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex flex-row items-start gap-1 justify-">
+                                <p class="text-sm italic font-thin pt-0.5">Created</p>
+                                <p class="italic font-bold text-right">
+                                    {{ $purchase->created_at->format(' M d Y ') }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex flex-row items-start gap-1 justify-">
-                        <p class="text-sm italic font-thin pt-0.5">Created</p>
-                        <p class="italic font-bold text-right">
-                            {{ $purchase->created_at->format(' M d Y ') }}
-                        </p>
-                    </div>
-                </div>
-                <div class="grid h-full grid-flow-row px-4 overflow-auto leading-none bg-[rgb(252,237,222)] row-span-7">
-                    @foreach ($purchase->purchaseDetailsJoin as $purchaseDetail)
-                    <div class="flex flex-row items-center justify-between py-2 text-left start">
-                        <p class="break-words text-md font-light w-[200px]">{{$purchaseDetail->itemsJoin->item_name}} -
-                            {{$purchaseDetail->itemsJoin->item_description}} -
-                            {{$purchaseDetail->itemsJoin->item_unit}}</p>
-                        <p class="font-bold text-center">{{$purchaseDetail->purchase_quantity}}</p>
-
-                    </div>
-                    @endforeach
-                </div>
-                <div class="row-span-2 flex items-center justify-between px-4 border-t border-[rgb(53,53,53)]">
-                    <div class="flex flex-row justify-between ">
-                        <div class="flex flex-row items-center gap-2">
-                            <div @if ($purchase->deliveryJoin->status == 'Delivered') class="bg-green-200 border
+                        <div
+                            class="grid h-full grid-flow-row px-4 overflow-y-auto leading-none bg-[rgb(252,237,222)] row-span-7">
+                            @foreach ($purchase->purchaseDetailsJoin as $purchaseDetail)
+                                <div class="flex flex-row items-center justify-between py-2 text-left start">
+                                    <div class="flex flex-col ">
+                                        <p class="break-words text-left font-bold text-md w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_name }}
+                                        </p>
+                                        <p class="break-words text-left text-md font-light w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_description }}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="break-words italic text-md font-light w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_unit }}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-center">{{ $purchaseDetail->purchase_quantity }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="row-span-2 flex items-center justify-between px-4 border-t border-[rgb(53,53,53)]">
+                            <div class="flex flex-row justify-between ">
+                                <div class="flex flex-row items-center gap-2">
+                                    <div
+                                        @if ($purchase->deliveryJoin->status == 'Delivered') class="bg-green-200 border
                                 w-[16px] h-[16px] border-green-900 rounded-full pointer-events-none"
 
                                 @elseif ($purchase->deliveryJoin->status == 'Cancelled')
@@ -132,28 +145,30 @@
 
                                 class="text-xs font-thin text-center bg-pink-200 border border-pink-900 rounded-full
                                 w-[16px] h-[16px] pointer-events-none " @endif>
+                                    </div>
+                                    <p class="text-sm ">{{ $purchase->deliveryjoin->status }}</p>
+                                </div>
                             </div>
-                            <p class="text-sm ">{{ $purchase->deliveryjoin->status }}</p>
+                            <div class="flex flex-row items-center gap-4">
+                                <div class="cursor-pointer hover:bg-[rgb(255,234,174)] rounded-full p-1"
+                                    wire:click="printPO({{ $purchase->id }})"
+                                    x-on:click="$wire.displayPrintPurchaseOrderDetails()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                                    </svg>
+                                </div>
+                                <div x-on:click=" $wire.displayPurchaseOrderDetails(); openActions = !openActions"
+                                    wire:click="getPo_ID({{ $purchase->id }})"
+                                    class="underline transition-all duration-100 ease-in-out cursor-pointer">
+                                    <p class=" text-md hover:text-[rgb(138,117,59)]">View</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex flex-row items-center gap-4">
-                        <div class="cursor-pointer hover:bg-[rgb(255,234,174)] rounded-full p-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
-                            </svg>
-                        </div>
-                        <div x-on:click=" $wire.displayPurchaseOrderDetails(); openActions = !openActions"
-                            wire:click="getPo_ID({{ $purchase->id }})"
-                            class="underline transition-all duration-100 ease-in-out cursor-pointer">
-                            <p class=" text-md hover:text-[rgb(138,117,59)]">View</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
-        </div>
         @endif
     </div>
 
