@@ -11,6 +11,8 @@ use App\Models\Log;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
 use App\Models\Supplier;
+use App\Models\SupplierItems;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -25,17 +27,26 @@ class PurchaseOrderForm extends Component
 
 
 
-    public $po_number, $items, $selectAll, $select_supplier;
+    public $items, $selectAll;
 
-    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [];
+    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [], $selectSuppliers = [], $po_numbers = [];
     public $search = '';
+
 
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
 
         if (empty($this->search)) {
-            $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')->get();
+            $items = Item::with('inventoryJoin')
+                ->withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
+                ->addSelect([
+                    'lowest_item_cost' => SupplierItems::select('item_cost')
+                        ->whereColumn('supplier_items.item_id', 'items.id')
+                        ->orderBy('item_cost', 'asc')
+                        ->limit(1)
+                ])
+                ->get();
 
             $this->reorderLists = [];
 
@@ -48,10 +59,10 @@ class PurchaseOrderForm extends Component
             }
         }
 
-
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
-            'reorderLists' => $this->reorderLists
+            'reorderLists' => $this->reorderLists,
+            'po_numbers' => $this->po_numbers
         ]);
     }
 
@@ -66,6 +77,7 @@ class PurchaseOrderForm extends Component
     public function create() //* create process
     {
         $validated = $this->validateForm();
+
 
         $this->confirm('Do you want to create this purchase order?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
@@ -82,37 +94,49 @@ class PurchaseOrderForm extends Component
 
         try {
 
-            $existingPurchaseOrder = Purchase::where('po_number', $validated['po_number'])->first();
 
-            if ($existingPurchaseOrder) {
-                $this->alert('error', 'Purchase order number already exists.');
-                return; // Exit if it exists
-            }
+            foreach ($this->selectSuppliers as $index => $selectSupplier) {
 
-            $purchase_order = Purchase::create([
-                'po_number' => $validated['po_number'],
-                'supplier_id' => $validated['select_supplier'],
-                'user_id' => Auth::id(),
-            ]);
+                $poNumber = $this->generatePurchaseOrderNumber();
 
+                $existingPurchaseOrder = Purchase::where('po_number', $poNumber)->first();
 
-            foreach ($this->selectedItems as $index => $selectedItem) {
-                if (isset($this->purchaseQuantities) && $this->purchaseQuantities[$index]) {
-                    PurchaseDetails::create([
-                        'purchase_id' => $purchase_order->id,
-                        'item_id' => $selectedItem['id'], // Use item_id from reorder_list
-                        'po_number' => $validated['po_number'],
-                        'purchase_quantity' => $this->purchaseQuantities[$index],
-                    ]);
+                if ($existingPurchaseOrder) {
+                    $this->alert('error', 'Purchase order number already exists.');
+                    return; // Exit if it exists
                 }
 
+                $purchase_order = Purchase::create([
+                    'po_number' => $poNumber,
+                    'supplier_id' => $selectSupplier,
+                    'user_id' => Auth::id(),
+                ]);
+
+                $delivery = Delivery::create([
+                    'status' => "In Progress",
+                    'date_delivered' => "N/A",
+                    'purchase_id' => $purchase_order->id
+                ]);
+
+
+                foreach ($this->selectedItems as $itemIndex => $selectedItem) {
+                    // Only create PurchaseDetails if the item matches the current supplier index
+                    if (isset($this->selectSuppliers[$itemIndex]) && $this->selectSuppliers[$itemIndex] == $selectSupplier) {
+                        PurchaseDetails::create([
+                            'purchase_id' => $purchase_order->id,
+                            'item_id' => $selectedItem['id'], // Use item_id from selected items
+                            'po_number' => $purchase_order->po_number,
+                            'purchase_quantity' => $this->purchaseQuantities[$itemIndex],
+                        ]);
+                    }
+                }
             }
 
-            $delivery = Delivery::create([
-                'status' => "In Progress",
-                'date_delivered' => "N/A",
-                'purchase_id' => $purchase_order->id
-            ]);
+
+
+
+
+
 
             $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
 
@@ -174,9 +198,15 @@ class PurchaseOrderForm extends Component
 
     }
 
+    public function updateSelectSupplier($index, $supplierID)
+    {
 
 
-    public function UpdatedPurchaseQuantities($index, $value)
+        $this->selectSuppliers[] = $supplierID;
+
+    }
+
+    public function updatedPurchaseQuantities($index, $value)
     {
 
     }
@@ -203,7 +233,7 @@ class PurchaseOrderForm extends Component
 
     public function test()
     {
-        dump($this->selectedItems);
+        dump($this->selectedItems, $this->selectSuppliers);
     }
 
 
@@ -213,8 +243,8 @@ class PurchaseOrderForm extends Component
     {
 
         $rules = [
-            'po_number' => 'required|string|max:255|min:1',
-            'select_supplier' => 'required|numeric',
+
+
         ];
 
         // Add validation rules for each purchase quantity
@@ -235,6 +265,8 @@ class PurchaseOrderForm extends Component
 
                 } else {
                     $rules["purchaseQuantities.$index"] = ['required', 'numeric', 'min:1'];
+                    $rules["selectSuppliers.$index"] = ['required', 'numeric'];
+
 
                 }
             }
@@ -249,7 +281,7 @@ class PurchaseOrderForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
-        $this->reset([ 'po_number', 'items', 'selectAll', 'select_supplier', 'reorderLists', 'toOrderItems', 'selectedItems', 'purchaseQuantities', 'search']);
+        $this->reset(['po_numbers', 'items', 'selectAll', 'selectSuppliers', 'reorderLists', 'toOrderItems', 'selectedItems', 'purchaseQuantities', 'search']);
     }
 
     public function closeModal() //* close ang modal after confirmation
@@ -271,7 +303,7 @@ class PurchaseOrderForm extends Component
         } while ($exists);
 
         // Assign the unique purchase order number
-        $this->po_number = $purchaseOrderNumber;
+        return $purchaseOrderNumber;
     }
 
     public function refreshTable() //* refresh ang table after confirmation
@@ -282,7 +314,7 @@ class PurchaseOrderForm extends Component
 
     public function po()
     {
-        $this->generatePurchaseOrderNumber();
+
 
 
     }

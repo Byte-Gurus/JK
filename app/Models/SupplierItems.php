@@ -21,4 +21,9 @@ class SupplierItems extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
+
+    public function itemjoin()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
 }
