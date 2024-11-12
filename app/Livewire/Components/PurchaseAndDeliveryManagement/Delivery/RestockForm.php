@@ -44,6 +44,8 @@ class RestockForm extends Component
                         'item_name' => $details->itemsJoin->item_name,
                         'reorder_point' => $details->itemsJoin->reorder_point,
                         'item_id' => $details->item_id,
+                        'item_category' => $details->itemsJoin->item_category,
+                        'item_unir' => $details->itemsJoin->item_unir,
                         'shelf_life_type' => $details->itemsJoin->shelf_life_type,
                         'item_description' => $details->itemsJoin->item_description,
                         'purchased_quantity' => $details->purchase_quantity,
@@ -292,7 +294,8 @@ class RestockForm extends Component
             'item_id' => $originalItem->item_id,
             'item_name' => $originalItem->itemsJoin->item_name,
             'shelf_life_type' => $originalItem->itemsJoin->shelf_life_type,
-
+            'item_unit' => $originalItem->itemsJoin->item_unit,
+            'item_category' => $originalItem->itemsJoin->item_category,
             'item_description' => $originalItem->itemsJoin->item_description,
             'purchase_quantity' => $originalItem->purchase_quantity,
             'sku_code' => $this->generateSKU(),  // Preserve the original SKU code
