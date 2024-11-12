@@ -47,7 +47,7 @@
                             <th scope="col" class="px-4 py-3 text-left">Item Name</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="px-4 py-3 text-left">Item Description</th>
+                            <th scope="col" class="px-4 py-3 text-left">Item Desc</th>
 
                             {{-- //* item name --}}
                             <th scope="col" class="px-4 py-3 text-left"> Unit</th>
@@ -56,35 +56,28 @@
                             <th scope="col" class="px-4 py-3 text-left">Category</th>
 
                             {{-- //* stocks on hand --}}
-                            <th scope="col" class="px-4 py-3 text-center ">Purchased Quantity</th>
+                            <th scope="col" class="px-4 py-3 text-center ">Pur Qty</th>
 
                             {{-- //* purchase quantity --}}
                             <th scope="col" class="px-4 py-3 text-left">SKU</th>
-                            </th>
 
                             {{-- //* restock quantity --}}
-                            <th scope="col" class="px-4 py-3 text-center ">Restock Quantity</th>
-                            </th>
+                            <th scope="col" class="px-4 py-3 text-center ">Restock Qty</th>
 
                             {{-- //* cost --}}
                             <th scope="col" class="px-4 py-3 text-center ">Cost (₱)</th>
-                            </th>
 
                             {{-- //* markup --}}
                             <th scope="col" class="px-4 py-3 text-center">Markup (%)</th>
-                            </th>
 
                             {{-- //* srp --}}
                             <th scope="col" class="px-4 py-3 text-center">SRP (₱)</th>
-                            </th>
 
                             {{-- //* expiration date --}}
-                            <th scope="col" class="px-4 py-3 text-center ">Expiration Date</th>
-                            </th>
+                            <th scope="col" class="px-4 py-3 text-center ">Expr Date</th>
 
                             {{-- //* actions --}}
                             <th scope="col" class="px-4 py-3 text-center">Actions</th>
-                            </th>
                         </tr>
                     </thead>
 
@@ -138,7 +131,7 @@
 
                                 <th scope="row"
                                     class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-nowrap">
-                                    <p>
+                                    <p class=" text-wrap">
                                         {{ $purchaseDetail['sku_code'] }}
                                     </p>
                                 </th>
@@ -192,8 +185,8 @@
                                     class="px-2 py-10 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
                                     @if (isset($purchaseDetail['isDuplicate']) && $purchaseDetail['isDuplicate'])
                                         <button type="button" wire:click="removeItem({{ $index }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                strokeWidth={1.5} stroke="currentColor"
                                                 class="transition-all duration-100 ease-in-out bg-red-100 rounded-full size-8 hover:bg-red-100">
                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                     d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

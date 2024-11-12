@@ -95,8 +95,8 @@
                         {{-- //* item name --}}
                         <th scope="col" class="px-4 py-3">Item Description</th>
 
-                         {{-- //* item unit --}}
-                         <th scope="col" class="px-4 py-3">Unit</th>
+                        {{-- //* item unit --}}
+                        <th scope="col" class="px-4 py-3">Unit</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier</th>
@@ -192,9 +192,9 @@
                             </th>
 
                             <th scope="row"
-                            class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
-                            {{ $inventory->itemJoin->item_unit }}
-                        </th>
+                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                {{ $inventory->itemJoin->item_unit }}
+                            </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $inventory->deliveryJoin?->purchaseJoin?->supplierJoin?->company_name ?? 'null' }}
@@ -259,7 +259,7 @@
 
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                {{ $inventory->stock_in_date->format(' M d Y h:i A')  }}
+                                {{ $inventory->stock_in_date->format(' M d Y h:i A') }}
 
                             </th>
 
