@@ -29,7 +29,7 @@ class PurchaseOrderForm extends Component
 
     public $items, $selectAll;
 
-    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [], $selectSuppliers = [], $po_numbers = [];
+    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [], $selectSuppliers = [], $po_numbers = [], $lowestSupplier = [];
     public $search = '';
 
 
@@ -51,11 +51,30 @@ class PurchaseOrderForm extends Component
             $this->reorderLists = [];
 
             foreach ($items as $item) {
-
-
+                // Only include items with low stock quantity
                 if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
                     $this->reorderLists[] = $item;
                 }
+            }
+        }
+
+        // Loop through reorderLists and assign the supplier with the lowest cost
+        foreach ($this->reorderLists as $reorderList) {
+            // Retrieve the supplier with the lowest cost
+            $lowestSupplier = SupplierItems::where('item_id', $reorderList->id)
+                ->orderBy('item_cost', 'asc')
+                ->first();  // Get the supplier with the lowest item cost
+
+            // Ensure lowestSupplier is not null before accessing its properties
+            if ($lowestSupplier) {
+                $supplier = Supplier::find($lowestSupplier->supplier_id);  // Fetch the actual Supplier model
+                if ($supplier) {
+                    $reorderList->lowestSupplier = $supplier;  // Assign the supplier with the lowest cost
+                } else {
+                    $reorderList->lowestSupplier = null;  // No supplier found
+                }
+            } else {
+                $reorderList->lowestSupplier = null;  // No supplier with the lowest cost
             }
         }
 
@@ -65,6 +84,7 @@ class PurchaseOrderForm extends Component
             'po_numbers' => $this->po_numbers
         ]);
     }
+
 
     protected $listeners = [
         'edit-po-from-table' => 'edit',

@@ -214,11 +214,14 @@
                                 @if (isset($toOrderItems[$index]) && $toOrderItems[$index])
                                 <select wire:change="updateSelectSupplier({{ $index }}, $event.target.value)"
                                     wire.model.live="selectSuppliers.{{$index}}">
-                                    @if (!isset($reorderList->lowest_item_cost))
-                                    <option value="No Supplier" selected>No supplier for this item</option>
+
+                                    @if (isset($reorderList->lowestSupplier))
+                                    <option value="{{ $reorderList->lowestSupplier->id }}" selected>{{
+                                        $reorderList->lowestSupplier->company_name }}</option>
                                     @else
-                                    <option value="No Supplier" selected>Yiipi</option>
+                                    <option value="No Supplier" selected>No supplier for this item</option>
                                     @endif
+
 
                                     @foreach ($suppliers as $supplier)
                                     <option value="{{ $supplier->id }}">

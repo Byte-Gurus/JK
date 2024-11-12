@@ -12,6 +12,8 @@ use App\Models\InventoryMovement;
 use App\Models\Item;
 use App\Models\Log;
 use App\Models\Purchase;
+use App\Models\Supplier;
+use App\Models\SupplierItems;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PurchaseDetails;
 use App\Models\Transaction;
@@ -49,7 +51,6 @@ class RestockForm extends Component
                         'shelf_life_type' => $details->itemsJoin->shelf_life_type,
                         'item_description' => $details->itemsJoin->item_description,
                         'item_unit' => $details->itemsJoin->item_unit,
-                        'item_category' => $details->itemsJoin->item_category,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
                         'isDuplicate' => false,
@@ -57,6 +58,9 @@ class RestockForm extends Component
                 })
                 ->toArray();
         }
+
+
+
 
         return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.restock-form', [
             'purchaseDetails' => $this->purchaseDetails,
@@ -201,6 +205,25 @@ class RestockForm extends Component
                     'movement_type' => 'Inventory',
                     'operation' => 'Stock In',
                 ]);
+
+                $purchaseDetails = PurchaseDetails::find($detail['id']);
+
+                $supplierItem = SupplierItems::where('item_id', $item->id)
+                    ->where('supplier_id', $purchaseDetails->purchaseJoin->supplier_id) // Use array syntax here
+                    ->first();
+
+                if ($supplierItem) {
+                    // If exists, update the cost
+                    $supplierItem->item_cost = $inventory->selling_price;
+                    $supplierItem->save();
+                } else {
+                    // If does not exist, create a new record
+                    $supplerItems = SupplierItems::create([
+                        'item_cost' => $inventory->selling_price,
+                        'item_id' => $item->id,
+                        'supplier_id' => $purchaseDetails->purchaseJoin->supplier_id, // Use array syntax here
+                    ]);
+                }
             }
 
             $delivery = Delivery::where('purchase_id', $this->purchase_id)->first();
@@ -233,6 +256,7 @@ class RestockForm extends Component
             $this->closeModal();
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while Restocking, please refresh the page ');
         }
@@ -407,83 +431,4 @@ class RestockForm extends Component
         return $SKU;
     }
 
-    // public function getReorderPoint($item_id)
-    // {
-    //     $deliveryDate = Carbon::parse($this->delivery_date);
-    //     $poDate = Carbon::parse($this->po_date);
-
-    //     // Define the start and end dates
-    //     $startDate = $poDate->startOfDay();
-    //     $endDate = $deliveryDate->endOfDay();
-
-
-    //     $totalQuantity = TransactionDetails::where('item_id', $item_id)
-    //         ->whereHas('transactionJoin', function ($query) use ($startDate, $endDate) {
-    //             $query->whereBetween('created_at', [$startDate, $endDate]);
-    //         })
-    //         ->sum('item_quantity');
-
-
-    //     // Calculate the number of days in the date range
-    //     $days = floor($startDate->diffInDays($endDate));
-    //     // dd($totalQuantity);
-
-    //     // Calculate the demand rate
-    //     $demandRate =  $totalQuantity / $days;
-    //     $reorder_point = ($days * $demandRate);
-
-    //     $item = Item::find($item_id);
-    //     $item->reorder_point = $reorder_point;
-    //     $item->save();
-    // }
-
-    // public function getMaximumLevel()
-    // {
-    //     $maximum_level_req = [];
-
-    //     foreach ($this->purchaseDetails as $detail) {
-    //         $itemId = $detail['item_id'];
-
-    //         $restockDate = Inventory::where('item_id', $itemId)
-    //             ->orderBy('stock_in_date', 'desc')
-    //             ->value('stock_in_date');
-    //         // Calculate the date range from the same day last week to today
-    //         $startDate = Carbon::parse($restockDate)->startOfDay()->toDateTimeString();
-    //         $endDate = Carbon::now()->endOfDay()->toDateTimeString();
-
-    //         // Calculate minimum consumption within the period
-    //         $minQuantity = TransactionDetails::where('item_id', $itemId)
-    //             ->whereBetween('created_at', [$startDate, $endDate])
-    //             ->min('item_quantity');
-
-    //         $isMySQL = Schema::getConnection()->getDriverName() === 'mysql';
-
-    //         $minReorderPeriod = PurchaseDetails::where('purchase_details.item_id', $itemId)
-    //             ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
-    //             ->join('deliveries', 'purchases.id', '=', 'deliveries.purchase_id')
-    //             ->select(DB::raw($isMySQL
-    //                 ? "DATEDIFF(deliveries.date_delivered, purchases.created_at) AS reorder_period"
-    //                 : "EXTRACT(DAY FROM AGE(deliveries.date_delivered::timestamp, purchases.created_at::timestamp)) AS reorder_period"))
-    //             ->orderBy('reorder_period', 'asc')
-    //             ->value('reorder_period');
-    //         // Calculate maximum level using the formula
-    //         $reorderPoint = $detail['reorder_point'];
-    //         $reorderQuantity = $detail['purchase_quantity'];
-    //         $minConsumption = $minQuantity ?? 0;
-    //         $minReorderPeriod = $minReorderPeriod ?? 0;
-
-    //         $maximumLevel = $reorderPoint + $reorderQuantity - ($minConsumption * $minReorderPeriod);
-
-    //         Item::where('id', $itemId)->update(['maximum_stock_level' => $maximumLevel]);
-
-    //         $maximum_level_req[] = [
-    //             'item_id' => $itemId,
-    //             'min_quantity' => $minConsumption,
-    //             'purchase_quantity' => $reorderQuantity,
-    //             'reorder_point' => $reorderPoint,
-    //             'min_reorder_period' => $minReorderPeriod,
-    //             'maximum_level' => $maximumLevel
-    //         ];
-    //     }
-    // }
 }
