@@ -26,6 +26,7 @@
                             <div class="flex flex-col w-[200px] items-start leading-1">
                                 <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
                                 <div class="text-[0.8em]">{{ $item->item_description }}</div>
+                                <div class="text-[0.8em]">{{ $item->item_unit }}</div>
                                 <div class="text-[1em]">{{ $item->barcode }}</div>
                             </div>
 

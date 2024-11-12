@@ -92,8 +92,8 @@
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
-                        {{-- <p class="text-[0.8em] text-left font-medium">
-                            {{ $backorderList->itemJoin->item_description }}</p> --}}
+                        <p class="text-[0.8em] text-left font-medium">
+                            {{ $backorderList->backorder_quantity }}</p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
