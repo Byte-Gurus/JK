@@ -11,7 +11,7 @@
                     <p class="text-[1.2em] font-black text-center w-fit">{{ $po_number }}</p>
                 </div>
                 <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    {{-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                         <svg aria-hidden="true" class="w-5 h-5 text-black" fill="currentColor" viewbox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    {{-- <input type="text" wire:model.live.debounce.100ms="search"
+                    <input type="text" wire:model.live.debounce.100ms="search"
                         class="w-1/2 p-3 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                         placeholder="Search an Item" required="" /> --}}
                 </div>
@@ -30,12 +30,12 @@
                         class=" bg-[rgb(255,255,255)] border border-[rgb(53,53,53)] rounded-md text-gray-900 text-sm block w-1/2 px-4 py-2 appearance-auto ">
                         <option value="" selected>Select Supplier</option>
                         @foreach ($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}">
-                            {{ $supplier->company_name }}</option>
+                            <option value="{{ $supplier->id }}">
+                                {{ $supplier->company_name }}</option>
                         @endforeach
 
                         @error('select_supplier')
-                        <span class="font-medium text-red-500 error">{{ $message }}</span>
+                            <span class="font-medium text-red-500 error">{{ $message }}</span>
                         @enderror
                     </select>
                 </div>
@@ -45,13 +45,13 @@
                         Test</button>
                     <div>
                         @if (empty($purchaseQuantities) || empty($reorderLists))
-                        <button type="submit" disabled
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
-                            Save</button>
+                            <button type="submit" disabled
+                                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
+                                Save</button>
                         @else
-                        <button type="submit"
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-lg hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out">
-                            Save</button>
+                            <button type="submit"
+                                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-lg hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out">
+                                Save</button>
                         @endif
                     </div>
                 </div>
@@ -79,13 +79,13 @@
                             <th scope="col" class="py-2 text-left">Barcode</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="px-2 py-2 text-left">Item Name</th>
+                            <th scope="col" class="py-2 text-left ">Item Name</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="px-2 py-2 text-left">Description</th>
+                            <th scope="col" class="py-2 text-left ">Description</th>
 
                             {{-- //* item name --}}
-                            <th scope="col" class="px-2 py-2 text-left">Unit</th>
+                            <th scope="col" class="py-2 text-left ">Unit</th>
 
                             {{-- //* stocks on hand --}}
                             <th scope="col" class="py-2 text-center">Stocks-On-Hand</th>
@@ -97,7 +97,9 @@
                             <th scope="col" class="py-2 text-center text-wrap">Item Reorder Qty</th>
 
                             {{-- //* purchase quantity --}}
-                            <th scope="col" class="py-2 text-center text-wrap">Purchase Qty</th>
+                            @if (in_array('true', $toOrderItems))
+                                <th scope="col" class="py-2 text-center text-wrap">Purchase Qty</th>
+                            @endif
 
                         </tr>
                     </thead>
@@ -154,56 +156,57 @@
                         </tr>
                         @endforeach --}}
                         @foreach ($reorderLists as $index => $reorderList)
-                        <tr
-                            class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
-                            <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                <div class="flex justify-center">
-                                    <input type="checkbox" wire:model.live="toOrderItems.{{$index}}"
-                                        class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
-                                </div>
-                            </th>
-                            <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->barcode }}
-                            </th>
-                            <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->item_name }}
-                            </th>
-                            <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->item_description }}
-                            </th>
-                            <th scope="row" class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->item_unit }}
-                            </th>
-                            <th scope="row"
-                                class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->total_stock_quantity }}
-                            </th>
-                            <th scope="row"
-                                class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->maximum_stock_level }}
-                            </th>
-                            <th scope="row"
-                                class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
-                                {{ $reorderList->reorder_point }}
-                            </th>
+                            <tr
+                                class="border-b hover:bg-gray-100 border-[rgb(207,207,207)] transition ease-in duration-75 index:bg-red-400">
+                                <th scope="row"
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    <div class="flex justify-center">
+                                        <input type="checkbox" wire:model.live="toOrderItems.{{ $index }}"
+                                            class="w-6 h-6 text-red-300 transition-all duration-100 ease-linear rounded-full hover:bg-red-400 hover:text-red-600">
+                                    </div>
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->barcode }}
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->item_name }}
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->item_description }}
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->item_unit }}
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->total_stock_quantity }}
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->maximum_stock_level }}
+                                </th>
+                                <th scope="row"
+                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    {{ $reorderList->reorder_point }}
+                                </th>
 
-                            @if(isset($toOrderItems[$index]) && $toOrderItems[$index])
-                            <th scope="row"
-                                class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
-                                <input type="number" wire:model.live="purchaseQuantities.{{ $index }}" required
-                                    class="bg-gray-100 self-center appearance-none border border-gray-400 text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
+                                <th scope="row"
+                                    class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
+                                    @if (isset($toOrderItems[$index]) && $toOrderItems[$index])
+                                        <input type="number" wire:model.live="purchaseQuantities.{{ $index }}"
+                                            required
+                                            class="bg-gray-100 self-center appearance-none border border-gray-400 text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
 
-                                @error("purchaseQuantities.$index")
-                                <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                @enderror
-                            </th>
-                            @else
-                            @endif
-
-
-                        </tr>
-
-
+                                        @error("purchaseQuantities.$index")
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+                                    @endif
+                                </th>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

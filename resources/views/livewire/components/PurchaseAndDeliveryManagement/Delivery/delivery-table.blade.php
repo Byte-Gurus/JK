@@ -122,12 +122,22 @@
                             class="grid h-full grid-flow-row px-4 overflow-auto leading-none bg-[rgb(231,251,255)] row-span-7">
                             @foreach ($delivery->purchaseJoin->purchaseDetailsJoin as $purchaseDetail)
                                 <div class="flex flex-row items-center justify-between py-2 text-left start">
-                                    <p class="break-words text-md font-light w-[200px]">
-                                        {{ $purchaseDetail->itemsJoin->item_name }} -
-                                        {{ $purchaseDetail->itemsJoin->item_description }} -
-                                        {{ $purchaseDetail->itemsJoin->item_unit }}</p>
-                                    <p class="font-bold text-center">{{ $purchaseDetail->purchase_quantity }}</p>
-
+                                    <div class="flex flex-col ">
+                                        <p class="break-words text-left font-bold text-md w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_name }}
+                                        </p>
+                                        <p class="break-words text-left text-md font-light w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_description }}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="break-words italic text-md font-light w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_unit }}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-center">{{ $purchaseDetail->purchase_quantity }}</p>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
