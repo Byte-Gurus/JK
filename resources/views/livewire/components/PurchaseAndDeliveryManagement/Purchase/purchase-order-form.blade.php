@@ -87,6 +87,9 @@
                             {{-- //* item name --}}
                             <th scope="col" class="py-2 text-left ">Unit</th>
 
+                            {{-- //* item name --}}
+                            <th scope="col" class="py-2 text-left ">Category</th>
+
                             {{-- //* stocks on hand --}}
                             <th scope="col" class="py-2 text-center">Stocks-On-Hand</th>
 

@@ -46,6 +46,8 @@ class RestockForm extends Component
                         'item_id' => $details->item_id,
                         'shelf_life_type' => $details->itemsJoin->shelf_life_type,
                         'item_description' => $details->itemsJoin->item_description,
+                        'item_unit' => $details->itemsJoin->item_unit,
+                        'item_category' => $details->itemsJoin->item_category,
                         'purchased_quantity' => $details->purchase_quantity,
                         'sku_code' => $this->generateSKU(),
                         'isDuplicate' => false,

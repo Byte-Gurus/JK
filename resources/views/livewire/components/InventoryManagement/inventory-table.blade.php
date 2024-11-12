@@ -120,7 +120,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Selling price (₱)</th>
 
                         {{-- //* vat amount --}}
-                        <th scope="col" class="px-4 py-3 text-center">Vat amount </th>
+                        <th scope="col" class="px-4 py-3 text-center">Vat amount (₱)</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
