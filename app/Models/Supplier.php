@@ -27,9 +27,9 @@ class Supplier extends Model
     {
         return $this->belongsTo(Address::class, 'address_id');
     }
-    public function inventoryJoin()
+    public function supplierItemsJoin()
     {
-        return $this->hasMany(Address::class, 'address_id');
+        return $this->hasMany(SupplierItems::class, 'supplier_id');
     }
 
     public function scopeSearch($query, $value)
