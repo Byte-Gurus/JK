@@ -139,7 +139,7 @@ class SalesTransaction extends Component
             ->with([
                 'inventoryJoin' => function ($query) {
                     $query->where('status', 'Available')
-                        ->where('current_stock_quantity', '>', 0); // Ensure only 'Available' inventory is eager-loaded
+                        ->where('current_stock_quantity', '>', 0);
                 },
             ])
             ->get();
@@ -232,12 +232,15 @@ class SalesTransaction extends Component
             $itemQuery = Inventory::with('itemJoin')
                 ->where('item_id', $item_id ?? $itemData->id)
                 ->where('status', 'Available')
+                ->orderByDesc('selling_price')
                 ->whereHas('itemJoin', function ($query) {
                     $query->where('status_id', 1);
-                })->orderBy('selling_price', 'desc')
-                ->first();
+                });
 
-            $item = $itemQuery;
+            // Apply ordering if the item is perishable
+
+            // Get the first item from the query
+            $item = $itemQuery->first();
             // dd($item);
 
             foreach ($this->selectedItems as $index => $selectedItem) {

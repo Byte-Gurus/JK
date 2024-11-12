@@ -35,7 +35,7 @@
 
                                 <p class="text-[1em] font-medium italic">PHP</p>
                                 <p class="text-[1.5em] font-bold ">
-                                    {{ number_format($item->inventoryJoin->selling_price, 2) }}</p>
+                                    {{ number_format($item->highestPricedInventory->selling_price, 2) }}
                             </div>
                         </li>
                     </ul>
