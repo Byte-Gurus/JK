@@ -246,27 +246,30 @@
                                 @endif
                             </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                @if ($InventoryHistory->movement_type === 'Inventory')
-                                    {{ $InventoryHistory->inventoryJoin->itemJoin->item_unit }}
-                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_unit }}
-                                @elseif ($InventoryHistory->movement_type === 'Sales')
-                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_unit ??
-                                        $InventoryHistory->voidTransactionDetailsJoin->transactionDetailsJoin->inventoryJoin->itemJoin->item_unit }}
-                                @endif
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            @if ($InventoryHistory->movement_type === 'Inventory')
+                            {{ $InventoryHistory->inventoryJoin->itemJoin->item_unit }}
+                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_unit }}
+                            @elseif ($InventoryHistory->movement_type === 'Sales')
+                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_unit ??
+                            $InventoryHistory->voidTransactionDetailsJoin->transactionDetailsJoin->inventoryJoin->itemJoin->item_unit
+                            }}
+                            @endif
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                @if ($InventoryHistory->movement_type === 'Inventory')
-                                    {{ $InventoryHistory->inventoryJoin->itemJoin->item_category }}
-                                @elseif ($InventoryHistory->movement_type === 'Adjustment')
-                                    {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_category }}
-                                @elseif ($InventoryHistory->movement_type === 'Sales')
-                                    {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_category ??
-                                        $InventoryHistory->voidTransactionDetailsJoin->transactionDetailsJoin->inventoryJoin->itemJoin->item_category }}
-                                @endif
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            @if ($InventoryHistory->movement_type === 'Inventory')
+                            {{ $InventoryHistory->inventoryJoin->itemJoin->item_category }}
+                            @elseif ($InventoryHistory->movement_type === 'Adjustment')
+                            {{ $InventoryHistory->adjustmentJoin->inventoryJoin->itemJoin->item_category }}
+                            @elseif ($InventoryHistory->movement_type === 'Sales')
+                            {{ $InventoryHistory->transactionDetailsJoin->inventoryJoin->itemJoin->item_category ??
+                            $InventoryHistory->voidTransactionDetailsJoin->transactionDetailsJoin->inventoryJoin->itemJoin->item_category
+                            }}
+                            @endif
+                        </th>
+
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $InventoryHistory->operation }}
