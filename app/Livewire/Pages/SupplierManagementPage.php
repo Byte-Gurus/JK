@@ -23,7 +23,8 @@ class SupplierManagementPage extends Component
 
     protected $listeners = [
         'close-modal' => 'closeModal',
-        'change-sidebar-status' => 'changeSidebarStatus'
+        'change-sidebar-status' => 'changeSidebarStatus',
+        'display-supplier-item-costs' => 'displaySupplierItemCosts',
         ];
 
     public function closeModal(){
@@ -40,7 +41,7 @@ class SupplierManagementPage extends Component
        $this->sidebarStatus = $sidebarOpen;
     }
 
-    public function viewSupplierItemCosts()
+    public function displaySupplierItemCosts()
     {
         $this->showSupplierTable = false;
         $this->showSupplierItemCosts = true;
