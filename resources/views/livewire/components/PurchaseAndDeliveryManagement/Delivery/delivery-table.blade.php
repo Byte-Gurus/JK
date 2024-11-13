@@ -71,7 +71,7 @@
                     <div
                         class="w-full grid grid-row-col grid-rows-12 h-[30vh] transition duration-200 ease-in-out border shadow-md hover:shadow-teal-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(241,255,253)]">
                         <div
-                            class="flex text-[rgb(53,53,53)] h-fit border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
+                            class="flex text-[rgb(53,53,53)] pointer-events-none h-fit border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
                             <div class="flex flex-col">
                                 <p class="text-2xl font-black">{{ $delivery->purchaseJoin->po_number }}</p>
                                 <div class="flex flex-row items-center gap-1">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div
-                            class="grid h-full grid-flow-row px-4 overflow-auto leading-none bg-[rgb(231,251,255)] row-span-7">
+                            class="grid h-full pointer-events-none grid-flow-row px-4 overflow-auto leading-none bg-[rgb(231,251,255)] row-span-7">
                             @foreach ($delivery->purchaseJoin->purchaseDetailsJoin as $purchaseDetail)
                                 <div class="flex flex-row items-center justify-between py-2 text-left start">
                                     <div class="flex flex-col ">
@@ -127,7 +127,7 @@
                         </div>
                         <div class="row-span-2 flex items-center justify-between px-4 border-t border-[rgb(53,53,53)]">
                             <div class="flex flex-row justify-between w-full">
-                                <div class="flex flex-row items-center gap-2">
+                                <div class="flex flex-row items-center gap-2 pointer-events-none">
                                     <div
                                         @if ($delivery->status == 'Delivered') class="bg-green-200 border
                                 w-[16px] h-[16px] border-green-900 rounded-full pointer-events-none"
