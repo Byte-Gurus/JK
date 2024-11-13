@@ -181,7 +181,7 @@
                                             @if (isset($reorderList->lowestSupplier))
                                                 <option value="{{ $reorderList->lowestSupplier->id }}" selected>
                                                     {{ $reorderList->lowestSupplier->company_name }} -
-                                                    ₱{{ number_format($reorderList->supplierItemsJoin->item_cost, 2) }}
+                                                    ₱{{ number_format($reorderList->lowestSupplier->supplierItemsJoin->item_cost, 2) }}
                                                 </option>
                                             @else
                                                 <option value="No Supplier" selected>No supplier for this item
