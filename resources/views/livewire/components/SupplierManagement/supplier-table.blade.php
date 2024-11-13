@@ -190,29 +190,67 @@
                                 {{ $supplier->updated_at->format(' M d Y ') }}
                             </th>
 
-                            <th class="px-4 py-4 text-center text-md text-nowrap">
-                                <div
-                                    class="flex items-center justify-center px-1 py-1 font-medium text-blue-600 rounded-md hover:bg-blue-100 ">
+                            {{-- //* Action --}}
+                            <th class="px-4 py-4 text-center z-99 text-md text-nowrap">
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
 
-                                    <button x-on:click="showModal=true;$wire.getSupplierID({{ $supplier->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
 
-                                        <div class="flex items-center">
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        x-on:click.away="openActions = false"
+                                        class="absolute z-10 overflow-hidden origin-top-right transform right-11 max-w-m w-[240px]">
 
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                </svg>
-                                            </span>
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
+                                    min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
 
-                                            <div>
-                                                <p>Edit</p>
+                                                <button
+                                                    x-on:click="x-on:click="showModal=true;$wire.getSupplierID({{ $supplier->id }})",
+                                                    openActions=!openActions" {{-- wire:click="getStockPrice({{ $inventory->id }})" --}}
+                                                    class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>Edit</div>
+                                                </button>
+
+                                                <div class="w-full border border-[rgb(39,39,39)]"></div>
+
+                                                <button
+                                                    x-on:click="$wire.viewSupplierItemCosts(), openActions = !openActions"
+                                                    {{-- wire:click="getStockID({{ $inventory->id }})" --}}
+                                                    class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-red-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" strokeWidth="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
+                                                        </svg></div>
+                                                    <div>View Supplier Item Costs</div>
+                                                </button>
+
+                                                <div class="w-full border border-[rgb(39,39,39)]"></div>
                                             </div>
-
                                         </div>
-                                    </button>
+                                    </div>
                                 </div>
                             </th>
                         </tr>

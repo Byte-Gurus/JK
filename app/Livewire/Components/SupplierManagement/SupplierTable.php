@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\SupplierManagement;
 
+use App\Livewire\Pages\SupplierManagementPage;
 use App\Models\Supplier;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -89,5 +90,10 @@ class SupplierTable extends Component
     public function refreshFromPusher()
     {
         $this->resetPage();
+    }
+
+    public function viewSupplierItemCosts()
+    {
+        $this->dispatch('display-supplier-item-costs', SupplierManagementPage::class);
     }
 }
