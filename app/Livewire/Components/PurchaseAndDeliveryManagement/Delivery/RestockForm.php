@@ -214,12 +214,12 @@ class RestockForm extends Component
 
                 if ($supplierItem) {
                     // If exists, update the cost
-                    $supplierItem->item_cost = $inventory->selling_price;
+                    $supplierItem->item_cost = $inventory->cost;
                     $supplierItem->save();
                 } else {
                     // If does not exist, create a new record
                     $supplerItems = SupplierItems::create([
-                        'item_cost' => $inventory->selling_price,
+                        'item_cost' => $inventory->cost,
                         'item_id' => $item->id,
                         'supplier_id' => $purchaseDetails->purchaseJoin->supplier_id, // Use array syntax here
                     ]);

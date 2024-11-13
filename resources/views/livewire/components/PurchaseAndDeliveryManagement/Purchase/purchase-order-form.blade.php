@@ -180,7 +180,9 @@
 
                                             @if (isset($reorderList->lowestSupplier))
                                                 <option value="{{ $reorderList->lowestSupplier->id }}" selected>
-                                                    {{ $reorderList->lowestSupplier->company_name }}</option>
+                                                    {{ $reorderList->lowestSupplier->company_name }} -
+                                                    ₱{{ number_format($reorderList->supplierItemsJoin->item_cost, 2) }}
+                                                </option>
                                             @else
                                                 <option value="No Supplier" selected>No supplier for this item
                                                 </option>
@@ -188,9 +190,16 @@
 
 
                                             @foreach ($suppliers as $supplier)
-                                                <option value="{{ $supplier->id }}">
-                                                    {{ $supplier->company_name }}</option>
-                                            @endforeach
+                                            <option value="{{ $supplier->id }}">
+                                                {{ $supplier->company_name }} -
+                                                @if ($supplier->supplierItemsJoin->isNotEmpty() && $supplier->supplierItemsJoin->first()->item_cost > 0)
+                                                    ₱{{ number_format($supplier->supplierItemsJoin->first()->item_cost, 2) }}
+                                                @else
+                                                    No Price yet
+                                                @endif
+                                            </option>
+                                        @endforeach
+
                                         </select>
 
                                         @error("selectSupplier.$index")

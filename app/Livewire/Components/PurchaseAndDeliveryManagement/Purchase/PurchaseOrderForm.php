@@ -35,7 +35,14 @@ class PurchaseOrderForm extends Component
 
     public function render()
     {
-        $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
+        $suppliers = Supplier::with(['supplierItemsJoin' => function ($query) {
+            $query->select('supplier_id', 'item_cost');
+        }])
+        ->select('id', 'company_name')
+        ->where('status_id', '1')
+        ->get();
+
+
 
         if (empty($this->search)) {
             $items = Item::with('inventoryJoin')
@@ -189,8 +196,6 @@ class PurchaseOrderForm extends Component
             foreach ($this->reorderLists as $index => $reorderList) {
                 $this->selectedItems[] = $reorderList;
             }
-
-
         } else {
             $this->toOrderItems = array_fill(0, count($this->reorderLists), false);
             foreach ($this->reorderLists as $index => $reorderList) {
@@ -214,8 +219,6 @@ class PurchaseOrderForm extends Component
         }
 
         $this->toOrderItems = array_fill(0, count($this->reorderLists), false);
-
-
     }
 
     public function updateSelectSupplier($index, $supplierID)
@@ -223,13 +226,9 @@ class PurchaseOrderForm extends Component
 
 
         $this->selectSuppliers[] = $supplierID;
-
     }
 
-    public function updatedPurchaseQuantities($index, $value)
-    {
-
-    }
+    public function updatedPurchaseQuantities($index, $value) {}
 
     public function updatedToOrderItems($state, $index)
     {
@@ -248,7 +247,6 @@ class PurchaseOrderForm extends Component
                 ->values()
                 ->toArray();
         }
-
     }
 
     public function test()
@@ -262,10 +260,7 @@ class PurchaseOrderForm extends Component
     protected function validateForm()
     {
 
-        $rules = [
-
-
-        ];
+        $rules = [];
 
         // Add validation rules for each purchase quantity
         foreach ($this->selectedItems as $index => $selectedItem) {
@@ -281,17 +276,11 @@ class PurchaseOrderForm extends Component
                         'min:1',
                         'lte:' . $maxStockLevel
                     ];
-
-
                 } else {
                     $rules["purchaseQuantities.$index"] = ['required', 'numeric', 'min:1'];
                     $rules["selectSuppliers.$index"] = ['required', 'numeric'];
-
-
                 }
             }
-
-
         }
 
 
@@ -332,11 +321,5 @@ class PurchaseOrderForm extends Component
         $this->dispatch('refresh-table')->to(DeliveryTable::class);
     }
 
-    public function po()
-    {
-
-
-
-    }
-
+    public function po() {}
 }
