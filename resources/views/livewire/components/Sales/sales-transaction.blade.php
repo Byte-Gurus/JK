@@ -423,6 +423,14 @@
 
             {{-- transaction number section --}}
 
+            @if ($imageUrl)
+            <div class="flex flex-col mb-4">
+                <p class="mb-1 font-medium text-gray-900 text-md">Customer Profile</p>
+                <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+            </div>
+            @endif
+
+
             <div class="border border-black"></div>
             <div class="flex flex-col p-2">
                 <p class="text-[1.2em] font-bold">Transaction No.</p>

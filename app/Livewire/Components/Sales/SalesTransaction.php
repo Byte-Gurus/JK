@@ -76,7 +76,8 @@ class SalesTransaction extends Component
     $returnInfo,
     $return_number,
     $transactionDiscount,
-    $excess_amount;
+    $excess_amount,
+     $imageUrl;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -182,6 +183,8 @@ class SalesTransaction extends Component
         $this->credit_limit = $credit->credit_limit;
         $this->discount_type = $credit->customerJoin->customer_type;
         $this->senior_pwd_id = $credit->customerJoin->senior_pwd_id ?? 'N/A';
+
+        $this->imageUrl = $credit->customerJoin->id_picture;
 
         $this->credit_details = [
             'customer_id' => $creditor_id,

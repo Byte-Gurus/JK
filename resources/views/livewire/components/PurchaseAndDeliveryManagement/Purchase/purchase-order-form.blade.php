@@ -192,7 +192,7 @@
                                             @foreach ($suppliers as $supplier)
                                             <option value="{{ $supplier->id }}">
                                                 {{ $supplier->company_name }} -
-                                                @if ($supplier->supplierItemsJoin->isNotEmpty() && $supplier->supplierItemsJoin->first()->item_cost > 0)
+                                                @if ($supplier->supplierItemsJoin->isNotEmpty() && $supplier->supplierItemsJoin->first()->item_cost > 0 && isset($reorderList->lowestSupplier))
                                                     ₱{{ number_format($supplier->supplierItemsJoin->first()->item_cost, 2) }}
                                                 @else
                                                     No Price yet
