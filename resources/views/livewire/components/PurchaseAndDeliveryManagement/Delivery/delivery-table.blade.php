@@ -119,7 +119,8 @@
                                             {{ $purchaseDetail->itemsJoin->item_unit }}
                                         </p>
                                     </div>
-                                    <div>
+                                    <div class="flex gap-1">
+                                        <p class="italic ">x</p>
                                         <p class="font-bold text-center">{{ $purchaseDetail->purchase_quantity }}</p>
                                     </div>
                                 </div>
