@@ -7,7 +7,7 @@
         <div class="flex flex-row items-center justify-between px-4 py-4 ">
 
             {{-- //* search filter --}}
-            <div class="relative w-1/2 mt-1">
+            <div class="relative w-1/2 pr-4 mt-1">
 
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none" viewBox="0 0 24 24"
@@ -18,10 +18,8 @@
                 </div>
 
                 <input type="text" wire:model.live.debounce.100ms="search"
-                    class="w-4/5 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                    class="w-full p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name or Barcode" required="" />
-
-
             </div>
 
 
@@ -54,6 +52,31 @@
                             <option value="Expired">Expired</option>
                             <option value="New Item">New Item</option>
 
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Unit:</label>
+
+                        <select wire:model.live="unitFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                            <option value="0">All</option>
+                            <option value="Kilo">Kilo</option>
+                            <option value="Pack">Pack</option>
+                            <option value="Piece">Piece</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Category:</label>
+
+                        <select wire:model.live="categoryFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                            <option value="0">All</option>
+                            <option value="Frozen">Frozen Supply</option>
+                            <option value="Consumer">Consumer Supply</option>
                         </select>
                     </div>
 
@@ -137,6 +160,10 @@
                         <th scope="col" class="px-4 py-3">Item Name</th>
 
                         <th scope="col" class="px-4 py-3">Description</th>
+
+                        <th scope="col" class="px-4 py-3">Unit</th>
+
+                        <th scope="col" class="px-4 py-3">Category</th>
 
                         <th scope="col" class="px-4 py-3">Operation</th>
 
@@ -223,6 +250,13 @@
                             @endif
                         </th>
 
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $InventoryHistory->inventoryJoin->itemJoin->item_unit }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $InventoryHistory->inventoryJoin->itemJoin->item_category }}
+                        </th>
 
                         <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                             {{ $InventoryHistory->operation }}

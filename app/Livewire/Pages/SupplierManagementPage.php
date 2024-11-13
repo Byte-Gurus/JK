@@ -10,6 +10,10 @@ class SupplierManagementPage extends Component
 
     public $showModal = false;
 
+    public $showSupplierTable = true;
+
+    public $showSupplierItemCosts = false;
+
     public $sidebarStatus;
 
     public function render()
@@ -34,5 +38,17 @@ class SupplierManagementPage extends Component
     public function changeSidebarStatus($sidebarOpen)
     {
        $this->sidebarStatus = $sidebarOpen;
+    }
+
+    public function viewSupplierItemCosts()
+    {
+        $this->showSupplierTable = false;
+        $this->showSupplierItemCosts = true;
+    }
+
+    public function returnToSupplierManagementPage()
+    {
+        $this->showSupplierTable = true;
+        $this->showSupplierItemCosts = false;
     }
 }

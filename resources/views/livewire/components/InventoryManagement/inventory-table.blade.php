@@ -44,6 +44,31 @@
 
                     <div class="flex flex-col gap-1">
 
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Unit:</label>
+
+                        <select wire:model.live="unitFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                            <option value="0">All</option>
+                            <option value="Kilo">Kilo</option>
+                            <option value="Pack">Pack</option>
+                            <option value="Piece">Piece</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+
+                        <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Category:</label>
+
+                        <select wire:model.live="categoryFilter"
+                            class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                            <option value="0">All</option>
+                            <option value="Frozen">Frozen Supply</option>
+                            <option value="Consumer">Consumer Supply</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+
                         <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Status:</label>
 
                         <select wire:model.live="statusFilter"
@@ -97,6 +122,9 @@
 
                         {{-- //* item unit --}}
                         <th scope="col" class="px-4 py-3">Unit</th>
+
+                        {{-- //* item category --}}
+                        <th scope="col" class="px-4 py-3">Category</th>
 
                         {{-- //* supplier name --}}
                         <th scope="col" class="px-4 py-3 text-left">Supplier</th>
@@ -194,6 +222,11 @@
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
                                 {{ $inventory->itemJoin->item_unit }}
+                            </th>
+
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap text-wrap">
+                                {{ $inventory->itemJoin->item_category }}
                             </th>
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">

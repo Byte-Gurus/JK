@@ -181,8 +181,7 @@
                                         <div class="mb-3">
 
                                             <label for="item_unit"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Item Unit
-                                                type</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Unit</label>
 
                                             <select id="item_unit" wire:model="item_unit"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">

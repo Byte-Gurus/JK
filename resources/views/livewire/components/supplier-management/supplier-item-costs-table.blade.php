@@ -29,17 +29,29 @@
 
                 <div class="flex flex-col gap-1">
 
-                    <label class="text-sm font-medium text-gray-900 text-nowrap">Status:</label>
+                    <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Unit:</label>
 
-                    <select wire:model.live="statusFilter"
-                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
+                    <select wire:model.live="unitFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
                         <option value="0">All</option>
-                        <option value="1">Active</option>
-                        <option value="2">Inactive</option>
-
+                        <option value="Kilo">Kilo</option>
+                        <option value="Pack">Pack</option>
+                        <option value="Piece">Piece</option>
                     </select>
-
                 </div>
+
+                <div class="flex flex-col gap-1">
+
+                    <label class="text-sm font-medium text-left text-gray-900 text-nowrap">Category:</label>
+
+                    <select wire:model.live="categoryFilter"
+                        class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-3 ">
+                        <option value="0">All</option>
+                        <option value="Frozen">Frozen Supply</option>
+                        <option value="Consumer">Consumer Supply</option>
+                    </select>
+                </div>
+
                 <div class="flex flex-col gap-1">
 
                     <label class="text-sm font-medium text-gray-900 text-nowrap">Supplier:</label>
@@ -48,9 +60,9 @@
                         class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-lg  block p-2.5 ">
                         <option value="0">All</option>
 
-                        @foreach ($supplierLists as $supplierList)
+                        {{-- @foreach ($supplierLists as $supplierList)
                             <option value="{{ $supplierList->id }}">{{ $supplierList->company_name }}</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </div>
             </div>
@@ -86,14 +98,23 @@
                             </div>
                         </th>
 
-                        {{-- //* contact number --}}
-                        <th scope="col" class="px-4 py-3">Contact No</th>
+                        {{-- //* item barcode --}}
+                        <th scope="col" class="px-4 py-3">Barcode</th>
 
-                        {{-- //* status --}}
-                        <th scope="col" class="px-4 py-3 text-center">Status</th>
+                        {{-- //* item name --}}
+                        <th scope="col" class="px-4 py-3 text-center">Item Name</th>
 
-                        {{-- //* Address --}}
-                        <th scope="col" class="px-4 py-3">Address</th>
+                        {{-- //* item description --}}
+                        <th scope="col" class="px-4 py-3">Item Description</th>
+
+                        {{-- //* category --}}
+                        <th scope="col" class="px-4 py-3">Category</th>
+
+                        {{-- //* unit --}}
+                        <th scope="col" class="px-4 py-3">Unit</th>
+
+                        {{-- //* item cost --}}
+                        <th scope="col" class="px-4 py-3">Item Cost (₱)</th>
 
 
                         {{-- //* created at --} --}}
@@ -114,39 +135,16 @@
 
                             </div>
                         </th>
-
-                        {{-- //* updated at --}}
-                        <th wire:click="sortByColumn('updated_at')" scope="col"
-                            class=" text-nowrap gap-2 px-4 py-3 transition-all duration-100 ease-in-out cursor-pointer hover:bg-[#464646] hover:text-white">
-
-                            <div class="flex items-center">
-
-                                <p>Updated at</p>
-
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                    </svg>
-                                </span>
-                            </div>
-                        </th>
-
-                        {{-- //* action --}}
-                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
-                        </th>
                     </tr>
                 </thead>
 
                 {{-- //* table body --}}
-                <tbody>
+                {{-- <tbody>
 
                     @foreach ($suppliers as $supplier)
                         <tr
                             class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            {{-- //* contact number --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->company_name }}
                             </th>
@@ -155,11 +153,9 @@
                                 {{ $supplier->contact_number }}
                             </th>
 
-                            {{-- //* status --}}
                             <th scope="row"
                                 class="px-4 py-4 font-medium text-center pointer-events-none text-md whitespace-nowrap">
 
-                                {{-- //* active green, if inactive red --}}
                                 <p
                                     @if ($supplier->statusJoin->status_type == 'Active') class=" text-green-900 font-medium  bg-green-100 border border-green-900 text-xs text-center px-2 py-0.5 rounded-sm"
 
@@ -180,12 +176,10 @@
                                 {{ $supplier->addressJoin->street }}
                             </th>
 
-                            {{-- //* created at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->created_at->format(' M d Y ') }}
                             </th>
 
-                            {{-- //* updated at --}}
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->updated_at->format(' M d Y ') }}
                             </th>
@@ -216,7 +210,7 @@
                                 </div>
                             </th>
                         </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -227,7 +221,7 @@
             {{-- //*pagination --}}
             <div class="mx-4 my-2 text-nowrap">
 
-                {{ $suppliers->links() }}
+                {{-- {{ $suppliers->links() }} --}}
 
             </div>
 

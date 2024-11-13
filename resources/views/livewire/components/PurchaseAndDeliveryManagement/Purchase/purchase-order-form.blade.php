@@ -63,7 +63,7 @@
 
                             @if (in_array('true', $toOrderItems))
                                 {{-- //* item reorder quantity --}}
-                                <th scope="col" class="py-2 text-left px-2.5 text-wrap">Best Dealer</th>
+                                <th scope="col" class="px-4 py-2 text-left text-wrap">Best Dealer</th>
                             @endif
 
                             {{-- //* purchase quantity --}}
@@ -171,10 +171,10 @@
                                 </th>
 
                                 <th scope="row"
-                                    class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                    class="py-6 font-medium text-center text-gray-900  text-md whitespace-nowrap">
                                     @if (isset($toOrderItems[$index]) && $toOrderItems[$index])
                                         <select
-                                            class="bg-gray-100 border border-[rgb(53,53,53)] hover:bg-gray-50 transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  p-2.5 "
+                                            class="bg-gray-100 border border-[rgb(53,53,53)] hover:bg-gray-50 transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md p-2.5 "
                                             wire:change="updateSelectSupplier({{ $index }}, $event.target.value)"
                                             wire.model.live="selectSuppliers.{{ $index }}">
 
