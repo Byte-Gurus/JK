@@ -30,75 +30,67 @@
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Date Created</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Item Name</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Status</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Item Description</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Date Delivered</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
-                    <div>
-                        <p class="text-[1em] uppercase text-right font-bold">Item Quantity</p>
-                    </div>
-                </li>
+
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
-            {{-- @if ($isTransactionEmpty)
-                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO STOCKS FOUND AVAILABLE</p>
-            @endif --}}
-            {{-- @foreach ($inventories as $inventory)
-                <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
+            @if (!$deliveries)
+            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DELIVERY FOUND AVAILABLE</p>
+            @endif
+            @if ($deliveries)
+            @foreach ($deliveries as $delivery)
+            <ul class="grid justify-between grid-flow-col grid-cols-4 mx-4 ">
 
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-medium">
-                                {{ $inventory->itemJoin->barcode }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 text-left py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-medium">
-                                {{ $inventory->itemJoin->item_name }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 text-left py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-medium">
-                                {{ $inventory->itemJoin->item_description }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-right font-medium">
-                                {{ $inventory->current_stock_quantity }}
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-            @endforeach --}}
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-medium">
+                            {{ $delivery->created_at }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 text-left py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-medium">
+                            {{ $delivery->status }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 text-left py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-medium">
+                            {{ $delivery->date_delivered }}
+                        </p>
+                    </div>
+                </li>
+
+            </ul>
+            @endforeach
         </div>
         <div class="px-4 py-4">
             <div class="flex flex-row gap-2 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Date & Time Created:</p>
-                {{-- <p>{{ $dateCreated }}</p> --}}
+                <p>{{ $dateCreated }}</p>
                 </p>
             </div>
             <div class="flex flex-row gap-2 py-4 text-nowrap">
                 <p class="text-[1em] font-bold uppercase">Prepared By:</p>
                 <p>
-                    {{-- {{ $createdBy }} --}}
+                    {{ $createdBy }}
                 </p>
             </div>
         </div>
+        @endif
     </div>
 </div>
