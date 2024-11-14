@@ -25,24 +25,24 @@
                                 placeholder="Search an Item" />
                         </div>
                         <div>
-                            @if (empty($purchaseQuantities) || empty($reorderLists) || empty($selectSuppliers) )
-                            <button wire:click="getSelectedItems" type="button" disabled
-                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-gray-400 rounded-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                </svg>
-                            </button>
+                            @if (empty($purchaseQuantities) || empty($reorderLists) || empty($selectSuppliers))
+                                <button wire:click="getSelectedItems" type="button" disabled
+                                    class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-gray-400 rounded-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </button>
                             @else
-                            <button wire:click="getSelectedItems" type="button"
-                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-orange-200 rounded-lg hover:bg-orange-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                </svg>
-                            </button>
+                                <button wire:click="getSelectedItems" type="button"
+                                    class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-orange-200 rounded-lg hover:bg-orange-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                    </svg>
+                                </button>
                             @endif
                         </div>
                     </div>
@@ -66,9 +66,6 @@
                                             class="w-6 h-6 text-red-300 ease-linear rounded-full transition-allduration-100 hover:bg-red-400 hover:text-red-600">
 
                                     </th>
-
-                                    {{-- //* barcode --}}
-                                    <th scope="col" class="py-2 text-left">Barcode</th>
 
                                     {{-- //* item name --}}
                                     <th scope="col" class="py-2 text-left break-words text-wrap">Name</th>
@@ -120,16 +117,21 @@
                                             </div>
                                         </th>
                                         <th scope="row"
-                                            class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorderList->barcode }}
+                                            class="py-6 text-left text-gray-900 text-md whitespace-nowrap">
+                                            <div class="flex flex-col">
+                                                <p class="font-bold break-words w-[100px] text-wrap">
+                                                    {{ $reorderList->item_name }}
+                                                </p>
+                                                <p class="italic font-thin">
+                                                    {{ $reorderList->barcode }}
+                                                </p>
+                                            </div>
                                         </th>
                                         <th scope="row"
-                                            class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorderList->item_name }}
-                                        </th>
-                                        <th scope="row"
-                                            class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
-                                            {{ $reorderList->item_description }}
+                                            class="py-6 font-medium break-words w-[100px] text-wrap text-left text-gray-900 text-md whitespace-nowrap">
+                                            <p class="font-bold break-words w-[100px] text-wrap">
+                                                {{ $reorderList->item_description }}
+                                            </p>
                                         </th>
                                         <th scope="row"
                                             class="py-6 font-medium text-left text-gray-900 text-md whitespace-nowrap">
@@ -192,20 +194,23 @@
                                                 </select>
 
                                                 @error("selectSuppliers.$index")
-                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                    <span
+                                                        class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             @endif
                                         </th>
 
                                         <th scope="row"
-                                            class="flex flex-col items-center justify-center py-6 font-medium text-gray-900 text-clip text-md whitespace-wrap">
+                                            class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+
                                             @if (isset($toOrderItems[$index]) && $toOrderItems[$index])
                                                 <input type="number"
                                                     wire:model.live="purchaseQuantities.{{ $index }}" required
                                                     class="bg-gray-100 self-center hover:bg-gray-50 appearance-none border border-gray-400 text-gray-900 text-sm rounded-md text-center w-2/3 p-2.5">
 
                                                 @error("purchaseQuantities.$index")
-                                                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                    <span
+                                                        class="font-medium text-red-500 error">{{ $message }}</span>
                                                 @enderror
                                             @endif
                                         </th>
@@ -217,10 +222,10 @@
                 </div>
                 <div class="flex flex-col col-span-3">
                     <div class="self-end col-span-1 mb-4">
-                        @if ( empty($orders))
-                        <button type="submit" disabled
-                            class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
-                            Save</button>
+                        @if (empty($orders))
+                            <button type="submit" disabled
+                                class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
+                                Save</button>
                         @else
                             <button type="submit"
                                 class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(197,255,180)] text-[rgb(53,53,53)] border rounded-lg hover:bg-[rgb(158,255,128)] transition-all duration-100 ease-in-out">
@@ -236,71 +241,73 @@
                         <div
                             class="grid grid-flow-row px-4 py-2 italic text-green-800 bg-[rgb(237,255,203)] border-b-8 border-green-700 rounded-t-lg">
                             <p class="font-semibold text-left text-md">Estimated Cost</p>
-                            <p class="text-2xl font-black text-center">₱{{$orderTotal}}</p>
+                            <p class="text-2xl font-black text-center">₱{{ $orderTotal }}</p>
                         </div>
                         <div
-                        class="px-4 py-0.2 m-2 italic text-red-100 hover:shadow-2xl shadow-2xl hover:shadow-red-900 bg-red-400 border-red-700 rounded-md w-fit hover:bg-red-500 hover:text-red-100">
+                            class="px-4 py-0.2 m-2 italic text-red-100 hover:shadow-2xl shadow-2xl hover:shadow-red-900 bg-red-400 border-red-700 rounded-md w-fit hover:bg-red-500 hover:text-red-100">
                             <button type="button" wire:click="removeAll">Delete All</button>
                         </div>
                         <div class="flex flex-col m-2 h-[48vh] no-scrollbar overflow-y-auto ">
                             @foreach ($orders as $index => $order)
-                            <div class="p-2 bg-[rgb(255,248,237)] border border-black rounded-lg">
-                                <div class="relative ">
-                                    <button type="button" class="absolute right-0 p-1 rounded-md hover:bg-red-300 ">
+                                <div class="p-2 bg-[rgb(255,248,237)] border border-black rounded-lg">
+                                    <div class="relative ">
+                                        <button type="button"
+                                            class="absolute right-0 p-1 rounded-md hover:bg-red-300 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="text-red-800 size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="grid grid-flow-col grid-cols-8 gap-2">
+                                        <div class="flex col-span-5 flex-col flex-wrap items-start gap-0.5 mb-2">
+                                            <p class="w-full text-xl font-semibold break-words text-wrap">
+                                                {{ $order['item']->item_name }}
+                                            </p>
+                                            <p class=" w-full font-[400] break-words text-l text-wrap">
+                                                {{ $order['item']->item_description }}
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="col-span-2 items-center py-1 px-3 border h-fit text-center border-black rounded-lg bg-[rgb(255,242,222)]">
+                                            <p class="text-sm italic font-medium">
+                                                {{ $order['item']->item_unit }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-row items-center gap-2 mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="text-red-800 size-6">
+                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                                         </svg>
-                                    </button>
-                                </div>
-                                <div class="grid grid-flow-col grid-cols-8 gap-2">
-                                    <div class="flex col-span-5 flex-col flex-wrap items-start gap-0.5 mb-2">
-                                        <p class="w-full text-xl font-semibold break-words text-wrap">
-                                            {{ $order['item']->item_name }}
-                                        </p>
-                                        <p class=" w-full font-[400] break-words text-l text-wrap">
-                                            {{ $order['item']->item_description }}
+                                        <p class="w-full text-sm italic break-words text-wrap">
+                                            {{ $order['supplier']->company_name }}
                                         </p>
                                     </div>
-                                    <div
-                                        class="col-span-2 items-center py-1 px-3 border h-fit text-center border-black rounded-lg bg-[rgb(255,242,222)]">
-                                        <p class="text-sm italic font-medium">
-                                            {{ $order['item']->item_unit }}
-                                        </p>
-                                    </div>
-                                </div>
 
-                                <div class="flex flex-row items-center gap-2 mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-                                    </svg>
-                                    <p class="w-full text-sm italic break-words text-wrap">
-                                        {{ $order['supplier']->company_name }}
-                                    </p>
-                                </div>
-
-                                <div class="grid grid-flow-col ">
-                                    <div class="flex flex-row items-center justify-start gap-4">
-                                        <p class="font-semibold text-md">
-                                            Quantity
-                                        </p>
-                                        <p class="pb-[1px] pt-[2.4px] text-sm font-medium border-b border-black">
-                                            {{ $order['purchaseQuantities'] }}
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-row items-center justify-start gap-4">
-                                        <p class="font-semibold text-md">
-                                            Cost
-                                        </p>
-                                        <p class="pb-[1px] pt-[2.4px] text-sm font-medium border-b border-black">
-                                            ₱{{ $order['supplierItem']->item_cost ?? 0.0 }}
-                                        </p>
+                                    <div class="grid grid-flow-col ">
+                                        <div class="flex flex-row items-center justify-start gap-4">
+                                            <p class="font-semibold text-md">
+                                                Quantity
+                                            </p>
+                                            <p class="pb-[1px] pt-[2.4px] text-sm font-medium border-b border-black">
+                                                {{ $order['purchaseQuantities'] }}
+                                            </p>
+                                        </div>
+                                        <div class="flex flex-row items-center justify-start gap-4">
+                                            <p class="font-semibold text-md">
+                                                Cost
+                                            </p>
+                                            <p class="pb-[1px] pt-[2.4px] text-sm font-medium border-b border-black">
+                                                ₱{{ $order['supplierItem']->item_cost ?? 0.0 }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
