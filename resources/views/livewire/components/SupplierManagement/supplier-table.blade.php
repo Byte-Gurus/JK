@@ -88,6 +88,7 @@
 
                         {{-- //* contact number --}}
                         <th scope="col" class="px-4 py-3">Contact No</th>
+                        <th scope="col" class="px-4 py-3">Contact Person</th>
 
                         {{-- //* status --}}
                         <th scope="col" class="px-4 py-3 text-center">Status</th>
@@ -153,6 +154,10 @@
 
                             <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
                                 {{ $supplier->contact_number }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplier->contact_person }}
                             </th>
 
                             {{-- //* status --}}

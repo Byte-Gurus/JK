@@ -33,7 +33,7 @@ class SupplierForm extends Component
     public $barangays = null;
 
     //var form inputs
-    public $supplier_id, $company_name, $status, $contact_number, $street;
+    public $supplier_id, $company_name, $status, $contact_number, $street, $contact_person;
 
     //var proxy id para sa supplier id, same sila ng value ng supplier id
     public $proxy_supplier_id;
@@ -100,6 +100,7 @@ class SupplierForm extends Component
 
             $supplier = Supplier::create([
                 'company_name' => $validated['company_name'],
+                'contact_person' => $validated['contact_person'],
                 'contact_number' => $validated['contact_number'],
                 'status_id' => 1,
                 'address_id' => $address->id
@@ -141,6 +142,7 @@ class SupplierForm extends Component
         //* ipasa ang laman ng validated inputs sa models
         $suppliers->company_name = $validated['company_name'];
         $suppliers->contact_number = $validated['contact_number'];
+        $suppliers->contact_number = $validated['contact_person'];
         $suppliers->status_id = $validated['status'];
         $suppliers->province_code = $validated['selectProvince'];
         $suppliers->city_municipality_code = $validated['selectCity'];
@@ -225,6 +227,7 @@ class SupplierForm extends Component
         $this->fill([
             'company_name' => $supplier_details->company_name,
             'contact_number' => $supplier_details->contact_number,
+            'contact_person' => $supplier_details->contact_person,
             'status' => $supplier_details->status_id,
             'selectProvince' => $supplier_details->addressJoin->province_code,
             'selectCity' => $supplier_details->addressJoin->city_municipality_code,
@@ -278,8 +281,8 @@ class SupplierForm extends Component
         $this->street = trim($this->street);
 
         $rules = [
-           'company_name' => 'required|string|max:50|regex:/^[\p{L}\'\-\.0-9]+(?: [\p{L}\'\-\.0-9]+)*$/u',
-
+            'company_name' => 'required|string|max:50|regex:/^[\p{L}\'\-\.0-9]+(?: [\p{L}\'\-\.0-9]+)*$/u',
+            'contact_person' => 'required|string|max:50|regex:/^[\p{L}\'\-\.]+(?: [\p{L}\'\-\.]+)*$/u',
             //? validation sa username paro iignore ang user_id para maupdate ang contact_number kahit unique
             'contact_number' => ['required', 'numeric', 'digits:11', 'regex:/^09[0-9]{9}$/', Rule::unique('suppliers', 'contact_number')->ignore($this->proxy_supplier_id)],
             'selectProvince' => 'required|exists:philippine_provinces,province_code',

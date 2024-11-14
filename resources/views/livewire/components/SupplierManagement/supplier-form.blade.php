@@ -72,6 +72,20 @@
                                     {{-- //* first row --}}
                                     <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
+                                        <div class="mb-3">
+
+                                            <label for="company_name"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Contact person
+                                            </label>
+
+                                            <input type="text" id="contact_person" wire:model="contact_person"
+                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
+                                                placeholder="Company Name" tabindex="2" required />
+
+                                            @error('contact_person')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                         {{-- //* company name --}}
                                         <div class="mb-3">
 
@@ -278,7 +292,7 @@
                                                 <option value="2">Inactive</option>
                                             </select>
                                             @else
-                                            <input type="text" readonly  value="Active"
+                                            <input type="text" readonly value="Active"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             </input>
                                             @endif
