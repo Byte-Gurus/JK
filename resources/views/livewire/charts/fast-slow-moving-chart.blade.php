@@ -1,5 +1,5 @@
 <div class="p-4 border h-full border-[rgb(143,143,143)] shadow-2xl bg-white rounded-lg ">
-    <div class="flex flex-row items-center justify-between ">
+    <div class="flex flex-row items-center justify-between mb-3 ">
         <div>
             <p class="text-2xl text-[rgb(72,72,72)] italic font-black">Fast & Slow Moving Items</p>
         </div>
@@ -8,6 +8,15 @@
                 class="p-2 text-orange-900 transition-all duration-100 ease-in-out bg-orange-200 border border-orange-900 rounded-lg hover:font-bold hover:bg-orange-400 " />
         </div>
     </div>
+
+    <div class="flex content-end justify-end">
+        <select id="selectTypeOfMovingItems" wire:model.live="selectTypeOfMovingItems"
+            class="bg-gray-200 py-2 text-center w-full border border-[rgb(143,143,143)] text-gray-900 hover:bg-gray-300 active:bg-gray-500 duration-100 ease-in-out transition-all text-md font-black rounded-md block">
+            <option value="0">Fast Moving Items</option>
+            <option value="1">Slow Moving Items</option>
+        </select>
+    </div>
+
     <div wire:ignore class="w-full h-full">
         <div>
             <canvas class="w-full h-full" id="fastslowChart"></canvas>
@@ -76,7 +85,7 @@
                             callbacks: {
                                 title: function(tooltipItems) {
                                     let index = tooltipItems[0]
-                                    .dataIndex; // Get the index of the item being hovered
+                                        .dataIndex; // Get the index of the item being hovered
                                     return items[index]; // Show the full item name in the tooltip title
                                 }
                             }
