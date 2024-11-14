@@ -18,7 +18,7 @@
         </div>
         <div class="grid grid-flow-col ">
             <div>
-                <p class="text-[1.4em] self-end font-bold text-right italic m-4 mr-10 uppercase">STOCK-ON-HAND REPORT
+                <p class="text-[1.4em] self-end font-bold text-right italic m-4 mr-10 uppercase">DELIVERY LIST REPORT
                 </p>
             </div>
         </div>
