@@ -168,8 +168,7 @@
                                     <div class="mb-3">
 
                                         <div class="flex flex-row justify-between mb-2 ">
-                                            <label for="id_picture" class="block text-sm font-medium text-gray-900 ">ID
-                                                Picture
+                                            <label for="id_picture" class="block text-sm font-medium text-gray-900 ">Valid ID Picture
                                             </label>
 
                                             @if (!empty($id_picture))
