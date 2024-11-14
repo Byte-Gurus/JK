@@ -327,6 +327,12 @@ class PurchaseOrderForm extends Component
 
     }
 
+    public function removeAll()
+    {
+        $this->orders = [];
+    }
+
+
     public function updatedToOrderItems($state, $index)
     {
         // Get the item from the reorderLists using the index

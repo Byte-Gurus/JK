@@ -27,7 +27,7 @@
                         <div>
                             @if (empty($purchaseQuantities) || empty($reorderLists) || empty($selectSuppliers) )
                             <button wire:click="getSelectedItems" type="button" disabled
-                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-red-200 rounded-lg hover:bg-orange-400">
+                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-red-600 rounded-lg hover:bg-orange-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -240,7 +240,7 @@
                         </div>
                         <div
                             class="grid grid-flow-row px-4 m-2 py-1 italic text-red-800 bg-[rgb(255,203,203)] border-red-700 rounded-lg">
-                            <button>Delete All</button>
+                            <button type="button" wire:click="removeAll">Delete All</button>
                         </div>
                         <div class="flex flex-col m-2 h-[47vh] no-scrollbar overflow-y-auto ">
                             @foreach ($orders as $index => $order)
