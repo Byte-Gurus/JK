@@ -133,7 +133,7 @@
 
 
                         <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->item_cost }}
+                            {{ number_format($supplierItem->item_cost, 2) }}
                         </th>
 
                         <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
