@@ -26,4 +26,16 @@ class SupplierItems extends Model
     {
         return $this->belongsTo(Item::class, 'item_id');
     }
+
+    public function scopeSearch($query, $value)
+    {
+        $value = strtolower($value);
+        $value = trim($value);
+
+        return $query->whereHas('itemjoin', function ($query) use ($value) {
+            $query->whereRaw('LOWER(item_name) LIKE ?', ["%{$value}%"])
+                ->orWhereRaw('LOWER(item_description) LIKE ?', ["%{$value}%"]);
+
+        });
+    }
 }

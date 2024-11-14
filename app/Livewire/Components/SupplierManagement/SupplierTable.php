@@ -81,6 +81,9 @@ class SupplierTable extends Component
         $this->sortColumn = $column; //* gawing global variable ang $column
     }
 
+    public function getSupplierItems($supplierId){
+        $this->dispatch('get-supplier-items', $supplierId)->to(SupplierItemCostsTable::class);
+    }
 
 
     public function refreshTable()
