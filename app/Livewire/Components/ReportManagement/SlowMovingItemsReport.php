@@ -103,22 +103,26 @@ class SlowMovingItemsReport extends Component
 
             $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;
 
-            $this->slowmoving_info[] = [
-                'barcode' => $item->itemJoin->barcode,
-                'item_description' => $item->itemJoin->item_description,
-                'item_name' => $item->itemJoin->item_name,
-                'tsi' => $totalQuantity,
-                'totalStockInQuantity' => $totalStockInQuantity,
-                'weeksWithStockIn' => $weeksWithStockIn,
-                'aii' => $averageStockInPerWeek,
-                'fast_slow' => $fastSlowValue,
+            if ($fastSlowValue <= 3) {
+                $this->slowmoving_info[] = [
+                    'barcode' => $item->itemJoin->barcode,
+                    'item_description' => $item->itemJoin->item_description,
+                    'item_name' => $item->itemJoin->item_name,
+                    'tsi' => $totalQuantity,
+                    'totalStockInQuantity' => $totalStockInQuantity,
+                    'weeksWithStockIn' => $weeksWithStockIn,
+                    'aii' => $averageStockInPerWeek,
+                    'fast_slow' => $fastSlowValue,
 
 
-            ];
+                ];
+
+                usort($this->slowmoving_info, function ($a, $b) {
+                    return $a['fast_slow'] <=> $b['fast_slow'];
+                });
+
+            }
         }
-        usort($this->slowmoving_info, function ($a, $b) {
-            return $a['fast_slow'] <=> $b['fast_slow'];
-        });
 
         $this->date = $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y');
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');

@@ -108,22 +108,30 @@ class FastMovingItemsReport extends Component
 
 
 
-            $this->fastmoving_info[] = [
-                'barcode' => $item->itemJoin->barcode,
-                'item_description' => $item->itemJoin->item_description,
-                'item_name' => $item->itemJoin->item_name,
-                'tsi' => $totalQuantity,
-                'totalStockInQuantity' => $totalStockInQuantity,
-                'weeksWithStockIn' => $weeksWithStockIn,
-                'aii' => $averageStockInPerWeek,
-                'fast_slow' => $fastSlowValue,
+            if ($fastSlowValue >= 3) {
+                $this->fastmoving_info[] = [
+                    'barcode' => $item->itemJoin->barcode,
+                    'item_description' => $item->itemJoin->item_description,
+                    'item_name' => $item->itemJoin->item_name,
+                    'tsi' => $totalQuantity,
+                    'totalStockInQuantity' => $totalStockInQuantity,
+                    'weeksWithStockIn' => $weeksWithStockIn,
+                    'aii' => $averageStockInPerWeek,
+                    'fast_slow' => $fastSlowValue,
 
 
-            ];
+                ];
+
+                usort($this->fastmoving_info, function ($a, $b) {
+                    return $b['fast_slow'] <=> $a['fast_slow'];
+                });
+            }
+
+
+
+
         }
-        usort($this->fastmoving_info, function ($a, $b) {
-            return $b['fast_slow'] <=> $a['fast_slow'];
-        });
+
         // $a['fast_slow'] <=> $b['fast_slow']
         $this->date = $startOfMonth->format('M d Y') . ' - ' . $endOfMonth->format('M d Y');
         $this->dateCreated = Carbon::now()->format('M d Y h:i A');
