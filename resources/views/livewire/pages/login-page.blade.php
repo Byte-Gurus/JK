@@ -12,7 +12,7 @@
         <div
             class="bg-white flex transition-all duration-100 ease-in-out border-2 border-[rgb(22,22,22)] rounded-br-xl rounded-tr-xl p-10 w-[520px]">
             <form wire:submit.prevent="authenticate" class="flex flex-col justify-center w-full flex-nowrap text-nowrap">
-                
+
                 <div class="flex flex-col mb-8">
                     <p class="font-bold pointer-events-none text-[3em]">
                         Sign In
@@ -89,6 +89,7 @@
                     <span class="mt-4 font-medium text-center text-red-500 text-md">{{ $message }}</span>
                 @enderror
             </form>
+            
         </div>
     </div>
 </div>

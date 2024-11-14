@@ -10,6 +10,7 @@
         "asdh/laravel-flatpickr": "^2.2",
         "aws/aws-sdk-php": "^3.322",
         "barryvdh/laravel-dompdf": "^3.0",
+        "biscolab/laravel-recaptcha": "^6.1",
         "fakerphp/faker": "^1.23",
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.9",
