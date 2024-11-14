@@ -27,7 +27,7 @@
                         <div>
                             @if (empty($purchaseQuantities) || empty($reorderLists) || empty($selectSuppliers) )
                             <button wire:click="getSelectedItems" type="button" disabled
-                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-red-600 rounded-lg hover:bg-orange-400">
+                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-gray-400 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -236,17 +236,17 @@
                         <div
                             class="grid grid-flow-row px-4 py-2 italic text-green-800 bg-[rgb(237,255,203)] border-b-8 border-green-700 rounded-t-lg">
                             <p class="font-semibold text-left text-md">Estimated Cost</p>
-                            <p class="text-2xl font-black text-center">₱g{{$orderTotal}}</p>
+                            <p class="text-2xl font-black text-center">₱{{$orderTotal}}</p>
                         </div>
                         <div
-                            class="grid grid-flow-row px-4 m-2 py-1 italic text-red-800 bg-[rgb(255,203,203)] border-red-700 rounded-lg">
+                        class="px-4 py-0.2 m-2 italic text-red-100 hover:shadow-2xl shadow-2xl hover:shadow-red-900 bg-red-400 border-red-700 rounded-md w-fit hover:bg-red-500 hover:text-red-100">
                             <button type="button" wire:click="removeAll">Delete All</button>
                         </div>
-                        <div class="flex flex-col m-2 h-[47vh] no-scrollbar overflow-y-auto ">
+                        <div class="flex flex-col m-2 h-[48vh] no-scrollbar overflow-y-auto ">
                             @foreach ($orders as $index => $order)
                             <div class="p-2 bg-[rgb(255,248,237)] border border-black rounded-lg">
                                 <div class="relative ">
-                                    <button class="absolute right-0 p-1 rounded-md hover:bg-red-300 ">
+                                    <button type="button" class="absolute right-0 p-1 rounded-md hover:bg-red-300 ">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="text-red-800 size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
