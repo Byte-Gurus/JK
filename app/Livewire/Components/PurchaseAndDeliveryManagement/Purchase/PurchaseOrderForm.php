@@ -27,15 +27,64 @@ class PurchaseOrderForm extends Component
 
 
 
-    public $items, $selectAll, $isAnyChecked;
+    public $items, $selectAll, $isAnyChecked, $orderTotal = 0.00;
 
-    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [], $selectSuppliers = [], $po_numbers = [], $lowestSupplier = [], $orders = [];
+    public $reorderLists = [], $toOrderItems = [], $selectedItems = [], $purchaseQuantities = [], $selectSuppliers = [], $po_numbers = [], $lowestSupplier = [], $orders = [], $clickRemove = [];
     public $search = '';
 
 
     public function render()
     {
         $suppliers = Supplier::select('id', 'company_name')->where('status_id', '1')->get();
+
+        $this->isAnyChecked = in_array(true, $this->toOrderItems, true);
+
+
+        $orderItemIds = array_map(function ($order) {
+            return $order['item']->id;
+        }, $this->orders);
+
+        $this->items = Item::with('inventoryJoin')
+            ->withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
+            ->orderBy('total_stock_quantity', 'asc')
+            ->whereNotIn('id', $orderItemIds)
+            ->get();
+
+        $this->reorderLists = [];
+
+        if (empty($this->search)) {
+
+            foreach ($this->items as $item) {
+                // Only include items with low stock quantity
+                if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
+                    $this->reorderLists[] = $item;
+                }
+            }
+        } else {
+            $this->items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
+                ->whereRaw('LOWER(item_name) like ?', ["%{$this->search}%"])
+                ->orWhereRaw('LOWER(item_description) like ?', ["%{$this->search}%"])
+                ->get();
+
+
+            $this->reorderLists = [];
+
+            foreach ($this->items as $item) {
+                // Check if item is already in orders
+                $itemInOrders = false;
+                foreach ($this->orders as $order) {
+                    if ($order['item']->id == $item->id) {
+                        $itemInOrders = true;
+                        break;
+                    }
+                }
+
+                // Ensure the item matches your criteria and is not in orders
+                if ($item->inventoryJoin->isNotEmpty() && !$itemInOrders) {
+                    $this->reorderLists[] = $item;
+                }
+            }
+        }
 
         foreach ($this->reorderLists as $index => $reorderList) {
             // Retrieve the supplier with the lowest cost
@@ -55,6 +104,25 @@ class PurchaseOrderForm extends Component
                 $this->lowestSupplier[$index] = $reorderList->lowestSupplier;
             }
         }
+
+
+        foreach ($this->orders as $index => $order) {
+
+            $this->orderTotal = 0;
+
+            if ($order['supplierItem'] !== null) {
+                // Assuming supplierItem has a property like 'item_cost' to sum
+                $itemCost = $order['supplierItem']->item_cost ?? 0; // Replace 'item_cost' with the actual property
+                $purchaseQuantity = $order['purchaseQuantities'];
+                $this->orderTotal += $itemCost * $purchaseQuantity;
+            } else {
+                // Handle cases where supplierItem is null
+                // You might want to log this or handle it in some way
+                // For now, we'll just skip it
+                continue;
+            }
+        }
+
         return view('livewire.components.PurchaseAndDeliveryManagement.Purchase.purchase-order-form', [
             'suppliers' => $suppliers,
             'reorderLists' => $this->reorderLists,
@@ -186,19 +254,8 @@ class PurchaseOrderForm extends Component
 
     public function updatedSearch()
     {
-        $items = Item::withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
-            ->where('item_name', 'like', '%' . $this->search . '%')
-            ->get();
 
-        $this->reorderLists = [];
 
-        foreach ($items as $item) {
-            if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
-                $this->reorderLists[] = $item;
-            }
-        }
-
-        // $this->toOrderItems = array_fill(0, count($this->reorderLists), false);
 
     }
 
@@ -221,7 +278,6 @@ class PurchaseOrderForm extends Component
             ];
 
 
-            unset($this->reorderLists[$index]);
             unset($this->selectedItems[$index]);
             unset($this->toOrderItems[$index]);
             unset($this->purchaseQuantities[$index]);
@@ -229,7 +285,6 @@ class PurchaseOrderForm extends Component
             unset($this->po_numbers[$index]);
         }
 
-        $this->reorderLists = array_values($this->reorderLists);
         $this->toOrderItems = array_values($this->toOrderItems);
         $this->selectedItems = array_values($this->selectedItems);
         $this->purchaseQuantities = array_values($this->purchaseQuantities);
@@ -291,7 +346,8 @@ class PurchaseOrderForm extends Component
             'selectSuppliers' => $this->selectSuppliers,
             'purchaseQuantities' => $this->purchaseQuantities,
             'reorderLists' => $this->reorderLists,
-            'lowestSupplier' => $this->lowestSupplier
+            'lowestSupplier' => $this->lowestSupplier,
+            'orders' => $this->orders
         ]);
     }
 
@@ -332,9 +388,23 @@ class PurchaseOrderForm extends Component
         }
 
 
-
         return $this->validate($rules);
     }
+
+
+    public function removeItem($index)
+    {
+        if (isset($this->orders[$index]['supplierItem']) && $this->orders[$index]['supplierItem'] !== null) {
+            $itemCost = $this->orders[$index]['supplierItem']->item_cost ?? 0; // Replace 'item_cost' with the actual property
+            $purchaseQuantity = $this->orders[$index]['purchaseQuantities'];
+            $this->orderTotal -= $itemCost * $purchaseQuantity;
+        }
+
+        unset($this->orders[$index]);
+
+        $this->orders = array_values($this->orders);
+    }
+
 
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
@@ -373,28 +443,7 @@ class PurchaseOrderForm extends Component
     public function po()
     {
 
-        $this->isAnyChecked = in_array(true, $this->toOrderItems, true);
 
-        if (empty($this->search)) {
-            $this->items = Item::with('inventoryJoin')
-                ->withSum('inventoryJoin as total_stock_quantity', 'current_stock_quantity')
-                ->addSelect([
-                    'lowest_item_cost' => SupplierItems::select('item_cost')
-                        ->whereColumn('supplier_items.item_id', 'items.id')
-                        ->orderBy('item_cost', 'asc')
-                        ->limit(1)
-                ])
-                ->get();
-
-            $this->reorderLists = [];
-
-            foreach ($this->items as $item) {
-                // Only include items with low stock quantity
-                if ($item->inventoryJoin->isNotEmpty() && $item->total_stock_quantity <= $item->reorder_point) {
-                    $this->reorderLists[] = $item;
-                }
-            }
-        }
 
         // Loop through reorderLists and assign the supplier with the lowest cost
 

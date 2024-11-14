@@ -25,6 +25,16 @@
                                 placeholder="Search an Item" required="" />f
                         </div>
                         <div>
+                            @if (empty($purchaseQuantities) || empty($reorderLists) || empty($selectSuppliers) )
+                            <button wire:click="getSelectedItems" type="button" disabled
+                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-orange-200 rounded-lg hover:bg-orange-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </button>
+                            @else
                             <button wire:click="getSelectedItems" type="button"
                                 class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-orange-200 rounded-lg hover:bg-orange-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -33,6 +43,7 @@
                                         d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                 </svg>
                             </button>
+                            @endif
                         </div>
                     </div>
                     {{-- //* tablea area --}}
@@ -228,10 +239,13 @@
                         <div
                             class="grid grid-flow-row px-4 py-2 italic text-green-800 bg-[rgb(237,255,203)] border-b-8 border-green-700 rounded-lg">
                             <p class="font-semibold text-left text-md">Estimated Cost</p>
-                            <p class="text-2xl font-black text-center">₱20.00</p>
+                            <p class="text-2xl font-black text-center">{{$orderTotal}}</p>
                         </div>
                         @foreach ($orders as $index => $order)
-                        <div class="px-4 my-2">
+                        <button type="button" wire.model="clickRemove.{{$index}}" wire:click="removeItem({{$index}})">
+                            remove
+                        </button>
+                        <div class=" px-4 my-2">
                             {{$order['item']->item_name}}
                             {{$order['item']->item_description}}
                             {{$order['item']->item_unit}}
