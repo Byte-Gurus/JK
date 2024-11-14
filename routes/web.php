@@ -10,6 +10,7 @@ use App\Livewire\Components\ReportManagement\BackorderedItemsReport;
 use App\Livewire\Components\ReportManagement\CustomerCreditListReport;
 use App\Livewire\Components\ReportManagement\DailySalesReport;
 use App\Livewire\Components\ReportManagement\DamagedItemsReport;
+use App\Livewire\Components\ReportManagement\DeliveryListReport;
 use App\Livewire\Components\ReportManagement\ExpiredItemsReport;
 use App\Livewire\Components\ReportManagement\FastMovingItemsReport;
 use App\Livewire\Components\ReportManagement\MonthlySalesReport;
@@ -166,6 +167,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         // Print Purchase Order Details
 
         Route::get('admin/ReportManagement/printPurchaseOrderDetails', PrintPurchaseOrderDetails::class)->name('printpurchaseorderdetails.sales.report');
+
+        // Print Delivery List Report
+
+        Route::get('admin/ReportManagement/deliveryListReport', DeliveryListReport::class)->name('deliverylist.sales.report');
 
     });
 });

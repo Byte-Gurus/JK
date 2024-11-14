@@ -323,12 +323,12 @@
 
     {{-- Delivery Lists --}}
 
-    {{-- <div x-show="showDeliveryListReport" x-data="{ showDeliveryListReport: @entangle('showDeliveryListReport') }">
+    <div x-show="showDeliveryListReport" x-data="{ showDeliveryListReport: @entangle('showDeliveryListReport') }">
         @livewire('components.ReportManagement.delivery-list-report')
     </div>
 
     <div x-show="showDeliveryListReportDatePickerModal" x-data="{ showDeliveryListReportDatePickerModal: @entangle('showDeliveryListReportDatePickerModal') }">
         @livewire('components.ReportManagement.delivery-list-report-date-picker-modal')
-    </div> --}}
+    </div>
 
 </div>

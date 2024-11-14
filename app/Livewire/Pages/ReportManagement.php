@@ -15,9 +15,9 @@ class ReportManagement extends Component
 
     public $reportSelected = false;
 
-    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal,$showSlowMovingItemsReportDatePickerModal,$showFastMovingItemsReportDatePickerModal, $showSalesReturnReportDatePickerModal, $showCustomerCreditListReportDatePickerModal, $showExpiredItemsReportDatePickerModal, $showDamagedItemsReportDatePickerModal, $showVoidedTransactionsReportDatePickerModal = false;
+    public $showDailySalesReportDatePickerModal,$showWeeklySalesReportDatePickerModal,$showMonthlySalesReportDatePickerModal,$showYearlySalesReportDatePickerModal,$showSlowMovingItemsReportDatePickerModal,$showFastMovingItemsReportDatePickerModal, $showSalesReturnReportDatePickerModal, $showCustomerCreditListReportDatePickerModal, $showExpiredItemsReportDatePickerModal, $showDamagedItemsReportDatePickerModal, $showVoidedTransactionsReportDatePickerModal, $showDeliveryListReportDatePickerModal = false;
 
-    public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport, $showDamagedItemsReport, $showVoidedTransactionsReport = false;
+    public $showDailySalesReport, $showWeeklySalesReport, $showMonthlySalesReport, $showYearlySalesReport, $showSalesReturnReport, $showCustomerCreditListReport, $showStockonhandReport, $showSlowMovingItemsReport, $showFastMovingItemsReport, $showReorderListReport, $showBackorderedItemsReport, $showExpiredItemsReport, $showDamagedItemsReport, $showVoidedTransactionsReport, $showDeliveryListReport = false;
 
     public function render()
     {
@@ -53,7 +53,9 @@ class ReportManagement extends Component
         'display-expired-items-report' => 'displayExpiredItemsReport',
         'display-voided-transactions-report' => 'displayVoidedTransactionsReport',
         'display-damaged-items-report' => 'displayDamagedItemsReport',
-        'close-sales-return-report-date-picker-modal' => 'closeSalesReturnReportDatePickerModal'
+        'close-sales-return-report-date-picker-modal' => 'closeSalesReturnReportDatePickerModal',
+        'display-delivery-list-report' => 'displayDeliveryListReport',
+        'close-delivery-list-report-date-picker-modal' => 'closeDeliveryListReportDatePickerModal',
     ];
 
 
@@ -168,6 +170,7 @@ class ReportManagement extends Component
         $this->showExpiredItemsReportDatePickerModal = false;
         $this->showDamagedItemsReportDatePickerModal = false;
         $this->showVoidedTransactionsReportDatePickerModal = false;
+        $this->showDeliveryListReportDatePickerModal = false;
     }
 
     // Daily Sales Report
@@ -396,5 +399,21 @@ class ReportManagement extends Component
     public function closeDamagedItemsReportDatePickerModal()
     {
         $this->showDamagedItemsReportDatePickerModal = false;
+    }
+
+    public function displayDeliveryListReportDatePickerModal()
+    {
+        $this->showDeliveryListReportDatePickerModal = true;
+    }
+
+    public function displayDeliveryListReport()
+    {
+        $this->showDeliveryListReport = true;
+        $this->hideExtras();
+    }
+
+    public function closeDeliveryListReportDatePickerModal()
+    {
+        $this->showDeliveryListReportDatePickerModal = false;
     }
 }
