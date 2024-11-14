@@ -142,74 +142,87 @@ class PurchaseOrderForm extends Component
 
     public function create() //* create process
     {
-        $validated = $this->validateForm();
-
 
         $this->confirm('Do you want to create this purchase order?', [
             'onConfirmed' => 'createConfirmed', //* call the createconfirmed method
-            'inputAttributes' => $validated, //* pass the user to the confirmed method, as a form of array
         ]);
     }
 
-    public function createConfirmed($data) //* confirmation process ng create
+    public function createConfirmed()
     {
-
-        $validated = $data['inputAttributes'];
 
         DB::beginTransaction();
 
         try {
+            // Group items by supplier and combine quantities
+            $groupedItemsBySupplier = [];
 
+            // Loop through orders to group items by supplier
+            foreach ($this->orders as $order) {
+                $supplierId = $order['supplier']->id;  // Assuming the supplier object is in the 'supplier' key
+                $itemId = $order['item']->id;  // Assuming the item object is in the 'item' key
+                $quantity = $order['purchaseQuantities'];  // Assuming 'purchaseQuantities' holds the quantity
 
-
-
-
-            foreach ($this->selectSuppliers as $index => $selectSupplier) {
-
-                $poNumber = $this->generatePurchaseOrderNumber();
-
-                $existingPurchaseOrder = Purchase::where('po_number', $poNumber)->first();
-
-                if ($existingPurchaseOrder) {
-                    $this->alert('error', 'Purchase order number already exists.');
-                    return; // Exit if it exists
+                // Initialize the supplier group if it doesn't exist
+                if (!isset($groupedItemsBySupplier[$supplierId])) {
+                    $groupedItemsBySupplier[$supplierId] = [];
                 }
 
+                // If the item already exists for this supplier, add to quantity
+                if (isset($groupedItemsBySupplier[$supplierId][$itemId])) {
+                    $groupedItemsBySupplier[$supplierId][$itemId]['quantity'] += $quantity;
+                } else {
+                    // Otherwise, add the item with its quantity
+                    $groupedItemsBySupplier[$supplierId][$itemId] = [
+                        'item' => $order['item'],
+                        'quantity' => $quantity,
+                    ];
+                }
+            }
+
+            // Process each supplier's grouped items
+            foreach ($groupedItemsBySupplier as $supplierId => $items) {
+                $poNumber = $this->generatePurchaseOrderNumber();
+
+                // Ensure the purchase order number is unique
+                $existingPurchaseOrder = Purchase::where('po_number', $poNumber)->first();
+                if ($existingPurchaseOrder) {
+                    $this->alert('error', 'Purchase order number already exists.');
+                    return;
+                }
+
+                // Create the purchase order for the supplier
                 $purchase_order = Purchase::create([
                     'po_number' => $poNumber,
-                    'supplier_id' => $selectSupplier,
+                    'supplier_id' => $supplierId,
                     'user_id' => Auth::id(),
                 ]);
 
-
+                // Create the delivery for the purchase order
                 $delivery = Delivery::create([
                     'status' => "In Progress",
                     'date_delivered' => "N/A",
                     'purchase_id' => $purchase_order->id
                 ]);
 
+                // Create purchase details for each item
+                foreach ($items as $itemData) {
+                    $selectedItem = $itemData['item'];
+                    $combinedQuantity = $itemData['quantity'];
 
-                foreach ($this->selectedItems as $itemIndex => $selectedItem) {
-                    // Only create PurchaseDetails if the item matches the current supplier index
-                    if (isset($this->selectSuppliers[$itemIndex]) && $this->selectSuppliers[$itemIndex] == $selectSupplier) {
-                        PurchaseDetails::create([
-                            'purchase_id' => $purchase_order->id,
-                            'item_id' => $selectedItem['id'], // Use item_id from selected items
-                            'po_number' => $purchase_order->po_number,
-                            'purchase_quantity' => $this->purchaseQuantities[$itemIndex],
-                        ]);
-                    }
+                    // Create purchase details with the combined quantity
+                    PurchaseDetails::create([
+                        'purchase_id' => $purchase_order->id,
+                        'item_id' => $selectedItem->id,  // Use item_id from selected items
+                        'po_number' => $purchase_order->po_number,
+                        'purchase_quantity' => $combinedQuantity,
+                    ]);
                 }
             }
 
-
-
-
-
-
+            // Log the creation
             $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
-
-            $log = Log::create([
+            Log::create([
                 'user_id' => Auth::user()->id,
                 'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Created a purchase order',
                 'action' => 'PO Create'
@@ -227,9 +240,11 @@ class PurchaseOrderForm extends Component
             // Rollback the transaction if something fails
             dump($e);
             DB::rollback();
-            $this->alert('error', 'An error occurred while creating the purchase order, please refresh the page ');
+            $this->alert('error', 'An error occurred while creating the purchase order, please refresh the page');
         }
     }
+
+
 
     public function updatedSelectAll()
     {
@@ -261,6 +276,8 @@ class PurchaseOrderForm extends Component
 
     public function getSelectedItems()
     {
+
+        $validated = $this->validateForm();
 
         foreach ($this->selectedItems as $index => $selectedItem) {
 
@@ -409,7 +426,7 @@ class PurchaseOrderForm extends Component
     private function resetForm() //*tanggalin ang laman ng input pati $item_id value
     {
 
-        $this->reset(['po_numbers', 'items', 'selectAll', 'selectSuppliers', 'reorderLists', 'toOrderItems', 'selectedItems', 'purchaseQuantities', 'search', 'lowestSupplier']);
+        $this->reset(['po_numbers', 'items', 'selectAll', 'selectSuppliers', 'reorderLists', 'toOrderItems', 'selectedItems', 'purchaseQuantities', 'search', 'lowestSupplier', 'orders']);
     }
 
     public function closeModal() //* close ang modal after confirmation

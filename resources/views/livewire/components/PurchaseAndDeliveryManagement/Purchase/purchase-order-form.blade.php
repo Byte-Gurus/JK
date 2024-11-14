@@ -22,12 +22,12 @@
                             <input type="text" wire:model.live.debounce.100ms="search" {{ $isAnyChecked ? 'disabled'
                                 : '' }}
                                 class="w-1/2 px-4 py-2 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-md cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
-                                placeholder="Search an Item" required="" />f
+                                placeholder="Search an Item" />f
                         </div>
                         <div>
                             @if (empty($purchaseQuantities) || empty($reorderLists) || empty($selectSuppliers) )
                             <button wire:click="getSelectedItems" type="button" disabled
-                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-orange-200 rounded-lg hover:bg-orange-400">
+                                class="flex flex-row items-center px-8 py-2 transition-all duration-100 ease-in-out bg-red-200 rounded-lg hover:bg-orange-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -218,7 +218,7 @@
                 </div>
                 <div class="flex flex-col col-span-3 ">
                     <div class="self-end col-span-1 mb-4">
-                        @if (empty($purchaseQuantities) || empty($reorderLists))
+                        @if ( empty($orders))
                         <button type="submit" disabled
                             class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(212,212,212)] text-[rgb(53,53,53)] border rounded-lg ">
                             Save</button>
