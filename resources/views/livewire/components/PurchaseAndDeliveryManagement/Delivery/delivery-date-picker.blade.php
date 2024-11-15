@@ -36,28 +36,11 @@
                     @error('date')
                         <span class="font-medium text-red-500 error">{{ $message }}</span>
                     @enderror
-                    <div class="flex flex-row self-end gap-2 mb-6">
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <button type="button" wire:click="resetFormWhenClosed"
-                                class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
-                                Cancel</button>
-                        </div>
-                        <div>
-                            @if ($date && $delivery_receipt)
-                                <button type="button" wire:click="changeDate()"
-                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Set</button>
-                            @else
-                                <button type="button" wire:click="changeDate" disabled
-                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Set</button>
-                            @endif
 
-                        </div>
-                    </div>
                     <div class="mb-3">
 
-                        <div class="flex flex-row justify-between mb-2 ">
-                            <label for="id_picture" class="block text-sm font-medium text-gray-900 ">Valid ID Picture
+                        <div class="flex flex-row justify-between w-full mb-2 ">
+                            <label for="id_picture" class="block text-sm font-medium text-white">Delivery Receipt
                             </label>
 
                             @if (!empty($delivery_receipt))
@@ -90,6 +73,24 @@
                         @enderror
                     </div>
 
+                    <div class="flex flex-row self-end gap-2 mb-6">
+                        <div>
+                            {{-- //* clear all button for create --}}
+                            <button type="button" wire:click="resetFormWhenClosed"
+                                class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
+                                Cancel</button>
+                        </div>
+                        <div>
+                            @if ($date && $delivery_receipt)
+                                <button type="button" wire:click="changeDate()"
+                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Set</button>
+                            @else
+                                <button type="button" wire:click="changeDate" disabled
+                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Set</button>
+                            @endif
+
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
