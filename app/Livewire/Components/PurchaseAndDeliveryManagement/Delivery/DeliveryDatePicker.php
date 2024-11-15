@@ -207,4 +207,10 @@ class DeliveryDatePicker extends Component
             'date'
         ]);
     }
+
+
+    public function removeSelectedPicture()
+    {
+        $this->reset(['delivery_receipt']);
+    }
 }
