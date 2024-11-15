@@ -48,32 +48,32 @@
 
             <div cwlass="w-full my-4 border-b border-black"> </div>
             @if (!$deliveries)
-            <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DELIVERY FOUND AVAILABLE</p>
+                <p class="w-full my-8 text-center text-[2em] font-black opacity-30">NO DELIVERY FOUND AVAILABLE</p>
             @else
-            @foreach ($deliveries as $delivery)
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
-                <li class="col-span-1 py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-left font-medium">
-                            {{ $delivery->created_at->format('M d Y') }}</p>
-                    </div>
-                </li>
-                <li class="col-span-1 text-left py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-left font-medium">
-                            {{ $delivery->status }}
-                        </p>
-                    </div>
-                </li>
-                <li class="col-span-1 text-left py-[3px]">
-                    <div>
-                        <p class="text-[1em] text-left font-medium">
-                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('M d Y') }}
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            @endforeach
+                @foreach ($deliveries as $delivery)
+                    <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+                        <li class="col-span-1 py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ $delivery->created_at->format('M d Y') }}</p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-left py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ $delivery->status }}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="col-span-1 text-left py-[3px]">
+                            <div>
+                                <p class="text-[1em] text-left font-medium">
+                                    {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('M d Y') }}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                @endforeach
             @endif
         </div>
         <div class="px-4 py-4">
