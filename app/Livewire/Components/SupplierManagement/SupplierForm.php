@@ -252,7 +252,7 @@ class SupplierForm extends Component
 
     private function resetForm() //*tanggalin ang laman ng input pati $supplier_id value
     {
-        $this->reset(['company_name', 'contact_number', 'status', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'supplier_id']);
+        $this->reset(['contact_person','company_name', 'contact_number', 'status', 'selectProvince', 'selectCity', 'selectBrgy', 'street', 'supplier_id']);
     }
 
     //* pag iclose ang form using close hindi natatanggal ang validation, this method resets form input and validation
