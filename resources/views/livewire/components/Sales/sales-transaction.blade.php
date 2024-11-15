@@ -450,9 +450,20 @@
 
                 <div class="flex flex-col p-2">
                     <div>
-                        <label for="credit_id" class="block mb-1 font-medium text-[1.2em] text-gray-900 ">Customer
-                            Name
-                        </label>
+                        <div class="flex flex-row justify-between">
+                            <label for="credit_id" class="block mb-1 font-medium text-[1.2em] text-gray-900 ">Customer
+                                Name
+                            </label>
+                            @if (!empty($credit_no))
+                                <div wire:click='clearSelectedCustomerName()' class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        strokeWidth={1.5} stroke="currentColor" class="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                </div>
+                            @endif
+                        </div>
 
                         @if (empty($credit_no))
                             <div class="relative w-1/2">
@@ -479,7 +490,7 @@
                                                             ' ' .
                                                             ($credit_customer->middlename ?? '') .
                                                             '
-                                                                                                                                                                                                                                                                                                                                ' .
+                                                                                                                                                                                                                                                                                                                                                                                        ' .
                                                             $credit_customer->lastname }}
                                                     </p>
                                                     @foreach ($credit_customer->creditJoin as $credit)
@@ -500,29 +511,20 @@
 
                                 <div class="flex flex-row items-center justify-between">
                                     <div class="flex flex-col items-start">
-                                        <div class="flex flex-col gap-1">
+                                        <div class="flex flex-col">
                                             <p class=" font-black text-[1.2em]">{{ $creditor_name }}</p>
-                                            <p class=" font-thin text-[0.6em] italic">{{ $credit_no }}</p>
+                                            <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div wire:click='clearSelectedCustomerName()'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                class="size-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round"
-                                                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                            </svg>
+                                    @if ($imageUrl)
+                                        <div class="flex flex-col mb-4">
+                                            <p class="mb-1 font-medium text-gray-900 text-md">Customer Profile</p>
+                                            <img src="{{ $imageUrl }}" alt="Customer ID Picture"
+                                                class="w-1/3 h-1/2">
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
-                                @if ($imageUrl)
-                                    <div class="flex flex-col mb-4">
-                                        <p class="mb-1 font-medium text-gray-900 text-md">Customer Profile</p>
-                                        <img src="{{ $imageUrl }}" alt="Customer ID Picture"
-                                            class="w-1/3 h-1/2">
-                                    </div>
-                                @endif
+
                                 <div class="flex flex-col items-start">
                                     <div class="flex flex-col gap-1">
                                         <p class="text-lg font-medium">Credit Limit</p>
