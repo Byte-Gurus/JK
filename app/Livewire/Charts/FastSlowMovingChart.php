@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class FastSlowMovingChart extends Component
 {
-    public $month;
+    public $month, $selectTypeOfMovingItems;
     public $fastmoving_info = [];
     public function render()
     {
@@ -97,15 +97,28 @@ class FastSlowMovingChart extends Component
 
             $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;
 
-            $this->fastmoving_info[] = [
-                'item_name' => $item->itemJoin->item_name,
-                'item_description' =>  $item->itemJoin->item_description,
-                'tsi' => $totalQuantity,
-                'totalStockInQuantity' => $totalStockInQuantity,
-                'weeksWithStockIn' => $weeksWithStockIn,
-                'aii' => $averageStockInPerWeek,
-                'fast_slow' => $fastSlowValue
-            ];
+            if ($fastSlowValue >= 3 && $this->selectTypeOfMovingItems == 0) {
+                $this->fastmoving_info[] = [
+                    'item_name' => $item->itemJoin->item_name,
+                    'item_description' => $item->itemJoin->item_description,
+                    'tsi' => $totalQuantity,
+                    'totalStockInQuantity' => $totalStockInQuantity,
+                    'weeksWithStockIn' => $weeksWithStockIn,
+                    'aii' => $averageStockInPerWeek,
+                    'fast_slow' => $fastSlowValue
+                ];
+            } elseif ($fastSlowValue < 3 && $this->selectTypeOfMovingItems == 1) {
+                $this->fastmoving_info[] = [
+                    'item_name' => $item->itemJoin->item_name,
+                    'item_description' => $item->itemJoin->item_description,
+                    'tsi' => $totalQuantity,
+                    'totalStockInQuantity' => $totalStockInQuantity,
+                    'weeksWithStockIn' => $weeksWithStockIn,
+                    'aii' => $averageStockInPerWeek,
+                    'fast_slow' => $fastSlowValue
+                ];
+            }
+
         }
         usort($this->fastmoving_info, function ($a, $b) {
             return $b['fast_slow'] <=> $a['fast_slow'];

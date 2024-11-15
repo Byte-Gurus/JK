@@ -10,6 +10,7 @@ use App\Models\Purchase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -74,7 +75,7 @@ class DeliveryDatePicker extends Component
 
         try {
 
-            if ($this->delivery_receipt) {
+            if (!is_string($this->delivery_receipt))  {
                 // Validate and store the uploaded file temporarily
                 $path = $this->delivery_receipt->store('temp'); // This stores the file in the 'temp' directory temporarily
 
@@ -171,6 +172,7 @@ class DeliveryDatePicker extends Component
             return back();
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while updating the Delivery, please refresh the page ');
         }
@@ -206,5 +208,11 @@ class DeliveryDatePicker extends Component
         $this->reset([
             'date'
         ]);
+    }
+
+
+    public function removeSelectedPicture()
+    {
+        $this->reset(['delivery_receipt']);
     }
 }
