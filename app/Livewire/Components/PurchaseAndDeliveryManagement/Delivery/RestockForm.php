@@ -62,7 +62,7 @@ class RestockForm extends Component
 
 
 
-        return view('livewire.components.PurchaseAndDeliveryManagement.Delivery.restock-form', [
+        return view('livewire.csomponents.PurchaseAndDeliveryManagement.Delivery.restock-form', [
             'purchaseDetails' => $this->purchaseDetails,
         ]);
     }

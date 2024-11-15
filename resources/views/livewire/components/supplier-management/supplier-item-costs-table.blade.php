@@ -1,23 +1,23 @@
 {{-- // --}}
 <div class="relative my-[3vh] rounded-lg" wire:poll.visible="1000ms">
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
-        <div class="border flex flex-row border-[rgb(143,143,143)] mt-2 rounded-r-full bg-purple-200 w-fit">
-            <div class="flex flex-row items-center gap-1">
-                <p class="text-xl font-bold">Company Name</p>
-                <div>
-                    |
-                </div>
-                <p class="font-medium text-l">
-                    {{ $supplier->company_name ?? '' }}
+        <div
+            class="flex flex-row items-center mt-4 gap-6 w-fit p-2 pr-4 bg-[rgb(40,23,83)] shadow-md shadow-[rgb(206,187,255)] text-white rounded-r-full">
+            <div>
+                <p class="text-[1em] font-thin text-center w-full">Company Name</p>
+            </div>
+            <div class="flex flex-col gap-2">
+                <p class="text-[1.2em] font-black"> {{ $supplier->company_name ?? '' }}
                 </p>
             </div>
-            <div class="flex flex-row items-center gap-1">
-                <p class="text-xl font-bold">Contact Person</p>
-                <div>
-                    |
-                </div>
-                <p class="font-medium text-l">
-
+            <div>
+                |
+            </div>
+            <div>
+                <p class="text-[1em] font-thin text-center w-full">Contact Person</p>
+            </div>
+            <div class="flex flex-col gap-2">
+                <p class="text-[1.2em] font-black text-wrap">
                     {{ $supplier->contact_person ?? '' }}
                 </p>
             </div>
@@ -70,8 +70,6 @@
                         <option value="Consumer">Consumer Supply</option>
                     </select>
                 </div>
-
-
             </div>
         </div>
 
@@ -185,7 +183,6 @@
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
-
             </div>
         </div>
     </div>
