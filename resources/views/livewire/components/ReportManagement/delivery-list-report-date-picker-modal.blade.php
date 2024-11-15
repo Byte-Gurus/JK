@@ -4,8 +4,7 @@
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
         <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
 
-            <div
-                class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-lg shadow-md text-nowrap">
+            <div class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-lg shadow-md text-nowrap">
                 <div class="flex flex-row items-center justify-between">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">

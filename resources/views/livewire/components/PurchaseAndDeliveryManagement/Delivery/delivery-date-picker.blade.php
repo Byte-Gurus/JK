@@ -4,8 +4,7 @@
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
         <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
 
-            <div
-                class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-lg shadow-md text-nowrap">
+            <div class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-lg shadow-md text-nowrap">
                 <div class="flex flex-row items-center justify-between gap-4">
                     {{-- //* form title --}}
                     <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
@@ -35,7 +34,7 @@
                     </div>
 
                     @error('date')
-                    <span class="font-medium text-red-500 error">{{ $message }}</span>
+                        <span class="font-medium text-red-500 error">{{ $message }}</span>
                     @enderror
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
@@ -46,11 +45,11 @@
                         </div>
                         <div>
                             @if ($date && $delivery_receipt)
-                            <button type="button" wire:click="changeDate()"
-                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Set</button>
+                                <button type="button" wire:click="changeDate()"
+                                    class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Set</button>
                             @else
-                            <button type="button" wire:click="changeDate" disabled
-                                class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Set</button>
+                                <button type="button" wire:click="changeDate" disabled
+                                    class=" px-6 py-2 bg-[rgb(75,102,105)] rounded-md text-[rgb(30,30,30)] font-bold">Set</button>
                             @endif
 
                         </div>
@@ -62,32 +61,32 @@
                             </label>
 
                             @if (!empty($delivery_receipt))
-                            <button type="button" wire:click='removeSelectedPicture()'
-                                class="px-4 text-sm font-medium transition-all duration-100 ease-in-out bg-red-200 rounded-md hover:bg-red-400">Remove
-                                Picture</button>
+                                <button type="button" wire:click='removeSelectedPicture()'
+                                    class="px-4 text-sm font-medium transition-all duration-100 ease-in-out bg-red-200 rounded-md hover:bg-red-400">Remove
+                                    Picture</button>
                             @endif
                         </div>
 
                         @if (empty($delivery_receipt))
-                        @if ($this->isCreate)
-                        <input id="delivery_receipt" type="file" accept="image/png, image/jpeg" required
-                            wire:model="delivery_receipt"
-                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
-                        @else
-                        <input id="delivery_receipt" type="file" accept="image/png, image/jpeg" nullable
-                            wire:model="delivery_receipt"
-                            class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
-                        @endif
+                            @if ($this->isCreate)
+                                <input id="delivery_receipt" type="file" accept="image/png, image/jpeg" required
+                                    wire:model="delivery_receipt"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                            @else
+                                <input id="delivery_receipt" type="file" accept="image/png, image/jpeg" nullable
+                                    wire:model="delivery_receipt"
+                                    class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
+                            @endif
                         @endif
 
                         @if ($delivery_receipt instanceof \Illuminate\Http\UploadedFile)
-                        <img src="{{ $delivery_receipt->temporaryUrl() }}">
+                            <img src="{{ $delivery_receipt->temporaryUrl() }}">
                         @elseif($delivery_receipt)
-                        <img src="{{ $delivery_receipt }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+                            <img src="{{ $delivery_receipt }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
                         @endif
 
                         @error('delivery_receipt')
-                        <span class="error">{{ $message }}</span>
+                            <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
 
