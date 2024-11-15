@@ -97,7 +97,7 @@ class FastSlowMovingChart extends Component
 
             $fastSlowValue = $averageStockInPerWeek > 0 ? $totalQuantity / $averageStockInPerWeek : 0;
 
-            if ($fastSlowValue < 3 && $this->selectTypeOfMovingItems == 0) {
+            if ($fastSlowValue >= 3 && $this->selectTypeOfMovingItems == 0) {
                 $this->fastmoving_info[] = [
                     'item_name' => $item->itemJoin->item_name,
                     'item_description' => $item->itemJoin->item_description,
@@ -107,7 +107,7 @@ class FastSlowMovingChart extends Component
                     'aii' => $averageStockInPerWeek,
                     'fast_slow' => $fastSlowValue
                 ];
-            } elseif ($fastSlowValue >= 3 && $this->selectTypeOfMovingItems == 1) {
+            } elseif ($fastSlowValue < 3 && $this->selectTypeOfMovingItems == 1) {
                 $this->fastmoving_info[] = [
                     'item_name' => $item->itemJoin->item_name,
                     'item_description' => $item->itemJoin->item_description,
