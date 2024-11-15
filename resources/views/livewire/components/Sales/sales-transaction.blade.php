@@ -506,14 +506,14 @@
                             @endif
                         @else
                             <div class="flex flex-col">
-                                <div class="flex flex-row items-center justify-between w-full">
+                                <div class="flex flex-row items-center w-full">
                                     <div class="flex flex-col items-start">
                                         <p class=" text-[1.2em] mb-1">Customer Name</p>
                                         <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
                                         <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
                                     </div>
                                     @if ($imageUrl)
-                                        <div class="border rounded-lg border-[rgb(141,99,45)]">
+                                        <div class="border rounded-lg self-end border-[rgb(141,99,45)]">
                                             <img src="{{ $imageUrl }}" alt="Customer ID Picture"
                                                 class="w-1/3 h-1/2">
                                         </div>
