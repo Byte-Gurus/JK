@@ -68,7 +68,7 @@
                         <li class="col-span-1 text-left py-[3px]">
                             <div>
                                 <p class="text-[1em] text-left font-medium">
-                                    {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('M d Y') }}
+                                    {{ \Carbon\Carbon::parse($delivery->date_delivered)->format('M d Y') ?? 'N/A' }}
                                 </p>
                             </div>
                         </li>
