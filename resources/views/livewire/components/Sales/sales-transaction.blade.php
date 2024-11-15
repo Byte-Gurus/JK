@@ -515,7 +515,7 @@
                                     @if ($imageUrl)
                                         <div class="flex self-center justify-end pr-4 w-fit">
                                             <img src="{{ $imageUrl }}" alt="Customer ID Picture"
-                                                class="w-2/3 h-1/2 rounded-lg border-[rgb(141,99,45)]">
+                                                class="w-2/3 h-1/2 border-2 rounded-lg border-[rgb(141,99,45)]">
                                         </div>
                                     @endif
                                 </div>
