@@ -14,7 +14,8 @@ class Delivery extends Model
         'status',
         'date_delivered',
         'purchase_id',
-        'old_po_id'
+        'old_po_id',
+        'delivery_receipt'
     ];
 
     public function purchaseJoin()
@@ -31,10 +32,10 @@ class Delivery extends Model
     public function scopeSearch($query, $value)
     {
         $value = strtolower($value);
-    
+
         return $query->whereHas('purchaseJoin', function ($query) use ($value) {
             $query->whereRaw('LOWER(po_number) LIKE ?', ["%{$value}%"]);
         });
     }
-    
+
 }
