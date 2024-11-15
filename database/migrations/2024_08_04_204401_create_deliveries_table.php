@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("status");
             $table->string("date_delivered");
-            $table->string("delivery_receipt");
+            $table->string("delivery_receipt")->nullable();
             $table->string("old_po_id")->nullable();
             $table->timestamps();
 
