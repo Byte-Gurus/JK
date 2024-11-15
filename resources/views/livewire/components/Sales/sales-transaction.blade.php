@@ -459,11 +459,11 @@
                         </div>
                     @endif
                     <div>
-                        <label for="credit_id" class="block mb-1 font-medium text-[1.2em] text-gray-900 ">Customer
-                            Name
-                        </label>
 
                         @if (empty($credit_no))
+                            <label for="credit_id" class="block mb-1 font-medium text-[1.2em] text-gray-900 ">Customer
+                                Name
+                            </label>
                             <div class="relative w-1/2">
 
                                 <input wire:model.live.debounce.300ms='searchCustomer' type="search"
@@ -488,7 +488,7 @@
                                                             ' ' .
                                                             ($credit_customer->middlename ?? '') .
                                                             '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ' .
                                                             $credit_customer->lastname }}
                                                     </p>
                                                     @foreach ($credit_customer->creditJoin as $credit)
@@ -507,11 +507,10 @@
                         @else
                             <div class="flex flex-col">
                                 <div class="flex flex-row items-center justify-between w-full">
+                                    <p class=" text-[1.2em]">Customer Name</p>
                                     <div class="flex flex-col items-start">
-                                        <div class="flex flex-col">
-                                            <p class=" font-black text-[1.2em]">{{ $creditor_name }}</p>
-                                            <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
-                                        </div>
+                                        <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
+                                        <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
                                     </div>
                                     @if ($imageUrl)
                                         <div class="border rounded-lg border-[rgb(141,99,45)]">
@@ -520,7 +519,6 @@
                                         </div>
                                     @endif
                                 </div>
-
                                 <div class="flex flex-col items-start">
                                     <div class="flex flex-col gap-1">
                                         <p class="text-lg font-medium">Credit Limit</p>
