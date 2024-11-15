@@ -12,7 +12,7 @@
                             @if ($this->showSupplierTable)
                                 Manage Supplier
                             @else
-                                Supplier Item Costs # { selected suppliers }
+                                Supplier Item Costs
                             @endif
                         </h1>
                     </div>

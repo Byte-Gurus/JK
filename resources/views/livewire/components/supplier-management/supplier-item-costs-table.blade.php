@@ -1,6 +1,27 @@
 {{-- // --}}
 <div class="relative my-[3vh] rounded-lg" wire:poll.visible="1000ms">
     <div class="relative overflow-hidden bg-white border border-[rgb(143,143,143)] sm:rounded-lg">
+        <div class="border flex flex-row border-[rgb(143,143,143)] mt-2 rounded-r-full bg-purple-200 w-fit">
+            <div class="flex flex-row items-center gap-1">
+                <p class="text-xl font-bold">Company Name</p>
+                <div>
+                    |
+                </div>
+                <p class="font-medium text-l">
+                    {{ $supplier->company_name ?? '' }}
+                </p>
+            </div>
+            <div class="flex flex-row items-center gap-1">
+                <p class="text-xl font-bold">Contact Person</p>
+                <div>
+                    |
+                </div>
+                <p class="font-medium text-l">
+
+                    {{ $supplier->contact_person ?? '' }}
+                </p>
+            </div>
+        </div>
 
         {{-- //* filters --}}
         <div class="flex flex-row items-center justify-between px-4 py-4 ">
@@ -17,15 +38,11 @@
                             clip-rule="evenodd" />
                     </svg>
                 </div>
-
-                {{$supplier->company_name ?? ''}}
-                {{$supplier->contact_person ?? ''}}
                 <input type="text" wire:model.live.debounce.100ms="search"
                     class="w-1/3 p-4 pl-10 hover:bg-[rgb(230,230,230)] transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-black text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Search by Item Name" required="" />
 
             </div>
-
 
             <div class="flex flex-row items-center justify-center gap-4">
 
@@ -112,36 +129,36 @@
                 <tbody>
 
                     @foreach ($supplierItems as $supplierItem)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_name }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_name }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_description }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_description }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_unit }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_unit }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_category }}
-                        </th>
-
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($supplierItem->item_cost, 2) }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->created_at->format('M d Y ') }}
-                        </th>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_category }}
+                            </th>
 
 
-                    </tr>
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($supplierItem->item_cost, 2) }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->created_at->format('M d Y ') }}
+                            </th>
+
+
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
