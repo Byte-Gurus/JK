@@ -450,7 +450,7 @@
 
                 <div class="flex flex-col p-2">
                     <div>
-                        <label for="credit_id" class="block mb-1 font-medium text-[1.6em] text-gray-900 ">Customer
+                        <label for="credit_id" class="block mb-1 font-medium text-[1.2em] text-gray-900 ">Customer
                             Name
                         </label>
 
@@ -479,7 +479,7 @@
                                                             ' ' .
                                                             ($credit_customer->middlename ?? '') .
                                                             '
-                                                                                                                                                                                                                                                                        ' .
+                                                                                                                                                                                                                                                                                                                                ' .
                                                             $credit_customer->lastname }}
                                                     </p>
                                                     @foreach ($credit_customer->creditJoin as $credit)
@@ -501,11 +501,8 @@
                                 <div class="flex flex-row items-center justify-between">
                                     <div class="flex flex-col items-start">
                                         <div class="flex flex-col gap-1">
-                                            <p class="text-lg font-medium">Name</p>
-                                            <div class="flex flex-col">
-                                                <p class=" font-black text-[1.2em]">{{ $creditor_name }}</p>
-                                                <p class=" font-thin text-[0.6em] italic">{{ $credit_no }}</p>
-                                            </div>
+                                            <p class=" font-black text-[1.2em]">{{ $creditor_name }}</p>
+                                            <p class=" font-thin text-[0.6em] italic">{{ $credit_no }}</p>
                                         </div>
                                     </div>
                                     <div>
