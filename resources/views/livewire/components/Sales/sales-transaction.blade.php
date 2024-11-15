@@ -513,16 +513,16 @@
                                         <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
                                     </div>
                                     @if ($imageUrl)
-                                        <div class="flex self-center justify-end pr-4 w-fit">
+                                        <div class="flex self-center justify-end w-fit">
                                             <img src="{{ $imageUrl }}" alt="Customer ID Picture"
                                                 class="w-2/3 h-1/2 border-2 rounded-lg border-[rgb(141,99,45)]">
                                         </div>
                                     @endif
-                                </div>
-                                <div class="flex flex-col items-start">
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-lg font-medium">Credit Limit</p>
-                                        <p class=" font-black text-[1.2em]">{{ $credit_limit }}</p>
+                                    <div class="flex flex-col items-start">
+                                        <div class="flex flex-col gap-1">
+                                            <p class="text-lg font-medium">Credit Limit</p>
+                                            <p class=" font-black text-[1.2em]">{{ $credit_limit }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
