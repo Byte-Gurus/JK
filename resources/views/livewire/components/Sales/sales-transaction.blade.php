@@ -450,7 +450,7 @@
 
                 <div class="flex flex-col p-2">
                     @if (!empty($credit_no))
-                        <div wire:click='clearSelectedCustomerName()' class="">
+                        <div wire:click='clearSelectedCustomerName()' class="flex justify-end">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 strokeWidth={1.5} stroke="currentColor" class="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -507,8 +507,8 @@
                         @else
                             <div class="flex flex-col">
                                 <div class="flex flex-row items-center justify-between w-full">
-                                    <p class=" text-[1.2em]">Customer Name</p>
                                     <div class="flex flex-col items-start">
+                                        <p class=" text-[1.2em] mb-1">Customer Name</p>
                                         <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
                                         <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
                                     </div>
