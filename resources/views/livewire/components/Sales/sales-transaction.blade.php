@@ -505,8 +505,8 @@
                                 </div>
                             @endif
                         @else
-                            <div class="flex flex-col">
-                                <div class="flex flex-row items-center w-full">
+                            <div class="flex flex-col w-full">
+                                <div class="flex flex-row items-center justify-between w-full">
                                     <div class="flex flex-col items-start">
                                         <p class=" text-[1.2em] mb-1">Customer Name</p>
                                         <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
