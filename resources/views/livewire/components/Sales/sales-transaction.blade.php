@@ -488,7 +488,7 @@
                                                             ' ' .
                                                             ($credit_customer->middlename ?? '') .
                                                             '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ' .
                                                             $credit_customer->lastname }}
                                                     </p>
                                                     @foreach ($credit_customer->creditJoin as $credit)
@@ -508,9 +508,15 @@
                             <div class="flex flex-col w-full">
                                 <div class="flex flex-row items-center justify-between w-full">
                                     <div class="flex flex-col items-start">
-                                        <p class=" text-[1.2em] mb-1">Customer Name</p>
-                                        <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
-                                        <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
+                                        <div class="flex flex-col items-start">
+                                            <p class=" text-[1.2em] mb-1">Customer Name</p>
+                                            <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
+                                            <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
+                                        </div>
+                                        <div class="flex flex-col items-start">
+                                            <p class="text-lg font-medium">Credit Limit</p>
+                                            <p class=" font-black text-[1.2em]">{{ $credit_limit }}</p>
+                                        </div>
                                     </div>
                                     @if ($imageUrl)
                                         <div class="flex self-center justify-end w-fit">
@@ -518,12 +524,6 @@
                                                 class="w-2/3 h-1/2 border-2 rounded-lg border-[rgb(141,99,45)]">
                                         </div>
                                     @endif
-                                    <div class="flex flex-col items-start">
-                                        <div class="flex flex-col gap-1">
-                                            <p class="text-lg font-medium">Credit Limit</p>
-                                            <p class=" font-black text-[1.2em]">{{ $credit_limit }}</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         @endif
