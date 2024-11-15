@@ -10,6 +10,7 @@ use App\Models\Purchase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -74,7 +75,7 @@ class DeliveryDatePicker extends Component
 
         try {
 
-            if ($this->delivery_receipt) {
+            if ($this->delivery_receipt && File::isImage($this->delivery_receipt)) {
                 // Validate and store the uploaded file temporarily
                 $path = $this->delivery_receipt->store('temp'); // This stores the file in the 'temp' directory temporarily
 
