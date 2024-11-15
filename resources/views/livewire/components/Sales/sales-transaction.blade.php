@@ -510,12 +510,14 @@
                                     <div class="flex flex-col items-start">
                                         <div class="flex flex-col items-start">
                                             <p class=" text-[1.2em] mb-1">Customer Name</p>
-                                            <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
-                                            <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
+                                            <div class="self-center">
+                                                <p class=" font-black text-[1em]">{{ $creditor_name }}</p>
+                                                <p class=" font-thin text-[0.8em] italic">{{ $credit_no }}</p>
+                                            </div>
                                         </div>
                                         <div class="flex flex-col items-start">
                                             <p class="text-lg font-medium">Credit Limit</p>
-                                            <p class=" font-black text-[1.2em]">{{ $credit_limit }}</p>
+                                            <p class=" font-black self-center text-[1.2em]">{{ $credit_limit }}</p>
                                         </div>
                                     </div>
                                     @if ($imageUrl)
