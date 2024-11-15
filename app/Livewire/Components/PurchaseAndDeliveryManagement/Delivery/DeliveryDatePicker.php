@@ -172,6 +172,7 @@ class DeliveryDatePicker extends Component
             return back();
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while updating the Delivery, please refresh the page ');
         }
