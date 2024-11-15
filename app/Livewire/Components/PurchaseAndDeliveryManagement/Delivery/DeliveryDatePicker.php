@@ -14,12 +14,15 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class DeliveryDatePicker extends Component
 {
-    use WithPagination, WithoutUrlPagination, LivewireAlert;
+    use WithPagination, WithoutUrlPagination, LivewireAlert, WithFileUploads;
 
-    public $date, $delivery_id, $selectedDate;
+    public $date, $delivery_id, $selectedDate, $delivery_receipt, $isCreate = true;
 
     public function render()
     {
@@ -29,6 +32,7 @@ class DeliveryDatePicker extends Component
     protected $listeners = [
         'get-date' => 'getDate',
         'updateConfirmed'
+
     ];
 
     public function changeDate()
@@ -50,6 +54,11 @@ class DeliveryDatePicker extends Component
             $this->alert('error', 'Delivery date maximum date is today.');
             return;
         }
+
+        if (!$this->delivery_receipt && $this->isCreate != true) {
+            $this->alert('error', 'Delivery Receipt is required.');
+            return;
+        }
         $this->selectedDate = $inputDate;
 
         $this->confirm("Do you want to update this delivery?", [
@@ -64,6 +73,29 @@ class DeliveryDatePicker extends Component
         DB::beginTransaction();
 
         try {
+
+            if ($this->delivery_receipt) {
+                // Validate and store the uploaded file temporarily
+                $path = $this->delivery_receipt->store('temp'); // This stores the file in the 'temp' directory temporarily
+
+                // Generate a new filename
+                $filename = Str::random(40) . '.' . $this->delivery_receipt->getClientOriginalExtension();
+
+                // Get the contents of the file
+                $fileContents = Storage::disk('local')->get($path);
+
+                // Store the file on S3
+                $isStored = Storage::disk('s3')->put($filename, $fileContents);
+
+                // Optionally delete the temporary file
+                Storage::disk('local')->delete($path);
+
+                $this->delivery_receipt = Storage::disk('s3')->url($filename);
+            } else {
+                $this->delivery_receipt = null; // or provide a default value if necessary
+            }
+
+
             $delivery = Delivery::find($this->delivery_id);
 
             if (!$delivery) {
@@ -106,6 +138,7 @@ class DeliveryDatePicker extends Component
                 // Update the current delivery details
                 $delivery->date_delivered = $this->selectedDate;
                 $delivery->status = "Delivered";
+                $delivery->delivery_receipt = $this->delivery_receipt;
                 $delivery->save();
 
                 $this->alert('success', 'Delivery date and applicable backorders updated successfully');
@@ -114,6 +147,7 @@ class DeliveryDatePicker extends Component
                 // If there are no backorders, only update the current delivery details
                 $delivery->date_delivered = $this->selectedDate;
                 $delivery->status = "Delivered";
+                $delivery->delivery_receipt = $this->delivery_receipt;
                 $delivery->save();
 
                 $this->alert('success', 'Delivery date changed successfully');
@@ -148,10 +182,24 @@ class DeliveryDatePicker extends Component
         $this->dispatch(event: 'close-delivery-date-picker')->to(DeliveryPage::class);
         $this->resetValidation();
     }
+    private function populateForm() //*lagyan ng laman ang mga input
+    {
+
+        $delivery = Delivery::find($this->delivery_id); //? kunin lahat ng data ng may ari ng user_id
+
+        $this->fill([
+            'date' => $delivery->date_delivered,
+            'delivery_receipt' => $delivery->delivery_receipt,
+        ]);
+
+    }
+
 
     public function getDate($id)
     {
         $this->delivery_id = $id;
+        $this->isCreate = false;
+        $this->populateForm();
     }
     public function resetForm()
     {
