@@ -48,7 +48,7 @@
                 <label class="text-sm font-thin text-gray-900 text-nowrap">Supplier:</label>
 
                 <select wire:model.live="supplierFilter"
-                    class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
+                    class="bg-gray-50 border border-[rgb(53,53,53)] hover:bg-[rgb(225,225,225)] transition text-ellipsis w-[180px] duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md  block p-2.5 ">
                     <option value="0">All</option>
 
                     @foreach ($suppliers as $supplier)
