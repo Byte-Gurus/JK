@@ -189,7 +189,7 @@
                                     @endif
 
                                     @if ($delivery->status == 'Delivered')
-                                        <div class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline hover:bg-[rgb(37,37,37)]"
+                                        <div class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline"
                                             x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
                                             <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
                                         </div>
@@ -212,6 +212,10 @@
                                     @if (
                                         ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty()) ||
                                             $delivery->status === 'Backorder complete')
+                                        <div class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline"
+                                            x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
+                                            <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
+                                        </div>
                                         <button x-on:click="$wire.viewBackorderDetails(); openActions = !openActions"
                                             wire:click="getPO_ID({{ $delivery->id }})"
                                             class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-violet-100 border border-violet-900 rounded-lg hover:bg-violet-300 duration-0">
