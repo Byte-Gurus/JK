@@ -43,7 +43,8 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                     </svg>
-                                    <p class="absolute bottom-0 text-[0.2em] text-orange-900 left-6 italic font-thin">transfer</p>
+                                    <p class="absolute bottom-0 text-[0.2em] text-orange-900 left-6 italic font-thin">
+                                        transfer</p>
                                 </button>
                             @endif
                         </div>
@@ -159,16 +160,16 @@
                                         </th>
 
                                         <th scope="row"
-                                            class="py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
+                                            class="px-4 py-6 font-medium text-center text-gray-900 text-md whitespace-nowrap">
                                             @if (isset($toOrderItems[$index]) && $toOrderItems[$index])
                                                 <select
-                                                    class="bg-gray-100 border border-[rgb(53,53,53)] hover:bg-gray-50 transition duration-100 ease-in-out text-[rgb(53,53,53)] text-sm rounded-md p-2.5 "
+                                                    class="bg-gray-100 border w-[150px] border-[rgb(53,53,53)] hover:bg-gray-50 transition duration-100 ease-in-out text-[rgb(53,53,53)] w-[100] text-ellipsis text-sm rounded-md p-2.5 "
                                                     wire:change="updateSelectSupplier({{ $index }}, $event.target.value)"
                                                     wire.model.live="selectSuppliers.{{ $index }}">
 
 
                                                     @if (isset($reorderList->lowestSupplier))
-                                                        <option value="{{ $reorderList->lowestSupplier->id }}"
+                                                        <option class="w-[100px]" value="{{ $reorderList->lowestSupplier->id }}"
                                                             selected>
                                                             {{ $reorderList->lowestSupplier->company_name }} -
                                                             ₱{{ number_format($reorderList->lowestSupplier->supplierItemsJoin->item_cost, 2) }}
@@ -177,7 +178,6 @@
                                                         <option value="No Supplier" selected>No supplier for this item
                                                         </option>
                                                     @endif
-
 
                                                     @foreach ($suppliers as $supplier)
                                                         <option value="{{ $supplier->id }}">
@@ -327,7 +327,7 @@
                                 @foreach ($orders as $index => $order)
                                     <div class="p-2 bg-[rgb(255,248,237)] border border-black rounded-lg">
                                         <div class="relative ">
-                                            <button type="button" wire:click="removeRowOrder({{$index}})"
+                                            <button type="button" wire:click="removeRowOrder({{ $index }})"
                                                 class="absolute right-0 p-1 rounded-md hover:bg-red-300 ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
