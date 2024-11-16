@@ -65,10 +65,10 @@
                     @enderror
                 </div>
 
-                <div class="flex justify-center mt-4">
+                {{-- <div class="flex justify-center mt-4">
                     {!! htmlFormSnippet() !!}
 
-                </div>
+                </div> --}}
 
 
                 <div class="mt-8 text-right">
