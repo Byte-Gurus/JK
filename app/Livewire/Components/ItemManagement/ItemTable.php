@@ -18,6 +18,11 @@ class ItemTable extends Component
 
     public $statusFilter = 0; //var filtering value = all
     public $vatFilter = 0; //var filtering value = all
+
+    public $categoryFilter = 0;
+
+    public $unitFilter = 0;
+
     public function render()
     {
         $query = Item::query();
@@ -27,6 +32,12 @@ class ItemTable extends Component
         }
         if ($this->vatFilter != 0) {
             $query->where('vat_type', $this->vatFilter); //?hanapin ang status na may same value sa statusFilter
+        }
+        if ($this->categoryFilter != 0) {
+            $query->where('item_category', $this->categoryFilter); //?hanapin ang status na may same value sa statusFilter
+        }
+        if ($this->unitFilter != 0) {
+            $query->where('item_unit', $this->unitFilter); //?hanapin ang status na may same value sa statusFilter
         }
         $items = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
