@@ -191,7 +191,7 @@
                                     @if ($delivery->status == 'Delivered')
                                         <div class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]"
                                             x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
-                                            <p class=" text-md hover:text-[rgb(138,117,59)]">Receipt</p>
+                                            <p>Receipt</p>
                                         </div>
                                         <button x-on:click='$wire.displayDeliveryDatePicker()'
                                             wire:click="changeDate({{ $delivery->id }})"
@@ -280,7 +280,7 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <img src="{{ $imageUrl }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+                <img src="{{ $imageUrl }}" alt="Delivery Receipt" class="w-1/3 h-1/2">
             </div>
         </div>
     @endif
