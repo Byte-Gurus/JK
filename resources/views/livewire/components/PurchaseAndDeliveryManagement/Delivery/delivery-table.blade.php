@@ -265,8 +265,8 @@
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
 
-            <div class="flex flex-col items-center justify-center w-screen h-screen p-4 rounded-lg ">
-                <div class="self-center bg-red-200 z-60">
+            <div class="flex flex-col items-center w-screen h-screen p-4 rounded-lg ">
+                <div class="self-end bg-red-200 z-60">
                     <button type="button" wire:click='closeImage'
                         class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto "
                         data-modal-hide="UserModal">
@@ -279,7 +279,9 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <img src="{{ $imageUrl }}" alt="Delivery Receipt" class="w-1/3 h-1/2">
+                <div class="self-center ">
+                    <img src="{{ $imageUrl }}" alt="Delivery Receipt" class="w-1/3 h-1/2">
+                </div>
             </div>
         </div>
     @endif
