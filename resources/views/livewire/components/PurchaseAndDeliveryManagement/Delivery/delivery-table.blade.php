@@ -189,7 +189,7 @@
                                     @endif
 
                                     @if ($delivery->status == 'Delivered')
-                                        <div class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-orange-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]"
+                                        <div class=" hover:text-orange-300 text-[rgb(53,53,53)] underline hover:bg-[rgb(37,37,37)]"
                                             x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
                                             <p>Receipt</p>
                                         </div>
@@ -199,9 +199,6 @@
                                             <p>Update Delivery Date
                                             </p>
                                         </button>
-                                    @endif
-
-                                    @if ($delivery->status === 'Delivered')
                                         <button
                                             x-on:click="$wire.viewRestockForm(); $wire.getDeliveryID({{ $delivery->id }}); openActions = !openActions"
                                             class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-blue-100 border border-blue-900 rounded-lg hover:bg-blue-300 duration-0">
