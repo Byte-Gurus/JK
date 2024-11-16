@@ -12,204 +12,203 @@
 
             {{-- //* Modal content --}}
             @if (!$this->isCreate)
-            {{-- *if form is edit --}}
-            <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
-                @endif
+                {{-- *if form is edit --}}
+                <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
+            @endif
 
-                {{-- *if form is create --}}
-                <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
-                    @csrf
+            {{-- *if form is create --}}
+            <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
+                @csrf
 
-                    <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
+                <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
 
-                        <div class="flex justify-center w-full p-2">
+                    <div class="flex justify-center w-full p-2">
 
-                            {{-- //* form title --}}
-                            <h3 class="text-xl font-black text-gray-900 item ">
+                        {{-- //* form title --}}
+                        <h3 class="text-xl font-black text-gray-900 item ">
 
-                                @if (!$this->isCreate)
+                            @if (!$this->isCreate)
                                 {{-- *if form is edit --}}
                                 Edit Supplier
-                                @else
+                            @else
                                 Create Supplier
-                                @endif
+                            @endif
 
-                            </h3>
-                        </div>
-
-                        {{-- //* close button --}}
-                        <button type="button" x-on:click="showModal=false" wire:click=' resetFormWhenClosed() '
-                            class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
-                            data-modal-hide="UserModal">
-
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-
-                            <span class="sr-only">Close modal</span>
-
-                        </button>
-
+                        </h3>
                     </div>
 
+                    {{-- //* close button --}}
+                    <button type="button" x-on:click="showModal=false" wire:click=' resetFormWhenClosed() '
+                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
+                        data-modal-hide="UserModal">
 
-                    <div class="p-6 space-y-6">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
 
-                        <div class="flex flex-col gap-4">
+                        <span class="sr-only">Close modal</span>
 
-                            {{-- //* first area, personal information --}}
-                            <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                    </button>
 
-                                <div
-                                    class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                    <h1 class="font-bold">Supplier Information</h1>
-                                </div>
+                </div>
 
-                                <div class="p-4">
 
-                                    {{-- //* first row --}}
-                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+                <div class="p-6 space-y-6">
 
-                                        <div class="mb-3">
+                    <div class="flex flex-col gap-4">
 
-                                            <label for="company_name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Contact person
-                                            </label>
+                        {{-- //* first area, personal information --}}
+                        <div class="border-2 border-[rgb(53,53,53)] rounded-md">
 
-                                            <input type="text" id="contact_person" wire:model="contact_person"
-                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
-                                                placeholder="Company Name" tabindex="2" required />
+                            <div
+                                class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
+                                <h1 class="font-bold">Supplier Information</h1>
+                            </div>
 
-                                            @error('contact_person')
+                            <div class="p-4">
+
+                                {{-- //* first row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                    <div class="mb-3">
+
+                                        <label for="contact_person"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Contact person
+                                        </label>
+
+                                        <input type="text" id="contact_person" wire:model="contact_person"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
+                                            placeholder="Contact Person" tabindex="2" required />
+
+                                        @error('contact_person')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        {{-- //* company name --}}
-                                        <div class="mb-3">
+                                        @enderror
+                                    </div>
+                                    {{-- //* company name --}}
+                                    <div class="mb-3">
 
-                                            <label for="company_name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Company Name
-                                            </label>
+                                        <label for="company_name"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Company Name
+                                        </label>
 
-                                            <input type="text" id="company_name" wire:model="company_name"
-                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
-                                                placeholder="Company Name" tabindex="2" required />
+                                        <input type="text" id="company_name" wire:model="company_name"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
+                                            placeholder="Company Name" tabindex="3" required />
 
-                                            @error('company_name')
+                                        @error('company_name')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-
-                                        {{-- //* contact_no --}}
-                                        <div class="mb-3">
-
-                                            <label for="contact_number"
-                                                class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span
-                                                    class="text-red-400 ">*</span></label>
-
-                                            <input type="number" id="contact_number" wire:model="contact_number"
-                                                required
-                                                class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                placeholder="Contact No" />
-
-                                            @error('contact_number')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-
-                                        </div>
+                                        @enderror
                                     </div>
 
-                                    {{-- //* second row --}}
-                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+                                    {{-- //* contact_no --}}
+                                    <div class="mb-3">
 
-                                        {{-- //* province --}}
-                                        <div class="mb-3">
+                                        <label for="contact_number"
+                                            class="block mb-2 text-sm font-medium text-gray-900 "> Contact No <span
+                                                class="text-red-400 ">*</span></label>
 
-                                            <label for="selectProvince"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Province
-                                            </label>
+                                        <input type="number" id="contact_number" tabindex="4" wire:model="contact_number" required
+                                            class=" bg-[rgb(245,245,245)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                            placeholder="Contact No" />
 
-                                            <select id="selectProvince" wire:model.live="selectProvince" required
-                                                class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
-                                                <option value="" selected>Select province</option>
-                                                @foreach ($provinces as $province)
+                                        @error('contact_number')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+
+                                {{-- //* second row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                    {{-- //* province --}}
+                                    <div class="mb-3">
+
+                                        <label for="selectProvince"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Province
+                                        </label>
+
+                                        <select id="selectProvince" wire:model.live="selectProvince" tabindex="5" required
+                                            class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
+                                            <option value="" selected>Select province</option>
+                                            @foreach ($provinces as $province)
                                                 <option value="{{ $province->province_code }}">
                                                     {{ $province->province_description }}</option>
-                                                @endforeach
+                                            @endforeach
 
-                                            </select>
+                                        </select>
 
-                                            @error('selectProvince')
+                                        @error('selectProvince')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
+                                        @enderror
 
-                                        </div>
+                                    </div>
 
-                                        {{-- //* city --}}
-                                        <div class="mb-3">
+                                    {{-- //* city --}}
+                                    <div class="mb-3">
 
-                                            <label for="selectCity"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">City
-                                                / Municipality
-                                            </label>
+                                        <label for="selectCity"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">City
+                                            / Municipality
+                                        </label>
 
-                                            @if (empty($selectProvince))
+                                        @if (empty($selectProvince))
 
                                             <select disabled id="selectCity" wire:model.live="selectCity" required
                                                 class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Select a City / Municipality</option>
 
                                                 @if (!is_null($cities))
-                                                @foreach ($cities as $city)
-                                                <option value="{{ $city->city_municipality_code }}" {{ $city->
-                                                    city_municipality_code == $selectCity ? 'selected' : '' }}>
-                                                    {{ $city->city_municipality_description }}</option>
-                                                @endforeach
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->city_municipality_code }}"
+                                                            {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
+                                                            {{ $city->city_municipality_description }}</option>
+                                                    @endforeach
 
 
                                                 @endif
                                             </select>
-                                            @else
+                                        @else
                                             <select id="selectCity" wire:model.live="selectCity" required
                                                 class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Select a City / Municipality</option>
 
                                                 @if (!is_null($cities))
-                                                @foreach ($cities as $city)
-                                                <option value="{{ $city->city_municipality_code }}" {{ $city->
-                                                    city_municipality_code == $selectCity ? 'selected' : '' }}>
-                                                    {{ $city->city_municipality_description }}</option>
-                                                @endforeach
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->city_municipality_code }}"
+                                                            {{ $city->city_municipality_code == $selectCity ? 'selected' : '' }}>
+                                                            {{ $city->city_municipality_description }}</option>
+                                                    @endforeach
 
 
                                                 @endif
                                             </select>
 
                                             @error('selectCity')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
-                                            @endif
+                                        @endif
 
 
 
-
-                                        </div>
 
                                     </div>
 
-                                    {{-- //* third row --}}
-                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+                                </div>
 
-                                        {{-- //* brgy --}}
-                                        <div class="mb-3">
+                                {{-- //* third row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                                            <label for="selectBrgy"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
+                                    {{-- //* brgy --}}
+                                    <div class="mb-3">
 
-                                            @if (empty($selectCity))
+                                        <label for="selectBrgy"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Barangay</label>
+
+                                        @if (empty($selectCity))
 
                                             <select id="selectBrgy" wire:model.live="selectBrgy" required
                                                 class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
@@ -217,102 +216,102 @@
                                                 <option value="" selected>Select a barangay</option>
 
                                                 @if (!is_null($barangays))
-                                                @foreach ($barangays as $barangay)
-                                                <option value="{{ $barangay->barangay_code }}" {{ $barangay->
-                                                    barangay_code == $selectBrgy ? 'selected' : '' }}>
-                                                    {{ $barangay->barangay_description }}</option>
-                                                @endforeach
+                                                    @foreach ($barangays as $barangay)
+                                                        <option value="{{ $barangay->barangay_code }}"
+                                                            {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
+                                                            {{ $barangay->barangay_description }}</option>
+                                                    @endforeach
                                                 @endif
                                             </select>
-                                            @else
+                                        @else
                                             <select id="selectBrgy" wire:model.live="selectBrgy" required
                                                 class=" bg-[rgb(245,245,245)] border cursor-pointer border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
 
                                                 <option value="" selected>Select a barangay</option>
 
                                                 @if (!is_null($barangays))
-                                                @foreach ($barangays as $barangay)
-                                                <option value="{{ $barangay->barangay_code }}" {{ $barangay->
-                                                    barangay_code == $selectBrgy ? 'selected' : '' }}>
-                                                    {{ $barangay->barangay_description }}</option>
-                                                @endforeach
+                                                    @foreach ($barangays as $barangay)
+                                                        <option value="{{ $barangay->barangay_code }}"
+                                                            {{ $barangay->barangay_code == $selectBrgy ? 'selected' : '' }}>
+                                                            {{ $barangay->barangay_description }}</option>
+                                                    @endforeach
                                                 @endif
                                             </select>
 
                                             @error('selectBrgy')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                                <span class="font-medium text-red-500 error">{{ $message }}</span>
                                             @enderror
 
-                                            @endif
-
-
-                                        </div>
-
-                                        {{-- //* street --}}
-                                        <div class="mb-3">
-
-                                            <label for="street"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
-
-                                            @if (empty($selectBrgy))
-                                            <input disabled type="text" id="street" wire:model="street"
-                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                placeholder="Street" required />
-                                            @else
-                                            <input type="text" id="street" wire:model="street"
-                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
-                                                placeholder="Street" required />
-                                            @endif
-
-
-
-
-                                            @error('street')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-
-                                        </div>
-
+                                        @endif
 
 
                                     </div>
 
-                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+                                    {{-- //* street --}}
+                                    <div class="mb-3">
+
+                                        <label for="street"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Street</label>
+
+                                        @if (empty($selectBrgy))
+                                            <input disabled type="text" id="street" wire:model="street"
+                                                class=" bg-[rgba(173,173,173,0.65)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Street" required />
+                                        @else
+                                            <input type="text" id="street" wire:model="street"
+                                                class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5"
+                                                placeholder="Street" required />
+                                        @endif
 
 
-                                        <div class="mb-3">
 
-                                            <label for="status"
-                                                class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
-                                            @if (!$this->isCreate)
+
+                                        @error('street')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+
+                                    <div class="mb-3">
+
+                                        <label for="status"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+                                        @if (!$this->isCreate)
                                             <select id="status" wire:model="status" required
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                                 <option value="" selected>Set your status</option>
                                                 <option value="1">Active</option>
                                                 <option value="2">Inactive</option>
                                             </select>
-                                            @else
+                                        @else
                                             <input type="text" readonly value="Active"
                                                 class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5 ">
                                             </input>
-                                            @endif
+                                        @endif
 
-                                            @error('status')
+                                        @error('status')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                            @enderror
-
-                                        </div>
-
+                                        @enderror
 
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        {{-- //* form footer --}}
+                    {{-- //* form footer --}}
 
-                        {{-- *if form is edit --}}
-                        @if (!$this->isCreate)
+                    {{-- *if form is edit --}}
+                    @if (!$this->isCreate)
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
@@ -328,11 +327,12 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                    <div class="flex items-center justify-center loader loader--style3 "
+                                        title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
-                                            height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
-                                            xml:space="preserve">
+                                            height="40px" viewBox="0 0 50 50"
+                                            style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                             <path fill="#000"
                                                 d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
                                                 <animateTransform attributeType="xml" attributeName="transform"
@@ -346,7 +346,7 @@
                             </div>
 
                         </div>
-                        @else
+                    @else
                         {{-- *if form is create --}}
                         <div class="flex flex-row justify-end gap-2">
                             <div>
@@ -372,11 +372,12 @@
                                 </button>
 
                                 <div wire:loading>
-                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                    <div class="flex items-center justify-center loader loader--style3 "
+                                        title="2">
                                         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
-                                            height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
-                                            xml:space="preserve">
+                                            height="40px" viewBox="0 0 50 50"
+                                            style="enable-background:new 0 0 50 50;" xml:space="preserve">
                                             <path fill="#000"
                                                 d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
                                                 <animateTransform attributeType="xml" attributeName="transform"
@@ -390,11 +391,11 @@
                             </div>
 
                         </div>
-                        @endif
+                    @endif
 
-                    </div>
+                </div>
 
-                </form>
+            </form>
         </div>
 
     </div>
