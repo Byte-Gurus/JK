@@ -490,7 +490,7 @@
 
                                         <label for="senior_pwd_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Customer
-                                            Discount
+                                            ID
                                             No</label>
 
                                         <input type="number" id="senior_pwd_id" disabled wire:model="senior_pwd_id"
