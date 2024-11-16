@@ -274,6 +274,13 @@ class PurchaseOrderForm extends Component
 
     }
 
+    public function removeRowOrder($index)
+    {
+        unset($this->orders[$index]);
+        $this->orders = array_values($this->orders);
+
+    }
+
     public function getSelectedItems()
     {
 
