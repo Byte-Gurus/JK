@@ -65,23 +65,19 @@
                     @enderror
                 </div>
 
-                {{-- <div>
+                <div class="flex justify-center mt-4">
                     {!! htmlFormSnippet() !!}
 
-                    @if ($errors->has('g-recaptcha-response'))
+                </div>
 
-                    <div>
-                        {{$errors->has('g-recaptcha-response')}}
-                    </div>
 
-                    @endif
-                </div> --}}
                 <div class="mt-8 text-right">
                     <button type="submit" wire:loading.remove
                         class="w-full px-8 py-2 font-bold outline-none focus:outline-none text-[rgb(249,249,249)] bg-[rgb(53,53,53)] border-2 border-black rounded-md text-md hover:bg-[rgb(80,80,80)]">
                         Log In
                     </button>
                 </div>
+
 
                 <div wire:loading>
                     <div class="flex items-center justify-center loader loader--style3" title="2">
@@ -100,6 +96,8 @@
                 @error('submit')
                 <span class="mt-4 font-medium text-center text-red-500 text-md">{{ $message }}</span>
                 @enderror
+
+
             </form>
 
         </div>
