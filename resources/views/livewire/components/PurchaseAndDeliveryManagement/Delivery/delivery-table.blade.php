@@ -182,32 +182,30 @@
                                             <button x-on:click='$wire.displayDeliveryDatePicker()'
                                                 wire:click="changeDate({{ $delivery->id }})"
                                                 class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-green-100 border border-green-900 rounded-lg hover:bg-green-300 duration-0">
-                                                <p>Set Delivery Date
+                                                <p class="text-sm ">Set Delivery Date
                                                 </p>
                                             </button>
                                         </div>
                                     @endif
 
                                     @if ($delivery->status == 'Delivered')
-                                        <div class=" hover:text-orange-300 text-[rgb(53,53,53)] underline hover:bg-[rgb(37,37,37)]"
+                                        <div class=" hover:text-orange-300 flex items-center text-[rgb(53,53,53)] underline hover:bg-[rgb(37,37,37)]"
                                             x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
-                                            <p>Receipt</p>
+                                            <p class="text-sm ">Receipt</p>
                                         </div>
                                         <button x-on:click='$wire.displayDeliveryDatePicker()'
                                             wire:click="changeDate({{ $delivery->id }})"
                                             class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-orange-100 border border-orange-900 rounded-lg hover:bg-orange-300 duration-0">
-                                            <p>Update Delivery Date
-                                            </p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931ZM16.862 4.487L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                            </svg>
                                         </button>
                                         <button
                                             x-on:click="$wire.viewRestockForm(); $wire.getDeliveryID({{ $delivery->id }}); openActions = !openActions"
                                             class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-blue-100 border border-blue-900 rounded-lg hover:bg-blue-300 duration-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                            </svg>
-                                            <p>Restock</p>
+                                            <p class="text-sm ">Restock</p>
                                         </button>
                                     @endif
 
@@ -223,7 +221,7 @@
                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                     d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                             </svg>
-                                            <p>Backorder</p>
+                                            <p class="text-sm ">Backorder</p>
                                         </button>
                                     @endif
                                 </div>
