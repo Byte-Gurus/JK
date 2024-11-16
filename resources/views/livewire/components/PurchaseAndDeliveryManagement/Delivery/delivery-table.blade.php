@@ -209,6 +209,13 @@
                                         </button>
                                     @endif
 
+                                    @if ($delivery->status === 'Complete Stock in')
+                                        <div class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline"
+                                            x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
+                                            <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
+                                        </div>
+                                    @endif
+
                                     @if (
                                         ($delivery->status === 'Stocked in with backorder' && $delivery->purchaseJoin->backorderJoin->isNotEmpty()) ||
                                             $delivery->status === 'Backorder complete')
