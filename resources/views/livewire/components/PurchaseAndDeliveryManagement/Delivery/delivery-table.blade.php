@@ -189,9 +189,9 @@
                                     @endif
 
                                     @if ($delivery->status == 'Delivered')
-                                        <div class=" hover:text-orange-300 flex items-center text-[rgb(53,53,53)] underline hover:bg-[rgb(37,37,37)]"
+                                        <div class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline hover:bg-[rgb(37,37,37)]"
                                             x-on:click=" $wire.showImage('{{ $delivery->id }}'), openActions = !openActions">
-                                            <p class="text-sm ">Receipt</p>
+                                            <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
                                         </div>
                                         <button x-on:click='$wire.displayDeliveryDatePicker()'
                                             wire:click="changeDate({{ $delivery->id }})"
