@@ -183,7 +183,6 @@
                                                 wire:click="changeDate({{ $delivery->id }})"
                                                 class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-green-100 border border-green-900 rounded-lg hover:bg-green-300 duration-0">
                                                 <p class="text-sm ">Set Delivery Date
-                                                <p class="text-sm ">Set Delivery Date
                                                 </p>
                                             </button>
                                         </div>
