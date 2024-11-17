@@ -45,6 +45,48 @@
             </div>
 
             <div class="flex flex-row items-center justify-center gap-4">
+                <div class="relative w-1/2">
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black " fill="none"
+                                viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </div>
+                        <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
+                            class="w-[200px] p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="Search by Item Name or Barcode" required="">
+                    </div>
+
+                    @if (!empty($search))
+                        <div
+                            class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
+                            @foreach ($items as $item)
+                                <ul wire:click="selectItem({{ $item->id }})"
+                                    class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
+                                    <li class="flex items-start justify-between">
+                                        <!-- Item details on the left side -->
+                                        <div class="flex flex-col w-[200px] items-start leading-1">
+                                            <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
+                                            <div class="text-[0.8em]">{{ $item->item_description }}</div>
+                                            <div class="text-[0.8em]">{{ $item->item_unit }}</div>
+                                            <div class="text-[1em]">{{ $item->barcode }}</div>
+                                        </div>
+
+                                        <!-- Price on the right side -->
+                                        <div class="flex flex-row items-center self-center justify-between gap-2 pr-2 ">
+
+                                            <p class="text-[1em] font-medium italic">PHP</p>
+                                            <p class="text-[1.5em] font-bold ">
+                                                {{ number_format($item->highestPricedInventory->selling_price, 2) }}
+                                        </div>
+                                    </li>
+                                </ul>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
 
                 <div class="flex flex-col gap-1">
 
