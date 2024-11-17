@@ -23,7 +23,7 @@ class DeliveryDatePicker extends Component
 {
     use WithPagination, WithoutUrlPagination, LivewireAlert, WithFileUploads;
 
-    public $date, $delivery_id, $selectedDate, $delivery_receipt, $isCreate = true;
+    public $date, $delivery_id, $selectedDate, $receipt_picture, $isCreate = true;
 
     public function render()
     {
@@ -56,7 +56,7 @@ class DeliveryDatePicker extends Component
             return;
         }
 
-        if (!$this->delivery_receipt && $this->isCreate != true) {
+        if (!$this->receipt_picture && $this->isCreate != true) {
             $this->alert('error', 'Delivery Receipt is required.');
             return;
         }
@@ -75,12 +75,12 @@ class DeliveryDatePicker extends Component
 
         try {
 
-            if (!is_string($this->delivery_receipt))  {
+            if (!is_string($this->receipt_picture))  {
                 // Validate and store the uploaded file temporarily
-                $path = $this->delivery_receipt->store('temp'); // This stores the file in the 'temp' directory temporarily
+                $path = $this->receipt_picture->store('temp'); // This stores the file in the 'temp' directory temporarily
 
                 // Generate a new filename
-                $filename = Str::random(40) . '.' . $this->delivery_receipt->getClientOriginalExtension();
+                $filename = Str::random(40) . '.' . $this->receipt_picture->getClientOriginalExtension();
 
                 // Get the contents of the file
                 $fileContents = Storage::disk('local')->get($path);
@@ -91,9 +91,9 @@ class DeliveryDatePicker extends Component
                 // Optionally delete the temporary file
                 Storage::disk('local')->delete($path);
 
-                $this->delivery_receipt = Storage::disk('s3')->url($filename);
+                $this->receipt_picture = Storage::disk('s3')->url($filename);
             } else {
-                $this->delivery_receipt = null; // or provide a default value if necessary
+                $this->receipt_picture = null; // or provide a default value if necessary
             }
 
 
@@ -139,7 +139,7 @@ class DeliveryDatePicker extends Component
                 // Update the current delivery details
                 $delivery->date_delivered = $this->selectedDate;
                 $delivery->status = "Delivered";
-                $delivery->delivery_receipt = $this->delivery_receipt;
+                $delivery->receipt_picture = $this->receipt_picture;
                 $delivery->save();
 
                 $this->alert('success', 'Delivery date and applicable backorders updated successfully');
@@ -148,7 +148,7 @@ class DeliveryDatePicker extends Component
                 // If there are no backorders, only update the current delivery details
                 $delivery->date_delivered = $this->selectedDate;
                 $delivery->status = "Delivered";
-                $delivery->delivery_receipt = $this->delivery_receipt;
+                $delivery->receipt_picture = $this->receipt_picture;
                 $delivery->save();
 
                 $this->alert('success', 'Delivery date changed successfully');
@@ -191,7 +191,7 @@ class DeliveryDatePicker extends Component
 
         $this->fill([
             'date' => $delivery->date_delivered,
-            'delivery_receipt' => $delivery->delivery_receipt,
+            'receipt_picture' => $delivery->receipt_picture,
         ]);
 
     }
@@ -213,6 +213,6 @@ class DeliveryDatePicker extends Component
 
     public function removeSelectedPicture()
     {
-        $this->reset(['delivery_receipt']);
+        $this->reset(['receipt_picture']);
     }
 }
