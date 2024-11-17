@@ -19,6 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     {!! htmlScriptTagJsApi() !!}
     @livewireStyles
@@ -38,7 +39,8 @@
     @livewireScripts()
     {{-- @livewireChartsScripts --}}
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
 
     <x-livewire-alert::scripts />
 </body>

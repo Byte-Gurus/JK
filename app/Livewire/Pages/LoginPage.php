@@ -25,7 +25,8 @@ class LoginPage extends Component
         $validated = $this->validate([
             'username' => 'required',
             'password' => 'required|min:8',
-            // 'g-recaptcha-response' => 'required|recaptcha'
+            // 'g-recaptcha-response' => 'recaptcha',
+
         ]);
 
         if (Auth::attempt($validated)) {
