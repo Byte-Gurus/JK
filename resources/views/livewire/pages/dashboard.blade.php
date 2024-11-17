@@ -40,12 +40,12 @@
             <a href="{{ route('purchaseanddeliverymanagement.index') }}"
                 class="p-4 border border-[rgb(143,143,143)] w-full  col-span-2 shadow-2xl bg-white rounded-lg ">
                 <div>
-                    <p class="text-2xl text-[rgb(72,72,72)] italic sticky font-black">Reorder Items</p>
+                    <p class="text-2xl text-[rgb(72,72,72)] italic sticky font-black">Critical Level Items</p>
                 </div>
                 <div class=" h-[40vh] overflow-y-auto">
                     @foreach ($reorder_lists as $index => $reorder_list)
                         <div
-                            class="flex bg-purple-50 flex-col text-[rgb(72,72,72)] p-2 my-4 border border-purple-900 shadow-md shadow-purple-300 rounded-lg cursor-default">
+                            class="flex bg-red-50 flex-col text-[rgb(72,72,72)] p-2 my-4 border border-red-900 shadow-md shadow-red-300 rounded-lg cursor-default">
                             <p class="text-sm italic font-black">
                                 {{ $reorder_list['item_name'] }}</p>
                             <p class="text-sm italic font-thin">
