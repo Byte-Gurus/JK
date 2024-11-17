@@ -15,7 +15,8 @@ class Delivery extends Model
         'date_delivered',
         'purchase_id',
         'old_po_id',
-        'delivery_receipt'
+        'receipt_picture',
+        'receipt_number'
     ];
 
     public function purchaseJoin()

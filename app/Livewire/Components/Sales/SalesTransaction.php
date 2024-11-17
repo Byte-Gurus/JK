@@ -238,7 +238,8 @@ class SalesTransaction extends Component
                 ->orderByDesc('selling_price')
                 ->whereHas('itemJoin', function ($query) {
                     $query->where('status_id', 1);
-                });
+                })
+                ;
 
             // Apply ordering if the item is perishable
 

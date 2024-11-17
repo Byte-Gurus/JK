@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'RedirectIfLoggedIn' => RedirectIfLoggedIn::class,
             'CheckIfLoggedIn' => CheckIfLoggedIn::class,
             'ClearSession' => ClearSession::class,
+            
         ]);
 
 

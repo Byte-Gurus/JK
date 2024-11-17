@@ -43,32 +43,32 @@
                             <label for="id_picture" class="block text-sm font-medium text-white">Delivery Receipt
                             </label>
 
-                            @if (!empty($delivery_receipt))
+                            @if (!empty($receipt_picture))
                                 <button type="button" wire:click='removeSelectedPicture()'
                                     class="px-4 text-sm font-medium transition-all duration-100 ease-in-out bg-red-200 rounded-md hover:bg-red-400">Remove
                                     Picture</button>
                             @endif
                         </div>
 
-                        @if (empty($delivery_receipt))
+                        @if (empty($receipt_picture))
                             @if ($this->isCreate)
-                                <input id="delivery_receipt" type="file" accept="image/png, image/jpeg" required
-                                    wire:model="delivery_receipt"
+                                <input id="receipt_picture" type="file" accept="image/png, image/jpeg" required
+                                    wire:model="receipt_picture"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
                             @else
-                                <input id="delivery_receipt" type="file" accept="image/png, image/jpeg" nullable
-                                    wire:model="delivery_receipt"
+                                <input id="receipt_picture" type="file" accept="image/png, image/jpeg" nullable
+                                    wire:model="receipt_picture"
                                     class=" bg-[rgb(245,245,245)] border border-[rgb(143,143,143)] text-gray-900 text-sm rounded-md block w-full p-2.5">
                             @endif
                         @endif
 
-                        @if ($delivery_receipt instanceof \Illuminate\Http\UploadedFile)
-                            <img src="{{ $delivery_receipt->temporaryUrl() }}">
-                        @elseif($delivery_receipt)
-                            <img src="{{ $delivery_receipt }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
+                        @if ($receipt_picture instanceof \Illuminate\Http\UploadedFile)
+                            <img src="{{ $receipt_picture->temporaryUrl() }}">
+                        @elseif($receipt_picture)
+                            <img src="{{ $receipt_picture }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
                         @endif
 
-                        @error('delivery_receipt')
+                        @error('receipt_picture')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -81,7 +81,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            @if ($date && $delivery_receipt)
+                            @if ($date && $receipt_picture)
                                 <button type="button" wire:click="changeDate()"
                                     class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Set</button>
                             @else
