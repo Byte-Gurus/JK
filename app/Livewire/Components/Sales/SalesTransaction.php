@@ -235,7 +235,6 @@ class SalesTransaction extends Component
             $itemQuery = Inventory::with('itemJoin')
                 ->where('item_id', $item_id ?? $itemData->id)
                 ->where('status', 'Available')
-                ->orderByDesc('selling_price')
                 ->whereHas('itemJoin', function ($query) {
                     $query->where('status_id', 1);
                 })
