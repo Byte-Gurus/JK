@@ -23,7 +23,7 @@ class DeliveryDatePicker extends Component
 {
     use WithPagination, WithoutUrlPagination, LivewireAlert, WithFileUploads;
 
-    public $date, $delivery_id, $selectedDate, $receipt_picture, $isCreate = true;
+    public $date, $delivery_id, $selectedDate, $receipt_picture, $receipt_number, $isCreate = true;
 
     public function render()
     {
@@ -58,6 +58,11 @@ class DeliveryDatePicker extends Component
 
         if (!$this->receipt_picture && $this->isCreate != true) {
             $this->alert('error', 'Delivery Receipt is required.');
+            return;
+        }
+
+        if (!$this->receipt_number) {
+            $this->alert('error', 'Delivery Receipt number is required.');
             return;
         }
         $this->selectedDate = $inputDate;
@@ -138,6 +143,7 @@ class DeliveryDatePicker extends Component
 
                 // Update the current delivery details
                 $delivery->date_delivered = $this->selectedDate;
+                $delivery->receipt_number = $this->receipt_number;
                 $delivery->status = "Delivered";
                 $delivery->receipt_picture = $this->receipt_picture;
                 $delivery->save();
@@ -147,6 +153,7 @@ class DeliveryDatePicker extends Component
             } else {
                 // If there are no backorders, only update the current delivery details
                 $delivery->date_delivered = $this->selectedDate;
+                $delivery->receipt_number = $this->receipt_number;
                 $delivery->status = "Delivered";
                 $delivery->receipt_picture = $this->receipt_picture;
                 $delivery->save();
@@ -192,6 +199,7 @@ class DeliveryDatePicker extends Component
         $this->fill([
             'date' => $delivery->date_delivered,
             'receipt_picture' => $delivery->receipt_picture,
+            'receipt_number' => $delivery->receipt_number
         ]);
 
     }
@@ -206,7 +214,9 @@ class DeliveryDatePicker extends Component
     public function resetForm()
     {
         $this->reset([
-            'date'
+            'date',
+            'receipt_number',
+            'receipt_picture'
         ]);
     }
 
