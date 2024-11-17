@@ -49,6 +49,11 @@ class Item extends Model
         return $this->hasMany(BackOrder::class, 'item_id');
     }
 
+    public function ceilingPriceJoin()
+    {
+        return $this->belongsTo(CeilingPrice::class, 'item_id');
+    }
+
 
 
     public function scopeSearch($query, $value)
