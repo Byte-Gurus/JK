@@ -77,7 +77,7 @@ class SalesTransaction extends Component
     $return_number,
     $transactionDiscount,
     $excess_amount,
-     $imageUrl;
+    $imageUrl;
     public $tax_details = [];
     public $credit_details = [];
     public $customerDetails = [];
@@ -238,8 +238,12 @@ class SalesTransaction extends Component
                 ->orderByDesc('selling_price')
                 ->whereHas('itemJoin', function ($query) {
                     $query->where('status_id', 1);
-                })
-                ;
+                });
+
+            if ($itemData && $itemData->shelf_life_type === 'Perishable') {
+                $itemQuery->orderBy('expiration_date', 'asc')
+                    ->orderBy('current_stock_quantity', 'asc');
+            }
 
             // Apply ordering if the item is perishable
 
