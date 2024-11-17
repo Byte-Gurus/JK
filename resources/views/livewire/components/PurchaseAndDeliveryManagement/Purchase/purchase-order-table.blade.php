@@ -69,9 +69,9 @@
             <div class="grid grid-cols-2 gap-4 transition-transform duration-1000 ease-in-out lg:grid-cols-3">
                 @foreach ($purchases as $purchase)
                     <div
-                        class="w-full grid grid-row-col grid-rows-12 h-[30vh] transition duration-200 ease-in-out border shadow-md hover:shadow-orange-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(255,248,241)]">
+                        class="w-full transition duration-200 ease-in-out border shadow-md hover:shadow-orange-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(255,248,241)]">
                         <div
-                            class="flex pointer-events-none text-[rgb(53,53,53)] h-fit border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
+                            class="flex h-fit pointer-events-none text-[rgb(53,53,53)] border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
                             <div class="flex flex-col">
                                 <p class="text-2xl font-black">{{ $purchase->po_number }}</p>
                                 <div class="flex flex-row items-center gap-1">
@@ -80,7 +80,8 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                                     </svg>
-                                    <p class="text-sm italic font-medium"> {{ \Illuminate\Support\Str::limit($purchase->supplierJoin->company_name, 24, '...') }}
+                                    <p class="text-sm italic font-medium">
+                                        {{ \Illuminate\Support\Str::limit($purchase->supplierJoin->company_name, 24, '...') }}
                                     </p>
                                 </div>
                             </div>
@@ -91,31 +92,64 @@
                                 </p>
                             </div>
                         </div>
-                        <div
-                            class="grid h-full pointer-events-none grid-flow-row px-4 overflow-y-auto leading-none bg-[rgb(252,237,222)] row-span-7">
-                            @foreach ($purchase->purchaseDetailsJoin as $purchaseDetail)
-                                <div class="flex flex-row items-center justify-between py-2 text-left start">
-                                    <div class="flex flex-col ">
-                                        <p class="break-words text-left font-bold text-md w-[140px]">
-                                            {{ $purchaseDetail->itemsJoin->item_name }}
-                                        </p>
-                                        <p class="break-words text-left text-md font-light w-[140px]">
-                                            {{ $purchaseDetail->itemsJoin->item_description }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p class="break-words italic text-md font-light w-[140px]">
-                                            {{ $purchaseDetail->itemsJoin->item_unit }}
-                                        </p>
-                                    </div>
-                                    <div class="flex gap-1">
-                                        <p class="italic ">x</p>
-                                        <p class="font-bold text-center">{{ $purchaseDetail->purchase_quantity }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class=" overflow-x-auto overflow-y-scroll scroll h-[24vh] no-scrollbar">
+
+                            <table class="w-full text-sm text-left scroll no-scrollbar">
+
+                                {{-- //* table header --}}
+                                <thead
+                                    class="sticky top-0 text-xs font-medium text-[rgb(81,81,81)] italic uppercase bg-[rgb(255,233,211)] cursor-default">
+
+                                    <tr class=" text-nowrap">
+
+                                        <th scope="col" class="px-4 py-3 text-left">Item</th>
+
+                                        {{-- //* status --}}
+                                        <th scope="col" class="px-4 py-3 text-left">Unit</th>
+
+                                        {{-- //* username --}}
+                                        <th scope="col" class="px-4 py-3 text-center">Qty</th>
+
+                                    </tr>
+                                </thead>
+
+                                {{-- //* table body --}}
+                                <tbody>
+                                    @foreach ($purchase->purchaseDetailsJoin as $purchaseDetail)
+                                        <tr>
+
+                                            {{-- //* name --}}
+                                            <th scope="row"
+                                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                                <div class="flex flex-col ">
+                                                    <p class="break-words text-left text-wrap font-bold text-md w-[140px]">
+                                                        {{ $purchaseDetail->itemsJoin->item_name }}
+                                                    </p>
+                                                    <p class="break-words text-left text-md font-light w-[140px]">
+                                                        {{ $purchaseDetail->itemsJoin->item_description }}
+                                                    </p>
+                                                </div>
+                                            </th>
+
+                                            {{-- //* contact number --}}
+                                            <th scope="row"
+                                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                                {{ $purchaseDetail->itemsJoin->item_unit }}
+
+                                            </th>
+
+                                            {{-- //* role --}}
+                                            <th scope="row"
+                                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                                {{ $purchaseDetail->purchase_quantity }}
+                                            </th>
+
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="row-span-2 flex items-center justify-between px-4 border-t border-[rgb(53,53,53)]">
+                        <div class=" flex items-center justify-between px-4 py-1 border-t border-[rgb(53,53,53)]">
                             <div class="flex flex-row justify-between pointer-events-none ">
                                 <div class="flex flex-row items-center gap-2">
                                     <div
