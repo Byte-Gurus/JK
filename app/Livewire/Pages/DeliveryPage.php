@@ -84,7 +84,7 @@ class DeliveryPage extends Component
         $this->showDeliveryDatePicker = false;
     }
 
-    public function displayPrintPurchaseOrderDetails()
+    public function displayPrintDeliveryDetails()
     {
         $this->showDeliveryTable = false;
         $this->showPrintDeliveryDetails = true;
