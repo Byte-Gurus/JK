@@ -97,4 +97,8 @@ class SupplierItemCostsTable extends Component
         $this->reset('addItem');
 
     }
+    public function removeRow($supplierItem_id){
+        $supplierItem = SupplierItems::find($supplierItem_id);
+        $supplierItem->delete();
+    }
 }
