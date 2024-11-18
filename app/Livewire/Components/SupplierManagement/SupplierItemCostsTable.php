@@ -22,6 +22,10 @@ class SupplierItemCostsTable extends Component
     public $search = '';
     public $addItem = '';
 
+    public $showModal = false;
+
+    public $showSupplierItemCostsForm = false;
+
     public function render()
     {
 
@@ -49,7 +53,7 @@ class SupplierItemCostsTable extends Component
             ->paginate($this->perPage);
 
 
-        return view('livewire.components.supplier-management.supplier-item-costs-table', [
+        return view('livewire.components.SupplierManagement.supplier-item-costs-table', [
             'supplierItems' => $supplierItems,
             'items' => $items
         ]);
@@ -96,7 +100,16 @@ class SupplierItemCostsTable extends Component
 
         $this->reset('addItem');
 
+        $this->supplierItemCostsFormCreate();
+
     }
+
+    public function supplierItemCostsFormCreate()
+    {
+        $this->showSupplierItemCostsForm = true;
+        $this->dispatch('change-method', isCreateSupplierItemCosts: true)->to(SupplierItemCostsForm::class);
+    }
+
     public function removeRow($supplierItem_id){
         $supplierItem = SupplierItems::find($supplierItem_id);
         $supplierItem->delete();

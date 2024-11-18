@@ -7,7 +7,7 @@
                 <p class="text-[1em] font-thin text-center w-full">Company Name</p>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-[1.2em] font-black"> {{ $supplier->company_name ?? '' }}
+                <p class="text-[1em] font-black w-[400px] break-words text-wrap"> {{ $supplier->company_name ?? '' }}
                 </p>
             </div>
             <div>
@@ -17,7 +17,7 @@
                 <p class="text-[1em] font-thin text-center w-full">Contact Person</p>
             </div>
             <div class="flex flex-col gap-2">
-                <p class="text-[1.2em] font-black text-wrap">
+                <p class="text-[1.2em] font-black w-[400px] break-words text-wrap">
                     {{ $supplier->contact_person ?? '' }}
                 </p>
             </div>
@@ -63,7 +63,9 @@
                     <div
                         class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
                         @foreach ($items as $item)
-                        <ul wire:click="selectItem({{ $item->id }})"
+
+                        <ul wire:click="selectItem({{ $item->id }}); "
+                            x-on:click="showSupplierItemCostsForm=true;$wire.supplierItemCostsFormCreate()"
                             class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
                             <li class="flex items-start justify-between">
                                 <!-- Item details on the left side -->
@@ -291,5 +293,8 @@
                 </select>
             </div>
         </div>
+    </div>
+    <div x-cloak x-show="showSupplierItemCostsForm" x-data="{ showSupplierItemCostsForm: @entangle('showSupplierItemCostsForm') }">
+        @livewire('components.SupplierManagement.supplier-item-costs-form')
     </div>
 </div>

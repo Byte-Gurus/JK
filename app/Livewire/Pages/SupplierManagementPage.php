@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Livewire\Components\SupplierManagement\SupplierForm;
+use App\Livewire\Components\SupplierManagement\SupplierItemCostsForm;
 use Livewire\Component;
 
 class SupplierManagementPage extends Component
