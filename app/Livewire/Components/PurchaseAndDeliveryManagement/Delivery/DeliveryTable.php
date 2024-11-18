@@ -182,7 +182,7 @@ class DeliveryTable extends Component
     {
         $this->dispatch('print-delivery-from-table', delivery_id: $delivery_id)->to(PrintDeliveryDetails::class);
     }
-    public function displayPrintPurchaseOrderDetails()
+    public function displayPrintDeliveryDetails()
     {
         $this->dispatch('hide-navbar')->to(PurchaseAndDeliveryManagementPage::class);
         $this->dispatch('display-print-delivery-details')->to(DeliveryPage::class);
