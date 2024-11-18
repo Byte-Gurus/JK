@@ -14,6 +14,8 @@ class DeliveryPage extends Component
     public $showBackorderForm = false;
     public $showDeliveryDatePicker = false;
 
+    public $showPrintDeliveryDetails = false;
+
 
     public function render()
     {
@@ -80,5 +82,11 @@ class DeliveryPage extends Component
     public function closeDeliveryDatePicker()
     {
         $this->showDeliveryDatePicker = false;
+    }
+
+    public function displayPrintPurchaseOrderDetails()
+    {
+        $this->showDeliveryTable = false;
+        $this->showPrintDeliveryDetails = true;
     }
 }
