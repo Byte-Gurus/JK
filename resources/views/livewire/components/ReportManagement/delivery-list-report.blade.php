@@ -91,7 +91,7 @@
                 </li>
                 <li class="col-span-1 text-left py-[3px]">
                     <div>
-                        <p class="text-[1em] text-left font-medium">
+                        <p class="text-[1em] text-center font-medium">
                             {{ $delivery->id }}
                         </p>
                     </div>
