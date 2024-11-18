@@ -73,7 +73,8 @@
                         @enderror
                     </div>
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="text" wire:model.live="receipt_number" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <input type="text" wire:model.live="receipt_number"
+                            class="w-full p-4 rounded-md hover:bg-gray-300">
                     </div>
 
                     @error('receipt_number')
