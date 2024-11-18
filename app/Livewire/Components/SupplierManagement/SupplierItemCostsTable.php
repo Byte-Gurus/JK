@@ -86,20 +86,7 @@ class SupplierItemCostsTable extends Component
 
     public function selectItem($itemId)
     {
-        $isItemExist = SupplierItems::where('item_id', $itemId)->exists();
-
-        if ($isItemExist) {
-            $this->alert('error', ' This item already exist');
-            return;
-        }
-        $supplierItem = SupplierItems::create([
-            'item_cost' => 0.00,
-            'item_id' => $itemId,
-            'supplier_id' => $this->supplier_id
-        ]);
-
-        $this->reset('addItem');
-
+        $this->dispatch('get-supplier-item', $itemId)->to(SupplierItemCostsForm::class);
         $this->supplierItemCostsFormCreate();
 
     }
@@ -110,7 +97,8 @@ class SupplierItemCostsTable extends Component
         $this->dispatch('change-method', isCreateSupplierItemCosts: true)->to(SupplierItemCostsForm::class);
     }
 
-    public function removeRow($supplierItem_id){
+    public function removeRow($supplierItem_id)
+    {
         $supplierItem = SupplierItems::find($supplierItem_id);
         $supplierItem->delete();
     }

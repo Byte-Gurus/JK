@@ -68,27 +68,6 @@
                             </div>
 
                             <div class="p-4">
-
-                                {{-- //* first row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
-                                    <div class="mb-3">
-
-                                        <label for="item_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Name
-                                        </label>
-
-                                        <input type="text" id="item_name" wire:model="item_name"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
-                                            placeholder="Item Name" tabindex="1" required />
-
-                                        @error('item_name')
-                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                </div>
-
                                 {{-- //* second row --}}
                                 <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 

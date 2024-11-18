@@ -17,6 +17,7 @@ class SupplierItemCostsForm extends Component
         'edit-supplier-item-costs-from-table' => 'edit',  //* key:'edit-supplier-from-table' value:'edit'  galing sa SupplierTable class
         //* key:'change-method' value:'changeMethod' galing sa SupplierTable class,  laman false
         'change-method' => 'changeMethod',
+        'get-supplier-item' => 'getSupplierItem',
         'updateConfirmed',
         'createConfirmed',
     ];
@@ -40,5 +41,9 @@ class SupplierItemCostsForm extends Component
             // $this->status = 1;
             $this->resetForm();
         }
+    }
+
+    public function getSupplierItem(){
+        
     }
 }
