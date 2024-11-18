@@ -171,7 +171,6 @@ class DeliveryTable extends Component
     {
         $delivery = Delivery::find($delivery_id);
         $this->imageUrl =  $delivery->delivery_receipt;
-        dd('hi');
     }
 
     public function closeImage()
