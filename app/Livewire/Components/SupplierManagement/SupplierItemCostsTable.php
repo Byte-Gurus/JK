@@ -94,7 +94,7 @@ class SupplierItemCostsTable extends Component
             'supplier_id' => $this->supplier_id
         ]);
 
-        $this->reset('addItems');
+        $this->reset('addItem');
 
     }
 }
