@@ -169,6 +169,7 @@ class DeliveryTable extends Component
 
     public function showImage($delivery_id)
     {
+        dump($delivery_id);
         $delivery = Delivery::find($delivery_id);
         $this->imageUrl =  $delivery->delivery_receipt;
     }
