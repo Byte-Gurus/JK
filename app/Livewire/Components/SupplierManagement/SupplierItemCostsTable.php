@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Components\SupplierManagement;
 
+use App\Models\Item;
 use App\Models\Supplier;
 use App\Models\SupplierItems;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class SupplierItemCostsTable extends Component
 {
-    use WithPagination, WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination, LivewireAlert;
     public $supplier_id, $supplier;
 
     public $unitFilter = 0; //var filtering value = all
@@ -18,6 +20,7 @@ class SupplierItemCostsTable extends Component
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';
+    public $addItem = '';
 
     public function render()
     {
@@ -39,13 +42,16 @@ class SupplierItemCostsTable extends Component
             });
         }
 
+        $items = Item::all();
+
         $supplierItems = $query->search($this->search) //?search the user
             ->orderBy($this->sortColumn, $this->sortDirection) //? i sort ang column based sa $sortColumn na var
             ->paginate($this->perPage);
 
 
         return view('livewire.components.supplier-management.supplier-item-costs-table', [
-            'supplierItems' => $supplierItems
+            'supplierItems' => $supplierItems,
+            'items' => $items
         ]);
     }
 
@@ -70,6 +76,25 @@ class SupplierItemCostsTable extends Component
     {
         $this->supplier_id = $supplierId;
         $this->supplier = Supplier::find($supplierId);
+
+
+    }
+
+    public function selectItem($itemId)
+    {
+        $isItemExist = SupplierItems::where('item_id', $itemId)->exists();
+
+        if ($isItemExist) {
+            $this->alert('error', ' This item already exist');
+            return;
+        }
+        $supplierItem = SupplierItems::create([
+            'item_cost' => 0.00,
+            'item_id' => $itemId,
+            'supplier_id' => $this->supplier_id
+        ]);
+
+        $this->reset('addItems');
 
     }
 }

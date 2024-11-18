@@ -25,6 +25,8 @@ class InventoryTable extends Component
 
     public $startDate, $endDate;
     public $sku_code;
+    public $unitFilter = 0;
+    public $categoryFilter = 0;
     public function mount($sku_code = null)
     {
         $this->search = $this->sku_code;
@@ -39,6 +41,12 @@ class InventoryTable extends Component
 
         if ($this->statusFilter != 0) {
             $query->where('status', $this->statusFilter); //?hanapin ang status na may same value sa statusFilter
+        }
+
+        if ($this->unitFilter != 0) {
+            $query->whereHas('itemJoin', function ($query) {
+                $query->where('item_unit', $this->unitFilter); //?hanapin ang status na may same value sa statusFilter
+            });
         }
 
         if ($this->supplierFilter != 0) {

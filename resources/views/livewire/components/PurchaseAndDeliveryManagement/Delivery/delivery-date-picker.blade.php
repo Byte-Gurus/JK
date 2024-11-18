@@ -73,7 +73,7 @@
                         @enderror
                     </div>
                     <div class="flex justify-center w-full my-4 ">
-                        <input type="text" wire:model="receipt_number" class="w-full p-4 rounded-md hover:bg-gray-300">
+                        <input type="text" wire:model.live="receipt_number" class="w-full p-4 rounded-md hover:bg-gray-300">
                     </div>
 
                     @error('receipt_number')
@@ -87,7 +87,7 @@
                                 Cancel</button>
                         </div>
                         <div>
-                            @if ($date && $receipt_picture && receipt_number)
+                            @if ($date && $receipt_picture && $receipt_number)
                                 <button type="button" wire:click="changeDate()"
                                     class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Set</button>
                             @else

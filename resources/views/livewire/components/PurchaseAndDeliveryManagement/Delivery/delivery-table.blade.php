@@ -52,7 +52,7 @@
                     <option value="0">All</option>
 
                     @foreach ($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                    <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -62,166 +62,163 @@
     <div
         class="overflow-x-auto overflow-y-scroll border rounded-md border-[rgb(149,149,149)] shadow-md bg-[rgb(252,252,252)] p-2 scroll no-scrollbar h-[60vh]">
         @if (empty($deliveries))
-            <div class="flex items-center justify-center w-full h-full">
-                <p class="text-[1.8em] opacity-40 font-black">NO PURCHASE ORDERS YET</p>
-            </div>
+        <div class="flex items-center justify-center w-full h-full">
+            <p class="text-[1.8em] opacity-40 font-black">NO PURCHASE ORDERS YET</p>
+        </div>
         @else
-            <div class="grid grid-cols-2 gap-4 transition-transform duration-1000 ease-in-out lg:grid-cols-3">
-                @foreach ($deliveries as $delivery)
-                    <div
-                        class="w-full transition duration-200 ease-in-out border shadow-md hover:shadow-blue-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(241,250,255)]">
-                        <div
-                            class="flex h-fit pointer-events-none text-[rgb(53,53,53)] border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
-                            <div class="flex flex-col">
-                                <p class="text-2xl font-black">{{ $delivery->purchaseJoin->po_number }}</p>
-                                <div class="flex flex-row items-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-                                    </svg>
-                                    <p class="text-sm italic font-medium">
-                                        {{ \Illuminate\Support\Str::limit($delivery->purchaseJoin->supplierJoin->company_name, 24, '...') }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex flex-col ">
-                                <div class="flex flex-row items-center justify-end gap-1">
-                                    <p class="text-sm italic font-thin">Created</p>
-                                    <p class="italic font-bold text-right">
-                                        {{ $delivery->created_at->format(' M d Y ') }}
-                                    </p>
-                                </div>
-                                @if ($delivery->status == 'Delivered')
-                                    <div class="flex flex-row items-center justify-end gap-1">
-                                        <p class="text-sm italic font-thin">Delivered</p>
-                                        <p class="italic font-bold text-right">
-                                            {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ') }}
+        <div class="grid grid-cols-2 gap-4 transition-transform duration-1000 ease-in-out lg:grid-cols-3">
+            @foreach ($deliveries as $delivery)
+            <div
+                class="w-full transition duration-200 ease-in-out border shadow-md hover:shadow-blue-900 border-[rgb(53,53,53)] rounded-md bg-[rgb(241,250,255)]">
+                <div
+                    class="flex h-fit pointer-events-none text-[rgb(53,53,53)] border-b border-[rgb(53,53,53)] flex-row justify-between row-span-3 px-4 py-2">
+                    <div class="flex flex-col">
+                        <p class="text-2xl font-black">{{ $delivery->purchaseJoin->po_number }}</p>
+                        <div class="flex flex-row items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                            </svg>
+                            <p class="text-sm italic font-medium">
+                                {{ \Illuminate\Support\Str::limit($delivery->purchaseJoin->supplierJoin->company_name,
+                                24, '...') }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col ">
+                        <div class="flex flex-row items-center justify-end gap-1">
+                            <p class="text-sm italic font-thin">Created</p>
+                            <p class="italic font-bold text-right">
+                                {{ $delivery->created_at->format(' M d Y ') }}
+                            </p>
+                        </div>
+                        @if ($delivery->status == 'Delivered')
+                        <div class="flex flex-row items-center justify-end gap-1">
+                            <p class="text-sm italic font-thin">Delivered</p>
+                            <p class="italic font-bold text-right">
+                                {{ \Carbon\Carbon::parse($delivery->date_delivered)->format(' M d Y ') }}
+                            </p>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                <div class=" overflow-x-auto overflow-y-scroll scroll h-[24vh] no-scrollbar">
+
+                    <table class="w-full text-sm text-left scroll no-scrollbar">
+
+                        {{-- //* table header --}}
+                        <thead
+                            class="sticky top-0 text-xs font-medium text-[rgb(81,81,81)] italic uppercase bg-[rgb(211,255,246)] cursor-default">
+
+                            <tr class=" text-nowrap">
+
+                                <th scope="col" class="px-4 py-3 text-left">Item</th>
+
+                                {{-- //* status --}}
+                                <th scope="col" class="px-4 py-3 text-left">Unit</th>
+
+                                {{-- //* username --}}
+                                <th scope="col" class="px-4 py-3 text-center">Qty</th>
+
+                            </tr>
+                        </thead>
+
+                        {{-- //* table body --}}
+                        <tbody>
+                            @foreach ($delivery->purchaseJoin->purchaseDetailsJoin as $purchaseDetail)
+                            <tr>
+
+                                {{-- //* name --}}
+                                <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                    <div class="flex flex-col ">
+                                        <p class="break-words text-left text-wrap font-bold text-md w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_name }}
+                                        </p>
+                                        <p class="break-words text-left text-md font-light w-[140px]">
+                                            {{ $purchaseDetail->itemsJoin->item_description }}
                                         </p>
                                     </div>
-                                @endif
+                                </th>
+
+                                {{-- //* contact number --}}
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->itemsJoin->item_unit }}
+
+                                </th>
+
+                                {{-- //* role --}}
+                                <th scope="row"
+                                    class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
+                                    {{ $purchaseDetail->purchase_quantity }}
+                                </th>
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class=" flex items-center justify-between px-4 py-1 border-t border-[rgb(53,53,53)]">
+                    <div class="flex flex-row justify-between pointer-events-none ">
+                        <div class="flex flex-row items-center gap-2">
+                            <div @if ($delivery->status == 'Delivered') class="bg-green-200 border
+                                w-[16px] h-[16px] border-green-900 rounded-full pointer-events-none"
+
+                                @elseif ($delivery->status == 'Cancelled')
+
+                                class="text-xs font-thin text-center bg-red-200 border border-red-900 rounded-full
+                                w-[16px] h-[16px] pointer-events-none "
+
+                                @elseif ($delivery->status == 'Complete Stock in')
+
+                                class="text-xs font-thin text-center bg-blue-200 border border-blue-900 rounded-full
+                                w-[16px] h-[16px] pointer-events-none "
+
+                                @elseif ($delivery->status == 'Stocked in with backorder')
+
+                                class="text-xs font-thin text-center bg-purple-200 border border-purple-900 rounded-full
+                                w-[16px] h-[16px] pointer-events-none "
+
+                                @elseif ($delivery->status == 'In Progress')
+
+                                class="text-xs font-thin text-center bg-orange-200 border border-orange-900
+                                rounded-full w-[16px] h-[16px] pointer-events-none "
+
+                                @elseif ($delivery->status == 'Backorder complete')
+
+                                class="text-xs font-thin text-center bg-pink-200 border border-pink-900 rounded-full
+                                w-[16px] h-[16px] pointer-events-none " @endif>
                             </div>
+                            <p class="text-sm ">{{ $delivery->status }}</p>
                         </div>
-                        <div class=" overflow-x-auto overflow-y-scroll scroll h-[24vh] no-scrollbar">
+                    </div>
+                    <div class="flex justify-center gap-2">
 
-                            <table class="w-full text-sm text-left scroll no-scrollbar">
-
-                                {{-- //* table header --}}
-                                <thead
-                                    class="sticky top-0 text-xs font-medium text-[rgb(81,81,81)] italic uppercase bg-[rgb(211,255,246)] cursor-default">
-
-                                    <tr class=" text-nowrap">
-
-                                        <th scope="col" class="px-4 py-3 text-left">Item</th>
-
-                                        {{-- //* status --}}
-                                        <th scope="col" class="px-4 py-3 text-left">Unit</th>
-
-                                        {{-- //* username --}}
-                                        <th scope="col" class="px-4 py-3 text-center">Qty</th>
-
-                                    </tr>
-                                </thead>
-
-                                {{-- //* table body --}}
-                                <tbody>
-                                    @foreach ($delivery->purchaseJoin->purchaseDetailsJoin as $purchaseDetail)
-                                        <tr>
-
-                                            {{-- //* name --}}
-                                            <th scope="row"
-                                                class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                                <div class="flex flex-col ">
-                                                    <p
-                                                        class="break-words text-left text-wrap font-bold text-md w-[140px]">
-                                                        {{ $purchaseDetail->itemsJoin->item_name }}
-                                                    </p>
-                                                    <p class="break-words text-left text-md font-light w-[140px]">
-                                                        {{ $purchaseDetail->itemsJoin->item_description }}
-                                                    </p>
-                                                </div>
-                                            </th>
-
-                                            {{-- //* contact number --}}
-                                            <th scope="row"
-                                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
-                                                {{ $purchaseDetail->itemsJoin->item_unit }}
-
-                                            </th>
-
-                                            {{-- //* role --}}
-                                            <th scope="row"
-                                                class="px-4 py-4 font-medium text-center text-gray-900 text-md whitespace-nowrap ">
-                                                {{ $purchaseDetail->purchase_quantity }}
-                                            </th>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class=" flex items-center justify-between px-4 py-1 border-t border-[rgb(53,53,53)]">
-                            <div class="flex flex-row justify-between pointer-events-none ">
-                                <div class="flex flex-row items-center gap-2">
-                                    <div
-                                        @if ($delivery->status == 'Delivered') class="bg-green-200 border
-                                            w-[16px] h-[16px] border-green-900 rounded-full pointer-events-none"
-
-                                            @elseif ($delivery->status == 'Cancelled')
-
-                                            class="text-xs font-thin text-center bg-red-200 border border-red-900 rounded-full
-                                            w-[16px] h-[16px] pointer-events-none "
-
-                                            @elseif ($delivery->status == 'Complete Stock in')
-
-                                            class="text-xs font-thin text-center bg-blue-200 border border-blue-900 rounded-full
-                                            w-[16px] h-[16px] pointer-events-none "
-
-                                            @elseif ($delivery->status == 'Stocked in with backorder')
-
-                                            class="text-xs font-thin text-center bg-purple-200 border border-purple-900 rounded-full
-                                            w-[16px] h-[16px] pointer-events-none "
-
-                                            @elseif ($delivery->status == 'In Progress')
-
-                                            class="text-xs font-thin text-center bg-orange-200 border border-orange-900
-                                            rounded-full w-[16px] h-[16px] pointer-events-none "
-
-                                            @elseif ($delivery->status == 'Backorder complete')
-
-                                            class="text-xs font-thin text-center bg-pink-200 border border-pink-900 rounded-full
-                                            w-[16px] h-[16px] pointer-events-none " @endif>
-                                    </div>
-                                    <p class="text-sm ">{{ $delivery->status }}</p>
+                        @if ($delivery->status === 'Cancelled')
+                        <p class="italic font-medium text-md">N/A</p>
+                        @elseif ($delivery->status === 'In Progress')
+                        <div class="flex flex-row items-center gap-2">
+                            <button x-on:click="$wire.cancelDelivery({{ $delivery->id }}); openActions = !openActions"
+                                class="flex items-center p-1.5 transition-all duration-100 ease-in-out rounded-full hover:bg-red-200">
+                                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="text-red-500 size-6">
+                                        <path
+                                            d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375Z" />
+                                        <path fill-rule="evenodd"
+                                            d="m3.087 9 .54 9.176A3 3 0 0 0 6.62 21h10.757a3 3 0 0 0 2.995-2.824L20.913 9H3.087Zm6.133 2.845a.75.75 0 0 1 1.06 0l1.72 1.72 1.72-1.72a.75.75 0 1 1 1.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 1 1-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 1 1-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 0 1 0-1.06Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
                                 </div>
-                            </div>
-                            <div class="flex justify-center gap-2">
-
-                                @if ($delivery->status === 'Cancelled')
-                                    <p class="italic font-medium text-md">N/A</p>
-                                @elseif ($delivery->status === 'In Progress')
-                                    <div class="flex flex-row items-center gap-2">
-                                        <button
-                                            x-on:click="$wire.cancelDelivery({{ $delivery->id }}); openActions = !openActions"
-                                            class="flex items-center p-1.5 transition-all duration-100 ease-in-out rounded-full hover:bg-red-200">
-                                            <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    fill="currentColor" class="text-red-500 size-6">
-                                                    <path
-                                                        d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375Z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="m3.087 9 .54 9.176A3 3 0 0 0 6.62 21h10.757a3 3 0 0 0 2.995-2.824L20.913 9H3.087Zm6.133 2.845a.75.75 0 0 1 1.06 0l1.72 1.72 1.72-1.72a.75.75 0 1 1 1.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 1 1-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 1 1-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 0 1 0-1.06Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </button>
-                                        <button x-on:click='$wire.displayDeliveryDatePicker()'
-                                            wire:click="changeDate({{ $delivery->id }})"
-                                            class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-green-100 border border-green-900 rounded-lg hover:bg-green-300 duration-0">
-                                            <p class="text-sm ">Set Delivery Date
-                                            </p>
-                                        </button>
-                                    </div>
-                                @endif
+                            </button>
+                            <button x-on:click='$wire.displayDeliveryDatePicker()'
+                                wire:click="changeDate({{ $delivery->id }})"
+                                class="flex flex-row items-center gap-2 px-2 py-0.5 font-bold transition-none ease-in-out bg-green-100 border border-green-900 rounded-lg hover:bg-green-300 duration-0">
+                                <p class="text-sm ">Set Delivery Date
+                                </p>
+                            </button>
+                        </div>
+                        @endif
 
                                 @if ($delivery->status == 'Delivered')
                                     <div class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline"
@@ -259,8 +256,8 @@
                                         <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
                                     </div>
                                     <div class="cursor-pointer hover:bg-[rgb(174,236,255)] rounded-full p-1"
-                                        wire:click="printDelivery({{ $delivery->id }})"
-                                        x-on:click="$wire.displayPrintDeliveryDetails()">
+                                        wire:click="printPO({{ $delivery->id }})"
+                                        x-on:click="$wire.displayPrintPurchaseOrderDetails()">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -277,8 +274,8 @@
                                         <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
                                     </div>
                                     <div class="cursor-pointer hover:bg-[rgb(174,236,255)] rounded-full p-1"
-                                        wire:click="printDelivery({{ $delivery->id }})"
-                                        x-on:click="$wire.displayPrintDeliveryDetails()">
+                                        wire:click="printPO({{ $delivery->id }})"
+                                        x-on:click="$wire.displayPrintPurchaseOrderDetails()">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -329,25 +326,24 @@
         </div>
     </div>
     @if ($imageUrl)
-        <div
-            class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
+    <div class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
 
-            <div class="flex flex-col items-center justify-center w-screen h-screen p-4 rounded-lg ">
-                <div class="self-center bg-red-200 z-60">
-                    <button type="button" wire:click='closeImage'
-                        class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto "
-                        data-modal-hide="UserModal">
+        <div class="flex flex-col items-center justify-center w-screen h-screen p-4 rounded-lg ">
+            <div class="self-center bg-red-200 z-60">
+                <button type="button" wire:click='closeImage'
+                    class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto "
+                    data-modal-hide="UserModal">
 
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <img src="{{ $imageUrl }}" alt="Delivery Receipt" class="w-1/3 h-1/2">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
             </div>
+            <img src="{{ $imageUrl }}" alt="Delivery Receipt" class="w-1/3 h-1/2">
         </div>
+    </div>
     @endif
 </div>

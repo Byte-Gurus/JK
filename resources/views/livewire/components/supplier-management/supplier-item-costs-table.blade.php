@@ -54,35 +54,35 @@
                                     d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
                         </div>
-                        <input wire:model.live.debounce.300ms='search' type="text" list="itemList"
+                        <input wire:model.live.debounce.300ms='addItem' type="text" list="itemList"
                             class="w-[200px] p-4 pl-10 hover:bg-[rgb(230,230,230)] outline-offset-2 hover:outline transition duration-100 ease-in-out border border-[rgb(53,53,53)] placeholder-[rgb(101,101,101)] text-[rgb(53,53,53)] rounded-sm cursor-pointer text-sm bg-[rgb(242,242,242)] focus:ring-primary-500 focus:border-primary-500"
                             placeholder="Search by Item Name or Barcode" required="">
                     </div>
 
-                    @if (!empty($search))
-                        <div
-                            class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
-                            @foreach ($items as $item)
-                                <ul wire:click="selectItem({{ $item->id }})"
-                                    class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
-                                    <li class="flex items-start justify-between">
-                                        <!-- Item details on the left side -->
-                                        <div class="flex flex-col w-[200px] items-start leading-1">
-                                            <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
-                                            <div class="text-[0.8em]">{{ $item->item_description }}</div>
-                                        </div>
+                    @if (!empty($addItem))
+                    <div
+                        class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
+                        @foreach ($items as $item)
+                        <ul wire:click="selectItem({{ $item->id }})"
+                            class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
+                            <li class="flex items-start justify-between">
+                                <!-- Item details on the left side -->
+                                <div class="flex flex-col w-[200px] items-start leading-1">
+                                    <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
+                                    <div class="text-[0.8em]">{{ $item->item_description }}</div>
+                                </div>
 
-                                        <!-- Price on the right side -->
-                                        <div class="flex flex-row items-center self-center justify-between gap-2 pr-2 ">
+                                <!-- Price on the right side -->
+                                {{-- <div class="flex flex-row items-center self-center justify-between gap-2 pr-2 ">
 
-                                            <p class="text-[1em] font-medium italic">PHP</p>
-                                            <p class="text-[1.5em] font-bold ">
-                                                {{ number_format($item->highestPricedInventory->selling_price, 2) }}
-                                        </div>
-                                    </li>
-                                </ul>
-                            @endforeach
-                        </div>
+                                    <p class="text-[1em] font-medium italic">PHP</p>
+                                    <p class="text-[1.5em] font-bold ">
+                                        {{ number_format($item->highestPricedInventory->selling_price, 2) }}
+                                </div> --}}
+                            </li>
+                        </ul>
+                        @endforeach
+                    </div>
                     @endif
                 </div>
 
@@ -167,36 +167,36 @@
                 <tbody>
 
                     @foreach ($supplierItems as $supplierItem)
-                        <tr
-                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                    <tr
+                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplierItem->itemJoin->item_name }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplierItem->itemJoin->item_name }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplierItem->itemJoin->item_description }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplierItem->itemJoin->item_description }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplierItem->itemJoin->item_unit }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplierItem->itemJoin->item_unit }}
+                        </th>
 
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplierItem->itemJoin->item_category }}
-                            </th>
-
-
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ number_format($supplierItem->item_cost, 2) }}
-                            </th>
-
-                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                                {{ $supplierItem->created_at->format('M d Y ') }}
-                            </th>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplierItem->itemJoin->item_category }}
+                        </th>
 
 
-                        </tr>
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ number_format($supplierItem->item_cost, 2) }}
+                        </th>
+
+                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                            {{ $supplierItem->created_at->format('M d Y ') }}
+                        </th>
+
+
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
