@@ -60,29 +60,29 @@
                     </div>
 
                     @if (!empty($addItem))
-                    <div
-                        class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
-                        @foreach ($items as $item)
-                        <ul wire:click="selectItem({{ $item->id }})"
-                            class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
-                            <li class="flex items-start justify-between">
-                                <!-- Item details on the left side -->
-                                <div class="flex flex-col w-[200px] items-start leading-1">
-                                    <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
-                                    <div class="text-[0.8em]">{{ $item->item_description }}</div>
-                                </div>
+                        <div
+                            class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
+                            @foreach ($items as $item)
+                                <ul wire:click="selectItem({{ $item->id }})"
+                                    class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
+                                    <li class="flex items-start justify-between">
+                                        <!-- Item details on the left side -->
+                                        <div class="flex flex-col w-[200px] items-start leading-1">
+                                            <div class="text-[1.2em] font-bold text-wrap">{{ $item->item_name }}</div>
+                                            <div class="text-[0.8em]">{{ $item->item_description }}</div>
+                                        </div>
 
-                                <!-- Price on the right side -->
-                                {{-- <div class="flex flex-row items-center self-center justify-between gap-2 pr-2 ">
+                                        <!-- Price on the right side -->
+                                        {{-- <div class="flex flex-row items-center self-center justify-between gap-2 pr-2 ">
 
                                     <p class="text-[1em] font-medium italic">PHP</p>
                                     <p class="text-[1.5em] font-bold ">
                                         {{ number_format($item->highestPricedInventory->selling_price, 2) }}
                                 </div> --}}
-                            </li>
-                        </ul>
-                        @endforeach
-                    </div>
+                                    </li>
+                                </ul>
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
@@ -126,20 +126,20 @@
 
 
                         {{-- //* item name --}}
-                        <th scope="col" class="px-4 py-3 text-center">Item Name</th>
+                        <th scope="col" class="px-4 py-3 text-left">Item Name</th>
 
                         {{-- //* item description --}}
-                        <th scope="col" class="px-4 py-3">Item Description</th>
+                        <th scope="col" class="px-4 py-3 text-left">Item Description</th>
 
 
                         {{-- //* unit --}}
-                        <th scope="col" class="px-4 py-3">Unit</th>
+                        <th scope="col" class="px-4 py-3 text-left">Unit</th>
 
                         {{-- //* category --}}
-                        <th scope="col" class="px-4 py-3">Category</th>
+                        <th scope="col" class="px-4 py-3 text-left">Category</th>
 
                         {{-- //* item cost --}}
-                        <th scope="col" class="px-4 py-3">Item Cost (₱)</th>
+                        <th scope="col" class="px-4 py-3 text-right">Item Cost (₱)</th>
 
 
                         {{-- //* created at --} --}}
@@ -160,6 +160,9 @@
 
                             </div>
                         </th>
+
+                        {{-- //* action --}}
+                        <th scope="col" class="px-4 py-3 text-nowrap">Actions</th>
                     </tr>
                 </thead>
 
@@ -167,36 +170,86 @@
                 <tbody>
 
                     @foreach ($supplierItems as $supplierItem)
-                    <tr
-                        class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
+                        <tr
+                            class="border-b border-[rgb(207,207,207)] hover:bg-[rgb(246,246,246)] transition ease-in duration-75">
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_name }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_name }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_description }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_description }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_unit }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_unit }}
+                            </th>
 
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->itemJoin->item_category }}
-                        </th>
-
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ number_format($supplierItem->item_cost, 2) }}
-                        </th>
-
-                        <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
-                            {{ $supplierItem->created_at->format('M d Y ') }}
-                        </th>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-left text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->itemJoin->item_category }}
+                            </th>
 
 
-                    </tr>
+                            <th scope="row"
+                                class="px-4 py-4 font-medium text-right text-gray-900 text-md whitespace-nowrap ">
+                                {{ number_format($supplierItem->item_cost, 2) }}
+                            </th>
+
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 text-md whitespace-nowrap ">
+                                {{ $supplierItem->created_at->format('M d Y ') }}
+                            </th>
+
+                            {{-- //* Action --}}
+                            <th class="px-4 py-4 text-center z-99 text-md text-nowrap">
+                                <div x-data="{ openActions: false }">
+                                    <div x-on:click="openActions = !openActions"
+                                        class="p-1 flex items-center justify-center cursor-pointer transition-all duration-100 ease-in-out rounded-full hover:bg-[rgba(0,0,0,0.08)]">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
+
+                                    <div x-show="openActions" x-transition:enter="transition ease-in-out duration-300"
+                                        x-cloak x-transition:enter-start="transform opacity-100 scale-0"
+                                        x-transition:enter-end="transform opacity-100 scale-100"
+                                        x-transition:leave="transition ease-out duration-100"
+                                        x-transition:leave-start="transform opacity-100 scale-100"
+                                        x-transition:leave-end="transform opacity-0 scale-0"
+                                        x-on:click.away="openActions = false"
+                                        class="absolute overflow-hidden  right-11 z-10 transform max-w-m origin-top-right w-[170px]">
+
+                                        <div
+                                            class=" overflow-y-auto rounded-l-lg rounded-br-lg rounded-tr-none h-3/5 max-h-full
+                                min-h-[20%]">
+                                            <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
+
+                                                <button
+                                                    x-on:click="$wire.displayInventoryForm(), openActions = !openActions"
+                                                    wire:click="getStockPrice({{ $inventory->id }})"
+                                                    class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5"
+                                                            stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg>
+                                                    </div>
+                                                    <div>Edit</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
