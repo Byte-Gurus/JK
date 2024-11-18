@@ -326,7 +326,7 @@
             </div>
         </div>
     </div>
-    @if ($imageUrl)
+    @if ($receipt_picture)
         <div
             class="fixed inset-0 top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-gray-900/50 ">
 
@@ -344,7 +344,7 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <img src="{{ $imageUrl }}" alt="Delivery Receipt" class="w-1/3 h-1/2">
+                <img src="{{ $receipt_picture }}" alt="Customer ID Picture" class="w-1/3 h-1/2">
             </div>
         </div>
     @endif

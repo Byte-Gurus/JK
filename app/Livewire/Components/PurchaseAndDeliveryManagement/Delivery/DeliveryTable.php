@@ -25,7 +25,7 @@ class DeliveryTable extends Component
     public $sortColumn = 'id'; //var defualt sort is ID
     public $perPage = 10; //var for pagination
     public $search = '';  //var search component
-    public $imageUrl;
+    public $receipt_picture;
 
     public $statusFilter = 0; //var filtering value = all
     //var filtering value = all
@@ -169,9 +169,8 @@ class DeliveryTable extends Component
 
     public function showImage($delivery_id)
     {
-        dump($delivery_id);
         $delivery = Delivery::find($delivery_id);
-        $this->imageUrl =  $delivery->delivery_receipt;
+        $this->receipt_picture =  $delivery->receipt_picture;
     }
 
     public function closeImage()
