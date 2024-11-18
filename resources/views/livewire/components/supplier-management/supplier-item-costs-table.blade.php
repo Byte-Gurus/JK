@@ -232,7 +232,7 @@
 
                                                 <button
                                                     x-on:click="$wire.displayInventoryForm(), openActions = !openActions"
-                                                    wire:click="getStockPrice({{ $inventory->id }})"
+                                                    {{-- wire:click="getStockPrice({{ $inventory->id }})" --}}
                                                     class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
