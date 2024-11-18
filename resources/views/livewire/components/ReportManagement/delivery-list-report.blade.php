@@ -99,7 +99,7 @@
                 <li class="col-span-1 text-left py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-medium">
-                            {{ $delivery->receipt_number }}
+                            {{ $delivery->receipt_number ?? 'N/A' }}
                         </p>
                     </div>
                 </li>
