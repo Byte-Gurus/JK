@@ -1,6 +1,7 @@
-<div x-cloak>
+<div x-cloak x-data=" hide: @entangle('hide')">
     <div class="flex flex-row justify-between w-full">
-        <div class="flex flex-row w-full items-center justify-between mb-[3vh]">
+        <div class="flex flex-row w-full items-center justify-between mb-[3vh]"
+        :class=" hide && 'hidden' ">
             <h1 class="text-[2em] font-bold pointer-events-none">
                 @if ($this->showDeliveryTable)
                     List of Deliveries

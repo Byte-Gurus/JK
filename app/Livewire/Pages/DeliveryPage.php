@@ -16,6 +16,7 @@ class DeliveryPage extends Component
 
     public $showPrintDeliveryDetails = false;
 
+    public $hide = false;
 
     public function render()
     {
@@ -88,5 +89,6 @@ class DeliveryPage extends Component
     {
         $this->showDeliveryTable = false;
         $this->showPrintDeliveryDetails = true;
+        $this->hide = true;
     }
 }
