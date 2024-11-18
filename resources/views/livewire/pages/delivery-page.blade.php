@@ -58,4 +58,7 @@
     <div x-show="showDeliveryDatePicker" x-data="{ showDeliveryDatePicker: @entangle('showDeliveryDatePicker') }">
         @livewire('components.PurchaseAndDeliveryManagement.Delivery.delivery-date-picker')
     </div>
+    <div x-data="{ showPrintDeliveryDetails: @entangle('showPrintDeliveryDetails') }" x-show="showPrintDeliveryDetails">
+        @livewire('components.PurchaseAndDeliveryManagement.print-delivery-details')
+    </div>
 </div>

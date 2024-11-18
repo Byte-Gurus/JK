@@ -3,7 +3,9 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement\Delivery;
 
 use App\Events\DeliveryEvent;
+use App\Livewire\Components\PurchaseAndDeliveryManagement\PrintDeliveryDetails;
 use App\Livewire\Pages\DeliveryPage;
+use App\Livewire\Pages\PurchaseAndDeliveryManagementPage;
 use App\Models\BackOrder;
 use App\Models\Delivery;
 use App\Models\Purchase;
@@ -169,10 +171,21 @@ class DeliveryTable extends Component
     {
         $delivery = Delivery::find($delivery_id);
         $this->imageUrl =  $delivery->delivery_receipt;
+        dd('hi');
     }
 
     public function closeImage()
     {
         $this->reset(['imageUrl']);
+    }
+
+    public function printDelivery($delivery_id)
+    {
+        $this->dispatch('print-delivery-from-table', delivery_id: $delivery_id)->to(PrintDeliveryDetails::class);
+    }
+    public function displayPrintPurchaseOrderDetails()
+    {
+        $this->dispatch('hide-navbar')->to(PurchaseAndDeliveryManagementPage::class);
+        $this->dispatch('display-print-delivery-details')->to(DeliveryPage::class);
     }
 }

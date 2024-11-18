@@ -27,6 +27,7 @@ class DeliveryPage extends Component
         'display-backorder-form' => 'displayBackorderForm',
         'display-delivery-date-picker' => 'displayDeliveryDatePicker',
         'close-delivery-date-picker' => 'closeDeliveryDatePicker',
+        'display-print-delivery-details' => 'displayPrintDeliveryDetails',
         'closeRestockFormConfirmed'
     ];
 

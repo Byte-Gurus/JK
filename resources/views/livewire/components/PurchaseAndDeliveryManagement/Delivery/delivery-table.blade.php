@@ -229,8 +229,8 @@
                                         <p class="text-sm ">Receipt</p>
                                     </div>
                                     <div class="cursor-pointer hover:bg-[rgb(174,236,255)] rounded-full p-1"
-                                        wire:click="printPO({{ $delivery->id }})"
-                                        x-on:click="$wire.displayPrintPurchaseOrderDetails()">
+                                        wire:click="printDelivery({{ $delivery->id }})"
+                                        x-on:click="$wire.displayPrintDeliveryDetails()">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -259,8 +259,8 @@
                                         <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
                                     </div>
                                     <div class="cursor-pointer hover:bg-[rgb(174,236,255)] rounded-full p-1"
-                                        wire:click="printPO({{ $delivery->id }})"
-                                        x-on:click="$wire.displayPrintPurchaseOrderDetails()">
+                                        wire:click="printDelivery({{ $delivery->id }})"
+                                        x-on:click="$wire.displayPrintDeliveryDetails()">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -277,8 +277,8 @@
                                         <p class="text-sm hover:text-[rgb(138,117,59)]">Receipt</p>
                                     </div>
                                     <div class="cursor-pointer hover:bg-[rgb(174,236,255)] rounded-full p-1"
-                                        wire:click="printPO({{ $delivery->id }})"
-                                        x-on:click="$wire.displayPrintPurchaseOrderDetails()">
+                                        wire:click="printDelivery({{ $delivery->id }})"
+                                        x-on:click="$wire.displayPrintDeliveryDetails()">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
