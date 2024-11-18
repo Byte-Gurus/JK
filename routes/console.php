@@ -27,6 +27,7 @@ Artisan::command('migration-order', function () {
         '2024_07_22_152908_create_customers_table.php',
         '2024_06_16_014707_create_suppliers_table.php',
         '2024_07_09_211729_create_items_table.php',
+        '2024_11_17_181240_create_ceiling_prices_table.php',
         '2024_11_12_210053_create_supplier_items_table.php',
         '2024_08_09_131524_create_purchases_table.php',
         '2024_08_09_142144_create_purchase_details_table.php',
