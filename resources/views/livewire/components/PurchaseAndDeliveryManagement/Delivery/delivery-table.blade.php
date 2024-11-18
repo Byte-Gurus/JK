@@ -223,7 +223,7 @@
                         @if ($delivery->status == 'Delivered')
                         <button
                             class="  flex items-center text-[rgb(53,53,53)] transition-all duration-100 ease-in-out cursor-pointer underline"
-                            x-on:click=" $wire.showImage({{ $delivery->id }}), openActions = !openActions">
+                            x-on:click="$wire.showImage({{ $delivery->id }}), openActions = !openActions">
                             Receipt
                         </button>
                         <div class="cursor-pointer hover:bg-[rgb(174,236,255)] rounded-full p-1"
