@@ -102,15 +102,15 @@
                             </div>
 
                             <div class="flex flex-row ">
-                                <input type="text" wire:model="adjustReason" placeholder="Reason" required
-                                    class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-l-md block p-2">
-
                                 <select id="description"
-                                    class=" bg-[#ffffff3d] border border-[rgb(143,143,143)] text-ellipsis w-[160px] text-sm text-center text-white rounded-r-md block p-2.5 ">
+                                    class=" bg-[#ffffff3d] border border-[rgb(143,143,143)] text-ellipsis w-[160px] text-sm text-center text-white rounded-l-md block p-2.5 ">
                                     <option value="" selected>Description</option>
                                     <option value="Damaged">Damaged</option>
                                     <option value="Expired">Expired</option>
                                 </select>
+                                <input type="text" wire:model="adjustReason" placeholder="Reason" required
+                                    class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-r-md block p-2">
+
                             </div>
 
                             @error('adjustReason')
