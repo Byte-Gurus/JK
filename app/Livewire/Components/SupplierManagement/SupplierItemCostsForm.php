@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Components\SupplierManagement;
 
+use App\Models\Log;
 use App\Models\SupplierItems;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 class SupplierItemCostsForm extends Component
@@ -58,14 +58,11 @@ class SupplierItemCostsForm extends Component
 
         try {
 
-            $supplierItem = [
+            $supplierItem = SupplierItems::create([
                 'item_cost' => $validated['item_cost'],
                 'item_id' => $this->item_id,
                 'supplier_id' => $this->supplier_id,
-
-            ];
-
-            $supplierItem = SupplierItems::create($supplierItem);
+            ]);
 
             $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
 
@@ -78,10 +75,10 @@ class SupplierItemCostsForm extends Component
             DB::commit();
 
             $this->alert('success', 'Item was created successfully');
-            $this->refreshTable();
+            // $this->refreshTable();
             // ItemEvent::dispatch('refresh-item');
-            $this->resetForm();
-            $this->closeModal();
+            // $this->resetForm();
+            // $this->closeModal();
 
 
         } catch (\Exception $e) {
@@ -102,11 +99,10 @@ class SupplierItemCostsForm extends Component
         }
     }
 
-    public function setSupplierCost($itemId, $supplier_id)
+    public function setSupplierCost($data)
     {
-        dump($itemId, $supplier_id);
-        $this->supplier_id = $supplier_id;
-        $this->item_id = $itemId;
+        $this->supplier_id = $data['supplier_id'];
+        $this->item_id = $data['itemId'];
 
     }
 
