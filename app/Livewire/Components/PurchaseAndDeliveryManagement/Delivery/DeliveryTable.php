@@ -175,7 +175,7 @@ class DeliveryTable extends Component
 
     public function closeImage()
     {
-        $this->reset(['imageUrl']);
+        $this->reset(['receipt_picture']);
     }
 
     public function printDelivery($delivery_id)
