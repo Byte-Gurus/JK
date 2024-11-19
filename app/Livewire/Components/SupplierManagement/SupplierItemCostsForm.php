@@ -111,7 +111,7 @@ class SupplierItemCostsForm extends Component
     {
 
         $rules = [
-            "cost" => "required|numeric|min:0"
+            "item_cost" => "required|numeric|min:0"
         ];
 
         return $this->validate($rules);
