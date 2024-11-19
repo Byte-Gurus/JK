@@ -77,7 +77,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Item Cost
                                         </label>
 
-                                        <input type="text" id="item_cost" wire:model="item_cost"
+                                        <input type="text" id="item_cost" wire:model="item_cost" step=".01"
                                             class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
                                             placeholder="Item Cost" tabindex="2" required />
 
