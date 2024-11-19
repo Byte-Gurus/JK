@@ -102,10 +102,11 @@ class SupplierItemCostsForm extends Component
         }
     }
 
-    public function setSupplierCost($data)
+    public function setSupplierCost($itemId, $supplier_id)
     {
-        $this->supplier_id = $data['supplier_id'];
-        $this->item_id = $data['itemId'];
+        dump($itemId, $supplier_id);
+        $this->supplier_id = $supplier_id;
+        $this->item_id = $itemId;
 
     }
 
