@@ -86,6 +86,7 @@ class SupplierItemCostsForm extends Component
 
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while creating the Item, please refresh the page ');
         }
@@ -111,7 +112,7 @@ class SupplierItemCostsForm extends Component
     {
 
         $rules = [
-            "cost" => "required|numeric|min:0"
+            "item_cost" => "required|numeric|min:0"
         ];
 
         return $this->validate($rules);
