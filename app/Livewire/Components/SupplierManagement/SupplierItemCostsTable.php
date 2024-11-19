@@ -60,7 +60,10 @@ class SupplierItemCostsTable extends Component
     }
 
     protected $listeners = [
-        'get-supplier-items' => 'getSupplierItems'
+        'refresh-table' => 'refreshTable',
+        'confirmedRemoveRow',
+        'get-supplier-items' => 'getSupplierItems',
+        "echo:refresh-supplier-item,SupplierItemEvent" => 'refreshFromPusher',
     ];
 
     public function sortByColumn($column)
@@ -93,6 +96,7 @@ class SupplierItemCostsTable extends Component
             "supplier_id" => $this->supplier_id
         ])->to(SupplierItemCostsForm::class);
 
+        $this->reset('addItem');
 
     }
 
@@ -104,7 +108,28 @@ class SupplierItemCostsTable extends Component
 
     public function removeRow($supplierItem_id)
     {
+
+        $this->confirm('Do you want to remove this item?', [
+            'onConfirmed' => 'confirmedRemoveRow', //* call the createconfirmed method
+            'inputAttributes' => $supplierItem_id, //* pass the user to the confirmed method, as a form of array
+        ]);
+
+    }
+
+    public function confirmedRemoveRow($data)
+    {
+        $supplierItem_id = $data['inputAttributes'];
+
         $supplierItem = SupplierItems::find($supplierItem_id);
         $supplierItem->delete();
+
+    }
+    public function refreshFromPusher()
+    {
+        $this->resetPage();
+    }
+    public function refreshTable()
+    {
+        $this->resetPage();
     }
 }

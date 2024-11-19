@@ -64,8 +64,7 @@
                         class="absolute z-10 w-full h-fit max-h-[400px] overflow-y-scroll backdrop-blur-md rounded-b-lg border-[rgb(53,53,53)] border-2 bg-[rgba(255,255,255,0.85)]">
                         @foreach ($items as $item)
 
-                        <ul wire:click="selectItem({{ $item->id }})"
-                            x-on:click="showSupplierItemCostsForm=true;"
+                        <ul wire:click="selectItem({{ $item->id }})" x-on:click="showSupplierItemCostsForm=true;"
                             class=" w-full p-4 transition-all duration-100 ease-in-out border border-black cursor-pointer hover:bg-[rgba(205,205,205,0.79)] h-fit text-nowrap">
                             <li class="flex items-start justify-between">
                                 <!-- Item details on the left side -->
@@ -231,9 +230,8 @@
                                 min-h-[20%]">
                                         <div class="flex flex-col font-black bg-[rgba(53,53,53,0.95)]">
 
-                                            <button
-                                                x-on:click="$wire.displayInventoryForm(), openActions = !openActions"
-
+                                            <button x-on:click="showSupplierItemCostsForm=true;"
+                                                wire:click="selectItem({{ $supplierItem->item_id }})"
                                                 class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                 <div>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -245,9 +243,7 @@
                                                 </div>
                                                 <div>Edit</div>
                                             </button>
-                                            <button
-                                                wire:click="removeRow({{$supplierItem->id}})"
-
+                                            <button wire:click="removeRow({{$supplierItem->id}})"
                                                 class="flex transition-all duration-100 ease-in-out hover:pl-3 hover:text-blue-300 flex-row items-center gap-2 px-2 py-2 text-white justify-left hover:bg-[rgb(37,37,37)]">
                                                 <div>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -294,7 +290,8 @@
             </div>
         </div>
     </div>
-    <div x-cloak x-show="showSupplierItemCostsForm" x-data="{ showSupplierItemCostsForm: @entangle('showSupplierItemCostsForm') }">
+    <div x-cloak x-show="showSupplierItemCostsForm"
+        x-data="{ showSupplierItemCostsForm: @entangle('showSupplierItemCostsForm') }">
         @livewire('components.SupplierManagement.supplier-item-costs-form')
     </div>
 </div>

@@ -116,3 +116,10 @@ Broadcast::channel(
     }
 );
 
+Broadcast::channel(
+    'efresh-supplier-item',
+    function () {
+        return 'Supplier Item refreshed';
+    }
+);
+

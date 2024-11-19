@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Components\SupplierManagement;
 
+use App\Events\SupplierItemEvent;
+use App\Livewire\Pages\SupplierManagementPage;
 use App\Models\Log;
 use App\Models\SupplierItems;
 use Illuminate\Support\Facades\Auth;
@@ -75,9 +77,9 @@ class SupplierItemCostsForm extends Component
             DB::commit();
 
             $this->alert('success', 'Item was created successfully');
-            // $this->refreshTable();
-            // ItemEvent::dispatch('refresh-item');
-            // $this->resetForm();
+            $this->refreshTable();
+            SupplierItemEvent::dispatch('refresh-supplier-item');
+            $this->resetForm();
             // $this->closeModal();
 
 
@@ -89,6 +91,54 @@ class SupplierItemCostsForm extends Component
         }
 
     }
+    public function update() //* update process
+    {
+        $validated = $this->validateForm();
+        $this->confirm('Do you want to update this item?', [
+            'onConfirmed' => 'updateConfirmed', //* call the confmired method
+            'inputAttributes' => $validated, //* pass the $attributes array to the confirmed method
+        ]);
+    }
+
+    public function updateConfirmed($data) //* confirmation process ng update
+    {
+
+
+        $validated = $data['inputAttributes'];
+
+        DB::beginTransaction();
+
+        try {
+
+            $supplierItem = SupplierItems::where('supplier_id', $this->supplier_id)
+                ->where('item_id', $this->item_id)->first();
+
+            $supplierItem->item_cost =  $validated['item_cost'];
+            $supplierItem->save();
+
+            $userName = Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname;
+            $log = Log::create([
+                'user_id' => Auth::user()->id,
+                'message' => $userName . ' (' . Auth::user()->username . ') ' . 'Updated an item',
+                'action' => 'Item Update'
+            ]);
+
+            DB::commit();
+
+            $this->alert('success', 'Item was updated successfully');
+            $this->refreshTable();
+            SupplierItemEvent::dispatch('refresh-supplier-item');
+            $this->resetForm();
+
+        } catch (\Exception $e) {
+            dump($e);
+            DB::rollback();
+            $this->alert('error', 'An error occurred while updating the Item, please refresh the page ');
+        }
+
+
+    }
+
     public function changeMethod($isCreateSupplierItemCosts)
     {
         $this->isCreateSupplierItemCosts = $isCreateSupplierItemCosts; //var assign ang parameter value sa global variable
@@ -98,14 +148,30 @@ class SupplierItemCostsForm extends Component
             $this->resetForm();
         }
     }
+    public function closeModal() //* close ang modal after confirmation
+    {
+        $this->dispatch('close-modal')->to(SupplierManagementPage::class);
+        $this->resetValidation();
+    }
 
     public function setSupplierCost($data)
     {
         $this->supplier_id = $data['supplier_id'];
         $this->item_id = $data['itemId'];
 
-    }
+        $supplierItem = SupplierItems::where('supplier_id', $this->supplier_id)
+            ->where('item_id', $this->item_id)->first();
 
+        if ($supplierItem->exists()) {
+
+            $this->isCreateSupplierItemCosts = false;
+            $this->item_cost = $supplierItem->item_cost;
+        }
+    }
+    public function refreshTable() //* refresh ang table after confirmation
+    {
+        $this->dispatch('refresh-table')->to(SupplierItemCostsTable::class);
+    }
     protected function validateForm()
     {
 

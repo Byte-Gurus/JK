@@ -1,5 +1,6 @@
 {{-- //var from livewire variable passed to blade file with entanglement --}}
-<div x-cloak x-show="showSupplierItemCostsForm" x-data="{ isCreateSupplierItemCosts: @entangle('isCreateSupplierItemCosts') }">
+<div x-cloak x-show="showSupplierItemCostsForm"
+    x-data="{ isCreateSupplierItemCosts: @entangle('isCreateSupplierItemCosts') }">
 
     {{-- //* form background --}}
     <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
@@ -12,88 +13,89 @@
 
             {{-- //* Modal content --}}
             @if (!$this->isCreateSupplierItemCosts)
-                {{-- *if form is edit --}}
-                <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
-            @endif
+            {{-- *if form is edit --}}
+            <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
+                @endif
 
-            {{-- *if form is create --}}
-            <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
-                @csrf
+                {{-- *if form is create --}}
+                <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="create">
+                    @csrf
 
-                <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
+                    <div class="flex items-center justify-between px-6 py-2 border-b rounded-t ">
 
-                    <div class="flex justify-center w-full p-2">
+                        <div class="flex justify-center w-full p-2">
 
-                        {{-- //* form title --}}
-                        <h3 class="text-xl font-black text-gray-900 item ">
+                            {{-- //* form title --}}
+                            <h3 class="text-xl font-black text-gray-900 item ">
 
-                            @if (!$this->isCreateSupplierItemCosts)
+                                @if (!$this->isCreateSupplierItemCosts)
                                 {{-- *if form is edit --}}
                                 Edit Supplier
-                            @else
+                                @else
                                 Create Supplier
-                            @endif
+                                @endif
 
-                        </h3>
+                            </h3>
+                        </div>
+
+                        {{-- //* close button --}}
+                        <button type="button" x-on:click="showSupplierItemCostsForm=false"
+                            wire:click=' resetFormWhenClosed() '
+                            class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
+                            data-modal-hide="UserModal">
+
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+
+                            <span class="sr-only">Close modal</span>
+
+                        </button>
+
                     </div>
 
-                    {{-- //* close button --}}
-                    <button type="button" x-on:click="showSupplierItemCostsForm=false" wire:click=' resetFormWhenClosed() '
-                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
-                        data-modal-hide="UserModal">
 
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
+                    <div class="p-6 space-y-6">
 
-                        <span class="sr-only">Close modal</span>
+                        <div class="flex flex-col gap-4">
 
-                    </button>
+                            {{-- //* first area, personal information --}}
+                            <div class="border-2 border-[rgb(53,53,53)] rounded-md">
 
-                </div>
+                                <div
+                                    class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
+                                    <h1 class="font-bold">Supplier Item Costs Information</h1>
+                                </div>
 
+                                <div class="p-4">
+                                    {{-- //* second row --}}
+                                    <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
 
-                <div class="p-6 space-y-6">
+                                        <div class="mb-3">
 
-                    <div class="flex flex-col gap-4">
+                                            <label for="item_cost"
+                                                class="block mb-2 text-sm font-medium text-gray-900 ">Item Cost
+                                            </label>
 
-                        {{-- //* first area, personal information --}}
-                        <div class="border-2 border-[rgb(53,53,53)] rounded-md">
+                                            <input type="text" id="item_cost" wire:model="item_cost" step=".01"
+                                                class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
+                                                placeholder="Item Cost" tabindex="2" required />
 
-                            <div
-                                class="p-2 border-b bg-[rgb(53,53,53)] text-[rgb(242,242,242)] pointer-events-none rounded-br-sm rounded-bl-sm">
-                                <h1 class="font-bold">Supplier Item Costs Information</h1>
-                            </div>
-
-                            <div class="p-4">
-                                {{-- //* second row --}}
-                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
-
-                                    <div class="mb-3">
-
-                                        <label for="item_cost"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Cost
-                                        </label>
-
-                                        <input type="text" id="item_cost" wire:model="item_cost" step=".01"
-                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
-                                            placeholder="Item Cost" tabindex="2" required />
-
-                                        @error('item_cost')
+                                            @error('item_cost')
                                             <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                        @enderror
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    {{-- //* form footer --}}
+                        {{-- //* form footer --}}
 
-                    {{-- *if form is edit --}}
-                    @if (!$this->isCreateSupplierItemCosts)
+                        {{-- *if form is edit --}}
+                        @if (!$this->isCreateSupplierItemCosts)
                         <div class="flex flex-row justify-end gap-2">
 
                             <div>
@@ -125,7 +127,7 @@
                                 </div>
                             </div>
                         </div>
-                    @else
+                        @else
                         {{-- *if form is create --}}
                         <div class="flex flex-row justify-end gap-2">
                             <div>
@@ -165,9 +167,9 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
-                </div>
-            </form>
+                        @endif
+                    </div>
+                </form>
         </div>
     </div>
 </div>
