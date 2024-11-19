@@ -43,7 +43,7 @@ class SupplierItemCostsForm extends Component
         }
     }
 
-    public function getSupplierItem(){
-        
+    public function getSupplierItem($itemId){
+
     }
 }
