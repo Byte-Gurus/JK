@@ -86,6 +86,7 @@ class SupplierItemCostsForm extends Component
 
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while creating the Item, please refresh the page ');
         }
