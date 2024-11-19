@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col justify-between px-4 mb-2">
+        <div class="flex flex-row justify-between px-4 mb-2">
             <div class="flex flex-col ">
                 <div class="flex flex-row text-nowrap">
                     <p class="text-[1em] font-bold uppercase">Purchase Order No.</p>
@@ -25,8 +25,15 @@
                     </p>
                 </div>
                 <div class="flex flex-row text-nowrap">
-                    <p class="text-[1em] font-bold uppercase">Supplier Name:</p>
+                    <p class="text-[1em] font-bold uppercase">Purchase Order Date</p>
                     {{-- <p class="text-[1em] font-bold uppercase">{{ $supplier }}</p> --}}
+                </div>
+            </div>
+            <div class="flex flex-col ">
+                <div class="flex flex-row text-nowrap">
+                    <p class="text-[1em] font-bold uppercase">Date Delivered</p>
+                    {{-- <p class="text-[1em] font-bold uppercase">{{ $po_number }}</p> --}}
+                    </p>
                 </div>
             </div>
         </div>
@@ -35,11 +42,11 @@
             <div class="w-full my-4 border-b border-black"> </div>
 
             {{-- //* table header --}}
-            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+            <ul class="grid justify-between grid-flow-col grid-cols-8 mx-4 ">
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Barcode</p>
+                        <p class="text-[1em] uppercase text-left font-bold">SKU</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
@@ -49,10 +56,34 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-center font-bold">Purchase Quantity</p>
+                        <p class="text-[1em] uppercase text-left font-bold">Desc</p>
                     </div>
                 </li>
-
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-left font-bold">Item Cost</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-left font-bold">Restock Qty</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-left font-bold">Exp Date</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-left font-bold">Purchase Qty</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
+                        <p class="text-[1em] uppercase text-left font-bold">Backorder Qty</p>
+                    </div>
+                </li>
             </ul>
 
             <div class="w-full my-4 border-b border-black"> </div>
