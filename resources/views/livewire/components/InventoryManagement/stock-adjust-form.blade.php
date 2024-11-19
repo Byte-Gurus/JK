@@ -1,7 +1,7 @@
 <div class="relative" x-cloak>
     <div
         class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
-        <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[460px]">
+        <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[660px]">
             <div
                 class="flex backdrop-blur-xl flex-col h-full w-full justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
                 <div class="flex flex-col gap-1 leading-none">
@@ -48,7 +48,8 @@
                 </div>
 
                 {{-- //* first row --}} {{-- //* adjust reason --}}
-                <form wire:submit.prevent="adjust" class="flex flex-col items-center w-full h-full pr-6 mt-2 justify-evenly">
+                <form wire:submit.prevent="adjust"
+                    class="flex flex-col items-center w-full h-full pr-6 mt-2 justify-evenly">
                     @csrf
 
                     <div class="flex flex-col justify-start w-fit">
@@ -100,9 +101,16 @@
                                 <label for="adjust_quantity" class="text-[1em] font-bold text-white">Reason</label>
                             </div>
 
-                            <div>
+                            <div class="flex flex-row ">
                                 <input type="text" wire:model="adjustReason" placeholder="Reason" required
-                                    class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
+                                    class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-l-md block p-2">
+
+                                <select id="description"
+                                    class=" bg-[#ffffff3d] border border-[rgb(143,143,143)] text-ellipsis w-[160px] text-sm text-center text-white rounded-r-md block p-2.5 ">
+                                    <option value="" selected>Description</option>
+                                    <option value="Damaged">Damaged</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
                             </div>
 
                             @error('adjustReason')
@@ -114,8 +122,7 @@
                     <div class="flex flex-row self-end gap-2 mb-6">
                         <div>
                             {{-- //* clear all button for create --}}
-                            <button type="button"
-                            wire:click='resetFormWhenClosed'
+                            <button type="button" wire:click='resetFormWhenClosed'
                                 class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
                                 Cancel</button>
                         </div>
