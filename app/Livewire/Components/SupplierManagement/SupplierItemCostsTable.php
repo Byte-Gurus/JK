@@ -86,7 +86,7 @@ class SupplierItemCostsTable extends Component
 
     public function selectItem($itemId)
     {
-        $this->dispatch('get-supplier-item', $itemId)->to(SupplierItemCostsForm::class);
+        $this->dispatch('set-supplier-cost', $itemId, $this->supplier_id)->to(SupplierItemCostsForm::class);
         $this->supplierItemCostsFormCreate();
 
     }

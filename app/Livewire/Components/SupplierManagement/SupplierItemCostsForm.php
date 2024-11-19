@@ -12,7 +12,7 @@ class SupplierItemCostsForm extends Component
 {
     use LivewireAlert;
     public $isCreateSupplierItemCosts = true;
-    public $supplierItem, $item_cost;
+    public $supplier_id, $item_cost, $item_id;
     public function render()
     {
         return view('livewire.components.SupplierManagement.supplier-item-costs-form');
@@ -22,7 +22,7 @@ class SupplierItemCostsForm extends Component
         'edit-supplier-item-costs-from-table' => 'edit',  //* key:'edit-supplier-from-table' value:'edit'  galing sa SupplierTable class
         //* key:'change-method' value:'changeMethod' galing sa SupplierTable class,  laman false
         'change-method' => 'changeMethod',
-        'get-supplier-item' => 'getSupplierItem',
+        'set-supplier-cost' => 'setSupplierCost',
         'updateConfirmed',
         'createConfirmed',
     ];
@@ -60,8 +60,8 @@ class SupplierItemCostsForm extends Component
 
             $supplierItem = [
                 'item_cost' => $validated['item_cost'],
-                'item_id' => $this->supplierItem->item_id,
-                'supplier_id' => $this->supplierItem->supplier_id,
+                'item_id' => $this->item_id,
+                'supplier_id' => $this->supplier_id,
 
             ];
 
@@ -102,9 +102,10 @@ class SupplierItemCostsForm extends Component
         }
     }
 
-    public function getSupplierItem($itemId)
+    public function setSupplierCost($itemId, $supplier_id)
     {
-        $this->supplierItem = SupplierItems::find($itemId);
+        $this->supplier_id = $supplier_id;
+        $this->item_id = $itemId;
 
     }
 
