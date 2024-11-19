@@ -46,42 +46,42 @@
 
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">SKU</p>
+                        <p class="font-bold text-left uppercase text-md">SKU</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Item Name</p>
+                        <p class="font-bold text-left uppercase text-md">Item Name</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Desc</p>
+                        <p class="font-bold text-left uppercase text-md">Desc</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Item Cost</p>
+                        <p class="font-bold text-left uppercase text-md">Item Cost</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Restock Qty</p>
+                        <p class="font-bold text-left uppercase text-md">Restock Qty</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Exp Date</p>
+                        <p class="font-bold text-left uppercase text-md">Exp Date</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Purchase Qty</p>
+                        <p class="font-bold text-left uppercase text-md">Purchase Qty</p>
                     </div>
                 </li>
                 <li class="col-span-1 ">
                     <div>
-                        <p class="text-[1em] uppercase text-left font-bold">Backorder Qty</p>
+                        <p class="font-bold text-left uppercase text-md">Backorder Qty</p>
                     </div>
                 </li>
             </ul>
