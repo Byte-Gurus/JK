@@ -14,7 +14,7 @@ class PrintDeliveryDetails extends Component
     public function render()
     {
         $restockDetails = RestockDetails::all();
-        dump($restockDetails);
+        dd($restockDetails);
 
         return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details', [
             'restockDetails' => $restockDetails
