@@ -148,9 +148,17 @@
                     </p>
                 </div>
                 <div>
+                    @php
+                    $purchaseQuantity = $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity
+                    ?? null;
+                    $stockInQuantity = $inventory->stock_in_quantity ?? null;
+
+                    $quantityDifference = is_numeric($purchaseQuantity) && is_numeric($stockInQuantity)
+                    ? $purchaseQuantity - $stockInQuantity
+                    : 'N/A';
+                    @endphp
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity ?? 'N/A' -
-                        $inventory->stock_in_quantity ?? 'N/A'}}
+                        {{ $quantityDifference }}
                     </p>
                 </div>
                 </li>
