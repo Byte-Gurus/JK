@@ -37,7 +37,7 @@ class PrintDeliveryDetails extends Component
             'createdBy' => $delivery_details->userJoin->firstname . ' ' . ($delivery_details->userJoin->middlename ? $delivery_details->userJoin->middlename . ' ' : '') . $delivery_details->userJoin->lastname,
         ]);
     }
-    public function printPO($delivery_id)
+    public function printDelivery($delivery_id)
     {
         $this->delivery_id = $delivery_id;
 
