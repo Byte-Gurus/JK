@@ -145,7 +145,7 @@
                 <div>
                     <p class="text-[1em] text-center fot-bold">
                         {{ $restockDetail->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity ??
-                        'N/A'}}
+                        0}}
                     </p>
                 </div>
                 <div>
