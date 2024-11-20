@@ -126,7 +126,7 @@
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-center fot-bold">
-                            {{ $restockDetail->cost }}
+                            {{ number_format($restockDetail->cost, 2) }}
                         </p>
                     </div>
                 </li>
@@ -139,7 +139,7 @@
                 </li>
                 <div>
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $restockDetail->expiration_date ?? 'N/A' }}
+                        {{ $restockDetail->expiration_date->format('M d Y') ?? 'N/A' }}
                     </p>
                 </div>
                 <div>
