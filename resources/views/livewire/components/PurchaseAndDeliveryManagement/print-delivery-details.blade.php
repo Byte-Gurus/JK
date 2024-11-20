@@ -139,7 +139,7 @@
                 </li>
                 <div>
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $restockDetail->expiration_date->format('M d Y') ?? 'N/A' }}
+                        {{ \Carbon\Carbon::parse($restockDetail->expiration_date)->format('M d Y')  ?? 'N/A' }}
                     </p>
                 </div>
                 <div>
