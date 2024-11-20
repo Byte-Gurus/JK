@@ -3,6 +3,7 @@
 namespace App\Livewire\Components\PurchaseAndDeliveryManagement;
 
 use App\Models\Delivery;
+use App\Models\Inventory;
 use Livewire\Component;
 
 class PrintDeliveryDetails extends Component
@@ -11,7 +12,11 @@ class PrintDeliveryDetails extends Component
 
     public function render()
     {
-        return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details');
+        $inventories = Inventory::where('delivery_id', $this->delivery_id)->get();
+
+        return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details',[
+            'inventories' => $inventories
+        ]);
     }
 
     protected $listeners = [

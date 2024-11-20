@@ -61,6 +61,11 @@
                 </li>
                 <li class="col-span-1 ">
                     <div>
+                        <p class="font-bold text-left uppercase text-md">Unit</p>
+                    </div>
+                </li>
+                <li class="col-span-1 ">
+                    <div>
                         <p class="font-bold text-left uppercase text-md">Item Cost</p>
                     </div>
                 </li>
@@ -88,32 +93,70 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            {{-- @foreach ($purchaseDetails as $purchaseDetail)
-                <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
+            @foreach ($inventories as $inventory)
+            <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-medium">
-                                {{ $purchaseDetail->itemsJoin->barcode }}</p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-left font-bold">
-                                {{ $purchaseDetail->itemsJoin->item_name }}
-                            </p>
-                        </div>
-                    </li>
-                    <li class="col-span-1 py-[3px]">
-                        <div>
-                            <p class="text-[1em] text-center fot-bold">
-                                {{ $purchaseDetail->purchase_quantity }}
-                            </p>
-                        </div>
-                    </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-medium">
+                            {{ $inventory->sku_code }}</p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-bold">
+                            {{ $inventory->itemsJoin->item_name }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-bold">
+                            {{ $inventory->itemsJoin->item_description }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-left font-bold">
+                            {{ $inventory->itemsJoin->item_unit }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-center fot-bold">
+                            {{ $inventory->cost }}
+                        </p>
+                    </div>
+                </li>
+                <li class="col-span-1 py-[3px]">
+                    <div>
+                        <p class="text-[1em] text-center fot-bold">
+                            {{ $inventory->stock_in_quantity }}
+                        </p>
+                    </div>
+                </li>
+                <div>
+                    <p class="text-[1em] text-center fot-bold">
+                        {{ $inventory->expiration_date ?? 'N/A' }}
+                    </p>
+                </div>
+                <div>
+                    <p class="text-[1em] text-center fot-bold">
+                        {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity }}
+                    </p>
+                </div>
+                <div>
+                    <p class="text-[1em] text-center fot-bold">
+                        {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity -
+                        $inventory->stock_in_quantity }}
+                    </p>
+                </div>
+                </li>
 
-                </ul>
-            @endforeach --}}
+            </ul>
+            @endforeach
         </div>
         <div class="px-4 py-4 ">
             <div class="flex flex-row gap-2 text-nowrap">

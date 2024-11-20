@@ -17,6 +17,10 @@ class PurchaseDetails extends Model
         'discount_id'
     ];
 
+    public function backorderJoin()
+    {
+        return $this->hasMany(BackOrder::class, 'delivery_id');
+    }
     public function discountJoin()
     {
         return $this->belongsTo(Discount::class, 'discount_id');
