@@ -69,11 +69,11 @@
                         <p class="font-bold text-left uppercase text-md">Item Cost</p>
                     </div>
                 </li>
-                <li class="col-span-1 ">
+                {{-- <li class="col-span-1 ">
                     <div>
                         <p class="font-bold text-left uppercase text-md">Restock Qty</p>
                     </div>
-                </li>
+                </li> --}}
                 <li class="col-span-1 ">
                     <div>
                         <p class="font-bold text-left uppercase text-md">Exp Date</p>
