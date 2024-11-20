@@ -12,6 +12,7 @@ use App\Models\InventoryMovement;
 use App\Models\Item;
 use App\Models\Log;
 use App\Models\Purchase;
+use App\Models\RestockDetails;
 use App\Models\Supplier;
 use App\Models\SupplierItems;
 use Illuminate\Support\Facades\Auth;
@@ -196,6 +197,16 @@ class RestockForm extends Component
                     'item_id' => $detail['item_id'],  // Assuming 'id' here refers to the item_id
                     'delivery_id' => $this->delivery_id, // Assuming you want to associate with the supplier
                     'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
+                ]);
+
+                $restockDetails = RestockDetails::cretae([
+                    'cost' => $this->cost[$index],
+                    'restock_quantity' => $validated['restock_quantity'][$index],
+                    'expiration_date' => $validated['expiration_date'][$index] ?? null,
+                    'item_id' => $detail['item_id'],
+                    'delivery_id' => $this->delivery_id,
+                    'sku_code' => $detail['sku_code'],
+                    'bacorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
                 ]);
 
 
