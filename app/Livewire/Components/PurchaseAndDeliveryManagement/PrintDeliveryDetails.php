@@ -15,7 +15,7 @@ class PrintDeliveryDetails extends Component
     {
         $restockDetails = RestockDetails::where('delivery_id', $this->delivery_id)->get();
 
-        dump($restockDetails);
+        dump($this->delivery_id, $restockDetails);
 
         return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details', [
             'restockDetails' => $restockDetails
