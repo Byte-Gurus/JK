@@ -4,6 +4,7 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement;
 
 use App\Models\Delivery;
 use App\Models\Inventory;
+use App\Models\RestockDetails;
 use Livewire\Component;
 
 class PrintDeliveryDetails extends Component
@@ -12,10 +13,10 @@ class PrintDeliveryDetails extends Component
 
     public function render()
     {
-        $inventories = Inventory::where('delivery_id', $this->delivery_id)->where('status', '!=', 'New Item')->get();
-       
+        $restockDetails = RestockDetails::where('delivery_id', $this->delivery_id)->get();
+
         return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details', [
-            'inventories' => $inventories
+            'restockDetails' => $restockDetails
         ]);
     }
 

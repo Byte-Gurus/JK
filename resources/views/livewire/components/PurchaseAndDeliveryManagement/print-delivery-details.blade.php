@@ -93,72 +93,64 @@
 
             <div class="w-full my-4 border-b border-black"> </div>
 
-            @foreach ($inventories as $inventory)
+            @foreach ($restockDetails as $restockDetail)
             <ul class="grid justify-between grid-flow-col grid-cols-3 mx-4 ">
 
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-medium">
-                            {{ $inventory->sku_code }}</p>
+                            {{ $restockDetail->sku_code }}</p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">
-                            {{ $inventory->itemJoin->item_name }}
+                            {{ $restockDetail->itemJoin->item_name }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">
-                            {{ $inventory->itemJoin->item_description }}
+                            {{ $restockDetail->itemJoin->item_description }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">
-                            {{ $inventory->itemJoin->item_unit }}
+                            {{ $restockDetail->itemJoin->item_unit }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-center fot-bold">
-                            {{ $inventory->cost }}
+                            {{ $restockDetail->cost }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-center fot-bold">
-                            {{ $inventory->stock_in_quantity }}
+                            {{ $restockDetail->restock_quantity }}
                         </p>
                     </div>
                 </li>
                 <div>
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $inventory->expiration_date ?? 'N/A' }}
+                        {{ $restockDetail->expiration_date ?? 'N/A' }}
                     </p>
                 </div>
                 <div>
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity ?? 'N/A'}}
+                        {{ $restockDetail->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity ??
+                        'N/A'}}
                     </p>
                 </div>
                 <div>
-                    @php
-                    $purchaseQuantity = $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity
-                    ?? null;
-                    $stockInQuantity = $inventory->stock_in_quantity ?? null;
-
-                    $quantityDifference = is_numeric($purchaseQuantity) && is_numeric($stockInQuantity)
-                    ? $purchaseQuantity - $stockInQuantity
-                    : 'N/A';
-                    @endphp
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $quantityDifference }}
+                        {{ $restockDetail->backorder_quantity }}
                     </p>
                 </div>
                 </li>

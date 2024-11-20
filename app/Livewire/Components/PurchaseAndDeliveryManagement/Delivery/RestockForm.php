@@ -206,7 +206,7 @@ class RestockForm extends Component
                     'item_id' => $detail['item_id'],
                     'delivery_id' => $this->delivery_id,
                     'sku_code' => $detail['sku_code'],
-                    'bacorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
+                    'backorder_quantity' => $detail['purchase_quantity'] - $totalRestockQuantity,
                 ]);
 
 

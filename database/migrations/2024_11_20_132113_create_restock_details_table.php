@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer("restock_quantity");
             $table->datetime('expiration_date')->nullable();
             $table->string('sku_code')->unique();
-            $table->integer("bacorder_quantity");
+            $table->integer("backorder_quantity");
             $table->timestamps();
 
             $table->foreignId('item_id')->constrained('items');

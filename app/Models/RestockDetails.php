@@ -16,7 +16,7 @@ class RestockDetails extends Model
         'item_id',
         'delivery_id',
         'sku_code',
-        'bacorder_quantity'
+        'backorder_quantity'
     ];
 
     public function itemJoin()
