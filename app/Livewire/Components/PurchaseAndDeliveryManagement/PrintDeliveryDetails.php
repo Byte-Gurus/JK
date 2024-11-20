@@ -5,6 +5,7 @@ namespace App\Livewire\Components\PurchaseAndDeliveryManagement;
 use App\Models\Delivery;
 use App\Models\Inventory;
 use App\Models\RestockDetails;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class PrintDeliveryDetails extends Component
@@ -32,9 +33,9 @@ class PrintDeliveryDetails extends Component
 
         $this->fill([
             'po_number' => $delivery_details->po_number,
-            'supplier' => $delivery_details->supplierJoin->company_name,
+            'supplier' => $delivery_details->purchaseJoin->supplierJoin->company_name,
             'dateCreated' => $delivery_details->created_at,
-            'createdBy' => $delivery_details->userJoin->firstname . ' ' . ($delivery_details->userJoin->middlename ? $delivery_details->userJoin->middlename . ' ' : '') . $delivery_details->userJoin->lastname,
+            'createdBy' => Auth::user()->firstname . ' ' . (Auth::user()->middlename ? Auth::user()->middlename . ' ' : '') . Auth::user()->lastname,
         ]);
     }
     public function printDelivery($delivery_id)
