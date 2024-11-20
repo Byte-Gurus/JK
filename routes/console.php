@@ -39,7 +39,7 @@ Artisan::command('migration-order', function () {
         '2024_08_05_213148_create_inventories_table.php',
         '2024_08_16_234953_create_inventory_adjustments_table.php',
 
-        '024_11_20_132113_create_restock_details_table.php',
+        '2024_11_20_132113_create_restock_details_table.php',
 
         '2024_09_03_101448_create_payments_table.php',
         '2024_09_02_213236_create_transaction_details_table.php',
