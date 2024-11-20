@@ -105,21 +105,21 @@
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">
-                            {{ $inventory->itemsJoin->item_name }}
+                            {{ $inventory->itemJoin->item_name }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">
-                            {{ $inventory->itemsJoin->item_description }}
+                            {{ $inventory->itemJoin->item_description }}
                         </p>
                     </div>
                 </li>
                 <li class="col-span-1 py-[3px]">
                     <div>
                         <p class="text-[1em] text-left font-bold">
-                            {{ $inventory->itemsJoin->item_unit }}
+                            {{ $inventory->itemJoin->item_unit }}
                         </p>
                     </div>
                 </li>
