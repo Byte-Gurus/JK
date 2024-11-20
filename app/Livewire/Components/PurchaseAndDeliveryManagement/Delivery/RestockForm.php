@@ -199,7 +199,7 @@ class RestockForm extends Component
                     'user_id' => Auth::id(), // Assuming you want to associate with the currently authenticated user
                 ]);
 
-                $restockDetails = RestockDetails::cretae([
+                $restockDetails = RestockDetails::create([
                     'cost' => $this->cost[$index],
                     'restock_quantity' => $validated['restock_quantity'][$index],
                     'expiration_date' => $validated['expiration_date'][$index] ?? null,
