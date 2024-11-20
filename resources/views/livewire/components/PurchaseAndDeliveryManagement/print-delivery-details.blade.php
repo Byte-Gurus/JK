@@ -144,13 +144,13 @@
                 </div>
                 <div>
                     <p class="text-[1em] text-center fot-bold">
-                        {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity }}
+                        {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity ?? 'N/A'}}
                     </p>
                 </div>
                 <div>
                     <p class="text-[1em] text-center fot-bold">
                         {{ $inventory->deliveryJoin->purchaseJoin->purchaseDetailsJoin->purchase_quantity -
-                        $inventory->stock_in_quantity }}
+                        $inventory->stock_in_quantity ?? 'N/A'}}
                     </p>
                 </div>
                 </li>
