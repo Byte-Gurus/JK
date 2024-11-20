@@ -12,8 +12,7 @@ class PrintDeliveryDetails extends Component
 
     public function render()
     {
-        $inventories = Inventory::all();
-        dump($inventories);
+        $inventories = Inventory::where('delivery_id', $this->delivery_id)->where('status', '!=' , 'New Item')->get();
         return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details',[
             'inventories' => $inventories
         ]);
