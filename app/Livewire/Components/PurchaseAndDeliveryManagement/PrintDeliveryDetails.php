@@ -12,8 +12,9 @@ class PrintDeliveryDetails extends Component
 
     public function render()
     {
-        $inventories = Inventory::where('delivery_id', $this->delivery_id)->where('status', '!=' , 'New Item')->get();
-        return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details',[
+        $inventories = Inventory::where('delivery_id', $this->delivery_id)->where('status', '!=', 'New Item')->get();
+        dd($inventories);
+        return view('livewire.components.PurchaseAndDeliveryManagement.print-delivery-details', [
             'inventories' => $inventories
         ]);
     }
@@ -30,7 +31,7 @@ class PrintDeliveryDetails extends Component
             'po_number' => $delivery_details->po_number,
             'supplier' => $delivery_details->supplierJoin->company_name,
             'dateCreated' => $delivery_details->created_at,
-           'createdBy' => $delivery_details->userJoin->firstname . ' ' . ($delivery_details->userJoin->middlename ? $delivery_details->userJoin->middlename . ' ' : '') . $delivery_details->userJoin->lastname,
+            'createdBy' => $delivery_details->userJoin->firstname . ' ' . ($delivery_details->userJoin->middlename ? $delivery_details->userJoin->middlename . ' ' : '') . $delivery_details->userJoin->lastname,
         ]);
     }
     public function printPO($delivery_id)
