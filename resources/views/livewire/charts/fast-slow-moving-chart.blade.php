@@ -69,7 +69,7 @@
                     }),
                     datasets: [{
                         label: 'Item',
-                        data: datas,
+                        data: tsi,
                         borderWidth: 1
                     }]
                 },
