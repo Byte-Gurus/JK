@@ -40,7 +40,7 @@
                     <div class="mb-3">
 
                         <div class="flex flex-row justify-between w-full mb-2 ">
-                            <label for="id_picture" class="block text-sm font-medium text-white">Delivery Receipt
+                            <label for="id_picture" class="block text-sm font-medium text-white">Receipt Picture
                             </label>
 
                             @if (!empty($receipt_picture))
@@ -73,8 +73,14 @@
                         @enderror
                     </div>
                     <div class="flex justify-center w-full my-4 ">
+                        <label for="id_picture" class="block text-sm font-medium text-white">Receipt Number
+                        </label>
                         <input type="text" wire:model.live="receipt_number"
                             class="w-full p-4 rounded-md hover:bg-gray-300">
+
+                            @error('receipt_number')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     @error('receipt_number')
