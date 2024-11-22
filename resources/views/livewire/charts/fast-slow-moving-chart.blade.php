@@ -37,7 +37,7 @@
 
             items = [];
             datas = [];
-            tsi = [];
+            fast_slow = [];
             if (Chart.getChart("fastslowChart")) {
                 Chart.getChart("fastslowChart")?.destroy();
             }
