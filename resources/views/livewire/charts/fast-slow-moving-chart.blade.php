@@ -43,7 +43,7 @@
             }
 
             fastmoving_info = $wire.fastmoving_info;
-            console.log('item movement:', fastSlow);
+            console.log('item movement:', fastmoving_info);
 
 
             for (let index = 0; index < fastmoving_info.length; index++) {
