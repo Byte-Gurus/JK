@@ -46,7 +46,7 @@
             console.log('item movement:', fastSlow);
 
 
-            for (let index = 0; index < fastSlow.length; index++) {
+            for (let index = 0; index < fastmoving_info.length; index++) {
 
                 items[index] = fastmoving_info[index].item_name + ' ' + fastmoving_info[index].item_description;
 
