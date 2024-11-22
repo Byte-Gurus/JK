@@ -42,16 +42,16 @@
                 Chart.getChart("fastslowChart")?.destroy();
             }
 
-            fastSlow = $wire.fastmoving_info;
+            fastmoving_info = $wire.fastmoving_info;
             console.log('item movement:', fastSlow);
 
 
             for (let index = 0; index < fastSlow.length; index++) {
 
-                items[index] = fastSlow[index].item_name + ' ' + fastSlow[index].item_description;
+                items[index] = fastmoving_info[index].item_name + ' ' + fastmoving_info[index].item_description;
 
-                datas[index] = fastSlow[index].totalStockInQuantity;
-                tsi[index] = fastSlow[index].tsi;
+                datas[index] = fastmoving_info[index].totalStockInQuantity;
+                fast_slow[index] = fastmoving_info[index].fast_slow;
             }
             console.log('item movement:', items);
 
@@ -69,7 +69,7 @@
                     }),
                     datasets: [{
                         label: 'Item',
-                        data: tsi,
+                        data: fast_slow,
                         borderWidth: 1
                     }]
                 },
