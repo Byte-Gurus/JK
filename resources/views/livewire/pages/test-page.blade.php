@@ -1,42 +1,48 @@
-<div class="relative" x-cloak>
+{{-- //var from livewire variable passed to blade file with entanglement --}}
+<div x-cloak>
+    {{-- x-show="showSupplierItemCostsForm" x-data="{ isCreateSupplierItemCosts: @entangle('isCreateSupplierItemCosts') }" --}}
+
+    {{-- //* form background --}}
+    <div class="fixed inset-0 z-40 bg-gray-900/50 dark:bg-gray-900/80"></div>
+
+    {{-- //* form position --}}
     <div
-        class="fixed flex justify-center items-center top-0 left-0 bg-transparent right-0 z-50 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)]">
-        <div class="grid items-center justify-center grid-flow-col bg-transparent h-fit w-[660px]">
-            <div
-                class="flex backdrop-blur-xl flex-col h-full w-full justify-evenly gap-4 p-4 border border-black bg-[rgba(53,53,53,0.39)] rounded-l-lg shadow-md shadow-[rgb(149,241,253)] text-nowrap">
-                <div class="flex flex-col gap-1 leading-none">
-                    <p class="text-[1em] font-thin text-white">SKU</p>
-                    {{-- <p class="text-[1.2em] font-bold text-white">{{ $sku_code }}</p> --}}sdsd
-                </div>
-                <div class="flex flex-col gap-1 leading-none">
-                    <p class="text-[1em] font-thin text-white">Item Name</p>
-                    {{-- <p class="text-[1.2em] font-bold text-white">{{ $item_name }}</p> --}}dsds
-                </div>
-                <div class="flex flex-col gap-1 leading-none">
-                    <p class="text-[1em] font-thin text-white">Item Description</p>
-                    <p class="text-[1.2em] font-bold text-white">
-                        {{-- {{ $description }} --}}sdsdsds
-                    </p>
-                </div>
-                <div class="flex flex-col gap-1 leading-none">
-                    <p class="text-[1em] font-thin text-white">Current Quantity</p>
-                    <p class="text-[1.6em] font-black text-white">
-                        {{-- {{ $current_quantity }} --}}dsdsdsds
-                    </p>
-                </div>
-            </div>
-            <div
-                class="h-full w-full gap-4 p-4 border-black border bg-[rgb(34,34,34)] rounded-r-lg shadow-md text-nowrap">
-                <div class="flex flex-row items-center justify-between">
-                    {{-- //* form title --}}
-                    <h3 class="text-xl font-black text-[rgb(255,255,255)] item">
-                        Stock Adjust
-                    </h3>
+        class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+
+        <div class="relative w-full max-w-2xl max-h-full mx-auto">
+
+            {{-- //* Modal content --}}
+            {{-- @if (!$this->isCreateSupplierItemCosts)
+                *if form is edit
+                <form class="relative bg-[rgb(238,238,238)] rounded-lg shadow " wire:submit.prevent="update">
+            @endif --}}
+
+            {{-- *if form is create --}}
+            <form class="relative bg-[rgb(238,238,238)] rounded-b-lg shadow " wire:submit.prevent="create">
+                @csrf
+
+                <div class="flex items-center justify-between px-6 py-4 border-b rounded-t ">
+
+                    <div class="flex justify-center w-full p-2">
+
+                        {{-- //* form title --}}
+                        <h3 class="text-xl font-black text-gray-900 item ">
+
+                            {{-- @if (!$this->isCreateSupplierItemCosts)
+                                *if form is edit
+                                Edit Supplier
+                            @else
+                                Create Supplier
+                            @endif --}}
+
+                        </h3>
+                    </div>
 
                     {{-- //* close button --}}
-                    <button type="button" x-on:click="showStockAdjustPage=false" wire:click="resetFormWhenClosed"
-                        class="w-8 h-8 text-sm text-[rgb(255,120,120)] flex justify-center items-center bg-transparent rounded-lg hover:bg-[rgb(231,231,231)] transition duration-100 ease-in-out hover:text-[rgb(0,0,0)] ms-auto"
+                    <button type="button" x-on:click="showSupplierItemCostsForm=false" wire:click=' resetFormWhenClosed() '
+                        class="absolute right-[26px] inline-flex items-center justify-center w-8 h-8 text-sm text-[rgb(53,53,53)] bg-transparent rounded-lg hover:bg-[rgb(52,52,52)] transition duration-100 ease-in-out hover:text-gray-100 ms-auto "
                         data-modal-hide="UserModal">
+
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,104 +50,124 @@
                         </svg>
 
                         <span class="sr-only">Close modal</span>
+
                     </button>
+
                 </div>
 
-                {{-- //* first row --}} {{-- //* adjust reason --}}
-                <form wire:submit.prevent="adjust"
-                    class="flex flex-col items-center w-full h-full pr-6 mt-2 justify-evenly">
-                    @csrf
 
-                    <div class="flex flex-col justify-start w-fit">
-                        <div class="flex flex-row gap-4 mb-4">
-                            <fieldset class="flex flex-col gap-8">
-                                <legend class="text-[1.2em] text-white">
-                                    Select Adjustment Operation
-                                </legend>
-                                <div class="flex flex-row gap-2 justify-evenly">
-                                    <label class="flex gap-2 font-black text-white radio">
-                                        <input type="radio" wire:model="selectOperation" value="Add" />
-                                        Add
-                                    </label>
-                                    {{-- @if ($current_quantity !== 0)
-                                        <label class="flex gap-2 font-black text-white radio">
-                                            <input type="radio" wire:model="selectOperation" value="Deduct" />
-                                            Deduct
+                <div class="p-6 space-y-6">
+
+                    <div class="flex flex-col gap-4">
+
+                        {{-- //* first area, personal information --}}
+                        <div class="rounded-md ">
+
+                            <div class="p-4">
+                                {{-- //* second row --}}
+                                <div class="grid justify-between grid-flow-col grid-cols-2 gap-4">
+
+                                    <div class="mb-3">
+
+                                        <label for="item_cost"
+                                            class="block mb-2 text-sm font-medium text-gray-900 ">Item Cost
                                         </label>
-                                    @endif --}}
-                                    @error('selectOperation')
-                                        <span class="font-medium text-red-500 error">{{ $message }}</span>
-                                    @enderror
+
+                                        <input type="text" id="item_cost" wire:model="item_cost" step=".01"
+                                            class=" bg-[rgb(245,245,245)] text-gray-900 border border-[rgb(143,143,143)] text-sm rounded-md  block w-full p-2.5"
+                                            placeholder="Item Cost" tabindex="2" required />
+
+                                        @error('item_cost')
+                                            <span class="font-medium text-red-500 error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </fieldset>
-                        </div>
-                        {{-- //* adjust quantity --}}
-                        <div class="flex flex-col gap-1 mb-3">
-
-                            <div>
-                                <label for="adjust_quantity" class="text-[1em] font-bold text-white">Adjust
-                                    Quantity</label>
                             </div>
-
-                            <div>
-                                <input type="number" wire:model="quantityToAdjust" placeholder="Quantity" required
-                                    class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-md block p-2">
-
-                                @error('quantityToAdjust')
-                                    <span class="my-4 font-medium text-red-500 text-wrap error">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                        </div>
-
-                        {{-- //* adjust reason --}}
-                        <div class="flex flex-col gap-1 mb-3">
-
-                            <div>
-                                <label for="adjust_quantity" class="text-[1em] font-bold text-white">Reason</label>
-                            </div>
-
-                            <div class="flex flex-row ">
-                                <input type="text" wire:model="adjustReason" placeholder="Reason" required
-                                    class=" bg-[#ffffff3d] w-full text-center font-medium text-xl border border-[rgb(143,143,143)] text-white rounded-l-md block p-2">
-
-                                <select id="description"
-                                    class=" bg-[#ffffff3d] border border-[rgb(143,143,143)] text-ellipsis w-[160px] text-sm text-center text-white rounded-r-md block p-2.5 ">
-                                    <option value="" selected>Description</option>
-                                    <option value="Damaged">Damaged</option>
-                                    <option value="Expired">Expired</option>
-                                </select>
-                            </div>
-
-                            @error('adjustReason')
-                                <span class="my-4 font-medium text-red-500 text-wrap error">{{ $message }}</span>
-                            @enderror
-
                         </div>
                     </div>
-                    <div class="flex flex-row self-end gap-2 mb-6">
-                        <div>
-                            {{-- //* clear all button for create --}}
-                            <button type="button" wire:click='resetFormWhenClosed'
-                                class="text-[rgb(221,221,221)] hover:bg-[rgb(60,60,60)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">
-                                Cancel</button>
+
+                    {{-- //* form footer --}}
+
+                    {{-- *if form is edit --}}
+                    {{-- @if (!$this->isCreateSupplierItemCosts) --}}
+                        <div class="flex flex-row justify-end gap-2">
+
+                            <div>
+
+                                {{-- //* submit button for edit --}}
+                                <button type="submit" wire:loading.remove
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    <div class="flex flex-row items-center gap-2">
+                                        <p>Update</p>
+
+                                    </div>
+
+                                </button>
+
+                                <div wire:loading>
+                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+                                            height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
+                                            xml:space="preserve">
+                                            <path fill="#000"
+                                                d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                <animateTransform attributeType="xml" attributeName="transform"
+                                                    type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
+                                                    repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <button type="submit"
-                                class=" px-6 py-2 bg-[rgb(149,241,253)] rounded-md text-[rgb(30,30,30)] hover:bg-[rgb(97,204,219)] font-bold ease-in-out duration-100 transition-all">Adjust</button>
+                    {{-- @else --}}
+                        {{-- *if form is create --}}
+                        <div class="flex flex-row justify-end gap-2">
+                            <div>
+
+                                {{-- //* clear all button for create --}}
+                                <button type="reset"
+                                    class="text-[rgb(53,53,53)] hover:bg-[rgb(229,229,229)] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition ease-in-out duration-100">Clear
+                                    All</button>
+                            </div>
+
+                            <div>
+
+                                {{-- //* submit button for create --}}
+                                <button type="submit" wire:loading.remove
+                                    class="text-white bg-[rgb(55,55,55)] focus:ring-4 hover:bg-[rgb(28,28,28)] focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                                    <div class="flex flex-row items-center gap-2">
+                                        <p>
+                                            Save
+                                        </p>
+                                    </div>
+                                </button>
+
+                                <div wire:loading>
+                                    <div class="flex items-center justify-center loader loader--style3 " title="2">
+                                        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px"
+                                            height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
+                                            xml:space="preserve">
+                                            <path fill="#000"
+                                                d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+                                                <animateTransform attributeType="xml" attributeName="transform"
+                                                    type="rotate" from="0 25 25" to="360 25 25" dur="0.6s"
+                                                    repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    {{-- @endif --}}
+                </div>
+            </form>
         </div>
     </div>
-
-
 </div>
-@script
-    <script>
-        Livewire.on("adjust_quantity_focus", () => {
-            document.getElementById("adjust_quantity").focus();
-        });
-    </script>
-@endscript
+
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+
+<x-livewire-alert::flash />
