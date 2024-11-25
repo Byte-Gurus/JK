@@ -267,6 +267,7 @@ class RestockForm extends Component
             $this->closeModal();
         } catch (\Exception $e) {
             // Rollback the transaction if something fails
+            dump($e);
             DB::rollback();
             $this->alert('error', 'An error occurred while Restocking, please refresh the page ');
         }
