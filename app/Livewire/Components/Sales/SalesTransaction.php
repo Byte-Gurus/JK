@@ -1280,8 +1280,7 @@ class SalesTransaction extends Component
 
     public function focusInput()
     {
-        dump('asas');
-        $this->dispatch('barcode_focus');
+        $this->dispatch('barcode_focus')->to(SalesTransaction::class);
     }
 
     public function getReturnDetails()
