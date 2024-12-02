@@ -159,8 +159,7 @@
 
                             <div>
                                 <button type="button" wire:click="cancelRow"
-                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Cancel
-                                    PO</button>
+                                    class=" px-4 py-2 text-sm font-bold flex flex-row items-center gap-2 bg-[rgb(255,180,180)] text-[rgb(53,53,53)] border rounded-md hover:bg-[rgb(255,128,128)] transition-all duration-100 ease-in-out">Remove</button>
                             </div>
                             <div>
                                 @if (empty($new_po_items))

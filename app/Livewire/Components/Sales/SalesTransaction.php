@@ -613,7 +613,10 @@ class SalesTransaction extends Component
 
     public function cancelConfirmed()
     {
+        $this->alert('success', 'Transaction was cancelled successfully');
+
         return redirect(request()->header('Referer'));
+
     }
 
     public function updatedChangeTransactionType()

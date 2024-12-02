@@ -72,7 +72,7 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="flex justify-center w-full my-4 ">
+                    <div class="flex flex-col justify-center w-full gap-2 my-4 ">
                         <label for="id_picture" class="block text-sm font-medium text-white">Receipt Number
                         </label>
                         <input type="text" wire:model.live="receipt_number"

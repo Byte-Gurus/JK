@@ -82,7 +82,7 @@
                         <th scope="col" class="px-4 py-3 text-center">Customer Type</th>
 
                         {{-- //* Customer discount number --}}
-                        <th scope="col" class="px-4 py-3">Disount Number</th>
+                        <th scope="col" class="px-4 py-3">Customer ID No.</th>
 
                         {{-- //* created at --} --}}
                         <th wire:click="sortByColumn('created_at')" scope="col"
