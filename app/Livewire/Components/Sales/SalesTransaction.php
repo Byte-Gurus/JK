@@ -211,7 +211,8 @@ class SalesTransaction extends Component
         $this->searchCustomer = '';
     }
 
-    protected $listeners = ['removeRowConfirmed', 'removeRowCancelled', 'cancelConfirmed', 'display-change-quantity-form' => 'displayChangeQuantityForm', 'display-sales-transaction' => 'displaySalesTransaction', 'display-discount-form' => 'displayDiscountForm', 'display-payment-form' => 'displayPaymentForm', 'get-quantity' => 'getQuantity', 'get-customer-details' => 'getCustomerDetails', 'get-customer-payments' => 'getCustomerPayments', 'unselect-item' => 'unselectItem', 'display-sales-receipt' => 'displaySalesReceipt'];
+    protected $listeners = ['removeRowConfirmed', 'removeRowCancelled', 'cancelConfirmed', 'display-change-quantity-form' => 'displayChangeQuantityForm', 'display-sales-transaction' => 'displaySalesTransaction', 'display-discount-form' => 'displayDiscountForm', 'display-payment-form' => 'displayPaymentForm', 'get-quantity' => 'getQuantity', 'get-customer-details' => 'getCustomerDetails', 'get-customer-payments' => 'getCustomerPayments', 'unselect-item' => 'unselectItem', 'display-sales-receipt' => 'displaySalesReceipt',
+    'focus-input' => 'focusInput'];
 
     public function unselectItem()
     {

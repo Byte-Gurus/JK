@@ -55,6 +55,7 @@ class ChangeQuantityForm extends Component
         // ]);
 
         $this->dispatch('unselect-item')->to(SalesTransaction::class);
+        $this->dispatch('focus-input')->to(SalesTransaction::class);
     }
 
     // public function adjustConfirmed($data)
